@@ -1,0 +1,73 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="jquery-3.6.4.min.js"></script>
+<script src="Function.js" defer=""></script>
+
+<h1>聊天图片水印参数设置界面</h1>
+<h1>推荐网站：<a href="https://imgtool.net/image-watermark/">图片加水印</a></h1>
+<h1>返回<a href='#' onclick="mt()" id='mt'>MoeTalk</a></h1>
+角度：<input type="text" class="drowsy">（整数，不建议太大）<br>
+字体大小：<input type="text" class="drowsy">（整数，10以上）<br>
+<span style="color: red;">颜色R：</span><input type="text" class="drowsy">（0~255）<br>
+<span style="color: green;">颜色G：</span><input type="text" class="drowsy">（0~255）<br>
+<span style="color: blue;">颜色B：</span><input type="text" class="drowsy">（0~255）<br>
+透明度：<input type="text" class="drowsy">（0~1）<br>
+稠密度：<input type="text" class="drowsy">（整数，不建议太大）<br>
+文本：<input type="text" class="drowsy">如果想多行显示请空格分隔，最多三行（一行 两行 三行）<br>
+参数提交后请返回MoeTalk页面，选择生成图片后就可以看到带水印的图片了，需要手动保存<br>
+<button onclick="mark()">提交参数</button><br>预览用图片：<br>
+
+<img src="demo.jpg" id="drowsy"/>
+<script type="text/javascript">
+	function mt()
+	{
+		window.location.replace(window.location.href.replace(getCurentFileName(),''))
+	}
+if(localStorage['wmark'])
+{
+  let arr = JSON.parse(localStorage['wmark']);
+  $(".drowsy")[0].value = arr[0];
+  $(".drowsy")[1].value = arr[1];
+  $(".drowsy")[2].value = arr[2];
+  $(".drowsy")[3].value = arr[3];
+  $(".drowsy")[4].value = arr[4];
+  $(".drowsy")[5].value = arr[5];
+  $(".drowsy")[6].value = arr[6];
+  $(".drowsy")[7].value = arr[7];
+}
+function mark()
+{
+	let arr = [];
+	r = $(".drowsy")[0].value == '' ? 0 : $(".drowsy")[0].value
+	f = $(".drowsy")[1].value == '' ? 40 : $(".drowsy")[1].value
+	c1 = $(".drowsy")[2].value == '' ? 0 : $(".drowsy")[2].value
+	c2 = $(".drowsy")[3].value == '' ? 0 : $(".drowsy")[3].value
+	c3 = $(".drowsy")[4].value == '' ? 0 : $(".drowsy")[4].value
+	c4 = $(".drowsy")[5].value == '' ? 0.8 : $(".drowsy")[5].value
+	d = $(".drowsy")[6].value == '' ? 3 : $(".drowsy")[6].value
+	s = $(".drowsy")[7].value == '' ? '防和谐 水印 测试' : $(".drowsy")[7].value
+  s = s.split(" ")
+	drawWaterMark.init(
+	{
+		imgpath: "demo.jpg",//图片路径	string类型	[必传]
+		rotate: r,//旋转角度	 int类型
+		fontsize: f,//字体大小
+		fontcolor: c1+","+c2+","+c3+","+c4,//字体颜色	rgba类型
+		density: d,//稠密度
+		str: s,		//[必传]
+		domid: "drowsy",//图片id
+		cb:function(base64)
+		{
+				//console.log(base64)
+			arr[0] = $(".drowsy")[0].value = r;
+			arr[1] = $(".drowsy")[1].value = f;
+			arr[2] = $(".drowsy")[2].value = c1;
+			arr[3] = $(".drowsy")[3].value = c2;
+			arr[4] = $(".drowsy")[4].value = c3;
+			arr[5] = $(".drowsy")[5].value = c4;
+			arr[6] = $(".drowsy")[6].value = d;
+			arr[7] = $(".drowsy")[7].value = s.join(' ');
+			localStorage['wmark'] = JSON.stringify(arr);
+		}
+	})
+}
+</script>
