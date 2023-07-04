@@ -4784,7 +4784,7 @@
 						{
 							children: [(0, m.jsx)("title",
 							{
-								children: "MolluTalk"
+								children: localStorage['MoeTalk']//#"MolleTalk"
 							}), (0, m.jsx)("meta",
 							{
 								name: "description",

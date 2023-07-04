@@ -1,5 +1,7 @@
 //https://try8.cn/tool/format/js
 var version = '0.9';
+if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';
+
 $.get("https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MolluTalk/main/check.json",function(data) 
 {
 	if(data > version)alert('最新版本为：'+data+'\n请尝试清除浏览器缓存数据以访问最新版本\n如果是离线版请点击【新】按钮下载最新版')
