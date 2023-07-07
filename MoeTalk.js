@@ -1,5 +1,6 @@
 //https://try8.cn/tool/format/js
 var version = '0.9';
+var cha = 'a'
 if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';
 
 $.get("https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MolluTalk/main/check.json",function(data) 
@@ -63,7 +64,7 @@ $(".bIcduz").wait(function()
 $(".frVjsk").wait(function()
 {
 	height = $(".iBfcuf").height().toFixed(0);
-	$(".frVjsk").append("<button class='"+class0+"' id='uphead' class='"+class0+"'><b style='color:black;'>傳</b></button>※<span class='tool'>手动上传头像，当前角色名：<br><span id='cusname'></span><br>");
+	$(".frVjsk").append("<button class='"+class0+"' id='uphead' class='"+class0+"'><b style='color:black;'>傳</b></button>※<span class='tool'>手动上传头像，当前角色名：<br><span id='cusname'></span></span><br>");
 	$(".frVjsk").append("<span class='tool'>※存储空间体积：<b id='size' style='color:red;'>"+size+"</b>KB</span><br>");
 	$(".frVjsk").append("<span class='tool'>※聊天记录长度：<b id='height' style='color:red;'>"+height+"</b></span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='help'><b style='color:rgb(139,187,233);'>説</b></button>↑<span class='tool'>使用说明</span><br>");
@@ -80,6 +81,7 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append("<button class='"+class0+"' id='png'><b style='color:blue;'>圖</b></button>↑<span class='tool'>切换图片读取格式</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='wmark'><b style='color:black;'>印</b></button>↑<span class='tool'>设置水印参数</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='head'><b style='color:black;'>頭</b></button>↑<span class='tool'>右侧添加头像</span><br>");
+	$(".frVjsk").append("<button class='"+class0+"' id='ct'><b style='color:green;'>C</b></button>↑<span class='tool'>生成ClosureTalk存档</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='dels'><b style='color:black;'>批</b></button>↑<span class='tool'>批量删除或强制追加</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='zhui'><b style='color:black;'>追</b></button>↑<span class='tool'>强制追加选项</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='refresh'><b style='color:black;'>刷</b></button>↑<span class='tool'>刷新页面</span><br>");
@@ -92,22 +94,11 @@ $('body').on('click',".jZKzYg",function()
 {
 	alert("此为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
 		"MolluTalk的代码取得方式来自浏览器自带的Ctrl+S\n"+
-		"对于代码的改动地点均已用//#与//*标注");
+		"对于代码的改动地点已用//#与//*标注");
 });
 $('body').on('click',"#help",function()
 {
-	alert("※此为MolluTalk（作者Raun0129）的功能增强改版\n"+
-		"※当前版本为"+version+"，功能如下：\n"+
-		"	1.自定义角色的创造、删除、修改、备份、读取功能\n"+
-		"	2.自动保存功能升级，退出浏览器时存档不会消失\n"+
-		"	3.聊天记录长度和数据大小检测功能，到达一定程度会有警告提示\n"+
-		"	4.语言、文字发送方式、字体加载选项的更改功能\n"+
-		"	5.加入了批量删除和强制追加功能\n"+
-		"	6.在线版读取速度优化。并且可以设置自定义头像图片质量\n"+
-		"	7.添加了角色排序方式的更改功能和最近使用角色的标记功能\n"+
-		"	8.新增了为图片添加水印功能，可以设置相关参数\n"+
-		"※5.3版本使用了新的存储方式，会导致低版本的自定义头像无法正常显示，需要重新添加头像\n"+
-		"※如果有其他使用建议和错误请向我反馈");
+	alert("此版本为测试版，不保证稳定性，建议使用MotherTalk");
 });
 //上传头像
 $('body').on('click',"#uphead",function()
@@ -254,6 +245,60 @@ $("body").on('change','#custom',function()
 		// console.log(base64Img)
 		compress(base64Img)
 	}
+})
+$('body').on('click',"#ct",function()
+{
+	let arr = JSON.parse(localStorage['chats'])
+	let cl = [];
+	$.each(arr,function(k,v)
+	{
+		cl[k] = {};
+		cl[k]['content'] = v['content'];
+		cl[k]['is_breaking'] = false;
+		if(v['sCharacter']['no'] != 0)
+		{
+			cl[k]['char_id'] = "mt-"+v['sCharacter']['no'];
+			cl[k]['img'] = v['sCharacter']['no']+'.'+v['sCharacter']['index'];
+		}
+		cl[k]['yuzutalk'] = {};
+		cl[k]['yuzutalk']['nameOverride'] = '';
+		if(v['isFirst'] === true)cl[k]['yuzutalk']['avatarState'] = 'SHOW';
+		else cl[k]['yuzutalk']['avatarState'] = 'HIDE';
+		if(v['type'] == 'chat')cl[k]['yuzutalk']['type'] = 'TEXT';
+		if(v['type'] == 'image')
+		{
+			cl[k]['content'] = "../moetalk/"+v['content'];
+			cl[k]['yuzutalk']['type'] = 'IMAGE';
+		}
+		if(v['type'] == 'heart')cl[k]['yuzutalk']['type'] = 'RELATIONSHIPSTORY';
+		if(v['type'] == 'info')cl[k]['yuzutalk']['type'] = 'NARRATION';
+		if(v['type'] == 'reply')
+		{
+			cl[k]['yuzutalk']['type'] = 'CHOICES';
+			cl[k]['rg'] = v['replyGroup'];
+		}
+		if(v['file'])cl[k]['content'] = v['file'];
+	})
+	$.each(cl,function(k,v)
+	{
+		if(v['rg'] && cl[k+1] && v['rg'] === cl[k+1]['rg'])
+		{
+			cl[k+1]['content'] = cl[k]['content']+'\n'+cl[k+1]['content']
+			delete cl[k];
+		}
+	})
+	for(let i=0;i<cl.length;i++){if(cl[i]===undefined){cl.splice(i,1);i--;}}
+	arr = {};
+	arr['chat'] = cl
+	arr['chars'] = [];
+	$.each(JSON.parse(localStorage['qchar'])['selectedList'],function(k,v)
+	{
+		arr['chars'][k] = {};
+		arr['chars'][k]['char_id'] = 'mt-'+v.no
+		arr['chars'][k]['img'] = v.no+'.'+v.index
+	})
+	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
+	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(arr));//生成专用存档
 })
 //保存人物
 $('body').on('click',"#savecus",function()

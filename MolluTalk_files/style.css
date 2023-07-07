@@ -3,11 +3,12 @@
 {
 	color:white;
 	width: 64px;
+	word-wrap: break-word;/* 允许单词内断行 */
+	white-space: normal;/* 处理空白符，自动换行 */
 }
 #cusname
 {
-	writing-mode:tb-rl;
-	background:rgb(255,255,255);
+	color:blue;
 }
 .blue{color:blue;}
 .red{color:red;}

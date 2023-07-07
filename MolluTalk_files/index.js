@@ -2178,12 +2178,12 @@
 											date: (0, u._3)(!0, !0),
 											replyNo: s.replyNo,
 											replyGroup: s.replyGroup,
-											custom: JSON.parse(localStorage['custom']),
-											heads: JSON.parse(localStorage['heads']),
+											custom: localStorage['custom'],
+											heads: localStorage['heads'],
 											chars: n
 										}, (0, et.Z)(s.chats)])], e.next = 6, (0, u.rU)(r);
 									case 6:
-										o = e.sent, (0, ef.saveAs)(o, "MolluTalk_".concat(t.title, ".zip")), N();//#存档t.title, ".png"
+										o = e.sent, (0, ef.saveAs)(o, "MolluTalk_".concat(t.title, ".png")), N();//#存档t.title, ".png"
 									case 9:
 									case "end":
 										return e.stop()
@@ -3332,7 +3332,7 @@
 							r((0, eo.U_)(n)), s()
 						};
 					return (0, m.jsx)(m.Fragment,
-					{
+					{//*表情+
 						children: (0, m.jsx)(ea.Xf,
 						{
 							className: n ? "visible medium" : "medium",
@@ -3351,7 +3351,7 @@
 									children: [(0, m.jsx)(ea.Dx,
 									{
 										className: "bold",
-										children: F.Z.emoticon[l]
+										children: cha==='a' ? F.Z.emoticon[l] : '差分表情（完善中）'
 									}), (0, m.jsx)(ea.ec,
 									{
 										onClick: function()
@@ -3366,8 +3366,11 @@
 									children: (0, m.jsxs)(eK,
 									{
 										//*改
-										children: [Array(84).fill(0).map(function(e, n)
+										children: [Array(cha==='a' ? 84 : 1).fill(0).map(function(e, n)
 										{
+											
+											let link;if(cha==='a')link = loadhead(199+'.'+(n+1))
+											else link = 'favicon.png';//添加中
 											return (0, m.jsx)(eX,
 											{
 												alt: "emoji",
@@ -3375,10 +3378,10 @@
 												width: 310,
 												onClick: function()
 												{
-													u(loadhead("199."+(n+1)))
+													u(link)
 													//#u("image/emoticon/".concat(l, "/ClanChat_Emoji_").concat(n + 1, ".png"))
 												},
-												src: loadhead("199."+(n+1))
+												src: link
 												//#src: "".concat("https://server.raun0129.com/asset/", "image/emoticon/").concat(l, "/ClanChat_Emoji_").concat(n + 1, ".png")
 											}, n)
 										})]
@@ -3387,7 +3390,7 @@
 							})
 						})
 					})
-				},
+				},//*表情-
 				eH = (0, o.ZP)(ea.$0).withConfig(
 				{
 					displayName: "PopupEmoticonChat__Section2",
@@ -3616,11 +3619,32 @@
 										title: "emoticon",
 										onClick: function()
 										{
+											cha = 'a';
 											S(!0)
 										},
 										children: (0, m.jsx)(c.xL,
 										{
 											icon: ei.pkM
+										})
+									}),
+									//*+
+									(0, m.jsx)(eV,
+									{
+										style:
+										{
+											padding: "0.2rem",
+											width: "2.2rem",
+											height: "2.2rem"
+										},
+										title: "emoticon",
+										onClick: function()
+										{
+											cha = 'b';
+											S(!0)
+										},
+										children: (0, m.jsx)(c.xL,
+										{
+											icon: l.FKd
 										})
 									})]
 								})
