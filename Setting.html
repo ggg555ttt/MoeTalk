@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="./MoeTalk/Jquery-3.6.4.min.js" defer=""></script>
+	<script src="./MoeTalk/Function.js" defer=""></script>
+	<script src="./MoeTalk/Tools.js" defer=""></script>
+	<link rel="stylesheet" href="./MoeTalk/STYLE/style.css" data-n-g="">
+	<title>相关设置页面</title>
+</head>
+<body>
+	<a href='./'><b style='color:black;'>返回MoeTalk</a></b>
+	<h1>设置选项:</h1>
+	<button id='savecus'><b style='color:rgb(139,187,233);'>备份自定义角色存档</b></button>
+	<button id='loadcus'><b style='color:rgb(139,187,233);'>恢复自定义角色存档</b></button>
+	<button id='language'><b style='color:blue;'>更改语言</b></button>
+	<button id='send'><b style='color:blue;'>文字发送方式</b></button>
+	<button id='order'><b style='color:blue;'>角色排序方式</b></button>
+	<button id='hnum'><b style='color:blue;'>设置自定义头像质量</b></button>
+	<button id='font'><b style='color:blue;'>字体加载选项</b></button>
+	<button id='zhui'><b style='color:black;'>强制追加选项</b></button>
+	<button id='clean'><b style='color:black;'>清除本地数据</b></button>
+	<button id='head'><b style='color:black;'>右侧添加头像</b></button><br>
+	<a href='https://404.lanzouk.com/b018yzkaj'><b style='color:black;'>下载最新版密码:595t</a></b>
+	<h1>存档恢复:</h1>
+	请上传由MoeTalk生成的png图片：<input type="file" id="file1">
+
+	<h1>图片水印设置：</h1>
+	推荐网站：<a href="https://imgtool.net/image-watermark/">图片加水印</a><br>
+	角度：<input type="text" class="drowsy">（整数，不建议太大）<br>
+	字体大小：<input type="text" class="drowsy">（整数，10以上）<br>
+	<span style="color: red;">颜色R：</span><input type="text" class="drowsy">（0~255）<br>
+	<span style="color: green;">颜色G：</span><input type="text" class="drowsy">（0~255）<br>
+	<span style="color: blue;">颜色B：</span><input type="text" class="drowsy">（0~255）<br>
+	透明度：<input type="text" class="drowsy">（0~1）<br>
+	稠密度：<input type="text" class="drowsy">（整数，不建议太大）<br>
+	文本：<input type="text" class="drowsy">如果想多行显示请空格分隔，最多三行（一行 两行 三行）<br>
+	参数提交后请返回MoeTalk页面，选择生成图片后就可以看到带水印的图片了，需要手动保存<br>
+	<button onclick="mark()">提交参数</button><br>预览用图片：<br>
+
+	<img src="demo.jpg" id="drowsy"/>
+	<script type="text/javascript">
+
+	</script>
+</body>
+</html>
