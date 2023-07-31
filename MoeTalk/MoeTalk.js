@@ -1,8 +1,9 @@
 //https://try8.cn/tool/format/js
-var version = '0.9';
-var cfemoji = 'NO'
+var version = '1.0';
+var cfemoji = 'NO';//表情差分开关
+var CharFaceIndex = null;//差分映射
 var lname = true;//临时改名
-if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';
+if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';//标题
 //版本检测
 $.get("https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MolluTalk/main/check.json",function(data) 
 {
@@ -13,9 +14,9 @@ var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>"
 if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname == 'frp.freefrp.net' || window.location.hostname == '192.168.1.4')
 {
 	font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font_web.css' data-n-g=''>";
-	if(!localStorage['imgs'] || localStorage['imgs'] != 566)
+	if(!localStorage['imgs'] || localStorage['imgs'] != 503)
 	{
-		$.getJSON("https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MolluTalk/main/baimg.json",function(json) 
+		$.getJSON("https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MolluTalk/main/MT-CharImg.JSON",function(json) 
 		{
 			localStorage['imgs'] = 0;
 			$.each(json,function(k,v)
@@ -32,7 +33,7 @@ if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname 
 		});
 	}
 }
-font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";
+//font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";
 if(!localStorage['nofont'])$("head").append(font);//加载字体
 
 $("body").on('click',function()
@@ -51,6 +52,8 @@ $("body").on('click',function()
 //标题框
 $(".bIcduz").wait(function()
 {
+	$(".bIcduz").after("<button id='rdelsall' hidden='hidden'>反选</button>");
+	$(".bIcduz").after("<button id='delsall' hidden='hidden'>全选</button>");
 	height = $(".iBfcuf").height().toFixed(0);
 	$(".bIcduz").after("<span class='"+class1+"' style='line-height:100%;color:green;'><b id='height'>"+height+"</b></span>");
 	$(".bIcduz").after("<span id='warning'><button class='"+class0+"'><b style='color:red;'>⚠️</b></button>※警告提示</span>");
@@ -67,8 +70,8 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append("<button class='"+class0+"' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色信息，下方输入ID：↓</span><input size='5' id='ccus'/><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='ct'><b style='color:green;'>C</b></button><span class='tool'>生成ClosureTalk存档</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='dels'><b style='color:black;'>批</b></button><span class='tool'>批量删除或强制追加</span><br>");
+	$(".frVjsk").append("<button class='"+class0+"' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>");
 	$(".frVjsk").append("<a href='./setting.html'><button class='"+class0+"'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>");
-	
 },".frVjsk")
 //使用说明
 $('body').on('click',".jZKzYg",function()
@@ -252,7 +255,7 @@ $('body').on('click',"#warning",function()
 	let wc = 0;
 	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
 	height = $(".iBfcuf").height().toFixed(0);
-	if(height > 10000)wh = "聊天记录长度为"+height+"，超过10000可能会影响到聊天记录图片的生成\n";
+	if(height > 8192)wh = "聊天记录长度为"+height+"，超过8192可能会影响到聊天记录图片的生成（视浏览器而定，在8192-16384之间，请自行测试）\n";
 	if(size > 3000)ws = "存储空间体积为"+size+"KB，超过5120KB会使保存功能崩溃\n";
 	if(localStorage['last-viewed-version'])
 	{
@@ -276,8 +279,18 @@ $('body').on('click',"#dels",function()
 {
 	if($(".dels:checked").length == 0)
 	{
-		if($('.dels').attr('hidden') == 'hidden'){$('.dels').removeAttr('hidden')}
-		else{$('.dels').attr('hidden','hidden')}
+		if($('.dels').attr('hidden') == 'hidden')
+		{
+			$('#delsall').removeAttr('hidden')
+			$('#rdelsall').removeAttr('hidden')
+			$('.dels').removeAttr('hidden')
+		}
+		else
+		{
+			$('#delsall').attr('hidden','hidden')
+			$('#rdelsall').attr('hidden','hidden')
+			$('.dels').attr('hidden','hidden')
+		}
 	}
 	if($(".dels:checked").length == 1)
 	{
@@ -366,4 +379,70 @@ $('body').on('click',".iVTxiA",function()
 		lname = true;
 		return;
 	}
+})
+//差分映射
+$('body').on('click',"#cf",function()
+{
+	if(CharFaceIndex == null)
+	{
+		let no = JSON.parse(localStorage['qchar'])['selected']['no'];
+		let index = JSON.parse(localStorage['qchar'])['selected']['index'];
+		CharFaceIndex = no+'.'+index;///读取选择的角色
+		alert('你选择了差分映射功能，根据你下方被选中的角色\n其包含的差分表情会映射到你下一个选择的角色\n如果你不想映射，请再点击一遍按钮\n如果想恢复默认映射，请再点击一下被选中的头像');
+	}
+	else
+	{
+		CharFaceIndex = null;
+		alert('取消映射');
+	}
+})
+$('body').on('click',".fzOyMd",function()
+{
+	if(CharFaceIndex != null)
+	{
+		if(!localStorage['CharFaceIndex'])localStorage['CharFaceIndex'] = '{}';
+		let cfiarr = JSON.parse(localStorage['CharFaceIndex']);
+		let no = JSON.parse(localStorage['qchar'])['selected']['no'];
+		let index = JSON.parse(localStorage['qchar'])['selected']['index'];
+		if(CharFaceIndex != no+'.'+index)
+		{
+			cfiarr[CharFaceIndex] = no+'.'+index;
+			localStorage['CharFaceIndex'] = JSON.stringify(cfiarr);
+			CharFaceIndex = null;
+			alert('映射成功');
+		}
+		else
+		{
+			delete cfiarr[CharFaceIndex];
+			localStorage['CharFaceIndex'] = JSON.stringify(cfiarr);
+			CharFaceIndex = null;
+			alert('已恢复默认映射');
+		}
+		
+	}
+})
+//全选及反选
+$('body').on('click',"#delsall",function()
+{
+	if($(".dels:checked").length == 0)
+	{
+		$(".dels").each(function()
+		{
+			$(this).prop("checked",true);
+		});
+	}
+	else
+	{
+		$(".dels").each(function()
+		{
+			$(this).prop("checked",false);
+		});
+	}
+})
+$('body').on('click',"#rdelsall",function()
+{
+	$(".dels").each(function()
+	{
+		$(this).prop("checked",!$(this).prop("checked"));
+	});
 })

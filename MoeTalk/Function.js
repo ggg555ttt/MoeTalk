@@ -283,7 +283,7 @@ function download_txt(filename,content,contentType)
 //警告提示
 function warning()
 {
-	if(height > 10000 || size > 3000)//检测聊天框宽度
+	if(height > 8192 || size > 3000)//检测聊天框宽度
 	{
 		$("#warning").removeAttr('hidden');//显示警告
 	}

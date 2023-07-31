@@ -89,6 +89,7 @@ $('body').on('click',"#hnum",function()
 	let hnum = prompt("数值越大上传的头像越清晰，同时也会越占用存储空间\n建议在100到300之间取值"+num,300);
 	if(!isNaN(hnum) && hnum != null && hnum.trim() != '')localStorage['hnum'] = hnum.trim()
 })
+
 //清除数据
 $("body").on('click','#clean',function()
 {
