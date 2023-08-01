@@ -76,7 +76,7 @@ $(".frVjsk").wait(function()
 //使用说明
 $('body').on('click',".jZKzYg",function()
 {
-	alert("此为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
+	alert("MoeTalk是MotherTalk的后续版本\nMoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
 		"MolluTalk的代码取得方式来自浏览器自带的Ctrl+S\n"+
 		"对于代码的改动地点均用注释//与/**/标注");
 });
