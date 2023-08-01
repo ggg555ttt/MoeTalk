@@ -152,7 +152,7 @@ function loadhead(imgindex)
 		if(parseInt(imgindex).toFixed(0) == '199')image = 'Emoji/';
 		image = image+imgindex+'.webp';
 		if(headarr[imgindex])image = headarr[imgindex];
-		if(!headarr[imgindex] && localStorage['imgs'] == 566)
+		if(!headarr[imgindex] && localStorage['imgs'] == 503)
 		{
 			let db;
 			openDB('MoeTalk').then((db =>
