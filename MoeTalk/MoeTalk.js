@@ -71,7 +71,7 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append("<button class='"+class0+"' id='ct'><b style='color:green;'>C</b></button><span class='tool'>生成ClosureTalk存档</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='dels'><b style='color:black;'>批</b></button><span class='tool'>批量删除或强制追加</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>");
-	$(".frVjsk").append("<a href='./setting.html'><button class='"+class0+"'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>");
+	$(".frVjsk").append("<a href='./Setting.html'><button class='"+class0+"'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>");
 },".frVjsk")
 //使用说明
 $('body').on('click',".jZKzYg",function()
