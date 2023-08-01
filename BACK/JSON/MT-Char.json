@@ -1,0 +1,2203 @@
+[{
+	"kr": "아비도스",
+	"en": "ABYDOS",
+	"jp": "アビドス",
+	"zh_cn": "阿比多斯",
+	"zh_tw": "阿拜多斯",
+	"club": [{
+		"kr": "대책위원회",
+		"en": "Countermeasures Council",
+		"jp": "対策委員会",
+		"zh_cn": "对策委员会",
+		"zh_tw": "對策委員會",
+		"characters": [{
+			"no": 1,
+			"kr": "스나오오카미 시로코",
+			"en": "Sunaookami Shiroko",
+			"jp": "砂狼 シロコ",
+			"zh_cn": "砂狼 白子",
+			"zh_tw": "砂狼 白子",
+			"profile": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+		}, {
+			"no": 2,
+			"kr": "타카나시 호시노",
+			"en": "Takanashi Hoshino",
+			"jp": "小鳥遊 ホシノ",
+			"zh_cn": "小鸟游 星野",
+			"zh_tw": "小鳥遊 星野",
+			"profile": [1, 2, 3, 4, 5, 6, 7]
+		}, {
+			"no": 3,
+			"kr": "쿠로미 세리카",
+			"en": "Kuromi Serika",
+			"jp": "黒見 セリカ",
+			"zh_cn": "黑见 芹香",
+			"zh_tw": "黑見 茜香",
+			"profile": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+		}, {
+			"no": 4,
+			"kr": "이자요이 노노미",
+			"en": "Izayoi Nonomi",
+			"jp": "十六夜 ノノミ",
+			"zh_cn": "十六夜 野宫",
+			"zh_tw": "十六夜 野宮",
+			"profile": [1, 2, 3, 4, 5, 6, 7]
+		}, {
+			"no": 5,
+			"kr": "오쿠소라 아야네",
+			"en": "Okusora Ayane",
+			"jp": "奥空 アヤネ",
+			"zh_cn": "奥空 绫音",
+			"zh_tw": "奧空 綾音",
+			"profile": [1, 2, 3, 4, 5, 6, 7, 8]
+		}]
+	}]
+}, {
+	"kr": "게헨나",
+	"en": "GEHENNA",
+	"jp": "ゲヘナ",
+	"zh_cn": "格黑娜",
+	"zh_tw": "格赫娜",
+	"club": [{
+		"kr": "선도부",
+		"en": "Prefect Team",
+		"jp": "風紀委員会",
+		"zh_cn": "风纪委员会",
+		"zh_tw": "糾察部",
+		"characters": [{
+			"no": 6,
+			"kr": "선도부원",
+			"en": "Prefect-Team-Member",
+			"jp": "風紀委員",
+			"zh_cn": "风纪委员",
+			"zh_tw": "風紀委員",
+			"profile": [1]
+		}, {
+			"no": 7,
+			"kr": "소라사키 히나",
+			"en": "Sorasaki Hina",
+			"jp": "空崎 ヒナ",
+			"zh_cn": "空崎 日奈",
+			"zh_tw": "空崎 陽奈",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 8,
+			"kr": "시로미 이오리",
+			"en": "Shiromi Iori",
+			"jp": "銀鏡 イオリ",
+			"zh_cn": "银镜 伊织",
+			"zh_tw": "銀鏡 伊織",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 9,
+			"kr": "아마우 아코",
+			"en": "Amau Ako",
+			"jp": "天雨 アコ",
+			"zh_cn": "天雨 亚子",
+			"zh_tw": "天雨 亞子",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 10,
+			"kr": "히노미야 치나츠",
+			"en": "Hinomiya Chinatsu",
+			"jp": "火宮 チナツ",
+			"zh_cn": "火宫 千夏",
+			"zh_tw": "火宮 千夏",
+			"profile": [1, 2, 3, 4]
+		}]
+	}, {
+		"kr": "흥신소68",
+		"en": "Problem Solver 68",
+		"jp": "便利屋68",
+		"zh_cn": "便利屋68",
+		"zh_tw": "便利屋68",
+		"characters": [{
+			"no": 11,
+			"kr": "아사기 무츠키",
+			"en": "Asagi Mutsuki",
+			"jp": "浅黄 ムツキ",
+			"zh_cn": "浅黄 睦月",
+			"zh_tw": "淺黃 睦月",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 12,
+			"kr": "이구사 하루카",
+			"en": "Igusa Haruka",
+			"jp": "伊草 ハルカ",
+			"zh_cn": "伊草 遥香",
+			"zh_tw": "伊草 遙香",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 13,
+			"kr": "오니카타 카요코",
+			"en": "Onikata Kayoko",
+			"jp": "鬼方 カヨコ",
+			"zh_cn": "鬼方 佳代子",
+			"zh_tw": "鬼方 佳代子",
+			"profile": [1, 2, 3, 5, 4]
+		}, {
+			"no": 14,
+			"kr": "리쿠하치마 아루",
+			"en": "Rikuhachima Aru",
+			"jp": "陸八魔 アル",
+			"zh_cn": "陆八魔 阿露",
+			"zh_tw": "陸八魔 亞瑠",
+			"profile": [1, 2, 3, 4]
+		}]
+	}, {
+		"kr": "미식연구회",
+		"en": "Gourmet Research Society",
+		"jp": "美食研究会",
+		"zh_cn": "美食研究会",
+		"zh_tw": "美食研究會",
+		"characters": [{
+			"no": 15,
+			"kr": "시시도우 이즈미",
+			"en": "Shishidou Izumi",
+			"jp": "獅子堂 イズミ",
+			"zh_cn": "狮子堂 泉",
+			"zh_tw": "獅子堂 泉",
+			"profile": [1, 2, 3, 4, 5, 6]
+		}, {
+			"no": 16,
+			"kr": "아카시 준코",
+			"en": "Akashi Junko",
+			"jp": "赤司 ジュンコ",
+			"zh_cn": "赤司 淳子",
+			"zh_tw": "赤司 纯子",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 17,
+			"kr": "와니부치 아카리",
+			"en": "Wanibuchi Akari",
+			"jp": "鰐渕 アカリ",
+			"zh_cn": "鳄渊 明里",
+			"zh_tw": "鱷淵 亞伽里",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 18,
+			"kr": "쿠로다테 하루나",
+			"en": "Kurodate Haruna",
+			"jp": "黒館 ハルナ",
+			"zh_cn": "黑馆 晴奈",
+			"zh_tw": "黑館 羽留奈",
+			"profile": [1, 2, 3, 4, 5]
+		}]
+	}, {
+		"kr": "만마전",
+		"en": "Pandemonium Society",
+		"jp": "万魔殿",
+		"zh_cn": "万魔殿",
+		"zh_tw": "萬魔殿",
+		"characters": [{
+			"no": 19,
+			"kr": "하누마 마코토",
+			"en": "Hanuma Makoto",
+			"jp": "羽沼 マコト",
+			"zh_cn": "羽沼 真琴",
+			"zh_tw": "羽沼 真琴",
+			"profile": [1]
+		}, {
+			"no": 20,
+			"kr": "나츠메 이로하",
+			"en": "Natsume Iroha",
+			"jp": "棗 イロハ",
+			"zh_cn": "枣 伊吕波",
+			"zh_tw": "棗 伊呂波",
+			"profile": [1, 2]
+		}, {
+			"no": 21,
+			"kr": "이부키",
+			"en": "Ibuki",
+			"jp": "イブキ",
+			"zh_cn": "伊吹",
+			"zh_tw": "伊吹",
+			"profile": [1]
+		}, {
+			"no": 22,
+			"kr": "사츠키",
+			"en": "Satsuki",
+			"jp": "サツキ",
+			"zh_cn": "皋月",
+			"zh_tw": "皋月",
+			"profile": [1]
+		}, {
+			"no": 23,
+			"kr": "만마전-임원",
+			"en": "Pandemonium-Member",
+			"jp": "万魔殿役員",
+			"zh_cn": "万魔殿干部",
+			"zh_tw": "萬魔殿幹部",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "급양부",
+		"en": "School Lunch Club",
+		"jp": "給食部",
+		"zh_cn": "给食部",
+		"zh_tw": "給食部",
+		"characters": [{
+			"no": 24,
+			"kr": "아이키요 후우카",
+			"en": "Aikiyo Fuuka",
+			"jp": "愛清 フウカ",
+			"zh_cn": "爱清 枫香",
+			"zh_tw": "愛清 楓華",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 25,
+			"kr": "우시마키 주리",
+			"en": "Ushimaki Juri",
+			"jp": "牛牧 ジュリ",
+			"zh_cn": "牛牧 朱莉",
+			"zh_tw": "牛牧 茱莉",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "온천개발부",
+		"en": "Onsen Development Club",
+		"jp": "温泉開発部",
+		"zh_cn": "温泉开发部",
+		"zh_tw": "溫泉開發部",
+		"characters": [{
+			"no": 26,
+			"kr": "카스미",
+			"en": "Kasumi",
+			"jp": "カスミ",
+			"zh_cn": "霞",
+			"zh_tw": "霞",
+			"profile": [1]
+		}, {
+			"no": 27,
+			"kr": "시모쿠라 메구",
+			"en": "Shimokura Megu",
+			"jp": "下倉 メグ",
+			"zh_cn": "下仓 惠",
+			"zh_tw": "下倉 惠",
+			"profile": [1, 2]
+		}, {
+			"no": 28,
+			"kr": "온천개발부원",
+			"en": "Onsen Development Member",
+			"jp": "温泉開発部員",
+			"zh_cn": "温泉开发部成员",
+			"zh_tw": "溫泉開發部成員",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "응급의학부",
+		"en": "Emargency Medicine Club",
+		"jp": "救急医学部",
+		"zh_cn": "救急医学部",
+		"zh_tw": "救急醫學部",
+		"characters": [{
+			"no": 29,
+			"kr": "히무로 세나",
+			"en": "Himuro Sena",
+			"jp": "氷室 セナ",
+			"zh_cn": "冰室 濑名",
+			"zh_tw": "冰室 瀨奈",
+			"profile": [1, 2]
+		}, {
+			"no": 30,
+			"kr": "구급의학부원",
+			"en": "Emargency Medicine Member",
+			"jp": "救急医学部員",
+			"zh_cn": "急救医学人员",
+			"zh_tw": "急救醫學人員",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "귀가부",
+		"en": "Go-Home Club",
+		"jp": "帰宅部",
+		"zh_cn": "归宅部",
+		"zh_tw": "歸宅部",
+		"characters": [{
+			"no": 31,
+			"kr": "하타미 에리카",
+			"en": "Hatami Elika",
+			"jp": "旗見 エリカ",
+			"zh_cn": "旗见 绘梨香",
+			"zh_tw": "旗見 艾麗嘉",
+			"profile": [1]
+		}, {
+			"no": 32,
+			"kr": "키라라",
+			"en": "Kilala",
+			"jp": "キララ",
+			"zh_cn": "绮良",
+			"zh_tw": "綺良",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "학생",
+		"en": "characters",
+		"jp": "生徒",
+		"zh_cn": "学生",
+		"zh_tw": "學生",
+		"characters": [{
+			"no": 33,
+			"kr": "게헨나-학생",
+			"en": "GEHENNA-Student",
+			"jp": "ゲヘナ-生徒",
+			"zh_cn": "格黑娜-学生",
+			"zh_tw": "格赫娜-學生",
+			"profile": [1]
+		}]
+	}]
+}, {
+	"kr": "밀레니엄",
+	"en": "MILLENNIUM",
+	"jp": "ミレニアム",
+	"zh_cn": "千禧",
+	"zh_tw": "千年",
+	"club": [{
+		"kr": "Cleaning & Clearing",
+		"en": "Cleaning & Clearing",
+		"jp": "Cleaning & Clearing",
+		"zh_cn": "C&C",
+		"zh_tw": "C&C",
+		"characters": [{
+			"no": 34,
+			"kr": "무로카사 아카네",
+			"en": "Murokasa Akane",
+			"jp": "室笠 アカネ",
+			"zh_cn": "室笠 朱音",
+			"zh_tw": "室笠 朱音",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 35,
+			"kr": "미카모 네루",
+			"en": "Mikamo Neru",
+			"jp": "美甘 ネル",
+			"zh_cn": "美甘 尼禄",
+			"zh_tw": "美甘 寧瑠",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 36,
+			"kr": "이치노세 아스나",
+			"en": "Ichinose Asuna",
+			"jp": "一之瀬 アスナ",
+			"zh_cn": "一之濑 明日奈",
+			"zh_tw": "一之瀬 明日奈",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 37,
+			"kr": "카쿠다테 카린",
+			"en": "Kakudate Karin",
+			"jp": "角楯 カリン",
+			"zh_cn": "角楯 花凛",
+			"zh_tw": "角楯 花凛",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 175,
+			"kr": "아스마 토키",
+			"en": "Asuma Toki",
+			"jp": "飛鳥馬 トキ",
+			"zh_cn": "飞鸟马 时",
+			"zh_tw": "飛鳥馬 季",
+			"profile": [1, 2, 3, 4, 5]
+		}]
+	}, {
+		"kr": "게임개발부",
+		"en": "Game Development Department",
+		"jp": "ゲーム開発部",
+		"zh_cn": "游戏开发部",
+		"zh_tw": "遊戲開發部",
+		"characters": [{
+			"no": 38,
+			"kr": "텐도 아리스",
+			"en": "Tendou Aris",
+			"jp": "天童 アリス",
+			"zh_cn": "天童 爱丽丝",
+			"zh_tw": "天童 愛麗絲",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 188,
+			"kr": "Key",
+			"en": "Key",
+			"jp": "ケイ",
+			"zh_cn": "Key",
+			"zh_tw": "Key",
+			"profile": [1]
+		}, {
+			"no": 39,
+			"kr": "사이바 모모이",
+			"en": "Saiba Momoi",
+			"jp": "才羽 モモイ",
+			"zh_cn": "才羽 桃井",
+			"zh_tw": "才羽 桃井",
+			"profile": [1, 2, 3]
+		}, {
+			"no": 40,
+			"kr": "사이바 미도리",
+			"en": "Saiba Midori",
+			"jp": "才羽 ミドリ",
+			"zh_cn": "才羽 绿",
+			"zh_tw": "才羽 綠",
+			"profile": [1, 2, 3]
+		}, {
+			"no": 41,
+			"kr": "하나오카 유즈",
+			"en": "Hanaoka Yuzu",
+			"jp": "花岡 ユズ",
+			"zh_cn": "花冈 柚子",
+			"zh_tw": "花岡 柚子",
+			"profile": [1, 2, 3, 4]
+		}]
+	}, {
+		"kr": "베리타스",
+		"en": "Veritas",
+		"jp": "ヴェリタス",
+		"zh_cn": "真理部",
+		"zh_tw": "貝利塔斯",
+		"characters": [{
+			"no": 42,
+			"kr": "아케보시 히마리",
+			"en": "Akeboshi Himari",
+			"jp": "明星 ヒマリ",
+			"zh_cn": "明星 日鞠",
+			"zh_tw": "明星 陽葵",
+			"profile": [1, 2, 3]
+		}, {
+			"no": 43,
+			"kr": "오마가리 하레",
+			"en": "Omagari Hare",
+			"jp": "小鈎 ハレ",
+			"zh_cn": "小钩 晴",
+			"zh_tw": "小鉤 晴",
+			"profile": [1, 2]
+		}, {
+			"no": 44,
+			"kr": "오토세 코타마",
+			"en": "Otose Kotama",
+			"jp": "音瀬 コタマ",
+			"zh_cn": "音濑 小玉",
+			"zh_tw": "音瀨 小玉",
+			"profile": [1, 2]
+		}, {
+			"no": 45,
+			"kr": "카가미 치히로",
+			"en": "Kagami Chihiro",
+			"jp": "各務 チヒロ",
+			"zh_cn": "各务 千寻",
+			"zh_tw": "各務 千尋",
+			"profile": [1, 2]
+		}, {
+			"no": 46,
+			"kr": "코누리 마키",
+			"en": "Konuri Maki",
+			"jp": "小塗 マキ",
+			"zh_cn": "小涂 真纪",
+			"zh_tw": "小塗 真紀",
+			"profile": [1, 2, 3]
+		}]
+	}, {
+		"kr": "엔지니어부",
+		"en": "Engineering Department",
+		"jp": "エンジニア部",
+		"zh_cn": "工程部",
+		"zh_tw": "工程師部",
+		"characters": [{
+			"no": 47,
+			"kr": "네코즈카 히비키",
+			"en": "Nekozuka Hibiki",
+			"jp": "猫塚 ヒビキ",
+			"zh_cn": "猫塚 响",
+			"zh_tw": "猫塚 響",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 48,
+			"kr": "시라이시 우타하",
+			"en": "Shiraishi Utaha",
+			"jp": "白石 ウタハ",
+			"zh_cn": "白石 歌原",
+			"zh_tw": "白石 詠葉",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 49,
+			"kr": "토요미 코토리",
+			"en": "Toyomi Kotori",
+			"jp": "豊見 コトリ",
+			"zh_cn": "丰见 小鸟",
+			"zh_tw": "豐見 亞都梨",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 50,
+			"kr": "천둥이",
+			"en": "Utahaturret",
+			"jp": "ウタハタレット",
+			"zh_cn": "歌原的炮台",
+			"zh_tw": "歌原的炮臺",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "세미나",
+		"en": "Seminar",
+		"jp": "セミナー",
+		"zh_cn": "研讨会",
+		"zh_tw": "研討會",
+		"characters": [{
+			"no": 176,
+			"kr": "츠카츠키 리오",
+			"en": "Tsukatsuki Rio",
+			"jp": "調月 リオ",
+			"zh_cn": "调月 莉音",
+			"zh_tw": "調月 莉音",
+			"profile": [1]
+		}, {
+			"no": 51,
+			"kr": "하야세 유우카",
+			"en": "Hayase Yuuka",
+			"jp": "早瀬 ユウカ",
+			"zh_cn": "早濑 优香",
+			"zh_tw": "早瀬 佑香",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 52,
+			"kr": "쿠로사키 코유키",
+			"en": "Kurosaki Koyuki",
+			"jp": "黒崎 コユキ",
+			"zh_cn": "黑崎 小雪",
+			"zh_tw": "黑崎 小雪",
+			"profile": [1, 2, 3]
+		}, {
+			"no": 172,
+			"kr": "우시노 노아",
+			"en": "Ushio Noa",
+			"jp": "生塩 ノア",
+			"zh_cn": "生盐 诺亚",
+			"zh_tw": "生塩 乃愛",
+			"profile": [1, 2, 3]
+		}]
+	}, {
+		"kr": "초현상특무부",
+		"en": "Super Phenomenon Task Force",
+		"jp": "特異現象捜査部",
+		"zh_cn": "特异现象搜查部",
+		"zh_tw": "特異現象搜查部",
+		"characters": [{
+			"no": 53,
+			"kr": "이즈미모토 에이미",
+			"en": "Izumimoto Eimi",
+			"jp": "和泉元 エイミ",
+			"zh_cn": "和泉元 艾米",
+			"zh_tw": "和泉元 英美",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "트레이닝부",
+		"en": "Gym Training Department",
+		"jp": "トレーニング部",
+		"zh_cn": "健身部",
+		"zh_tw": "健身部",
+		"characters": [{
+			"no": 54,
+			"kr": "오토하나 스미레",
+			"en": "Otohana Sumire",
+			"jp": "乙花 スミレ",
+			"zh_cn": "乙花 菫",
+			"zh_tw": "乙花 菫",
+			"profile": [1, 2, 3]
+		}]
+	}, {
+		"kr": "학생",
+		"en": "characters",
+		"jp": "生徒",
+		"zh_cn": "学生",
+		"zh_tw": "學生",
+		"characters": [{
+			"no": 173,
+			"kr": "밀레니엄-학생",
+			"en": "MILLENNIUM-Student",
+			"jp": "ミレニアム-生徒",
+			"zh_cn": "千禧-学生",
+			"zh_tw": "千年-學生",
+			"profile": [1, 2]
+		}]
+	}]
+}, {
+	"kr": "트리니티",
+	"en": "TRINITY",
+	"jp": "トリニティ",
+	"zh_cn": "圣三一",
+	"zh_tw": "聖三一",
+	"club": [{
+		"kr": "방과후 디저트부",
+		"en": "After-School Sweets Club",
+		"jp": "放課後スイーツ部",
+		"zh_cn": "放学后甜品部",
+		"zh_tw": "放學後甜品部",
+		"characters": [{
+			"no": 55,
+			"kr": "유토리 나츠",
+			"en": "Yutori Natsu",
+			"jp": "柚鳥 ナツ",
+			"zh_cn": "柚鸟 夏",
+			"zh_tw": "柚鳥 夏",
+			"profile": [1, 2, 3]
+		}, {
+			"no": 56,
+			"kr": "이바라기 요시미",
+			"en": "Ibaragi Yoshimi",
+			"jp": "伊原木 ヨシミ",
+			"zh_cn": "伊原木 喜美",
+			"zh_tw": "伊原木 喜美",
+			"profile": [1, 2]
+		}, {
+			"no": 57,
+			"kr": "쿠리무라 아이리",
+			"en": "Kurimura Airi",
+			"jp": "栗村 アイリ",
+			"zh_cn": "栗村 爱莉",
+			"zh_tw": "栗村 愛莉",
+			"profile": [1, 2]
+		}, {
+			"no": 58,
+			"kr": "코야마 카즈사",
+			"en": "Kyouyama Kazusa",
+			"jp": "杏山 カズサ",
+			"zh_cn": "杏山 和纱",
+			"zh_tw": "杏山 和紗",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "티 파티",
+		"en": "Tea Party",
+		"jp": "ティーパーティー",
+		"zh_cn": "茶会",
+		"zh_tw": "茶會",
+		"characters": [{
+			"no": 59,
+			"kr": "티파티",
+			"en": "TeaParty",
+			"jp": "ティーパーティー",
+			"zh_cn": "茶会",
+			"zh_tw": "茶會",
+			"profile": [1, 2]
+		}, {
+			"no": 60,
+			"kr": "미소노 미카",
+			"en": "Misono Mika",
+			"jp": "聖園 ミカ",
+			"zh_cn": "圣园 未花",
+			"zh_tw": "聖園 未花",
+			"profile": [1, 2]
+		}, {
+			"no": 61,
+			"kr": "유리조노 세이아",
+			"en": "Yurizono Seia",
+			"jp": "百合園 セイア",
+			"zh_cn": "百合园 圣娅",
+			"zh_tw": "百合園 聖婭",
+			"profile": [1]
+		}, {
+			"no": 62,
+			"kr": "키리후지 나기사",
+			"en": "Kirifuji Nagisa",
+			"jp": "桐藤 ナギサ",
+			"zh_cn": "桐藤 渚",
+			"zh_tw": "桐藤 渚",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "보충수업부",
+		"en": "Make-Up Work Club",
+		"jp": "補習授業部",
+		"zh_cn": "补习部",
+		"zh_tw": "補習部",
+		"characters": [{
+			"no": 63,
+			"kr": "시라스 아즈사",
+			"en": "Shirasu Azusa",
+			"jp": "白洲 アズサ",
+			"zh_cn": "白洲 梓",
+			"zh_tw": "白洲 梓",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 64,
+			"kr": "시모에 코하루",
+			"en": "Shimoe Koharu",
+			"jp": "下江 コハル",
+			"zh_cn": "下江 小春",
+			"zh_tw": "下江 小春",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 65,
+			"kr": "아지타니 히후미",
+			"en": "Ajitani Hifumi",
+			"jp": "阿慈谷 ヒフミ",
+			"zh_cn": "阿慈谷 日富美",
+			"zh_tw": "阿慈谷 日步美",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 66,
+			"kr": "우라와 하나코",
+			"en": "Urawa Hanako",
+			"jp": "浦和 ハナコ",
+			"zh_cn": "浦和 花子",
+			"zh_tw": "浦和 花子",
+			"profile": [1, 2, 3, 4, 5]
+		}]
+	}, {
+		"kr": "정의실현부",
+		"en": "Justice Task Force",
+		"jp": "正義実現委員会",
+		"zh_cn": "正义实现委员会",
+		"zh_tw": "正義實現委員會",
+		"characters": [{
+			"no": 67,
+			"kr": "정의실현부원",
+			"en": "Justice-Task-Force-Member",
+			"jp": "正義実現委員会部員",
+			"zh_cn": "正义实现委员会部员",
+			"zh_tw": "正義實現委員會組員",
+			"profile": [1, 2]
+		}, {
+			"no": 68,
+			"kr": "시즈야마 마시로",
+			"en": "Shizuyama Mashiro",
+			"jp": "静山 マシロ",
+			"zh_cn": "静山 真白",
+			"zh_tw": "靜山 麻白",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 69,
+			"kr": "켄자키 츠루기",
+			"en": "Kenzaki Tsurugi",
+			"jp": "剣先 ツルギ",
+			"zh_cn": "剑先 鹤城",
+			"zh_tw": "劍先 弦生",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 70,
+			"kr": "하네카와 하스미",
+			"en": "Hanekawa Hasumi",
+			"jp": "羽川 ハスミ",
+			"zh_cn": "羽川 莲见",
+			"zh_tw": "羽川 蓮實",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 71,
+			"kr": "이치카",
+			"en": "Ichika",
+			"jp": "イチカ",
+			"zh_cn": "一花",
+			"zh_tw": "一花",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "시스터후드",
+		"en": "Sisterhood",
+		"jp": "シスターフッド",
+		"zh_cn": "修女会",
+		"zh_tw": "修女會",
+		"characters": [{
+			"no": 72,
+			"kr": "시스터후드",
+			"en": "Sisterhood",
+			"jp": "シスターフッド",
+			"zh_cn": "修女会",
+			"zh_tw": "修女會",
+			"profile": [1]
+		}, {
+			"no": 73,
+			"kr": "와카바 히나타",
+			"en": "Wakaba Hinata",
+			"jp": "若葉 ヒナタ",
+			"zh_cn": "若叶 日向",
+			"zh_tw": "若葉 日向",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 74,
+			"kr": "이오치 마리",
+			"en": "Iochi Mari",
+			"jp": "伊落 マリー",
+			"zh_cn": "伊落 玛丽",
+			"zh_tw": "伊落 瑪麗",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 75,
+			"kr": "우타즈미 사쿠라코",
+			"en": "Utazumi Sakurako",
+			"jp": "歌住 サクラコ",
+			"zh_cn": "歌住 樱子",
+			"zh_tw": "歌住 櫻子",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "구호기사단",
+		"en": "Remedial Knights",
+		"jp": "救護騎士団",
+		"zh_cn": "救护骑士团",
+		"zh_tw": "救護騎士團",
+		"characters": [{
+			"no": 76,
+			"kr": "스미 세리나",
+			"en": "Sumi Serina",
+			"jp": "鷲見 セリナ",
+			"zh_cn": "鹫见 芹娜",
+			"zh_tw": "鷲見 芹奈",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 77,
+			"kr": "아사가오 하나에",
+			"en": "Asagao Hanae",
+			"jp": "朝顔 ハナエ",
+			"zh_cn": "朝颜 花绘",
+			"zh_tw": "朝顏 花繪",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 78,
+			"kr": "아오모리 미네",
+			"en": "Aomori Mine",
+			"jp": "蒼森 ミネ",
+			"zh_cn": "苍森 美弥",
+			"zh_tw": "蒼森 美彌",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "도서부",
+		"en": "Library Committee",
+		"jp": "図書委員会",
+		"zh_cn": "图书委员会",
+		"zh_tw": "圖書委員會",
+		"characters": [{
+			"no": 79,
+			"kr": "엔도우 시미코",
+			"en": "Endou Shimiko",
+			"jp": "円堂 シミコ",
+			"zh_cn": "円堂 志美子",
+			"zh_tw": "円堂 志美子",
+			"profile": [1, 2]
+		}, {
+			"no": 80,
+			"kr": "코제키 우이",
+			"en": "Kozeki Ui",
+			"jp": "古関 ウイ",
+			"zh_cn": "古关 忧",
+			"zh_tw": "古関 憂",
+			"profile": [1, 2, 3, 4]
+		}]
+	}, {
+		"kr": "트리니티 자경단",
+		"en": "Vigilante Crew",
+		"jp": "トリニティ自警団",
+		"zh_cn": "圣三一自警团",
+		"zh_tw": "聖三一自警團",
+		"characters": [{
+			"no": 81,
+			"kr": "모리즈키 스즈미",
+			"en": "Morizuki Suzumi",
+			"jp": "守月 スズミ",
+			"zh_cn": "守月 铃美",
+			"zh_tw": "守月 鈴美",
+			"profile": [1, 2]
+		}, {
+			"no": 171,
+			"kr": "우자와 레이사",
+			"en": "Uzawa Reisa",
+			"jp": "宇沢 レイサ",
+			"zh_cn": "宇泽 玲纱",
+			"zh_tw": "宇澤 玲紗",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "학생",
+		"en": "characters",
+		"jp": "生徒",
+		"zh_cn": "学生",
+		"zh_tw": "學生",
+		"characters": [{
+			"no": 82,
+			"kr": "트리니티-학생",
+			"en": "TRINITY-Student",
+			"jp": "トリニティ-生徒",
+			"zh_cn": "圣三一-学生",
+			"zh_tw": "聖三一-學生",
+			"profile": [1]
+		}]
+	}]
+}, {
+	"kr": "백귀야행",
+	"en": "HYAKKIYAKO",
+	"jp": "百鬼夜行",
+	"zh_cn": "百鬼夜行",
+	"zh_tw": "百鬼夜行",
+	"club": [{
+		"kr": "마츠리운영관리부",
+		"en": "Festival Management Committee",
+		"jp": "お祭り運営委員会",
+		"zh_cn": "庆典运营委员会",
+		"zh_tw": "慶典運營委員會",
+		"characters": [{
+			"no": 83,
+			"kr": "아사히나 피나",
+			"en": "Asahina Pina",
+			"jp": "朝比奈 フィーナ",
+			"zh_cn": "朝日奈 菲娜",
+			"zh_tw": "朝日奈 菲娜",
+			"profile": [1, 2]
+		}, {
+			"no": 84,
+			"kr": "카와와 시즈코",
+			"en": "Kawawa Shizuko",
+			"jp": "河和 シズコ",
+			"zh_cn": "河和 静子",
+			"zh_tw": "河和 靜子",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 85,
+			"kr": "우미카",
+			"en": "Umika",
+			"jp": "ウミカ",
+			"zh_cn": "海夏",
+			"zh_tw": "海夏",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "수행부",
+		"en": "Etiquette Training Society",
+		"jp": "修行部",
+		"zh_cn": "修行部",
+		"zh_tw": "執行部",
+		"characters": [{
+			"no": 86,
+			"kr": "미즈하 미모리",
+			"en": "Mizuha Mimori",
+			"jp": "水羽 ミモリ",
+			"zh_cn": "水羽 三森",
+			"zh_tw": "水羽 三森",
+			"profile": [1, 2, 3]
+		}, {
+			"no": 87,
+			"kr": "카스가 츠바키",
+			"en": "Kasuga Tsubaki",
+			"jp": "春日 ツバキ",
+			"zh_cn": "春日 椿",
+			"zh_tw": "春日 椿",
+			"profile": [1, 2]
+		}, {
+			"no": 88,
+			"kr": "이사미 카에데",
+			"en": "Isami Kaede",
+			"jp": "勇美 カエデ",
+			"zh_cn": "勇美 枫",
+			"zh_tw": "勇美 楓",
+			"profile": [1, 2, 3]
+		}]
+	}, {
+		"kr": "음양부",
+		"en": "Yin-Yang Club",
+		"jp": "陰陽部",
+		"zh_cn": "阴阳部",
+		"zh_tw": "陰陽部",
+		"characters": [{
+			"no": 89,
+			"kr": "와라쿠 치세",
+			"en": "Waraku Chise",
+			"jp": "和楽 チセ",
+			"zh_cn": "和乐 知世",
+			"zh_tw": "和樂 知世",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 90,
+			"kr": "아마치 니야",
+			"en": "Amachi Niya",
+			"jp": "天地 ニヤ",
+			"zh_cn": "天地 妮娅",
+			"zh_tw": "天地 妮婭",
+			"profile": [1]
+		}, {
+			"no": 91,
+			"kr": "쿠와카미 카호",
+			"en": "Kuwakami Kaho",
+			"jp": "桑上 カホ",
+			"zh_cn": "桑上 果穗",
+			"zh_tw": "桑上 果穗",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "인법연구부",
+		"en": "Ninjutsu Research Department",
+		"jp": "忍術研究部",
+		"zh_cn": "忍术研究部",
+		"zh_tw": "忍術研究部",
+		"characters": [{
+			"no": 92,
+			"kr": "쿠다 이즈나",
+			"en": "Kuda Izuna",
+			"jp": "久田 イズナ",
+			"zh_cn": "久田 泉奈",
+			"zh_tw": "久田 伊樹菜",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 93,
+			"kr": "치도리 미치루",
+			"en": "Chidori Michiru",
+			"jp": "千鳥 ミチル",
+			"zh_cn": "千鸟 满",
+			"zh_tw": "千鳥 滿",
+			"profile": [1, 2]
+		}, {
+			"no": 94,
+			"kr": "오오노 츠쿠요",
+			"en": "Oono Tsukuyo",
+			"jp": "大野 ツクヨ",
+			"zh_cn": "大野 月咏",
+			"zh_tw": "大野 月詠",
+			"profile": [1, 2, 3]
+		}]
+	}, {
+		"kr": "소속 불명",
+		"en": "Unknown",
+		"jp": "所属不明",
+		"zh_cn": "所属不详",
+		"zh_tw": "所屬不詳",
+		"characters": [{
+			"no": 95,
+			"kr": "코사카 와카모",
+			"en": "Kosaka Wakamo",
+			"jp": "狐坂 ワカモ",
+			"zh_cn": "狐坂 若藻",
+			"zh_tw": "狐阪 若藻",
+			"profile": [1, 2, 3, 4, 5, 6, 7]
+		}]
+	}, {
+		"kr": "백화요란 분쟁조정위원회",
+		"en": "Hyakkayouran Conflict Resolution Council",
+		"jp": "百花繚乱紛争調停委員会",
+		"zh_cn": "百花缭乱纷争调停委员会",
+		"zh_tw": "百花繚亂紛爭調停委員會",
+		"characters": [{
+			"no": 97,
+			"kr": "쿠즈노하",
+			"en": "Kuzunoha",
+			"jp": "クズノハ",
+			"zh_cn": "葛叶",
+			"zh_tw": "葛葉",
+			"profile": [1]
+		}, {
+			"no": 192,
+			"kr": "고료 나구사",
+			"en": "Goryo Nagusa",
+			"jp": "五稜 なぐさ",
+			"zh_cn": "五陵 名草",
+			"zh_tw": "五陵 名草",
+			"profile": [1]
+		}]
+	}]
+}, {
+	"kr": "산해경",
+	"en": "SHANHAIJING",
+	"jp": "山海経",
+	"zh_cn": "山海经",
+	"zh_tw": "山海經",
+	"club": [{
+		"kr": "현룡문",
+		"en": "Genryumon",
+		"jp": "玄竜門",
+		"zh_cn": "玄龙门",
+		"zh_tw": "玄龍門",
+		"characters": [{
+			"no": 183,
+			"kr": "키사키",
+			"en": "Kissaki",
+			"jp": "キサキ",
+			"zh_cn": "妃咲",
+			"zh_tw": "妃姬",
+			"profile": [1]
+		}, {
+			"no": 184,
+			"kr": "코노에 미나",
+			"en": "Konoe Mina",
+			"jp": "近衛 ミナ",
+			"zh_cn": "近卫 南",
+			"zh_tw": "近衛 南",
+			"profile": [1, 2]
+		}, {
+			"no": 185,
+			"kr": "현룡문-임원",
+			"en": "Genryumon-Member",
+			"jp": "玄竜門役員",
+			"zh_cn": "玄龙门高级管理人员",
+			"zh_tw": "玄龍門高級管理人員",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "연단방",
+		"en": "Eastern Alchemy Society",
+		"jp": "練丹術研究会",
+		"zh_cn": "炼丹术研究会",
+		"zh_tw": "煉丹術研究會",
+		"characters": [{
+			"no": 98,
+			"kr": "야쿠시 사야",
+			"en": "Yakushi Saya",
+			"jp": "薬子 サヤ",
+			"zh_cn": "药子 纱绫",
+			"zh_tw": "藥子 沙耶",
+			"profile": [1, 2, 3, 4]
+		}]
+	}, {
+		"kr": "현무상회",
+		"en": "Genbu Shokai",
+		"jp": "玄武商会",
+		"zh_cn": "玄武商会",
+		"zh_tw": "玄武商會",
+		"characters": [{
+			"no": 99,
+			"kr": "아케시로 루미",
+			"en": "Akeshiro Rumi",
+			"jp": "朱城 ルミ",
+			"zh_cn": "朱城 瑠美",
+			"zh_tw": "朱城 瑠美",
+			"profile": [1, 2]
+		}, {
+			"no": 100,
+			"kr": "카야마 레이죠",
+			"en": "Kayama Reizo",
+			"jp": "鹿山 レイジョ",
+			"zh_cn": "鹿山 丽情",
+			"zh_tw": "鹿山 麗情",
+			"profile": [1]
+		}, {
+			"no": 101,
+			"kr": "현무상회-직원",
+			"en": "Genbu-Shokai-Employee",
+			"jp": "玄武商会職員",
+			"zh_cn": "玄武商会职员",
+			"zh_tw": "玄武商會職員",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "훈육지원부 「매화원」",
+		"en": "Plum Blossom Garden",
+		"jp": "訓育支援部「梅花園」",
+		"zh_cn": "教育支援部「梅花园」",
+		"zh_tw": "教育支援部「梅花園」",
+		"characters": [{
+			"no": 102,
+			"kr": "스노하라 슌",
+			"en": "Sunohara Shun",
+			"jp": "春原 シュン",
+			"zh_cn": "春原 瞬",
+			"zh_tw": "春原 旬",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 103,
+			"kr": "스노하라 코코나",
+			"en": "Sunohara Kokona",
+			"jp": "春原 ココナ",
+			"zh_cn": "春原 心奈",
+			"zh_tw": "春原 心菜",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "소속 불명",
+		"en": "Unknown",
+		"jp": "所属不明",
+		"zh_cn": "所属不详",
+		"zh_tw": "所屬不詳",
+		"characters": [{
+			"no": 96,
+			"kr": "페이",
+			"en": "Pei",
+			"jp": "ペイ",
+			"zh_cn": "裴",
+			"zh_tw": "裴",
+			"profile": [1]
+		}, {
+			"no": 198,
+			"kr": "신야 카이",
+			"en": "Saruya Kai",
+			"jp": "申谷 カイ",
+			"zh_cn": "申谷 启",
+			"zh_tw": "申谷 啟",
+			"profile": [1]
+		}]
+	}]
+}, {
+	"kr": "붉은겨울",
+	"en": "REDWINTER",
+	"jp": "レッドウィンター",
+	"zh_cn": "红冬",
+	"zh_tw": "紅冬",
+	"club": [{
+		"kr": "붉은겨울 사무국",
+		"en": "REDWINTER Secretariat",
+		"jp": "レッドウィンター事務局",
+		"zh_cn": "红冬事务局",
+		"zh_tw": "紅冬事務局",
+		"characters": [{
+			"no": 104,
+			"kr": "렌카와 체리노",
+			"en": "Renkawa Cherino",
+			"jp": "連河 チェリノ",
+			"zh_cn": "连河 切里诺",
+			"zh_tw": "連河 潔莉諾",
+			"profile": [1, 2, 3, 4]
+		}, {
+			"no": 105,
+			"kr": "사시로 토모에",
+			"en": "Sashiro Tomoe",
+			"jp": "佐城 トモエ",
+			"zh_cn": "佐城 智惠",
+			"zh_tw": "佐城 智惠",
+			"profile": [1, 2]
+		}, {
+			"no": 106,
+			"kr": "이케쿠라 마리나",
+			"en": "Ikekura Marina",
+			"jp": "池倉 マリナ",
+			"zh_cn": "池仓 玛丽娜",
+			"zh_tw": "池倉 瑪麗娜",
+			"profile": [1, 2]
+		}, {
+			"no": 107,
+			"kr": "친위대원",
+			"en": "Member-Of-The-SS",
+			"jp": "親衛隊員",
+			"zh_cn": "亲卫队员",
+			"zh_tw": "親衛隊員",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "227호 특별반",
+		"en": "Spec Ops.227",
+		"jp": "227号特別クラス",
+		"zh_cn": "227号特别班",
+		"zh_tw": "227號特別班",
+		"characters": [{
+			"no": 108,
+			"kr": "마요이 시구레",
+			"en": "Mayoi Shigure",
+			"jp": "間宵 シグレ",
+			"zh_cn": "间宵 时雨",
+			"zh_tw": "間宵 時雨",
+			"profile": [1, 3, 2]
+		}, {
+			"no": 109,
+			"kr": "아마미 노도카",
+			"en": "Amami Nodoka",
+			"jp": "天見 ノドカ",
+			"zh_cn": "天见 和香",
+			"zh_tw": "天見 和香",
+			"profile": [1, 2, 3, 4]
+		}]
+	}, {
+		"kr": "지식해방전선",
+		"en": "Knowledge Liberation Front",
+		"jp": "知識解放戦線",
+		"zh_cn": "知识解放战线",
+		"zh_tw": "知識解放戰線",
+		"characters": [{
+			"no": 110,
+			"kr": "히메키 메루",
+			"en": "Himeki Meru",
+			"jp": "姫木 メル",
+			"zh_cn": "姬木 梅露",
+			"zh_tw": "姬木 梅露",
+			"profile": [1, 2]
+		}, {
+			"no": 111,
+			"kr": "아키이즈미 모미지",
+			"en": "Akiizumi Momiji",
+			"jp": "秋泉 モミジ",
+			"zh_cn": "秋泉 红叶",
+			"zh_tw": "秋泉 紅葉",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "용역부",
+		"en": "Construction Department",
+		"jp": "工務部",
+		"zh_cn": "工务部",
+		"zh_tw": "工務部",
+		"characters": [{
+			"no": 112,
+			"kr": "야스모리 미노리",
+			"en": "Yasumori Minori",
+			"jp": "安守 ミノリ",
+			"zh_cn": "安守 实里",
+			"zh_tw": "安守 實裏",
+			"profile": [1, 2]
+		}, {
+			"no": 113,
+			"kr": "용역부원",
+			"en": "Construction-Department-Member",
+			"jp": "工務部員",
+			"zh_cn": "工务部员",
+			"zh_tw": "工務部員",
+			"profile": [1, 2]
+		}]
+	}]
+}, {
+	"kr": "발키리",
+	"en": "VALKYRIE",
+	"jp": "ヴァルキューレ",
+	"zh_cn": "瓦尔基里",
+	"zh_tw": "瓦爾基里",
+	"club": [{
+		"kr": "생활안전국",
+		"en": "Community Safety Bureau",
+		"jp": "生活安全局",
+		"zh_cn": "生活安全局",
+		"zh_tw": "生活安全局",
+		"characters": [{
+			"no": 114,
+			"kr": "나카츠카사 키리노",
+			"en": "Nakatsukasa Kirino",
+			"jp": "中務 キリノ",
+			"zh_cn": "中务 桐乃",
+			"zh_tw": "中務 桐乃",
+			"profile": [1, 2]
+		}, {
+			"no": 115,
+			"kr": "네무가키 후부키",
+			"en": "Nemugaki Fubuki",
+			"jp": "合歓垣 フブキ",
+			"zh_cn": "合欢垣 吹雪",
+			"zh_tw": "合歓垣 吹雪",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "공안국",
+		"en": "Public Security Bureau",
+		"jp": "公安局",
+		"zh_cn": "公安局",
+		"zh_tw": "公安局",
+		"characters": [{
+			"no": 116,
+			"kr": "오가타 칸나",
+			"en": "Ogata Kanna",
+			"jp": "尾刃 カンナ",
+			"zh_cn": "尾刃 康纳",
+			"zh_tw": "尾刃 康娜",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "학생",
+		"en": "characters",
+		"jp": "生徒",
+		"zh_cn": "学生",
+		"zh_tw": "學生",
+		"characters": [{
+			"no": 117,
+			"kr": "발키리-학생",
+			"en": "Valkyrie-Student",
+			"jp": "ヴァルキューレ生徒",
+			"zh_cn": "瓦尔基里学生",
+			"zh_tw": "瓦爾基里學生",
+			"profile": [1, 2]
+		}]
+	}]
+}, {
+	"kr": "SRT",
+	"en": "SRT",
+	"jp": "SRT",
+	"zh_cn": "SRT",
+	"zh_tw": "SRT",
+	"club": [{
+		"kr": "RABBIT 소대",
+		"en": "RABBIT Platoon",
+		"jp": "RABBIT 小隊",
+		"zh_cn": "RABBIT小队",
+		"zh_tw": "RABBIT小隊",
+		"characters": [{
+			"no": 118,
+			"kr": "소라이 사키",
+			"en": "Sorai Saki",
+			"jp": "空井 サキ",
+			"zh_cn": "空井 咲",
+			"zh_tw": "空井 咲希",
+			"profile": [1, 2, 4, 3, 5, 6]
+		}, {
+			"no": 119,
+			"kr": "츠키유키 미야코",
+			"en": "Tsukiyuki Miyako",
+			"jp": "月雪 ミヤコ",
+			"zh_cn": "月雪 宫子",
+			"zh_tw": "月雪 都子",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 120,
+			"kr": "카스미자와 미유",
+			"en": "Kasumizawa Miyu",
+			"jp": "霞沢 ミユ",
+			"zh_cn": "霞泽 美游",
+			"zh_tw": "霞澤 美優",
+			"profile": [1, 2, 3, 4, 5]
+		}, {
+			"no": 121,
+			"kr": "카제쿠라 모에",
+			"en": "Kazekura Moe",
+			"jp": "風倉 モエ",
+			"zh_cn": "风仓 萌惠",
+			"zh_tw": "風倉 萌",
+			"profile": [1, 2, 3, 4]
+		}]
+	}, {
+		"kr": "FOX 소대",
+		"en": "FOX Platoon",
+		"jp": "FOX 小隊",
+		"zh_cn": "FOX 小队",
+		"zh_tw": "FOX 小隊",
+		"characters": [{
+			"no": 122,
+			"kr": "유키노",
+			"en": "Yukino",
+			"jp": "ユキノ",
+			"zh_cn": "雪乃",
+			"zh_tw": "雪乃",
+			"profile": [1]
+		}, {
+			"no": 123,
+			"kr": "니코",
+			"en": "Niko",
+			"jp": "ニコ",
+			"zh_cn": "妮可",
+			"zh_tw": "妮可",
+			"profile": [1]
+		}, {
+			"no": 186,
+			"kr": "오토기",
+			"en": "Otogi",
+			"jp": "オトギ",
+			"zh_cn": "音葵",
+			"zh_tw": "音葵",
+			"profile": [1]
+		}, {
+			"no": 187,
+			"kr": "쿠루미",
+			"en": "Kurumi",
+			"jp": "クルミ",
+			"zh_cn": "胡桃",
+			"zh_tw": "胡桃",
+			"profile": [1]
+		}]
+	}]
+}, {
+	"kr": "아리우스",
+	"en": "ARIUS",
+	"jp": "アリウス",
+	"zh_cn": "阿里乌斯",
+	"zh_tw": "阿里烏斯",
+	"club": [{
+		"kr": "아리우스 스쿼드",
+		"en": "Arius Squad",
+		"jp": "アリウス スクワッド",
+		"zh_cn": "阿里乌斯特殊小队",
+		"zh_tw": "阿里烏斯特殊小隊",
+		"characters": [{
+			"no": 124,
+			"kr": "조마에 사오리",
+			"en": "Joumae Saori",
+			"jp": "錠前 サオリ",
+			"zh_cn": "锭前 纱织",
+			"zh_tw": "錠前 紗織",
+			"profile": [1, 2, 3]
+		}, {
+			"no": 125,
+			"kr": "하카리 아츠코",
+			"en": "Hakari Atsuko",
+			"jp": "秤 アツコ",
+			"zh_cn": "秤 亚津子",
+			"zh_tw": "秤 敦子",
+			"profile": [1, 2, 3]
+		}, {
+			"no": 126,
+			"kr": "츠치나가 히요리",
+			"en": "Tsuchinaga Hiyori",
+			"jp": "槌永 ヒヨリ",
+			"zh_cn": "槌永 日和",
+			"zh_tw": "槌永 日和",
+			"profile": [1, 2]
+		}, {
+			"no": 127,
+			"kr": "이마시노 미사키",
+			"en": "Imashino Misaki",
+			"jp": "戒野 ミサキ",
+			"zh_cn": "戒野 美咲",
+			"zh_tw": "戒野 美咲",
+			"profile": [1, 2, 3]
+		}]
+	}, {
+		"kr": "학생",
+		"en": "characters",
+		"jp": "生徒",
+		"zh_cn": "学生",
+		"zh_tw": "學生",
+		"characters": [{
+			"no": 128,
+			"kr": "아리우스-학생",
+			"en": "ARIUS-Student",
+			"jp": "アリウス生徒",
+			"zh_cn": "阿里乌斯学生",
+			"zh_tw": "阿里烏斯學生",
+			"profile": [1]
+		}]
+	}]
+}, {
+	"kr": "엑스트라",
+	"en": "EXTRA",
+	"jp": "エキストラ",
+	"zh_cn": "其他",
+	"zh_tw": "臨時演員",
+	"club": [{
+		"kr": "크로노스 보도부",
+		"en": "Cronos Press Department",
+		"jp": "クロノス 報道部",
+		"zh_cn": "克洛诺斯报道部",
+		"zh_tw": "克洛諾斯報道部",
+		"characters": [{
+			"no": 134,
+			"kr": "마이",
+			"en": "Mai",
+			"jp": "マイ",
+			"zh_cn": "舞",
+			"zh_tw": "舞",
+			"profile": [1]
+		}, {
+			"no": 135,
+			"kr": "카와루 시논",
+			"en": "Kawaru Shinon",
+			"jp": "川流 シノン",
+			"zh_cn": "川流 诗乃",
+			"zh_tw": "川流 詩乃",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "골든 플리스",
+		"en": "Golden Fleece",
+		"jp": "ゴールデン フリース",
+		"zh_cn": "金羊毛",
+		"zh_tw": "金羊毛",
+		"characters": [{
+			"no": 136,
+			"kr": "바니걸-가드",
+			"en": "BunnyGirl-Guard",
+			"jp": "バニーガール ガード",
+			"zh_cn": "兔女郎守卫",
+			"zh_tw": "兔女郎守衛",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "게마트리아",
+		"en": "Gematria",
+		"jp": "ゲマトリア",
+		"zh_cn": "数秘术",
+		"zh_tw": "蓋瑪特利亞",
+		"characters": [{
+			"no": 138,
+			"kr": "검은-양복",
+			"en": "Black-Suit",
+			"jp": "黒服",
+			"zh_cn": "黑服",
+			"zh_tw": "黑色西裝人",
+			"profile": [1, 2]
+		}, {
+			"no": 139,
+			"kr": "골콩드",
+			"en": "Golconde",
+			"jp": "ゴルコンダ",
+			"zh_cn": "戈尔孔达",
+			"zh_tw": "戈爾孔達",
+			"profile": [1]
+		}, {
+			"no": 140,
+			"kr": "데칼코마니",
+			"en": "Décalcomanie",
+			"jp": "デカルコマニー",
+			"zh_cn": "印花釉法",
+			"zh_tw": "印花釉法",
+			"profile": [1]
+		}, {
+			"no": 194,
+			"kr": "프랜시스",
+			"en": "Francis",
+			"jp": "フランシス",
+			"zh_cn": "弗朗西斯",
+			"zh_tw": "弗朗西斯",
+			"profile": [1]
+		}, {
+			"no": 141,
+			"kr": "마에스트로",
+			"en": "Maestro",
+			"jp": "マエストロ",
+			"zh_cn": "巨匠",
+			"zh_tw": "巨匠",
+			"profile": [1, 2]
+		}, {
+			"no": 142,
+			"kr": "베아트리체",
+			"en": "Beatrice",
+			"jp": "ベアトリーチェ",
+			"zh_cn": "贝阿朵莉切",
+			"zh_tw": "貝阿朵莉切",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "The Library of Lore",
+		"en": "The Library of Lore",
+		"jp": "The Library of Lore",
+		"zh_cn": "无限怪谈图书馆",
+		"zh_tw": "無限怪談圖書館",
+		"characters": [{
+			"no": 143,
+			"kr": "페로로질라",
+			"en": "Perorozilla",
+			"jp": "ペロロジラ",
+			"zh_cn": "佩洛洛斯拉",
+			"zh_tw": "佩洛洛吉拉",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "검은거북파",
+		"en": "Black Turtles",
+		"jp": "黒亀組",
+		"zh_cn": "黑龟组",
+		"zh_tw": "黑龜組",
+		"characters": [{
+			"no": 144,
+			"kr": "오토마타",
+			"en": "Automata",
+			"jp": "オートマタ",
+			"zh_cn": "自动机兵",
+			"zh_tw": "戰鬥機器人",
+			"profile": [1, 2, 3]
+		}, {
+			"no": 145,
+			"kr": "카메지마 고로",
+			"en": "Camajima Goro",
+			"jp": "亀島 五郎",
+			"zh_cn": "龟岛 五郎",
+			"zh_tw": "龜島 五郎",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "불량배",
+		"en": "Thugs",
+		"jp": "スケバン",
+		"zh_cn": "小混混",
+		"zh_tw": "小混混",
+		"characters": [{
+			"no": 146,
+			"kr": "불량배",
+			"en": "Thugs",
+			"jp": "スケバン",
+			"zh_cn": "小混混",
+			"zh_tw": "小混混",
+			"profile": [1, 2, 3, 4, 5]
+		}]
+	}, {
+		"kr": "데카그라마톤",
+		"en": "Decagrammaton",
+		"jp": "デカグラマトン",
+		"zh_cn": "十字神名",
+		"zh_tw": "十字神名",
+		"characters": [{
+			"no": 147,
+			"kr": "호드",
+			"en": "Hod",
+			"jp": "ホド",
+			"zh_cn": "霍德",
+			"zh_tw": "霍德",
+			"profile": [1]
+		}, {
+			"no": 148,
+			"kr": "헤세드",
+			"en": "Chesed",
+			"jp": "ケセド",
+			"zh_cn": "凯赛德",
+			"zh_tw": "赫賽德",
+			"profile": [1]
+		}, {
+			"no": 149,
+			"kr": "비나",
+			"en": "Binah",
+			"jp": "ビナー",
+			"zh_cn": "薇娜",
+			"zh_tw": "薇娜",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "모모프렌즈",
+		"en": "Momo Friends",
+		"jp": "モモフレンズ",
+		"zh_cn": "Momo Friends",
+		"zh_tw": "Momo Friends",
+		"characters": [{
+			"no": 150,
+			"kr": "페로로님",
+			"en": "Peroro-Sama",
+			"jp": "ペロロ様",
+			"zh_cn": "佩洛洛大人",
+			"zh_tw": "佩洛洛大人",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "백귀야행 상점가",
+		"en": "Hyakkiyako Commercial district",
+		"jp": "百鬼夜行商店街",
+		"zh_cn": "百鬼夜行商店街",
+		"zh_tw": "百鬼夜行商店街",
+		"characters": [{
+			"no": 151,
+			"kr": "냥텐마루",
+			"en": "Nyantenmaru",
+			"jp": "ニャン天丸",
+			"zh_cn": "喵天丸",
+			"zh_tw": "喵天丸",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "슬럼피아",
+		"en": "Slumpia",
+		"jp": "スランピア",
+		"zh_cn": "斯兰皮亚",
+		"zh_tw": "斯兰皮亚",
+		"characters": [{
+			"no": 152,
+			"kr": "시로",
+			"en": "Shiro",
+			"jp": "シロ",
+			"zh_cn": "白",
+			"zh_tw": "白",
+			"profile": [1]
+		}, {
+			"no": 153,
+			"kr": "쿠로",
+			"en": "Kuro",
+			"jp": "クロ",
+			"zh_cn": "黑",
+			"zh_tw": "黑",
+			"profile": [1]
+		}, {
+			"no": 174,
+			"kr": "고즈",
+			"en": "Goz",
+			"jp": "ゴズ",
+			"zh_cn": "戈兹",
+			"zh_tw": "戈茲",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "시민",
+		"en": "Citizen",
+		"jp": "市民",
+		"zh_cn": "市民",
+		"zh_tw": "市民",
+		"characters": [{
+			"no": 154,
+			"kr": "키보토스-시민",
+			"en": "Kivotos-Citizen",
+			"jp": "キヴォトス市民",
+			"zh_cn": "基沃托斯市民",
+			"zh_tw": "奇普托斯市民",
+			"profile": [1, 2, 3, 4, 5, 6, 7]
+		}, {
+			"no": 155,
+			"kr": "안드로이드",
+			"en": "Android",
+			"jp": "アンドロイド",
+			"zh_cn": "机器人",
+			"zh_tw": "機器人",
+			"profile": [1, 2, 3]
+		}]
+	}, {
+		"kr": "시바세키 라멘",
+		"en": "Sibaseki Ramen",
+		"jp": "柴関ラーメン",
+		"zh_cn": "柴关拉面",
+		"zh_tw": "柴關拉麵",
+		"characters": [{
+			"no": 156,
+			"kr": "시바세키-사장",
+			"en": "Shibaseki-Master",
+			"jp": "柴大将",
+			"zh_cn": "柴大将",
+			"zh_tw": "柴大将",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "엔젤 24",
+		"en": "Angel 24",
+		"jp": "エンジェル24",
+		"zh_cn": "天使24",
+		"zh_tw": "天使24",
+		"characters": [{
+			"no": 158,
+			"kr": "소라",
+			"en": "Sora",
+			"jp": "ソラ",
+			"zh_cn": "空",
+			"zh_tw": "空",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "이매일좌 노상류",
+		"en": "Chimi Ichiza Rojou Ryu",
+		"jp": "魑魅一座・路上流",
+		"zh_cn": "魑魅一座・路上流",
+		"zh_tw": "二水魅劇團路流",
+		"characters": [{
+			"no": 159,
+			"kr": "이매일좌",
+			"en": "Chimi-Ichiza",
+			"jp": "魑魅一座",
+			"zh_cn": "二流魅剧团",
+			"zh_tw": "二流魅劇團",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "카이저 PMC",
+		"en": "Kaiser PMC",
+		"jp": "カイザー PMC",
+		"zh_cn": "凯撒 PMC",
+		"zh_tw": "凱撒 PMC",
+		"characters": [{
+			"no": 160,
+			"kr": "카이저-PMC-이사",
+			"en": "Kaiser-PMC-Director",
+			"jp": "カイザーPMC理事",
+			"zh_cn": "凯撒PMC理事",
+			"zh_tw": "凱撒PMC理事",
+			"profile": [1, 2]
+		}, {
+			"no": 180,
+			"kr": "카이저-PMC-장군",
+			"en": "Kaiser-PMC-General",
+			"jp": "カイザーPMC将軍",
+			"zh_cn": "凯撒PMC将军",
+			"zh_tw": "凱撒PMC將軍",
+			"profile": [1]
+		}, {
+			"no": 181,
+			"kr": "카이저-회장",
+			"en": "Kaiser-President",
+			"jp": "カイザー会長",
+			"zh_cn": "凯撒总裁",
+			"zh_tw": "凱撒主席",
+			"profile": [1]
+		}, {
+			"no": 182,
+			"kr": "카이저-SOF",
+			"en": "Kaiser-SOF",
+			"jp": "カイザーSOF",
+			"zh_cn": "凯撒特种部队",
+			"zh_tw": "凱撒特種部隊",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "카이텐저",
+		"en": "Kaitenger",
+		"jp": "カイテンジャー",
+		"zh_cn": "凯坦泽",
+		"zh_tw": "凱坦澤",
+		"characters": [{
+			"no": 161,
+			"kr": "KAITEN-FX-Mk.0",
+			"en": "KAITEN-FX-Mk.0",
+			"jp": "KAITEN-FX-Mk.0",
+			"zh_cn": "KAITEN-FX-Mk.0",
+			"zh_tw": "KAITEN-FX-Mk.0",
+			"profile": [1]
+		}, {
+			"no": 162,
+			"kr": "카이텐레인저",
+			"en": "KaitenRanger",
+			"jp": "KaitenRanger",
+			"zh_cn": "回转寿司战队",
+			"zh_tw": "回轉壽司戰隊",
+			"profile": [1, 2, 3, 4, 5]
+		}]
+	}, {
+		"kr": "카타카타 헬멧단",
+		"en": "Katakata Helmet Gang",
+		"jp": "カタカタヘルメット団",
+		"zh_cn": "咔哒咔哒 钢盔团",
+		"zh_tw": "咔噠咔噠 頭盔團",
+		"characters": [{
+			"no": 163,
+			"kr": "헬멧단",
+			"en": "Helmet-Gang",
+			"jp": "ヘルメット団",
+			"zh_cn": "钢盔团",
+			"zh_tw": "頭盔團",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "첨벙첨벙 헬멧단",
+		"en": "SplashSplash Helmet Gang",
+		"jp": "ジャブジャブヘルメット団",
+		"zh_cn": "JumpJump钢盔团",
+		"zh_tw": "JumpJump頭盔團",
+		"characters": [{
+			"no": 164,
+			"kr": "코마카제 라브",
+			"en": "Komakaje Rabu",
+			"jp": "河駒風 ラブ",
+			"zh_cn": "和驹风 良舞",
+			"zh_tw": "和駒風 良舞",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "코뮤니오 상토룸",
+		"en": "Communio Sanctorum",
+		"jp": "コムニオ・サンクトラム",
+		"zh_cn": "诸圣相通",
+		"zh_tw": "諸聖相通",
+		"characters": [{
+			"no": 165,
+			"kr": "예로니무스",
+			"en": "Hieronymus",
+			"jp": "ヒエロニムス",
+			"zh_cn": "希罗尼穆斯",
+			"zh_tw": "希羅尼姆斯",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "소속 불명",
+		"en": "Unknown",
+		"jp": "所属不明",
+		"zh_cn": "所属不详",
+		"zh_tw": "所屬不詳",
+		"characters": [{
+			"no": 137,
+			"kr": "하츠네-미쿠",
+			"en": "Hatsune-Miku",
+			"jp": "初音ミク",
+			"zh_cn": "初音未来",
+			"zh_tw": "初音未來",
+			"profile": [1, 2]
+		}, {
+			"no": 166,
+			"kr": "칸나",
+			"en": "Kanna",
+			"jp": "カンナ",
+			"zh_cn": "坎纳",
+			"zh_tw": "坎納",
+			"profile": [1]
+		}, {
+			"no": 167,
+			"kr": "마리아",
+			"en": "Miria",
+			"jp": "ミリア",
+			"zh_cn": "米莉亚",
+			"zh_tw": "米莉亞",
+			"profile": [1]
+		}, {
+			"no": 168,
+			"kr": "나오",
+			"en": "Nao",
+			"jp": "ナオ",
+			"zh_cn": "纳奥",
+			"zh_tw": "納奧",
+			"profile": [1]
+		}, {
+			"no": 169,
+			"kr": "로네",
+			"en": "Rone",
+			"jp": "ローネ",
+			"zh_cn": "罗内",
+			"zh_tw": "羅內",
+			"profile": [1]
+		}, {
+			"no": 170,
+			"kr": "유카리",
+			"en": "Yukari",
+			"jp": "ユカリ",
+			"zh_cn": "由香里",
+			"zh_tw": "由香裏",
+			"profile": [1]
+		}, {
+			"no": 190,
+			"kr": "아누비스",
+			"en": "Anubis",
+			"jp": "アヌビス",
+			"zh_cn": "阿努比斯",
+			"zh_tw": "阿努比斯",
+			"profile": [1]
+		}, {
+			"no": 195,
+			"kr": "???",
+			"en": "???",
+			"jp": "???",
+			"zh_cn": "???",
+			"zh_tw": "???",
+			"profile": [1]
+		}, {
+			"no": 196,
+			"kr": "무명사제",
+			"en": "The-nameless-priests",
+			"jp": "無名の司祭",
+			"zh_cn": "无名司祭",
+			"zh_tw": "無名司祭",
+			"profile": [1]
+		}, {
+			"no": 197,
+			"kr": "아키라",
+			"en": "Akira",
+			"jp": "アキラ",
+			"zh_cn": "晶",
+			"zh_tw": "晶",
+			"profile": [1, 2]
+		}]
+	}, {
+		"kr": "색채",
+		"en": "Color",
+		"jp": "色彩",
+		"zh_cn": "色彩",
+		"zh_tw": "色彩",
+		"characters": [{
+			"no": 189,
+			"kr": "프레나파테스",
+			"en": "Frenapates",
+			"jp": "プレナパテス",
+			"zh_cn": "普雷纳瓦德斯",
+			"zh_tw": "普雷納瓦德斯",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "블루아카이브",
+		"en": "BlueArchive",
+		"jp": "ブルーアーカイブ",
+		"zh_cn": "蔚蓝档案",
+		"zh_tw": "蔚藍檔案",
+		"characters": [{
+			"no": 177,
+			"kr": "404",
+			"en": "404",
+			"jp": "404",
+			"zh_cn": "404",
+			"zh_tw": "404",
+			"profile": [1]
+		}]
+	}]
+}, {
+	"kr": "DU",
+	"en": "DU",
+	"jp": "DU",
+	"zh_cn": "DU",
+	"zh_tw": "DU",
+	"club": [{
+		"kr": "연방학생회",
+		"en": "GSC",
+		"jp": "連邦生徒会",
+		"zh_cn": "联邦学生会",
+		"zh_tw": "聯邦學生會",
+		"characters": [{
+			"no": 129,
+			"kr": "총학생회장",
+			"en": "GSC President",
+			"jp": "連邦生徒会長",
+			"zh_cn": "联邦学生会长",
+			"zh_tw": "聯邦學生會長",
+			"profile": [1]
+		}, {
+			"no": 130,
+			"kr": "나나가미 린",
+			"en": "Nanagami Rin",
+			"jp": "七神 リン",
+			"zh_cn": "七神 凛",
+			"zh_tw": "七神 琳",
+			"profile": [1, 2]
+		}, {
+			"no": 131,
+			"kr": "유라기 모모카",
+			"en": "Yuragi Momoka",
+			"jp": "由良木 モモカ",
+			"zh_cn": "由良木 桃香",
+			"zh_tw": "由良木 桃香",
+			"profile": [1, 2]
+		}, {
+			"no": 132,
+			"kr": "이와비츠 아유무",
+			"en": "Iwabitsu Ayumu",
+			"jp": "岩櫃 アユム",
+			"zh_cn": "岩柜 步梦",
+			"zh_tw": "巖櫃 步",
+			"profile": [1, 2]
+		}, {
+			"no": 133,
+			"kr": "시라누이 카야",
+			"en": "Shiranui Kaya",
+			"jp": "不知火 カヤ",
+			"zh_cn": "不知火 花耶",
+			"zh_tw": "不知火 花耶",
+			"profile": [1]
+		}, {
+			"no": 178,
+			"kr": "오키 아오이",
+			"en": "Oki Aoi",
+			"jp": "扇喜 アオイ",
+			"zh_cn": "扇喜 葵",
+			"zh_tw": "扇喜 葵",
+			"profile": [1]
+		}, {
+			"no": 179,
+			"kr": "총학생회-임원",
+			"en": "Student-Council-Officer",
+			"jp": "連邦生徒会長役員",
+			"zh_cn": "联邦学生会成员",
+			"zh_tw": "聯邦學生會成員",
+			"profile": [1, 2]
+		}, {
+			"no": 200,
+			"kr": "200",
+			"en": "Haine",
+			"jp": "はいね",
+			"zh_cn": "灰音",
+			"zh_tw": "灰音",
+			"profile": [1]
+		}, {
+			"no": 201,
+			"kr": "201",
+			"en": "Sumomo",
+			"jp": "すもも",
+			"zh_cn": "李",
+			"zh_tw": "李",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "싯딤의 상자",
+		"en": "Shittim Chests",
+		"jp": "シッテムの箱",
+		"zh_cn": "什庭之匣",
+		"zh_tw": "希迪姆的箱子",
+		"characters": [{
+			"no": 157,
+			"kr": "아로나",
+			"en": "Arona",
+			"jp": "アロナ",
+			"zh_cn": "阿罗娜",
+			"zh_tw": "彩奈",
+			"profile": [1]
+		}, {
+			"no": 191,
+			"kr": "프라나",
+			"en": "Plana",
+			"jp": "プラナ",
+			"zh_cn": "普拉娜",
+			"zh_tw": "普拉娜",
+			"profile": [1]
+		}]
+	}, {
+		"kr": "연방수사동아리 <S.C.H.A.L.E>",
+		"en": "Schale, Independent Federal Investigation Club",
+		"jp": "連邦捜査部「シャーレ」",
+		"zh_cn": "联邦搜查社团「夏莱」",
+		"zh_tw": "聯邦搜查社團「夏萊」",
+		"characters": [{
+			"no": 193,
+			"kr": "선생님",
+			"en": "Sensei",
+			"jp": "先生",
+			"zh_cn": "老师",
+			"zh_tw": "老師",
+			"profile": [1]
+		}]
+	}]
+}]
