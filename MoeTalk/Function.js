@@ -148,7 +148,7 @@ function loadhead(imgindex)
 	}
 	else
 	{//本地头像
-		let image = 'Char/';
+		let image = 'char/';
 		if(parseInt(imgindex).toFixed(0) == '199')image = 'Emoji/';
 		image = image+imgindex+'.webp';
 		if(headarr[imgindex])image = headarr[imgindex];
