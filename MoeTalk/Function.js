@@ -9,6 +9,8 @@ var size = (JSON.stringify(localStorage).length/1024).toFixed(0);//数据大小
 if(!localStorage['heads'])localStorage['heads'] = '[{}]';
 if(!localStorage['chats'])localStorage['chats'] = '[]';
 if(!localStorage['mt-lang'])localStorage['mt-lang'] = 'zh_cn';
+if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';
+if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';//标题
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
 var class1 = 'talk__TextBox-sc-eq7cqw-4 talk__NTextBox-sc-eq7cqw-5 fWynih fYSjWX';
 /*预定义区*/

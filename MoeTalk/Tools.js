@@ -105,7 +105,26 @@ $("body").on('click','#clean',function()
 		window.location.reload();//刷新页面
 	}
 })
-
+//设置表情大小百分比
+$("body").on('click','#mt-size',function()
+{
+	let size = '90%';
+	let msg = prompt("请输入表情大小百分比(默认为90%),请勿乱输入",size);
+	if(msg)
+	{
+		localStorage['mt-size'] = msg;
+	}
+})
+//设置标题
+$("body").on('click','#mt-title',function()
+{
+	let title = 'MoeTalk';
+	let msg = prompt("请输入标题文字(不要包含中文)",title);
+	if(msg)
+	{
+		localStorage['MoeTalk'] = msg;
+	}
+})
 
 //待重新编写
 $('body').on('click',"#head",function()
