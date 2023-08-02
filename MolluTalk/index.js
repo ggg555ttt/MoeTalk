@@ -4171,7 +4171,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 										onClick: function(e)
 										{
 											var n;
-											if("edit" === a)x = t.type;
+											if("edit" === a)x = t.type;//@修复BUG
 											("image" === t.type && "edit" === a || "image" === x) && (null === (n = _.current) || void 0 === n || n.click())
 										},
 										onChange: function(e)
