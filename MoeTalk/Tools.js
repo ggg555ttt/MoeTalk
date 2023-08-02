@@ -32,7 +32,7 @@ $('body').on('change',"#loadcusfile",function()
 		// 	if(k.indexOf('.') == -1)k = k+'.'+1;//
 		// 	savehead(k,i)
 		// })
-		alert('需刷新页面确认读取成功')
+		alert('需返回页面确认读取成功')
 	}
 });
 //更改语言
@@ -41,7 +41,7 @@ $('body').on('click',"#language",function()
 	let lang = prompt("请输入想更改的语言：kr(韩语)、jp(日语)、en(英语)、zh_cn(简体中文)、zh_tw(繁体中文)", "zh_cn");
 	if (lang != null)
 	{
-		alert('更改完成，请刷新页面!');
+		alert('更改完成，请返回页面!');
 		localStorage['mt-lang'] = lang;
 	}
 })
@@ -72,8 +72,8 @@ $('body').on('click',"#order",function()
 //字体加载
 $('body').on('click',"#font",function()
 {
-	if(!localStorage['nofont']){if(confirm('是否取消加载字体文件？取消可以优化页面加载时间\n确认后请刷新页面')){localStorage['nofont'] = true;}}
-	else{if(confirm('是否恢复加载字体文件？恢复可以使页面布局更美观\n确认后请刷新页面')){localStorage.removeItem('nofont');}}
+	if(!localStorage['nofont']){if(confirm('是否取消加载字体文件？取消可以优化页面加载时间\n确认后请返回页面')){localStorage['nofont'] = true;}}
+	else{if(confirm('是否恢复加载字体文件？恢复可以使页面布局更美观\n确认后请返回页面')){localStorage.removeItem('nofont');}}
 })
 //强制追加选项
 $('body').on('click',"#zhui",function()

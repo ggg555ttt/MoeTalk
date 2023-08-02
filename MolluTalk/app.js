@@ -9568,10 +9568,10 @@ const mt_img = JSON.parse('{"img":"iVBORw0KGgoAAAANSUhEUgAAAKgAAACiCAYAAADV0IbSA
 										zh_cn: n.zh_cn,
 										zh_tw: n.zh_tw
 									},
-									illust: 0,//#
+									illust: 0,//#改为默认
 									profile: n.profile,
-									open: true,//#
-									momotalk: true//#
+									open: true,//#改为默认
+									momotalk: true//#改为默认
 								})
 							})
 						})
@@ -9785,6 +9785,7 @@ const mt_img = JSON.parse('{"img":"iVBORw0KGgoAAAANSUhEUgAAAKgAAACiCAYAAADV0IbSA
 					g = function(e, t, n, r)
 					{
 						var i, a;
+						n.sortCharType = localStorage['mt-order']//@读取排序方式
 						//*按ID排序
 						if("ID" === n.sortCharType)
 						{
