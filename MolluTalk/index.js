@@ -1366,7 +1366,8 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							if(localStorage['custom'])carr = JSON.parse(localStorage['custom'])[0]['club'][0]['characters'];
 							for(let num = 0;num < arr.length;num++)
 							{
-								arr[num].club[localStorage['mt-lang']] = arr[num].club[localStorage['mt-lang']]+'-'+arr[num].no;
+								if(names[lang] && names[lang][arr[num].no])arr[num].name[lang] = names[lang][arr[num].no];
+								arr[num].club[lang] = arr[num].club[lang]+'@'+arr[num].no;
 							}
 							for(let num = 0;num < carr.length;num++)
 							{
@@ -3465,7 +3466,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							{
 								return item.no == no;
 							});
-							charname = charname[0].name[localStorage['mt-lang']];
+							charname = charname[0].name[lang];
 						}
 						if(cf == 'CharFace' && charface[cfindex] && charface[cfindex] != 'NO')
 						{
@@ -3520,7 +3521,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 												.fill(0)
 												.map(function(e, n)
 												{
-													if(cf == 'Emoji')link = cf+'/'+localStorage['mt-lang']+'/'+(n+1)+'_'+localStorage['mt-lang']+'.webp';//@原版表情
+													if(cf == 'Emoji')link = cf+'/'+lang+'/'+(n+1)+'_'+lang+'.webp';//@原版表情
 													if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
 													return (0, m.jsx)(eX,
 													{
@@ -3529,7 +3530,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 														width: 310,
 														onClick: function()
 														{
-															if(cf == 'Emoji')link = cf+'/'+localStorage['mt-lang']+'/'+(n+1)+'_'+localStorage['mt-lang']+'.webp';//@原版表情
+															if(cf == 'Emoji')link = cf+'/'+lang+'/'+(n+1)+'_'+lang+'.webp';//@原版表情
 															if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
 															u(link)//#表情链接
 														},
@@ -4124,12 +4125,12 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 											{
 												type: "checkbox",
 												id: e,
-												checked: t.type === e && "add" !== a || "add" === a && x === e,
+												checked: "edit" === a && x === e || "add" === a && x === e,//#
 												onChange: function(n)
 												{
 													w(""), y(e)
 												},
-												disabled: "add" !== a,
+												/*disabled: "add" !== a,///取消隐藏*/
 												value: e
 											}), F.Z[e][f]]
 										}, n)

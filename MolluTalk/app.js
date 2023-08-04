@@ -9893,12 +9893,14 @@ const mt_img = JSON.parse('{"img":"iVBORw0KGgoAAAANSUhEUgAAAKgAAACiCAYAAADV0IbSA
 					},
 					S = function(e, t, n)
 					{
+						
 						var r = i.Z.filter(function(t)
 							{
 								return t.no === e
 							})[0],
 							o = (r = r || a.Y)
 							.name[n];
+							names = JSON.parse(localStorage['mt-names']);if(names[lang] && names[lang][e])o = names[lang][e];//@人物改名
 						return t && o.split(" ")[1] || o.replaceAll("-", " ")
 					},
 					z = function(e, t, n)
@@ -13840,7 +13842,7 @@ const mt_img = JSON.parse('{"img":"iVBORw0KGgoAAAANSUhEUgAAAKgAAACiCAYAAADV0IbSA
 							isLogin: !1,
 							isMenu: !1,
 							isRight: !1,
-							lang: "en",
+							lang: lang,//#读取设置语言
 							gameName: "Mollu"
 						},
 						reducers:

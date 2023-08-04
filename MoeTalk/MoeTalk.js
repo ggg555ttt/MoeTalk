@@ -1,5 +1,5 @@
 //https://try8.cn/tool/format/js
-var version = '1.0';
+var version = '1.1';
 var cfemoji = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var lname = true;//临时改名
@@ -54,7 +54,7 @@ $(".bIcduz").wait(function()
 	$(".bIcduz").after("<button id='delsall' hidden='hidden'>全选</button>");
 	height = $(".iBfcuf").height().toFixed(0);
 	$(".bIcduz").after("<span class='"+class1+"' style='line-height:100%;color:green;'><b id='height'>"+height+"</b></span>");
-	$(".bIcduz").after("<span id='warning'><button class='"+class0+"'><b style='color:red;'>⚠️</b></button>※警告提示</span>");
+	$(".bIcduz").after("<span id='warning'><button class='"+class0+"'><b style='color:red;'>⚠️</b></button>※错误警告</span>");
 	$(".bIcduz").after("<span class='"+class1+"' style='line-height:100%;color:red;'><b id='size'>"+size+"</b>KB</span>");
 	warning();
 },".bIcduz")
@@ -149,6 +149,16 @@ $('body').on('click',"#delcus",function()
 $('body').on('click',"#changecus",function()
 {
 	let id = parseInt($("#ccus").val());
+	let id2 = $("#ccus").val().split('@');
+	if(!isNaN(parseInt(id2[1])))
+	{
+		if(!names[lang])names[lang] = {};
+		let name = prompt("MoeTalk人物ID："+id2[1]+"，请输入TA的新名字");
+		if(name != null && name.trim() != '')names[lang][id2[1]] = name;
+		if(name == ' ') delete names[lang][id2[1]];
+		localStorage['mt-names'] = JSON.stringify(names);
+
+	}
 	if(!isNaN(id))
 	{
 		chararr = JSON.parse(localStorage['custom'])
