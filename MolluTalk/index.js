@@ -2093,6 +2093,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 														checked: S === e,
 														onChange: function()
 														{
+															height*e > 16384 ? alert('图片长度将超过16384，可能会出错') : '';//@长度警告
 															P(e)
 														},
 														value: e
@@ -3712,7 +3713,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							index > -1 ? c.splice(index,0,i) : c.push(i);
 							!h || h && o.indexOf(h) === o.length ? c : o.forEach(function(e, n)
 							{
-								c.push(e), o[n + 1] === h && c.push(i)
+								c, o[n + 1] === h && c
 							}), t((0, eo.U_)(c)), setTimeout(function()
 							{
 								nextindex().scrollIntoView(!1)///更新位置
@@ -4341,7 +4342,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							"data-html2canvas-ignore": "true",
 							onClick: function()
 							{
-								f(!0, null, "delete")
+								f(!0, null, "delete"),h("delete")//#
 							},
 							children: (0, m.jsx)(c.xL,
 							{
@@ -4351,7 +4352,8 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 						{
 							onClick: function()
 							{
-								t((0, eo.Z8)(n.replyNo))
+								///t((0, eo.Z8)(n.replyNo))//#禁用选择肢跳转
+								f(!0, null, "edit"),h("edit")//@
 							},
 							children: (0, m.jsx)(ne,
 							{

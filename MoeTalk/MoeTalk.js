@@ -311,14 +311,6 @@ $("body").on('click',".jiban",function()
 	$(this).remove();
 });
 
-//屏蔽选项跳转操作
-document.addEventListener("click", handler, true);
-function handler(e)
-{
-	let class1 = "ReplyButtonBox__Span-sc-15gyqnr-2 dyLBbx medium";
-	let class2 = "common__Button-sc-1ojome3-8 common__SubmitButton-sc-1ojome3-9 talk__ReplyButton-sc-eq7cqw-11 cVRiXh eIEKpg evqKja";
-	if(e.target.className == class1 || e.target.className == class2){e.stopPropagation();e.preventDefault();}
-}
 //清除冗余文件数据
 $('body').on('click',"input",function()
 {
