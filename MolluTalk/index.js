@@ -1616,6 +1616,21 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									isFirst: a
 								},
 								r = (0, u.ho)(p.chats, n);
+							//*新版向前追加对话
+							e = (0, et.Z)(p.chats);
+							let index = loadindex();
+							index > -1 ? e.splice(index,0,n) : e.push(n);
+							!r || r && p.chats.indexOf(r) === p.chats.length ? e : p.chats.forEach(function(t, o)
+							{
+								e, p.chats[o + 1] === r && e
+							}), a && x((0, eo.uE)(p.replyGroup + 1)), x((0, eo.U_)(e)), x((0, eo.I0)(p.replyNo + 1)), y(), setTimeout(function()
+							{
+								var e;
+								index > -1 ? e = nextindex() : e = n.current
+								null == l || null === e || void 0 === e || e.scrollIntoView(!1)
+							}, 100)
+							//*
+							/*///原语句
 							!r || r && p.chats.indexOf(r) === p.chats.length ? e.push.apply(e, (0, et.Z)(p.chats)
 								.concat([n])) : p.chats.forEach(function(t, o)
 							{
@@ -1625,6 +1640,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 								var e;
 								null == l || null === (e = l.current) || void 0 === e || e.scrollIntoView(!1)
 							}, 100)
+							*/
 						};
 					return (0, m.jsx)(ea.Xf,
 					{
@@ -3423,10 +3439,12 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									content: e,
 									isFirst: a.chats.length < 1 || a.chats[a.chats.length - 1].sCharacter !== o || a.chats[a.chats.length - 1].replyDepth !== a.sReplyNo
 								};
+							let index = loadindex();//@获取记录位置
 							if(a.chats.length < 1) n.push(i);
 							else if(t) a.chats.forEach(function(e)
 							{
-								n.push(e), e === t && (i.isFirst = "heart" === t.type || t.sCharacter !== o || t.replyDepth !== a.sReplyNo, n.push(i))
+								n.push(e), e === t && (i.isFirst = "heart" === t.type || t.sCharacter !== o || t.replyDepth !== a.sReplyNo, index > -1 ?n.splice(index,0,i) : n.push(i))
+								//#新版追加功能
 							});
 							else
 							{
@@ -3441,7 +3459,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									n.push(e), e === c && n.push(i)
 								})
 							}
-							r((0, eo.U_)(n)), s()
+							r((0, eo.U_)(n)), s(), setTimeout(function(){nextindex().scrollIntoView(!1)}, 100)//#
 						};
 					if(cfemoji != 'NO'){let cf = cfemoji;cfemoji = 'NO';//@加入判断
 						//*定义差分文件链接
@@ -3668,7 +3686,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							*/
 
 						},
-						I = (0, r.useCallback)(function(e, r)
+						I = (0, r.useCallback)(function(e, r)///发送功能
 						{
 							var i = {
 								type: e,
@@ -3689,6 +3707,23 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 								.pop();
 							l && (i.isFirst = !("chat" === l.type && (0, u.Y)(l.sCharacter, s)) || l.replyDepth !== a);
 							var h = (0, u.ho)(o, i);
+							
+							//*新版向上追加对话
+							c = (0, et.Z)(o);
+							let index = loadindex();
+							index > -1 ? c.splice(index,0,i) : c.push(i);
+							!h || h && o.indexOf(h) === o.length ? c : o.forEach(function(e, n)
+							{
+								c.push(e), o[n + 1] === h && c.push(i)
+							}), t((0, eo.U_)(c)), setTimeout(function()
+							{
+								var e;
+								index > -1 ? e = nextindex() : e = n.current
+								null === e || void 0 === e || e.scrollIntoView(!1)
+							}, 100)
+
+							//*
+							/*///原语句
 							!h || h && o.indexOf(h) === o.length ? c.push.apply(c, (0, et.Z)(o)
 								.concat([i])) : o.forEach(function(e, n)
 							{
@@ -3698,6 +3733,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 								var e;
 								null === (e = n.current) || void 0 === e || e.scrollIntoView(!1)
 							}, 100)
+							*/
 						}, [a, s, o, n, t]),
 						B = function()
 						{
@@ -3838,7 +3874,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 								disabled: w.length < 1,
 								onClick: function()
 								{
-									I("chat", w), _("")
+									I("chat", w), _("")///这是发送功能
 								},
 								children: (0, m.jsx)(c.xL,
 								{
@@ -3951,7 +3987,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 						_ = (0, r.useRef)(null);
 					(0, r.useEffect)(function()
 					{
-						w("edit" === a && "image" !== t.type ? t.content : "")
+						w("add" === a && "image" !== t.type ? t.content : "")//#修改变追加
 					}, [a, t, w]);
 					var C = function e(n)
 						{
@@ -4013,7 +4049,8 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							{
 								e = e0(
 								{}, o), o === t ? (n.push(e0(
-								{}, o)), e.type = x, e.replyNo = 0, e.replyGroup = 0, e.replyDepth = h.sReplyNo, e.sCharacter = "info" === x ? d.I : p, e.content = j, e.isFirst = !0, r = !0) : r && (e.isFirst = !0, r = !1), n.push(e)
+								{}, o)), n.pop(), e.type = x, e.replyNo = 0, e.replyGroup = 0, e.replyDepth = h.sReplyNo, e.sCharacter = "info" === x ? d.I : p, e.content = j, e.isFirst = !0, r = !0) : r && (e.isFirst = !0, r = !1), n.push(e)
+								//#加了个n.pop()追加变修改
 							})), s((0, eo.U_)(n)), S()
 						},
 						Z = (0, r.useCallback)(function(e, n)
@@ -4096,16 +4133,15 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 										{
 											style:
 											{
-												width: "23%"
+												margin: "0 auto"//#改为居中
 											},
 											className: a === e ? "selected medium" : "medium",
 											onClick: function()
 											{
 												l(e)
 											},
-											/*///取消隐藏
-											disabled: "edit" === e && "heart" === t.type || "add" === e && "reply" === t.type || "time" === e && "chat" !== t.type,
-											*/
+											hidden: "time" === e && "chat" !== t.type || "edit" === e && "reply" !== t.type || "add" === e && "reply" === t.type,
+											//#禁用特定功能
 											children: F.Z[e][f]
 										}, n)
 									})
@@ -4121,6 +4157,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 										return (0, m.jsxs)(c.Jg,
 										{
 											htmlFor: e,
+											hidden: "time" === a || "delete" === a,//@禁用特定选框
 											children: [(0, m.jsx)("input",
 											{
 												type: "checkbox",
@@ -4128,9 +4165,9 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 												checked: "edit" === a && x === e || "add" === a && x === e,//#
 												onChange: function(n)
 												{
-													w(""), y(e)
+													w("image" === e ? "" : t.content), y(e)//#图片不显示文字
 												},
-												/*disabled: "add" !== a,///取消隐藏*/
+												disabled: "add" !== a,
 												value: e
 											}), F.Z[e][f]]
 										}, n)
@@ -4168,11 +4205,10 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 											else if("heart" === x || "image" === x) return !0;
 											return !1
 										}(),
-										value: j,
+										value: "image" === x || "heart" === x ? '' : j,//#
 										onClick: function(e)
 										{
 											var n;
-											if("edit" === a)x = t.type;//@修复BUG
 											("image" === t.type && "edit" === a || "image" === x) && (null === (n = _.current) || void 0 === n || n.click())
 										},
 										onChange: function(e)
@@ -4547,7 +4583,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 					return (0, m.jsx)(eN.uU,
 					{
 						ref: f,
-						style: n.isFirst ?
+						style: n.isFirst || n.sCharacter.no != (t-1 >= 0 ? l[t-1].sCharacter.no : 0) ?//#往上追加防止头像隐藏
 						{} :
 						{
 							padding: "0.5rem 1rem 0 1rem"
@@ -4586,7 +4622,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									{
 										onClick: function()
 										{
-											o(!0, n, "edit")
+											o(!0, n, "add")//#改为新版修改
 										},
 										children: n.content///右侧对话
 									}), (0, m.jsx)(eN.CJ,
@@ -4595,11 +4631,12 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 								{
 									onClick: function()
 									{
-										o(!0, n, "edit")
+										o(!0, n, "add")//#改为新版修改
 									},
 									src: n.file || (n.content.match("emoticon") ? n.content.replace(/^\//, "") : "" + n.content)//#
 								}) : "info" === n.type ? (0, m.jsx)(eN.vD,
 								{
+									onClick: function(){o(!0, n, "add")},//@添加新版修改功能
 									children: n.content///旁白
 								}) : "reply" === n.type ? (0, m.jsx)(nn,
 								{
@@ -4609,7 +4646,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									character: (0, u.fY)(n.sCharacter.no, !0, d)
 								}) : (0, m.jsx)(m.Fragment,
 								{})]
-							})]
+							}),(0, m.jsx)("input",{type : "checkbox",index: t,class: "dels"})]//#添加复选框
 						}) : (0, m.jsxs)(m.Fragment,
 						{
 							children: [(0, m.jsx)(eN.xu,
@@ -4626,7 +4663,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 								{
 									style:
 									{
-										display: n.isFirst ? "block" : "none"
+										display: n.isFirst || n.sCharacter.no != (t-1 >= 0 ? l[t-1].sCharacter.no : 0) ? "block" : "none"//#往上追加防止头像隐藏
 									},
 									height: 252,
 									width: 252,
@@ -4643,7 +4680,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 								children: [(0, m.jsx)("span",
 								{
 									className: "bold",
-									style: n.isFirst ?
+									style: n.isFirst || n.sCharacter.no != (t-1 >= 0 ? l[t-1].sCharacter.no : 0) ?//#往上追加防止头像隐藏
 									{
 										height: "1.8rem",
 										lineHeight: "1.5rem"
@@ -4651,21 +4688,22 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									{
 										display: "none"
 									},
-									children: n.content.split('#')[1] ? n.content.split('#')[1] : (n.sCharacter.no > 999 ? loadname(n.sCharacter.no) : (0, u.fY)(n.sCharacter.no, !0, d))//#新增临时名称
+									children: n.content.split('#')[1] ? n.content.split('#')[1] : (0, u.fY)(n.sCharacter.no, !0, d)//#新增临时名称
 								}), (0, m.jsxs)("div",
 								{
 									style:
 									{
 										display: "flex"
 									},
-									children: ["chat" === n.type ? n.isFirst ? (0, m.jsxs)(m.Fragment,
+									children: ["chat" === n.type ? n.isFirst || n.sCharacter.no != (t-1 >= 0 ? l[t-1].sCharacter.no : 0) ? (0, m.jsxs)(m.Fragment,
+									//#往上追加防止头像隐藏
 									{
 										children: [(0, m.jsx)(eN.zC,
 										{
 											style:isJSON(n.content.split('#')[2]) ? JSON.parse(n.content.split('#')[2]) : null,//@设置文字样式(#带头像)
 											onClick: function()
 											{
-												o(!0, n, "edit")
+												o(!0, n, "add")//#改为新版修改
 											},
 											children: n.content.split('#')[0]///对话
 										}), n.time && (0, m.jsx)(eN.i9,
@@ -4683,7 +4721,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 											style:isJSON(n.content.split('#')[2]) ? JSON.parse(n.content.split('#')[2]) : null,//@设置文字样式(#无头像)
 											onClick: function()
 											{
-												o(!0, n, "edit")
+												o(!0, n, "add")//#改为新版修改
 											},
 											children: n.content.split('#')[0]//#无头像对话
 										}), n.time && (0, m.jsx)(eN.i9,
@@ -4698,7 +4736,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									{
 										onClick: function()
 										{
-											o(!0, n, "edit")
+											o(!0, n, "add")//#改为新版修改
 										},
 										src: n.file || (n.content.match("emoticon") ? n.content.replace(/^\//, "") : "" + n.content)//#
 									}), h || (0, m.jsx)(nl,
@@ -4714,7 +4752,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 										})
 									})]
 								})]
-							})]
+							}),(0, m.jsx)("input",{type : "checkbox",index: t,class: "dels"})]//#添加复选框
 						})
 					})
 				},

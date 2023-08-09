@@ -17,6 +17,7 @@ var names = JSON.parse(localStorage['mt-names']);
 var lang = localStorage['mt-lang'];
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
 var class1 = 'talk__TextBox-sc-eq7cqw-4 talk__NTextBox-sc-eq7cqw-5 fWynih fYSjWX';
+var insertIndex = -1;
 /*预定义区*/
 
 /*函数库*/
@@ -444,4 +445,17 @@ function loadname(no)
 		}
 	})
 	return name;
+}
+function loadindex()
+{
+	let i = $(".dels:checked").attr('index');
+	if(i > -1)return i;
+	return i;
+}
+function nextindex()
+{
+	let index = $(".dels").index($(".dels:checked"));
+	$(".dels").eq(index).prop("checked",false);
+	$(".dels").eq(index+1).prop("checked",true);
+	return $(".dels:checked")[0];
 }

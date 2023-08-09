@@ -1,5 +1,5 @@
 //https://try8.cn/tool/format/js
-var version = '1.1';
+var version = '1.2';
 var cfemoji = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var lname = true;//临时改名
@@ -31,22 +31,22 @@ if(!localStorage['nofont'])$("head").append(font);//加载字体
 
 $("body").on('click',function()
 {
-	let checkbox = "<input class='dels' type='checkbox' hidden='hidden'>";
+	//let checkbox = "<input class='dels' type='checkbox' hidden='hidden'>";
 	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
 	height = $(".iBfcuf").height().toFixed(0);
 	$('#size').text(size);
 	$('#height').text(height);
 	warning();
 
-	$(".jhinQ").each(function(){if($(this).parents('.hfOSPu').find('.dels').length == 0)$(this).parents('.hfOSPu').append(checkbox);})
-	$(".evqKja").each(function(){if($(this).parent().find('.dels').length == 0)$(this).parent().append(checkbox);})
-	if($('.dels').attr('hidden') != 'hidden')$('.dels').removeAttr('hidden');
+	// $(".jhinQ").each(function(){if($(this).parents('.hfOSPu').find('.dels').length == 0)$(this).parents('.hfOSPu').append(checkbox);})
+	// $(".evqKja").each(function(){if($(this).parent().find('.dels').length == 0)$(this).parent().append(checkbox);})
+	// if($('.dels').attr('hidden') != 'hidden')$('.dels').removeAttr('hidden');
+	//$(".dels:checked").index()
 })
 //标题框
 $(".bIcduz").wait(function()
 {
-	$(".bIcduz").after("<button id='rdelsall' hidden='hidden'>反选</button>");
-	$(".bIcduz").after("<button id='delsall' hidden='hidden'>全选</button>");
+	
 	height = $(".iBfcuf").height().toFixed(0);
 	$(".bIcduz").after("<span class='"+class1+"' style='line-height:100%;color:green;'><b id='height'>"+height+"</b></span>");
 	$(".bIcduz").after("<span id='warning'><button class='"+class0+"'><b style='color:red;'>⚠️</b></button>※错误警告</span>");
@@ -62,9 +62,11 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append("<button class='"+class0+"' id='delcus'><b style='color:red;'>刪</b></button><span class='tool'>删除角色</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色信息，下方输入ID：↓</span><input size='5' id='ccus'/><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='ct'><b style='color:green;'>C</b></button><span class='tool'>生成ClosureTalk存档</span><br>");
-	$(".frVjsk").append("<button class='"+class0+"' id='dels'><b style='color:black;'>批</b></button><span class='tool'>批量删除或强制追加</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>");
 	$(".frVjsk").append("<a href='./Setting.html'><button class='"+class0+"'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>");
+	$(".frVjsk").append("<button id='delsall'>全选</button>");
+	$(".frVjsk").append("<button class='"+class0+"' id='dels'><b style='color:black;'>批</b></button><span class='tool'>批量删除</span><br>");
+	$(".frVjsk").append("<button id='rdelsall'>反选</button>");
 },".frVjsk")
 //使用说明
 $('body').on('click',".jZKzYg",function()
@@ -77,7 +79,6 @@ $('body').on('click',".jZKzYg",function()
 $("body").append("<input id='custom' hidden type='file' accept='image/*'>");//添加上传标签
 $('body').on('click',"#makecus",function()
 {
-	
 	let id;
 	let cus = prompt("请输入角色姓名，创建成功后点击排序按钮即可更新角色列表\n"+
 		"如果名字中带空格，则聊天界面只显示第一个空格后的文字，如果想显示空格请用“-”代替\n"+
@@ -280,41 +281,46 @@ $('body').on('click',"#warning",function()
 //批量删除
 $('body').on('click',"#dels",function()
 {
-	if($(".dels:checked").length == 0)
-	{
-		if($('.dels').attr('hidden') == 'hidden')
-		{
-			$('#delsall').removeAttr('hidden')
-			$('#rdelsall').removeAttr('hidden')
-			$('.dels').removeAttr('hidden')
-		}
-		else
-		{
-			$('#delsall').attr('hidden','hidden')
-			$('#rdelsall').attr('hidden','hidden')
-			$('.dels').attr('hidden','hidden')
-		}
-	}
+	// if($(".dels:checked").length == 0)
+	// {
+	// 	if($('.dels').attr('hidden') == 'hidden')
+	// 	{
+	// 		$('#delsall').removeAttr('hidden')
+	// 		$('#rdelsall').removeAttr('hidden')
+	// 		$('.dels').removeAttr('hidden')
+	// 	}
+	// 	else
+	// 	{
+	// 		$('#delsall').attr('hidden','hidden')
+	// 		$('#rdelsall').attr('hidden','hidden')
+	// 		$('.dels').attr('hidden','hidden')
+	// 	}
+	// }
+	// if($(".dels:checked").length == 1)
+	// {
+	// 	let chat = prompt("您只选择了一条数据，判断为强制追加，请输入您想在该位置强制追加的文本\n"+
+	// 		"成功提交后会马上刷新页面，发言人物以你底下被选中的头像为准，可以设置差分头像\n"+
+	// 		"例：3#文本内容（3是你的差分头像序号，序号和文本内容之间需要用#分隔，可以不输入序号）");
+	// 	if(chat != null && chat.trim() != '')
+	// 	{
+	// 		let no = $(".jjPyvz .selected").attr('alt');if(no == 'sensei')no = 0;
+	// 		let zhui = 1;if(localStorage['zhui'])zhui = 0;
+	// 		chat = chat.trim().split("#");if(chat.length == 1){chat0 = 1;chat1 = chat[0];}
+	// 		if(chat.length == 2){chat0 = chat[0];if(chat0.trim() == '')chat0 = 1;chat1 = chat[1];}
+	// 		if(chat1.trim() != '' && chat.length < 3 && !isNaN(parseInt(chat0)))
+	// 		{
+	// 			let arr = JSON.parse(localStorage['chats']);
+	// 			arr.splice($('.dels').index($(".dels:checked"))+zhui,0,{type:"chat",content:chat1,replyDepth:0,replyNo:0,replyGroup:0,sCharacter:{no:parseInt(no),index:parseInt(chat0)}})
+	// 			localStorage['chats'] = JSON.stringify(arr);
+	// 			alert('追加完成，即将刷新页面')
+	// 			window.location.reload();//刷新页面
+	// 		}
+	// 	}
+	// }
 	if($(".dels:checked").length == 1)
 	{
-		let chat = prompt("您只选择了一条数据，判断为强制追加，请输入您想在该位置强制追加的文本\n"+
-			"成功提交后会马上刷新页面，发言人物以你底下被选中的头像为准，可以设置差分头像\n"+
-			"例：3#文本内容（3是你的差分头像序号，序号和文本内容之间需要用#分隔，可以不输入序号）");
-		if(chat != null && chat.trim() != '')
-		{
-			let no = $(".jjPyvz .selected").attr('alt');if(no == 'sensei')no = 0;
-			let zhui = 1;if(localStorage['zhui'])zhui = 0;
-			chat = chat.trim().split("#");if(chat.length == 1){chat0 = 1;chat1 = chat[0];}
-			if(chat.length == 2){chat0 = chat[0];if(chat0.trim() == '')chat0 = 1;chat1 = chat[1];}
-			if(chat1.trim() != '' && chat.length < 3 && !isNaN(parseInt(chat0)))
-			{
-				let arr = JSON.parse(localStorage['chats']);
-				arr.splice($('.dels').index($(".dels:checked"))+zhui,0,{type:"chat",content:chat1,replyDepth:0,replyNo:0,replyGroup:0,sCharacter:{no:parseInt(no),index:parseInt(chat0)}})
-				localStorage['chats'] = JSON.stringify(arr);
-				alert('追加完成，即将刷新页面')
-				window.location.reload();//刷新页面
-			}
-		}
+		let index = $(".dels:checked").attr('index');
+		console.log(JSON.parse(localStorage['chats'])[index]);
 	}
 	if($(".dels:checked").length > 1)
 	{
@@ -352,11 +358,6 @@ function handler(e)
 	let class2 = "common__Button-sc-1ojome3-8 common__SubmitButton-sc-1ojome3-9 talk__ReplyButton-sc-eq7cqw-11 cVRiXh eIEKpg evqKja";
 	if(e.target.className == class1 || e.target.className == class2){e.stopPropagation();e.preventDefault();}
 }
-//操作提醒
-$('body').on('click',".lgnIRp",function()
-{
-	if($(this).parent().next().is('div'))alert('不要使用追加功能，会出现错误')
-})
 //清除冗余文件数据
 $('body').on('click',"input",function()
 {
@@ -448,4 +449,27 @@ $('body').on('click',"#rdelsall",function()
 	{
 		$(this).prop("checked",!$(this).prop("checked"));
 	});
+})
+
+$('body').on('click',".gxgCGp:eq(4)",function()
+{
+	$(".dels").each(function()
+	{
+		$(this).prop("checked",false);
+	});
+	if($('.dels').attr('hidden') == 'hidden')
+	{
+		$('#delsall').removeAttr('hidden')
+		$('#rdelsall').removeAttr('hidden')
+		$('.dels').removeAttr('hidden')
+		$('#dels').removeAttr('hidden')
+		$('#dels').removeAttr('hidden').next().removeAttr('hidden')
+	}
+	else
+	{
+		$('#delsall').attr('hidden','hidden')
+		$('#rdelsall').attr('hidden','hidden')
+		$('.dels').attr('hidden','hidden')
+		$('#dels').attr('hidden','hidden').next().attr('hidden','hidden')
+	}
 })
