@@ -131,20 +131,6 @@ function savehead(headindex,img64)
 	let headarr = JSON.parse(localStorage['heads']);
 	headarr[0][headindex] = img64;
 	localStorage['heads'] = JSON.stringify(headarr);
-	// let db;
-	// openDB('MoeTalk').then((db =>
-	// {
-	// 	db = db;
-	// 	let data =
-	// 	{
-	// 		key : headindex,//唯一
-	// 		val : img64
-	// 	}
-	// 	if((JSON.stringify(sessionStorage).length/1048576).toFixed(2) < 4.9)sessionStorage[headindex] = img64;
-	// 	updateDB(db,'Custom', data)
-	// 	if(headindex < 999)localStorage['imgs']++;
-	// 	closeDB(db)//关闭数据库
-	// }))
 }
 //读取头像
 function loadhead(imgindex)
@@ -189,27 +175,6 @@ function loadhead(imgindex)
 		}
 		return image;
 	}
-	// let db;
-	// openDB('MoeTalk').then((db =>
-	// {
-	// 	db = db;
-	// 	getDataByKey(db,'Custom',imgindex).then((arr =>
-	// 	{
-	// 		if((JSON.stringify(sessionStorage).length/1048576).toFixed(2) > 4.9)
-	// 		{
-	// 			headarr[imgindex] = arr['val'];
-	// 		}
-	// 		else 
-	// 		{
-	// 			//console.log((JSON.stringify(sessionStorage).length/1048576).toFixed(2))
-	// 			if(imgindex < 199)sessionStorage[imgindex] = arr['val'];
-	// 			headarr[imgindex] = arr['val'];
-	// 		}
-			
-	// 	}))
-	// 	closeDB(db)//关闭数据库
-	// 	return '';
-	// }))
 }
 //删除头像
 function delhead(imgindex)
@@ -217,12 +182,6 @@ function delhead(imgindex)
 	let headarr = JSON.parse(localStorage['heads']);
 	delete headarr[0][imgindex];
 	localStorage['heads'] = JSON.stringify(headarr);
-	// let db;
-	// openDB('MoeTalk').then((db =>
-	// {
-	// 	deleteDB(db,'Custom',imgindex)
-	// 	closeDB(db)//关闭数据库
-	// }))
 }
 
 //元素出现后执行代码
@@ -433,19 +392,7 @@ function isJSON(str) {
     }
     return false;
 }
-//读取自定义角色名
-function loadname(no)
-{
-	let name;
-	$.each(JSON.parse(localStorage['custom'])[0].club[0].characters,function(k,v)
-	{
-		if(v.no == no)
-		{
-			name = v.zh_cn;
-		}
-	})
-	return name;
-}
+
 function loadindex()
 {
 	let i = $(".dels:checked").attr('index');
