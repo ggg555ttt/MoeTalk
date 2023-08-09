@@ -3,6 +3,7 @@ var version = '1.2';
 var cfemoji = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var lname = true;//临时改名
+var hidden = false;//临时改名
 var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
 //判断网络
 if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname == 'frp.freefrp.net')
@@ -29,20 +30,15 @@ if(!localStorage['imgs'] || localStorage['imgs'] != 503)
 		})
 	});
 }
-
-$("body").on('click',function()
+//$(".gxgCGp:eq(4)").wait(function(){$(".gxgCGp:eq(4)").click()},".gxgCGp:eq(4)")//默认隐藏工具按钮
+$('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
+$("body").on('keydown',function()
 {
-	//let checkbox = "<input class='dels' type='checkbox' hidden='hidden'>";
 	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
 	height = $(".iBfcuf").height().toFixed(0);
 	$('#size').text(size);
 	$('#height').text(height);
 	warning();
-
-	// $(".jhinQ").each(function(){if($(this).parents('.hfOSPu').find('.dels').length == 0)$(this).parents('.hfOSPu').append(checkbox);})
-	// $(".evqKja").each(function(){if($(this).parent().find('.dels').length == 0)$(this).parent().append(checkbox);})
-	// if($('.dels').attr('hidden') != 'hidden')$('.dels').removeAttr('hidden');
-	//$(".dels:checked").index()
 })
 //标题框
 $(".bIcduz").wait(function()
@@ -282,46 +278,10 @@ $('body').on('click',"#warning",function()
 //批量删除
 $('body').on('click',"#dels",function()
 {
-	// if($(".dels:checked").length == 0)
-	// {
-	// 	if($('.dels').attr('hidden') == 'hidden')
-	// 	{
-	// 		$('#delsall').removeAttr('hidden')
-	// 		$('#rdelsall').removeAttr('hidden')
-	// 		$('.dels').removeAttr('hidden')
-	// 	}
-	// 	else
-	// 	{
-	// 		$('#delsall').attr('hidden','hidden')
-	// 		$('#rdelsall').attr('hidden','hidden')
-	// 		$('.dels').attr('hidden','hidden')
-	// 	}
-	// }
-	// if($(".dels:checked").length == 1)
-	// {
-	// 	let chat = prompt("您只选择了一条数据，判断为强制追加，请输入您想在该位置强制追加的文本\n"+
-	// 		"成功提交后会马上刷新页面，发言人物以你底下被选中的头像为准，可以设置差分头像\n"+
-	// 		"例：3#文本内容（3是你的差分头像序号，序号和文本内容之间需要用#分隔，可以不输入序号）");
-	// 	if(chat != null && chat.trim() != '')
-	// 	{
-	// 		let no = $(".jjPyvz .selected").attr('alt');if(no == 'sensei')no = 0;
-	// 		let zhui = 1;if(localStorage['zhui'])zhui = 0;
-	// 		chat = chat.trim().split("#");if(chat.length == 1){chat0 = 1;chat1 = chat[0];}
-	// 		if(chat.length == 2){chat0 = chat[0];if(chat0.trim() == '')chat0 = 1;chat1 = chat[1];}
-	// 		if(chat1.trim() != '' && chat.length < 3 && !isNaN(parseInt(chat0)))
-	// 		{
-	// 			let arr = JSON.parse(localStorage['chats']);
-	// 			arr.splice($('.dels').index($(".dels:checked"))+zhui,0,{type:"chat",content:chat1,replyDepth:0,replyNo:0,replyGroup:0,sCharacter:{no:parseInt(no),index:parseInt(chat0)}})
-	// 			localStorage['chats'] = JSON.stringify(arr);
-	// 			alert('追加完成，即将刷新页面')
-	// 			window.location.reload();//刷新页面
-	// 		}
-	// 	}
-	// }
 	if($(".dels:checked").length == 1)
 	{
 		let index = $(".dels:checked").attr('index');
-		console.log(JSON.parse(localStorage['chats'])[index]);
+		console.log(JSON.parse(localStorage['chats'])[index].replyGroup);
 	}
 	if($(".dels:checked").length > 1)
 	{
@@ -451,26 +411,53 @@ $('body').on('click',"#rdelsall",function()
 		$(this).prop("checked",!$(this).prop("checked"));
 	});
 })
-
+//隐藏工具按钮拓展
 $('body').on('click',".gxgCGp:eq(4)",function()
 {
 	$(".dels").each(function()
 	{
 		$(this).prop("checked",false);
 	});
-	if($('.dels').attr('hidden') == 'hidden')
+	if($('.dels').attr('hidden'))
 	{
 		$('#delsall').removeAttr('hidden')
 		$('#rdelsall').removeAttr('hidden')
 		$('.dels').removeAttr('hidden')
 		$('#dels').removeAttr('hidden')
 		$('#dels').removeAttr('hidden').next().removeAttr('hidden')
+		hidden = false;
 	}
 	else
 	{
-		$('#delsall').attr('hidden','hidden')
-		$('#rdelsall').attr('hidden','hidden')
-		$('.dels').attr('hidden','hidden')
-		$('#dels').attr('hidden','hidden').next().attr('hidden','hidden')
+		$('#delsall').attr('hidden',true)
+		$('#rdelsall').attr('hidden',true)
+		$('.dels').attr('hidden',true)
+		$('#dels').attr('hidden',true).next().attr('hidden',true)
+		hidden = true;
 	}
 })
+
+/*
+var element = $('.iBfcuf');
+
+// 创建一个canvas元素
+var canvas = document.createElement('canvas');
+canvas.width = element.outerWidth();  // 设置canvas宽度为元素宽度
+canvas.height = element.outerHeight();  // 设置canvas高度为元素高度
+
+// 获取2D绘图上下文
+var context = canvas.getContext('2d');
+
+// 使用html2canvas库将元素绘制到canvas上
+html2canvas(element[0]).then(function (canvas) {
+    // 将canvas转换为图像
+    var image = canvas.toDataURL('image/png');
+
+    // 创建一个新的图像元素
+    var img = document.createElement('img');
+    img.src = image;
+
+    // 将图像元素添加到页面中
+    $('body').append(img);
+});
+*/

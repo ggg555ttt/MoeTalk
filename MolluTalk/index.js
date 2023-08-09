@@ -1625,9 +1625,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 								e, p.chats[o + 1] === r && e
 							}), a && x((0, eo.uE)(p.replyGroup + 1)), x((0, eo.U_)(e)), x((0, eo.I0)(p.replyNo + 1)), y(), setTimeout(function()
 							{
-								var e;
-								index > -1 ? e = nextindex() : e = n.current
-								null == l || null === e || void 0 === e || e.scrollIntoView(!1)
+								nextindex().scrollIntoView(!1)///更新位置
 							}, 100)
 							//*
 							/*///原语句
@@ -3459,7 +3457,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									n.push(e), e === c && n.push(i)
 								})
 							}
-							r((0, eo.U_)(n)), s(), setTimeout(function(){nextindex().scrollIntoView(!1)}, 100)//#
+							r((0, eo.U_)(n)), s(), setTimeout(function(){nextindex().scrollIntoView(!1)}, 100)//#更新表情位置
 						};
 					if(cfemoji != 'NO'){let cf = cfemoji;cfemoji = 'NO';//@加入判断
 						//*定义差分文件链接
@@ -3717,9 +3715,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 								c.push(e), o[n + 1] === h && c.push(i)
 							}), t((0, eo.U_)(c)), setTimeout(function()
 							{
-								var e;
-								index > -1 ? e = nextindex() : e = n.current
-								null === e || void 0 === e || e.scrollIntoView(!1)
+								nextindex().scrollIntoView(!1)///更新位置
 							}, 100)
 
 							//*
@@ -4646,7 +4642,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									character: (0, u.fY)(n.sCharacter.no, !0, d)
 								}) : (0, m.jsx)(m.Fragment,
 								{})]
-							}),(0, m.jsx)("input",{type : "checkbox",index: t,class: "dels"})]//#添加复选框
+							}),(0, m.jsx)("input",{type:"checkbox",hidden:hidden,index:t,class:"dels"})]//#添加复选框
 						}) : (0, m.jsxs)(m.Fragment,
 						{
 							children: [(0, m.jsx)(eN.xu,
@@ -4752,7 +4748,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 										})
 									})]
 								})]
-							}),(0, m.jsx)("input",{type : "checkbox",index: t,class: "dels"})]//#添加复选框
+							}),(0, m.jsx)("input",{type:"checkbox",hidden:hidden,index:t,class:"dels"})]//#添加复选框
 						})
 					})
 				},

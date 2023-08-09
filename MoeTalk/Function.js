@@ -228,7 +228,7 @@ function delhead(imgindex)
 //元素出现后执行代码
 jQuery.fn.wait = function (func,cls,times,interval) {
 	var _times = times || -1, //100次
-		_interval = interval || 2000, //20毫秒每次
+		_interval = interval || 10, //20毫秒每次
 		_self = this,
 		_selector = this.selector, //选择器
 		_iIntervalID; //定时器id
@@ -455,7 +455,15 @@ function loadindex()
 function nextindex()
 {
 	let index = $(".dels").index($(".dels:checked"));
-	$(".dels").eq(index).prop("checked",false);
-	$(".dels").eq(index+1).prop("checked",true);
-	return $(".dels:checked")[0];
+	if(index > -1)
+	{
+		$(".dels").eq(index).prop("checked",false);
+		$(".dels").eq(index+1).prop("checked",true);
+		index = $(".dels:checked")[0];
+	}
+	else
+	{
+		index = $('.hfOSPu:eq(-1)')[0];
+	}
+	return index;
 }

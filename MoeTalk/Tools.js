@@ -2,16 +2,10 @@
 $('body').on('click',"#savecus",function()
 {
 	if(!localStorage['custom']) return false;
-	alert('建议您确认所有头像都加载完毕再使用本功能，以确保保存的存档文件是完整的')
+	alert('生成的存档请用【备份自定义角色存档】读取，否则会出错')
 	let arr = [];
 	arr[0] = localStorage['custom'];
 	arr[1] = localStorage['heads'];
-	// $.each(JSON.parse(localStorage['custom'])[0]['club'][0]['characters'],function(k,i)
-	// {
-	// 	console.log($(this)[0]['no']+'.1');
-	// 	console.log(headarr[$(this)[0]['no']+'.1']);
-	// 	arr[1][$(this)[0]['no']+'.1'] = headarr[$(this)[0]['no']+'.1'];
-	// })
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 	download_txt('MoeTalk自定义角色存档'+time+'.json',JSON.stringify(arr));//生成专用存档
 })
@@ -27,11 +21,27 @@ $('body').on('change',"#loadcusfile",function()
 	{
 		localStorage['custom'] = JSON.parse(this.result)[0];
 		localStorage['heads'] = JSON.parse(this.result)[1];
-		// $.each(JSON.parse(this.result)[1],function(k,i)
-		// {
-		// 	if(k.indexOf('.') == -1)k = k+'.'+1;//
-		// 	savehead(k,i)
-		// })
+
+		alert('需返回页面确认读取成功')
+	}
+});
+$('body').on('click',"#savedata",function()
+{
+	if(!localStorage['chats']) return false;
+	alert('这个是为MoeTalk崩溃时准备的存档提取功能\n只能通过【上传MoeTalk存档】读取，否则会出错')
+	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
+	download_txt('MoeTalk存档'+time+'.json',localStorage['chats']);//生成专用存档
+});
+$("body").append("<input id='loaddatafile' hidden type='file' accept='application/json'>");
+$('body').on('click',"#loaddata",function(){$("#loaddatafile").click();})
+$('body').on('change',"#loaddatafile",function()
+{
+	let file = this.files[0];
+	let reader=new FileReader();
+	reader.readAsText(file);
+	reader.onload = function(e)
+	{
+		localStorage['chats'] = this.result;
 		alert('需返回页面确认读取成功')
 	}
 });
