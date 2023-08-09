@@ -8,26 +8,27 @@ var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>"
 if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname == 'frp.freefrp.net')
 {
 	font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font_web.css' data-n-g=''>";//更改为网络字体
-	if(!localStorage['imgs'] || localStorage['imgs'] != 503)//头像缓存
-	{
-		$.getJSON("https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MolluTalk/main/MT-CharImg.JSON",function(json) 
-		{
-			localStorage['imgs'] = 0;
-			$.each(json,function(k,v)
-			{
-				let db;
-				openDB('MoeTalk').then((db =>
-				{
-					db = db;
-					let data = {key:k,val:v}
-					updateDB(db,'Custom', data)
-					closeDB(db)//关闭数据库
-				}))
-			})
-		});
-	}
 }
 if(!localStorage['nofont'])$("head").append(font);//加载字体
+//头像缓存
+if(!localStorage['imgs'] || localStorage['imgs'] != 503)
+{
+	$.getJSON("https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MolluTalk/main/MT-CharImg.JSON",function(json) 
+	{
+		localStorage['imgs'] = 0;
+		$.each(json,function(k,v)
+		{
+			let db;
+			openDB('MoeTalk').then((db =>
+			{
+				db = db;
+				let data = {key:k,val:v}
+				updateDB(db,'Custom', data)
+				closeDB(db)//关闭数据库
+			}))
+		})
+	});
+}
 
 $("body").on('click',function()
 {
