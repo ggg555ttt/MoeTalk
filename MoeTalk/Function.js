@@ -216,19 +216,13 @@ function compress(base64Img)
 	img.src = base64Img;//图片对象添加图片地址
 	img.onload = function()//图片地址加载完后执行操作
 	{
-		//drawImage(img, 画布开始位置x, 画布开始位置y, 画布被选区域w, 画布被选区域h, 图片开始位置x, 图片开始位置y, dw, dh)
-		//x780 y183
 		w = img.width;
 		h = img.height;
-		let x = 0;
-		let y = 0;
-		let l = w;
-		if(w > h)x = (w-h)/2,l = h,h = w;
-		else y = (h-w)/2,l = w,w = h;
-
+		let x = 0;let y = 0;let l = w;//正方形头像
+		if(w > h)x = (w-h)/2,l = h,h = w;//竖图上下居中
+		else y = (h-w)/2,l = w,w = h;//横图左右居中
 		n = localStorage['hnum'] ? localStorage['hnum'] : 300;
-		a = Math.min(1, n / w);
-        (w *= a), (h *= a);
+		a = Math.min(1, n / w);(w *= a), (h *= a);//最大长度不得超过300
 		//开始画压缩图
 		var canvas = document.createElement("canvas");
 		var ctx = canvas.getContext("2d");
@@ -401,13 +395,14 @@ function isJSON(str) {
     }
     return false;
 }
-
+//读取选择框索引
 function loadindex()
 {
 	let i = $(".dels:checked").attr('index');
 	if(i > -1)return i;
 	return i;
 }
+//选择框索引下移
 function nextindex()
 {
 	let index = $(".dels").index($(".dels:checked"));
@@ -423,6 +418,7 @@ function nextindex()
 	}
 	return index;
 }
+//点击函数
 function click(name)
 {
 	$(name).click();

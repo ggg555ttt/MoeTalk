@@ -6,6 +6,41 @@
 		<meta name="next-head-count" content="17">
 		<link rel="stylesheet" href="./MoeTalk/STYLE/style.css" data-n-g="">
 		<!-- <script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script> -->
+		<script type="text/javascript">
+			/*
+			$('body').on('click',"#capture",function()
+			{
+				if(confirm('截屏'))
+				{
+					let json = [];
+					json[0] = {};
+					json[0]['title'] = '备份存档';
+					json[0]['nickname'] = 'MoeTalk';
+					json[0]['date'] = '不明';
+					json[0]['replyNo'] = localStorage['replyNo'];
+					json[0]['replyGroup'] = localStorage['replyNo'];
+					json[0]['chars'] = localStorage['chars'];
+					json[1] = JSON.parse(localStorage['chats']);
+					var element = $('.iBfcuf');
+					// 创建一个canvas元素
+					var canvas = document.createElement('canvas');
+					canvas.width = element.outerWidth();  // 设置canvas宽度为元素宽度
+					canvas.height = element.outerHeight();  // 设置canvas高度为元素高度
+					// 获取2D绘图上下文
+					var context = canvas.getContext('2d');
+					// 使用html2canvas库将元素绘制到canvas上
+					html2canvas(element[0]).then(function (canvas)
+					{
+						// 将canvas转换为图像
+						var image = canvas.toDataURL('image/png');
+						// 创建一个新的图像元素
+						// 将图像元素添加到页面中
+						combineFiles(image.replace('data:image/png;base64,',''),JSON.stringify(json),"MoeTalk截屏.PNG");
+					});
+				}
+			})
+			*/
+		</script>
 		<script src="./MoeTalk/Jquery-3.6.4.min.js" defer=""></script>
 		<script src="./MoeTalk/Function.js" defer=""></script>
 		<script src="./MoeTalk/MoeTalk.js" defer=""></script>
@@ -28,6 +63,6 @@
 		<script id="__NEXT_DATA__" type="application/json">
 			{"props":{"pageProps":{}},"page":"/","query":{},"buildId":"3OWxHtb__kBpj2Lnn_di-","nextExport":true,"autoExport":true,"isFallback":false,"scriptLoader":[{"strategy":"afterInteractive","async":true,"src":"https://www.googletagmanager.com/gtag/js?id=G-CWBXC2EKNZ"},{"id":"gtag-init","strategy":"afterInteractive","dangerouslySetInnerHTML":{"__html":"\n                window.dataLayer = window.dataLayer || [];\n                function gtag(){dataLayer.push(arguments);}\n                gtag('js', new Date());\n                gtag('config', 'G-CWBXC2EKNZ', {\n                  page_path: window.location.pathname,\n                });\n              "}}]}
 		</script>
-		<a href='./Setting.html'>这是设置页面链接，为MoeTalk因不明原因崩溃时准备的，请尝试导出或清除数据并向我们反馈吧</a>
+		<a href='./Setting.html'>这是设置页面链接，为MoeTalk因不明原因崩溃而无法进入时准备的，请尝试导出或清除数据并向我们反馈吧</a>
 	</body>
 </html>

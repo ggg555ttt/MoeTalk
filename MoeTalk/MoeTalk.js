@@ -3,7 +3,6 @@ var version = '1.2';
 var cfemoji = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var lname = true;//临时改名
-var hidden = false;//临时改名
 var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
 //判断网络
 if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname == 'frp.freefrp.net')
@@ -280,7 +279,7 @@ $('body').on('click',"#dels",function()
 {
 	if($(".dels:checked").length > 0)
 	{
-		if(confirm('你一共选中了'+$(".dels:checked").length+'条数据\n点击确认后会马上删除并刷新页面，确定吗？'))
+		if(confirm('此功能尚有问题，请谨慎使用\n你一共选中了'+$(".dels:checked").length+'条数据\n点击确认后会马上删除并刷新页面，确定吗？'))
 		{
 			let arr = JSON.parse(localStorage['chats']);let i = 0;
 			$(".dels:checked").each(function(){arr.splice($(this).attr('index')-i,1);i++})
@@ -290,21 +289,6 @@ $('body').on('click',"#dels",function()
 		}
 	}
 })
-
-//修改羁绊事件
-$("body").on('click',".heJhGb .medium",function()
-{
-	$(this).attr("hidden","hidden");
-	$(this).before("<input value='"+$(this).text()+"'><button class='jiban'>确定修改</button>");
-});
-$("body").on('click',".jiban",function()
-{
-	text = $(this).siblings("input").val();
-	if(jQuery.trim(text) == 0)text = $(this).siblings("button").text();
-	$(this).siblings("button").removeAttr('hidden').text(text);
-	$(this).siblings("input").remove();
-	$(this).remove();
-});
 
 //清除冗余文件数据
 $('body').on('click',"input",function()
@@ -407,38 +391,11 @@ $('body').on('click',".gxgCGp:eq(4)",function()
 		$('#delsall').attr('hidden',false)
 		$('#rdelsall').attr('hidden',false)
 		$('#dels').attr('hidden',false).next().attr('hidden',false)
-		hidden = false;
 	}
 	else
 	{
 		$('#delsall').attr('hidden',true)
 		$('#rdelsall').attr('hidden',true)
 		$('#dels').attr('hidden',true).next().attr('hidden',true)
-		hidden = true;
 	}
 })
-
-/*
-var element = $('.iBfcuf');
-
-// 创建一个canvas元素
-var canvas = document.createElement('canvas');
-canvas.width = element.outerWidth();  // 设置canvas宽度为元素宽度
-canvas.height = element.outerHeight();  // 设置canvas高度为元素高度
-
-// 获取2D绘图上下文
-var context = canvas.getContext('2d');
-
-// 使用html2canvas库将元素绘制到canvas上
-html2canvas(element[0]).then(function (canvas) {
-    // 将canvas转换为图像
-    var image = canvas.toDataURL('image/png');
-
-    // 创建一个新的图像元素
-    var img = document.createElement('img');
-    img.src = image;
-
-    // 将图像元素添加到页面中
-    $('body').append(img);
-});
-*/
