@@ -216,9 +216,17 @@ function compress(base64Img)
 	img.src = base64Img;//图片对象添加图片地址
 	img.onload = function()//图片地址加载完后执行操作
 	{
+		//drawImage(img, 画布开始位置x, 画布开始位置y, 画布被选区域w, 画布被选区域h, 图片开始位置x, 图片开始位置y, dw, dh)
+		//x780 y183
 		w = img.width;
-        h = img.height;
-        n = localStorage['hnum'] ? localStorage['hnum'] : 300;
+		h = img.height;
+		let x = 0;
+		let y = 0;
+		let l = w;
+		if(w > h)x = (w-h)/2,l = h,h = w;
+		else y = (h-w)/2,l = w,w = h;
+
+		n = localStorage['hnum'] ? localStorage['hnum'] : 300;
 		a = Math.min(1, n / w);
         (w *= a), (h *= a);
 		//开始画压缩图
@@ -226,7 +234,8 @@ function compress(base64Img)
 		var ctx = canvas.getContext("2d");
 		canvas.width = w;//压缩图的宽度
 		canvas.height = h;//压缩图的高度
-		ctx.drawImage(img,0,0,w,h);
+		//ctx.drawImage(img,0,0,w,h);
+		ctx.drawImage(img,x,y,l,l,0,0,w,h);
 		var newBase64 = canvas.toDataURL("image/webp");
 
 		localStorage['custom'] = JSON.stringify(chararr);
@@ -413,4 +422,8 @@ function nextindex()
 		index = $('.hfOSPu:eq(-1)')[0];
 	}
 	return index;
+}
+function click(name)
+{
+	$(name).click();
 }

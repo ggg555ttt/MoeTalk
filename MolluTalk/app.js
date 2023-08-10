@@ -15138,8 +15138,7 @@ const mt_img = JSON.parse('{"img":"iVBORw0KGgoAAAANSUhEUgAAAKgAAACiCAYAAADV0IbSA
 					{
 						displayName: "common__Profile",
 						componentId: "sc-1ojome3-6"
-					})(["box-sizing:border-box;margin:0rem;width:4rem;height:4rem;object-fit:cover;border-radius:50%;"]),
-					//#contain改cover
+					})(["box-sizing:border-box;margin:0rem;width:4rem;height:4rem;object-fit:contain;border-radius:50%;"]),
 					Z = (0, L.ZP)(K)
 					.withConfig(
 					{

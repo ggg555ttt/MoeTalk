@@ -278,17 +278,12 @@ $('body').on('click',"#warning",function()
 //批量删除
 $('body').on('click',"#dels",function()
 {
-	if($(".dels:checked").length == 1)
-	{
-		let index = $(".dels:checked").attr('index');
-		console.log(JSON.parse(localStorage['chats'])[index].replyGroup);
-	}
-	if($(".dels:checked").length > 1)
+	if($(".dels:checked").length > 0)
 	{
 		if(confirm('你一共选中了'+$(".dels:checked").length+'条数据\n点击确认后会马上删除并刷新页面，确定吗？'))
 		{
 			let arr = JSON.parse(localStorage['chats']);let i = 0;
-			$(".dels:checked").each(function(){arr.splice($('.dels').index($(this))-i,1);i++})
+			$(".dels:checked").each(function(){arr.splice($(this).attr('index')-i,1);i++})
 			localStorage['chats'] = JSON.stringify(arr);
 			alert('删除完成，即将刷新页面')
 			window.location.reload();//刷新页面
@@ -406,24 +401,18 @@ $('body').on('click',"#rdelsall",function()
 //隐藏工具按钮拓展
 $('body').on('click',".gxgCGp:eq(4)",function()
 {
-	$(".dels").each(function()
+
+	if($('#dels').attr('hidden'))
 	{
-		$(this).prop("checked",false);
-	});
-	if($('.dels').attr('hidden'))
-	{
-		$('#delsall').removeAttr('hidden')
-		$('#rdelsall').removeAttr('hidden')
-		$('.dels').removeAttr('hidden')
-		$('#dels').removeAttr('hidden')
-		$('#dels').removeAttr('hidden').next().removeAttr('hidden')
+		$('#delsall').attr('hidden',false)
+		$('#rdelsall').attr('hidden',false)
+		$('#dels').attr('hidden',false).next().attr('hidden',false)
 		hidden = false;
 	}
 	else
 	{
 		$('#delsall').attr('hidden',true)
 		$('#rdelsall').attr('hidden',true)
-		$('.dels').attr('hidden',true)
 		$('#dels').attr('hidden',true).next().attr('hidden',true)
 		hidden = true;
 	}
