@@ -3,6 +3,8 @@ var version = '1.2';
 var cfemoji = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var lname = true;//临时改名
+var mtype = 'chat';//临时改名
+var isFirefox = os().isFirefox ? "" : "medium";
 var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
 //判断网络
 if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname == 'frp.freefrp.net')

@@ -3676,7 +3676,6 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							/*///原语句
 							13 === (e.which || e.keyCode) && (e.ctrlKey || e.shiftKey) && (e.preventDefault(), "" !== e.currentTarget.value && n())
 							*/
-
 						},
 						I = (0, r.useCallback)(function(e, r)///发送功能
 						{
@@ -3684,12 +3683,16 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 								type: e,
 								content: "",
 								replyDepth: a,
-								replyNo: 0,
-								replyGroup: 0,
+								replyNo: e === 'reply' ? localStorage['replyNo'] : 0,
+								replyGroup: e === 'reply' ? localStorage['replyGroup'] : 0,
 								sCharacter: s,
 								isFirst: !0
 							};
+							localStorage['replyNo']++
+							localStorage['replyGroup']++
+
 							"image" === e ? i.file = r : "chat" === e ? i.content = r : "info" === e && (i.content = r, i.sCharacter = d.I);
+							if("reply" === e)i.content = r, i.sCharacter = d.I
 							var c = [],
 								l = (0, et.Z)(o)
 								.filter(function(e)
@@ -3805,7 +3808,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 										{
 											P(e, function()
 											{
-												I("chat", w), _("")
+												I(mtype, w), _("")//#回车发送
 											})
 										},
 										onChange: function(e)
@@ -3813,7 +3816,48 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 											cfemoji = 'NO';//@输入文字时不读取表情
 											_(e.currentTarget.value)
 										}
-									}), (0, m.jsx)(eV,
+									}), 
+									//*加入1
+									(0, m.jsx)(eV,
+									{
+										style:
+										{
+											padding: "0.2rem",
+											width: "2.2rem",
+											height: "2.2rem"
+										},
+										title: "emoticon",
+										onClick: function()
+										{
+											mtype = 'info';
+										},
+										children: (0, m.jsx)(c.xL,
+										{
+											icon: l.DBf
+										})
+									}),
+									//*加入1
+									//*加入2
+									(0, m.jsx)(eV,
+									{
+										style:
+										{
+											padding: "0.2rem",
+											width: "2.2rem",
+											height: "2.2rem"
+										},
+										title: "emoticon",
+										onClick: function()
+										{
+											mtype = 'reply';
+										},
+										children: (0, m.jsx)(c.xL,
+										{
+											icon: l.Lh7
+										})
+									}),
+									//*加入2
+									(0, m.jsx)(eV,
 									{
 										style:
 										{
@@ -3863,7 +3907,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 								disabled: w.length < 1,
 								onClick: function()
 								{
-									I("chat", w), _("")///这是发送功能
+									I(mtype, w), _("")//#单击发送
 								},
 								children: (0, m.jsx)(c.xL,
 								{
@@ -4351,7 +4395,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							},
 							children: (0, m.jsx)(ne,
 							{
-								className: "medium",
+								className: isFirefox,//#判断火狐
 								children: n.content
 							})
 						}), (0, m.jsx)(e1,
