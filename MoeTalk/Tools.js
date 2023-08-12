@@ -115,14 +115,24 @@ $("body").on('click','#clean',function()
 		window.location.reload();//刷新页面
 	}
 })
-//设置表情大小百分比
+//设置整体上传的图片宽高百分比
 $("body").on('click','#mt-size',function()
 {
 	let size = '90%';
-	let msg = prompt("请输入表情大小百分比(默认为90%),请勿乱输入",size);
+	let msg = prompt("请输入整体上传的图片宽高百分比(默认为90%)，请勿乱输入，数字后一定要带百分号",size);
 	if(msg)
 	{
 		localStorage['mt-size'] = msg;
+	}
+})
+//设置独立的差分表情宽高百分比
+$("body").on('click','#mt-cfsize',function()
+{
+	let size = '90%';
+	let msg = prompt("请输入独立的差分表情宽高百分比(默认为90%)，请勿乱输入，数字后一定要带百分号",size);
+	if(msg)
+	{
+		localStorage['mt-cfsize'] = msg;
 	}
 })
 //设置标题

@@ -9,7 +9,8 @@ var size = (JSON.stringify(localStorage).length/1024).toFixed(0);//数据大小
 if(!localStorage['heads'])localStorage['heads'] = '[{}]';
 if(!localStorage['chats'])localStorage['chats'] = '[]';
 if(!localStorage['mt-lang'])localStorage['mt-lang'] = 'zh_cn';//默认语言
-if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';//
+if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';//整体图片宽高百分比
+if(!localStorage['mt-cfsize'])localStorage['mt-cfsize'] = '90%';//差分表情宽高百分比
 if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';//标题
 if(!localStorage['mt-order'])localStorage['mt-order'] = 'name';//排序方式
 if(!localStorage['mt-names'])localStorage['mt-names'] = '{}';//
@@ -254,11 +255,15 @@ function warning()
 {
 	if(height > 8192 || size > 3000)//检测聊天框宽度
 	{
-		$("#warning").removeAttr('hidden');//显示警告
+		$("#size").css('color','red');//显示警告
 	}
 	else
 	{
-		$("#warning").attr('hidden','hidden');//隐藏警告
+		$("#size").css('color','green');//隐藏警告
+	}
+	if(height > 15000 || size > 4500)//检测聊天框宽度
+	{
+		alert('当前长度和存档体积已逼近临界点\n请清除一些数据以确保MoeTalk的正常使用\n长度最长为16384，体积最大为5120KB')
 	}
 }
 
@@ -402,6 +407,10 @@ function loadindex()
 	if(i > -1)return i;
 	return i;
 }
+function loadchecked()
+{
+	return $(".dels:checked")[0];
+}
 //选择框索引下移
 function nextindex()
 {
@@ -410,6 +419,8 @@ function nextindex()
 	{
 		$(".dels").eq(index).prop("checked",false);
 		$(".dels").eq(index+1).prop("checked",true);
+		$(".dels").eq(index).parent().removeAttr("style")//
+		$(".dels").eq(index+1).parent().css("background-color","rgb(202,215,221)")//
 		index = $(".dels:checked")[0];
 	}
 	else

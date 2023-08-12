@@ -1,5 +1,5 @@
 //https://try8.cn/tool/format/js
-var version = '1.3';
+var version = '1.4';
 var cfemoji = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var lname = true;//临时改名
@@ -37,18 +37,21 @@ $("body").on('keydown',function()
 {
 	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
 	height = $(".iBfcuf").height().toFixed(0);
-	$('#size').text(size);
-	$('#height').text(height);
+	$('#size').text(height+"\n"+size+"KB");
+	warning();
+})
+$("body").on('click',function()
+{
+	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
+	height = $(".iBfcuf").height().toFixed(0);
+	$('#size').text(height+"\n"+size+"KB");
 	warning();
 })
 //标题框
 $(".bIcduz").wait(function()
 {
-	
 	height = $(".iBfcuf").height().toFixed(0);
-	$(".bIcduz").after("<span class='"+class1+"' style='line-height:100%;color:green;'><b id='height'>"+height+"</b></span>");
-	$(".bIcduz").after("<span id='warning'><button class='"+class0+"'><b style='color:red;'>⚠️</b></button>※错误警告</span>");
-	$(".bIcduz").after("<span class='"+class1+"' style='line-height:100%;color:red;'><b id='size'>"+size+"</b>KB</span>");
+	$(".bIcduz").after("<span id='size' class='"+class1+"'><b>"+height+"\n"+size+"KB</b></span>");
 	warning();
 },".bIcduz")
 //加载工具
@@ -250,15 +253,15 @@ $('body').on('click',"#ct",function()
 })
 
 //警告提醒
-$('body').on('click',"#warning",function()
+$('body').on('click',"#size",function()
 {
 	let wh = '';
 	let ws = '';
-	let wc = 0;
+	let wc = '';
 	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
 	height = $(".iBfcuf").height().toFixed(0);
-	if(height > 8192)wh = "聊天记录长度为"+height+"，超过8192可能会影响到聊天记录图片的生成（视浏览器而定，在8192-16384之间，请自行测试）\n";
-	if(size > 3000)ws = "存储空间体积为"+size+"KB，超过5120KB会使保存功能崩溃\n";
+	if(height > 8192)wh = "聊天记录长度为"+height+"，超过8192可能会影响到聊天记录图片的生成\n（视浏览器而定，在8192-16384之间，请自行测试）\n";
+	if(size > 2560)ws = "存储空间体积为"+size+"KB，超过5120KB会使保存功能崩溃\n";
 	if(localStorage['last-viewed-version'])
 	{
 		if(localStorage['last-chat'])wc += localStorage['last-chat'].length
@@ -271,11 +274,9 @@ $('body').on('click',"#warning",function()
 		if(localStorage['rendererConfigs'])wc += localStorage['rendererConfigs'].length;
 		wc = "检测到ClosureTalk存档数据，数据大小为"+(wc/1024).toFixed(0)+"KB";
 	}
-	
-	alert(wh+ws+wc);
+	if(wh+ws)alert(wh+ws+wc);
 
 });
-
 //批量删除
 $('body').on('click',"#dels",function()
 {
@@ -291,14 +292,13 @@ $('body').on('click',"#dels",function()
 		}
 	}
 })
-
 //清除冗余文件数据
 $('body').on('click',"input",function()
 {
 	$("input[type='file']").val('')
 })
 //临时改名
-$('body').on('click',".iVTxiA",function()
+$('body').on('click',".eLDbih",function()
 {
 	let span = $(this).parent().next().children('span');
 	if($(this).css('display') == 'block' && lname)
@@ -359,14 +359,15 @@ $('body').on('click',".fzOyMd",function()
 		
 	}
 })
-//全选及反选
+//全选
 $('body').on('click',"#delsall",function()
 {
-	if($(".dels:checked").length == 0)
+	if($(".dels:checked").length !== $(".dels").length)
 	{
 		$(".dels").each(function()
 		{
 			$(this).prop("checked",true);
+			$(this).parent().css("background-color","rgb(202,215,221)")//
 		});
 	}
 	else
@@ -374,20 +375,24 @@ $('body').on('click',"#delsall",function()
 		$(".dels").each(function()
 		{
 			$(this).prop("checked",false);
+			$(this).parent().removeAttr("style")//
 		});
 	}
 })
+//反选
 $('body').on('click',"#rdelsall",function()
 {
 	$(".dels").each(function()
 	{
 		$(this).prop("checked",!$(this).prop("checked"));
+		if($(this).prop('checked'))$(this).parent().css("background-color","rgb(202,215,221)")//
+		else $(this).parent().removeAttr("style")//
 	});
 })
 //隐藏工具按钮拓展
 $('body').on('click',".gxgCGp:eq(4)",function()
 {
-
+	$('.hfOSPu').removeAttr("style")//
 	if($('#dels').attr('hidden'))
 	{
 		$('#delsall').attr('hidden',false)
@@ -400,4 +405,15 @@ $('body').on('click',".gxgCGp:eq(4)",function()
 		$('#rdelsall').attr('hidden',true)
 		$('#dels').attr('hidden',true).next().attr('hidden',true)
 	}
+})
+//选框被选中背景色
+$('body').on('change',".dels",function()
+{
+	if($(this).prop('checked'))$(this).parent().css("background-color","rgb(202,215,221)")//
+	else $(this).parent().removeAttr("style")//
+})
+//自动跳到被选位置
+$('body').on('click',".dkwjoK",function()
+{
+	if(loadindex())loadchecked().scrollIntoView(!1)
 })

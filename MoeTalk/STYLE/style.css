@@ -13,3 +13,16 @@
 .blue{color:blue;}
 .red{color:red;}
 .black{color:black;}
+
+input[type="checkbox"] {
+border: 1px solid #ccc;  /* 边框 */
+width: 20px;  /* 宽度 */
+height: 20px;  /* 高度 */
+border-radius: 2px;  /* 圆角 */
+cursor: pointer;  /* 鼠标形状 */
+}
+
+input[type="checkbox"]:checked {
+background-color: #4CAF50; /* 背景色 */
+border-color: #4CAF50; /* 边框色 */
+}
