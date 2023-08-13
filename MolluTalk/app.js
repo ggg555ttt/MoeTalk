@@ -15534,7 +15534,7 @@ const mt_img = JSON.parse('{"img":"iVBORw0KGgoAAAANSUhEUgAAAKgAAACiCAYAAADV0IbSA
 					}
 				});
 				var r = n(3420),
-					i = ["delete", "edit", "add", "time"],
+					i = ["delete", "edit", "add", "time", "name"],
 					a = ["chat", "image", "reply", "heart", "info"],
 					o = ["name", "school", "club", "ID"],//#加入ID
 					s = ["kr", "jp", "en", "zh_cn", "zh_tw"],

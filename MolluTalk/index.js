@@ -3815,7 +3815,6 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 										{
 											cfemoji = 'NO';//@输入文字时不读取表情
 											_(e.currentTarget.value)
-											if(loadindex())loadchecked().scrollIntoView(!1)//@自动跳到被选位置
 										}
 									}), 
 									/*加入旁白和选择按钮
@@ -4011,10 +4010,10 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							return e.sCharacter.selected
 						}),
 						g = (0, r.useState)(t.type),
-						x = g[0],
+						x = notype ? t.type : g[0],//#
 						y = g[1],
 						b = (0, r.useState)(""),
-						j = b[0],
+						j = val === '' ? b[0] : !val ? '' : val,//#
 						w = b[1],
 						_ = (0, r.useRef)(null);
 					(0, r.useEffect)(function()
@@ -4055,6 +4054,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 						{
 							var e, n = [],
 								r = !1;
+							"name" === a ? h.chats.forEach(function(r){e = e0({}, r), r === t && (e.name = j), n.push(e)}) : //@加入临时改名
 							"delete" === a ? "reply" === t.type ? n = v() : h.chats.forEach(function(o)
 							{
 								e = e0(
@@ -4191,7 +4191,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 										return (0, m.jsxs)(c.Jg,
 										{
 											htmlFor: e,
-											hidden: "time" === a || "delete" === a,//@禁用特定选框
+											hidden: "time" === a || "delete" === a || "name" === a,//@禁用特定选框
 											children: [(0, m.jsx)("input",
 											{
 												type: "checkbox",
@@ -4199,7 +4199,8 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 												checked: "edit" === a && x === e || "add" === a && x === e,//#
 												onChange: function(n)
 												{
-													w("image" === e ? "" : t.content), y(e)//#图片不显示文字
+													notype = false;
+													w(t.content), y(e)//#图片不显示文字
 												},
 												disabled: "add" !== a,
 												value: e
@@ -4227,7 +4228,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									}), (0, m.jsx)(c.Kx,
 									{
 										className: "medium",
-										placeholder: I(),
+										placeholder:"name" === a ? (0, u.fY)(t.sCharacter.no, !0, f)+" : "+t.name : I(),//@改名提示
 										maxRows: 5,
 										readOnly: function()
 										{
@@ -4236,17 +4237,24 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 											{
 												if("image" === t.type) return !0
 											}
-											else if("heart" === x || "image" === x) return !0;
+											else if(("heart" === x || "image" === x) && "name" !== a && "time" !== a)//#可以输入名字和时间
+											{
+												j = ''//@图片和羁绊不显示文字
+												return !0
+											}
 											return !1
 										}(),
-										value: "image" === x || "heart" === x ? '' : j === '' && "time" !== a ? j = t.content : j,//#给值
+										value: j,//#给值
 										onClick: function(e)
 										{
 											var n;
+											if("name" === a || "time" === a)x = "chat";//@改名和时间不弹框
 											("image" === t.type && "edit" === a || "image" === x) && (null === (n = _.current) || void 0 === n || n.click())
 										},
 										onChange: function(e)
 										{
+											val = e.currentTarget.value;
+											if(val === '')val = false;
 											w(e.currentTarget.value)
 										}
 									})]
@@ -4263,7 +4271,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									}), (0, m.jsx)(ea.AZ,
 									{
 										className: "bold",
-										disabled: P(),
+										disabled: "name" !== a && P(),//#改名可以清空
 										onClick: function()
 										{
 											k()
@@ -4610,6 +4618,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									n === e ? o.push(
 									{
 										file: e.file,//@大概原作者忘加了
+										name: e.name,//@新增临时改名
 										type: e.type,
 										replyNo: e.replyNo,
 										replyDepth: e.replyDepth,
@@ -4731,7 +4740,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									{
 										display: "none"
 									},
-									children: n.content.split('#')[1] ? n.content.split('#')[1] : (0, u.fY)(n.sCharacter.no, !0, d)//#新增临时名称
+									children: n.name && n.name !== '' ? n.name : (0, u.fY)(n.sCharacter.no, !0, d)//#新增临时名称
 								}), (0, m.jsxs)("div",
 								{
 									style:

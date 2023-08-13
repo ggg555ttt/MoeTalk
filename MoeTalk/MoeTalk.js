@@ -1,10 +1,12 @@
 //https://try8.cn/tool/format/js
-var version = '1.4';
+var version = '1.5';
 var cfemoji = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var lname = true;//临时改名
 var mtype = 'chat';//临时改名
 var isFirefox = os().isFirefox ? "" : "medium";
+var val = '';
+var notype = true;
 var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
 //判断网络
 if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname == 'frp.freefrp.net')
@@ -45,6 +47,11 @@ $("body").on('click',function()
 	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
 	height = $(".iBfcuf").height().toFixed(0);
 	$('#size').text(height+"\n"+size+"KB");
+	if($('.visible').length === 0)
+	{
+		val = '';
+		notype = true;
+	}
 	warning();
 })
 //标题框
@@ -296,27 +303,6 @@ $('body').on('click',"#dels",function()
 $('body').on('click',"input",function()
 {
 	$("input[type='file']").val('')
-})
-//临时改名
-$('body').on('click',".eLDbih",function()
-{
-	let span = $(this).parent().next().children('span');
-	if($(this).css('display') == 'block' && lname)
-	{
-		span.attr("hidden","hidden");
-		span.before("<input value='"+span.text()+"'>");
-		lname = false;
-		return;
-	}
-	if($(this).css('display') == 'block' && !lname)
-	{
-		text = span.siblings("input").val();
-		if(jQuery.trim(text) == 0)text = span.text();
-		span.removeAttr('hidden').text(text);
-		span.siblings("input").remove();
-		lname = true;
-		return;
-	}
 })
 //差分映射
 $('body').on('click',"#cf",function()
