@@ -70,7 +70,7 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append("<button class='"+class0+"' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='delcus'><b style='color:red;'>刪</b></button><span class='tool'>删除角色</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色信息，下方输入ID：↓</span><input size='5' id='ccus'/><br>");
-	$(".frVjsk").append("<button class='"+class0+"' id='ct'><b style='color:green;'>C</b></button><span class='tool'>生成ClosureTalk存档</span><br>");
+	//$(".frVjsk").append("<button class='"+class0+"' id='ct'><b style='color:green;'>C</b></button><span class='tool'>生成ClosureTalk存档</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>");
 	$(".frVjsk").append("<a href='./Setting.html'><button class='"+class0+"'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>");
 	$(".frVjsk").append("<button id='delsall'>全选</button>");
@@ -204,60 +204,6 @@ $("body").on('change','#custom',function()
 		// console.log(base64Img)
 		compress(base64Img)
 	}
-})
-$('body').on('click',"#ct",function()
-{
-	let arr = JSON.parse(localStorage['chats'])
-	let cl = [];
-	$.each(arr,function(k,v)
-	{
-		cl[k] = {};
-		cl[k]['content'] = v['content'];
-		cl[k]['is_breaking'] = false;
-		if(v['sCharacter']['no'] != 0)
-		{
-			cl[k]['char_id'] = "mt-"+v['sCharacter']['no'];
-			cl[k]['img'] = v['sCharacter']['no']+'.'+v['sCharacter']['index'];
-		}
-		cl[k]['yuzutalk'] = {};
-		cl[k]['yuzutalk']['nameOverride'] = '';
-		if(v['isFirst'] === true)cl[k]['yuzutalk']['avatarState'] = 'SHOW';
-		else cl[k]['yuzutalk']['avatarState'] = 'HIDE';
-		if(v['type'] == 'chat')cl[k]['yuzutalk']['type'] = 'TEXT';
-		if(v['type'] == 'image')
-		{
-			cl[k]['content'] = "../moetalk/"+v['content'];
-			cl[k]['yuzutalk']['type'] = 'IMAGE';
-		}
-		if(v['type'] == 'heart')cl[k]['yuzutalk']['type'] = 'RELATIONSHIPSTORY';
-		if(v['type'] == 'info')cl[k]['yuzutalk']['type'] = 'NARRATION';
-		if(v['type'] == 'reply')
-		{
-			cl[k]['yuzutalk']['type'] = 'CHOICES';
-			cl[k]['rg'] = v['replyGroup'];
-		}
-		if(v['file'])cl[k]['content'] = v['file'];
-	})
-	$.each(cl,function(k,v)
-	{
-		if(v['rg'] && cl[k+1] && v['rg'] === cl[k+1]['rg'])
-		{
-			cl[k+1]['content'] = cl[k]['content']+'\n'+cl[k+1]['content']
-			delete cl[k];
-		}
-	})
-	for(let i=0;i<cl.length;i++){if(cl[i]===undefined){cl.splice(i,1);i--;}}
-	arr = {};
-	arr['chat'] = cl
-	arr['chars'] = [];
-	$.each(JSON.parse(localStorage['qchar'])['selectedList'],function(k,v)
-	{
-		arr['chars'][k] = {};
-		arr['chars'][k]['char_id'] = 'mt-'+v.no
-		arr['chars'][k]['img'] = v.no+'.'+v.index
-	})
-	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(arr));//生成专用存档
 })
 
 //警告提醒

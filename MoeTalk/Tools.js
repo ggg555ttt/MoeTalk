@@ -223,6 +223,13 @@ function mark()
 		}
 	})
 }
+function cleanmark()
+{
+	if(confirm('是否清空？'))
+	{
+		localStorage.removeItem('wmark');
+	}
+}
 //隐写回复
 const sep = '-sep-';
 const maxExtLength = 4;
@@ -295,4 +302,58 @@ $('body').on('click',"#mt-edit",function()
 	{
 		localStorage['mt-edit'] = '旧版编辑模式';
 	}
+})
+$('body').on('click',"#ct",function()
+{
+	let arr = JSON.parse(localStorage['chats'])
+	let cl = [];
+	$.each(arr,function(k,v)
+	{
+		cl[k] = {};
+		cl[k]['content'] = v['content'];
+		cl[k]['is_breaking'] = false;
+		if(v['sCharacter']['no'] != 0)
+		{
+			cl[k]['char_id'] = "mt-"+v['sCharacter']['no'];
+			cl[k]['img'] = v['sCharacter']['no']+'.'+v['sCharacter']['index'];
+		}
+		cl[k]['yuzutalk'] = {};
+		cl[k]['yuzutalk']['nameOverride'] = v['name'] ? v['name'] : '';
+		if(v['isFirst'] === true)cl[k]['yuzutalk']['avatarState'] = 'SHOW';
+		else cl[k]['yuzutalk']['avatarState'] = 'HIDE';
+		if(v['type'] == 'chat')cl[k]['yuzutalk']['type'] = 'TEXT';
+		if(v['type'] == 'image')
+		{
+			cl[k]['content'] = "../moetalk/"+v['content'];
+			cl[k]['yuzutalk']['type'] = 'IMAGE';
+		}
+		if(v['type'] == 'heart')cl[k]['yuzutalk']['type'] = 'RELATIONSHIPSTORY';
+		if(v['type'] == 'info')cl[k]['yuzutalk']['type'] = 'NARRATION';
+		if(v['type'] == 'reply')
+		{
+			cl[k]['yuzutalk']['type'] = 'CHOICES';
+			cl[k]['rg'] = v['replyGroup'];
+		}
+		if(v['file'])cl[k]['content'] = v['file'];
+	})
+	$.each(cl,function(k,v)
+	{
+		if(v['rg'] && cl[k+1] && v['rg'] === cl[k+1]['rg'])
+		{
+			cl[k+1]['content'] = cl[k]['content']+'\n'+cl[k+1]['content']
+			delete cl[k];
+		}
+	})
+	for(let i=0;i<cl.length;i++){if(cl[i]===undefined){cl.splice(i,1);i--;}}
+	arr = {};
+	arr['chat'] = cl
+	arr['chars'] = [];
+	$.each(JSON.parse(localStorage['qchar'])['selectedList'],function(k,v)
+	{
+		arr['chars'][k] = {};
+		arr['chars'][k]['char_id'] = 'mt-'+v.no
+		arr['chars'][k]['img'] = v.no+'.'+v.index
+	})
+	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
+	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(arr));//生成专用存档
 })

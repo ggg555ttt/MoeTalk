@@ -4015,7 +4015,7 @@
 						_ = (0, r.useRef)(null);
 					(0, r.useEffect)(function()
 					{
-						w(localStorage['mt-edit'] ? "edit" : "add" === a && "image" !== t.type ? t.content : "")//#修改变追加
+						w((localStorage['mt-edit'] ? "edit" : "add") === a && "image" !== t.type ? t.content : "")//#修改变追加
 					}, [a, t, w]);
 					var C = function e(n)
 						{
