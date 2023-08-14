@@ -1,5 +1,5 @@
 //https://try8.cn/tool/format/js
-var version = '1.5';
+var version = '2.0';
 var cfemoji = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var lname = true;//临时改名
