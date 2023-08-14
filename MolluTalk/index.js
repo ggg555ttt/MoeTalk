@@ -4164,7 +4164,8 @@
 										{
 											style:
 											{
-												margin: "0 auto"//#改为居中
+												width: "23%",
+												margin: "0 auto"//@改为居中
 											},
 											className: a === e ? "selected medium" : "medium",
 											onClick: function()
@@ -4615,6 +4616,7 @@
 									n === e ? o.push(
 									{
 										file: e.file,//@大概原作者忘加了
+										time: e.time,//@大概原作者忘加了
 										name: e.name,//@新增临时改名
 										type: e.type,
 										replyNo: e.replyNo,
@@ -4757,14 +4759,7 @@
 												o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
 											},
 											children: n.content.split('#')[0]///对话
-										}), n.time && (0, m.jsx)(eN.i9,
-										{
-											style:
-											{
-												marginRight: 0
-											},
-											children: n.time
-										})]
+										})/*被删除的时间戳*/]
 									}) : (0, m.jsxs)(m.Fragment,
 									{
 										children: [(0, m.jsx)(eN.Dt,
@@ -4775,14 +4770,7 @@
 												o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
 											},
 											children: n.content.split('#')[0]//#无头像对话
-										}), n.time && (0, m.jsx)(eN.i9,
-										{
-											style:
-											{
-												marginRight: 0
-											},
-											children: n.time
-										})]
+										})/*被删除的时间戳*/]
 									}) : (0, m.jsx)(eN.tG,
 									{
 										style:{"max-width":n.content.split('/')[0] === "CharFace" ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
@@ -4791,7 +4779,7 @@
 											o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
 										},
 										src: n.file || n.content//#
-									}), n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}), h || (0, m.jsx)(nl,//#给图片加入时间戳
+									}), n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}), h || (0, m.jsx)(nl,//#时间戳放在这
 									{
 										"data-html2canvas-ignore": "true",
 										onClick: function()
