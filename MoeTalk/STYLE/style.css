@@ -13,16 +13,29 @@
 .blue{color:blue;}
 .red{color:red;}
 .black{color:black;}
+#notice
+{
+	display:none;
+	font-size: 25px;
+	font-family:medium-cn;
+}
+#warning
+{
+	display:none;
+	font-size: 25px;
+	font-family:medium-cn;
+}
 
-input[type="checkbox"] {
+
+.dels[type="checkbox"] {
 border: 1px solid #ccc;  /* 边框 */
 width: 20px;  /* 宽度 */
 height: 20px;  /* 高度 */
 border-radius: 2px;  /* 圆角 */
 cursor: pointer;  /* 鼠标形状 */
+-webkit-appearance: none;  /*清除默认样式*/
 }
 
-input[type="checkbox"]:checked {
-background-color: #4CAF50; /* 背景色 */
-border-color: #4CAF50; /* 边框色 */
+.dels[type="checkbox"]:checked {
+   background: url("data:image/webp;base64,UklGRroBAABXRUJQVlA4WAoAAAAwAAAAEwAAEwAAQUxQSGgAAAABPwAUiD91K4eISMFRbdtOs3+fpmf6cYCErCigGMH/9IOHiP5PANyCy1+7CtvFLS/xrNPOHmxnkSUOHdoQhm2gB0vkxpGoxs/ENvQyB3PEQaIFPkxsWS/04H9zQNH4DvMSTGnoO4vTCFZQOCAsAQAA0AcAnQEqFAAUAD6dRp5LJaOioagIALATiWwAnTKEcDeAcIZpduAbYDcAbw16AH7AdagRD27VDdtBb9dM+uP99dEGHOK0iAAA/p2b0dfgF76hcHJqzja+ZKdDExR92+P1ehR7YWCc81sFx9ib/vWk8a4kzsug6V36X320YwyMZkK//zj+/hxGOr4r/D5+78f8QHPuQSME1r7P3//5Egulp0Sg3dzL8NFfoEoyPKa+/PDxP3NJJh1HGn8vOPJskR4nh47EvvjOAbNAqXC0AkuQn9icM46bmB3fYS7s6z8pWZY5MBsye8XqXFcxxGZJYsfe/jFX9uowKlPctRdDt9rH30cE1Mqhq+tb2fKYdnOuBTxNjxoy0MwdxxHV6rpYja0ZXRKDZGqKmVCVIKAA") no-repeat center center;
 }

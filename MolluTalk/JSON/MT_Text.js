@@ -1,4 +1,4 @@
-{
+var mt_text = {
 	"name": {
 		"kr": "이름",
 		"en": "Name",
@@ -1162,3 +1162,4 @@
 		"zh_tw": "ID"
 	}
 }
+if(localStorage['mt-edit'])mt_text.add = {"kr":"추가","en":"Add","jp":"追加","zh_cn":"追加","zh_tw":"追加"}

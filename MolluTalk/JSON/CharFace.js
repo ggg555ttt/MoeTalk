@@ -1,4 +1,4 @@
-{
+var charface = {
 	"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":"砂狼 白子-1",
 	"1.2":"Abydos_Countermeasure_Shiroko_Bandit.8.webp","<=":"砂狼 白子-2",
 	"1.3":"1.1","<=":"砂狼 白子-3",

@@ -59,6 +59,7 @@ $(".bIcduz").wait(function()
 {
 	height = $(".iBfcuf").height().toFixed(0);
 	$(".bIcduz").after("<span id='size' class='"+class1+"'><b>"+height+"\n"+size+"KB</b></span>");
+	$(".hXhSup").prepend("<span id='warning'><b></b></span>");
 	warning();
 },".bIcduz")
 //加载工具
@@ -330,7 +331,7 @@ $('body').on('click',".fzOyMd",function()
 		let index = JSON.parse(localStorage['qchar'])['selected']['index'];
 		if(CharFaceIndex != no+'.'+index)
 		{
-			cfiarr[CharFaceIndex] = no+'.'+index;
+			cfiarr[no+'.'+index] = CharFaceIndex;
 			localStorage['CharFaceIndex'] = JSON.stringify(cfiarr);
 			CharFaceIndex = null;
 			alert('映射成功');
@@ -401,5 +402,16 @@ $('body').on('change',".dels",function()
 //自动跳到被选位置
 $('body').on('click',".dkwjoK",function()
 {
-	if(loadindex())loadchecked().scrollIntoView(!1)
+	if(loadindex())
+	{
+		loadchecked().scrollIntoView(!1)
+		notice('发送消息时会在被选中的消息上方插入新的消息',250)
+	}
+})
+$('body').on('click',".common__CheckBox-sc-1ojome3-14 input",function()
+{
+	if($(this).prop('checked') === false)
+	{
+		notice('点击选框没反应的话点一下其它的选框就行了',1000)
+	}
 })

@@ -250,7 +250,7 @@ function download_txt(filename,content,contentType)
 	a.click();
 }
 
-//警告提示
+//警告
 function warning()
 {
 	if(height > 8192 || size > 3000)//检测聊天框宽度
@@ -263,7 +263,15 @@ function warning()
 	}
 	if(height > 15000 || size > 4500)//检测聊天框宽度
 	{
-		alert('当前长度和存档体积已逼近临界点\n请清除一些数据以确保MoeTalk的正常使用\n长度最长为16384，体积最大为5120KB')
+		notice('当前长度和存档体积已逼近临界点，请清除一些数据以确保MoeTalk的正常使用，长度最长为16384，体积最大为5120KB',1000,"#warning")
+	}
+}
+//提示
+function notice(text,time = 2000,id = "#notice")
+{
+	if($(id).is(":hidden") && text !=='')//
+	{
+		$(id).text(text).show(300).delay(time).hide(300);
 	}
 }
 

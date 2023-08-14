@@ -285,3 +285,14 @@ function blobToArrayBuffer(file) {
 		reader.readAsArrayBuffer(file);
 	});
 }
+$('body').on('click',"#mt-edit",function()
+{
+	if(confirm('是否切换编辑模式？\n点击【确定】为将使用新版编辑模式\n点击【取消】将使用旧版编辑模式'))
+	{
+		localStorage.removeItem('mt-edit');
+	}
+	else
+	{
+		localStorage['mt-edit'] = '旧版编辑模式';
+	}
+})

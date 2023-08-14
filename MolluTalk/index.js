@@ -1,7 +1,3 @@
-///https://www.bejson.com/
-///import charface from './JSON/CharFace.json' assert {type:'json'};//@差分表情列表
-const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":"砂狼 白子-1","1.2":"Abydos_Countermeasure_Shiroko_Bandit.8.webp","<=":"砂狼 白子-2","1.3":"1.1","<=":"砂狼 白子-3","1.4":"Abydos_Countermeasure_Shiroko_Cycling.8.webp","<=":"砂狼 白子-4","1.5":"1.4","<=":"砂狼 白子-5","1.6":"Abydos_Countermeasure_Shiroko_Swimsuit.8.webp","<=":"砂狼 白子-6","1.7":"1.6","<=":"砂狼 白子-7","1.8":"Abydos_Countermeasure_Shiroko_SwimsuitB.8.webp","<=":"砂狼 白子-8","1.9":"Abydos_Countermeasure_Shiroko_Track.9.webp","<=":"砂狼 白子-9","2.1":"Abydos_Countermeasure_Hoshino.19.webp","<=":"小鸟游 星野-1","2.2":"Abydos_Countermeasure_Hoshino_Bandit.8.webp","<=":"小鸟游 星野-2","2.3":"2.1","<=":"小鸟游 星野-3","2.4":"Abydos_Countermeasure_Hoshino_Swimsuit.23.webp","<=":"小鸟游 星野-4","2.5":"Abydos_Countermeasure_Hoshino_SwimsuitB.23.webp","<=":"小鸟游 星野-5","2.6":"2.4","<=":"小鸟游 星野-6","2.7":"Abydos_Countermeasure_Hoshino_Track.19.webp","<=":"小鸟游 星野-7","3.1":"Abydos_Countermeasure_Serika.15.webp","<=":"黑见 芹香-1","3.2":"Abydos_Countermeasure_Serika_Bandit.15.webp","<=":"黑见 芹香-2","3.3":"Abydos_Countermeasure_Serika_Working.15.webp","<=":"黑见 芹香-3","3.4":"3.1","<=":"黑见 芹香-4","3.5":"Abydos_Countermeasure_Serika_NewYear.16.webp","<=":"黑见 芹香-5","3.6":"3.5","<=":"黑见 芹香-6","3.7":"Abydos_Countermeasure_Serika_Swimsuit.19.webp","<=":"黑见 芹香-7","3.8":"Abydos_Countermeasure_Serika_SwimsuitB.19.webp","<=":"黑见 芹香-8","3.9":"Abydos_Countermeasure_Serika_Track.15.webp","<=":"黑见 芹香-9","4.1":"Abydos_Countermeasure_Nonomi.20.webp","<=":"十六夜 野宫-1","4.2":"Abydos_Countermeasure_Nonomi_Bandit.8.webp","<=":"十六夜 野宫-2","4.3":"4.1","<=":"十六夜 野宫-3","4.4":"Abydos_Countermeasure_Nonomi_Swimsuit.24.webp","<=":"十六夜 野宫-4","4.5":"Abydos_Countermeasure_Nonomi_SwimsuitB.24.webp","<=":"十六夜 野宫-5","4.6":"4.4","<=":"十六夜 野宫-6","4.7":"Abydos_Countermeasure_Nonomi_Track.21.webp","<=":"十六夜 野宫-7","5.1":"Abydos_Countermeasure_Ayane.16.webp","<=":"奥空 绫音-1","5.2":"Abydos_Countermeasure_Ayane_Bandit.16.webp","<=":"奥空 绫音-2","5.3":"5.1","<=":"奥空 绫音-3","5.4":"Abydos_Countermeasure_Ayane_Swimsuit.18.webp","<=":"奥空 绫音-4","5.5":"Abydos_Countermeasure_Ayane_Track.16.webp","<=":"奥空 绫音-5","5.6":"Abydos_Countermeasure_Ayane_SwimsuitB.18.webp","<=":"奥空 绫音-6","5.7":"5.4","<=":"奥空 绫音-7","5.8":"Abydos_Countermeasure_Ayane_Navigator.16.webp","<=":"奥空 绫音-8","6.1":"Gehenna_Fuuki_Member.9.webp","<=":"风纪委员-1","7.1":"Gehenna_Fuuki_Hina.22.webp,Gehenna_Fuuki_Hina_Wounded.7.webp","<=":"空崎 日奈-1","7.2":"7.1","<=":"空崎 日奈-2","7.3":"Gehenna_Fuuki_Hina_Swimsuit.12.webp","<=":"空崎 日奈-3","7.4":"7.3","<=":"空崎 日奈-4","7.5":"Gehenna_Fuuki_Hina_Nightware.7.webp","<=":"空崎 日奈-5","8.1":"Gehenna_Fuuki_Iori.8.webp","<=":"银镜 伊织-1","8.2":"8.1","<=":"银镜 伊织-2","8.3":"Gehenna_Fuuki_Iori_Swimsuit.11.webp","<=":"银镜 伊织-3","8.4":"8.3","<=":"银镜 伊织-4","9.1":"Gehenna_Fuuki_Ako.17.webp,Gehenna_Fuuki_Ako_Wounded.17.webp","<=":"天雨 亚子-1","9.2":"9.1","<=":"天雨 亚子-2","9.3":"Gehenna_Fuuki_Ako_Track.18.webp","<=":"天雨 亚子-3","9.4":"Gehenna_Fuuki_Ako_Navigator.15.webp","<=":"天雨 亚子-4","10.1":"Gehenna_Fuuki_Chinatsu.9.webp","<=":"火宫 千夏-1","10.2":"10.1","<=":"火宫 千夏-2","10.3":"Gehenna_Fuuki_Chinatsu_HotSpring.11.webp","<=":"火宫 千夏-3","10.4":"10.3","<=":"火宫 千夏-4","11.1":"Gehenna_Kohshinjo68_Mutsuki.15.webp","<=":"浅黄 睦月-1","11.2":"11.1","<=":"浅黄 睦月-2","11.3":"Gehenna_Kohshinjo68_Mutsuki_NewYear.11.webp","<=":"浅黄 睦月-3","11.4":"11.3","<=":"浅黄 睦月-4","12.1":"Gehenna_Kohshinjo68_Haruka.15.webp","<=":"伊草 遥香-1","12.2":"12.1","<=":"伊草 遥香-2","12.3":"Gehenna_Kohshinjo68_Haruka_NewYear.14.webp","<=":"伊草 遥香-3","12.4":"12.3","<=":"伊草 遥香-4","13.1":"Gehenna_Kohshinjo68_Kayoko.8.webp","<=":"鬼方 佳代子-1","13.2":"13.1","<=":"鬼方 佳代子-2","13.3":"Gehenna_Kohshinjo68_Kayoko_NewYear.9.webp","<=":"鬼方 佳代子-3","13.5":"13.3","<=":"鬼方 佳代子-5","13.4":"Gehenna_Kohshinjo68_Kayoko_Navigator.9.webp","<=":"鬼方 佳代子-4","14.1":"Gehenna_Kohshinjo68_Aru.16.webp","<=":"陆八魔 阿露-1","14.2":"14.1","<=":"陆八魔 阿露-2","14.3":"Gehenna_Kohshinjo68_Aru_NewYear.19.webp","<=":"陆八魔 阿露-3","14.4":"14.3","<=":"陆八魔 阿露-4","15.1":"Gehenna_GourmetClub_Izumi.11.webp","<=":"狮子堂 泉-1","15.2":"15.1","<=":"狮子堂 泉-2","15.3":"Gehenna_GourmetClub_Izumi_Swimsuit.12.webp","<=":"狮子堂 泉-3","15.4":"15.3","<=":"狮子堂 泉-4","15.5":"Gehenna_GourmetClub_Izumi_Track.11.webp","<=":"狮子堂 泉-5","15.6":"Gehenna_GourmetClub_Izumi_NewYear.12.webp","<=":"狮子堂 泉-6","16.1":"Gehenna_GourmetClub_Junko.17.webp","<=":"赤司 淳子-1","16.2":"16.1","<=":"赤司 淳子-2","16.3":"Gehenna_GourmetClub_Junko_Track.17.webp","<=":"赤司 淳子-3","16.4":"Gehenna_GourmetClub_Junko_NewYear.19.webp","<=":"赤司 淳子-4","16.5":"16.4","<=":"赤司 淳子-5","17.1":"Gehenna_GourmetClub_Akari.7.webp","<=":"鳄渊 明里-1","17.2":"17.1","<=":"鳄渊 明里-2","17.3":"Gehenna_GourmetClub_Akari_Track.7.webp","<=":"鳄渊 明里-3","17.4":"Gehenna_GourmetClub_Akari_NewYear.14.webp","<=":"鳄渊 明里-4","18.1":"Gehenna_GourmetClub_Haruna.9.webp","<=":"黑馆 晴奈-1","18.2":"18.1","<=":"黑馆 晴奈-2","18.3":"Gehenna_GourmetClub_Haruna_Track.16.webp","<=":"黑馆 晴奈-3","18.4":"Gehenna_GourmetClub_Haruna_NewYear.15.webp","<=":"黑馆 晴奈-4","18.5":"18.4","<=":"黑馆 晴奈-5","19.1":"Gehenna_PandemoniumSociety_Makoto.13.webp","<=":"羽沼 真琴-1","20.1":"Gehenna_PandemoniumSociety_Iroha.9.webp","<=":"枣 伊吕波-1","20.2":"20.1","<=":"枣 伊吕波-2","21.1":"Gehenna_PandemoniumSociety_Ibuki.11.webp","<=":"伊吹-1","22.1":"Gehenna_PandemoniumSociety_Satsuki.13.webp","<=":"皋月-1","23.1":"Gehenna_PandemoniumSociety_Member.9.webp","<=":"万魔殿干部-1","24.1":"Gehenna_FoodService_Fuuka.10.webp","<=":"爱清 枫香-1","24.2":"24.2","<=":"爱清 枫香-2","24.3":"Gehenna_FoodService_Fuuka_NewYear.19.webp","<=":"爱清 枫香-3","24.4":"24.3","<=":"爱清 枫香-4","25.1":"Gehenna_FoodService_Juri.14.webp","<=":"牛牧 朱莉-1","25.2":"25.1","<=":"牛牧 朱莉-2","26.1":"Gehenna_HotSpringsDepartment_Kasumi.10.webp","<=":"霞-1","27.1":"Gehenna_HotSpringsDepartment_Megu.9.webp","<=":"下仓 惠-1","27.2":"27.2","<=":"下仓 惠-2","28.1":"Gehenna_HotSpringsDepartment_Member.8.webp","<=":"温泉开发部成员-1","29.1":"Gehenna_Emergentology_Sena.8.webp","<=":"冰室 濑名-1","29.2":"29.1","<=":"冰室 濑名-2","30.1":"Gehenna_Emergentology_Member.7.webp","<=":"急救医学人员-1","31.1":"Gehenna_GoHomeClub_Erika.17.webp","<=":"旗见 绘梨香-1","32.1":"Gehenna_GoHomeClub_Kilala.13.webp","<=":"绮良-1","33.1":"Gehenna_Student_Member.10.webp","<=":"格黑娜-学生-1","34.1":"Millennium_CleanNClearing_Akane.8.webp","<=":"室笠 朱音-1","34.2":"34.2","<=":"室笠 朱音-2","34.3":"Millennium_CleanNClearing_Akane_Bunny.8.webp","<=":"室笠 朱音-3","34.4":"34.4","<=":"室笠 朱音-4","35.1":"Millennium_CleanNClearing_Neru.12.webp,Millennium_CleanNClearing_Neru_wounded.24.webp","<=":"美甘 尼禄-1","35.2":"35.1","<=":"美甘 尼禄-2","35.3":"Millennium_CleanNClearing_Neru_Bunny.11.webp","<=":"美甘 尼禄-3","35.4":"35.4","<=":"美甘 尼禄-4","36.1":"Millennium_CleanNClearing_Asuna.8.webp","<=":"一之濑 明日奈-1","36.2":"36.1","<=":"一之濑 明日奈-2","36.3":"Millennium_CleanNClearing_Asuna_Bunny.9.webp","<=":"一之濑 明日奈-3","36.4":"36.3","<=":"一之濑 明日奈-4","36.5":"Millennium_CleanNClearing_Asuna_Uniform.9.webp","<=":"一之濑 明日奈-5","37.1":"Millennium_CleanNClearing_Karin.7.webp","<=":"角楯 花凛-1","37.2":"37.1","<=":"角楯 花凛-2","37.3":"Millennium_CleanNClearing_Karin_Bunny.8.webp","<=":"角楯 花凛-3","37.4":"37.3","<=":"角楯 花凛-4","37.5":"Millennium_CleanNClearing_Karin_Uniform.9.webp","<=":"角楯 花凛-5","175.1":"Millennium_CleanNClearing_Toki.18.webp,Millennium_CleanNClearing_Toki_wounded.8.webp","<=":"飞鸟马 时-1","175.2":"1712","<=":"飞鸟马 时-2","175.3":"Millennium_CleanNClearing_Toki_Mecha.13.webp","<=":"飞鸟马 时-3","175.4":"Millennium_CleanNClearing_Toki_Bunny.9.webp","<=":"飞鸟马 时-4","175.5":"175.4","<=":"飞鸟马 时-5","38.1":"Millennium_GameDev_Aris.28.webp","<=":"天童 爱丽丝-1","38.2":"38.1","<=":"天童 爱丽丝-2","38.3":"Millennium_GameDev_Aris_Maid.11.webp","<=":"天童 爱丽丝-3","38.4":"38.3","<=":"天童 爱丽丝-4","188.1":"Millennium_GameDev_Kei.2.webp","<=":"Key-1","39.1":"Millennium_GameDev_Momoi.9.webp","<=":"才羽 桃井-1","39.2":"39.1","<=":"才羽 桃井-2","39.3":"Millennium_GameDev_Momoi_Maid.13.webp","<=":"才羽 桃井-3","40.1":"Millennium_GameDev_Midori.8.webp","<=":"才羽 绿-1","40.2":"40.1","<=":"才羽 绿-2","40.3":"Millennium_GameDev_Midori_Maid.15.webp","<=":"才羽 绿-3","41.1":"Millennium_GameDev_Yuzu.10.webp","<=":"花冈 柚子-1","41.2":"41.1","<=":"花冈 柚子-2","41.3":"Millennium_GameDev_Yuzu_Maid.12.webp","<=":"花冈 柚子-3","41.4":"41.3","<=":"花冈 柚子-4","42.1":"Millennium_SPTF_Himari.13.webp","<=":"明星 日鞠-1","42.2":"42.1","<=":"明星 日鞠-2","42.3":"Millennium_SPTF_Himari_Navigator.13.webp","<=":"明星 日鞠-3","43.1":"Millennium_Veritas_Hare.8.webp","<=":"小钩 晴-1","43.2":"43.1","<=":"小钩 晴-2","44.1":"Millennium_Veritas_Kotama.7.webp","<=":"音濑 小玉-1","44.2":"44.1","<=":"音濑 小玉-2","45.1":"Millennium_Veritas_Chihiro.7.webp","<=":"各务 千寻-1","45.2":"45.1","<=":"各务 千寻-2","46.1":"Millennium_Veritas_Maki.9.webp","<=":"小涂 真纪-1","46.2":"46.1","<=":"小涂 真纪-2","46.3":"Millennium_Veritas_Maki_Track.8.webp","<=":"小涂 真纪-3","47.1":"Millennium_Engineer_Hibiki.14.webp","<=":"猫塚 响-1","47.2":"47.1","<=":"猫塚 响-2","47.3":"Millennium_Engineer_Hibiki_Cheerleader.23.webp","<=":"猫塚 响-3","47.4":"47.4","<=":"猫塚 响-4","48.1":"Millennium_Engineer_Utaha.9.webp","<=":"白石 歌原-1","48.2":"48.2","<=":"白石 歌原-2","48.3":"Millennium_Engineer_Utaha_Cheerleader.17.webp","<=":"白石 歌原-3","48.4":"48.3","<=":"白石 歌原-4","49.1":"Millennium_Engineer_Kotori.8.webp","<=":"丰见 小鸟-1","49.2":"49.1","<=":"丰见 小鸟-2","49.3":"Millennium_Engineer_Kotori_Track.8.webp","<=":"丰见 小鸟-3","49.4":"Millennium_Engineer_Kotori_Cheerleader.23.webp","<=":"丰见 小鸟-4","50.1":"NO","<=":"歌原的炮台-1","176.1":"Millennium_TheSeminar_Rio.11.webp","<=":"调月 莉音-1","51.1":"Millennium_TheSeminar_Yuuka.8.webp","<=":"早濑 优香-1","51.2":"51.1","<=":"早濑 优香-2","51.3":"Millennium_TheSeminar_Yuuka_Track.17.webp","<=":"早濑 优香-3","51.4":"51.3","<=":"早濑 优香-4","51.5":"Millennium_TheSeminar_Yuuka_Navigator.8.webp","<=":"早濑 优香-5","52.1":"Millennium_TheSeminar_Koyuki_Bunny.13.webp","<=":"黑崎 小雪-1","52.2":"Millennium_TheSeminar_Koyuki.17.webp","<=":"黑崎 小雪-2","52.3":"52.3","<=":"黑崎 小雪-3","172.1":"Millennium_TheSeminar_Noa.8.webp","<=":"生盐 诺亚-1","172.2":"172.1","<=":"生盐 诺亚-2","172.3":"Millennium_TheSeminar_Noa_Track.9.webp","<=":"生盐 诺亚-3","53.1":"Millennium_SPTF_Eimi.8.webp","<=":"和泉元 艾米-1","53.2":"53.1","<=":"和泉元 艾米-2","54.1":"Millennium_TrainingClub_Sumire.14.webp","<=":"乙花 菫-1","54.2":"54.1","<=":"乙花 菫-2","54.3":"Millennium_TrainingClub_Sumire_Track.14.webp","<=":"乙花 菫-3","173.1":"Millennium_Student_MemberB.7.webp","<=":"千禧-学生-1","173.2":"Millennium_Student_MemberA.15.webp","<=":"千禧-学生-2","55.1":"Trinity_HoukagoDessert_Natsu.9.webp","<=":"柚鸟 夏-1","55.2":"55.1","<=":"柚鸟 夏-2","55.3":"Trinity_HoukagoDessert_Natsu_Track.9.webp","<=":"柚鸟 夏-3","56.1":"Trinity_HoukagoDessert_Yoshimi.12.webp","<=":"伊原木 喜美-1","56.2":"56.2","<=":"伊原木 喜美-2","57.1":"Trinity_HoukagoDessert_Airi.9.webp","<=":"栗村 爱莉-1","57.2":"57.1","<=":"栗村 爱莉-2","58.1":"Trinity_HoukagoDessert_Kazusa.14.webp,Trinity_HoukagoDessert_Kazusa_Old.9.webp","<=":"杏山 和纱-1","58.2":"58.1","<=":"杏山 和纱-2","59.1":"Trinity_TeaParty_MemberB.9.webp","<=":"茶会-1","59.2":"Trinity_TeaParty_MemberA.9.webp","<=":"茶会-2","60.1":"Trinity_TeaParty_Mika.30.webp,Trinity_TeaParty_Mika_NoHawl.30.webp,Trinity_TeaParty_Mika_woundedN.30.webp","<=":"圣园 未花-1","60.2":"Trinity_TeaParty_Mika_Track.30.webp,Trinity_TeaParty_Mika_Sukumizu.29.webp","<=":"圣园 未花-2","61.1":"Trinity_TeaParty_Seia.10.webp","<=":"百合园 圣娅-1","62.1":"Trinity_TeaParty_Nagisa.17.webp,Trinity_TeaParty_Nagisa_Old.11.webp","<=":"桐藤 渚-1","62.2":"62.1","<=":"桐藤 渚-2","63.1":"Trinity_RemedialClass_Azusa.10.webp,Trinity_RemedialClass_Azusa_wounded.10.webp","<=":"白洲 梓-1","63.2":"Trinity_RemedialClass_Azusa_Track.10.webp,Trinity_RemedialClass_Azusa_Sukumizu.10.webp","<=":"白洲 梓-2","63.3":"Trinity_RemedialClass_Azusa_Swimsuit.9.webp","<=":"白洲 梓-3","63.4":"63.4","<=":"白洲 梓-4","64.1":"Trinity_RemedialClass_Koharu.14.webp","<=":"下江 小春-1","64.2":"Trinity_RemedialClass_Koharu_Track.14.webp,Trinity_RemedialClass_Koharu_Sukumizu.14.webp","<=":"下江 小春-2","64.3":"Trinity_RemedialClass_Koharu_Swimsuit.22.webp","<=":"下江 小春-3","64.4":"64.3","<=":"下江 小春-4","65.1":"Trinity_RemedialClass_Hifumi.14.webp","<=":"阿慈谷 日富美-1","65.2":"Trinity_RemedialClass_Hifumi_Bandit.7.webp","<=":"阿慈谷 日富美-2","65.3":"Trinity_RemedialClass_Hifumi_Track.8.webp,Trinity_RemedialClass_Hifumi_Sukumizu.8.webp","<=":"阿慈谷 日富美-3","65.4":"Trinity_RemedialClass_Hifumi_Swimsuit.12.webp","<=":"阿慈谷 日富美-4","65.5":"65.4","<=":"阿慈谷 日富美-5","66.1":"Trinity_RemedialClass_Hanako.8.webp","<=":"浦和 花子-1","66.2":"Trinity_RemedialClass_Hanako_Track.7.webp,Trinity_RemedialClass_Hanako_Sukumizu.7.webp","<=":"浦和 花子-2","66.3":"Trinity_RemedialClass_Hanako_Navigator.7.webp","<=":"浦和 花子-3","66.4":"Trinity_RemedialClass_Hanako_Swimsuit.11.webp","<=":"浦和 花子-4","66.5":"66.4","<=":"浦和 花子-5","67.1":"Trinity_Justice_Member.8.webp","<=":"正义实现委员会部员-1","67.2":"Trinity_Justice_Member_Track.7.webp","<=":"正义实现委员会部员-2","68.1":"Trinity_Justice_Mashiro.7.webp","<=":"静山 真白-1","68.2":"68.1","<=":"静山 真白-2","68.3":"Trinity_Justice_Mashiro_Swimsuit.8.webp","<=":"静山 真白-3","68.4":"68.3","<=":"静山 真白-4","68.5":"Trinity_Justice_Mashiro_Track.8.webp","<=":"静山 真白-5","69.1":"Trinity_Justice_Tsurugi.16.webp","<=":"剑先 鹤城-1","69.2":"69.1","<=":"剑先 鹤城-2","69.3":"Trinity_Justice_Tsurugi_Swimsuit.12.webp","<=":"剑先 鹤城-3","69.4":"69.3","<=":"剑先 鹤城-4","69.5":"Trinity_Justice_Tsurugi_Track.16.webp","<=":"剑先 鹤城-5","70.1":"Trinity_Justice_Hasumi.10.webp","<=":"羽川 莲见-1","70.2":"70.1","<=":"羽川 莲见-2","70.3":"Trinity_Justice_Hasumi_Track.12.webp","<=":"羽川 莲见-3","70.4":"70.3","<=":"羽川 莲见-4","71.1":"Trinity_Justice_Ichika.15.webp","<=":"一花-1","72.1":"Trinity_SisterHood_Member.9.webp","<=":"修女会-1","73.1":"Trinity_SisterHood_Hinata.8.webp","<=":"若叶 日向-1","73.2":"73.1","<=":"若叶 日向-2","73.3":"Trinity_SisterHood_Hinata_Swimsuit.13.webp","<=":"若叶 日向-3","73.4":"73.3","<=":"若叶 日向-4","74.1":"Trinity_SisterHood_Mari.10.webp","<=":"伊落 玛丽-1","74.2":"74.1","<=":"伊落 玛丽-2","74.3":"Trinity_SisterHood_Mari_Track.11.webp","<=":"伊落 玛丽-3","74.4":"74.3","<=":"伊落 玛丽-4","75.1":"Trinity_SisterHood_Sakurako.12.webp,Trinity_SisterHood_Sakurako_Kakugo.14.webp,Trinity_SisterHood_Sakurako_Old.8.webp","<=":"歌住 樱子-1","75.2":"75.1","<=":"歌住 樱子-2","76.1":"Trinity_KnightsHospitaller_Serina.7.webp","<=":"鹫见 芹娜-1","76.2":"76.1","<=":"鹫见 芹娜-2","76.3":"Trinity_KnightsHospitaller_Serina_Nurse.9.webp","<=":"鹫见 芹娜-3","76.4":"Trinity_KnightsHospitaller_Serina_Christmas.12.webp","<=":"鹫见 芹娜-4","76.5":"76.4","<=":"鹫见 芹娜-5","77.1":"Trinity_KnightsHospitaller_Hanae.8.webp","<=":"朝颜 花绘-1","77.2":"77.1","<=":"朝颜 花绘-2","77.3":"Trinity_KnightsHospitaller_Hanae_Cheerleader.10.webp","<=":"朝颜 花绘-3","77.4":"Trinity_KnightsHospitaller_Hanae_Christmas.11.webp","<=":"朝颜 花绘-4","77.5":"77.4","<=":"朝颜 花绘-5","78.1":"Trinity_KnightsHospitaller_Mine.10.webp","<=":"苍森 美弥-1","78.2":"78.1","<=":"苍森 美弥-2","79.1":"Trinity_BookClub_Shimiko.8.webp","<=":"円堂 志美子-1","79.2":"79.1","<=":"円堂 志美子-2","80.1":"Trinity_BookClub_Ui.25.webp","<=":"古关 忧-1","80.2":"80.1","<=":"古关 忧-2","80.3":"Trinity_BookClub_Ui_Swimsuit.54.webp","<=":"古关 忧-3","80.4":"80.3","<=":"古关 忧-4","81.1":"Trinity_TrinityVigilance_Suzumi.7.webp","<=":"守月 铃美-1","81.2":"81.1","<=":"守月 铃美-2","171.1":"Trinity_TrinityVigilance_Reisa.20.webp","<=":"宇泽 玲纱-1","171.2":"171.1","<=":"宇泽 玲纱-2","82.1":"Trinity_Student_Member.10.webp","<=":"圣三一-学生-1","83.1":"Hyakkiyako_MatsuriOffice_Pina.10.webp","<=":"朝日奈 菲娜-1","83.2":"83.1","<=":"朝日奈 菲娜-2","84.1":"Hyakkiyako_MatsuriOffice_Shizuko.8.webp","<=":"河和 静子-1","84.2":"84.1","<=":"河和 静子-2","84.3":"Hyakkiyako_MatsuriOffice_Shizuko_Swimsuit.11.webp","<=":"河和 静子-3","84.4":"84.3","<=":"河和 静子-4","84.5":"Hyakkiyako_MatsuriOffice_Shizuko_Track.8.webp","<=":"河和 静子-5","85.1":"Hyakkiyako_MatsuriOffice_Umika.18.webp","<=":"海夏-1","86.1":"Hyakkiyako_Shugyobu_Mimori.11.webp","<=":"水羽 三森-1","86.2":"86.1","<=":"水羽 三森-2","86.3":"Hyakkiyako_Shugyobu_Mimori_Swimsuit.10.webp","<=":"水羽 三森-3","87.1":"Hyakkiyako_Shugyobu_Tsubaki.12.webp","<=":"春日 椿-1","87.2":"87.1","<=":"春日 椿-2","88.1":"Hyakkiyako_Shugyobu_Kaede.17.webp","<=":"勇美 枫-1","88.2":"88.1","<=":"勇美 枫-2","88.3":"Hyakkiyako_Shugyobu_Kaede_Track.17.webp","<=":"勇美 枫-3","89.1":"Hyakkiyako_Onmyobu_Chise.11.webp","<=":"和乐 知世-1","89.2":"89.1","<=":"和乐 知世-2","89.3":"Hyakkiyako_Onmyobu_Chise_Swimsuit.16.webp","<=":"和乐 知世-3","89.4":"89.3","<=":"和乐 知世-4","89.5":"Hyakkiyako_Onmyobu_Chise_Track.11.webp","<=":"和乐 知世-5","90.1":"Hyakkiyako_Onmyobu_Niya.9.webp","<=":"天地 妮娅-1","91.1":"Hyakkiyako_Onmyobu_Kaho.19.webp","<=":"桑上 果穗-1","91.2":"91.1","<=":"桑上 果穗-2","92.1":"Hyakkiyako_NinpoKenkyubu_Izuna.9.webp","<=":"久田 泉奈-1","92.2":"92.1","<=":"久田 泉奈-2","92.3":"Hyakkiyako_NinpoKenkyubu_Izuna_Swimsuit.13.webp","<=":"久田 泉奈-3","92.4":"92.3","<=":"久田 泉奈-4","92.5":"Hyakkiyako_NinpoKenkyubu_Izuna_Track.9.webp","<=":"久田 泉奈-5","93.1":"Hyakkiyako_NinpoKenkyubu_Michiru.11.webp","<=":"千鸟 满-1","93.2":"93.1","<=":"千鸟 满-2","94.1":"Hyakkiyako_NinpoKenkyubu_Tsukuyo.9.webp","<=":"大野 月咏-1","94.2":"94.1","<=":"大野 月咏-2","94.3":"Hyakkiyako_NinpoKenkyubu_Tsukuyo_Track.8.webp","<=":"大野 月咏-3","95.1":"Hyakkiyako_EmptyClub_Wakamo.13.webp","<=":"狐坂 若藻-1","95.2":"95.1","<=":"狐坂 若藻-2","95.3":"95.1","<=":"狐坂 若藻-3","95.4":"Hyakkiyako_EmptyClub_Wakamo_Swimsuit.17.webp","<=":"狐坂 若藻-4","95.5":"95.4","<=":"狐坂 若藻-5","95.6":"95.4","<=":"狐坂 若藻-6","95.7":"Hyakkiyako_EmptyClub_Wakamo_Wafuku.9.webp","<=":"狐坂 若藻-7","97.1":"Hyakkiyako_EmptyClub_Kuzunoha.13.webp","<=":"葛叶-1","192.1":"Hyakkiyako_Hyakkayouran_Nagusa.9.webp","<=":"五陵 名草-1","183.1":"Shanhaijing_Genryumon_Kissaki.10.webp","<=":"妃咲-1","184.1":"Shanhaijing_Genryumon_Mina.17.webp","<=":"近卫 南-1","184.2":"184.1","<=":"近卫 南-2","185.1":"Shanhaijing_Genryumon_Member.16.webp","<=":"玄龙门高级管理人员-1","98.1":"Shanhaijing_Endanbou_Saya.9.webp","<=":"药子 纱绫-1","98.2":"98.1","<=":"药子 纱绫-2","98.3":"Shanhaijing_Endanbou_Saya_Casual.8.webp","<=":"药子 纱绫-3","98.4":"98.3","<=":"药子 纱绫-4","99.1":"Shanhaijing_BlackTortoisePromenade_Rumi.9.webp","<=":"朱城 瑠美-1","99.2":"99.1","<=":"朱城 瑠美-2","100.1":"Shanhaijing_BlackTortoisePromenade_Reizyo.19.webp","<=":"鹿山 丽情-1","101.1":"Shanhaijing_BlackTortoisePromenade_Member.10.webp","<=":"玄武商会职员-1","102.1":"Shanhaijing_Meihuayuan_Shun.16.webp","<=":"春原 瞬-1","102.2":"102.1","<=":"春原 瞬-2","102.3":"Shanhaijing_Meihuayuan_Shun_Small.31.webp","<=":"春原 瞬-3","102.4":"102.3","<=":"春原 瞬-4","103.1":"Shanhaijing_Meihuayuan_Kokona.14.webp","<=":"春原 心奈-1","103.2":"103.1","<=":"春原 心奈-2","96.1":"NO","<=":"裴-1","198.1":"Shanhaijing_EmptyClub_Kai.15.webp","<=":"申谷 启-1","104.1":"RedWinter_RedwinterSecretary_Cherino.7.webp,RedWinter_RedwinterSecretary_Cherino_NoBeard.7.webp","<=":"连河 切里诺-1","104.2":"104.1","<=":"连河 切里诺-2","104.3":"RedWinter_RedwinterSecretary_Cherino_HotSpring.16.webp,RedWinter_RedwinterSecretary_Cherino_HotSpringN.11.webp","<=":"连河 切里诺-3","104.4":"104.3","<=":"连河 切里诺-4","105.1":"RedWinter_RedwinterSecretary_Tomoe.8.webp","<=":"佐城 智惠-1","105.2":"105.1","<=":"佐城 智惠-2","106.1":"RedWinter_RedwinterSecretary_Marina.13.webp","<=":"池仓 玛丽娜-1","106.2":"106.1","<=":"池仓 玛丽娜-2","107.1":"RedWinter_RedwinterSecretary_Member.1.webp","<=":"亲卫队员-1","108.1":"RedWinter_Class227_Shigure.13.webp","<=":"间宵 时雨-1","108.3":"108.1","<=":"间宵 时雨-3","108.2":"RedWinter_Class227_Shigure_HotSpring.11.webp","<=":"间宵 时雨-2","109.1":"RedWinter_Class227_Nodoka.8.webp","<=":"天见 和香-1","109.2":"109.1","<=":"天见 和香-2","109.3":"RedWinter_Class227_Nodoka_HotSpring.37.webp","<=":"天见 和香-3","109.4":"109.3","<=":"天见 和香-4","110.1":"RedWinter_KnowledgeLiberationFront_Meru.13.webp","<=":"姬木 梅露-1","110.2":"RedWinter_KnowledgeLiberationFront_Meru_HotSpring.11.webp","<=":"姬木 梅露-2","111.1":"RedWinter_KnowledgeLiberationFront_Momiji.8.webp","<=":"秋泉 红叶-1","112.1":"RedWinter_LaborParty_Minori.11.webp,RedWinter_LaborParty_Minori_Old.11.webp","<=":"安守 实里-1","112.2":"112.1","<=":"安守 实里-2","113.1":"ETC_Worker_Youhei.3.webp","<=":"工务部员-1","113.2":"RedWinter_LaborParty_Member.3.webp","<=":"工务部员-2","114.1":"Valkyrie_Anzenkyoku_Kirino.11.webp","<=":"中务 桐乃-1","114.2":"114.1","<=":"中务 桐乃-2","115.1":"Valkyrie_Anzenkyoku_Fubuki.12.webp","<=":"合欢垣 吹雪-1","115.2":"115.1","<=":"合欢垣 吹雪-2","116.1":"Valkyrie_PublicPeaceBureau_Kanna.10.webp,Valkyrie_PublicPeaceBureau_Kanna_wounded.11.webp","<=":"尾刃 康纳-1","116.2":"116.1","<=":"尾刃 康纳-2","117.1":"Valkyrie_PublicPeaceBureau_Member.11.webp","<=":"瓦尔基里学生-1","117.2":"Valkyrie_PublicPeaceBureau_Member_Swimsuit.10.webp","<=":"瓦尔基里学生-2","118.1":"SRT_RabbitPlatoon_Saki.15.webp","<=":"空井 咲-1","118.2":"118.1","<=":"空井 咲-2","118.4":"118.1","<=":"空井 咲-4","118.3":"SRT_RabbitPlatoon_Saki_Track.28.webp","<=":"空井 咲-3","118.5":"SRT_RabbitPlatoon_Saki_Swimsuit.30.webp","<=":"空井 咲-5","118.6":"118.5","<=":"空井 咲-6","119.1":"SRT_RabbitPlatoon_Miyako.14.webp","<=":"月雪 宫子-1","119.2":"119.1","<=":"月雪 宫子-2","119.3":"SRT_RabbitPlatoon_Miyako_Track.11.webp","<=":"月雪 宫子-3","119.4":"SRT_RabbitPlatoon_Miyako_Swimsuit.25.webp","<=":"月雪 宫子-4","119.5":"119.4","<=":"月雪 宫子-5","120.1":"SRT_RabbitPlatoon_Miyu.14.webp","<=":"霞泽 美游-1","120.2":"120.1","<=":"霞泽 美游-2","120.3":"SRT_RabbitPlatoon_Miyu_Track.13.webp","<=":"霞泽 美游-3","120.4":"SRT_RabbitPlatoon_Miyu_Swimsuit.28.webp","<=":"霞泽 美游-4","120.5":"120.4","<=":"霞泽 美游-5","121.1":"SRT_RabbitPlatoon_Moe.20.webp","<=":"风仓 萌惠-1","121.2":"121.1","<=":"风仓 萌惠-2","121.3":"SRT_RabbitPlatoon_Moe_Track.19.webp","<=":"风仓 萌惠-3","121.4":"SRT_RabbitPlatoon_Moe_Swimsuit.27.webp","<=":"风仓 萌惠-4","122.1":"SRT_FoxPlatoon_Yukino.17.webp","<=":"雪乃-1","123.1":"SRT_FoxPlatoon_Niko.13.webp","<=":"妮可-1","186.1":"SRT_FoxPlatoon_Otogi.17.webp","<=":"音葵-1","187.1":"SRT_FoxPlatoon_Kurumi.14.webp","<=":"胡桃-1","124.1":"Arius_AriusSqud_Saori.30.webp,Arius_AriusSqud_Saori_wounded.29.webp","<=":"锭前 纱织-1","124.2":"Arius_AriusSqud_Saori_NoMask.29.webp,Arius_AriusSqud_Saori_woundedN.29.webp","<=":"锭前 纱织-2","124.3":"24.2","<=":"锭前 纱织-3","125.1":"Arius_AriusSqud_Atsuko.9.webp,Arius_AriusSqud_Atsuko_Oblation.10.webp,Arius_AriusSqud_Atsuko_wounded.7.webp","<=":"秤 亚津子-1","125.2":"125.1","<=":"秤 亚津子-2","125.3":"125.1","<=":"秤 亚津子-3","126.1":"Arius_AriusSqud_Hiyori.11.webp","<=":"槌永 日和-1","126.2":"126.1","<=":"槌永 日和-2","127.1":"Arius_AriusSqud_Misaki.9.webp","<=":"戒野 美咲-1","127.2":"Arius_AriusSqud_Misaki_NoMask.10.webp","<=":"戒野 美咲-2","127.3":"127.2","<=":"戒野 美咲-3","128.1":"Arius_EmptyClub_Member.1.webp","<=":"阿里乌斯学生-1","129.1":"DU_GSC_Kaichou.25.webp","<=":"联邦学生会长-1","130.1":"DU_GSC_Rin.94.webp","<=":"七神 凛-1","130.2":"DU_GSC_Rin_Navigator.17.webp","<=":"七神 凛-2","131.1":"DU_GSC_Momoka.48.webp","<=":"由良木 桃香-1","131.2":"DU_GSC_Momoka_Navigator.13.webp","<=":"由良木 桃香-2","132.1":"DU_GSC_Ayumu.16.webp","<=":"岩柜 步梦-1","132.2":"DU_GSC_Ayumu_Navigator.16.webp","<=":"岩柜 步梦-2","133.1":"DU_GSC_Kaya.25.webp","<=":"不知火 花耶-1","178.1":"DU_GSC_Aoi.8.webp","<=":"扇喜 葵-1","179.1":"DU_GSC_MemberB.10.webp","<=":"联邦学生会成员-1","179.2":"DU_GSC_MemberA.10.webp","<=":"联邦学生会成员-2","200.1":"DU_GSC_Heine.21.webp","<=":"灰音-1","201.1":"DU_GSC_Sumomo.13.webp","<=":"李-1","134.1":"Cronos_PressDepartment_Mai.8.webp","<=":"舞-1","135.1":"Cronos_PressDepartment_Shinon.10.webp","<=":"川流 诗乃-1","136.1":"ETC_BunnyGuard_Member.8.webp","<=":"兔女郎守卫-1","138.1":"ETC_Gematria_blacksuit.1.webp","<=":"黑服-1","138.2":"ETC_Gematria_blacksuit_Terror.1.webp","<=":"黑服-2","139.1":"ETC_Gematria_Golconde.1.webp","<=":"戈尔孔达-1","140.1":"ETC_Gematria_Décalcomanie.1.webp","<=":"印花釉法-1","141.1":"ETC_Gematria_maestro.1.webp","<=":"巨匠-1","141.2":"ETC_Gematria_maestro_Terror.1.webp","<=":"巨匠-2","142.1":"ETC_Gematria_Beatrice.3.webp","<=":"贝阿朵莉切-1","143.1":"NO","<=":"佩洛洛斯拉-1","144.1":"NO","<=":"自动机兵-1","144.2":"NO","<=":"自动机兵-2","144.3":"NO","<=":"自动机兵-3","145.1":"NO","<=":"龟岛 五郎-1","146.1":"ETC_Thugs_MemberB.8.webp","<=":"小混混-1","146.2":"ETC_Thugs_MemberA.8.webp","<=":"小混混-2","146.3":"ETC_Thugs_MemberC.8.webp","<=":"小混混-3","146.4":"ETC_Thugs_MemberD.8.webp","<=":"小混混-4","146.5":"ETC_Thugs_MemberE.8.webp","<=":"小混混-5","147.1":"NO","<=":"霍德-1","148.1":"NO","<=":"凯赛德-1","149.1":"NO","<=":"薇娜-1","150.1":"NO","<=":"佩洛洛大人-1","151.1":"ETC_CommercialDistrict_Nyantenmaru.1.webp","<=":"喵天丸-1","152.1":"NO","<=":"白-1","153.1":"NO","<=":"黑-1","174.1":"NO","<=":"戈兹-1","154.1":"NO","<=":"基沃托斯市民-1","154.2":"NO","<=":"基沃托斯市民-2","154.3":"NO","<=":"基沃托斯市民-3","154.4":"NO","<=":"基沃托斯市民-4","154.5":"NO","<=":"基沃托斯市民-5","154.6":"NO","<=":"基沃托斯市民-6","154.7":"NO","<=":"基沃托斯市民-7","155.1":"NO","<=":"机器人-1","155.2":"NO","<=":"机器人-2","155.3":"NO","<=":"机器人-3","156.1":"ETC_Sibaseki_ShibasekiMaster.1.webp","<=":"柴大将-1","158.1":"DU_Angel24_Sora.29.webp","<=":"空-1","159.1":"Hyakkiyako_ChimiIchiza_MemberA.7.webp","<=":"二流魅剧团-1","159.2":"Hyakkiyako_ChimiIchiza_MemberB.1.webp","<=":"二流魅剧团-2","160.1":"ETC_Kaiser_Director.1.webp","<=":"凯撒PMC理事-1","160.2":"ETC_Kaiser_Director_Idle.1.webp","<=":"凯撒PMC理事-2","180.1":"ETC_Kaiser_General.1.webp","<=":"凯撒PMC将军-1","181.1":"ETC_Kaiser_President.1.webp","<=":"凯撒总裁-1","182.1":"ETC_Kaiser_SOF.1.webp","<=":"凯撒特种部队-1","161.1":"NO","<=":"KAITEN-FX-Mk.0-1","162.1":"ETC_KaitenRanger_BLack.1.webp","<=":"回转寿司战队-1","162.2":"ETC_KaitenRanger_Green.1.webp","<=":"回转寿司战队-2","162.3":"ETC_KaitenRanger_Pink.1.webp","<=":"回转寿司战队-3","162.4":"ETC_KaitenRanger_Red.1.webp","<=":"回转寿司战队-4","162.5":"ETC_KaitenRanger_Yellow.1.webp","<=":"回转寿司战队-5","163.1":"ETC_HelmetGang_Member.1.webp","<=":"钢盔团-1","163.2":"ETC_HelmetGang_Kanbu.1.webp","<=":"钢盔团-2","164.1":"ETC_HelmetGang_Rabu.13.webp","<=":"和驹风 良舞-1","165.1":"ETC_KaitenRanger_Yellow.1.webp","<=":"希罗尼穆斯-1","137.1":"ETC_EmptyClub_Miku.16.webp","<=":"初音未来-1","137.2":"137.1","<=":"初音未来-2","166.1":"NO","<=":"坎纳-1","167.1":"NO","<=":"米莉亚-1","168.1":"NO","<=":"纳奥-1","169.1":"NO","<=":"罗内-1","170.1":"NO","<=":"由香里-1","194.1":"ETC_Gematria_Francis.1.webp","<=":"弗朗西斯-1","190.1":"Abydos_Countermeasure_Shiroko_Terror.10.webp,Abydos_Countermeasure_Shiroko_WounderdT.10.webp","<=":"阿努比斯-1","195.1":"NO","<=":"???-1","196.1":"ETC_Nameless_Priests.1.webp","<=":"无名司祭-1","197.1":"Trinity_EmptyClub_Akria.29.webp","<=":"晶-1","197.2":"197.1","<=":"晶-2","189.1":"ETC_Color_Frenapates.1.webp","<=":"普雷纳瓦德斯-1","177.1":"NO","<=":"404-1","157.1":"DU_Shittim_Arona.33.webp","<=":"阿罗娜-1","191.1":"DU_Shittim_Plana.22.webp","<=":"普拉娜-1","193.1":"NO","<=":"老师-1"}');
-//@差分表情列表
 (self.webpackChunk_N_E = self.webpackChunk_N_E || [])
 .push([
 	[405],
@@ -3815,6 +3811,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 										{
 											cfemoji = 'NO';//@输入文字时不读取表情
 											_(e.currentTarget.value)
+											if(loadindex())loadchecked().scrollIntoView(!1)//@输入文字自动跳到被选处
 										}
 									}), 
 									/*加入旁白和选择按钮
@@ -4018,7 +4015,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 						_ = (0, r.useRef)(null);
 					(0, r.useEffect)(function()
 					{
-						w("add" === a && "image" !== t.type ? t.content : "")//#修改变追加
+						w(localStorage['mt-edit'] ? "edit" : "add" === a && "image" !== t.type ? t.content : "")//#修改变追加
 					}, [a, t, w]);
 					var C = function e(n)
 						{
@@ -4071,7 +4068,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							{
 								e = e0(
 								{}, o), o === t ? (n.push(e0(
-								{}, e)), n.pop(), e.type = x, e.replyNo = h.replyNo, e.replyGroup = h.replyGroup, e.replyDepth = h.sReplyNo, e.sCharacter = d.I, e.content = j, e.isFirst = !0, s((0, eo.gW)(
+								{}, e)),localStorage['mt-edit'] ? "" : n.pop(), e.type = x, e.replyNo = h.replyNo, e.replyGroup = h.replyGroup, e.replyDepth = h.sReplyNo, e.sCharacter = d.I, e.content = j, e.isFirst = !0, s((0, eo.gW)(
 								//#加了个, n.pop()追加变修改：选择肢
 								{
 									sReplyNo: h.sReplyNo,
@@ -4082,7 +4079,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							{
 								e = e0(
 								{}, o), o === t ? (n.push(e0(
-								{}, o)), n.pop(), e.type = x, e.replyNo = 0, e.replyGroup = 0, e.replyDepth = h.sReplyNo, e.sCharacter = "info" === x ? d.I : p, e.content = j, e.isFirst = !0, r = !0) : r && (e.isFirst = !0, r = !1), n.push(e)
+								{}, o)),localStorage['mt-edit'] ? "" : n.pop(), e.type = x, e.replyNo = 0, e.replyGroup = 0, e.replyDepth = h.sReplyNo, e.sCharacter = "info" === x ? d.I : p, e.content = j, e.isFirst = !0, r = !0) : r && (e.isFirst = !0, r = !1), n.push(e)
 								//#加了个, n.pop()追加变修改：一般消息
 							})), s((0, eo.U_)(n)), S()
 						},
@@ -4098,7 +4095,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							{
 								r = e0(
 								{}, o), o === t ? (i.push(e0(
-								{}, r)), i.pop(), r.type = e, r.replyNo = 0, r.replyGroup = 0, r.replyDepth = h.sReplyNo, r.sCharacter = p, r.content = "", r.isFirst = !0, r.file = n, c = !0) : c && (r.isFirst = !0, c = !1), i.push(r)
+								{}, r)),localStorage['mt-edit'] ? "" : i.pop(), r.type = e, r.replyNo = 0, r.replyGroup = 0, r.replyDepth = h.sReplyNo, r.sCharacter = p, r.content = "", r.isFirst = !0, r.file = n, c = !0) : c && (r.isFirst = !0, c = !1), i.push(r)
 								//#加了个, n.pop()追加变修改：图片
 							}), s((0, eo.U_)(i)), o(!1, null, "delete"), w("")
 						}, [a, h, t, s, p, o]),
@@ -4174,8 +4171,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 											{
 												l(e)
 											},
-											hidden: "time" === e && "chat" !== t.type || "edit" === e,
-											//#禁用特定功能
+											hidden: localStorage['mt-edit'] ? "" : "edit" === e || ("heart" === t.type || "info" === t.type || "reply" === t.type) && ("name" === e || "time" === e),//#禁用特定功能
 											children: F.Z[e][f]
 										}, n)
 									})
@@ -4202,7 +4198,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 													notype = false;
 													w(t.content), y(e)//#图片不显示文字
 												},
-												disabled: "add" !== a,
+												disabled: "add" !== a,//#
 												value: e
 											}), F.Z[e][f]]
 										}, n)
@@ -4248,7 +4244,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 										onClick: function(e)
 										{
 											var n;
-											if("name" === a || "time" === a)x = "chat";//@改名和时间不弹框
+											if("name" === a || "time" === a)x = "chat";//@改名和时间不弹文件上传框
 											("image" === t.type && "edit" === a || "image" === x) && (null === (n = _.current) || void 0 === n || n.click())
 										},
 										onChange: function(e)
@@ -4271,7 +4267,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									}), (0, m.jsx)(ea.AZ,
 									{
 										className: "bold",
-										disabled: "name" !== a && P(),//#改名可以清空
+										disabled: "name" !== a && P(),//#改名可以设置空值
 										onClick: function()
 										{
 											k()
@@ -4317,7 +4313,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 						{}), (0, m.jsx)(eN._x,
 						{
 							className: "medium",
-							onClick: function(){e.click()},//@
+							onClick: function(){e.click()},//@羁绊事件编辑
 							children: n + F.Z.go_relationship_event[t]
 						})]
 					})
@@ -4365,7 +4361,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 				}),
 				e9 = function(e)
 				{
-					let index = e.index//@加入索引
+					let index = e.index//@加入选择分支索引
 					var n = e.chat,
 						t = (0, i.T)(),
 						o = (0, i.C)(function(e)
@@ -4399,13 +4395,15 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 						{
 							onClick: function()
 							{
-								///t((0, eo.Z8)(n.replyNo))//#禁用选择肢跳转
-								f(!0, null, "add"),h("add")//@加入编辑功能
+								/*t((0, eo.Z8)(n.replyNo))禁用选择肢跳转*/
+								notice('可以通过换行来分割选择肢',250)//@提示
+								val = n.content;//@选择肢给值
+								f(!0, null, localStorage['mt-edit'] ? "edit" : "add"),h(localStorage['mt-edit'] ? "edit" : "add")//@加入编辑功能
 							},
 							children: (0, m.jsx)(ne,
 							{
 								className: isFirefox,//#判断火狐
-								children: n.content.split('\n')[index]//#根据索引判断选择肢位置
+								children: n.content.split('\n')[index]//#根据分支索引判断选择肢位置
 							})
 						}), (0, m.jsx)(e1,
 						{
@@ -4488,11 +4486,10 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 							},
 							children: t.map(function(e, t)
 							{
-								return n.replyGroup === e.replyGroup && e.content.split('\n').map(function(v, k)//@换行分割选择肢
-								{
+								return n.replyGroup === e.replyGroup && e.content.split('\n').map(function(v, k){//@换行分割选择肢
 									return n.replyGroup === e.replyGroup && (0, m.jsx)(e9,
 									{
-										index: k,//@加入选择肢索引
+										index: k,//@加入选择分支索引
 										chat: e
 									}, t)
 								})//@换行分割选择肢
@@ -4673,28 +4670,30 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 									{
 										onClick: function()
 										{
-											o(!0, n, "add")//#改为新版修改
+											o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
 										},
 										children: n.content///右侧对话
 									}), (0, m.jsx)(eN.CJ,
 									{})]
-								}) : "image" === n.type ? (0, m.jsx)(eN.tG,
+								}) : "image" === n.type ? [n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}),(0, m.jsx)(eN.tG,
+								//#[给图片加入时间戳
 								{
+									style:{"max-width":n.content.split('/')[0] === "CharFace" ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 									onClick: function()
 									{
-										o(!0, n, "add")//#改为新版修改
+										o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
 									},
 									src: n.file || n.content//#
-								}) : "info" === n.type ? (0, m.jsx)(eN.vD,
+								})] : "info" === n.type ? (0, m.jsx)(eN.vD,//@]
 								{
-									onClick: function(){o(!0, n, "add")},//@添加新版修改功能
-									children: n.content///旁白
+									onClick: function(){o(!0, n, localStorage['mt-edit'] ? "edit" : "add")},//@给旁白添加新版修改功能
+									children: n.content
 								}) : "reply" === n.type ? (0, m.jsx)(nn,
 								{
 									chat: n
 								}) : "heart" === n.type ? (0, m.jsx)(e5,
 								{
-									click: function(){o(!0, n, "add")},//@
+									click: function(){o(!0, n, localStorage['mt-edit'] ? "edit" : "add")},//@给羁绊添加新版修改功能
 									character: (0, u.fY)(n.sCharacter.no, !0, d)
 								}) : (0, m.jsx)(m.Fragment,
 								{})]
@@ -4755,7 +4754,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 											style:isJSON(n.content.split('#')[2]) ? JSON.parse(n.content.split('#')[2]) : null,//@设置文字样式(#带头像)
 											onClick: function()
 											{
-												o(!0, n, "add")//#改为新版修改
+												o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
 											},
 											children: n.content.split('#')[0]///对话
 										}), n.time && (0, m.jsx)(eN.i9,
@@ -4773,7 +4772,7 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 											style:isJSON(n.content.split('#')[2]) ? JSON.parse(n.content.split('#')[2]) : null,//@设置文字样式(#无头像)
 											onClick: function()
 											{
-												o(!0, n, "add")//#改为新版修改
+												o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
 											},
 											children: n.content.split('#')[0]//#无头像对话
 										}), n.time && (0, m.jsx)(eN.i9,
@@ -4786,16 +4785,13 @@ const charface = JSON.parse('{"1.1":"Abydos_Countermeasure_Shiroko.8.webp","<=":
 										})]
 									}) : (0, m.jsx)(eN.tG,
 									{
-										style:
-										{
-											"max-width":n.content.split('/')[0] === "CharFace" ? localStorage['mt-cfsize'] : ""
-										},
+										style:{"max-width":n.content.split('/')[0] === "CharFace" ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 										onClick: function()
 										{
-											o(!0, n, "add")//#改为新版修改
+											o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
 										},
 										src: n.file || n.content//#
-									}), h || (0, m.jsx)(nl,
+									}), n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}), h || (0, m.jsx)(nl,//#给图片加入时间戳
 									{
 										"data-html2canvas-ignore": "true",
 										onClick: function()
