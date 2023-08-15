@@ -4007,15 +4007,16 @@
 							return e.sCharacter.selected
 						}),
 						g = (0, r.useState)(t.type),
-						x = notype ? t.type : g[0],//#
+						x = g[0],//#
 						y = g[1],
 						b = (0, r.useState)(""),
-						j = val === '' ? b[0] : !val ? '' : val,//#
+						j = val === '' ? (b[0] ? b[0] : t.content): !val ? '' : val,//#
 						w = b[1],
 						_ = (0, r.useRef)(null);
+						//console.log(t.content);
 					(0, r.useEffect)(function()
 					{
-						w((localStorage['mt-edit'] ? "edit" : "add") === a && "image" !== t.type ? t.content : "")//#修改变追加
+						w("edit" === a && "image" !== t.type ? t.content : "")//#修改变追加
 					}, [a, t, w]);
 					var C = function e(n)
 						{
@@ -4068,7 +4069,7 @@
 							{
 								e = e0(
 								{}, o), o === t ? (n.push(e0(
-								{}, e)),localStorage['mt-edit'] ? "" : n.pop(), e.type = x, e.replyNo = h.replyNo, e.replyGroup = h.replyGroup, e.replyDepth = h.sReplyNo, e.sCharacter = d.I, e.content = j, e.isFirst = !0, s((0, eo.gW)(
+								{}, e)),localStorage['mt-edit'] ? (e.time = "",e.name = "") : n.pop(), e.file = "", e.type = x, e.replyNo = h.replyNo, e.replyGroup = h.replyGroup, e.replyDepth = h.sReplyNo, e.sCharacter = d.I, e.content = j, e.isFirst = !0, s((0, eo.gW)(
 								//#加了个, n.pop()追加变修改：选择肢
 								{
 									sReplyNo: h.sReplyNo,
@@ -4079,7 +4080,7 @@
 							{
 								e = e0(
 								{}, o), o === t ? (n.push(e0(
-								{}, o)),localStorage['mt-edit'] ? "" : n.pop(), e.type = x, e.replyNo = 0, e.replyGroup = 0, e.replyDepth = h.sReplyNo, e.sCharacter = "info" === x ? d.I : p, e.content = j, e.isFirst = !0, r = !0) : r && (e.isFirst = !0, r = !1), n.push(e)
+								{}, o)),localStorage['mt-edit'] ? (e.time = "",e.name = "") : n.pop(), e.file = "", e.type = x, e.replyNo = 0, e.replyGroup = 0, e.replyDepth = h.sReplyNo, e.sCharacter = "info" === x ? d.I : p, e.content = j, e.isFirst = !0, r = !0) : r && (e.isFirst = !0, r = !1), n.push(e)
 								//#加了个, n.pop()追加变修改：一般消息
 							})), s((0, eo.U_)(n)), S()
 						},
@@ -4095,8 +4096,8 @@
 							{
 								r = e0(
 								{}, o), o === t ? (i.push(e0(
-								{}, r)),localStorage['mt-edit'] ? "" : i.pop(), r.type = e, r.replyNo = 0, r.replyGroup = 0, r.replyDepth = h.sReplyNo, r.sCharacter = p, r.content = "", r.isFirst = !0, r.file = n, c = !0) : c && (r.isFirst = !0, c = !1), i.push(r)
-								//#加了个, n.pop()追加变修改：图片
+								{}, r)),localStorage['mt-edit'] ? (r.time = "",r.name = "") : i.pop(), r.type = e, r.replyNo = 0, r.replyGroup = 0, r.replyDepth = h.sReplyNo, r.sCharacter = p, r.content = r.content, r.isFirst = !0, r.file = n, c = !0) : c && (r.isFirst = !0, c = !1), i.push(r)
+								//#加了个, n.pop()追加变修改：图片，且文字不为空
 							}), s((0, eo.U_)(i)), o(!1, null, "delete"), w("")
 						}, [a, h, t, s, p, o]),
 						N = function()
@@ -4120,7 +4121,7 @@
 						I = (0, r.useCallback)(function()
 						{
 							var e = "";
-							return "add" !== a ? ("info" !== t.type && (e = (0, u.fY)(t.sCharacter.no, !0, f)), "heart" === t.type ? e += F.Z.go_relationship_event[f] : "image" === t.type ? "edit" === a ? e += " : " + F.Z.add_image[f] : e += " : " + F.Z.image[f] : "time" === a ? e += " : " + F.Z.time_comment[f] : "chat" === t.type ? e += " : " + t.content : e += t.content) : "chat" === x ? e = (0, u.fY)(p.no, !0, f) + " : " + F.Z.input_comment[f] : "image" === x ? e = (0, u.fY)(p.no, !0, f) + " : " + F.Z.add_image[f] : "reply" === x ? e = "Sensei : " + F.Z.input_comment[f] : "heart" === x ? e = 0 === p.no ? F.Z.select_char[f] : (0, u.fY)(p.no, !0, f) + F.Z.go_relationship_event[f] : "info" === x && (e = F.Z.input_comment[f]), e
+							return "add" !== a ? ("info" !== t.type && (e = (0, u.fY)(t.sCharacter.no, !0, f)), "heart" === t.type ? e += F.Z.go_relationship_event[f] : "image" === t.type ? "edit" === a ? e += " : " + F.Z.add_image[f] : e += " : " + F.Z.image[f] : "time" === a ? e += " : " + F.Z.time_comment[f] : "chat" === t.type ? e += " : " + t.content : e += t.content) : "chat" === x ? e = (0, u.fY)(p.no, !0, f) + " : " + F.Z.input_comment[f] : "image" === x ? e = (0, u.fY)(p.no, !0, f) + " : " + F.Z.add_image[f] : "reply" === x ? e = F.Z.input_comment[f] : "heart" === x ? e = 0 === p.no ? F.Z.select_char[f] : (0, u.fY)(p.no, !0, f) + F.Z.go_relationship_event[f] : "info" === x && (e = F.Z.input_comment[f]), e
 						}, [a, x, f, t, p]);
 					return (0, m.jsx)(ea.Xf,
 					{
@@ -4172,7 +4173,7 @@
 											{
 												l(e)
 											},
-											hidden: localStorage['mt-edit'] ? "" : "edit" === e || ("heart" === t.type || "info" === t.type || "reply" === t.type) && ("name" === e || "time" === e),//#禁用特定功能
+											hidden: ("heart" === t.type || "info" === t.type || "reply" === t.type) && ("name" === e || "time" === e),//#禁用特定功能
 											children: F.Z[e][f]
 										}, n)
 									})
@@ -4188,7 +4189,7 @@
 										return (0, m.jsxs)(c.Jg,
 										{
 											htmlFor: e,
-											hidden: "time" === a || "delete" === a || "name" === a,//@禁用特定选框
+											hidden: "edit" === a || "time" === a || "delete" === a || "name" === a,//@禁用特定选框
 											children: [(0, m.jsx)("input",
 											{
 												type: "checkbox",
@@ -4196,7 +4197,6 @@
 												checked: "edit" === a && x === e || "add" === a && x === e,//#
 												onChange: function(n)
 												{
-													notype = false;
 													w(t.content), y(e)//#图片不显示文字
 												},
 												disabled: "add" !== a,//#
@@ -4204,6 +4204,18 @@
 											}), F.Z[e][f]]
 										}, n)
 									})
+								}),
+								//*编辑界面更改
+								(0, m.jsx)("span",
+								{
+									className: "medium",
+									children: I(),
+									onClick: function(e)
+									{
+										var n;
+										if("name" === a || "time" === a || "edit" === a || "delete" === a)x = a;//@非图片不弹文件上传框
+										("image" === t.type && "edit" === a || "image" === x) && (null === (n = _.current) || void 0 === n || n.click())
+									},
 								}), (0, m.jsxs)(c.OP,
 								{
 									children: [(0, m.jsx)("input",
@@ -4225,37 +4237,31 @@
 									}), (0, m.jsx)(c.Kx,
 									{
 										className: "medium",
-										placeholder:"name" === a ? (0, u.fY)(t.sCharacter.no, !0, f)+" : "+t.name : I(),//@改名提示
 										maxRows: 5,
 										readOnly: function()
 										{
 											if("delete" === a) return !0;
-											if("edit" === a)
-											{
-												if("image" === t.type) return !0
-											}
-											else if(("heart" === x || "image" === x) && "name" !== a && "time" !== a)//#可以输入名字和时间
-											{
-												j = ''//@图片和羁绊不显示文字
-												return !0
-											}
+											// if("edit" === a)
+											// {
+											// 	if("image" === t.type) return !0
+											// }
+											// else if(("heart" === x || "image" === x) && "name" !== a && "time" !== a)//#可以输入名字和时间
+											// {
+											// 	return !0
+											// }
 											return !1
 										}(),
 										value: j,//#给值
-										onClick: function(e)
-										{
-											var n;
-											if("name" === a || "time" === a)x = "chat";//@改名和时间不弹文件上传框
-											("image" === t.type && "edit" === a || "image" === x) && (null === (n = _.current) || void 0 === n || n.click())
-										},
 										onChange: function(e)
 										{
 											val = e.currentTarget.value;
 											if(val === '')val = false;
-											w(e.currentTarget.value)
+											w(val)
 										}
-									})]
-								}), (0, m.jsxs)(ea.$_,
+									})]///,t.file && x === 'image' ? (0, m.jsx)('img',{src: t.file}) : ''以后再说
+								}),
+								//*编辑界面更改
+								(0, m.jsxs)(ea.$_,
 								{
 									children: [(0, m.jsx)(ea.Lw,
 									{
@@ -4268,7 +4274,7 @@
 									}), (0, m.jsx)(ea.AZ,
 									{
 										className: "bold",
-										disabled: "name" !== a && P(),//#改名可以设置空值
+										disabled: !1,//#改名可以设置空值
 										onClick: function()
 										{
 											k()
@@ -4399,7 +4405,7 @@
 								/*t((0, eo.Z8)(n.replyNo))禁用选择肢跳转*/
 								notice('可以通过换行来分割选择肢',250)//@提示
 								val = n.content;//@选择肢给值
-								f(!0, null, localStorage['mt-edit'] ? "edit" : "add"),h(localStorage['mt-edit'] ? "edit" : "add")//@加入编辑功能
+								f(!0, null, "edit"),h("edit")//@加入编辑功能
 							},
 							children: (0, m.jsx)(ne,
 							{
@@ -4672,7 +4678,7 @@
 									{
 										onClick: function()
 										{
-											o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
+											o(!0, n, "edit")//#改为新版修改
 										},
 										children: n.content///右侧对话
 									}), (0, m.jsx)(eN.CJ,
@@ -4680,22 +4686,22 @@
 								}) : "image" === n.type ? [n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}),(0, m.jsx)(eN.tG,
 								//#[给图片加入时间戳
 								{
-									style:{"max-width":n.content.split('/')[0] === "CharFace" ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
+									style:{"max-width":n.content.split('/')[0] === "CharFace" && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 									onClick: function()
 									{
-										o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
+										o(!0, n, "edit")//#改为新版修改
 									},
 									src: n.file || n.content//#
 								})] : "info" === n.type ? (0, m.jsx)(eN.vD,//@]
 								{
-									onClick: function(){o(!0, n, localStorage['mt-edit'] ? "edit" : "add")},//@给旁白添加新版修改功能
+									onClick: function(){o(!0, n, "edit")},//@给旁白添加新版修改功能
 									children: n.content
 								}) : "reply" === n.type ? (0, m.jsx)(nn,
 								{
 									chat: n
 								}) : "heart" === n.type ? (0, m.jsx)(e5,
 								{
-									click: function(){o(!0, n, localStorage['mt-edit'] ? "edit" : "add")},//@给羁绊添加新版修改功能
+									click: function(){o(!0, n, "edit")},//@给羁绊添加新版修改功能
 									character: (0, u.fY)(n.sCharacter.no, !0, d)
 								}) : (0, m.jsx)(m.Fragment,
 								{})]
@@ -4756,7 +4762,7 @@
 											style:isJSON(n.content.split('#')[2]) ? JSON.parse(n.content.split('#')[2]) : null,//@设置文字样式(#带头像)
 											onClick: function()
 											{
-												o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
+												o(!0, n, "edit")//#改为新版修改
 											},
 											children: n.content.split('#')[0]///对话
 										})/*被删除的时间戳*/]
@@ -4767,16 +4773,16 @@
 											style:isJSON(n.content.split('#')[2]) ? JSON.parse(n.content.split('#')[2]) : null,//@设置文字样式(#无头像)
 											onClick: function()
 											{
-												o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
+												o(!0, n, "edit")//#改为新版修改
 											},
 											children: n.content.split('#')[0]//#无头像对话
 										})/*被删除的时间戳*/]
 									}) : (0, m.jsx)(eN.tG,
 									{
-										style:{"max-width":n.content.split('/')[0] === "CharFace" ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
+										style:{"max-width":n.content.split('/')[0] === "CharFace" && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 										onClick: function()
 										{
-											o(!0, n, localStorage['mt-edit'] ? "edit" : "add")//#改为新版修改
+											o(!0, n, "edit")//#改为新版修改
 										},
 										src: n.file || n.content//#
 									}), n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}), h || (0, m.jsx)(nl,//#时间戳放在这
