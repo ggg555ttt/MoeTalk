@@ -9893,7 +9893,8 @@
 						else
 						{
 							r = JSON.parse(localStorage['custom'])[0].club[0].characters.filter(function(t){return t.no === e})[0]
-							o = r.zh_cn;
+							if(r)o = r.zh_cn;
+							else o = '#'+e;
 						}
 						//*
 						// var r = i.Z.filter(function(t)
