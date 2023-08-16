@@ -4070,7 +4070,7 @@
 								e = e0(
 								{}, o), o === t ? (n.push(e0(
 								{}, e)),localStorage['mt-edit'] ? (e.time = "",e.name = "") : n.pop(), e.file = "", e.type = x, e.replyNo = h.replyNo, e.replyGroup = h.replyGroup, e.replyDepth = h.sReplyNo, e.sCharacter = d.I, e.content = j, e.isFirst = !0, s((0, eo.gW)(
-								//#加了个, n.pop()追加变修改：选择肢
+								//#加了个n.pop()改为新版修改：选择肢（追加时清空时间戳）
 								{
 									sReplyNo: h.sReplyNo,
 									replyNo: h.replyNo + 1,
@@ -4081,7 +4081,7 @@
 								e = e0(
 								{}, o), o === t ? (n.push(e0(
 								{}, o)),localStorage['mt-edit'] ? (e.time = "",e.name = "") : n.pop(), e.file = "", e.type = x, e.replyNo = 0, e.replyGroup = 0, e.replyDepth = h.sReplyNo, e.sCharacter = "info" === x ? d.I : p, e.content = j, e.isFirst = !0, r = !0) : r && (e.isFirst = !0, r = !1), n.push(e)
-								//#加了个, n.pop()追加变修改：一般消息
+								//#加了个n.pop()改为新版修改：一般消息（追加时清空时间戳）
 							})), s((0, eo.U_)(n)), S()
 						},
 						Z = (0, r.useCallback)(function(e, n)
@@ -4096,8 +4096,8 @@
 							{
 								r = e0(
 								{}, o), o === t ? (i.push(e0(
-								{}, r)),localStorage['mt-edit'] ? (r.time = "",r.name = "") : i.pop(), r.type = e, r.replyNo = 0, r.replyGroup = 0, r.replyDepth = h.sReplyNo, r.sCharacter = p, r.content = r.content, r.isFirst = !0, r.file = n, c = !0) : c && (r.isFirst = !0, c = !1), i.push(r)
-								//#加了个, n.pop()追加变修改：图片，且文字不为空
+								{}, r)),localStorage['mt-edit'] ? (r.time = "",r.name = "") : i.pop(), r.file = "", r.type = e, r.replyNo = 0, r.replyGroup = 0, r.replyDepth = h.sReplyNo, r.sCharacter = p, r.content = r.content, r.isFirst = !0, r.file = n, c = !0) : c && (r.isFirst = !0, c = !1), i.push(r)
+								//#加了个i.pop()改为新版修改：图片（追加时清空时间戳）
 							}), s((0, eo.U_)(i)), o(!1, null, "delete"), w("")
 						}, [a, h, t, s, p, o]),
 						N = function()
@@ -4208,7 +4208,14 @@
 								//*编辑界面更改
 								(0, m.jsx)("span",
 								{
-									className: "medium",
+									className: "common__TextArea-sc-1ojome3-13 juTGbm medium",
+									style: 
+									{
+										"overflow": "hidden",
+										"text-overflow": "ellipsis",
+										"white-space": "nowrap",
+										"width": "70%"
+									},
 									children: I(),
 									onClick: function(e)
 									{
@@ -4216,7 +4223,12 @@
 										if("name" === a || "time" === a || "edit" === a || "delete" === a)x = a;//@非图片不弹文件上传框
 										("image" === t.type && "edit" === a || "image" === x) && (null === (n = _.current) || void 0 === n || n.click())
 									},
-								}), (0, m.jsxs)(c.OP,
+								}),t.file ? (0, m.jsx)('img',
+								{
+									width : "25%",
+									height : "25%",
+									src: t.file
+								}) : '', (0, m.jsxs)(c.OP,
 								{
 									children: [(0, m.jsx)("input",
 									{
@@ -4678,7 +4690,7 @@
 									{
 										onClick: function()
 										{
-											o(!0, n, "edit")//#改为新版修改
+											o(!0, n, "edit")
 										},
 										children: n.content///右侧对话
 									}), (0, m.jsx)(eN.CJ,
@@ -4689,7 +4701,7 @@
 									style:{"max-width":n.content.split('/')[0] === "CharFace" && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 									onClick: function()
 									{
-										o(!0, n, "edit")//#改为新版修改
+										o(!0, n, "edit")
 									},
 									src: n.file || n.content//#
 								})] : "info" === n.type ? (0, m.jsx)(eN.vD,//@]
@@ -4762,7 +4774,7 @@
 											style:isJSON(n.content.split('#')[2]) ? JSON.parse(n.content.split('#')[2]) : null,//@设置文字样式(#带头像)
 											onClick: function()
 											{
-												o(!0, n, "edit")//#改为新版修改
+												o(!0, n, "edit")
 											},
 											children: n.content.split('#')[0]///对话
 										})/*被删除的时间戳*/]
@@ -4773,7 +4785,7 @@
 											style:isJSON(n.content.split('#')[2]) ? JSON.parse(n.content.split('#')[2]) : null,//@设置文字样式(#无头像)
 											onClick: function()
 											{
-												o(!0, n, "edit")//#改为新版修改
+												o(!0, n, "edit")
 											},
 											children: n.content.split('#')[0]//#无头像对话
 										})/*被删除的时间戳*/]
@@ -4782,7 +4794,7 @@
 										style:{"max-width":n.content.split('/')[0] === "CharFace" && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 										onClick: function()
 										{
-											o(!0, n, "edit")//#改为新版修改
+											o(!0, n, "edit")
 										},
 										src: n.file || n.content//#
 									}), n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}), h || (0, m.jsx)(nl,//#时间戳放在这

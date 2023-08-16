@@ -44,7 +44,7 @@
 					// 获取2D绘图上下文
 					var context = canvas.getContext('2d');
 					// 使用html2canvas库将元素绘制到canvas上
-					html2canvas(element[0]).then(function (canvas)
+					html2canvas(element[0],{scale:1.1}).then(function (canvas)
 					{
 						// 将canvas转换为图像
 						var image = canvas.toDataURL('image/png');

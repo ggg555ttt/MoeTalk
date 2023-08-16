@@ -10142,9 +10142,22 @@
 						{
 							children: [(0, O.jsxs)(P,
 							{
-								children: [/*//删除阿罗娜图标*/(0, O.jsx)(I,
+								//*反馈通道和自定义标题
+								children: [(0, O.jsx)(I,
 								{
-									children: localStorage['MoeTalk']//#自定义顶部横幅标题
+									children: [(0, O.jsx)(I,{id:"readme",children:localStorage['MoeTalk']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
+									{
+										href: "https://docs.qq.com/form/page/DY2JndlVJbUJGaEVw",
+										className: "medium",
+										style:
+										{
+											color: "white",
+											fontSize: "24px",
+											textDecoration: "underline"
+										},
+										children: '反馈'
+									})]
+								//*反馈通道和自定义标题
 								}), a || (0, O.jsx)(m(),
 								{
 									

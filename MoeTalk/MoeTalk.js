@@ -38,14 +38,14 @@ $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")/
 $("body").on('keydown',function()
 {
 	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
-	height = $(".iBfcuf").height().toFixed(0);
+	height = parseInt(($(".iBfcuf").outerHeight()*1.25).toFixed(0))+80
 	$('#size').text(height+"\n"+size+"KB");
 	warning();
 })
 $("body").on('click',function()
 {
 	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
-	height = $(".iBfcuf").height().toFixed(0);
+	height = parseInt(($(".iBfcuf").outerHeight()*1.25).toFixed(0))+80
 	$('#size').text(height+"\n"+size+"KB");
 	if($('.visible').length === 0)
 	{
@@ -57,7 +57,7 @@ $("body").on('click',function()
 //标题框
 $(".bIcduz").wait(function()
 {
-	height = $(".iBfcuf").height().toFixed(0);
+	height = parseInt(($(".iBfcuf").outerHeight()*1.25).toFixed(0))+80
 	$(".bIcduz").after("<span id='size' class='"+class1+"'><b>"+height+"\n"+size+"KB</b></span>");
 	$(".hXhSup").prepend("<span id='warning'><b></b></span>");
 	warning();
@@ -65,7 +65,6 @@ $(".bIcduz").wait(function()
 //加载工具
 $(".frVjsk").wait(function()
 {
-	height = $(".iBfcuf").height().toFixed(0);
 	$(".frVjsk").append("<button class='"+class0+"' id='uphead' class='"+class0+"'><b style='color:black;'>傳</b></button><span class='tool'>手动上传头像，当前角色名：<span id='cusname'></span></span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='delcus'><b style='color:red;'>刪</b></button><span class='tool'>删除角色</span><br>");
@@ -78,7 +77,7 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append("<button id='rdelsall'>反选</button>");
 },".frVjsk")
 //使用说明
-$('body').on('click',".jZKzYg",function()
+$('body').on('click',"#readme",function()
 {
 	alert("MoeTalk是MotherTalk的后续版本\nMoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
 		"MolluTalk的代码取得方式来自浏览器自带的Ctrl+S\n"+
@@ -213,7 +212,7 @@ $('body').on('click',"#size",function()
 	let ws = '';
 	let wc = '';
 	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
-	height = $(".iBfcuf").height().toFixed(0);
+	height = parseInt(($(".iBfcuf").outerHeight()*1.25).toFixed(0))+80
 	if(height > 8192)wh = "聊天记录长度为"+height+"，超过8192可能会影响到聊天记录图片的生成\n（视浏览器而定，在8192-16384之间，请自行测试）\n";
 	if(size > 2560)ws = "存储空间体积为"+size+"KB，超过5120KB会使保存功能崩溃\n";
 	if(localStorage['last-viewed-version'])
@@ -352,12 +351,5 @@ $('body').on('click',".dkwjoK",function()
 	{
 		loadchecked().scrollIntoView(!1)
 		notice('发送消息时会在被选中的消息上方插入新的消息',250)
-	}
-})
-$('body').on('click',".common__CheckBox-sc-1ojome3-14 input",function()
-{
-	if($(this).prop('checked') === false)
-	{
-		notice('点击选框没反应的话点一下其它的选框就行了',1000)
 	}
 })
