@@ -10148,13 +10148,15 @@
 								{
 									children: [(0, O.jsx)(I,{id:"readme",children:localStorage['MoeTalk']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
-										href: "https://docs.qq.com/form/page/DY2JndlVJbUJGaEVw",
+										href: "https://wj.qq.com/s2/12952865/a1aa/",
 										className: "medium",
 										style:
 										{
 											color: "white",
-											fontSize: "24px",
-											textDecoration: "underline"
+											fontSize: "20px",
+											textDecoration: "underline",
+											position: "relative",
+											top: "-2.5px"
 										},
 										children: '反馈'
 									})]
