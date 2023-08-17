@@ -825,7 +825,7 @@
 									{
 										width: 252,
 										height: 252,
-										src: loadhead(n.no+'.1'),//#左方选择框
+										src: loadhead(n.no+'.'+n.profile[0]),//#左方选择框
 										onError: function(e)
 										{
 											var n = e.currentTarget;

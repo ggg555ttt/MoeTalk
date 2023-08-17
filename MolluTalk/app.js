@@ -9885,17 +9885,18 @@
 					{
 						//*
 						var r,o;
-						if(e < 1000)
+						if(isNaN(parseInt(e)) || e < 1000)
 						{
 							r = i.Z.filter(function(t){return t.no === e})[0]
 							o = (r = r || a.Y).name[n];
 						}
-						else
+						else if(localStorage['custom'])
 						{
 							r = JSON.parse(localStorage['custom'])[0].club[0].characters.filter(function(t){return t.no === e})[0]
 							if(r)o = r.zh_cn;
 							else o = '#'+e;
 						}
+						else o = '#'+e;
 						//*
 						// var r = i.Z.filter(function(t)
 						// 	{
