@@ -2082,7 +2082,6 @@
 														checked: S === e,
 														onChange: function()
 														{
-															height*e > 16384 ? alert('图片长度将超过16384，可能会出错') : '';//@长度警告
 															P(e)
 														},
 														value: e
@@ -2148,7 +2147,16 @@
 											disabled: x,
 											onClick: function()
 											{
-												D()
+												//*加入长度判断
+												if(height*(1=== S ? S +.1:S) > maxHeight)
+												{
+													if(confirm(height+'x'+(1=== S ? S +.1:S)+'=('+(height*(1=== S ? S +.1:S)).toFixed(0)+' > '+maxHeight+')，生成的图片可能会有缺失\n另外此数字可能并不准确，具体请以生成的图片长度为基准'))D();
+												}
+												else
+												{
+													D()
+												}
+												//*加入长度判断
 											},
 											children: F.Z.confirm[g]
 										})]
@@ -4421,7 +4429,7 @@
 							},
 							children: (0, m.jsx)(ne,
 							{
-								className: isFirefox,//#判断火狐
+								className: browser.isFirefox ? "" : "medium",//#判断火狐
 								children: n.content.split('\n')[index]//#根据分支索引判断选择肢位置
 							})
 						}), (0, m.jsx)(e1,

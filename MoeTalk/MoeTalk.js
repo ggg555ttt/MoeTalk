@@ -2,12 +2,19 @@
 var version = '2.0';
 var cfemoji = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
-var lname = true;//临时改名
-var mtype = 'chat';//临时改名
-var isFirefox = os().isFirefox ? "" : "medium";
+var mtype = 'chat';//
 var val = '';
-var notype = true;
+var browser = os();//获取浏览器信息
+var maxHeight = browser.isFirefox ? 16384*2 : 16384;
 var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
+
+function mt_height()
+{
+	let num;
+	if(browser.isMobile === true)num = 1.251;
+	else num = 1.1;
+	return parseInt(($(".iBfcuf").outerHeight()*num).toFixed(0))+80;
+}
 //判断网络
 if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname == 'frp.freefrp.net')
 {
@@ -38,14 +45,14 @@ $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")/
 $("body").on('keydown',function()
 {
 	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
-	height = parseInt(($(".iBfcuf").outerHeight()*1.25).toFixed(0))+80
+	height = mt_height()
 	$('#size').text(height+"\n"+size+"KB");
 	warning();
 })
 $("body").on('click',function()
 {
 	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
-	height = parseInt(($(".iBfcuf").outerHeight()*1.25).toFixed(0))+80
+	height = mt_height()
 	$('#size').text(height+"\n"+size+"KB");
 	if($('.visible').length === 0)
 	{
@@ -57,7 +64,7 @@ $("body").on('click',function()
 //标题框
 $(".bIcduz").wait(function()
 {
-	height = parseInt(($(".iBfcuf").outerHeight()*1.25).toFixed(0))+80
+	height = mt_height()
 	$(".bIcduz").after("<span id='size' class='"+class1+"'><b>"+height+"\n"+size+"KB</b></span>");
 	$(".hXhSup").prepend("<span id='warning'><b></b></span>");
 	warning();
@@ -212,9 +219,9 @@ $('body').on('click',"#size",function()
 	let ws = '';
 	let wc = '';
 	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
-	height = parseInt(($(".iBfcuf").outerHeight()*1.25).toFixed(0))+80
-	if(height > 8192)wh = "聊天记录长度为"+height+"，超过8192可能会影响到聊天记录图片的生成\n（视浏览器而定，在8192-16384之间，请自行测试）\n";
-	if(size > 2560)ws = "存储空间体积为"+size+"KB，超过5120KB会使保存功能崩溃\n";
+	height = mt_height()
+	if(height > (maxHeight*0.75))wh = "聊天记录长度大约为"+height+"，超过"+maxHeight+"会使生成的图片产生空白区域\n另外此数字可能并不准确，具体请以生成的图片长度为基准\n";
+	if(size > (5120*0.75))ws = "存储空间体积为"+size+"KB，超过5120KB会使保存功能崩溃\n";
 	if(localStorage['last-viewed-version'])
 	{
 		if(localStorage['last-chat'])wc += localStorage['last-chat'].length
