@@ -77,11 +77,11 @@ var mt_text = {
 		"zh_tw": "修改"
 	},
 	"add": {
-		"kr": "변경",
-		"en": "Change",
-		"jp": "変更",
-		"zh_cn": "更改",
-		"zh_tw": "更改"
+		"kr": "유형",
+		"en": "Type",
+		"jp": "タイプ",
+		"zh_cn": "类型",
+		"zh_tw": "類型"
 	},
 	"chat": {
 		"kr": "채팅",
