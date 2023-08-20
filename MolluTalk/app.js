@@ -9516,7 +9516,6 @@
 			721: function(e, t, n)
 			{
 				"use strict";
-				/*把JSON改成了引用式*/
 				n.d(t,
 				{
 					Z: function()
@@ -9524,48 +9523,44 @@
 						return i
 					}
 				});
-				var r, i = (r = [], mt_char//#带自定义角色的数组
+				//*新版角色文件读取
+				var r, i = (r = [], mt_characters
 					.forEach(function(e)
 					{
-						e.club.forEach(function(t)
+						r.push(
 						{
-							t.characters.forEach(function(n)
+							no: e.no,
+							school:
 							{
-								r.push(
-								{
-									no: n.no,
-									school:
-									{
-										kr: e.kr,
-										en: e.en,
-										jp: e.jp,
-										zh_cn: e.zh_cn,
-										zh_tw: e.zh_tw
-									},
-									club:
-									{
-										kr: t.kr,
-										en: t.en,
-										jp: t.jp,
-										zh_cn: t.zh_cn,
-										zh_tw: t.zh_tw
-									},
-									name:
-									{
-										kr: n.kr,
-										en: n.en,
-										jp: n.jp,
-										zh_cn: n.zh_cn,
-										zh_tw: n.zh_tw
-									},
-									illust: 0,//#改为默认
-									profile: n.profile,
-									open: true,//#改为默认
-									momotalk: true//#改为默认
-								})
-							})
+								zh_cn: mt_school[e.from.split('.')[0]].split('█')[0],
+								zh_tw: mt_school[e.from.split('.')[0]].split('█')[1],
+								jp: mt_school[e.from.split('.')[0]].split('█')[2],
+								en: mt_school[e.from.split('.')[0]].split('█')[3],
+								kr: mt_school[e.from.split('.')[0]].split('█')[4]
+							},
+							club:
+							{
+								zh_cn: mt_club[e.from].split('█')[0],
+								zh_tw: mt_club[e.from].split('█')[1],
+								jp: mt_club[e.from].split('█')[2],
+								en: mt_club[e.from].split('█')[3],
+								kr: mt_club[e.from].split('█')[4]
+							},
+							name:
+							{
+								zh_cn: e.name.split('█')[0],
+								zh_tw: e.name.split('█')[1],
+								jp: e.name.split('█')[2],
+								en: e.name.split('█')[3],
+								kr: e.name.split('█')[4]
+							},
+							illust: 0,//#改为默认
+							profile: e.profile.split(','),
+							open: true,//#改为默认
+							momotalk: true//#改为默认
 						})
 					}), r)
+			//*新版角色文件读取
 			},
 			7579: function(e, t, n)
 			{
