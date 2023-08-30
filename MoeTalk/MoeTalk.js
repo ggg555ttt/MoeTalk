@@ -1,19 +1,21 @@
 //https://try8.cn/tool/format/js
-var version = '2.0';
+var version = '2.1';
 var cfemoji = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var mtype = 'chat';//
 var val = '';
+var sm = true;
 var browser = os();//获取浏览器信息
 var maxHeight = browser.isFirefox ? 16384*2 : 16384;
 var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
-
+var $jquery = $;
+var clearImage = false;
 function mt_height()
 {
 	let num;
 	if(browser.isMobile === true)num = 1.251;
 	else num = 1.1;
-	return parseInt(($(".iBfcuf").outerHeight()*num).toFixed(0))+80;
+	return parseInt(($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed(0))+80;
 }
 //判断网络
 if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname == 'frp.freefrp.net')
@@ -57,7 +59,7 @@ $("body").on('click',function()
 	if($('.visible').length === 0)
 	{
 		val = '';
-		notype = true;
+		clearImage = false;
 	}
 	warning();
 })
@@ -72,33 +74,34 @@ $(".bIcduz").wait(function()
 //加载工具
 $(".frVjsk").wait(function()
 {
-	$(".frVjsk").append("<button class='"+class0+"' id='uphead' class='"+class0+"'><b style='color:black;'>傳</b></button><span class='tool'>手动上传头像，当前角色名：<span id='cusname'></span></span><br>");
+	$(".frVjsk").append("<button class='"+class0+"' id='uphead' class='"+class0+"'><b style='color:black;'>傳</b></button><span class='tool'>上传头像<span id='cusname'></span></span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='delcus'><b style='color:red;'>刪</b></button><span class='tool'>删除角色</span><br>");
-	$(".frVjsk").append("<button class='"+class0+"' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色信息，下方输入ID：↓</span><input size='5' id='ccus'/><br>");
+	$(".frVjsk").append("<button class='"+class0+"' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色</span><input size='6' id='ccus' placeholder='输入角色ID'/><br>");
 	//$(".frVjsk").append("<button class='"+class0+"' id='ct'><b style='color:green;'>C</b></button><span class='tool'>生成ClosureTalk存档</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>");
+	$(".frVjsk").append("<button class='"+class0+"' id='mt-style'><b style='color:black;'>切</b></button><span class='tool'>切换样式</span><br>");
 	$(".frVjsk").append("<a href='./Setting.html'><button class='"+class0+"'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>");
-	$(".frVjsk").append("<button id='delsall'>全选</button>");
-	$(".frVjsk").append("<button class='"+class0+"' id='dels'><b style='color:black;'>批</b></button><span class='tool'>批量删除</span><br>");
-	$(".frVjsk").append("<button id='rdelsall'>反选</button>");
 },".frVjsk")
 //使用说明
 $('body').on('click',"#readme",function()
 {
-	alert("MoeTalk是MotherTalk的后续版本\nMoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
+	if(confirm("MoeTalk是MotherTalk的后续版本\nMoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
 		"MolluTalk的代码取得方式来自浏览器自带的Ctrl+S\n"+
-		"对于代码的改动地点均用注释//与/**/标注");
+		"对于代码的改动地点均用注释//与/**/标注\n"+
+		"点击【确认】将跳转至反馈页面"))
+	{
+		window.open("https://wj.qq.com/s2/12952865/a1aa/");
+	}
+
 });
 //创建人物
 $("body").append("<input id='custom' hidden type='file' accept='image/*'>");//添加上传标签
 $('body').on('click',"#makecus",function()
 {
 	let id;
-	let cus = prompt("请输入角色姓名，创建成功后点击排序按钮即可更新角色列表\n"+
-		"如果名字中带空格，则聊天界面只显示第一个空格后的文字，如果想显示空格请用“-”代替\n"+
-		"例：【砂狼 白子】=【白子】、【一一 四五 一四】=【四五】\n"+
-		"如果点击确认后未出现文件上传界面，请点击最上方的【傳】字按钮");
+	let cus = prompt("请输入角色姓名，创建成功后自动更新列表\n"+
+		"如果未弹出文件上传界面，请点击最上方的【傳】字按钮");
 
 	if(cus != null && cus.trim() != '')
 	{
@@ -129,7 +132,7 @@ $('body').on('click',"#uphead",function()//上传头像
 	}		
 	else
 	{
-		alert('此功能为创建自定义角色时出现无法上传头像问题的解决方案\n如无无问题请不要点击');
+		alert('此功能为上传头像的备用方案\n如无问题无需点击');
 	}
 })
 //删除人物
@@ -153,8 +156,8 @@ $('body').on('click',"#delcus",function()
 			localStorage['custom'] = JSON.stringify(arr);
 			//console.log(arr[0]['club'][0]['characters']);
 		})
+		$('.eIEKpg:eq(0)').click();//更新列表
 	}
-
 })
 //修改人物
 $('body').on('click',"#changecus",function()
@@ -178,7 +181,7 @@ $('body').on('click',"#changecus",function()
 		{
 			if($(this)[0]['no'] == id+1000)
 			{
-				let cname = prompt("如果点击确认后未出现文件上传界面，请点击最上方的【傳】字按钮\n若不上传头像那么则只修改角色名\n当前角色名为：",$(this)[0]['zh_cn']);
+				let cname = prompt("若不想上传头像那么则只修改角色名\n当前角色名为：",$(this)[0]['zh_cn']);
 				if(cname != null && cname.trim() != '')
 				{
 					cname = cname.trim();
@@ -193,6 +196,11 @@ $('body').on('click',"#changecus",function()
 				
 			}
 		})
+		$('.eIEKpg:eq(0)').click();//更新列表
+	}
+	else
+	{
+		alert('请在下方输入角色ID再点击按钮！(#后面的纯数字)')
 	}
 })
 //储存头像
@@ -237,21 +245,6 @@ $('body').on('click',"#size",function()
 	if(wh+ws)alert(wh+ws+wc);
 
 });
-//批量删除
-$('body').on('click',"#dels",function()
-{
-	if($(".dels:checked").length > 0)
-	{
-		if(confirm('此功能尚有问题，请谨慎使用\n你一共选中了'+$(".dels:checked").length+'条数据\n点击确认后会马上删除并刷新页面，确定吗？'))
-		{
-			let arr = JSON.parse(localStorage['chats']);let i = 0;
-			$(".dels:checked").each(function(){arr.splice($(this).attr('index')-i,1);i++})
-			localStorage['chats'] = JSON.stringify(arr);
-			alert('删除完成，即将刷新页面')
-			window.location.reload();//刷新页面
-		}
-	}
-})
 //清除冗余文件数据
 $('body').on('click',"input",function()
 {
@@ -328,19 +321,38 @@ $('body').on('click',"#rdelsall",function()
 		else $(this).parent().removeAttr("style")//
 	});
 })
+//区间选择
+$('body').on('click',"#delsto",function()
+{
+	if($(".dels:checked").length > 1)
+	{
+		let start = $(".dels").index($(".dels:checked:eq(0)"));
+		let end = $(".dels").index($(".dels:checked:eq(-1)"));
+		$(".dels").each(function(index)
+		{
+			if(index >= start && index <= end)
+			{
+				$(this).prop("checked",true);
+				$(this).parent().css("background-color","rgb(202,215,221)")//
+			}
+		});
+	}
+})
 //隐藏工具按钮拓展
 $('body').on('click',".gxgCGp:eq(4)",function()
 {
 	$('.hfOSPu').removeAttr("style")//
-	if($('#dels').attr('hidden'))
+	if($('#delsto').attr('hidden'))
 	{
 		$('#delsall').attr('hidden',false)
+		$('#delsto').attr('hidden',false)
 		$('#rdelsall').attr('hidden',false)
 		$('#dels').attr('hidden',false).next().attr('hidden',false)
 	}
 	else
 	{
 		$('#delsall').attr('hidden',true)
+		$('#delsto').attr('hidden',true)
 		$('#rdelsall').attr('hidden',true)
 		$('#dels').attr('hidden',true).next().attr('hidden',true)
 	}
@@ -360,3 +372,31 @@ $('body').on('click',".dkwjoK",function()
 		notice('发送消息时会在被选中的消息上方插入新的消息',250)
 	}
 })
+$(window).keydown(function(event)
+{
+	if(event.ctrlKey && event.which == 37)selectClick(37);
+	if(event.ctrlKey && event.which == 39)selectClick(39);
+});
+$('body').on('click',"#mt-style",function()
+{
+	if(localStorage['mt-style'] === 'rgb(255,247,225) rgb(255,255,255) transparent')
+	{
+		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,255,255)');
+		$('.talk__ImgBox-sc-eq7cqw-3').css('background-color','transparent');
+		$('.talk__InfoBox-sc-eq7cqw-8').css('background','rgb(220,229,232)');
+		localStorage['mt-style'] = 'rgb(255,255,255) transparent rgb(220,229,232)';
+	}
+	else
+	{
+		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,247,225)');
+		$('.talk__ImgBox-sc-eq7cqw-3').css('background-color','rgb(255,255,255)');
+		$('.talk__InfoBox-sc-eq7cqw-8').css('background','transparent');
+		localStorage['mt-style'] = 'rgb(255,247,225) rgb(255,255,255) transparent';
+	}
+})
+
+
+
+
+
+

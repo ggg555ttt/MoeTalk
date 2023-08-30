@@ -10144,8 +10144,10 @@
 								{
 									children: [(0, O.jsx)(I,{id:"readme",children:localStorage['MoeTalk']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
+										hidden:(window.screen.availWidth < 400),
 										href: "https://wj.qq.com/s2/12952865/a1aa/",
 										className: "medium",
+										id: 'help',
 										style:
 										{
 											color: "white",
@@ -10272,7 +10274,8 @@
 					{
 						displayName: "Header__QuestionButton",
 						componentId: "sc-17b1not-3"
-					})(["width:1.9rem;height:1.9rem;margin:auto 1rem auto 1rem;font-size:1.3rem;box-shadow:0.05rem 0.1rem 0.2rem ", ";color:", ";background-color:", ";border-radius:0.3rem;"], function(e)
+					})(["width:1.9rem;height:1.9rem;font-size:1.3rem;box-shadow:0.05rem 0.1rem 0.2rem ", ";color:", ";background-color:", ";border-radius:0.3rem;"], function(e)
+					//#删除margin:auto 1rem auto 1rem;
 					{
 						return e.theme.color.rgb113_155_195
 					}, function(e)

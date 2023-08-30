@@ -1738,7 +1738,20 @@
 									})]
 								}), (0, m.jsxs)(ea.$0,
 								{
-									children: [(0, m.jsx)("span",
+									children: [
+									//*批量删除提示
+									$jquery(".dels:checked").length > 0 ? (0, m.jsx)("span",
+									{
+										style:
+										{
+											fontSize: "1.5rem",
+											color: "red",
+											marginTop: "1rem"
+										},
+										children: '你一共选中了'+$jquery(".dels:checked").length+'条数据'
+									}) : '',
+									//*批量删除提示
+									(0, m.jsx)("span",
 									{
 										children: F.Z.ask_delete[o]
 									}), (0, m.jsxs)("span",
@@ -3337,10 +3350,28 @@
 							},
 							handleDeleteAll: function()
 							{
-								T(!1), a((0, eo.U_)([])), a((0, eo.gW)(
+								//*批量删除
+								let arr = [];
+								let i = 0;
+								let rGroup = 1;
+								let rNo = 1;
+								if($jquery(".dels:checked").length > 0)
 								{
-									replyGroup: 1,
-									replyNo: 1,
+									arr = JSON.parse(JSON.stringify(d));
+									rGroup = localStorage['replyGroup'];
+									rNo = localStorage['replyNo'];
+									$jquery(".dels:checked").each(function()
+									{
+										arr.splice($jquery(this).attr('index')-i,1);
+										i++;
+									})
+								}
+								click('#delsall');click('#delsall');
+								//*批量删除
+								T(!1), a((0, eo.U_)(arr)), a((0, eo.gW)(//#批量删除支持
+								{
+									replyGroup: 1,//#
+									replyNo: 1,//#
 									sReplyNo: 0
 								}))
 							}
@@ -3749,11 +3780,13 @@
 								title: "open",
 								onClick: function()
 								{
-									p ? g(!1) : g(!0)
+									///p ? g(!1) : g(!0)
+									click('.gxgCGp:eq(4)')//#
 								},
 								children: (0, m.jsx)(c.xL,
 								{
-									icon: p ? l.dWM : l.XSi
+									///icon: p ? l.dWM : l.XSi
+									icon: l.QY_//#
 								})
 							}), (0, m.jsx)("input",
 							{
@@ -3821,46 +3854,7 @@
 											_(e.currentTarget.value)
 											if(loadindex())loadchecked().scrollIntoView(!1)//@输入文字自动跳到被选处
 										}
-									}), 
-									/*加入旁白和选择按钮
-									(0, m.jsx)(eV,
-									{
-										style:
-										{
-											padding: "0.2rem",
-											width: "2.2rem",
-											height: "2.2rem"
-										},
-										title: "emoticon",
-										onClick: function()
-										{
-											mtype = 'info';
-										},
-										children: (0, m.jsx)(c.xL,
-										{
-											icon: l.DBf
-										})
-									}),
-									(0, m.jsx)(eV,
-									{
-										style:
-										{
-											padding: "0.2rem",
-											width: "2.2rem",
-											height: "2.2rem"
-										},
-										title: "emoticon",
-										onClick: function()
-										{
-											mtype = 'reply';
-										},
-										children: (0, m.jsx)(c.xL,
-										{
-											icon: l.Lh7
-										})
-									}),
-									加入旁白和选择按钮*/
-									(0, m.jsx)(eV,
+									}), (0, m.jsx)(eV,
 									{
 										style:
 										{
@@ -3926,7 +3920,108 @@
 						{
 							show: y,
 							handleShow: S
-						})]
+						})
+						//**
+						, (0, m.jsxs)(eU,
+						{
+							style:
+							{
+								padding: "5px 0",
+							},
+							children: [
+								(0, m.jsx)(eV,
+								{
+									style:
+									{
+										padding: "0.2rem",
+										width: "2.2rem",
+										height: "2.2rem"
+									},
+									title: "选项",
+									onClick: function()
+									{
+										click('.gxgCGp:eq(0)')
+									},
+									children: (0, m.jsx)(c.xL,
+									{
+										icon: l.Lh7
+									})
+								}),
+								(0, m.jsx)(eV,
+								{
+									style:
+									{
+										padding: "0.2rem",
+										width: "2.2rem",
+										height: "2.2rem"
+									},
+									title: "旁白",
+									onClick: function()
+									{
+										click('.gxgCGp:eq(1)')
+									},
+									children: (0, m.jsx)(c.xL,
+									{
+										icon: l.DBf
+									})
+								}),
+								(0, m.jsx)(eV,
+								{
+									style:
+									{
+										padding: "0.2rem",
+										width: "2.2rem",
+										height: "2.2rem"
+									},
+									title: "羁绊",
+									onClick: function()
+									{
+										click('.gxgCGp:eq(2)')
+									},
+									children: (0, m.jsx)(c.xL,
+									{
+										icon: l.m6i
+									})
+								}),
+								(0, m.jsx)(eV,
+								{
+									style:
+									{
+										padding: "0.2rem",
+										width: "2.2rem",
+										height: "2.2rem"
+									},
+									title: "存档",
+									onClick: function()
+									{
+										click('.gxgCGp:eq(6)')
+									},
+									children: (0, m.jsx)(c.xL,
+									{
+										icon: l.EdJ
+									})
+								}),
+								(0, m.jsx)(eV,
+								{
+									style:
+									{
+										padding: "0.2rem",
+										width: "2.2rem",
+										height: "2.2rem"
+									},
+									onClick: function()
+									{
+										click('.gxgCGp:eq(5)')
+									},
+									children: (0, m.jsx)(c.xL,
+									{
+										icon: l.wf8
+									})
+								})
+								]
+						})
+						//**
+						]
 					})
 				},
 				e$ = o.ZP.div.withConfig(
@@ -4144,12 +4239,36 @@
 							{
 								return e.stopPropagation(), !1
 							},
-							children: [(0, m.jsxs)(ea.h4,
+							children: [
+							//*编辑界面更改
+							(0, m.jsxs)(ea.h4,
 							{
-								children: [(0, m.jsx)(ea.Dx,
+								children: [(0, m.jsx)(c.Bx,
+								{
+									hidden: "add" !== a,
+									className: "bold",
+									style:
+									{
+										"width": "auto",
+										"color": "black"
+									},
+									children: '←',
+									onClick:function(){selectClick(37)}
+								}), (0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
 									children: F.Z[t.type][f]
+								}), (0, m.jsx)(c.Bx,
+								{
+									hidden: "add" !== a,
+									className: "bold",
+									style:
+									{
+										"width": "auto",
+										"color": "black"
+									},
+									children: '→',
+									onClick:function(){selectClick(39)}
 								}), (0, m.jsx)(ea.ec,
 								{
 									onClick: function()
@@ -4161,7 +4280,74 @@
 								})]
 							}), (0, m.jsxs)(ea.$0,
 							{
-								children: [(0, m.jsx)(e2,
+								children: [(0, m.jsx)(eN.g4,
+								{
+									children: I(),
+									className: "medium",
+									style: 
+									{
+										"overflow": "hidden",
+										"text-overflow": "ellipsis",
+										"white-space": "nowrap",
+										"width": "70%",
+										"padding": "0"
+									},
+									onClick: function(e)
+									{
+										var n;
+										if("name" === a || "time" === a || "edit" === a || "delete" === a)x = a;//@非图片不弹文件上传框
+										("image" === t.type && "edit" === a || "image" === x) && (null === (n = _.current) || void 0 === n || n.click())
+									},
+								}), t.file?(0,m.jsx)('img',{width:"25%",height:"25%",src:t.file}):'',(0, m.jsx)('span',
+								{
+									children: t.file && "add" === a && "image" === x ? '↑点击“确认”会清除上面的图片↑' : ''
+								}), (0, m.jsxs)(c.OP,
+								{
+									children: [(0, m.jsx)("input",
+									{
+										type: "file",
+										ref: _,
+										style:
+										{
+											display: "none"
+										},
+										accept: "image/*",
+										onChange: function(e)
+										{
+											(0, u.T6)(e, function(e)
+											{
+												Z("image", e)///1
+											}, N)
+										}
+									}), "add"===a?(0, m.jsx)(c.NZ,{src:loadhead(p.no+'.'+p.index)}):'',(0, m.jsx)(c.Kx,
+									{
+										className: "medium",
+										maxRows: 5,
+										placeholder: "add"===a&&"image"===x?'此处可以输入图片链接':'',
+										readOnly: function()
+										{
+											if("delete" === a) return !0;
+											// if("edit" === a)
+											// {
+											// 	if("image" === t.type) return !0
+											// }
+											// else if(("heart" === x || "image" === x) && "name" !== a && "time" !== a)//#可以输入名字和时间
+											// {
+											// 	return !0
+											// }
+											return !1
+										}(),
+										value: j,//#给值
+										onChange: function(e)
+										{
+											val = e.currentTarget.value;
+											if(val === '')val = false;
+											w(val)
+										}
+									})]///,t.file && x === 'image' ? (0, m.jsx)('img',{src: t.file}) : ''以后再说
+								}),
+								//*编辑界面更改
+								(0, m.jsx)(e2,
 								{
 									style:
 									{
@@ -4212,76 +4398,7 @@
 											}), F.Z[e][f]]
 										}, n)
 									})
-								}),
-								//*编辑界面更改
-								(0, m.jsx)("span",
-								{
-									className: "common__TextArea-sc-1ojome3-13 juTGbm medium",
-									style: 
-									{
-										"overflow": "hidden",
-										"text-overflow": "ellipsis",
-										"white-space": "nowrap",
-										"width": "70%"
-									},
-									children: I(),
-									onClick: function(e)
-									{
-										var n;
-										if("name" === a || "time" === a || "edit" === a || "delete" === a)x = a;//@非图片不弹文件上传框
-										("image" === t.type && "edit" === a || "image" === x) && (null === (n = _.current) || void 0 === n || n.click())
-									},
-								}),t.file ? (0, m.jsx)('img',
-								{
-									width : "25%",
-									height : "25%",
-									src: t.file
-								}) : '', (0, m.jsxs)(c.OP,
-								{
-									children: [(0, m.jsx)("input",
-									{
-										type: "file",
-										ref: _,
-										style:
-										{
-											display: "none"
-										},
-										accept: "image/*",
-										onChange: function(e)
-										{
-											(0, u.T6)(e, function(e)
-											{
-												Z("image", e)///1
-											}, N)
-										}
-									}), (0, m.jsx)(c.Kx,
-									{
-										className: "medium",
-										maxRows: 5,
-										readOnly: function()
-										{
-											if("delete" === a) return !0;
-											// if("edit" === a)
-											// {
-											// 	if("image" === t.type) return !0
-											// }
-											// else if(("heart" === x || "image" === x) && "name" !== a && "time" !== a)//#可以输入名字和时间
-											// {
-											// 	return !0
-											// }
-											return !1
-										}(),
-										value: j,//#给值
-										onChange: function(e)
-										{
-											val = e.currentTarget.value;
-											if(val === '')val = false;
-											w(val)
-										}
-									})]///,t.file && x === 'image' ? (0, m.jsx)('img',{src: t.file}) : ''以后再说
-								}),
-								//*编辑界面更改
-								(0, m.jsxs)(ea.$_,
+								}), (0, m.jsxs)(ea.$_,
 								{
 									children: [(0, m.jsx)(ea.Lw,
 									{
@@ -4706,12 +4823,12 @@
 								}) : "image" === n.type ? [n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}),(0, m.jsx)(eN.tG,
 								//#[给图片加入时间戳
 								{
-									style:{"max-width":n.content.split('/')[0] === "CharFace" && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
+									style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.split('/')[0] === "CharFace" && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 									onClick: function()
 									{
 										o(!0, n, "edit")
 									},
-									src: n.file || n.content//#
+									src: n.file || n.content.split('#')[0]//#图片也支持样式了
 								})] : "info" === n.type ? (0, m.jsx)(eN.vD,//@]
 								{
 									onClick: function(){o(!0, n, "edit")},//@给旁白添加新版修改功能
@@ -4779,7 +4896,7 @@
 									{
 										children: [(0, m.jsx)(eN.zC,
 										{
-											style:isJSON(n.content.split('#')[2]) ? JSON.parse(n.content.split('#')[2]) : null,//@设置文字样式(#带头像)
+											style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : null,//@设置文字样式(#带头像)
 											onClick: function()
 											{
 												o(!0, n, "edit")
@@ -4790,7 +4907,7 @@
 									{
 										children: [(0, m.jsx)(eN.Dt,
 										{
-											style:isJSON(n.content.split('#')[2]) ? JSON.parse(n.content.split('#')[2]) : null,//@设置文字样式(#无头像)
+											style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : null,//@设置文字样式(#无头像)
 											onClick: function()
 											{
 												o(!0, n, "edit")
@@ -4799,12 +4916,12 @@
 										})/*被删除的时间戳*/]
 									}) : (0, m.jsx)(eN.tG,
 									{
-										style:{"max-width":n.content.split('/')[0] === "CharFace" && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
+										style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.split('/')[0] === "CharFace" && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 										onClick: function()
 										{
 											o(!0, n, "edit")
 										},
-										src: n.file || n.content//#
+										src: n.file || n.content.split('#')[0]//#图片也支持样式了
 									}), n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}), h || (0, m.jsx)(nl,//#时间戳放在这
 									{
 										"data-html2canvas-ignore": "true",
@@ -4936,7 +5053,68 @@
 									icon: ei.WA2
 								})
 							})]
-						}), (0, m.jsx)(nu,
+						}),
+						//*
+						(0, m.jsxs)(eU,
+						{
+							style:{padding: "5px 0",},
+							children: [
+								(0, m.jsx)(c.jl,
+								{
+									style:{"width": "auto"},
+									id:'delsall',
+									children: (0, m.jsx)(W,
+									{
+										className: "bold",
+										children: (0, m.jsx)(X,
+										{
+											style:{fontSize: "1.1rem"},
+											children: '全选'
+										})
+									})
+								}),
+								(0, m.jsx)(c.jl,
+								{
+									style:{"width": "auto"},
+									id:'delsto',
+									children: (0, m.jsx)(W,
+									{
+										className: "bold",
+										children: (0, m.jsx)(X,
+										{
+											style:{fontSize: "1.1rem"},
+											children: '区间选择'
+										})
+									})
+								}),
+								(0, m.jsx)(c.jl,
+								{
+									style:{"width": "auto"},
+									id:'rdelsall',
+									children: (0, m.jsx)(W,
+									{
+										className: "bold",
+										children: (0, m.jsx)(X,
+										{
+											style:{fontSize: "1.1rem"},
+											children: '反选'
+										})
+									})
+								}),
+								(0, m.jsx)($,
+								{
+									className: "bold",
+									onClick:function(){click('.gxgCGp:eq(3)')},
+									children: (0, m.jsx)(X,
+									{
+										style:{fontSize: "1.1rem"},
+										children: F.Z['delete'][lang]
+									})
+								}),
+								]
+						}),
+						//*
+						(0, m.jsx)(nu,
 						{
 							children: (0, m.jsx)(nd,
 							{
@@ -4987,7 +5165,7 @@
 					})
 				}, function(e)
 				{
-					return e.theme.color.rgb255_255_255
+					return localStorage['mt-style'].split(' ')[0]//#自定义样式
 				}, function(e)
 				{
 					return e.theme.color.rgb255_255_255
@@ -5274,7 +5452,7 @@
 				})(["max-width:"+localStorage['mt-size']+";border:2px solid ", ";background-color:transparent;padding:0.5rem;border-radius:10px;"], function(e)
 				//#仿ClosureTalk把90%改成40%，可以考虑自定义
 				{
-					return e.theme.color.rgb230_233_235
+					return localStorage['mt-style'].split(' ')[1]//#自定义样式
 				}),
 				s = r.ZP.span.withConfig(
 				{
@@ -5326,7 +5504,7 @@
 					return e.theme.color.rgb69_78_89
 				}, function(e)
 				{
-					return e.theme.color.rgb220_229_232
+					return localStorage['mt-style'].split(' ')[2]//#自定义样式
 				}),
 				f = (0, r.ZP)(o.Mm)
 				.withConfig(

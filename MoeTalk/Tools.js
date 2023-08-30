@@ -118,8 +118,8 @@ $("body").on('click','#clean',function()
 //设置整体上传的图片宽高百分比
 $("body").on('click','#mt-size',function()
 {
-	let size = '90%';
-	let msg = prompt("请输入整体上传的图片宽高百分比(默认为90%)，请勿乱输入，数字后一定要带百分号",size);
+	let size = localStorage['mt-size'];
+	let msg = prompt("请输入整体上传的图片宽高百分比，数字后一定要带百分号，当前数值为：",size);
 	if(msg)
 	{
 		localStorage['mt-size'] = msg;
@@ -128,8 +128,8 @@ $("body").on('click','#mt-size',function()
 //设置独立的差分表情宽高百分比
 $("body").on('click','#mt-cfsize',function()
 {
-	let size = '90%';
-	let msg = prompt("请输入独立的差分表情宽高百分比(默认为90%)，请勿乱输入，数字后一定要带百分号",size);
+	let size = localStorage['mt-cfsize'];
+	let msg = prompt("请输入独立的差分表情宽高百分比，数字后一定要带百分号，当前数值为：",size);
 	if(msg)
 	{
 		localStorage['mt-cfsize'] = msg;
@@ -138,7 +138,7 @@ $("body").on('click','#mt-cfsize',function()
 //设置标题
 $("body").on('click','#mt-title',function()
 {
-	let title = 'MoeTalk';
+	let title = localStorage['MoeTalk'];
 	let msg = prompt("请输入标题文字(不要包含中文)",title);
 	if(msg)
 	{
