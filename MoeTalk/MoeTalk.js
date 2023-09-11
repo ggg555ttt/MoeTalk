@@ -39,7 +39,7 @@ if(!localStorage['imgs'] || localStorage['imgs'] != 851)
 {
 	
 	
-	$.getJSON(,function(json)
+	$.getJSON(charimg,function(json)
 	{
 		localStorage['imgs'] = 0;
 		$.each(json,function(k,v)
