@@ -49,6 +49,20 @@ cursor: pointer;  /* 鼠标形状 */
     padding: 0px;
     position: relative;
 }
+.dropdown button
+{
+	height: 2.5rem;
+	height: auto;
+	min-height:2.5rem;
+
+	width: 32%;
+	width: auto;
+	min-width: 32%;
+}
+.dropdown p
+{
+    color: white;
+}
 .dropdown ul
 {
     display: none;

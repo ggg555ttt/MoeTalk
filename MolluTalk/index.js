@@ -849,7 +849,7 @@
 										{
 											children: [(0, m.jsx)(D,
 											{
-												children: n.school[a] === '%23' ? n.club[a] : n.school[a]//#显示学校
+												children: n.school[a] === '%23' ? '自创角色' : n.school[a]//#显示学校
 											}),(0, m.jsx)(D,{children: n.club[a]})]//@显示社团
 										})]
 									})]
@@ -1060,6 +1060,35 @@
 										children: mt_text['clear'][lang]+mt_text['select'][lang]
 									})]
 								}), 
+								(0, m.jsx)('dl',
+								{
+									className: "dropdown",
+									children: [(0, m.jsx)('button',
+									{
+										className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 cVRiXh kwhiZC medium",
+										children: [(0, m.jsx)('p',
+										{
+											className: "multiSel 自创"
+										}), (0, m.jsx)('span',
+										{
+											className: "hida",
+											children: '自创角色'
+										})]
+									}), (0, m.jsx)('ul',
+									{
+										className: "mutliSelect",
+										children: (0, m.jsx)('li',
+										{
+											children: [(0, m.jsx)('input',
+											{
+												type: "checkbox",
+												className: "club",
+												school: "自创",
+												value: "自创"
+											}),"自创角色"]
+										})
+									})]
+								}),
 								mt_school.map(function(v, k)
 								{
 									return (0, m.jsx)('dl',
@@ -1067,23 +1096,9 @@
 										className: "dropdown",
 										children: [(0, m.jsx)('button',
 										{
-											style:
-											{
-												height:"2.5rem",
-												height:"auto",
-												minHeight:"2.5rem",
-
-												width:"32%",
-												width:"auto",
-												minWidth:"32%"
-											},
 											className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 cVRiXh kwhiZC medium",
 											children: [(0, m.jsx)('p',
 											{
-												style:
-												{
-													color:"white"
-												},
 												className: "multiSel "+v
 											}), (0, m.jsx)('span',
 											{
@@ -1437,14 +1452,9 @@
 							let arr = JSON.parse(JSON.stringify(_.Z));
 							let carr = [];
 							if(localStorage['custom'])carr = JSON.parse(localStorage['custom'])[0]['club'][0]['characters'];
-							// for(let num = 0;num < arr.length;num++)
-							// {
-							// 	if(names[lang] && names[lang][arr[num].no])arr[num].name[lang] = names[lang][arr[num].no];
-							// 	arr[num].club[lang] = arr[num].club[lang]+'@'+arr[num].no;
-							// }
 							for(let num = 0;num < carr.length;num++)
 							{
-								arr.push(
+								arr.unshift(
 								{
 									name : 
 									{
@@ -1485,8 +1495,15 @@
 								arr.map(function(v, k)
 								{
 									let arr1 = v['no'].toString().split('/');
-									arr1.pop();
-									arr1 = arr1.join('/')
+									if(v['school']['zh_cn'] === '%23')
+									{
+										arr1 = '自创/自创';
+									}
+									else
+									{
+										arr1.pop();
+										arr1 = arr1.join('/');
+									}
 									if(!clubarr[arr1])delete arr[k]
 								})
 							}
