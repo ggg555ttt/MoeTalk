@@ -9893,6 +9893,7 @@
 							else o = '#'+e;
 						}
 						else o = '#'+e;
+						if(o === '#0')o = '主角';
 						//*
 						// var r = i.Z.filter(function(t)
 						// 	{
