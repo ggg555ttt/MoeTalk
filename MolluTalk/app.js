@@ -9524,43 +9524,42 @@
 					}
 				});
 				//*新版角色文件读取
-				var r, i = (r = [], mt_characters
-					.forEach(function(e)
+				var r, i = (r = [], $jquery.each(mt_characters,function(k,v)
 					{
-						r.push(
-						{
-							no: e.no,
-							school:
-							{
-								zh_cn: mt_school[e.from.split('.')[0]].split('█')[0],
-								zh_tw: mt_school[e.from.split('.')[0]].split('█')[1],
-								jp: mt_school[e.from.split('.')[0]].split('█')[2],
-								en: mt_school[e.from.split('.')[0]].split('█')[3],
-								kr: mt_school[e.from.split('.')[0]].split('█')[4]
+						r.push({
+							//no:k,
+							no:v.school+'/'+v.club+'/'+k,
+							school:{
+								zh_cn: mt_schoolname[v.school].zh_cn ? mt_schoolname[v.school].zh_cn : v.school,
+								zh_tw: mt_schoolname[v.school].zh_tw ? mt_schoolname[v.school].zh_tw : v.school,
+								jp: mt_schoolname[v.school].jp ? mt_schoolname[v.school].jp : v.school,
+								en: mt_schoolname[v.school].en ? mt_schoolname[v.school].en : v.school,
+								kr: mt_schoolname[v.school].kr ? mt_schoolname[v.school].kr : v.school,
+								pinyin: mt_schoolname[v.school].pinyin ? mt_schoolname[v.school].pinyin : v.school
 							},
-							club:
-							{
-								zh_cn: mt_club[e.from].split('█')[0],
-								zh_tw: mt_club[e.from].split('█')[1],
-								jp: mt_club[e.from].split('█')[2],
-								en: mt_club[e.from].split('█')[3],
-								kr: mt_club[e.from].split('█')[4]
+							club:{
+								zh_cn: mt_clubname[v.club].zh_cn ? mt_clubname[v.club].zh_cn : v.club,
+								zh_tw: mt_clubname[v.club].zh_tw ? mt_clubname[v.club].zh_tw : v.club,
+								jp: mt_clubname[v.club].jp ? mt_clubname[v.club].jp : v.club,
+								en: mt_clubname[v.club].en ? mt_clubname[v.club].en : v.club,
+								kr: mt_clubname[v.club].kr ? mt_clubname[v.club].kr : v.club,
+								pinyin: mt_clubname[v.club].pinyin ? mt_clubname[v.club].pinyin : v.club
 							},
-							name:
-							{
-								zh_cn: e.name.split('█')[0],
-								zh_tw: e.name.split('█')[1],
-								jp: e.name.split('█')[2],
-								en: e.name.split('█')[3],
-								kr: e.name.split('█')[4]
+							name:{
+								zh_cn: v.name.zh_cn ? v.name.zh_cn : k,
+								zh_tw: v.name.zh_tw ? v.name.zh_tw : k,
+								jp: v.name.jp ? v.name.jp : k,
+								en: v.name.en ? v.name.en : k,
+								kr: v.name.kr ? v.name.kr : k,
+								pinyin: v.name.pinyin
 							},
 							illust: 0,//#改为默认
-							profile: e.profile.split(','),
+							profile: v.profile.split(','),
 							open: true,//#改为默认
 							momotalk: true//#改为默认
 						})
 					}), r)
-			//*新版角色文件读取
+				//*新版角色文件读取
 			},
 			7579: function(e, t, n)
 			{
@@ -9771,17 +9770,19 @@
 					{
 						var i, a;
 						n.sortCharType = localStorage['mt-order']//@读取排序方式
+						if(r === 'zh_cn' || r === 'zh_tw'){r = 'pinyin'}//@中文改为拼音排序
 						//*按ID排序
 						if("ID" === n.sortCharType)
 						{
 							i = e['no'],a = t['no'];
 							return (i , a , n.order) ? i < a ? -1 : i > a ? 1 : 0 : i < a ? 1 : i > a ? -1 : 0
 						}
-						//*按ID排序
+						//*按名称排序
 						if("name" === n.sortCharType)
 						{
 							var o = e[n.sortCharType][r],
 								s = t[n.sortCharType][r];
+							
 							i = o.split(" ")[1] || o.replaceAll("-", " "), a = s.split(" ")[1] || s.replaceAll("-", " ")
 						}
 						else i = e[n.sortCharType][r], a = t[n.sortCharType][r];
@@ -9880,7 +9881,7 @@
 					{
 						//*
 						var r,o;
-						if(isNaN(parseInt(e)) || e < 1000)
+						if(isNaN(parseInt(e)))
 						{
 							r = i.Z.filter(function(t){return t.no === e})[0]
 							o = (r = r || a.Y).name[n];
@@ -10144,7 +10145,6 @@
 								{
 									children: [(0, O.jsx)(I,{id:"readme",children:localStorage['MoeTalk']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
-										hidden:(window.screen.availWidth < 400),
 										href: "https://wj.qq.com/s2/12952865/a1aa/",
 										className: "medium",
 										id: 'help',
@@ -10240,7 +10240,8 @@
 					{
 						displayName: "Header__Navbar",
 						componentId: "sc-17b1not-0"
-					})(["", " flex-shrink:0;height:3.5rem;background-color:", ";padding:0.5rem 0rem;"], function(e)
+					})(["", " flex-shrink:0;height:3.5rem;background-color:", ";padding:0.5rem 0rem;overflow-x: auto;overflow-y: hidden;white-space: nowrap;"], function(e)
+					//#标题框可左右拖拽（限手机）
 					{
 						return e.theme.common.flexBox(
 						{
@@ -15343,7 +15344,7 @@
 						})
 					}, function(e)
 					{
-						return e.theme.color.rgba0_0_0_6
+						return ''//#e.theme.color.rgba0_0_0_6
 					}),
 					o = r.ZP.div.withConfig(
 					{
@@ -15542,7 +15543,7 @@
 					i = ["delete", "edit", "add", "time", "name"],//#加入名字
 					a = ["chat", "image", "reply", "heart", "info"],
 					o = ["name", "school", "club", "ID"],//#加入ID
-					s = ["kr", "jp", "en", "zh_cn", "zh_tw"],
+					s = ["kr", "jp", "en", "zh_cn", "zh_tw", "pinyin"],//#加入拼音
 					u = {
 						type: "end",
 						isFirst: !0,

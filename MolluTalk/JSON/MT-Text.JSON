@@ -1,0 +1,1165 @@
+var mt_text = {
+	"name": {
+		"kr": "이름",
+		"en": "Name",
+		"jp": "名前",
+		"zh_cn": "名字",
+		"zh_tw": "名稱"
+	},
+	"club": {
+		"kr": "동아리",
+		"en": "Club",
+		"jp": "サークル",
+		"zh_cn": "社团",
+		"zh_tw": "社團"
+	},
+	"school": {
+		"kr": "학원",
+		"en": "School",
+		"jp": "学園",
+		"zh_cn": "学院",
+		"zh_tw": "學院"
+	},
+	"sort": {
+		"kr": "정렬",
+		"en": "Sort",
+		"jp": "整列",
+		"zh_cn": "排序",
+		"zh_tw": "排序"
+	},
+	"confirm": {
+		"kr": "확인",
+		"en": "Confirm",
+		"jp": "確認",
+		"zh_cn": "确认",
+		"zh_tw": "確認"
+	},
+	"change": {
+		"kr": "변경",
+		"en": "Change",
+		"jp": "変更",
+		"zh_cn": "变更",
+		"zh_tw": "變更"
+	},
+	"cancel": {
+		"kr": "취소",
+		"en": "Cancel",
+		"jp": "キャンセル",
+		"zh_cn": "取消",
+		"zh_tw": "取消"
+	},
+	"time": {
+		"kr": "시간",
+		"en": "Time",
+		"jp": "時間",
+		"zh_cn": "时间",
+		"zh_tw": "時間"
+	},
+	"student": {
+		"kr": "학생",
+		"en": "Student",
+		"jp": "生徒",
+		"zh_cn": "学生",
+		"zh_tw": "學生"
+	},
+	"delete": {
+		"kr": "삭제",
+		"en": "Delete",
+		"jp": "削除",
+		"zh_cn": "删除",
+		"zh_tw": "刪除"
+	},
+	"edit": {
+		"kr": "수정",
+		"en": "Edit",
+		"jp": "修正",
+		"zh_cn": "修改",
+		"zh_tw": "修改"
+	},
+	"add": {
+		"kr": "유형",
+		"en": "Type",
+		"jp": "タイプ",
+		"zh_cn": "类型",
+		"zh_tw": "類型"
+	},
+	"chat": {
+		"kr": "채팅",
+		"en": "Chat",
+		"jp": "チャット",
+		"zh_cn": "文字",
+		"zh_tw": "文字"
+	},
+	"image": {
+		"kr": "이미지",
+		"en": "Image",
+		"jp": "画像",
+		"zh_cn": "图像",
+		"zh_tw": "圖像"
+	},
+	"reply": {
+		"kr": "답장",
+		"en": "Reply",
+		"jp": "返事",
+		"zh_cn": "回复",
+		"zh_tw": "回復"
+	},
+	"heart": {
+		"kr": "인연",
+		"en": "Heart",
+		"jp": "キズナ",
+		"zh_cn": "羁绊事件",
+		"zh_tw": "羈絆事件"
+	},
+	"end": {
+		"kr": "끝",
+		"en": "End",
+		"jp": "終わり",
+		"zh_cn": "结束",
+		"zh_tw": "結束"
+	},
+	"error": {
+		"kr": "오류",
+		"en": "Error",
+		"jp": "エラー",
+		"zh_cn": "错误",
+		"zh_tw": "錯誤"
+	},
+	"search": {
+		"kr": "검색",
+		"en": "Search",
+		"jp": "検索",
+		"zh_cn": "搜索",
+		"zh_tw": "搜索"
+	},
+	"option": {
+		"kr": "옵션",
+		"en": "Option",
+		"jp": "Option",
+		"zh_cn": "Option",
+		"zh_tw": "Option"
+	},
+	"help": {
+		"kr": "도움말",
+		"en": "Help",
+		"jp": "Help",
+		"zh_cn": "Help",
+		"zh_tw": "Help"
+	},
+	"notice": {
+		"kr": "공지",
+		"en": "Notice",
+		"jp": "Notice",
+		"zh_cn": "Notice",
+		"zh_tw": "Notice"
+	},
+	"copyright": {
+		"kr": "저작권",
+		"en": "Copyright",
+		"jp": "Copyright",
+		"zh_cn": "Copyright",
+		"zh_tw": "Copyright"
+	},
+	"terms": {
+		"kr": "이용약관",
+		"en": "Terms",
+		"jp": "Terms",
+		"zh_cn": "Terms",
+		"zh_tw": "Terms"
+	},
+	"success": {
+		"kr": "성공",
+		"en": "Success",
+		"jp": "成功",
+		"zh_cn": "成功",
+		"zh_tw": "成功"
+	},
+	"select": {
+		"kr": "선택",
+		"en": "Select",
+		"jp": "選択",
+		"zh_cn": "选择",
+		"zh_tw": "選擇"
+	},
+	"noTitle": {
+		"kr": "무제",
+		"en": "NoTitle",
+		"jp": "無題",
+		"zh_cn": "无题",
+		"zh_tw": "無題"
+	},
+	"noName": {
+		"kr": "무명",
+		"en": "NoName",
+		"jp": "無名",
+		"zh_cn": "无名小卒",
+		"zh_tw": "無名小卒"
+	},
+	"title": {
+		"kr": "제목",
+		"en": "Title",
+		"jp": "タイトル",
+		"zh_cn": "标题",
+		"zh_tw": "標題"
+	},
+	"writer": {
+		"kr": "작성자",
+		"en": "Author",
+		"jp": "作成者",
+		"zh_cn": "作者",
+		"zh_tw": "作者"
+	},
+	"donation": {
+		"kr": "후원",
+		"en": "Donation",
+		"jp": "寄付",
+		"zh_cn": "捐赠",
+		"zh_tw": "捐贈"
+	},
+	"board_no": {
+		"kr": "톡번호",
+		"en": "Talk_no",
+		"jp": "トーク番号",
+		"zh_cn": "转矩编号",
+		"zh_tw": "轉矩編號"
+	},
+	"member_no": {
+		"kr": "회원번호",
+		"en": "Member_no",
+		"jp": "会員番号",
+		"zh_cn": "会员编号",
+		"zh_tw": "會員編號"
+	},
+	"series": {
+		"kr": "시리즈",
+		"en": "Series",
+		"jp": "シリーズ",
+		"zh_cn": "系列",
+		"zh_tw": "系列"
+	},
+	"none_series": {
+		"kr": "시리즈 선택안함",
+		"en": "None Series",
+		"jp": "なし系列",
+		"zh_cn": "无级数",
+		"zh_tw": "無級數"
+	},
+	"add_series": {
+		"kr": "시리즈 추가",
+		"en": "Add Series",
+		"jp": "シリーズの追加",
+		"zh_cn": "添加系列",
+		"zh_tw": "添加系列"
+	},
+	"management": {
+		"kr": "관리",
+		"en": "Management",
+		"jp": "管理",
+		"zh_cn": "管理",
+		"zh_tw": "管理"
+	},
+	"date": {
+		"kr": "날짜",
+		"en": "Date",
+		"jp": "日数",
+		"zh_cn": "天数",
+		"zh_tw": "天數"
+	},
+	"recent": {
+		"kr": "최신",
+		"en": "Recent",
+		"jp": "最新",
+		"zh_cn": "最新",
+		"zh_tw": "最新"
+	},
+	"best": {
+		"kr": "인기",
+		"en": "Best",
+		"jp": "人気",
+		"zh_cn": "人气",
+		"zh_tw": "人氣"
+	},
+	"view": {
+		"kr": "조회",
+		"en": "View",
+		"jp": "照会",
+		"zh_cn": "查询",
+		"zh_tw": "查詢"
+	},
+	"views": {
+		"kr": "조회수",
+		"en": "Views",
+		"jp": "照会数",
+		"zh_cn": "查询数",
+		"zh_tw": "查詢數"
+	},
+	"good": {
+		"kr": "추천",
+		"en": "Good",
+		"jp": "おすすめ",
+		"zh_cn": "推荐",
+		"zh_tw": "推薦"
+	},
+	"bad": {
+		"kr": "비추천",
+		"en": "Bad",
+		"jp": "非推奨",
+		"zh_cn": "不推荐",
+		"zh_tw": "不推薦"
+	},
+	"bookmark": {
+		"kr": "북마크",
+		"en": "Bookmark",
+		"jp": "ブックマーク",
+		"zh_cn": "书签",
+		"zh_tw": "書籤"
+	},
+	"share": {
+		"kr": "공유",
+		"en": "Share",
+		"jp": "共有",
+		"zh_cn": "孔侑莉",
+		"zh_tw": "孔侑莉"
+	},
+	"report": {
+		"kr": "신고",
+		"en": "Report",
+		"jp": "報告",
+		"zh_cn": "报告",
+		"zh_tw": "報告"
+	},
+	"download": {
+		"kr": "다운로드",
+		"en": "Download",
+		"jp": "ダウンロード",
+		"zh_cn": "下载",
+		"zh_tw": "下載"
+	},
+	"official": {
+		"kr": "공식",
+		"en": "Official",
+		"jp": "公式",
+		"zh_cn": "公式",
+		"zh_tw": "公式"
+	},
+	"creative": {
+		"kr": "창작",
+		"en": "Creative",
+		"jp": "創作",
+		"zh_cn": "创作",
+		"zh_tw": "創作"
+	},
+	"private": {
+		"kr": "비공개",
+		"en": "Private",
+		"jp": "非公開",
+		"zh_cn": "非公开",
+		"zh_tw": "非公開"
+	},
+	"open": {
+		"kr": "공개",
+		"en": "Open",
+		"jp": "公開",
+		"zh_cn": "公开",
+		"zh_tw": "公開"
+	},
+	"upload": {
+		"kr": "업로드",
+		"en": "Upload",
+		"jp": "アップロード",
+		"zh_cn": "上传",
+		"zh_tw": "上傳"
+	},
+	"auto": {
+		"kr": "자동",
+		"en": "Auto",
+		"jp": "自動",
+		"zh_cn": "自动",
+		"zh_tw": "自動"
+	},
+	"login": {
+		"kr": "로그인",
+		"en": "Login",
+		"jp": "Login",
+		"zh_cn": "Login",
+		"zh_tw": "Login"
+	},
+	"logout": {
+		"kr": "로그아웃",
+		"en": "Logout",
+		"jp": "Logout",
+		"zh_cn": "Logout",
+		"zh_tw": "Logout"
+	},
+	"email": {
+		"kr": "이메일",
+		"en": "Email",
+		"jp": "Email",
+		"zh_cn": "Email",
+		"zh_tw": "Email"
+	},
+	"account": {
+		"kr": "계정",
+		"en": "Account",
+		"jp": "アカウント",
+		"zh_cn": "帐目",
+		"zh_tw": "帳目"
+	},
+	"message": {
+		"kr": "메세지",
+		"en": "Message",
+		"jp": "メッセージ",
+		"zh_cn": "信息",
+		"zh_tw": "信息"
+	},
+	"talk": {
+		"kr": "톡",
+		"en": "Talk",
+		"jp": "トーク",
+		"zh_cn": "Talk",
+		"zh_tw": "Talk"
+	},
+	"game": {
+		"kr": "게임",
+		"en": "Game",
+		"jp": "ゲーム",
+		"zh_cn": "游戏",
+		"zh_tw": "遊戲"
+	},
+	"nickname": {
+		"kr": "닉네임",
+		"en": "Nickname",
+		"jp": "ニックネーム",
+		"zh_cn": "昵称",
+		"zh_tw": "暱稱"
+	},
+	"language": {
+		"kr": "언어",
+		"en": "Language",
+		"jp": "言語",
+		"zh_cn": "语言",
+		"zh_tw": "語言"
+	},
+	"preset": {
+		"kr": "프리셋",
+		"en": "Preset",
+		"jp": "プリセット",
+		"zh_cn": "预设",
+		"zh_tw": "預設"
+	},
+	"none": {
+		"kr": "없음",
+		"en": "None",
+		"jp": "なし",
+		"zh_cn": "无",
+		"zh_tw": "無"
+	},
+	"url": {
+		"kr": "URL",
+		"en": "URL",
+		"jp": "URL",
+		"zh_cn": "URL",
+		"zh_tw": "URL"
+	},
+	"clear": {
+		"kr": "삭제",
+		"en": "Clear",
+		"jp": "クリア",
+		"zh_cn": "清除",
+		"zh_tw": "清除"
+	},
+	"leave": {
+		"kr": "탈퇴",
+		"en": "Delete",
+		"jp": "脱退",
+		"zh_cn": "退出",
+		"zh_tw": "退出"
+	},
+	"delete_account": {
+		"kr": "계정탈퇴",
+		"en": "Delete Account",
+		"jp": "勘定脱退",
+		"zh_cn": "注销账户",
+		"zh_tw": "註銷賬戶"
+	},
+	"clear_cache": {
+		"kr": "캐시 삭제",
+		"en": "Clear Cache",
+		"jp": "キャッシュのクリア",
+		"zh_cn": "清除缓存",
+		"zh_tw": "清除緩存"
+	},
+	"album": {
+		"kr": "앨범",
+		"en": "Album",
+		"jp": "アルバム",
+		"zh_cn": "专辑",
+		"zh_tw": "專輯"
+	},
+	"chat_speed": {
+		"kr": "채팅배속",
+		"en": "Chat Speed",
+		"jp": "チャット倍速",
+		"zh_cn": "聊天倍速",
+		"zh_tw": "聊天倍速"
+	},
+	"search_creative": {
+		"kr": "창작톡 검색",
+		"en": "Search Creative Talk",
+		"jp": "創作トーク検索",
+		"zh_cn": "自创Talk搜索",
+		"zh_tw": "自創Talk搜索"
+	},
+	"search_official": {
+		"kr": "공식톡 검색",
+		"en": "Search Official Talk",
+		"jp": "公式トークを検索",
+		"zh_cn": "正式Talk搜索",
+		"zh_tw": "公式Talk搜索"
+	},
+	"search_writer": {
+		"kr": "작성자 검색",
+		"en": "Search Author",
+		"jp": "作成者検索",
+		"zh_cn": "作者搜索",
+		"zh_tw": "作者搜索"
+	},
+	"search_series": {
+		"kr": "시리즈 검색",
+		"en": "Search Series",
+		"jp": "シリーズ検索",
+		"zh_cn": "系列搜索",
+		"zh_tw": "系列搜索"
+	},
+	"characters": {
+		"kr": "등장인물",
+		"en": "Characters",
+		"jp": "登場人物",
+		"zh_cn": "登场人物",
+		"zh_tw": "登場人物"
+	},
+	"date_created": {
+		"kr": "작성일",
+		"en": "Date Created",
+		"jp": "作成日",
+		"zh_cn": "创建日期",
+		"zh_tw": "創建日期"
+	},
+	"upload_to_server": {
+		"kr": "서버에 업로드",
+		"en": "Upload to Server",
+		"jp": "サーバーにアップロード",
+		"zh_cn": "上载到服务器",
+		"zh_tw": "上載到服務器"
+	},
+	"download_to_image": {
+		"kr": "이미지로 다운로드",
+		"en": "Download to Image",
+		"jp": "画像でダウンロード",
+		"zh_cn": "通过图像下载",
+		"zh_tw": "通過圖像下載"
+	},
+	"emoticon": {
+		"kr": "이모티콘",
+		"en": "Emoticon",
+		"jp": "絵文字",
+		"zh_cn": "图画文字",
+		"zh_tw": "圖畫文字"
+	},
+	"deleteTalk": {
+		"kr": "톡 삭제",
+		"en": "Delete Talk",
+		"jp": "トーク削除",
+		"zh_cn": "Talk删除",
+		"zh_tw": "Talk刪除"
+	},
+	"go_reply": {
+		"kr": "답장하기",
+		"en": "Reply",
+		"jp": "返事する",
+		"zh_cn": "回复",
+		"zh_tw": "回复"
+	},
+	"music_count": {
+		"kr": "곡 수",
+		"en": "Music Count",
+		"jp": "音楽数",
+		"zh_cn": "音乐计数",
+		"zh_tw": "音樂計數"
+	},
+	"add_reply": {
+		"kr": "답장추가",
+		"en": "Add Reply",
+		"jp": "返事追加",
+		"zh_cn": "添加选择肢",
+		"zh_tw": "添加選擇肢"
+	},
+	"delete_reply": {
+		"kr": "답장삭제",
+		"en": "Delete Reply",
+		"jp": "返事削除",
+		"zh_cn": "删除回复",
+		"zh_tw": "刪除回覆"
+	},
+	"msg_end": {
+		"kr": "메세지 종료",
+		"en": "End Message",
+		"jp": "メッセージ終了",
+		"zh_cn": "信息结束",
+		"zh_tw": "信息結束"
+	},
+	"watermark": {
+		"kr": "워터마크",
+		"en": "Watermark",
+		"jp": "ウォーターマーク",
+		"zh_cn": "水印",
+		"zh_tw": "水印"
+	},
+	"sharedFile": {
+		"kr": "공유파일",
+		"en": "Shared File",
+		"jp": "共有ファイル",
+		"zh_cn": "共享文件",
+		"zh_tw": "共享文件"
+	},
+	"relationship_event": {
+		"kr": "인연 이벤트",
+		"en": "Relationship Event",
+		"jp": "絆イベント",
+		"zh_cn": "羁绊事件",
+		"zh_tw": "羈絆事件"
+	},
+	"expected": {
+		"kr": "예정",
+		"en": "Expected",
+		"jp": "予定",
+		"zh_cn": "预定",
+		"zh_tw": "預定"
+	},
+	"setting": {
+		"kr": "설정",
+		"en": "Setting",
+		"jp": "設定",
+		"zh_cn": "设定",
+		"zh_tw": "設定"
+	},
+	"report_suggest": {
+		"kr": "버그리포트 / 건의사항",
+		"en": "Bug Report / Suggestions",
+		"jp": "バグレポート / 提案",
+		"zh_cn": "错误报告 / 建议",
+		"zh_tw": "錯誤報告 / 建議"
+	},
+	"image_qaulity": {
+		"kr": "이미지 품질",
+		"en": "Image Quality",
+		"jp": "イメージ画質",
+		"zh_cn": "图像质量",
+		"zh_tw": "圖像質量"
+	},
+	"off_the_record_mode": {
+		"kr": "비공개 모드",
+		"en": "Off The Record Mode",
+		"jp": "オフレコモード",
+		"zh_cn": "非记录模式",
+		"zh_tw": "非記錄模式"
+	},
+	"info": {
+		"kr": "정보",
+		"en": "Info",
+		"jp": "情報",
+		"zh_cn": "旁白",
+		"zh_tw": "旁白"
+	},
+	"music": {
+		"kr": "뮤직",
+		"en": "Music",
+		"jp": "音楽",
+		"zh_cn": "音乐",
+		"zh_tw": "音樂"
+	},
+	"playlist": {
+		"kr": "플레이리스트",
+		"en": "Playlist",
+		"jp": "プレイリスト",
+		"zh_cn": "播放列表",
+		"zh_tw": "播放列表"
+	},
+	"player": {
+		"kr": "플레이어",
+		"en": "Player",
+		"jp": "プレイヤー",
+		"zh_cn": "球员",
+		"zh_tw": "球員"
+	},
+	"artist": {
+		"kr": "아티스트",
+		"en": "Artist",
+		"jp": "アーティスト",
+		"zh_cn": "艺术家",
+		"zh_tw": "藝術家"
+	},
+	"privacy": {
+		"kr": "개인정보",
+		"en": "Privacy",
+		"jp": "Privacy",
+		"zh_cn": "Privacy",
+		"zh_tw": "Privacy"
+	},
+	"cant_upload_comment": {
+		"kr": "해당 계정은 업로드 할 수 없습니다.",
+		"en": "You cannot upload this account.",
+		"jp": "このアカウントはアップロードできません。",
+		"zh_cn": "该账号不能上传。",
+		"zh_tw": "該賬號不能上傳。"
+	},
+	"go_relationship_event": {
+		"kr": "의 인연스토리로",
+		"en": "s relationship story",
+		"jp": "の絆ストーリーへ",
+		"zh_cn": "的羁绊剧情",
+		"zh_tw": "的羈絆劇情"
+	},
+	"ask_delete": {
+		"kr": "정말로 삭제하시겠습니까?",
+		"en": "Are you sure you want to delete it?",
+		"jp": "本当に削除しますか？",
+		"zh_cn": "确定要删除吗?",
+		"zh_tw": "確定要刪除嗎?"
+	},
+	"deleteTalk_comment": {
+		"kr": "삭제된 톡은 되돌릴 수 없습니다.",
+		"en": "Deleted Talk is irreversible.",
+		"jp": "削除されたトークは元に戻すことができません。",
+		"zh_cn": "无法撤消已删除的 Talk",
+		"zh_tw": "無法撤消已刪除的 Talk"
+	},
+	"deleteReply_comment": {
+		"kr": "해당 답장과 관련된 모든 채팅이 삭제됩니다.",
+		"en": "All chat related to that reply will be deleted.",
+		"jp": "該当返信に関連するすべてのチャットが削除されます。",
+		"zh_cn": "与该回复相关的所有聊天将被删除。",
+		"zh_tw": "與該回複相關的所有聊天將被刪除。"
+	},
+	"search_comment": {
+		"kr": "정보를 입력해주세요.",
+		"en": "Please enter the information.",
+		"jp": "情報を入力してください。",
+		"zh_cn": "请输入信息。",
+		"zh_tw": "請輸入信息。"
+	},
+	"input_comment": {
+		"kr": "내용을 입력해주세요.",
+		"en": "Please enter the Contents.",
+		"jp": "内容を入力してください。",
+		"zh_cn": "请输入内容。",
+		"zh_tw": "請輸入內容。"
+	},
+	"title_comment": {
+		"kr": "제목을 입력해주세요.",
+		"en": "Please enter the Title.",
+		"jp": "タイトルを入力してください。",
+		"zh_cn": "请输入标题。",
+		"zh_tw": "請輸入標題。"
+	},
+	"series_title_comment": {
+		"kr": "새로운 시리즈 제목을 입력해주세요.",
+		"en": "Please enter the new Series Title.",
+		"jp": "新しいシリーズタイトルを入力してください。",
+		"zh_cn": "请输入新的系列标题。",
+		"zh_tw": "請輸入新的系列標題。"
+	},
+	"nickName_comment": {
+		"kr": "닉네임을 입력해주세요.",
+		"en": "Please enter the NickName.",
+		"jp": "ニックネームを入力してください。",
+		"zh_cn": "请输入昵称。",
+		"zh_tw": "請輸入暱稱。"
+	},
+	"nomatch_comment": {
+		"kr": "해당 페이지를 찾을 수 없습니다.",
+		"en": "The page could not be found.",
+		"jp": "該当ページを見つかれません。",
+		"zh_cn": "找不到相应页面。",
+		"zh_tw": "找不到相應頁面。"
+	},
+	"select_char": {
+		"kr": "캐릭터를 선택해주세요.",
+		"en": "Please select a character.",
+		"jp": "キャラクターを選択してください。",
+		"zh_cn": "请选择角色。",
+		"zh_tw": "請選擇角色。"
+	},
+	"select_msg": {
+		"kr": "메세지를 선택해주세요.",
+		"en": "Please select a message.",
+		"jp": "メッセージを選択してください。",
+		"zh_cn": "请选择信息。",
+		"zh_tw": "請選擇信息。"
+	},
+	"select_playlist": {
+		"kr": "플레이리스트를 선택해주세요.",
+		"en": "Please select a playlist.",
+		"jp": "プレイリストを選択してください。",
+		"zh_cn": "请选择播放列表。",
+		"zh_tw": "請選擇播放列表。"
+	},
+	"add_playlist": {
+		"kr": "플레이리스트 추가",
+		"en": "Add Playlist",
+		"jp": "プレイリストの追加",
+		"zh_cn": "添加播放列表",
+		"zh_tw": "添加播放列表"
+	},
+	"add_music": {
+		"kr": "음악 추가",
+		"en": "Add Music",
+		"jp": "音楽の追加",
+		"zh_cn": "添加音乐",
+		"zh_tw": "添加音樂"
+	},
+	"to_add_playlist": {
+		"kr": "추가할 플레이리스트 제목을 적어주세요.",
+		"en": "Please write down the title of the playlist to add.",
+		"jp": "追加するプレイリストのタイトルを書いてください。",
+		"zh_cn": "请写下要添加的播放列表的标题。",
+		"zh_tw": "請寫下要添加的播放列表的標題。"
+	},
+	"no_support": {
+		"kr": "지원하지 않는 파일입니다.",
+		"en": "This file is not supported.",
+		"jp": "サポートしていないファイルです。",
+		"zh_cn": "不支持的文件。",
+		"zh_tw": "不支持的文件。"
+	},
+	"error_ment": {
+		"kr": "오류 : 관리자에게 문의해주세요.",
+		"en": "Error: Please contact the administrator.",
+		"jp": "エラー：管理者に連絡してください。",
+		"zh_cn": "错误 : 请与管理员联系。",
+		"zh_tw": "錯誤 : 請與管理員聯繫。"
+	},
+	"add_image": {
+		"kr": "클릭하여 사진을 추가해주세요.",
+		"en": "Click to add a photo.",
+		"jp": "クリックして写真を追加してください。",
+		"zh_cn": "请点击添加图片文件。",
+		"zh_tw": "請點擊添加圖片文件。"
+	},
+	"thanks": {
+		"kr": "이용해주셔서 감사합니다.",
+		"en": "Thank you for using it.",
+		"jp": "ご利用いただきありがとうございます。",
+		"zh_cn": "感谢您的使用。",
+		"zh_tw": "感謝您的使用。"
+	},
+	"down_comment1": {
+		"kr": "몰루톡이 이미지로 저장됩니다.",
+		"en": "MoeTalk is saved as an image.",
+		"jp": "MoeTalkは画像として保存されます。",
+		"zh_cn": "MoeTalk 另存为图像。",
+		"zh_tw": "MoeTalk 另存爲圖像。"
+	},
+	"down_comment2": {
+		"kr": "몰루톡이 공유파일로 저장됩니다.",
+		"en": "MoeTalk is saved as a share File.",
+		"jp": "MoeTalkが共有ファイルとして保存されます。",
+		"zh_cn": "MoeTalk 另存为共享文件。",
+		"zh_tw": "MoeTalk 另存爲共享文件。"
+	},
+	"down_comment3": {
+		"kr": "다시 업로드하여 수정 가능합니다.",
+		"en": "You can upload it again and modify it.",
+		"jp": "再アップロードして修正することができます。",
+		"zh_cn": "可以重新上传后修改。",
+		"zh_tw": "可以重新上傳後修改。"
+	},
+	"edit_comment": {
+		"kr": "공유파일을 업로드하여 수정할 수 있습니다.",
+		"en": "You can modify the shared file by uploading it.",
+		"jp": "共有ファイルをアップロードして修正することができます。",
+		"zh_cn": "可以上载和修改共享文件。",
+		"zh_tw": "可以上載和修改共享文件。"
+	},
+	"up_comment1": {
+		"kr": "파일을 업로드하시겠습니까?",
+		"en": "Are you sure you want to upload the file?",
+		"jp": "ファイルをアップロードしますか？",
+		"zh_cn": "确定要上传文件吗 ？",
+		"zh_tw": "確定要上傳文件嗎 ？"
+	},
+	"up_comment2": {
+		"kr": "기존 작업된 톡이 삭제됩니다.",
+		"en": "The existing worked talk will be deleted.",
+		"jp": "既存の作業済みのトークが削除されます。",
+		"zh_cn": "将删除现有已处理的谈话。",
+		"zh_tw": "將刪除現有已處理的談話。"
+	},
+	"login_comment": {
+		"kr": "로그인을 해주세요.",
+		"en": "Please log In.",
+		"jp": "ログインしてください。",
+		"zh_cn": "请登录。",
+		"zh_tw": "請登錄。"
+	},
+	"error_image_size": {
+		"kr": "이미지 용량을 초과하였습니다.",
+		"en": "Image size exceeded.",
+		"jp": "画像容量を超えました。",
+		"zh_cn": "超过了图像容量。",
+		"zh_tw": "超過了圖像容量。"
+	},
+	"error_title_size": {
+		"kr": "타이틀은 30자까지 가능합니다.",
+		"en": "Title can be up to 30 characters long.",
+		"jp": "タイトルは30文字まで入力可能です。",
+		"zh_cn": "题目最多可以写30个字。",
+		"zh_tw": "題目最多可以寫30個字。"
+	},
+	"error_series_size": {
+		"kr": "시리즈 타이틀은 20자까지 가능합니다.",
+		"en": "Series Title can be up to 20 characters long.",
+		"jp": "シリーズタイトルは20文字まで入力可能です。",
+		"zh_cn": "系列标题最多可包含20个字符。",
+		"zh_tw": "系列標題最多可包含20個字符。"
+	},
+	"error_noCharacter": {
+		"kr": "최소 한명의 캐릭터가 있어야합니다.",
+		"en": "There must be at least one character.",
+		"jp": "少なくとも一人のキャラクターが必要です。",
+		"zh_cn": "至少需要一个角色。",
+		"zh_tw": "至少需要一個角色。"
+	},
+	"error_upload": {
+		"kr": "업로드에 실패했습니다.",
+		"en": "Upload failed.",
+		"jp": "アップロードに失敗しました。",
+		"zh_cn": "上传失败。",
+		"zh_tw": "上傳失敗。"
+	},
+	"upload_comment": {
+		"kr": "업로드 되었습니다.",
+		"en": "Upload Successed.",
+		"jp": "アップロードされました。",
+		"zh_cn": "已上传。",
+		"zh_tw": "已上傳。"
+	},
+	"rule_comment": {
+		"kr": "규정에 어긋날 시 삭제될 수 있습니다.",
+		"en": "It may be deleted if it violates the rules.",
+		"jp": "規定に違反すると削除されることがあります。",
+		"zh_cn": "违反规定可能会被删除。",
+		"zh_tw": "違反規定可能會被刪除。"
+	},
+	"image_max_comment": {
+		"kr": "이미지는 최대 3mb까지 가능합니다.",
+		"en": "Images can be up to 3mb.",
+		"jp": "画像は最大3MBまでアップロード可能です。",
+		"zh_cn": "图像最大可达3mb。",
+		"zh_tw": "圖像最大可達3mb。"
+	},
+	"login_comment1": {
+		"kr": "Firebase를 통해 회원관리가 이루어집니다.",
+		"en": "Membership management is done through Firebase.",
+		"jp": "Firebaseを通じて会員管理が行われます。",
+		"zh_cn": "通过Firebase进行会员管理。",
+		"zh_tw": "通過Firebase進行會員管理。"
+	},
+	"login_comment2": {
+		"kr": "로그인시 페이지가 새로고침됩니다.",
+		"en": "The page refreshes upon login.",
+		"jp": "ログインするとページが更新されます。",
+		"zh_cn": "登录后页面会更新。",
+		"zh_tw": "登錄後頁面會更新。"
+	},
+	"login_comment3": {
+		"kr": "작업중인 톡이 있다면 반드시 저장해주세요.",
+		"en": "If you have a talk that you are working on, be sure to save it.",
+		"jp": "作業中のトークがある場合は必ず保存してください。",
+		"zh_cn": "如有作业中的Talk，请务必保存。",
+		"zh_tw": "如有作業中的Talk，請務必保存。"
+	},
+	"nickname_comment1": {
+		"kr": "중복된 닉네임입니다.",
+		"en": "Duplicate nickname.",
+		"jp": "重複したニックネームです。",
+		"zh_cn": "是重复的昵称。",
+		"zh_tw": "是重複的暱稱。"
+	},
+	"nickname_comment2": {
+		"kr": "닉네임은 최대 10글자까지 가능합니다.",
+		"en": "Nicknames can be up to 10 characters long.",
+		"jp": "ニックネームは最大10文字まで入力可能です。",
+		"zh_cn": "昵称最多可以有10个字。",
+		"zh_tw": "暱稱最多可以有10個字。"
+	},
+	"nickname_comment3": {
+		"kr": "미입력시 Mollu가 기본값입니다.",
+		"en": "If not entered, Mollu is the default.",
+		"jp": "未入力時はMolluがデフォルトです。",
+		"zh_cn": "未输入时Mollu为默认值。",
+		"zh_tw": "未輸入時Mollu爲默認值。"
+	},
+	"report_comment1": {
+		"kr": "신고 내용을 입력해주세요.",
+		"en": "Please enter your report details.",
+		"jp": "申告内容を入力してください。",
+		"zh_cn": "请输入申报内容。",
+		"zh_tw": "請輸入申報內容。"
+	},
+	"report_comment2": {
+		"kr": "신고 내용은 20글자까지 가능합니다.",
+		"en": "Report content can be up to 20 characters.",
+		"jp": "申告内容は20文字まで入力可能です。",
+		"zh_cn": "申报内容最多可以20个字。",
+		"zh_tw": "申報內容最多可以20個字。"
+	},
+	"delete_series_talk": {
+		"kr": "포함된 몰루톡까지 삭제",
+		"en": "Delete even included MolluTalk",
+		"jp": "シリーズに含まれたMolluTalkまで削除する",
+		"zh_cn": "删除至包含的 MolluTalk",
+		"zh_tw": "刪除至包含的 MolluTalk"
+	},
+	"change_talk_comment": {
+		"kr": "해당 톡으로 변경하시겠습니까?",
+		"en": "Do you want to change to that talk?",
+		"jp": "該当トークに変更しますか？",
+		"zh_cn": "您要换成相关聊天工具吗?",
+		"zh_tw": "您要換成相關聊天工具嗎?"
+	},
+	"reset_talk_comment": {
+		"kr": "처음부터 다시 시작하시겠습니까?",
+		"en": "Do you want to restart?",
+		"jp": "最初からやり直しますか？",
+		"zh_cn": "从头再来吗?",
+		"zh_tw": "從頭再來嗎?"
+	},
+	"move_page_comment": {
+		"kr": "페이지를 이동하시겠습니까?",
+		"en": "Are you sure you want to move the page?",
+		"jp": "ページを移動しますか？",
+		"zh_cn": "确定要移动页面吗 ？",
+		"zh_tw": "確定要移動頁面嗎 ？"
+	},
+	"delete_talk_comment": {
+		"kr": "기존 대화 내용이 삭제됩니다.",
+		"en": "Existing conversation transcripts are deleted.",
+		"jp": "既存の会話内容が削除されます。",
+		"zh_cn": "现有对话内容将被删除。",
+		"zh_tw": "現有對話內容將被刪除。"
+	},
+	"off_the_record_mode_comment": {
+		"kr": "게임에 공개되지 않는 학생(캐릭터)가 표시됩니다.",
+		"en": "Students (characters) not revealed to the game are displayed.",
+		"jp": "ゲームに公開されていない生徒（キャラクター）が表示されます。",
+		"zh_cn": "显示游戏中未公开的学生(角色)。",
+		"zh_tw": "顯示遊戲中未公開的學生(角色)。"
+	},
+	"off_the_record_mode_comment1": {
+		"kr": "해당 톡은 비공개 학생이 포함되어있습니다.",
+		"en": "This Talk includes off the record students.",
+		"jp": "このトークは、プライベートの学生が含まれています。",
+		"zh_cn": "那个脱口秀包含私生活学生。",
+		"zh_tw": "那個脫口秀包含私生活學生。"
+	},
+	"off_the_record_mode_comment2": {
+		"kr": "설정에서 비공개 모드를 활성화해주세요.",
+		"en": "Please enable Off The Record Mode in Setting.",
+		"jp": "設定でプライベートモードをオンにしてください。",
+		"zh_cn": "请在设置中激活专用模式。",
+		"zh_tw": "請在設置中激活專用模式。"
+	},
+	"noSearch_comment": {
+		"kr": "메세지가 없습니다.",
+		"en": "There is No Message.",
+		"jp": "メッセージがありません。",
+		"zh_cn": "没有信息。",
+		"zh_tw": "沒有信息。"
+	},
+	"no_playlist_comment": {
+		"kr": "플레이리스트가 없습니다.",
+		"en": "There is No Playlist.",
+		"jp": "プレイリストはありません。",
+		"zh_cn": "没有播放列表。",
+		"zh_tw": "沒有播放列表。"
+	},
+	"no_music_comment": {
+		"kr": "음악이 없습니다.",
+		"en": "There is No Music.",
+		"jp": "音楽はありません。",
+		"zh_cn": "没有音乐。",
+		"zh_tw": "沒有音樂。"
+	},
+	"image_download": {
+		"kr": "이미지가 다운로드 안 된 경우 해당 이미지를 다운받아주세요.",
+		"en": "If the image has not been downloaded, please download it.",
+		"jp": "画像がダウンロードされない場合は、表示された画像をダウンロードしてください。",
+		"zh_cn": "如果未下载图像，请下载该图像。",
+		"zh_tw": "如果未下載圖像，請下載該圖像。"
+	},
+	"filter_selectBox": {
+		"kr": "검색해보세요.",
+		"en": "Search for it.",
+		"jp": "検索してみてください。",
+		"zh_cn": "请搜索一下。",
+		"zh_tw": "請搜索一下。"
+	},
+	"time_comment": {
+		"kr": "시간을 입력해주세요.",
+		"en": "Please enter a time.",
+		"jp": "時間を入力してください。",
+		"zh_cn": "请输入时间。",
+		"zh_tw": "請輸入時間。"
+	},
+	"help_translation": {
+		"kr": "번역을 도와주세요!",
+		"en": "Please help me translate!",
+		"jp": "翻訳を手伝ってください！",
+		"zh_cn": "请帮我翻译！",
+		"zh_tw": "請幫我翻譯！"
+	},
+	"delete_account_comment1": {
+		"kr": "회원님의 창작톡은 익명으로 전환되며 비공개톡은 삭제 처리됩니다.",
+		"en": "Your creative talk will be converted to anonymous and private talk will be deleted.",
+		"jp": "あなたのクリエイティブトークは匿名に変換され、プライベートトークは削除されます。",
+		"zh_cn": "你的创意谈话将被转换为匿名谈话，私人谈话将被删除。",
+		"zh_tw": "你的創意談話將被轉換爲匿名談話，私人談話將被刪除。"
+	},
+	"delete_account_comment2": {
+		"kr": "삭제된 계정은 되돌릴 수 없습니다.",
+		"en": "Deleted accounts cannot be reversed.",
+		"jp": "削除されたアカウントは元に戻すことはできません。",
+		"zh_cn": "删除的账号无法返回。",
+		"zh_tw": "刪除的賬號無法返回。"
+	},
+	"delete_account_comment3": {
+		"kr": "탈퇴버튼을 누르면 재로그인해서 인증하게됩니다. ",
+		"en": "If you press the withdrawal button, you will log in again and authenticate.",
+		"jp": "退会ボタンを押すと、再ログインして認証します。",
+		"zh_cn": "按下退出按钮，就会重新登录认证。",
+		"zh_tw": "按下退出按鈕，就會重新登錄認證。"
+	},
+	"delete_account_comment4": {
+		"kr": "탈퇴하실 계정으로 로그인 해주세요. ",
+		"en": "Please log in with the account you want to leave.",
+		"jp": "退会するアカウントでログインしてください。",
+		"zh_cn": "请用要注销的账号登录。",
+		"zh_tw": "請用要註銷的賬號登錄。"
+	},
+	"display_ads": {
+		"kr": "광고 자리입니다.",
+		"en": "Its a commercial spot.",
+		"jp": "広告の席です。",
+		"zh_cn": "是广告位置。",
+		"zh_tw": "是廣告位置。"
+	},
+	"ID": {
+		"kr": "ID",
+		"en": "ID",
+		"jp": "ID",
+		"zh_cn": "ID",
+		"zh_tw": "ID"
+	}
+}
+if(localStorage['mt-edit'])mt_text.add = {"kr":"추가","en":"Add","jp":"追加","zh_cn":"追加","zh_tw":"追加"}

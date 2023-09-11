@@ -611,7 +611,7 @@
 												alt: String(e.no),
 												width: 252,
 												height: 252,
-												src: loadhead(e.no+'.'+e.index),//#下方快捷角色选择框
+												src: loadhead(e.no,e.index),//#下方快捷角色选择框
 												onClick: function()
 												{
 													_(e)
@@ -640,7 +640,7 @@
 								width: 252,
 								height: 252,
 								alt: "sensei",
-								src: loadhead(d.I.no+'.'+d.I.index),//#右侧老师本人
+								src: loadhead(d.I.no,d.I.index),//#右侧老师本人
 								onClick: function()
 								{
 									e((0, h.Ks)(d.I))
@@ -747,7 +747,7 @@
 							{
 								return !(n.no === t.no && e === t.index)
 							}))
-							.length === r.length ? o((0, h.AU)(c)) : o((0, h.F5)(i)), t(null)
+							.length === r.length ? o((0, h.AU)(c)) : o((0, h.F5)(i))//#
 						};
 					return (0, m.jsx)(a.Z,
 					{
@@ -760,7 +760,7 @@
 									width: 252,
 									height: 252,
 									alt: "profile",
-									src: loadhead(n.no+'.'+e),//#左方人物皮肤选择分支
+									src: loadhead(n.no,e),//#左方人物皮肤选择分支
 									onError: function(e)
 									{
 										var n = e.currentTarget;
@@ -825,7 +825,7 @@
 									{
 										width: 252,
 										height: 252,
-										src: loadhead(n.no+'.'+n.profile[0]),//#左方选择框
+										src: loadhead(n.no,n.profile[0]),//#左方选择框
 										onError: function(e)
 										{
 											var n = e.currentTarget;
@@ -840,23 +840,24 @@
 											{
 												children: (0, m.jsx)(E,
 												{
+													style:{color:'black'},//@
 													className: "bold",
 													children: n.name[a].replaceAll("-", " ")
 												})
 											})
 										}), (0, m.jsx)(R,
 										{
-											children: (0, m.jsx)(D,
+											children: [(0, m.jsx)(D,
 											{
-												children: n.club[a]
-											})
+												children: n.school[a] === '%23' ? n.club[a] : n.school[a]//#显示学校
+											}),(0, m.jsx)(D,{children: n.club[a]})]//@显示社团
 										})]
 									})]
 								}), (0, m.jsx)(B,
 								{
 									width: 252,
 									height: 252,
-									src: "MoeTalk/UI/School/".concat(n.school.en.indexOf('#') > -1 ? '%23' : n.school.en, ".webp"),//#学校
+									src: "MoeTalk/UI/School/"+(n.school[a] === '%23' ? '%23' : n.no.toString().split('/')[0])+'.webp',//#学校图标
 									onError: function(e)
 									{
 										var n = e.currentTarget;
@@ -1005,7 +1006,7 @@
 						{
 							style:
 							{
-								maxHeight: n ? "12rem" : "0"
+								maxHeight: n ? ($jquery('.LeftScreen__CharContainer-sc-jf2v8s-1').outerHeight())+"px" : "0"//#设置分类框最大高度
 							},
 							children: [(0, m.jsxs)(A,
 							{
@@ -1018,25 +1019,98 @@
 									onClick: function()
 									{
 										t()
+										club()//@
 									},
 									children: (0, m.jsx)(G,
 									{})
 								})]
 							}), (0, m.jsx)(q,
 							{
-								children: L.h5.map(function(e, n)
+								style:{overflow:'scroll',display:'block'},//@滚动支持
+								children: [L.h5.map(function(e, n)
 								{
 									return (0, m.jsx)(c.Bx,
 									{
 										className: u === e ? "selected medium" : "medium",
 										onClick: function()
 										{
-											localStorage['mt-order'] = e//@储存排序方式
 											d(e)
 										},
 										children: F.Z[e][l]
 									}, n)
+								}),
+								//*新增社团分类
+								(0, m.jsxs)(A,
+								{
+									children: [(0, m.jsx)(U,
+									{
+										className: "bold",
+										children: mt_text['select'][lang]+mt_text['club'][lang]+"："
+									}), (0, m.jsx)(c.Bx,
+									{
+										className:"bold",
+										style:
+										{
+											color: 'black'
+										},
+										onClick: function()
+										{
+											club(true)
+										},
+										children: mt_text['clear'][lang]+mt_text['select'][lang]
+									})]
+								}), 
+								mt_school.map(function(v, k)
+								{
+									return (0, m.jsx)('dl',
+									{
+										className: "dropdown",
+										children: [(0, m.jsx)('button',
+										{
+											style:
+											{
+												height:"2.5rem",
+												height:"auto",
+												minHeight:"2.5rem",
+
+												width:"32%",
+												width:"auto",
+												minWidth:"32%"
+											},
+											className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 cVRiXh kwhiZC medium",
+											children: [(0, m.jsx)('p',
+											{
+												style:
+												{
+													color:"white"
+												},
+												className: "multiSel "+v
+											}), (0, m.jsx)('span',
+											{
+												className: "hida",
+												children: mt_schoolname[v][lang] ? mt_schoolname[v][lang] : v
+											})]
+										}), (0, m.jsx)('ul',
+										{
+											className: "mutliSelect",
+											children: mt_club[v].map(function(value, index)
+											{
+												return (0, m.jsx)('li',
+												{
+													children: [(0, m.jsx)('input',
+													{
+														type: "checkbox",
+														className: "club",
+														school: v,
+														value: value
+													}),mt_clubname[value][lang] ? mt_clubname[value][lang] : value]
+												})
+											})
+										})]
+									})
 								})
+								//*新增社团分类
+								]
 							}), (0, m.jsx)(A,
 							{
 								children: (0, m.jsx)(c.Mm,
@@ -1044,6 +1118,15 @@
 									className: "medium",
 									onClick: function()
 									{
+										//*储存分类和排序方式
+										localStorage['mt-order'] = u
+										clubarr = {};
+										$jquery(".club:checked").each(function()
+										{
+											clubarr[$jquery(this).attr('school')+'/'+$jquery(this).attr('value')] = 'YES'
+										})
+										localStorage['mt-club'] = JSON.stringify(clubarr);
+										//*储存分类和排序方式
 										t(), a(
 										{
 											sortCharType: u
@@ -1159,6 +1242,7 @@
 									onClick: function()
 									{
 										s(!l)
+										club()//@
 									},
 									children: (0, m.jsx)(X,
 									{
@@ -1353,11 +1437,11 @@
 							let arr = JSON.parse(JSON.stringify(_.Z));
 							let carr = [];
 							if(localStorage['custom'])carr = JSON.parse(localStorage['custom'])[0]['club'][0]['characters'];
-							for(let num = 0;num < arr.length;num++)
-							{
-								if(names[lang] && names[lang][arr[num].no])arr[num].name[lang] = names[lang][arr[num].no];
-								arr[num].club[lang] = arr[num].club[lang]+'@'+arr[num].no;
-							}
+							// for(let num = 0;num < arr.length;num++)
+							// {
+							// 	if(names[lang] && names[lang][arr[num].no])arr[num].name[lang] = names[lang][arr[num].no];
+							// 	arr[num].club[lang] = arr[num].club[lang]+'@'+arr[num].no;
+							// }
 							for(let num = 0;num < carr.length;num++)
 							{
 								arr.push(
@@ -1368,29 +1452,42 @@
 										zh_tw : carr[num].zh_cn,
 										en : carr[num].zh_cn,
 										jp : carr[num].zh_cn,
-										kr : carr[num].zh_cn
+										kr : carr[num].zh_cn,
+										pinyin : carr[num].zh_cn,
 									},
 									club : 
 									{
-										zh_cn : '#'+(carr[num].no-1000),
-										zh_tw : '#'+(carr[num].no-1000),
-										en : '#'+(carr[num].no-1000),
-										jp : '#'+(carr[num].no-1000),
-										kr : '#'+(carr[num].no-1000)
+										zh_cn : '#'+(carr[num].no),
+										zh_tw : '#'+(carr[num].no),
+										en : '#'+(carr[num].no),
+										jp : '#'+(carr[num].no),
+										kr : '#'+(carr[num].no),
+										pinyin : '#'+(carr[num].no),
 									},
 									school : 
 									{
-										zh_cn : '#'+(carr[num].no-1000),
-										zh_tw : '#'+(carr[num].no-1000),
-										en : '#'+(carr[num].no-1000),
-										jp : '#'+(carr[num].no-1000),
-										kr : '#'+(carr[num].no-1000)
+										zh_cn : '%23',
+										zh_tw : '%23',
+										en : '%23',
+										jp : '%23',
+										kr : '%23',
+										pinyin : '%23',
 									},
 									no: carr[num].no,
 									illust : 0,
 									profile : [1],
 									momotalk : true,
 									open : true
+								})
+							}
+							if(JSON.stringify(clubarr) !== '{}')
+							{
+								arr.map(function(v, k)
+								{
+									let arr1 = v['no'].toString().split('/');
+									arr1.pop();
+									arr1 = arr1.join('/')
+									if(!clubarr[arr1])delete arr[k]
 								})
 							}
 							//*更新自定义角色的读取方式
@@ -3488,46 +3585,65 @@
 							}
 							r((0, eo.U_)(n)), s(), setTimeout(function(){nextindex().scrollIntoView(!1)}, 100)//#更新表情位置
 						};
-					if(cfemoji != 'NO'){let cf = cfemoji;cfemoji = 'NO';//@加入判断
-						//*定义差分文件链接
+					//*定义差分文件链接
+					if(cfemoji != 'NO')
+					{
+						let cf = cfemoji;cfemoji = 'NO';//@加入判断
 						let no = JSON.parse(localStorage['qchar'])['selected']['no'];
-						let index = JSON.parse(localStorage['qchar'])['selected']['index'];
-						let cfindex = no+'.'+index;///读取选择的角色
-						if(localStorage['CharFaceIndex'] && JSON.parse(localStorage['CharFaceIndex'])[cfindex] != null)cfindex = JSON.parse(localStorage['CharFaceIndex'])[cfindex];
+						if(!isNaN(parseInt(no)))no = '0/0/'+no;
+						let cfindex = no.split('/')[2];///读取选择的角色
+
+						if(localStorage['CharFaceIndex'] && JSON.parse(localStorage['CharFaceIndex'])[cfindex] != null)
+						{
+							cfindex = JSON.parse(localStorage['CharFaceIndex'])[cfindex];
+						}
 						let link;let cflink = null;let cfarr = [];cfarr[0] = 'CharFace';///定义链接
 						let charname = '暂无';
-						if(no > 999)
+
+						if(!isNaN(parseInt(no.split('/')[2])))
 						{
-							charname = JSON.parse(localStorage['custom'])[0].club[0].characters.filter(function(item)
+							if(no.split('/')[2] > 0)
 							{
-								return item.no == no;
-							});
-							charname = charname[0].zh_cn;
+								charname = JSON.parse(localStorage['custom'])[0].club[0].characters.filter(function(item)
+								{
+									return item.no == no.split('/')[2];
+								});
+								charname = charname[0] ? charname[0].zh_cn : '缺失角色';
+							}
+							else
+							{
+								charname = '主角';
+							}
 						}
 						else
 						{
-							if(no == 0)no = 193;
 							charname = _.Z.filter(function(item)
 							{
 								return item.no == no;
 							});
-							charname = charname[0].name[lang];
+							charname = charname[0] ? charname[0].name[lang] : '缺失角色';
 						}
-						if(cf == 'CharFace' && charface[cfindex] && charface[cfindex] != 'NO')
+
+						let mt_charface = mt_characters[cfindex] ? mt_characters[cfindex].charface : ''
+						if(cf == 'CharFace' && mt_charface && mt_charface !== '')
 						{
-							if(charface[cfindex].split('.').length < 3)cfindex = charface[cfindex];
-							let arr = charface[cfindex].split(',');
-							for(let i = 0;i < arr.length;i++)
+							if(mt_charface.split('.').length < 3)cfindex = mt_charface;
+
+							if(mt_charface.split(',').length <= CFPI)CFPI = 0;
+							if(CFPI < 0)CFPI = mt_charface.split(',').length-1;
+							let arr = mt_charface.split(',')[CFPI];
+							for(let num = 1;num <= arr.split('.')[1];num++)
 							{
-								for(let num = 1;num <= arr[i].split('.')[1];num++)
-								{
-									cflink = 'CharFace/'+(arr[i].split('.')[0].replaceAll('_','/'))+'/'+arr[i].split('.')[0]+'.';
-									cfarr.push(cflink+num+'.webp')
-								}
+								cflink = 'CharFace/'+(arr.split('.')[0].replaceAll('_','/'))+'/'+arr.split('.')[0]+'.';
+								cfarr.push(cflink+num+'.webp')
 							}
 						}
+						else
+						{
+							CFPI = -1;
+						}
 						let cfnum = cf == 'Emoji' ? '112+25' : cfarr.length-1;///差分总数
-						//*定义差分文件链接
+						
 						return (0, m.jsx)(m.Fragment,
 						{
 							children: (0, m.jsx)(ea.Xf,
@@ -3548,9 +3664,10 @@
 										children: [(0, m.jsx)(ea.Dx,
 										{
 											className: "bold",
-											children: cf == 'Emoji' ? F.Z.emoticon[l]+'('+cfnum+')' : '差分表情：'+charname+'('+cfnum+')'//#加入差分表情
+											children: cf == 'Emoji' ? F.Z.emoticon[l]+'('+cfnum+')' : charname+'('+cfnum+')'//#加入差分表情
 										}), (0, m.jsx)(ea.ec,
 										{
+											id: 'close',//@
 											onClick: function()
 											{
 												s()
@@ -3558,7 +3675,39 @@
 											children: (0, m.jsx)(c.j4,
 											{})
 										})]
-									}), (0, m.jsx)(eH,
+									}),cf == 'CharFace' ? (0, m.jsxs)(ea.h4,
+									{
+										children: [(0, m.jsx)(c.Bx,
+										{
+											className: "bold",
+											style:
+											{
+												"width": "auto",
+												"color": "black"
+											},
+											children: '←',
+											onClick:function(){click('#close');CFPI = CFPI-1}
+										}), (0, m.jsx)(ea.Dx,
+										{
+											className: "bold",
+											style:
+											{
+												"width": "25%",
+												textAlign:"center"
+											},
+											children: (CFPI+1)+"/"+(mt_charface ? mt_charface.split(',').length : 0)
+										}), (0, m.jsx)(c.Bx,
+										{
+											className: "bold",
+											style:
+											{
+												"width": "auto",
+												"color": "black"
+											},
+											children: '→',
+											onClick:function(){click('#close');CFPI = CFPI+1}
+										})]
+									}) : '', (0, m.jsx)(eH,
 									{
 										children: (0, m.jsxs)(eK,
 										{
@@ -3603,7 +3752,8 @@
 								})
 							})
 						})
-					}//@加入判断
+					}
+					//*定义差分文件链接
 				},
 				eH = (0, o.ZP)(ea.$0)
 				.withConfig(
@@ -3882,7 +4032,7 @@
 											width: "2.2rem",
 											height: "2.2rem"
 										},
-										title: "emoticon",
+										id: "CharFace",
 										onClick: function()
 										{
 											cfemoji = 'CharFace';///这是差分表情
@@ -4319,7 +4469,7 @@
 												Z("image", e)///1
 											}, N)
 										}
-									}), "add"===a?(0, m.jsx)(c.NZ,{src:loadhead(p.no+'.'+p.index)}):'',(0, m.jsx)(c.Kx,
+									}), "add"===a?(0, m.jsx)(c.NZ,{src:loadhead(p.no,p.index)}):'',(0, m.jsx)(c.Kx,
 									{
 										className: "medium",
 										maxRows: 5,
@@ -4863,7 +5013,7 @@
 									},
 									height: 252,
 									width: 252,
-									src: loadhead(n.sCharacter.no+'.'+n.sCharacter.index),//#聊天记录头像
+									src: loadhead(n.sCharacter.no,n.sCharacter.index),//#聊天记录头像
 									onError: function(e)
 									{
 										var n = e.currentTarget;
@@ -5057,7 +5207,12 @@
 						//*
 						(0, m.jsxs)(eU,
 						{
-							style:{padding: "5px 0",},
+							style:
+							{
+								padding: "5px 10px",
+								width: "auto",
+								marginLeft: "auto"
+							},
 							children: [
 								(0, m.jsx)(c.jl,
 								{
@@ -5076,20 +5231,6 @@
 								(0, m.jsx)(c.jl,
 								{
 									style:{"width": "auto"},
-									id:'delsto',
-									children: (0, m.jsx)(W,
-									{
-										className: "bold",
-										children: (0, m.jsx)(X,
-										{
-											style:{fontSize: "1.1rem"},
-											children: '区间选择'
-										})
-									})
-								}),
-								(0, m.jsx)(c.jl,
-								{
-									style:{"width": "auto"},
 									id:'rdelsall',
 									children: (0, m.jsx)(W,
 									{
@@ -5098,6 +5239,20 @@
 										{
 											style:{fontSize: "1.1rem"},
 											children: '反选'
+										})
+									})
+								}),
+								(0, m.jsx)(c.jl,
+								{
+									style:{"width": "auto"},
+									id:'delsto',
+									children: (0, m.jsx)(W,
+									{
+										className: "bold",
+										children: (0, m.jsx)(X,
+										{
+											style:{fontSize: "1.1rem"},
+											children: '区间选择'
 										})
 									})
 								}),
@@ -5449,7 +5604,7 @@
 				{
 					displayName: "talk__ImgBox",
 					componentId: "sc-eq7cqw-3"
-				})(["max-width:"+localStorage['mt-size']+";border:2px solid ", ";background-color:transparent;padding:0.5rem;border-radius:10px;"], function(e)
+				})(["max-width:"+localStorage['mt-size']+";border:2px solid ", ";background-color:"+localStorage['mt-style'].split(' ')[1]+";padding:0.5rem;border-radius:10px;"], function(e)
 				//#仿ClosureTalk把90%改成40%，可以考虑自定义
 				{
 					return localStorage['mt-style'].split(' ')[1]//#自定义样式
@@ -5548,7 +5703,7 @@
 				{
 					displayName: "talk__TimeSpan",
 					componentId: "sc-eq7cqw-12"
-				})(["color :", ";font-size :0.9rem;margin:auto 0.5rem 0 0.5rem;flex-shrink:0;"], function(e)
+				})(["color :", ";font-size :0.9rem;margin:auto 0.5rem 0 0.5rem;flex-shrink:0;white-space: pre-wrap;"], function(e)
 				{
 					return e.theme.color.rgb69_78_89
 				}),

@@ -1,6 +1,5 @@
 //https://try8.cn/tool/format/js
-localStorage['heads'] = localStorage['heads'].replaceAll('.1"','/1"')
-var version = '2.12';
+var version = '2.2';
 var cfemoji = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var mtype = 'chat';//
@@ -11,6 +10,9 @@ var maxHeight = browser.isFirefox ? 16384*2 : 16384;
 var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
 var $jquery = $;
 var clearImage = false;
+
+var clubarr = {};
+if(localStorage['mt-club'])clubarr = JSON.parse(localStorage['mt-club']);
 function mt_height()
 {
 	let num;
@@ -25,9 +27,9 @@ if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname 
 }
 if(!localStorage['nofont'])$("head").append(font);//加载字体
 //头像缓存
-if(!localStorage['imgs'] || localStorage['imgs'] != 503)
+if(!localStorage['imgs'] || localStorage['imgs'] != 851)
 {
-	$.getJSON("https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MolluTalk/main/MT-CharImg.JSON",function(json) 
+	$.getJSON("https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MolluTalk/main/MT-CharImg.JSON",function(json)
 	{
 		localStorage['imgs'] = 0;
 		$.each(json,function(k,v)
@@ -68,7 +70,7 @@ $("body").on('click',function()
 $(".bIcduz").wait(function()
 {
 	height = mt_height()
-	$(".bIcduz").after("<span id='size' class='"+class1+"'><b>"+height+"\n"+size+"KB</b></span>");
+	$(".bIcduz").after("<span id='size' class='"+class1+"' style='white-space:pre;'><b>"+height+"\n"+size+"KB</b></span>");
 	$(".hXhSup").prepend("<span id='warning'><b></b></span>");
 	warning();
 },".bIcduz")
@@ -111,7 +113,7 @@ $('body').on('click',"#makecus",function()
 		else{chararr.push({club:[{characters:[]}]})}//如果没有自定义角色
 		char = chararr[0]['club'][0]['characters'];
 
-		if(char.length == 0)id = 1000;
+		if(char.length == 0)id = 1;
 		else id = char[char.length-1]['no']+1;
 
 		char.push({
@@ -119,7 +121,7 @@ $('body').on('click',"#makecus",function()
 			zh_cn : cus
 		})
 		//console.log(chararr);
-		imgindex = id+".1";
+		imgindex = id+"/1";
 		$("#cusname").text(cus);
 		$("#custom").click();
 	}
@@ -147,7 +149,7 @@ $('body').on('click',"#delcus",function()
 	{
 		$.each(id.trim().split(" "),function(k,cusid)
 		{
-			cusid = parseInt(cusid)+1000;
+			cusid = parseInt(cusid);
 			$.each(arr[0]['club'][0]['characters'],function(k,i)
 			{
 				if($(this)[0]['no'] == cusid)arr[0]['club'][0]['characters'].splice(k,1);
@@ -180,7 +182,7 @@ $('body').on('click',"#changecus",function()
 		let arr = JSON.parse(localStorage['custom'])[0]['club'][0]['characters'];
 		$.each(arr,function(k,i)
 		{
-			if($(this)[0]['no'] == id+1000)
+			if($(this)[0]['no'] == id)
 			{
 				let cname = prompt("若不想上传头像那么则只修改角色名\n当前角色名为：",$(this)[0]['zh_cn']);
 				if(cname != null && cname.trim() != '')
@@ -189,7 +191,7 @@ $('body').on('click',"#changecus",function()
 					$(this)[0]['zh_cn'] = cname;
 					chararr[0]['club'][0]['characters'] = arr;
 					//console.log(chararr[0]['club'][0]['characters'][id]);
-					imgindex = arr.indexOf($(this)[0])+1000+'.1';
+					imgindex = arr.indexOf($(this)[0])+'/1';
 					$("#cusname").text($(this)[0]['zh_cn'].trim());
 					localStorage['custom'] = JSON.stringify(chararr);//保存名字
 					$("#custom").click();
@@ -257,9 +259,8 @@ $('body').on('click',"#cf",function()
 	if(CharFaceIndex == null)
 	{
 		let no = JSON.parse(localStorage['qchar'])['selected']['no'];
-		let index = JSON.parse(localStorage['qchar'])['selected']['index'];
-		CharFaceIndex = no+'.'+index;///读取选择的角色
-		alert('你选择了差分映射功能，根据你下方被选中的角色\n其包含的差分表情会映射到你下一个选择的角色\n如果你不想映射，请再点击一遍按钮\n如果想恢复默认映射，请再点击一下被选中的头像');
+		CharFaceIndex = !isNaN(parseInt(no)) ? no : no.split('/')[2];
+		alert('你选择了差分映射功能，根据你下方被选中的角色\n其包含的差分表情会映射到你下一个选择的角色\n如果你不想映射，请再点击一遍按钮\n如果想恢复默认映射，请再点击一下被选中的头像或与之相同的角色');
 	}
 	else
 	{
@@ -274,10 +275,10 @@ $('body').on('click',".fzOyMd",function()
 		if(!localStorage['CharFaceIndex'])localStorage['CharFaceIndex'] = '{}';
 		let cfiarr = JSON.parse(localStorage['CharFaceIndex']);
 		let no = JSON.parse(localStorage['qchar'])['selected']['no'];
-		let index = JSON.parse(localStorage['qchar'])['selected']['index'];
-		if(CharFaceIndex != no+'.'+index)
+		no = !isNaN(parseInt(no)) ? no : no.split('/')[2];
+		if(CharFaceIndex != no)
 		{
-			cfiarr[no+'.'+index] = CharFaceIndex;
+			cfiarr[no] = CharFaceIndex;
 			localStorage['CharFaceIndex'] = JSON.stringify(cfiarr);
 			CharFaceIndex = null;
 			alert('映射成功');
@@ -308,7 +309,7 @@ $('body').on('click',"#delsall",function()
 		$(".dels").each(function()
 		{
 			$(this).prop("checked",false);
-			$(this).parent().removeAttr("style")//
+			$(this).parent().css("background-color","")//
 		});
 	}
 })
@@ -319,7 +320,7 @@ $('body').on('click',"#rdelsall",function()
 	{
 		$(this).prop("checked",!$(this).prop("checked"));
 		if($(this).prop('checked'))$(this).parent().css("background-color","rgb(202,215,221)")//
-		else $(this).parent().removeAttr("style")//
+		else $(this).parent().css("background-color","")//
 	});
 })
 //区间选择
@@ -342,7 +343,7 @@ $('body').on('click',"#delsto",function()
 //隐藏工具按钮拓展
 $('body').on('click',".gxgCGp:eq(4)",function()
 {
-	$('.hfOSPu').removeAttr("style")//
+	$('.hfOSPu').css("background-color","")//
 	if($('#delsto').attr('hidden'))
 	{
 		$('#delsall').attr('hidden',false)
@@ -362,7 +363,7 @@ $('body').on('click',".gxgCGp:eq(4)",function()
 $('body').on('change',".dels",function()
 {
 	if($(this).prop('checked'))$(this).parent().css("background-color","rgb(202,215,221)")//
-	else $(this).parent().removeAttr("style")//
+	else $(this).parent().css("background-color","")//
 })
 //自动跳到被选位置
 $('body').on('click',".dkwjoK",function()
@@ -375,8 +376,11 @@ $('body').on('click',".dkwjoK",function()
 })
 $(window).keydown(function(event)
 {
-	if(event.ctrlKey && event.which == 37)selectClick(37);
-	if(event.ctrlKey && event.which == 39)selectClick(39);
+	if($(".popup__MyModal-sc-1ardd6p-0.btncdx.visible.medium").length === 0)
+	{
+		if(event.ctrlKey && event.which == 37)selectClick(37);
+		if(event.ctrlKey && event.which == 39)selectClick(39);
+	}
 });
 $('body').on('click',"#mt-style",function()
 {
@@ -396,8 +400,48 @@ $('body').on('click',"#mt-style",function()
 	}
 })
 
+$('body').on('click',"#close",function()
+{
+	setTimeout(function()
+	{
+		$('#CharFace').click();
+	}, 1)
+})
 
+$("body").on('click',".dropdown button",function()
+{
+	$(this).next().slideToggle('fast');
+});
 
+$(document).bind('click', function(e)
+{
+	var $clicked = $(e.target);
+	if (!$clicked.parents().hasClass("dropdown")) $(".dropdown ul").hide();
+});
 
+$("body").on('click','.mutliSelect input[type="checkbox"]',function()
+{
 
+	var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').parent().text(),
+		title = $(this).parent().text() + ",";
 
+	var school = $(this).attr('school');
+	var id = school+'/'+$(this).val();
+
+	if($(this).is(':checked')) 
+	{
+		var html = '<span class="title" title="'+id+'">'+title+'</span>';
+		$('.multiSel.'+school).append(html);
+		$('.'+school).next().hide();
+		$('.'+school).parent().css("background-color","rgb(139, 187, 233)")
+	}
+	else
+	{
+		$('span[title="'+id+'"]').remove();
+		if($('.'+school).find('span').length === 0)
+		{
+			$('.'+school).next().show()
+			$('.'+school).parent().css("background-color","")
+		}
+	}
+});

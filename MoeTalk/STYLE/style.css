@@ -39,3 +39,25 @@ cursor: pointer;  /* 鼠标形状 */
 .dels[type="checkbox"]:checked {
    background: url("data:image/webp;base64,UklGRq4BAABXRUJQVlA4WAoAAAAwAAAADgAAEgAAVlA4TJABAAAvDoAEEOfiOrZtpdlPv3Bpgi5pkzqc5HIiTTiIJEmRaub4HjS9fzuMXYwiSZJSPcPpAA+YxCQW+PLesx01kuTI0Y2qXm9+R+MSWARmHhOv8XJbrp/2+Ss+lzXl2M5V/p9SquN/SGlimnPfxXT2j8R0tkTsF8mJvOzCvHK2x0zeyZOe9PgxEVdRaNeYQpSnY1zNcdFfraBPIU6jTYgTgjhNpXgIRSUR5tWnNhAJh4BRVIrDRVAuRtXmNBDKgwqwggsKslL8HIxggACAAfyBAgAAAAUEAACHsW2bzolt27b9Eef/Hzvv9d9H3EJE/xW2bdsoO909AwAgj1UTcgD4MFVi8VgmVV+mjo4JpZO45sOUkRmhlJJ59J0qgsx9v6O7I+HDSsi8zGXVnFK+L944v9w3eAjpUO/RCJUlMgyM7mJJ5+neaxZrff1gD5uiA57OrWqGu7IlQt0GeNq3igmw1/cpJwB3+1o2AXBmtHjTupaM77XGjx9wNS9FA96f9U1B/5tz/h+5f2R0vzk9D/xD9sMB") no-repeat center center;
 }
+
+.dropdown,
+.dropdown button,
+.dropdown .mutliSelect
+{
+    width: auto;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+.dropdown ul
+{
+    display: none;
+}
+.dropdown .title
+{
+	padding: 5px 5px 5px 5px;
+}
+/*.dropdown li
+{
+    display: inline;
+}*/

@@ -9,7 +9,7 @@
 }
 @font-face {
 	font-family:bold;
-	src:url(Title_Bold.woff) format("woff");
+	src:url(Title_Medium.woff) format("woff");
 	unicode-range:U+ac00-d7a3,U+0041-005a,U+0061-007a,U+0030-0039,U+002?,U+003a-0040,U+005b-0060,U+007b-007e,U+11??,U+3130-318f,U+a960-a97f,U+ac00-d7af,U+d7b0-d7ff
 }
 @font-face {
@@ -18,7 +18,7 @@
 }
 @font-face {
 	font-family:bold-cn;
-	src:url(NotoSansSC-Bold.otf)
+	src:url(NotoSansSC-Medium.otf)
 }
 [lang=en],[lang=en] .medium,[lang=ja],[lang=ja] .medium,[lang=ko],[lang=ko] .medium,[lang=zh-tw],[lang=zh-tw] .medium,[lang=zh-CN],[lang=zh-CN] .medium,[lang=zh],[lang=zh] .medium {
 	font-family:medium,medium-cn
