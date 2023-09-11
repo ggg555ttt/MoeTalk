@@ -8,7 +8,7 @@ var sm = true;
 var browser = os();//获取浏览器信息
 var maxHeight = browser.isFirefox ? 16384*2 : 16384;
 var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
-var charimg = "https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MolluTalk/main/MT-CharImg.JSON";
+var charimg = "https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main/MT-CharImg.JSON";
 var $jquery = $;
 var clearImage = false;
 var clubarr = {};
