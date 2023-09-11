@@ -8,9 +8,9 @@ var sm = true;
 var browser = os();//获取浏览器信息
 var maxHeight = browser.isFirefox ? 16384*2 : 16384;
 var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
+var charimg = "https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MolluTalk/main/MT-CharImg.JSON";
 var $jquery = $;
 var clearImage = false;
-
 var clubarr = {};
 if(localStorage['mt-club'])clubarr = JSON.parse(localStorage['mt-club']);
 function mt_height()
@@ -20,16 +20,26 @@ function mt_height()
 	else num = 1.1;
 	return parseInt(($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed(0))+80;
 }
+
 //判断网络
 if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname == 'frp.freefrp.net')
 {
 	font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font_web.css' data-n-g=''>";//更改为网络字体
 }
+//判断浏览器
+if(browser.isFirefox)
+{
+	font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
+	charimg = "./MT-CharImg.JSON"
+}
+
 if(!localStorage['nofont'])$("head").append(font);//加载字体
 //头像缓存
 if(!localStorage['imgs'] || localStorage['imgs'] != 851)
 {
-	$.getJSON("https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MolluTalk/main/MT-CharImg.JSON",function(json)
+	
+	
+	$.getJSON(,function(json)
 	{
 		localStorage['imgs'] = 0;
 		$.each(json,function(k,v)
