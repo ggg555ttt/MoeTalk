@@ -1,18 +1,12 @@
 //https://try8.cn/tool/format/js
-var version = '2.2';
 var cfemoji = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
-var mtype = 'chat';//
-var val = '';
-var sm = true;
+var val = '';//记录输入框值
 var browser = os();//获取浏览器信息
 var maxHeight = browser.isFirefox ? 16384*2 : 16384;
-var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
-var charimg = "https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main/MT-CharImg.JSON";
-var $jquery = $;
-var clearImage = false;
-var clubarr = {};
-if(localStorage['mt-club'])clubarr = JSON.parse(localStorage['mt-club']);
+var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//字体文件地址
+var charimg = "https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main/MT-CharImg.JSON";//缓存图片地址
+
 function mt_height()
 {
 	let num;
@@ -35,26 +29,24 @@ if(browser.isFirefox)
 
 if(!localStorage['nofont'])$("head").append(font);//加载字体
 //头像缓存
-if(!localStorage['imgs'] || localStorage['imgs'] != 851)
-{
-	
-	
-	$.getJSON(charimg,function(json)
-	{
-		localStorage['imgs'] = 0;
-		$.each(json,function(k,v)
-		{
-			let db;
-			openDB('MoeTalk').then((db =>
-			{
-				db = db;
-				let data = {key:k,val:v}
-				updateDB(db,'Custom', data)
-				closeDB(db)//关闭数据库
-			}))
-		})
-	});
-}
+// if(!localStorage['imgs'] || localStorage['imgs'] != 851)
+// {
+// 	$.getJSON(charimg,function(json)
+// 	{
+// 		localStorage['imgs'] = 0;
+// 		$.each(json,function(k,v)
+// 		{
+// 			let db;
+// 			openDB('MoeTalk').then((db =>
+// 			{
+// 				db = db;
+// 				let data = {key:k,val:v}
+// 				updateDB(db,'Custom', data)
+// 				closeDB(db)//关闭数据库
+// 			}))
+// 		})
+// 	});
+// }
 //$(".gxgCGp:eq(4)").wait(function(){$(".gxgCGp:eq(4)").click()},".gxgCGp:eq(4)")//默认隐藏工具按钮
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
 $("body").on('keydown',function()
@@ -99,12 +91,21 @@ $(".frVjsk").wait(function()
 //使用说明
 $('body').on('click',"#readme",function()
 {
-	if(confirm("MoeTalk是MotherTalk的后续版本\nMoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
-		"MolluTalk的代码取得方式来自浏览器自带的Ctrl+S\n"+
-		"对于代码的改动地点均用注释//与/**/标注\n"+
-		"点击【确认】将跳转至反馈页面"))
+	window.caches && caches.keys && caches.keys().then(function(keys)
 	{
-		window.open("https://wj.qq.com/s2/12952865/a1aa/");
+		keys.forEach(function(key)
+		{
+			console.log("delete cache", key);
+			caches.delete(key);
+		});
+	});
+	if(confirm("MoeTalk当前版本："+version+"\n"+
+		"MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
+		"MolluTalk的代码取得方式来自浏览器自带的Ctrl+S\n"+
+		"对于代码的改动地点均用注释语句标注\n"+
+		"点击【确认】将尝试更新版本并刷新页面"))
+	{
+		location.reload(true)
 	}
 
 });
@@ -175,45 +176,50 @@ $('body').on('click',"#delcus",function()
 //修改人物
 $('body').on('click',"#changecus",function()
 {
-	let id = parseInt($("#ccus").val());
-	let id2 = $("#ccus").val().split('@');
-	if(!isNaN(parseInt(id2[1])))
+	let id = $("#ccus").val().replaceAll(' ','');
+	if(id)
 	{
-		if(!names[lang])names[lang] = {};
-		let name = prompt("MoeTalk人物ID："+id2[1]+"，请输入TA的新名字");
-		if(name != null && name.trim() != '')names[lang][id2[1]] = name;
-		if(name == ' ') delete names[lang][id2[1]];
-		localStorage['mt-names'] = JSON.stringify(names);
-
-	}
-	if(!isNaN(id))
-	{
-		chararr = JSON.parse(localStorage['custom'])
-		let arr = JSON.parse(localStorage['custom'])[0]['club'][0]['characters'];
-		$.each(arr,function(k,i)
+		if(!isNaN(parseInt(id)))
 		{
-			if($(this)[0]['no'] == id)
+			chararr = JSON.parse(localStorage['custom'])
+			let arr = JSON.parse(localStorage['custom'])[0]['club'][0]['characters'];
+			$.each(arr,function(k,i)
 			{
-				let cname = prompt("若不想上传头像那么则只修改角色名\n当前角色名为：",$(this)[0]['zh_cn']);
-				if(cname != null && cname.trim() != '')
+				if($(this)[0]['no'] == id)
 				{
-					cname = cname.trim();
-					$(this)[0]['zh_cn'] = cname;
-					chararr[0]['club'][0]['characters'] = arr;
-					//console.log(chararr[0]['club'][0]['characters'][id]);
-					imgindex = arr.indexOf($(this)[0])+'/1';
-					$("#cusname").text($(this)[0]['zh_cn'].trim());
-					localStorage['custom'] = JSON.stringify(chararr);//保存名字
-					$("#custom").click();
+					let cname = prompt("自定义角色ID："+id+"\n若不想上传头像那么则只修改角色名\n当前角色名为：",$(this)[0]['zh_cn']);
+					if(cname != null && cname.trim() != '')
+					{
+						cname = cname.trim();
+						$(this)[0]['zh_cn'] = cname;
+						chararr[0]['club'][0]['characters'] = arr;
+						//console.log(chararr[0]['club'][0]['characters'][id]);
+						imgindex = arr.indexOf($(this)[0])+'/1';
+						$("#cusname").text($(this)[0]['zh_cn'].trim());
+						localStorage['custom'] = JSON.stringify(chararr);//保存名字
+						$("#custom").click();
+					}
+					
 				}
-				
+			})
+			$('.eIEKpg:eq(0)').click();//更新列表
+		}
+		else
+		{
+			if(mt_characters[id])
+			{
+				let name = prompt("当前人物ID："+id+"\n你想改为什么名字？\n为空则使用默认名",mt_name[id] ? mt_name[id] : "");
+				if(name != null && name.trim() != '')mt_name[id] = name
+				else mt_name[id] ? delete mt_name[id] : ''
+				localStorage['mt-name'] = JSON.stringify(mt_name)
+				$('.eIEKpg:eq(0)').click();click('.gxgCGp:eq(4)')//更新列表
 			}
-		})
-		$('.eIEKpg:eq(0)').click();//更新列表
+		}
+		
 	}
 	else
 	{
-		alert('请在下方输入角色ID再点击按钮！(#后面的纯数字)')
+		alert("请在下方输入角色ID再点击按钮！\n人物名称右侧的灰色斜体文本即为角色ID")
 	}
 })
 //储存头像
@@ -268,8 +274,8 @@ $('body').on('click',"#cf",function()
 {
 	if(CharFaceIndex == null)
 	{
-		let no = JSON.parse(localStorage['qchar'])['selected']['no'];
-		CharFaceIndex = !isNaN(parseInt(no)) ? no : no.split('/')[2];
+		let no = JSON.parse(localStorage['mt-selectedList'])['selected']['no'];
+		CharFaceIndex = no;
 		alert('你选择了差分映射功能，根据你下方被选中的角色\n其包含的差分表情会映射到你下一个选择的角色\n如果你不想映射，请再点击一遍按钮\n如果想恢复默认映射，请再点击一下被选中的头像或与之相同的角色');
 	}
 	else
@@ -284,8 +290,7 @@ $('body').on('click',".fzOyMd",function()
 	{
 		if(!localStorage['CharFaceIndex'])localStorage['CharFaceIndex'] = '{}';
 		let cfiarr = JSON.parse(localStorage['CharFaceIndex']);
-		let no = JSON.parse(localStorage['qchar'])['selected']['no'];
-		no = !isNaN(parseInt(no)) ? no : no.split('/')[2];
+		let no = JSON.parse(localStorage['mt-selectedList'])['selected']['no'];
 		if(CharFaceIndex != no)
 		{
 			cfiarr[no] = CharFaceIndex;

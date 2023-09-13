@@ -3,7 +3,7 @@ var mt_characters = {
         "school": "SRT",
         "club": "狐狸小队",
         "profile": "Student_Portrait_CH0173_Collection,Student_Portrait_CH0173",
-        "charface": "SRT_FoxPlatoon_Kurumi.14.webp",
+        "charface": "SRT_FoxPlatoon_Kurumi.14",
         "name": {
             "zh_cn": "胡桃",
             "zh_tw": "胡桃",
@@ -17,7 +17,7 @@ var mt_characters = {
         "school": "SRT",
         "club": "狐狸小队",
         "profile": "Student_Portrait_CH0172_Collection,Student_Portrait_CH0172",
-        "charface": "SRT_FoxPlatoon_Niko.13.webp",
+        "charface": "SRT_FoxPlatoon_Niko.13",
         "name": {
             "zh_cn": "妮可",
             "zh_tw": "妮可",
@@ -31,7 +31,7 @@ var mt_characters = {
         "school": "SRT",
         "club": "狐狸小队",
         "profile": "Student_Portrait_CH0171_Collection,Student_Portrait_CH0171",
-        "charface": "SRT_FoxPlatoon_Yukino.17.webp",
+        "charface": "SRT_FoxPlatoon_Yukino.17",
         "name": {
             "zh_cn": "雪乃",
             "zh_tw": "雪乃",
@@ -45,7 +45,7 @@ var mt_characters = {
         "school": "SRT",
         "club": "狐狸小队",
         "profile": "Student_Portrait_CH0174_Collection,Student_Portrait_CH0174",
-        "charface": "SRT_FoxPlatoon_Otogi.17.webp",
+        "charface": "SRT_FoxPlatoon_Otogi.17",
         "name": {
             "zh_cn": "音葵",
             "zh_tw": "音葵",
@@ -59,7 +59,7 @@ var mt_characters = {
         "school": "SRT",
         "club": "兔子小队",
         "profile": "Lobbyillust_Icon_Moe_01,NPC_Portrait_NP0073_Collection,Student_Portrait_CH0216_Collection,Student_Portrait_Moe_Collection,Student_Portrait_CH0216,Student_Portrait_Moe",
-        "charface": "SRT_RabbitPlatoon_Moe.20.webp,SRT_RabbitPlatoon_Moe_Track.19.webp,SRT_RabbitPlatoon_Moe_Swimsuit.27.webp",
+        "charface": "SRT_RabbitPlatoon_Moe.20,SRT_RabbitPlatoon_Moe_Track.19,SRT_RabbitPlatoon_Moe_Swimsuit.27",
         "name": {
             "zh_cn": "风仓 萌惠",
             "zh_tw": "風倉 萌",
@@ -87,7 +87,7 @@ var mt_characters = {
         "school": "SRT",
         "club": "兔子小队",
         "profile": "Lobbyillust_Icon_CH0145_01,Lobbyillust_Icon_CH0218_01,NPC_Portrait_NP0071_Collection,Student_Portrait_CH0145_Collection,Student_Portrait_CH0218_Collection,Student_Portrait_CH0145,Student_Portrait_CH0218",
-        "charface": "SRT_RabbitPlatoon_Miyu.14.webp,SRT_RabbitPlatoon_Miyu_Track.13.webp,SRT_RabbitPlatoon_Miyu_Swimsuit.28.webp",
+        "charface": "SRT_RabbitPlatoon_Miyu.14,SRT_RabbitPlatoon_Miyu_Track.13,SRT_RabbitPlatoon_Miyu_Swimsuit.28",
         "name": {
             "zh_cn": "霞泽 美游",
             "zh_tw": "霞澤 美優",
@@ -101,7 +101,7 @@ var mt_characters = {
         "school": "SRT",
         "club": "兔子小队",
         "profile": "NPC_Portrait_NP0018",
-        "charface": "ETC_Others_OilDrum.1.webp",
+        "charface": "ETC_Others_OilDrum.1",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -115,7 +115,7 @@ var mt_characters = {
         "school": "SRT",
         "club": "兔子小队",
         "profile": "Lobbyillust_Icon_CH0215_01,Lobbyillust_Icon_Miyako_01,NPC_Portrait_NP0070_Collection,Student_Portrait_CH0215_Collection,Student_Portrait_Miyako_Collection,Student_Portrait_CH0215,Student_Portrait_Miyako",
-        "charface": "SRT_RabbitPlatoon_Miyako.14.webp,SRT_RabbitPlatoon_Miyako_Track.11.webp,SRT_RabbitPlatoon_Miyako_Swimsuit.25.webp",
+        "charface": "SRT_RabbitPlatoon_Miyako.14,SRT_RabbitPlatoon_Miyako_Track.11,SRT_RabbitPlatoon_Miyako_Swimsuit.25",
         "name": {
             "zh_cn": "月雪 宫子",
             "zh_tw": "月雪 都子",
@@ -129,7 +129,7 @@ var mt_characters = {
         "school": "阿比多斯",
         "club": "对策委员会",
         "profile": "Lobbyillust_Icon_Ayane_01,Lobbyillust_Icon_CH0176_01,NPC_Portrait_NP0048_Collection,NPC_Portrait_NP0066_Collection,NPC_Portrait_NP0108_Collection,Student_Portrait_Ayane_Collection,Student_Portrait_Ayane_Robber_Collection,Student_Portrait_CH0176_Collection,NPC_Portrait_NP0066,NPC_Portrait_NP0108,Student_Portrait_Ayane_Robber,Student_Portrait_CH0176",
-        "charface": "Abydos_Countermeasure_Ayane.16.webp,Abydos_Countermeasure_Ayane_Bandit.16.webp,Abydos_Countermeasure_Ayane_Swimsuit.18.webp,Abydos_Countermeasure_Ayane_Track.16.webp,Abydos_Countermeasure_Ayane_SwimsuitB.18.webp,Abydos_Countermeasure_Ayane_Navigator.16.webp",
+        "charface": "Abydos_Countermeasure_Ayane.16,Abydos_Countermeasure_Ayane_Bandit.16,Abydos_Countermeasure_Ayane_Swimsuit.18,Abydos_Countermeasure_Ayane_Track.16,Abydos_Countermeasure_Ayane_SwimsuitB.18,Abydos_Countermeasure_Ayane_Navigator.16",
         "name": {
             "zh_cn": "奥空 绫音",
             "zh_tw": "奧空 綾音",
@@ -143,7 +143,7 @@ var mt_characters = {
         "school": "阿比多斯",
         "club": "对策委员会",
         "profile": "Lobbyillust_Icon_Serika_01,Lobbyillust_Icon_Serika_Newyear_01,NPC_Portrait_NP0047_Collection,NPC_Portrait_NP0065_Collection,Student_Portrait_CH0189_Collection,Student_Portrait_Serika_Collection,Student_Portrait_Serika_Newyear_Collection,Student_Portrait_Serika_Robber_Collection,Student_Portrait_Serika_Shibaseki_Collection,NPC_Portrait_NP0065,Student_Portrait_CH0189,Student_Portrait_Serika,Student_Portrait_Serika_Newyear,Student_Portrait_Serika_Robber,Student_Portrait_Serika_Shibaseki",
-        "charface": "Abydos_Countermeasure_Serika.15.webp,Abydos_Countermeasure_Serika_Bandit.15.webp,Abydos_Countermeasure_Serika_Working.15.webp,Abydos_Countermeasure_Serika_NewYear.16.webp,Abydos_Countermeasure_Serika_Swimsuit.19.webp,Abydos_Countermeasure_Serika_SwimsuitB.19.webp,Abydos_Countermeasure_Serika_Track.15.webp",
+        "charface": "Abydos_Countermeasure_Serika.15,Abydos_Countermeasure_Serika_Bandit.15,Abydos_Countermeasure_Serika_Working.15,Abydos_Countermeasure_Serika_NewYear.16,Abydos_Countermeasure_Serika_Swimsuit.19,Abydos_Countermeasure_Serika_SwimsuitB.19,Abydos_Countermeasure_Serika_Track.15",
         "name": {
             "zh_cn": "黑见 芹香",
             "zh_tw": "黑見 茜香",
@@ -171,7 +171,7 @@ var mt_characters = {
         "school": "阿比多斯",
         "club": "对策委员会",
         "profile": "Lobbyillust_Icon_CH0188_01,Lobbyillust_Icon_Shiroko_01,Lobbyillust_Icon_Shiroko_ridingsuit_01,NPC_Portrait_NP0046_Collection,NPC_Portrait_NP0064_Collection,Student_Portrait_CH0188_Collection,Student_Portrait_Shiroko_Collection,Student_Portrait_Shiroko_ridingsuit_Collection,Student_Portrait_Shiroko_Robber_Collection,NPC_Portrait_NP0064,NPC_Portrait_NP0124,Student_Portrait_CH0188,Student_Portrait_Shiroko,Student_Portrait_Shiroko_ridingsuit,Student_Portrait_Shiroko_Robber",
-        "charface": "Abydos_Countermeasure_Shiroko.8.webp,Abydos_Countermeasure_Shiroko_Bandit.8.webp,Abydos_Countermeasure_Shiroko_Cycling.8.webp,Abydos_Countermeasure_Shiroko_Swimsuit.8.webp,Abydos_Countermeasure_Shiroko_SwimsuitB.8.webp,Abydos_Countermeasure_Shiroko_Track.9.webp",
+        "charface": "Abydos_Countermeasure_Shiroko.8,Abydos_Countermeasure_Shiroko_Bandit.8,Abydos_Countermeasure_Shiroko_Cycling.8,Abydos_Countermeasure_Shiroko_Swimsuit.8,Abydos_Countermeasure_Shiroko_SwimsuitB.8,Abydos_Countermeasure_Shiroko_Track.9",
         "name": {
             "zh_cn": "砂狼 白子",
             "zh_tw": "砂狼 白子",
@@ -185,7 +185,7 @@ var mt_characters = {
         "school": "阿比多斯",
         "club": "对策委员会",
         "profile": "Student_Portrait_CH0199_Collection,NPC_Portrait_NP0125,Student_Portrait_CH0199",
-        "charface": "Abydos_Countermeasure_Shiroko_Terror.10.webp,Abydos_Countermeasure_Shiroko_WounderdT.10.webp",
+        "charface": "Abydos_Countermeasure_Shiroko_Terror.10,Abydos_Countermeasure_Shiroko_WounderdT.10",
         "name": {
             "zh_cn": "砂狼 白子？",
             "zh_tw": "砂狼 白子？",
@@ -199,7 +199,7 @@ var mt_characters = {
         "school": "阿比多斯",
         "club": "对策委员会",
         "profile": "Lobbyillust_Icon_CH0092_01,Lobbyillust_Icon_Nonomi_01,NPC_Portrait_NP0044_Collection,NPC_Portrait_NP0067_Collection,Student_Portrait_CH0092_Collection,Student_Portrait_Nonomi_Collection,Student_Portrait_Nonomi_Robber_Collection,NPC_Portrait_NP0067,Student_Portrait_CH0092,Student_Portrait_Nonomi,Student_Portrait_Nonomi_Robber",
-        "charface": "Abydos_Countermeasure_Nonomi_Bandit.8.webp,Abydos_Countermeasure_Nonomi_Swimsuit.24.webp,Abydos_Countermeasure_Nonomi_SwimsuitB.24.webp,Abydos_Countermeasure_Nonomi_Track.21.webp",
+        "charface": "Abydos_Countermeasure_Nonomi_Bandit.8,Abydos_Countermeasure_Nonomi_Swimsuit.24,Abydos_Countermeasure_Nonomi_SwimsuitB.24,Abydos_Countermeasure_Nonomi_Track.21",
         "name": {
             "zh_cn": "十六夜 野宫",
             "zh_tw": "十六夜 野宮",
@@ -213,7 +213,7 @@ var mt_characters = {
         "school": "阿比多斯",
         "club": "对策委员会",
         "profile": "Lobbyillust_Icon_Hoshino_01,Lobbyillust_Icon_Hoshino_swimsuit_01,NPC_Portrait_NP0045_Collection,NPC_Portrait_NP0063_Collection,Student_Portrait_Hoshino_Collection,Student_Portrait_Hoshino_Robber_Collection,Student_Portrait_Hoshino_Swimsuit_Collection,小鸟游星野_昔日_Collection,NPC_Portrait_NP0063,Student_Portrait_Hoshino,Student_Portrait_Hoshino_Robber,Student_Portrait_Hoshino_swimsuit",
-        "charface": "Abydos_Countermeasure_Hoshino.19.webp,Abydos_Countermeasure_Hoshino_Bandit.8.webp,Abydos_Countermeasure_Hoshino_Swimsuit.23.webp,Abydos_Countermeasure_Hoshino_SwimsuitB.23.webp,Abydos_Countermeasure_Hoshino_Track.19.webp",
+        "charface": "Abydos_Countermeasure_Hoshino.19,Abydos_Countermeasure_Hoshino_Bandit.8,Abydos_Countermeasure_Hoshino_Swimsuit.23,Abydos_Countermeasure_Hoshino_SwimsuitB.23,Abydos_Countermeasure_Hoshino_Track.19",
         "name": {
             "zh_cn": "小鸟游 星野",
             "zh_tw": "小鳥遊 星野",
@@ -227,7 +227,7 @@ var mt_characters = {
         "school": "阿里乌斯",
         "club": "所属不明-阿里乌斯",
         "profile": "NPC_Portrait_Arius_GL1_Collection,NPC_Portrait_Arius_GL1",
-        "charface": "Arius_EmptyClub_Member.1.webp",
+        "charface": "Arius_EmptyClub_Member.1",
         "name": {
             "zh_cn": "阿里乌斯学生",
             "zh_tw": "阿里烏斯學生",
@@ -255,7 +255,7 @@ var mt_characters = {
         "school": "阿里乌斯",
         "club": "特殊小队",
         "profile": "Lobbyillust_Icon_Saori_01,NPC_Portrait_NP0012_Collection,Student_Portrait_Saori_Collection,NPC_Portrait_NP0012,NPC_Portrait_NP0103,Student_Portrait_Saori",
-        "charface": "Arius_AriusSqud_Saori.30.webp,Arius_AriusSqud_Saori_wounded.29.webp,Arius_AriusSqud_Saori_NoMask.29.webp,Arius_AriusSqud_Saori_woundedN.29.webp",
+        "charface": "Arius_AriusSqud_Saori.30,Arius_AriusSqud_Saori_wounded.29,Arius_AriusSqud_Saori_NoMask.29,Arius_AriusSqud_Saori_woundedN.29",
         "name": {
             "zh_cn": "锭前 纱织",
             "zh_tw": "錠前 紗織",
@@ -283,7 +283,7 @@ var mt_characters = {
         "school": "阿里乌斯",
         "club": "特殊小队",
         "profile": "Lobbyillust_Icon_Hiyori_01,Student_Portrait_Hiyori_Collection,Student_Portrait_Hiyori",
-        "charface": "Arius_AriusSqud_Hiyori.11.webp",
+        "charface": "Arius_AriusSqud_Hiyori.11",
         "name": {
             "zh_cn": "槌永 日和",
             "zh_tw": "槌永 日和",
@@ -297,7 +297,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "百花缭乱纷争调停委员会",
         "profile": "NPC_Portrait_NP0038_Collection,NPC_Portrait_NP0038",
-        "charface": "Hyakkiyako_EmptyClub_Kuzunoha.13.webp",
+        "charface": "Hyakkiyako_EmptyClub_Kuzunoha.13",
         "name": {
             "zh_cn": "葛叶",
             "zh_tw": "葛葉",
@@ -311,7 +311,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "百花缭乱纷争调停委员会",
         "profile": "Student_Portrait_CH0222_Collection,Student_Portrait_CH0222",
-        "charface": "Hyakkiyako_Hyakkayouran_Nagusa.9.webp",
+        "charface": "Hyakkiyako_Hyakkayouran_Nagusa.9",
         "name": {
             "zh_cn": "御稜 名草",
             "zh_tw": "御稜 名草",
@@ -325,7 +325,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "庆典运营委员会",
         "profile": "Lobbyillust_Icon_Pina_01,Student_Portrait_Pina_Collection,Student_Portrait_Pina",
-        "charface": "Hyakkiyako_MatsuriOffice_Pina.10.webp",
+        "charface": "Hyakkiyako_MatsuriOffice_Pina.10",
         "name": {
             "zh_cn": "朝比奈 菲娜",
             "zh_tw": "朝比奈 菲娜",
@@ -339,7 +339,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "庆典运营委员会",
         "profile": "Student_Portrait_CH0110_Collection,Student_Portrait_CH0110",
-        "charface": "Hyakkiyako_MatsuriOffice_Umika.18.webp",
+        "charface": "Hyakkiyako_MatsuriOffice_Umika.18",
         "name": {
             "zh_cn": "海夏",
             "zh_tw": "海夏",
@@ -353,7 +353,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "庆典运营委员会",
         "profile": "Lobbyillust_Icon_CH0180_01,Lobbyillust_Icon_Shizuko_01,NPC_Portrait_NP0053_Collection,Student_Portrait_CH0180_Collection,Student_Portrait_Shizuko_Collection,Student_Portrait_CH0180,Student_Portrait_Shizuko",
-        "charface": "Hyakkiyako_MatsuriOffice_Shizuko.8.webp,Hyakkiyako_MatsuriOffice_Shizuko_Swimsuit.11.webp,Hyakkiyako_MatsuriOffice_Shizuko_Track.8.webp",
+        "charface": "Hyakkiyako_MatsuriOffice_Shizuko.8,Hyakkiyako_MatsuriOffice_Shizuko_Swimsuit.11,Hyakkiyako_MatsuriOffice_Shizuko_Track.8",
         "name": {
             "zh_cn": "河和 静子",
             "zh_tw": "河和 靜子",
@@ -367,7 +367,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "忍术研究部",
         "profile": "Lobbyillust_Icon_CH0114_01,NPC_Portrait_NP0056_Collection,Student_Portrait_CH0114_Collection,Student_Portrait_CH0114",
-        "charface": "Hyakkiyako_NinpoKenkyubu_Tsukuyo.9.webp,Hyakkiyako_NinpoKenkyubu_Tsukuyo_Track.8.webp",
+        "charface": "Hyakkiyako_NinpoKenkyubu_Tsukuyo.9,Hyakkiyako_NinpoKenkyubu_Tsukuyo_Track.8",
         "name": {
             "zh_cn": "大野 月咏",
             "zh_tw": "大野 月詠",
@@ -381,7 +381,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "忍术研究部",
         "profile": "Lobbyillust_Icon_CH0179_01,Lobbyillust_Icon_Izuna_01,NPC_Portrait_NP0052_Collection,Student_Portrait_CH0179_Collection,Student_Portrait_Izuna_Collection,Student_Portrait_CH0179,Student_Portrait_Izuna",
-        "charface": "Hyakkiyako_NinpoKenkyubu_Izuna.9.webp,Hyakkiyako_NinpoKenkyubu_Izuna_Swimsuit.13.webp,Hyakkiyako_NinpoKenkyubu_Izuna_Track.9.webp",
+        "charface": "Hyakkiyako_NinpoKenkyubu_Izuna.9,Hyakkiyako_NinpoKenkyubu_Izuna_Swimsuit.13,Hyakkiyako_NinpoKenkyubu_Izuna_Track.9",
         "name": {
             "zh_cn": "久田 泉奈",
             "zh_tw": "久田 伊樹菜",
@@ -395,7 +395,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "忍术研究部",
         "profile": "Lobbyillust_Icon_CH0113_01,Student_Portrait_CH0113_Collection,Student_Portrait_CH0113",
-        "charface": "Hyakkiyako_NinpoKenkyubu_Michiru.11.webp",
+        "charface": "Hyakkiyako_NinpoKenkyubu_Michiru.11",
         "name": {
             "zh_cn": "千鸟 满",
             "zh_tw": "千鳥 滿",
@@ -409,7 +409,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "所属不明-百鬼夜行",
         "profile": "Lobbyillust_Icon_CH0175_01,Lobbyillust_Icon_Wakamo_01,NPC_Portrait_NP0014_Collection,Student_Portrait_CH0175_Collection,Student_Portrait_Wakamo_Collection,NPC_Portrait_NP0014,Student_Portrait_CH0175,95.2,95.5",
-        "charface": "Hyakkiyako_EmptyClub_Wakamo.13.webp,Hyakkiyako_EmptyClub_Wakamo_Swimsuit.17.webp,Hyakkiyako_EmptyClub_Wakamo_Wafuku.9.webp",
+        "charface": "Hyakkiyako_EmptyClub_Wakamo.13,Hyakkiyako_EmptyClub_Wakamo_Swimsuit.17,Hyakkiyako_EmptyClub_Wakamo_Wafuku.9",
         "name": {
             "zh_cn": "狐坂 若藻",
             "zh_tw": "狐阪 若藻",
@@ -423,7 +423,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "修行部",
         "profile": "Lobbyillust_Icon_Tsubaki_01,Student_Portrait_Tsubaki_Collection,Student_Portrait_Tsubaki",
-        "charface": "Hyakkiyako_Shugyobu_Tsubaki.12.webp",
+        "charface": "Hyakkiyako_Shugyobu_Tsubaki.12",
         "name": {
             "zh_cn": "春日 椿",
             "zh_tw": "春日 椿",
@@ -437,7 +437,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "修行部",
         "profile": "Lobbyillust_Icon_CH0183_01,Lobbyillust_Icon_Mimori_01,Student_Portrait_CH0183_Collection,Student_Portrait_Mimori_Collection,Student_Portrait_CH0183,Student_Portrait_Mimori",
-        "charface": "Hyakkiyako_Shugyobu_Mimori.11.webp,Hyakkiyako_Shugyobu_Mimori_Swimsuit.10.webp",
+        "charface": "Hyakkiyako_Shugyobu_Mimori.11,Hyakkiyako_Shugyobu_Mimori_Swimsuit.10",
         "name": {
             "zh_cn": "水羽 三森",
             "zh_tw": "水羽 三森",
@@ -451,7 +451,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "修行部",
         "profile": "Lobbyillust_Icon_Kaede_01,NPC_Portrait_NP0054_Collection,Student_Portrait_Kaede_Collection,Student_Portrait_Kaede",
-        "charface": "Hyakkiyako_Shugyobu_Kaede.17.webp,Hyakkiyako_Shugyobu_Kaede_Track.17.webp",
+        "charface": "Hyakkiyako_Shugyobu_Kaede.17,Hyakkiyako_Shugyobu_Kaede_Track.17",
         "name": {
             "zh_cn": "勇美 枫",
             "zh_tw": "勇美 楓",
@@ -465,7 +465,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "阴阳部",
         "profile": "Lobbyillust_Icon_CH0178_01,Lobbyillust_Icon_Chise_01,NPC_Portrait_NP0055_Collection,Student_Portrait_CH0178_Collection,Student_Portrait_Chise_Collection,Student_Portrait_CH0178,Student_Portrait_Chise",
-        "charface": "Hyakkiyako_Onmyobu_Chise.11.webp,Hyakkiyako_Onmyobu_Chise_Swimsuit.16.webp,Hyakkiyako_Onmyobu_Chise_Track.11.webp",
+        "charface": "Hyakkiyako_Onmyobu_Chise.11,Hyakkiyako_Onmyobu_Chise_Swimsuit.16,Hyakkiyako_Onmyobu_Chise_Track.11",
         "name": {
             "zh_cn": "和乐 千世",
             "zh_tw": "和樂 千世",
@@ -479,7 +479,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "阴阳部",
         "profile": "Lobbyillust_Icon_CH0107_01,Student_Portrait_CH0107_Collection,Student_Portrait_CH0107",
-        "charface": "Hyakkiyako_Onmyobu_Kaho.19.webp",
+        "charface": "Hyakkiyako_Onmyobu_Kaho.19",
         "name": {
             "zh_cn": "桑上 果穗",
             "zh_tw": "桑上 果穗",
@@ -493,7 +493,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "阴阳部",
         "profile": "Student_Portrait_CH0109_Collection,Student_Portrait_CH0109",
-        "charface": "Hyakkiyako_Onmyobu_Niya.9.webp",
+        "charface": "Hyakkiyako_Onmyobu_Niya.9",
         "name": {
             "zh_cn": "天地 妮娅",
             "zh_tw": "天地 妮婭",
@@ -507,7 +507,7 @@ var mt_characters = {
         "school": "百鬼夜行",
         "club": "魑魅一座",
         "profile": "NPC_Portrait_StreetGhostes_MG_Collection,NPC_Portrait_StreetGhostes_RL_Collection,NPC_Portrait_StreetGhostes_MG,NPC_Portrait_StreetGhostes_RL",
-        "charface": "Hyakkiyako_ChimiIchiza_MemberA.7.webp,Hyakkiyako_ChimiIchiza_MemberB.1.webp",
+        "charface": "Hyakkiyako_ChimiIchiza_MemberA.7,Hyakkiyako_ChimiIchiza_MemberB.1",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -521,7 +521,7 @@ var mt_characters = {
         "school": "赤冬",
         "club": "227号特别班",
         "profile": "Lobbyillust_Icon_Shigure_01,Student_Portrait_CH0123_Collection,Student_Portrait_Shigure_Collection,Student_Portrait_CH0123,Student_Portrait_Shigure",
-        "charface": "RedWinter_Class227_Shigure.13.webp,RedWinter_Class227_Shigure_HotSpring.11.webp",
+        "charface": "RedWinter_Class227_Shigure.13,RedWinter_Class227_Shigure_HotSpring.11",
         "name": {
             "zh_cn": "间宵 时雨",
             "zh_tw": "間宵 時雨",
@@ -535,7 +535,7 @@ var mt_characters = {
         "school": "赤冬",
         "club": "227号特别班",
         "profile": "Lobbyillust_Icon_CH0165_01,Lobbyillust_Icon_Nodoka_01,Student_Portrait_CH0165_Collection,Student_Portrait_Nodoka_Collection,Student_Portrait_CH0165,Student_Portrait_Nodoka",
-        "charface": "RedWinter_Class227_Nodoka.8.webp,RedWinter_Class227_Nodoka_HotSpring.37.webp",
+        "charface": "RedWinter_Class227_Nodoka.8,RedWinter_Class227_Nodoka_HotSpring.37",
         "name": {
             "zh_cn": "天见 和香",
             "zh_tw": "天見 和香",
@@ -549,7 +549,7 @@ var mt_characters = {
         "school": "赤冬",
         "club": "赤冬事务局",
         "profile": "Lobbyillust_Icon_Marina_01,Student_Portrait_Marina_Collection,Student_Portrait_Marina",
-        "charface": "RedWinter_RedwinterSecretary_Marina.13.webp",
+        "charface": "RedWinter_RedwinterSecretary_Marina.13",
         "name": {
             "zh_cn": "池仓 玛丽娜",
             "zh_tw": "池倉 瑪麗娜",
@@ -563,7 +563,7 @@ var mt_characters = {
         "school": "赤冬",
         "club": "赤冬事务局",
         "profile": "Lobbyillust_Icon_CH0164_01,Lobbyillust_Icon_Cherino_01,Student_Portrait_CH0164_Collection,Student_Portrait_Cherino_Collection,Student_Portrait_CH0164,Student_Portrait_Cherino",
-        "charface": "RedWinter_RedwinterSecretary_Cherino.7.webp,RedWinter_RedwinterSecretary_Cherino_NoBeard.7.webp,RedWinter_RedwinterSecretary_Cherino_HotSpring.16.webp,RedWinter_RedwinterSecretary_Cherino_HotSpringN.11.webp",
+        "charface": "RedWinter_RedwinterSecretary_Cherino.7,RedWinter_RedwinterSecretary_Cherino_NoBeard.7,RedWinter_RedwinterSecretary_Cherino_HotSpring.16,RedWinter_RedwinterSecretary_Cherino_HotSpringN.11",
         "name": {
             "zh_cn": "连河 切里诺",
             "zh_tw": "連河 潔莉諾",
@@ -577,7 +577,7 @@ var mt_characters = {
         "school": "赤冬",
         "club": "赤冬事务局",
         "profile": "Student_Portrait_Royalguard_redwinter1_Collection,Student_Portrait_Royalguard_redwinter1",
-        "charface": "RedWinter_RedwinterSecretary_Member.1.webp",
+        "charface": "RedWinter_RedwinterSecretary_Member.1",
         "name": {
             "zh_cn": "亲卫队员",
             "zh_tw": "親衛隊員",
@@ -591,7 +591,7 @@ var mt_characters = {
         "school": "赤冬",
         "club": "赤冬事务局",
         "profile": "Lobbyillust_Icon_Tomoe_01,Student_Portrait_Tomoe_Collection,Student_Portrait_Tomoe",
-        "charface": "RedWinter_RedwinterSecretary_Tomoe.8.webp",
+        "charface": "RedWinter_RedwinterSecretary_Tomoe.8",
         "name": {
             "zh_cn": "佐城 智惠",
             "zh_tw": "佐城 智惠",
@@ -633,7 +633,7 @@ var mt_characters = {
         "school": "赤冬",
         "club": "工务部",
         "profile": "Lobbyillust_Icon_CH0214_01,Student_Portrait_CH0214_Collection,Student_Portrait_Minori_Collection,Student_Portrait_CH0214,Student_Portrait_Minori",
-        "charface": "RedWinter_LaborParty_Minori.11.webp,RedWinter_LaborParty_Minori_Old.11.webp",
+        "charface": "RedWinter_LaborParty_Minori.11,RedWinter_LaborParty_Minori_Old.11",
         "name": {
             "zh_cn": "安守 实里",
             "zh_tw": "安守 實裏",
@@ -647,7 +647,7 @@ var mt_characters = {
         "school": "赤冬",
         "club": "工务部",
         "profile": "Student_Portrait_Yoheki_redwinter1_Collection,Student_Portrait_Yoheki_redwinter1",
-        "charface": "RedWinter_LaborParty_Member.3.webp",
+        "charface": "RedWinter_LaborParty_Member.3",
         "name": {
             "zh_cn": "工务部员",
             "zh_tw": "工務部員",
@@ -661,7 +661,7 @@ var mt_characters = {
         "school": "赤冬",
         "club": "知识解放战线",
         "profile": "Lobbyillust_Icon_CH0124_01,Student_Portrait_CH0124_Collection,Student_Portrait_CH0125_Collection,Student_Portrait_CH0124,Student_Portrait_CH0125",
-        "charface": "RedWinter_KnowledgeLiberationFront_Meru.13.webp,RedWinter_KnowledgeLiberationFront_Meru_HotSpring.11.webp",
+        "charface": "RedWinter_KnowledgeLiberationFront_Meru.13,RedWinter_KnowledgeLiberationFront_Meru_HotSpring.11",
         "name": {
             "zh_cn": "姬木 梅露",
             "zh_tw": "姬木 梅露",
@@ -675,7 +675,7 @@ var mt_characters = {
         "school": "赤冬",
         "club": "知识解放战线",
         "profile": "Lobbyillust_Icon_Momiji_01,Student_Portrait_Momiji_Collection,Student_Portrait_Momiji",
-        "charface": "RedWinter_KnowledgeLiberationFront_Momiji.8.webp",
+        "charface": "RedWinter_KnowledgeLiberationFront_Momiji.8",
         "name": {
             "zh_cn": "秋泉 红叶",
             "zh_tw": "秋泉 紅葉",
@@ -689,7 +689,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "便利屋68",
         "profile": "Lobbyillust_Icon_CH0086_01,Lobbyillust_Icon_Kayoko_01,NPC_Portrait_NP0118_Collection,Student_Portrait_CH0086_Collection,Student_Portrait_Kayoko_Collection,NPC_Portrait_NP0118,Student_Portrait_CH0086,Student_Portrait_Kayoko",
-        "charface": "Gehenna_Kohshinjo68_Kayoko.8.webp,Gehenna_Kohshinjo68_Kayoko_NewYear.9.webp,Gehenna_Kohshinjo68_Kayoko_Navigator.9.webp",
+        "charface": "Gehenna_Kohshinjo68_Kayoko.8,Gehenna_Kohshinjo68_Kayoko_NewYear.9,Gehenna_Kohshinjo68_Kayoko_Navigator.9",
         "name": {
             "zh_cn": "鬼方 佳代子",
             "zh_tw": "鬼方 佳代子",
@@ -703,7 +703,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "便利屋68",
         "profile": "Lobbyillust_Icon_Aru_01,Lobbyillust_Icon_Aru_Newyear_01,Student_Portrait_Aru_Collection,Student_Portrait_Aru_Newyear_Collection,Student_Portrait_Aru,Student_Portrait_Aru_Newyear",
-        "charface": "Gehenna_Kohshinjo68_Aru.16.webp,Gehenna_Kohshinjo68_Aru_NewYear.19.webp",
+        "charface": "Gehenna_Kohshinjo68_Aru.16,Gehenna_Kohshinjo68_Aru_NewYear.19",
         "name": {
             "zh_cn": "陆八魔 阿露",
             "zh_tw": "陸八魔 亞瑠",
@@ -717,7 +717,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "便利屋68",
         "profile": "Lobbyillust_Icon_Mutsuki_01,Lobbyillust_Icon_Mutsuki_Newyear_01,Student_Portrait_Mutsuki_Collection,Student_Portrait_Mutsuki_Newyear_Collection,Student_Portrait_Mutsuki,Student_Portrait_Mutsuki_Newyear",
-        "charface": "Gehenna_Kohshinjo68_Mutsuki.15.webp,Gehenna_Kohshinjo68_Mutsuki_NewYear.11.webp",
+        "charface": "Gehenna_Kohshinjo68_Mutsuki.15,Gehenna_Kohshinjo68_Mutsuki_NewYear.11",
         "name": {
             "zh_cn": "浅黄 睦月",
             "zh_tw": "淺黃 睦月",
@@ -731,7 +731,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "便利屋68",
         "profile": "Lobbyillust_Icon_CH0087_01,Lobbyillust_Icon_Haruka_01,Student_Portrait_CH0087_Collection,Student_Portrait_Haruka_Collection,Student_Portrait_CH0087,Student_Portrait_Haruka",
-        "charface": "Gehenna_Kohshinjo68_Haruka.15.webp,Gehenna_Kohshinjo68_Haruka_NewYear.14.webp",
+        "charface": "Gehenna_Kohshinjo68_Haruka.15,Gehenna_Kohshinjo68_Haruka_NewYear.14",
         "name": {
             "zh_cn": "伊草 遥香",
             "zh_tw": "伊草 遙香",
@@ -745,7 +745,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "风纪委员会",
         "profile": "NPC_Portrait_Fuuki_Normal1_Collection,NPC_Portrait_Fuuki_Normal1",
-        "charface": "Gehenna_Fuuki_Member.9.webp",
+        "charface": "Gehenna_Fuuki_Member.9",
         "name": {
             "zh_cn": "风纪委员",
             "zh_tw": "風紀委員",
@@ -759,7 +759,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "风纪委员会",
         "profile": "Lobbyillust_Icon_CH0163_01,Lobbyillust_Icon_Chinatsu_01,Student_Portrait_CH0163_Collection,Student_Portrait_Chinatsu_Collection,Student_Portrait_CH0163",
-        "charface": "Gehenna_Fuuki_Chinatsu.9.webp,Gehenna_Fuuki_Chinatsu_HotSpring.11.webp",
+        "charface": "Gehenna_Fuuki_Chinatsu.9,Gehenna_Fuuki_Chinatsu_HotSpring.11",
         "name": {
             "zh_cn": "火宫 千夏",
             "zh_tw": "火宮 千夏",
@@ -773,7 +773,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "风纪委员会",
         "profile": "LobbyIllust_Icon_CH0063_01,Lobbyillust_Icon_Hina_01,NPC_Portrait_NP0009_Collection,Student_Portrait_CH0063_Collection,Student_Portrait_Hina_Collection,NPC_Portrait_NP0009,NPC_Portrait_NP0017,Student_Portrait_CH0063,Student_Portrait_Hina",
-        "charface": "Gehenna_Fuuki_Hina.22.webp,Gehenna_Fuuki_Hina_Wounded.7.webp,Gehenna_Fuuki_Hina_Swimsuit.12.webp,Gehenna_Fuuki_Hina_Nightware.7.webp",
+        "charface": "Gehenna_Fuuki_Hina.22,Gehenna_Fuuki_Hina_Wounded.7,Gehenna_Fuuki_Hina_Swimsuit.12,Gehenna_Fuuki_Hina_Nightware.7",
         "name": {
             "zh_cn": "空崎 日奈",
             "zh_tw": "空崎 陽奈",
@@ -787,7 +787,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "风纪委员会",
         "profile": "Lobbyillust_Icon_Ako_01,NPC_Portrait_NP0059_Collection,NPC_Portrait_NP0111_Collection,Student_Portrait_Ako_Collection,NPC_Portrait_NP0019,NPC_Portrait_NP0111,Student_Portrait_Ako",
-        "charface": "Gehenna_Fuuki_Ako.17.webp,Gehenna_Fuuki_Ako_Wounded.17.webp,Gehenna_Fuuki_Ako_Track.18.webp,Gehenna_Fuuki_Ako_Navigator.15.webp",
+        "charface": "Gehenna_Fuuki_Ako.17,Gehenna_Fuuki_Ako_Wounded.17,Gehenna_Fuuki_Ako_Track.18,Gehenna_Fuuki_Ako_Navigator.15",
         "name": {
             "zh_cn": "天雨 亚子",
             "zh_tw": "天雨 亞子",
@@ -801,7 +801,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "风纪委员会",
         "profile": "LobbyIllust_Icon_CH0064_01,Lobbyillust_Icon_Iori_01,Student_Portrait_CH0064_Collection,Student_Portrait_Iori_Collection,Student_Portrait_CH0064,Student_Portrait_Iori",
-        "charface": "Gehenna_Fuuki_Iori.8.webp,Gehenna_Fuuki_Iori_Swimsuit.11.webp",
+        "charface": "Gehenna_Fuuki_Iori.8,Gehenna_Fuuki_Iori_Swimsuit.11",
         "name": {
             "zh_cn": "银镜 伊织",
             "zh_tw": "銀鏡 伊織",
@@ -815,7 +815,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "给食部",
         "profile": "Lobbyillust_Icon_CH0177_01,Lobbyillust_Icon_Fuuka_01,Student_Portrait_CH0177_Collection,Student_Portrait_Fuuka_Collection,Student_Portrait_CH0177,Student_Portrait_Fuuka",
-        "charface": "Gehenna_FoodService_Fuuka.10.webp,Gehenna_FoodService_Fuuka_NewYear.19.webp",
+        "charface": "Gehenna_FoodService_Fuuka.10,Gehenna_FoodService_Fuuka_NewYear.19",
         "name": {
             "zh_cn": "爱清 枫香",
             "zh_tw": "愛清 楓華",
@@ -829,7 +829,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "给食部",
         "profile": "Lobbyillust_Icon_Juri_01,Student_Portrait_Juri_Collection,Student_Portrait_Juri",
-        "charface": "Gehenna_FoodService_Juri.14.webp",
+        "charface": "Gehenna_FoodService_Juri.14",
         "name": {
             "zh_cn": "牛牧 朱莉",
             "zh_tw": "牛牧 茱莉",
@@ -843,7 +843,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "归宅部",
         "profile": "Student_Portrait_Erika_Collection,Student_Portrait_Erika",
-        "charface": "Gehenna_GoHomeClub_Erika.17.webp",
+        "charface": "Gehenna_GoHomeClub_Erika.17",
         "name": {
             "zh_cn": "旗见 绘梨香",
             "zh_tw": "旗見 艾麗嘉",
@@ -857,7 +857,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "归宅部",
         "profile": "Student_Portrait_Kirara_Collection,Student_Portrait_Kirara",
-        "charface": "Gehenna_GoHomeClub_Kilala.13.webp",
+        "charface": "Gehenna_GoHomeClub_Kilala.13",
         "name": {
             "zh_cn": "绮良良",
             "zh_tw": "綺良良",
@@ -871,7 +871,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "救急医学部",
         "profile": "Lobbyillust_Icon_Sena_01,Student_Portrait_Sena_Collection,Student_Portrait_Sena",
-        "charface": "Gehenna_Emergentology_Sena.8.webp",
+        "charface": "Gehenna_Emergentology_Sena.8",
         "name": {
             "zh_cn": "冰室 濑名",
             "zh_tw": "冰室 瀨奈",
@@ -885,7 +885,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "救急医学部",
         "profile": "NPC_Portrait_NP0023_Collection,NPC_Portrait_NP0023",
-        "charface": "Gehenna_Emergentology_Member.7.webp",
+        "charface": "Gehenna_Emergentology_Member.7",
         "name": {
             "zh_cn": "救急医学部成员",
             "zh_tw": "救急醫學部成員",
@@ -899,7 +899,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "美食研究部",
         "profile": "Lobbyillust_Icon_CH0192_01,Lobbyillust_Icon_Zunko_01,NPC_Portrait_NP0049_Collection,Student_Portrait_CH0192_Collection,Student_Portrait_Zunko_Collection,Student_Portrait_CH0192,Student_Portrait_Zunko",
-        "charface": "Gehenna_GourmetClub_Junko.17.webp,Gehenna_GourmetClub_Junko_Track.17.webp,Gehenna_GourmetClub_Junko_NewYear.19.webp",
+        "charface": "Gehenna_GourmetClub_Junko.17,Gehenna_GourmetClub_Junko_Track.17,Gehenna_GourmetClub_Junko_NewYear.19",
         "name": {
             "zh_cn": "赤司 纯子",
             "zh_tw": "赤司 纯子",
@@ -913,7 +913,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "美食研究部",
         "profile": "Lobbyillust_Icon_CH0191_01,Lobbyillust_Icon_Haruna_01,Student_Portrait_CH0191_Collection,Student_Portrait_CH0193_Collection,Student_Portrait_Haruna_Collection,Student_Portrait_CH0191,Student_Portrait_CH0193,Student_Portrait_Haruna",
-        "charface": "Gehenna_GourmetClub_Haruna.9.webp,Gehenna_GourmetClub_Haruna_Track.16.webp,Gehenna_GourmetClub_Haruna_NewYear.15.webp",
+        "charface": "Gehenna_GourmetClub_Haruna.9,Gehenna_GourmetClub_Haruna_Track.16,Gehenna_GourmetClub_Haruna_NewYear.15",
         "name": {
             "zh_cn": "黑馆 晴奈",
             "zh_tw": "黑館 羽留奈",
@@ -927,7 +927,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "美食研究部",
         "profile": "Lobbyillust_Icon_Izumi_01,Lobbyillust_Icon_Izumi_swimsuit_01,NPC_Portrait_NP0051_Collection,Student_Portrait_CH0197_Collection,Student_Portrait_Izumi_Collection,Student_Portrait_Izumi_swimsuit_Collection,Student_Portrait_CH0197,Student_Portrait_Izumi,Student_Portrait_Izumi_swimsuit",
-        "charface": "Gehenna_GourmetClub_Izumi.11.webp,Gehenna_GourmetClub_Izumi_Swimsuit.12.webp,Gehenna_GourmetClub_Izumi_Track.11.webp,Gehenna_GourmetClub_Izumi_NewYear.12.webp",
+        "charface": "Gehenna_GourmetClub_Izumi.11,Gehenna_GourmetClub_Izumi_Swimsuit.12,Gehenna_GourmetClub_Izumi_Track.11,Gehenna_GourmetClub_Izumi_NewYear.12",
         "name": {
             "zh_cn": "狮子堂 泉",
             "zh_tw": "獅子堂 泉",
@@ -941,7 +941,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "美食研究部",
         "profile": "Lobbyillust_Icon_Akari_01,NPC_Portrait_NP0068_Collection,Student_Portrait_Akari_Collection,Student_Portrait_CH0196_Collection,Student_Portrait_Akari,Student_Portrait_CH0196",
-        "charface": "Gehenna_GourmetClub_Akari.7.webp,Gehenna_GourmetClub_Akari_Track.7.webp,Gehenna_GourmetClub_Akari_NewYear.14.webp",
+        "charface": "Gehenna_GourmetClub_Akari.7,Gehenna_GourmetClub_Akari_Track.7,Gehenna_GourmetClub_Akari_NewYear.14",
         "name": {
             "zh_cn": "鳄渊 明里",
             "zh_tw": "鱷淵 亞伽里",
@@ -955,7 +955,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "所属不明-格黑娜",
         "profile": "NPC_Portrait_NP0026_Collection,NPC_Portrait_NP0026",
-        "charface": "Gehenna_Student_Member.10.webp",
+        "charface": "Gehenna_Student_Member.10",
         "name": {
             "zh_cn": "格黑娜-学生",
             "zh_tw": "格赫娜-學生",
@@ -969,7 +969,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "万魔殿",
         "profile": "Student_Portrait_CH0080_Collection,Student_Portrait_CH0080",
-        "charface": "Gehenna_PandemoniumSociety_Satsuki.13.webp",
+        "charface": "Gehenna_PandemoniumSociety_Satsuki.13",
         "name": {
             "zh_cn": "皋月",
             "zh_tw": "皋月",
@@ -983,7 +983,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "万魔殿",
         "profile": "NPC_Portrait_NP0027_Collection,NPC_Portrait_NP0027",
-        "charface": "Gehenna_PandemoniumSociety_Member.9.webp",
+        "charface": "Gehenna_PandemoniumSociety_Member.9",
         "name": {
             "zh_cn": "万魔殿干部",
             "zh_tw": "萬魔殿幹部",
@@ -997,7 +997,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "万魔殿",
         "profile": "Student_Portrait_Ibuki_Collection,Student_Portrait_Ibuki",
-        "charface": "Gehenna_PandemoniumSociety_Ibuki.11.webp",
+        "charface": "Gehenna_PandemoniumSociety_Ibuki.11",
         "name": {
             "zh_cn": "伊吹",
             "zh_tw": "伊吹",
@@ -1011,7 +1011,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "万魔殿",
         "profile": "Student_Portrait_CH0079_Collection,Student_Portrait_CH0079",
-        "charface": "Gehenna_PandemoniumSociety_Makoto.13.webp",
+        "charface": "Gehenna_PandemoniumSociety_Makoto.13",
         "name": {
             "zh_cn": "羽沼 真琴",
             "zh_tw": "羽沼 真琴",
@@ -1025,7 +1025,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "万魔殿",
         "profile": "Lobbyillust_Icon_CH0156_01,Student_Portrait_CH0156_Collection,Student_Portrait_CH0156",
-        "charface": "Gehenna_PandemoniumSociety_Iroha.9.webp",
+        "charface": "Gehenna_PandemoniumSociety_Iroha.9",
         "name": {
             "zh_cn": "枣 伊吕波",
             "zh_tw": "棗 伊呂波",
@@ -1039,7 +1039,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "温泉开发部",
         "profile": "NPC_Portrait_Soldier_OnsenDev_RL_Collection,NPC_Portrait_Soldier_OnsenDev_RL",
-        "charface": "Gehenna_HotSpringsDepartment_Member.8.webp",
+        "charface": "Gehenna_HotSpringsDepartment_Member.8",
         "name": {
             "zh_cn": "温泉开发部成员",
             "zh_tw": "溫泉開發部成員",
@@ -1053,7 +1053,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "温泉开发部",
         "profile": "Student_Portrait_CH0089_Collection,Student_Portrait_CH0089",
-        "charface": "Gehenna_HotSpringsDepartment_Kasumi.10.webp",
+        "charface": "Gehenna_HotSpringsDepartment_Kasumi.10",
         "name": {
             "zh_cn": "霞",
             "zh_tw": "霞",
@@ -1067,7 +1067,7 @@ var mt_characters = {
         "school": "格黑娜",
         "club": "温泉开发部",
         "profile": "Lobbyillust_Icon_CH0088_01,Student_Portrait_CH0088_Collection,Student_Portrait_CH0088",
-        "charface": "Gehenna_HotSpringsDepartment_Megu.9.webp",
+        "charface": "Gehenna_HotSpringsDepartment_Megu.9",
         "name": {
             "zh_cn": "下仓 惠",
             "zh_tw": "下倉 惠",
@@ -1081,7 +1081,7 @@ var mt_characters = {
         "school": "其他",
         "club": "柴关拉面",
         "profile": "NPC_Portrait_Shibasekimaster_Collection,NPC_Portrait_Shibasekimaster",
-        "charface": "ETC_Sibaseki_ShibasekiMaster.1.webp",
+        "charface": "ETC_Sibaseki_ShibasekiMaster.1",
         "name": {
             "zh_cn": "柴大将",
             "zh_tw": "柴大将",
@@ -1095,7 +1095,7 @@ var mt_characters = {
         "school": "其他",
         "club": "凯撒集团",
         "profile": "NPC_Portrait_NP0104_Collection,NPC_Portrait_NP0104",
-        "charface": "ETC_Kaiser_General.1.webp",
+        "charface": "ETC_Kaiser_General.1",
         "name": {
             "zh_cn": "凯撒PMC将军",
             "zh_tw": "凱撒PMC將軍",
@@ -1109,7 +1109,7 @@ var mt_characters = {
         "school": "其他",
         "club": "凯撒集团",
         "profile": "NPC_Portrait_NP0034_Collection,NPC_Portrait_Pmcdirector_Collection,NPC_Portrait_NP0034,NPC_Portrait_Pmcdirector",
-        "charface": "ETC_Kaiser_Director.1.webp,ETC_Kaiser_Director_Idle.1.webp",
+        "charface": "ETC_Kaiser_Director.1,ETC_Kaiser_Director_Idle.1",
         "name": {
             "zh_cn": "凯撒PMC理事",
             "zh_tw": "凱撒PMC理事",
@@ -1123,7 +1123,7 @@ var mt_characters = {
         "school": "其他",
         "club": "凯撒集团",
         "profile": "NPC_Portrait_NP0096_Collection,NPC_Portrait_NP0096",
-        "charface": "ETC_Kaiser_President.1.webp",
+        "charface": "ETC_Kaiser_President.1",
         "name": {
             "zh_cn": "凯撒总裁",
             "zh_tw": "凱撒主席",
@@ -1133,7 +1133,7 @@ var mt_characters = {
             "pinyin": "kaisazongcai"
         }
     },
-    "KAITEN FX MK.0": {
+    "KAITENFXMK.0": {
         "school": "其他",
         "club": "凯坦泽",
         "profile": "161.1",
@@ -1151,7 +1151,7 @@ var mt_characters = {
         "school": "其他",
         "club": "凯坦泽",
         "profile": "NPC_Portrait_Kaitenranger_Black_Collection,NPC_Portrait_Kaitenranger_Green_Collection,NPC_Portrait_Kaitenranger_Pink_Collection,NPC_Portrait_Kaitenranger_Red_Collection,NPC_Portrait_Kaitenranger_Yellow_Collection,NPC_Portrait_Kaitenranger_Black,NPC_Portrait_Kaitenranger_Green,NPC_Portrait_Kaitenranger_Pink,NPC_Portrait_Kaitenranger_Red,NPC_Portrait_Kaitenranger_Yellow",
-        "charface": "ETC_KaitenRanger_BLack.1.webp,ETC_KaitenRanger_Green.1.webp,ETC_KaitenRanger_Pink.1.webp,ETC_KaitenRanger_Red.1.webp,ETC_KaitenRanger_Yellow.1.webp",
+        "charface": "ETC_KaitenRanger_BLack.1,ETC_KaitenRanger_Green.1,ETC_KaitenRanger_Pink.1,ETC_KaitenRanger_Red.1,ETC_KaitenRanger_Yellow.1",
         "name": {
             "zh_cn": "回转寿司战队",
             "zh_tw": "回轉壽司戰隊",
@@ -1165,7 +1165,7 @@ var mt_characters = {
         "school": "其他",
         "club": "克洛诺斯报道部",
         "profile": "Student_Portrait_Shinon_Collection,Student_Portrait_Shinon",
-        "charface": "Cronos_PressDepartment_Shinon.10.webp",
+        "charface": "Cronos_PressDepartment_Shinon.10",
         "name": {
             "zh_cn": "川流 诗乃",
             "zh_tw": "川流 詩乃",
@@ -1179,7 +1179,7 @@ var mt_characters = {
         "school": "其他",
         "club": "克洛诺斯报道部",
         "profile": "Student_Portrait_Mai_Collection,Student_Portrait_Mai",
-        "charface": "Cronos_PressDepartment_Mai.8.webp",
+        "charface": "Cronos_PressDepartment_Mai.8",
         "name": {
             "zh_cn": "舞",
             "zh_tw": "舞",
@@ -1193,7 +1193,7 @@ var mt_characters = {
         "school": "其他",
         "club": "联邦学生会",
         "profile": "NPC_Portrait_NP0015_Collection,NPC_Portrait_NP0015",
-        "charface": "DU_GSC_Kaya.25.webp",
+        "charface": "DU_GSC_Kaya.25",
         "name": {
             "zh_cn": "不知火 花耶",
             "zh_tw": "不知火 花耶",
@@ -1207,7 +1207,7 @@ var mt_characters = {
         "school": "其他",
         "club": "联邦学生会",
         "profile": "NPC_Portrait_NP0033_Collection,NPC_Portrait_NP0033",
-        "charface": "DU_GSC_Heine.21.webp",
+        "charface": "DU_GSC_Heine.21",
         "name": {
             "zh_cn": "灰音",
             "zh_tw": "灰音",
@@ -1221,7 +1221,7 @@ var mt_characters = {
         "school": "其他",
         "club": "联邦学生会",
         "profile": "NPC_Portrait_NP0037_Collection,NPC_Portrait_NP0037",
-        "charface": "DU_GSC_Sumomo.13.webp",
+        "charface": "DU_GSC_Sumomo.13",
         "name": {
             "zh_cn": "李",
             "zh_tw": "李",
@@ -1249,7 +1249,7 @@ var mt_characters = {
         "school": "其他",
         "club": "联邦学生会",
         "profile": "NPC_Portrait_NP0106_Collection,NPC_Portrait_NP0107_Collection,NPC_Portrait_NP0106,NPC_Portrait_NP0107",
-        "charface": "DU_GSC_MemberA.10.webp,DU_GSC_MemberB.10.webp",
+        "charface": "DU_GSC_MemberA.10,DU_GSC_MemberB.10",
         "name": {
             "zh_cn": "联邦学生会成员",
             "zh_tw": "聯邦學生會成員",
@@ -1263,7 +1263,7 @@ var mt_characters = {
         "school": "其他",
         "club": "联邦学生会",
         "profile": "NPC_Portrait_NP0097_Collection,NPC_Portrait_Rin_Collection,NPC_Portrait_NP0097",
-        "charface": "DU_GSC_Rin.94.webp,DU_GSC_Rin_Navigator.17.webp",
+        "charface": "DU_GSC_Rin.94,DU_GSC_Rin_Navigator.17",
         "name": {
             "zh_cn": "七神 凛",
             "zh_tw": "七神 琳",
@@ -1277,7 +1277,7 @@ var mt_characters = {
         "school": "其他",
         "club": "联邦学生会",
         "profile": "NPC_Portrait_NP0032_Collection,NPC_Portrait_NP0032",
-        "charface": "DU_GSC_Aoi.8.webp",
+        "charface": "DU_GSC_Aoi.8",
         "name": {
             "zh_cn": "扇喜 葵",
             "zh_tw": "扇喜 葵",
@@ -1291,7 +1291,7 @@ var mt_characters = {
         "school": "其他",
         "club": "联邦学生会",
         "profile": "NPC_Portrait_NP0013_Collection,NPC_Portrait_NP0099_Collection,NPC_Portrait_NP0013,NPC_Portrait_NP0099",
-        "charface": "DU_GSC_Ayumu.16.webp,DU_GSC_Ayumu_Navigator.16.webp",
+        "charface": "DU_GSC_Ayumu.16,DU_GSC_Ayumu_Navigator.16",
         "name": {
             "zh_cn": "岩柜 步梦",
             "zh_tw": "巖櫃 步",
@@ -1305,7 +1305,7 @@ var mt_characters = {
         "school": "其他",
         "club": "联邦学生会",
         "profile": "NPC_Portrait_Momoka_Collection,NPC_Portrait_NP0098_Collection,NPC_Portrait_NP0098",
-        "charface": "DU_GSC_Momoka.48.webp,DU_GSC_Momoka_Navigator.13.webp",
+        "charface": "DU_GSC_Momoka.48,DU_GSC_Momoka_Navigator.13",
         "name": {
             "zh_cn": "由良木 桃香",
             "zh_tw": "由良木 桃香",
@@ -1319,7 +1319,7 @@ var mt_characters = {
         "school": "其他",
         "club": "色彩",
         "profile": "NPC_Portrait_NP0095_Collection,NPC_Portrait_NP0095",
-        "charface": "ETC_Color_Frenapates.1.webp",
+        "charface": "ETC_Color_Frenapates.1",
         "name": {
             "zh_cn": "普雷纳帕特斯",
             "zh_tw": "普雷納帕特斯",
@@ -1389,7 +1389,7 @@ var mt_characters = {
         "school": "其他",
         "club": "什亭之匣",
         "profile": "NPC_Portrait_Arona_Collection",
-        "charface": "DU_Shittim_Arona.33.webp",
+        "charface": "DU_Shittim_Arona.33",
         "name": {
             "zh_cn": "阿罗娜",
             "zh_tw": "彩奈",
@@ -1403,7 +1403,7 @@ var mt_characters = {
         "school": "其他",
         "club": "什亭之匣",
         "profile": "NPC_Portrait_NP0035_Collection,NPC_Portrait_NP0035",
-        "charface": "DU_Shittim_Plana.22.webp",
+        "charface": "DU_Shittim_Plana.22",
         "name": {
             "zh_cn": "普拉娜",
             "zh_tw": "普拉娜",
@@ -1417,7 +1417,7 @@ var mt_characters = {
         "school": "其他",
         "club": "数秘术",
         "profile": "NPC_Portrait_NP0029_Collection,NPC_Portrait_NP0029",
-        "charface": "ETC_Gematria_Beatrice.3.webp",
+        "charface": "ETC_Gematria_Beatrice.3",
         "name": {
             "zh_cn": "贝阿朵莉切",
             "zh_tw": "貝阿朵莉切",
@@ -1431,7 +1431,7 @@ var mt_characters = {
         "school": "其他",
         "club": "数秘术",
         "profile": "NPC_Portrait_NP0115_1_Collection,NPC_Portrait_NP0115_1",
-        "charface": "ETC_Gematria_Francis.1.webp",
+        "charface": "ETC_Gematria_Francis.1",
         "name": {
             "zh_cn": "弗朗西斯",
             "zh_tw": "弗朗西斯",
@@ -1445,7 +1445,7 @@ var mt_characters = {
         "school": "其他",
         "club": "数秘术",
         "profile": "NPC_Portrait_NP0011_1_Collection,NPC_Portrait_NP0011_1",
-        "charface": "ETC_Gematria_Golconde.1.webp",
+        "charface": "ETC_Gematria_Golconde.1",
         "name": {
             "zh_cn": "戈尔孔达",
             "zh_tw": "戈爾孔達",
@@ -1459,7 +1459,7 @@ var mt_characters = {
         "school": "其他",
         "club": "数秘术",
         "profile": "NPC_Portrait_Blacksuit_Collection,NPC_Portrait_NP0113_Collection,NPC_Portrait_Blacksuit,NPC_Portrait_NP0113",
-        "charface": "ETC_Gematria_blacksuit.1.webp,ETC_Gematria_blacksuit_Terror.1.webp",
+        "charface": "ETC_Gematria_blacksuit.1,ETC_Gematria_blacksuit_Terror.1",
         "name": {
             "zh_cn": "黑服",
             "zh_tw": "黑色西裝人",
@@ -1473,7 +1473,7 @@ var mt_characters = {
         "school": "其他",
         "club": "数秘术",
         "profile": "NPC_Portrait_Maestro_Collection,NPC_Portrait_NP0114_Collection,NPC_Portrait_Maestro,NPC_Portrait_NP0114",
-        "charface": "ETC_Gematria_maestro.1.webp,ETC_Gematria_maestro_Terror.1.webp",
+        "charface": "ETC_Gematria_maestro.1,ETC_Gematria_maestro_Terror.1",
         "name": {
             "zh_cn": "巨匠",
             "zh_tw": "巨匠",
@@ -1487,7 +1487,7 @@ var mt_characters = {
         "school": "其他",
         "club": "数秘术",
         "profile": "NPC_Portrait_NP0011_2_Collection,NPC_Portrait_NP0011_2,NPC_Portrait_NP0115_2",
-        "charface": "ETC_Gematria_Décalcomanie.1.webp",
+        "charface": "ETC_Gematria_Décalcomanie.1",
         "name": {
             "zh_cn": "印花釉法",
             "zh_tw": "印花釉法",
@@ -1543,7 +1543,7 @@ var mt_characters = {
         "school": "其他",
         "club": "所确幸",
         "profile": "NPC_Portrait_NP0031_Collection,NPC_Portrait_NP0031,NPC_Portrait_NP0142",
-        "charface": "ETC_Shokakkou_Descartes.7.webp,ETC_Shokakkou_Descartes_Police.6.webp",
+        "charface": "ETC_Shokakkou_Descartes.7,ETC_Shokakkou_Descartes_Police.6",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1571,7 +1571,7 @@ var mt_characters = {
         "school": "其他",
         "club": "所属不明-其他",
         "profile": "Lobbyillust_Icon_CH9999_01,Student_Portrait_CH9999_Collection,Student_Portrait_CH9999",
-        "charface": "ETC_EmptyClub_Miku.16.webp",
+        "charface": "ETC_EmptyClub_Miku.16",
         "name": {
             "zh_cn": "初音未来",
             "zh_tw": "初音未來",
@@ -1585,7 +1585,7 @@ var mt_characters = {
         "school": "其他",
         "club": "所属不明-其他",
         "profile": "NPC_Portrait_Yoheki_Normal1_Collection,NPC_Portrait_Yoheki_Normal1",
-        "charface": "ETC_Worker_Youhei.3.webp",
+        "charface": "ETC_Worker_Youhei.3",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1613,7 +1613,7 @@ var mt_characters = {
         "school": "其他",
         "club": "所属不明-其他",
         "profile": "NPC_Portrait_Sukebanswim_MG1_Collection,NPC_Portrait_Sukebanswim_SMG1_Collection,NPC_Portrait_Sukeban_HMG1_Collection,NPC_Portrait_Sukeban_SMG1_Collection,NPC_Portrait_Sukeban_SR1_Collection,NPC_Portrait_Sukebanswim_MG1,NPC_Portrait_Sukebanswim_SMG1,NPC_Portrait_Sukeban_HMG1,NPC_Portrait_Sukeban_SMG1,NPC_Portrait_Sukeban_SR1",
-        "charface": "ETC_Thugs_MemberB.8.webp,ETC_Thugs_MemberA.8.webp,ETC_Thugs_MemberC.8.webp,ETC_Thugs_MemberD.8.webp,ETC_Thugs_MemberE.8.webp",
+        "charface": "ETC_Thugs_MemberB.8,ETC_Thugs_MemberA.8,ETC_Thugs_MemberC.8,ETC_Thugs_MemberD.8,ETC_Thugs_MemberE.8",
         "name": {
             "zh_cn": "混混",
             "zh_tw": "混混",
@@ -1627,7 +1627,7 @@ var mt_characters = {
         "school": "其他",
         "club": "所属不明-其他",
         "profile": "NPC_Portrait_Peroro_Collection,NPC_Portrait_Peroro",
-        "charface": "ETC_Others_peroro.1.webp",
+        "charface": "ETC_Others_peroro.1",
         "name": {
             "zh_cn": "佩洛洛大人",
             "zh_tw": "佩洛洛大人",
@@ -1641,7 +1641,7 @@ var mt_characters = {
         "school": "其他",
         "club": "所属不明-其他",
         "profile": "NPC_Portrait_Citizen_Animal1_Collection,NPC_Portrait_Citizen_Animal2_Collection,NPC_Portrait_Citizen_Animal3_Collection,NPC_Portrait_Citizen_Animal5_Collection,NPC_Portrait_Citizen_Animal5_eyepatch_Collection,NPC_Portrait_Citizen_Animal6_Collection,NPC_Portrait_Citizen_animal7_Collection,NPC_Portrait_Citizen_Borot1_Collection,NPC_Portrait_Citizen_Borot2_Collection,NPC_Portrait_NP0086_Collection,NPC_Portrait_NP0087_Collection,NPC_Portrait_NP0092_Collection,NPC_Portrait_NP0093_Collection,NPC_Portrait_NP0094_Collection,NPC_Portrait_NP0132_Collection,NPC_Portrait_NP0133_Collection,NPC_Portrait_NP0135_Collection,NPC_Portrait_NP0136_Collection,绷带狗_Collection,NPC_Portrait_Citizen_Animal1,NPC_Portrait_Citizen_Animal2,NPC_Portrait_Citizen_Animal3,NPC_Portrait_Citizen_Animal5,NPC_Portrait_Citizen_Animal5_eyepatch,NPC_Portrait_Citizen_Animal6,NPC_Portrait_Citizen_animal7,NPC_Portrait_Citizen_Borot1,NPC_Portrait_Citizen_Borot2,NPC_Portrait_NP0086,NPC_Portrait_NP0087,NPC_Portrait_NP0092,NPC_Portrait_NP0093,NPC_Portrait_NP0094,NPC_Portrait_NP0132,NPC_Portrait_NP0133,NPC_Portrait_NP0135,NPC_Portrait_NP0136",
-        "charface": "ETC_Citizen_Citizen-A.2.webp,ETC_Citizen_CitizenB.2.webp,ETC_Citizen_CitizenBotA.12.webp,ETC_Citizen_CitizenBotB.1.webp,ETC_Citizen_CitizenC.2.webp,ETC_Citizen_CitizenOthers.10.webp",
+        "charface": "ETC_Citizen_Citizen-A.2,ETC_Citizen_CitizenB.2,ETC_Citizen_CitizenBotA.12,ETC_Citizen_CitizenBotB.1,ETC_Citizen_CitizenC.2,ETC_Citizen_CitizenOthers.10",
         "name": {
             "zh_cn": "市民",
             "zh_tw": "市民",
@@ -1655,7 +1655,7 @@ var mt_characters = {
         "school": "其他",
         "club": "所属不明-其他",
         "profile": "NPC_Portrait_BunnyGirl_SR_Collection,NPC_Portrait_BunnyGirl_SR",
-        "charface": "ETC_BunnyGuard_Member.8.webp",
+        "charface": "ETC_BunnyGuard_Member.8",
         "name": {
             "zh_cn": "兔女郎守卫",
             "zh_tw": "兔女郎守衛",
@@ -1669,7 +1669,7 @@ var mt_characters = {
         "school": "其他",
         "club": "所属不明-其他",
         "profile": "NPC_Portrait_NP0074_Collection,NPC_Portrait_NP0137_Collection,NPC_Portrait_Yustina_SR1_Collection,NPC_Portrait_NP0074,NPC_Portrait_NP0137,NPC_Portrait_Yustina_SR1",
-        "charface": "ETC_Yustina_YustinaA.1.webp,ETC_Yustina_YustinaA_Swimsuit.1.webp,ETC_Yustina_YustinaB.1.webp",
+        "charface": "ETC_Yustina_YustinaA.1,ETC_Yustina_YustinaA_Swimsuit.1,ETC_Yustina_YustinaB.1",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1683,7 +1683,7 @@ var mt_characters = {
         "school": "其他",
         "club": "天使24",
         "profile": "NPC_Portrait_Sora_Collection,NPC_Portrait_Sora",
-        "charface": "DU_Angel24_Sora.29.webp",
+        "charface": "DU_Angel24_Sora.29",
         "name": {
             "zh_cn": "空",
             "zh_tw": "空",
@@ -1697,7 +1697,7 @@ var mt_characters = {
         "school": "其他",
         "club": "头盔团",
         "profile": "Student_Portrait_CH0166_Collection,Student_Portrait_CH0166",
-        "charface": "ETC_HelmetGang_Rabu.13.webp",
+        "charface": "ETC_HelmetGang_Rabu.13",
         "name": {
             "zh_cn": "和驹风 兰舞",
             "zh_tw": "和駒風 兰舞",
@@ -1711,7 +1711,7 @@ var mt_characters = {
         "school": "其他",
         "club": "头盔团",
         "profile": "NPC_Portrait_Helmetdan_Black1_Collection,NPC_Portrait_Helmetdan_Red1_Collection,NPC_Portrait_Helmetdan_Black1,NPC_Portrait_Helmetdan_Red1",
-        "charface": "ETC_HelmetGang_Member.1.webp,ETC_HelmetGang_Kanbu.1.webp",
+        "charface": "ETC_HelmetGang_Member.1,ETC_HelmetGang_Kanbu.1",
         "name": {
             "zh_cn": "钢盔团",
             "zh_tw": "頭盔團",
@@ -1725,7 +1725,7 @@ var mt_characters = {
         "school": "其他",
         "club": "无名众神",
         "profile": "NPC_Portrait_NP0091_Collection,NPC_Portrait_NP0091",
-        "charface": "ETC_TheDivison_DivisonBot.3.webp",
+        "charface": "ETC_TheDivison_DivisonBot.3",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1739,7 +1739,7 @@ var mt_characters = {
         "school": "其他",
         "club": "无名众神",
         "profile": "NPC_Portrait_NP0042_Collection,NPC_Portrait_NP0042",
-        "charface": "ETC_Nameless_Priests.1.webp",
+        "charface": "ETC_Nameless_Priests.1",
         "name": {
             "zh_cn": "无名司祭",
             "zh_tw": "無名司祭",
@@ -1795,7 +1795,7 @@ var mt_characters = {
         "school": "其他",
         "club": "自动机器人",
         "profile": "NPC_Portrait_Automata_Kurokamegumi1_Collection,NPC_Portrait_Automata_Kurokamegumi1",
-        "charface": "ETC_AutoMata_Kurokamegumi.1.webp",
+        "charface": "ETC_AutoMata_Kurokamegumi.1",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1809,7 +1809,7 @@ var mt_characters = {
         "school": "其他",
         "club": "自动机器人",
         "profile": "NPC_Portrait_Automata_PMC1_Collection,NPC_Portrait_Automata_PMC1",
-        "charface": "ETC_AutoMata_PMC.1.webp",
+        "charface": "ETC_AutoMata_PMC.1",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1823,7 +1823,7 @@ var mt_characters = {
         "school": "其他",
         "club": "自动机器人",
         "profile": "NPC_Portrait_NP0116_Collection,NPC_Portrait_NP0116",
-        "charface": "ETC_Kaiser_SOF.1.webp",
+        "charface": "ETC_Kaiser_SOF.1",
         "name": {
             "zh_cn": "凯撒特种部队",
             "zh_tw": "凱撒特種部隊",
@@ -1837,7 +1837,7 @@ var mt_characters = {
         "school": "其他",
         "club": "自动机器人",
         "profile": "NPC_Portrait_Automata_Decagrammaton1_Collection,NPC_Portrait_Automata_Decagrammaton1",
-        "charface": "ETC_AutoMata_Decagrammaton.1.webp",
+        "charface": "ETC_AutoMata_Decagrammaton.1",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1851,7 +1851,7 @@ var mt_characters = {
         "school": "其他",
         "club": "自动机器人",
         "profile": "NPC_Portrait_Automata_Division1_Collection,NPC_Portrait_Automata_Division1",
-        "charface": "ETC_AutoMata_Divison.1.webp",
+        "charface": "ETC_AutoMata_Divison.1",
         "name": {
             "zh_cn": "自动机器人",
             "zh_tw": "自動機器人",
@@ -1865,7 +1865,7 @@ var mt_characters = {
         "school": "千年",
         "club": "C&C",
         "profile": "Lobbyillust_Icon_CH0187_01,Lobbyillust_Icon_CH0211_01,Student_Portrait_CH0187_Collection,Student_Portrait_CH0211_Collection,NPC_Portrait_NP0078,NPC_Portrait_NP0079,NPC_Portrait_NP0123,Student_Portrait_CH0187,Student_Portrait_CH0211,175.3",
-        "charface": "Millennium_CleanNClearing_Toki.18.webp,Millennium_CleanNClearing_Toki_wounded.8.webp,Millennium_CleanNClearing_Toki_Mecha.13.webp,Millennium_CleanNClearing_Toki_Bunny.9.webp",
+        "charface": "Millennium_CleanNClearing_Toki.18,Millennium_CleanNClearing_Toki_wounded.8,Millennium_CleanNClearing_Toki_Mecha.13,Millennium_CleanNClearing_Toki_Bunny.9",
         "name": {
             "zh_cn": "飞鸟马 时",
             "zh_tw": "飛鳥馬 季",
@@ -1879,7 +1879,7 @@ var mt_characters = {
         "school": "千年",
         "club": "C&C",
         "profile": "Lobbyillust_Icon_CH0100_01,Lobbyillust_Icon_Karin_01,NPC_Portrait_NP0082_Collection,Student_Portrait_CH0100_Collection,Student_Portrait_Karin_Collection,NPC_Portrait_NP0082,Student_Portrait_CH0100,Student_Portrait_Karin",
-        "charface": "Millennium_CleanNClearing_Karin.7.webp,Millennium_CleanNClearing_Karin_Bunny.8.webp,Millennium_CleanNClearing_Karin_Uniform.9.webp",
+        "charface": "Millennium_CleanNClearing_Karin.7,Millennium_CleanNClearing_Karin_Bunny.8,Millennium_CleanNClearing_Karin_Uniform.9",
         "name": {
             "zh_cn": "角楯 花凛",
             "zh_tw": "角楯 花凛",
@@ -1893,7 +1893,7 @@ var mt_characters = {
         "school": "千年",
         "club": "C&C",
         "profile": "Lobbyillust_Icon_CH0101_01,Lobbyillust_Icon_Neru_01,Student_Portrait_CH0101_Collection,Student_Portrait_Neru_Collection,Student_Portrait_CH0101,Student_Portrait_Neru",
-        "charface": "Millennium_CleanNClearing_Neru.12.webp,Millennium_CleanNClearing_Neru_wounded.24.webp,Millennium_CleanNClearing_Neru_Bunny.11.webp",
+        "charface": "Millennium_CleanNClearing_Neru.12,Millennium_CleanNClearing_Neru_wounded.24,Millennium_CleanNClearing_Neru_Bunny.11",
         "name": {
             "zh_cn": "美甘 尼禄",
             "zh_tw": "美甘 寧瑠",
@@ -1907,7 +1907,7 @@ var mt_characters = {
         "school": "千年",
         "club": "C&C",
         "profile": "Lobbyillust_Icon_Akane_01,Lobbyillust_Icon_CH0099_01,Student_Portrait_Akane_Collection,Student_Portrait_CH0099_Collection,Student_Portrait_Akane,Student_Portrait_CH0099",
-        "charface": "Millennium_CleanNClearing_Akane.8.webp,Millennium_CleanNClearing_Akane_Bunny.8.webp",
+        "charface": "Millennium_CleanNClearing_Akane.8,Millennium_CleanNClearing_Akane_Bunny.8",
         "name": {
             "zh_cn": "室笠 茜",
             "zh_tw": "室笠 茜",
@@ -1921,7 +1921,7 @@ var mt_characters = {
         "school": "千年",
         "club": "C&C",
         "profile": "Lobbyillust_Icon_Asuna_01,Lobbyillust_Icon_CH0098_01,NPC_Portrait_NP0081_Collection,Student_Portrait_Asuna_Collection,Student_Portrait_CH0098_Collection,NPC_Portrait_NP0081,Student_Portrait_Asuna,Student_Portrait_CH0098",
-        "charface": "Millennium_CleanNClearing_Asuna.8.webp,Millennium_CleanNClearing_Asuna_Bunny.9.webp,Millennium_CleanNClearing_Asuna_Uniform.9.webp",
+        "charface": "Millennium_CleanNClearing_Asuna.8,Millennium_CleanNClearing_Asuna_Bunny.9,Millennium_CleanNClearing_Asuna_Uniform.9",
         "name": {
             "zh_cn": "一之濑 明日奈",
             "zh_tw": "一之瀬 明日奈",
@@ -1935,7 +1935,7 @@ var mt_characters = {
         "school": "千年",
         "club": "工程部",
         "profile": "Lobbyillust_Icon_CH0182_01,Lobbyillust_Icon_Utaha_01,Student_Portrait_CH0182_Collection,Student_Portrait_Utaha_Collection,Student_Portrait_CH0182,Student_Portrait_Utaha",
-        "charface": "Millennium_Engineer_Utaha.9.webp,Millennium_Engineer_Utaha_Cheerleader.17.webp",
+        "charface": "Millennium_Engineer_Utaha.9,Millennium_Engineer_Utaha_Cheerleader.17",
         "name": {
             "zh_cn": "白石 歌原",
             "zh_tw": "白石 詠葉",
@@ -1949,7 +1949,7 @@ var mt_characters = {
         "school": "千年",
         "club": "工程部",
         "profile": "Lobbyillust_Icon_CH0185_01,Lobbyillust_Icon_Kotori_01,NPC_Portrait_NP0069_Collection,Student_Portrait_CH0185_Collection,Student_Portrait_Kotori_Collection,Student_Portrait_CH0185,Student_Portrait_Kotori",
-        "charface": "Millennium_Engineer_Kotori.8.webp,Millennium_Engineer_Kotori_Track.8.webp,Millennium_Engineer_Kotori_Cheerleader.23.webp",
+        "charface": "Millennium_Engineer_Kotori.8,Millennium_Engineer_Kotori_Track.8,Millennium_Engineer_Kotori_Cheerleader.23",
         "name": {
             "zh_cn": "丰见 小鸟",
             "zh_tw": "豐見 亞都梨",
@@ -1963,7 +1963,7 @@ var mt_characters = {
         "school": "千年",
         "club": "工程部",
         "profile": "NPC_Portrait_utahaturret_Collection",
-        "charface": "ETC_Others_Turrent.1.webp",
+        "charface": "ETC_Others_Turrent.1",
         "name": {
             "zh_cn": "歌原的炮台",
             "zh_tw": "歌原的炮臺",
@@ -1977,7 +1977,7 @@ var mt_characters = {
         "school": "千年",
         "club": "工程部",
         "profile": "Lobbyillust_Icon_CH0181_01,Lobbyillust_Icon_Hibiki_01,Student_Portrait_CH0181_Collection,Student_Portrait_Hibiki_Collection,Student_Portrait_CH0181,Student_Portrait_Hibiki",
-        "charface": "Millennium_Engineer_Hibiki.14.webp,Millennium_Engineer_Hibiki_Cheerleader.23.webp",
+        "charface": "Millennium_Engineer_Hibiki.14,Millennium_Engineer_Hibiki_Cheerleader.23",
         "name": {
             "zh_cn": "猫塚 响",
             "zh_tw": "猫塚 響",
@@ -1991,7 +1991,7 @@ var mt_characters = {
         "school": "千年",
         "club": "健身部",
         "profile": "Lobbyillust_Icon_Sumire_01,NPC_Portrait_NP0061_Collection,Student_Portrait_Sumire_Collection,Student_Portrait_Sumire",
-        "charface": "Millennium_TrainingClub_Sumire.14.webp,Millennium_TrainingClub_Sumire_Track.14.webp",
+        "charface": "Millennium_TrainingClub_Sumire.14,Millennium_TrainingClub_Sumire_Track.14",
         "name": {
             "zh_cn": "乙花 菫",
             "zh_tw": "乙花 菫",
@@ -2005,7 +2005,7 @@ var mt_characters = {
         "school": "千年",
         "club": "所属不明-千年",
         "profile": "NPC_Portrait_NP0085,NPC_Portrait_NP0122",
-        "charface": "ETC_AMAS_AMAS-A.1.webp,ETC_AMAS_AMAS-B.1.webp",
+        "charface": "ETC_AMAS_AMAS-A.1,ETC_AMAS_AMAS-B.1",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2019,7 +2019,7 @@ var mt_characters = {
         "school": "千年",
         "club": "所属不明-千年",
         "profile": "NPC_Portrait_NP0036_Collection,NPC_Portrait_NP0084_Collection,NPC_Portrait_NP0036,NPC_Portrait_NP0084",
-        "charface": "Millennium_Student_MemberA.15.webp,Millennium_Student_MemberB.7.webp",
+        "charface": "Millennium_Student_MemberA.15,Millennium_Student_MemberB.7",
         "name": {
             "zh_cn": "千年-学生",
             "zh_tw": "千年-學生",
@@ -2033,7 +2033,7 @@ var mt_characters = {
         "school": "千年",
         "club": "特异现象搜查部",
         "profile": "Lobbyillust_Icon_Eimi_01,Student_Portrait_Eimi_Collection,Student_Portrait_Eimi",
-        "charface": "Millennium_SPTF_Eimi.8.webp",
+        "charface": "Millennium_SPTF_Eimi.8",
         "name": {
             "zh_cn": "和泉元 艾米",
             "zh_tw": "和泉元 英美",
@@ -2047,7 +2047,7 @@ var mt_characters = {
         "school": "千年",
         "club": "特异现象搜查部",
         "profile": "Lobbyillust_Icon_CH0159_01,NPC_Portrait_NP0112_Collection,Student_Portrait_CH0159_Collection,NPC_Portrait_NP0112,Student_Portrait_CH0159",
-        "charface": "Millennium_SPTF_Himari.13.webp,Millennium_SPTF_Himari_Navigator.13.webp",
+        "charface": "Millennium_SPTF_Himari.13,Millennium_SPTF_Himari_Navigator.13",
         "name": {
             "zh_cn": "明星 日鞠",
             "zh_tw": "明星 陽葵",
@@ -2061,7 +2061,7 @@ var mt_characters = {
         "school": "千年",
         "club": "研讨会",
         "profile": "Student_Portrait_CH0158_Collection,Student_Portrait_CH0158",
-        "charface": "Millennium_TheSeminar_Rio.11.webp",
+        "charface": "Millennium_TheSeminar_Rio.11",
         "name": {
             "zh_cn": "调月 莉音",
             "zh_tw": "調月 莉音",
@@ -2075,7 +2075,7 @@ var mt_characters = {
         "school": "千年",
         "club": "研讨会",
         "profile": "Lobbyillust_Icon_CH0198_01,Student_Portrait_CH0162_Collection,Student_Portrait_CH0198_Collection,Student_Portrait_CH0162,Student_Portrait_CH0198",
-        "charface": "Millennium_TheSeminar_Koyuki_Bunny.13.webp,Millennium_TheSeminar_Koyuki.17.webp",
+        "charface": "Millennium_TheSeminar_Koyuki_Bunny.13,Millennium_TheSeminar_Koyuki.17",
         "name": {
             "zh_cn": "黑崎 小雪",
             "zh_tw": "黑崎 小雪",
@@ -2089,7 +2089,7 @@ var mt_characters = {
         "school": "千年",
         "club": "研讨会",
         "profile": "Lobbyillust_Icon_CH0095_01,NPC_Portrait_NP0043_Collection,Student_Portrait_CH0095_Collection,Student_Portrait_CH0095",
-        "charface": "Millennium_TheSeminar_Noa.8.webp,Millennium_TheSeminar_Noa_Track.9.webp",
+        "charface": "Millennium_TheSeminar_Noa.8,Millennium_TheSeminar_Noa_Track.9",
         "name": {
             "zh_cn": "生盐 诺亚",
             "zh_tw": "生塩 乃愛",
@@ -2103,7 +2103,7 @@ var mt_characters = {
         "school": "千年",
         "club": "研讨会",
         "profile": "Lobbyillust_Icon_CH0184_01,Lobbyillust_Icon_Yuuka_01,NPC_Portrait_NP0109_Collection,Student_Portrait_CH0184_Collection,Student_Portrait_Yuuka_Collection,NPC_Portrait_NP0109,Student_Portrait_CH0184",
-        "charface": "Millennium_TheSeminar_Yuuka.8.webp,Millennium_TheSeminar_Yuuka_Track.17.webp,Millennium_TheSeminar_Yuuka_Navigator.8.webp",
+        "charface": "Millennium_TheSeminar_Yuuka.8,Millennium_TheSeminar_Yuuka_Track.17,Millennium_TheSeminar_Yuuka_Navigator.8",
         "name": {
             "zh_cn": "早濑 优香",
             "zh_tw": "早瀬 佑香",
@@ -2117,7 +2117,7 @@ var mt_characters = {
         "school": "千年",
         "club": "游戏开发部",
         "profile": "188.1",
-        "charface": "Millennium_GameDev_Kei.2.webp",
+        "charface": "Millennium_GameDev_Kei.2",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2131,7 +2131,7 @@ var mt_characters = {
         "school": "千年",
         "club": "游戏开发部",
         "profile": "Lobbyillust_Icon_Midori_01,Student_Portrait_CH0202_Collection,Student_Portrait_Midori_Collection,Student_Portrait_CH0202,Student_Portrait_Midori",
-        "charface": "Millennium_GameDev_Midori.8.webp,Millennium_GameDev_Midori_Maid.15.webp",
+        "charface": "Millennium_GameDev_Midori.8,Millennium_GameDev_Midori_Maid.15",
         "name": {
             "zh_cn": "才羽 绿",
             "zh_tw": "才羽 綠",
@@ -2145,7 +2145,7 @@ var mt_characters = {
         "school": "千年",
         "club": "游戏开发部",
         "profile": "Lobbyillust_Icon_Momoi_01,Student_Portrait_CH0201_Collection,Student_Portrait_Momoi_Collection,Student_Portrait_CH0201,Student_Portrait_Momoi",
-        "charface": "Millennium_GameDev_Momoi.9.webp,Millennium_GameDev_Momoi_Maid.13.webp",
+        "charface": "Millennium_GameDev_Momoi.9,Millennium_GameDev_Momoi_Maid.13",
         "name": {
             "zh_cn": "才羽 桃井",
             "zh_tw": "才羽 桃井",
@@ -2159,7 +2159,7 @@ var mt_characters = {
         "school": "千年",
         "club": "游戏开发部",
         "profile": "Lobbyillust_Icon_CH0203_01,Lobbyillust_Icon_Yuzu_01,Student_Portrait_CH0203_Collection,Student_Portrait_Yuzu_Collection,NPC_Portrait_NP0126,Student_Portrait_CH0203,Student_Portrait_Yuzu",
-        "charface": "Millennium_GameDev_Yuzu.10.webp,Millennium_GameDev_Yuzu_Maid.12.webp,ETC_Others_Carton.1.webp",
+        "charface": "Millennium_GameDev_Yuzu.10,Millennium_GameDev_Yuzu_Maid.12,ETC_Others_Carton.1",
         "name": {
             "zh_cn": "花冈 柚子",
             "zh_tw": "花岡 柚子",
@@ -2173,7 +2173,7 @@ var mt_characters = {
         "school": "千年",
         "club": "游戏开发部",
         "profile": "Lobbyillust_Icon_Aris_01,Lobbyillust_Icon_CH0200_01,Student_Portrait_Aris_Collection,Student_Portrait_CH0200_Collection,Student_Portrait_Aris,Student_Portrait_CH0200",
-        "charface": "Millennium_GameDev_Aris.28.webp,Millennium_GameDev_Aris_Maid.11.webp,Millennium_GameDev_Kei.2.webp",
+        "charface": "Millennium_GameDev_Aris.28,Millennium_GameDev_Aris_Maid.11,Millennium_GameDev_Kei.2",
         "name": {
             "zh_cn": "天童 爱丽丝",
             "zh_tw": "天童 愛麗絲",
@@ -2187,7 +2187,7 @@ var mt_characters = {
         "school": "千年",
         "club": "真理部",
         "profile": "Lobbyillust_Icon_CH0160_01,Student_Portrait_CH0160_Collection,Student_Portrait_CH0160",
-        "charface": "Millennium_Veritas_Chihiro.7.webp",
+        "charface": "Millennium_Veritas_Chihiro.7",
         "name": {
             "zh_cn": "各务 千寻",
             "zh_tw": "各務 千尋",
@@ -2201,7 +2201,7 @@ var mt_characters = {
         "school": "千年",
         "club": "真理部",
         "profile": "Lobbyillust_Icon_Hare_01,Student_Portrait_Hare_Collection,Student_Portrait_Hare",
-        "charface": "Millennium_Veritas_Hare.8.webp",
+        "charface": "Millennium_Veritas_Hare.8",
         "name": {
             "zh_cn": "小钩 晴",
             "zh_tw": "小鉤 晴",
@@ -2215,7 +2215,7 @@ var mt_characters = {
         "school": "千年",
         "club": "真理部",
         "profile": "Lobbyillust_Icon_Maki_01,NPC_Portrait_NP0050_Collection,Student_Portrait_Maki_Collection,Student_Portrait_Maki",
-        "charface": "Millennium_Veritas_Maki.9.webp,Millennium_Veritas_Maki_Track.8.webp",
+        "charface": "Millennium_Veritas_Maki.9,Millennium_Veritas_Maki_Track.8",
         "name": {
             "zh_cn": "小涂 真纪",
             "zh_tw": "小塗 真紀",
@@ -2229,7 +2229,7 @@ var mt_characters = {
         "school": "千年",
         "club": "真理部",
         "profile": "Lobbyillust_Icon_Kotama_01,Student_Portrait_Kotama_Collection,Student_Portrait_Kotama",
-        "charface": "Millennium_Veritas_Kotama.7.webp",
+        "charface": "Millennium_Veritas_Kotama.7",
         "name": {
             "zh_cn": "音濑 小玉",
             "zh_tw": "音瀨 小玉",
@@ -2243,7 +2243,7 @@ var mt_characters = {
         "school": "山海经",
         "club": "炼丹术研究会",
         "profile": "Lobbyillust_Icon_Saya_01,Lobbyillust_Icon_Saya_casual_01,Student_Portrait_Saya_casual_Collection,Student_Portrait_Saya_Collection,Student_Portrait_Saya,Student_Portrait_Saya_casual",
-        "charface": "Shanhaijing_Endanbou_Saya.9.webp,Shanhaijing_Endanbou_Saya_Casual.8.webp",
+        "charface": "Shanhaijing_Endanbou_Saya.9,Shanhaijing_Endanbou_Saya_Casual.8",
         "name": {
             "zh_cn": "药子 纱绫",
             "zh_tw": "藥子 沙耶",
@@ -2257,7 +2257,7 @@ var mt_characters = {
         "school": "山海经",
         "club": "梅花园",
         "profile": "Lobbyillust_Icon_CH0066_01,Lobbyillust_Icon_Shun_01,Student_Portrait_CH0066_Collection,Student_Portrait_Shun_Collection,Student_Portrait_CH0066,Student_Portrait_Shun",
-        "charface": "Shanhaijing_Meihuayuan_Shun.16.webp,Shanhaijing_Meihuayuan_Shun_Small.31.webp",
+        "charface": "Shanhaijing_Meihuayuan_Shun.16,Shanhaijing_Meihuayuan_Shun_Small.31",
         "name": {
             "zh_cn": "春原 瞬",
             "zh_tw": "春原 旬",
@@ -2271,7 +2271,7 @@ var mt_characters = {
         "school": "山海经",
         "club": "梅花园",
         "profile": "Lobbyillust_Icon_CH0137_01,Student_Portrait_CH0137_Collection,Student_Portrait_CH0137",
-        "charface": "Shanhaijing_Meihuayuan_Kokona.14.webp",
+        "charface": "Shanhaijing_Meihuayuan_Kokona.14",
         "name": {
             "zh_cn": "春原 心奈",
             "zh_tw": "春原 心菜",
@@ -2285,7 +2285,7 @@ var mt_characters = {
         "school": "山海经",
         "club": "所属不明-山海经",
         "profile": "Student_Portrait_CH0213_Collection,Student_Portrait_CH0213",
-        "charface": "Shanhaijing_EmptyClub_Kai.15.webp",
+        "charface": "Shanhaijing_EmptyClub_Kai.15",
         "name": {
             "zh_cn": "申谷 启",
             "zh_tw": "申谷 啟",
@@ -2299,7 +2299,7 @@ var mt_characters = {
         "school": "山海经",
         "club": "玄龙门",
         "profile": "Lobbyillust_Icon_CH0138_01,Student_Portrait_CH0138_Collection,Student_Portrait_CH0138",
-        "charface": "Shanhaijing_Genryumon_Mina.17.webp",
+        "charface": "Shanhaijing_Genryumon_Mina.17",
         "name": {
             "zh_cn": "近卫 南",
             "zh_tw": "近衛 南",
@@ -2313,7 +2313,7 @@ var mt_characters = {
         "school": "山海经",
         "club": "玄龙门",
         "profile": "Student_Portrait_CH0139_Collection,Student_Portrait_CH0139",
-        "charface": "Shanhaijing_Genryumon_Kissaki.10.webp",
+        "charface": "Shanhaijing_Genryumon_Kissaki.10",
         "name": {
             "zh_cn": "妃咲",
             "zh_tw": "妃姬",
@@ -2327,7 +2327,7 @@ var mt_characters = {
         "school": "山海经",
         "club": "玄龙门",
         "profile": "NPC_Portrait_NP0121_Collection,NPC_Portrait_NP0121",
-        "charface": "Shanhaijing_Genryumon_Member.16.webp",
+        "charface": "Shanhaijing_Genryumon_Member.16",
         "name": {
             "zh_cn": "玄龙门成员",
             "zh_tw": "玄龍門成員",
@@ -2341,7 +2341,7 @@ var mt_characters = {
         "school": "山海经",
         "club": "玄武商会",
         "profile": "Student_Portrait_Reizyo_Collection,Student_Portrait_Reizyo",
-        "charface": "Shanhaijing_BlackTortoisePromenade_Reizyo.19.webp",
+        "charface": "Shanhaijing_BlackTortoisePromenade_Reizyo.19",
         "name": {
             "zh_cn": "鹿山 丽情",
             "zh_tw": "鹿山 麗情",
@@ -2355,7 +2355,7 @@ var mt_characters = {
         "school": "山海经",
         "club": "玄武商会",
         "profile": "NPC_Portrait_GenbuStore_SG_Collection,NPC_Portrait_GenbuStore_SG",
-        "charface": "Shanhaijing_BlackTortoisePromenade_Member.10.webp",
+        "charface": "Shanhaijing_BlackTortoisePromenade_Member.10",
         "name": {
             "zh_cn": "玄武商会职员",
             "zh_tw": "玄武商會職員",
@@ -2369,7 +2369,7 @@ var mt_characters = {
         "school": "山海经",
         "club": "玄武商会",
         "profile": "Lobbyillust_Icon_CH0135_01,Student_Portrait_CH0135_Collection,Student_Portrait_CH0135",
-        "charface": "Shanhaijing_BlackTortoisePromenade_Rumi.9.webp",
+        "charface": "Shanhaijing_BlackTortoisePromenade_Rumi.9",
         "name": {
             "zh_cn": "朱城 瑠美",
             "zh_tw": "朱城 瑠美",
@@ -2383,7 +2383,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "补习部",
         "profile": "Lobbyillust_Icon_CH0058_01,Lobbyillust_Icon_Hihumi_01,Student_Portrait_CH0058_Collection,Student_Portrait_Hihumi_Collection,Student_Portrait_Hihumi_Robber_Collection,Student_Portrait_CH0058,Student_Portrait_Hihumi,Student_Portrait_Hihumi_Robber",
-        "charface": "Trinity_RemedialClass_Hifumi.14.webp,Trinity_RemedialClass_Hifumi_Bandit.7.webp,Trinity_RemedialClass_Hifumi_Track.8.webp,Trinity_RemedialClass_Hifumi_Sukumizu.8.webp,Trinity_RemedialClass_Hifumi_Swimsuit.12.webp",
+        "charface": "Trinity_RemedialClass_Hifumi.14,Trinity_RemedialClass_Hifumi_Bandit.7,Trinity_RemedialClass_Hifumi_Track.8,Trinity_RemedialClass_Hifumi_Sukumizu.8,Trinity_RemedialClass_Hifumi_Swimsuit.12",
         "name": {
             "zh_cn": "阿慈谷 日富美",
             "zh_tw": "阿慈谷 日步美",
@@ -2396,8 +2396,8 @@ var mt_characters = {
     "白洲梓": {
         "school": "圣三一",
         "club": "补习部",
-        "profile": "Lobbyillust_Icon_Azusa_01,Lobbyillust_Icon_Azusa_Swimsuit_01,Student_Portrait_Azusa_Collection,Student_Portrait_Azusa_Swimsuit_Collection,NPC_Portrait_NP0020,Student_Portrait_Azusa,Student_Portrait_Azusa_Swimsuit",
-        "charface": "Trinity_RemedialClass_Azusa.10.webp,Trinity_RemedialClass_Azusa_wounded.10.webp,Trinity_RemedialClass_Azusa_Track.10.webp,Trinity_RemedialClass_Azusa_Sukumizu.10.webp,Trinity_RemedialClass_Azusa_Swimsuit.9.webp",
+        "profile": "Lobbyillust_Icon_Azusa_01,Lobbyillust_Icon_Azusa_Swimsuit_01,Student_Portrait_Azusa_Collection,Student_Portrait_Azusa_Swimsuit_Collection,NPC_Portrait_NP0020,Student_Portrait_Azusa,Student_Portrait_Azusa_Swimsuit,Trinity_RemedialClass_Azusa.9",
+        "charface": "Trinity_RemedialClass_Azusa.10,Trinity_RemedialClass_Azusa_wounded.10,Trinity_RemedialClass_Azusa_Track.10,Trinity_RemedialClass_Azusa_Sukumizu.10,Trinity_RemedialClass_Azusa_Swimsuit.9",
         "name": {
             "zh_cn": "白洲 梓",
             "zh_tw": "白洲 梓",
@@ -2411,7 +2411,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "补习部",
         "profile": "Lobbyillust_Icon_CH0209_01,Lobbyillust_Icon_Hanako_01,NPC_Portrait_NP0110_Collection,Student_Portrait_CH0209_Collection,Student_Portrait_Hanako_Collection,NPC_Portrait_NP0110,Student_Portrait_CH0209,Student_Portrait_Hanako",
-        "charface": "Trinity_RemedialClass_Hanako.8.webp,Trinity_RemedialClass_Hanako_Track.7.webp,Trinity_RemedialClass_Hanako_Sukumizu.7.webp,Trinity_RemedialClass_Hanako_Navigator.7.webp,Trinity_RemedialClass_Hanako_Swimsuit.11.webp",
+        "charface": "Trinity_RemedialClass_Hanako.8,Trinity_RemedialClass_Hanako_Track.7,Trinity_RemedialClass_Hanako_Sukumizu.7,Trinity_RemedialClass_Hanako_Navigator.7,Trinity_RemedialClass_Hanako_Swimsuit.11",
         "name": {
             "zh_cn": "浦和 花子",
             "zh_tw": "浦和 花子",
@@ -2425,7 +2425,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "补习部",
         "profile": "Lobbyillust_Icon_CH0205_01,Lobbyillust_Icon_Koharu_01,Student_Portrait_CH0205_Collection,Student_Portrait_Koharu_Collection,Student_Portrait_CH0205,Student_Portrait_Koharu",
-        "charface": "Trinity_RemedialClass_Koharu.14.webp,Trinity_RemedialClass_Koharu_Track.14.webp,Trinity_RemedialClass_Koharu_Sukumizu.14.webp,Trinity_RemedialClass_Koharu_Swimsuit.22.webp",
+        "charface": "Trinity_RemedialClass_Koharu.14,Trinity_RemedialClass_Koharu_Track.14,Trinity_RemedialClass_Koharu_Sukumizu.14,Trinity_RemedialClass_Koharu_Swimsuit.22",
         "name": {
             "zh_cn": "下江 小春",
             "zh_tw": "下江 小春",
@@ -2439,7 +2439,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "茶会",
         "profile": "Student_Portrait_CH0070_Collection,Student_Portrait_CH0070",
-        "charface": "Trinity_TeaParty_Seia.10.webp",
+        "charface": "Trinity_TeaParty_Seia.10",
         "name": {
             "zh_cn": "百合园 圣娅",
             "zh_tw": "百合園 聖婭",
@@ -2453,7 +2453,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "茶会",
         "profile": "NPC_Portrait_NP0022_Collection,NPC_Portrait_NP0028_Collection,NPC_Portrait_NP0022,NPC_Portrait_NP0028",
-        "charface": "Trinity_TeaParty_MemberA.9.webp,Trinity_TeaParty_MemberB.9.webp",
+        "charface": "Trinity_TeaParty_MemberA.9,Trinity_TeaParty_MemberB.9",
         "name": {
             "zh_cn": "茶会",
             "zh_tw": "茶會",
@@ -2467,7 +2467,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "茶会",
         "profile": "Lobbyillust_Icon_CH0069_01,Student_Portrait_CH0069_Collection,NPC_Portrait_NP0041,NPC_Portrait_NP0101,NPC_Portrait_NP0102,Student_Portrait_CH0069",
-        "charface": "Trinity_TeaParty_Mika.30.webp,Trinity_TeaParty_Mika_NoHawl.30.webp,Trinity_TeaParty_Mika_woundedN.30.webp,Trinity_TeaParty_Mika_Track.30.webp,Trinity_TeaParty_Mika_Sukumizu.29.webp",
+        "charface": "Trinity_TeaParty_Mika.30,Trinity_TeaParty_Mika_NoHawl.30,Trinity_TeaParty_Mika_woundedN.30,Trinity_TeaParty_Mika_Track.30,Trinity_TeaParty_Mika_Sukumizu.29",
         "name": {
             "zh_cn": "圣园 未花",
             "zh_tw": "聖園 未花",
@@ -2481,7 +2481,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "茶会",
         "profile": "Lobbyillust_Icon_Nagisa_01,Student_Portrait_Nagisa_Collection,Student_Portrait_Nagisa",
-        "charface": "Trinity_TeaParty_Nagisa.17.webp,Trinity_TeaParty_Nagisa_Old.11.webp",
+        "charface": "Trinity_TeaParty_Nagisa.17,Trinity_TeaParty_Nagisa_Old.11",
         "name": {
             "zh_cn": "桐藤 渚",
             "zh_tw": "桐藤 渚",
@@ -2495,7 +2495,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "放学后甜品部",
         "profile": "Lobbyillust_Icon_Airi_01,Student_Portrait_Airi_Collection,Student_Portrait_Airi",
-        "charface": "Trinity_HoukagoDessert_Airi.9.webp",
+        "charface": "Trinity_HoukagoDessert_Airi.9",
         "name": {
             "zh_cn": "栗村 爱莉",
             "zh_tw": "栗村 愛莉",
@@ -2509,7 +2509,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "放学后甜品部",
         "profile": "Lobbyillust_Icon_Kazusa_01,Student_Portrait_Kazusa_Collection,Student_Portrait_Kazusa",
-        "charface": "Trinity_HoukagoDessert_Kazusa.14.webp,Trinity_HoukagoDessert_Kazusa_Old.9.webp",
+        "charface": "Trinity_HoukagoDessert_Kazusa.14,Trinity_HoukagoDessert_Kazusa_Old.9",
         "name": {
             "zh_cn": "杏山 和纱",
             "zh_tw": "杏山 和紗",
@@ -2523,7 +2523,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "放学后甜品部",
         "profile": "Lobbyillust_Icon_Yoshimi_01,Student_Portrait_Yoshimi_Collection,Student_Portrait_Yoshimi",
-        "charface": "Trinity_HoukagoDessert_Yoshimi.12.webp",
+        "charface": "Trinity_HoukagoDessert_Yoshimi.12",
         "name": {
             "zh_cn": "伊原木 好美",
             "zh_tw": "伊原木 好美",
@@ -2537,7 +2537,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "放学后甜品部",
         "profile": "Lobbyillust_Icon_CH0155_01,NPC_Portrait_NP0057_Collection,Student_Portrait_CH0155_Collection,Student_Portrait_CH0155",
-        "charface": "Trinity_HoukagoDessert_Natsu.9.webp,Trinity_HoukagoDessert_Natsu_Track.9.webp",
+        "charface": "Trinity_HoukagoDessert_Natsu.9,Trinity_HoukagoDessert_Natsu_Track.9",
         "name": {
             "zh_cn": "柚鸟 夏",
             "zh_tw": "柚鳥 夏",
@@ -2551,7 +2551,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "救护骑士团",
         "profile": "Lobbyillust_Icon_CH0152_01,Student_Portrait_CH0152_Collection,Student_Portrait_CH0152",
-        "charface": "Trinity_KnightsHospitaller_Mine.10.webp",
+        "charface": "Trinity_KnightsHospitaller_Mine.10",
         "name": {
             "zh_cn": "苍森 美弥",
             "zh_tw": "蒼森 美彌",
@@ -2565,7 +2565,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "救护骑士团",
         "profile": "Lobbyillust_Icon_CH0195_01,Lobbyillust_Icon_Hanae_01,NPC_Portrait_NP0076_Collection,Student_Portrait_CH0195_Collection,Student_Portrait_Hanae_Collection,NPC_Portrait_NP0076,Student_Portrait_CH0195,Student_Portrait_Hanae",
-        "charface": "Trinity_KnightsHospitaller_Hanae.8.webp,Trinity_KnightsHospitaller_Hanae_Cheerleader.10.webp,Trinity_KnightsHospitaller_Hanae_Christmas.11.webp",
+        "charface": "Trinity_KnightsHospitaller_Hanae.8,Trinity_KnightsHospitaller_Hanae_Cheerleader.10,Trinity_KnightsHospitaller_Hanae_Christmas.11",
         "name": {
             "zh_cn": "朝颜 花绘",
             "zh_tw": "朝顏 花繪",
@@ -2579,7 +2579,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "救护骑士团",
         "profile": "Lobbyillust_Icon_CH0194_01,Lobbyillust_Icon_Serina_01,NPC_Portrait_NP0075_Collection,Student_Portrait_CH0194_Collection,Student_Portrait_Serina_Collection,NPC_Portrait_NP0075,Student_Portrait_CH0194,Student_Portrait_Serina",
-        "charface": "Trinity_KnightsHospitaller_Serina.7.webp,Trinity_KnightsHospitaller_Serina_Nurse.9.webp,Trinity_KnightsHospitaller_Serina_Christmas.12.webp",
+        "charface": "Trinity_KnightsHospitaller_Serina.7,Trinity_KnightsHospitaller_Serina_Nurse.9,Trinity_KnightsHospitaller_Serina_Christmas.12",
         "name": {
             "zh_cn": "鹫见 芹娜",
             "zh_tw": "鷲見 芹奈",
@@ -2593,7 +2593,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "圣三一自警团",
         "profile": "Lobbyillust_Icon_Suzumi_01,Student_Portrait_Suzumi_Collection",
-        "charface": "Trinity_TrinityVigilance_Suzumi.7.webp",
+        "charface": "Trinity_TrinityVigilance_Suzumi.7",
         "name": {
             "zh_cn": "守月 铃美",
             "zh_tw": "守月 鈴美",
@@ -2607,7 +2607,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "圣三一自警团",
         "profile": "Lobbyillust_Icon_CH0167_01,Student_Portrait_CH0167_Collection,Student_Portrait_CH0167",
-        "charface": "Trinity_TrinityVigilance_Reisa.20.webp",
+        "charface": "Trinity_TrinityVigilance_Reisa.20",
         "name": {
             "zh_cn": "宇泽 玲纱",
             "zh_tw": "宇澤 玲紗",
@@ -2621,7 +2621,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "所属不明-圣三一",
         "profile": "Student_Portrait_CH0212_Collection,Student_Portrait_CH0212,197.2",
-        "charface": "Trinity_EmptyClub_Akria.29.webp",
+        "charface": "Trinity_EmptyClub_Akria.29",
         "name": {
             "zh_cn": "晶",
             "zh_tw": "晶",
@@ -2635,7 +2635,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "所属不明-圣三一",
         "profile": "NPC_Portrait_NP0024_Collection,NPC_Portrait_NP0024",
-        "charface": "Trinity_Student_Member.10.webp",
+        "charface": "Trinity_Student_Member.10",
         "name": {
             "zh_cn": "圣三一-学生",
             "zh_tw": "聖三一-學生",
@@ -2649,7 +2649,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "图书委员会",
         "profile": "Lobbyillust_Icon_CH0169_01,Lobbyillust_Icon_CH0204_01,Student_Portrait_CH0169_Collection,Student_Portrait_CH0204_Collection,Student_Portrait_CH0169,Student_Portrait_CH0204",
-        "charface": "Trinity_BookClub_Ui.25.webp,Trinity_BookClub_Ui_Swimsuit.54.webp",
+        "charface": "Trinity_BookClub_Ui.25,Trinity_BookClub_Ui_Swimsuit.54",
         "name": {
             "zh_cn": "古关 忧",
             "zh_tw": "古関 憂",
@@ -2663,7 +2663,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "图书委员会",
         "profile": "Lobbyillust_Icon_Shimiko_01,Student_Portrait_Shimiko_Collection,Student_Portrait_Shimiko",
-        "charface": "Trinity_BookClub_Shimiko.8.webp",
+        "charface": "Trinity_BookClub_Shimiko.8",
         "name": {
             "zh_cn": "圆堂 志美子",
             "zh_tw": "円堂 志美子",
@@ -2677,7 +2677,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "修女会",
         "profile": "Lobbyillust_Icon_Sakurako_01,Student_Portrait_Sakurako_Collection,NPC_Portrait_NP0090,Student_Portrait_Sakurako",
-        "charface": "Trinity_SisterHood_Sakurako.12.webp,Trinity_SisterHood_Sakurako_Kakugo.14.webp,Trinity_SisterHood_Sakurako_Old.8.webp",
+        "charface": "Trinity_SisterHood_Sakurako.12,Trinity_SisterHood_Sakurako_Kakugo.14,Trinity_SisterHood_Sakurako_Old.8",
         "name": {
             "zh_cn": "歌住 樱子",
             "zh_tw": "歌住 櫻子",
@@ -2691,7 +2691,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "修女会",
         "profile": "Lobbyillust_Icon_CH0210_01,Lobbyillust_Icon_Hinata_01,Student_Portrait_CH0210_Collection,Student_Portrait_Hinata_Collection,Student_Portrait_CH0210,Student_Portrait_Hinata",
-        "charface": "Trinity_SisterHood_Hinata.8.webp,Trinity_SisterHood_Hinata_Swimsuit.13.webp",
+        "charface": "Trinity_SisterHood_Hinata.8,Trinity_SisterHood_Hinata_Swimsuit.13",
         "name": {
             "zh_cn": "若叶 日向",
             "zh_tw": "若葉 日向",
@@ -2705,7 +2705,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "修女会",
         "profile": "NPC_Portrait_NP0025_Collection,NPC_Portrait_NP0025",
-        "charface": "Trinity_SisterHood_Member.9.webp",
+        "charface": "Trinity_SisterHood_Member.9",
         "name": {
             "zh_cn": "修女会",
             "zh_tw": "修女會",
@@ -2719,7 +2719,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "修女会",
         "profile": "Lobbyillust_Icon_CH0186_01,Lobbyillust_Icon_Mari_01,Student_Portrait_CH0186_Collection,Student_Portrait_Mari_Collection,Student_Portrait_CH0186,Student_Portrait_Mari",
-        "charface": "Trinity_SisterHood_Mari.10.webp,Trinity_SisterHood_Mari_Track.11.webp",
+        "charface": "Trinity_SisterHood_Mari.10,Trinity_SisterHood_Mari_Track.11",
         "name": {
             "zh_cn": "伊落 玛丽",
             "zh_tw": "伊落 瑪麗",
@@ -2733,7 +2733,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "正义实现委员会",
         "profile": "Lobbyillust_Icon_CH0060_01,Lobbyillust_Icon_Tsurugi_01,NPC_Portrait_NP0058_Collection,Student_Portrait_CH0060_Collection,Student_Portrait_Tsurugi_Collection,Student_Portrait_CH0060,Student_Portrait_Tsurugi",
-        "charface": "Trinity_Justice_Tsurugi.16.webp,Trinity_Justice_Tsurugi_Swimsuit.12.webp,Trinity_Justice_Tsurugi_Track.16.webp",
+        "charface": "Trinity_Justice_Tsurugi.16,Trinity_Justice_Tsurugi_Swimsuit.12,Trinity_Justice_Tsurugi_Track.16",
         "name": {
             "zh_cn": "剑先 鹤城",
             "zh_tw": "劍先 弦生",
@@ -2747,7 +2747,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "正义实现委员会",
         "profile": "Lobbyillust_Icon_Mashiro_01,Lobbyillust_Icon_Mashiro_Swimsuit_01,NPC_Portrait_NP0062_Collection,Student_Portrait_Mashiro_Collection,Student_Portrait_Mashiro_Swimsuit_Collection,Student_Portrait_Mashiro,Student_Portrait_Mashiro_Swimsuit",
-        "charface": "Trinity_Justice_Mashiro.7.webp,Trinity_Justice_Mashiro_Swimsuit.8.webp,Trinity_Justice_Mashiro_Track.8.webp",
+        "charface": "Trinity_Justice_Mashiro.7,Trinity_Justice_Mashiro_Swimsuit.8,Trinity_Justice_Mashiro_Track.8",
         "name": {
             "zh_cn": "静山 真白",
             "zh_tw": "靜山 麻白",
@@ -2761,7 +2761,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "正义实现委员会",
         "profile": "Student_Portrait_CH0071_Collection,Student_Portrait_CH0071",
-        "charface": "Trinity_Justice_Ichika.15.webp",
+        "charface": "Trinity_Justice_Ichika.15",
         "name": {
             "zh_cn": "一花",
             "zh_tw": "一花",
@@ -2775,7 +2775,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "正义实现委员会",
         "profile": "Lobbyillust_Icon_CH0190_01,Lobbyillust_Icon_Hasumi_01,Student_Portrait_CH0190_Collection,Student_Portrait_Hasumi_Collection,Student_Portrait_CH0190",
-        "charface": "Trinity_Justice_Hasumi.10.webp,Trinity_Justice_Hasumi_Track.12.webp",
+        "charface": "Trinity_Justice_Hasumi.10,Trinity_Justice_Hasumi_Track.12",
         "name": {
             "zh_cn": "羽川 莲见",
             "zh_tw": "羽川 蓮實",
@@ -2789,7 +2789,7 @@ var mt_characters = {
         "school": "圣三一",
         "club": "正义实现委员会",
         "profile": "NPC_Portrait_Justice_normal1_Collection,NPC_Portrait_NP0060_Collection,NPC_Portrait_Justice_normal1",
-        "charface": "Trinity_Justice_Member.8.webp,Trinity_Justice_Member_Track.7.webp",
+        "charface": "Trinity_Justice_Member.8,Trinity_Justice_Member_Track.7",
         "name": {
             "zh_cn": "正义实现委员会部员",
             "zh_tw": "正義實現委員會組員",
@@ -2803,7 +2803,7 @@ var mt_characters = {
         "school": "瓦尔基里",
         "club": "公安局",
         "profile": "Lobbyillust_Icon_CH0170_01,Student_Portrait_CH0170_Collection,NPC_Portrait_NP0105,Student_Portrait_CH0170",
-        "charface": "Valkyrie_PublicPeaceBureau_Kanna.10.webp,Valkyrie_PublicPeaceBureau_Kanna_wounded.11.webp",
+        "charface": "Valkyrie_PublicPeaceBureau_Kanna.10,Valkyrie_PublicPeaceBureau_Kanna_wounded.11",
         "name": {
             "zh_cn": "尾刃 康纳",
             "zh_tw": "尾刃 康娜",
@@ -2817,7 +2817,7 @@ var mt_characters = {
         "school": "瓦尔基里",
         "club": "生活安全局",
         "profile": "Lobbyillust_Icon_CH0141_01,Student_Portrait_CH0141_Collection,Student_Portrait_CH0141",
-        "charface": "Valkyrie_Anzenkyoku_Fubuki.12.webp",
+        "charface": "Valkyrie_Anzenkyoku_Fubuki.12",
         "name": {
             "zh_cn": "合欢垣 吹雪",
             "zh_tw": "合歓垣 吹雪",
@@ -2831,7 +2831,7 @@ var mt_characters = {
         "school": "瓦尔基里",
         "club": "生活安全局",
         "profile": "Lobbyillust_Icon_Kirino_01,Student_Portrait_Kirino_Collection,Student_Portrait_Kirino",
-        "charface": "Valkyrie_Anzenkyoku_Kirino.11.webp",
+        "charface": "Valkyrie_Anzenkyoku_Kirino.11",
         "name": {
             "zh_cn": "中务 桐乃",
             "zh_tw": "中務 桐乃",
@@ -2845,7 +2845,7 @@ var mt_characters = {
         "school": "瓦尔基里",
         "club": "所属不明-瓦尔基里",
         "profile": "NPC_Portrait_NP0134_Collection,NPC_Portrait_Valkyrie_SG_Collection,NPC_Portrait_NP0134,NPC_Portrait_Valkyrie_SG",
-        "charface": "Valkyrie_PublicPeaceBureau_Member.11.webp,Valkyrie_PublicPeaceBureau_Member_Swimsuit.10.webp",
+        "charface": "Valkyrie_PublicPeaceBureau_Member.11,Valkyrie_PublicPeaceBureau_Member_Swimsuit.10",
         "name": {
             "zh_cn": "瓦尔基里学生",
             "zh_tw": "瓦爾基里學生",

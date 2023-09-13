@@ -27,10 +27,9 @@ $('body').on('change',"#loadcusfile",function()
 });
 $('body').on('click',"#savedata",function()
 {
-	if(!localStorage['chats']) return false;
-	alert('这个是为MoeTalk崩溃时准备的存档提取功能\n只能通过【上传MoeTalk存档】读取，否则会出错')
+	alert('这个是为MoeTalk崩溃时准备的存档提取功能\n只能通过【上传MoeTalk存档】读取，否则会出错\n若工具出现使用问题可以通过反馈链接向开发者提交此存档文件')
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-	download_txt('MoeTalk存档'+time+'.json',localStorage['chats']);//生成专用存档
+	download_txt('MoeTalk崩溃专用存档'+time+'.json',JSON.stringify(localStorage));//生成专用存档
 });
 $("body").append("<input id='loaddatafile' hidden type='file' accept='application/json'>");
 $('body').on('click',"#loaddata",function(){$("#loaddatafile").click();})
@@ -41,7 +40,11 @@ $('body').on('change',"#loaddatafile",function()
 	reader.readAsText(file);
 	reader.onload = function(e)
 	{
-		localStorage['chats'] = this.result;
+		localStorage.clear()
+		$.each(JSON.parse(this.result),function(k,v)
+		{
+			localStorage[k] = v;
+		})
 		alert('需返回页面确认读取成功')
 	}
 });
@@ -357,4 +360,15 @@ $('body').on('click',"#ct",function()
 	})
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(arr));//生成专用存档
+})
+$('body').on('click',"#cleancache",function()
+{
+	window.caches && caches.keys && caches.keys().then(function(keys)
+	{
+		keys.forEach(function(key)
+		{
+			caches.delete(key);
+		});
+	});
+	alert('已清除ServiceWorker缓存')
 })

@@ -510,9 +510,9 @@
 						w = (0, i.C)(function(e)
 						{
 							//*储存读取快捷角色
-							if(qchar == 'yes' && localStorage['qchar'])e.sCharacter = JSON.parse(localStorage['qchar']);
-							qchar = 'no';
-							localStorage['qchar'] = JSON.stringify(e.sCharacter);
+							if(selectedList == 'yes' && localStorage['mt-selectedList'])e.sCharacter = JSON.parse(localStorage['mt-selectedList']);
+							selectedList = 'no';
+							localStorage['mt-selectedList'] = JSON.stringify(e.sCharacter);
 							//*储存读取快捷角色
 							return e.sCharacter
 						}),
@@ -842,7 +842,17 @@
 												{
 													style:{color:'black'},//@
 													className: "bold",
-													children: n.name[a].replaceAll("-", " ")
+													children: [n.name[a].replaceAll("-", " "),(0, m.jsx)('span',
+													{
+														style:
+														{
+															className: "medium",
+															color:'rgb(111, 119, 127)',
+															fontSzie:'1rem',
+															fontStyle:'italic'
+														},
+														children: ' '+n.no
+													})]
 												})
 											})
 										}), (0, m.jsx)(R,
@@ -857,7 +867,7 @@
 								{
 									width: 252,
 									height: 252,
-									src: "MoeTalk/UI/School/"+(n.school[a] === '%23' ? '%23' : n.no.toString().split('/')[0])+'.webp',//#学校图标
+									src: "MoeTalk/UI/School/"+(n.school[a] === '%23' ? '%23' : mt_characters[n.no].school)+'.webp',//#学校图标
 									onError: function(e)
 									{
 										var n = e.currentTarget;
@@ -1138,7 +1148,7 @@
 										clubarr = {};
 										$jquery(".club:checked").each(function()
 										{
-											clubarr[$jquery(this).attr('school')+'/'+$jquery(this).attr('value')] = 'YES'
+											clubarr[$jquery(this).attr('value')] = 'YES'
 										})
 										localStorage['mt-club'] = JSON.stringify(clubarr);
 										//*储存分类和排序方式
@@ -1494,17 +1504,9 @@
 							{
 								arr.map(function(v, k)
 								{
-									let arr1 = v['no'].toString().split('/');
-									if(v['school']['zh_cn'] === '%23')
-									{
-										arr1 = '自创/自创';
-									}
-									else
-									{
-										arr1.pop();
-										arr1 = arr1.join('/');
-									}
-									if(!clubarr[arr1])delete arr[k]
+									let club = v.school.zh_cn === '%23' ? '自创' : mt_characters[v.no].club
+									if(mt_name[v.no])arr[k].name[lang] = mt_name[v.no];//@改名
+									if(!clubarr[club])delete arr[k]
 								})
 							}
 							//*更新自定义角色的读取方式
@@ -3606,24 +3608,22 @@
 					if(cfemoji != 'NO')
 					{
 						let cf = cfemoji;cfemoji = 'NO';//@加入判断
-						let no = JSON.parse(localStorage['qchar'])['selected']['no'];
-						if(!isNaN(parseInt(no)))no = '0/0/'+no;
-						let cfindex = no.split('/')[2];///读取选择的角色
+						let no = JSON.parse(localStorage['mt-selectedList'])['selected']['no'];
 
-						if(localStorage['CharFaceIndex'] && JSON.parse(localStorage['CharFaceIndex'])[cfindex] != null)
+						if(localStorage['CharFaceIndex'] && JSON.parse(localStorage['CharFaceIndex'])[no] != null)
 						{
-							cfindex = JSON.parse(localStorage['CharFaceIndex'])[cfindex];
+							no = JSON.parse(localStorage['CharFaceIndex'])[no];
 						}
 						let link;let cflink = null;let cfarr = [];cfarr[0] = 'CharFace';///定义链接
 						let charname = '暂无';
 
-						if(!isNaN(parseInt(no.split('/')[2])))
+						if(!isNaN(parseInt(no)))
 						{
-							if(no.split('/')[2] > 0)
+							if(no > 0)
 							{
 								charname = JSON.parse(localStorage['custom'])[0].club[0].characters.filter(function(item)
 								{
-									return item.no == no.split('/')[2];
+									return item.no == no;
 								});
 								charname = charname[0] ? charname[0].zh_cn : '缺失角色';
 							}
@@ -3640,12 +3640,10 @@
 							});
 							charname = charname[0] ? charname[0].name[lang] : '缺失角色';
 						}
-
-						let mt_charface = mt_characters[cfindex] ? mt_characters[cfindex].charface : ''
-						if(cf == 'CharFace' && mt_charface && mt_charface !== '')
+						if(mt_name[no])charname = mt_name[no];//@改名
+						let mt_charface = mt_characters[no] ? mt_characters[no].charface : ''
+						if(cf == 'CharFace' && mt_charface !== '')
 						{
-							if(mt_charface.split('.').length < 3)cfindex = mt_charface;
-
 							if(mt_charface.split(',').length <= CFPI)CFPI = 0;
 							if(CFPI < 0)CFPI = mt_charface.split(',').length-1;
 							let arr = mt_charface.split(',')[CFPI];
@@ -4012,7 +4010,7 @@
 										{
 											P(e, function()
 											{
-												I(mtype, w), _("")//#回车发送
+												I('chat', w), _("")//#回车发送
 											})
 										},
 										onChange: function(e)
@@ -4071,7 +4069,7 @@
 								disabled: w.length < 1,
 								onClick: function()
 								{
-									I(mtype, w), _("")//#单击发送
+									I('chat', w), _("")//#单击发送
 								},
 								children: (0, m.jsx)(c.xL,
 								{

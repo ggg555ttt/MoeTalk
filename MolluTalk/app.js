@@ -9527,8 +9527,7 @@
 				var r, i = (r = [], $jquery.each(mt_characters,function(k,v)
 					{
 						r.push({
-							//no:k,
-							no:v.school+'/'+v.club+'/'+k,
+							no:k,
 							school:{
 								zh_cn: mt_schoolname[v.school].zh_cn ? mt_schoolname[v.school].zh_cn : v.school,
 								zh_tw: mt_schoolname[v.school].zh_tw ? mt_schoolname[v.school].zh_tw : v.school,
@@ -9894,14 +9893,8 @@
 						}
 						else o = '#'+e;
 						if(o === '#0')o = '主角';
+						if(mt_name[e])o = mt_name[e];//@改名
 						//*
-						// var r = i.Z.filter(function(t)
-						// 	{
-						// 		return t.no === e
-						// 	})[0],
-						// 	o = (r = r || a.Y)
-						// 	.name[n];
-							names = JSON.parse(localStorage['mt-names']);if(names[lang] && names[lang][e])o = names[lang][e];//@人物改名
 						return t && o.split(" ")[1] || o.replaceAll("-", " ")
 					},
 					z = function(e, t, n)
