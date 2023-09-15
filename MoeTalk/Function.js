@@ -59,7 +59,7 @@ if(localStorage['qchar'] || localStorage['custom'])
 		let harr = {}
 		$.each(JSON.parse(localStorage['heads'])[0],function(k,v)
 		{
-			let id k.split('.')
+			let id = k.split('.')
 			if(id.length === 2)harr[id[0]] = v
 			if(id.length === 2)harr[id[0]] = v
 		})
