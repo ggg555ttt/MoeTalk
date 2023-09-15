@@ -5,7 +5,6 @@ var val = '';//记录输入框值
 var browser = os();//获取浏览器信息
 var maxHeight = browser.isFirefox ? 16384*2 : 16384;
 var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//字体文件地址
-var charimg = "https://ghproxy.com/https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main/MT-CharImg.JSON";//缓存图片地址
 
 function mt_height()
 {
@@ -24,30 +23,9 @@ if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname 
 if(browser.isFirefox)
 {
 	font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
-	charimg = "./MT-CharImg.JSON"
 }
 
 if(!localStorage['nofont'])$("head").append(font);//加载字体
-//头像缓存
-// if(!localStorage['imgs'] || localStorage['imgs'] != 851)
-// {
-// 	$.getJSON(charimg,function(json)
-// 	{
-// 		localStorage['imgs'] = 0;
-// 		$.each(json,function(k,v)
-// 		{
-// 			let db;
-// 			openDB('MoeTalk').then((db =>
-// 			{
-// 				db = db;
-// 				let data = {key:k,val:v}
-// 				updateDB(db,'Custom', data)
-// 				closeDB(db)//关闭数据库
-// 			}))
-// 		})
-// 	});
-// }
-//$(".gxgCGp:eq(4)").wait(function(){$(".gxgCGp:eq(4)").click()},".gxgCGp:eq(4)")//默认隐藏工具按钮
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
 $("body").on('keydown',function()
 {
@@ -83,7 +61,6 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append("<button class='"+class0+"' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='delcus'><b style='color:red;'>刪</b></button><span class='tool'>删除角色</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色</span><input size='6' id='ccus' placeholder='输入角色ID'/><br>");
-	//$(".frVjsk").append("<button class='"+class0+"' id='ct'><b style='color:green;'>C</b></button><span class='tool'>生成ClosureTalk存档</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='mt-style'><b style='color:black;'>切</b></button><span class='tool'>切换样式</span><br>");
 	$(".frVjsk").append("<a href='./Setting.html'><button class='"+class0+"'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>");
