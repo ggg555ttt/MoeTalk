@@ -34,7 +34,7 @@ if(!localStorage['mt-date'] || (localStorage['mt-date'] != new Date().getDate())
 /*预定义区*/
 if(!localStorage['mt-char'])localStorage['mt-char'] = '{}';//自定义角色名称
 if(!localStorage['mt-head'])localStorage['mt-head'] = '{}';//自定义角色头像
-if(!localStorage['chats'])localStorage['chats'] = '[]';
+if(!localStorage['chats'])localStorage['chats'] = '[]';//聊天记录
 if(!localStorage['mt-lang'])localStorage['mt-lang'] = 'zh_cn';//默认语言
 if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';//整体图片宽高百分比
 if(!localStorage['mt-cfsize'])localStorage['mt-cfsize'] = '90%';//差分表情宽高百分比
@@ -60,14 +60,16 @@ if(localStorage['qchar'] || localStorage['custom'])
 		let harr = {}
 		$.each(JSON.parse(localStorage['heads'])[0],function(k,v)
 		{
-			let id = k.split('.')
-			if(id.length === 2)harr[id[0]] = v
-			if(id.length === 2)harr[id[0]] = v
+			if(k.split('.').length === 2)harr[k.split('.')[0]] = v
+			if(k.split('/').length === 2)harr[k.split('/')[0]] = v
 		})
 		localStorage['mt-head'] = JSON.stringify(harr)
 	}
 	localStorage.removeItem('custom')
 	localStorage.removeItem('heads')
+	localStorage.removeItem('first')
+	localStorage.removeItem('nofont')
+	localStorage.removeItem('mt-names')
 	deleteDBAll('MoeTalk');
 }
 if(!localStorage['mt-version'])
