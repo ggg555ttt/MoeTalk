@@ -9890,9 +9890,9 @@
 						{
 							o = JSON.parse(localStorage['mt-char'])[e]
 						}
-						else if(oldchar[e])
+						else if(lastchar[e])
 						{
-							o = oldchar[e][n]+'#'+e
+							o = lastchar[e][n]+'#'+e
 						}
 						if(mt_name[e])o = mt_name[e];//@改名
 						//*读取人名

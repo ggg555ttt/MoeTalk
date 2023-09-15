@@ -1,4 +1,4 @@
-var oldchar = {
+var lastchar = {
     "1": {
         "zh_cn": "砂狼 白子",
         "zh_tw": "砂狼 白子",

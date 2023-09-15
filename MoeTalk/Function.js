@@ -59,8 +59,9 @@ if(localStorage['qchar'] || localStorage['custom'])
 		let harr = {}
 		$.each(JSON.parse(localStorage['heads'])[0],function(k,v)
 		{
-			if(k.split('.').length === 2)harr[k.split('.')[0]] = v
-			if(k.split('/').length === 2)harr[k.split('/')[0]] = v
+			let id k.split('.')
+			if(id.length === 2)harr[id[0]] = v
+			if(id.length === 2)harr[id[0]] = v
 		})
 		localStorage['mt-head'] = JSON.stringify(harr)
 	}
@@ -213,7 +214,7 @@ function loadhead(id,img)
 		if(id === 0)return "MoeTalk/UI/you.webp"
 		else
 		{
-			if(oldchar[id])return 'oldchar/'+id+'.'+img+'.webp';
+			if(lastchar[id])return 'lastchar/'+id+'.'+img+'.webp';
 			return "MoeTalk/UI/error.webp"
 		}
 	}
