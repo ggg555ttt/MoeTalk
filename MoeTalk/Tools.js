@@ -1,11 +1,12 @@
 //保存人物
 $('body').on('click',"#savecus",function()
 {
-	if(!localStorage['custom']) return false;
+	if(!localStorage['mt-char']) return false;
 	alert('生成的存档请用【备份自定义角色存档】读取，否则会出错')
 	let arr = [];
-	arr[0] = localStorage['custom'];
-	arr[1] = localStorage['heads'];
+	arr[0] = 'Custom';
+	arr[1] = localStorage['mt-char'];
+	arr[2] = localStorage['mt-head'];
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 	download_txt('MoeTalk自定义角色存档'+time+'.json',JSON.stringify(arr));//生成专用存档
 })
@@ -19,9 +20,16 @@ $('body').on('change',"#loadcusfile",function()
 	reader.readAsText(file);
 	reader.onload = function(e)
 	{
-		localStorage['custom'] = JSON.parse(this.result)[0];
-		localStorage['heads'] = JSON.parse(this.result)[1];
-
+		if(JSON.parse(this.result)[0] === 'Custom')
+		{
+			localStorage['mt-char'] = JSON.parse(this.result)[1];
+			localStorage['mt-head'] = JSON.parse(this.result)[2];
+		}
+		else
+		{
+			localStorage['custom'] = JSON.parse(this.result)[0];
+			localStorage['heads'] = JSON.parse(this.result)[1];
+		}
 		alert('需返回页面确认读取成功')
 	}
 });
@@ -111,7 +119,6 @@ $("body").on('click','#clean',function()
 	let msg = prompt("此操作会将你的所有存档数据一个不留的全部清除，如果你知道自己在干什么，请输入“确认清除”后点击确定\n"+cl);
 	if(msg == '确认清除')
 	{
-
 		deleteDBAll('MoeTalk');
 		localStorage.clear();
 		sessionStorage.clear();

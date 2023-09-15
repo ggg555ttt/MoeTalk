@@ -113,26 +113,22 @@ $('body').on('click',"#readme",function()
 $("body").append("<input id='custom' hidden type='file' accept='image/*'>");//添加上传标签
 $('body').on('click',"#makecus",function()
 {
-	let id;
 	let cus = prompt("请输入角色姓名，创建成功后自动更新列表\n"+
 		"如果未弹出文件上传界面，请点击最上方的【傳】字按钮");
 
 	if(cus != null && cus.trim() != '')
 	{
 		cus = cus.trim();
-		if(localStorage['custom'])chararr = JSON.parse(localStorage['custom']);
-		else{chararr.push({club:[{characters:[]}]})}//如果没有自定义角色
-		char = chararr[0]['club'][0]['characters'];
-
-		if(char.length == 0)id = 1;
-		else id = char[char.length-1]['no']+1;
-
-		char.push({
-			no : id,
-			zh_cn : cus
-		})
-		//console.log(chararr);
-		imgindex = id+"/1";
+		chararr = JSON.parse(localStorage['mt-char']);
+		if(localStorage['mt-char'] === '{}')
+		{
+			imgindex = 1
+		}
+		else
+		{
+			imgindex = parseInt(Object.keys(chararr).pop())+1
+		}
+		chararr[imgindex] = cus
 		$("#cusname").text(cus);
 		$("#custom").click();
 	}
@@ -152,75 +148,59 @@ $('body').on('click',"#uphead",function()//上传头像
 //删除人物
 $('body').on('click',"#delcus",function()
 {
-	let id = prompt("请输入角色ID(#后面的纯数字)\n"+
-	"若想批量删除请用空格分隔，例:0 1 2 3 4 5\n"+
-	"删除后聊天记录将无法显示该角色");
-	let arr = JSON.parse(localStorage['custom']);
-	if(!isNaN(parseInt(id)))
+	let id = prompt("请输入角色ID（大于0的纯数字）\n"+
+	"若想批量删除请用空格分隔，例:1 2 3 4 5\n"+
+	"无法删除工具自带角色");
+	if(id)
 	{
-		$.each(id.trim().split(" "),function(k,cusid)
+		let char = JSON.parse(localStorage['mt-char']);
+		let head = JSON.parse(localStorage['mt-head']);
+		
+		$('.jotOXZ')[0].click()
+		$.each(id.trim().split(" "),function(k,v)
 		{
-			cusid = parseInt(cusid);
-			$.each(arr[0]['club'][0]['characters'],function(k,i)
+			if(char[v])
 			{
-				if($(this)[0]['no'] == cusid)arr[0]['club'][0]['characters'].splice(k,1);
-			})
-			delhead(cusid+'.1')
-			sessionStorage.removeItem(cusid);
-			localStorage['custom'] = JSON.stringify(arr);
-			//console.log(arr[0]['club'][0]['characters']);
+				delete char[v];
+				delete head[v];
+				setTimeout(function(){$('[alt="'+v+'"]').click();},100)
+			}
 		})
+		localStorage['mt-char'] = JSON.stringify(char);
+		localStorage['mt-head'] = JSON.stringify(head);
+		setTimeout(function(){$('.jotOXZ')[1].click()},100)
 		$('.eIEKpg:eq(0)').click();//更新列表
+		
 	}
 })
 //修改人物
 $('body').on('click',"#changecus",function()
 {
 	let id = $("#ccus").val().replaceAll(' ','');
-	if(id)
+	chararr = JSON.parse(localStorage['mt-char'])
+	if(chararr[id])
 	{
-		if(!isNaN(parseInt(id)))
+		let cname = prompt("自定义角色ID："+id+"\n若不想上传头像那么则只修改角色名\n当前角色名为：",chararr[id]);
+		if(cname != null && cname.trim() != '')
 		{
-			chararr = JSON.parse(localStorage['custom'])
-			let arr = JSON.parse(localStorage['custom'])[0]['club'][0]['characters'];
-			$.each(arr,function(k,i)
-			{
-				if($(this)[0]['no'] == id)
-				{
-					let cname = prompt("自定义角色ID："+id+"\n若不想上传头像那么则只修改角色名\n当前角色名为：",$(this)[0]['zh_cn']);
-					if(cname != null && cname.trim() != '')
-					{
-						cname = cname.trim();
-						$(this)[0]['zh_cn'] = cname;
-						chararr[0]['club'][0]['characters'] = arr;
-						//console.log(chararr[0]['club'][0]['characters'][id]);
-						imgindex = arr.indexOf($(this)[0])+'/1';
-						$("#cusname").text($(this)[0]['zh_cn'].trim());
-						localStorage['custom'] = JSON.stringify(chararr);//保存名字
-						$("#custom").click();
-					}
-					
-				}
-			})
+			cname = cname.trim();
+			chararr[id] = cname;
+			imgindex = id;
+			$("#cusname").text(cname);
+			localStorage['mt-char'] = JSON.stringify(chararr);//保存名字
+			$("#custom").click();
 			$('.eIEKpg:eq(0)').click();//更新列表
 		}
-		else
-		{
-			if(mt_characters[id])
-			{
-				let name = prompt("当前人物ID："+id+"\n你想改为什么名字？\n为空则使用默认名",mt_name[id] ? mt_name[id] : "");
-				if(name != null && name.trim() != '')mt_name[id] = name
-				else mt_name[id] ? delete mt_name[id] : ''
-				localStorage['mt-name'] = JSON.stringify(mt_name)
-				$('.eIEKpg:eq(0)').click();click('.gxgCGp:eq(4)')//更新列表
-			}
-		}
-		
 	}
-	else
+	if(mt_characters[id])
 	{
-		alert("请在下方输入角色ID再点击按钮！\n人物名称右侧的灰色斜体文本即为角色ID")
+		let name = prompt("当前人物ID："+id+"\n你想改为什么名字？\n为空则使用默认名",mt_name[id] ? mt_name[id] : "");
+		if(name != null && name.trim() != '')mt_name[id] = name
+		else mt_name[id] ? delete mt_name[id] : ''
+		localStorage['mt-name'] = JSON.stringify(mt_name)
+		$('.eIEKpg:eq(0)').click();click('.gxgCGp:eq(4)')//更新列表
 	}
+	if(!id)alert("请在下方输入角色ID再点击按钮！")
 })
 //储存头像
 $("body").on('change','#custom',function()

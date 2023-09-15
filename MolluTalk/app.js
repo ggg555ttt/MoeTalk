@@ -9878,23 +9878,24 @@
 					},
 					S = function(e, t, n)
 					{
-						//*
+						//*读取人名
 						var r,o;
-						if(isNaN(parseInt(e)))
+						if(e === 0)o = a.Y.name[n]
+						else o = '#';
+						if(mt_characters[e])
 						{
-							r = i.Z.filter(function(t){return t.no === e})[0]
-							o = (r = r || a.Y).name[n];
+							o = mt_characters[e].name[n] ? mt_characters[e].name[n] : e;
 						}
-						else if(localStorage['custom'])
+						if(localStorage['mt-char'] && JSON.parse(localStorage['mt-char'])[e])
 						{
-							r = JSON.parse(localStorage['custom'])[0].club[0].characters.filter(function(t){return t.no === e})[0]
-							if(r)o = r.zh_cn;
-							else o = '#'+e;
+							o = JSON.parse(localStorage['mt-char'])[e]
 						}
-						else o = '#'+e;
-						if(o === '#0')o = '主角';
+						else if(oldchar[e])
+						{
+							o = oldchar[e][n]+'#'+e
+						}
 						if(mt_name[e])o = mt_name[e];//@改名
-						//*
+						//*读取人名
 						return t && o.split(" ")[1] || o.replaceAll("-", " ")
 					},
 					z = function(e, t, n)

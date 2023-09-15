@@ -832,7 +832,9 @@
 											(0, u.Mp)(n, "character")
 										},
 										alt: "profile"
-									}), (0, m.jsxs)(I,
+									}),
+									//*添加ID和社团信息
+									(0, m.jsxs)(I,
 									{
 										children: [(0, m.jsx)("h2",
 										{
@@ -840,34 +842,46 @@
 											{
 												children: (0, m.jsx)(E,
 												{
-													style:{color:'black'},//@
 													className: "bold",
-													children: [n.name[a].replaceAll("-", " "),(0, m.jsx)('span',
-													{
-														style:
-														{
-															className: "medium",
-															color:'rgb(111, 119, 127)',
-															fontSzie:'1rem',
-															fontStyle:'italic'
-														},
-														children: ' '+n.no
-													})]
+													style:{color:'black'},
+													children: n.name[a].replaceAll("-", " ")
 												})
 											})
 										}), (0, m.jsx)(R,
 										{
+											className: "bold",
 											children: [(0, m.jsx)(D,
 											{
-												children: n.school[a] === '%23' ? '自创角色' : n.school[a]//#显示学校
-											}),(0, m.jsx)(D,{children: n.club[a]})]//@显示社团
+												children:[(0, m.jsx)('span',
+												{
+													style:{color:'black'},
+													children:'ID：'
+												}),(0, m.jsx)('span',
+												{
+													style:{fontStyle:'italic'},
+													className: "medium",
+													children:n.no
+												})]
+											}),(0, m.jsx)(D,
+											{
+												children: [(0, m.jsx)('span',
+												{
+													style:{color:'black'},
+													children:'社团：'
+												}),(0, m.jsx)('span',
+												{
+													children:n.club[a] === '自定义角色' ? '自定义角色' : n.club[a]
+												})]
+											})]//@显示社团
 										})]
-									})]
+									})
+									//*添加ID和社团信息
+									]
 								}), (0, m.jsx)(B,
 								{
 									width: 252,
 									height: 252,
-									src: "MoeTalk/UI/School/"+(n.school[a] === '%23' ? '%23' : mt_characters[n.no].school)+'.webp',//#学校图标
+									src: "MoeTalk/UI/School/"+(n.school[a] === '自定义' ? '自定义' : mt_characters[n.no].school)+'.webp',//#学校图标
 									onError: function(e)
 									{
 										var n = e.currentTarget;
@@ -1078,11 +1092,11 @@
 										className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 cVRiXh kwhiZC medium",
 										children: [(0, m.jsx)('p',
 										{
-											className: "multiSel 自创"
+											className: "multiSel 自定义"
 										}), (0, m.jsx)('span',
 										{
 											className: "hida",
-											children: '自创角色'
+											children: '自定义'
 										})]
 									}), (0, m.jsx)('ul',
 									{
@@ -1093,9 +1107,9 @@
 											{
 												type: "checkbox",
 												className: "club",
-												school: "自创",
-												value: "自创"
-											}),"自创角色"]
+												school: "自定义",
+												value: "自定义角色"
+											}),"自定义角色"]
 										})
 									})]
 								}),
@@ -1461,63 +1475,44 @@
 							//*更新自定义角色的读取方式
 							let arr = JSON.parse(JSON.stringify(_.Z));
 							let carr = [];
-							if(localStorage['custom'])carr = JSON.parse(localStorage['custom'])[0]['club'][0]['characters'];
-							for(let num = 0;num < carr.length;num++)
+							$jquery.each(JSON.parse(localStorage['mt-char']),function(k,v)
 							{
 								arr.unshift(
 								{
-									name : 
+									name:
 									{
-										zh_cn : carr[num].zh_cn,
-										zh_tw : carr[num].zh_cn,
-										en : carr[num].zh_cn,
-										jp : carr[num].zh_cn,
-										kr : carr[num].zh_cn,
-										pinyin : carr[num].zh_cn,
+										zh_cn:v,zh_tw:v,en:v,jp:v,kr:v,pinyin:v
 									},
-									club : 
+									club:
 									{
-										zh_cn : '#'+(carr[num].no),
-										zh_tw : '#'+(carr[num].no),
-										en : '#'+(carr[num].no),
-										jp : '#'+(carr[num].no),
-										kr : '#'+(carr[num].no),
-										pinyin : '#'+(carr[num].no),
+										zh_cn:'自定义角色',zh_tw:'自定义角色',en:'自定义角色',jp:'自定义角色',kr:'#',pinyin:'自定义角色'
 									},
 									school : 
 									{
-										zh_cn : '%23',
-										zh_tw : '%23',
-										en : '%23',
-										jp : '%23',
-										kr : '%23',
-										pinyin : '%23',
+										zh_cn:'自定义',zh_tw:'自定义',en:'自定义',jp:'自定义',kr:'自定义',pinyin:'自定义'
 									},
-									no: carr[num].no,
+									no:k,
 									illust : 0,
 									profile : [1],
 									momotalk : true,
 									open : true
 								})
-							}
-							if(JSON.stringify(clubarr) !== '{}')
+							})
+							arr.map(function(v, k)
 							{
-								arr.map(function(v, k)
-								{
-									let club = v.school.zh_cn === '%23' ? '自创' : mt_characters[v.no].club
-									if(mt_name[v.no])arr[k].name[lang] = mt_name[v.no];//@改名
-									if(!clubarr[club])delete arr[k]
-								})
-							}
+								let club = v.school.zh_cn === '自定义' ? '自定义角色' : mt_characters[v.no].club
+								if(mt_name[v.no])arr[k].name[lang] = mt_name[v.no];//@改名
+								if(JSON.stringify(clubarr) !== '{}' && !clubarr[club])delete arr[k]
+							})
 							//*更新自定义角色的读取方式
 							return arr.filter(function(e)//#_.Z换为arr
-								{
-									return null !== (0, u.oG)(e, c.text)
-								})
-								.sort(function(e, n)
-								{
-									return (0, u.ur)(e, n, c, t)
-								})
+							{
+								return null !== (0, u.oG)(e, c.text)
+							})
+							.sort(function(e, n)
+							{
+								return (0, u.ur)(e, n, c, t)
+							})
 						}, [t, c]),
 						y = (null == g ? void 0 : null === (e = g.current) || void 0 === e ? void 0 : e.clientHeight) || 0;
 					return (0, r.useEffect)(function()
@@ -2408,8 +2403,8 @@
 													date: (0, u._3)(!0, !0),
 													replyNo: s.replyNo,
 													replyGroup: s.replyGroup,
-													custom: localStorage['custom'],//@自创角色
-													heads: localStorage['heads'],//@自创头像
+													mt_char: localStorage['mt-char'],//@自创角色
+													mt_head: localStorage['mt-head'],//@自创头像
 													chars: n
 												}, (0, et.Z)(s.chats)])], e.next = 6, (0, u.rU)(r);
 											case 6:
@@ -3615,31 +3610,17 @@
 							no = JSON.parse(localStorage['CharFaceIndex'])[no];
 						}
 						let link;let cflink = null;let cfarr = [];cfarr[0] = 'CharFace';///定义链接
-						let charname = '暂无';
+						let charname = no === 0 ? '主角' : '#';
 
-						if(!isNaN(parseInt(no)))
+						if(JSON.parse(localStorage['mt-char'])[no])
 						{
-							if(no > 0)
-							{
-								charname = JSON.parse(localStorage['custom'])[0].club[0].characters.filter(function(item)
-								{
-									return item.no == no;
-								});
-								charname = charname[0] ? charname[0].zh_cn : '缺失角色';
-							}
-							else
-							{
-								charname = '主角';
-							}
+							charname = JSON.parse(localStorage['mt-char'])[no];
 						}
-						else
+						if(mt_characters[no])
 						{
-							charname = _.Z.filter(function(item)
-							{
-								return item.no == no;
-							});
-							charname = charname[0] ? charname[0].name[lang] : '缺失角色';
+							charname = mt_characters[no].name[lang] ? mt_characters[no].name[lang] : no
 						}
+
 						if(mt_name[no])charname = mt_name[no];//@改名
 						let mt_charface = mt_characters[no] ? mt_characters[no].charface : ''
 						if(cf == 'CharFace' && mt_charface !== '')
