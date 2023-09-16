@@ -350,7 +350,7 @@ $('body').on('click',".juTGbm",function()
 })
 $(window).keydown(function(event)
 {
-	if($(".popup__MyModal-sc-1ardd6p-0.btncdx.visible.medium").length === 0)
+	if($('#edit').hasClass('visible'))
 	{
 		if(event.ctrlKey && event.which == 37)selectClick(37);
 		if(event.ctrlKey && event.which == 39)selectClick(39);
