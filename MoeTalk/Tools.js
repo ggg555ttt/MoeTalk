@@ -119,7 +119,6 @@ $("body").on('click','#clean',function()
 	let msg = prompt("此操作会将你的所有存档数据一个不留的全部清除，如果你知道自己在干什么，请输入“确认清除”后点击确定\n"+cl);
 	if(msg == '确认清除')
 	{
-		deleteDBAll('MoeTalk');
 		localStorage.clear();
 		sessionStorage.clear();
 		window.location.reload();//刷新页面

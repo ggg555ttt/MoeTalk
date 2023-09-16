@@ -17,7 +17,10 @@ if(!localStorage['mt-date'] || (localStorage['mt-date'] != new Date().getDate())
 		{
 			caches.delete(key);
 		});
-		localStorage['mt-date'] = new Date().getDate(),location.reload(true)
+		localStorage['mt-date'] = new Date().getDate(),
+		deleteDBAll('MotherTalk'),
+		deleteDBAll('MoeTalk'),
+		location.reload(true);
 	});
 }
 //解决低版本浏览器不支持replaceAll
@@ -70,6 +73,8 @@ if(localStorage['qchar'] || localStorage['custom'])
 	localStorage.removeItem('first')
 	localStorage.removeItem('nofont')
 	localStorage.removeItem('mt-names')
+	localStorage.removeItem('mt-version')
+	localStorage.removeItem('imgs')
 	deleteDBAll('MoeTalk');
 }
 if(parseInt(Object.keys(JSON.parse(localStorage['mt-char']))[0]) < 999)
