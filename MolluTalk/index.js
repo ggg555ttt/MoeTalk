@@ -854,22 +854,22 @@
 											{
 												children:[(0, m.jsx)('span',
 												{
-													style:{color:'black'},
+													
 													children:'ID：'
 												}),(0, m.jsx)('span',
 												{
-													style:{fontStyle:'italic'},
+													style:{fontStyle:'italic',color:'black'},
 													className: "medium",
-													children:n.no
+													children:n.no>999?n.no-1000:n.no 
 												})]
 											}),(0, m.jsx)(D,
 											{
 												children: [(0, m.jsx)('span',
 												{
-													style:{color:'black'},
 													children:'社团：'
 												}),(0, m.jsx)('span',
 												{
+													style:{color:'black'},
 													children:n.club[a] === '自定义角色' ? '自定义角色' : n.club[a]
 												})]
 											})]//@显示社团
@@ -1718,7 +1718,7 @@
 								r = (0, u.ho)(p.chats, n);
 							//*新版向上追加消息：选择肢
 							e = (0, et.Z)(p.chats);
-							let index = loadindex();
+							let index = $jquery(".dels:checked").attr('index');
 							index && a === true > -1 ? e.splice(index,0,n) : e.push(n);
 							!r || r && p.chats.indexOf(r) === p.chats.length ? e : p.chats.forEach(function(t, o)
 							{
@@ -2458,7 +2458,17 @@
 						},
 						I = function()
 						{
-							///j[0]其他存档数据
+							//*
+							$jquery.each(j[1],function(k,v)
+							{
+								if(v.sCharacter.no.toString().split('/').length > 1)
+								{
+									v.sCharacter.no = v.sCharacter.no.toString().split('/').pop()
+								}
+								j[1][k] = v
+							})
+							localStorage['chats'] = JSON.stringify(j[1])
+							//*
 							a((0, eo.U_)(j[1])), a((0, eo.gW)(
 							{
 								sReplyNo: 0,
@@ -3577,7 +3587,7 @@
 									content: e,
 									isFirst: a.chats.length < 1 || a.chats[a.chats.length - 1].sCharacter !== o || a.chats[a.chats.length - 1].replyDepth !== a.sReplyNo
 								};
-							let index = loadindex();//@获取记录位置
+							let index = $jquery(".dels:checked").attr('index');//@获取记录位置
 							if(a.chats.length < 1) n.push(i);
 							else if(t) a.chats.forEach(function(e)
 							{
@@ -3610,7 +3620,7 @@
 							no = JSON.parse(localStorage['CharFaceIndex'])[no];
 						}
 						let link;let cflink = null;let cfarr = [];cfarr[0] = 'CharFace';///定义链接
-						let charname = no === 0 ? '主角' : '#';
+						let charname = no === 0 ? '主角' : '#'+(no-1000);
 
 						if(JSON.parse(localStorage['mt-char'])[no])
 						{
@@ -3886,7 +3896,7 @@
 							
 							//*新版向上追加消息：一般消息
 							c = (0, et.Z)(o);
-							let index = loadindex();
+							let index = $jquery(".dels:checked").attr('index');
 							index > -1 ? c.splice(index,0,i) : c.push(i);
 							!h || h && o.indexOf(h) === o.length ? c : o.forEach(function(e, n)
 							{
@@ -3998,7 +4008,7 @@
 										{
 											cfemoji = 'NO';//@输入文字时不读取表情
 											_(e.currentTarget.value)
-											if(loadindex())loadchecked().scrollIntoView(!1)//@输入文字自动跳到被选处
+											if($jquery(".dels:checked").attr('index'))$jquery(".dels:checked")[0].scrollIntoView(!1)//@输入文字自动跳到被选处
 										}
 									}), (0, m.jsx)(eV,
 									{

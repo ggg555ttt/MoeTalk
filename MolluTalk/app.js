@@ -9881,7 +9881,7 @@
 						//*读取人名
 						var r,o;
 						if(e === 0)o = a.Y.name[n]
-						else o = '#';
+						else o = '#'+(e-1000);
 						if(mt_characters[e])
 						{
 							o = mt_characters[e].name[n] ? mt_characters[e].name[n] : e;
@@ -9892,7 +9892,7 @@
 						}
 						else if(lastchar[e])
 						{
-							o = lastchar[e][n]+'#'+e
+							o = lastchar[e][n]
 						}
 						if(mt_name[e])o = mt_name[e];//@改名
 						//*读取人名

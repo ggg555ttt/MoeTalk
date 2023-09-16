@@ -99,7 +99,7 @@ $('body').on('click',"#makecus",function()
 		chararr = JSON.parse(localStorage['mt-char']);
 		if(localStorage['mt-char'] === '{}')
 		{
-			imgindex = 1
+			imgindex = 1001
 		}
 		else
 		{
@@ -136,17 +136,18 @@ $('body').on('click',"#delcus",function()
 		$('.jotOXZ')[0].click()
 		$.each(id.trim().split(" "),function(k,v)
 		{
+			v = parseInt(v)+1000
 			if(char[v])
 			{
 				delete char[v];
 				delete head[v];
-				setTimeout(function(){$('[alt="'+v+'"]').click();},100)
+				setTimeout(function(){$('[alt="'+v+'"]').click()})
 			}
 		})
 		localStorage['mt-char'] = JSON.stringify(char);
 		localStorage['mt-head'] = JSON.stringify(head);
-		setTimeout(function(){$('.jotOXZ')[1].click()},100)
-		$('.eIEKpg:eq(0)').click();//更新列表
+		setTimeout(function(){$('.jotOXZ')[1].click()})
+		list()//更新列表
 		
 	}
 })
@@ -155,9 +156,10 @@ $('body').on('click',"#changecus",function()
 {
 	let id = $("#ccus").val().replaceAll(' ','');
 	chararr = JSON.parse(localStorage['mt-char'])
-	if(chararr[id])
+	if(chararr[parseInt(id)+1000])
 	{
-		let cname = prompt("自定义角色ID："+id+"\n若不想上传头像那么则只修改角色名\n当前角色名为：",chararr[id]);
+		id = parseInt(id)+1000
+		let cname = prompt("自定义角色ID："+(parseInt(id)-1000)+"\n若不想上传头像那么则只修改角色名\n当前角色名为：",chararr[id]);
 		if(cname != null && cname.trim() != '')
 		{
 			cname = cname.trim();
@@ -166,7 +168,7 @@ $('body').on('click',"#changecus",function()
 			$("#cusname").text(cname);
 			localStorage['mt-char'] = JSON.stringify(chararr);//保存名字
 			$("#custom").click();
-			$('.eIEKpg:eq(0)').click();//更新列表
+			list()//更新列表
 		}
 	}
 	if(mt_characters[id])
@@ -175,7 +177,7 @@ $('body').on('click',"#changecus",function()
 		if(name != null && name.trim() != '')mt_name[id] = name
 		else mt_name[id] ? delete mt_name[id] : ''
 		localStorage['mt-name'] = JSON.stringify(mt_name)
-		$('.eIEKpg:eq(0)').click();click('.gxgCGp:eq(4)')//更新列表
+		list()//更新列表
 	}
 	if(!id)alert("请在下方输入角色ID再点击按钮！")
 })
@@ -338,11 +340,11 @@ $('body').on('change',".dels",function()
 	else $(this).parent().css("background-color","")//
 })
 //自动跳到被选位置
-$('body').on('click',".dkwjoK",function()
+$('body').on('click',".juTGbm",function()
 {
-	if(loadindex())
+	if($(".dels:checked").attr('index'))
 	{
-		loadchecked().scrollIntoView(!1)
+		$(".dels:checked")[0].scrollIntoView(!1)
 		notice('发送消息时会在被选中的消息上方插入新的消息',250)
 	}
 })
