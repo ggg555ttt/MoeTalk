@@ -3654,6 +3654,7 @@
 						{
 							children: (0, m.jsx)(ea.Xf,
 							{
+								id:'emoji',//@
 								className: n ? "visible medium" : "medium",
 								onDoubleClick: function()
 								{
@@ -4384,7 +4385,6 @@
 						}, [a, x, f, t, p]);
 					return (0, m.jsx)(ea.Xf,
 					{
-						id:'edit',//@
 						className: n ? "visible medium" : "medium",
 						onDoubleClick: function()
 						{

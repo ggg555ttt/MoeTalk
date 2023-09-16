@@ -350,7 +350,7 @@ $('body').on('click',".juTGbm",function()
 })
 $(window).keydown(function(event)
 {
-	if($('#edit').hasClass('visible'))
+	if($('#emoji').length === 0)
 	{
 		if(event.ctrlKey && event.which == 37)selectClick(37);
 		if(event.ctrlKey && event.which == 39)selectClick(39);
