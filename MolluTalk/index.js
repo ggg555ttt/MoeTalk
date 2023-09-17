@@ -3612,7 +3612,9 @@
 					//*定义差分文件链接
 					if(cfemoji != 'NO')
 					{
-						let cf = cfemoji;cfemoji = 'NO';//@加入判断
+						cf = cfemoji;
+						cfemoji = 'NO';//@加入判断
+						let emojinum;
 						let no = JSON.parse(localStorage['mt-selectedList'])['selected']['no'];
 
 						if(localStorage['CharFaceIndex'] && JSON.parse(localStorage['CharFaceIndex'])[no] != null)
@@ -3644,11 +3646,20 @@
 								cfarr.push(cflink+num+'.webp')
 							}
 						}
+						else if(cf == 'Emoji')
+						{
+							if(4 <= CFPI)CFPI = 0;
+							if(CFPI < 0)CFPI = 3;
+							if(CFPI == 0)emojinum = 40;
+							if(CFPI == 1)emojinum = 40;
+							if(CFPI == 2)emojinum = 64;
+							if(CFPI == 3)emojinum = 27;
+						}
 						else
 						{
 							CFPI = -1;
 						}
-						let cfnum = cf == 'Emoji' ? '112+25' : cfarr.length-1;///差分总数
+						let cfnum = cf == 'Emoji' ? emojinum : cfarr.length-1;///差分总数
 						
 						return (0, m.jsx)(m.Fragment,
 						{
@@ -3682,7 +3693,7 @@
 											children: (0, m.jsx)(c.j4,
 											{})
 										})]
-									}),cf == 'CharFace' ? (0, m.jsxs)(ea.h4,
+									}),(0, m.jsxs)(ea.h4,
 									{
 										children: [(0, m.jsx)(c.Bx,
 										{
@@ -3693,7 +3704,11 @@
 												"color": "black"
 											},
 											children: '←',
-											onClick:function(){click('#close');CFPI = CFPI-1}
+											onClick:function()
+											{
+												click('#close');
+												CFPI = CFPI-1
+											}
 										}), (0, m.jsx)(ea.Dx,
 										{
 											className: "bold",
@@ -3702,7 +3717,7 @@
 												"width": "25%",
 												textAlign:"center"
 											},
-											children: (CFPI+1)+"/"+(mt_charface ? mt_charface.split(',').length : 0)
+											children: (CFPI+1)+"/"+(cf !== 'Emoji' && mt_charface ? mt_charface.split(',').length : cf == 'Emoji' ? 4 : 0)
 										}), (0, m.jsx)(c.Bx,
 										{
 											className: "bold",
@@ -3712,17 +3727,21 @@
 												"color": "black"
 											},
 											children: '→',
-											onClick:function(){click('#close');CFPI = CFPI+1}
+											onClick:function()
+											{
+												click('#close');
+												CFPI = CFPI+1
+											}
 										})]
-									}) : '', (0, m.jsx)(eH,
+									}), (0, m.jsx)(eH,
 									{
 										children: (0, m.jsxs)(eK,
 										{
-											children: [Array(cf == 'Emoji' ? 112 : cfnum)//#加入差分表情
+											children: [Array(cf == 'Emoji' ? emojinum : cfnum)//#加入差分表情
 												.fill(0)
 												.map(function(e, n)
 												{
-													if(cf == 'Emoji')link = cf+'/'+lang+'/'+(n+1)+'_'+lang+'.webp';//@原版表情
+													if(cf == 'Emoji')link = cf+'/'+(CFPI+1)+(CFPI<3?(lang=='zh_cn'?'zh_tw':lang):'')+(n+1)+'.webp';//@原版表情
 													if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
 													return (0, m.jsx)(eX,
 													{
@@ -3731,26 +3750,11 @@
 														width: 310,
 														onClick: function()
 														{
-															if(cf == 'Emoji')link = cf+'/'+lang+'/'+(n+1)+'_'+lang+'.webp';//@原版表情
+															if(cf == 'Emoji')link = cf+'/'+(CFPI+1)+(CFPI<3?(lang=='zh_cn'?'zh_tw':lang):'')+(n+1)+'.webp';//@原版表情
 															if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
 															u(link)//#表情链接
 														},
 														src: link//#表情链接
-													}, n)
-												}),Array(cf == 'Emoji' ? 25 : 0)//#恢复额外表情
-												.fill(0)
-												.map(function(e, n)
-												{
-													return (0, m.jsx)(eX,
-													{
-														alt: cf,
-														height: 310,
-														width: 310,
-														onClick: function()
-														{
-															u(cf+'/'+(n+1)+'_'+cf+'.webp')//#表情链接
-														},
-														src: cf+'/'+(n+1)+'_'+cf+'.webp'//#表情链接
 													}, n)
 												})
 											]

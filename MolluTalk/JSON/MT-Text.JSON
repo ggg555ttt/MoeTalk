@@ -563,8 +563,8 @@ var mt_text = {
 		"kr": "이모티콘",
 		"en": "Emoticon",
 		"jp": "絵文字",
-		"zh_cn": "图画文字",
-		"zh_tw": "圖畫文字"
+		"zh_cn": "图文表情",
+		"zh_tw": "圖文表情"
 	},
 	"deleteTalk": {
 		"kr": "톡 삭제",

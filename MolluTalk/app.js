@@ -9553,7 +9553,7 @@
 								pinyin: v.name.pinyin
 							},
 							illust: 0,//#改为默认
-							profile: v.profile.split(','),
+							profile: v.head.split(','),
 							open: true,//#改为默认
 							momotalk: true//#改为默认
 						})

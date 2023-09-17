@@ -1,5 +1,6 @@
 //https://try8.cn/tool/format/js
 var cfemoji = 'NO';//表情差分开关
+var cf = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var val = '';//记录输入框值
 var browser = os();//获取浏览器信息
@@ -376,10 +377,8 @@ $('body').on('click',"#mt-style",function()
 
 $('body').on('click',"#close",function()
 {
-	setTimeout(function()
-	{
-		$('#CharFace').click();
-	}, 1)
+	if(cf == 'CharFace')setTimeout(function(){$('#CharFace').click()})
+	if(cf == 'Emoji')setTimeout(function(){$('[title="emoticon"]').click()})
 })
 
 $("body").on('click',".dropdown button",function()
