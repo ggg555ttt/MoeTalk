@@ -102,7 +102,7 @@ var mt_characters = {
         "club": "兔子小队",
         "head": "NPC_Portrait_NP0018",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "油桶",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -158,7 +158,7 @@ var mt_characters = {
         "club": "对策委员会",
         "head": "梦_Collection",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "梦",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -508,7 +508,7 @@ var mt_characters = {
         "club": "魑魅一座",
         "head": "NPC_Portrait_StreetGhostes_MG_Collection,NPC_Portrait_StreetGhostes_RL_Collection,NPC_Portrait_StreetGhostes_MG,NPC_Portrait_StreetGhostes_RL",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "魑魅一座成员",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -606,7 +606,7 @@ var mt_characters = {
         "club": "出版部",
         "head": "Student_Portrait_CH0228_Collection,Student_Portrait_CH0228",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "荒槙 八云",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -620,7 +620,7 @@ var mt_characters = {
         "club": "出版部",
         "head": "Student_Portrait_CH0229_Collection,Student_Portrait_CH0229",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "三善 贵音",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -1362,7 +1362,7 @@ var mt_characters = {
         "club": "十字神明",
         "head": "凯瑟_Collection",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "凯瑟",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -1544,7 +1544,7 @@ var mt_characters = {
         "club": "所确幸",
         "head": "NPC_Portrait_NP0031_Collection,NPC_Portrait_NP0031,NPC_Portrait_NP0142",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "笛卡尔",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -1558,11 +1558,11 @@ var mt_characters = {
         "club": "所属不明-其他",
         "head": "NPC_Portrait_Hidden_Arena",
         "name": {
-            "zh_cn": "",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "？？？",
+            "zh_tw": "？？？",
+            "jp": "？？？",
+            "en": "？？？",
+            "kr": "？？？",
             "pinyin": "？？？"
         },
         "charface": ""
@@ -1586,7 +1586,7 @@ var mt_characters = {
         "club": "所属不明-其他",
         "head": "NPC_Portrait_Yoheki_Normal1_Collection,NPC_Portrait_Yoheki_Normal1",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "打工学生",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -1600,7 +1600,7 @@ var mt_characters = {
         "club": "所属不明-其他",
         "head": "96.1,166.1,167.1,168.1,169.1,170.1",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "废案学生",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -1670,7 +1670,7 @@ var mt_characters = {
         "club": "所属不明-其他",
         "head": "NPC_Portrait_NP0074_Collection,NPC_Portrait_NP0137_Collection,NPC_Portrait_Yustina_SR1_Collection,NPC_Portrait_NP0074,NPC_Portrait_NP0137,NPC_Portrait_Yustina_SR1",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "尤斯蒂娅圣徒会",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -1726,7 +1726,7 @@ var mt_characters = {
         "club": "无名众神",
         "head": "NPC_Portrait_NP0091_Collection,NPC_Portrait_NP0091",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "无名机器人",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -1796,7 +1796,7 @@ var mt_characters = {
         "club": "自动机器人",
         "head": "NPC_Portrait_Automata_Kurokamegumi1_Collection,NPC_Portrait_Automata_Kurokamegumi1",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "黑龟组机器人",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -1810,7 +1810,7 @@ var mt_characters = {
         "club": "自动机器人",
         "head": "NPC_Portrait_Automata_PMC1_Collection,NPC_Portrait_Automata_PMC1",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "凯撒士兵",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -1838,7 +1838,7 @@ var mt_characters = {
         "club": "自动机器人",
         "head": "NPC_Portrait_Automata_Decagrammaton1_Collection,NPC_Portrait_Automata_Decagrammaton1",
         "name": {
-            "zh_cn": "",
+            "zh_cn": "十字神明机器人",
             "zh_tw": "",
             "jp": "",
             "en": "",
@@ -2006,11 +2006,11 @@ var mt_characters = {
         "club": "所属不明-千年",
         "head": "NPC_Portrait_NP0085,NPC_Portrait_NP0122",
         "name": {
-            "zh_cn": "",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "AMAS",
+            "zh_tw": "AMAS",
+            "jp": "AMAS",
+            "en": "AMAS",
+            "kr": "AMAS",
             "pinyin": "AMAS"
         },
         "charface": "ETC_AMAS_AMAS-A.1,ETC_AMAS_AMAS-B.1"
@@ -2118,11 +2118,11 @@ var mt_characters = {
         "club": "游戏开发部",
         "head": "188.1",
         "name": {
-            "zh_cn": "",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "Kei",
+            "zh_tw": "Kei",
+            "jp": "Kei",
+            "en": "Kei",
+            "kr": "Kei",
             "pinyin": "Kei"
         },
         "charface": "Millennium_GameDev_Kei.2"

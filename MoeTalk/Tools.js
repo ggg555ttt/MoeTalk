@@ -358,7 +358,7 @@ $('body').on('click',"#ct",function()
 	arr = {};
 	arr['chat'] = cl
 	arr['chars'] = [];
-	$.each(JSON.parse(localStorage['qchar'])['selectedList'],function(k,v)
+	$.each(JSON.parse(localStorage['mt-selectedList'])['selectedList'],function(k,v)
 	{
 		arr['chars'][k] = {};
 		arr['chars'][k]['char_id'] = 'mt-'+v.no
@@ -366,6 +366,10 @@ $('body').on('click',"#ct",function()
 	})
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(arr));//生成专用存档
+	if(confirm('生成的ClosureTalk存档只能通过Gitee版ClosureTalk读取\n点击【确定】访问'))
+	{
+		location.href = '../closuretalk/'
+	}
 })
 $('body').on('click',"#cleancache",function()
 {
