@@ -1262,7 +1262,7 @@ var mt_characters = {
     "七神凛": {
         "school": "其他",
         "club": "联邦学生会",
-        "head": "NPC_Portrait_NP0097_Collection,NPC_Portrait_Rin_Collection,NPC_Portrait_NP0097",
+        "head": "NPC_Portrait_NP0097_Collection,NPC_Portrait_Rin_Collection,NPC_Portrait_NP0097,NPC_Portrait_Rin",
         "name": {
             "zh_cn": "七神 凛",
             "zh_tw": "七神 琳",
