@@ -9890,10 +9890,8 @@
 						{
 							o = JSON.parse(localStorage['mt-char'])[e]
 						}
-						else if(lastchar[e])
-						{
-							o = lastchar[e][n]
-						}
+						if(lastchar[e])o = lastchar[e][n]
+						if(closurechar[e])o = closurechar[e][n]
 						if(mt_name[e])o = mt_name[e];//@改名
 						//*读取人名
 						return t && o.split(" ")[1] || o.replaceAll("-", " ")

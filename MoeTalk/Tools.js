@@ -318,13 +318,19 @@ $('body').on('click',"#ct",function()
 	let cl = [];
 	$.each(arr,function(k,v)
 	{
+		let data = 'mt-';
+		if(mt_characters[v['sCharacter']['no']])data = "MoeTalk-"
+		if(lastchar[v['sCharacter']['no']])data = "MT-"
+		if(closurechar[v['sCharacter']['no']])data = "ba-"
 		cl[k] = {};
 		cl[k]['content'] = v['content'];
 		cl[k]['is_breaking'] = false;
-		if(v['sCharacter']['no'] != 0)
+		if(v['sCharacter']['no'] !== 0)
 		{
-			cl[k]['char_id'] = "mt-"+v['sCharacter']['no'];
-			cl[k]['img'] = v['sCharacter']['no']+'.'+v['sCharacter']['index'];
+			cl[k]['char_id'] = data+v['sCharacter']['no'];
+			cl[k]['img'] = v['sCharacter']['index'];
+			if(data === "MT-")cl[k]['img'] = v['sCharacter']['no']+'.'+v['sCharacter']['index'];
+
 		}
 		cl[k]['yuzutalk'] = {};
 		cl[k]['yuzutalk']['nameOverride'] = v['name'] ? v['name'] : '';
@@ -358,12 +364,6 @@ $('body').on('click',"#ct",function()
 	arr = {};
 	arr['chat'] = cl
 	arr['chars'] = [];
-	$.each(JSON.parse(localStorage['mt-selectedList'])['selectedList'],function(k,v)
-	{
-		arr['chars'][k] = {};
-		arr['chars'][k]['char_id'] = 'mt-'+v.no
-		arr['chars'][k]['img'] = v.no+'.'+v.index
-	})
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(arr));//生成专用存档
 	if(confirm('生成的ClosureTalk存档只能通过Gitee版ClosureTalk读取\n点击【确定】访问'))

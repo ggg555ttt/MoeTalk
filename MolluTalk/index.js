@@ -1708,8 +1708,8 @@
 							var e = [],
 								n = {
 									type: "reply",
-									replyNo: p.replyNo,
-									replyGroup: (null == t ? void 0 : t.replyGroup) || p.replyGroup,
+									replyNo: p.replyNo+Math.random(),//#随机ID防BUG
+									replyGroup: ((null == t ? void 0 : t.replyGroup) || p.replyGroup)+Math.random(),//#随机ID防BUG
 									replyDepth: p.sReplyNo,
 									sCharacter: d.I,
 									content: h,
@@ -2432,7 +2432,7 @@
 											ment: F.Z.error[d],
 											title: F.Z.no_support[d]
 										}));
-										w(JSON.parse(n.result)), y("upload")
+										w(loaddata(JSON.parse(n.result))), y("upload")//#
 									}, eZ()
 									.loadAsync(t)
 									.then(function(e)
@@ -4333,8 +4333,8 @@
 							{
 								e = e0(
 								{}, o), o === t ? (n.push(e0(
-								{}, e)),localStorage['mt-edit'] ? (e.time = "",e.name = "") : n.pop(), e.file = "", e.type = x, e.replyNo = h.replyNo, e.replyGroup = h.replyGroup, e.replyDepth = h.sReplyNo, e.sCharacter = d.I, e.content = j, e.isFirst = !0, s((0, eo.gW)(
-								//#加了个n.pop()改为新版修改：选择肢（追加时清空时间戳）
+								{}, e)),localStorage['mt-edit'] ? (e.time = "",e.name = "") : n.pop(), e.file = "", e.type = x, e.replyNo = h.replyNo+Math.random(), e.replyGroup = h.replyGroup+Math.random(), e.replyDepth = h.sReplyNo, e.sCharacter = d.I, e.content = j, e.isFirst = !0, s((0, eo.gW)(
+								//#加了个n.pop()改为新版修改：选择肢（追加时清空时间戳），ID改为随机
 								{
 									sReplyNo: h.sReplyNo,
 									replyNo: h.replyNo + 1,

@@ -37,7 +37,7 @@ if(!localStorage['mt-date'] || (localStorage['mt-date'] != new Date().getDate())
 /*预定义区*/
 if(!localStorage['mt-char'])localStorage['mt-char'] = '{}';//自定义角色名称
 if(!localStorage['mt-head'])localStorage['mt-head'] = '{}';//自定义角色头像
-if(!localStorage['chats'])localStorage['chats'] = '[]';//聊天记录
+if(!localStorage['chats'] || !isJSON(localStorage['chats']))localStorage['chats'] = '[]';//聊天记录
 if(!localStorage['mt-lang'])localStorage['mt-lang'] = 'zh_cn';//默认语言
 if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';//整体图片宽高百分比
 if(!localStorage['mt-cfsize'])localStorage['mt-cfsize'] = '90%';//差分表情宽高百分比
@@ -224,23 +224,20 @@ function savehead(headindex,img64)
 //读取头像
 function loadhead(id,img)
 {
+	//MoeTalk头像
 	if(mt_characters[id])
 	{
-		return 'char/'+mt_characters[id].school+'/'+mt_characters[id].club+'/'+id+'/'+img+'.webp'
+		return 'char/'+mt_characters[id].school+'/'+mt_characters[id].club+'/'+id+'/'+img+'.webp';
 	}
-	if(JSON.parse(localStorage['mt-head'])[id])//自定义头像
+	//自定义头像
+	if(JSON.parse(localStorage['mt-head'])[id])
 	{
 		return JSON.parse(localStorage['mt-head'])[id];
 	}
-	else//本地头像
-	{
-		if(id === 0)return "MoeTalk/UI/you.webp"
-		else
-		{
-			if(lastchar[id])return 'lastchar/'+id+'.'+img+'.webp';
-			return "MoeTalk/UI/error.webp"
-		}
-	}
+	if(closurechar[id])return '../ClosureTalk/resources/ba/characters/'+img+'.webp';//closure头像
+	if(lastchar[id])return 'lastchar/'+id+'.'+img+'.webp';//旧版头像
+	if(id === 0)return "MoeTalk/UI/you.webp";//主角
+	return "MoeTalk/UI/error.webp";//默认头像
 }
 //删除头像
 function delhead(imgindex)
@@ -575,4 +572,71 @@ function list()
 	setTimeout(function(){$('.gxgCGp:eq(4)').click()})
 	setTimeout(function(){selectClick(37)})
 	setTimeout(function(){selectClick(39)})
+}
+function loaddata(json)
+{
+	if(!json[0] || (json[0] && !json[0].title))
+	{
+		json[0] = {};
+		json[1] = [];
+		json[0]['title'] = '错误存档'
+		json[0]['nickname'] = '无法识别的数据'
+		json[0]['date'] = '强制上传会清空当前正在编辑的数据'
+		
+		json[0]['replyGroup'] = 0
+		json[0]['replyNo'] = 0
+	}
+	if(json['chat'])
+	{
+		json[0] = {};
+		json[1] = [];
+		json[0]['title'] = 'ClosureTalk存档'
+		json[0]['replyGroup'] = 0
+		json[0]['replyNo'] = 0
+		$.each(json['chat'],function(k,v)
+		{
+			json[1][k] = {};
+			json[1][k]['sCharacter'] = {};
+			json[1][k]['content'] = v['content'];
+			json[1][k]['replyNo'] = 0
+			json[1][k]['replyGroup'] = 0
+			json[1][k]['replyDepth'] = 0
+
+			json[1][k]['sCharacter']['no'] = v['char_id'] ? v['char_id'].split('-')[1] : 0
+			json[1][k]['sCharacter']['index'] = v['img'] ? v['img'].split('.').shift() : 1
+
+			if(v['yuzutalk']['type'] === 'TEXT')json[1][k]['type'] = 'chat'
+			if(v['yuzutalk']['type'] === 'RELATIONSHIPSTORY')json[1][k]['type'] = 'heart'
+			if(v['yuzutalk']['type'] === 'NARRATION')
+			{
+				json[1][k]['type'] = 'info'
+				json[1][k]['sCharacter']['no'] = 0
+				json[1][k]['sCharacter']['index'] = 1
+			}
+			if(v['yuzutalk']['type'] === 'CHOICES')
+			{
+				json[1][k]['replyNo'] = Math.random()
+				json[1][k]['replyGroup'] = Math.random()
+				json[1][k]['type'] = 'reply'
+				json[1][k]['sCharacter']['no'] = 0
+				json[1][k]['sCharacter']['index'] = 1
+			}
+			if(v['yuzutalk']['type'] === 'IMAGE')
+			{
+				json[1][k]['type'] = 'image'
+				if(v['content'].indexOf('data:image/') > -1)
+				{
+					json[1][k]['file'] = v['content'];
+					json[1][k]['content'] = '';
+				}
+				else
+				{
+					json[1][k]['content'] = '../ClosureTalk/'+v['content'];
+					json[1][k]['content'] = json[1][k]['content'].replaceAll('../ClosureTalk/../moetalk/','');
+				}
+			}
+			json[1][k]['isFirst'] = true;
+		})
+	}
+	return json
 }
