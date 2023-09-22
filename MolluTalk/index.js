@@ -2465,17 +2465,6 @@
 						},
 						I = function()
 						{
-							//*
-							$jquery.each(j[1],function(k,v)
-							{
-								if(v.sCharacter.no.toString().split('/').length > 1)
-								{
-									v.sCharacter.no = v.sCharacter.no.toString().split('/').pop()
-								}
-								j[1][k] = v
-							})
-							localStorage['chats'] = JSON.stringify(j[1])
-							//*
 							a((0, eo.U_)(j[1])), a((0, eo.gW)(
 							{
 								sReplyNo: 0,
@@ -5124,7 +5113,8 @@
 				{
 					displayName: "Chat__EditButton",
 					componentId: "sc-5hhx0-1"
-				})(["align-self:end;margin:0rem 0.5rem;color:", ";height:1.2rem;width:1.2rem;flex-shrink:0;"], function(e)
+				})(["align-self:end;margin:0rem 0.5rem;color:", ";height:auto;width:1.2rem;flex-shrink:0;"], function(e)
+				//#height:auto;防止编辑按钮下移
 				{
 					return e.theme.color.rgb45_70_100
 				}),
@@ -5234,7 +5224,7 @@
 							children: [
 								(0, m.jsx)(c.jl,
 								{
-									style:{"width": "auto"},
+									style:{height: "auto","width": "auto"},
 									id:'delsall',
 									children: (0, m.jsx)(W,
 									{
@@ -5248,7 +5238,7 @@
 								}),
 								(0, m.jsx)(c.jl,
 								{
-									style:{"width": "auto"},
+									style:{height: "auto","width": "auto"},
 									id:'rdelsall',
 									children: (0, m.jsx)(W,
 									{
@@ -5262,7 +5252,7 @@
 								}),
 								(0, m.jsx)(c.jl,
 								{
-									style:{"width": "auto"},
+									style:{height: "auto","width": "auto"},
 									id:'delsto',
 									children: (0, m.jsx)(W,
 									{
@@ -5271,6 +5261,20 @@
 										{
 											style:{fontSize: "1.1rem"},
 											children: '区间选择'
+										})
+									})
+								}),
+								(0, m.jsx)(c.jl,
+								{
+									style:{height: "auto","width": "auto"},
+									id:'cutdata',
+									children: (0, m.jsx)(W,
+									{
+										className: "bold",
+										children: (0, m.jsx)(X,
+										{
+											style:{fontSize: "1.1rem"},
+											children: '截取存档'
 										})
 									})
 								}),
@@ -5283,7 +5287,7 @@
 										style:{fontSize: "1.1rem"},
 										children: F.Z['delete'][lang]
 									})
-								}),
+								})
 								]
 						}),
 						//*

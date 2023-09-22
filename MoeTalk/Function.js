@@ -101,7 +101,7 @@ var imgindex;var text;//人物自定义
 var chararr = [];//自定义角色列表
 var height;//聊天记录长度
 var $jquery = $;//jquery转义
-var size = (JSON.stringify(localStorage).length/1024).toFixed(0);//数据大小
+var size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0));//数据大小
 var CFPI = 0;//差分页码
 var lang = localStorage['mt-lang'];
 var clearImage = false;
@@ -588,11 +588,13 @@ function loaddata(json)
 		json[0]['replyGroup'] = 0
 		json[0]['replyNo'] = 0
 	}
+	let josnsize = parseInt((JSON.stringify(json).length/1024).toFixed(0))
 	if(json['chat'])
 	{
 		json[0] = {};
-		json[1] = [];
+		json[1] = [];//(JSON.stringify(localStorage).length/1024).toFixed(0)
 		json[0]['title'] = 'ClosureTalk存档'
+		json[0]['nickname'] = '存档大小：'+josnsize+'KB'
 		json[0]['replyGroup'] = 0
 		json[0]['replyNo'] = 0
 		$.each(json['chat'],function(k,v)
@@ -639,6 +641,21 @@ function loaddata(json)
 			}
 			json[1][k]['isFirst'] = true;
 		})
+	}
+	$jquery.each(json[1],function(k,v)
+	{
+		if(v.sCharacter.no.toString().split('/').length > 1)
+		{
+			v.sCharacter.no = v.sCharacter.no.toString().split('/').pop()
+		}
+		json[1][k] = v
+	})
+	if(josnsize+size > 5120)
+	{
+		alert('当前存档数据：'+size+
+			'\n读取存档数据：'+josnsize+'\n'+
+			josnsize+'+'+size+'='+(josnsize+size)+'\n'+
+			(josnsize+size)+'>'+'5120，存档将无法读取')
 	}
 	return json
 }

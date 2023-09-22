@@ -30,14 +30,14 @@ if(!localStorage['nofont'])$("head").append(font);//加载字体
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
 $("body").on('keydown',function()
 {
-	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
+	size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0))
 	height = mt_height()
 	$('#size').text(height+"\n"+size+"KB");
 	warning();
 })
 $("body").on('click',function()
 {
-	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
+	size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0))
 	height = mt_height()
 	$('#size').text(height+"\n"+size+"KB");
 	if($('.visible').length === 0)
@@ -63,7 +63,7 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append("<button class='"+class0+"' id='delcus'><b style='color:red;'>刪</b></button><span class='tool'>删除角色</span><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色</span><input size='6' id='ccus' placeholder='输入角色ID'/><br>");
 	$(".frVjsk").append("<button class='"+class0+"' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>");
-	$(".frVjsk").append("<button class='"+class0+"' id='mt-style'><b style='color:black;'>切</b></button><span class='tool'>切换样式</span><br>");
+	$(".frVjsk").append("<button class='"+class0+"' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>");
 	$(".frVjsk").append("<a href='./Setting.html'><button class='"+class0+"'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>");
 },".frVjsk")
 //使用说明
@@ -205,7 +205,7 @@ $('body').on('click',"#size",function()
 	let wh = '';
 	let ws = '';
 	let wc = '';
-	size = (JSON.stringify(localStorage).length/1024).toFixed(0);
+	size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0))
 	height = mt_height()
 	if(height > (maxHeight*0.75))wh = "聊天记录长度大约为"+height+"，超过"+maxHeight+"会使生成的图片产生空白区域\n另外此数字可能并不准确，具体请以生成的图片长度为基准\n";
 	if(size > (5120*0.75))ws = "存储空间体积为"+size+"KB，超过5120KB会使保存功能崩溃\n";
@@ -417,4 +417,8 @@ $("body").on('click','.mutliSelect input[type="checkbox"]',function()
 			$('.'+school).parent().css("background-color","")
 		}
 	}
+});
+$("body").on('click',"#cutdata",function()
+{
+	alert('开发中，敬请期待')
 });
