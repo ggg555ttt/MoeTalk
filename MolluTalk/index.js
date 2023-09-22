@@ -2018,9 +2018,8 @@
 														json[0]['title'] = '备份存档';
 														json[0]['nickname'] = 'MoeTalk';
 														json[0]['date'] = (0, u._3)(!0, !0);
-														json[0]['replyNo'] = localStorage['replyNo'];
-														json[0]['replyGroup'] = localStorage['replyNo'];
-														json[0]['chars'] = localStorage['chars'];
+														json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
+														json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
 														json[1] = JSON.parse(localStorage['chats']);
 														if(localStorage['wmark'])
 														{

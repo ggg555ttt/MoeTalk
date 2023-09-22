@@ -324,6 +324,7 @@ $('body').on('click',".gxgCGp:eq(4)",function()
 		$('#delsall').attr('hidden',false)
 		$('#delsto').attr('hidden',false)
 		$('#rdelsall').attr('hidden',false)
+		$('#cutdata').attr('hidden',false)
 		$('#dels').attr('hidden',false).next().attr('hidden',false)
 	}
 	else
@@ -331,6 +332,7 @@ $('body').on('click',".gxgCGp:eq(4)",function()
 		$('#delsall').attr('hidden',true)
 		$('#delsto').attr('hidden',true)
 		$('#rdelsall').attr('hidden',true)
+		$('#cutdata').attr('hidden',true)
 		$('#dels').attr('hidden',true).next().attr('hidden',true)
 	}
 })
@@ -420,5 +422,34 @@ $("body").on('click','.mutliSelect input[type="checkbox"]',function()
 });
 $("body").on('click',"#cutdata",function()
 {
-	alert('开发中，敬请期待')
+	if($(".dels:checked").length > 0)
+	{
+		let filename = prompt("【截取存档】\n你一共选中了"+$(".dels:checked").length+"条数据\n请输入文件名：");
+		if(filename !== null && filename.trim() !== '')
+		{
+			let arr = [];
+			let json = []
+			let time = new Date(); 
+			let year = time.getFullYear(); // 年
+			let month = time.getMonth() + 1; // 月
+			let date = time.getDate(); // 日
+			$(".dels:checked").each(function()
+			{
+				arr.push(JSON.parse(localStorage['chats'])[$(this).attr('index')]);
+			})
+			json[0] = {};
+			json[0]['title'] = filename;
+			json[0]['nickname'] = '截取存档';
+			json[0]['date'] = `${year}-${month}-${date}`
+			json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
+			json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
+			json[1] = JSON.parse(JSON.stringify(arr));
+			download_txt(`${filename}-MoeTalk截取存档${year}_${month}_${date}.json`,JSON.stringify(json));
+			click('.gxgCGp:eq(4)')
+		}
+	}
+	else
+	{
+		alert('你没有选中数据！')
+	}
 });
