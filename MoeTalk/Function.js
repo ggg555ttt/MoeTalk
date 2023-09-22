@@ -39,6 +39,10 @@ if(!localStorage['mt-char'])localStorage['mt-char'] = '{}';//自定义角色名�
 if(!localStorage['mt-head'])localStorage['mt-head'] = '{}';//自定义角色头像
 if(!localStorage['chats'] || !isJSON(localStorage['chats']))localStorage['chats'] = '[]';//聊天记录
 if(!localStorage['mt-lang'])localStorage['mt-lang'] = 'zh_cn';//默认语言
+if(location.href.split('?')[1])
+{
+	localStorage['mt-lang'] = location.href.split('?')[1].replaceAll('sw.js')
+}
 if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';//整体图片宽高百分比
 if(!localStorage['mt-cfsize'])localStorage['mt-cfsize'] = '90%';//差分表情宽高百分比
 if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';//标题
