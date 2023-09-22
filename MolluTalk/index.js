@@ -852,13 +852,20 @@
 											className: "bold",
 											children: [(0, m.jsx)(D,
 											{
+												onClick: function()
+												{
+													$jquery('#ccus').val(n.no>999?n.no-1000:n.no)
+												},
 												children:[(0, m.jsx)('span',
 												{
-													
 													children:'ID：'
 												}),(0, m.jsx)('span',
 												{
-													style:{fontStyle:'italic',color:'black'},
+													style:
+													{
+														fontStyle:'italic',
+														color:'black',
+													},
 													className: "medium",
 													children:n.no>999?n.no-1000:n.no 
 												})]
@@ -866,10 +873,10 @@
 											{
 												children: [(0, m.jsx)('span',
 												{
-													children:'社团：'
+													children:mt_text['club'][lang]+'：'
 												}),(0, m.jsx)('span',
 												{
-													style:{color:'black'},
+													className: "medium",
 													children:n.club[a] === '自定义角色' ? '自定义角色' : n.club[a]
 												})]
 											})]//@显示社团

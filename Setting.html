@@ -12,26 +12,26 @@
 	<script src="./MolluTalk/JSON/MT-Characters.JSON?v=2.5.2" defer=""></script><!-- 学生数据 -->
 </head>
 <body>
-	<a href='./'><b style='color:black;'>返回MoeTalk</a></b>
+	<a href='./'><b>返回MoeTalk</a></b>
 	<h1>设置选项:</h1>
-	<button id='cleancache'><b style='color:black;'>清除ServiceWorker缓存</b></button>
-	<button id='savecus'><b style='color:rgb(139,187,233);'>备份自定义角色存档</b></button>
-	<button id='loadcus'><b style='color:rgb(139,187,233);'>恢复自定义角色存档</b></button>
-	<button id='savedata'><b style='color:red'>生成MoeTalk崩溃专用存档</b></button>
-	<button id='loaddata'><b style='color:rgb(139,187,233);'>上传MoeTalk存档</b></button>
-	<button id='ct'><b style='color:rgb(139,187,233);'>生成ClosureTalk存档</b></button>
-	<button id='language'><b style='color:blue;'>更改语言</b></button>
-	<button id='send'><b style='color:blue;'>文字发送方式</b></button>
-	<button id='hnum'><b style='color:blue;'>设置自定义头像质量</b></button>
-	<button id='mt-size'><b style='color:blue;'>设置整体图片宽高百分比</b></button>
-	<button id='mt-cfsize'><b style='color:blue;'>设置差分表情宽高百分比</b></button>
-	<button id='mt-title'><b style='color:blue;'>设置标题</b></button>
-	<button id='mt-edit'><b style='color:blue;'>切换编辑模式</b></button>
-	<button id='font'><b style='color:blue;'>字体加载选项</b></button>
-	<button id='clean'><b style='color:black;'>清除本地数据</b></button>
-	<button><a href='https://wj.qq.com/s2/12952865/a1aa/'><b style='color:red;'>反馈通道</a></b></button>
-	<!-- <button id='head'><b style='color:black;'>右侧添加头像</b></button><br> -->
-	<a href='https://ghproxy.com/https://github.com/ggg555ttt/MoeTalk/archive/refs/heads/main.zip'><b style='color:black;'>下载最新版压缩包</a></b>
+	<button class="button-container" id='cleancache'><b style='color:black;'>清除ServiceWorker缓存</b></button>
+	<button class="button-container" id='savecus'><b style='color:white;'>备份自定义角色存档</b></button>
+	<button class="button-container" id='loadcus'><b style='color:white;'>恢复自定义角色存档</b></button>
+	<button class="button-container" id='savedata'><b style='color:white'>生成MoeTalk崩溃专用存档</b></button>
+	<button class="button-container" id='loaddata'><b style='color:white;'>上传MoeTalk崩溃存档</b></button>
+	<button class="button-container" id='ct'><b style='color:white;'>生成ClosureTalk存档</b></button>
+	<button class="button-container" id='language'><b style='color:blue;'>更改语言</b></button>
+	<button class="button-container" id='send'><b style='color:blue;'>文字发送方式</b></button>
+	<button class="button-container" id='hnum'><b style='color:blue;'>设置自定义头像质量</b></button>
+	<button class="button-container" id='mt-size'><b style='color:blue;'>设置整体图片宽高百分比</b></button>
+	<button class="button-container" id='mt-cfsize'><b style='color:blue;'>设置差分表情宽高百分比</b></button>
+	<button class="button-container" id='mt-title'><b style='color:blue;'>设置标题</b></button>
+	<button class="button-container" id='mt-edit'><b style='color:blue;'>切换编辑模式</b></button>
+	<button class="button-container" id='font'><b style='color:blue;'>字体加载选项</b></button>
+	<button class="button-container" id='clean'><b style='color:black;'>清除本地数据</b></button>
+	<button class="button-container" ><a href='https://wj.qq.com/s2/12952865/a1aa/'><b style='color:red;'>反馈通道</a></b></button>
+	<br><!-- <button class="button-container" id='head'><b style='color:black;'>右侧添加头像</b></button><br> -->
+	<a href='https://ghproxy.com/https://github.com/ggg555ttt/MoeTalk/archive/refs/heads/main.zip'><b>下载最新版压缩包</a></b>
 	<h1>存档恢复:</h1>
 	请上传由MoeTalk生成的png图片：<input type="file" id="file1">
 
@@ -46,7 +46,7 @@
 	稠密度：<input type="text" class="drowsy">（整数，不建议太大）<br>
 	文本：<input type="text" class="drowsy">如果想多行显示请空格分隔，最多三行（一行 两行 三行）<br>
 	参数提交后请返回MoeTalk页面，选择生成图片后就可以看到带水印的图片了，需要手动保存<br>
-	<button onclick="mark()">提交参数</button><button onclick="cleanmark()">清空提交的参数</button><br>预览用图片：<br>
+	<button class="button-container" onclick="mark()">提交参数</button><button class="button-container" onclick="cleanmark()">清空提交的参数</button><br>预览用图片：<br>
 
 	<img src="demo.jpg" id="drowsy"/>
 	<script type="text/javascript">
