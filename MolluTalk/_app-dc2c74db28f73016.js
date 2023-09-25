@@ -10179,7 +10179,7 @@
 										className: "music" === e.pathname.split("/")[1] ? "selected" : "",
 										children: (0, O.jsx)(V,
 										{
-											hidden:window.location.href.indexOf('http') > -1 ? false : true,
+											hidden:window.location.href.indexOf('localhost') > -1 ? false : true,
 											children: (0, O.jsx)(d.xL,
 											{
 												style:
