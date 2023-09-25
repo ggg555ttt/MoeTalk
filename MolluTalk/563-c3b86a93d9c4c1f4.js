@@ -1009,7 +1009,7 @@
 									{
 										g(""), y("", null)
 									},
-									src: href+"/MoeTalk/UI/pen.webp",//#铅笔图标
+									src: href+"MoeTalk/UI/pen.webp",//#铅笔图标
 									alt: "pen"
 								})]
 							}), (0, b.jsx)(W,
