@@ -1,5 +1,4 @@
-(self.webpackChunk_N_E = self.webpackChunk_N_E || [])
-.push([
+(self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
 	[405],
 	{
 		3162: function(e, n, t)
@@ -218,158 +217,6 @@
 					componentId: "sc-x1wvnd-2"
 				})(["transition:width 300ms ease-in-out;width:100%;height:100%;overflow:hidden;"])
 		},
-		5654: function(e, n, t)
-		{
-			"use strict";
-			var r = t(4701),
-				o = t(6150),
-				i = t(1563),
-				c = t(9417),
-				a = t(7294),
-				l = t(9521),
-				s = t(5893);
-			n.Z = function(e)
-			{
-				var n = e.items,
-					t = e.selected,
-					l = e.setSelected,
-					f = (0, a.useState)(!1),
-					p = f[0],
-					g = f[1],
-					x = (0, a.useState)(""),
-					y = x[0],
-					b = x[1],
-					j = (0, o.C)(function(e)
-					{
-						return e.global.lang
-					}),
-					w = n.length > 0 ? n.filter(function(e)
-					{
-						return e.title.toLowerCase()
-							.match(y.toLowerCase())
-					}) : [];
-				return (0, a.useEffect)(function()
-				{
-					p ? b("") : b(t.title)
-				}, [p, t, b]), (0, s.jsx)(u,
-				{
-					children: (0, s.jsxs)("div",
-					{
-						style:
-						{
-							position: "relative",
-							width: "100%"
-						},
-						children: [(0, s.jsxs)(i.OP,
-						{
-							style:
-							{
-								padding: "0 0.5rem",
-								zIndex: "2",
-								position: "relative",
-								height: "2rem"
-							},
-							onClick: function()
-							{
-								g(!0)
-							},
-							children: [(0, s.jsx)(i.Kx,
-							{
-								className: "medium",
-								style:
-								{
-									padding: "0",
-									overflow: "hidden"
-								},
-								placeholder: r.Z.filter_selectBox[j],
-								maxRows: 1,
-								value: y,
-								maxLength: 20,
-								onChange: function(e)
-								{
-									!p || e.currentTarget.value.match("\n") || b(e.currentTarget.value)
-								}
-							}), (0, s.jsx)(i.xL,
-							{
-								style:
-								{
-									width: "0.7rem",
-									margin: "0 0 0 0.2rem"
-								},
-								icon: p ? c.l1h : c.eW2
-							})]
-						}), (0, s.jsx)(d,
-						{
-							style:
-							{
-								display: p ? "block" : "none"
-							},
-							children: w.map(function(e, n)
-							{
-								return (0, s.jsx)("li",
-								{
-									children: (0, s.jsx)(h,
-									{
-										className: e.no === t.no ? "medium selected" : "medium",
-										onClick: function()
-										{
-											l(e), g(!1)
-										},
-										children: e.title || "-"
-									})
-								}, n)
-							})
-						}), (0, s.jsx)(m,
-						{
-							style:
-							{
-								display: p ? "block" : "none"
-							},
-							onClick: function()
-							{
-								g(!1)
-							}
-						})]
-					})
-				})
-			};
-			var u = l.ZP.div.withConfig(
-				{
-					displayName: "SelectBox__Container",
-					componentId: "sc-1p70i56-0"
-				})(["width :100%;"]),
-				d = l.ZP.ul.withConfig(
-				{
-					displayName: "SelectBox__UL",
-					componentId: "sc-1p70i56-1"
-				})(["position:absolute;width:100%;max-height:15rem;z-index:2;border:2px solid ", ";border-radius:0.5rem;background-color:", ";overflow-y:auto;overflow-y:overlay;overflow-x:hidden;&::-webkit-scrollbar{display:inline-block;width:0.4rem;}&::-webkit-scrollbar-thumb{height:17%;background-color:", ";border-radius:1rem;}"], function(e)
-				{
-					return e.theme.color.rgb139_187_233
-				}, function(e)
-				{
-					return e.theme.color.rgb255_255_255
-				}, function(e)
-				{
-					return e.theme.color.rgb210_210_210
-				}),
-				h = (0, l.ZP)(i.zx)
-				.withConfig(
-				{
-					displayName: "SelectBox__ItemButton",
-					componentId: "sc-1p70i56-2"
-				})(["width :100%;padding:auto 0.5rem;text-align:left;border-radius:0;&.selected{color:", ";background-color:", ";pointer-events:none;}"], function(e)
-				{
-					return e.theme.color.rgb255_255_255
-				}, function(e)
-				{
-					return e.theme.color.rgb139_187_233
-				}),
-				m = l.ZP.div.withConfig(
-				{
-					displayName: "SelectBox__BG",
-					componentId: "sc-1p70i56-3"
-				})(["position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;"])
-		},
 		8024: function(e, n, t)
 		{
 			"use strict";
@@ -387,8 +234,7 @@
 					var r = Object.getOwnPropertySymbols(e);
 					n && (r = r.filter(function(n)
 					{
-						return Object.getOwnPropertyDescriptor(e, n)
-							.enumerable
+						return Object.getOwnPropertyDescriptor(e, n).enumerable
 					})), t.push.apply(t, r)
 				}
 				return t
@@ -400,15 +246,13 @@
 				{
 					var t = null != arguments[n] ? arguments[n] :
 					{};
-					n % 2 ? l(Object(t), !0)
-						.forEach(function(n)
-						{
-							(0, r.Z)(e, n, t[n])
-						}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : l(Object(t))
-						.forEach(function(n)
-						{
-							Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
-						})
+					n % 2 ? l(Object(t), !0).forEach(function(n)
+					{
+						(0, r.Z)(e, n, t[n])
+					}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : l(Object(t)).forEach(function(n)
+					{
+						Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
+					})
 				}
 				return e
 			}
@@ -472,14 +316,14 @@
 				})
 			}
 		},
-		583: function(e, n, t)
+		1097: function(e, n, t)
 		{
 			"use strict";
 			t.r(n), t.d(n,
 			{
 				default: function()
 				{
-					return nw
+					return nm
 				}
 			});
 			var r = t(7294),
@@ -701,8 +545,7 @@
 						justify: "flex-start"
 					})
 				}),
-				y = (0, o.ZP)(c.hU)
-				.withConfig(
+				y = (0, o.ZP)(c.hU).withConfig(
 				{
 					displayName: "Footer__Circlebutton",
 					componentId: "sc-1rjbi2j-3"
@@ -710,8 +553,7 @@
 				{
 					return e.theme.color.rgb61_75_92
 				}),
-				b = (0, o.ZP)(c.xL)
-				.withConfig(
+				b = (0, o.ZP)(c.xL).withConfig(
 				{
 					displayName: "Footer__StyledIcon2",
 					componentId: "sc-1rjbi2j-4"
@@ -719,8 +561,7 @@
 				{
 					return e.theme.color.rgb255_255_255
 				}),
-				j = (0, o.ZP)(c.t_)
-				.withConfig(
+				j = (0, o.ZP)(c.t_).withConfig(
 				{
 					displayName: "Footer__ProfileClick2",
 					componentId: "sc-1rjbi2j-5"
@@ -746,8 +587,7 @@
 							(i = r.filter(function(t)
 							{
 								return !(n.no === t.no && e === t.index)
-							}))
-							.length === r.length ? o((0, h.AU)(c)) : o((0, h.F5)(i))//#
+							})).length === r.length ? o((0, h.AU)(c)) : o((0, h.F5)(i))//#, t(null)
 						};
 					return (0, m.jsx)(a.Z,
 					{
@@ -771,10 +611,9 @@
 										l(e)
 									},
 									className: 1 === r.filter(function(t)
-										{
-											return n.no === t.no && e === t.index
-										})
-										.length ? "selected" : ""
+									{
+										return n.no === t.no && e === t.index
+									}).length ? "selected" : ""
 								}, e)
 							})
 						})
@@ -809,10 +648,9 @@
 						children: [(0, m.jsx)(S,
 						{
 							className: o.filter(function(e)
-								{
-									return e.no === n.no
-								})
-								.length > 0 ? "selected" : "",
+							{
+								return e.no === n.no
+							}).length > 0 ? "selected" : "",
 							children: (0, m.jsxs)(P,
 							{
 								onClick: function()
@@ -832,25 +670,25 @@
 											(0, u.Mp)(n, "character")
 										},
 										alt: "profile"
-									}),
+									}), 
 									//*添加ID和社团信息
 									(0, m.jsxs)(I,
 									{
 										children: [(0, m.jsx)("h2",
 										{
-											children: (0, m.jsx)(R,
+											children: (0, m.jsx)(F,
 											{
-												children: (0, m.jsx)(E,
+												children: (0, m.jsx)(D,
 												{
 													className: "bold",
 													style:{color:'black'},
 													children: n.name[a].replaceAll("-", " ")
 												})
 											})
-										}), (0, m.jsx)(R,
+										}), (0, m.jsx)(F,
 										{
 											className: "bold",
-											children: [(0, m.jsx)(D,
+											children: [(0, m.jsx)(O,
 											{
 												onClick: function()
 												{
@@ -869,15 +707,15 @@
 													className: "medium",
 													children:n.no>999?n.no-1000:n.no 
 												})]
-											}),(0, m.jsx)(D,
+											}),(0, m.jsx)(O,
 											{
 												children: [(0, m.jsx)('span',
 												{
-													children:mt_text['club'][lang]+'：'
+													children:(n.club[a] === '自定义角色' ? "size" : mt_text['club'][lang])+'：'
 												}),(0, m.jsx)('span',
 												{
 													className: "medium",
-													children:n.club[a] === '自定义角色' ? '自定义角色' : n.club[a]
+													children:n.club[a] === '自定义角色' ? (JSON.parse(localStorage['mt-head'])[n.no].length/1024).toFixed(0)+'kb' : n.club[a]
 												})]
 											})]//@显示社团
 										})]
@@ -888,7 +726,7 @@
 								{
 									width: 252,
 									height: 252,
-									src: "MoeTalk/UI/School/"+(n.school[a] === '自定义' ? '自定义' : mt_characters[n.no].school)+'.webp',//#学校图标
+									src: href+"MoeTalk/UI/School/"+(n.school[a] === '自定义' ? '自定义' : mt_characters[n.no].school)+'.webp',//#学校图标
 									onError: function(e)
 									{
 										var n = e.currentTarget;
@@ -903,7 +741,7 @@
 							{
 								character: n,
 								setSelected: r
-							}), (0, m.jsx)(O,
+							}), (0, m.jsx)(R,
 							{})]
 						})]
 					})
@@ -970,8 +808,7 @@
 				{
 					return e.theme.color.rgb68_72_78
 				}),
-				B = (0, o.ZP)(c.Yo)
-				.withConfig(
+				B = (0, o.ZP)(c.Yo).withConfig(
 				{
 					displayName: "Character__School",
 					componentId: "sc-9wktk6-4"
@@ -981,7 +818,7 @@
 					displayName: "Character__ProfileWrapper",
 					componentId: "sc-9wktk6-5"
 				})(["padding:0rem 1rem;width:100%;box-sizing:border-box;"]),
-				O = o.ZP.div.withConfig(
+				R = o.ZP.div.withConfig(
 				{
 					displayName: "Character__HR",
 					componentId: "sc-9wktk6-6"
@@ -989,18 +826,17 @@
 				{
 					return e.theme.color.rgb231_231_231
 				}),
-				R = o.ZP.div.withConfig(
+				F = o.ZP.div.withConfig(
 				{
 					displayName: "Character__FontDiv",
 					componentId: "sc-9wktk6-7"
 				})(["display:table;width:100%;table-layout:fixed;white-space:nowrap;"]),
-				E = o.ZP.span.withConfig(
+				D = o.ZP.span.withConfig(
 				{
 					displayName: "Character__FontSpan",
 					componentId: "sc-9wktk6-8"
 				})(["display:table-cell;display:block;text-overflow:ellipsis;white-space:nowrap;"]),//#去overflow:hidden;
-				D = (0, o.ZP)(E)
-				.withConfig(
+				O = (0, o.ZP)(D).withConfig(
 				{
 					displayName: "Character__FontSpan2",
 					componentId: "sc-9wktk6-9"
@@ -1008,9 +844,9 @@
 				{
 					return e.theme.color.rgb111_119_127
 				}),
-				F = t(4701),
-				L = t(8681),
-				z = function(e)
+				L = t(4701),
+				E = t(8681),
+				M = function(e)
 				{
 					var n = e.modalShow,
 						t = e.handleModalShow,
@@ -1033,7 +869,7 @@
 							width: "100%",
 							position: "relative"
 						},
-						children: (0, m.jsxs)(M,
+						children: (0, m.jsxs)(z,
 						{
 							style:
 							{
@@ -1041,10 +877,10 @@
 							},
 							children: [(0, m.jsxs)(A,
 							{
-								children: [(0, m.jsx)(U,
+								children: [(0, m.jsx)(G,
 								{
 									className: "bold",
-									children: F.Z.sort[l]
+									children: L.Z.sort[l]
 								}), (0, m.jsx)(c.hU,
 								{
 									onClick: function()
@@ -1052,13 +888,14 @@
 										t()
 										club()//@
 									},
-									children: (0, m.jsx)(G,
+									children: (0, m.jsx)(U,
 									{})
 								})]
 							}), (0, m.jsx)(q,
 							{
+								//*新增社团分类
 								style:{overflow:'scroll',display:'block'},//@滚动支持
-								children: [L.h5.map(function(e, n)
+								children: [E.h5.map(function(e, n)
 								{
 									return (0, m.jsx)(c.Bx,
 									{
@@ -1067,13 +904,11 @@
 										{
 											d(e)
 										},
-										children: F.Z[e][l]
+										children: L.Z[e][l]
 									}, n)
-								}),
-								//*新增社团分类
-								(0, m.jsxs)(A,
+								}), (0, m.jsxs)(A,
 								{
-									children: [(0, m.jsx)(U,
+									children: [(0, m.jsx)(G,
 									{
 										className: "bold",
 										children: mt_text['select'][lang]+mt_text['club'][lang]+"："
@@ -1154,9 +989,8 @@
 											})
 										})]
 									})
-								})
+								})]
 								//*新增社团分类
-								]
 							}), (0, m.jsx)(A,
 							{
 								children: (0, m.jsx)(c.Mm,
@@ -1178,13 +1012,13 @@
 											sortCharType: u
 										})
 									},
-									children: F.Z.confirm[l]
+									children: L.Z.confirm[l]
 								})
 							})]
 						})
 					})
 				},
-				M = o.ZP.div.withConfig(
+				z = o.ZP.div.withConfig(
 				{
 					displayName: "GroupModal__Container",
 					componentId: "sc-123a00a-0"
@@ -1229,7 +1063,7 @@
 				{
 					return e.theme.color.rgb239_240_241
 				}),
-				U = o.ZP.span.withConfig(
+				G = o.ZP.span.withConfig(
 				{
 					displayName: "GroupModal__FontSpan",
 					componentId: "sc-123a00a-3"
@@ -1237,8 +1071,7 @@
 				{
 					return e.theme.color.rgb63_68_74
 				}),
-				G = (0, o.ZP)(c.j4)
-				.withConfig(
+				U = (0, o.ZP)(c.j4).withConfig(
 				{
 					displayName: "GroupModal__ExitI",
 					componentId: "sc-123a00a-4"
@@ -1246,7 +1079,7 @@
 				{
 					return e.theme.color.rgb15_33_64
 				}),
-				Y = function(e)
+				H = function(e)
 				{
 					var n = e.search,
 						t = e.setSearch,
@@ -1258,7 +1091,7 @@
 						{
 							return e.global.lang
 						});
-					return (0, m.jsxs)(H,
+					return (0, m.jsxs)(Y,
 					{
 						children: [(0, m.jsxs)(K,
 						{
@@ -1267,7 +1100,7 @@
 								children: (0, m.jsxs)(X,
 								{
 									className: "bold",
-									children: [F.Z.student[u], " ", (0, m.jsxs)("span",
+									children: [L.Z.student[u], " ", (0, m.jsxs)("span",
 									{
 										style:
 										{
@@ -1296,7 +1129,7 @@
 										{
 											fontSize: "1.1rem"
 										},
-										children: F.Z[n.sortCharType][u]
+										children: L.Z[n.sortCharType][u]
 									})
 								}), (0, m.jsx)(c.jl,
 								{
@@ -1320,7 +1153,7 @@
 											width: 110,
 											height: 60,
 											alt: "order",
-											src: "MoeTalk/UI/".concat(n.order ? "down" : "up", ".webp")//#排序图标
+											src: href+"MoeTalk/UI/".concat(n.order ? "down" : "up", ".webp")//#排序图标
 										})
 									})
 								})]
@@ -1333,7 +1166,7 @@
 								value: n.text,
 								maxLength: 30,
 								className: "medium",
-								placeholder: F.Z.search_comment[u],
+								placeholder: L.Z.search_comment[u],
 								onChange: function(e)
 								{
 									t(
@@ -1352,10 +1185,10 @@
 										text: ""
 									})
 								},
-								src: "MoeTalk/UI/pen.webp",//#铅笔图标
+								src: href+"MoeTalk/UI/pen.webp",//#铅笔图标
 								alt: "pen"
 							})]
-						}), (0, m.jsx)(z,
+						}), (0, m.jsx)(M,
 						{
 							modalShow: l,
 							handleModalShow: function()
@@ -1367,7 +1200,7 @@
 						})]
 					})
 				},
-				H = o.ZP.div.withConfig(
+				Y = o.ZP.div.withConfig(
 				{
 					displayName: "SearchBar__Container",
 					componentId: "sc-1mvis42-0"
@@ -1406,8 +1239,7 @@
 					return e.theme.common.flexBox(
 					{})
 				}),
-				$ = (0, o.ZP)(c.jl)
-				.withConfig(
+				$ = (0, o.ZP)(c.jl).withConfig(
 				{
 					displayName: "SearchBar__Parallelogram1",
 					componentId: "sc-1mvis42-4"
@@ -1427,8 +1259,7 @@
 					var r = Object.getOwnPropertySymbols(e);
 					n && (r = r.filter(function(n)
 					{
-						return Object.getOwnPropertyDescriptor(e, n)
-							.enumerable
+						return Object.getOwnPropertyDescriptor(e, n).enumerable
 					})), t.push.apply(t, r)
 				}
 				return t
@@ -1440,15 +1271,13 @@
 				{
 					var t = null != arguments[n] ? arguments[n] :
 					{};
-					n % 2 ? J(Object(t), !0)
-						.forEach(function(n)
-						{
-							(0, w.Z)(e, n, t[n])
-						}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : J(Object(t))
-						.forEach(function(n)
-						{
-							Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
-						})
+					n % 2 ? J(Object(t), !0).forEach(function(n)
+					{
+						(0, w.Z)(e, n, t[n])
+					}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : J(Object(t)).forEach(function(n)
+					{
+						Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
+					})
 				}
 				return e
 			}
@@ -1484,7 +1313,7 @@
 							let carr = [];
 							$jquery.each(JSON.parse(localStorage['mt-char']),function(k,v)
 							{
-								arr.unshift(
+								if(v !== null)arr.unshift(
 								{
 									name:
 									{
@@ -1492,7 +1321,7 @@
 									},
 									club:
 									{
-										zh_cn:'自定义角色',zh_tw:'自定义角色',en:'自定义角色',jp:'自定义角色',kr:'#',pinyin:'自定义角色'
+										zh_cn:'自定义角色',zh_tw:'自定义角色',en:'自定义角色',jp:'自定义角色',kr:'自定义角色',pinyin:'自定义角色'
 									},
 									school : 
 									{
@@ -1515,8 +1344,7 @@
 							return arr.filter(function(e)//#_.Z换为arr
 							{
 								return null !== (0, u.oG)(e, c.text)
-							})
-							.sort(function(e, n)
+							}).sort(function(e, n)
 							{
 								return (0, u.ur)(e, n, c, t)
 							})
@@ -1530,7 +1358,7 @@
 						}, 500)
 					}, [g, n]), (0, m.jsxs)(ee,
 					{
-						children: [(0, m.jsx)(Y,
+						children: [(0, m.jsx)(H,
 						{
 							search: c,
 							setSearch: function(e)
@@ -1637,7 +1465,7 @@
 								children: [(0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
-									children: F.Z.info[u]
+									children: L.Z.info[u]
 								}), (0, m.jsx)(ea.ec,
 								{
 									onClick: function()
@@ -1654,7 +1482,7 @@
 									children: (0, m.jsx)(c.Kx,
 									{
 										className: "medium",
-										placeholder: F.Z.input_comment[u],
+										placeholder: L.Z.input_comment[u],
 										maxRows: 3,
 										value: l,
 										onChange: function(e)
@@ -1671,7 +1499,7 @@
 										{
 											d()
 										},
-										children: F.Z.cancel[u]
+										children: L.Z.cancel[u]
 									}), (0, m.jsx)(ea.AZ,
 									{
 										className: "bold",
@@ -1680,7 +1508,7 @@
 										{
 											o("info", l), d()
 										},
-										children: F.Z.confirm[u]
+										children: L.Z.confirm[u]
 									})]
 								})]
 							})]
@@ -1735,9 +1563,8 @@
 								a ? nextindex().scrollIntoView(!1) : a;///更新位置
 							}, 100)
 							//*新版向上追加消息：选择肢
-							/*///原语句
-							!r || r && p.chats.indexOf(r) === p.chats.length ? e.push.apply(e, (0, et.Z)(p.chats)
-								.concat([n])) : p.chats.forEach(function(t, o)
+							/*
+							!r || r && p.chats.indexOf(r) === p.chats.length ? e.push.apply(e, (0, et.Z)(p.chats).concat([n])) : p.chats.forEach(function(t, o)
 							{
 								e.push(t), p.chats[o + 1] === r && e.push(n)
 							}), a && x((0, eo.uE)(p.replyGroup + 1)), x((0, eo.U_)(e)), x((0, eo.I0)(p.replyNo + 1)), y(), setTimeout(function()
@@ -1765,7 +1592,7 @@
 								children: [(0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
-									children: a ? F.Z.go_reply[g] : F.Z.add_reply[g]
+									children: a ? L.Z.go_reply[g] : L.Z.add_reply[g]
 								}), (0, m.jsx)(ea.ec,
 								{
 									onClick: function()
@@ -1782,7 +1609,7 @@
 									children: (0, m.jsx)(c.Kx,
 									{
 										className: "medium",
-										placeholder: F.Z.input_comment[g],
+										placeholder: L.Z.input_comment[g],
 										maxRows: 3,
 										value: h,
 										onChange: function(e)
@@ -1799,7 +1626,7 @@
 										{
 											y()
 										},
-										children: F.Z.cancel[g]
+										children: L.Z.cancel[g]
 									}), (0, m.jsx)(ea.AZ,
 									{
 										className: "bold",
@@ -1808,7 +1635,7 @@
 										{
 											b()
 										},
-										children: F.Z.confirm[g]
+										children: L.Z.confirm[g]
 									})]
 								})]
 							})]
@@ -1844,7 +1671,7 @@
 									children: [(0, m.jsx)(ea.Dx,
 									{
 										className: "bold",
-										children: F.Z.deleteTalk[o]
+										children: L.Z.deleteTalk[o]
 									}), (0, m.jsx)(ea.ec,
 									{
 										onClick: function()
@@ -1871,7 +1698,7 @@
 									//*批量删除提示
 									(0, m.jsx)("span",
 									{
-										children: F.Z.ask_delete[o]
+										children: L.Z.ask_delete[o]
 									}), (0, m.jsxs)("span",
 									{
 										style:
@@ -1879,7 +1706,7 @@
 											fontSize: "0.9rem",
 											marginTop: "1rem"
 										},
-										children: ["※ ", F.Z.deleteTalk_comment[o]]
+										children: ["※ ", L.Z.deleteTalk_comment[o]]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -1889,7 +1716,7 @@
 											{
 												t(!1)
 											},
-											children: F.Z.cancel[o]
+											children: L.Z.cancel[o]
 										}), (0, m.jsx)(ea.AZ,
 										{
 											className: "bold",
@@ -1897,7 +1724,7 @@
 											{
 												r()
 											},
-											children: F.Z.confirm[o]
+											children: L.Z.confirm[o]
 										})]
 									})]
 								})]
@@ -1919,8 +1746,7 @@
 							fixedCacheKey: "account"
 						}),
 						t = (0, ec.Z)(n, 2),
-						o = null === (e = (t[0], t[1])
-							.data) || void 0 === e ? void 0 : e.NICKNAME,
+						o = null === (e = (t[0], t[1]).data) || void 0 === e ? void 0 : e.NICKNAME,
 						c = (0, i.C)(function(e)
 						{
 							return e.global.gameName
@@ -1969,116 +1795,111 @@
 						I = (0, r.useRef)(null),
 						B = ey(),
 						T = (0, ec.Z)(B, 2),
-						O = T[0],
-						R = T[1],
-						E = function()
+						R = T[0],
+						F = T[1],
+						D = function()
 						{
 							C(""), b && (URL.revokeObjectURL(b), j("")), h(!1)
 						},
-						D = (l = (0, ed.Z)(em()
-							.mark(function e()
+						O = (l = (0, ed.Z)(em().mark(function e()
+						{
+							var n, t;
+							return em().wrap(function(e)
 							{
-								var n, t;
-								return em()
-									.wrap(function(e)
-									{
-										for(;;) switch (e.prev = e.next)
+								for(;;) switch (e.prev = e.next)
+								{
+									case 0:
+										if(p((0, s.jh)(!0)), null !== (n = f.current))
 										{
-											case 0:
-												if(p((0, s.jh)(!0)), null !== (n = f.current))
-												{
-													e.next = 4;
-													break
-												}
-												return e.abrupt("return");
-											case 4:
-												t = function(e, n)
-													{
-														e.documentElement.style.fontSize = "16px", n.style.width = "500px";
-														var t = F.Z.title[g] + " : " + ("" !== _ ? _ : F.Z.noTitle[g]),
-															r = F.Z.writer[g] + " : " + ("" !== O ? O : F.Z.noName[g]),
-															o = (0, u.Jx)(k, t, r);
-														n.prepend(o)
-													}, eg()(n,
-													{
-														logging: !1,
-														allowTaint: !0,
-														useCORS: !0,
-														width: 500,
-														windowWidth: 500,
-														scale: 1 === S ? S + .1 : S,
-														onclone: t
-													})
-													.then(function(e)
-													{
-														var n, t = e.toDataURL("image/png");
-														//*加入水印功能和隐写存档
-														let json = [];
-														json[0] = {};
-														json[0]['title'] = '备份存档';
-														json[0]['nickname'] = 'MoeTalk';
-														json[0]['date'] = (0, u._3)(!0, !0);
-														json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
-														json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
-														json[1] = JSON.parse(localStorage['chats']);
-														if(localStorage['wmark'])
-														{
-															let arr = JSON.parse(localStorage['wmark']);
-															drawWaterMark.init(
-															{
-																imgpath: t,///图片路径  string类型  [必传]
-																rotate: arr[0],///旋转角度   int类型
-																fontsize: arr[1],///字体大小
-																fontcolor: arr[2]+","+arr[3]+","+arr[4]+","+arr[5],///字体颜色  rgba类型
-																density: arr[6],///稠密度
-																str: arr[7].split(" "),	///[必传]
-																cb: function(base64)
-																{
-																	j(base64), null === (n = I.current) || void 0 === n || n.setAttribute("src",base64), e.toBlob(function(e)
-																	{
-																		combineFiles(t.replace('data:image/png;base64,',''),JSON.stringify(json),"MolluTalk_" + ("" !== _ ? _ : F.Z.noTitle[g]));
-																	})
-																}
-															})
-														}
-														else
-														{
-															j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
-															{
-																combineFiles(t.replace('data:image/png;base64,',''),JSON.stringify(json),"MolluTalk_" + ("" !== _ ? _ : F.Z.noTitle[g]));
-															})
-														}
-														//*加入水印功能和隐写存档
-														/*///原语句
-														j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
-														{
-															e && (0, ef.saveAs)(e, "MolluTalk_" + ("" !== _ ? _ : F.Z.noTitle[g] + ".png"))
-														})
-														*/
-													})
-													.catch(function()
-													{
-														p((0, er.Y2)(
-														{
-															isAlert: !0,
-															title: F.Z.error[g],
-															ment: F.Z.error_ment[g]
-														}))
-													})
-													.finally(function()
-													{
-														p((0, s.jh)(!1))
-													});
-											case 6:
-											case "end":
-												return e.stop()
+											e.next = 4;
+											break
 										}
-									}, e)
-							})), function()
+										return e.abrupt("return");
+									case 4:
+										t = function(e, n)
+										{
+											e.documentElement.style.fontSize = "16px", n.style.width = "500px";
+											var t = L.Z.title[g] + " : " + ("" !== _ ? _ : L.Z.noTitle[g]),
+												r = L.Z.writer[g] + " : " + ("" !== R ? R : L.Z.noName[g]),
+												o = (0, u.Jx)(k, t, r);
+											n.prepend(o)
+										}, eg()(n,
+										{
+											logging: !1,
+											allowTaint: !0,
+											useCORS: !0,
+											width: 500,
+											windowWidth: 500,
+											scale: 1 === S ? S + .1 : S,
+											onclone: t
+										}).then(function(e)
+										{
+											var n, t = e.toDataURL("image/png");
+											//*加入水印功能和隐写存档
+											let json = [];
+											json[0] = {};
+											json[0]['title'] = '备份存档';
+											json[0]['nickname'] = 'MoeTalk';
+											json[0]['date'] = (0, u._3)(!0, !0);
+											json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
+											json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
+											json[1] = JSON.parse(localStorage['chats']);
+											if(localStorage['wmark'])
+											{
+												let arr = JSON.parse(localStorage['wmark']);
+												drawWaterMark.init(
+												{
+													imgpath: t,///图片路径  string类型  [必传]
+													rotate: arr[0],///旋转角度   int类型
+													fontsize: arr[1],///字体大小
+													fontcolor: arr[2]+","+arr[3]+","+arr[4]+","+arr[5],///字体颜色  rgba类型
+													density: arr[6],///稠密度
+													str: arr[7].split(" "),	///[必传]
+													cb: function(base64)
+													{
+														j(base64), null === (n = I.current) || void 0 === n || n.setAttribute("src",base64), e.toBlob(function(e)
+														{
+															combineFiles(t.replace('data:image/png;base64,',''),JSON.stringify(json),"MolluTalk_" + ("" !== _ ? _ : F.Z.noTitle[g]));
+														})
+													}
+												})
+											}
+											else
+											{
+												j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
+												{
+													combineFiles(t.replace('data:image/png;base64,',''),JSON.stringify(json),"MolluTalk_" + ("" !== _ ? _ : F.Z.noTitle[g]));
+												})
+											}
+											//*加入水印功能和隐写存档
+											/*
+											j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
+											{
+												e && (0, ef.saveAs)(e, "MolluTalk_" + ("" !== _ ? _ : L.Z.noTitle[g] + ".png"))
+											})
+											*/
+										}).catch(function()
+										{
+											p((0, er.Y2)(
+											{
+												isAlert: !0,
+												title: L.Z.error[g],
+												ment: L.Z.error_ment[g]
+											}))
+										}).finally(function()
+										{
+											p((0, s.jh)(!1))
+										});
+									case 6:
+									case "end":
+										return e.stop()
+								}
+							}, e)
+						})), function()
 						{
 							return l.apply(this, arguments)
 						}),
-						L = function(e, n)
+						E = function(e, n)
 						{
 							var t = e.target.checked,
 								r = {
@@ -2093,7 +1914,7 @@
 						className: d ? "visible medium" : "medium",
 						onDoubleClick: function()
 						{
-							E()
+							D()
 						},
 						children: (0, m.jsxs)(ea.F0,
 						{
@@ -2106,12 +1927,12 @@
 								children: [(0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
-									children: F.Z.download_to_image[g]
+									children: L.Z.download_to_image[g]
 								}), (0, m.jsx)(ea.ec,
 								{
 									onClick: function()
 									{
-										E()
+										D()
 									},
 									children: (0, m.jsx)(c.j4,
 									{})
@@ -2133,7 +1954,7 @@
 											alignItems: "flex-start",
 											lineHeight: "2rem"
 										},
-										children: [F.Z.title[g], (0, m.jsx)(c.OP,
+										children: [L.Z.title[g], (0, m.jsx)(c.OP,
 										{
 											style:
 											{
@@ -2142,7 +1963,7 @@
 											children: (0, m.jsx)(c.Kx,
 											{
 												className: "medium",
-												placeholder: F.Z.title_comment[g],
+												placeholder: L.Z.title_comment[g],
 												maxRows: 1,
 												value: _,
 												maxLength: 14,
@@ -2158,19 +1979,19 @@
 												},
 												onKeyDown: function(e) {}
 											})
-										}), F.Z.writer[g], (0, m.jsx)(c.OP,
+										}), L.Z.writer[g], (0, m.jsx)(c.OP,
 										{
 											children: (0, m.jsx)(c.Kx,
 											{
 												className: "medium",
-												placeholder: F.Z.nickName_comment[g],
+												placeholder: L.Z.nickName_comment[g],
 												maxRows: 1,
-												value: O,
+												value: R,
 												maxLength: 9,
 												onChange: function(e)
 												{
 													var n = e.currentTarget.value;
-													n.match("\n") || (R(n), Z(
+													n.match("\n") || (F(n), Z(
 													{
 														watermark: !0,
 														writer: !0,
@@ -2187,7 +2008,7 @@
 										},
 										children: [(0, m.jsx)("span",
 										{
-											children: F.Z.image_qaulity[g]
+											children: L.Z.image_qaulity[g]
 										}), (0, m.jsx)("div",
 										{
 											style:
@@ -2238,10 +2059,10 @@
 													checked: k[e],
 													onChange: function(n)
 													{
-														return L(n, e)
+														return E(n, e)
 													},
 													value: n
-												}), F.Z[e][g]]
+												}), L.Z[e][g]]
 											}, n)
 										})
 									}), (0, m.jsx)("span",
@@ -2252,7 +2073,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: F.Z.down_comment1[g]
+										children: L.Z.down_comment1[g]
 									}), (0, m.jsx)("span",
 									{
 										style:
@@ -2260,7 +2081,7 @@
 											textAlign: "center",
 											fontSize: "0.9rem"
 										},
-										children: F.Z.thanks[g]
+										children: L.Z.thanks[g]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -2268,9 +2089,9 @@
 											className: "bold",
 											onClick: function()
 											{
-												E()
+												D()
 											},
-											children: F.Z.cancel[g]
+											children: L.Z.cancel[g]
 										}), (0, m.jsx)(ea.AZ,
 										{
 											className: "bold",
@@ -2284,11 +2105,11 @@
 												}
 												else
 												{
-													D()
+													O()
 												}
 												//*加入长度判断
 											},
-											children: F.Z.confirm[g]
+											children: L.Z.confirm[g]
 										})]
 									})]
 								}), (0, m.jsx)(e_,
@@ -2306,7 +2127,7 @@
 												fontSize: "1rem",
 												marginBottom: "1rem"
 											},
-											children: F.Z.image_download[g]
+											children: L.Z.image_download[g]
 										}), (0, m.jsx)(ev,
 										{
 											ref: I,
@@ -2387,40 +2208,38 @@
 						{
 							o(!1), p(""), y("")
 						},
-						S = (n = (0, ed.Z)(em()
-							.mark(function e()
+						S = (n = (0, ed.Z)(em().mark(function e()
+						{
+							var n, t, r, o;
+							return em().wrap(function(e)
 							{
-								var n, t, r, o;
-								return em()
-									.wrap(function(e)
-									{
-										for(;;) switch (e.prev = e.next)
+								for(;;) switch (e.prev = e.next)
+								{
+									case 0:
+										return n = [], s.chats.forEach(function(e, t)
 										{
-											case 0:
-												return n = [], s.chats.forEach(function(e, t)
-												{
-													s.chats.findIndex(function(n, t)
-													{
-														return e.sCharacter.no === n.sCharacter.no
-													}) === t && 0 !== e.sCharacter.no && n.push(e.sCharacter.no)
-												}), r = [JSON.stringify([t = {
-													title: "" !== f ? f : F.Z.noTitle[d],
-													nickname: "" !== k ? k : F.Z.noName[d],
-													date: (0, u._3)(!0, !0),
-													replyNo: s.replyNo,
-													replyGroup: s.replyGroup,
-													mt_char: localStorage['mt-char'],//@自创角色
-													mt_head: localStorage['mt-head'],//@自创头像
-													chars: n
-												}, (0, et.Z)(s.chats)])], e.next = 6, (0, u.rU)(r);
-											case 6:
-												o = e.sent, (0, ef.saveAs)(o, "MolluTalk_".concat(t.title, ".png")), N();
-											case 9:
-											case "end":
-												return e.stop()
-										}
-									}, e)
-							})), function()
+											s.chats.findIndex(function(n, t)
+											{
+												return e.sCharacter.no === n.sCharacter.no
+											}) === t && 0 !== e.sCharacter.no && n.push(e.sCharacter.no)
+										}), r = [JSON.stringify([t = {
+											title: "" !== f ? f : L.Z.noTitle[d],
+											nickname: "" !== k ? k : L.Z.noName[d],
+											date: (0, u._3)(!0, !0),
+											replyNo: s.replyNo,
+											replyGroup: s.replyGroup,
+											mt_char: localStorage['mt-char'],//@自创角色
+											mt_head: localStorage['mt-head'],//@自创头像
+											chars: n
+										}, (0, et.Z)(s.chats)])], e.next = 6, (0, u.rU)(r);
+									case 6:
+										o = e.sent, (0, ef.saveAs)(o, "MolluTalk_".concat(t.title, ".png")), N();
+									case 9:
+									case "end":
+										return e.stop()
+								}
+							}, e)
+						})), function()
 						{
 							return n.apply(this, arguments)
 						}),
@@ -2431,35 +2250,32 @@
 								var n = new FileReader,
 									t = e.currentTarget.files[0];
 								n.onloadend = function()
+								{
+									if("string" != typeof n.result) return a((0, er.Y2)(
 									{
-										if("string" != typeof n.result) return a((0, er.Y2)(
-										{
-											isAlert: !0,
-											ment: F.Z.error[d],
-											title: F.Z.no_support[d]
-										}));
-										w(loaddata(JSON.parse(n.result))), y("upload")//#
-									}, eZ()
-									.loadAsync(t)
-									.then(function(e)
+										isAlert: !0,
+										ment: L.Z.error[d],
+										title: L.Z.no_support[d]
+									}));
+									w(loaddata(JSON.parse(n.result))), y("upload")//#编译存档
+								}, eZ().loadAsync(t).then(function(e)
+								{
+									e.forEach(function(e, t)
 									{
-										e.forEach(function(e, t)
+										t.dir || t.async("blob").then(function(e)
 										{
-											t.dir || t.async("blob")
-												.then(function(e)
-												{
-													n.readAsText(e)
-												})
+											n.readAsText(e)
 										})
-									}, function(e)
-									{
-										t ? n.readAsText(t) : a((0, er.Y2)(
-										{
-											isAlert: !0,
-											ment: F.Z.error[d],
-											title: F.Z.no_support[d]
-										}))
 									})
+								}, function(e)
+								{
+									t ? n.readAsText(t) : a((0, er.Y2)(
+									{
+										isAlert: !0,
+										ment: L.Z.error[d],
+										title: L.Z.no_support[d]
+									}))
+								})
 							}
 						},
 						I = function()
@@ -2499,7 +2315,7 @@
 								children: [(0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
-									children: F.Z.sharedFile[d]
+									children: L.Z.sharedFile[d]
 								}), (0, m.jsx)(ea.ec,
 								{
 									onClick: function()
@@ -2542,7 +2358,7 @@
 										}), (0, m.jsx)("span",
 										{
 											className: "bold",
-											children: F.Z.upload[d]
+											children: L.Z.upload[d]
 										}), (0, m.jsx)("span",
 										{
 											style:
@@ -2550,7 +2366,7 @@
 												margin: "1rem",
 												fontSize: "1rem"
 											},
-											children: F.Z.edit_comment[d]
+											children: L.Z.edit_comment[d]
 										})]
 									}), (0, m.jsx)(eN.HR,
 									{
@@ -2574,7 +2390,7 @@
 										}), (0, m.jsx)("span",
 										{
 											className: "bold",
-											children: F.Z.download[d]
+											children: L.Z.download[d]
 										}), (0, m.jsx)("span",
 										{
 											style:
@@ -2582,21 +2398,21 @@
 												margin: "1rem",
 												fontSize: "1rem"
 											},
-											children: F.Z.down_comment2[d]
+											children: L.Z.down_comment2[d]
 										}), (0, m.jsx)("span",
 										{
 											style:
 											{
 												fontSize: "1rem"
 											},
-											children: F.Z.down_comment3[d]
+											children: L.Z.down_comment3[d]
 										})]
 									})]
 								}) : "download" === x ? (0, m.jsxs)(m.Fragment,
 								{
 									children: [(0, m.jsxs)(eB,
 									{
-										children: [F.Z.title[d], (0, m.jsx)(c.OP,
+										children: [L.Z.title[d], (0, m.jsx)(c.OP,
 										{
 											style:
 											{
@@ -2605,7 +2421,7 @@
 											children: (0, m.jsx)(c.Kx,
 											{
 												className: "medium",
-												placeholder: F.Z.title_comment[d],
+												placeholder: L.Z.title_comment[d],
 												maxRows: 1,
 												value: f,
 												maxLength: 20,
@@ -2614,12 +2430,12 @@
 													e.currentTarget.value.match("\n") || p(e.currentTarget.value)
 												}
 											})
-										}), F.Z.writer[d], (0, m.jsx)(c.OP,
+										}), L.Z.writer[d], (0, m.jsx)(c.OP,
 										{
 											children: (0, m.jsx)(c.Kx,
 											{
 												className: "medium",
-												placeholder: F.Z.nickName_comment[d],
+												placeholder: L.Z.nickName_comment[d],
 												maxRows: 1,
 												value: k,
 												maxLength: 10,
@@ -2637,7 +2453,7 @@
 											fontSize: "1rem",
 											marginTop: "1rem"
 										},
-										children: F.Z.thanks[d]
+										children: L.Z.thanks[d]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -2647,7 +2463,7 @@
 											{
 												N()
 											},
-											children: F.Z.cancel[d]
+											children: L.Z.cancel[d]
 										}), (0, m.jsx)(ea.AZ,
 										{
 											className: "bold",
@@ -2655,14 +2471,14 @@
 											{
 												S()
 											},
-											children: F.Z.confirm[d]
+											children: L.Z.confirm[d]
 										})]
 									})]
 								}) : (0, m.jsxs)(m.Fragment,
 								{
 									children: [(0, m.jsx)("span",
 									{
-										children: F.Z.up_comment1[d]
+										children: L.Z.up_comment1[d]
 									}), (0, m.jsxs)("div",
 									{
 										style:
@@ -2671,13 +2487,13 @@
 										},
 										children: [(0, m.jsxs)(eT,
 										{
-											children: [F.Z.title[d], " : ", j[0].title]
+											children: [L.Z.title[d], " : ", j[0].title]
 										}), (0, m.jsxs)(eT,
 										{
-											children: [F.Z.writer[d], " : ", j[0].nickname]
+											children: [L.Z.writer[d], " : ", j[0].nickname]
 										}), (0, m.jsxs)(eT,
 										{
-											children: [F.Z.date[d], " : ", j[0].date]
+											children: [L.Z.date[d], " : ", j[0].date]
 										})]
 									}), (0, m.jsxs)("span",
 									{
@@ -2685,7 +2501,7 @@
 										{
 											fontSize: "1rem"
 										},
-										children: ["※", F.Z.up_comment2[d]]
+										children: ["※", L.Z.up_comment2[d]]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -2695,7 +2511,7 @@
 											{
 												N()
 											},
-											children: F.Z.cancel[d]
+											children: L.Z.cancel[d]
 										}), (0, m.jsx)(ea.AZ,
 										{
 											className: "bold",
@@ -2703,7 +2519,7 @@
 											{
 												I()
 											},
-											children: F.Z.confirm[d]
+											children: L.Z.confirm[d]
 										})]
 									})]
 								})
@@ -2722,8 +2538,7 @@
 						direction: "column"
 					})
 				}),
-				eI = (0, o.ZP)(c.hU)
-				.withConfig(
+				eI = (0, o.ZP)(c.hU).withConfig(
 				{
 					displayName: "PopupFileShare__ShareButton",
 					componentId: "sc-ynp9rx-1"
@@ -2748,514 +2563,7 @@
 					displayName: "PopupFileShare__InfoSpan",
 					componentId: "sc-ynp9rx-3"
 				})(["display:block;text-align:left;font-size:1.1rem;margin-bottom:1rem;"]),
-				eO = t(1163),
-				eR = t(5654);
-
-			function eE(e, n)
-			{
-				var t = Object.keys(e);
-				if(Object.getOwnPropertySymbols)
-				{
-					var r = Object.getOwnPropertySymbols(e);
-					n && (r = r.filter(function(n)
-					{
-						return Object.getOwnPropertyDescriptor(e, n)
-							.enumerable
-					})), t.push.apply(t, r)
-				}
-				return t
-			}
-
-			function eD(e)
-			{
-				for(var n = 1; n < arguments.length; n++)
-				{
-					var t = null != arguments[n] ? arguments[n] :
-					{};
-					n % 2 ? eE(Object(t), !0)
-						.forEach(function(n)
-						{
-							(0, w.Z)(e, n, t[n])
-						}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : eE(Object(t))
-						.forEach(function(n)
-						{
-							Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
-						})
-				}
-				return e
-			}
-			var eF = function(e)
-				{
-					var n, t, o = e.show,
-						a = e.handleShow,
-						l = (0, i.T)(),
-						d = (0, eO.useRouter)(),
-						h = (0, i.C)(function(e)
-						{
-							return e.global.lang
-						}),
-						f = (0, i.C)(function(e)
-						{
-							return e.global.isLoading
-						}),
-						p = (0, i.C)(function(e)
-						{
-							return e.makeChat
-						}),
-						g = (0, ex.vC)(
-						{
-							fixedCacheKey: "account"
-						}),
-						x = (0, ec.Z)(g, 2),
-						y = (x[0], x[1]),
-						b = (0, ex.yg)(),
-						j = (0, ec.Z)(b, 1)[0],
-						w = [
-						{
-							no: -1,
-							title: F.Z.none_series[h],
-							idx: 0
-						},
-						{
-							no: 0,
-							title: F.Z.add_series[h],
-							idx: 0
-						}],
-						_ = (0, r.useState)(""),
-						C = _[0],
-						v = _[1],
-						k = (0, r.useState)(0),
-						Z = k[0],
-						N = k[1],
-						S = (0, r.useState)(1),
-						P = S[0],
-						I = S[1],
-						B = (0, r.useState)(w[0]),
-						T = B[0],
-						O = B[1],
-						R = (0, r.useState)(""),
-						E = R[0],
-						D = R[1],
-						L = (0, r.useState)(0),
-						z = L[0],
-						M = L[1],
-						A = (0, ex.O_)(
-						{
-							MEMBER_NO: z,
-							M_TYPE: P
-						},
-						{
-							skip: 0 === z
-						}),
-						q = (0, r.useMemo)(function()
-						{
-							var e = [
-							{
-								no: -1,
-								title: F.Z.none_series[h],
-								idx: 0
-							},
-							{
-								no: 0,
-								title: F.Z.add_series[h],
-								idx: 0
-							}];
-							return A.data && (e = e.concat((0, et.Z)(A.data)
-								.map(function(e)
-								{
-									return {
-										no: e.SERIES_NO,
-										title: e.TITLE,
-										idx: e.SERIES_IDX || 0
-									}
-								}))), e
-						}, [A, h]);
-					(0, r.useEffect)(function()
-					{
-						y.data && M(y.data.MEMBER_NO)
-					}, [y.data]);
-					var U = function()
-						{
-							a(!1), v(""), I(1), N(0), O(w[0]), D("")
-						},
-						G = (n = (0, ed.Z)(em()
-							.mark(function e()
-							{
-								var n, t, r, o, i, c, a, m, g, x, b, w, _;
-								return em()
-									.wrap(function(e)
-									{
-										for(;;) switch (e.prev = e.next)
-										{
-											case 0:
-												if(!f)
-												{
-													e.next = 2;
-													break
-												}
-												return e.abrupt("return");
-											case 2:
-												if(l((0, s.jh)(!0)), n = [], t = [], r = [], o = [], i = new Date()
-													.getTime()
-													.toString(36), c = [], a = 0, m = 1, p.chats.forEach(function(e, o)
-													{
-														var a, l = eD(
-														{}, e);
-														p.chats.findIndex(function(n, t)
-														{
-															return e.sCharacter.no === n.sCharacter.no
-														}) === o && 0 !== e.sCharacter.no && (e.sCharacter.no && n.push(e.sCharacter.no), t.push(
-														{
-															no: e.sCharacter.no,
-															idx: e.sCharacter.index
-														})), e.file && e.file.length > 0 && (l.content = "getFile/".concat(null === (a = y.data) || void 0 === a ? void 0 : a.MEMBER_NO, "/")
-															.concat(i, "/mollu_")
-															.concat(m, ".png"), c.push(
-															{
-																file: e.file || "",
-																name: "mollu_".concat(m, ".png")
-															}), m++), r.push(eD(eD(
-														{}, l),
-														{},
-														{
-															file: ""
-														}))
-													}), c.forEach(function(e)
-													{
-														var n = atob(e.file.split(",")[1]);
-														e.file = "";
-														for(var t = Array(n.length), r = 0; r < t.length; r++) t[r] = n.charCodeAt(r);
-														var i = new Blob([new Uint8Array(t)],
-														{
-															type: "image/png"
-														});
-														o.push(i), a += i.size / 1024 / 1024
-													}), N(Number.parseFloat(a.toFixed(2))), !(a > 3))
-												{
-													e.next = 19;
-													break
-												}
-												l((0, er.Y2)(
-												{
-													isAlert: !0,
-													ment: F.Z.error[h],
-													title: F.Z.error_image_size[h]
-												})), l((0, s.jh)(!1)), e.next = 75;
-												break;
-											case 19:
-												if(!(0 === C.trim()
-													.length || C.length > 30))
-												{
-													e.next = 24;
-													break
-												}
-												l((0, er.Y2)(
-												{
-													isAlert: !0,
-													ment: F.Z.error[h],
-													title: F.Z.error_title_size[h]
-												})), l((0, s.jh)(!1)), e.next = 75;
-												break;
-											case 24:
-												if(!(0 === T.no && (0 === E.trim()
-													.length || E.length > 20)))
-												{
-													e.next = 29;
-													break
-												}
-												l((0, er.Y2)(
-												{
-													isAlert: !0,
-													title: F.Z.error[h],
-													ment: F.Z.error_series_size[h]
-												})), l((0, s.jh)(!1)), e.next = 75;
-												break;
-											case 29:
-												if(!(n.length < 1))
-												{
-													e.next = 34;
-													break
-												}
-												l((0, er.Y2)(
-												{
-													isAlert: !0,
-													title: F.Z.error[h],
-													ment: F.Z.error_noCharacter[h]
-												})), l((0, s.jh)(!1)), e.next = 75;
-												break;
-											case 34:
-												if(void 0 !== y.data)
-												{
-													e.next = 39;
-													break
-												}
-												l((0, er.Y2)(
-												{
-													isAlert: !0,
-													title: F.Z.error[h],
-													ment: F.Z.error_ment[h]
-												})), l((0, s.jh)(!1)), e.next = 75;
-												break;
-											case 39:
-												return b = {
-													title: C,
-													nickname: null === (g = y.data) || void 0 === g ? void 0 : g.NICKNAME,
-													date: (0, u._3)(!0, !0),
-													replyNo: p.replyNo,
-													replyGroup: p.replyGroup,
-													chars: n
-												}, c.unshift(
-												{
-													file: "",
-													name: "mollu_0.json"
-												}), o.unshift(new Blob([JSON.stringify([b, r])],
-												{
-													type: "application/json"
-												})), w = new FormData, o.forEach(function(e, n)
-												{
-													w.append("file_blobs", e), w.append("names", c[n].name)
-												}), w.append("chars", "|" + n.join("|") + "|"), w.append("info", C), w.append("info", String(y.data.MEMBER_NO)), w.append("info", String(P)), w.append("info", h), w.append("info", localStorage.getItem("local_no") || ""), w.append("info", null === (x = y.data) || void 0 === x ? void 0 : x.UID), w.append("info", i), w.append("series", String(T.no)), w.append("series", String((T.idx || 0) + 1)), w.append("series", E), w.append("profile", String(t[0].no)), w.append("profile", String(t[0].idx)), e.next = 59, j(w);
-											case 59:
-												if(console.log(_ = e.sent), l((0, s.jh)(!1)), U(), !("data" in _ && _.data > 0))
-												{
-													e.next = 74;
-													break
-												}
-												l((0, er.Y2)(
-												{
-													isAlert: !0,
-													title: F.Z.success[h],
-													ment: F.Z.upload_comment[h]
-												})), e.t0 = P, e.next = 1 === e.t0 ? 68 : 2 === e.t0 ? 70 : 72;
-												break;
-											case 68:
-												return d.push("/creative/".concat(h, "/1")), e.abrupt("break", 72);
-											case 70:
-												return d.push("/private/".concat(h, "/1")), e.abrupt("break", 72);
-											case 72:
-												e.next = 75;
-												break;
-											case 74:
-												l((0, er.Y2)(
-												{
-													isAlert: !0,
-													title: F.Z.error[h],
-													ment: F.Z.error_upload[h]
-												}));
-											case 75:
-											case "end":
-												return e.stop()
-										}
-									}, e)
-							})), function()
-						{
-							return n.apply(this, arguments)
-						});
-					return (0, m.jsx)(ea.Xf,
-					{
-						className: o ? "visible medium" : "medium",
-						onDoubleClick: function()
-						{
-							U()
-						},
-						children: (0, m.jsxs)(ea.F0,
-						{
-							onDoubleClick: function(e)
-							{
-								return e.stopPropagation(), !1
-							},
-							children: [(0, m.jsxs)(ea.h4,
-							{
-								children: [(0, m.jsx)(ea.Dx,
-								{
-									className: "bold",
-									children: F.Z.upload_to_server[h]
-								}), (0, m.jsx)(ea.ec,
-								{
-									onClick: function()
-									{
-										U()
-									},
-									children: (0, m.jsx)(c.j4,
-									{})
-								})]
-							}), (0, m.jsxs)(ea.$0,
-							{
-								children: [(0, m.jsxs)(ez,
-								{
-									children: [(0, m.jsxs)("div",
-									{
-										style:
-										{
-											width: "100%",
-											textAlign: "left",
-											display: 2 === P ? "none" : "block"
-										},
-										children: [F.Z.series[h], (0, m.jsx)("div",
-										{
-											style:
-											{
-												marginBottom: "1rem",
-												width: "100%"
-											},
-											children: (0, m.jsx)(eR.Z,
-											{
-												items: q,
-												selected: T,
-												setSelected: function(e)
-												{
-													O(e)
-												}
-											})
-										})]
-									}), 0 === T.no && (0, m.jsx)(c.OP,
-									{
-										style:
-										{
-											marginBottom: "1rem"
-										},
-										children: (0, m.jsx)(c.Kx,
-										{
-											className: "medium",
-											placeholder: F.Z.series_title_comment[h],
-											maxRows: 1,
-											value: E,
-											maxLength: 20,
-											onChange: function(e)
-											{
-												e.currentTarget.value.match("\n") || D(e.currentTarget.value)
-											}
-										})
-									}), F.Z.title[h], (0, m.jsx)(c.OP,
-									{
-										style:
-										{
-											marginBottom: "1rem"
-										},
-										children: (0, m.jsx)(c.Kx,
-										{
-											className: "medium",
-											placeholder: F.Z.title_comment[h],
-											maxRows: 1,
-											value: C,
-											maxLength: 30,
-											onChange: function(e)
-											{
-												e.currentTarget.value.match("\n") || v(e.currentTarget.value)
-											}
-										})
-									}), F.Z.writer[h], (0, m.jsx)(c.OP,
-									{
-										children: (0, m.jsx)(c.Kx,
-										{
-											className: "medium",
-											maxRows: 1,
-											value: null === (t = y.data) || void 0 === t ? void 0 : t.NICKNAME,
-											readOnly: !0
-										})
-									})]
-								}), (0, m.jsx)(eM,
-								{
-									children: ["creative", "private"].map(function(e, n)
-									{
-										var t;
-										return (0, m.jsxs)(c.Jg,
-										{
-											style:
-											{
-												margin: "0 1rem"
-											},
-											htmlFor: "iq_".concat(n + 1),
-											children: [(0, m.jsx)("input",
-											{
-												type: "checkbox",
-												disabled: (null === (t = y.data) || void 0 === t ? void 0 : t.AUTH) === 0 && "official" === e,
-												id: "iq_".concat(n + 1),
-												checked: P === n + 1,
-												onChange: function()
-												{
-													I(n + 1), O(w[0])
-												},
-												value: n + 1
-											}), F.Z[e][h]]
-										}, n + 1)
-									})
-								}), (0, m.jsxs)(eL,
-								{
-									children: [(0, m.jsxs)("span",
-									{
-										style: Z > 3 ?
-										{
-											color: "red"
-										} :
-										{},
-										children: ["※ ", F.Z.image_max_comment[h], " (", Z, "/3mb)"]
-									}), (0, m.jsxs)("span",
-									{
-										children: ["※ ", F.Z.rule_comment[h]]
-									}), (0, m.jsx)("span",
-									{
-										children: F.Z.thanks[h]
-									})]
-								}), (0, m.jsxs)(ea.$_,
-								{
-									children: [(0, m.jsx)(ea.Lw,
-									{
-										className: "bold",
-										onClick: function()
-										{
-											U()
-										},
-										children: F.Z.cancel[h]
-									}), (0, m.jsx)(ea.AZ,
-									{
-										className: "bold",
-										disabled: C.trim()
-											.length < 1 || Z > 5 || f,
-										onClick: function()
-										{
-											G()
-										},
-										children: F.Z.confirm[h]
-									})]
-								})]
-							})]
-						})
-					})
-				},
-				eL = o.ZP.div.withConfig(
-				{
-					displayName: "PopupServerUpload__SpanBox",
-					componentId: "sc-155pfqz-0"
-				})(["", ";font-size:0.9rem;line-height:1.5rem;"], function(e)
-				{
-					return e.theme.common.flexBox(
-					{
-						direction: "column"
-					})
-				}),
-				ez = o.ZP.div.withConfig(
-				{
-					displayName: "PopupServerUpload__Wrapper",
-					componentId: "sc-155pfqz-1"
-				})(["", ";line-height:2rem;"], function(e)
-				{
-					return e.theme.common.flexBox(
-					{
-						direction: "column",
-						align: "flex-start"
-					})
-				}),
-				eM = o.ZP.div.withConfig(
-				{
-					displayName: "PopupServerUpload__CBWrapper",
-					componentId: "sc-155pfqz-2"
-				})(["", ";width:auto;font-size:0.9rem;margin:1rem 0;"], function(e)
-				{
-					return e.theme.common.flexBox(
-					{})
-				}),
-				eA = function(e)
+				eR = function(e)
 				{
 					var n = e.scrollRef,
 						t = e.show,
@@ -3272,54 +2580,33 @@
 						h = (0, i.C)(function(e)
 						{
 							return e.global.isScreenshot
-						}),
-						f = (0, i.C)(function(e)
-						{
-							return e.global.lang
-						}),
-						p = (0, ex.vC)(
+						});
+					(0, i.C)(function(e)
+					{
+						return e.global.lang
+					});
+					var f = (0, ex.vC)(
 						{
 							fixedCacheKey: "account"
 						}),
-						g = (0, ec.Z)(p, 2),
-						x = (g[0], g[1]),
-						y = (0, r.useState)(!1),
-						b = y[0],
-						j = y[1],
-						w = (0, r.useState)(!1),
-						_ = w[0],
-						C = w[1],
-						v = (0, r.useState)(!1),
-						k = v[0],
-						Z = v[1],
-						N = (0, r.useState)(!1),
-						S = N[0],
-						P = N[1],
-						I = (0, r.useState)(!1),
-						B = I[0],
-						T = I[1],
-						O = (0, r.useState)(!1),
-						R = O[0],
-						E = O[1],
-						D = function()
-						{
-							if(x.data)
-							{
-								if(0 !== x.data.STATUS)
-								{
-									a((0, er.Y2)(
-									{
-										isAlert: !0,
-										title: F.Z.error[f],
-										ment: F.Z.cant_upload_comment[f]
-									}));
-									return
-								}
-								C(!0)
-							}
-							else a((0, s.Aj)(!0))
-						};
-					return (0, m.jsxs)(eq,
+						p = (0, ec.Z)(f, 2);
+					p[0], p[1];
+					var g = (0, r.useState)(!1),
+						x = g[0],
+						y = g[1],
+						b = (0, r.useState)(!1),
+						j = b[0],
+						w = b[1],
+						_ = (0, r.useState)(!1),
+						C = _[0],
+						v = _[1],
+						k = (0, r.useState)(!1),
+						Z = k[0],
+						N = k[1],
+						S = (0, r.useState)(!1),
+						P = S[0],
+						I = S[1];
+					return (0, m.jsxs)(eF,
 					{
 						style: t ?
 						{
@@ -3328,31 +2615,31 @@
 						{
 							maxHeight: "0"
 						},
-						children: [(0, m.jsxs)(eU,
+						children: [(0, m.jsxs)(eD,
 						{
-							children: [(0, m.jsx)(eG,
+							children: [(0, m.jsx)(eO,
 							{
 								title: "Reply",
 								onClick: function()
 								{
-									P(!0)
+									v(!0)
 								},
 								children: (0, m.jsx)(c.xL,
 								{
 									icon: l.Lh7
 								})
-							}), (0, m.jsx)(eG,
+							}), (0, m.jsx)(eO,
 							{
 								title: "Info",
 								onClick: function()
 								{
-									E(!0)
+									I(!0)
 								},
 								children: (0, m.jsx)(c.xL,
 								{
 									icon: l.DBf
 								})
-							}), (0, m.jsx)(eG,
+							}), (0, m.jsx)(eO,
 							{
 								disabled: 0 === u.no,
 								title: "Relationship Event",
@@ -3364,22 +2651,22 @@
 								{
 									icon: l.m6i
 								})
-							}), (0, m.jsx)(eG,
+							}), (0, m.jsx)(eO,
 							{
 								disabled: d.length < 1,
 								title: "Delete ALL",
 								onClick: function()
 								{
-									T(!0)
+									N(!0)
 								},
 								children: (0, m.jsx)(c.xL,
 								{
 									icon: l.Vui
 								})
 							})]
-						}), (0, m.jsxs)(eU,
+						}), (0, m.jsxs)(eD,
 						{
-							children: [(0, m.jsx)(eG,
+							children: [(0, m.jsx)(eO,
 							{
 								title: "ScreenShot Mode",
 								className: h ? "dot" : "",
@@ -3391,78 +2678,54 @@
 								{
 									icon: l.QY_
 								})
-							}), (0, m.jsx)(eG,
+							}), (0, m.jsx)(eO,
 							{
 								disabled: d.length < 1,
 								title: "Image Download",
 								onClick: function()
 								{
-									j(!0)
+									y(!0)
 								},
 								children: (0, m.jsx)(c.xL,
 								{
 									icon: l.wf8
 								})
-							}), (0, m.jsx)(eG,
+							}), (0, m.jsx)(eO,
 							{
 								title: "Share File",
 								onClick: function()
 								{
-									Z(!0)
+									w(!0)
 								},
 								children: (0, m.jsx)(c.xL,
 								{
 									icon: l.EdJ
 								})
-							}), (0, m.jsx)(eG,
-							{
-								disabled: d.length < 1,
-								title: "File Upload",
-								style:
-								{
-									width: "3rem"
-								},
-								onClick: function()
-								{
-									D()
-								},
-								children: (0, m.jsx)(c.xL,
-								{
-									icon: l.wEO,
-									className: "fa-solid fa-file-arrow-up"
-								})
 							})]
-						}), (0, m.jsx)(eF,
-						{
-							show: _,
-							handleShow: function(e)
-							{
-								C(e)
-							}
 						}), (0, m.jsx)(el,
 						{
-							show: R,
+							show: P,
 							handleShow: function(e)
 							{
-								E(e)
+								I(e)
 							},
 							sendChat: o
 						}), (0, m.jsx)(es,
 						{
-							show: S,
+							show: C,
 							handleShow: function(e)
 							{
-								P(e)
+								v(e)
 							},
 							isFirst: !0,
 							sReply: null,
 							scrollRef: n
 						}), (0, m.jsx)(eu,
 						{
-							show: B,
+							show: Z,
 							handleShow: function(e)
 							{
-								T(e)
+								N(e)
 							},
 							handleDeleteAll: function()
 							{
@@ -3484,32 +2747,32 @@
 								}
 								click('#delsall');click('#delsall');
 								//*批量删除
-								T(!1), a((0, eo.U_)(arr)), a((0, eo.gW)(//#批量删除支持
+								N(!1), a((0, eo.U_)(arr)), a((0, eo.gW)(//#批量删除支持[]改arr
 								{
-									replyGroup: 1,//#
-									replyNo: 1,//#
+									replyGroup: 1,
+									replyNo: 1,
 									sReplyNo: 0
 								}))
 							}
 						}), (0, m.jsx)(eb,
 						{
-							show: b,
+							show: x,
 							handleShow: function(e)
 							{
-								j(e)
+								y(e)
 							},
 							scrollRef: n
 						}), (0, m.jsx)(eS,
 						{
-							show: k,
+							show: j,
 							handleShow: function(e)
 							{
-								Z(e)
+								w(e)
 							}
 						})]
 					})
 				},
-				eq = o.ZP.div.withConfig(
+				eF = o.ZP.div.withConfig(
 				{
 					displayName: "ToolBox__Container",
 					componentId: "sc-1ssk4pv-0"
@@ -3523,7 +2786,7 @@
 				{
 					return e.theme.color.rgb230_233_235
 				}),
-				eU = o.ZP.div.withConfig(
+				eD = o.ZP.div.withConfig(
 				{
 					displayName: "ToolBox__Wrapper",
 					componentId: "sc-1ssk4pv-1"
@@ -3534,8 +2797,7 @@
 						justify: "space-around"
 					})
 				}),
-				eG = (0, o.ZP)(c.hU)
-				.withConfig(
+				eO = (0, o.ZP)(c.hU).withConfig(
 				{
 					displayName: "ToolBox__ToolButton",
 					componentId: "sc-1ssk4pv-2"
@@ -3543,7 +2805,7 @@
 				{
 					return e.theme.color.rgb45_70_100
 				}),
-				eY = function(e)
+				eL = function(e)
 				{
 					var n = e.show,
 						t = e.handleShow,
@@ -3567,12 +2829,10 @@
 						u = function(e)
 						{
 							var n = [],
-								t = (0, et.Z)(a.chats)
-								.filter(function(e)
+								t = (0, et.Z)(a.chats).filter(function(e)
 								{
 									return e.replyDepth === a.sReplyNo
-								})
-								.pop(),
+								}).pop(),
 								i = {
 									type: "image",
 									replyNo: 0,
@@ -3591,12 +2851,10 @@
 							});
 							else
 							{
-								var c = (0, et.Z)(a.chats)
-									.filter(function(e)
-									{
-										return e.replyNo === a.sReplyNo
-									})
-									.pop();
+								var c = (0, et.Z)(a.chats).filter(function(e)
+								{
+									return e.replyNo === a.sReplyNo
+								}).pop();
 								a.chats.forEach(function(e)
 								{
 									n.push(e), e === c && n.push(i)
@@ -3638,7 +2896,7 @@
 							for(let num = 1;num <= arr.split('.')[1];num++)
 							{
 								cflink = 'CharFace/'+(arr.split('.')[0].replaceAll('_','/'))+'/'+arr.split('.')[0]+'.';
-								cfarr.push(cflink+num+'.webp')
+								cfarr.push(href+cflink+num+'.webp')
 							}
 						}
 						else if(cf == 'Emoji')
@@ -3677,7 +2935,7 @@
 										children: [(0, m.jsx)(ea.Dx,
 										{
 											className: "bold",
-											children: cf == 'Emoji' ? F.Z.emoticon[l]+'('+cfnum+')' : charname+'('+cfnum+')'//#加入差分表情
+											children: cf == 'Emoji' ? L.Z.emoticon[l]+'('+cfnum+')' : charname+'('+cfnum+')'//#加入差分表情
 										}), (0, m.jsx)(ea.ec,
 										{
 											id: 'close',//@
@@ -3728,24 +2986,24 @@
 												CFPI = CFPI+1
 											}
 										})]
-									}), (0, m.jsx)(eH,
+									}), (0, m.jsx)(eE,
 									{
-										children: (0, m.jsxs)(eK,
+										children: (0, m.jsxs)(eM,
 										{
 											children: [Array(cf == 'Emoji' ? emojinum : cfnum)//#加入差分表情
 												.fill(0)
 												.map(function(e, n)
 												{
-													if(cf == 'Emoji')link = cf+'/'+(CFPI+1)+(CFPI<3?(lang=='zh_cn'?'zh_tw':lang):'')+(n+1)+'.webp';//@原版表情
+													if(cf == 'Emoji')link = href+cf+'/'+(CFPI+1)+(CFPI<3?(lang=='zh_cn'?'zh_tw':lang):'')+(n+1)+'.webp';//@原版表情
 													if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
-													return (0, m.jsx)(eX,
+													return (0, m.jsx)(ez,
 													{
 														alt: cf,
 														height: 310,
 														width: 310,
 														onClick: function()
 														{
-															if(cf == 'Emoji')link = cf+'/'+(CFPI+1)+(CFPI<3?(lang=='zh_cn'?'zh_tw':lang):'')+(n+1)+'.webp';//@原版表情
+															if(cf == 'Emoji')link = href+cf+'/'+(CFPI+1)+(CFPI<3?(lang=='zh_cn'?'zh_tw':lang):'')+(n+1)+'.webp';//@原版表情
 															if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
 															u(link)//#表情链接
 														},
@@ -3761,8 +3019,7 @@
 					}
 					//*定义差分文件链接
 				},
-				eH = (0, o.ZP)(ea.$0)
-				.withConfig(
+				eE = (0, o.ZP)(ea.$0).withConfig(
 				{
 					displayName: "PopupEmoticonChat__Section2",
 					componentId: "sc-vzjcea-0"
@@ -3774,7 +3031,7 @@
 						align: "flex-start"
 					})
 				}),
-				eK = o.ZP.div.withConfig(
+				eM = o.ZP.div.withConfig(
 				{
 					displayName: "PopupEmoticonChat__Body",
 					componentId: "sc-vzjcea-1"
@@ -3788,8 +3045,7 @@
 				{
 					return e.theme.color.rgb216_218_220
 				}),
-				eX = (0, o.ZP)(c.Yo)
-				.withConfig(
+				ez = (0, o.ZP)(c.Yo).withConfig(
 				{
 					displayName: "PopupEmoticonChat__ImgBox",
 					componentId: "sc-vzjcea-2"
@@ -3800,7 +3056,7 @@
 				{
 					return e.theme.color.rgb255_255_255
 				}),
-				eW = function(e)
+				eA = function(e)
 				{
 					var n = e.scrollRef,
 						t = (0, i.T)(),
@@ -3864,7 +3120,7 @@
 								n()
 							}
 							//*更改文字发送方式
-							/*///原语句
+							/*
 							13 === (e.which || e.keyCode) && (e.ctrlKey || e.shiftKey) && (e.preventDefault(), "" !== e.currentTarget.value && n())
 							*/
 						},
@@ -3874,26 +3130,19 @@
 								type: e,
 								content: "",
 								replyDepth: a,
-								replyNo: e === 'reply' ? localStorage['replyNo'] : 0,
-								replyGroup: e === 'reply' ? localStorage['replyGroup'] : 0,
+								replyNo: 0,
+								replyGroup: 0,
 								sCharacter: s,
 								isFirst: !0
 							};
-							// localStorage['replyNo']++
-							// localStorage['replyGroup']++
-
 							"image" === e ? i.file = r : "chat" === e ? i.content = r : "info" === e && (i.content = r, i.sCharacter = d.I);
-							if("reply" === e)i.content = r, i.sCharacter = d.I
 							var c = [],
-								l = (0, et.Z)(o)
-								.filter(function(e)
+								l = (0, et.Z)(o).filter(function(e)
 								{
 									return e.replyDepth === a
-								})
-								.pop();
+								}).pop();
 							l && (i.isFirst = !("chat" === l.type && (0, u.Y)(l.sCharacter, s)) || l.replyDepth !== a);
 							var h = (0, u.ho)(o, i);
-							
 							//*新版向上追加消息：一般消息
 							c = (0, et.Z)(o);
 							let index = $jquery(".dels:checked").attr('index');
@@ -3906,9 +3155,8 @@
 								nextindex().scrollIntoView(!1)///更新位置
 							}, 100)
 							//*新版向上追加消息：一般消息
-							/*///原语句
-							!h || h && o.indexOf(h) === o.length ? c.push.apply(c, (0, et.Z)(o)
-								.concat([i])) : o.forEach(function(e, n)
+							/*
+							!h || h && o.indexOf(h) === o.length ? c.push.apply(c, (0, et.Z)(o).concat([i])) : o.forEach(function(e, n)
 							{
 								c.push(e), o[n + 1] === h && c.push(i)
 							}), t((0, eo.U_)(c)), setTimeout(function()
@@ -3923,26 +3171,24 @@
 							t((0, er.Y2)(
 							{
 								isAlert: !0,
-								title: F.Z.error[h],
-								ment: F.Z.no_support[h]
+								title: L.Z.error[h],
+								ment: L.Z.no_support[h]
 							}))
 						};
-					return (0, m.jsxs)(e$,
+					return (0, m.jsxs)(eq,
 					{
-						children: [(0, m.jsxs)(eJ,
+						children: [(0, m.jsxs)(eG,
 						{
-							children: [(0, m.jsx)(eV,
+							children: [(0, m.jsx)(eU,
 							{
 								title: "open",
 								onClick: function()
 								{
-									///p ? g(!1) : g(!0)
-									click('.gxgCGp:eq(4)')//#
+									click('.gxgCGp:eq(4)')//#p ? g(!1) : g(!0)
 								},
 								children: (0, m.jsx)(c.xL,
 								{
-									///icon: p ? l.dWM : l.XSi
-									icon: l.QY_//#
+									icon: l.QY_//#icon: p ? l.dWM : l.XSi
 								})
 							}), (0, m.jsx)("input",
 							{
@@ -3960,7 +3206,7 @@
 										I("image", e)
 									}, B)
 								}
-							}), (0, m.jsx)(eV,
+							}), (0, m.jsx)(eU,
 							{
 								style:
 								{
@@ -3989,7 +3235,7 @@
 									children: [(0, m.jsx)(c.Kx,
 									{
 										className: "medium",
-										placeholder: F.Z.input_comment[h],
+										placeholder: L.Z.input_comment[h],
 										maxRows: 5,
 										value: w,
 										ref: Z,
@@ -4001,7 +3247,7 @@
 										{
 											P(e, function()
 											{
-												I('chat', w), _("")//#回车发送
+												I('chat', w), _("")///回车发送
 											})
 										},
 										onChange: function(e)
@@ -4010,7 +3256,7 @@
 											_(e.currentTarget.value)
 											if($jquery(".dels:checked").attr('index'))$jquery(".dels:checked")[0].scrollIntoView(!1)//@输入文字自动跳到被选处
 										}
-									}), (0, m.jsx)(eV,
+									}), (0, m.jsx)(eU,
 									{
 										style:
 										{
@@ -4028,9 +3274,9 @@
 										{
 											icon: ei.pkM
 										})
-									})
+									}),
 									//*加入差分
-									, (0, m.jsx)(eV,
+									, (0, m.jsx)(eU,
 									{
 										style:
 										{
@@ -4052,7 +3298,7 @@
 									//*加入差分
 									]
 								})
-							}), (0, m.jsx)(eV,
+							}), (0, m.jsx)(eU,
 							{
 								style:
 								{},
@@ -4060,32 +3306,32 @@
 								disabled: w.length < 1,
 								onClick: function()
 								{
-									I('chat', w), _("")//#单击发送
+									I('chat', w), _("")///单击发送
 								},
 								children: (0, m.jsx)(c.xL,
 								{
 									icon: l.FQ0
 								})
 							})]
-						}), (0, m.jsx)(eA,
+						}), (0, m.jsx)(eR,
 						{
 							show: p,
 							scrollRef: n,
 							sendChat: I
-						}), (0, m.jsx)(eY,
+						}), (0, m.jsx)(eL,
 						{
 							show: y,
 							handleShow: S
 						})
 						//**
-						, (0, m.jsxs)(eU,
+						, (0, m.jsxs)(eD,
 						{
 							style:
 							{
 								padding: "5px 0",
 							},
 							children: [
-								(0, m.jsx)(eV,
+								(0, m.jsx)(eU,
 								{
 									style:
 									{
@@ -4103,7 +3349,7 @@
 										icon: l.Lh7
 									})
 								}),
-								(0, m.jsx)(eV,
+								(0, m.jsx)(eU,
 								{
 									style:
 									{
@@ -4121,7 +3367,7 @@
 										icon: l.DBf
 									})
 								}),
-								(0, m.jsx)(eV,
+								(0, m.jsx)(eU,
 								{
 									style:
 									{
@@ -4139,7 +3385,7 @@
 										icon: l.m6i
 									})
 								}),
-								(0, m.jsx)(eV,
+								(0, m.jsx)(eU,
 								{
 									style:
 									{
@@ -4157,7 +3403,7 @@
 										icon: l.EdJ
 									})
 								}),
-								(0, m.jsx)(eV,
+								(0, m.jsx)(eU,
 								{
 									style:
 									{
@@ -4180,7 +3426,7 @@
 						]
 					})
 				},
-				e$ = o.ZP.div.withConfig(
+				eq = o.ZP.div.withConfig(
 				{
 					displayName: "InputBar__Container",
 					componentId: "sc-1fvyhr8-0"
@@ -4197,13 +3443,12 @@
 				{
 					return e.theme.color.rgb230_233_235
 				}),
-				eJ = o.ZP.div.withConfig(
+				eG = o.ZP.div.withConfig(
 				{
 					displayName: "InputBar__Wrapper",
 					componentId: "sc-1fvyhr8-1"
 				})(["display:flex;width:100%;height:auto;padding:0;"]),
-				eV = (0, o.ZP)(c.hU)
-				.withConfig(
+				eU = (0, o.ZP)(c.hU).withConfig(
 				{
 					displayName: "InputBar__InputButton",
 					componentId: "sc-1fvyhr8-2"
@@ -4212,7 +3457,7 @@
 					return e.theme.color.rgb45_70_100
 				});
 
-			function eQ(e, n)
+			function eH(e, n)
 			{
 				var t = Object.keys(e);
 				if(Object.getOwnPropertySymbols)
@@ -4220,32 +3465,29 @@
 					var r = Object.getOwnPropertySymbols(e);
 					n && (r = r.filter(function(n)
 					{
-						return Object.getOwnPropertyDescriptor(e, n)
-							.enumerable
+						return Object.getOwnPropertyDescriptor(e, n).enumerable
 					})), t.push.apply(t, r)
 				}
 				return t
 			}
 
-			function e0(e)
+			function eY(e)
 			{
 				for(var n = 1; n < arguments.length; n++)
 				{
 					var t = null != arguments[n] ? arguments[n] :
 					{};
-					n % 2 ? eQ(Object(t), !0)
-						.forEach(function(n)
-						{
-							(0, w.Z)(e, n, t[n])
-						}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : eQ(Object(t))
-						.forEach(function(n)
-						{
-							Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
-						})
+					n % 2 ? eH(Object(t), !0).forEach(function(n)
+					{
+						(0, w.Z)(e, n, t[n])
+					}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : eH(Object(t)).forEach(function(n)
+					{
+						Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
+					})
 				}
 				return e
 			}
-			var e1 = function(e)
+			var eK = function(e)
 				{
 					var n = e.show,
 						t = e.selectChat,
@@ -4266,13 +3508,12 @@
 							return e.sCharacter.selected
 						}),
 						g = (0, r.useState)(t.type),
-						x = g[0],//#
+						x = g[0],
 						y = g[1],
 						b = (0, r.useState)(""),
 						j = val === '' ? (b[0] ? b[0] : t.content): !val ? '' : val,//#
 						w = b[1],
 						_ = (0, r.useRef)(null);
-						//console.log(t.content);
 					(0, r.useEffect)(function()
 					{
 						w("edit" === a && "image" !== t.type ? t.content : "")//#修改变追加
@@ -4294,13 +3535,12 @@
 							return h.chats.forEach(function(i)
 							{
 								if(r = o.filter(function(e)
-									{
-										return e === i.replyDepth
-									})
-									.length > 0, t === i || r) n = !0;
+								{
+									return e === i.replyDepth
+								}).length > 0, t === i || r) n = !0;
 								else if(n && t.isFirst)
 								{
-									var c = e0(
+									var c = eY(
 									{}, i);
 									c.isFirst = !0, e.push(c), n = !1
 								}
@@ -4311,23 +3551,23 @@
 						{
 							var e, n = [],
 								r = !1;
-							"name" === a ? h.chats.forEach(function(r){e = e0({}, r), r === t && (e.name = j), n.push(e)}) : //@加入临时改名
+							"name" === a ? h.chats.forEach(function(r){e = eY({}, r), r === t && (e.name = j), n.push(e)}) : //@加入临时改名
 							"delete" === a ? "reply" === t.type ? n = v() : h.chats.forEach(function(o)
 							{
-								e = e0(
+								e = eY(
 								{}, o), r ? (r = !1, e.isFirst = !0, n.push(e)) : o !== t ? n.push(e) : r = !0
 							}) : "edit" === a ? h.chats.forEach(function(r)
 							{
-								e = e0(
+								e = eY(
 								{}, r), r === t && (e.content = j), n.push(e)
 							}) : "time" === a ? h.chats.forEach(function(r)
 							{
-								e = e0(
+								e = eY(
 								{}, r), r === t && (e.time = j), n.push(e)
 							}) : "add" === a && ("reply" === x ? h.chats.forEach(function(o)
 							{
-								e = e0(
-								{}, o), o === t ? (n.push(e0(
+								e = eY(
+								{}, o), o === t ? (n.push(eY(
 								{}, e)),localStorage['mt-edit'] ? (e.time = "",e.name = "") : n.pop(), e.file = "", e.type = x, e.replyNo = h.replyNo+Math.random(), e.replyGroup = h.replyGroup+Math.random(), e.replyDepth = h.sReplyNo, e.sCharacter = d.I, e.content = j, e.isFirst = !0, s((0, eo.gW)(
 								//#加了个n.pop()改为新版修改：选择肢（追加时清空时间戳），ID改为随机
 								{
@@ -4337,8 +3577,8 @@
 								})), r = !0) : r && (e.isFirst = !0, r = !1), n.push(e)
 							}) : h.chats.forEach(function(o)
 							{
-								e = e0(
-								{}, o), o === t ? (n.push(e0(
+								e = eY(
+								{}, o), o === t ? (n.push(eY(
 								{}, o)),localStorage['mt-edit'] ? (e.time = "",e.name = "") : n.pop(), e.file = "", e.type = x, e.replyNo = 0, e.replyGroup = 0, e.replyDepth = h.sReplyNo, e.sCharacter = "info" === x ? d.I : p, e.content = j, e.isFirst = !0, r = !0) : r && (e.isFirst = !0, r = !1), n.push(e)
 								//#加了个n.pop()改为新版修改：一般消息（追加时清空时间戳）
 							})), s((0, eo.U_)(n)), S()
@@ -4349,12 +3589,12 @@
 								c = !1;
 							"edit" === a ? h.chats.forEach(function(e)
 							{
-								r = e0(
+								r = eY(
 								{}, e), e === t && (r.file = n), i.push(r)
 							}) : h.chats.forEach(function(o)
 							{
-								r = e0(
-								{}, o), o === t ? (i.push(e0(
+								r = eY(
+								{}, o), o === t ? (i.push(eY(
 								{}, r)),localStorage['mt-edit'] ? (r.time = "",r.name = "") : i.pop(), r.file = "", r.type = e, r.replyNo = 0, r.replyGroup = 0, r.replyDepth = h.sReplyNo, r.sCharacter = p, r.content = r.content, r.isFirst = !0, r.file = n, c = !0) : c && (r.isFirst = !0, c = !1), i.push(r)
 								//#加了个i.pop()改为新版修改：图片（追加时清空时间戳）
 							}), s((0, eo.U_)(i)), o(!1, null, "delete"), w("")
@@ -4364,8 +3604,8 @@
 							s((0, er.Y2)(
 							{
 								isAlert: !0,
-								title: F.Z.error[f],
-								ment: F.Z.no_support[f]
+								title: L.Z.error[f],
+								ment: L.Z.no_support[f]
 							}))
 						},
 						S = function()
@@ -4380,7 +3620,7 @@
 						I = (0, r.useCallback)(function()
 						{
 							var e = "";
-							return "add" !== a ? ("info" !== t.type && (e = (0, u.fY)(t.sCharacter.no, !0, f)), "heart" === t.type ? e += F.Z.go_relationship_event[f] : "image" === t.type ? "edit" === a ? e += " : " + F.Z.add_image[f] : e += " : " + F.Z.image[f] : "time" === a ? e += " : " + F.Z.time_comment[f] : "chat" === t.type ? e += " : " + t.content : e += t.content) : "chat" === x ? e = (0, u.fY)(p.no, !0, f) + " : " + F.Z.input_comment[f] : "image" === x ? e = (0, u.fY)(p.no, !0, f) + " : " + F.Z.add_image[f] : "reply" === x ? e = F.Z.input_comment[f] : "heart" === x ? e = 0 === p.no ? F.Z.select_char[f] : (0, u.fY)(p.no, !0, f) + F.Z.go_relationship_event[f] : "info" === x && (e = F.Z.input_comment[f]), e
+							return "add" !== a ? ("info" !== t.type && (e = (0, u.fY)(t.sCharacter.no, !0, f)), "heart" === t.type ? e += L.Z.go_relationship_event[f] : "image" === t.type ? "edit" === a ? e += " : " + L.Z.add_image[f] : e += " : " + L.Z.image[f] : "time" === a ? e += " : " + L.Z.time_comment[f] : "chat" === t.type ? e += " : " + t.content : e += t.content) : "chat" === x ? e = (0, u.fY)(p.no, !0, f) + " : " + L.Z.input_comment[f] : "image" === x ? e = (0, u.fY)(p.no, !0, f) + " : " + L.Z.add_image[f] : "reply" === x ? e = "Sensei : " + L.Z.input_comment[f] : "heart" === x ? e = 0 === p.no ? L.Z.select_char[f] : (0, u.fY)(p.no, !0, f) + L.Z.go_relationship_event[f] : "info" === x && (e = L.Z.input_comment[f]), e
 						}, [a, x, f, t, p]);
 					return (0, m.jsx)(ea.Xf,
 					{
@@ -4396,7 +3636,7 @@
 								return e.stopPropagation(), !1
 							},
 							children: [
-							//*编辑界面更改
+							//*编辑界面更改1
 							(0, m.jsxs)(ea.h4,
 							{
 								children: [(0, m.jsx)(c.Bx,
@@ -4413,7 +3653,7 @@
 								}), (0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
-									children: F.Z[t.type][f]
+									children: L.Z[t.type][f]
 								}), (0, m.jsx)(c.Bx,
 								{
 									hidden: "add" !== a,
@@ -4434,9 +3674,13 @@
 									children: (0, m.jsx)(c.j4,
 									{})
 								})]
-							}), (0, m.jsxs)(ea.$0,
+							}), 
+							//*编辑界面更改1
+							(0, m.jsxs)(ea.$0,
 							{
-								children: [(0, m.jsx)(eN.g4,
+								children: [
+								//*编辑界面更2
+								(0, m.jsx)(eN.g4,
 								{
 									children: I(),
 									className: "medium",
@@ -4501,22 +3745,22 @@
 											w(val)
 										}
 									})]///,t.file && x === 'image' ? (0, m.jsx)('img',{src: t.file}) : ''以后再说
-								}),
-								//*编辑界面更改
-								(0, m.jsx)(e2,
+								}), 
+								//*编辑界面更改2
+								(0, m.jsx)(eX,
 								{
 									style:
 									{
 										justifyContent: "space-between"
 									},
-									children: L.ze.map(function(e, n)
+									children: E.ze.map(function(e, n)
 									{
 										return (0, m.jsx)(c.Bx,
 										{
 											style:
 											{
-												width: "23%",
-												margin: "0 auto"//@改为居中
+												margin: "0 auto",//@改为居中
+												width: "23%"
 											},
 											className: a === e ? "selected medium" : "medium",
 											onClick: function()
@@ -4524,17 +3768,17 @@
 												l(e)
 											},
 											hidden: ("heart" === t.type || "info" === t.type || "reply" === t.type) && ("name" === e || "time" === e),//#禁用特定功能
-											children: F.Z[e][f]
+											children: L.Z[e][f]
 										}, n)
 									})
-								}), (0, m.jsx)(e2,
+								}), (0, m.jsx)(eX,
 								{
 									style:
 									{
 										justifyContent: "space-around",
 										fontSize: "1rem"
 									},
-									children: L.PN.map(function(e, n)
+									children: E.PN.map(function(e, n)
 									{
 										return (0, m.jsxs)(c.Jg,
 										{
@@ -4549,12 +3793,60 @@
 												{
 													w(t.content), y(e)//#图片不显示文字
 												},
-												disabled: "add" !== a,//#
+												disabled: "add" !== a,
 												value: e
-											}), F.Z[e][f]]
+											}), L.Z[e][f]]
 										}, n)
 									})
-								}), (0, m.jsxs)(ea.$_,
+								}),
+								/*
+								(0, m.jsxs)(c.OP,
+								{
+									children: [(0, m.jsx)("input",
+									{
+										type: "file",
+										ref: _,
+										style:
+										{
+											display: "none"
+										},
+										accept: "image/*",
+										onChange: function(e)
+										{
+											(0, u.T6)(e, function(e)
+											{
+												Z("image", e)
+											}, N)
+										}
+									}), (0, m.jsx)(c.Kx,
+									{
+										className: "medium",
+										placeholder: I(),
+										maxRows: 5,
+										readOnly: function()
+										{
+											if("delete" === a) return !0;
+											if("edit" === a)
+											{
+												if("image" === t.type) return !0
+											}
+											else if("heart" === x || "image" === x) return !0;
+											return !1
+										}(),
+										value: j,
+										onClick: function(e)
+										{
+											var n;
+											("image" === t.type && "edit" === a || "image" === x) && (null === (n = _.current) || void 0 === n || n.click())
+										},
+										onChange: function(e)
+										{
+											w(e.currentTarget.value)
+										}
+									})]
+								}),
+								*/
+								(0, m.jsxs)(ea.$_,
 								{
 									children: [(0, m.jsx)(ea.Lw,
 									{
@@ -4563,7 +3855,7 @@
 										{
 											S()
 										},
-										children: F.Z.cancel[f]
+										children: L.Z.cancel[f]
 									}), (0, m.jsx)(ea.AZ,
 									{
 										className: "bold",
@@ -4572,14 +3864,14 @@
 										{
 											k()
 										},
-										children: F.Z.confirm[f]
+										children: L.Z.confirm[f]
 									})]
 								})]
 							})]
 						})
 					})
 				},
-				e2 = o.ZP.div.withConfig(
+				eX = o.ZP.div.withConfig(
 				{
 					displayName: "PopupChatChange__Wrapper",
 					componentId: "sc-11i0qdg-0"
@@ -4588,41 +3880,41 @@
 					return e.theme.common.flexBox(
 					{})
 				}),
-				e5 = function(e)
+				eW = function(e)
 				{
 					var n = e.character,
 						t = (0, i.C)(function(e)
 						{
 							return e.global.lang
 						});
-					return (0, m.jsxs)(e3,
+					return (0, m.jsxs)(e$,
 					{
-						children: [(0, m.jsxs)(e4,
+						children: [(0, m.jsxs)(eJ,
 						{
 							style:
 							{
 								alignItems: "center"
 							},
-							children: [(0, m.jsx)(e7,
+							children: [(0, m.jsx)(eV,
 							{}), (0, m.jsx)("span",
 							{
 								className: "bold",
-								children: F.Z.relationship_event[t]
+								children: L.Z.relationship_event[t]
 							})]
 						}), (0, m.jsx)(eN.HR,
 						{}), (0, m.jsx)(eN._x,
 						{
 							className: "medium",
 							onClick: function(){e.click()},//@羁绊事件编辑
-							children: n + F.Z.go_relationship_event[t]
+							children: n + L.Z.go_relationship_event[t]
 						})]
 					})
 				},
-				e3 = o.ZP.div.withConfig(
+				e$ = o.ZP.div.withConfig(
 				{
 					displayName: "HeartBox__Container",
 					componentId: "sc-cwriov-0"
-				})(["", ";padding:0.5rem;font-size:1.1rem;height:auto;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", ";background-image:url('MoeTalk/UI/Favor_Schedule_Deco.webp');background-repeat:no-repeat;background-position:right;background-size:auto 100%;line-height:1.5rem;"], function(e)
+				})(["", ";padding:0.5rem;font-size:1.1rem;height:auto;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeTalk/UI/Favor_Schedule_Deco.webp');background-repeat:no-repeat;background-position:right;background-size:auto 100%;line-height:1.5rem;`], function(e)
 				//#心形背景
 				{
 					return e.theme.common.flexBox(
@@ -4640,7 +3932,7 @@
 				{
 					return e.theme.color.rgb252_238_240
 				}),
-				e4 = o.ZP.div.withConfig(
+				eJ = o.ZP.div.withConfig(
 				{
 					displayName: "HeartBox__Flex",
 					componentId: "sc-cwriov-1"
@@ -4651,7 +3943,7 @@
 						justify: "flex-start"
 					})
 				}),
-				e7 = o.ZP.div.withConfig(
+				eV = o.ZP.div.withConfig(
 				{
 					displayName: "HeartBox__Border",
 					componentId: "sc-cwriov-2"
@@ -4659,7 +3951,7 @@
 				{
 					return e.theme.color.rgb252_142_155
 				}),
-				e9 = function(e)
+				eQ = function(e)
 				{
 					let index = e.index//@加入选择分支索引
 					var n = e.chat,
@@ -4678,9 +3970,9 @@
 						{
 							s(e)
 						};
-					return (0, m.jsxs)(e6,
+					return (0, m.jsxs)(e0,
 					{
-						children: [o || (0, m.jsx)(e8,
+						children: [o || (0, m.jsx)(e1,
 						{
 							"data-html2canvas-ignore": "true",
 							onClick: function()
@@ -4695,17 +3987,17 @@
 						{
 							onClick: function()
 							{
-								/*t((0, eo.Z8)(n.replyNo))禁用选择肢跳转*/
+								/*t((0, eo.Z8)(n.replyNo))*/
 								notice('可以通过换行来分割选择肢',250)//@提示
 								val = n.content;//@选择肢给值
 								f(!0, null, "edit"),h("edit")//@加入编辑功能
 							},
-							children: (0, m.jsx)(ne,
+							children: (0, m.jsx)(e2,
 							{
 								className: browser.isFirefox ? "" : "medium",//#判断火狐
 								children: n.content.split('\n')[index]//#根据分支索引判断选择肢位置
 							})
-						}), (0, m.jsx)(e1,
+						}), (0, m.jsx)(eK,
 						{
 							show: l,
 							selectChat: n,
@@ -4718,7 +4010,7 @@
 						})]
 					})
 				},
-				e6 = o.ZP.div.withConfig(
+				e0 = o.ZP.div.withConfig(
 				{
 					displayName: "ReplyButtonBox__Container",
 					componentId: "sc-15gyqnr-0"
@@ -4727,8 +4019,7 @@
 					return e.theme.common.flexBox(
 					{})
 				}),
-				e8 = (0, o.ZP)(c.hU)
-				.withConfig(
+				e1 = (0, o.ZP)(c.hU).withConfig(
 				{
 					displayName: "ReplyButtonBox__EditButton",
 					componentId: "sc-15gyqnr-1"
@@ -4736,12 +4027,12 @@
 				{
 					return e.theme.color.rgb45_70_100
 				}),
-				ne = o.ZP.span.withConfig(
+				e2 = o.ZP.span.withConfig(
 				{
 					displayName: "ReplyButtonBox__Span",
 					componentId: "sc-15gyqnr-2"
 				})(["overflow:hidden;word-break:break-all;word-wrap:break-word;white-space:pre-wrap;line-break:loose;"]),
-				nn = function(e)
+				e5 = function(e)
 				{
 					var n = e.chat,
 						t = (0, i.C)(function(e)
@@ -4763,22 +4054,22 @@
 						{
 							d(e)
 						};
-					return (0, m.jsxs)(nt,
+					return (0, m.jsxs)(e3,
 					{
-						children: [(0, m.jsxs)(nr,
+						children: [(0, m.jsxs)(e4,
 						{
 							style:
 							{
 								alignItems: "center"
 							},
-							children: [(0, m.jsx)(ni,
+							children: [(0, m.jsx)(e7,
 							{}), (0, m.jsx)("span",
 							{
 								className: "bold",
-								children: F.Z.go_reply[o]
+								children: L.Z.go_reply[o]
 							})]
 						}), (0, m.jsx)(eN.HR,
-						{}), (0, m.jsx)(nr,
+						{}), (0, m.jsx)(e4,
 						{
 							style:
 							{
@@ -4787,14 +4078,14 @@
 							children: t.map(function(e, t)
 							{
 								return n.replyGroup === e.replyGroup && e.content.split('\n').map(function(v, k){//@换行分割选择肢
-									return n.replyGroup === e.replyGroup && (0, m.jsx)(e9,
+									return n.replyGroup === e.replyGroup && (0, m.jsx)(eQ,
 									{
 										index: k,//@加入选择分支索引
 										chat: e
 									}, t)
 								})//@换行分割选择肢
 							})
-						}), a || (0, m.jsx)(no,
+						}), a || (0, m.jsx)(e9,
 						{
 							hidden: true,//@隐藏追加选择分支功能
 							"data-html2canvas-ignore": "true",
@@ -4815,11 +4106,11 @@
 						})]
 					})
 				},
-				nt = o.ZP.div.withConfig(
+				e3 = o.ZP.div.withConfig(
 				{
 					displayName: "ReplyBox__Container",
 					componentId: "sc-dwjyi3-0"
-				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", ";background-image:url('MoeTalk/UI/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;"], function(e)
+				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeTalk/UI/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
 				//#背景
 				{
 					return e.theme.common.flexBox(
@@ -4836,7 +4127,7 @@
 				{
 					return e.theme.color.rgb225_237_240
 				}),
-				nr = o.ZP.div.withConfig(
+				e4 = o.ZP.div.withConfig(
 				{
 					displayName: "ReplyBox__Flex",
 					componentId: "sc-dwjyi3-1"
@@ -4847,8 +4138,7 @@
 						justify: "flex-start"
 					})
 				}),
-				no = (0, o.ZP)(c.hU)
-				.withConfig(
+				e9 = (0, o.ZP)(c.hU).withConfig(
 				{
 					displayName: "ReplyBox__PlusButton",
 					componentId: "sc-dwjyi3-2"
@@ -4862,7 +4152,7 @@
 				{
 					return e.theme.color.rgb202_215_221
 				}),
-				ni = o.ZP.div.withConfig(
+				e7 = o.ZP.div.withConfig(
 				{
 					displayName: "ReplyBox__Line",
 					componentId: "sc-dwjyi3-3"
@@ -4870,7 +4160,7 @@
 				{
 					return e.theme.color.rgb39_153_228
 				}),
-				nc = function(e)
+				e6 = function(e)
 				{
 					var n = e.chat,
 						t = e.index,
@@ -4945,9 +4235,9 @@
 								{
 									marginRight: "chat" === n.type || "image" === n.type ? "1.5rem" : "0"
 								}
-							}), (0, m.jsxs)(na,
+							}), (0, m.jsxs)(e8,
 							{
-								children: ["reply" === n.type || h || (0, m.jsx)(nl,
+								children: ["reply" === n.type || h || (0, m.jsx)(ne,
 								{
 									"data-html2canvas-ignore": "true",
 									onClick: function()
@@ -4989,10 +4279,10 @@
 								{
 									onClick: function(){o(!0, n, "edit")},//@给旁白添加新版修改功能
 									children: n.content
-								}) : "reply" === n.type ? (0, m.jsx)(nn,
+								}) : "reply" === n.type ? (0, m.jsx)(e5,
 								{
 									chat: n
-								}) : "heart" === n.type ? (0, m.jsx)(e5,
+								}) : "heart" === n.type ? (0, m.jsx)(eW,
 								{
 									click: function(){o(!0, n, "edit")},//@给羁绊添加新版修改功能
 									character: (0, u.fY)(n.sCharacter.no, !0, d)
@@ -5058,7 +4348,18 @@
 												o(!0, n, "edit")
 											},
 											children: n.content.split('#')[0]///对话
-										})/*被删除的时间戳*/]
+										})
+										/*
+										, n.time && (0, m.jsx)(eN.i9,
+										{
+											style:
+											{
+												marginRight: 0
+											},
+											children: n.time
+										})
+										*/
+										]
 									}) : (0, m.jsxs)(m.Fragment,
 									{
 										children: [(0, m.jsx)(eN.Dt,
@@ -5069,7 +4370,18 @@
 												o(!0, n, "edit")
 											},
 											children: n.content.split('#')[0]//#无头像对话
-										})/*被删除的时间戳*/]
+										})
+										/*
+										, n.time && (0, m.jsx)(eN.i9,
+										{
+											style:
+											{
+												marginRight: 0
+											},
+											children: n.time
+										})
+										*/
+										]
 									}) : (0, m.jsx)(eN.tG,
 									{
 										style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.split('/')[0] === "CharFace" && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
@@ -5078,7 +4390,7 @@
 											o(!0, n, "edit")
 										},
 										src: n.file || n.content.split('#')[0]//#图片也支持样式了
-									}), n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}), h || (0, m.jsx)(nl,//#时间戳放在这
+									}), n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}), h || (0, m.jsx)(ne,//#时间戳放在这
 									{
 										"data-html2canvas-ignore": "true",
 										onClick: function()
@@ -5095,7 +4407,7 @@
 						})
 					})
 				},
-				na = o.ZP.div.withConfig(
+				e8 = o.ZP.div.withConfig(
 				{
 					displayName: "Chat__Flex",
 					componentId: "sc-5hhx0-0"
@@ -5107,8 +4419,7 @@
 						align: "flex-start"
 					})
 				}),
-				nl = (0, o.ZP)(c.hU)
-				.withConfig(
+				ne = (0, o.ZP)(c.hU).withConfig(
 				{
 					displayName: "Chat__EditButton",
 					componentId: "sc-5hhx0-1"
@@ -5117,7 +4428,7 @@
 				{
 					return e.theme.color.rgb45_70_100
 				}),
-				ns = function(e)
+				nn = function(e)
 				{
 					var n = e.scrollRef,
 						t = (0, i.C)(function(e)
@@ -5176,13 +4487,13 @@
 							width: "100%",
 							height: "100%"
 						},
-						children: [(0, m.jsxs)(nh,
+						children: [(0, m.jsxs)(no,
 						{
 							style:
 							{
 								display: s ? "flex" : "none"
 							},
-							children: [(0, m.jsx)(nm,
+							children: [(0, m.jsx)(ni,
 							{
 								onClick: function()
 								{
@@ -5194,12 +4505,12 @@
 								})
 							}), t.map(function(e, n)
 							{
-								return e.replyNo === o && 0 !== e.replyNo && (0, m.jsxs)(nf,
+								return e.replyNo === o && 0 !== e.replyNo && (0, m.jsxs)(nc,
 								{
 									className: "bold",
 									children: ["Re: ", e.content]
 								}, n)
-							}), (0, m.jsx)(nm,
+							}), (0, m.jsx)(ni,
 							{
 								onClick: function()
 								{
@@ -5212,7 +4523,7 @@
 							})]
 						}),
 						//*
-						(0, m.jsxs)(eU,
+						(0, m.jsxs)(eD,
 						{
 							style:
 							{
@@ -5284,20 +4595,20 @@
 									children: (0, m.jsx)(X,
 									{
 										style:{fontSize: "1.1rem"},
-										children: F.Z['delete'][lang]
+										children: L.Z['delete'][lang]
 									})
 								})
 								]
 						}),
 						//*
-						(0, m.jsx)(nu,
+						(0, m.jsx)(nt,
 						{
-							children: (0, m.jsx)(nd,
+							children: (0, m.jsx)(nr,
 							{
 								ref: n,
 								children: t.map(function(e, n)
 								{
-									return e.replyDepth === o && !("reply" === e.type && !1 === e.isFirst) && (0, m.jsx)(nc,
+									return e.replyDepth === o && !("reply" === e.type && !1 === e.isFirst) && (0, m.jsx)(e6,
 									{
 										index: n,
 										handleShow: _,
@@ -5305,7 +4616,7 @@
 									}, n)
 								})
 							})
-						}), (0, m.jsx)(e1,
+						}), (0, m.jsx)(eK,
 						{
 							show: x,
 							handleShow: _,
@@ -5318,7 +4629,7 @@
 						})]
 					})
 				},
-				nu = o.ZP.div.withConfig(
+				nt = o.ZP.div.withConfig(
 				{
 					displayName: "Talk__Container",
 					componentId: "sc-1uzn66i-0"
@@ -5329,7 +4640,7 @@
 				{
 					return e.theme.color.rgb210_210_210
 				}),
-				nd = o.ZP.div.withConfig(
+				nr = o.ZP.div.withConfig(
 				{
 					displayName: "Talk__CContainer",
 					componentId: "sc-1uzn66i-1"
@@ -5346,7 +4657,7 @@
 				{
 					return e.theme.color.rgb255_255_255
 				}),
-				nh = o.ZP.div.withConfig(
+				no = o.ZP.div.withConfig(
 				{
 					displayName: "Talk__Header",
 					componentId: "sc-1uzn66i-2"
@@ -5363,8 +4674,7 @@
 				{
 					return e.theme.color.rgb230_233_235
 				}),
-				nm = (0, o.ZP)(c.hU)
-				.withConfig(
+				ni = (0, o.ZP)(c.hU).withConfig(
 				{
 					displayName: "Talk__BackButton",
 					componentId: "sc-1uzn66i-3"
@@ -5372,12 +4682,12 @@
 				{
 					return e.theme.color.rgb45_70_100
 				}),
-				nf = o.ZP.span.withConfig(
+				nc = o.ZP.span.withConfig(
 				{
 					displayName: "Talk__Span",
 					componentId: "sc-1uzn66i-4"
 				})(["margin:auto 1rem;overflow:hidden;word-break:break-all;white-space:pre-wrap;line-break:loose;"]),
-				np = function()
+				na = function()
 				{
 					var e = (0, i.C)(function(e)
 						{
@@ -5388,9 +4698,9 @@
 							return e.makeChat.chats
 						}),
 						t = (0, r.useRef)(null);
-					return (0, m.jsxs)(ng,
+					return (0, m.jsxs)(nl,
 					{
-						children: [(0, m.jsx)(nx,
+						children: [(0, m.jsx)(ns,
 						{
 							style:
 							{
@@ -5402,25 +4712,25 @@
 								{
 									fontSize: "1.1rem"
 								},
-								children: F.Z.select_char[e]
+								children: L.Z.select_char[e]
 							})
-						}), (0, m.jsx)(nx,
+						}), (0, m.jsx)(ns,
 						{
 							style:
 							{
 								display: n.length > 0 ? "flex" : "none"
 							},
-							children: (0, m.jsx)(ns,
+							children: (0, m.jsx)(nn,
 							{
 								scrollRef: t
 							})
-						}), (0, m.jsx)(eW,
+						}), (0, m.jsx)(eA,
 						{
 							scrollRef: t
 						})]
 					})
 				},
-				ng = o.ZP.div.withConfig(
+				nl = o.ZP.div.withConfig(
 				{
 					displayName: "RightScreen__Container",
 					componentId: "sc-1fwinj2-0"
@@ -5431,7 +4741,7 @@
 						direction: "column"
 					})
 				}),
-				nx = o.ZP.div.withConfig(
+				ns = o.ZP.div.withConfig(
 				{
 					displayName: "RightScreen__Box",
 					componentId: "sc-1fwinj2-1"
@@ -5448,14 +4758,14 @@
 				{
 					return e.theme.color.rgb111_119_127
 				}),
-				ny = t(9008),
-				nb = t.n(ny),
-				nj = t(5615),
-				nw = function()
+				nu = t(9008),
+				nd = t.n(nu),
+				nh = t(5615),
+				nm = function()
 				{
-					return (0, m.jsxs)(n_,
+					return (0, m.jsxs)(nf,
 					{
-						children: [(0, m.jsxs)(nb(),
+						children: [(0, m.jsxs)(nd(),
 						{
 							children: [(0, m.jsx)("title",
 							{
@@ -5501,16 +4811,16 @@
 								name: "twitter:card",
 								content: "summary_large_image"
 							})]
-						}), (0, m.jsx)(nj.Z,
+						}), (0, m.jsx)(nh.Z,
 						{
 							childrens: [(0, m.jsx)(Q,
-							{}, 0), (0, m.jsx)(np,
+							{}, 0), (0, m.jsx)(na,
 							{}, 1)]
 						}), (0, m.jsx)(f,
 						{})]
 					})
 				},
-				n_ = o.ZP.div.withConfig(
+				nf = o.ZP.div.withConfig(
 				{
 					displayName: "pages__Container",
 					componentId: "sc-ll9qpl-0"
@@ -5645,14 +4955,12 @@
 				{
 					return e.theme.color.rgb76_91_111
 				}),
-				u = (0, r.ZP)(s)
-				.withConfig(
+				u = (0, r.ZP)(s).withConfig(
 				{
 					displayName: "talk__NTextBox",
 					componentId: "sc-eq7cqw-5"
 				})(["::after{content:none;}"]),
-				d = (0, r.ZP)(s)
-				.withConfig(
+				d = (0, r.ZP)(s).withConfig(
 				{
 					displayName: "talk__STextBox",
 					componentId: "sc-eq7cqw-6"
@@ -5682,8 +4990,7 @@
 				{
 					return localStorage['mt-style'].split(' ')[2]//#自定义样式
 				}),
-				f = (0, r.ZP)(o.Mm)
-				.withConfig(
+				f = (0, r.ZP)(o.Mm).withConfig(
 				{
 					displayName: "talk__HeartButton",
 					componentId: "sc-eq7cqw-9"
@@ -5708,8 +5015,7 @@
 				{
 					return e.theme.color.rgb218_225_229
 				}),
-				g = (0, r.ZP)(o.Mm)
-				.withConfig(
+				g = (0, r.ZP)(o.Mm).withConfig(
 				{
 					displayName: "talk__ReplyButton",
 					componentId: "sc-eq7cqw-11"
@@ -5724,12 +5030,11 @@
 				{
 					displayName: "talk__TimeSpan",
 					componentId: "sc-eq7cqw-12"
-				})(["color :", ";font-size :0.9rem;margin:auto 0.5rem 0 0.5rem;flex-shrink:0;white-space: pre-wrap;"], function(e)
+				})(["color :", ";font-size :0.9rem;margin:auto 0.5rem 0 0.5rem;flex-shrink:0;"], function(e)
 				{
 					return e.theme.color.rgb69_78_89
 				}),
-				y = (0, r.ZP)(o.xL)
-				.withConfig(
+				y = (0, r.ZP)(o.xL).withConfig(
 				{
 					displayName: "talk__CheckedIcon",
 					componentId: "sc-eq7cqw-13"
@@ -5742,10 +5047,9 @@
 		},
 		8312: function(e, n, t)
 		{
-			(window.__NEXT_P = window.__NEXT_P || [])
-			.push(["/", function()
+			(window.__NEXT_P = window.__NEXT_P || []).push(["/", function()
 			{
-				return t(583)
+				return t(1097)
 			}])
 		}
 	},

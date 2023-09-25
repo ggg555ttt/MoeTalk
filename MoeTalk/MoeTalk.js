@@ -58,13 +58,13 @@ $(".bIcduz").wait(function()
 //加载工具
 $(".frVjsk").wait(function()
 {
-	$(".frVjsk").append("<button class='"+class0+"' id='uphead' class='"+class0+"'><b style='color:black;'>傳</b></button><span class='tool'>上传头像<span id='cusname'></span></span><br>");
-	$(".frVjsk").append("<button class='"+class0+"' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>");
-	$(".frVjsk").append("<button class='"+class0+"' id='delcus'><b style='color:red;'>刪</b></button><span class='tool'>删除角色</span><br>");
-	$(".frVjsk").append("<button class='"+class0+"' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色</span><input size='6' id='ccus' placeholder='输入角色ID'/><br>");
-	$(".frVjsk").append("<button class='"+class0+"' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>");
-	$(".frVjsk").append("<button class='"+class0+"' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>");
-	$(".frVjsk").append("<a href='./Setting.html'><button class='"+class0+"'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>");
+	$(".frVjsk").append(`<button class='${class0}' id='uphead' class='${class0}'><b style='color:black;'>傳</b></button><span class='tool'>上传头像<span id='cusname'></span></span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='delcus'><b style='color:red;'>刪</b></button><span class='tool'>删除角色</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色</span><input size='6' id='ccus' placeholder='输入角色ID'/><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
+	$(".frVjsk").append(`<a href='${href}Setting.html'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
 //使用说明
 $('body').on('click',"#readme",function()
@@ -362,15 +362,15 @@ $(window).keydown(function(event)
 $('body').on('click',"#mt-style",function()
 {
 	if(localStorage['mt-style'] === 'rgb(255,247,225) rgb(255,255,255) transparent')
-	{
-		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,255,255)');
+	{//RightScreen__CContainer-sc-14j003s-2
+		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,255,255)');
 		$('.talk__ImgBox-sc-eq7cqw-3').css('background-color','transparent');
 		$('.talk__InfoBox-sc-eq7cqw-8').css('background','rgb(220,229,232)');
 		localStorage['mt-style'] = 'rgb(255,255,255) transparent rgb(220,229,232)';
 	}
 	else
 	{
-		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,247,225)');
+		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,247,225)');
 		$('.talk__ImgBox-sc-eq7cqw-3').css('background-color','rgb(255,255,255)');
 		$('.talk__InfoBox-sc-eq7cqw-8').css('background','transparent');
 		localStorage['mt-style'] = 'rgb(255,247,225) rgb(255,255,255) transparent';

@@ -1,3 +1,4 @@
+var href = window.location.href.split(window.location.host)[1].split('?')[0]
 if(window.location.href.indexOf('file:///') === 0)
 {
 	if(confirm('请不要直接通过资源管理器进入MoeTalk\n离线版相关进入教程请点击【确定】或【取消】访问'))
@@ -40,7 +41,7 @@ if(!localStorage['mt-head'])localStorage['mt-head'] = '{}';//自定义角色头�
 if(!localStorage['chats'] || !isJSON(localStorage['chats']))localStorage['chats'] = '[]';//聊天记录
 if(!localStorage['mt-lang'])localStorage['mt-lang'] = 'zh_cn';//默认语言
 if(location.href.split('?')[1])localStorage['mt-lang'] = location.href.split('?')[1].replaceAll('sw.js','')
-if(['zh_cn','zh_tw','jp','en','jp'].indexOf(localStorage['mt-lang']) < 0)localStorage['mt-lang'] = 'zh_cn'
+if(['zh_cn','zh_tw','jp','en','kr'].indexOf(localStorage['mt-lang']) < 0)localStorage['mt-lang'] = 'zh_cn'
 if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';//整体图片宽高百分比
 if(!localStorage['mt-cfsize'])localStorage['mt-cfsize'] = '90%';//差分表情宽高百分比
 if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';//标题
@@ -227,19 +228,20 @@ function savehead(headindex,img64)
 function loadhead(id,img)
 {
 	//MoeTalk头像
+	if(sessionStorage[id])return JSON.parse(sessionStorage[id])[1];//closure自定义角色支持
 	if(mt_characters[id])
 	{
-		return 'char/'+mt_characters[id].school+'/'+mt_characters[id].club+'/'+id+'/'+img+'.webp';
+		return href+'char/'+mt_characters[id].school+'/'+mt_characters[id].club+'/'+id+'/'+img+'.webp';
 	}
 	//自定义头像
 	if(JSON.parse(localStorage['mt-head'])[id])
 	{
 		return JSON.parse(localStorage['mt-head'])[id];
 	}
-	if(closurechar[id])return '../ClosureTalk/resources/ba/characters/'+img+'.webp';//closure头像
-	if(lastchar[id])return 'lastchar/'+id+'.'+img+'.webp';//旧版头像
-	if(id === 0)return "MoeTalk/UI/you.webp";//主角
-	return "MoeTalk/UI/error.webp";//默认头像
+	if(closurechar[id])return '/ClosureTalk/resources/ba/characters/'+img+'.webp';//closure头像
+	if(lastchar[id])return href+'lastchar/'+id+'.'+img+'.webp';//旧版头像
+	if(id === 0)return href+"MoeTalk/UI/you.webp";//主角
+	return href+"MoeTalk/UI/error.webp";//默认头像
 }
 //删除头像
 function delhead(imgindex)
@@ -608,7 +610,11 @@ function loaddata(json)
 
 			json[1][k]['sCharacter']['no'] = v['char_id'] ? v['char_id'].split('-')[1] : 0
 			json[1][k]['sCharacter']['index'] = v['img'] ? v['img'].split('.').shift() : 1
-
+			if(v['img'] === 'uploaded')
+			{
+				json[1][k]['sCharacter']['no'] = v['char_id']
+				json[1][k]['sCharacter']['index'] = v['img']
+			}
 			if(v['yuzutalk']['type'] === 'TEXT')json[1][k]['type'] = 'chat'
 			if(v['yuzutalk']['type'] === 'RELATIONSHIPSTORY')json[1][k]['type'] = 'heart'
 			if(v['yuzutalk']['type'] === 'NARRATION')
@@ -640,6 +646,16 @@ function loaddata(json)
 				}
 			}
 			json[1][k]['isFirst'] = true;
+		})
+	}
+	if(json['custom_chars'])
+	{
+		let arr = [];
+		$.each(json['custom_chars'],function(k,v)
+		{
+			arr[0] = v.name;
+			arr[1] = v.img;
+			sessionStorage[v.char_id] = JSON.stringify(arr)
 		})
 	}
 	$jquery.each(json[1],function(k,v)

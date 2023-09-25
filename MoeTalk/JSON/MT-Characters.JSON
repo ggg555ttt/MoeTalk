@@ -207,7 +207,7 @@ var mt_characters = {
             "kr": "이자요이 노노미",
             "pinyin": "shiliuyeyegong"
         },
-        "charface": "Abydos_Countermeasure_Nonomi_Bandit.8,Abydos_Countermeasure_Nonomi_Swimsuit.24,Abydos_Countermeasure_Nonomi_SwimsuitB.24,Abydos_Countermeasure_Nonomi_Track.21"
+        "charface": "Abydos_Countermeasure_Nonomi.20,Abydos_Countermeasure_Nonomi_Bandit.8,Abydos_Countermeasure_Nonomi_Swimsuit.24,Abydos_Countermeasure_Nonomi_SwimsuitB.24,Abydos_Countermeasure_Nonomi_Track.21"
     },
     "小鸟游星野": {
         "school": "阿比多斯",
@@ -1444,7 +1444,7 @@ var mt_characters = {
     "戈尔孔达": {
         "school": "其他",
         "club": "数秘术",
-        "head": "NPC_Portrait_NP0011_1_Collection,NPC_Portrait_NP0011_1",
+        "head": "NPC_Portrait_NP0011_2_Collection,NPC_Portrait_NP0011_2,NPC_Portrait_NP0115_2",
         "name": {
             "zh_cn": "戈尔孔达",
             "zh_tw": "戈爾孔達",
@@ -1486,7 +1486,7 @@ var mt_characters = {
     "印花釉法": {
         "school": "其他",
         "club": "数秘术",
-        "head": "NPC_Portrait_NP0011_2_Collection,NPC_Portrait_NP0011_2,NPC_Portrait_NP0115_2",
+        "head": "NPC_Portrait_NP0011_1_Collection,NPC_Portrait_NP0011_1",
         "name": {
             "zh_cn": "印花釉法",
             "zh_tw": "印花釉法",

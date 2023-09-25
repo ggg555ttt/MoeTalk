@@ -79,7 +79,6 @@ cursor: pointer;  /* 鼠标形状 */
 button {
   font-size: 24px;
   background-color: rgb(139, 187, 233);
-  color: #fff;
   border-radius: 2px;
   border: none;
   text-transform: uppercase;
