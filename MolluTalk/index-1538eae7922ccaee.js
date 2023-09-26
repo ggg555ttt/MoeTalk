@@ -1859,7 +1859,7 @@
 													{
 														j(base64), null === (n = I.current) || void 0 === n || n.setAttribute("src",base64), e.toBlob(function(e)
 														{
-															combineFiles(t.replace('data:image/png;base64,',''),JSON.stringify(json),"MolluTalk_" + ("" !== _ ? _ : F.Z.noTitle[g]));
+															combineFiles(t.replace('data:image/png;base64,',''),JSON.stringify(json),"MolluTalk_" + ("" !== _ ? _ : L.Z.noTitle[g]));
 														})
 													}
 												})
@@ -1868,7 +1868,7 @@
 											{
 												j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
 												{
-													combineFiles(t.replace('data:image/png;base64,',''),JSON.stringify(json),"MolluTalk_" + ("" !== _ ? _ : F.Z.noTitle[g]));
+													combineFiles(t.replace('data:image/png;base64,',''),JSON.stringify(json),"MolluTalk_" + ("" !== _ ? _ : L.Z.noTitle[g]));
 												})
 											}
 											//*加入水印功能和隐写存档

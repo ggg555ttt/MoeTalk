@@ -645,7 +645,12 @@ function loaddata(json)
 					json[1][k]['content'] = json[1][k]['content'].replaceAll('../ClosureTalk/../moetalk/','');
 				}
 			}
-			json[1][k]['isFirst'] = true;
+			json[1][k]['isFirst'] = false;
+			if(['RELATIONSHIPSTORY','NARRATION','CHOICES'].indexOf(v.yuzutalk.type) > -1 || !json.chat[k-1] || v.yuzutalk.avatarState === 'SHOW' || (json.chat[k-1] && (json.chat[k-1].char_id !== json.chat[k].char_id || ['RELATIONSHIPSTORY','NARRATION','CHOICES'].indexOf(json.chat[k-1].yuzutalk.type) > -1)))
+			{
+				json[1][k]['isFirst'] = true;
+			}
+			
 		})
 	}
 	if(json['custom_chars'])
