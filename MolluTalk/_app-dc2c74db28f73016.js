@@ -9686,7 +9686,7 @@
 						if(lastchar[e])o = lastchar[e][n]
 						if(closurechar[e])o = closurechar[e][n]
 						if(mt_name[e])o = mt_name[e];//@改名
-						if(sessionStorage[e])o = JSON.parse(sessionStorage[e])[0]//closure自定义角色支持
+						if(sessionStorage[e] && e.toString().split(' ').length > 1)o = JSON.parse(sessionStorage[e])[0]//closure自定义角色支持
 						//*读取人名
 						return t && o.split(" ")[1] || o.replaceAll("-", " ")
 						/*

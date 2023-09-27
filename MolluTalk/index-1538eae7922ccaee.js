@@ -2890,16 +2890,18 @@
 						let mt_charface = mt_characters[no] ? mt_characters[no].charface : ''
 						if(cf == 'CharFace' && mt_charface !== '')
 						{
-							if(mt_charface.split(',').length <= CFPI)CFPI = 0;
-							if(CFPI < 0)CFPI = mt_charface.split(',').length-1;
-							let arr = mt_charface.split(',')[CFPI];
+							if(!sessionStorage[no] || sessionStorage[no] < 0 || sessionStorage[no] > mt_charface.split(',').length-1)
+							{
+								sessionStorage[no] < 0 ? sessionStorage[no] = mt_charface.split(',').length-1 : sessionStorage[no] = 0;
+							}
+							let arr = mt_charface.split(',')[parseInt(sessionStorage[no])];
 							for(let num = 1;num <= arr.split('.')[1];num++)
 							{
 								cflink = 'CharFace/'+(arr.split('.')[0].replaceAll('_','/'))+'/'+arr.split('.')[0]+'.';
 								cfarr.push(href+cflink+num+'.webp')
 							}
 						}
-						else if(cf == 'Emoji')
+						if(cf == 'Emoji')
 						{
 							if(4 <= CFPI)CFPI = 0;
 							if(CFPI < 0)CFPI = 3;
@@ -2907,10 +2909,6 @@
 							if(CFPI == 1)emojinum = 40;
 							if(CFPI == 2)emojinum = 64;
 							if(CFPI == 3)emojinum = 27;
-						}
-						else
-						{
-							CFPI = -1;
 						}
 						let cfnum = cf == 'Emoji' ? emojinum : cfarr.length-1;///差分总数
 						
@@ -2960,7 +2958,7 @@
 											onClick:function()
 											{
 												click('#close');
-												CFPI = CFPI-1
+												cf == 'Emoji' ? CFPI = CFPI-1 : sessionStorage[no] = parseInt(sessionStorage[no])-1
 											}
 										}), (0, m.jsx)(ea.Dx,
 										{
@@ -2970,7 +2968,7 @@
 												"width": "25%",
 												textAlign:"center"
 											},
-											children: (CFPI+1)+"/"+(cf !== 'Emoji' && mt_charface ? mt_charface.split(',').length : cf == 'Emoji' ? 4 : 0)
+											children: (cf == 'Emoji' ? CFPI+1 : (parseInt(sessionStorage[no])+1))+"/"+(cf !== 'Emoji' && mt_charface ? mt_charface.split(',').length : cf == 'Emoji' ? 4 : 0)
 										}), (0, m.jsx)(c.Bx,
 										{
 											className: "bold",
@@ -2983,7 +2981,7 @@
 											onClick:function()
 											{
 												click('#close');
-												CFPI = CFPI+1
+												cf == 'Emoji' ? CFPI = CFPI+1 : sessionStorage[no] = parseInt(sessionStorage[no])+1
 											}
 										})]
 									}), (0, m.jsx)(eE,

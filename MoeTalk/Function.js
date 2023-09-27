@@ -228,7 +228,7 @@ function savehead(headindex,img64)
 function loadhead(id,img)
 {
 	//MoeTalk头像
-	if(sessionStorage[id])return JSON.parse(sessionStorage[id])[1];//closure自定义角色支持
+	if(sessionStorage[id] && id.toString().split(' ').length > 1)return JSON.parse(sessionStorage[id])[1];//closure自定义角色支持
 	if(mt_characters[id])
 	{
 		return href+'char/'+mt_characters[id].school+'/'+mt_characters[id].club+'/'+id+'/'+img+'.webp';
