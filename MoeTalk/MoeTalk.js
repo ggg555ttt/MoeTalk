@@ -418,29 +418,31 @@ $("body").on('click',"#cutdata",function()
 {
 	if($(".dels:checked").length > 0)
 	{
-		let filename = prompt("【截取存档】\n你一共选中了"+$(".dels:checked").length+"条数据\n请输入文件名：");
-		if(filename !== null && filename.trim() !== '')
-		{
 			let arr = [];
-			let json = []
+			let json = [];
+			let length = 0;
 			let time = new Date(); 
 			let year = time.getFullYear(); // 年
 			let month = time.getMonth() + 1; // 月
 			let date = time.getDate(); // 日
 			$(".dels:checked").each(function()
 			{
+				length = length+$(this).parent().outerHeight();
 				arr.push(JSON.parse(localStorage['chats'])[$(this).attr('index')]);
 			})
-			json[0] = {};
-			json[0]['title'] = filename;
-			json[0]['nickname'] = '截取存档';
-			json[0]['date'] = `${year}-${month}-${date}`
-			json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
-			json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
-			json[1] = JSON.parse(JSON.stringify(arr));
-			download_txt(`${filename}-MoeTalk截取存档${year}_${month}_${date}.json`,JSON.stringify(json));
-			click('.gxgCGp:eq(4)')
-		}
+
+			let filename = prompt(`【截取存档】\n你一共选中了${$(".dels:checked").length}条数据\n长度大概在${length.toFixed(0)}左右\n请输入文件名：`);
+			if(filename !== null && filename.trim() !== '')
+			{
+				json[0] = {};
+				json[0]['title'] = filename;
+				json[0]['nickname'] = '截取存档'+length.toFixed(0);
+				json[0]['date'] = `${year}-${month}-${date}`
+				json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
+				json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
+				json[1] = JSON.parse(JSON.stringify(arr));
+				download_txt(`${filename}-MoeTalk截取存档${year}_${month}_${date}-长度${length.toFixed(0)}.json`,JSON.stringify(json));
+			}
 	}
 	else
 	{

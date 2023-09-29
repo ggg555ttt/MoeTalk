@@ -1835,6 +1835,7 @@
 										}).then(function(e)
 										{
 											var n, t = e.toDataURL("image/png");
+											if(e.height > maxHeight)alert(`图片长度为${e.height}，超过${maxHeight}的部分会变为空白`);
 											//*加入水印功能和隐写存档
 											let json = [];
 											json[0] = {};
