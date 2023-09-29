@@ -1939,11 +1939,11 @@
 								})]
 							}), (0, m.jsxs)(ea.$0,
 							{
-								style:
+								/*style:
 								{
 									minHeight: "20rem",
 									overflow: "hidden"
-								},
+								},*/
 								children: [0 === b.length && (0, m.jsxs)(m.Fragment,
 								{
 									children: [(0, m.jsxs)(ew,
@@ -2101,7 +2101,7 @@
 												//*加入长度判断
 												if(height*(1=== S ? S +.1:S) > maxHeight)
 												{
-													if(confirm(height+'x'+(1=== S ? S +.1:S)+'=('+(height*(1=== S ? S +.1:S)).toFixed(0)+' > '+maxHeight+')，生成的图片可能会有缺失\n另外此数字可能并不准确，具体请以生成的图片长度为基准'))D();
+													if(confirm(height+'x'+(1=== S ? S +.1:S)+'=('+(height*(1=== S ? S +.1:S)).toFixed(0)+' > '+maxHeight+')，生成的图片可能会有缺失\n另外此数字可能并不准确，具体请以生成的图片长度为基准'))O();
 												}
 												else
 												{
@@ -2228,8 +2228,8 @@
 											date: (0, u._3)(!0, !0),
 											replyNo: s.replyNo,
 											replyGroup: s.replyGroup,
-											mt_char: localStorage['mt-char'],//@自创角色
-											mt_head: localStorage['mt-head'],//@自创头像
+											mt_char: JSON.parse(localStorage['mt-char']),//@自创角色
+											mt_head: JSON.parse(localStorage['mt-head']),//@自创头像
 											chars: n
 										}, (0, et.Z)(s.chats)])], e.next = 6, (0, u.rU)(r);
 									case 6:

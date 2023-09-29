@@ -5,7 +5,7 @@ var CharFaceIndex = null;//差分映射
 var val = '';//记录输入框值
 var browser = os();//获取浏览器信息
 var maxHeight = browser.isFirefox ? 16384*2 : 16384;
-var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//字体文件地址
+
 
 function mt_height()
 {
@@ -15,18 +15,33 @@ function mt_height()
 	return parseInt(($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed(0))+80;
 }
 
-//判断网络
-if(window.location.hostname == 'ggg555ttt.gitee.io' || window.location.hostname == 'frp.freefrp.net')
+$.ajax(
 {
-	font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font_web.css' data-n-g=''>";//更改为网络字体
-}
-//判断浏览器
-if(browser.isFirefox)
-{
-	font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//设置字体
-}
+	url: 'http://ys-n.ysepan.com/624927220/713993806/n554U7J4956MK6fjpSV23be/success.txt?lx=xz',
+	dataType: 'text',
+	cache: false,
+	success: function(data)
+	{
+		let font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//字体文件地址
+		if(window.location.hostname !== 'localhost' && !browser.isFirefox)
+		{
+			font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font_web.css' data-n-g=''>";//更改为网络字体
+		}
+		if(!localStorage['nofont'])
+		{
+			if(data === 'success' && window.location.hostname !== 'localhost')
+			{
+				$("head").append("<link rel='stylesheet' href='./MoeTalk/STYLE/font_ys168.css' data-n-g=''>");//加载字体
+			}
+			else
+			{
+				$("head").append(font);//加载字体
+			}
+		}
+		
+	}
+});
 
-if(!localStorage['nofont'])$("head").append(font);//加载字体
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
 $("body").on('keydown',function()
 {
