@@ -9683,8 +9683,8 @@
 						{
 							o = JSON.parse(localStorage['mt-char'])[e]
 						}
-						if(lastchar[e])o = lastchar[e][n]
-						if(closurechar[e])o = closurechar[e][n]
+						if(mollu_char[e])o = mollu_char[e][n]
+						if(closure_char[e])o = closure_char[e][n]
 						if(mt_name[e])o = mt_name[e];//@改名
 						if(sessionStorage[e] && e.toString().split(' ').length > 1)o = JSON.parse(sessionStorage[e])[0]//closure自定义角色支持
 						//*读取人名
@@ -9976,7 +9976,7 @@
 											width: "2.5rem",
 											height: "2.5rem"
 										},
-										src: href+"MoeTalk/UI/menu.webp",//#菜单图标
+										src: href+"Images/Ui/menu.webp",//#菜单图标
 										alt: "menu"
 									})
 								}), (0, O.jsx)(B,
@@ -10143,7 +10143,7 @@
 											{
 												width: 100,
 												height: 100,
-												src: href+"MoeTalk/UI/make.webp",//#编辑界面
+												src: href+"Images/Ui/make.webp",//#编辑界面
 												alt: "make",
 												priority: !0
 											})
@@ -10162,7 +10162,7 @@
 											{
 												width: 100,
 												height: 100,
-												src: href+"MoeTalk/UI/private.webp",//#播放器界面
+												src: href+"Images/Ui/private.webp",//#播放器界面
 												alt: "private"
 											})
 										})
@@ -12409,7 +12409,7 @@
 					{
 						displayName: "AppWrapper__CoverBg",
 						componentId: "sc-ha7ldy-0"
-					})([`height:100%;overflow:auto;background-image:linear-gradient( rgba(255,255,255,0.5),rgba(255,255,255,0.5) ),url("${href}MoeTalk/UI/hexa_back_01.webp");background-repeat :no-repeat;background-size :cover;user-select:none;`]),
+					})([`height:100%;overflow:auto;background-image:linear-gradient( rgba(255,255,255,0.5),rgba(255,255,255,0.5) ),url("${href}Images/Ui/hexa_back_01.webp");background-repeat :no-repeat;background-size :cover;user-select:none;`]),
 					//#背景
 					tF = h.ZP.div.withConfig(
 					{
@@ -15030,7 +15030,7 @@
 					{
 						displayName: "popup__Header",
 						componentId: "sc-1ardd6p-3"
-					})(["", " position:relative;height:auto;font-size:1.7rem;height:3rem;color:4px solid ", ";border-bottom:2px solid ", `;background-image:url('${href}MoeTalk/UI/Popup_Img_Deco_0.webp');background-repeat :no-repeat;background-size :cover;background-position:-2rem -2rem;border-radius:0.9rem 0 0 0;`], function(e)
+					})(["", " position:relative;height:auto;font-size:1.7rem;height:3rem;color:4px solid ", ";border-bottom:2px solid ", `;background-image:url('${href}Images/Ui/Popup_Img_Deco_0.webp');background-repeat :no-repeat;background-size :cover;background-position:-2rem -2rem;border-radius:0.9rem 0 0 0;`], function(e)
 					//#背景
 					{
 						return e.theme.common.flexBox(
@@ -15048,7 +15048,7 @@
 					{
 						displayName: "popup__Section",
 						componentId: "sc-1ardd6p-4"
-					})(["", " height:auto;text-align:center;color:", `;font-size:1.3rem;background-image:url('${href}MoeTalk/UI/Popup_Img_Deco_1.webp');background-repeat :no-repeat;background-size :cover;background-position:right 0 bottom 0;border-radius:0 0 0.9rem 0;padding:2rem;`], function(e)
+					})(["", " height:auto;text-align:center;color:", `;font-size:1.3rem;background-image:url('${href}Images/Ui/Popup_Img_Deco_1.webp');background-repeat :no-repeat;background-size :cover;background-position:right 0 bottom 0;border-radius:0 0 0.9rem 0;padding:2rem;`], function(e)
 					//#背景
 					{
 						return e.theme.common.flexBox(

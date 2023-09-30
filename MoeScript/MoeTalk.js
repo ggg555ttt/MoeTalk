@@ -13,11 +13,14 @@ function mt_height()
 	else num = 1.1;
 	return parseInt(($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed(0))+80;
 }
-
-var font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font.css' data-n-g=''>";//字体文件地址
+//http://frp.freefrp.net:40404/
+// $.ajax(
+// {
+// 	url: "http://frp.freefrp.net:40404/text.php"})
+var font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g=''>";//字体文件地址
 if(window.location.hostname !== 'localhost' && !browser.isFirefox)
 {
-	font = "<link rel='stylesheet' href='./MoeTalk/STYLE/font_web.css' data-n-g=''>";//更改为网络字体
+	font = "<link rel='stylesheet' href='./MoeScript/Style/font_web.css' data-n-g=''>";//更改为网络字体
 }
 $("head").append(font);//加载字体
 

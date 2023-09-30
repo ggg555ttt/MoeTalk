@@ -726,7 +726,7 @@
 								{
 									width: 252,
 									height: 252,
-									src: href+"MoeTalk/UI/School/"+(n.school[a] === '自定义' ? '自定义' : mt_characters[n.no].school)+'.webp',//#学校图标
+									src: href+"Images/Ui/School/"+(n.school[a] === '自定义' ? '自定义' : mt_characters[n.no].school)+'.webp',//#学校图标
 									onError: function(e)
 									{
 										var n = e.currentTarget;
@@ -1153,7 +1153,7 @@
 											width: 110,
 											height: 60,
 											alt: "order",
-											src: href+"MoeTalk/UI/".concat(n.order ? "down" : "up", ".webp")//#排序图标
+											src: href+"Images/Ui/".concat(n.order ? "down" : "up", ".webp")//#排序图标
 										})
 									})
 								})]
@@ -1185,7 +1185,7 @@
 										text: ""
 									})
 								},
-								src: href+"MoeTalk/UI/pen.webp",//#铅笔图标
+								src: href+"Images/Ui/pen.webp",//#铅笔图标
 								alt: "pen"
 							})]
 						}), (0, m.jsx)(M,
@@ -2875,7 +2875,7 @@
 						{
 							no = JSON.parse(localStorage['CharFaceIndex'])[no];
 						}
-						let link;let cflink = null;let cfarr = [];cfarr[0] = 'CharFace';///定义链接
+						let link;let cflink = null;let cfarr = [];cfarr[0] = 'Images/CharFace';///定义链接
 						let charname = no === 0 ? '主角' : '#'+(no-1000);
 
 						if(JSON.parse(localStorage['mt-char'])[no])
@@ -2898,7 +2898,7 @@
 							let arr = mt_charface.split(',')[parseInt(sessionStorage[no])];
 							for(let num = 1;num <= arr.split('.')[1];num++)
 							{
-								cflink = 'CharFace/'+(arr.split('.')[0].replaceAll('_','/'))+'/'+arr.split('.')[0]+'.';
+								cflink = 'Images/CharFace/'+(arr.split('.')[0].replaceAll('_','/'))+'/'+arr.split('.')[0]+'.';
 								cfarr.push(href+cflink+num+'.webp')
 							}
 						}
@@ -2993,7 +2993,7 @@
 												.fill(0)
 												.map(function(e, n)
 												{
-													if(cf == 'Emoji')link = href+cf+'/'+(CFPI+1)+(CFPI<3?(lang=='zh_cn'?'zh_tw':lang):'')+(n+1)+'.webp';//@原版表情
+													if(cf == 'Emoji')link = `${href}Images/${cf}/${CFPI+1}${CFPI<3?(lang=='zh_cn'?'zh_tw':lang):''}${n+1}.webp`;//@原版表情
 													if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
 													return (0, m.jsx)(ez,
 													{
@@ -3002,7 +3002,7 @@
 														width: 310,
 														onClick: function()
 														{
-															if(cf == 'Emoji')link = href+cf+'/'+(CFPI+1)+(CFPI<3?(lang=='zh_cn'?'zh_tw':lang):'')+(n+1)+'.webp';//@原版表情
+															if(cf == 'Emoji')link = `${href}Images/${cf}/${CFPI+1}${CFPI<3?(lang=='zh_cn'?'zh_tw':lang):''}${n+1}.webp`;//@原版表情
 															if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
 															u(link)//#表情链接
 														},
@@ -3913,7 +3913,7 @@
 				{
 					displayName: "HeartBox__Container",
 					componentId: "sc-cwriov-0"
-				})(["", ";padding:0.5rem;font-size:1.1rem;height:auto;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeTalk/UI/Favor_Schedule_Deco.webp');background-repeat:no-repeat;background-position:right;background-size:auto 100%;line-height:1.5rem;`], function(e)
+				})(["", ";padding:0.5rem;font-size:1.1rem;height:auto;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}Images/Ui/Favor_Schedule_Deco.webp');background-repeat:no-repeat;background-position:right;background-size:auto 100%;line-height:1.5rem;`], function(e)
 				//#心形背景
 				{
 					return e.theme.common.flexBox(
@@ -4109,7 +4109,7 @@
 				{
 					displayName: "ReplyBox__Container",
 					componentId: "sc-dwjyi3-0"
-				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeTalk/UI/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
+				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}Images/Ui/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
 				//#背景
 				{
 					return e.theme.common.flexBox(

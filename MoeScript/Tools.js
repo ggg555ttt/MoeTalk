@@ -320,8 +320,8 @@ $('body').on('click',"#ct",function()
 	{
 		let data = 'mt-';
 		if(mt_characters[v['sCharacter']['no']])data = "MoeTalk-"
-		if(lastchar[v['sCharacter']['no']])data = "MT-"
-		if(closurechar[v['sCharacter']['no']])data = "ba-"
+		if(mollu_char[v['sCharacter']['no']])data = "MT-"
+		if(closure_char[v['sCharacter']['no']])data = "ba-"
 		cl[k] = {};
 		cl[k]['content'] = v['content'];
 		cl[k]['is_breaking'] = false;

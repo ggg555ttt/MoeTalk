@@ -548,7 +548,7 @@
 									{
 										className: "SideBar__Img-sc-v5z5y3-2 hWDtZg",
 										style:{width: "75%",height: "75%"},
-										src: href+"MoeTalk/UI/setting.webp"
+										src: href+"Images/Ui/setting.webp"
 									})
 								})
 								//*速度设置按钮
@@ -801,7 +801,7 @@
 				{
 					displayName: "EndBox__Container",
 					componentId: "sc-1bnhokl-0"
-				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeTalk/UI/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
+				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}Images/Ui/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
 				{
 					return e.theme.common.flexBox(
 					{
@@ -930,7 +930,7 @@
 				{
 					displayName: "HeartBox__Container",
 					componentId: "sc-1gwqj71-0"
-				})(["", ";padding:0.5rem;font-size:1.1rem;height:auto;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeTalk/UI/Favor_Schedule_Deco.webp');background-repeat:no-repeat;background-position:right;background-size:auto 100%;line-height:1.5rem;`], function(e)
+				})(["", ";padding:0.5rem;font-size:1.1rem;height:auto;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}Images/Ui/Favor_Schedule_Deco.webp');background-repeat:no-repeat;background-position:right;background-size:auto 100%;line-height:1.5rem;`], function(e)
 				{
 					return e.theme.common.flexBox(
 					{
@@ -1111,7 +1111,7 @@
 				{
 					displayName: "ReplyBox__Container",
 					componentId: "sc-14pasys-0"
-				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeTalk/UI/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
+				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}Images/Ui/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
 				{
 					return e.theme.common.flexBox(
 					{

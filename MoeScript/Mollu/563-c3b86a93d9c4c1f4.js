@@ -506,7 +506,7 @@
 								{
 									width: 252,
 									height: 252,
-									src: href+"MoeTalk/UI/School/"+(t.school[lang] === '自定义' ? '自定义' : mt_characters[t.no].school)+'.webp',//#学校图标
+									src: href+"Images/Ui/School/"+(t.school[lang] === '自定义' ? '自定义' : mt_characters[t.no].school)+'.webp',//#学校图标
 									onError: function(e)
 									{
 										var t = e.currentTarget;
@@ -924,7 +924,7 @@
 												width: 110,
 												height: 60,
 												alt: "order",
-												src: href+"MoeTalk/UI/".concat(n.order ? "down" : "up", ".webp")//#排序图标
+												src: href+"Images/Ui/".concat(n.order ? "down" : "up", ".webp")//#排序图标
 											})
 										})
 									})]
@@ -1009,7 +1009,7 @@
 									{
 										g(""), y("", null)
 									},
-									src: href+"MoeTalk/UI/pen.webp",//#铅笔图标
+									src: href+"Images/Ui/pen.webp",//#铅笔图标
 									alt: "pen"
 								})]
 							}), (0, b.jsx)(W,
@@ -2249,7 +2249,7 @@
 									width: 478,
 									height: 498,
 									alt: "404",
-									src: `${href}MoeTalk/UI/404.webp`//#
+									src: `${href}Images/Ui/404.webp`//#
 								}), (0, b.jsx)("span",
 								{
 									children: '请点击下方按钮上传存档'//#

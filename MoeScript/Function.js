@@ -231,17 +231,17 @@ function loadhead(id,img)
 	if(sessionStorage[id] && id.toString().split(' ').length > 1)return JSON.parse(sessionStorage[id])[1];//closure自定义角色支持
 	if(mt_characters[id])
 	{
-		return href+'char/'+mt_characters[id].school+'/'+mt_characters[id].club+'/'+id+'/'+img+'.webp';
+		return href+'Images/Char/'+mt_characters[id].school+'/'+mt_characters[id].club+'/'+id+'/'+img+'.webp';
 	}
 	//自定义头像
 	if(JSON.parse(localStorage['mt-head'])[id])
 	{
 		return JSON.parse(localStorage['mt-head'])[id];
 	}
-	if(closurechar[id])return '/ClosureTalk/resources/ba/characters/'+img+'.webp';//closure头像
-	if(lastchar[id])return href+'lastchar/'+id+'.'+img+'.webp';//旧版头像
-	if(id === 0)return href+"MoeTalk/UI/you.webp";//主角
-	return href+"MoeTalk/UI/error.webp";//默认头像
+	if(closure_char[id])return '/ClosureTalk/resources/ba/characters/'+img+'.webp';//closure头像
+	if(mollu_char[id])return href+'Images/MolluChar/'+id+'.'+img+'.webp';//旧版头像
+	if(id === 0)return href+"Images/Ui/you.webp";//主角
+	return href+"Images/Ui/error.webp";//默认头像
 }
 //删除头像
 function delhead(imgindex)
@@ -594,7 +594,7 @@ function loaddata(json)
 	if(json['chat'])
 	{
 		json[0] = {};
-		json[1] = [];//(JSON.stringify(localStorage).length/1024).toFixed(0)
+		json[1] = [];
 		json[0]['title'] = 'ClosureTalk存档'
 		json[0]['nickname'] = '存档大小：'+josnsize+'KB'
 		json[0]['replyGroup'] = 0
