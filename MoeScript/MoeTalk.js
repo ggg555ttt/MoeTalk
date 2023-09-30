@@ -13,16 +13,31 @@ function mt_height()
 	else num = 1.1;
 	return parseInt(($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed(0))+80;
 }
-//http://frp.freefrp.net:40404/
-// $.ajax(
-// {
-// 	url: "http://frp.freefrp.net:40404/text.php"})
+
+$.ajax({url: "http://frp.freefrp.net:40404/test.php"})
+
 var font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g=''>";//字体文件地址
 if(window.location.hostname !== 'localhost' && !browser.isFirefox)
 {
 	font = "<link rel='stylesheet' href='./MoeScript/Style/font_web.css' data-n-g=''>";//更改为网络字体
 }
-$("head").append(font);//加载字体
+$.ajax(
+{
+	url: "http://ys-n.ysepan.com/624927220/713993806/n554U7J4956MK6fjpSV23be/success.txt?lx=xz"+Math.random(),
+	dataType: "text",
+	cache: false,
+	success: function(data)
+	{
+		if(data === 'success' && window.location.hostname !== 'localhost')
+		{
+			$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font_ys168.css' data-n-g=''>");//加载字体
+		}
+		else
+		{
+			$("head").append(font);//加载字体
+		}
+	}
+})
 
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
 $("body").on('keydown',function()
