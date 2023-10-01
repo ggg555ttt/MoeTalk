@@ -356,7 +356,7 @@ $('body').on('click',"#ct",function()
 	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(arr));//生成专用存档
 	if(confirm('生成的ClosureTalk存档只能通过Gitee版ClosureTalk读取\n点击【确定】访问'))
 	{
-		location.href = '../closuretalk/'
+		location.href = 'https://closuretalk.gitee.io/'
 	}
 })
 $('body').on('click',"#cleancache",function()
