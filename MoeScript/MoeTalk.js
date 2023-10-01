@@ -312,21 +312,23 @@ $('body').on('click',"#delsto",function()
 //隐藏工具按钮拓展
 $('body').on('click',".gxgCGp:eq(4)",function()
 {
-	$('.hfOSPu').css("background-color","")//
-	if($('#delsto').attr('hidden'))
+	//$('.hfOSPu').css("background-color","")//
+	if($('.tools').attr('hidden'))
 	{
-		$('#delsall').attr('hidden',false)
-		$('#delsto').attr('hidden',false)
-		$('#rdelsall').attr('hidden',false)
-		$('#cutdata').attr('hidden',false)
+		// $('#delsall').attr('hidden',false)
+		// $('#delsto').attr('hidden',false)
+		// $('#rdelsall').attr('hidden',false)
+		// $('#cutdata').attr('hidden',false)
+		$('.tools').attr('hidden',false)
 		$('#dels').attr('hidden',false).next().attr('hidden',false)
 	}
 	else
 	{
-		$('#delsall').attr('hidden',true)
-		$('#delsto').attr('hidden',true)
-		$('#rdelsall').attr('hidden',true)
-		$('#cutdata').attr('hidden',true)
+		// $('#delsall').attr('hidden',true)
+		// $('#delsto').attr('hidden',true)
+		// $('#rdelsall').attr('hidden',true)
+		// $('#cutdata').attr('hidden',true)tools1
+		$('.tools').attr('hidden',true)
 		$('#dels').attr('hidden',true).next().attr('hidden',true)
 	}
 })

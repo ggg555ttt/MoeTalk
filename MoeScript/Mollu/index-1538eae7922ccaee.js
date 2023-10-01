@@ -3340,6 +3340,7 @@
 						//**
 						, (0, m.jsxs)(eD,
 						{
+							className: "tools",
 							style:
 							{
 								padding: "5px 0",
@@ -4539,6 +4540,7 @@
 						//*
 						(0, m.jsxs)(eD,
 						{
+							className: "tools",
 							style:
 							{
 								padding: "5px 10px",
@@ -4728,7 +4730,9 @@
 								},
 								children: L.Z.select_char[e]
 							})
-						}), (0, m.jsx)(ns,
+						}),
+						//*
+						(0, m.jsx)(ns,
 						{
 							style:
 							{
@@ -4743,6 +4747,50 @@
 								children: '设置页面可以更改语言'
 							})
 						}), (0, m.jsx)(ns,
+						{
+							style:
+							{
+								display: n.length > 0 ? "none" : "flex"
+							},
+							children: (0, m.jsx)("span",
+							{
+								style:
+								{
+									fontSize: "1.1rem"
+								},
+								children: '钩选中消息后可以在其上方发送新消息'
+							})
+						}), (0, m.jsx)(ns,
+						{
+							style:
+							{
+								display: n.length > 0 ? "none" : "flex"
+							},
+							children: (0, m.jsx)("span",
+							{
+								style:
+								{
+									fontSize: "1.1rem"
+								},
+								children: '点击左下按钮可以隐藏或显示工具'
+							})
+						}), (0, m.jsx)(ns,
+						{
+							style:
+							{
+								display: n.length > 0 ? "none" : "flex"
+							},
+							children: (0, m.jsx)("span",
+							{
+								style:
+								{
+									fontSize: "1.1rem"
+								},
+								children: '手动截取指定长度存档可以用来生成高分辨率图片'
+							})
+						}),
+						//*
+						(0, m.jsx)(ns,
 						{
 							style:
 							{
