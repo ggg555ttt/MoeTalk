@@ -4732,6 +4732,20 @@
 						{
 							style:
 							{
+								display: n.length > 0 ? "none" : "flex"
+							},
+							children: (0, m.jsx)("span",
+							{
+								style:
+								{
+									fontSize: "1.1rem"
+								},
+								children: '设置页面可以更改语言'
+							})
+						}), (0, m.jsx)(ns,
+						{
+							style:
+							{
 								display: n.length > 0 ? "flex" : "none"
 							},
 							children: (0, m.jsx)(nn,
