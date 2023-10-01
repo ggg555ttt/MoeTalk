@@ -341,7 +341,7 @@ $('body').on('click',"#ct",function()
 		{
 			cl[k]['content'] = v['content'];
 			if(v['content'].indexOf('http') < 0)cl[k]['content'] = 'http://moetalk.gitee.io/'+v['content'];
-			if(v['content'].indexOf('://') > -1 || v['content'].indexOf('data:image/') > -1)cl[k]['content'] = v['content'];
+			if(v['content'].indexOf('data:image/') > -1)cl[k]['content'] = v['content'];
 			cl[k]['yuzutalk']['type'] = 'IMAGE';
 		}
 		if(v['type'] == 'heart')cl[k]['yuzutalk']['type'] = 'RELATIONSHIPSTORY';

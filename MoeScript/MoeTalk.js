@@ -14,8 +14,6 @@ function mt_height()
 	return parseInt(($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed(0))+80;
 }
 
-$.ajax({url:"http://frp.freefrp.net:40404/test.php"})
-
 var font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g=''>";//字体文件地址
 if(window.location.hostname !== 'localhost' && !browser.isFirefox)
 {
