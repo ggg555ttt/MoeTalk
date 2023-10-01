@@ -641,8 +641,8 @@ function loaddata(json)
 				}
 				else
 				{
-					json[1][k]['content'] = '../ClosureTalk/'+v['content'];
-					json[1][k]['content'] = json[1][k]['content'].replaceAll('../ClosureTalk/../moetalk/','');
+					json[1][k]['content'] = v['content'];
+					if(v['content'].indexOf('http') < 0)json[1][k]['content'] = 'https://closuretalk.gitee.io/'+v['content'];
 				}
 			}
 			json[1][k]['isFirst'] = false;
@@ -665,6 +665,13 @@ function loaddata(json)
 	}
 	$jquery.each(json[1],function(k,v)
 	{
+		if(v['content'].indexOf('http') < 0)
+		{
+			v.content = v.content.replaceAll('Images/','')
+			v.content = v.content.replaceAll('CharFace','Images/CharFace')
+			v.content = v.content.replaceAll('Emoji','Images/Emoji')
+		}
+
 		if(v.sCharacter.no.toString().split('/').length > 1)
 		{
 			v.sCharacter.no = v.sCharacter.no.toString().split('/').pop()

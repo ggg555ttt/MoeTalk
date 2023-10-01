@@ -339,7 +339,8 @@ $('body').on('click',"#ct",function()
 		if(v['type'] == 'chat')cl[k]['yuzutalk']['type'] = 'TEXT';
 		if(v['type'] == 'image')
 		{
-			cl[k]['content'] = "../moetalk/"+v['content'];
+			cl[k]['content'] = v['content'];
+			if(v['content'].indexOf('http') < 0)cl[k]['content'] = 'http://moetalk.gitee.io/'+v['content'];
 			if(v['content'].indexOf('://') > -1 || v['content'].indexOf('data:image/') > -1)cl[k]['content'] = v['content'];
 			cl[k]['yuzutalk']['type'] = 'IMAGE';
 		}
