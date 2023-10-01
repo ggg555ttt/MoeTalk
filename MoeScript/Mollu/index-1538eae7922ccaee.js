@@ -2326,7 +2326,22 @@
 									children: (0, m.jsx)(c.j4,
 									{})
 								})]
-							}), (0, m.jsx)(ea.$0,
+							}),
+							//*
+							(0, m.jsx)("input",
+							{
+								hidden: x ? true : false,
+								type: "checkbox",
+								id: "customchar"
+							}),
+							(0, m.jsx)("span",
+							{
+								hidden: x ? true : false,
+								className: "bold",
+								children: "上传MoeTalk存档内的自定义角色"
+							}),
+							//*
+							(0, m.jsx)(ea.$0,
 							{
 								children: "" === x ? (0, m.jsxs)(m.Fragment,
 								{

@@ -619,8 +619,8 @@ var mt_text = {
 		"kr": "공유파일",
 		"en": "Shared File",
 		"jp": "共有ファイル",
-		"zh_cn": "共享文件",
-		"zh_tw": "共享文件"
+		"zh_cn": "存档文件",
+		"zh_tw": "存檔文件"
 	},
 	"relationship_event": {
 		"kr": "인연 이벤트",
@@ -864,8 +864,8 @@ var mt_text = {
 		"kr": "몰루톡이 공유파일로 저장됩니다.",
 		"en": "MoeTalk is saved as a share File.",
 		"jp": "MoeTalkが共有ファイルとして保存されます。",
-		"zh_cn": "MoeTalk 另存为共享文件。",
-		"zh_tw": "MoeTalk 另存爲共享文件。"
+		"zh_cn": "MoeTalk 另存为存档文件。",
+		"zh_tw": "MoeTalk 另存爲存檔文件。"
 	},
 	"down_comment3": {
 		"kr": "다시 업로드하여 수정 가능합니다.",
@@ -878,8 +878,8 @@ var mt_text = {
 		"kr": "공유파일을 업로드하여 수정할 수 있습니다.",
 		"en": "You can modify the shared file by uploading it.",
 		"jp": "共有ファイルをアップロードして修正することができます。",
-		"zh_cn": "可以上载和修改共享文件。",
-		"zh_tw": "可以上載和修改共享文件。"
+		"zh_cn": "可以上载和修改存档文件。",
+		"zh_tw": "可以上載和修改存檔文件。"
 	},
 	"up_comment1": {
 		"kr": "파일을 업로드하시겠습니까?",

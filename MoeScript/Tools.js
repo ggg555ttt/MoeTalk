@@ -1,18 +1,17 @@
 //保存人物
 $('body').on('click',"#savecus",function()
 {
-	if(!localStorage['mt-char']) return false;
-	alert('生成的存档请用【备份自定义角色存档】读取，否则会出错')
-	let arr = [];
-	arr[0] = 'Custom';
-	arr[1] = localStorage['mt-char'];
-	arr[2] = localStorage['mt-head'];
-	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-	download_txt('MoeTalk自定义角色存档'+time+'.json',JSON.stringify(arr));//生成专用存档
+	alert('此功能已被弃用，MoeTalk存档自带自定义角色数据，可以直接上传读取')
 })
 //读取人物
 $("body").append("<input id='loadcusfile' hidden type='file' accept='application/json'>");
-$('body').on('click',"#loadcus",function(){$("#loadcusfile").click();})
+$('body').on('click',"#loadcus",function()
+{
+	if(confirm('此功能只能读取专用的自定义角色存档文件，不要乱上传'))
+	{
+		$("#loadcusfile").click();
+	}
+})
 $('body').on('change',"#loadcusfile",function()
 {
 	let file = this.files[0];
@@ -30,14 +29,13 @@ $('body').on('change',"#loadcusfile",function()
 			localStorage['custom'] = JSON.parse(this.result)[0];
 			localStorage['heads'] = JSON.parse(this.result)[1];
 		}
-		alert('需返回页面确认读取成功')
 	}
 });
 $('body').on('click',"#savedata",function()
 {
-	alert('这个是为MoeTalk崩溃时准备的存档提取功能\n只能通过【上传MoeTalk存档】读取，否则会出错\n若工具出现使用问题可以通过反馈链接向开发者提交此存档文件')
+	alert('MoeTalk出现问题时可以使用此功能提取存档并向开发者反馈\n虽然可以使用【读取本地数据存档】读取，但并不推荐您这么做')
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-	download_txt('MoeTalk崩溃专用存档'+time+'.json',JSON.stringify(localStorage));//生成专用存档
+	download_txt('MoeTalk本地数据存档'+time+'.json',JSON.stringify(localStorage));//生成专用存档
 });
 $("body").append("<input id='loaddatafile' hidden type='file' accept='application/json'>");
 $('body').on('click',"#loaddata",function(){$("#loaddatafile").click();})
@@ -84,23 +82,11 @@ $('body').on('click',"#send",function()
 		}
 	}
 })
-//角色排序
-$('body').on('click',"#order",function()
-{
-	if(!localStorage['order']){if(confirm('当前排序方式为默认排序\n是否将角色排序方式改为按ID排序？\n自创角色会排在最末尾')){localStorage['order'] = true;}}
-	else{if(confirm('当前排序方式为按ID排序\n是否将角色排序方式还原为默认排序？')){localStorage.removeItem('order');}}
-})
 //字体加载
 $('body').on('click',"#font",function()
 {
 	if(!localStorage['nofont']){if(confirm('是否取消加载字体文件？取消可以优化页面加载时间\n确认后请返回页面')){localStorage['nofont'] = true;}}
 	else{if(confirm('是否恢复加载字体文件？恢复可以使页面布局更美观\n确认后请返回页面')){localStorage.removeItem('nofont');}}
-})
-//强制追加选项
-$('body').on('click',"#zhui",function()
-{
-	if(!localStorage['zhui']){if(confirm('向前强制追加？')){localStorage['zhui'] = 'qian';}}
-	else{if(confirm('向后强制追加？')){localStorage.removeItem('zhui');}}
 })
 //头像质量
 $('body').on('click',"#hnum",function()
@@ -239,6 +225,7 @@ function cleanmark()
 		localStorage.removeItem('wmark');
 	}
 }
+
 //隐写回复
 const sep = '-sep-';
 const maxExtLength = 4;

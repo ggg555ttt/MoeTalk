@@ -543,6 +543,25 @@ function loaddata(json)
 		json[0]['replyGroup'] = 0
 		json[0]['replyNo'] = 0
 	}
+	if($('#customchar').prop('checked') === true && json[0] && (json[0].mt_char || json[0].custom))
+	{
+		if(json[0].custom)
+		{
+			json[0].mt_char = json[0].custom
+			json[0].mt_head = json[0].heads
+		}
+		if(typeof json[0].mt_char === 'object')
+		{
+			json[0].mt_char = JSON.stringify(json[0].mt_char)
+			json[0].mt_head = JSON.stringify(json[0].mt_head)
+		}
+		if(confirm('确定上传存档内的自定义角色吗？\n这会清除当前存储的自定义角色'))
+		{
+			localStorage['mt-char'] = json[0].mt_char
+			localStorage['mt-head'] = json[0].mt_head
+			list()//更新列表
+		}
+	}
 	let josnsize = parseInt((JSON.stringify(json).length/1024).toFixed(0))
 	if(json['chat'])
 	{
