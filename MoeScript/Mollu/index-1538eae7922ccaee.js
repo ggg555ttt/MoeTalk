@@ -4284,7 +4284,7 @@
 								}) : "image" === n.type ? [n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}),(0, m.jsx)(eN.tG,
 								//#[给图片加入时间戳
 								{
-									style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.split('/')[0] === "CharFace" && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
+									style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 									onClick: function()
 									{
 										o(!0, n, "edit")
@@ -4399,7 +4399,7 @@
 										]
 									}) : (0, m.jsx)(eN.tG,
 									{
-										style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.split('/')[0] === "CharFace" && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
+										style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 										onClick: function()
 										{
 											o(!0, n, "edit")
