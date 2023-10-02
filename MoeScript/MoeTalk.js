@@ -19,7 +19,7 @@ if(window.location.hostname !== 'localhost' && !browser.isFirefox)
 {
 	font = "<link rel='stylesheet' href='./MoeScript/Style/font_web.css' data-n-g=''>";//更改为网络字体
 }
-$("head").append(font);//加载字体
+if(!localStorage['nofont'])$("head").append(font);//加载字体
 
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
 $("body").on('keydown',function()
