@@ -545,10 +545,21 @@ function loaddata(json)
 	}
 	if($('#customchar').prop('checked') === true && json[0] && (json[0].mt_char || json[0].custom))
 	{
-		if(json[0].custom)
+		if(json[0].custom && JSON.parse(json[0].custom)[0].club[0].characters)
 		{
-			json[0].mt_char = json[0].custom
-			json[0].mt_head = json[0].heads
+			json[0].mt_char = {}
+			json[0].mt_head = {}
+			let i;
+			$.each(JSON.parse(json[0].custom)[0].club[0].characters,function(k,v)
+			{
+				json[0].mt_char[v.no] = v.zh_cn
+			})
+			$.each(JSON.parse(json[0].heads)[0],function(k,v)
+			{
+				if(k.split('.').length > 1)i = k.split('.')[0];
+				if(k.split('/').length > 1)i = k.split('.')[0];
+				json[0].mt_head[i] = v;
+			})
 		}
 		if(typeof json[0].mt_char === 'object')
 		{

@@ -19,15 +19,35 @@ $('body').on('change',"#loadcusfile",function()
 	reader.readAsText(file);
 	reader.onload = function(e)
 	{
-		if(JSON.parse(this.result)[0] === 'Custom')
+		let mt_char = {};
+		let mt_head = {};
+		let json = JSON.parse(this.result);
+		if(json[0] === 'Custom')
 		{
-			localStorage['mt-char'] = JSON.parse(this.result)[1];
-			localStorage['mt-head'] = JSON.parse(this.result)[2];
+			localStorage['mt-char'] = json[1];
+			localStorage['mt-head'] = json[2];
 		}
 		else
 		{
-			localStorage['custom'] = JSON.parse(this.result)[0];
-			localStorage['heads'] = JSON.parse(this.result)[1];
+			if(json[0] && JSON.parse(json[0])[0].club[0].characters)
+			{
+				mt_char = {}
+				mt_head = {}
+				let i;
+				$.each(JSON.parse(json[0])[0].club[0].characters,function(k,v)
+				{
+					mt_char[v.no] = v.zh_cn
+				})
+				$.each(JSON.parse(json[1])[0],function(k,v)
+				{
+					if(k.split('.').length > 1)i = k.split('.')[0];
+					if(k.split('/').length > 1)i = k.split('.')[0];
+					mt_head[i] = v;
+				})
+				localStorage['mt-char'] = JSON.stringify(mt_char);
+				localStorage['mt-head'] = JSON.stringify(mt_head);
+			}
+			
 		}
 	}
 });
