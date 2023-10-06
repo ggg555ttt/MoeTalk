@@ -10,6 +10,13 @@ if(window.location.href.indexOf('file:///') === 0)
 		window.location.replace('https://tieba.baidu.com/p/8440629156')
 	}
 }
+if(window.location.href === 'https://ggg555ttt.gitee.io/moetalk/')
+{
+	if(confirm('MoeTalk已更新最新地址，请导出数据后点击【确定】访问'))
+	{
+		window.location.replace('https://moetalk.gitee.io/')
+	}
+}
 if(!localStorage['mt-date'] || (localStorage['mt-date'] != new Date().getDate()))
 {
 	window.caches && caches.keys && caches.keys().then(function(keys)
