@@ -3738,7 +3738,8 @@
 												{
 													margin: "0 auto",//@改为居中
 													width: "23%",
-													height: 'auto'
+													height: 'auto',
+													whiteSpace: 'nowrap'
 												},
 												className: a === e ? "selected medium" : "medium",
 												onClick: function()
