@@ -15199,7 +15199,7 @@
 				});
 				var r = n(3420),
 					i = ["delete", "edit", "add", "time", "name"],//#加入名字
-					a = ["chat", "image", "reply", "heart", "info"],
+					a = ["chat", "reply", "heart", "info", "image"],
 					o = ["name", "school", "club", "ID"],//#加入ID
 					s = ["kr", "jp", "en", "zh_cn", "zh_tw", "pinyin"],//#加入拼音
 					u = {

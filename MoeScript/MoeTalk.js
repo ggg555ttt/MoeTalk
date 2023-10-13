@@ -5,7 +5,7 @@ var CharFaceIndex = null;//差分映射
 var val = '';//记录输入框值
 var browser = os();//获取浏览器信息
 var maxHeight = browser.isFirefox ? 16384*2 : 16384;
-
+var sendChar = false
 function mt_height()
 {
 	let num;
@@ -34,11 +34,10 @@ $("body").on('click',function()
 	size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0))
 	height = mt_height()
 	$('#size').text(height+"\n"+size+"KB");
-	if($('.visible').length === 0)
-	{
-		val = '';
-		clearImage = false;
-	}
+	// if($('.visible').length === 0)
+	// {
+	// 	sendChar = false
+	// }
 	warning();
 })
 //标题框
@@ -310,9 +309,9 @@ $('body').on('click',"#delsto",function()
 	}
 })
 //隐藏工具按钮拓展
-$('body').on('click',".gxgCGp:eq(4)",function()
+$('body').on('click',"#editTools",function()
 {
-	//$('.hfOSPu').css("background-color","")//
+	$(".dels").parent().css("background-color","")//
 	if($('.tools').attr('hidden'))
 	{
 		// $('#delsall').attr('hidden',false)
@@ -451,3 +450,4 @@ $("body").on('click',"#cutdata",function()
 		alert('你没有选中数据！')
 	}
 });
+var fuck = false;

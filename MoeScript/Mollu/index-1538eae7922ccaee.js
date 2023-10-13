@@ -331,7 +331,7 @@
 				i = t(6150),
 				c = t(1563),
 				a = t(8727),
-				l = t(9417),
+				ico = t(9417),//#图标库
 				s = t(8586),
 				u = t(3380),
 				d = t(3420),
@@ -384,7 +384,7 @@
 								},
 								onClick: function()
 								{
-									o(!0), e((0, h.Ks)(d.I))
+									if($jquery('.visible').length<1)o(!0), e((0, h.Ks)(d.I))//#
 								},
 								children: (0, m.jsx)(b,
 								{
@@ -392,7 +392,7 @@
 									{
 										marginLeft: "0.1rem"
 									},
-									icon: l.FKd
+									icon: ico.FKd
 								})
 							}), (0, m.jsx)(y,
 							{
@@ -410,7 +410,7 @@
 									{
 										marginLeft: "0.1rem"
 									},
-									icon: l.k9h
+									icon: ico.k9h
 								})
 							}), (0, m.jsx)(y,
 							{
@@ -421,11 +421,11 @@
 								},
 								onClick: function()
 								{
-									e((0, s.Cz)(!1))
+									if($jquery('.visible').length<1)e((0, s.Cz)(!1))//#
 								},
 								children: (0, m.jsx)(b,
 								{
-									icon: l.EyR
+									icon: ico.EyR
 								})
 							})]
 						}), (0, m.jsx)(g,
@@ -502,7 +502,7 @@
 								},
 								children: (0, m.jsx)(b,
 								{
-									icon: l.yOZ
+									icon: ico.yOZ
 								})
 							})]
 						})]
@@ -2369,7 +2369,7 @@
 										{
 											children: (0, m.jsx)(c.xL,
 											{
-												icon: l.cf$
+												icon: ico.cf$
 											})
 										}), (0, m.jsx)("span",
 										{
@@ -2401,7 +2401,7 @@
 											disabled: s.chats.length < 1,
 											children: (0, m.jsx)(c.xL,
 											{
-												icon: l.q7m
+												icon: ico.q7m
 											})
 										}), (0, m.jsx)("span",
 										{
@@ -2635,6 +2635,7 @@
 						{
 							children: [(0, m.jsx)(eO,
 							{
+								id: "tool-reply",//@选择肢
 								title: "Reply",
 								onClick: function()
 								{
@@ -2642,10 +2643,11 @@
 								},
 								children: (0, m.jsx)(c.xL,
 								{
-									icon: l.Lh7
+									icon: ico.Lh7
 								})
 							}), (0, m.jsx)(eO,
 							{
+								id: "tool-info",//@旁白
 								title: "Info",
 								onClick: function()
 								{
@@ -2653,10 +2655,11 @@
 								},
 								children: (0, m.jsx)(c.xL,
 								{
-									icon: l.DBf
+									icon: ico.DBf
 								})
 							}), (0, m.jsx)(eO,
 							{
+								id: "tool-heart",//@羁绊事件
 								disabled: 0 === u.no,
 								title: "Relationship Event",
 								onClick: function()
@@ -2665,10 +2668,11 @@
 								},
 								children: (0, m.jsx)(c.xL,
 								{
-									icon: l.m6i
+									icon: ico.m6i
 								})
 							}), (0, m.jsx)(eO,
 							{
+								id: "tool-delete",//@删除工具
 								disabled: d.length < 1,
 								title: "Delete ALL",
 								onClick: function()
@@ -2677,13 +2681,14 @@
 								},
 								children: (0, m.jsx)(c.xL,
 								{
-									icon: l.Vui
+									icon: ico.Vui
 								})
 							})]
 						}), (0, m.jsxs)(eD,
 						{
 							children: [(0, m.jsx)(eO,
 							{
+								id: "editTools",//@编辑工具
 								title: "ScreenShot Mode",
 								className: h ? "dot" : "",
 								onClick: function()
@@ -2692,10 +2697,11 @@
 								},
 								children: (0, m.jsx)(c.xL,
 								{
-									icon: l.QY_
+									icon: ico.QY_
 								})
 							}), (0, m.jsx)(eO,
 							{
+								id: "tool-image",//@截图工具
 								disabled: d.length < 1,
 								title: "Image Download",
 								onClick: function()
@@ -2704,10 +2710,11 @@
 								},
 								children: (0, m.jsx)(c.xL,
 								{
-									icon: l.wf8
+									icon: ico.wf8
 								})
 							}), (0, m.jsx)(eO,
 							{
+								id: "tool-save",//@存档工具
 								title: "Share File",
 								onClick: function()
 								{
@@ -2715,7 +2722,7 @@
 								},
 								children: (0, m.jsx)(c.xL,
 								{
-									icon: l.EdJ
+									icon: ico.EdJ
 								})
 							})]
 						}), (0, m.jsx)(el,
@@ -3198,11 +3205,11 @@
 								title: "open",
 								onClick: function()
 								{
-									click('.gxgCGp:eq(4)')//#p ? g(!1) : g(!0)
+									click('#editTools')//#p ? g(!1) : g(!0)
 								},
 								children: (0, m.jsx)(c.xL,
 								{
-									icon: l.QY_//#icon: p ? l.dWM : l.XSi
+									icon: ico.QY_//#icon: p ? l.dWM : l.XSi
 								})
 							}), (0, m.jsx)("input",
 							{
@@ -3306,7 +3313,7 @@
 										},
 										children: (0, m.jsx)(c.xL,
 										{
-											icon: l.FKd
+											icon: ico.FKd
 										})
 									})
 									//*加入差分
@@ -3324,7 +3331,7 @@
 								},
 								children: (0, m.jsx)(c.xL,
 								{
-									icon: l.FQ0
+									icon: ico.FQ0
 								})
 							})]
 						}), (0, m.jsx)(eR,
@@ -3357,11 +3364,11 @@
 									title: "选项",
 									onClick: function()
 									{
-										click('.gxgCGp:eq(0)')
+										click('#tool-reply')
 									},
 									children: (0, m.jsx)(c.xL,
 									{
-										icon: l.Lh7
+										icon: ico.Lh7
 									})
 								}),
 								(0, m.jsx)(eU,
@@ -3375,11 +3382,11 @@
 									title: "旁白",
 									onClick: function()
 									{
-										click('.gxgCGp:eq(1)')
+										click('#tool-info')
 									},
 									children: (0, m.jsx)(c.xL,
 									{
-										icon: l.DBf
+										icon: ico.DBf
 									})
 								}),
 								(0, m.jsx)(eU,
@@ -3393,11 +3400,11 @@
 									title: "羁绊",
 									onClick: function()
 									{
-										click('.gxgCGp:eq(2)')
+										click('#tool-heart')
 									},
 									children: (0, m.jsx)(c.xL,
 									{
-										icon: l.m6i
+										icon: ico.m6i
 									})
 								}),
 								(0, m.jsx)(eU,
@@ -3411,11 +3418,11 @@
 									title: "存档",
 									onClick: function()
 									{
-										click('.gxgCGp:eq(6)')
+										click('#tool-save')
 									},
 									children: (0, m.jsx)(c.xL,
 									{
-										icon: l.EdJ
+										icon: ico.EdJ
 									})
 								}),
 								(0, m.jsx)(eU,
@@ -3428,11 +3435,11 @@
 									},
 									onClick: function()
 									{
-										click('.gxgCGp:eq(5)')
+										click('#tool-image')
 									},
 									children: (0, m.jsx)(c.xL,
 									{
-										icon: l.wf8
+										icon: ico.wf8
 									})
 								})
 								]
@@ -3562,58 +3569,70 @@
 								else e.push(i)
 							}), e
 						},
+						//*编辑功能
 						k = function()
 						{
 							var e, n = [],
 								r = !1;
-							"name" === a ? h.chats.forEach(function(r){e = eY({}, r), r === t && (e.name = j), n.push(e)}) : //@加入临时改名
-							"delete" === a ? "reply" === t.type ? n = v() : h.chats.forEach(function(o)
+							h.chats.forEach(function(r)
 							{
-								e = eY(
-								{}, o), r ? (r = !1, e.isFirst = !0, n.push(e)) : o !== t ? n.push(e) : r = !0
-							}) : "edit" === a ? h.chats.forEach(function(r)
-							{
-								e = eY(
-								{}, r), r === t && (e.content = j), n.push(e)
-							}) : "time" === a ? h.chats.forEach(function(r)
-							{
-								e = eY(
-								{}, r), r === t && (e.time = j), n.push(e)
-							}) : "add" === a && ("reply" === x ? h.chats.forEach(function(o)
-							{
-								e = eY(
-								{}, o), o === t ? (n.push(eY(
-								{}, e)),localStorage['mt-edit'] ? (e.time = "",e.name = "") : n.pop(), e.file = "", e.type = x, e.replyNo = h.replyNo+Math.random(), e.replyGroup = h.replyGroup+Math.random(), e.replyDepth = h.sReplyNo, e.sCharacter = d.I, e.content = j, e.isFirst = !0, s((0, eo.gW)(
-								//#加了个n.pop()改为新版修改：选择肢（追加时清空时间戳），ID改为随机
+								e = eY({}, r)
+								if(r === t)
 								{
-									sReplyNo: h.sReplyNo,
-									replyNo: h.replyNo + 1,
-									replyGroup: h.replyGroup + 1
-								})), r = !0) : r && (e.isFirst = !0, r = !1), n.push(e)
-							}) : h.chats.forEach(function(o)
-							{
-								e = eY(
-								{}, o), o === t ? (n.push(eY(
-								{}, o)),localStorage['mt-edit'] ? (e.time = "",e.name = "") : n.pop(), e.file = "", e.type = x, e.replyNo = 0, e.replyGroup = 0, e.replyDepth = h.sReplyNo, e.sCharacter = "info" === x ? d.I : p, e.content = j, e.isFirst = !0, r = !0) : r && (e.isFirst = !0, r = !1), n.push(e)
-								//#加了个n.pop()改为新版修改：一般消息（追加时清空时间戳）
-							})), s((0, eo.U_)(n)), S()
+									e.isFirst = true
+									e.content = $jquery('.content').val()
+									e.name = $jquery('.name').val()
+									e.time = $jquery('.time').val()
+									e.type = a
+									e.sReplyNo = h.sReplyNo,
+									e.replyNo = h.replyNo+Math.random()
+									e.replyGroup = h.replyGroup+Math.random()
+									if(sendChar === true)
+									{
+										e.sCharacter = p
+									}
+									if($jquery('.addChat').prop('checked') || (clearImage === true && t.file) || a !== 'image')
+									{
+										e.file = ''
+									}
+									if($jquery('.addChat').prop('checked') && !clearImage && e.type !== 'delete')n.push(eY({}, r))
+									clearImage = false
+								}
+								if(e.type !== 'delete')n.push(e)
+							}), s((0, eo.U_)(n)), S()
 						},
-						Z = (0, r.useCallback)(function(e, n)
+						Z = (0, r.useCallback)(function(e, n)///图片编辑
 						{
 							var r, i = [],
 								c = !1;
-							"edit" === a ? h.chats.forEach(function(e)
+							h.chats.forEach(function(o)
 							{
-								r = eY(
-								{}, e), e === t && (r.file = n), i.push(r)
-							}) : h.chats.forEach(function(o)
-							{
-								r = eY(
-								{}, o), o === t ? (i.push(eY(
-								{}, r)),localStorage['mt-edit'] ? (r.time = "",r.name = "") : i.pop(), r.file = "", r.type = e, r.replyNo = 0, r.replyGroup = 0, r.replyDepth = h.sReplyNo, r.sCharacter = p, r.content = r.content, r.isFirst = !0, r.file = n, c = !0) : c && (r.isFirst = !0, c = !1), i.push(r)
-								//#加了个i.pop()改为新版修改：图片（追加时清空时间戳）
+								r = eY({}, o)
+								if(o === t)
+								{
+									r.content = r.content
+									r.isFirst = !0
+									r.type = e
+									r.replyNo = 0
+									r.replyGroup = 0
+									r.replyDepth = h.sReplyNo
+									r.file = n
+									c = !0
+									if(sendChar === true)
+									{
+										r.sCharacter = p
+									}
+									if($jquery('.addChat').prop('checked'))i.push(eY({}, o))
+								}
+								else
+								{
+									c && (r.isFirst = !0, c = !1)
+								}
+								i.push(r)
+								
 							}), s((0, eo.U_)(i)), o(!1, null, "delete"), w("")
 						}, [a, h, t, s, p, o]),
+						//*编辑功能
 						N = function()
 						{
 							s((0, er.Y2)(
@@ -3637,9 +3656,11 @@
 							var e = "";
 							return "add" !== a ? ("info" !== t.type && (e = (0, u.fY)(t.sCharacter.no, !0, f)), "heart" === t.type ? e += L.Z.go_relationship_event[f] : "image" === t.type ? "edit" === a ? e += " : " + L.Z.add_image[f] : e += " : " + L.Z.image[f] : "time" === a ? e += " : " + L.Z.time_comment[f] : "chat" === t.type ? e += " : " + t.content : e += t.content) : "chat" === x ? e = (0, u.fY)(p.no, !0, f) + " : " + L.Z.input_comment[f] : "image" === x ? e = (0, u.fY)(p.no, !0, f) + " : " + L.Z.add_image[f] : "reply" === x ? e = "Sensei : " + L.Z.input_comment[f] : "heart" === x ? e = 0 === p.no ? L.Z.select_char[f] : (0, u.fY)(p.no, !0, f) + L.Z.go_relationship_event[f] : "info" === x && (e = L.Z.input_comment[f]), e
 						}, [a, x, f, t, p]);
+					//*编辑界面
 					return (0, m.jsx)(ea.Xf,
 					{
 						className: n ? "visible medium" : "medium",
+						style:{position:'absolute'},
 						onDoubleClick: function()
 						{
 							S()
@@ -3650,13 +3671,11 @@
 							{
 								return e.stopPropagation(), !1
 							},
-							children: [
-							//*编辑界面更改1
-							(0, m.jsxs)(ea.h4,
+							children: [(0, m.jsxs)(ea.h4,
 							{
 								children: [(0, m.jsx)(c.Bx,
 								{
-									hidden: "add" !== a,
+									hidden: !sendChar,
 									className: "bold",
 									style:
 									{
@@ -3671,7 +3690,7 @@
 									children: L.Z[t.type][f]
 								}), (0, m.jsx)(c.Bx,
 								{
-									hidden: "add" !== a,
+									hidden: !sendChar,
 									className: "bold",
 									style:
 									{
@@ -3689,15 +3708,131 @@
 									children: (0, m.jsx)(c.j4,
 									{})
 								})]
-							}), 
-							//*编辑界面更改1
-							(0, m.jsxs)(ea.$0,
+							}), (0, m.jsxs)(ea.$0,
 							{
+								style:{gap:"16px"},
 								children: [
-								//*编辑界面更2
-								(0, m.jsx)(eN.g4,
+								(0, m.jsx)('div',
 								{
-									children: I(),
+									className: "edit_2",
+									children: [(0, m.jsx)('div',
+									{
+										className:"edit_2_1",
+										children:(0, m.jsx)('div',
+										{
+											className:"edit_2_1_1 bold",
+											children:[(0, m.jsx)('input',
+											{
+												type:'checkbox',
+												className:'addChat'
+											}),L.Z.add[f]]
+										})
+									}),(0, m.jsx)('div',
+									{
+										className:"edit_button",
+										children: E.PN.map(function(e, n)
+										{
+											return (0, m.jsx)(c.Bx,
+											{
+												style:
+												{
+													margin: "0 auto",//@改为居中
+													width: "23%",
+													height: 'auto'
+												},
+												className: a === e ? "selected medium" : "medium",
+												onClick: function()
+												{
+													l(e)
+												},
+												children: L.Z[e][f]
+											}, n)
+										})
+									})]
+								}),(0, m.jsx)('div',
+								{
+									className:"edit_4",
+									children:[(0, m.jsx)(c.NZ,
+									{
+										onClick:function()
+										{
+											w(sendChar)
+											sendChar === false ? sendChar = true : sendChar = false
+										},
+										style:
+										{
+											width: '48px',
+											height: '48px',
+										},
+										src:sendChar === false ? loadhead(t.sCharacter.no,t.sCharacter.index) : loadhead(p.no,p.index)
+									}), (0, m.jsx)('div',
+									{
+										className:"edit_3_box1",
+										children:(0, m.jsx)('div',
+										{
+											className:"edit_3_box2",
+											children:(0, m.jsx)('div',
+											{
+												className:"edit_3_box3",
+												children:[(0, m.jsx)('div',
+												{
+													className:"edit_3_box3_1",
+													children: (0, m.jsx)('input',
+													{
+														className:"edit_3_box3_1_1 name medium",
+														placeholder: sendChar === false ? (0, u.fY)(t.sCharacter.no, !0, f) : (0, u.fY)(p.no, !0, f),
+														onChange: function(e)
+														{
+															$jquery('.name').val(e.currentTarget.value)
+														}
+													})
+												}),(0, m.jsx)('div',
+												{
+													className:"edit_3_box3_2",
+													children: (0, m.jsx)('div',
+													{
+														className:"edit_3_box3_2_1 bold",
+														children: L.Z.name[f]
+													})
+												})]
+											})
+										})
+									}),(0, m.jsx)('div',
+									{
+										className:"edit_3_box1",
+										children:(0, m.jsx)('div',
+										{
+											className:"edit_3_box2",
+											children:(0, m.jsx)('div',
+											{
+												className:"edit_3_box3",
+												children:[(0, m.jsx)('div',
+												{
+													className:"edit_3_box3_1",
+													children: (0, m.jsx)('input',
+													{
+														className:"edit_3_box3_1_1 time medium",
+														onChange: function(e)
+														{
+															$jquery('.time').val(e.currentTarget.value)
+														}
+													})
+												}),(0, m.jsx)('div',
+												{
+													className:"edit_3_box3_2",
+													children: (0, m.jsx)('div',
+													{
+														className:"edit_3_box3_2_1",
+														children: L.Z.time[f]
+													})
+												})]
+											})
+										})
+									})]
+								}), (0, m.jsx)(eN.g4,
+								{
+									hidden: a !== 'image',
+									children: L.Z.add_image[f],
 									className: "medium",
 									style: 
 									{
@@ -3709,161 +3844,97 @@
 									},
 									onClick: function(e)
 									{
-										var n;
-										if("name" === a || "time" === a || "edit" === a || "delete" === a)x = a;//@非图片不弹文件上传框
-										("image" === t.type && "edit" === a || "image" === x) && (null === (n = _.current) || void 0 === n || n.click())
-									},
-								}), t.file?(0,m.jsx)('img',{width:"25%",height:"25%",src:t.file}):'',(0, m.jsx)('span',
+										_.current.click()
+									}
+								}), t.file ? (0,m.jsx)('div',
 								{
-									children: t.file && "add" === a && "image" === x ? '↑点击“确认”会清除上面的图片↑' : ''
-								}), (0, m.jsxs)(c.OP,
-								{
-									children: [(0, m.jsx)("input",
+									hidden: a !== 'image',
+									width:"64px",
+									height:"64px",
+									children: (0,m.jsx)('img',
 									{
-										type: "file",
-										ref: _,
-										style:
-										{
-											display: "none"
-										},
-										accept: "image/*",
-										onChange: function(e)
-										{
-											(0, u.T6)(e, function(e)
-											{
-												Z("image", e)///1
-											}, N)
-										}
-									}), "add"===a?(0, m.jsx)(c.NZ,{src:loadhead(p.no,p.index)}):'',(0, m.jsx)(c.Kx,
-									{
-										className: "medium",
-										maxRows: 5,
-										placeholder: "add"===a&&"image"===x?'此处可以输入图片链接':'',
-										readOnly: function()
-										{
-											if("delete" === a) return !0;
-											// if("edit" === a)
-											// {
-											// 	if("image" === t.type) return !0
-											// }
-											// else if(("heart" === x || "image" === x) && "name" !== a && "time" !== a)//#可以输入名字和时间
-											// {
-											// 	return !0
-											// }
-											return !1
-										}(),
-										value: j,//#给值
-										onChange: function(e)
-										{
-											val = e.currentTarget.value;
-											if(val === '')val = false;
-											w(val)
-										}
-									})]///,t.file && x === 'image' ? (0, m.jsx)('img',{src: t.file}) : ''以后再说
-								}), 
-								//*编辑界面更改2
-								(0, m.jsx)(eX,
-								{
-									style:
-									{
-										justifyContent: "space-between"
-									},
-									children: E.ze.map(function(e, n)
-									{
-										return (0, m.jsx)(c.Bx,
-										{
-											style:
-											{
-												margin: "0 auto",//@改为居中
-												width: "23%"
-											},
-											className: a === e ? "selected medium" : "medium",
-											onClick: function()
-											{
-												l(e)
-											},
-											hidden: ("heart" === t.type || "info" === t.type || "reply" === t.type) && ("name" === e || "time" === e),//#禁用特定功能
-											children: L.Z[e][f]
-										}, n)
+										width:"auto",
+										height:"64px",
+										src:t.file,
 									})
-								}), (0, m.jsx)(eX,
+								}) : '',(0, m.jsx)('span',
 								{
+									hidden: a !== 'image',
+									onClick: function()
+									{
+										if(t.file && confirm('点击确认会清除这张图片，确认吗？'))
+										{
+											clearImage = true
+											k()
+										}
+									},
+									children: t.file ? `图片体积：${parseInt((t.file.length/1024).toFixed(0))}KB` : '无图片文件，可以在下方输入图片链接' 
+								}), (0, m.jsx)("input",
+								{
+									type: "file",
+									ref: _,
 									style:
 									{
-										justifyContent: "space-around",
-										fontSize: "1rem"
+										display: "none"
 									},
-									children: E.PN.map(function(e, n)
+									accept: "image/*",
+									onChange: function(e)
 									{
-										return (0, m.jsxs)(c.Jg,
+										(0, u.T6)(e, function(e)
 										{
-											htmlFor: e,
-											hidden: "edit" === a || "time" === a || "delete" === a || "name" === a,//@禁用特定选框
-											children: [(0, m.jsx)("input",
+											Z("image", e)///1
+										}, N)
+									}
+								}), (0, m.jsx)('div',
+								{
+									className:"edit_3",
+									children:(0, m.jsx)('div',
+									{
+										className:"edit_3_box1",
+										children:(0, m.jsx)('div',
+										{
+											className:"edit_3_box2",
+											children:(0, m.jsx)('div',
 											{
-												type: "checkbox",
-												id: e,
-												checked: "edit" === a && x === e || "add" === a && x === e,//#
-												onChange: function(n)
+												className:"edit_3_box3",
+												children:[(0, m.jsx)('div',
 												{
-													w(t.content), y(e)//#图片不显示文字
-												},
-												disabled: "add" !== a,
-												value: e
-											}), L.Z[e][f]]
-										}, n)
+													className:"edit_3_box3_1",
+													children: (0, m.jsx)(c.Kx,
+													{
+														className:"edit_3_box3_1_1 content medium",
+														onChange: function(e)
+														{
+															$jquery('.content').val(e.currentTarget.value)
+														}
+													})
+												}),(0, m.jsx)('div',
+												{
+													className:"edit_3_box3_2",
+													children: (0, m.jsx)('div',
+													{
+														className:"edit_3_box3_2_1",
+														children: L.Z.input_comment[f]
+													})
+												})]
+											})
+										})
 									})
-								}),
-								/*
-								(0, m.jsxs)(c.OP,
+								}),(0, m.jsxs)(ea.$_,
 								{
-									children: [(0, m.jsx)("input",
+									children: [(0, m.jsx)(eO,
 									{
-										type: "file",
-										ref: _,
-										style:
+										title: "删除消息",
+										onClick: function()
 										{
-											display: "none"
+											a = 'delete'
+											k()
 										},
-										accept: "image/*",
-										onChange: function(e)
+										children: (0, m.jsx)(c.xL,
 										{
-											(0, u.T6)(e, function(e)
-											{
-												Z("image", e)
-											}, N)
-										}
-									}), (0, m.jsx)(c.Kx,
-									{
-										className: "medium",
-										placeholder: I(),
-										maxRows: 5,
-										readOnly: function()
-										{
-											if("delete" === a) return !0;
-											if("edit" === a)
-											{
-												if("image" === t.type) return !0
-											}
-											else if("heart" === x || "image" === x) return !0;
-											return !1
-										}(),
-										value: j,
-										onClick: function(e)
-										{
-											var n;
-											("image" === t.type && "edit" === a || "image" === x) && (null === (n = _.current) || void 0 === n || n.click())
-										},
-										onChange: function(e)
-										{
-											w(e.currentTarget.value)
-										}
-									})]
-								}),
-								*/
-								(0, m.jsxs)(ea.$_,
-								{
-									children: [(0, m.jsx)(ea.Lw,
+											icon: ico.Vui
+										})
+									}), (0, m.jsx)(ea.Lw,
 									{
 										className: "bold",
 										onClick: function()
@@ -3885,6 +3956,7 @@
 							})]
 						})
 					})
+					//*编辑界面
 				},
 				eX = o.ZP.div.withConfig(
 				{
@@ -3987,26 +4059,29 @@
 						};
 					return (0, m.jsxs)(e0,
 					{
-						children: [o || (0, m.jsx)(e1,
+						children: [
+						// o || (0, m.jsx)(e1,
+						// {
+						// 	"data-html2canvas-ignore": "true",
+						// 	onClick: function()
+						// 	{
+						// 		f(!0, null, "delete"),h("delete")//#
+						// 	},
+						// 	children: (0, m.jsx)(c.xL,
+						// 	{
+						// 		icon: ei.Yai
+						// 	})
+						// }), 
+						(0, m.jsx)(eN.g4,
 						{
-							"data-html2canvas-ignore": "true",
-							onClick: function()
-							{
-								f(!0, null, "delete"),h("delete")//#
-							},
-							children: (0, m.jsx)(c.xL,
-							{
-								icon: ei.Yai
-							})
-						}), (0, m.jsx)(eN.g4,
-						{
-							onClick: function()
-							{
-								/*t((0, eo.Z8)(n.replyNo))*/
-								notice('可以通过换行来分割选择肢',250)//@提示
-								val = n.content;//@选择肢给值
-								f(!0, null, "edit"),h("edit")//@加入编辑功能
-							},
+							// onClick: function()
+							// {
+							// 	/*t((0, eo.Z8)(n.replyNo))*/
+							// 	notice('可以通过换行来分割选择肢',250)//@提示
+							// 	val = n.content;//@选择肢给值
+							// 	$jquery('.edit_3_box3_1_1').val(n.content)//@
+							// 	f(!0, null, n.type),h(n.type)//@加入编辑功能
+							// },
 							children: (0, m.jsx)(e2,
 							{
 								className: browser.isFirefox ? "" : "medium",//#判断火狐
@@ -4110,7 +4185,7 @@
 							},
 							children: (0, m.jsx)(c.xL,
 							{
-								icon: l.r8p
+								icon: ico.r8p
 							})
 						}), (0, m.jsx)(es,
 						{
@@ -4242,7 +4317,7 @@
 						{
 							padding: "0.5rem 1rem 0 1rem"
 						},
-						children: 0 === n.sCharacter.no || "heart" === n.type ? (0, m.jsxs)(m.Fragment,
+						children: 0 === n.sCharacter.no || "reply" === n.type || "info" === n.type ||"heart" === n.type ? (0, m.jsxs)(m.Fragment,
 						{
 							children: ["info" === n.type || (0, m.jsx)(eN.xu,
 							{
@@ -4276,7 +4351,10 @@
 									{
 										onClick: function()
 										{
-											o(!0, n, "edit")
+											$jquery('.content').val(n.content)//@
+											$jquery('.name').val(n.name)//@
+											$jquery('.time').val(n.time)//@
+											o(!0, n, n.type)
 										},
 										children: n.content///右侧对话
 									}), (0, m.jsx)(eN.CJ,
@@ -4287,19 +4365,44 @@
 									style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 									onClick: function()
 									{
-										o(!0, n, "edit")
+										$jquery('.content').val(n.content)//@
+										$jquery('.name').val(n.name)//@
+										$jquery('.time').val(n.time)//@
+										o(!0, n, n.type)
 									},
 									src: n.file || n.content.split('#')[0]//#图片也支持样式了
 								})] : "info" === n.type ? (0, m.jsx)(eN.vD,//@]
 								{
-									onClick: function(){o(!0, n, "edit")},//@给旁白添加新版修改功能
+									onClick: function()
+									{
+										$jquery('.content').val(n.content)//@
+										$jquery('.name').val(n.name)//@
+										$jquery('.time').val(n.time)//@
+										o(!0, n, n.type)
+									},//@给旁白添加新版修改功能
 									children: n.content
-								}) : "reply" === n.type ? (0, m.jsx)(e5,
+								}) : "reply" === n.type ? (0, m.jsx)(eN.vD,
 								{
-									chat: n
+									onClick: function()
+									{
+										$jquery('.content').val(n.content)//@
+										$jquery('.name').val(n.name)//@
+										$jquery('.time').val(n.time)//@
+										o(!0, n, n.type)
+									},
+									children:(0, m.jsx)(e5,
+									{
+										chat: n
+									})
 								}) : "heart" === n.type ? (0, m.jsx)(eW,
 								{
-									click: function(){o(!0, n, "edit")},//@给羁绊添加新版修改功能
+									click: function()
+									{
+										$jquery('.content').val(n.content)//@
+										$jquery('.name').val(n.name)//@
+										$jquery('.time').val(n.time)//@
+										o(!0, n, n.type)
+									},//@给羁绊添加新版修改功能
 									character: (0, u.fY)(n.sCharacter.no, !0, d)
 								}) : (0, m.jsx)(m.Fragment,
 								{})]
@@ -4360,7 +4463,10 @@
 											style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : null,//@设置文字样式(#带头像)
 											onClick: function()
 											{
-												o(!0, n, "edit")
+												$jquery('.content').val(n.content)//@
+												$jquery('.name').val(n.name)//@
+												$jquery('.time').val(n.time)//@
+												o(!0, n, n.type)
 											},
 											children: n.content.split('#')[0]///对话
 										})
@@ -4382,7 +4488,10 @@
 											style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : null,//@设置文字样式(#无头像)
 											onClick: function()
 											{
-												o(!0, n, "edit")
+												$jquery('.content').val(n.content)//@
+												$jquery('.name').val(n.name)//@
+												$jquery('.time').val(n.time)//@
+												o(!0, n, n.type)
 											},
 											children: n.content.split('#')[0]//#无头像对话
 										})
@@ -4402,7 +4511,10 @@
 										style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 										onClick: function()
 										{
-											o(!0, n, "edit")
+											$jquery('.content').val(n.content)//@
+											$jquery('.name').val(n.name)//@
+											$jquery('.time').val(n.time)//@
+											o(!0, n, n.type)
 										},
 										src: n.file || n.content.split('#')[0]//#图片也支持样式了
 									}), n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}), h || (0, m.jsx)(ne,//#时间戳放在这
@@ -4607,7 +4719,7 @@
 								(0, m.jsx)($,
 								{
 									className: "bold",
-									onClick:function(){click('.gxgCGp:eq(3)')},
+									onClick:function(){click('#tool-delete')},
 									children: (0, m.jsx)(X,
 									{
 										style:{fontSize: "1.1rem"},

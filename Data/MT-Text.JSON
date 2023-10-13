@@ -77,11 +77,11 @@ var mt_text = {
 		"zh_tw": "修改"
 	},
 	"add": {
-		"kr": "유형",
-		"en": "Type",
-		"jp": "タイプ",
-		"zh_cn": "类型",
-		"zh_tw": "類型"
+		"kr": "추가",
+		"en": "Add",
+		"jp": "追加",
+		"zh_cn": "追加",
+		"zh_tw": "追加"
 	},
 	"chat": {
 		"kr": "채팅",
@@ -108,8 +108,8 @@ var mt_text = {
 		"kr": "인연",
 		"en": "Heart",
 		"jp": "キズナ",
-		"zh_cn": "羁绊事件",
-		"zh_tw": "羈絆事件"
+		"zh_cn": "羁绊",
+		"zh_tw": "羈絆"
 	},
 	"end": {
 		"kr": "끝",
@@ -749,11 +749,11 @@ var mt_text = {
 		"zh_tw": "請輸入信息。"
 	},
 	"input_comment": {
-		"kr": "내용을 입력해주세요.",
-		"en": "Please enter the Contents.",
-		"jp": "内容を入力してください。",
-		"zh_cn": "请输入内容。",
-		"zh_tw": "請輸入內容。"
+		"kr": "내용을 입력해주세요",
+		"en": "Please enter the Contents",
+		"jp": "内容を入力してください",
+		"zh_cn": "请输入内容",
+		"zh_tw": "請輸入內容"
 	},
 	"title_comment": {
 		"kr": "제목을 입력해주세요.",
@@ -1162,4 +1162,3 @@ var mt_text = {
 		"zh_tw": "ID"
 	}
 }
-if(localStorage['mt-edit'])mt_text.add = {"kr":"추가","en":"Add","jp":"追加","zh_cn":"追加","zh_tw":"追加"}
