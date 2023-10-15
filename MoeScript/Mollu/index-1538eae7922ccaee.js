@@ -3587,20 +3587,20 @@
 									{
 										if(name !== '')
 										{
-											if(name === ' ')name = ''
-											e.name = name
+											if(name === ' ')e.name = ''
+											else e.name = name
 											type = false
 										}
 										if(time !== '')
 										{
-											if(time === ' ')time = ''
-											e.time = time
+											if(time === ' ')e.time = ''
+											else e.time = time
 											type = false
 										}
 										if(content !== '')
 										{
-											if(content === ' ')content = ''
-											e.content = content
+											if(content === ' ')e.content = ''
+											else e.content = content
 											type = false
 										}
 										if(sendChar === true)
