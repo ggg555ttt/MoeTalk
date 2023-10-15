@@ -537,6 +537,13 @@ function list()
 	setTimeout(function(){selectClick(37)})
 	setTimeout(function(){selectClick(39)})
 }
+function editMsg(o,n)
+{
+	$jquery('.content').val(n.content)
+	$jquery('.name').val(n.name)
+	$jquery('.time').val(n.time)
+	o(!0, n, n.type)
+}
 function loaddata(json)
 {
 	if(!json[0] || (json[0] && !json[0].title))

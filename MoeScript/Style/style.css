@@ -173,7 +173,7 @@ gap: 10px;
 .edit_2_1_1
 {
 	color: var(--m-3-sys-light-on-surface, #1C1B1F);
-text-align: right;
+/*text-align: right;*/
 font-size: 14px;
 font-style: normal;
 font-weight: 400;

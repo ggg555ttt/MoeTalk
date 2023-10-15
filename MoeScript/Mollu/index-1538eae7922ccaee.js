@@ -3533,7 +3533,7 @@
 						x = g[0],
 						y = g[1],
 						b = (0, r.useState)(""),
-						j = val === '' ? (b[0] ? b[0] : t.content): !val ? '' : val,//#
+						j = b[0],
 						w = b[1],
 						_ = (0, r.useRef)(null);
 					(0, r.useEffect)(function()
@@ -3574,32 +3574,84 @@
 						{
 							var e, n = [],
 								r = !1;
-							h.chats.forEach(function(r)
+							let name = $jquery('.name').val()
+							let time = $jquery('.time').val()
+							let content = $jquery('.content').val()
+							let type = true
+							if($jquery('.dels:checked').length > 1 && batEdit)
 							{
-								e = eY({}, r)
-								if(r === t)
+								h.chats.forEach(function(v,k)
 								{
-									e.isFirst = true
-									e.content = $jquery('.content').val()
-									e.name = $jquery('.name').val()
-									e.time = $jquery('.time').val()
-									e.type = a
-									e.sReplyNo = h.sReplyNo,
-									e.replyNo = h.replyNo+Math.random()
-									e.replyGroup = h.replyGroup+Math.random()
-									if(sendChar === true)
+									e = eY({}, v)
+									if($jquery(`[index=${k}]`).prop('checked'))
 									{
-										e.sCharacter = p
+										if(name !== '')
+										{
+											if(name === ' ')name = ''
+											e.name = name
+											type = false
+										}
+										if(time !== '')
+										{
+											if(time === ' ')time = ''
+											e.time = time
+											type = false
+										}
+										if(content !== '')
+										{
+											if(content === ' ')content = ''
+											e.content = content
+											type = false
+										}
+										if(sendChar === true)
+										{
+											e.sCharacter = p
+											type = false
+										}
+										if(type)
+										{
+											e.type = a
+											if('image' !== a && t.file)e.file = ''
+											if('reply' === a)e.isFirst = true
+										}
+										e.sReplyNo = h.sReplyNo,
+										e.replyNo = h.replyNo+Math.random()
+										e.replyGroup = h.replyGroup+Math.random()
 									}
-									if($jquery('.addChat').prop('checked') || (clearImage === true && t.file) || a !== 'image')
+									n.push(e)
+								})
+								batEdit = false
+							}
+							else
+							{
+								h.chats.forEach(function(r)
+								{
+									e = eY({}, r)
+									if(r === t)
 									{
-										e.file = ''
+										e.isFirst = true
+										e.content = content
+										e.name = name
+										e.time = time
+										e.type = a
+										e.sReplyNo = h.sReplyNo,
+										e.replyNo = h.replyNo+Math.random()
+										e.replyGroup = h.replyGroup+Math.random()
+										if(sendChar === true)
+										{
+											e.sCharacter = p
+										}
+										if($jquery('.addChat').prop('checked') || (clearImage === true && t.file) || a !== 'image')
+										{
+											e.file = ''
+										}
+										if($jquery('.addChat').prop('checked') && !clearImage && e.type !== 'delete')n.push(eY({}, r))
+										clearImage = false
 									}
-									if($jquery('.addChat').prop('checked') && !clearImage && e.type !== 'delete')n.push(eY({}, r))
-									clearImage = false
-								}
-								if(e.type !== 'delete')n.push(e)
-							}), s((0, eo.U_)(n)), S()
+									if(e.type !== 'delete')n.push(e)
+								})
+							}
+							s((0, eo.U_)(n)), S()
 						},
 						Z = (0, r.useCallback)(function(e, n)///图片编辑
 						{
@@ -3687,7 +3739,7 @@
 								}), (0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
-									children: L.Z[t.type][f]
+									children: $jquery('.dels:checked').length > 1 ? `批量编辑(${$jquery('.dels:checked').length})` : L.Z[t.type][f]
 								}), (0, m.jsx)(c.Bx,
 								{
 									hidden: !sendChar,
@@ -3711,8 +3763,7 @@
 							}), (0, m.jsxs)(ea.$0,
 							{
 								style:{gap:"16px"},
-								children: [
-								(0, m.jsx)('div',
+								children: [(0, m.jsx)('div',
 								{
 									className: "edit_2",
 									children: [(0, m.jsx)('div',
@@ -3721,11 +3772,11 @@
 										children:(0, m.jsx)('div',
 										{
 											className:"edit_2_1_1 bold",
-											children:[(0, m.jsx)('input',
+											children:$jquery('.dels:checked').length < 2 ? [(0, m.jsx)('input',
 											{
 												type:'checkbox',
 												className:'addChat'
-											}),L.Z.add[f]]
+											}),L.Z.add[f]] : ['输入内容为空缺则不修改该条目的文本内容',(0,m.jsx)('br',{}),'只输入一个空格则会清空该条目的文本内容']
 										})
 									}),(0, m.jsx)('div',
 									{
@@ -3745,7 +3796,15 @@
 												className: a === e ? "selected medium" : "medium",
 												onClick: function()
 												{
-													l(e)
+													if($jquery('.dels:checked').length > 1 && ($jquery('.name').val() !== '' || $jquery('.time').val() !== '' || $jquery('.content').val() !== '' || sendChar))
+													{
+														alert('消息类型修改条件：发言人为默认，名字、时间、文本为空缺\n满足条件后则只修改消息类型，其余均保持不变')
+													}
+													else
+													{
+														l(e)
+													}
+													
 												},
 												children: L.Z[e][f]
 											}, n)
@@ -3833,7 +3892,7 @@
 									})]
 								}), (0, m.jsx)(eN.g4,
 								{
-									hidden: a !== 'image',
+									hidden: a !== 'image' || $jquery('.dels:checked').length > 1,
 									children: L.Z.add_image[f],
 									className: "medium",
 									style: 
@@ -3864,13 +3923,13 @@
 									hidden: a !== 'image',
 									onClick: function()
 									{
-										if(t.file && confirm('点击确认会清除这张图片，确认吗？'))
+										if($jquery('.dels:checked').length < 2 && t.file && confirm('点击确认会清除这张图片，确认吗？'))
 										{
 											clearImage = true
 											k()
 										}
 									},
-									children: t.file ? `图片体积：${parseInt((t.file.length/1024).toFixed(0))}KB` : '无图片文件，可以在下方输入图片链接' 
+									children: t.file ? `图片体积：${parseInt((t.file.length/1024).toFixed(0))}KB` : $jquery('.dels:checked').length < 2 ? '无图片文件，可以在下方输入图片链接' : ''
 								}), (0, m.jsx)("input",
 								{
 									type: "file",
@@ -3926,6 +3985,7 @@
 								{
 									children: [(0, m.jsx)(eO,
 									{
+										hidden: $jquery('.dels:checked').length > 1,
 										title: "删除消息",
 										onClick: function()
 										{
@@ -3950,7 +4010,27 @@
 										disabled: !1,//#改名可以设置空值
 										onClick: function()
 										{
-											k()
+											if($jquery('.dels:checked').length > 1)
+											{
+												let mode;
+												if($jquery('.name').val() !== '' || $jquery('.time').val() !== '' || $jquery('.content').val() !== '' || sendChar)
+												{
+													mode = '\n		文本内容或发言人修改\n请注意发言人默认与自定的区别，以及文本内容的填充或空缺\n※注意此操作不会改变消息的类型'
+												}
+												else
+												{
+													mode = '\n		消息类型修改，其余一概不变\n注意图片类型转为其它类型会清除其内的图片文件\n'
+												}
+												if(confirm('您选择的批量修改方式为：'+mode))
+												{
+													batEdit = true
+													k()
+												}
+											}
+											else
+											{
+												k()
+											}
 										},
 										children: L.Z.confirm[f]
 									})]
@@ -3994,7 +4074,7 @@
 						{}), (0, m.jsx)(eN._x,
 						{
 							className: "medium",
-							onClick: function(){e.click()},//@羁绊事件编辑
+							onClick: function(){e.onClick()},//@羁绊事件编辑
 							children: n + L.Z.go_relationship_event[t]
 						})]
 					})
@@ -4061,44 +4141,17 @@
 						};
 					return (0, m.jsxs)(e0,
 					{
-						children: [
-						// o || (0, m.jsx)(e1,
-						// {
-						// 	"data-html2canvas-ignore": "true",
-						// 	onClick: function()
-						// 	{
-						// 		f(!0, null, "delete"),h("delete")//#
-						// 	},
-						// 	children: (0, m.jsx)(c.xL,
-						// 	{
-						// 		icon: ei.Yai
-						// 	})
-						// }), 
-						(0, m.jsx)(eN.g4,
+						children: [(0, m.jsx)(eN.g4,
 						{
-							// onClick: function()
+							// onClick:function()
 							// {
-							// 	/*t((0, eo.Z8)(n.replyNo))*/
-							// 	notice('可以通过换行来分割选择肢',250)//@提示
-							// 	val = n.content;//@选择肢给值
-							// 	$jquery('.edit_3_box3_1_1').val(n.content)//@
-							// 	f(!0, null, n.type),h(n.type)//@加入编辑功能
+							// 	t((0, eo.Z8)(1234))
 							// },
 							children: (0, m.jsx)(e2,
 							{
 								className: browser.isFirefox ? "" : "medium",//#判断火狐
 								children: n.content.split('\n')[index]//#根据分支索引判断选择肢位置
 							})
-						}), (0, m.jsx)(eK,
-						{
-							show: l,
-							selectChat: n,
-							handleShow: f,
-							sChatModeType: d,
-							setSChatModeType: function(e)
-							{
-								h(e)
-							}
 						})]
 					})
 				},
@@ -4252,6 +4305,7 @@
 				{
 					return e.theme.color.rgb39_153_228
 				}),
+				//*这是消息界面
 				e6 = function(e)
 				{
 					var n = e.chat,
@@ -4329,12 +4383,13 @@
 								}
 							}), (0, m.jsxs)(e8,
 							{
-								children: ["reply" === n.type || h || (0, m.jsx)(ne,
+								children: [h || (0, m.jsx)(ne,
 								{
 									"data-html2canvas-ignore": "true",
+									hidden: true,//@暂时用不到了
 									onClick: function()
 									{
-										o(!0, n, "delete")
+										editMsg(o,n)//#编辑消息
 									},
 									children: (0, m.jsx)(c.xL,
 									{
@@ -4353,61 +4408,52 @@
 									{
 										onClick: function()
 										{
-											$jquery('.content').val(n.content)//@
-											$jquery('.name').val(n.name)//@
-											$jquery('.time').val(n.time)//@
-											o(!0, n, n.type)
+											editMsg(o,n)//#编辑消息-右侧对话
 										},
-										children: n.content///右侧对话
+										children: n.content
 									}), (0, m.jsx)(eN.CJ,
 									{})]
-								}) : "image" === n.type ? [n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}),(0, m.jsx)(eN.tG,
-								//#[给图片加入时间戳
+								}) : "image" === n.type ? [n.time && (0, m.jsx)(eN.i9,//给图片加入时间戳
+								{
+									style:
+									{
+										marginLeft:0
+									},
+									children:n.time
+								}), (0, m.jsx)(eN.tG,
 								{
 									style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 									onClick: function()
 									{
-										$jquery('.content').val(n.content)//@
-										$jquery('.name').val(n.name)//@
-										$jquery('.time').val(n.time)//@
-										o(!0, n, n.type)
+										editMsg(o,n)//#编辑消息-图片
 									},
 									src: n.file || n.content.split('#')[0]//#图片也支持样式了
 								})] : "info" === n.type ? (0, m.jsx)(eN.vD,//@]
 								{
 									onClick: function()
 									{
-										$jquery('.content').val(n.content)//@
-										$jquery('.name').val(n.name)//@
-										$jquery('.time').val(n.time)//@
-										o(!0, n, n.type)
-									},//@给旁白添加新版修改功能
+										editMsg(o,n)//#编辑消息-旁白
+									},
 									children: n.content
-								}) : "reply" === n.type ? (0, m.jsx)(eN.vD,
+								}) : "reply" === n.type ? (0, m.jsx)('div',
 								{
 									onClick: function()
 									{
-										$jquery('.content').val(n.content)//@
-										$jquery('.name').val(n.name)//@
-										$jquery('.time').val(n.time)//@
-										o(!0, n, n.type)
+										editMsg(o,n)//#编辑消息-回复
 									},
-									children:(0, m.jsx)(e5,
+									style:{width:"100%"},
+									children: (0, m.jsx)(e5,
 									{
 										chat: n
 									})
 								}) : "heart" === n.type ? (0, m.jsx)(eW,
 								{
-									click: function()
+									onClick: function()
 									{
-										$jquery('.content').val(n.content)//@
-										$jquery('.name').val(n.name)//@
-										$jquery('.time').val(n.time)//@
-										o(!0, n, n.type)
-									},//@给羁绊添加新版修改功能
+										editMsg(o,n)//#编辑消息-羁绊
+									},
 									character: (0, u.fY)(n.sCharacter.no, !0, d)
-								}) : (0, m.jsx)(m.Fragment,
-								{})]
+								}) : (0, m.jsx)(m.Fragment,{})]
 							}),h||(0, m.jsx)("input",{"data-html2canvas-ignore":"true",type:"checkbox",index:t,class:"dels"})]//#添加复选框
 						}) : (0, m.jsxs)(m.Fragment,
 						{
@@ -4465,24 +4511,10 @@
 											style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : null,//@设置文字样式(#带头像)
 											onClick: function()
 											{
-												$jquery('.content').val(n.content)//@
-												$jquery('.name').val(n.name)//@
-												$jquery('.time').val(n.time)//@
-												o(!0, n, n.type)
+												editMsg(o,n)//#编辑消息
 											},
 											children: n.content.split('#')[0]///对话
-										})
-										/*
-										, n.time && (0, m.jsx)(eN.i9,
-										{
-											style:
-											{
-												marginRight: 0
-											},
-											children: n.time
-										})
-										*/
-										]
+										})]
 									}) : (0, m.jsxs)(m.Fragment,
 									{
 										children: [(0, m.jsx)(eN.Dt,
@@ -4490,41 +4522,25 @@
 											style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : null,//@设置文字样式(#无头像)
 											onClick: function()
 											{
-												$jquery('.content').val(n.content)//@
-												$jquery('.name').val(n.name)//@
-												$jquery('.time').val(n.time)//@
-												o(!0, n, n.type)
+												editMsg(o,n)//#编辑消息
 											},
 											children: n.content.split('#')[0]//#无头像对话
-										})
-										/*
-										, n.time && (0, m.jsx)(eN.i9,
-										{
-											style:
-											{
-												marginRight: 0
-											},
-											children: n.time
-										})
-										*/
-										]
+										})]
 									}) : (0, m.jsx)(eN.tG,
 									{
 										style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 										onClick: function()
 										{
-											$jquery('.content').val(n.content)//@
-											$jquery('.name').val(n.name)//@
-											$jquery('.time').val(n.time)//@
-											o(!0, n, n.type)
+											editMsg(o,n)//#编辑消息
 										},
 										src: n.file || n.content.split('#')[0]//#图片也支持样式了
 									}), n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}), h || (0, m.jsx)(ne,//#时间戳放在这
 									{
 										"data-html2canvas-ignore": "true",
+										hidden: true,//@暂时用不到了
 										onClick: function()
 										{
-											o(!0, n, "delete")
+											editMsg(o,n)//#编辑消息
 										},
 										children: (0, m.jsx)(c.xL,
 										{
@@ -4536,6 +4552,7 @@
 						})
 					})
 				},
+				//*这是消息界面
 				e8 = o.ZP.div.withConfig(
 				{
 					displayName: "Chat__Flex",
