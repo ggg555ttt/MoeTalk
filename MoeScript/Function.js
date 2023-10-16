@@ -532,16 +532,25 @@ function club(clear = false)
 function list()
 {
 	$('.eIEKpg:eq(0)').click();//更新列表
-	setTimeout(function(){$('.gxgCGp:eq(4)').click()})
-	setTimeout(function(){$('.gxgCGp:eq(4)').click()})
+	setTimeout(function(){$('.editTools').click()})
+	setTimeout(function(){$('.editTools').click()})
 	setTimeout(function(){selectClick(37)})
 	setTimeout(function(){selectClick(39)})
 }
 function editMsg(o,n)
 {
-	$jquery('.content').val(n.content)
-	$jquery('.name').val(n.name)
-	$jquery('.time').val(n.time)
+	let name = n.name
+	let time = n.time
+	let content = n.content
+	if($jquery('.dels:checked').length > 1)
+	{
+		name = ''
+		time = ''
+		content = ''
+	}
+	$jquery('.content').val(content)
+	$jquery('.name').val(name)
+	$jquery('.time').val(time)
 	o(!0, n, n.type)
 }
 function loaddata(json)

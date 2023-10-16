@@ -3577,7 +3577,7 @@
 							let name = $jquery('.name').val()
 							let time = $jquery('.time').val()
 							let content = $jquery('.content').val()
-							let type = true
+							let type = $jquery('.editType').prop('checked')
 							if($jquery('.dels:checked').length > 1 && batEdit)
 							{
 								h.chats.forEach(function(v,k)
@@ -3589,24 +3589,20 @@
 										{
 											if(name === ' ')e.name = ''
 											else e.name = name
-											type = false
 										}
 										if(time !== '')
 										{
 											if(time === ' ')e.time = ''
 											else e.time = time
-											type = false
 										}
 										if(content !== '')
 										{
 											if(content === ' ')e.content = ''
 											else e.content = content
-											type = false
 										}
 										if(sendChar === true)
 										{
 											e.sCharacter = p
-											type = false
 										}
 										if(type)
 										{
@@ -3772,11 +3768,21 @@
 										children:(0, m.jsx)('div',
 										{
 											className:"edit_2_1_1 bold",
-											children:$jquery('.dels:checked').length < 2 ? [(0, m.jsx)('input',
+											children:[(0, m.jsx)('input',
 											{
+												hidden: $jquery('.dels:checked').length > 1,
 												type:'checkbox',
 												className:'addChat'
-											}),L.Z.add[f]] : ['输入内容为空缺则不修改该条目的文本内容',(0,m.jsx)('br',{}),'只输入一个空格则会清空该条目的文本内容']
+											}),(0, m.jsx)('input',
+											{
+												hidden: $jquery('.dels:checked').length < 2,
+												type:'checkbox',
+												className:'editType',
+												onClick:function()
+												{
+													w($jquery('.editType').prop('checked'))
+												}
+											}),$jquery('.dels:checked').length < 2 ? L.Z.add[f] : '同时修改消息类型']
 										})
 									}),(0, m.jsx)('div',
 									{
@@ -3785,6 +3791,7 @@
 										{
 											return (0, m.jsx)(c.Bx,
 											{
+												hidden: $jquery('.dels:checked').length > 1 && !$jquery('.editType').prop('checked'),
 												style:
 												{
 													margin: "0 auto",//@改为居中
@@ -3796,15 +3803,7 @@
 												className: a === e ? "selected medium" : "medium",
 												onClick: function()
 												{
-													if($jquery('.dels:checked').length > 1 && ($jquery('.name').val() !== '' || $jquery('.time').val() !== '' || $jquery('.content').val() !== '' || sendChar))
-													{
-														alert('消息类型修改条件：发言人为默认，名字、时间、文本为空缺\n满足条件后则只修改消息类型，其余均保持不变')
-													}
-													else
-													{
-														l(e)
-													}
-													
+													l(e)
 												},
 												children: L.Z[e][f]
 											}, n)
@@ -3813,19 +3812,29 @@
 								}),(0, m.jsx)('div',
 								{
 									className:"edit_4",
-									children:[(0, m.jsx)(c.NZ,
+									children:[(0, m.jsx)('div',
 									{
-										onClick:function()
-										{
-											w(sendChar)
-											sendChar === false ? sendChar = true : sendChar = false
-										},
 										style:
 										{
-											width: '48px',
-											height: '48px',
+											fontSize:'2px',
+											display: 'inline-grid',
+											whiteSpace: "nowrap",
+											justifyItems: 'center'
 										},
-										src:sendChar === false ? loadhead(t.sCharacter.no,t.sCharacter.index) : loadhead(p.no,p.index)
+										children:[(0, m.jsx)(c.NZ,
+										{
+											onClick:function()
+											{
+												w(sendChar)
+												sendChar === false ? sendChar = true : sendChar = false
+											},
+											style:
+											{
+												width: '40px',
+												height: '40px',
+											},
+											src:sendChar === false ? loadhead(t.sCharacter.no,t.sCharacter.index) : loadhead(p.no,p.index)
+										}),sendChar ? '自定' : '默认']
 									}), (0, m.jsx)('div',
 									{
 										className:"edit_3_box1",
@@ -3909,7 +3918,7 @@
 									}
 								}), t.file ? (0,m.jsx)('div',
 								{
-									hidden: a !== 'image',
+									hidden: a !== 'image' || $jquery('.dels:checked').length > 1,
 									width:"64px",
 									height:"64px",
 									children: (0,m.jsx)('img',
@@ -3920,24 +3929,21 @@
 									})
 								}) : '',(0, m.jsx)('span',
 								{
-									hidden: a !== 'image',
+									hidden: a !== 'image' || $jquery('.dels:checked').length > 1,
 									onClick: function()
 									{
-										if($jquery('.dels:checked').length < 2 && t.file && confirm('点击确认会清除这张图片，确认吗？'))
+										if(t.file && confirm('点击确认会清除这张图片，确认吗？'))
 										{
 											clearImage = true
 											k()
 										}
 									},
-									children: t.file ? `图片体积：${parseInt((t.file.length/1024).toFixed(0))}KB` : $jquery('.dels:checked').length < 2 ? '无图片文件，可以在下方输入图片链接' : ''
+									children: t.file ? `图片体积：${parseInt((t.file.length/1024).toFixed(0))}KB` : '无图片文件，可以在下方输入图片链接'
 								}), (0, m.jsx)("input",
 								{
 									type: "file",
 									ref: _,
-									style:
-									{
-										display: "none"
-									},
+									hidden: 1,
 									accept: "image/*",
 									onChange: function(e)
 									{
@@ -4007,21 +4013,11 @@
 									}), (0, m.jsx)(ea.AZ,
 									{
 										className: "bold",
-										disabled: !1,//#改名可以设置空值
 										onClick: function()
 										{
 											if($jquery('.dels:checked').length > 1)
 											{
-												let mode;
-												if($jquery('.name').val() !== '' || $jquery('.time').val() !== '' || $jquery('.content').val() !== '' || sendChar)
-												{
-													mode = '\n		文本内容或发言人修改\n请注意发言人默认与自定的区别，以及文本内容的填充或空缺\n※注意此操作不会改变消息的类型'
-												}
-												else
-												{
-													mode = '\n		消息类型修改，其余一概不变\n注意图片类型转为其它类型会清除其内的图片文件\n'
-												}
-												if(confirm('您选择的批量修改方式为：'+mode))
+												if(confirm('※注意!!!\n空内容会判断为不修改该条目\n只输入一个空格会判断为清空内容\n图片转为其它类型时会清除文件\n发言人为默认时则不修改发言人\n点击【确定】开始批量修改'))
 												{
 													batEdit = true
 													k()
