@@ -2,10 +2,10 @@
 var cfemoji = 'NO';//表情差分开关
 var cf = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
-var batEdit = false;//记录输入框值
+var batEdit = false;//批量编辑开关
 var browser = os();//获取浏览器信息
 var maxHeight = browser.isFirefox ? 16384*2 : 16384;
-var sendChar = false
+var sendChar = false//发言人开关
 function mt_height()
 {
 	let num;
