@@ -198,7 +198,7 @@ function loadhead(id,img)
 	{
 		return JSON.parse(localStorage['mt-head'])[id];
 	}
-	if(closure_char[id])return '/ClosureTalk/resources/ba/characters/'+img+'.webp';//closure头像
+	if(closure_char[id])return 'https://closuretalk.gitee.io/resources/ba/characters/'+img+'.webp';//closure头像
 	if(mollu_char[id])return href+'Images/MolluChar/'+id+'.'+img+'.webp';//旧版头像
 	if(id === 0)return href+"Images/Ui/you.webp";//主角
 	return href+"Images/Ui/error.webp";//默认头像
