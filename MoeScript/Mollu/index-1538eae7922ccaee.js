@@ -3056,7 +3056,8 @@
 				{
 					displayName: "PopupEmoticonChat__Body",
 					componentId: "sc-vzjcea-1"
-				})(["", ";flex-wrap:wrap;background-color:", ";border-radius:0.5rem;justify-content:space-between;padding:0.5rem;"], function(e)
+				})(["", ";flex-wrap:wrap;background-color:", ";border-radius:0.5rem;justify-content:space-between;padding:0.5rem;height:auto;"], function(e)
+				//#height:auto;
 				{
 					return e.theme.common.flexBox(
 					{
