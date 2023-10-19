@@ -191,6 +191,7 @@ function loadhead(id,img)
 	if(sessionStorage[id] && id.toString().split(' ').length > 1)return JSON.parse(sessionStorage[id])[1];//closure自定义角色支持
 	if(mt_characters[id])
 	{
+		img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D')
 		return href+'Images/Char/'+mt_characters[id].school+'/'+mt_characters[id].club+'/'+id+'/'+img+'.webp';
 	}
 	//自定义头像
@@ -537,20 +538,26 @@ function list()
 	setTimeout(function(){selectClick(37)})
 	setTimeout(function(){selectClick(39)})
 }
-function editMsg(o,n)
+function editMsg(o,n,t)
 {
 	let name = n.name
 	let time = n.time
 	let content = n.content
+	let isRight = n.isRight ? true : false
+	let isLeft = false
 	if($jquery('.dels:checked').length > 1)
 	{
 		name = ''
 		time = ''
 		content = ''
+		isRight = false
+		isLeft = false
 	}
 	$jquery('.content').val(content)
 	$jquery('.name').val(name)
 	$jquery('.time').val(time)
+	$jquery('.isRight').prop('checked',isRight)
+	chatIndex = t
 	o(!0, n, n.type)
 }
 function loaddata(json)

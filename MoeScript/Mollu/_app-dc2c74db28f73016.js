@@ -13756,7 +13756,27 @@
 						{
 							setMakeChats: function(e, t)
 							{
-								e.chats = t.payload
+								//*
+								let l = JSON.parse(JSON.stringify(t.payload))
+								$jquery.each(l,function(t,n)
+								{
+									if(!n.isRight)l[t].isRight = false
+									if(n.isFirst === false)
+									{
+										if(t-1 < 0)l[t].isFirst = true	
+										if(t > 0 && (n.sCharacter.no !== l[t-1].sCharacter.no || ['heart','info','reply'].indexOf(l[t-1].type) > -1 || l[t-1].isRight !== l[t].isRight))
+										{
+											l[t].isFirst = true
+										}
+										if(n.sCharacter.no === 0)
+										{
+											l[t].isFirst = false
+											l[t].isRight = false
+										}
+									}
+								})
+								e.chats = l
+								//*
 							},
 							setReplyNo: function(e, t)
 							{

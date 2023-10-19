@@ -6,6 +6,7 @@ var batEdit = false;//批量编辑开关
 var browser = os();//获取浏览器信息
 var maxHeight = browser.isFirefox ? 16384*2 : 16384;
 var sendChar = false//发言人开关
+var chatIndex = -1//消息索引
 function mt_height()
 {
 	let num;

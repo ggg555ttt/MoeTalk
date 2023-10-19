@@ -1546,15 +1546,15 @@
 									replyNo: p.replyNo+Math.random(),//#随机ID防BUG
 									replyGroup: ((null == t ? void 0 : t.replyGroup) || p.replyGroup)+Math.random(),//#随机ID防BUG
 									replyDepth: p.sReplyNo,
-									sCharacter: d.I,
+									sCharacter: JSON.parse(localStorage['mt-selectedList'])['selected'],
 									content: h,
-									isFirst: a
+									isFirst: !1
 								},
 								r = (0, u.ho)(p.chats, n);
 							//*新版向上追加消息：选择肢
 							e = (0, et.Z)(p.chats);
 							let index = $jquery(".dels:checked").attr('index');
-							index && a === true > -1 ? e.splice(index,0,n) : e.push(n);
+							index ? e.splice(index,0,n) : e.push(n);
 							!r || r && p.chats.indexOf(r) === p.chats.length ? e : p.chats.forEach(function(t, o)
 							{
 								e, p.chats[o + 1] === r && e
@@ -2740,7 +2740,7 @@
 							{
 								v(e)
 							},
-							isFirst: !0,
+							isFirst: !1,
 							sReply: null,
 							scrollRef: n
 						}), (0, m.jsx)(eu,
@@ -2863,13 +2863,13 @@
 									replyDepth: a.sReplyNo,
 									sCharacter: o,
 									content: e,
-									isFirst: a.chats.length < 1 || a.chats[a.chats.length - 1].sCharacter !== o || a.chats[a.chats.length - 1].replyDepth !== a.sReplyNo
+									isFirst: !1
 								};
 							let index = $jquery(".dels:checked").attr('index');//@获取记录位置
 							if(a.chats.length < 1) n.push(i);
 							else if(t) a.chats.forEach(function(e)
 							{
-								n.push(e), e === t && (i.isFirst = "heart" === t.type || t.sCharacter !== o || t.replyDepth !== a.sReplyNo, index > -1 ? n.splice(index,0,i) : n.push(i))
+								n.push(e), e === t && (index > -1 ? n.splice(index,0,i) : n.push(i))
 								//#新版向上追加消息：表情
 							});
 							else
@@ -3154,15 +3154,15 @@
 								replyNo: 0,
 								replyGroup: 0,
 								sCharacter: s,
-								isFirst: !0
+								isFirst: !1
 							};
-							"image" === e ? i.file = r : "chat" === e ? i.content = r : "info" === e && (i.content = r, i.sCharacter = d.I);
+							"image" === e ? i.file = r : "chat" === e ? i.content = r : "info" === e && (i.content = r);
 							var c = [],
 								l = (0, et.Z)(o).filter(function(e)
 								{
 									return e.replyDepth === a
 								}).pop();
-							l && (i.isFirst = !("chat" === l.type && (0, u.Y)(l.sCharacter, s)) || l.replyDepth !== a);
+							//#l && (i.isFirst = !("chat" === l.type && (0, u.Y)(l.sCharacter, s)) || l.replyDepth !== a);
 							var h = (0, u.ho)(o, i);
 							//*新版向上追加消息：一般消息
 							c = (0, et.Z)(o);
@@ -3536,6 +3536,7 @@
 						j = b[0],
 						w = b[1],
 						_ = (0, r.useRef)(null);
+						h = JSON.parse(JSON.stringify(h));
 					(0, r.useEffect)(function()
 					{
 						w("edit" === a && "image" !== t.type ? t.content : "")//#修改变追加
@@ -3564,7 +3565,7 @@
 								{
 									var c = eY(
 									{}, i);
-									c.isFirst = !0, e.push(c), n = !1
+									c.isFirst = !1, e.push(c), n = !1
 								}
 								else e.push(i)
 							}), e
@@ -3577,108 +3578,104 @@
 							let name = $jquery('.name').val()
 							let time = $jquery('.time').val()
 							let content = $jquery('.content').val()
+							let isRight = $jquery('.isRight').prop('checked')
+							let isLeft = $jquery('.isLeft').prop('checked')
 							let type = $jquery('.editType').prop('checked')
+							let index
 							if($jquery('.dels:checked').length > 1 && batEdit)
 							{
-								h.chats.forEach(function(v,k)
+								$jquery(".dels:checked").each(function()
 								{
-									e = eY({}, v)
-									if($jquery(`[index=${k}]`).prop('checked'))
+									e = h.chats[$jquery(this).attr('index')]
+									if(name !== '')
 									{
-										if(name !== '')
-										{
-											if(name === ' ')e.name = ''
-											else e.name = name
-										}
-										if(time !== '')
-										{
-											if(time === ' ')e.time = ''
-											else e.time = time
-										}
-										if(content !== '')
-										{
-											if(content === ' ')e.content = ''
-											else e.content = content
-										}
-										if(sendChar === true)
-										{
-											e.sCharacter = p
-										}
-										if(type)
-										{
-											e.type = a
-											if('image' !== a && t.file)e.file = ''
-											if('reply' === a)e.isFirst = true
-										}
-										e.sReplyNo = h.sReplyNo,
-										e.replyNo = h.replyNo+Math.random()
-										e.replyGroup = h.replyGroup+Math.random()
+										if(name === ' ')e.name = ''
+										else e.name = name
 									}
-									n.push(e)
+									if(time !== '')
+									{
+										if(time === ' ')e.time = ''
+										else e.time = time
+									}
+									if(content !== '')
+									{
+										if(content === ' ')e.content = ''
+										else e.content = content
+									}
+									if(sendChar === true)
+									{
+										e.sCharacter = p
+									}
+									if(isRight === true)
+									{
+										e.isRight = true
+									}
+									if(isLeft === true)
+									{
+										e.isRight = false
+									}
+									if(type)
+									{
+										e.type = a
+										if('image' !== a && t.file)e.file = ''
+										//#if('reply' === a)e.isFirst = true
+									}
+									e.sReplyNo = h.sReplyNo,
+									e.replyNo = h.replyNo+Math.random()
+									e.replyGroup = h.replyGroup+Math.random()
 								})
 								batEdit = false
 							}
 							else
 							{
-								h.chats.forEach(function(r)
+								n = JSON.parse(JSON.stringify(h.chats[chatIndex]));
+								if(sendChar === true)
 								{
-									e = eY({}, r)
-									if(r === t)
-									{
-										e.isFirst = true
-										e.content = content
-										e.name = name
-										e.time = time
-										e.type = a
-										e.sReplyNo = h.sReplyNo,
-										e.replyNo = h.replyNo+Math.random()
-										e.replyGroup = h.replyGroup+Math.random()
-										if(sendChar === true)
-										{
-											e.sCharacter = p
-										}
-										if($jquery('.addChat').prop('checked') || (clearImage === true && t.file) || a !== 'image')
-										{
-											e.file = ''
-										}
-										if($jquery('.addChat').prop('checked') && !clearImage && e.type !== 'delete')n.push(eY({}, r))
-										clearImage = false
-									}
-									if(e.type !== 'delete')n.push(e)
-								})
+									n.sCharacter = p
+								}
+								n.isRight = n.sCharacter.no === 0 ? false : isRight
+								//#n.isFirst = n.sCharacter.no === 0 ? false : t.isFirst
+								n.content = content
+								n.time = time
+								n.name = name
+								n.type = a
+								n.sReplyNo = h.sReplyNo,
+								n.replyNo = h.replyNo+Math.random()
+								n.replyGroup = h.replyGroup+Math.random()
+								if($jquery('.addChat').prop('checked') || (clearImage === true && t.file) || a !== 'image')
+								{
+									n.file = ''
+								}
+								if($jquery('.addChat').prop('checked') && !clearImage && n.type !== 'delete')
+								{
+									h.chats.splice(chatIndex+1,0,n)
+								}
+								if(!$jquery('.addChat').prop('checked'))
+								{
+									h.chats[chatIndex] = n
+								}
+								if(n.type === 'delete')h.chats.splice(chatIndex,1)
+								clearImage = false
 							}
-							s((0, eo.U_)(n)), S()
+							s((0, eo.U_)(h.chats)), S()
 						},
-						Z = (0, r.useCallback)(function(e, n)///图片编辑
+						Z = (0, r.useCallback)(function(e, file)///图片编辑
 						{
-							var r, i = [],
-								c = !1;
-							h.chats.forEach(function(o)
+							let chat = JSON.parse(JSON.stringify(h.chats[chatIndex]));
+							chat.content = $jquery('.content').val()
+							chat.name = $jquery('.name').val()
+							chat.time = $jquery('.time').val()
+							chat.isRight = $jquery('.isRight').prop('checked')
+							chat.file = file
+							if($jquery('.addChat').prop('checked'))
 							{
-								r = eY({}, o)
-								if(o === t)
-								{
-									r.content = r.content
-									r.isFirst = !0
-									r.type = e
-									r.replyNo = 0
-									r.replyGroup = 0
-									r.replyDepth = h.sReplyNo
-									r.file = n
-									c = !0
-									if(sendChar === true)
-									{
-										r.sCharacter = p
-									}
-									if($jquery('.addChat').prop('checked'))i.push(eY({}, o))
-								}
-								else
-								{
-									c && (r.isFirst = !0, c = !1)
-								}
-								i.push(r)
-								
-							}), s((0, eo.U_)(i)), o(!1, null, "delete"), w("")
+								h.chats.splice(chatIndex+1,0,chat)
+							}
+							else
+							{
+								h.chats[chatIndex] = chat
+							}
+							s((0, eo.U_)(h.chats)), o(!1, null, "delete"), w("")
 						}, [a, h, t, s, p, o]),
 						//*编辑功能
 						N = function()
@@ -3782,7 +3779,16 @@
 												{
 													w($jquery('.editType').prop('checked'))
 												}
-											}),$jquery('.dels:checked').length < 2 ? L.Z.add[f] : '同时修改消息类型']
+											}),$jquery('.dels:checked').length < 2 ? L.Z.add[f] : '同时修改消息类型',(0, m.jsx)('input',
+											{
+												type:'checkbox',
+												className:'isRight'
+											}),'右侧显示',(0, m.jsx)('input',
+											{
+												hidden: $jquery('.dels:checked').length < 2,
+												type:'checkbox',
+												className:'isLeft'
+											}),$jquery('.dels:checked').length > 1 ? '默认位置' : '']
 										})
 									}),(0, m.jsx)('div',
 									{
@@ -4335,217 +4341,185 @@
 					}, [s, n, a]);
 					var p = function()
 					{
-						if(0 !== t)
-						{
-							var e = l[t],
-								r = l[t - 1];
-							if("heart" !== r.type && (0, u.Y)(e.sCharacter, r.sCharacter) && e.replyDepth === r.replyDepth)
-							{
-								var o = [];
-								l.forEach(function(e)
-								{
-									n === e ? o.push(
-									{
-										file: e.file,//@大概原作者忘加了
-										time: e.time,//@大概原作者忘加了
-										name: e.name,//@新增临时改名
-										type: e.type,
-										replyNo: e.replyNo,
-										replyDepth: e.replyDepth,
-										replyGroup: e.replyGroup,
-										sCharacter: e.sCharacter,
-										content: e.content,
-										isFirst: !e.isFirst
-									}) : o.push(e)
-								}), a((0, eo.U_)(o))
-							}
-						}
+						l = JSON.parse(JSON.stringify(l))
+						l[t].isFirst = !l[t].isFirst
+						a((0, eo.U_)(l))
 					};
 					return (0, m.jsx)(eN.uU,
 					{
 						ref: f,
-						style: n.isFirst || n.sCharacter.no != (t-1 >= 0 ? l[t-1].sCharacter.no : 0) ?//#往上追加防止头像隐藏
-						{} :
+						style: n.isFirst ?
 						{
-							padding: "0.5rem 1rem 0 1rem"
+							padding: n.sCharacter.no === 0 ? ['heart','info','reply'].indexOf(n.type) > -1 ? "" : "0.5rem 1rem 0 1rem" : ""
+						} :
+						{
+							padding: ['heart','info','reply'].indexOf(n.type) > -1 ? "" : "0.5rem 1rem 0 1rem"
 						},
-						children: 0 === n.sCharacter.no || "reply" === n.type || "info" === n.type ||"heart" === n.type ? (0, m.jsxs)(m.Fragment,
+						children: [(0, m.jsxs)(m.Fragment,
 						{
-							children: ["info" === n.type || (0, m.jsx)(eN.xu,
+							children: "chat" === n.type || "image" === n.type ? (0, m.jsxs)(m.Fragment,
 							{
-								style:
+								children: (0, m.jsxs)(e8,
 								{
-									marginRight: "chat" === n.type || "image" === n.type ? "1.5rem" : "0"
-								}
-							}), (0, m.jsxs)(e8,
-							{
-								children: [h || (0, m.jsx)(ne,
-								{
-									"data-html2canvas-ignore": "true",
-									hidden: true,//@暂时用不到了
-									onClick: function()
+									children: [!n.isRight ? (0, m.jsx)(eN.xu,
 									{
-										editMsg(o,n)//#编辑消息
-									},
-									children: (0, m.jsx)(c.xL,
+										onClick: function()
+										{
+											p()
+										},
+										style: n.sCharacter.no !== 0 ? 
+										{
+											cursor: "pointer",
+											height: "100%"
+										} : {marginRight: '1.5rem'},
+										children: (0, m.jsx)(eN.NZ,
+										{
+											//左侧头像
+											hidden: !n.isFirst || n.sCharacter.no === 0,
+											height: 252,
+											width: 252,
+											src: loadhead(n.sCharacter.no,n.sCharacter.index),
+											onError: function(e)
+											{
+												e.currentTarget.src = 'Images/Ui/error.webp';
+											},
+											alt: "profile"
+										})
+									}) : '', (0, m.jsxs)(n.sCharacter.no === 0 ? "div" : eN.Xp,
 									{
-										icon: ei.Yai
-									})
-								}), "chat" === n.type ? (0, m.jsxs)(m.Fragment,
-								{
-									children: [n.time && (0, m.jsx)(eN.i9,
+										style: n.isRight ? 
+										{
+											display: 'flex',
+											alignItems: 'flex-end'
+										} : {width: '100%'},
+										children: [(0, m.jsx)("span",
+										{
+											className: "bold",
+											style: n.isFirst && n.sCharacter.no !== 0 ?
+											{
+												height: "1.8rem",
+												lineHeight: "1.5rem",
+											} :
+											{
+												display: 'none'
+											},
+											children: n.name && n.name !== '' ? n.name : (0, u.fY)(n.sCharacter.no, !0, d)//#新增临时名称
+										}), (0, m.jsxs)("div",
+										{
+											style:
+											{
+												display:"flex",
+												justifyContent: n.isRight || n.sCharacter.no === 0 ? 'flex-end' : 'flex-start'
+											},
+											children: [(0, m.jsx)(eN.i9,
+											{
+												//左侧时间戳
+												hidden: (!n.time || n.sCharacter.no !== 0) && !n.isRight,
+												style:{marginRight:0},
+												children: n.time
+											}), "chat" === n.type ? [(0, m.jsx)(n.sCharacter.no === 0 ? eN.LP : 
+												!n.isRight && n.isFirst ? eN.zC : eN.Dt,
+											{
+												style: n.isRight ?
+												{
+													background: 'rgb(74, 138, 202)',
+													border: '1px solid rgb(74, 138, 202)'
+												} : {},
+												onClick: function()
+												{
+													editMsg(o,n,t)//#编辑消息-右侧对话
+												},
+												children: n.content
+											}), (0, m.jsx)(eN.CJ,
+											{
+												hidden: n.isRight && !n.isFirst,
+												style:
+												{
+													display: !n.isRight && n.sCharacter.no !== 0 ? 'none' : ''
+												}
+												
+											})] : (0, m.jsx)(eN.tG,
+											{
+												style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
+												onClick: function()
+												{
+													editMsg(o,n,t)//#编辑消息-图片
+												},
+												src: n.file || n.content.split('#')[0],//#图片也支持样式了
+												onError: function(e)
+												{
+													e.currentTarget.src = 'Images/Ui/error.webp';
+												}
+											}), (0, m.jsx)(eN.i9,
+											{
+												//右侧时间戳
+												hidden: !n.time || n.sCharacter.no === 0 || n.isRight,
+												style:{marginLeft:0},
+												children: n.time
+											})]
+										})]
+									}), n.isRight ? (0, m.jsx)(eN.xu,
 									{
 										style:
 										{
-											marginLeft: 0
+											justifyContent:'flex-end',
+											cursor: "pointer",
+											height: "100%"
 										},
-										children: n.time
-									}), (0, m.jsx)(eN.LP,
-									{
 										onClick: function()
 										{
-											editMsg(o,n)//#编辑消息-右侧对话
+											p()
 										},
-										children: n.content
-									}), (0, m.jsx)(eN.CJ,
-									{})]
-								}) : "image" === n.type ? [n.time && (0, m.jsx)(eN.i9,//给图片加入时间戳
-								{
-									style:
-									{
-										marginLeft:0
-									},
-									children:n.time
-								}), (0, m.jsx)(eN.tG,
-								{
-									style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
-									onClick: function()
-									{
-										editMsg(o,n)//#编辑消息-图片
-									},
-									src: n.file || n.content.split('#')[0]//#图片也支持样式了
-								})] : "info" === n.type ? (0, m.jsx)(eN.vD,//@]
-								{
-									onClick: function()
-									{
-										editMsg(o,n)//#编辑消息-旁白
-									},
-									children: n.content
-								}) : "reply" === n.type ? (0, m.jsx)('div',
-								{
-									onClick: function()
-									{
-										editMsg(o,n)//#编辑消息-回复
-									},
-									style:{width:"100%"},
-									children: (0, m.jsx)(e5,
-									{
-										chat: n
-									})
-								}) : "heart" === n.type ? (0, m.jsx)(eW,
-								{
-									onClick: function()
-									{
-										editMsg(o,n)//#编辑消息-羁绊
-									},
-									character: (0, u.fY)(n.sCharacter.no, !0, d)
-								}) : (0, m.jsx)(m.Fragment,{})]
-							}),h||(0, m.jsx)("input",{"data-html2canvas-ignore":"true",type:"checkbox",index:t,class:"dels"})]//#添加复选框
-						}) : (0, m.jsxs)(m.Fragment,
-						{
-							children: [(0, m.jsx)(eN.xu,
+										hidden: n.sCharacter.no === 0,
+										children: (0, m.jsx)(eN.NZ,
+										{
+											hidden: !n.isFirst,
+											height: 252,
+											width: 252,
+											src: loadhead(n.sCharacter.no,n.sCharacter.index),//#聊天记录头像
+											onError: function(e)
+											{
+												var n = e.currentTarget;
+												(0, u.Mp)(n, "character")
+											},
+											alt: "profile"
+										})
+									}) : '']
+								})
+							}) : "reply" === n.type ? [(0, m.jsx)(eN.xu,
+							{}),(0, m.jsx)('div',
 							{
 								onClick: function()
 								{
-									p()
+									editMsg(o,n,t)//#编辑消息-回复
 								},
-								style:
+								style:{width:"100%"},
+								children: (0, m.jsx)(e5,
 								{
-									cursor: "pointer"
-								},
-								children: (0, m.jsx)(eN.NZ,
-								{
-									style:
-									{
-										display: n.isFirst || n.sCharacter.no != (t-1 >= 0 ? l[t-1].sCharacter.no : 0) ? "block" : "none"//#往上追加防止头像隐藏
-									},
-									height: 252,
-									width: 252,
-									src: loadhead(n.sCharacter.no,n.sCharacter.index),//#聊天记录头像
-									onError: function(e)
-									{
-										var n = e.currentTarget;
-										(0, u.Mp)(n, "character")
-									},
-									alt: "profile"
+									chat: n
 								})
-							}), (0, m.jsxs)(eN.Xp,
+							})] : "heart" === n.type ? [(0, m.jsx)(eN.xu,
+							{}),(0, m.jsx)(eW,
 							{
-								children: [(0, m.jsx)("span",
+								onClick: function()
 								{
-									className: "bold",
-									style: n.isFirst || n.sCharacter.no != (t-1 >= 0 ? l[t-1].sCharacter.no : 0) ?//#往上追加防止头像隐藏
-									{
-										height: "1.8rem",
-										lineHeight: "1.5rem"
-									} :
-									{
-										display: "none"
-									},
-									children: n.name && n.name !== '' ? n.name : (0, u.fY)(n.sCharacter.no, !0, d)//#新增临时名称
-								}), (0, m.jsxs)("div",
+									editMsg(o,n,t)//#编辑消息-羁绊
+								},
+								character: (0, u.fY)(n.sCharacter.no, !0, d)
+							})] : "info" === n.type ? (0, m.jsx)(eN.vD,
+							{
+								onClick: function()
 								{
-									style:
-									{
-										display: "flex"
-									},
-									children: ["chat" === n.type ? n.isFirst || n.sCharacter.no != (t-1 >= 0 ? l[t-1].sCharacter.no : 0) ? (0, m.jsxs)(m.Fragment,
-									//#往上追加防止头像隐藏
-									{
-										children: [(0, m.jsx)(eN.zC,
-										{
-											style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : null,//@设置文字样式(#带头像)
-											onClick: function()
-											{
-												editMsg(o,n)//#编辑消息
-											},
-											children: n.content.split('#')[0]///对话
-										})]
-									}) : (0, m.jsxs)(m.Fragment,
-									{
-										children: [(0, m.jsx)(eN.Dt,
-										{
-											style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : null,//@设置文字样式(#无头像)
-											onClick: function()
-											{
-												editMsg(o,n)//#编辑消息
-											},
-											children: n.content.split('#')[0]//#无头像对话
-										})]
-									}) : (0, m.jsx)(eN.tG,
-									{
-										style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
-										onClick: function()
-										{
-											editMsg(o,n)//#编辑消息
-										},
-										src: n.file || n.content.split('#')[0]//#图片也支持样式了
-									}), n.time && (0, m.jsx)(eN.i9,{style:{marginLeft:0},children:n.time}), h || (0, m.jsx)(ne,//#时间戳放在这
-									{
-										"data-html2canvas-ignore": "true",
-										hidden: true,//@暂时用不到了
-										onClick: function()
-										{
-											editMsg(o,n)//#编辑消息
-										},
-										children: (0, m.jsx)(c.xL,
-										{
-											icon: ei.Yai
-										})
-									})]
-								})]
-							}),h||(0, m.jsx)("input",{"data-html2canvas-ignore":"true",type:"checkbox",index:t,class:"dels"})]//#添加复选框
-						})
+									editMsg(o,n,t)//#编辑消息-旁白
+								},
+								children: n.content
+							}) : (0, m.jsx)(m.Fragment,{})
+						}), h || (0, m.jsx)("input",
+						{
+							"data-html2canvas-ignore":"true",
+							type:"checkbox",
+							index:t,class:"dels"
+						})]
 					})
 				},
 				//*这是消息界面
@@ -4598,7 +4572,7 @@
 					var b = (0, r.useState)(
 						{
 							type: "chat",
-							isFirst: !0,
+							isFirst: !1,
 							replyNo: 0,
 							replyDepth: 0,
 							replyGroup: 0,
@@ -4751,7 +4725,7 @@
 								ref: n,
 								children: t.map(function(e, n)
 								{
-									return e.replyDepth === o && !("reply" === e.type && !1 === e.isFirst) && (0, m.jsx)(e6,
+									return e.replyDepth === o && (0, m.jsx)(e6,
 									{
 										index: n,
 										handleShow: _,
