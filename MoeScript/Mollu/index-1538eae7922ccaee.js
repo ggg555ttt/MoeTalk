@@ -3822,7 +3822,7 @@
 									{
 										style:
 										{
-											fontSize:'2px',
+											fontSize:'12px',
 											display: 'inline-grid',
 											whiteSpace: "nowrap",
 											justifyItems: 'center'
