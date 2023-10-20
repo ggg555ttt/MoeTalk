@@ -310,10 +310,13 @@ function blobToArrayBuffer(file) {
 }
 $('body').on('click',"#mt-edit",function()
 {
-	localStorage.removeItem('mt-edit')
-	if(confirm('此功能已被弃用，旧版的追加功能已被整合进新版的消息编辑功能内\n点击确定可以跳转旧版MoeTalk使用旧版编辑功能'))
+	if(confirm('是否切换编辑模式？\n点击【确定】为将使用新版编辑模式\n点击【取消】将使用旧版编辑模式'))
 	{
-		window.location.replace('https://ggg555ttt.gitee.io/mothertalk/')
+		localStorage.removeItem('mt-edit');
+	}
+	else
+	{
+		localStorage['mt-edit'] = '旧版编辑模式';
 	}
 })
 $('body').on('click',"#ct",function()

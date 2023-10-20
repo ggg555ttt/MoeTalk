@@ -26,8 +26,6 @@ if(!localStorage['mt-date'] || (localStorage['mt-date'] != new Date().getDate())
 			caches.delete(key);
 		});
 		localStorage['mt-date'] = new Date().getDate(),
-		deleteDBAll('MotherTalk'),
-		deleteDBAll('MoeTalk'),
 		location.reload(true);
 	});
 }
@@ -61,7 +59,7 @@ var selectedList = 'yes';//快捷角色开关
 var imgindex;var text;//人物自定义
 var chararr = [];//自定义角色列表
 var height;//聊天记录长度
-var $jquery = $;//jquery转义
+var $$ = $;//jquery转义
 var size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0));//数据大小
 var CFPI = 0;//差分页码
 var lang = localStorage['mt-lang'];
@@ -72,111 +70,6 @@ var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-
 var class1 = 'talk__TextBox-sc-eq7cqw-4 talk__NTextBox-sc-eq7cqw-5 fWynih fYSjWX';
 /*预定义区*/
 
-/*函数库*/
-//IndexedDB打开数据库
-function openDB(dbName, version = 1) {
-	return new Promise((resolve, reject) => {
-	//	兼容浏览器
-	var indexedDB =
-		window.indexedDB ||
-		window.mozIndexedDB ||
-		window.webkitIndexedDB ||
-		window.msIndexedDB;
-	let db;
-	// 打开数据库，若没有则会创建
-	const request = indexedDB.open(dbName, version);
-	// 数据库打开成功回调
-	request.onsuccess = function (event) {
-		db = event.target.result; // 数据库对象
-		//console.log("数据库打开成功");
-		resolve(db);
-	};
-	// 数据库打开失败的回调
-	request.onerror = function (event) {
-		console.log("数据库打开报错");
-	};
-	// 数据库有更新时候的回调
-	request.onupgradeneeded = function (event) {
-		// 数据库创建或升级的时候会触发
-		console.log("数据库已更新");
-		db = event.target.result; // 数据库对象
-		var objectStore;
-		// 创建存储库
-		objectStore = db.createObjectStore("Custom", {//数据表
-		keyPath: "key", // 这是主键
-		// autoIncrement: true // 实现自增
-		});
-		// 创建索引，在后面查询数据的时候可以根据索引查
-		
-		objectStore.createIndex("key", "key", { unique: false });//主键
-		objectStore.createIndex("val", "val", { unique: false });//数据
-	};
-	});
-}
-//IndexedDB通过主键读取数据
-function getDataByKey(db, storeName, key) {
-	return new Promise((resolve, reject) => {
-	var transaction = db.transaction([storeName]); // 事务
-	var objectStore = transaction.objectStore(storeName); // 仓库对象
-	var request = objectStore.get(key); // 通过主键获取数据
-
-	request.onerror = function (event) {
-		console.log("事务失败");
-	};
-
-	request.onsuccess = function (event) {
-		//console.log("主键查询结果: ", request.result);
-		resolve(request.result);
-	};
-	});
-}
-//IndexedDB更新数据
-function updateDB(db, storeName, data) {
-	var request = db
-	.transaction([storeName], "readwrite") // 事务对象
-	.objectStore(storeName) // 仓库对象
-	.put(data);
-
-	request.onsuccess = function () {
-		localStorage['imgs']++;
-	//console.log("数据更新成功");
-	};
-
-	request.onerror = function () {
-	console.log("数据更新失败");
-	};
-}
-//IndexedDB通过主键删除数据
-function deleteDB(db, storeName, id) {
-var request = db
-.transaction([storeName], "readwrite")
-.objectStore(storeName)
-.delete(id);
-
-request.onsuccess = function () {
-//console.log("数据删除成功");
-};
-
-request.onerror = function () {
-console.log("数据删除失败");
-};
-}
-//IndexedDB关闭数据库
-function closeDB(db) {
-	db.close();
-	//console.log("数据库已关闭");
-}
-//IndexedDB删库跑路
-function deleteDBAll(dbName) {
-	console.log(dbName);
-	let deleteRequest = window.indexedDB.deleteDatabase(dbName);
-	deleteRequest.onerror = function (event) {
-	console.log("删除失败");
-	};
-	deleteRequest.onsuccess = function (event) {
-	console.log("删除成功");
-	};
-}
 //保存头像
 function savehead(headindex,img64)
 {
@@ -199,7 +92,7 @@ function loadhead(id,img)
 	{
 		return JSON.parse(localStorage['mt-head'])[id];
 	}
-	if(closure_char[id])return 'https://closuretalk.gitee.io/resources/ba/characters/'+img+'.webp';//closure头像
+	if(closure_char[id])return `${href}Images/ClosureChar/${img}.webp`;//closure头像
 	if(mollu_char[id])return href+'Images/MolluChar/'+id+'.'+img+'.webp';//旧版头像
 	if(id === 0)return href+"Images/Ui/you.webp";//主角
 	return href+"Images/Ui/error.webp";//默认头像
@@ -545,7 +438,7 @@ function editMsg(o,n,t)
 	let content = n.content
 	let isRight = n.isRight ? true : false
 	let isLeft = false
-	if($jquery('.dels:checked').length > 1)
+	if($$('.dels:checked').length > 1)
 	{
 		name = ''
 		time = ''
@@ -553,10 +446,10 @@ function editMsg(o,n,t)
 		isRight = false
 		isLeft = false
 	}
-	$jquery('.content').val(content)
-	$jquery('.name').val(name)
-	$jquery('.time').val(time)
-	$jquery('.isRight').prop('checked',isRight)
+	$$('.content').val(content)
+	$$('.name').val(name)
+	$$('.time').val(time)
+	$$('.isRight').prop('checked',isRight)
 	chatIndex = t
 	o(!0, n, n.type)
 }
@@ -655,7 +548,7 @@ function loaddata(json)
 				else
 				{
 					json[1][k]['content'] = v['content'];
-					if(v['content'].indexOf('http') < 0)json[1][k]['content'] = 'https://closuretalk.gitee.io/'+v['content'];
+					if(v['content'].indexOf('http') < 0)json[1][k]['content'] = v['content'].replace('resources/ba/stamps','Images/ClosureEmoji');
 				}
 			}
 			json[1][k]['isFirst'] = false;
@@ -676,21 +569,6 @@ function loaddata(json)
 			sessionStorage[v.char_id] = JSON.stringify(arr)
 		})
 	}
-	$jquery.each(json[1],function(k,v)
-	{
-		if(v['content'].indexOf('http') < 0)
-		{
-			v.content = v.content.replaceAll('Images/','')
-			v.content = v.content.replaceAll('CharFace','Images/CharFace')
-			v.content = v.content.replaceAll('Emoji','Images/Emoji')
-		}
-
-		if(v.sCharacter.no.toString().split('/').length > 1)
-		{
-			v.sCharacter.no = v.sCharacter.no.toString().split('/').pop()
-		}
-		json[1][k] = v
-	})
 	if(josnsize+size > 5120)
 	{
 		alert('当前存档数据：'+size+

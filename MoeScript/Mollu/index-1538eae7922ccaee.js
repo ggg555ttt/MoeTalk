@@ -384,7 +384,7 @@
 								},
 								onClick: function()
 								{
-									if($jquery('.visible').length<1)o(!0), e((0, h.Ks)(d.I))//#
+									if($$('.visible').length<1)o(!0), e((0, h.Ks)(d.I))//#
 								},
 								children: (0, m.jsx)(b,
 								{
@@ -421,7 +421,7 @@
 								},
 								onClick: function()
 								{
-									if($jquery('.visible').length<1)e((0, s.Cz)(!1))//#
+									if($$('.visible').length<1)e((0, s.Cz)(!1))//#
 								},
 								children: (0, m.jsx)(b,
 								{
@@ -692,7 +692,7 @@
 											{
 												onClick: function()
 												{
-													$jquery('#ccus').val(n.no>999?n.no-1000:n.no)
+													$$('#ccus').val(n.no>999?n.no-1000:n.no)
 												},
 												children:[(0, m.jsx)('span',
 												{
@@ -873,7 +873,7 @@
 						{
 							style:
 							{
-								maxHeight: n ? ($jquery('.LeftScreen__CharContainer-sc-jf2v8s-1').outerHeight())+"px" : "0"//#设置分类框最大高度
+								maxHeight: n ? ($$('.LeftScreen__CharContainer-sc-jf2v8s-1').outerHeight())+"px" : "0"//#设置分类框最大高度
 							},
 							children: [(0, m.jsxs)(A,
 							{
@@ -1001,9 +1001,9 @@
 										//*储存分类和排序方式
 										localStorage['mt-order'] = u
 										clubarr = {};
-										$jquery(".club:checked").each(function()
+										$$(".club:checked").each(function()
 										{
-											clubarr[$jquery(this).attr('value')] = 'YES'
+											clubarr[$$(this).attr('value')] = 'YES'
 										})
 										localStorage['mt-club'] = JSON.stringify(clubarr);
 										//*储存分类和排序方式
@@ -1311,7 +1311,7 @@
 							//*更新自定义角色的读取方式
 							let arr = JSON.parse(JSON.stringify(_.Z));
 							let carr = [];
-							$jquery.each(JSON.parse(localStorage['mt-char']),function(k,v)
+							$$.each(JSON.parse(localStorage['mt-char']),function(k,v)
 							{
 								if(v !== null)arr.unshift(
 								{
@@ -1553,7 +1553,7 @@
 								r = (0, u.ho)(p.chats, n);
 							//*新版向上追加消息：选择肢
 							e = (0, et.Z)(p.chats);
-							let index = $jquery(".dels:checked").attr('index');
+							let index = $$(".dels:checked").attr('index');
 							index ? e.splice(index,0,n) : e.push(n);
 							!r || r && p.chats.indexOf(r) === p.chats.length ? e : p.chats.forEach(function(t, o)
 							{
@@ -1685,7 +1685,7 @@
 								{
 									children: [
 									//*批量删除提示
-									$jquery(".dels:checked").length > 0 ? (0, m.jsx)("span",
+									$$(".dels:checked").length > 0 ? (0, m.jsx)("span",
 									{
 										style:
 										{
@@ -1693,7 +1693,7 @@
 											color: "red",
 											marginTop: "1rem"
 										},
-										children: '你一共选中了'+$jquery(".dels:checked").length+'条数据'
+										children: '你一共选中了'+$$(".dels:checked").length+'条数据'
 									}) : '',
 									//*批量删除提示
 									(0, m.jsx)("span",
@@ -2757,14 +2757,14 @@
 								let i = 0;
 								let rGroup = 1;
 								let rNo = 1;
-								if($jquery(".dels:checked").length > 0)
+								if($$(".dels:checked").length > 0)
 								{
 									arr = JSON.parse(JSON.stringify(d));
 									rGroup = localStorage['replyGroup'];
 									rNo = localStorage['replyNo'];
-									$jquery(".dels:checked").each(function()
+									$$(".dels:checked").each(function()
 									{
-										arr.splice($jquery(this).attr('index')-i,1);
+										arr.splice($$(this).attr('index')-i,1);
 										i++;
 									})
 								}
@@ -2865,7 +2865,7 @@
 									content: e,
 									isFirst: !1
 								};
-							let index = $jquery(".dels:checked").attr('index');//@获取记录位置
+							let index = $$(".dels:checked").attr('index');//@获取记录位置
 							if(a.chats.length < 1) n.push(i);
 							else if(t) a.chats.forEach(function(e)
 							{
@@ -3167,7 +3167,7 @@
 							var h = (0, u.ho)(o, i);
 							//*新版向上追加消息：一般消息
 							c = (0, et.Z)(o);
-							let index = $jquery(".dels:checked").attr('index');
+							let index = $$(".dels:checked").attr('index');
 							index > -1 ? c.splice(index,0,i) : c.push(i);
 							!h || h && o.indexOf(h) === o.length ? c : o.forEach(function(e, n)
 							{
@@ -3276,7 +3276,7 @@
 										{
 											cfemoji = 'NO';//@输入文字时不读取表情
 											_(e.currentTarget.value)
-											if($jquery(".dels:checked").attr('index'))$jquery(".dels:checked")[0].scrollIntoView(!1)//@输入文字自动跳到被选处
+											if($$(".dels:checked").attr('index'))$$(".dels:checked")[0].scrollIntoView(!1)//@输入文字自动跳到被选处
 										}
 									}), (0, m.jsx)(eU,
 									{
@@ -3576,18 +3576,18 @@
 						{
 							var e, n = [],
 								r = !1;
-							let name = $jquery('.name').val()
-							let time = $jquery('.time').val()
-							let content = $jquery('.content').val()
-							let isRight = $jquery('.isRight').prop('checked')
-							let isLeft = $jquery('.isLeft').prop('checked')
-							let type = $jquery('.editType').prop('checked')
+							let name = $$('.name').val()
+							let time = $$('.time').val()
+							let content = $$('.content').val()
+							let isRight = $$('.isRight').prop('checked')
+							let isLeft = $$('.isLeft').prop('checked')
+							let type = $$('.editType').prop('checked')
 							let index
-							if($jquery('.dels:checked').length > 1 && batEdit)
+							if($$('.dels:checked').length > 1 && batEdit)
 							{
-								$jquery(".dels:checked").each(function()
+								$$(".dels:checked").each(function()
 								{
-									e = h.chats[$jquery(this).attr('index')]
+									e = h.chats[$$(this).attr('index')]
 									if(name !== '')
 									{
 										if(name === ' ')e.name = ''
@@ -3643,15 +3643,15 @@
 								n.sReplyNo = h.sReplyNo,
 								n.replyNo = h.replyNo+Math.random()
 								n.replyGroup = h.replyGroup+Math.random()
-								if($jquery('.addChat').prop('checked') || (clearImage === true && t.file) || a !== 'image')
+								if($$('.addChat').prop('checked') || (clearImage === true && t.file) || a !== 'image')
 								{
 									n.file = ''
 								}
-								if($jquery('.addChat').prop('checked') && !clearImage && n.type !== 'delete')
+								if($$('.addChat').prop('checked') && !clearImage && n.type !== 'delete')
 								{
 									h.chats.splice(chatIndex+1,0,n)
 								}
-								if(!$jquery('.addChat').prop('checked'))
+								if(!$$('.addChat').prop('checked'))
 								{
 									h.chats[chatIndex] = n
 								}
@@ -3663,12 +3663,12 @@
 						Z = (0, r.useCallback)(function(e, file)///图片编辑
 						{
 							let chat = JSON.parse(JSON.stringify(h.chats[chatIndex]));
-							chat.content = $jquery('.content').val()
-							chat.name = $jquery('.name').val()
-							chat.time = $jquery('.time').val()
-							chat.isRight = $jquery('.isRight').prop('checked')
+							chat.content = $$('.content').val()
+							chat.name = $$('.name').val()
+							chat.time = $$('.time').val()
+							chat.isRight = $$('.isRight').prop('checked')
 							chat.file = file
-							if($jquery('.addChat').prop('checked'))
+							if($$('.addChat').prop('checked'))
 							{
 								h.chats.splice(chatIndex+1,0,chat)
 							}
@@ -3733,7 +3733,7 @@
 								}), (0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
-									children: $jquery('.dels:checked').length > 1 ? `批量编辑(${$jquery('.dels:checked').length})` : L.Z[t.type][f]
+									children: $$('.dels:checked').length > 1 ? `批量编辑(${$$('.dels:checked').length})` : L.Z[t.type][f]
 								}), (0, m.jsx)(c.Bx,
 								{
 									hidden: !sendChar,
@@ -3768,28 +3768,28 @@
 											className:"edit_2_1_1 bold",
 											children:[(0, m.jsx)('input',
 											{
-												hidden: $jquery('.dels:checked').length > 1,
+												hidden: $$('.dels:checked').length > 1,
 												type:'checkbox',
 												className:'addChat'
 											}),(0, m.jsx)('input',
 											{
-												hidden: $jquery('.dels:checked').length < 2,
+												hidden: $$('.dels:checked').length < 2,
 												type:'checkbox',
 												className:'editType',
 												onClick:function()
 												{
-													w($jquery('.editType').prop('checked'))
+													w($$('.editType').prop('checked'))
 												}
-											}),$jquery('.dels:checked').length < 2 ? L.Z.add[f] : '同时修改消息类型',(0, m.jsx)('input',
+											}),$$('.dels:checked').length < 2 ? L.Z.add[f] : '同时修改消息类型',(0, m.jsx)('input',
 											{
 												type:'checkbox',
 												className:'isRight'
 											}),'右侧显示',(0, m.jsx)('input',
 											{
-												hidden: $jquery('.dels:checked').length < 2,
+												hidden: $$('.dels:checked').length < 2,
 												type:'checkbox',
 												className:'isLeft'
-											}),$jquery('.dels:checked').length > 1 ? '默认位置' : '']
+											}),$$('.dels:checked').length > 1 ? '默认位置' : '']
 										})
 									}),(0, m.jsx)('div',
 									{
@@ -3798,7 +3798,7 @@
 										{
 											return (0, m.jsx)(c.Bx,
 											{
-												hidden: $jquery('.dels:checked').length > 1 && !$jquery('.editType').prop('checked'),
+												hidden: $$('.dels:checked').length > 1 && !$$('.editType').prop('checked'),
 												style:
 												{
 													margin: "0 auto",//@改为居中
@@ -3860,7 +3860,7 @@
 														placeholder: sendChar === false ? (0, u.fY)(t.sCharacter.no, !0, f) : (0, u.fY)(p.no, !0, f),
 														onChange: function(e)
 														{
-															$jquery('.name').val(e.currentTarget.value)
+															$$('.name').val(e.currentTarget.value)
 														}
 													})
 												}),(0, m.jsx)('div',
@@ -3891,7 +3891,7 @@
 														className:"edit_3_box3_1_1 time medium",
 														onChange: function(e)
 														{
-															$jquery('.time').val(e.currentTarget.value)
+															$$('.time').val(e.currentTarget.value)
 														}
 													})
 												}),(0, m.jsx)('div',
@@ -3908,7 +3908,7 @@
 									})]
 								}), (0, m.jsx)(eN.g4,
 								{
-									hidden: a !== 'image' || $jquery('.dels:checked').length > 1,
+									hidden: a !== 'image' || $$('.dels:checked').length > 1,
 									children: L.Z.add_image[f],
 									className: "medium",
 									style: 
@@ -3925,7 +3925,7 @@
 									}
 								}), t.file ? (0,m.jsx)('div',
 								{
-									hidden: a !== 'image' || $jquery('.dels:checked').length > 1,
+									hidden: a !== 'image' || $$('.dels:checked').length > 1,
 									width:"64px",
 									height:"64px",
 									children: (0,m.jsx)('img',
@@ -3936,7 +3936,7 @@
 									})
 								}) : '',(0, m.jsx)('span',
 								{
-									hidden: a !== 'image' || $jquery('.dels:checked').length > 1,
+									hidden: a !== 'image' || $$('.dels:checked').length > 1,
 									onClick: function()
 									{
 										if(t.file && confirm('点击确认会清除这张图片，确认吗？'))
@@ -3979,7 +3979,7 @@
 														className:"edit_3_box3_1_1 content medium",
 														onChange: function(e)
 														{
-															$jquery('.content').val(e.currentTarget.value)
+															$$('.content').val(e.currentTarget.value)
 														}
 													})
 												}),(0, m.jsx)('div',
@@ -3998,7 +3998,7 @@
 								{
 									children: [(0, m.jsx)(eO,
 									{
-										hidden: $jquery('.dels:checked').length > 1,
+										hidden: $$('.dels:checked').length > 1,
 										title: "删除消息",
 										onClick: function()
 										{
@@ -4022,7 +4022,7 @@
 										className: "bold",
 										onClick: function()
 										{
-											if($jquery('.dels:checked').length > 1)
+											if($$('.dels:checked').length > 1)
 											{
 												if(confirm('※注意!!!\n空内容会判断为不修改该条目\n只输入一个空格会判断为清空内容\n图片转为其它类型时会清除文件\n发言人为默认时则不修改发言人\n点击【确定】开始批量修改'))
 												{

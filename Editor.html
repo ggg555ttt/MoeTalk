@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相关设置页面</title>
+    <link rel="stylesheet" href="./MoeScript/Style/editor.css">
+    <script src="./MoeScript/Jquery-3.6.4.min.js" defer=""></script>
+    <script src="./MoeScript/Function.js" defer=""></script>
+    <script src="./MoeScript/Tools.js" defer=""></script>
+    <script src="./Data/MolluChar.json" defer=""></script><!-- 旧版学生 -->
+    <script src="./Data/ClosureChar.json" defer=""></script><!-- closure学生 -->
+    <script src="./Data/MT-Characters.JSON?v=2.5.2" defer=""></script><!-- 学生数据 -->
+    <script>
+        function openFile(){
+            document.getElementById('open').click();
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="dtrMainHeader">
+            <div class="dtrfixed_Header">
+                <button class="return"><a href='./'><b>返回MoeTalk</a></b></button>
+                <div class="blank1">
+                    <hr>
+                </div>
+                <img src="./Images/Ui/MoeTalk.png" alt="Moetalk">
+                <div class="blank2">
+                    <hr>
+                </div>
+                <div class="dropdownSetting">
+                    <button class="dropbtn">自定义设置项</button>
+                    <div class="dpd-content">
+                        <a href="#" class="button-container" id="hnum">头像质量</a>
+                        <a href="#" class="button-container" id="mt-size">整体图片宽高</a>
+                        <a href="#" class="button-container" id="mt-cfsize">差分表情宽高</a>
+                        <a href="#" class="button-container" id="mt-title">标题</a>
+                        <a href="#" class="button-container" id="language">更改语言</a>
+                        <a href="#" class="button-container" id="send">文字发送方式</a> 
+                        <a href="#" class="button-container" id="mt-edit">切换编辑模式</a> 
+                        <a href="#" class="button-container" id="font">字体加载选项</a> 
+                    </div>
+                </div>
+                <button class="button-container feedback" onclick="window.open('https://wj.qq.com/s2/12952865/a1aa/')">反馈通道</button>
+                <button class="button-container clear" id="clean">清除本地数据</button>
+                <button class="button-container resetSrvWkr" id="cleancache">清除SERVICEWORKER缓存</button>
+            </div>
+        </div>
+    </header>
+    
+
+    <main>
+        <div class="PageContainer">    
+            <div class="SBWrapper">
+                <!--用户修改项 -->
+                <div class="SideBar">
+                    <div>存档相关</div>
+                    <hr>
+                    <a href='https://ghproxy.com/https://github.com/ggg555ttt/MoeTalk/archive/refs/heads/main.zip'><b>下载最新版<br></br>安装包</a></b>
+                    <button class="Bar" id="savecus">
+                        <b>备</b>
+                    </button>
+                    <span class="button-container">备份自定义角色存档</span>
+                    <br>
+                    <button class="Bar" id="loadcus">
+                        <b>复</b>
+                    </button>
+                    <span class="button-container">恢复自定义角色存档</span>
+                    <br>
+                    <button class="Bar" id="savedata">
+                        <b>载</b>
+                    </button>
+                    <span class="button-container">下载本地数据存档</span>
+                    <br>
+                    <button class="Bar" id="loaddata">
+                        <b>读</b>
+                    </button>
+                    <span class="button-container">读取本地数据存档</span>
+                    <br>
+                    <button class="Bar" id="ct">
+                        <b>生</b>
+                    </button>
+                    <span class="button-container">生成CLOSURE TALK存档</span>
+                </div>
+            </div>
+            <div class="Mainpart">
+                <div class="callback">
+                    <p style="font-size: 30px; font-weight: bold;">存档恢复</p>
+                    <br>
+                    <span style="font-size: 20px; font-weight: 600;">上传由Moetalk生成的图片</span>
+                    <div class="inputwrapper">
+                        <button onclick="$('#file1').click()">选择文件</button>
+                        <input type="file" id="file1" hidden accept='image/png'>
+                        <!-- <button class="Picimport" >No File chosen yet</button> -->
+                    </div>
+                    <!-- <span class="reminder">* 注意应当是png格式</span> -->
+                </div>
+                <div class="footprintset">
+                    <h1 style="font-size: 30px; font-weight: bold;">图片参数修改</h1>
+                    <!-- 用于打开，调整预览图片，后续会经过js调整 -->
+                    <div class="setwrapper"> 
+                        <div class="datadetails">
+                            角度<input type="text" class="drowsy" placeholder="* 整数且不建议太大">
+                            字体大小<input type="text" class="drowsy" placeholder="* 整数且十以上">
+                            <span>颜色RED</span><input type="text" class="drowsy" placeholder="0~255">
+                            <span>颜色GREEN</span><input type="text" class="drowsy" placeholder="0~255">
+                            <span>颜色BLUE</span;><input type="text" class="drowsy" placeholder="0~255">
+                            透明度<input type="text" class="drowsy" placeholder="0~1">
+                            稠密度<input type="text" class="drowsy" placeholder="整数且不建议太大">
+                            文本<input type="text" class="drowsy" placeholder="多行显示用空格隔开,最多三行">
+                        </div>
+                        <div class="forviewPic">
+                            <img src="./Demo.jpg" id="drowsy" alt="预览用图片">
+                        </div>
+                        <div class="upload">
+                            <div class="holder">
+                                <button class="button-container send" onclick="mark()">提交参数</button>
+                                <button class="button-container clear2" onclick="cleanmark()">清空提交的参数</button>
+                            </div>
+                            <p>PS:参数提交后请返回Moetalk,选择生成图片即可看到带水印图片,需要手动保存</p>
+                        </div>  
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="fri">
+            推荐网站：<a href="https://imgtool.net/image-watermark/">图片加水印</a>
+        </div>
+        <div class="author">
+            Created By Sisyphe
+        </div>
+        
+    </footer>    
+</body>
+</html>

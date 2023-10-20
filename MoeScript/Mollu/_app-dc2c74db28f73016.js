@@ -9313,7 +9313,7 @@
 					}
 				});
 				//*新版角色文件读取
-				var r, i = (r = [], $jquery.each(mt_characters,function(k,v)
+				var r, i = (r = [], $$.each(mt_characters,function(k,v)
 					{
 						r.push({
 							no:k,
@@ -13758,7 +13758,7 @@
 							{
 								//*
 								let l = JSON.parse(JSON.stringify(t.payload))
-								$jquery.each(l,function(t,n)
+								$$.each(l,function(t,n)
 								{
 									if(!n.isRight)l[t].isRight = false
 									if(n.isFirst === false)

@@ -35,10 +35,11 @@ $("body").on('click',function()
 	size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0))
 	height = mt_height()
 	$('#size').text(height+"\n"+size+"KB");
-	// if($('.visible').length === 0)
-	// {
-	// 	sendChar = false
-	// }
+	if($('.visible').length === 0)
+	{
+		sendChar = false
+		$('.addChat').prop('checked',false)
+	}
 	warning();
 })
 //标题框
@@ -58,7 +59,7 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append(`<button class='${class0}' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色</span><input size='6' id='ccus' placeholder='输入角色ID'/><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
-	$(".frVjsk").append(`<a href='${href}Setting.html'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
+	$(".frVjsk").append(`<a href='./${browser.isMobile ? 'Setting' : 'Editor'}.html?v=${version}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
 //使用说明
 $('body').on('click',"#readme",function()
@@ -451,4 +452,3 @@ $("body").on('click',"#cutdata",function()
 		alert('你没有选中数据！')
 	}
 });
-var fuck = false;
