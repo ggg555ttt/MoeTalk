@@ -2424,7 +2424,7 @@
 							{
 								hidden: x ? true : false,
 								className: "bold",
-								children: "上同时传存档内自带的自定义角色"
+								children: "同时上传存档内自带的自定义角色"
 							}),
 							//*
 							(0, m.jsx)(ea.$0,
