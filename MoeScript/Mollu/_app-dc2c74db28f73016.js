@@ -8641,7 +8641,7 @@
 									f = c.kind,
 									h = l.length - 1;
 								return {
-									sizes: s || "w" !== f ? s : "100vw",
+									/*sizes: s || "w" !== f ? s : "100vw",///
 									srcSet: l.map(function(e, r)
 									{
 										return "".concat(u(
@@ -8651,7 +8651,7 @@
 											quality: o,
 											width: e
 										}), " ").concat("w" === f ? e : r + 1).concat(f)
-									}).join(", "),
+									}).join(", "),*/
 									src: u(
 									{
 										config: t,
@@ -9679,6 +9679,10 @@
 						{
 							o = mt_characters[e].name[n] ? mt_characters[e].name[n] : e;
 						}
+						if(sessionStorage['mt-char'] && JSON.parse(sessionStorage['mt-char'])[e])
+						{
+							o = JSON.parse(sessionStorage['mt-char'])[e]
+						}
 						if(localStorage['mt-char'] && JSON.parse(localStorage['mt-char'])[e])
 						{
 							o = JSON.parse(localStorage['mt-char'])[e]
@@ -9686,7 +9690,6 @@
 						if(mollu_char[e])o = mollu_char[e][n]
 						if(closure_char[e])o = closure_char[e][n]
 						if(mt_name[e])o = mt_name[e];//@改名
-						if(sessionStorage[e] && e.toString().split(' ').length > 1)o = JSON.parse(sessionStorage[e])[0]//closure自定义角色支持
 						//*读取人名
 						return t && o.split(" ")[1] || o.replaceAll("-", " ")
 						/*
@@ -13761,21 +13764,24 @@
 								$$.each(l,function(t,n)
 								{
 									if(!n.isRight)l[t].isRight = false
-									if(n.isFirst === false)
+									if(n.isFirst === false && n.sCharacter.no !== 0)
 									{
-										if(t-1 < 0)l[t].isFirst = true	
+										if(t-1 < 0)l[t].isFirst = true
 										if(t > 0 && (n.sCharacter.no !== l[t-1].sCharacter.no || ['heart','info','reply'].indexOf(l[t-1].type) > -1 || l[t-1].isRight !== l[t].isRight))
 										{
 											l[t].isFirst = true
 										}
-										if(n.sCharacter.no === 0)
-										{
-											l[t].isFirst = false
-											l[t].isRight = false
-										}
 									}
 								})
 								e.chats = l
+								if(operate === 'isFirst')chatArr[chatIndex] = l
+								if(operate === false)
+								{
+									chatArr = chatArr.slice(0,chatIndex+1)
+									chatArr.push(l)
+									chatIndex = chatArr.length-1
+								}
+								operate = false
 								//*
 							},
 							setReplyNo: function(e, t)
@@ -14830,7 +14836,7 @@
 					{
 						displayName: "common__Profile",
 						componentId: "sc-1ojome3-6"
-					})(["box-sizing:border-box;margin:0rem;width:4rem;height:4rem;object-fit:contain;border-radius:50%;"]),
+					})(["box-sizing:border-box;margin:0rem;width:4rem;height:4rem;object-fit:cover;border-radius:50%;"]),//#
 					Z = (0, L.ZP)(K).withConfig(
 					{
 						displayName: "common__ProfileClick",

@@ -43,6 +43,8 @@ if(!localStorage['mt-date'] || (localStorage['mt-date'] != new Date().getDate())
 /*预定义区*/
 if(!localStorage['mt-char'])localStorage['mt-char'] = '{}';//自定义角色名称
 if(!localStorage['mt-head'])localStorage['mt-head'] = '{}';//自定义角色头像
+if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';//自定义角色名称
+if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';//自定义角色头像
 if(!localStorage['chats'] || !isJSON(localStorage['chats']))localStorage['chats'] = '[]';//聊天记录
 if(!localStorage['mt-lang'])localStorage['mt-lang'] = 'zh_cn';//默认语言
 if(location.href.split('?')[1])localStorage['mt-lang'] = location.href.split('?')[1].replaceAll('sw.js','')
@@ -81,7 +83,6 @@ function savehead(headindex,img64)
 function loadhead(id,img)
 {
 	//MoeTalk头像
-	if(sessionStorage[id] && id.toString().split(' ').length > 1)return JSON.parse(sessionStorage[id])[1];//closure自定义角色支持
 	if(mt_characters[id])
 	{
 		img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D')
@@ -90,7 +91,11 @@ function loadhead(id,img)
 	//自定义头像
 	if(JSON.parse(localStorage['mt-head'])[id])
 	{
-		return JSON.parse(localStorage['mt-head'])[id];
+		return JSON.parse(localStorage['mt-head'])[id]
+	}
+	if(JSON.parse(sessionStorage['mt-head'])[id])
+	{
+		return JSON.parse(sessionStorage['mt-head'])[id]
 	}
 	if(closure_char[id])return `${href}Images/ClosureChar/${img}.webp`;//closure头像
 	if(mollu_char[id])return href+'Images/MolluChar/'+id+'.'+img+'.webp';//旧版头像
@@ -273,6 +278,15 @@ function blobToArrayBuffer(file) {
 		reader.readAsArrayBuffer(file);
 	});
 }
+function blobToBase64(blob, callback) { 
+  var reader = new FileReader(); 
+  reader.onload = function() { 
+    var dataUrl = reader.result; 
+    var base64 = dataUrl.split(',')[1]; 
+    callback(base64); 
+  }; 
+  reader.readAsDataURL(blob); 
+} 
 function combineFiles(mainFile, hideFile, fileName) {
 	const sep = '-sep-';
 	const maxExtLength = 4;
@@ -425,6 +439,7 @@ function club(clear = false)
 }
 function list()
 {
+	club()
 	$('.eIEKpg:eq(0)').click();//更新列表
 	setTimeout(function(){$('.editTools').click()})
 	setTimeout(function(){$('.editTools').click()})
@@ -455,6 +470,8 @@ function editMsg(o,n,t)
 }
 function loaddata(json)
 {
+	let custom_char = {};
+	let custom_head = {};
 	if(!json[0] || (json[0] && !json[0].title))
 	{
 		json[0] = {};
@@ -466,7 +483,7 @@ function loaddata(json)
 		json[0]['replyGroup'] = 0
 		json[0]['replyNo'] = 0
 	}
-	if($('#customchar').prop('checked') === true && json[0] && (json[0].mt_char || json[0].custom))
+	if(json[0] && (json[0].mt_char || json[0].custom))
 	{
 		if(json[0].custom && JSON.parse(json[0].custom)[0].club[0].characters)
 		{
@@ -489,12 +506,16 @@ function loaddata(json)
 			json[0].mt_char = JSON.stringify(json[0].mt_char)
 			json[0].mt_head = JSON.stringify(json[0].mt_head)
 		}
-		if(confirm('确定上传存档内的自定义角色吗？\n这会清除当前存储的自定义角色'))
+		custom_char = JSON.parse(json[0].mt_char);
+		custom_head = JSON.parse(json[0].mt_head);
+	}
+	if(json['custom_chars'])
+	{
+		$.each(json['custom_chars'],function(k,v)
 		{
-			localStorage['mt-char'] = json[0].mt_char
-			localStorage['mt-head'] = json[0].mt_head
-			list()//更新列表
-		}
+			custom_char[v.char_id] = v.name
+			custom_head[v.char_id] = v.img
+		})
 	}
 	let josnsize = parseInt((JSON.stringify(json).length/1024).toFixed(0))
 	if(json['chat'])
@@ -508,12 +529,11 @@ function loaddata(json)
 		$.each(json['chat'],function(k,v)
 		{
 			json[1][k] = {};
-			json[1][k]['sCharacter'] = {};
-			json[1][k]['content'] = v['content'];
 			json[1][k]['replyNo'] = 0
 			json[1][k]['replyGroup'] = 0
 			json[1][k]['replyDepth'] = 0
 
+			json[1][k]['sCharacter'] = {};
 			json[1][k]['sCharacter']['no'] = v['char_id'] ? v['char_id'].split('-')[1] : 0
 			json[1][k]['sCharacter']['index'] = v['img'] ? v['img'].split('.').shift() : 1
 			if(v['img'] === 'uploaded')
@@ -521,21 +541,17 @@ function loaddata(json)
 				json[1][k]['sCharacter']['no'] = v['char_id']
 				json[1][k]['sCharacter']['index'] = v['img']
 			}
+
+			json[1][k]['content'] = v['content'];
+
 			if(v['yuzutalk']['type'] === 'TEXT')json[1][k]['type'] = 'chat'
 			if(v['yuzutalk']['type'] === 'RELATIONSHIPSTORY')json[1][k]['type'] = 'heart'
-			if(v['yuzutalk']['type'] === 'NARRATION')
-			{
-				json[1][k]['type'] = 'info'
-				json[1][k]['sCharacter']['no'] = 0
-				json[1][k]['sCharacter']['index'] = 1
-			}
+			if(v['yuzutalk']['type'] === 'NARRATION')json[1][k]['type'] = 'info'
 			if(v['yuzutalk']['type'] === 'CHOICES')
 			{
 				json[1][k]['replyNo'] = Math.random()
 				json[1][k]['replyGroup'] = Math.random()
 				json[1][k]['type'] = 'reply'
-				json[1][k]['sCharacter']['no'] = 0
-				json[1][k]['sCharacter']['index'] = 1
 			}
 			if(v['yuzutalk']['type'] === 'IMAGE')
 			{
@@ -551,30 +567,61 @@ function loaddata(json)
 					if(v['content'].indexOf('http') < 0)json[1][k]['content'] = v['content'].replace('resources/ba/stamps','Images/ClosureEmoji');
 				}
 			}
-			json[1][k]['isFirst'] = false;
-			if(['RELATIONSHIPSTORY','NARRATION','CHOICES'].indexOf(v.yuzutalk.type) > -1 || !json.chat[k-1] || v.yuzutalk.avatarState === 'SHOW' || (json.chat[k-1] && (json.chat[k-1].char_id !== json.chat[k].char_id || ['RELATIONSHIPSTORY','NARRATION','CHOICES'].indexOf(json.chat[k-1].yuzutalk.type) > -1)))
-			{
-				json[1][k]['isFirst'] = true;
-			}
 			
+			json[1][k]['isFirst'] = false;
+			if(v.yuzutalk.avatarState === 'SHOW')json[1][k]['isFirst'] = true;
 		})
 	}
-	if(json['custom_chars'])
+	
+	if($('#customchar').prop('checked') === true && confirm('确定上传存档内的自定义角色吗？\n这会清除当前存储的自定义角色'))
 	{
-		let arr = [];
-		$.each(json['custom_chars'],function(k,v)
-		{
-			arr[0] = v.name;
-			arr[1] = v.img;
-			sessionStorage[v.char_id] = JSON.stringify(arr)
-		})
+		localStorage['mt-char'] = JSON.stringify(custom_char)
+		localStorage['mt-head'] = JSON.stringify(custom_head)
+		list()//更新列表
+	}
+	else
+	{
+		sessionStorage['mt-char'] = JSON.stringify(custom_char)
+		sessionStorage['mt-head'] = JSON.stringify(custom_head)
+		list()//更新列表
 	}
 	if(josnsize+size > 5120)
 	{
 		alert('当前存档数据：'+size+
 			'\n读取存档数据：'+josnsize+'\n'+
 			josnsize+'+'+size+'='+(josnsize+size)+'\n'+
-			(josnsize+size)+'>'+'5120，存档将无法读取')
+			(josnsize+size)+'>'+'5120，存档可能无法读取')
 	}
 	return json
+}
+// 格式化日对象
+const getNowDate = () => {
+  var date = new Date();
+  var sign2 = ":";
+  var year = date.getFullYear() // 年
+  var month = date.getMonth() + 1; // 月
+  var day = date.getDate(); // 日
+  var hour = date.getHours(); // 时
+  var minutes = date.getMinutes(); // 分
+  var seconds = date.getSeconds() //秒
+  var weekArr = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
+  var week = weekArr[date.getDay()];
+  // 给一位数的数据前面加 “0”
+  if (month >= 1 && month <= 9) {
+    month = "0" + month;
+  }
+  if (day >= 0 && day <= 9) {
+    day = "0" + day;
+  }
+  if (hour >= 0 && hour <= 9) {
+    hour = "0" + hour;
+  }
+  if (minutes >= 0 && minutes <= 9) {
+    minutes = "0" + minutes;
+  }
+  if (seconds >= 0 && seconds <= 9) {
+    seconds = "0" + seconds;
+  }
+  //return year + "-" + month + "-" + day + " " + hour + sign2 + minutes + sign2 + seconds;
+  return `${year}${month}${day}${hour}${minutes}${seconds}`;
 }

@@ -7,6 +7,10 @@ var browser = os();//获取浏览器信息
 var maxHeight = browser.isFirefox ? 16384*2 : 16384;
 var sendChar = false//发言人开关
 var chatIndex = -1//消息索引
+var chatArr = []
+var chatIndex = 0;
+var operate = false
+var copydata;
 function mt_height()
 {
 	let num;
@@ -40,6 +44,15 @@ $("body").on('click',function()
 		sendChar = false
 		$('.addChat').prop('checked',false)
 	}
+	if($(".dels:checked").length > 0)
+	{
+		$(".operate_copy").prop('hidden',false)
+	}
+	else
+	{
+		$(".operate_copy").prop('hidden',true)
+	}
+	$('.delsNum').text($(".dels:checked").length)
 	warning();
 })
 //标题框
@@ -55,8 +68,8 @@ $(".frVjsk").wait(function()
 {
 	$(".frVjsk").append(`<button class='${class0}' id='uphead' class='${class0}'><b style='color:black;'>傳</b></button><span class='tool'>上传头像<span id='cusname'></span></span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='delcus'><b style='color:red;'>刪</b></button><span class='tool'>删除角色</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色</span><input size='6' id='ccus' placeholder='输入角色ID'/><br>`);
+	//$(".frVjsk").append(`<button class='${class0}' id='delcus'><b style='color:red;'>刪</b></button><span class='tool'>删除角色</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色</span><span id='ccus'></span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='./${browser.isMobile ? 'Setting' : 'Editor'}.html?v=${version}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
@@ -93,14 +106,7 @@ $('body').on('click',"#makecus",function()
 	{
 		cus = cus.trim();
 		chararr = JSON.parse(localStorage['mt-char']);
-		if(localStorage['mt-char'] === '{}')
-		{
-			imgindex = 1001
-		}
-		else
-		{
-			imgindex = parseInt(Object.keys(chararr).pop())+1
-		}
+		imgindex = 'custom-'+getNowDate()
 		chararr[imgindex] = cus
 		$("#cusname").text(cus);
 		$("#custom").click();
@@ -150,12 +156,11 @@ $('body').on('click',"#delcus",function()
 //修改人物
 $('body').on('click',"#changecus",function()
 {
-	let id = $("#ccus").val().replaceAll(' ','');
+	let id = $("#ccus").text().replaceAll(' ','');
 	chararr = JSON.parse(localStorage['mt-char'])
-	if(chararr[parseInt(id)+1000])
+	if(chararr[id])
 	{
-		id = parseInt(id)+1000
-		let cname = prompt("自定义角色ID："+(parseInt(id)-1000)+"\n若不想上传头像那么则只修改角色名\n当前角色名为：",chararr[id]);
+		let cname = prompt(`自定义角色ID：${id}\n若不想上传头像那么则只修改角色名\n当前角色名为：`,chararr[id]);
 		if(cname != null && cname.trim() != '')
 		{
 			cname = cname.trim();
@@ -175,7 +180,7 @@ $('body').on('click',"#changecus",function()
 		localStorage['mt-name'] = JSON.stringify(mt_name)
 		list()//更新列表
 	}
-	if(!id)alert("请在下方输入角色ID再点击按钮！")
+	if(!id)alert("请点击角色ID再点击此按钮！")
 })
 //储存头像
 $("body").on('change','#custom',function()
@@ -363,7 +368,7 @@ $('body').on('click',"#mt-style",function()
 		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,255,255)');
 		$('.talk__ImgBox-sc-eq7cqw-3').css('background-color','transparent');
 		$('.talk__InfoBox-sc-eq7cqw-8').css('background','rgb(220,229,232)');
-		localStorage['mt-style'] = 'rgb(255,255,255) transparent rgb(220,229,232)';
+		localStorage['mt-style'] = 'rgb(255,255,255) rgb(255,255,255) rgb(220,229,232)';//transparent
 	}
 	else
 	{
@@ -421,34 +426,45 @@ $("body").on('click',"#cutdata",function()
 {
 	if($(".dels:checked").length > 0)
 	{
-			let arr = [];
-			let json = [];
-			let length = 0;
-			let time = new Date(); 
-			let year = time.getFullYear(); // 年
-			let month = time.getMonth() + 1; // 月
-			let date = time.getDate(); // 日
-			$(".dels:checked").each(function()
-			{
-				length = length+$(this).parent().outerHeight();
-				arr.push(JSON.parse(localStorage['chats'])[$(this).attr('index')]);
-			})
+		let arr = [];
+		let json = [];
+		let length = 0;
+		let time = new Date(); 
+		let year = time.getFullYear(); // 年
+		let month = time.getMonth() + 1; // 月
+		let date = time.getDate(); // 日
+		$(".dels:checked").each(function()
+		{
+			length = length+$(this).parent().outerHeight();
+			arr.push(JSON.parse(localStorage['chats'])[$(this).attr('index')]);
+		})
 
-			let filename = prompt(`【截取存档】\n你一共选中了${$(".dels:checked").length}条数据\n长度大概在${length.toFixed(0)}左右\n请输入文件名：`);
-			if(filename !== null && filename.trim() !== '')
-			{
-				json[0] = {};
-				json[0]['title'] = filename;
-				json[0]['nickname'] = '截取存档'+length.toFixed(0);
-				json[0]['date'] = `${year}-${month}-${date}`
-				json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
-				json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
-				json[1] = JSON.parse(JSON.stringify(arr));
-				download_txt(`${filename}-MoeTalk截取存档${year}_${month}_${date}-长度${length.toFixed(0)}.json`,JSON.stringify(json));
-			}
+		let filename = prompt(`【截取存档】\n你一共选中了${$(".dels:checked").length}条数据\n长度大概在${length.toFixed(0)}左右\n请输入文件名：`);
+		if(filename !== null && filename.trim() !== '')
+		{
+			json[0] = {};
+			json[0]['title'] = filename;
+			json[0]['nickname'] = '截取存档'+length.toFixed(0);
+			json[0]['date'] = `${year}-${month}-${date}`
+			json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
+			json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
+			json[1] = JSON.parse(JSON.stringify(arr));
+			download_txt(`${filename}-MoeTalk截取存档${year}_${month}_${date}-长度${length.toFixed(0)}.json`,JSON.stringify(json));
+		}
 	}
 	else
 	{
 		alert('你没有选中数据！')
+	}
+});
+$("body").on('click',".operate",function()
+{
+	if($('.operateTools').prop('hidden'))
+	{
+		$('.operateTools').prop('hidden',false)
+	}
+	else
+	{
+		$('.operateTools').prop('hidden',true)
 	}
 });

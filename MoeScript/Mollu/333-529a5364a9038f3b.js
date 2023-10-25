@@ -1844,7 +1844,7 @@
 				})(["max-width:"+localStorage['mt-size']+";border:2px solid ", ";background-color:"+localStorage['mt-style'].split(' ')[1]+";padding:0.5rem;border-radius:10px;"], function(e)
 				//#仿ClosureTalk把90%改成40%，可以考虑自定义
 				{
-					return e.theme.color.rgb230_233_235
+					return localStorage['mt-style'].split(' ')[1]//#自定义样式
 				}),
 				s = r.ZP.span.withConfig(
 				{

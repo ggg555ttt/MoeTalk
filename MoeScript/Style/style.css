@@ -6,6 +6,10 @@
 	word-wrap: break-word;/* 允许单词内断行 */
 	white-space: normal;/* 处理空白符，自动换行 */
 }
+#ccus
+{
+	word-break:break-all;
+}
 #cusname
 {
 	color:blue;

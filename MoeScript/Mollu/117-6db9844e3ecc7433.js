@@ -847,8 +847,7 @@
 				{
 					displayName: "talk__TextBox",
 					componentId: "sc-eq7cqw-4"
-				})(["user-select:text;position:relative;color:white;width:fit-content;border-radius:10px;background:", ";border:1px solid ", ";white-space:pre-wrap;overflow-wrap:break-word;word-break:break-all;word-wrap:break-all;line-break:loose;font-size:1.2rem;padding:0.6rem;line-height:141%;::after{content:'';position:absolute;left:-0.5rem;top:0.6rem;border-top:0.3rem solid transparent;border-right:0.5rem solid ", ";border-bottom:0.3rem solid transparent;}"], function(e)
-				//#1.7rem;改为141%
+				})(["user-select:text;position:relative;color:white;width:fit-content;border-radius:10px;background:", ";border:1px solid ", ";white-space:pre-wrap;overflow-wrap:break-word;word-break:break-all;word-wrap:break-all;line-break:loose;font-size:1.2rem;padding:0.6rem;line-height:1.7rem;::after{content:'';position:absolute;left:-0.5rem;top:0.6rem;border-top:0.3rem solid transparent;border-right:0.5rem solid ", ";border-bottom:0.3rem solid transparent;}"], function(e)
 				{
 					return e.theme.color.rgb76_91_111
 				}, function(e)
@@ -946,7 +945,7 @@
 				{
 					displayName: "talk__Profile",
 					componentId: "sc-eq7cqw-14"
-				})(["box-sizing:border-box;margin:0rem;width:4rem;height:4rem;object-fit:contain;border-radius:50%;"])
+				})(["box-sizing:border-box;margin:0rem;width:4rem;height:4rem;object-fit:cover;border-radius:50%;"])//#
 		}
 	}
 ]);

@@ -1651,6 +1651,20 @@ var mt_characters = {
         },
         "charface": "ETC_Others_peroro.1"
     },
+    "食蜂操祈": {
+        "school": "其他",
+        "club": "所属不明-其他",
+        "head": "CH9997_L2D,CH9997_Collection,CH9997",
+        "name": {
+            "zh_cn": "食蜂 操祈",
+            "zh_tw": "食蜂 操祈",
+            "jp": "食蜂 操祈",
+            "en": "Shokuho Misaki",
+            "kr": "쇼쿠호 미사키",
+            "pinyin": "shifengcaoqi"
+        },
+        "charface": "其他_所属不明-其他_食蜂操祈.13.webp"
+    },
     "市民": {
         "school": "其他",
         "club": "所属不明-其他",
@@ -1692,6 +1706,34 @@ var mt_characters = {
             "pinyin": "yousidiyashengtuhui"
         },
         "charface": "ETC_Yustina_YustinaA.1,ETC_Yustina_YustinaA_Swimsuit.1,ETC_Yustina_YustinaB.1"
+    },
+    "御坂美琴": {
+        "school": "其他",
+        "club": "所属不明-其他",
+        "head": "CH9998_L2D,CH9998_Collection,CH9998",
+        "name": {
+            "zh_cn": "御坂 美琴",
+            "zh_tw": "御坂 美琴",
+            "jp": "御坂 美琴",
+            "en": "Misaka Mikoto",
+            "kr": "미사카 미코토",
+            "pinyin": "yubanmeiqin"
+        },
+        "charface": "其他_所属不明-其他_御坂美琴.20.webp"
+    },
+    "佐天泪子": {
+        "school": "其他",
+        "club": "所属不明-其他",
+        "head": "CH9996_L2D,CH9996_Collection,CH9996",
+        "name": {
+            "zh_cn": "佐天 泪子",
+            "zh_tw": "佐天 涙子",
+            "jp": "佐天 涙子",
+            "en": "Saten Ruiko",
+            "kr": "사텐 루이코",
+            "pinyin": "zuotianleizi"
+        },
+        "charface": "其他_所属不明-其他_佐天泪子.16.webp"
     },
     "空": {
         "school": "其他",

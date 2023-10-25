@@ -599,7 +599,7 @@
 								{
 									width: 252,
 									height: 252,
-									alt: "profile",
+									alt: e,
 									src: loadhead(n.no,e),//#左方人物皮肤选择分支
 									onError: function(e)
 									{
@@ -655,7 +655,7 @@
 							{
 								onClick: function()
 								{
-									t === n ? r(null) : r(n)
+									if(n.club[a] !== '临时角色')t === n ? r(null) : r(n)
 								},
 								children: [(0, m.jsxs)(S,
 								{
@@ -669,7 +669,7 @@
 											var n = e.currentTarget;
 											(0, u.Mp)(n, "character")
 										},
-										alt: "profile"
+										alt: n.profile[0]
 									}), 
 									//*添加ID和社团信息
 									(0, m.jsxs)(I,
@@ -692,7 +692,7 @@
 											{
 												onClick: function()
 												{
-													$$('#ccus').val(n.no>999?n.no-1000:n.no)
+													if(n.club[a] !== '临时角色')$$('#ccus').text(n.no)
 												},
 												children:[(0, m.jsx)('span',
 												{
@@ -705,17 +705,17 @@
 														color:'black',
 													},
 													className: "medium",
-													children:n.no>999?n.no-1000:n.no 
+													children:n.no
 												})]
 											}),(0, m.jsx)(O,
 											{
 												children: [(0, m.jsx)('span',
 												{
-													children:(n.club[a] === '自定义角色' ? "size" : mt_text['club'][lang])+'：'
+													children:n.club[a] === '自定义角色' || '临时角色' ? '' : L.Z.club[a]+'：'
 												}),(0, m.jsx)('span',
 												{
 													className: "medium",
-													children:n.club[a] === '自定义角色' ? (JSON.parse(localStorage['mt-head'])[n.no].length/1024).toFixed(0)+'kb' : n.club[a]
+													children:n.club[a] === '自定义角色' ? '自定义角色('+(JSON.parse(localStorage['mt-head'])[n.no].length/1024).toFixed(0)+'KB)' : n.club[a]
 												})]
 											})]//@显示社团
 										})]
@@ -726,11 +726,58 @@
 								{
 									width: 252,
 									height: 252,
-									src: href+"Images/Ui/School/"+(n.school[a] === '自定义' ? '自定义' : mt_characters[n.no].school)+'.webp',//#学校图标
+									src: href+"Images/Ui/School/"+(!mt_schoolname[n.school['zh_cn']] ? n.club['zh_cn'] : mt_characters[n.no].school)+'.webp',//#学校图标
 									onError: function(e)
 									{
 										var n = e.currentTarget;
 										(0, u.Mp)(n, "school")
+									},
+									onClick: function()
+									{
+										if(n.club[a] === '自定义角色')
+										{
+											if(confirm(`角色名：${n.name[a].replaceAll("-", " ")}\nID：${n.no}\n确定要删除这名角色吗？\n删除后的角色可以从临时角色列表中找回`))
+											{
+												let localChar = JSON.parse(localStorage['mt-char']);
+												let localHead = JSON.parse(localStorage['mt-head']);	
+												let sessionChar = JSON.parse(sessionStorage['mt-char']);
+												let sessionHead = JSON.parse(sessionStorage['mt-head']);
+												sessionChar[n.no] = localChar[n.no]
+												sessionHead[n.no] = localHead[n.no]
+												delete localChar[n.no];
+												delete localHead[n.no];
+												localStorage['mt-char'] = JSON.stringify(localChar);
+												localStorage['mt-head'] = JSON.stringify(localHead);
+												sessionStorage['mt-char'] = JSON.stringify(sessionChar);
+												sessionStorage['mt-head'] = JSON.stringify(sessionHead);
+												$$('.jotOXZ')[0].click()
+												setTimeout(function(){$$(`[alt="${n.no}"]`).click()})
+												setTimeout(function(){$$('.jotOXZ')[1].click()})
+												list()//更新列表
+											}
+										}
+										if(n.club[a] === '临时角色')
+										{
+											if(confirm(`角色名：${n.name[a].replaceAll("-", " ")}\nID：${n.no}\n确定将这名角色添加进自定义角色列表？`))
+											{
+												let localChar = JSON.parse(localStorage['mt-char']);
+												let localHead = JSON.parse(localStorage['mt-head']);	
+												let sessionChar = JSON.parse(sessionStorage['mt-char']);
+												let sessionHead = JSON.parse(sessionStorage['mt-head']);
+												localChar[n.no] = sessionChar[n.no]
+												localHead[n.no] = sessionHead[n.no]
+												delete sessionChar[n.no];
+												delete sessionHead[n.no];
+												localStorage['mt-char'] = JSON.stringify(localChar);
+												localStorage['mt-head'] = JSON.stringify(localHead);
+												sessionStorage['mt-char'] = JSON.stringify(sessionChar);
+												sessionStorage['mt-head'] = JSON.stringify(sessionHead);
+												// $$('.jotOXZ')[0].click()
+												// setTimeout(function(){$$(`[alt="${n.no}"]`).click()})
+												// setTimeout(function(){$$('.jotOXZ')[1].click()})
+												list()//更新列表
+											}
+										}
 									},
 									alt: "school"
 								})]
@@ -943,7 +990,7 @@
 									}), (0, m.jsx)('ul',
 									{
 										className: "mutliSelect",
-										children: (0, m.jsx)('li',
+										children: [(0, m.jsx)('li',
 										{
 											children: [(0, m.jsx)('input',
 											{
@@ -952,7 +999,16 @@
 												school: "自定义",
 												value: "自定义角色"
 											}),"自定义角色"]
-										})
+										}),(0, m.jsx)('li',
+										{
+											children: [(0, m.jsx)('input',
+											{
+												type: "checkbox",
+												className: "club",
+												school: "自定义",
+												value: "临时角色"
+											}),"临时角色"]
+										})]
 									})]
 								}),
 								mt_school.map(function(v, k)
@@ -1329,14 +1385,41 @@
 									},
 									no:k,
 									illust : 0,
-									profile : [1],
+									profile : ['local'],
 									momotalk : true,
 									open : true
 								})
 							})
+							if(clubarr['临时角色'] && clubarr['临时角色'] === 'YES')
+							{
+								$$.each(JSON.parse(sessionStorage['mt-char']),function(k,v)
+								{
+									if(v !== null && !JSON.parse(localStorage['mt-char'])[k])arr.unshift(
+									{
+										name:
+										{
+											zh_cn:v,zh_tw:v,en:v,jp:v,kr:v,pinyin:v
+										},
+										club:
+										{
+											zh_cn:'临时角色',zh_tw:'临时角色',en:'临时角色',jp:'临时角色',kr:'临时角色',pinyin:'临时角色'
+										},
+										school : 
+										{
+											zh_cn:'自定义',zh_tw:'自定义',en:'自定义',jp:'自定义',kr:'自定义',pinyin:'自定义'
+										},
+										no:k,
+										illust : 0,
+										profile : ['session'],
+										momotalk : true,
+										open : true
+									})
+								})
+							}
+							
 							arr.map(function(v, k)
 							{
-								let club = v.school.zh_cn === '自定义' ? '自定义角色' : mt_characters[v.no].club
+								let club = v.school.zh_cn === '自定义' ? v.club.zh_cn : mt_characters[v.no].club
 								if(mt_name[v.no])arr[k].name[lang] = mt_name[v.no];//@改名
 								if(JSON.stringify(clubarr) !== '{}' && !clubarr[club])delete arr[k]
 							})
@@ -2234,7 +2317,10 @@
 											chars: n
 										}, (0, et.Z)(s.chats)])], e.next = 6, (0, u.rU)(r);
 									case 6:
-										o = e.sent, (0, ef.saveAs)(o, "MolluTalk_".concat(t.title, ".png")), N();
+										o = e.sent, (0, ef.saveAs)(o, "MolluTalk_".concat(t.title, ".png")), blobToBase64(o,function(base64)
+										{
+											$$('#downImg').attr('src','data:image/png;base64,'+base64)
+										});
 									case 9:
 									case "end":
 										return e.stop()
@@ -2338,7 +2424,7 @@
 							{
 								hidden: x ? true : false,
 								className: "bold",
-								children: "上传MoeTalk存档内的自定义角色"
+								children: "上同时传存档内自带的自定义角色"
 							}),
 							//*
 							(0, m.jsx)(ea.$0,
@@ -2383,6 +2469,14 @@
 												fontSize: "1rem"
 											},
 											children: L.Z.edit_comment[d]
+										}), (0, m.jsx)("span",
+										{
+											style:
+											{
+												margin: "1rem",
+												fontSize: "1rem"
+											},
+											children: '支持ClosureTalk存档'
 										})]
 									}), (0, m.jsx)(eN.HR,
 									{
@@ -2469,7 +2563,10 @@
 											fontSize: "1rem",
 											marginTop: "1rem"
 										},
-										children: L.Z.thanks[d]
+										children: L.Z.image_download[d]
+									}), (0, m.jsx)("img",
+									{
+										id:'downImg'
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -2487,7 +2584,7 @@
 											{
 												S()
 											},
-											children: L.Z.confirm[d]
+											children: L.Z.download[d]
 										})]
 									})]
 								}) : (0, m.jsxs)(m.Fragment,
@@ -2904,6 +3001,10 @@
 						{
 							charname = JSON.parse(localStorage['mt-char'])[no];
 						}
+						if(JSON.parse(sessionStorage['mt-char'])[no])
+						{
+							charname = JSON.parse(sessionStorage['mt-char'])[no];
+						}
 						if(mt_characters[no])
 						{
 							charname = mt_characters[no].name[lang] ? mt_characters[no].name[lang] : no
@@ -2991,7 +3092,7 @@
 												"width": "25%",
 												textAlign:"center"
 											},
-											children: (cf == 'Emoji' ? CFPI+1 : (parseInt(sessionStorage[no])+1))+"/"+(cf !== 'Emoji' && mt_charface ? mt_charface.split(',').length : cf == 'Emoji' ? 4 : 0)
+											children: (cf == 'Emoji' ? CFPI+1 : !isNaN(parseInt(sessionStorage[no])) ? (parseInt(sessionStorage[no])+1) : 0)+"/"+(cf !== 'Emoji' && mt_charface ? mt_charface.split(',').length : cf == 'Emoji' ? 4 : 0)
 										}), (0, m.jsx)(c.Bx,
 										{
 											className: "bold",
@@ -4342,6 +4443,7 @@
 					}, [s, n, a]);
 					var p = function()
 					{
+						operate = 'isFirst'
 						l = JSON.parse(JSON.stringify(l))
 						l[t].isFirst = !l[t].isFirst
 						a((0, eo.U_)(l))
@@ -4384,7 +4486,7 @@
 											{
 												e.currentTarget.src = 'Images/Ui/error.webp';
 											},
-											alt: "profile"
+											alt: n.sCharacter.index
 										})
 									}) : '', (0, m.jsxs)(n.sCharacter.no === 0 ? "div" : eN.Xp,
 									{
@@ -4483,7 +4585,7 @@
 												var n = e.currentTarget;
 												(0, u.Mp)(n, "character")
 											},
-											alt: "profile"
+											alt: n.sCharacter.index
 										})
 									}) : '']
 								})
@@ -4518,8 +4620,9 @@
 						}), h || (0, m.jsx)("input",
 						{
 							"data-html2canvas-ignore":"true",
-							type:"checkbox",
-							index:t,class:"dels"
+							type: "checkbox",
+							index: t,
+							className:"dels"
 						})]
 					})
 				},
@@ -4649,74 +4752,200 @@
 								width: "auto",
 								marginLeft: "auto"
 							},
-							children: [
-								(0, m.jsx)(c.jl,
-								{
-									style:{height: "auto","width": "auto"},
-									id:'delsall',
-									children: (0, m.jsx)(W,
-									{
-										className: "bold",
-										children: (0, m.jsx)(X,
-										{
-											style:{fontSize: "1.1rem"},
-											children: '全选'
-										})
-									})
-								}),
-								(0, m.jsx)(c.jl,
-								{
-									style:{height: "auto","width": "auto"},
-									id:'rdelsall',
-									children: (0, m.jsx)(W,
-									{
-										className: "bold",
-										children: (0, m.jsx)(X,
-										{
-											style:{fontSize: "1.1rem"},
-											children: '反选'
-										})
-									})
-								}),
-								(0, m.jsx)(c.jl,
-								{
-									style:{height: "auto","width": "auto"},
-									id:'delsto',
-									children: (0, m.jsx)(W,
-									{
-										className: "bold",
-										children: (0, m.jsx)(X,
-										{
-											style:{fontSize: "1.1rem"},
-											children: '区间选择'
-										})
-									})
-								}),
-								(0, m.jsx)(c.jl,
-								{
-									style:{height: "auto","width": "auto"},
-									id:'cutdata',
-									children: (0, m.jsx)(W,
-									{
-										className: "bold",
-										children: (0, m.jsx)(X,
-										{
-											style:{fontSize: "1.1rem"},
-											children: '截取存档'
-										})
-									})
-								}),
-								(0, m.jsx)($,
+							children: [(0, m.jsx)('span',
+							{
+								className:'delsNum',
+								children: ''
+							}), (0, m.jsx)(c.jl,
+							{
+								style:{height: "auto","width": "auto"},
+								className: 'operate',
+								children: (0, m.jsx)(W,
 								{
 									className: "bold",
-									onClick:function(){click('#tool-delete')},
+									children: (0, m.jsx)(X,
+									{
+										style:{fontSize: "1.1rem",color: "rgb(139, 187, 233)"},
+										children: '操作'
+									})
+								})
+							}), (0, m.jsx)(c.jl,
+							{
+								style:{height: "auto","width": "auto"},
+								id:'delsall',
+								children: (0, m.jsx)(W,
+								{
+									className: "bold",
 									children: (0, m.jsx)(X,
 									{
 										style:{fontSize: "1.1rem"},
-										children: L.Z['delete'][lang]
+										children: '全选'
 									})
 								})
-								]
+							}), (0, m.jsx)(c.jl,
+							{
+								style:{height: "auto","width": "auto"},
+								id:'rdelsall',
+								children: (0, m.jsx)(W,
+								{
+									className: "bold",
+									children: (0, m.jsx)(X,
+									{
+										style:{fontSize: "1.1rem"},
+										children: '反选'
+									})
+								})
+							}), (0, m.jsx)(c.jl,
+							{
+								style:{height: "auto","width": "auto"},
+								id:'delsto',
+								children: (0, m.jsx)(W,
+								{
+									className: "bold",
+									children: (0, m.jsx)(X,
+									{
+										style:{fontSize: "1.1rem"},
+										children: '区间选择'
+									})
+								})
+							}), (0, m.jsx)($,
+							{
+								className: "bold",
+								onClick:function(){click('#tool-delete')},
+								children: (0, m.jsx)(X,
+								{
+									style:{fontSize: "1.1rem"},
+									children: L.Z['delete'][lang]
+								})
+							})]
+						}), (0, m.jsxs)(eD,
+						{
+							className: "operateTools",
+							style:
+							{
+								padding: "5px 10px",
+								width: "auto"
+							},
+							hidden: true,
+							children: [(0, m.jsx)(c.jl,
+							{
+								style:{height: "auto","width": "auto"},
+								className: 'operate_back',
+								hidden: chatIndex === 0,
+								onClick:function()
+								{
+									if(chatIndex > -1)
+									{
+										
+										chatIndex = chatIndex-1
+										operate = true
+										a((0, eo.U_)(chatArr[chatIndex]))
+									}
+								},
+								children: (0, m.jsx)(W,
+								{
+									className: "bold",
+									children: (0, m.jsx)(X,
+									{
+										style:{fontSize: "1.1rem"},
+										children: '撤销'
+									})
+								})
+							}), (0, m.jsx)(c.jl,
+							{
+								style:{height: "auto","width": "auto"},
+								className: 'operate_go',
+								hidden: chatIndex === chatArr.length-1,
+								onClick:function()
+								{
+									if(chatIndex < chatArr.length-1)
+									{
+										chatIndex = chatIndex+1
+										operate = true
+										a((0, eo.U_)(chatArr[chatIndex]))
+									}
+								},
+								children: (0, m.jsx)(W,
+								{
+									className: "bold",
+									children: (0, m.jsx)(X,
+									{
+										style:{fontSize: "1.1rem"},
+										children: '前进'
+									})
+								})
+							}), (0, m.jsx)(c.jl,
+							{
+								style:{height: "auto","width": "auto"},
+								className: 'operate_copy',
+								hidden: true,
+								children: (0, m.jsx)(W,
+								{
+									className: "bold",
+									children: (0, m.jsx)(X,
+									{
+										style:{fontSize: "1.1rem"},
+										children: '复制'
+									})
+								}),
+								onClick:function()
+								{
+									if($$(".dels:checked").length > 0)
+									{
+										copydata = []
+										$$(".dels:checked").each(function()
+										{
+											copydata.push(t[$$(this).attr('index')])
+										})
+										copydata.reverse()
+										$$(".operate_paste").prop('hidden',false)
+									}	
+								},
+							}), (0, m.jsx)(c.jl,
+							{
+								style:{height: "auto","width": "auto"},
+								className: 'operate_paste',
+								hidden: true,
+								children: (0, m.jsx)(W,
+								{
+									className: "bold",
+									children: (0, m.jsx)(X,
+									{
+										style:{fontSize: "1.1rem"},
+										children: '粘贴'
+									})
+								}),
+								onClick: function()
+								{
+									let index = $$(".dels:checked").attr('index')
+									let arr = JSON.parse(JSON.stringify(t))
+									$$.each(copydata,function(k,v)
+									{
+										if(index > -1)
+										{
+											arr.splice(index,0,v)
+										}
+										else
+										{
+											arr.splice(t.length,0,v)
+										}
+									})
+									a((0, eo.U_)(arr))
+								}
+							}), (0, m.jsx)(c.jl,
+							{
+								style:{height: "auto","width": "auto"},
+								id: 'cutdata',
+								children: (0, m.jsx)(W,
+								{
+									className: "bold",
+									children: (0, m.jsx)(X,
+									{
+										style:{fontSize: "1.1rem"},
+										children: '截取存档'
+									})
+								})
+							})]
 						}),
 						//*
 						(0, m.jsx)(nt,
@@ -4822,6 +5051,16 @@
 						{
 							style:
 							{
+								display: chatArr.length > 1 || n.length > 0 ? "flex" : "none"
+							},
+							children: (0, m.jsx)(nn,
+							{
+								scrollRef: t
+							})
+						}), (0, m.jsx)(ns,
+						{
+							style:
+							{
 								display: n.length > 0 ? "none" : "flex"
 							},
 							children: (0, m.jsx)("span",
@@ -4892,17 +5131,7 @@
 							})
 						}),
 						//*
-						(0, m.jsx)(ns,
-						{
-							style:
-							{
-								display: n.length > 0 ? "flex" : "none"
-							},
-							children: (0, m.jsx)(nn,
-							{
-								scrollRef: t
-							})
-						}), (0, m.jsx)(eA,
+						(0, m.jsx)(eA,
 						{
 							scrollRef: t
 						})]
@@ -5122,8 +5351,7 @@
 				{
 					displayName: "talk__TextBox",
 					componentId: "sc-eq7cqw-4"
-				})(["user-select:text;position:relative;color:white;width:fit-content;border-radius:10px;background:", ";border:1px solid ", ";white-space:pre-wrap;overflow-wrap:break-word;word-break:break-all;word-wrap:break-all;line-break:loose;font-size:1.2rem;padding:0.6rem;line-height:141%;::after{content:'';position:absolute;left:-0.5rem;top:0.6rem;border-top:0.3rem solid transparent;border-right:0.5rem solid ", ";border-bottom:0.3rem solid transparent;}"], function(e)
-				//#1.7rem;改为141%
+				})(["user-select:text;position:relative;color:white;width:fit-content;border-radius:10px;background:", ";border:1px solid ", ";white-space:pre-wrap;overflow-wrap:break-word;word-break:break-all;word-wrap:break-all;line-break:loose;font-size:1.2rem;padding:0.6rem;line-height:1.7rem;::after{content:'';position:absolute;left:-0.5rem;top:0.6rem;border-top:0.3rem solid transparent;border-right:0.5rem solid ", ";border-bottom:0.3rem solid transparent;}"], function(e)
 				{
 					return e.theme.color.rgb76_91_111
 				}, function(e)
