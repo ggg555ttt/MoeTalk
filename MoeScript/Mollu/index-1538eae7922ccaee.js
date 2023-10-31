@@ -4831,15 +4831,15 @@
 							{
 								style:{height: "auto","width": "auto"},
 								className: 'operate_back',
-								hidden: chatIndex === 0,
+								hidden: dataIndex === 0,
 								onClick:function()
 								{
-									if(chatIndex > -1)
+									if(dataIndex > -1)
 									{
 										
-										chatIndex = chatIndex-1
+										dataIndex = dataIndex-1
 										operate = true
-										a((0, eo.U_)(chatArr[chatIndex]))
+										a((0, eo.U_)(chatArr[dataIndex]))
 									}
 								},
 								children: (0, m.jsx)(W,
@@ -4855,14 +4855,14 @@
 							{
 								style:{height: "auto","width": "auto"},
 								className: 'operate_go',
-								hidden: chatIndex === chatArr.length-1,
+								hidden: dataIndex === chatArr.length-1,
 								onClick:function()
 								{
-									if(chatIndex < chatArr.length-1)
+									if(dataIndex < chatArr.length-1)
 									{
-										chatIndex = chatIndex+1
+										dataIndex = dataIndex+1
 										operate = true
-										a((0, eo.U_)(chatArr[chatIndex]))
+										a((0, eo.U_)(chatArr[dataIndex]))
 									}
 								},
 								children: (0, m.jsx)(W,

@@ -8,7 +8,7 @@ var maxHeight = browser.isFirefox ? 16384*2 : 16384;
 var sendChar = false//发言人开关
 var chatIndex = -1//消息索引
 var chatArr = []
-var chatIndex = 0;
+var dataIndex = 0;
 var operate = false
 var copydata;
 function mt_height()

@@ -13772,14 +13772,16 @@
 											l[t].isFirst = true
 										}
 									}
+									if(n.sCharacter.no === 0)l[t].isRight = false
+									if(n.sCharacter.no === 0)l[t].isFirst = false
 								})
 								e.chats = l
-								if(operate === 'isFirst')chatArr[chatIndex] = l
+								if(operate === 'isFirst')chatArr[dataIndex] = l
 								if(operate === false)
 								{
-									chatArr = chatArr.slice(0,chatIndex+1)
+									chatArr = chatArr.slice(0,dataIndex+1)
 									chatArr.push(l)
-									chatIndex = chatArr.length-1
+									dataIndex = chatArr.length-1
 								}
 								operate = false
 								//*
