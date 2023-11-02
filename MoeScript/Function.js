@@ -38,7 +38,7 @@ $.ajax({
 					length=length+1
 					if(keys.length === length)
 					{
-						alert(`当前版本：${version}\n即将更新至最新版本：${text}每次更新会重新将字体读取入缓存\n请耐心等待几分钟直至字体加载完毕\n如果您禁用了字体加载请无视此提示`)
+						alert(`当前版本：${version}\n即将更新至最新版本：${text}\n每次更新会重新将字体读取入缓存\n请耐心等待几分钟直至字体加载完毕\n如果您禁用了字体加载请无视此提示`)
 						localStorage['mt-version'] = text,
 						location.reload(true);
 					}
