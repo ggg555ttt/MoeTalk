@@ -87,6 +87,7 @@ $('body').on('click',"#readme",function()
 					"对于代码的改动地点均用注释语句标注\n"+
 					"点击【确认】将尝试更新版本并刷新页面"))
 				{
+					localStorage['mt-version'] = '0',
 					location.reload(true)
 				}
 			}
