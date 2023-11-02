@@ -19,12 +19,7 @@ function mt_height()
 	return parseInt(($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed(0))+80;
 }
 
-var font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g=''>";//字体文件地址
-if(window.location.hostname !== 'localhost' && !browser.isFirefox)
-{
-	font = "<link rel='stylesheet' href='./MoeScript/Style/font_web.css' data-n-g=''>";//更改为网络字体
-}
-if(!localStorage['nofont'])$("head").append(font);//加载字体
+if(!localStorage['nofont'])$("head").append("<link rel='stylesheet' href='./Data/font.css' data-n-g=''>");//加载字体
 
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
 $("body").on('keydown',function()
@@ -79,20 +74,26 @@ $('body').on('click',"#readme",function()
 {
 	window.caches && caches.keys && caches.keys().then(function(keys)
 	{
+		let length = 0;
 		keys.forEach(function(key)
 		{
-			console.log("delete cache", key);
 			caches.delete(key);
+			length=length+1
+			if(keys.length === length)
+			{
+				if(confirm("MoeTalk当前版本："+version+"\n"+
+					"MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
+					"MolluTalk的代码取得方式来自浏览器自带的Ctrl+S\n"+
+					"对于代码的改动地点均用注释语句标注\n"+
+					"点击【确认】将尝试更新版本并刷新页面"))
+				{
+					location.reload(true)
+				}
+			}
 		});
+		
 	});
-	if(confirm("MoeTalk当前版本："+version+"\n"+
-		"MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
-		"MolluTalk的代码取得方式来自浏览器自带的Ctrl+S\n"+
-		"对于代码的改动地点均用注释语句标注\n"+
-		"点击【确认】将尝试更新版本并刷新页面"))
-	{
-		location.reload(true)
-	}
+	
 
 });
 //创建人物

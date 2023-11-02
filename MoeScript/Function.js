@@ -1,4 +1,6 @@
 var href = window.location.href.split(window.location.host)[1].split('?')[0]
+var version = '';
+if(localStorage['mt-version'])version = localStorage['mt-version']
 if(window.location.href.indexOf('file:///') === 0)
 {
 	if(confirm('请不要直接通过资源管理器进入MoeTalk\n离线版相关进入教程请点击【确定】或【取消】访问'))
@@ -17,18 +19,33 @@ if(window.location.href === 'https://ggg555ttt.gitee.io/moetalk/')
 		window.location.replace('https://moetalk.gitee.io/')
 	}
 }
-if(!localStorage['mt-date'] || (localStorage['mt-date'] != new Date().getDate()))
-{
-	window.caches && caches.keys && caches.keys().then(function(keys)
+$.ajax({
+	url: './version.txt?t='+Date.now(),
+	type: 'GET',
+	cache: false, // 禁用缓存
+	success: function(text)
 	{
-		keys.forEach(function(key)
+		version = text
+		if(!localStorage['mt-version'] || localStorage['mt-version'] !== text)
 		{
-			caches.delete(key);
-		});
-		localStorage['mt-date'] = new Date().getDate(),
-		location.reload(true);
-	});
-}
+			window.caches && caches.keys && caches.keys().then(function(keys)
+			{
+				let length = 0;
+				keys.forEach(function(key)
+				{
+					caches.delete(key);
+					length=length+1
+					if(keys.length === length)
+					{
+						localStorage['mt-version'] = text,
+						location.reload(true);
+					}
+				});
+				
+			});
+		}
+	}
+});
 //解决低版本浏览器不支持replaceAll
 (function()
 {
