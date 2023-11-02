@@ -20,7 +20,7 @@ if(window.location.href === 'https://ggg555ttt.gitee.io/moetalk/')
 	}
 }
 $.ajax({
-	url: './version.txt?t='+Date.now(),
+	url: './version.json?t='+Date.now(),
 	type: 'GET',
 	cache: false, // 禁用缓存
 	success: function(text)
