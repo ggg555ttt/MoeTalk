@@ -49,6 +49,10 @@ $("body").on('click',function()
 	}
 	$('.delsNum').text($(".dels:checked").length)
 	warning();
+	if($('#readme').text() !== '' && localStorage['MoeTalk'] !== 'debug')
+	{
+		$('.vc-switch').hide()
+	}
 })
 //标题框
 $(".bIcduz").wait(function()
@@ -67,6 +71,7 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append(`<button class='${class0}' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色</span><span id='ccus'></span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
+	$(".frVjsk").append(`<a href='https://tieba.baidu.com/p/8551808608'}.html'><button class='${class0}'><b style='color:black;'>教</b></button></a><span class='tool'>使用教程</span><br>`);
 	$(".frVjsk").append(`<a href='./${browser.isMobile ? 'Setting' : 'Editor'}.html?v=${version}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
 //使用说明
