@@ -12399,10 +12399,12 @@
 								style:
 								{
 									opacity: i ? 1 : 0,
-									pointerEvents: "none"
+									pointerEvents: "none",
+									textAlign:'center'//@
 								},
 								children: (0, O.jsx)("span",
 								{
+									style:{lineHeight:'141%'},//@
 									children: localStorage['MoeTalk']+' '+version//#蒙版标题自定义localStorage['MoeTalk']
 								})
 							})]

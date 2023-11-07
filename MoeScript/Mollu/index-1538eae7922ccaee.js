@@ -2165,7 +2165,7 @@
 											textAlign: "center",
 											fontSize: "0.9rem"
 										},
-										children: L.Z.thanks[g]
+										children: '若等待时间较长建议您进入设置页面禁用字体加载'//L.Z.thanks[g]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,

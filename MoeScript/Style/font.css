@@ -1,0 +1,17 @@
+@font-face {
+	font-family:title;
+	src: url('../../Data/Font/Jalnan.TTF') format('truetype');
+}
+@font-face {
+	font-family:medium;
+	src: url('../../Data/Font/NotoSansSC-Medium.OTF') format('truetype');
+}
+@font-face {
+	font-family:bold;
+}
+[lang=en],[lang=en] .medium,[lang=ja],[lang=ja] .medium,[lang=ko],[lang=ko] .medium,[lang=zh-tw],[lang=zh-tw] .medium,[lang=zh-CN],[lang=zh-CN] .medium,[lang=zh],[lang=zh] .medium {
+	font-family:medium
+}
+[lang=en] .bold,[lang=ja] .bold,[lang=ko] .bold,[lang=zh-tw] .bold,[lang=zh-CN] .bold,[lang=zh] .bold {
+	font-family:bold
+}

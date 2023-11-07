@@ -112,7 +112,10 @@ a {
 	color: #3f51b5;
 	text-decoration: none;
 }
-
+.bold
+{
+	font-weight:500;
+}
 .button-container {
 	padding: 8px 24px;
 	margin: 15px 15px;

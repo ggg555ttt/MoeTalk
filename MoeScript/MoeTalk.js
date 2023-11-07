@@ -19,7 +19,7 @@ function mt_height()
 	return parseInt(($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed(0))+80;
 }
 
-if(!localStorage['nofont'])$("head").append("<link rel='stylesheet' href='./Data/font.css' data-n-g=''>");//加载字体
+if(!localStorage['nofont'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g=''>");//加载字体
 
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
 $("body").on('keydown',function()
@@ -49,11 +49,14 @@ $("body").on('click',function()
 	}
 	$('.delsNum').text($(".dels:checked").length)
 	warning();
+})
+$(document).ready(function()
+{
 	if($('#readme').text() !== '' && localStorage['MoeTalk'] !== 'debug')
 	{
 		$('.vc-switch').hide()
 	}
-})
+});
 //标题框
 $(".bIcduz").wait(function()
 {
@@ -77,30 +80,34 @@ $(".frVjsk").wait(function()
 //使用说明
 $('body').on('click',"#readme",function()
 {
-	window.caches && caches.keys && caches.keys().then(function(keys)
+	if($('.vc-switch').css('display') === 'none')
 	{
-		let length = 0;
-		keys.forEach(function(key)
+		$('.vc-switch').show()
+		$('.vc-switch').text('控制台')
+	}
+	else
+	{
+		$('.vc-switch').hide()
+	}
+	if(confirm("MoeTalk当前版本："+version+"\n"+
+	"MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
+	"你可以点击【确认】尝试更新版本并刷新页面"))
+	{
+		window.caches && caches.keys && caches.keys().then(function(keys)
 		{
-			caches.delete(key);
-			length=length+1
+			let length = 0;
+			keys.forEach(function(key)
+			{
+				length=length+1
+				caches.delete(key);
+			});
 			if(keys.length === length)
 			{
-				if(confirm("MoeTalk当前版本："+version+"\n"+
-					"MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
-					"MolluTalk的代码取得方式来自浏览器自带的Ctrl+S\n"+
-					"对于代码的改动地点均用注释语句标注\n"+
-					"点击【确认】将尝试更新版本并刷新页面"))
-				{
-					localStorage['mt-version'] = '0',
-					location.reload(true)
-				}
+				localStorage['mt-version'] = '0'
+				location.reload(true)
 			}
 		});
-		
-	});
-	
-
+	}
 });
 //创建人物
 $("body").append("<input id='custom' hidden type='file' accept='image/*'>");//添加上传标签
