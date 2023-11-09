@@ -336,14 +336,14 @@ $('body').on('click',"#delsto",function()
 $('body').on('click',"#editTools",function()
 {
 	$(".dels").parent().css("background-color","")//
-	if($('.tools').attr('hidden'))
+	if($('.tools').css('display') === 'none')
 	{
 		// $('#delsall').attr('hidden',false)
 		// $('#delsto').attr('hidden',false)
 		// $('#rdelsall').attr('hidden',false)
 		// $('#cutdata').attr('hidden',false)
-		$('.tools').attr('hidden',false)
-		$('#dels').attr('hidden',false).next().attr('hidden',false)
+		$('.tools').show()
+		$('.dels').attr('hidden',false).next().attr('hidden',false)
 	}
 	else
 	{
@@ -351,8 +351,8 @@ $('body').on('click',"#editTools",function()
 		// $('#delsto').attr('hidden',true)
 		// $('#rdelsall').attr('hidden',true)
 		// $('#cutdata').attr('hidden',true)tools1
-		$('.tools').attr('hidden',true)
-		$('#dels').attr('hidden',true).next().attr('hidden',true)
+		$('.tools').hide()
+		$('.dels').attr('hidden',true).next().attr('hidden',true)
 	}
 })
 //选框被选中背景色

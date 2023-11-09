@@ -4820,7 +4820,7 @@
 							})]
 						}), (0, m.jsxs)(eD,
 						{
-							className: "operateTools",
+							className: "tools operateTools",
 							style:
 							{
 								display: 'none',
