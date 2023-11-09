@@ -50,13 +50,12 @@ $("body").on('click',function()
 	$('.delsNum').text($(".dels:checked").length)
 	warning();
 })
-$(document).ready(function()
+window.onload = function()
 {
-	if($('#readme').text() !== '' && localStorage['MoeTalk'] !== 'debug')
-	{
-		$('.vc-switch').hide()
-	}
-});
+	var vConsole = new window.VConsole();
+	if($('#readme').text() !== '')$('.vc-switch').hide()
+}
+
 //标题框
 $(".bIcduz").wait(function()
 {
@@ -80,6 +79,10 @@ $(".frVjsk").wait(function()
 //使用说明
 $('body').on('click',"#readme",function()
 {
+	console.log('这是开发者的调试工具，点击标题会隐藏控制台按钮\n'+
+		'B站主页 https://space.bilibili.com/13973390\n'+
+		'Gitee项目地址 https://gitee.com/moetalk/MoeTalk\n'+
+		'Github项目地址 https://github.com/ggg555ttt/MoeTalk')
 	if($('.vc-switch').css('display') === 'none')
 	{
 		$('.vc-switch').show()

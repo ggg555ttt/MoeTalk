@@ -10657,7 +10657,7 @@
 							headers: i,
 							body: JSON.stringify(o)
 						},
-						u = {};//#会报错，隐藏u = await eO(() => fetch(r, s));
+						u = await eO(() => fetch(r, s));
 					if(u.ok)
 					{
 						let e = await u.json(),
@@ -19629,6 +19629,7 @@
 					},
 					c = (e, t, ...n) =>
 					{
+						return;//@
 						if(t < e.logLevel) return;
 						let r = new Date().toISOString(),
 							i = u[t];
