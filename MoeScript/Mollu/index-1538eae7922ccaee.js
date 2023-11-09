@@ -4823,10 +4823,10 @@
 							className: "operateTools",
 							style:
 							{
+								display: 'none',
 								padding: "5px 10px",
 								width: "auto"
 							},
-							hidden: true,
 							children: [(0, m.jsx)(c.jl,
 							{
 								style:{height: "auto","width": "auto"},

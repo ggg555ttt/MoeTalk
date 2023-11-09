@@ -93,8 +93,8 @@ $('body').on('click',"#readme",function()
 		$('.vc-switch').hide()
 	}
 	if(confirm("MoeTalk当前版本："+version+"\n"+
-	"MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
-	"你可以点击【确认】尝试更新版本并刷新页面"))
+		"MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
+		"你可以点击【确认】尝试更新版本并刷新页面"))
 	{
 		window.caches && caches.keys && caches.keys().then(function(keys)
 		{
@@ -476,12 +476,12 @@ $("body").on('click',"#cutdata",function()
 });
 $("body").on('click',".operate",function()
 {
-	if($('.operateTools').prop('hidden'))
+	if($('.operateTools').css('display') === 'none')
 	{
-		$('.operateTools').prop('hidden',false)
+		$('.operateTools').show()
 	}
 	else
 	{
-		$('.operateTools').prop('hidden',true)
+		$('.operateTools').hide()
 	}
 });
