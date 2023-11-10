@@ -85,8 +85,8 @@ $('body').on('click',"#readme",function()
 		'Github项目地址 https://github.com/ggg555ttt/MoeTalk')
 	if($('.vc-switch').css('display') === 'none')
 	{
-		$('.vc-switch').show()
 		$('.vc-switch').text('控制台')
+		$('.vc-switch').show()
 	}
 	else
 	{
