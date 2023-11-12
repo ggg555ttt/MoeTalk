@@ -60,7 +60,7 @@ $.ajax({
 							}
 						}
 						localStorage['mt-version'] = text
-						window.location.replace(`${location.href}?${Math.random()}`)
+						window.location.replace(`${window.location.href.split('?')[0]}?${Math.random()}`)
 					}
 				});
 				
