@@ -105,8 +105,8 @@ $('body').on('click',"#readme",function()
 			});
 			if(keys.length === length)
 			{
-				localStorage['mt-version'] = '0'
-				window.location.replace(`${location.href}?${Math.random()}`)
+				//localStorage['mt-version'] = '0'
+				window.location.replace(`${window.location.href.split('?')[0]}?${Math.random()}`)
 			}
 		});
 	}
