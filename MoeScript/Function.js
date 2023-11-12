@@ -38,6 +38,27 @@ $.ajax({
 					length=length+1
 					if(keys.length === length)
 					{
+						if(navigator.language.indexOf('ja') > -1)
+						{
+							if(confirm("(このオプションは更新ごとに通知されます)\n言語をブラウザのデフォルト言語に変更しますか?"))
+							{
+								localStorage['mt-lang'] = 'jp'
+							}
+						}
+						if(navigator.language.indexOf('en') > -1)
+						{
+							if(confirm("(This option will only be alerted with each update)\nDo you want to change the language to the browser's default language?"))
+							{
+								localStorage['mt-lang'] = 'en'
+							}
+						}
+						if(navigator.language.indexOf('ko') > -1)
+						{
+							if(confirm("(이 옵션은 업데이트할 때마다 알립니다.)\n 언어를 브라우저의 기본 언어로 변경하시겠습니까?"))
+							{
+								localStorage['mt-lang'] = 'kr'
+							}
+						}
 						localStorage['mt-version'] = text
 						window.location.replace(`${location.href}?${Math.random()}`)
 					}
@@ -65,8 +86,8 @@ if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';//自定义角色
 if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';//自定义角色头像
 if(!localStorage['chats'] || !isJSON(localStorage['chats']))localStorage['chats'] = '[]';//聊天记录
 if(!localStorage['mt-lang'])localStorage['mt-lang'] = 'zh_cn';//默认语言
-if(location.href.split('?')[1])localStorage['mt-lang'] = location.href.split('?')[1].replaceAll('sw.js','')
-if(['zh_cn','zh_tw','jp','en','kr'].indexOf(localStorage['mt-lang']) < 0)localStorage['mt-lang'] = 'zh_cn'
+// if(location.href.split('?')[1])localStorage['mt-lang'] = location.href.split('?')[1].replaceAll('sw.js','')
+// if(['zh_cn','zh_tw','jp','en','kr'].indexOf(localStorage['mt-lang']) < 0)localStorage['mt-lang'] = 'zh_cn'
 if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';//整体图片宽高百分比
 if(!localStorage['mt-cfsize'])localStorage['mt-cfsize'] = '90%';//差分表情宽高百分比
 if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';//标题
