@@ -39,7 +39,7 @@ $.ajax({
 					if(keys.length === length)
 					{
 						localStorage['mt-version'] = text
-						location.reload(true);
+						window.location.replace(`${location.href}?${Math.random()}`)
 					}
 				});
 				

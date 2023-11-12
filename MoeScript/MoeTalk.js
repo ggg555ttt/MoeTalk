@@ -50,11 +50,10 @@ $("body").on('click',function()
 	$('.delsNum').text($(".dels:checked").length)
 	warning();
 })
-window.onload = function()
+$(function()
 {
-	var vConsole = new window.VConsole();
 	if($('#readme').text() !== '')$('.vc-switch').hide()
-}
+});
 
 //标题框
 $(".bIcduz").wait(function()
@@ -106,8 +105,7 @@ $('body').on('click',"#readme",function()
 			});
 			if(keys.length === length)
 			{
-				localStorage['mt-version'] = '0'
-				location.reload(true)
+				window.location.replace(`${location.href}?${Math.random()}`)
 			}
 		});
 	}
