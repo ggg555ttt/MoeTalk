@@ -1385,7 +1385,7 @@
 									},
 									no:k,
 									illust : 0,
-									profile : ['local'],
+									profile : [k],
 									momotalk : true,
 									open : true
 								})

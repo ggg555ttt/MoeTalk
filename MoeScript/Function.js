@@ -85,9 +85,12 @@ if(!localStorage['mt-head'])localStorage['mt-head'] = '{}';//自定义角色头�
 if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';//自定义角色名称
 if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';//自定义角色头像
 if(!localStorage['chats'] || !isJSON(localStorage['chats']))localStorage['chats'] = '[]';//聊天记录
+//if(location.href.split('?')[1])localStorage['mt-lang'] = location.href.split('?')[1].replaceAll('sw.js','')
+var langarr = ['zh_cn','zh_tw','jp','en','kr'];
+var langid = langarr.indexOf(window.location.href.split('?')[1])
 if(!localStorage['mt-lang'])localStorage['mt-lang'] = 'zh_cn';//默认语言
-// if(location.href.split('?')[1])localStorage['mt-lang'] = location.href.split('?')[1].replaceAll('sw.js','')
-// if(['zh_cn','zh_tw','jp','en','kr'].indexOf(localStorage['mt-lang']) < 0)localStorage['mt-lang'] = 'zh_cn'
+if(langid > -1)localStorage['mt-lang'] = langarr[langid]
+
 if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';//整体图片宽高百分比
 if(!localStorage['mt-cfsize'])localStorage['mt-cfsize'] = '90%';//差分表情宽高百分比
 if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';//标题
