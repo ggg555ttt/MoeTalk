@@ -60,7 +60,7 @@ $.ajax({
 							}
 						}
 						localStorage['mt-version'] = text
-						window.location.replace(`${window.location.href.split('?')[0]}?${Math.random()}`)
+						location.reload(true)
 					}
 				});
 				
@@ -90,7 +90,6 @@ var langarr = ['zh_cn','zh_tw','jp','en','kr'];
 var langid = langarr.indexOf(window.location.href.split('?')[1])
 if(!localStorage['mt-lang'])localStorage['mt-lang'] = 'zh_cn';//默认语言
 if(langid > -1)localStorage['mt-lang'] = langarr[langid]
-
 if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';//整体图片宽高百分比
 if(!localStorage['mt-cfsize'])localStorage['mt-cfsize'] = '90%';//差分表情宽高百分比
 if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';//标题

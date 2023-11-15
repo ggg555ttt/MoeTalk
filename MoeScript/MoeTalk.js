@@ -73,7 +73,7 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='https://tieba.baidu.com/p/8551808608'}.html'><button class='${class0}'><b style='color:black;'>教</b></button></a><span class='tool'>使用教程</span><br>`);
-	$(".frVjsk").append(`<a href='./${browser.isMobile ? 'Setting' : 'Editor'}.html?v=${version}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
+	$(".frVjsk").append(`<a href='./${browser.isMobile ? 'Setting' : 'Editor'}.html'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
 //使用说明
 $('body').on('click',"#readme",function()
@@ -106,7 +106,7 @@ $('body').on('click',"#readme",function()
 			if(keys.length === length)
 			{
 				localStorage['mt-version'] = '0'
-				window.location.replace(`${window.location.href.split('?')[0]}?${Math.random()}`)
+				location.reload(true)
 			}
 		});
 	}
