@@ -4550,7 +4550,7 @@
 												{
 													editMsg(o,n,t)//#编辑消息-图片
 												},
-												src: n.file || n.content.toLowerCase().indexOf("moetalk") > -1 ? n.content.split('#')[0] : href+n.content.split('#')[0],//#图片也支持样式了
+												src: !n.file ? n.content.toLowerCase().indexOf("moetalk") > -1 && !n.file? n.content.split('#')[0] : href+n.content.split('#')[0] : n.file,//#图片也支持样式了
 												onError: function(e)
 												{
 													e.currentTarget.src = 'Images/Ui/error.webp';
