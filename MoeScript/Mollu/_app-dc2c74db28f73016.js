@@ -15045,7 +15045,7 @@
 					{
 						displayName: "popup__ModalContainer",
 						componentId: "sc-1ardd6p-1"
-					})([`background:white;max-width:${browser.isMobile ? '30' : '45'}rem;margin:auto;height:auto;width:90%;border-radius:1rem;-webkit-border-radius:1rem;-moz-border-radius:1rem;box-shadow:0rem 0.2rem 0.3rem `, ";"], function(e)
+					})([`background:white;max-width:${browser.isMobile || browser.isMobile ? '30' : '45'}rem;margin:auto;height:auto;width:90%;border-radius:1rem;-webkit-border-radius:1rem;-moz-border-radius:1rem;box-shadow:0rem 0.2rem 0.3rem `, ";"], function(e)
 					{
 						return e.theme.color.rgb60_60_60
 					}),
