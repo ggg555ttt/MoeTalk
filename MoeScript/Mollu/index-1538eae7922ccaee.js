@@ -2165,7 +2165,7 @@
 											textAlign: "center",
 											fontSize: "0.9rem"
 										},
-										children: '若等待时间较长建议您进入设置页面禁用字体加载'//L.Z.thanks[g]
+										children: localStorage.getItem('mt-font') ? '若等待时间较长建议您进入设置页面禁用字体加载' : '设置页面可以开启字体加载'//L.Z.thanks[g]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -3018,11 +3018,12 @@
 							{
 								sessionStorage[no] < 0 ? sessionStorage[no] = mt_charface.split(',').length-1 : sessionStorage[no] = 0;
 							}
+							if(isNaN(parseInt(sessionStorage[no])))sessionStorage[no] = 0;
 							let arr = mt_charface.split(',')[parseInt(sessionStorage[no])];
 							for(let num = 1;num <= arr.split('.')[1];num++)
 							{
-								cflink = 'Images/CharFace/'+(arr.split('.')[0].replaceAll('_','/'))+'/'+arr.split('.')[0]+'.';
-								cfarr.push(href+cflink+num+'.webp')
+								cflink = `Images/CharFace/${mt_characters[no].school}/${mt_characters[no].club}/${arr.split('.')[0]}.`;
+								cfarr.push(cflink+num+'.webp')
 							}
 						}
 						if(cf == 'Emoji')
@@ -3116,7 +3117,7 @@
 												.fill(0)
 												.map(function(e, n)
 												{
-													if(cf == 'Emoji')link = `${href}Images/${cf}/${CFPI+1}${CFPI<3?(lang=='zh_cn'?'zh_tw':lang):''}${n+1}.webp`;//@原版表情
+													if(cf == 'Emoji')link = `Images/${cf}/${CFPI+1}${CFPI<3?(lang=='zh_cn'?'zh_tw':lang):''}${n+1}.webp`;//@原版表情
 													if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
 													return (0, m.jsx)(ez,
 													{
@@ -3125,11 +3126,11 @@
 														width: 310,
 														onClick: function()
 														{
-															if(cf == 'Emoji')link = `${href}Images/${cf}/${CFPI+1}${CFPI<3?(lang=='zh_cn'?'zh_tw':lang):''}${n+1}.webp`;//@原版表情
+															if(cf == 'Emoji')link = `Images/${cf}/${CFPI+1}${CFPI<3?(lang=='zh_cn'?'zh_tw':lang):''}${n+1}.webp`;//@原版表情
 															if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
 															u(link)//#表情链接
 														},
-														src: link//#表情链接
+														src: href+link//#表情链接
 													}, n)
 												})
 											]
@@ -4247,10 +4248,10 @@
 					{
 						children: [(0, m.jsx)(eN.g4,
 						{
-							// onClick:function()
-							// {
-							// 	t((0, eo.Z8)(1234))
-							// },
+							onClick:function()
+							{
+								t((0, eo.Z8)(n.content.split('\n')[index]))
+							},
 							children: (0, m.jsx)(e2,
 							{
 								className: browser.isFirefox ? "" : "medium",//#判断火狐
@@ -4326,7 +4327,8 @@
 							},
 							children: t.map(function(e, t)
 							{
-								return n.replyGroup === e.replyGroup && e.content.split('\n').map(function(v, k){//@换行分割选择肢
+								return n.replyGroup === e.replyGroup && e.content.split('\n').map(function(v, k)
+								{//@换行分割选择肢
 									return n.replyGroup === e.replyGroup && (0, m.jsx)(eQ,
 									{
 										index: k,//@加入选择分支索引
@@ -4548,7 +4550,7 @@
 												{
 													editMsg(o,n,t)//#编辑消息-图片
 												},
-												src: n.file || n.content.split('#')[0],//#图片也支持样式了
+												src: n.file || n.content.toLowerCase().indexOf("moetalk") > -1 ? n.content.split('#')[0] : href+n.content.split('#')[0],//#图片也支持样式了
 												onError: function(e)
 												{
 													e.currentTarget.src = 'Images/Ui/error.webp';
@@ -4590,12 +4592,22 @@
 									}) : '']
 								})
 							}) : "reply" === n.type ? [(0, m.jsx)(eN.xu,
-							{}),(0, m.jsx)('div',
 							{
-								onClick: function()
+								style:{justifyContent: 'flex-end'},
+								children: (0, m.jsx)(ne,//编辑按钮
 								{
-									editMsg(o,n,t)//#编辑消息-回复
-								},
+									"data-html2canvas-ignore": "true",
+									onClick: function()
+									{
+										editMsg(o,n,t)//#编辑消息-回复
+									},
+									children: (0, m.jsx)(c.xL,
+									{
+										icon: ei.Yai
+									})
+								})
+							}),(0, m.jsx)('div',
+							{
 								style:{width:"100%"},
 								children: (0, m.jsx)(e5,
 								{
@@ -4695,7 +4707,8 @@
 								r = 0;
 							t.forEach(function(e)
 							{
-								e.replyNo === o && (n = e.replyDepth, r = e.replyGroup)
+
+								e.type === 'reply' && e.content.split('\n').indexOf(o) > -1 && (n = e.replyDepth, r = e.replyGroup)
 							}), -1 === e ? a((0, eo.Z8)(n)) : a((0, eo.Z8)(0)), a((0, eo.ZZ)(r))
 						};
 					return (0, m.jsxs)("div",
@@ -4723,14 +4736,11 @@
 								{
 									icon: ei.O24
 								})
-							}), t.map(function(e, n)
+							}), (0, m.jsxs)(nc,//
 							{
-								return e.replyNo === o && 0 !== e.replyNo && (0, m.jsxs)(nc,
-								{
-									className: "bold",
-									children: ["Re: ", e.content]
-								}, n)
-							}), (0, m.jsx)(ni,
+								className: "bold",
+								children: ["Re: ", o]
+							}, n), (0, m.jsx)(ni,
 							{
 								onClick: function()
 								{

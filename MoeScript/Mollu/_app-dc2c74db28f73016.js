@@ -9673,7 +9673,7 @@
 					{
 						//*读取人名
 						var r,o;
-						if(e === 0)o = a.Y.name[n]
+						if(e === 0)return a.Y.name[n]
 						else o = '#'+(e-1000);
 						if(mt_characters[e])
 						{
@@ -10163,8 +10163,11 @@
 										{
 											children: (0, O.jsx)(W,
 											{
-												width: 100,
-												height: 100,
+												style:
+												{
+													width: '100%',
+													height: '100%'
+												},
 												src: href+"Images/Ui/private.webp",//#播放器界面
 												alt: "private"
 											})
@@ -12405,6 +12408,7 @@
 								children: (0, O.jsx)("span",
 								{
 									style:{lineHeight:'141%'},//@
+									className: "bold",//@
 									children: localStorage['MoeTalk']+' '+version//#蒙版标题自定义localStorage['MoeTalk']
 								})
 							})]

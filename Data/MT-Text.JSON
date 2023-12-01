@@ -350,11 +350,11 @@ var mt_text = {
 		"zh_tw": "創作"
 	},
 	"private": {
-		"kr": "비공개",
-		"en": "Private",
-		"jp": "非公開",
-		"zh_cn": "非公开",
-		"zh_tw": "非公開"
+		"kr": "MomoTalk",
+		"en": "MomoTalk",
+		"jp": "MomoTalk",
+		"zh_cn": "MomoTalk",
+		"zh_tw": "MomoTalk"
 	},
 	"open": {
 		"kr": "공개",
@@ -406,11 +406,11 @@ var mt_text = {
 		"zh_tw": "帳目"
 	},
 	"message": {
-		"kr": "메세지",
-		"en": "Message",
-		"jp": "メッセージ",
-		"zh_cn": "信息",
-		"zh_tw": "信息"
+		"kr": "Player",
+		"en": "Player",
+		"jp": "Player",
+		"zh_cn": "播放器",
+		"zh_tw": "播放器"
 	},
 	"talk": {
 		"kr": "톡",

@@ -59,6 +59,7 @@ $.ajax({
 								localStorage['mt-lang'] = 'kr'
 							}
 						}
+						alert('2.9之后的更新：\n差分表情大小改为400*400\n字体默认不加载，但可以在设置页面变更')
 						localStorage['mt-version'] = text
 						location.reload(true)
 					}
@@ -633,6 +634,21 @@ function loaddata(json)
 			josnsize+'+'+size+'='+(josnsize+size)+'\n'+
 			(josnsize+size)+'>'+'5120，存档可能无法读取')
 	}
+	let l = json[1]
+	$.each(l,function(t,n)
+	{
+		if(!n.isRight)l[t].isRight = false
+		if(n.isFirst === false && n.sCharacter.no !== 0)
+		{
+			if(t-1 < 0)l[t].isFirst = true
+			if(t > 0 && (n.sCharacter.index !== l[t-1].sCharacter.index || ['heart','info','reply'].indexOf(l[t-1].type) > -1 || l[t-1].isRight !== l[t].isRight))
+			{
+				l[t].isFirst = true
+			}
+		}
+		if(n.sCharacter.no === 0)l[t].isRight = false
+		if(n.sCharacter.no === 0)l[t].isFirst = false
+	})
 	return json
 }
 // 格式化日对象

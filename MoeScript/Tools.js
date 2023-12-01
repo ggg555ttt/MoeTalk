@@ -105,8 +105,20 @@ $('body').on('click',"#send",function()
 //字体加载
 $('body').on('click',"#font",function()
 {
-	if(!localStorage['nofont']){if(confirm('是否取消加载字体文件？取消可以优化页面加载时间\n确认后请返回页面')){localStorage['nofont'] = true;}}
-	else{if(confirm('是否恢复加载字体文件？恢复可以使页面布局更美观\n确认后请返回页面')){localStorage.removeItem('nofont');}}
+	if(!localStorage['mt-font'])
+	{
+		if(confirm('是否恢复加载字体文件？恢复可以使页面布局更美观\n确认后请返回页面'))
+		{
+			localStorage['mt-font'] = true;
+		}
+	}
+	else
+	{
+		if(confirm('是否取消加载字体文件？取消可以优化页面加载时间\n确认后请返回页面'))
+		{
+			localStorage.removeItem('mt-font');
+		}
+	}
 })
 //头像质量
 $('body').on('click',"#hnum",function()
