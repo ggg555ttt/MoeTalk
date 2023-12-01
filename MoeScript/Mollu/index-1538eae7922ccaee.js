@@ -3146,7 +3146,7 @@
 				{
 					displayName: "PopupEmoticonChat__Section2",
 					componentId: "sc-vzjcea-0"
-				})(["", ";overflow:hidden;overflow-y:auto;max-height:30rem;padding:0.5rem;"], function(e)
+				})(["", ";overflow:hidden;overflow-y:auto;max-height:45rem;padding:0.5rem;"], function(e)
 				{
 					return e.theme.common.flexBox(
 					{
