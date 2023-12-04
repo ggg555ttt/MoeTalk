@@ -1927,6 +1927,8 @@
 											json[0]['date'] = (0, u._3)(!0, !0);
 											json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
 											json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
+											json[0]['mt-char'] = JSON.parse(localStorage['mt-char']);//@自创角色
+											json[0]['mt-head'] = JSON.parse(localStorage['mt-head']);//@自创头像
 											json[1] = JSON.parse(localStorage['chats']);
 											if(localStorage['wmark'])
 											{
@@ -1943,7 +1945,7 @@
 													{
 														j(base64), null === (n = I.current) || void 0 === n || n.setAttribute("src",base64), e.toBlob(function(e)
 														{
-															combineFiles(t.replace('data:image/png;base64,',''),JSON.stringify(json),"MolluTalk_" + ("" !== _ ? _ : L.Z.noTitle[g]));
+															combineFiles(base64.replace('data:image/png;base64,',''),JSON.stringify(json),"MolluTalk_" + ("" !== _ ? _ : L.Z.noTitle[g]));
 														})
 													}
 												})
@@ -4178,6 +4180,7 @@
 						}), (0, m.jsx)(eN.HR,
 						{}), (0, m.jsx)(eN._x,
 						{
+							style:{wordBreak: "break-all"},
 							className: "medium",
 							onClick: function(){e.onClick()},//@羁绊事件编辑
 							children: n + L.Z.go_relationship_event[t]
@@ -4486,7 +4489,7 @@
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
 											onError: function(e)
 											{
-												e.currentTarget.src = 'Images/Ui/error.webp';
+												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: n.sCharacter.index
 										})
@@ -4494,16 +4497,17 @@
 									{
 										style: n.isRight ? 
 										{
-											display: 'flex',
+											display: 'block',
 											alignItems: 'flex-end'
-										} : {width: '100%'},
+										} : {display: 'block',width: '100%'},
 										children: [(0, m.jsx)("span",
 										{
 											className: "bold",
 											style: n.isFirst && n.sCharacter.no !== 0 ?
 											{
-												height: "1.8rem",
-												lineHeight: "1.5rem",
+												//height: "1.8rem",
+												lineHeight: "1.8rem",
+												wordBreak: "break-all"
 											} :
 											{
 												display: 'none'
@@ -4550,10 +4554,10 @@
 												{
 													editMsg(o,n,t)//#编辑消息-图片
 												},
-												src: !n.file ? n.content.toLowerCase().indexOf("moetalk") > -1 && !n.file? n.content.split('#')[0] : href+n.content.split('#')[0] : n.file,//#图片也支持样式了
+												src: n.file || (href+n.content.split('#')[0]).replaceAll('//Images','/Images'),//#图片也支持样式了
 												onError: function(e)
 												{
-													e.currentTarget.src = 'Images/Ui/error.webp';
+													e.currentTarget.src = href+'Images/Ui/error.webp';
 												}
 											}), (0, m.jsx)(eN.i9,
 											{
@@ -4620,7 +4624,7 @@
 								{
 									editMsg(o,n,t)//#编辑消息-羁绊
 								},
-								character: (0, u.fY)(n.sCharacter.no, !0, d)
+								character: n.name || (0, u.fY)(n.sCharacter.no, !0, d)
 							})] : "info" === n.type ? (0, m.jsx)(eN.vD,
 							{
 								onClick: function()

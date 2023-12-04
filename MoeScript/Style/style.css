@@ -111,14 +111,6 @@ a {
 	color: #3f51b5;
 	text-decoration: none;
 }
-#readme
-{
-	font-weight:700;
-}
-.bold
-{
-	font-weight:700;
-}
 .button-container {
 	padding: 8px 24px;
 	margin: 15px 15px;
@@ -356,4 +348,8 @@ padding-top: 6px;
 align-items: flex-start;
 gap: 4px;
 align-self: stretch;
+}
+.bold,#readme
+{
+	font-weight:700;
 }

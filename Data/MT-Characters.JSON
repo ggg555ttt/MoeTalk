@@ -19,10 +19,10 @@ var mt_characters = {
         "head": "NP0018",
         "name": {
             "zh_cn": "油桶",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_tw": "油桶",
+            "jp": "ドラム缶",
+            "en": "Steel-Drum",
+            "kr": "드럼통",
             "pinyin": "youtong"
         },
         "charface": "油桶/油桶.1.webp"
@@ -74,10 +74,10 @@ var mt_characters = {
         "club": "狐狸小队",
         "head": "CH0171_Collection,CH0171",
         "name": {
-            "zh_cn": "雪乃",
-            "zh_tw": "雪乃",
-            "jp": "ユキノ",
-            "en": "Yukino",
+            "zh_cn": "七度 雪乃",
+            "zh_tw": "七度 雪乃",
+            "jp": "七度 ユキノ",
+            "en": "Shichido Yukino",
             "kr": "유키노",
             "pinyin": "qiduxuenai"
         },
@@ -133,7 +133,7 @@ var mt_characters = {
             "zh_cn": "普拉娜",
             "zh_tw": "普拉娜",
             "jp": "プラナ",
-            "en": "Plana",
+            "en": "Purana",
             "kr": "프라나",
             "pinyin": "pulana"
         },
@@ -172,11 +172,11 @@ var mt_characters = {
         "club": "克洛诺斯报道部",
         "head": "Mai_Collection,Mai",
         "name": {
-            "zh_cn": "舞",
-            "zh_tw": "舞",
-            "jp": "マイ",
-            "en": "Mai",
-            "kr": "마이",
+            "zh_cn": "风卷 舞",
+            "zh_tw": "風巻 舞",
+            "jp": "風巻 マイ",
+            "en": "Kazemaki Mai",
+            "kr": "카제마키 마이",
             "pinyin": "wu"
         },
         "charface": "舞/mai/mai.6.webp,舞/舞.4.webp"
@@ -186,11 +186,11 @@ var mt_characters = {
         "club": "凯坦泽",
         "head": "寿司人_Collection",
         "name": {
-            "zh_cn": "",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "KAITEN-FX-Mk.0",
+            "zh_tw": "KAITEN-FX-Mk.0",
+            "jp": "KAITEN-FX-Mk.0",
+            "en": "KAITEN-FX-Mk.0",
+            "kr": "KAITEN-FX-Mk.0",
             "pinyin": "KAITENFXMK0"
         },
         "charface": ""
@@ -200,10 +200,10 @@ var mt_characters = {
         "club": "凯坦泽",
         "head": "Kaitenranger_Black_Collection,Kaitenranger_Green_Collection,Kaitenranger_Pink_Collection,Kaitenranger_Red_Collection,Kaitenranger_Yellow_Collection,Kaitenranger_Black,Kaitenranger_Green,Kaitenranger_Pink,Kaitenranger_Red,Kaitenranger_Yellow",
         "name": {
-            "zh_cn": "回转寿司战队",
-            "zh_tw": "回轉壽司戰隊",
-            "jp": "KaitenRanger",
-            "en": "KaitenRanger",
+            "zh_cn": "凯坦泽",
+            "zh_tw": "凱坦澤",
+            "jp": "カイテンジャー",
+            "en": "Kaitenger",
             "kr": "카이텐레인저",
             "pinyin": "huizhuanshousizhandui"
         },
@@ -257,10 +257,10 @@ var mt_characters = {
         "head": "凯瑟_Collection",
         "name": {
             "zh_cn": "凯瑟",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_tw": "凱瑟",
+            "jp": "ケテル",
+            "en": "KETHER",
+            "kr": "케테르",
             "pinyin": "kaise"
         },
         "charface": ""
@@ -343,7 +343,7 @@ var mt_characters = {
             "zh_cn": "钢盔团",
             "zh_tw": "頭盔團",
             "jp": "ヘルメット団",
-            "en": "Helmet-Gang",
+            "en": "Helmet-Dan",
             "kr": "헬멧단",
             "pinyin": "toukuituanchengyuan"
         },
@@ -368,11 +368,11 @@ var mt_characters = {
         "club": "所属不明-其他",
         "head": "NP0138_Collection,NP0158_Collection,NP0159_Collection,NP0138,NP0158,NP0159",
         "name": {
-            "zh_cn": "",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "列车乘务员",
+            "zh_tw": "列車乘務員",
+            "jp": "列車乗務員",
+            "en": "Train-Attendant",
+            "kr": "열차-승무원",
             "pinyin": "chengwuyuan"
         },
         "charface": "乘务员/NP0138/NP0138.10.webp,乘务员/NP0158/NP0158.9.webp,乘务员/NP0159/NP0159.7.webp,乘务员/乘务员.9.webp"
@@ -382,11 +382,11 @@ var mt_characters = {
         "club": "所属不明-其他",
         "head": "CH9996_L2D,CH9996_Collection,CH9996",
         "name": {
-            "zh_cn": "",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "佐天 泪子",
+            "zh_tw": "佐天 淚子",
+            "jp": "佐天 淚子",
+            "en": "Saten Ruiko",
+            "kr": "사텐 루이코",
             "pinyin": "zuotianleizi"
         },
         "charface": "佐天泪子/CH9996/CH9996.14.webp,佐天泪子/佐天泪子.4.webp"
@@ -412,7 +412,7 @@ var mt_characters = {
         "name": {
             "zh_cn": "兔女郎守卫",
             "zh_tw": "兔女郎守衛",
-            "jp": "バニーガール ガード",
+            "jp": "バニーガール-ガード",
             "en": "BunnyGirl-Guard",
             "kr": "바니걸-가드",
             "pinyin": "tunvlangshouwei"
@@ -439,10 +439,10 @@ var mt_characters = {
         "head": "NP0074_Collection,NP0137_Collection,Yustina_SR1_Collection,NP0074,NP0137,Yustina_SR1",
         "name": {
             "zh_cn": "尤斯蒂娅圣徒会",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_tw": "尤斯蒂亞聖徒會",
+            "jp": "ユスティナ信徒",
+            "en": "Yustina",
+            "kr": "유스티나-성도회",
             "pinyin": "yousidiyashengtuhui"
         },
         "charface": "尤斯蒂娅圣徒会/尤斯蒂娅圣徒会.3.webp"
@@ -467,10 +467,10 @@ var mt_characters = {
         "head": "丽情_Collection,奈央_Collection,康娜_Collection,由加利_Collection,米莉亚_Collection,露音_Collection",
         "name": {
             "zh_cn": "废案学生",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_tw": "廢案學生",
+            "jp": "Student",
+            "en": "Student",
+            "kr": "Student",
             "pinyin": "feianxuesheng"
         },
         "charface": ""
@@ -480,11 +480,11 @@ var mt_characters = {
         "club": "所属不明-其他",
         "head": "CH9998_L2D,CH9998_Collection,CH9998",
         "name": {
-            "zh_cn": "",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "御坂 美琴",
+            "zh_tw": "御坂 美琴",
+            "jp": "御坂 美琴",
+            "en": "Misaka Mikoto",
+            "kr": "미사카 미코토",
             "pinyin": "yubanmeiqin"
         },
         "charface": "御坂美琴/CH9998/CH9998.18.webp,御坂美琴/御坂美琴.4.webp"
@@ -494,11 +494,11 @@ var mt_characters = {
         "club": "所属不明-其他",
         "head": "Yoheki_Normal1_Collection,Yoheki_Normal1",
         "name": {
-            "zh_cn": "打工学生",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "打工佣兵",
+            "zh_tw": "打工傭兵",
+            "jp": "傭兵バイト",
+            "en": "Yoheki",
+            "kr": "용역",
             "pinyin": "dagongxuesheng"
         },
         "charface": "打工学生/yoheki_normal1/yoheki_normal1.2.webp,打工学生/打工学生.2.webp"
@@ -522,11 +522,11 @@ var mt_characters = {
         "club": "所属不明-其他",
         "head": "CH9997_L2D,CH9997_Collection,CH9997",
         "name": {
-            "zh_cn": "",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "食蜂 操祈",
+            "zh_tw": "食蜂 操祈",
+            "jp": "食蜂 操祈",
+            "en": "Shokuhou Misaki",
+            "kr": "쇼쿠호 미사키",
             "pinyin": "shifengcaoqi"
         },
         "charface": "食蜂操祈/CH9997/CH9997.11.webp,食蜂操祈/NP0169/NP0169.11.webp,食蜂操祈/食蜂操祈.8.webp"
@@ -551,10 +551,10 @@ var mt_characters = {
         "head": "NP0031_Collection,NP0031,NP0142",
         "name": {
             "zh_cn": "笛卡尔",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_tw": "笛卡爾",
+            "jp": "デカルト",
+            "en": "Descartes",
+            "kr": "데카르트",
             "pinyin": "dikaer"
         },
         "charface": "笛卡尔/NP0031/NP0031.6.webp,笛卡尔/NP0142/NP0142.6.webp,笛卡尔/笛卡尔.4.webp"
@@ -571,7 +571,7 @@ var mt_characters = {
             "kr": "데칼코마니",
             "pinyin": "yinhuayoufa"
         },
-        "charface": ""
+        "charface": "戈尔孔达/戈尔孔达.1.webp"
     },
     "巨匠": {
         "school": "其他",
@@ -595,7 +595,7 @@ var mt_characters = {
             "zh_cn": "弗朗西斯",
             "zh_tw": "弗朗西斯",
             "jp": "フランシス",
-            "en": "Francis",
+            "en": "Frances",
             "kr": "프랜시스",
             "pinyin": "fulangxisi"
         },
@@ -690,14 +690,14 @@ var mt_characters = {
         "club": "无名众神",
         "head": "NP0091_Collection,NP0091",
         "name": {
-            "zh_cn": "无名机器人",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "Divi:Sion",
+            "zh_tw": "Divi:Sion",
+            "jp": "Divi:Sion",
+            "en": "Divi:Sion",
+            "kr": "Divi:Sion",
             "pinyin": "wumingjiqiren"
         },
-        "charface": "无名机器人/NP0091/NP0091.2.webp,无名机器人/无名机器人.3.webp"
+        "charface": "无名机器人/NP0091/NP0091.2.webp,无名机器人/无名机器人.2.webp"
     },
     "无名祭祀": {
         "school": "其他",
@@ -775,7 +775,7 @@ var mt_characters = {
         "head": "NP0013_Collection,NP0099_Collection,NP0013,NP0099",
         "name": {
             "zh_cn": "岩柜 步梦",
-            "zh_tw": "巖櫃 步",
+            "zh_tw": "岩櫃 步夢",
             "jp": "岩櫃 アユム",
             "en": "Iwabitsu Ayumu",
             "kr": "이와비츠 아유무",
@@ -804,9 +804,9 @@ var mt_characters = {
         "name": {
             "zh_cn": "李",
             "zh_tw": "李",
-            "jp": "すもも",
+            "jp": "スモモ",
             "en": "Sumomo",
-            "kr": "",
+            "kr": "스모모",
             "pinyin": "li"
         },
         "charface": "李/NP0037/NP0037.11.webp,李/李.4.webp"
@@ -818,9 +818,9 @@ var mt_characters = {
         "name": {
             "zh_cn": "灰音",
             "zh_tw": "灰音",
-            "jp": "はいね",
+            "jp": "ハイネ",
             "en": "Haine",
-            "kr": "",
+            "kr": "하이네",
             "pinyin": "huiyin"
         },
         "charface": "灰音/NP0033/NP0033.20.webp,灰音/灰音.4.webp"
@@ -861,7 +861,7 @@ var mt_characters = {
             "zh_cn": "联邦学生会长",
             "zh_tw": "聯邦學生會長",
             "jp": "連邦生徒会長",
-            "en": "GSC President",
+            "en": "Student-Council-President",
             "kr": "총학생회장",
             "pinyin": "lianbangxueshenghuichang"
         },
@@ -872,12 +872,12 @@ var mt_characters = {
         "club": "自动机器人",
         "head": "Automata_PMC1_Collection,Automata_PMC1",
         "name": {
-            "zh_cn": "凯撒士兵",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
-            "pinyin": "kaisashibing"
+            "zh_cn": "凯撒机器人",
+            "zh_tw": "凱撒機器人",
+            "jp": "カイザー-オートマタ",
+            "en": "Kaiser-Automata",
+            "kr": "카이저-오토마타",
+            "pinyin": "zidongjiqiren"
         },
         "charface": "凯撒士兵/凯撒士兵.1.webp"
     },
@@ -901,11 +901,11 @@ var mt_characters = {
         "head": "Automata_Decagrammaton1_Collection,Automata_Decagrammaton1",
         "name": {
             "zh_cn": "十字神明机器人",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
-            "pinyin": "shizishenmingjiqiren"
+            "zh_tw": "十字神明機器人",
+            "jp": "デカグラマトン-カイザー",
+            "en": "Decagrammaton-Automata",
+            "kr": "데카그라마톤-오토마타",
+            "pinyin": "zidongjiqiren"
         },
         "charface": "十字神明机器人/十字神明机器人.1.webp"
     },
@@ -916,12 +916,12 @@ var mt_characters = {
         "name": {
             "zh_cn": "自动机器人",
             "zh_tw": "自動機器人",
-            "jp": "オートマタ",
+            "jp": "黑龟组-オートマタ",
             "en": "Automata",
             "kr": "오토마타",
             "pinyin": "zidongjiqiren"
         },
-        "charface": ""
+        "charface": "自动机器人/自动机器人.1.webp"
     },
     "黑龟组机器人": {
         "school": "其他",
@@ -929,11 +929,11 @@ var mt_characters = {
         "head": "Automata_Kurokamegumi1_Collection,Automata_Kurokamegumi1",
         "name": {
             "zh_cn": "黑龟组机器人",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
-            "pinyin": "heiguizujiqiren"
+            "zh_tw": "黑龜組機器人",
+            "jp": "黒亀組-オートマタ",
+            "en": "BlackTurtles-Automata",
+            "kr": "검은거북파-오토마타",
+            "pinyin": "zidongjiqiren"
         },
         "charface": "黑龟组机器人/黑龟组机器人.1.webp"
     },
@@ -945,11 +945,25 @@ var mt_characters = {
             "zh_cn": "普雷纳帕特斯",
             "zh_tw": "普雷納帕特斯",
             "jp": "プレナパテス",
-            "en": "Frenapates",
+            "en": "Phrenapates",
             "kr": "프레나파테스",
             "pinyin": "puleinapatesi"
         },
         "charface": "普雷纳帕特斯/普雷纳帕特斯.1.webp"
+    },
+    "格里高利": {
+        "school": "其他",
+        "club": "诸圣相通",
+        "head": "格里高利_Collection",
+        "name": {
+            "zh_cn": "格里高利",
+            "zh_tw": "格裡高利",
+            "jp": "グレゴリオ",
+            "en": "Gregorius",
+            "kr": "그레고리오",
+            "pinyin": "geligaoli"
+        },
+        "charface": ""
     },
     "耶罗尼姆斯": {
         "school": "其他",
@@ -1124,8 +1138,8 @@ var mt_characters = {
         "club": "所属不明-千年",
         "head": "NP0036_Collection,NP0084_Collection,NP0036,NP0084",
         "name": {
-            "zh_cn": "千年-学生",
-            "zh_tw": "千年-學生",
+            "zh_cn": "千年学生",
+            "zh_tw": "千年學生",
             "jp": "ミレニアム-生徒",
             "en": "MILLENNIUM-Student",
             "kr": "밀레니엄-학생",
@@ -1145,7 +1159,7 @@ var mt_characters = {
             "kr": "Kei",
             "pinyin": "Kei"
         },
-        "charface": ""
+        "charface": "天童爱丽丝/aris/aris.19.webp,天童爱丽丝/CH0200/CH0200.9.webp,天童爱丽丝/天童爱丽丝.8.webp"
     },
     "天童爱丽丝": {
         "school": "千年",
@@ -1362,8 +1376,8 @@ var mt_characters = {
         "club": "修女会",
         "head": "NP0025_Collection,NP0025",
         "name": {
-            "zh_cn": "修女会",
-            "zh_tw": "修女會",
+            "zh_cn": "修女会成员",
+            "zh_tw": "修女會成員",
             "jp": "シスターフッド",
             "en": "Sisterhood",
             "kr": "시스터후드",
@@ -1419,7 +1433,7 @@ var mt_characters = {
         "head": "Shimiko_L2D,Shimiko_Collection,Shimiko",
         "name": {
             "zh_cn": "圆堂 志美子",
-            "zh_tw": "円堂 志美子",
+            "zh_tw": "圓堂 志美子",
             "jp": "円堂 シミコ",
             "en": "Endou Shimiko",
             "kr": "엔도우 시미코",
@@ -1460,8 +1474,8 @@ var mt_characters = {
         "club": "所属不明-圣三一",
         "head": "NP0024_Collection,NP0024",
         "name": {
-            "zh_cn": "圣三一-学生",
-            "zh_tw": "聖三一-學生",
+            "zh_cn": "圣三一学生",
+            "zh_tw": "聖三一學生",
             "jp": "トリニティ-生徒",
             "en": "TRINITY-Student",
             "kr": "트리니티-학생",
@@ -1474,11 +1488,11 @@ var mt_characters = {
         "club": "所属不明-圣三一",
         "head": "CH0212_Collection,CH0212,CH0212_无面具",
         "name": {
-            "zh_cn": "晶",
-            "zh_tw": "晶",
-            "jp": "アキラ",
-            "en": "Akira",
-            "kr": "아키라",
+            "zh_cn": "清澄 晶",
+            "zh_tw": "清澄 晶",
+            "jp": "清澄 アキラ",
+            "en": "Kiyosumi Akira",
+            "kr": "키요스미 아키라",
             "pinyin": "qingchengjing"
         },
         "charface": "清澄晶/CH0212/CH0212.14.webp,清澄晶/CH0212/CH0212-S2.14.webp,清澄晶/清澄晶.6.webp"
@@ -1586,11 +1600,11 @@ var mt_characters = {
         "club": "正义实现委员会",
         "head": "CH0071_L2D,CH0071_Collection,CH0071",
         "name": {
-            "zh_cn": "一花",
-            "zh_tw": "一花",
-            "jp": "イチカ",
-            "en": "Ichika",
-            "kr": "이치카",
+            "zh_cn": "仲正 一花",
+            "zh_tw": "仲正 一花",
+            "jp": "仲正 イチカ",
+            "en": "Nakamasa Ichika",
+            "kr": "나카마사 이치카",
             "pinyin": "yihua"
         },
         "charface": "一花/CH0071/CH0071.21.webp,一花/一花.3.webp"
@@ -1614,8 +1628,8 @@ var mt_characters = {
         "club": "正义实现委员会",
         "head": "Justice_normal1_Collection,NP0060_Collection,Justice_normal1",
         "name": {
-            "zh_cn": "正义实现委员会部员",
-            "zh_tw": "正義實現委員會組員",
+            "zh_cn": "正义实现委员会成员",
+            "zh_tw": "實現正義部成員",
             "jp": "正義実現委員会部員",
             "en": "Justice-Task-Force-Member",
             "kr": "정의실현부원",
@@ -1698,8 +1712,8 @@ var mt_characters = {
         "club": "茶会",
         "head": "NP0022_Collection,NP0028_Collection,NP0022,NP0028",
         "name": {
-            "zh_cn": "茶会",
-            "zh_tw": "茶會",
+            "zh_cn": "茶会成员",
+            "zh_tw": "茶會成員",
             "jp": "ティーパーティー",
             "en": "TeaParty",
             "kr": "티파티",
@@ -1768,11 +1782,11 @@ var mt_characters = {
         "club": "所属不明-山海经",
         "head": "NP0152_Collection,NP0157_Collection,NP0152,NP0157",
         "name": {
-            "zh_cn": "",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "山海经学生",
+            "zh_tw": "山海經學生",
+            "jp": "山海経生徒",
+            "en": "SHANHAIJING-Student",
+            "kr": "산해경-학생",
             "pinyin": "shanhaijingxuesheng"
         },
         "charface": "山海经学生/NP0152/NP0152.6.webp,山海经学生/NP0157/NP0157.6.webp,山海经学生/山海经学生.5.webp"
@@ -1785,8 +1799,8 @@ var mt_characters = {
             "zh_cn": "申谷 启",
             "zh_tw": "申谷 啟",
             "jp": "申谷 カイ",
-            "en": "Saruya Kai",
-            "kr": "신야 카이",
+            "en": "Sintani Kai",
+            "kr": "신타니 카이",
             "pinyin": "shenguqi"
         },
         "charface": "申谷启/CH0213/CH0213.13.webp,申谷启/申谷启.4.webp"
@@ -1852,10 +1866,10 @@ var mt_characters = {
         "club": "玄武商会",
         "head": "GenbuStore_SG_Collection,GenbuStore_SG",
         "name": {
-            "zh_cn": "玄武商会职员",
-            "zh_tw": "玄武商會職員",
-            "jp": "玄武商会職員",
-            "en": "Genbu-Shokai-Employee",
+            "zh_cn": "玄武商会成员",
+            "zh_tw": "玄武商會成員",
+            "jp": "玄武商会のメンバー",
+            "en": "Genbustore-Member",
             "kr": "현무상회-직원",
             "pinyin": "xuanwushanghuichengyuan"
         },
@@ -1869,7 +1883,7 @@ var mt_characters = {
             "zh_cn": "鹿山 丽情",
             "zh_tw": "鹿山 麗情",
             "jp": "鹿山 レイジョ",
-            "en": "Kayama reizyo",
+            "en": "Kayama Reijo",
             "kr": "카야마 레이죠",
             "pinyin": "lushanliqing"
         },
@@ -1908,10 +1922,10 @@ var mt_characters = {
         "club": "玄龙门",
         "head": "CH0139_Collection,CH0139",
         "name": {
-            "zh_cn": "妃咲",
-            "zh_tw": "妃姬",
-            "jp": "キサキ",
-            "en": "Kissaki",
+            "zh_cn": "龙华 妃咲",
+            "zh_tw": "龍華 妃姬",
+            "jp": "竜華 キサキ",
+            "en": "Ryuuge Kisaki",
             "kr": "키사키",
             "pinyin": "longhuafeixiao"
         },
@@ -2035,7 +2049,7 @@ var mt_characters = {
         "head": "CH0086_L2D,Kayoko_L2D,NP0118_Collection,CH0086_Collection,Kayoko_Collection,NP0118,CH0086,Kayoko",
         "name": {
             "zh_cn": "鬼方 佳代子",
-            "zh_tw": "鬼方 佳代子",
+            "zh_tw": "鬼方 佳世子",
             "jp": "鬼方 カヨコ",
             "en": "Onikata Kayoko",
             "kr": "오니카타 카요코",
@@ -2051,7 +2065,7 @@ var mt_characters = {
             "zh_cn": "旗见 绘梨香",
             "zh_tw": "旗見 艾麗嘉",
             "jp": "旗見 エリカ",
-            "en": "Hatami erika",
+            "en": "Hatami Erika",
             "kr": "하타미 에리카",
             "pinyin": "qijianailika"
         },
@@ -2065,7 +2079,7 @@ var mt_characters = {
             "zh_cn": "绮良良",
             "zh_tw": "綺良良",
             "jp": "キララ",
-            "en": "kirara",
+            "en": "Kirara",
             "kr": "키라라",
             "pinyin": "qiliangliang"
         },
@@ -2076,9 +2090,9 @@ var mt_characters = {
         "club": "所属不明-格黑娜",
         "head": "NP0026_Collection,NP0026",
         "name": {
-            "zh_cn": "格黑娜-学生",
-            "zh_tw": "格赫娜-學生",
-            "jp": "ゲヘナ-生徒",
+            "zh_cn": "格赫娜学生",
+            "zh_tw": "格黑娜學生",
+            "jp": "ゲヘナの生徒",
             "en": "GEHENNA-Student",
             "kr": "게헨나-학생",
             "pinyin": "geheinaxuesheng"
@@ -2090,7 +2104,7 @@ var mt_characters = {
         "club": "救急医学部",
         "head": "Sena_L2D,Sena_Collection,Sena",
         "name": {
-            "zh_cn": "冰室 濑名",
+            "zh_cn": "氷室 濑名",
             "zh_tw": "冰室 瀨奈",
             "jp": "氷室 セナ",
             "en": "Himuro Sena",
@@ -2106,8 +2120,8 @@ var mt_characters = {
         "name": {
             "zh_cn": "救急医学部成员",
             "zh_tw": "救急醫學部成員",
-            "jp": "救急医学部員",
-            "en": "Emargency Medicine Member",
+            "jp": "救急医学部の部員",
+            "en": "Emargency-Medicine-Member",
             "kr": "구급의학부원",
             "pinyin": "jiujiyixuebuchengyuan"
         },
@@ -2135,7 +2149,7 @@ var mt_characters = {
             "zh_cn": "温泉开发部成员",
             "zh_tw": "溫泉開發部成員",
             "jp": "温泉開発部員",
-            "en": "Onsen Development Member",
+            "en": "Onsen-Development-Member",
             "kr": "온천개발부원",
             "pinyin": "wenquankaifabuchengyuan"
         },
@@ -2146,9 +2160,9 @@ var mt_characters = {
         "club": "温泉开发部",
         "head": "CH0089_L2D,CH0089_Collection,CH0089",
         "name": {
-            "zh_cn": "霞",
-            "zh_tw": "霞",
-            "jp": "カスミ",
+            "zh_cn": "鬼怒川 霞",
+            "zh_tw": "鬼怒川 霞",
+            "jp": "鬼怒川 カスミ",
             "en": "Kasumi",
             "kr": "카스미",
             "pinyin": "xia"
@@ -2205,7 +2219,7 @@ var mt_characters = {
             "zh_cn": "赤司 纯子",
             "zh_tw": "赤司 纯子",
             "jp": "赤司 ジュンコ",
-            "en": "Akashi Zunko",
+            "en": "Akashi Junko",
             "kr": "아카시 준코",
             "pinyin": "chisichunzi"
         },
@@ -2232,7 +2246,7 @@ var mt_characters = {
         "name": {
             "zh_cn": "黑馆 晴奈",
             "zh_tw": "黑館 羽留奈",
-            "jp": "黒館 ハルナ",
+            "jp": "黒舘 ハルナ",
             "en": "Kurodate Haruna",
             "kr": "쿠로다테 하루나",
             "pinyin": "heiguanqingnai"
@@ -2303,7 +2317,7 @@ var mt_characters = {
             "zh_cn": "风纪委员",
             "zh_tw": "風紀委員",
             "jp": "風紀委員",
-            "en": "Prefect-Team-Member",
+            "en": "Disciplinary-Committee-Member",
             "kr": "선도부원",
             "pinyin": "fengjiweiyuanhuichengyuan"
         },
@@ -2331,7 +2345,7 @@ var mt_characters = {
             "zh_cn": "瓦尔基里学生",
             "zh_tw": "瓦爾基里學生",
             "jp": "ヴァルキューレ生徒",
-            "en": "Valkyrie-Student",
+            "en": "VALKYRIE-Student",
             "kr": "발키리-학생",
             "pinyin": "waerjilixuesheng"
         },
@@ -2510,11 +2524,11 @@ var mt_characters = {
         "club": "所属不明-百鬼夜行",
         "head": "NP0149_Collection,NP0150_Collection,NP0156_Collection,NP0149,NP0150,NP0156",
         "name": {
-            "zh_cn": "",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "百鬼夜行学生",
+            "zh_tw": "百鬼夜行學生",
+            "jp": "百鬼夜行生徒",
+            "en": "HYAKKIYAKO-Student",
+            "kr": "백귀야행-학생",
             "pinyin": "baiguiyexingxuesheng"
         },
         "charface": "百鬼夜行学生/NP0149/NP0149.7.webp,百鬼夜行学生/NP0150/NP0150.6.webp,百鬼夜行学生/NP0156/NP0156.6.webp,百鬼夜行学生/百鬼夜行学生.7.webp"
@@ -2527,7 +2541,7 @@ var mt_characters = {
             "zh_cn": "幻魉百物语",
             "zh_tw": "幻魎百物語",
             "jp": "幻魎百物語",
-            "en": "",
+            "en": "Genryou-Hyakumonogatari",
             "kr": "환량백물어",
             "pinyin": "huanliangbaiwuyu"
         },
@@ -2541,11 +2555,25 @@ var mt_characters = {
             "zh_cn": "无面之形代",
             "zh_tw": "無面之形代",
             "jp": "無貌の形代",
-            "en": "",
-            "kr": "얼굴없는 카타시로",
+            "en": "Mubou Katashiro",
+            "kr": "얼굴없는-카타시로",
             "pinyin": "wumianzhixingdai"
         },
         "charface": "无面之形代/无面之形代.1.webp"
+    },
+    "猫鬼黑影": {
+        "school": "百鬼夜行",
+        "club": "百物语",
+        "head": "猫鬼黑影_Collection",
+        "name": {
+            "zh_cn": "猫鬼黑影",
+            "zh_tw": "貓鬼黑影",
+            "jp": "クロカゲ",
+            "en": "MyoukiKurokage",
+            "kr": "묘귀쿠로카게",
+            "pinyin": "maoguiheiying"
+        },
+        "charface": ""
     },
     "不破莲华": {
         "school": "百鬼夜行",
@@ -2555,8 +2583,8 @@ var mt_characters = {
             "zh_cn": "不破 莲华",
             "zh_tw": "不破 蓮華",
             "jp": "不破 レンゲ",
-            "en": "",
-            "kr": "렌게",
+            "en": "Fuwa Renge",
+            "kr": "후와 렌지",
             "pinyin": "bupolianhua"
         },
         "charface": "不破莲华/CH0224/CH0224.15.webp,不破莲华/不破莲华.4.webp"
@@ -2569,8 +2597,8 @@ var mt_characters = {
             "zh_cn": "勘解由小路 紫蓠",
             "zh_tw": "勘解由小路 紫蘺",
             "jp": "勘解由小路 ユカリ",
-            "en": "",
-            "kr": "유카리",
+            "en": "Kadenokouji Yukari",
+            "kr": "감해유코지 유카리",
             "pinyin": "kanjieyouxiaoluzili"
         },
         "charface": "勘解由小路紫蓠/CH0161/CH0161.14.webp,勘解由小路紫蓠/NP0147/NP0147.14.webp,勘解由小路紫蓠/NP0148/NP0148.15.webp,勘解由小路紫蓠/勘解由小路紫蓠.12.webp"
@@ -2582,7 +2610,7 @@ var mt_characters = {
         "name": {
             "zh_cn": "御稜 名草",
             "zh_tw": "御稜 名草",
-            "jp": "御稜 なぐさ",
+            "jp": "御稜 ナグサ",
             "en": "Goryo Nagusa",
             "kr": "고료 나구사",
             "pinyin": "yulingmingcao"
@@ -2594,10 +2622,10 @@ var mt_characters = {
         "club": "百花缭乱纷争调停委员会",
         "head": "CH0225_L2D,CH0225_Collection,CH0225",
         "name": {
-            "zh_cn": "桐生 キキョウ",
-            "zh_tw": "桐生 キキョウ",
+            "zh_cn": "桐生 桔梗",
+            "zh_tw": "桐生 桔梗",
             "jp": "桐生 キキョウ",
-            "en": "",
+            "en": "Kiryuu Kikyou",
             "kr": "키쿄",
             "pinyin": "tongshengjugeng"
         },
@@ -2625,8 +2653,8 @@ var mt_characters = {
             "zh_cn": "箭吹 棕榈",
             "zh_tw": "箭吹 棕櫚",
             "jp": "箭吹 シュロ",
-            "en": "",
-            "kr": "슈로",
+            "en": "Yabuki Shuro",
+            "kr": "야부키 슈로",
             "pinyin": "jianchuizonglv"
         },
         "charface": "箭吹棕榈/CH0227/CH0227.24.webp,箭吹棕榈/箭吹棕榈.4.webp"
@@ -2639,7 +2667,7 @@ var mt_characters = {
             "zh_cn": "雏芥子",
             "zh_tw": "雛芥子",
             "jp": "コクリコ",
-            "en": "",
+            "en": "Kokuriko",
             "kr": "코쿠리코",
             "pinyin": "chujiezi"
         },
@@ -2651,7 +2679,7 @@ var mt_characters = {
         "head": "CH0178_L2D,Chise_L2D,NP0055_Collection,CH0178_Collection,Chise_Collection,CH0178,Chise",
         "name": {
             "zh_cn": "和乐 千世",
-            "zh_tw": "和樂 千世",
+            "zh_tw": "和樂 知世",
             "jp": "和楽 チセ",
             "en": "Waraku Chise",
             "kr": "와라쿠 치세",
@@ -2665,7 +2693,7 @@ var mt_characters = {
         "head": "CH0109_Collection,CH0109",
         "name": {
             "zh_cn": "天地 妮娅",
-            "zh_tw": "天地 妮婭",
+            "zh_tw": "天地 仁耶",
             "jp": "天地 ニヤ",
             "en": "Amachi Niya",
             "kr": "아마치 니야",
@@ -2679,7 +2707,7 @@ var mt_characters = {
         "head": "CH0107_L2D,CH0107_Collection,CH0107",
         "name": {
             "zh_cn": "桑上 果穗",
-            "zh_tw": "桑上 果穗",
+            "zh_tw": "桑上 佳穗",
             "jp": "桑上 カホ",
             "en": "Kuwakami Kaho",
             "kr": "쿠와카미 카호",
@@ -2695,7 +2723,7 @@ var mt_characters = {
             "zh_cn": "新",
             "zh_tw": "新",
             "jp": "アラタ",
-            "en": "",
+            "en": "Arata",
             "kr": "아라타",
             "pinyin": "xin"
         },
@@ -2706,11 +2734,11 @@ var mt_characters = {
         "club": "魑魅一座",
         "head": "StreetGhostes_MG_Collection,StreetGhostes_RL_Collection,StreetGhostes_MG,StreetGhostes_RL",
         "name": {
-            "zh_cn": "魑魅一座成员",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_cn": "魑魅一座",
+            "zh_tw": "魑魅一座",
+            "jp": "魑魅一座",
+            "en": "Sudama-Ichiza",
+            "kr": "이매일좌",
             "pinyin": "chimeiyizuochengyuan"
         },
         "charface": "魑魅一座成员/Yukata_StreetGhostes_RL/Yukata_StreetGhostes_RL.6.webp,魑魅一座成员/魑魅一座成员.3.webp"
@@ -2749,10 +2777,10 @@ var mt_characters = {
         "head": "CH0229_Collection,CH0229",
         "name": {
             "zh_cn": "三善 贵音",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_tw": "三善 貴音",
+            "jp": "三善 タカネ",
+            "en": "Miyoshi Takane",
+            "kr": "미요시 타카네",
             "pinyin": "sanshanguiyin"
         },
         "charface": "三善贵音/CH0229/CH0229.18.webp,三善贵音/三善贵音.4.webp"
@@ -2763,10 +2791,10 @@ var mt_characters = {
         "head": "CH0228_Collection,CH0228",
         "name": {
             "zh_cn": "荒槙 八云",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_tw": "荒槙 八云",
+            "jp": "荒槇 ヤクモ",
+            "en": "Aramaki Yakumo",
+            "kr": "아라마키 야쿠모",
             "pinyin": "huangzhenbayun"
         },
         "charface": "荒槙八云/CH0228/CH0228.13.webp,荒槙八云/荒槙八云.4.webp"
@@ -2776,7 +2804,7 @@ var mt_characters = {
         "club": "工务部",
         "head": "CH0214_L2D,CH0214_Collection,Minori_Collection,CH0214,Minori",
         "name": {
-            "zh_cn": "安守 实里",
+            "zh_cn": "安守 实梨",
             "zh_tw": "安守 實裏",
             "jp": "安守 ミノリ",
             "en": "Yasumori Minori",
@@ -2805,7 +2833,7 @@ var mt_characters = {
         "head": "CH0124_L2D,CH0124_Collection,CH0125_Collection,CH0124,CH0125",
         "name": {
             "zh_cn": "姬木 梅露",
-            "zh_tw": "姬木 梅露",
+            "zh_tw": "姬木 愛瑠",
             "jp": "姫木 メル",
             "en": "Himeki Meru",
             "kr": "히메키 메루",
@@ -2835,7 +2863,7 @@ var mt_characters = {
             "zh_cn": "亲卫队员",
             "zh_tw": "親衛隊員",
             "jp": "親衛隊員",
-            "en": "Member-Of-The-SS",
+            "en": "Royalguard",
             "kr": "친위대원",
             "pinyin": "qinweiduiyuan"
         },
@@ -2889,7 +2917,7 @@ var mt_characters = {
         "head": "CH0092_L2D,Nonomi_L2D,NP0044_Collection,NP0067_Collection,CH0092_Collection,Nonomi_Collection,Nonomi_Robber_Collection,NP0067,CH0092,Nonomi,Nonomi_Robber",
         "name": {
             "zh_cn": "十六夜 野宫",
-            "zh_tw": "十六夜 野宮",
+            "zh_tw": "十六夜 野乃美",
             "jp": "十六夜 ノノミ",
             "en": "Izayoi Nonomi",
             "kr": "이자요이 노노미",
@@ -2931,10 +2959,10 @@ var mt_characters = {
         "head": "梦_Collection",
         "name": {
             "zh_cn": "梦",
-            "zh_tw": "",
-            "jp": "",
-            "en": "",
-            "kr": "",
+            "zh_tw": "夢",
+            "jp": "ユメ",
+            "en": "Yume",
+            "kr": "유메",
             "pinyin": "meng"
         },
         "charface": ""
@@ -2987,7 +3015,7 @@ var mt_characters = {
         "head": "Arius_GL1_Collection,Arius_GL1",
         "name": {
             "zh_cn": "阿里乌斯学生",
-            "zh_tw": "阿里烏斯學生",
+            "zh_tw": "奥利斯學生",
             "jp": "アリウス生徒",
             "en": "ARIUS-Student",
             "kr": "아리우스-학생",

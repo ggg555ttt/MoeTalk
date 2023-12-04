@@ -917,12 +917,13 @@
 						{}), (0, m.jsx)(s._x,
 						{
 							className: "medium",
+							style:{wordBreak: "break-all"},//@
 							disabled: f,
 							onClick: function()
 							{
 								g(), p(!0)
 							},
-							children: (0, l.fY)(t.sCharacter.no, !0, d) + r.Z.go_relationship_event[d]
+							children: (t.name || (0, l.fY)(t.sCharacter.no, !0, d)) + r.Z.go_relationship_event[d]
 						})]
 					})
 				},
@@ -1372,7 +1373,7 @@
 											src: loadhead(t.sCharacter.no,t.sCharacter.index),
 											onError: function(e)
 											{
-												e.currentTarget.src = 'Images/Ui/error.webp';
+												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: t.sCharacter.index
 										})
@@ -1382,14 +1383,15 @@
 										{
 											display: 'flex',
 											alignItems: 'flex-end'
-										} : {width: '100%'},
+										} : {display: 'block',width: '100%'},
 										children: [(0, m.jsx)("span",
 										{
 											className: "bold",
 											style: t.isFirst && t.sCharacter.no !== 0 ?
 											{
-												height: "1.8rem",
-												lineHeight: "1.5rem",
+												//height: "1.8rem",
+												lineHeight: "1.8rem",
+												wordBreak: "break-all"
 											} :
 											{
 												display: 'none'
@@ -1427,7 +1429,7 @@
 											})] : (0, m.jsx)(s.tG,
 											{
 												style:isJSON(t.content.split('#')[1]) ? JSON.parse(t.content.split('#')[1]) : {"max-width":t.content.indexOf("CharFace") > -1 && !t.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
-												src: !t.file ? t.content.toLowerCase().indexOf("moetalk") > -1 ? t.content.split('#')[0] : href+t.content.split('#')[0] : t.file,//#图片也支持样式了
+												src: t.file || (href+t.content.split('#')[0]).replaceAll('//Images','/Images'),//#图片也支持样式了
 												onError: function(e)
 												{
 													e.currentTarget.src = href+'Images/Ui/error.webp';

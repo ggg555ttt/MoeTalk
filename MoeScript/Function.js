@@ -350,6 +350,7 @@ function combineFiles(mainFile, hideFile, fileName) {
 		targetData.set(hideData, mainData.length + sepData.length);
 		const blob = new Blob([targetData], { type: mimeMap[mainFileExt] });
 		//downloadBlob(blob, fileName+'.'+mainFileExt);
+		blobToBase64(blob,function(e){$("[alt='download']").attr('src','data:image/png;base64,'+e)})//替换手动保存的图片
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
 		a.download = fileName+'.'+mainFileExt;

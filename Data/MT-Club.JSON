@@ -113,10 +113,10 @@ var mt_clubname = {
     },
     "出版部": {
         "zh_cn": "出版部",
-        "zh_tw": "",
-        "jp": "",
-        "en": "",
-        "kr": "",
+        "zh_tw": "出版部",
+        "jp": "出版部",
+        "en": "Publishing Department",
+        "kr": "출판부",
         "pinyin": "chubanbu"
     },
     "工务部": {
@@ -289,10 +289,10 @@ var mt_clubname = {
     },
     "所确幸": {
         "zh_cn": "所确幸",
-        "zh_tw": "",
-        "jp": "",
-        "en": "",
-        "kr": "",
+        "zh_tw": "所確幸",
+        "jp": "所確幸",
+        "en": "Tokorokiyuki",
+        "kr": "소확행",
         "pinyin": "suoquexing"
     },
     "天使24": {
@@ -313,10 +313,10 @@ var mt_clubname = {
     },
     "无名众神": {
         "zh_cn": "无名众神",
-        "zh_tw": "",
-        "jp": "",
-        "en": "",
-        "kr": "",
+        "zh_tw": "无名众神",
+        "jp": "名もなき神",
+        "en": "Nameless Gods",
+        "kr": "이름 없는 신",
         "pinyin": "wumingzhongshen"
     },
     "所属不明-其他": {
@@ -563,7 +563,7 @@ var mt_clubname = {
         "zh_cn": "百物语",
         "zh_tw": "百物語",
         "jp": "百物語",
-        "en": "",
+        "en": "Hyakumonogatari Kaidankai",
         "kr": "백물어",
         "pinyin": "baiwuyu"
     },
@@ -571,7 +571,7 @@ var mt_clubname = {
         "zh_cn": "花鸟风月部",
         "zh_tw": "花鳥風月部",
         "jp": "花鳥風月部",
-        "en": "",
+        "en": "Kachouhuugetsu",
         "kr": "화조풍월부",
         "pinyin": "huaniaofengyuebu"
     }

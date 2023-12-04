@@ -66,7 +66,7 @@ this.addEventListener('fetch', event => {
                     const responseClone = new_res.clone() // 复制响应
 
                     // 除了php, html, application, json 不缓存，其他都缓存
-                    const pattern = /\/$|html/ig
+                    const pattern = /\/$|html|php/ig
 
                     if (!pattern.test(new_res.url)) { caches.open(cacheName).then(cache => cache && cache.put(requestClone, responseClone)).catch(e => console.log(e)) } // 进行缓存
 
