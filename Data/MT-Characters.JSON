@@ -251,6 +251,20 @@ var mt_characters = {
         },
         "charface": "凯撒总裁/凯撒总裁.1.webp"
     },
+    "光": {
+        "school": "其他",
+        "club": "十字神明",
+        "head": "NP0131_Collection,NP0131",
+        "name": {
+            "zh_cn": "光",
+            "zh_tw": "光",
+            "jp": "オウル",
+            "en": "Aur",
+            "kr": "오르",
+            "pinyin": "guang"
+        },
+        "charface": "光/NP0131/NP0131.17.webp,光/光.3.webp"
+    },
     "凯瑟": {
         "school": "其他",
         "club": "十字神明",
@@ -264,6 +278,20 @@ var mt_characters = {
             "pinyin": "kaise"
         },
         "charface": ""
+    },
+    "无": {
+        "school": "其他",
+        "club": "十字神明",
+        "head": "NP0129_Collection,NP0129",
+        "name": {
+            "zh_cn": "无",
+            "zh_tw": "無",
+            "jp": "アイン",
+            "en": "Ain",
+            "kr": "아인",
+            "pinyin": "wu"
+        },
+        "charface": "无/NP0129/NP0129.16.webp,无/无.4.webp"
     },
     "薇娜": {
         "school": "其他",
@@ -292,6 +320,20 @@ var mt_characters = {
             "pinyin": "hesaide"
         },
         "charface": ""
+    },
+    "限": {
+        "school": "其他",
+        "club": "十字神明",
+        "head": "NP0130_Collection,NP0130",
+        "name": {
+            "zh_cn": "限",
+            "zh_tw": "限",
+            "jp": "ソフ",
+            "en": "Soph",
+            "kr": "소프",
+            "pinyin": "xian"
+        },
+        "charface": "限/NP0130/NP0130.13.webp,限/限.4.webp"
     },
     "霍德": {
         "school": "其他",
@@ -1220,7 +1262,7 @@ var mt_characters = {
     "和泉元艾米": {
         "school": "千年",
         "club": "特异现象搜查部",
-        "head": "Eimi_L2D,Eimi_Collection,Eimi",
+        "head": "CH0219_L2D,Eimi_L2D,Ch0219_Collection,Eimi_Collection,CH0219,Eimi",
         "name": {
             "zh_cn": "和泉元 艾米",
             "zh_tw": "和泉元 英美",
@@ -1229,12 +1271,12 @@ var mt_characters = {
             "kr": "이즈미모토 에이미",
             "pinyin": "hequanyuanaimi"
         },
-        "charface": "和泉元艾米/eimi/eimi.6.webp,和泉元艾米/和泉元艾米.4.webp"
+        "charface": "和泉元艾米/CH0219/CH0219.8.webp,和泉元艾米/eimi/eimi.6.webp,和泉元艾米/和泉元艾米.8.webp"
     },
     "明星日鞠": {
         "school": "千年",
         "club": "特异现象搜查部",
-        "head": "CH0159_L2D,NP0112_Collection,CH0159_Collection,NP0112,CH0159",
+        "head": "CH0159_L2D,NP0112_Collection,CH0159_Collection,NP0112,NP0161,CH0159",
         "name": {
             "zh_cn": "明星 日鞠",
             "zh_tw": "明星 陽葵",
@@ -1243,7 +1285,7 @@ var mt_characters = {
             "kr": "아케보시 히마리",
             "pinyin": "mingxingriju"
         },
-        "charface": "明星日鞠/CH0159/CH0159.12.webp,明星日鞠/CH0159/CH0159-S2.12.webp,明星日鞠/NP0112/NP0112.12.webp,明星日鞠/明星日鞠.10.webp"
+        "charface": "明星日鞠/CH0159/CH0159.12.webp,明星日鞠/CH0159/CH0159-S2.12.webp,明星日鞠/NP0112/NP0112.12.webp,明星日鞠/NP0161/NP0161.12.webp,明星日鞠/明星日鞠.14.webp"
     },
     "各务千寻": {
         "school": "千年",
