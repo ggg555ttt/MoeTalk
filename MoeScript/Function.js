@@ -59,7 +59,6 @@ $.ajax({
 								localStorage['mt-lang'] = 'kr'
 							}
 						}
-						alert('2.9之后的更新：\n差分表情大小改为400*400\n字体默认不加载，但可以在设置页面变更')
 						localStorage['mt-version'] = text
 						location.reload(true)
 					}
