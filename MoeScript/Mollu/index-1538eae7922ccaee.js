@@ -3071,7 +3071,15 @@
 											children: (0, m.jsx)(c.j4,
 											{})
 										})]
-									}),(0, m.jsxs)(ea.h4,
+									}), (0, m.jsxs)(ea.h4,
+									{
+										children: [(0, m.jsx)('a',
+										{
+											className: "bold",
+											children: '部分自定义差分表情作者主页链接',
+											href:'https://space.bilibili.com/249137912'
+										})]
+									}), (0, m.jsxs)(ea.h4,
 									{
 										children: [(0, m.jsx)(c.Bx,
 										{

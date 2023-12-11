@@ -293,6 +293,20 @@ var mt_characters = {
         },
         "charface": "无/NP0129/NP0129.16.webp,无/无.4.webp"
     },
+    "盖布拉": {
+        "school": "其他",
+        "club": "十字神明",
+        "head": "盖布拉_Collection",
+        "name": {
+            "zh_cn": "盖布拉",
+            "zh_tw": "蓋布拉",
+            "jp": "ゲブラ",
+            "en": "Geburah",
+            "kr": "게부라",
+            "pinyin": "gaibula"
+        },
+        "charface": ""
+    },
     "薇娜": {
         "school": "其他",
         "club": "十字神明",
@@ -1355,7 +1369,7 @@ var mt_characters = {
             "kr": "하야세 유우카",
             "pinyin": "zaolaiyouxiang"
         },
-        "charface": "早濑优香/CH0184/CH0184.15.webp,早濑优香/NP0109/NP0109.7.webp,早濑优香/yuuka/yuuka.7.webp,早濑优香/早濑优香.12.webp"
+        "charface": "早濑优香/CH0184/CH0184.15.webp,早濑优香/NP0109/NP0109.7.webp,早濑优香/yuuka/yuuka.7.webp,早濑优香/早濑优香.12.webp,早濑优香/早濑优香-249137912/早濑优香-249137912.19.webp"
     },
     "生盐诺亚": {
         "school": "千年",
@@ -1369,7 +1383,7 @@ var mt_characters = {
             "kr": "우시노 노아",
             "pinyin": "shengyannuoya"
         },
-        "charface": "生盐诺亚/CH0095/CH0095.7.webp,生盐诺亚/NP0043/NP0043.7.webp,生盐诺亚/生盐诺亚.8.webp"
+        "charface": "生盐诺亚/CH0095/CH0095.7.webp,生盐诺亚/NP0043/NP0043.7.webp,生盐诺亚/生盐诺亚.8.webp,生盐诺亚/生盐诺亚-249137912/生盐诺亚-249137912.21.webp"
     },
     "调月莉音": {
         "school": "千年",
@@ -1733,7 +1747,7 @@ var mt_characters = {
             "kr": "키리후지 나기사",
             "pinyin": "tongtengzhu"
         },
-        "charface": "桐藤渚/nagisa/nagisa.16.webp,桐藤渚/桐藤渚.4.webp"
+        "charface": "桐藤渚/nagisa/nagisa.16.webp,桐藤渚/桐藤渚.4.webp,桐藤渚/桐藤渚-249137912/桐藤渚-249137912.10.webp"
     },
     "百合园圣娅": {
         "school": "圣三一",
@@ -2013,7 +2027,7 @@ var mt_characters = {
             "kr": "나츠메 이로하",
             "pinyin": "zaoyilvbo"
         },
-        "charface": "枣伊吕波/CH0156/CH0156.7.webp,枣伊吕波/枣伊吕波.4.webp"
+        "charface": "枣伊吕波/CH0156/CH0156.7.webp,枣伊吕波/枣伊吕波.4.webp,枣伊吕波/枣伊吕波-249137912/枣伊吕波-249137912.20.webp"
     },
     "皐月": {
         "school": "格黑娜",
@@ -2083,7 +2097,7 @@ var mt_characters = {
             "kr": "리쿠하치마 아루",
             "pinyin": "lubamoalu"
         },
-        "charface": "陆八魔阿露/aru_newyear/aru_newyear.17.webp,陆八魔阿露/aru/aru.14.webp,陆八魔阿露/陆八魔阿露.8.webp"
+        "charface": "陆八魔阿露/aru_newyear/aru_newyear.17.webp,陆八魔阿露/aru/aru.14.webp,陆八魔阿露/陆八魔阿露.8.webp,陆八魔阿露/陆八魔阿露-249137912/陆八魔阿露-249137912.7.webp"
     },
     "鬼方佳代子": {
         "school": "格黑娜",
@@ -2097,7 +2111,7 @@ var mt_characters = {
             "kr": "오니카타 카요코",
             "pinyin": "guifangjiadaizi"
         },
-        "charface": "鬼方佳代子/CH0086/CH0086.7.webp,鬼方佳代子/kayoko/kayoko.7.webp,鬼方佳代子/NP0118/NP0118.7.webp,鬼方佳代子/鬼方佳代子.12.webp"
+        "charface": "鬼方佳代子/CH0086/CH0086.7.webp,鬼方佳代子/kayoko/kayoko.7.webp,鬼方佳代子/NP0118/NP0118.7.webp,鬼方佳代子/鬼方佳代子.12.webp,鬼方佳代子/鬼方佳代子-249137912/鬼方佳代子-249137912.7.webp"
     },
     "旗见艾丽卡": {
         "school": "格黑娜",
@@ -2335,7 +2349,7 @@ var mt_characters = {
             "kr": "소라사키 히나",
             "pinyin": "kongqirinai"
         },
-        "charface": "空崎日奈/CH0063/CH0063.10.webp,空崎日奈/hina/hina.20.webp,空崎日奈/NP0009/NP0009.6.webp,空崎日奈/NP0017/NP0017.6.webp,空崎日奈/空崎日奈.14.webp"
+        "charface": "空崎日奈/CH0063/CH0063.10.webp,空崎日奈/hina/hina.20.webp,空崎日奈/NP0009/NP0009.6.webp,空崎日奈/NP0017/NP0017.6.webp,空崎日奈/空崎日奈.14.webp,空崎日奈/空崎日奈-249137912/空崎日奈-249137912.9.webp"
     },
     "银镜伊织": {
         "school": "格黑娜",
