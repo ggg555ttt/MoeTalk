@@ -4505,7 +4505,7 @@
 									{
 										style: n.isRight ? 
 										{
-											display: 'block',
+											//display: 'block',
 											alignItems: 'flex-end'
 										} : {display: 'block',width: '100%'},
 										children: [(0, m.jsx)("span",
