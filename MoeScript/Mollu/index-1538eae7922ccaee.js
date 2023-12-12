@@ -1927,8 +1927,8 @@
 											json[0]['date'] = (0, u._3)(!0, !0);
 											json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
 											json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
-											json[0]['mt-char'] = JSON.parse(localStorage['mt-char']);//@自创角色
-											json[0]['mt-head'] = JSON.parse(localStorage['mt-head']);//@自创头像
+											json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
+											json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
 											json[1] = JSON.parse(localStorage['chats']);
 											if(localStorage['wmark'])
 											{
