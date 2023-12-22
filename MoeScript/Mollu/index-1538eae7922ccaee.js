@@ -2989,6 +2989,8 @@
 					{
 						cf = cfemoji;
 						cfemoji = 'NO';//@加入判断
+						let customcf = false;//自设差分
+						let cftype = '';//差分类型
 						let emojinum;
 						let no = JSON.parse(localStorage['mt-selectedList'])['selected']['no'];
 
@@ -3021,11 +3023,20 @@
 								sessionStorage[no] < 0 ? sessionStorage[no] = mt_charface.split(',').length-1 : sessionStorage[no] = 0;
 							}
 							if(isNaN(parseInt(sessionStorage[no])))sessionStorage[no] = 0;
-							let arr = mt_charface.split(',')[parseInt(sessionStorage[no])];
-							for(let num = 1;num <= arr.split('.')[1];num++)
+							let arr = mt_charface.split(',')[parseInt(sessionStorage[no])].split('.');
+							arr.pop();//去掉后缀名
+							let maxnum = arr.pop()//获取最大数字
+							arr = arr.join('.')
+							cftype = arr === `${no}/${no}` ? '其他' : ''
+							for(let num = 1;num <= maxnum;num++)
 							{
-								cflink = `Images/CharFace/${mt_characters[no].school}/${mt_characters[no].club}/${arr.split('.')[0]}.`;
+								cflink = `Images/CharFace/${mt_characters[no].school}/${mt_characters[no].club}/${arr}.`;
 								cfarr.push(cflink+num+'.webp')
+								if(cflink.indexOf('@') > -1)
+								{
+									customcf = `https://space.bilibili.com/${arr.split('@')[1]}`;
+									cftype = '自设'
+								}
 							}
 						}
 						if(cf == 'Emoji')
@@ -3038,7 +3049,6 @@
 							if(CFPI == 3)emojinum = 27;
 						}
 						let cfnum = cf == 'Emoji' ? emojinum : cfarr.length-1;///差分总数
-						
 						return (0, m.jsx)(m.Fragment,
 						{
 							children: (0, m.jsx)(ea.Xf,
@@ -3060,7 +3070,12 @@
 										children: [(0, m.jsx)(ea.Dx,
 										{
 											className: "bold",
-											children: cf == 'Emoji' ? L.Z.emoticon[l]+'('+cfnum+')' : charname+'('+cfnum+')'//#加入差分表情
+											children: [cf == 'Emoji' ? L.Z.emoticon[l]+'('+cfnum+')' : charname+'('+cfnum+cftype+')',(0, m.jsx)('a',
+											{
+												hidden:!customcf,
+												href: customcf,
+												children: '差分来源'
+											})]//#加入差分表情
 										}), (0, m.jsx)(ea.ec,
 										{
 											id: 'close',//@
@@ -3070,14 +3085,6 @@
 											},
 											children: (0, m.jsx)(c.j4,
 											{})
-										})]
-									}), (0, m.jsxs)(ea.h4,
-									{
-										children: [(0, m.jsx)('a',
-										{
-											className: "bold",
-											children: '部分自定义差分表情作者主页链接',
-											href:'https://space.bilibili.com/249137912'
 										})]
 									}), (0, m.jsxs)(ea.h4,
 									{
@@ -4557,12 +4564,12 @@
 												
 											})] : (0, m.jsx)(eN.tG,
 											{
-												style:isJSON(n.content.split('#')[1]) ? JSON.parse(n.content.split('#')[1]) : {"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
+												style:{"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
 												onClick: function()
 												{
 													editMsg(o,n,t)//#编辑消息-图片
 												},
-												src: n.file || (href+n.content.split('#')[0]).replaceAll('//Images','/Images'),//#图片也支持样式了
+												src: n.file || (href+n.content).replaceAll('//Images','/Images'),//#图片也支持样式了
 												onError: function(e)
 												{
 													e.currentTarget.src = href+'Images/Ui/error.webp';

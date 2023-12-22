@@ -1428,8 +1428,8 @@
 												}	
 											})] : (0, m.jsx)(s.tG,
 											{
-												style:isJSON(t.content.split('#')[1]) ? JSON.parse(t.content.split('#')[1]) : {"max-width":t.content.indexOf("CharFace") > -1 && !t.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
-												src: t.file || (href+t.content.split('#')[0]).replaceAll('//Images','/Images'),//#图片也支持样式了
+												style:{"max-width":t.content.indexOf("CharFace") > -1 && !t.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
+												src: t.file || (href+t.content).replaceAll('//Images','/Images'),//#图片也支持样式了
 												onError: function(e)
 												{
 													e.currentTarget.src = href+'Images/Ui/error.webp';

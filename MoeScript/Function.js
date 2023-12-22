@@ -682,3 +682,15 @@ const getNowDate = () => {
   //return year + "-" + month + "-" + day + " " + hour + sign2 + minutes + sign2 + seconds;
   return `${year}${month}${day}${hour}${minutes}${seconds}`;
 }
+// var imglink = ''
+// $("#read-article-holder .normal-img").each(function()
+// {
+// 	let link = $(this).attr('data-src')
+// 	if(link.indexOf('@!web-article-pic.avif') > -1)
+// 	{
+// 		imglink = imglink + link + '\n';
+// 	}
+// })
+// imglink = imglink.replaceAll('@!web-article-pic.avif','')
+// imglink = imglink.replaceAll('//','')
+// console.log(imglink)
