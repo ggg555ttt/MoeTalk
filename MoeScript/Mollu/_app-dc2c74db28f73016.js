@@ -9936,6 +9936,17 @@
 								{
 									children: [(0, O.jsx)(I,{id:"readme",children:localStorage['MoeTalk']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
+										href: "https://gitlab.com/ggg555ttt/MoeTalk/",
+										style:
+										{
+											fontSize: "20px",
+											position: "relative",
+											top: "-2.5px"
+										},
+										className: "bold",
+										children: '项目地址'
+									}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
+									{
 										href: "https://wj.qq.com/s2/12952865/a1aa/",
 										className: "medium",
 										id: 'help',
