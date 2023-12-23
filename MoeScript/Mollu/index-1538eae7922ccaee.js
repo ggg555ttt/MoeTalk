@@ -3032,9 +3032,10 @@
 							{
 								cflink = `Images/CharFace/${mt_characters[no].school}/${mt_characters[no].club}/${arr}.`;
 								cfarr.push(cflink+num+'.webp')
-								if(cflink.indexOf('@') > -1)
+								if(mt_CharFaceInfo[arr.split('/')[1]])
 								{
-									customcf = `https://space.bilibili.com/${arr.split('@')[1]}`;
+									if(mt_CharFaceIndex[mt_CharFaceInfo[arr.split('/')[1]]] !== '')
+									customcf = mt_CharFaceIndex[mt_CharFaceInfo[arr.split('/')[1]]];
 									cftype = '自设'
 								}
 							}
