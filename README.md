@@ -11,7 +11,7 @@
 ## 截止2023年11月22日的差分立绘图片 
 链接：https://pan.baidu.com/s/1euJDJLZs0F6GuvxAvez4Vg?pwd=5428 
 ## 项目地址： 
-https://github.com/ggg555ttt/MoeTalk/ 
+https://github.com/ggg555ttt/MoeTalk/  
 https://gitlab.com/ggg555ttt/MoeTalk/ 
 ## 项目Pages： 
 https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/ 
