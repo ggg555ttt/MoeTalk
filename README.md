@@ -14,7 +14,7 @@
 https://github.com/ggg555ttt/MoeTalk/  
 https://gitlab.com/ggg555ttt/MoeTalk/ 
 ## 项目Pages： 
-https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/ 
+https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/  
 https://moetalk.vercel.app/ 
 ## B站： 
 https://space.bilibili.com/13973390 
