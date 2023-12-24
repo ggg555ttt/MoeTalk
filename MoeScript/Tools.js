@@ -282,6 +282,9 @@ function parseFile(file) {
 			const ext = data2str(extData);
 			const subData = data.subarray(endIndex + maxExtLength);
 			const blob = new Blob([subData], { type: mimeMap[ext]});
+			if (blob.size < 1) {
+				return alert('该文件没有解析出存档文件！');
+			}
 			downloadBlob(blob, `恢复的存档.${ext}`);
 		});
 }

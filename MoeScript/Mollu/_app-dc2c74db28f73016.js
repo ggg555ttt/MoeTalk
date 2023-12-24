@@ -9932,7 +9932,30 @@
 							children: [(0, O.jsxs)(P,
 							{
 								//*反馈通道和自定义标题
-								children: [(0, O.jsx)(I,
+								children: [(0, O.jsx)(N,
+								{
+									onClick: function()
+									{
+										t((0, w.c1)(!r))
+									},
+									style:
+									{
+										display: i ? "block" : "none"
+									},
+									children: (0, O.jsx)(y(),
+									{
+										width: 90,
+										height: 90,
+										title: "menu",
+										style:
+										{
+											width: "2.5rem",
+											height: "2.5rem"
+										},
+										src: href+"Images/Ui/menu.webp",//#菜单图标
+										alt: "menu"
+									})
+								}), (0, O.jsx)(I,
 								{
 									children: [(0, O.jsx)(I,{id:"readme",children:localStorage['MoeTalk']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
@@ -9970,30 +9993,7 @@
 								//*反馈通道和自定义标题
 							}), (0, O.jsxs)("div",
 							{
-								children: [(0, O.jsx)(N,
-								{
-									onClick: function()
-									{
-										t((0, w.c1)(!r))
-									},
-									style:
-									{
-										display: i ? "block" : "none"
-									},
-									children: (0, O.jsx)(y(),
-									{
-										width: 90,
-										height: 90,
-										title: "menu",
-										style:
-										{
-											width: "2.5rem",
-											height: "2.5rem"
-										},
-										src: href+"Images/Ui/menu.webp",//#菜单图标
-										alt: "menu"
-									})
-								}), (0, O.jsx)(B,
+								children: [(0, O.jsx)(B,
 								{
 									onClick: function()
 									{
@@ -10042,7 +10042,7 @@
 					{
 						displayName: "Header__Flex",
 						componentId: "sc-17b1not-1"
-					})(["", " width:auto;padding:0rem 1rem;"], function(e)
+					})(["", " width:auto;padding:0rem 0.5rem;"], function(e)
 					{
 						return e.theme.common.flexBox(
 						{
@@ -10053,9 +10053,9 @@
 					{
 						displayName: "Header__Title",
 						componentId: "sc-17b1not-2"
-					})(["margin-left:0.5rem;line-height:2.5rem;font-size:2rem;color:", ";font-family:'title';"], function(e)
+					})(["font-size:2rem;color:", ";font-family:'title';"], function(e)
 					{
-						return e.theme.color.rgb255_255_255
+						return e.theme.color.rgb0_0_0
 					}),
 					T = (0, h.ZP)(d.hU).withConfig(
 					{
@@ -10076,7 +10076,7 @@
 					{
 						displayName: "Header__MenuButton",
 						componentId: "sc-17b1not-4"
-					})(["width:2.5rem;margin-right:1rem;@media screen and (min-width:769px){display:none;}"]),
+					})(["width:2.5rem;margin-right:0.5rem;@media screen and (min-width:769px){display:none;}"]),
 					B = (0, h.ZP)(d.hU).withConfig(
 					{
 						displayName: "Header__MoblieButton",
@@ -10286,7 +10286,7 @@
 					{
 						displayName: "SideBar__BgDiv",
 						componentId: "sc-v5z5y3-5"
-					})(["position:absolute;margin-top:3.5rem;width:100%;height:100%;background-color:", ";z-Index:3;opacity:0;transition:opacity 0.25s ease-in-out;"], function(e)
+					})(["position:absolute;margin-top:3.5rem;height:100%;background-color:", ";z-Index:3;opacity:0;transition:opacity 0.25s ease-in-out;"], function(e)
 					{
 						return e.theme.color.rgba0_0_0_6
 					}),

@@ -1868,8 +1868,9 @@
 						v = (0, r.useState)((t = {
 							watermark: !0,
 							title: !1,
-							writer: !1
-						}, "undefined" != typeof localStorage && (t.watermark = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("watermark")) === null ? "true" : localStorage.getItem("watermark") || "false")), t)),
+							writer: !1,
+							archive: !1
+						}, "undefined" != typeof localStorage && (t.watermark = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("watermark")) === null ? "true" : localStorage.getItem("watermark") || "false"), t.archive = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("archive")) === null ? "true" : localStorage.getItem("archive") || "false")), t)),
 						k = v[0],
 						Z = v[1],
 						N = (0, r.useState)((a = 1, "undefined" != typeof localStorage && (a = Number.parseInt((null === (o = localStorage) || void 0 === o ? void 0 : o.getItem("imageQaulity")) || "1")), a)),
@@ -1945,7 +1946,7 @@
 													{
 														j(base64), null === (n = I.current) || void 0 === n || n.setAttribute("src",base64), e.toBlob(function(e)
 														{
-															combineFiles(base64.replace('data:image/png;base64,',''),JSON.stringify(json),"MolluTalk_" + ("" !== _ ? _ : L.Z.noTitle[g]));
+															combineFiles(base64.replace('data:image/png;base64,',localStorage['archive'] === 'true' ? JSON.stringify(json) : ''),'',"MoeTalk_" + ("" !== _ ? _ : L.Z.noTitle[g]));
 														})
 													}
 												})
@@ -1954,7 +1955,7 @@
 											{
 												j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
 												{
-													combineFiles(t.replace('data:image/png;base64,',''),JSON.stringify(json),"MolluTalk_" + ("" !== _ ? _ : L.Z.noTitle[g]));
+													combineFiles(t.replace('data:image/png;base64,',''),localStorage['archive'] === 'true' ? JSON.stringify(json) : '',"MoeTalk_" + ("" !== _ ? _ : L.Z.noTitle[g]));
 												})
 											}
 											//*加入水印功能和隐写存档
@@ -1991,9 +1992,10 @@
 								r = {
 									watermark: k.watermark,
 									title: k.title,
-									writer: k.writer
+									writer: k.writer,
+									archive: k.archive
 								};
-							r[n] = t, "watermark" !== n || (localStorage.setItem("watermark", String(t)), t || (r.title = !1, r.writer = !1)), Z(r)
+							r[n] = t, "archive" !== n || (localStorage.setItem("archive", String(t)), t || (r.title = !1, r.writer = !1)), "watermark" !== n || (localStorage.setItem("watermark", String(t)), t || (r.title = !1, r.writer = !1)), Z(r)
 						};
 					return (0, m.jsx)(ea.Xf,
 					{
@@ -2060,7 +2062,8 @@
 													{
 														watermark: !0,
 														writer: !0,
-														title: !0
+														title: !0,
+														archive: !0
 													}))
 												},
 												onKeyDown: function(e) {}
@@ -2081,7 +2084,8 @@
 													{
 														watermark: !0,
 														writer: !0,
-														title: !0
+														title: !0,
+														archive: !0
 													}))
 												}
 											})
@@ -2148,7 +2152,7 @@
 														return E(n, e)
 													},
 													value: n
-												}), L.Z[e][g]]
+												}), L.Z[e][g],]
 											}, n)
 										})
 									}), (0, m.jsx)("span",
@@ -2159,7 +2163,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: L.Z.down_comment1[g]
+										children: [L.Z.down_comment1[g],localStorage['archive'] === 'true' ? '已包含存档' : '不包含存档']
 									}), (0, m.jsx)("span",
 									{
 										style:
@@ -2225,7 +2229,7 @@
 						})
 					})
 				},
-				ej = ["watermark", "title", "writer"],
+				ej = ["watermark", "title", "writer", "archive"],//#加入包含存档选项
 				ew = o.ZP.div.withConfig(
 				{
 					displayName: "PopupImageDownload__Wrapper",
@@ -5372,10 +5376,10 @@
 				{
 					displayName: "talk__ImgBox",
 					componentId: "sc-eq7cqw-3"
-				})(["max-width:"+localStorage['mt-size']+";border:2px solid ", ";background-color:"+localStorage['mt-style'].split(' ')[1]+";padding:0.5rem;border-radius:10px;"], function(e)
+				})(["max-width:"+localStorage['mt-size']+";border:2px solid ", ";background-color:rgb(255,255,255);padding:0.5rem;border-radius:10px;"], function(e)
 				//#仿ClosureTalk把90%改成40%，可以考虑自定义
 				{
-					return localStorage['mt-style'].split(' ')[1]//#自定义样式
+					return e.theme.color.rgb255_255_255
 				}),
 				s = r.ZP.span.withConfig(
 				{

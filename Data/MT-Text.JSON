@@ -1160,5 +1160,12 @@ var mt_text = {
 		"jp": "ID",
 		"zh_cn": "ID",
 		"zh_tw": "ID"
+	},
+	"archive": {
+		"kr": "archive",
+		"en": "archive",
+		"jp": "archive",
+		"zh_cn": "存档",
+		"zh_tw": "存檔"
 	}
 }

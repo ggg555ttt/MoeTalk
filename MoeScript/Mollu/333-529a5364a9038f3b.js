@@ -1978,10 +1978,10 @@
 				{
 					displayName: "talk__ImgBox",
 					componentId: "sc-eq7cqw-3"
-				})(["max-width:"+localStorage['mt-size']+";border:2px solid ", ";background-color:"+localStorage['mt-style'].split(' ')[1]+";padding:0.5rem;border-radius:10px;"], function(e)
+				})(["max-width:"+localStorage['mt-size']+";border:2px solid ", ";background-color:rgb(255,255,255);padding:0.5rem;border-radius:10px;"], function(e)
 				//#仿ClosureTalk把90%改成40%，可以考虑自定义
 				{
-					return localStorage['mt-style'].split(' ')[1]//#自定义样式
+					return e.theme.color.rgb255_255_255
 				}),
 				s = r.ZP.span.withConfig(
 				{

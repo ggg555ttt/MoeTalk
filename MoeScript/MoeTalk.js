@@ -382,14 +382,12 @@ $('body').on('click',"#mt-style",function()
 	if(localStorage['mt-style'] === 'rgb(255,247,225) rgb(255,255,255) transparent')
 	{//RightScreen__CContainer-sc-14j003s-2
 		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,255,255)');
-		$('.talk__ImgBox-sc-eq7cqw-3').css('background-color','transparent');
 		$('.talk__InfoBox-sc-eq7cqw-8').css('background','rgb(220,229,232)');
 		localStorage['mt-style'] = 'rgb(255,255,255) rgb(255,255,255) rgb(220,229,232)';//transparent
 	}
 	else
 	{
 		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,247,225)');
-		$('.talk__ImgBox-sc-eq7cqw-3').css('background-color','rgb(255,255,255)');
 		$('.talk__InfoBox-sc-eq7cqw-8').css('background','transparent');
 		localStorage['mt-style'] = 'rgb(255,247,225) rgb(255,255,255) transparent';
 	}

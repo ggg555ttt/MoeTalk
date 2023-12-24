@@ -8,8 +8,8 @@
 学校、社团、角色的中、日、英、韩名称 
 ## Data/MT-CharFaceInfo.JSON 
 自设差分的来源信息 
-## 截止2023年11月22日的差分立绘图片 
-链接：https://pan.baidu.com/s/1euJDJLZs0F6GuvxAvez4Vg?pwd=5428 
+## 差分立绘图片（持续更新） 
+链接：https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=BLDA 
 ## 项目地址： 
 https://github.com/ggg555ttt/MoeTalk/  
 https://gitlab.com/ggg555ttt/MoeTalk/ 
