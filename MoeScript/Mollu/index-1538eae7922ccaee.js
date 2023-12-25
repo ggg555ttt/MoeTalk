@@ -4509,7 +4509,8 @@
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
 											onError: function(e)
 											{
-												e.currentTarget.src = href+'Images/Ui/error.webp';
+												var n = e.currentTarget;
+												(0, u.Mp)(n, "character")
 											},
 											alt: n.sCharacter.index
 										})
@@ -4577,8 +4578,8 @@
 												src: n.file || n.content.indexOf("//") > -1 ? n.content : href+n.content,
 												onError: function(e)
 												{
-													e.currentTarget.src = href+'Images/Ui/error.webp';
-												}
+													e.currentTarget.src = 'Images/Ui/error.webp';
+												},
 											}), (0, m.jsx)(eN.i9,
 											{
 												//右侧时间戳
