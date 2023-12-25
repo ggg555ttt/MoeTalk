@@ -1,3 +1,5 @@
+## 离线启动方法（Windows） 
+运行EasyWebSvr.exe后浏览器访问localhost或127.0.0.1
 ## Data/TALK/CharFace.json 
 差分立绘切割成表情的坐标信息（x.y）和对应的角色ID，MoeTalk的差分表情图片为400x400，但实际原图选定的区域为476x476，json里记录的xy坐标全部-38（-38后小于0的除外） 
 ## Data/TALK/DATA_CharFace.JSON 

@@ -9674,7 +9674,7 @@
 						//*读取人名
 						var r,o;
 						if(e === 0)return a.Y.name[n]
-						else o = '#'+(e-1000);
+						else o = e;
 						if(mt_characters[e])
 						{
 							o = mt_characters[e].name[n] ? mt_characters[e].name[n] : e;

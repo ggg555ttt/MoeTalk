@@ -173,34 +173,6 @@ $("body").on('click','#mt-title',function()
 	}
 })
 
-//待重新编写
-$('body').on('click',"#head",function()
-{
-	let head = prompt("头像以你底下的角色选择框第一个头像为准，请输入人名，不输入即为空");
-	let img = "<img src='"+$('.fzOyMd:eq(0)').attr('src')+"'class='common__Profile-sc-1ojome3-6 ekLMv rhead'>";
-	$('.dCYmqA').next().remove();$('.dCYmqA').next().remove();
-	if(head != null && head != '')
-	{
-		$('.dCYmqA').after("<span style='writing-mode:tb-rl;background:rgb(76,91,111);line-height:normal;'>"+head+"</span>",img)
-	}
-	else
-	{
-		$('.dCYmqA').after(img)
-	}
-})
-$('body').on('click','.rhead',function()
-{
-	if($(this).prev().is('span'))
-	{
-		$(this).prev().remove();
-		$(this).remove();
-	}
-	else
-	{
-		$(this).remove();
-	}
-})
-
 //水印功能
 if(localStorage['wmark'])
 {
@@ -336,63 +308,79 @@ $('body').on('click',"#mt-edit",function()
 })
 $('body').on('click',"#ct",function()
 {
-	let arr = JSON.parse(localStorage['chats'])
-	let cl = [];
-	$.each(arr,function(k,v)
+	let moeurl = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io'
+	let ct = [];
+	let chars = {};
+	$.each(JSON.parse(localStorage['chats']),function(k,v)
 	{
-		let data = 'mt-';
-		if(mt_characters[v['sCharacter']['no']])data = "MoeTalk-"
-		if(mollu_char[v['sCharacter']['no']])data = "MT-"
-		if(closure_char[v['sCharacter']['no']])data = "ba-"
-		cl[k] = {};
-		cl[k]['content'] = v['content'];
-		cl[k]['is_breaking'] = false;
-		if(v['sCharacter']['no'] !== 0)
+		ct[k] = {};
+		let id = v['sCharacter']['no'];
+		let img = v['sCharacter']['index'];
+		let data = 'MT-';
+		if(closure_char[id])data = "ba-"
+		if(id !== 0 && id.indexOf('custom-') < 0)//正常角色
 		{
-			cl[k]['char_id'] = data+v['sCharacter']['no'];
-			cl[k]['img'] = v['sCharacter']['index'];
-			if(data === "MT-")cl[k]['img'] = v['sCharacter']['no']+'.'+v['sCharacter']['index'];
+			ct[k]['char_id'] = data+id;
+			ct[k]['img'] = img;
+			if(data === "MT-")
+			{
+				img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D')
+				ct[k]['char_id'] = `custom-MT-${id}-${img}`
+				ct[k]['img'] = 'uploaded';
+				
+				chars[ct[k]['char_id']] = {}
+				chars[ct[k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`
+				chars[ct[k]['char_id']]['name'] = loadname(id);
+			}
 
 		}
-		cl[k]['yuzutalk'] = {};
-		cl[k]['yuzutalk']['nameOverride'] = v['name'] ? v['name'] : '';
-		if(v['isFirst'] === true)cl[k]['yuzutalk']['avatarState'] = 'SHOW';
-		else cl[k]['yuzutalk']['avatarState'] = 'HIDE';
-		if(v['type'] == 'chat')cl[k]['yuzutalk']['type'] = 'TEXT';
-		if(v['type'] == 'image')
+		if(id !== 0 && id.indexOf('custom-') > -1)//自定义角色
 		{
-			cl[k]['content'] = v['content'];
-			if(v['content'].indexOf('http') < 0)cl[k]['content'] = 'http://moetalk.gitee.io/'+v['content'];
-			if(v['content'].indexOf('data:image/') > -1)cl[k]['content'] = v['content'];
-			cl[k]['yuzutalk']['type'] = 'IMAGE';
+			ct[k]['char_id'] = id;
+			ct[k]['img'] = 'uploaded';
+			chars[id] = {}
+			chars[id]['img'] = loadhead(id);
+			chars[id]['name'] = loadname(id);
 		}
-		if(v['type'] == 'heart')cl[k]['yuzutalk']['type'] = 'RELATIONSHIPSTORY';
-		if(v['type'] == 'info')cl[k]['yuzutalk']['type'] = 'NARRATION';
-		if(v['type'] == 'reply')
+		ct[k]['content'] = v['content'];//文本内容
+		ct[k]['is_breaking'] = false;
+		ct[k]['yuzutalk'] = {};
+		ct[k]['yuzutalk']['nameOverride'] = v['name'] ? v['name'] : '';//临时名字
+		if(v['isFirst'] === true)//头像显示
 		{
-			cl[k]['yuzutalk']['type'] = 'CHOICES';
-			cl[k]['rg'] = v['replyGroup'];
+			ct[k]['yuzutalk']['avatarState'] = 'SHOW';
 		}
-		if(v['file'])cl[k]['content'] = v['file'];
+		else
+		{
+			ct[k]['yuzutalk']['avatarState'] = 'AUTO';
+		}
+		
+		if(v['type'] == 'chat')ct[k]['yuzutalk']['type'] = 'TEXT';//文字类型
+		if(v['type'] == 'reply')ct[k]['yuzutalk']['type'] = 'CHOICES';//选择肢
+		if(v['type'] == 'heart')ct[k]['yuzutalk']['type'] = 'RELATIONSHIPSTORY';//羁绊
+		if(v['type'] == 'info')ct[k]['yuzutalk']['type'] = 'NARRATION';//旁白
+		if(v['type'] == 'image')//图片类型
+		{
+			ct[k]['yuzutalk']['type'] = 'IMAGE';
+			if(v['content'].indexOf('//') < 0)//本地链接
+			{
+				ct[k]['content'] = `${moeurl}/${v['content']}`;
+			}
+			if(v['file'])ct[k]['content'] = v['file'];
+		}
+		
 	})
-	$.each(cl,function(k,v)
+	for(let i=0;i<ct.length;i++){if(ct[i]===undefined){ct.splice(i,1);i--;}}
+	let closuretalk = {};
+	closuretalk['chat'] = ct
+	closuretalk['chars'] = [];
+	closuretalk['custom_chars'] = [];
+	$.each(chars,function(k,v)
 	{
-		if(v['rg'] && cl[k+1] && v['rg'] === cl[k+1]['rg'])
-		{
-			cl[k+1]['content'] = cl[k]['content']+'\n'+cl[k+1]['content']
-			delete cl[k];
-		}
+		closuretalk['custom_chars'].push({char_id:k,img:v.img,name:v.name})
 	})
-	for(let i=0;i<cl.length;i++){if(cl[i]===undefined){cl.splice(i,1);i--;}}
-	arr = {};
-	arr['chat'] = cl
-	arr['chars'] = [];
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(arr));//生成专用存档
-	if(confirm('生成的ClosureTalk存档只能通过Gitee版ClosureTalk读取\n点击【确定】访问'))
-	{
-		location.href = 'https://closuretalk.gitee.io/'
-	}
+	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(closuretalk));//生成专用存档
 })
 $('body').on('click',"#cleancache",function()
 {

@@ -3003,7 +3003,7 @@
 							no = JSON.parse(localStorage['CharFaceIndex'])[no];
 						}
 						let link;let cflink = null;let cfarr = [];cfarr[0] = 'Images/CharFace';///定义链接
-						let charname = no === 0 ? '主角' : '#'+(no-1000);
+						let charname = no === 0 ? '主角' : no;
 
 						if(JSON.parse(localStorage['mt-char'])[no])
 						{
@@ -4574,7 +4574,7 @@
 												{
 													editMsg(o,n,t)//#编辑消息-图片
 												},
-												src: n.file || (href+n.content).replaceAll('//Images','/Images'),//#图片也支持样式了
+												src: n.file || n.content.indexOf("//") > -1 ? n.content : href+n.content,
 												onError: function(e)
 												{
 													e.currentTarget.src = href+'Images/Ui/error.webp';

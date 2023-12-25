@@ -111,6 +111,7 @@ var clubarr = {};
 if(localStorage['mt-club'])clubarr = JSON.parse(localStorage['mt-club']);//读取社团
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
 var class1 = 'talk__TextBox-sc-eq7cqw-4 talk__NTextBox-sc-eq7cqw-5 fWynih fYSjWX';
+var closureurl = 'https://closuretalk-ggg555ttt-dfac17880f8c693eca26c2febcfbedfeda4494b71.gitlab.io'
 /*预定义区*/
 
 //保存头像
@@ -138,10 +139,35 @@ function loadhead(id,img)
 	{
 		return JSON.parse(sessionStorage['mt-head'])[id]
 	}
-	if(closure_char[id])return `${href}Images/ClosureChar/${img}.webp`;//closure头像
+	if(closure_char[id])return `${closureurl}/resources/ba/characters/${img}.webp`;//closure头像
 	if(mollu_char[id])return href+'Images/MolluChar/'+id+'.'+img+'.webp';//旧版头像
 	if(id === 0)return href+"Images/Ui/you.webp";//主角
 	return href+"Images/Ui/error.webp";//默认头像
+}
+function loadname(id)
+{
+	let e = id;
+	let t = !0;
+	let n = lang;
+	var r,o;
+	if(e === 0)return id
+	if(mt_characters[e])
+	{
+		o = mt_characters[e].name[n] ? mt_characters[e].name[n] : e;
+	}
+	if(sessionStorage['mt-char'] && JSON.parse(sessionStorage['mt-char'])[e])
+	{
+		o = JSON.parse(sessionStorage['mt-char'])[e]
+	}
+	if(localStorage['mt-char'] && JSON.parse(localStorage['mt-char'])[e])
+	{
+		o = JSON.parse(localStorage['mt-char'])[e]
+	}
+	if(mollu_char[e])o = mollu_char[e][n]
+	if(closure_char[e])o = closure_char[e][n]
+	if(mt_name[e])o = mt_name[e];//@改名
+	//*读取人名
+	return t && o.split(" ")[1] || o.replaceAll("-", " ")
 }
 //删除头像
 function delhead(imgindex)
@@ -555,8 +581,11 @@ function loaddata(json)
 	{
 		$.each(json['custom_chars'],function(k,v)
 		{
-			custom_char[v.char_id] = v.name
-			custom_head[v.char_id] = v.img
+			if(v['char_id'].split('-')[1] !== 'MT')
+			{
+				custom_char[v.char_id] = v.name
+				custom_head[v.char_id] = v.img
+			}
 		})
 	}
 	let josnsize = parseInt((JSON.stringify(json).length/1024).toFixed(0))
@@ -582,6 +611,11 @@ function loaddata(json)
 			{
 				json[1][k]['sCharacter']['no'] = v['char_id']
 				json[1][k]['sCharacter']['index'] = v['img']
+				if(v['char_id'].split('-')[1] === 'MT')
+				{
+					json[1][k]['sCharacter']['no'] = v['char_id'].split('-')[2]
+					json[1][k]['sCharacter']['index'] = v['char_id'].split('-')[3]
+				}
 			}
 
 			json[1][k]['content'] = v['content'];
@@ -606,7 +640,7 @@ function loaddata(json)
 				else
 				{
 					json[1][k]['content'] = v['content'];
-					if(v['content'].indexOf('http') < 0)json[1][k]['content'] = v['content'].replace('resources/ba/stamps','Images/ClosureEmoji');
+					if(v['content'].indexOf('//') < 0)json[1][k]['content'] = `${closureurl}/${v['content']}`;
 				}
 			}
 			

@@ -1831,7 +1831,7 @@ var mt_characters = {
             "kr": "아지타니 히후미",
             "pinyin": "acigurifumei"
         },
-        "charface": "阿慈谷日富美/CH0058/CH0058.10.webp,阿慈谷日富美/hihumi_robber/hihumi_robber.6.webp,阿慈谷日富美/hihumi/hihumi.12.webp,阿慈谷日富美/NP0005/NP0005.6.webp,阿慈谷日富美/NP0006/NP0006.6.webp,阿慈谷日富美/阿慈谷日富美.20.webp"
+        "charface": "阿慈谷日富美/CH0058/CH0058.10.webp,阿慈谷日富美/hihumi/hihumi.12.webp,阿慈谷日富美/hihumi_robber/hihumi_robber.6.webp,阿慈谷日富美/NP0005/NP0005.6.webp,阿慈谷日富美/NP0006/NP0006.6.webp,阿慈谷日富美/阿慈谷日富美.20.webp"
     },
     "山海经学生": {
         "school": "山海经",
@@ -1901,7 +1901,7 @@ var mt_characters = {
             "kr": "야쿠시 사야",
             "pinyin": "yaozishaling"
         },
-        "charface": "药子纱绫/saya_casual/saya_casual.6.webp,药子纱绫/saya/saya.7.webp,药子纱绫/药子纱绫.8.webp"
+        "charface": "药子纱绫/saya/saya.7.webp,药子纱绫/saya_casual/saya_casual.6.webp,药子纱绫/药子纱绫.8.webp"
     },
     "朱城瑠美": {
         "school": "山海经",
@@ -2083,7 +2083,7 @@ var mt_characters = {
             "kr": "아사기 무츠키",
             "pinyin": "qianhuangmuyue"
         },
-        "charface": "浅黄睦月/mutsuki_newyear/mutsuki_newyear.9.webp,浅黄睦月/mutsuki/mutsuki.13.webp,浅黄睦月/浅黄睦月.8.webp"
+        "charface": "浅黄睦月/mutsuki/mutsuki.13.webp,浅黄睦月/mutsuki_newyear/mutsuki_newyear.9.webp,浅黄睦月/浅黄睦月.8.webp"
     },
     "陆八魔阿露": {
         "school": "格黑娜",
@@ -2097,7 +2097,7 @@ var mt_characters = {
             "kr": "리쿠하치마 아루",
             "pinyin": "lubamoalu"
         },
-        "charface": "陆八魔阿露/aru_newyear/aru_newyear.17.webp,陆八魔阿露/aru/aru.14.webp,陆八魔阿露/陆八魔阿露.8.webp,陆八魔阿露/cv28127770/cv28127770.7.webp"
+        "charface": "陆八魔阿露/aru/aru.14.webp,陆八魔阿露/aru_newyear/aru_newyear.17.webp,陆八魔阿露/陆八魔阿露.8.webp,陆八魔阿露/cv28127770/cv28127770.7.webp"
     },
     "鬼方佳代子": {
         "school": "格黑娜",
@@ -2979,7 +2979,7 @@ var mt_characters = {
             "kr": "이자요이 노노미",
             "pinyin": "shiliuyeyegong"
         },
-        "charface": "十六夜野宫/CH0092/CH0092.22.webp,十六夜野宫/nonomi_robber/nonomi_robber.6.webp,十六夜野宫/nonomi/nonomi.19.webp,十六夜野宫/NP0044/NP0044.19.webp,十六夜野宫/NP0067/NP0067.22.webp,十六夜野宫/十六夜野宫.20.webp"
+        "charface": "十六夜野宫/CH0092/CH0092.22.webp,十六夜野宫/nonomi/nonomi.19.webp,十六夜野宫/nonomi_robber/nonomi_robber.6.webp,十六夜野宫/NP0044/NP0044.19.webp,十六夜野宫/NP0067/NP0067.22.webp,十六夜野宫/十六夜野宫.20.webp"
     },
     "奥空绫音": {
         "school": "阿比多斯",
@@ -2993,7 +2993,7 @@ var mt_characters = {
             "kr": "오쿠소라 아야네",
             "pinyin": "aokonglingyin"
         },
-        "charface": "奥空绫音/ayane_robber/ayane_robber.15.webp,奥空绫音/ayane/ayane.15.webp,奥空绫音/CH0176/CH0176.16.webp,奥空绫音/NP0048/NP0048.15.webp,奥空绫音/NP0066/NP0066.16.webp,奥空绫音/NP0108/NP0108.15.webp,奥空绫音/奥空绫音.24.webp"
+        "charface": "奥空绫音/ayane/ayane.15.webp,奥空绫音/ayane_robber/ayane_robber.15.webp,奥空绫音/CH0176/CH0176.16.webp,奥空绫音/NP0048/NP0048.15.webp,奥空绫音/NP0066/NP0066.16.webp,奥空绫音/NP0108/NP0108.15.webp,奥空绫音/奥空绫音.24.webp"
     },
     "小鸟游星野": {
         "school": "阿比多斯",
@@ -3007,7 +3007,7 @@ var mt_characters = {
             "kr": "타카나시 호시노",
             "pinyin": "xiaoniaoyouxingye"
         },
-        "charface": "小鸟游星野/hoshino_robber/hoshino_robber.6.webp,小鸟游星野/hoshino/hoshino.17.webp,小鸟游星野/hoshino_swimsuit/hoshino_swimsuit.21.webp,小鸟游星野/NP0045/NP0045.17.webp,小鸟游星野/NP0063/NP0063.21.webp,小鸟游星野/小鸟游星野.20.webp"
+        "charface": "小鸟游星野/hoshino/hoshino.17.webp,小鸟游星野/hoshino_robber/hoshino_robber.6.webp,小鸟游星野/hoshino_swimsuit/hoshino_swimsuit.21.webp,小鸟游星野/NP0045/NP0045.17.webp,小鸟游星野/NP0063/NP0063.21.webp,小鸟游星野/小鸟游星野.20.webp"
     },
     "梦": {
         "school": "阿比多斯",
@@ -3035,7 +3035,7 @@ var mt_characters = {
             "kr": "스나오오카미 시로코",
             "pinyin": "shalangbaizi"
         },
-        "charface": "砂狼白子/CH0188/CH0188.6.webp,砂狼白子/NP0046/NP0046.6.webp,砂狼白子/NP0064/NP0064.6.webp,砂狼白子/NP0124/NP0124.17.webp,砂狼白子/shiroko_ridingsuit/shiroko_ridingsuit.6.webp,砂狼白子/shiroko_robber/shiroko_robber.17.webp,砂狼白子/shiroko/shiroko.17.webp,砂狼白子/砂狼白子.28.webp"
+        "charface": "砂狼白子/CH0188/CH0188.6.webp,砂狼白子/NP0046/NP0046.6.webp,砂狼白子/NP0064/NP0064.6.webp,砂狼白子/NP0124/NP0124.17.webp,砂狼白子/shiroko/shiroko.17.webp,砂狼白子/shiroko_ridingsuit/shiroko_ridingsuit.6.webp,砂狼白子/shiroko_robber/shiroko_robber.17.webp,砂狼白子/砂狼白子.28.webp"
     },
     "砂狼白子？": {
         "school": "阿比多斯",
@@ -3063,7 +3063,7 @@ var mt_characters = {
             "kr": "쿠로미 세리카",
             "pinyin": "heijianqinxiang"
         },
-        "charface": "黑见芹香/CH0189/CH0189.17.webp,黑见芹香/NP0047/NP0047.13.webp,黑见芹香/NP0065/NP0065.17.webp,黑见芹香/serika_newyear/serika_newyear.14.webp,黑见芹香/serika_robber/serika_robber.13.webp,黑见芹香/serika_shibaseki/serika_shibaseki.13.webp,黑见芹香/serika/serika.13.webp,黑见芹香/黑见芹香.28.webp"
+        "charface": "黑见芹香/CH0189/CH0189.17.webp,黑见芹香/NP0047/NP0047.13.webp,黑见芹香/NP0065/NP0065.17.webp,黑见芹香/serika/serika.13.webp,黑见芹香/serika_newyear/serika_newyear.14.webp,黑见芹香/serika_robber/serika_robber.13.webp,黑见芹香/serika_shibaseki/serika_shibaseki.13.webp,黑见芹香/黑见芹香.28.webp"
     },
     "阿里乌斯学生": {
         "school": "阿里乌斯",
