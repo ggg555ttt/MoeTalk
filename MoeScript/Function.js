@@ -108,6 +108,7 @@ var CFPI = 0;//差分页码
 var lang = localStorage['mt-lang'];
 var clearImage = false;
 var clubarr = {};
+var charList = '';
 if(localStorage['mt-club'])clubarr = JSON.parse(localStorage['mt-club']);//读取社团
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
 var class1 = 'talk__TextBox-sc-eq7cqw-4 talk__NTextBox-sc-eq7cqw-5 fWynih fYSjWX';
@@ -538,9 +539,10 @@ function editMsg(o,n,t)
 }
 function loaddata(json)
 {
+	let josnsize = parseInt((JSON.stringify(json).length/1024).toFixed(0))
 	let custom_char = {};
 	let custom_head = {};
-	if(!json[0] || (json[0] && !json[0].title))
+	if(!json[0] || (json[0] && !json[0].title))//错误数据
 	{
 		json[0] = {};
 		json[1] = [];
@@ -551,7 +553,8 @@ function loaddata(json)
 		json[0]['replyGroup'] = 0
 		json[0]['replyNo'] = 0
 	}
-	if(json[0] && (json[0].mt_char || json[0].custom))
+
+	if(json[0] && (json[0].mt_char || json[0].custom))//mt旧版自定义角色转义
 	{
 		if(json[0].custom && JSON.parse(json[0].custom)[0].club[0].characters)
 		{
@@ -577,7 +580,8 @@ function loaddata(json)
 		custom_char = JSON.parse(json[0].mt_char);
 		custom_head = JSON.parse(json[0].mt_head);
 	}
-	if(json['custom_chars'])
+
+	if(json['custom_chars'])//ct自定义角色
 	{
 		$.each(json['custom_chars'],function(k,v)
 		{
@@ -588,10 +592,39 @@ function loaddata(json)
 			}
 		})
 	}
-	let josnsize = parseInt((JSON.stringify(json).length/1024).toFixed(0))
-	if(json['chat'])
+
+	if(json['chars'])//ct待选角色
 	{
-		json[0] = {};
+		json[0]['chars'] = {}
+		json[0]['chars']['selected'] = {}
+		json[0]['chars']['selected']['no'] = 0
+		json[0]['chars']['selected']['index'] = 1
+
+		json[0]['chars']['selectedList'] = []
+		
+		$.each(json['chars'],function(k,v)
+		{
+			json[0]['chars']['selectedList'][k] = {}
+			if(v['char_id'].split('-')[0] === 'ba')
+			{
+				json[0]['chars']['selectedList'][k]['no'] = v['char_id'].split('-')[1]
+				json[0]['chars']['selectedList'][k]['index'] = v['img']
+			}
+			else if(v['char_id'].split('-')[1] === 'MT')
+			{
+				json[0]['chars']['selectedList'][k]['no'] = v['char_id'].split('-')[2]
+				json[0]['chars']['selectedList'][k]['index'] = v['char_id'].split('-')[3]
+			}
+			else
+			{
+				json[0]['chars']['selectedList'][k]['no'] = v['char_id']
+				json[0]['chars']['selectedList'][k]['index'] = v['char_id']
+			}
+		})
+	}
+
+	if(json['chat'])//ct存档
+	{
 		json[1] = [];
 		json[0]['title'] = 'ClosureTalk存档'
 		json[0]['nickname'] = '存档大小：'+josnsize+'KB'
@@ -649,10 +682,10 @@ function loaddata(json)
 		})
 	}
 	
-	if($('#customchar').prop('checked') === true && confirm('确定上传存档内的自定义角色吗？\n这会清除当前存储的自定义角色'))
+	if($('#customchar').prop('checked') === true)//读取自定义角色
 	{
-		localStorage['mt-char'] = JSON.stringify(custom_char)
-		localStorage['mt-head'] = JSON.stringify(custom_head)
+		localStorage['mt-char'] = JSON.stringify({...JSON.parse(localStorage['mt-char']),...custom_char});
+		localStorage['mt-head'] = JSON.stringify({...JSON.parse(localStorage['mt-head']),...custom_head});
 		list()//更新列表
 	}
 	else
@@ -661,6 +694,7 @@ function loaddata(json)
 		sessionStorage['mt-head'] = JSON.stringify(custom_head)
 		list()//更新列表
 	}
+
 	if(josnsize+size > 5120)
 	{
 		alert('当前存档数据：'+size+
@@ -668,21 +702,8 @@ function loaddata(json)
 			josnsize+'+'+size+'='+(josnsize+size)+'\n'+
 			(josnsize+size)+'>'+'5120，存档可能无法读取')
 	}
-	let l = json[1]
-	$.each(l,function(t,n)
-	{
-		if(!n.isRight)l[t].isRight = false
-		if(n.isFirst === false && n.sCharacter.no !== 0)
-		{
-			if(t-1 < 0)l[t].isFirst = true
-			if(t > 0 && (n.sCharacter.index !== l[t-1].sCharacter.index || ['heart','info','reply'].indexOf(l[t-1].type) > -1 || l[t-1].isRight !== l[t].isRight))
-			{
-				l[t].isFirst = true
-			}
-		}
-		if(n.sCharacter.no === 0)l[t].isRight = false
-		if(n.sCharacter.no === 0)l[t].isFirst = false
-	})
+	if(json[0]['chars'])charList = JSON.stringify(json[0]['chars'])
+	
 	return json
 }
 // 格式化日对象
@@ -720,7 +741,7 @@ function MoeToClosure()
 {
 	let moeurl = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io'
 	let ct = [];
-	let chars = {};
+	let custom_chars = {};
 	$.each(JSON.parse(localStorage['chats']),function(k,v)
 	{
 		ct[k] = {};
@@ -738,19 +759,15 @@ function MoeToClosure()
 				ct[k]['char_id'] = `custom-MT-${id}-${img}`
 				ct[k]['img'] = 'uploaded';
 				
-				chars[ct[k]['char_id']] = {}
-				chars[ct[k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`
-				chars[ct[k]['char_id']]['name'] = loadname(id);
+				custom_chars[ct[k]['char_id']] = {}
+				custom_chars[ct[k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`
+				custom_chars[ct[k]['char_id']]['name'] = loadname(id);
 			}
-
 		}
 		if(id !== 0 && id.indexOf('custom-') > -1)//自定义角色
 		{
 			ct[k]['char_id'] = id;
 			ct[k]['img'] = 'uploaded';
-			chars[id] = {}
-			chars[id]['img'] = loadhead(id);
-			chars[id]['name'] = loadname(id);
 		}
 		ct[k]['content'] = v['content'];//文本内容
 		ct[k]['is_breaking'] = false;
@@ -785,10 +802,42 @@ function MoeToClosure()
 	closuretalk['chat'] = ct
 	closuretalk['chars'] = [];
 	closuretalk['custom_chars'] = [];
-	$.each(chars,function(k,v)
+	
+	$.each(JSON.parse(localStorage['mt-selectedList'])['selectedList'],function(k,v)
+	{
+		closuretalk['chars'][k] = {}
+		let id = v.no;
+		let img = v.index;
+		let data = 'MT-';
+		if(closure_char[id])data = "ba-"
+		if(id.indexOf('custom-') < 0)//正常角色
+		{
+			closuretalk['chars'][k]['char_id'] = data+id;
+			closuretalk['chars'][k]['img'] = img;
+			if(data === "MT-")
+			{
+				img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D')
+				closuretalk['chars'][k]['char_id'] = `custom-MT-${id}-${img}`
+				closuretalk['chars'][k]['img'] = 'uploaded';
+			}
+		}
+		if(id.indexOf('custom-') > -1)//自定义角色
+		{
+			closuretalk['chars'][k]['char_id'] = id;
+			closuretalk['chars'][k]['img'] = 'uploaded';
+		}
+	})
+	$.each(JSON.parse(localStorage['mt-char']),function(k,v)
+	{
+		custom_chars[k] = {}
+		custom_chars[k]['img'] = JSON.parse(localStorage['mt-head'])[k];
+		custom_chars[k]['name'] = v;
+	})
+	$.each(custom_chars,function(k,v)
 	{
 		closuretalk['custom_chars'].push({char_id:k,img:v.img,name:v.name})
 	})
+	console.log(closuretalk)
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(closuretalk));//生成专用存档
 }

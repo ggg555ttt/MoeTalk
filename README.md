@@ -1,3 +1,5 @@
+# MoeTalk说明： 
+MoeTalk是基于MolluTalk的代码基础上做出的个人改版，MolluTalk的原作者是Raun0129，代码和图片是通过浏览器获取的 
 ## 离线启动方法（Windows） 
 运行EasyWebSvr.exe后浏览器访问localhost或127.0.0.1
 ## Data/TALK/CharFace.json 

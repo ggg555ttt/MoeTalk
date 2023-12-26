@@ -1085,8 +1085,7 @@
 										src: loadhead(t.sCharacter.no,t.sCharacter.index),
 										onError: function(e)
 										{
-											var n = e.currentTarget;
-											(0, u.Mp)(n, "character")
+											e.currentTarget.src = href+'Images/Ui/error.webp';
 										},
 										alt: t.sCharacter.index
 									})
@@ -1161,8 +1160,7 @@
 										src: loadhead(t.sCharacter.no,t.sCharacter.index),
 										onError: function(e)
 										{
-											var n = e.currentTarget;
-											(0, u.Mp)(n, "character")
+											e.currentTarget.src = href+'Images/Ui/error.webp';
 										},
 										alt: t.sCharacter.index
 									})
@@ -1374,8 +1372,7 @@
 											src: loadhead(t.sCharacter.no,t.sCharacter.index),
 											onError: function(e)
 											{
-												var n = e.currentTarget;
-												(0, u.Mp)(n, "character")
+												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: t.sCharacter.index
 										})
@@ -1434,7 +1431,7 @@
 												src: t.file || (t.content.indexOf("//") > -1 ? t.content : href+t.content),
 												onError: function(e)
 												{
-													e.currentTarget.src = 'Images/Ui/error.webp';
+													e.currentTarget.src = href+'Images/Ui/error.webp';
 												},
 											}), (0, m.jsx)(s.i9,//右侧时间戳
 											{
@@ -1460,8 +1457,7 @@
 											src: loadhead(t.sCharacter.no,t.sCharacter.index),//#聊天记录头像
 											onError: function(e)
 											{
-												var n = e.currentTarget;
-												(0, u.Mp)(n, "character")
+												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: t.sCharacter.index
 										})

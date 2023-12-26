@@ -354,11 +354,11 @@
 						w = (0, i.C)(function(e)
 						{
 							//*储存读取快捷角色
-							if(selectedList == 'yes' && localStorage['mt-selectedList'])e.sCharacter = JSON.parse(localStorage['mt-selectedList']);
+							if(selectedList === 'yes' && localStorage['mt-selectedList'])e.sCharacter = JSON.parse(localStorage['mt-selectedList']);
 							selectedList = 'no';
 							localStorage['mt-selectedList'] = JSON.stringify(e.sCharacter);
 							//*储存读取快捷角色
-							return e.sCharacter
+							return selectedList === 'no' ? e.sCharacter : JSON.parse(localStorage['mt-selectedList'])
 						}),
 						_ = function(n)
 						{
@@ -462,8 +462,7 @@
 												},
 												onError: function(e)
 												{
-													var n = e.currentTarget;
-													(0, u.Mp)(n, "character")
+													e.currentTarget.src = href+'Images/Ui/error.webp';
 												},
 												className: (0, u.Y)(w.selected, e) ? "selected" : ""
 											}, n)
@@ -603,8 +602,7 @@
 									src: loadhead(n.no,e),//#左方人物皮肤选择分支
 									onError: function(e)
 									{
-										var n = e.currentTarget;
-										(0, u.Mp)(n, "character")
+										e.currentTarget.src = href+'Images/Ui/error.webp';
 									},
 									onClick: function()
 									{
@@ -666,8 +664,7 @@
 										src: loadhead(n.no,n.profile[0]),//#左方选择框
 										onError: function(e)
 										{
-											var n = e.currentTarget;
-											(0, u.Mp)(n, "character")
+											e.currentTarget.src = href+'Images/Ui/error.webp';
 										},
 										alt: n.profile[0]
 									}), 
@@ -729,8 +726,7 @@
 									src: href+"Images/Ui/School/"+(!mt_schoolname[n.school['zh_cn']] ? n.club['zh_cn'] : mt_characters[n.no].school)+'.webp',//#学校图标
 									onError: function(e)
 									{
-										var n = e.currentTarget;
-										(0, u.Mp)(n, "school")
+										e.currentTarget.src = href+'Images/Ui/error.webp';
 									},
 									onClick: function()
 									{
@@ -1928,6 +1924,7 @@
 											json[0]['date'] = (0, u._3)(!0, !0);
 											json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
 											json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
+											json[0]['chars'] = JSON.parse(localStorage['mt-selectedList'])//@
 											json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
 											json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
 											json[1] = JSON.parse(localStorage['chats']);
@@ -2320,7 +2317,7 @@
 											replyGroup: s.replyGroup,
 											mt_char: JSON.parse(localStorage['mt-char']),//@自创角色
 											mt_head: JSON.parse(localStorage['mt-head']),//@自创头像
-											chars: n
+											chars: JSON.parse(localStorage['mt-selectedList'])//@
 										}, (0, et.Z)(s.chats)])], e.next = 6, (0, u.rU)(r);
 									case 6:
 										o = e.sent, (0, ef.saveAs)(o, "MolluTalk_".concat(t.title, ".png")), blobToBase64(o,function(base64)
@@ -2422,11 +2419,13 @@
 							//*
 							(0, m.jsx)("input",
 							{
+								hidden: x === "upload",
 								type: "checkbox",
 								id: "customchar"
 							}),
 							(0, m.jsx)("span",
 							{
+								hidden: x === "upload",
 								className: "bold",
 								children: x ? "下载closuretalk存档" : "同时上传存档内自带的自定义角色"
 							}),
@@ -2641,6 +2640,8 @@
 											className: "bold",
 											onClick: function()
 											{
+												selectedList = 'yes'
+												localStorage['mt-selectedList'] = charList
 												I()
 											},
 											children: L.Z.confirm[d]
@@ -4515,8 +4516,7 @@
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
 											onError: function(e)
 											{
-												var n = e.currentTarget;
-												(0, u.Mp)(n, "character")
+												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: n.sCharacter.index
 										})
@@ -4584,7 +4584,7 @@
 												src: n.file || (n.content.indexOf("//") > -1 ? n.content : href+n.content),
 												onError: function(e)
 												{
-													e.currentTarget.src = 'Images/Ui/error.webp';
+													e.currentTarget.src = href+'Images/Ui/error.webp';
 												},
 											}), (0, m.jsx)(eN.i9,
 											{
@@ -4615,8 +4615,7 @@
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),//#聊天记录头像
 											onError: function(e)
 											{
-												var n = e.currentTarget;
-												(0, u.Mp)(n, "character")
+												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: n.sCharacter.index
 										})

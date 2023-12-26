@@ -9967,7 +9967,7 @@
 											top: "-2.5px"
 										},
 										className: "bold",
-										children: '项目地址'
+										children: '项目'
 									}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
 										href: "https://wj.qq.com/s2/12952865/a1aa/",
@@ -9981,7 +9981,7 @@
 											position: "relative",
 											top: "-2.5px"
 										},
-										children: '反馈入口'
+										children: '反馈'
 									})]
 								}), a || (0, O.jsx)(T,
 								{
