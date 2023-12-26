@@ -841,15 +841,3 @@ function MoeToClosure()
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(closuretalk));//生成专用存档
 }
-// var imglink = ''
-// $("#read-article-holder .normal-img").each(function()
-// {
-// 	let link = $(this).attr('data-src')
-// 	if(link.indexOf('@!web-article-pic.avif') > -1)
-// 	{
-// 		imglink = imglink + link + '\n';
-// 	}
-// })
-// imglink = imglink.replaceAll('@!web-article-pic.avif','')
-// imglink = imglink.replaceAll('//','')
-// console.log(imglink)
