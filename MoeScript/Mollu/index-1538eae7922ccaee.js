@@ -2422,15 +2422,13 @@
 							//*
 							(0, m.jsx)("input",
 							{
-								hidden: x ? true : false,
 								type: "checkbox",
 								id: "customchar"
 							}),
 							(0, m.jsx)("span",
 							{
-								hidden: x ? true : false,
 								className: "bold",
-								children: "同时上传存档内自带的自定义角色"
+								children: x ? "下载closuretalk存档" : "同时上传存档内自带的自定义角色"
 							}),
 							//*
 							(0, m.jsx)(ea.$0,
@@ -2588,7 +2586,14 @@
 											className: "bold",
 											onClick: function()
 											{
-												S()
+												if($$('#customchar').prop('checked') === true)
+												{
+													MoeToClosure()
+												}
+												else
+												{
+													S()
+												}
 											},
 											children: L.Z.download[d]
 										})]
@@ -3787,6 +3792,7 @@
 						Z = (0, r.useCallback)(function(e, file)///图片编辑
 						{
 							let chat = JSON.parse(JSON.stringify(h.chats[chatIndex]));
+							chat.type = 'image'
 							chat.content = $$('.content').val()
 							chat.name = $$('.name').val()
 							chat.time = $$('.time').val()
@@ -4575,7 +4581,7 @@
 												{
 													editMsg(o,n,t)//#编辑消息-图片
 												},
-												src: n.file || n.content.indexOf("//") > -1 ? n.content : href+n.content,
+												src: n.file || (n.content.indexOf("//") > -1 ? n.content : href+n.content),
 												onError: function(e)
 												{
 													e.currentTarget.src = 'Images/Ui/error.webp';

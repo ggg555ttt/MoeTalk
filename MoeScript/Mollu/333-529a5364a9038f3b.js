@@ -1431,7 +1431,7 @@
 											})] : (0, m.jsx)(s.tG,
 											{
 												style:{"max-width":t.content.indexOf("CharFace") > -1 && !t.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
-												src: t.file || t.content.indexOf("//") > -1 ? t.content : href+t.content,
+												src: t.file || (t.content.indexOf("//") > -1 ? t.content : href+t.content),
 												onError: function(e)
 												{
 													e.currentTarget.src = 'Images/Ui/error.webp';
