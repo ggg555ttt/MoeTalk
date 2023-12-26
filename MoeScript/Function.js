@@ -702,7 +702,7 @@ function loaddata(json)
 			josnsize+'+'+size+'='+(josnsize+size)+'\n'+
 			(josnsize+size)+'>'+'5120，存档可能无法读取')
 	}
-	if(json[0]['chars'])charList = JSON.stringify(json[0]['chars'])
+	if(json[0]['chars'] && JSON.stringify(json[0]['chars'])['selectedList'])charList = JSON.stringify(json[0]['chars'])
 	
 	return json
 }

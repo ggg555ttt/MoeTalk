@@ -9964,6 +9964,7 @@
 										{
 											fontSize: "20px",
 											position: "relative",
+											textDecoration: "underline",
 											top: "-2.5px"
 										},
 										className: "bold",
@@ -9971,11 +9972,11 @@
 									}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
 										href: "https://wj.qq.com/s2/12952865/a1aa/",
-										className: "medium",
+										className: "bold",
 										id: 'help',
 										style:
 										{
-											color: "white",
+											color: "black",
 											fontSize: "20px",
 											textDecoration: "underline",
 											position: "relative",
