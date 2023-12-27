@@ -2166,9 +2166,19 @@
 										style:
 										{
 											textAlign: "center",
-											fontSize: "0.9rem"
+											fontSize: "0.9rem",
+											marginBottom: "0.5rem"
 										},
 										children: localStorage.getItem('mt-font') ? '若等待时间较长建议您进入设置页面禁用字体加载' : '设置页面可以开启字体加载'//L.Z.thanks[g]
+									}), (0, m.jsx)("span",
+									{
+										style:
+										{
+											textAlign: "center",
+											fontSize: "0.9rem",
+											marginBottom: "0.5rem"
+										},
+										children: `长度预估为${height*S}${(height*S) > maxHeight ? ' 超出'+maxHeight+'的部分将变为空白' : ''}，请以生成图片的长度为准`
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -2185,16 +2195,7 @@
 											disabled: x,
 											onClick: function()
 											{
-												//*加入长度判断
-												if(height*(1=== S ? S +.1:S) > maxHeight)
-												{
-													if(confirm(height+'x'+(1=== S ? S +.1:S)+'=('+(height*(1=== S ? S +.1:S)).toFixed(0)+' > '+maxHeight+')，生成的图片可能会有缺失\n另外此数字可能并不准确，具体请以生成的图片长度为基准'))O();
-												}
-												else
-												{
-													O()
-												}
-												//*加入长度判断
+												O()
 											},
 											children: L.Z.confirm[g]
 										})]

@@ -16,7 +16,7 @@ function mt_height()
 	let num;
 	if(browser.isMobile === true)num = 1.251;
 	else num = 1.1;
-	return parseInt(($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed(0))+80;
+	return parseInt(($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed(0))+(localStorage.getItem('watermark') === 'false' ? 0 : 80);
 }
 
 if(localStorage['mt-font'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g=''>");//加载字体

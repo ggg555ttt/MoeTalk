@@ -1119,6 +1119,20 @@ var mt_characters = {
         },
         "charface": "乙花堇/NP0061/NP0061.13.webp,乙花堇/sumire/sumire.13.webp,乙花堇/乙花堇.7.webp"
     },
+    "野正玲": {
+        "school": "千年",
+        "club": "健身部",
+        "head": "CH0245_Collection,CH0245",
+        "name": {
+            "zh_cn": "野正 玲",
+            "zh_tw": "野正 玲",
+            "jp": "野正 レイ",
+            "en": "Nomasa Rei",
+            "kr": "노마사 레이",
+            "pinyin": "yezhengling"
+        },
+        "charface": "野正玲/CH0245/CH0245.19.webp,野正玲/野正玲.4.webp"
+    },
     "丰见小鸟": {
         "school": "千年",
         "club": "工程部",
@@ -1304,7 +1318,7 @@ var mt_characters = {
     "各务千寻": {
         "school": "千年",
         "club": "真理部",
-        "head": "CH0160_L2D,CH0160_Collection,CH0160",
+        "head": "CH0160_L2D,CH0160_Collection,CH0234_Collection,CH0160,CH0234",
         "name": {
             "zh_cn": "各务 千寻",
             "zh_tw": "各務 千尋",
@@ -1313,12 +1327,12 @@ var mt_characters = {
             "kr": "카가미 치히로",
             "pinyin": "gewuqianxun"
         },
-        "charface": "各务千寻/CH0160/CH0160.6.webp,各务千寻/各务千寻.4.webp"
+        "charface": "各务千寻/CH0160/CH0160.6.webp,各务千寻/CH0234/CH0234.11.webp,各务千寻/各务千寻.8.webp"
     },
     "小涂真纪": {
         "school": "千年",
         "club": "真理部",
-        "head": "Maki_L2D,NP0050_Collection,Maki_Collection,Maki",
+        "head": "Maki_L2D,NP0050_Collection,CH0235_Collection,Maki_Collection,CH0235,Maki",
         "name": {
             "zh_cn": "小涂 真纪",
             "zh_tw": "小塗 真紀",
@@ -1327,12 +1341,12 @@ var mt_characters = {
             "kr": "코누리 마키",
             "pinyin": "xiaotuzhenji"
         },
-        "charface": "小涂真纪/maki/maki.7.webp,小涂真纪/NP0050/NP0050.7.webp,小涂真纪/小涂真纪.8.webp"
+        "charface": "小涂真纪/CH0235/CH0235.12.webp,小涂真纪/maki/maki.7.webp,小涂真纪/NP0050/NP0050.7.webp,小涂真纪/小涂真纪.12.webp"
     },
     "小钩晴": {
         "school": "千年",
         "club": "真理部",
-        "head": "Hare_L2D,Hare_Collection,Hare",
+        "head": "CH0233_L2D,Hare_L2D,CH0233_Collection,Hare_Collection,CH0233,Hare",
         "name": {
             "zh_cn": "小钩 晴",
             "zh_tw": "小鉤 晴",
@@ -1341,12 +1355,12 @@ var mt_characters = {
             "kr": "오마가리 하레",
             "pinyin": "xiaogouqing"
         },
-        "charface": "小钩晴/hare/hare.6.webp,小钩晴/小钩晴.4.webp"
+        "charface": "小钩晴/CH0233/CH0233.14.webp,小钩晴/hare/hare.6.webp,小钩晴/小钩晴.8.webp"
     },
     "音濑小玉": {
         "school": "千年",
         "club": "真理部",
-        "head": "Kotama_L2D,Kotama_Collection,Kotama",
+        "head": "CH0232_L2D,Kotama_L2D,CH0232_Collection,Kotama_Collection,CH0232,Kotama",
         "name": {
             "zh_cn": "音濑 小玉",
             "zh_tw": "音瀨 小玉",
@@ -1355,7 +1369,7 @@ var mt_characters = {
             "kr": "오토세 코타마",
             "pinyin": "yinlaixiaoyu"
         },
-        "charface": "音濑小玉/kotama/kotama.6.webp,音濑小玉/音濑小玉.4.webp"
+        "charface": "音濑小玉/CH0232/CH0232.12.webp,音濑小玉/kotama/kotama.6.webp,音濑小玉/音濑小玉.8.webp"
     },
     "早濑优香": {
         "school": "千年",
