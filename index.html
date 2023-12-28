@@ -7,9 +7,10 @@
 <script src="./MoeScript/Script/vConsole.min.js"></script>
 <script>
 var vConsole = new window.VConsole();
+if(!localStorage['mt-rand'])localStorage['mt-rand'] = Math.random()
 function loadjs(url)
 {
-	let ver = '2.9.14'
+	let ver = localStorage['mt-rand']
 	document.write("<scr"+`ipt src='${url}?${ver}' defer></scr`+"ipt>");
 }
 </script>

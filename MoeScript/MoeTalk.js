@@ -105,7 +105,7 @@ $('body').on('click',"#readme",function()
 			});
 			if(keys.length === length)
 			{
-				localStorage['mt-version'] = '0'
+				localStorage['mt-rand'] = Math.random()
 				location.reload(true)
 			}
 		});

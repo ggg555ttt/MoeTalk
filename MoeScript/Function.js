@@ -20,14 +20,15 @@ if(window.location.href === 'https://ggg555ttt.gitee.io/moetalk/')
 	}
 }
 $.ajax({
-	url: './version.json?t='+Date.now(),
+	url: './version.json',
 	type: 'GET',
 	dataType:"text",
 	cache: false, // 禁用缓存
 	success: function(text)
 	{
-		version = text
-		if(!localStorage['mt-version'] || localStorage['mt-version'] !== text)
+		version = text.split(',')[0]
+		let rand = text.split(',')[1]
+		if(!localStorage['mt-version'] || localStorage['mt-version'] !== version || !localStorage['mt-rand'] || localStorage['mt-rand'] !== rand)
 		{
 			window.caches && caches.keys && caches.keys().then(function(keys)
 			{
@@ -59,7 +60,8 @@ $.ajax({
 								localStorage['mt-lang'] = 'kr'
 							}
 						}
-						localStorage['mt-version'] = text
+						localStorage['mt-version'] = version
+						localStorage['mt-rand'] = rand
 						location.reload(true)
 					}
 				});
