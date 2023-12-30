@@ -353,3 +353,12 @@ align-self: stretch;
 {
 	font-weight:700;
 }
+.editTools.dot::after {
+    content: "";
+    display: block;
+    background-color: red;
+    width: 0.5rem;
+    height: 0.5rem;
+    transform: translate(275%, -550%);
+    border-radius: 50%;
+}

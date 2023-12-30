@@ -1869,7 +1869,7 @@
 						}, "undefined" != typeof localStorage && (t.watermark = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("watermark")) === null ? "true" : localStorage.getItem("watermark") || "false"), t.archive = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("archive")) === null ? "true" : localStorage.getItem("archive") || "false")), t)),
 						k = v[0],
 						Z = v[1],
-						N = (0, r.useState)((a = 1, "undefined" != typeof localStorage && (a = Number.parseInt((null === (o = localStorage) || void 0 === o ? void 0 : o.getItem("imageQaulity")) || "1")), a)),
+						N = (0, r.useState)(1.1),
 						S = N[0],
 						P = N[1],
 						I = (0, r.useRef)(null),
@@ -1896,84 +1896,79 @@
 										}
 										return e.abrupt("return");
 									case 4:
-										t = function(e, n)
+										$$.each(imageArr,function(k,v)
 										{
-											e.documentElement.style.fontSize = "16px", n.style.width = "500px";
-											var t = L.Z.title[g] + " : " + ("" !== _ ? _ : L.Z.noTitle[g]),
-												r = L.Z.writer[g] + " : " + ("" !== R ? R : L.Z.noName[g]),
-												o = (0, u.Jx)(k, t, r);
-											n.prepend(o)
-										}, eg()(n,
-										{
-											logging: !1,
-											allowTaint: !0,
-											useCORS: !0,
-											width: 500,
-											windowWidth: 500,
-											scale: 1 === S ? S + .1 : S,
-											onclone: t
-										}).then(function(e)
-										{
-											var n, t = e.toDataURL("image/png");
-											if(e.height > maxHeight)alert(`图片长度为${e.height}，超过${maxHeight}的部分会变为空白`);
-											//*加入水印功能和隐写存档
-											let json = [];
-											json[0] = {};
-											json[0]['title'] = '备份存档';
-											json[0]['nickname'] = 'MoeTalk';
-											json[0]['date'] = (0, u._3)(!0, !0);
-											json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
-											json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
-											json[0]['chars'] = JSON.parse(localStorage['mt-selectedList'])//@
-											json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
-											json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
-											json[1] = JSON.parse(localStorage['chats']);
-											if(localStorage['wmark'])
+											if(k !== imageArr.length-1)
 											{
-												let arr = JSON.parse(localStorage['wmark']);
-												drawWaterMark.init(
+												eg()($$(".Talk__CContainer-sc-1uzn66i-1")[k],
 												{
-													imgpath: t,///图片路径  string类型  [必传]
-													rotate: arr[0],///旋转角度   int类型
-													fontsize: arr[1],///字体大小
-													fontcolor: arr[2]+","+arr[3]+","+arr[4]+","+arr[5],///字体颜色  rgba类型
-													density: arr[6],///稠密度
-													str: arr[7].split(" "),	///[必传]
-													cb: function(base64)
+													logging: !1,
+													allowTaint: !0,
+													useCORS: !0,
+													scale: S
+												}).then(function(e)
+												{
+													var n, t = e.toDataURL(localStorage['mt-image']);
+													let height = e.height
+													let json = [];
+													json[0] = {};
+													json[0]['title'] = '备份存档';
+													json[0]['nickname'] = 'MoeTalk';
+													json[0]['date'] = (0, u._3)(!0, !0);
+													json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
+													json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
+													json[0]['chars'] = JSON.parse(localStorage['mt-selectedList'])//@
+													json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
+													json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
+													json[1] = JSON.parse(localStorage['chats']);
+													j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
 													{
-														j(base64), null === (n = I.current) || void 0 === n || n.setAttribute("src",base64), e.toBlob(function(e)
-														{
-															combineFiles(base64.replace('data:image/png;base64,',localStorage['archive'] === 'true' ? JSON.stringify(json) : ''),'',"MoeTalk_" + ("" !== _ ? _ : L.Z.noTitle[g]));
-														})
-													}
+														combineFiles(t.replace(`data:${localStorage['mt-image']};base64,`,''),localStorage['archive'] === 'true' ? JSON.stringify(json) : '',"MoeTalk_" + ("" !== _ ? _ : L.Z.noTitle[g])+k+'-'+height);
+													})
 												})
 											}
 											else
 											{
-												j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
+												eg()($$(".Talk__CContainer-sc-1uzn66i-1")[k],
 												{
-													combineFiles(t.replace('data:image/png;base64,',''),localStorage['archive'] === 'true' ? JSON.stringify(json) : '',"MoeTalk_" + ("" !== _ ? _ : L.Z.noTitle[g]));
-												})
+													logging: !1,
+													allowTaint: !0,
+													useCORS: !0,
+													scale: S
+												}).then(function(e)
+												{
+													var n, t = e.toDataURL(localStorage['mt-image']);
+													let height = e.height
+													let json = [];
+													json[0] = {};
+													json[0]['title'] = '备份存档';
+													json[0]['nickname'] = 'MoeTalk';
+													json[0]['date'] = (0, u._3)(!0, !0);
+													json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
+													json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
+													json[0]['chars'] = JSON.parse(localStorage['mt-selectedList'])//@
+													json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
+													json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
+													json[1] = JSON.parse(localStorage['chats']);
+													j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
+													{
+														combineFiles(t.replace(`data:${localStorage['mt-image']};base64,`,''),localStorage['archive'] === 'true' ? JSON.stringify(json) : '',"MoeTalk_" + ("" !== _ ? _ : L.Z.noTitle[g])+k+'-'+height);
+													})
+												}).catch(function()
+												{
+													p((0, er.Y2)(
+													{
+														isAlert: !0,
+														title: L.Z.error[g],
+														ment: L.Z.error_ment[g]
+													}))
+												}).finally(function()
+												{
+													p((0, s.jh)(!1))
+												});
 											}
-											//*加入水印功能和隐写存档
-											/*
-											j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
-											{
-												e && (0, ef.saveAs)(e, "MolluTalk_" + ("" !== _ ? _ : L.Z.noTitle[g] + ".png"))
-											})
-											*/
-										}).catch(function()
-										{
-											p((0, er.Y2)(
-											{
-												isAlert: !0,
-												title: L.Z.error[g],
-												ment: L.Z.error_ment[g]
-											}))
-										}).finally(function()
-										{
-											p((0, s.jh)(!1))
-										});
+											
+										})
 									case 6:
 									case "end":
 										return e.stop()
@@ -1993,9 +1988,11 @@
 									archive: k.archive
 								};
 							r[n] = t, "archive" !== n || (localStorage.setItem("archive", String(t)), t || (r.title = !1, r.writer = !1)), "watermark" !== n || (localStorage.setItem("watermark", String(t)), t || (r.title = !1, r.writer = !1)), Z(r)
+							mt_title()//@
 						};
 					return (0, m.jsx)(ea.Xf,
 					{
+						id:"download_to_image",
 						className: d ? "visible medium" : "medium",
 						onDoubleClick: function()
 						{
@@ -2104,7 +2101,7 @@
 												fontSize: "0.9rem",
 												marginLeft: "1rem"
 											},
-											children: [1, 2, 3].map(function(e)
+											children: [1.1, 2, 3].map(function(e)
 											{
 												return (0, m.jsxs)(c.Jg,
 												{
@@ -2123,7 +2120,7 @@
 															P(e)
 														},
 														value: e
-													}), e, "x"]
+													}), "x", e]
 												}, e)
 											})
 										})]
@@ -2149,7 +2146,7 @@
 														return E(n, e)
 													},
 													value: n
-												}), L.Z[e][g],]
+												}), L.Z[e][g]]
 											}, n)
 										})
 									}), (0, m.jsx)("span",
@@ -2169,7 +2166,12 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: localStorage.getItem('mt-font') ? '若等待时间较长建议您进入设置页面禁用字体加载' : '设置页面可以开启字体加载'//L.Z.thanks[g]
+										children: ['图片长度为',(0, m.jsx)("span",
+										{
+											style:{color:'red'},
+											className:'bold',
+											children: mt_height(S)
+										}),mt_height(S) > maxHeight ? '，超出'+maxHeight+'的部分会自动分割' : '，可以正常生成图片']
 									}), (0, m.jsx)("span",
 									{
 										style:
@@ -2178,7 +2180,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: `长度预估为${height*S}${(height*S) > maxHeight ? ' 超出'+maxHeight+'的部分将变为空白' : ''}，请以生成图片的长度为准`
+										children: [localStorage.getItem('mt-font') ? '若等待时间较长建议您进入设置页面禁用字体加载' : '设置页面可以开启字体加载','，也可以通过更改生成的图片格式来缩减图片体积']//L.Z.thanks[g]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -2195,6 +2197,47 @@
 											disabled: x,
 											onClick: function()
 											{
+												let title = L.Z.title[g] + " : " + ("" !== _ ? _ : L.Z.noTitle[g])
+												let writer = L.Z.writer[g] + " : " + ("" !== R ? R : L.Z.noName[g])
+												if(k.title === false)title = ''
+												if(k.writer === false)writer = ''
+												mt_title(localStorage['MoeTalk'],title, writer)
+												let start = 0 
+												let end = 0 
+												let length = (localStorage['watermark'] === 'false' ? 16 : 88)*1.1
+												imageArr = []
+												for(let end=0;end<$$(".hfOSPu").length;end++)
+												{
+													length = length+($$(`.hfOSPu:eq(${end})`).outerHeight()*S)
+													if(length > maxHeight)
+													{
+														imageArr.push({start:start,end:end,length:length})
+														length = ((localStorage['watermark'] === 'false' ? 16 : 88)*S)+($$(`.hfOSPu:eq(${end})`).outerHeight()*S)
+														start = end
+													}
+													if(end === $$(".hfOSPu").length-1)
+													{
+														imageArr.push({start:start,end:$$(".hfOSPu").length,length:length})
+													}
+												}
+												length = $$(`.Talk__CContainer-sc-1uzn66i-1:eq(0) .hfOSPu`).length
+												$$.each(imageArr,function(k,v)
+												{
+													if(k !== imageArr.length-1)
+													{
+														let $clone = $$('.iGxbZT:eq(0)').clone();
+														$$('.iGxbZT:eq(0)').after($clone);
+													}
+												})
+												$$.each(imageArr,function(k,v)
+												{
+													$$(`.Talk__CContainer-sc-1uzn66i-1:eq(${k}) .hfOSPu`).slice(0,v.start).hide()
+													$$(`.Talk__CContainer-sc-1uzn66i-1:eq(${k}) .hfOSPu`).slice(v.end,length).hide()
+												})
+												if(imageArr.length > 1)
+												{
+													alert(`根据你的消息长度，MoeTalk将会以${S}倍图片质量连续生成${imageArr.length}张图片\n等待时间根据上面的信息变化，消息越长时间越长，请耐心等待`)
+												}
 												O()
 											},
 											children: L.Z.confirm[g]
@@ -2321,7 +2364,7 @@
 											chars: JSON.parse(localStorage['mt-selectedList'])//@
 										}, (0, et.Z)(s.chats)])], e.next = 6, (0, u.rU)(r);
 									case 6:
-										o = e.sent, (0, ef.saveAs)(o, "MolluTalk_".concat(t.title, ".png")), blobToBase64(o,function(base64)
+										o = e.sent, (0, ef.saveAs)(o, "MoeTalk_".concat(t.title, ".png")), blobToBase64(o,function(base64)
 										{
 											$$('#downImg').attr('src','data:image/png;base64,'+base64)
 										});
@@ -3327,7 +3370,11 @@
 								title: L.Z.error[h],
 								ment: L.Z.no_support[h]
 							}))
-						};
+						},
+						isScreenshot = (0, i.C)(function(e)
+						{
+							return e.global.isScreenshot
+						});
 					return (0, m.jsxs)(eq,
 					{
 						children: [(0, m.jsxs)(eG,
@@ -3335,6 +3382,7 @@
 							children: [(0, m.jsx)(eU,
 							{
 								title: "open",
+								className: isScreenshot ? "editTools dot" : "",
 								onClick: function()
 								{
 									click('#editTools')//#p ? g(!1) : g(!0)
@@ -3568,6 +3616,8 @@
 									onClick: function()
 									{
 										click('#tool-image')
+										$$('#editTools').click()
+										mt_title()
 									},
 									children: (0, m.jsx)(c.xL,
 									{
@@ -4994,7 +5044,65 @@
 							children: (0, m.jsx)(nr,
 							{
 								ref: n,
-								children: t.map(function(e, n)
+								children: [(0, m.jsx)('div',
+								{
+									id:"mt_watermark",
+									style:
+									{
+										backgroundColor:localStorage['mt-style'].split(' ')[2],
+										display:"flex",
+										width:"100%",
+										fontSize:"1rem",
+										lineHeight:"1.5rem",
+										minHeight:"64px",
+										justifyContent:"space-between",
+										color:"white",
+										boxSizing:"border-box",
+										padding:"0.5rem 1rem",
+										marginBottom:"1rem"
+									},
+									children: [(0, m.jsx)('div',
+									{
+										style:
+										{
+											display:"flex",
+											alignItems:"center",
+											marginRight:"1rem"
+										},
+										children: (0, m.jsx)('span',
+										{
+											className:'mt_watermark',
+											style:
+											{
+												fontSize:"2rem",
+												fontFamily:"title",
+												fontWeight:700
+											},
+											children: ''
+										})
+									}),(0, m.jsx)('div',
+									{
+										style:
+										{
+											display:"flex",
+											textAlign:"right",
+											flexDirection:"column",
+											alignItems:"flex-end",
+											justifyContent:"center"
+										},
+										children: [(0, m.jsx)('span',
+										{
+											id:"mt_title",
+											style:{textShadow:"1px 1px 0px rgb(34, 37, 41)"},
+											children: ''
+										}),(0, m.jsx)('span',
+										{
+											id:"mt_writer",
+											style:{textShadow:"1px 1px 0px rgb(34, 37, 41)"},
+											children: ''
+										})]
+									})]
+								}),t.map(function(e, n)
 								{
 									return e.replyDepth === o && (0, m.jsx)(e6,
 									{
@@ -5002,7 +5110,7 @@
 										handleShow: _,
 										chat: e
 									}, n)
-								})
+								})]
 							})
 						}), (0, m.jsx)(eK,
 						{

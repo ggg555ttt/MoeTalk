@@ -192,8 +192,8 @@ var mt_text = {
 		"kr": "무명",
 		"en": "NoName",
 		"jp": "無名",
-		"zh_cn": "无名小卒",
-		"zh_tw": "無名小卒"
+		"zh_cn": "佚名",
+		"zh_tw": "佚名"
 	},
 	"title": {
 		"kr": "제목",

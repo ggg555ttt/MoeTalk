@@ -11,14 +11,18 @@ var chatArr = []
 var dataIndex = 0;
 var operate = false
 var copydata;
-function mt_height()
+var mt_width = '';
+var imageArr;
+function mt_height(num)
 {
-	let num;
-	if(browser.isMobile === true)num = 1.251;
-	else num = 1.1;
-	return parseInt(($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed(0))+(localStorage.getItem('watermark') === 'false' ? 0 : 80);
+	if(!num)num = 1.1
+	return ($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed();
 }
-
+function mt_width()
+{
+	if(!num)num = 1.1
+	return ($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed();
+}
 if(localStorage['mt-font'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g=''>");//加载字体
 
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
@@ -38,6 +42,10 @@ $("body").on('click',function()
 	{
 		sendChar = false
 		$('.addChat').prop('checked',false)
+		$('.hfospu').show()
+		$$('#mt_watermark').hide()
+		$(".Talk__CContainer-sc-1uzn66i-1").outerWidth('inherit')
+		$('.iGxbZT').slice(1,$('.iGxbZT').length).remove()
 	}
 	if($(".dels:checked").length > 0)
 	{
@@ -218,26 +226,7 @@ $("body").on('change','#custom',function()
 //警告提醒
 $('body').on('click',"#size",function()
 {
-	let wh = '';
-	let ws = '';
-	let wc = '';
-	size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0))
-	height = mt_height()
-	if(height > (maxHeight*0.75))wh = "聊天记录长度大约为"+height+"，超过"+maxHeight+"会使生成的图片产生空白区域\n另外此数字可能并不准确，具体请以生成的图片长度为基准\n";
-	if(size > (5120*0.75))ws = "存储空间体积为"+size+"KB，超过5120KB会使保存功能崩溃\n";
-	if(localStorage['last-viewed-version'])
-	{
-		if(localStorage['last-chat'])wc += localStorage['last-chat'].length
-		if(localStorage['last-viewed-version'])wc += localStorage['last-viewed-version'].length
-		if(localStorage['ds_state_ba'])wc += localStorage['ds_state_ba'].length
-		if(localStorage['custom-characters'])wc += localStorage['custom-characters'].length
-		if(localStorage['ds_state_custom'])wc += localStorage['ds_state_custom'].length
-		if(localStorage['ds_state_ak'])wc += localStorage['ds_state_ak'].length
-		if(localStorage['renderer'])wc += localStorage['renderer'].length
-		if(localStorage['rendererConfigs'])wc += localStorage['rendererConfigs'].length;
-		wc = "检测到ClosureTalk存档数据，数据大小为"+(wc/1024).toFixed(0)+"KB";
-	}
-	if(wh+ws)alert(wh+ws+wc);
+	alert('消息长度最好不要16384\n存档体积不得超过5120KB\n此处的图片长度数值仅为估算，请以生成图片界面的数值为准')
 
 });
 //清除冗余文件数据
@@ -482,3 +471,4 @@ $("body").on('click',".operate",function()
 		$('.operateTools').hide()
 	}
 });
+var asd = 1;

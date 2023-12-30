@@ -1,8 +1,3 @@
-//保存人物
-$('body').on('click',"#savecus",function()
-{
-	alert('此功能已被弃用，MoeTalk存档自带自定义角色数据，可以直接上传读取')
-})
 //读取人物
 $("body").append("<input id='loadcusfile' hidden type='file' accept='application/json'>");
 $('body').on('click',"#loadcus",function()
@@ -77,7 +72,7 @@ $('body').on('change',"#loaddatafile",function()
 //更改语言
 $('body').on('click',"#language",function()
 {
-	let lang = prompt("请输入想更改的语言：kr(韩语)、jp(日语)、en(英语)、zh_cn(简体中文)、zh_tw(繁体中文)", "zh_cn");
+	let lang = prompt("请输入想更改的语言：\nkr(韩语)\njp(日语)\nen(英语)\nzh_cn(简体中文)\nzh_tw(繁体中文)", "zh_cn");
 	if (lang != null)
 	{
 		alert('更改完成，请返回页面!');
@@ -295,20 +290,14 @@ function blobToArrayBuffer(file) {
 		reader.readAsArrayBuffer(file);
 	});
 }
-$('body').on('click',"#mt-edit",function()
+$('body').on('click',"#mt-image",function()
 {
-	if(confirm('是否切换编辑模式？\n点击【确定】为将使用新版编辑模式\n点击【取消】将使用旧版编辑模式'))
+	let image = prompt("请输入生成图片的格式：（不要乱输入）\npng（默认）\njpeg（体积小）\nwebp（体积更小，但超长图片易出错）", localStorage['mt-image'].split('/')[1]);
+	if(image != null)
 	{
-		localStorage.removeItem('mt-edit');
+		alert('更改完成，如果图片生成错误请尝试改为其它参数');
+		localStorage['mt-image'] = 'image/'+image;
 	}
-	else
-	{
-		localStorage['mt-edit'] = '旧版编辑模式';
-	}
-})
-$('body').on('click',"#ct",function()
-{
-	alert('此功能已整合进moetalk的存档下载功能内')
 })
 $('body').on('click',"#cleancache",function()
 {
