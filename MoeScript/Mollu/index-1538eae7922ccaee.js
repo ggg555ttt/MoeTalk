@@ -2166,12 +2166,12 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: ['图片长度为',(0, m.jsx)("span",
+										children: ['图片长度约为',(0, m.jsx)("span",
 										{
 											style:{color:'red'},
 											className:'bold',
 											children: mt_height(S)
-										}),mt_height(S) > maxHeight ? '，超出'+maxHeight+'的部分会自动分割' : '，可以正常生成图片']
+										}),`，将生成${Math.ceil(mt_height(S)/maxHeight)}张${localStorage['mt-image'].split('/')[1]}图片`]
 									}), (0, m.jsx)("span",
 									{
 										style:
@@ -2180,7 +2180,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: [localStorage.getItem('mt-font') ? '若等待时间较长建议您进入设置页面禁用字体加载' : '设置页面可以开启字体加载','，也可以通过更改生成的图片格式来缩减图片体积']//L.Z.thanks[g]
+										children: [localStorage.getItem('mt-font') ? '若等待时间较长建议您进入设置页面禁用字体加载' : '设置页面可以开启字体加载','，也可以通过更改生成图片的格式来缩减图片体积']//L.Z.thanks[g]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -2202,9 +2202,11 @@
 												if(k.title === false)title = ''
 												if(k.writer === false)writer = ''
 												mt_title(localStorage['MoeTalk'],title, writer)
+												//let S = 1.1
 												let start = 0 
 												let end = 0 
-												let length = (localStorage['watermark'] === 'false' ? 16 : 88)*1.1
+												let leng = (16+(localStorage['watermark'] === 'false' ? 0 : 80))*S
+												let length = leng
 												imageArr = []
 												for(let end=0;end<$$(".hfOSPu").length;end++)
 												{
@@ -2212,7 +2214,7 @@
 													if(length > maxHeight)
 													{
 														imageArr.push({start:start,end:end,length:length})
-														length = ((localStorage['watermark'] === 'false' ? 16 : 88)*S)+($$(`.hfOSPu:eq(${end})`).outerHeight()*S)
+														length = leng+($$(`.hfOSPu:eq(${end})`).outerHeight()*S)
 														start = end
 													}
 													if(end === $$(".hfOSPu").length-1)
@@ -2220,24 +2222,19 @@
 														imageArr.push({start:start,end:$$(".hfOSPu").length,length:length})
 													}
 												}
-												length = $$(`.Talk__CContainer-sc-1uzn66i-1:eq(0) .hfOSPu`).length
+												length = $$('.iGxbZT:eq(0)').find('.hfOSPu').length
 												$$.each(imageArr,function(k,v)
 												{
-													if(k !== imageArr.length-1)
+													let $clone = $$('.iGxbZT:eq(0)').clone();
+													if(k !== 0)
 													{
-														let $clone = $$('.iGxbZT:eq(0)').clone();
-														$$('.iGxbZT:eq(0)').after($clone);
+														//$clone.find('#mt_watermark').remove()
+														$clone.find('.hfOSPu').slice(0,v.start).remove()
+														$clone.find('.hfOSPu').slice(v.end-v.start,length-v.start).remove()
+														$$(`.iGxbZT:eq(${k-1})`).after($clone);
 													}
 												})
-												$$.each(imageArr,function(k,v)
-												{
-													$$(`.Talk__CContainer-sc-1uzn66i-1:eq(${k}) .hfOSPu`).slice(0,v.start).hide()
-													$$(`.Talk__CContainer-sc-1uzn66i-1:eq(${k}) .hfOSPu`).slice(v.end,length).hide()
-												})
-												if(imageArr.length > 1)
-												{
-													alert(`根据你的消息长度，MoeTalk将会以${S}倍图片质量连续生成${imageArr.length}张图片\n等待时间根据上面的信息变化，消息越长时间越长，请耐心等待`)
-												}
+												$$('.iGxbZT:eq(0)').find('.hfOSPu').slice(imageArr[0].end,length).hide()
 												O()
 											},
 											children: L.Z.confirm[g]

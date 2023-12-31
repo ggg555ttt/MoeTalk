@@ -16,7 +16,16 @@ var imageArr;
 function mt_height(num)
 {
 	if(!num)num = 1.1
-	return ($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed();
+	let length = ($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num);
+	if(localStorage['watermark'] !== 'false')
+	{
+		length = Number(length) + (((80 + 16) * num) * (Math.ceil(length/maxHeight) - 1));
+	}
+	else
+	{
+		length = Number(length) + ((16 * num) * (Math.ceil(length/maxHeight) - 1));
+	}
+	return length.toFixed();
 }
 function mt_width()
 {
@@ -226,7 +235,7 @@ $("body").on('change','#custom',function()
 //警告提醒
 $('body').on('click',"#size",function()
 {
-	alert('消息长度最好不要16384\n存档体积不得超过5120KB\n此处的图片长度数值仅为估算，请以生成图片界面的数值为准')
+	alert('消息长度最好不要超过16384\n存档体积不得超过5120KB\n此处的长度数值仅为估算，请以生成图片界面的数值为准')
 
 });
 //清除冗余文件数据
