@@ -115,7 +115,6 @@ var charList = '';
 if(localStorage['mt-club'])clubarr = JSON.parse(localStorage['mt-club']);//读取社团
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
 var class1 = 'talk__TextBox-sc-eq7cqw-4 talk__NTextBox-sc-eq7cqw-5 fWynih fYSjWX';
-var closureurl = 'https://closuretalk-ggg555ttt-dfac17880f8c693eca26c2febcfbedfeda4494b71.gitlab.io'
 /*预定义区*/
 
 //保存头像
@@ -143,7 +142,7 @@ function loadhead(id,img)
 	{
 		return JSON.parse(sessionStorage['mt-head'])[id]
 	}
-	if(closure_char[id])return `${closureurl}/resources/ba/characters/${img}.webp`;//closure头像
+	if(closure_char[id])return `Images/ClosureTalk/resources/ba/characters/${img}.webp`;//closure头像
 	if(mollu_char[id])return href+'Images/MolluChar/'+id+'.'+img+'.webp';//旧版头像
 	if(id === 0)return href+"Images/Ui/you.webp";//主角
 	return href+"Images/Ui/error.webp";//默认头像
@@ -676,7 +675,7 @@ function loaddata(json)
 				else
 				{
 					json[1][k]['content'] = v['content'];
-					if(v['content'].indexOf('//') < 0)json[1][k]['content'] = `${closureurl}/${v['content']}`;
+					if(v['content'].indexOf('//') < 0)json[1][k]['content'] = `Images/ClosureTalk/${v['content']}`;
 				}
 			}
 			
@@ -794,7 +793,14 @@ function MoeToClosure()
 			ct[k]['yuzutalk']['type'] = 'IMAGE';
 			if(v['content'].indexOf('//') < 0)//本地链接
 			{
-				ct[k]['content'] = `${moeurl}/${v['content']}`;
+				if(v['content'].indexOf('Images/ClosureTalk/resources/ba') > -1)
+				{
+					ct[k]['content'] = v['content'].replace('Images/ClosureTalk/','')
+				}
+				else
+				{
+					ct[k]['content'] = `${moeurl}/${v['content']}`;
+				}
 			}
 			if(v['file'])ct[k]['content'] = v['file'];
 		}
@@ -829,6 +835,9 @@ function MoeToClosure()
 			closuretalk['chars'][k]['char_id'] = id;
 			closuretalk['chars'][k]['img'] = 'uploaded';
 		}
+		custom_chars[closuretalk['chars'][k]['char_id']] = {}
+		custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`
+		custom_chars[closuretalk['chars'][k]['char_id']]['name'] = loadname(id);
 	})
 	$.each(JSON.parse(localStorage['mt-char']),function(k,v)
 	{
@@ -865,4 +874,96 @@ function mt_title(moetalk,title,writer)
 		if(localStorage['watermark'] === 'false')$('#mt_watermark').hide()
 		$('#mt_watermark').css('background-color',localStorage['mt-style'].split(' ')[1])
 	}
+}
+function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)
+{
+	if(imageArr.length > 1)
+	{
+		let v = imageArr[0]
+		$$('.hfOSPu').show()
+		$$('.hfOSPu').slice(0,v.start).hide()
+		$$('.hfOSPu').slice(v.end,$$('.hfOSPu').length).hide()
+		eg()($$(".Talk__CContainer-sc-1uzn66i-1")[0],
+		{
+			logging: !1,
+			allowTaint: !0,
+			useCORS: !0,
+			scale: S
+		}).then(function(e)
+		{
+			var n, t = e.toDataURL(localStorage['mt-image']);
+			let height = e.height
+			let json = [];
+			json[0] = {};
+			json[0]['title'] = '备份存档';
+			json[0]['nickname'] = 'MoeTalk';
+			json[0]['date'] = (0, u._3)(!0, !0);
+			json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
+			json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
+			json[0]['chars'] = JSON.parse(localStorage['mt-selectedList'])//@
+			json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
+			json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
+			json[1] = JSON.parse(localStorage['chats']);
+			j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
+			{
+				imageArr.shift()
+				mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)
+				t = t.replace(`data:${localStorage['mt-image']};base64,`,'')
+				json = localStorage['archive'] === 'true' ? JSON.stringify(json) : ''
+				let title = "" !== _ ? _ : L.Z.noTitle[g]
+				combineFiles(t,json,`MoeTalk_${title}_${v.index}-${height}`);
+			})
+		})
+	}
+	else
+	{
+		if(imageArr.length !== 0)
+		{
+			let v = imageArr[0]
+			$$('.hfOSPu').show()
+			$$('.hfOSPu').slice(0,v.start).hide()
+			$$('.hfOSPu').slice(v.end,$$('.hfOSPu').length).hide()
+			eg()($$(".Talk__CContainer-sc-1uzn66i-1")[0],
+			{
+				logging: !1,
+				allowTaint: !0,
+				useCORS: !0,
+				scale: S
+			}).then(function(e)
+			{
+				var n, t = e.toDataURL(localStorage['mt-image']);
+				let height = e.height
+				let json = [];
+				json[0] = {};
+				json[0]['title'] = '备份存档';
+				json[0]['nickname'] = 'MoeTalk';
+				json[0]['date'] = (0, u._3)(!0, !0);
+				json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
+				json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
+				json[0]['chars'] = JSON.parse(localStorage['mt-selectedList'])//@
+				json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
+				json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
+				json[1] = JSON.parse(localStorage['chats']);
+				j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
+				{
+					t = t.replace(`data:${localStorage['mt-image']};base64,`,'')
+					json = localStorage['archive'] === 'true' ? JSON.stringify(json) : ''
+					let title = "" !== _ ? _ : L.Z.noTitle[g]
+					combineFiles(t,json,`MoeTalk_${title}_${v.index}-${height}`);
+				})
+			}).catch(function()
+			{
+				p((0, er.Y2)(
+				{
+					isAlert: !0,
+					title: L.Z.error[g],
+					ment: L.Z.error_ment[g]
+				}))
+			}).finally(function()
+			{
+				p((0, s.jh)(!1))
+			});
+		}
+	}
+	
 }

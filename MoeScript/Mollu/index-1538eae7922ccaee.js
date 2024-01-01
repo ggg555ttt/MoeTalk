@@ -1896,79 +1896,7 @@
 										}
 										return e.abrupt("return");
 									case 4:
-										$$.each(imageArr,function(k,v)
-										{
-											if(k !== imageArr.length-1)
-											{
-												eg()($$(".Talk__CContainer-sc-1uzn66i-1")[k],
-												{
-													logging: !1,
-													allowTaint: !0,
-													useCORS: !0,
-													scale: S
-												}).then(function(e)
-												{
-													var n, t = e.toDataURL(localStorage['mt-image']);
-													let height = e.height
-													let json = [];
-													json[0] = {};
-													json[0]['title'] = '备份存档';
-													json[0]['nickname'] = 'MoeTalk';
-													json[0]['date'] = (0, u._3)(!0, !0);
-													json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
-													json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
-													json[0]['chars'] = JSON.parse(localStorage['mt-selectedList'])//@
-													json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
-													json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
-													json[1] = JSON.parse(localStorage['chats']);
-													j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
-													{
-														combineFiles(t.replace(`data:${localStorage['mt-image']};base64,`,''),localStorage['archive'] === 'true' ? JSON.stringify(json) : '',"MoeTalk_" + ("" !== _ ? _ : L.Z.noTitle[g])+k+'-'+height);
-													})
-												})
-											}
-											else
-											{
-												eg()($$(".Talk__CContainer-sc-1uzn66i-1")[k],
-												{
-													logging: !1,
-													allowTaint: !0,
-													useCORS: !0,
-													scale: S
-												}).then(function(e)
-												{
-													var n, t = e.toDataURL(localStorage['mt-image']);
-													let height = e.height
-													let json = [];
-													json[0] = {};
-													json[0]['title'] = '备份存档';
-													json[0]['nickname'] = 'MoeTalk';
-													json[0]['date'] = (0, u._3)(!0, !0);
-													json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
-													json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
-													json[0]['chars'] = JSON.parse(localStorage['mt-selectedList'])//@
-													json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
-													json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
-													json[1] = JSON.parse(localStorage['chats']);
-													j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
-													{
-														combineFiles(t.replace(`data:${localStorage['mt-image']};base64,`,''),localStorage['archive'] === 'true' ? JSON.stringify(json) : '',"MoeTalk_" + ("" !== _ ? _ : L.Z.noTitle[g])+k+'-'+height);
-													})
-												}).catch(function()
-												{
-													p((0, er.Y2)(
-													{
-														isAlert: !0,
-														title: L.Z.error[g],
-														ment: L.Z.error_ment[g]
-													}))
-												}).finally(function()
-												{
-													p((0, s.jh)(!1))
-												});
-											}
-											
-										})
+										mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//新版截图
 									case 6:
 									case "end":
 										return e.stop()
@@ -2207,34 +2135,32 @@
 												let end = 0 
 												let leng = (16+(localStorage['watermark'] === 'false' ? 0 : 80))*S
 												let length = leng
+												let json = JSON.parse(localStorage['chats'])
 												imageArr = []
 												for(let end=0;end<$$(".hfOSPu").length;end++)
 												{
 													length = length+($$(`.hfOSPu:eq(${end})`).outerHeight()*S)
 													if(length > maxHeight)
 													{
-														imageArr.push({start:start,end:end,length:length})
-														length = leng+($$(`.hfOSPu:eq(${end})`).outerHeight()*S)
+														if(json[end].isFirst === false && json[end].sCharacter.no !== 0)
+														{
+															operate = 'isFirst'
+															json[end].isFirst = !json[end].isFirst
+															p((0, eo.U_)(json))
+															length = leng+($$(`.hfOSPu:eq(${end})`).outerHeight()*S)+(37*S)
+														}
+														else
+														{
+															length = leng+($$(`.hfOSPu:eq(${end})`).outerHeight()*S)
+														}
+														imageArr.push({start:start,end:end,index:imageArr.length+1})
 														start = end
 													}
 													if(end === $$(".hfOSPu").length-1)
 													{
-														imageArr.push({start:start,end:$$(".hfOSPu").length,length:length})
+														imageArr.push({start:start,end:$$(".hfOSPu").length,index:imageArr.length+1})
 													}
 												}
-												length = $$('.iGxbZT:eq(0)').find('.hfOSPu').length
-												$$.each(imageArr,function(k,v)
-												{
-													let $clone = $$('.iGxbZT:eq(0)').clone();
-													if(k !== 0)
-													{
-														//$clone.find('#mt_watermark').remove()
-														$clone.find('.hfOSPu').slice(0,v.start).remove()
-														$clone.find('.hfOSPu').slice(v.end-v.start,length-v.start).remove()
-														$$(`.iGxbZT:eq(${k-1})`).after($clone);
-													}
-												})
-												$$('.iGxbZT:eq(0)').find('.hfOSPu').slice(imageArr[0].end,length).hide()
 												O()
 											},
 											children: L.Z.confirm[g]
@@ -3613,7 +3539,7 @@
 									onClick: function()
 									{
 										click('#tool-image')
-										$$('#editTools').click()
+										$$(".dels").hide()
 										mt_title()
 									},
 									children: (0, m.jsx)(c.xL,

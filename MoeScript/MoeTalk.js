@@ -51,10 +51,10 @@ $("body").on('click',function()
 	{
 		sendChar = false
 		$('.addChat').prop('checked',false)
-		$('.hfospu').show()
-		$$('#mt_watermark').hide()
 		$(".Talk__CContainer-sc-1uzn66i-1").outerWidth('inherit')
-		$('.iGxbZT').slice(1,$('.iGxbZT').length).remove()
+		$('#mt_watermark').hide()
+		$('.hfospu').show()
+		$(".dels").show()
 	}
 	if($(".dels:checked").length > 0)
 	{

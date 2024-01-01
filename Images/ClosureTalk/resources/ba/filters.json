@@ -1,0 +1,466 @@
+[
+  {
+    "active": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "filter_names": [
+      {
+        "en": "Abydos High school",
+        "ja": "アビドス高等学校",
+        "ko": "아비도스 고등학교",
+        "zh-cn": "阿拜多斯高中",
+        "zh-tw": "阿拜多斯高中"
+      },
+      {
+        "en": "Arius Branch School",
+        "ja": "アリウス分校",
+        "ko": "아리우스 분교",
+        "zh-cn": "阿里乌斯分校",
+        "zh-tw": "奧利斯分校"
+      },
+      {
+        "en": "Gehenna Academy",
+        "ja": "ゲヘナ学園",
+        "ko": "게헨나 학원",
+        "zh-cn": "格赫娜学园",
+        "zh-tw": "格黑娜學園"
+      },
+      {
+        "en": "Allied Hyakkiyako Academy",
+        "ja": "百鬼夜行連合学院",
+        "ko": "백귀야행 연합학원",
+        "zh-cn": "百鬼夜行联合学园",
+        "zh-tw": "百鬼夜行聯合學園"
+      },
+      {
+        "en": "Millennium Science Academy",
+        "ja": "ミレニアムサイエンススクール",
+        "ko": "밀레니엄 사이언스 스쿨",
+        "zh-cn": "千年科学学园",
+        "zh-tw": "千年科學學園"
+      },
+      {
+        "en": "Red Winter Federal Academy",
+        "ja": "レッドウィンター連邦学園",
+        "ko": "레드윈터 연방학원",
+        "zh-cn": "赤冬联邦学园",
+        "zh-tw": "赤冬聯邦學園"
+      },
+      {
+        "en": "Shanhaijing Senior Secondary School",
+        "ja": "山海経高級中学校",
+        "ko": "산해경 고급중학교",
+        "zh-cn": "山海经高级中学",
+        "zh-tw": "山海經高級中學"
+      },
+      {
+        "en": "SRT Special Academy",
+        "ja": "SRT特殊学園",
+        "ko": "SRT 특수학원",
+        "zh-cn": "SRT特殊学园",
+        "zh-tw": "SRT特殊学園"
+      },
+      {
+        "en": "Trinity General School",
+        "ja": "トリニティ総合学園",
+        "ko": "트리니티 종합학원",
+        "zh-cn": "三一综合学园",
+        "zh-tw": "三一綜合學園"
+      },
+      {
+        "en": "Valkyrie Police Academy",
+        "ja": "ヴァルキューレ警察学校",
+        "ko": "발키리 경찰학교",
+        "zh-cn": "女武神警察学园",
+        "zh-tw": "女武神警察學園"
+      }
+    ],
+    "filter_searches": [
+      "abydos",
+      "arius",
+      "gehenna",
+      "hyakkiyako",
+      "millennium",
+      "red_winter",
+      "shanhaijing",
+      "srt",
+      "trinity",
+      "valkyrie"
+    ],
+    "group_key": "schools",
+    "group_name": {
+      "en": "School",
+      "ja": "学校",
+      "ko": "학교",
+      "zh-cn": "学校",
+      "zh-tw": "学校"
+    }
+  },
+  {
+    "active": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "filter_names": [
+      {
+        "en": "After-School Sweets Club",
+        "ja": "放課後スイーツ部",
+        "ko": "방과후 스위트부",
+        "zh-cn": "放学后的甜点部",
+        "zh-tw": "放學後的甜點部"
+      },
+      {
+        "en": "Angel 24",
+        "ja": "エンジェル24",
+        "ko": "엔젤24 편의점",
+        "zh-cn": "天使24",
+        "zh-tw": "天使24"
+      },
+      {
+        "en": "Arius Squad",
+        "ja": "アリウススクワッド",
+        "ko": "아리우스 스쿼드",
+        "zh-cn": "阿里乌斯小队",
+        "zh-tw": "奧利斯小隊"
+      },
+      {
+        "en": "Cleaning & Clearing",
+        "ja": "Cleaning & Clearing",
+        "ko": "Cleaning & Clearing",
+        "zh-cn": "C&C",
+        "zh-tw": "C&C"
+      },
+      {
+        "en": "Community Safety Bureau",
+        "ja": "生活安全局",
+        "ko": "생활안전국",
+        "zh-cn": "生活安全局",
+        "zh-tw": "生活安全局"
+      },
+      {
+        "en": "Countermeasures Council",
+        "ja": "対策委員会",
+        "ko": "대책위원회",
+        "zh-cn": "对策委员会",
+        "zh-tw": "對策委員會"
+      },
+      {
+        "en": "Disciplinary Committee",
+        "ja": "風紀委員会",
+        "ko": "풍기위원회",
+        "zh-cn": "风纪委员会",
+        "zh-tw": "風紀委員會"
+      },
+      {
+        "en": "Emergency Medicine Club",
+        "ja": "救急医学部",
+        "ko": "구급의학부",
+        "zh-cn": "急救医学部",
+        "zh-tw": "急救醫學部"
+      },
+      {
+        "en": "Engineering Club",
+        "ja": "エンジニア部",
+        "ko": "엔지니어부",
+        "zh-cn": "工程师部",
+        "zh-tw": "工程師部"
+      },
+      {
+        "en": "Festival Operations Department",
+        "ja": "お祭り運営委員会",
+        "ko": "축제운영위원회",
+        "zh-cn": "节庆运营委员会",
+        "zh-tw": "節慶營運管理部"
+      },
+      {
+        "en": "FOX Platoon",
+        "ja": "FOX小隊",
+        "ko": "FOX 소대",
+        "zh-cn": "FOX小队",
+        "zh-tw": "FOX小隊"
+      },
+      {
+        "en": "Game Development Department",
+        "ja": "ゲーム開発部",
+        "ko": "게임개발부",
+        "zh-cn": "游戏开发部",
+        "zh-tw": "遊戲開發部"
+      },
+      {
+        "en": "Gourmet Research Society",
+        "ja": "美食研究会",
+        "ko": "미식연구회",
+        "zh-cn": "美食研究会",
+        "zh-tw": "美食研究會"
+      },
+      {
+        "en": "Inner Discipline Club",
+        "ja": "修行部",
+        "ko": "수행부",
+        "zh-cn": "修行部",
+        "zh-tw": "執行部"
+      },
+      {
+        "en": "Justice Task Force",
+        "ja": "正義実現委員会",
+        "ko": "정의실현위원회",
+        "zh-cn": "正义实现委员会",
+        "zh-tw": "實現正義部"
+      },
+      {
+        "en": "Library Committee",
+        "ja": "図書委員会",
+        "ko": "도서위원회",
+        "zh-cn": "图书委员会",
+        "zh-tw": "圖書部"
+      },
+      {
+        "en": "Makeup Work Club",
+        "ja": "補習授業部",
+        "ko": "보충수업부",
+        "zh-cn": "补习部",
+        "zh-tw": "補課部"
+      },
+      {
+        "en": "Masked Swimsuit Group",
+        "ja": "覆面水着団",
+        "ko": "복면수영복단",
+        "zh-cn": "蒙面泳装团",
+        "zh-tw": "蒙面泳裝團"
+      },
+      {
+        "en": "Future Students?",
+        "ja": "新キャラ？",
+        "ko": "",
+        "zh-cn": "新学生？",
+        "zh-tw": "新學生？"
+      },
+      {
+        "en": "Ninjutsu Research Department",
+        "ja": "忍術研究部",
+        "ko": "인술연구부",
+        "zh-cn": "忍法研究部",
+        "zh-tw": "忍法研究部"
+      },
+      {
+        "en": "NPC",
+        "ja": "NPC",
+        "ko": "NPC",
+        "zh-cn": "NPC",
+        "zh-tw": "NPC"
+      },
+      {
+        "en": "Onsen Development Club",
+        "ja": "温泉開発部",
+        "ko": "온천개발부",
+        "zh-cn": "温泉开发部",
+        "zh-tw": "溫泉開發部"
+      },
+      {
+        "en": "Pandemonium Society",
+        "ja": "万魔殿",
+        "ko": "판데모니움 소사이어티",
+        "zh-cn": "万魔殿",
+        "zh-tw": "萬魔殿"
+      },
+      {
+        "en": "Plum Blossom Garden",
+        "ja": "訓育支援部「梅花園」",
+        "ko": "훈육지원부 「매화원」",
+        "zh-cn": "梅花园",
+        "zh-tw": "梅花園"
+      },
+      {
+        "en": "Prime Student Council",
+        "ja": "連邦生徒会",
+        "ko": "연방학생회",
+        "zh-cn": "联邦学生会",
+        "zh-tw": "聯邦學生會"
+      },
+      {
+        "en": "Problem Solver 68",
+        "ja": "便利屋68",
+        "ko": "흥신소68",
+        "zh-cn": "便利屋68",
+        "zh-tw": "便利屋68"
+      },
+      {
+        "en": "RABBIT Platoon",
+        "ja": "RABBIT小隊",
+        "ko": "RABBIT 소대",
+        "zh-cn": "RABBIT小队",
+        "zh-tw": "RABBIT小隊"
+      },
+      {
+        "en": "Red Winter Secretariat",
+        "ja": "レッドウィンター事務局",
+        "ko": "레드윈터 사무국",
+        "zh-cn": "赤冬事务局",
+        "zh-tw": "赤冬事務局"
+      },
+      {
+        "en": "Remedial Knights",
+        "ja": "救護騎士団",
+        "ko": "구호기사단",
+        "zh-cn": "救护骑士团",
+        "zh-tw": "救護騎士團"
+      },
+      {
+        "en": "School Lunch Club",
+        "ja": "給食部",
+        "ko": "급식부",
+        "zh-cn": "供餐部",
+        "zh-tw": "供給部"
+      },
+      {
+        "en": "Seminar",
+        "ja": "セミナー",
+        "ko": "세미나",
+        "zh-cn": "研讨会",
+        "zh-tw": "研討會"
+      },
+      {
+        "en": "Sisterhood",
+        "ja": "シスターフッド",
+        "ko": "시스터후드",
+        "zh-cn": "修女会",
+        "zh-tw": "修女會"
+      },
+      {
+        "en": "Special Class No.227",
+        "ja": "227号特別クラス",
+        "ko": "227호 특별반",
+        "zh-cn": "227特别班",
+        "zh-tw": "227特別班"
+      },
+      {
+        "en": "Super Phenomenon Task Force",
+        "ja": "特異現象特務部",
+        "ko": "초현상특무부",
+        "zh-cn": "超现象特务部",
+        "zh-tw": "超現象特務部"
+      },
+      {
+        "en": "Tea Party",
+        "ja": "ティーパーティー",
+        "ko": "티 파티",
+        "zh-cn": "茶会",
+        "zh-tw": "茶會"
+      },
+      {
+        "en": "Veritas",
+        "ja": "ヴェリタス",
+        "ko": "베리타스",
+        "zh-cn": "真理部",
+        "zh-tw": "貝里塔斯"
+      },
+      {
+        "en": "Vigilante Crew",
+        "ja": "トリニティ自警団",
+        "ko": "트리니티 자경단",
+        "zh-cn": "三一自卫团",
+        "zh-tw": "三一自衛隊"
+      },
+      {
+        "en": "Yin-Yang Club",
+        "ja": "陰陽部",
+        "ko": "음양부",
+        "zh-cn": "阴阳部",
+        "zh-tw": "陰陽部"
+      }
+    ],
+    "filter_searches": [
+      "after_school_sweets_club",
+      "angel_24",
+      "arius_squad",
+      "cleaning_and_clearing",
+      "community_safety_bureau",
+      "countermeasures_council",
+      "disciplinary_committee",
+      "emergency_medicine_club",
+      "engineering_club",
+      "festival_operations_department",
+      "fox_platoon",
+      "game_development_department",
+      "gourmet_research_society",
+      "inner_discipline_club",
+      "justice_task_force",
+      "library_committee",
+      "makeup_work_club",
+      "masked_swimsuit_group",
+      "new_students",
+      "ninjutsu_research_department",
+      "npc",
+      "onsen_development_club",
+      "pandemonium_society",
+      "plum_blossom_garden",
+      "prime_student_council",
+      "problem_solver_68",
+      "rabbit_platoon",
+      "red_winter_secretariat",
+      "remedial_knights",
+      "school_lunch_club",
+      "seminar",
+      "sisterhood",
+      "special_class_no.227",
+      "super_phenomenon_task_force",
+      "tea_party",
+      "veritas",
+      "vigilante_crew",
+      "yin_yang_club"
+    ],
+    "group_key": "clubs",
+    "group_name": {
+      "en": "Club",
+      "ja": "クラブ",
+      "ko": "",
+      "zh-cn": "社团",
+      "zh-tw": "社團"
+    }
+  }
+]
