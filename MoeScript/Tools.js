@@ -168,63 +168,6 @@ $("body").on('click','#mt-title',function()
 	}
 })
 
-//水印功能
-if(localStorage['wmark'])
-{
-	let arr = JSON.parse(localStorage['wmark']);
-	$(".drowsy")[0].value = arr[0];
-	$(".drowsy")[1].value = arr[1];
-	$(".drowsy")[2].value = arr[2];
-	$(".drowsy")[3].value = arr[3];
-	$(".drowsy")[4].value = arr[4];
-	$(".drowsy")[5].value = arr[5];
-	$(".drowsy")[6].value = arr[6];
-	$(".drowsy")[7].value = arr[7];
-}
-function mark()
-{
-	let arr = [];
-	r = $(".drowsy")[0].value == '' ? 0 : $(".drowsy")[0].value
-	f = $(".drowsy")[1].value == '' ? 40 : $(".drowsy")[1].value
-	c1 = $(".drowsy")[2].value == '' ? 0 : $(".drowsy")[2].value
-	c2 = $(".drowsy")[3].value == '' ? 0 : $(".drowsy")[3].value
-	c3 = $(".drowsy")[4].value == '' ? 0 : $(".drowsy")[4].value
-	c4 = $(".drowsy")[5].value == '' ? 0.8 : $(".drowsy")[5].value
-	d = $(".drowsy")[6].value == '' ? 3 : $(".drowsy")[6].value
-	s = $(".drowsy")[7].value == '' ? '防和谐 水印 测试' : $(".drowsy")[7].value
-	s = s.split(" ")
-	drawWaterMark.init(
-	{
-		imgpath: "demo.jpg",//图片路径	string类型	[必传]
-		rotate: r,//旋转角度	 int类型
-		fontsize: f,//字体大小
-		fontcolor: c1+","+c2+","+c3+","+c4,//字体颜色	rgba类型
-		density: d,//稠密度
-		str: s,		//[必传]
-		domid: "drowsy",//图片id
-		cb:function(base64)
-		{
-				//console.log(base64)
-			arr[0] = $(".drowsy")[0].value = r;
-			arr[1] = $(".drowsy")[1].value = f;
-			arr[2] = $(".drowsy")[2].value = c1;
-			arr[3] = $(".drowsy")[3].value = c2;
-			arr[4] = $(".drowsy")[4].value = c3;
-			arr[5] = $(".drowsy")[5].value = c4;
-			arr[6] = $(".drowsy")[6].value = d;
-			arr[7] = $(".drowsy")[7].value = s.join(' ');
-			localStorage['wmark'] = JSON.stringify(arr);
-		}
-	})
-}
-function cleanmark()
-{
-	if(confirm('是否清空？'))
-	{
-		localStorage.removeItem('wmark');
-	}
-}
-
 //隐写回复
 const sep = '-sep-';
 const maxExtLength = 4;

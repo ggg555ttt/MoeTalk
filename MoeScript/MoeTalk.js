@@ -85,7 +85,6 @@ $(".frVjsk").wait(function()
 {
 	$(".frVjsk").append(`<button class='${class0}' id='uphead' class='${class0}'><b style='color:black;'>傳</b></button><span class='tool'>上传头像<span id='cusname'></span></span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
-	//$(".frVjsk").append(`<button class='${class0}' id='delcus'><b style='color:red;'>刪</b></button><span class='tool'>删除角色</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色</span><span id='ccus'></span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
@@ -155,35 +154,6 @@ $('body').on('click',"#uphead",function()//上传头像
 	else
 	{
 		alert('此功能为上传头像的备用方案\n如无问题无需点击');
-	}
-})
-//删除人物
-$('body').on('click',"#delcus",function()
-{
-	let id = prompt("请输入角色ID（大于0的纯数字）\n"+
-	"若想批量删除请用空格分隔，例:1 2 3 4 5\n"+
-	"无法删除工具自带角色");
-	if(id)
-	{
-		let char = JSON.parse(localStorage['mt-char']);
-		let head = JSON.parse(localStorage['mt-head']);
-		
-		$('.jotOXZ')[0].click()
-		$.each(id.trim().split(" "),function(k,v)
-		{
-			v = parseInt(v)+1000
-			if(char[v])
-			{
-				delete char[v];
-				delete head[v];
-				setTimeout(function(){$('[alt="'+v+'"]').click()})
-			}
-		})
-		localStorage['mt-char'] = JSON.stringify(char);
-		localStorage['mt-head'] = JSON.stringify(head);
-		setTimeout(function(){$('.jotOXZ')[1].click()})
-		list()//更新列表
-		
 	}
 })
 //修改人物
@@ -335,19 +305,11 @@ $('body').on('click',"#editTools",function()
 	$(".dels").parent().css("background-color","")//
 	if($('.tools').css('display') === 'none')
 	{
-		// $('#delsall').attr('hidden',false)
-		// $('#delsto').attr('hidden',false)
-		// $('#rdelsall').attr('hidden',false)
-		// $('#cutdata').attr('hidden',false)
 		$('.tools').show()
 		$('.dels').attr('hidden',false).next().attr('hidden',false)
 	}
 	else
 	{
-		// $('#delsall').attr('hidden',true)
-		// $('#delsto').attr('hidden',true)
-		// $('#rdelsall').attr('hidden',true)
-		// $('#cutdata').attr('hidden',true)tools1
 		$('.tools').hide()
 		$('.dels').attr('hidden',true).next().attr('hidden',true)
 	}
@@ -361,11 +323,7 @@ $('body').on('change',".dels",function()
 //自动跳到被选位置
 $('body').on('click',".juTGbm",function()
 {
-	if($(".dels:checked").attr('index'))
-	{
-		$(".dels:checked")[0].scrollIntoView(!1)
-		notice('发送消息时会在被选中的消息上方插入新的消息',250)
-	}
+	if($(".dels:checked").attr('index'))$(".dels:checked")[0].scrollIntoView(!1)
 })
 $(window).keydown(function(event)
 {

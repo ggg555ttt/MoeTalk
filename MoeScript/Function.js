@@ -12,13 +12,6 @@ if(window.location.href.indexOf('file:///') === 0)
 		window.location.replace('https://tieba.baidu.com/p/8440629156')
 	}
 }
-if(window.location.href === 'https://ggg555ttt.gitee.io/moetalk/')
-{
-	if(confirm('MoeTalk已更新最新地址，请导出数据后点击【确定】访问'))
-	{
-		window.location.replace('https://moetalk.gitee.io/')
-	}
-}
 $.ajax({
 	url: './version.json',
 	type: 'GET',
@@ -258,76 +251,6 @@ function warning()
 		$("#size").css('color','green');//隐藏警告
 	}
 }
-//提示
-function notice(text,time = 2000,id = "#notice")
-{
-	if($(id).is(":hidden") && text !=='')//
-	{
-		$(id).text(text).show(300).delay(time).hide(300);
-	}
-}
-
-//绘制水印
-var drawWaterMark = {};
-drawWaterMark.init = function (objmsg) {
-	var canvas = document.createElement('canvas');
-	var ctx = canvas.getContext('2d');
-	var img = new Image();
-	img.src = objmsg.imgpath;
-	img.setAttribute("crossOrigin", 'Anonymous');
-	img.onload = function () {
-		//绘制和图片大小相同的canvas
-		canvas.width = img.width;
-		canvas.height = img.height;
-		//canvas绘制图片，0 0  为左上角坐标原点
-		ctx.drawImage(img, 0, 0);
-		//绘制水印
-		if (objmsg.rotate != undefined && objmsg.rotate != null) {//旋转角度[默认20]
-			ctx.rotate((Math.PI / 120) * -objmsg.rotate);
-		} else {
-			ctx.rotate((Math.PI / 120) * -20);
-		}
-		var fontsize = 20;
-		if (objmsg.fontsize != undefined && objmsg.fontsize != null) {//字体大小[默认20px]
-			fontsize = objmsg.fontsize;
-		}
-		ctx.font = "bold "+fontsize+"px Microsoft Yahei";
-		var fontcolor = '255, 255, 255, 0.2';
-		if (objmsg.fontcolor != undefined && objmsg.fontcolor != null) {//字体颜色透明度[默认白色]
-			fontcolor = objmsg.fontcolor;
-		}
-		ctx.fillStyle = "rgba(" + fontcolor + ")";
-		ctx.textAlign = "center";
-		ctx.textBaseline = "middle";
-		var density = 3;
-		if (objmsg.density != undefined && objmsg.density != null) {//稠密度[默认3]
-			density = objmsg.density
-		}
-		for (var i = -1000; i < img.height; i += img.width / density) {
-			for (var k = 0; k < img.height; k += img.width / density) {
-				var str = objmsg.str;
-				if (str.length == 1) {
-					ctx.fillText(str[0], i, k);
-				} else if(str.length==2){
-					ctx.fillText(str[0], i, k);
-					ctx.fillText(str[1], i, k + (fontsize-0+5));//多行
-				} else if (str.length == 3 || str.length > 3) {
-					ctx.fillText(str[0], i, k);
-					ctx.fillText(str[1], i, k + (fontsize - 0 + 5));//多行
-					ctx.fillText(str[2], i, k + (fontsize*2 - 0 + 5));//多行
-				}
-			}
-		}
-		var base64 = canvas.toDataURL(localStorage['mt-image']);//添加过水印的base64图片
-		if (objmsg.domid != undefined && objmsg.domid != null) {//id图片
-			document.getElementById(objmsg.domid).src = base64;
-			//$(objmsg.domid).attr('src', base64);
-		}
-		if (objmsg.cb != undefined && objmsg.cb != null) {//回调函数
-			objmsg.cb(base64);//回调函数
-		}
-	}
-}
 
 //图片隐写
 function base64ToBlob(base64)
@@ -517,7 +440,7 @@ function list()
 	setTimeout(function(){selectClick(37)})
 	setTimeout(function(){selectClick(39)})
 }
-function editMsg(o,n,t)
+function editMsg(o,n,t)//编辑消息
 {
 	let name = n.name
 	let time = n.time
@@ -539,7 +462,7 @@ function editMsg(o,n,t)
 	chatIndex = t
 	o(!0, n, n.type)
 }
-function loaddata(json)
+function loaddata(json)//识别存档
 {
 	let josnsize = parseInt((JSON.stringify(json).length/1024).toFixed(0))
 	let custom_char = {};
@@ -739,7 +662,7 @@ const getNowDate = () => {
   //return year + "-" + month + "-" + day + " " + hour + sign2 + minutes + sign2 + seconds;
   return `${year}${month}${day}${hour}${minutes}${seconds}`;
 }
-function MoeToClosure()
+function MoeToClosure()//Moe转Closure
 {
 	let moeurl = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io'
 	let ct = [];
@@ -875,7 +798,7 @@ function mt_title(moetalk,title,writer)
 		$('#mt_watermark').css('background-color',localStorage['mt-style'].split(' ')[1])
 	}
 }
-function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)
+function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 {
 	if(imageArr.length > 1)
 	{
