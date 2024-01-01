@@ -2287,7 +2287,7 @@
 											chars: JSON.parse(localStorage['mt-selectedList'])//@
 										}, (0, et.Z)(s.chats)])], e.next = 6, (0, u.rU)(r);
 									case 6:
-										o = e.sent, (0, ef.saveAs)(o, "MoeTalk_".concat(t.title, ".png")), blobToBase64(o,function(base64)
+										o = e.sent, (0, ef.saveAs)(o,`MoeTalk_${t.title}_${mt_height()}.png`), blobToBase64(o,function(base64)
 										{
 											$$('#downImg').attr('src','data:image/png;base64,'+base64)
 										});

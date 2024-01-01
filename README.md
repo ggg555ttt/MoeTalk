@@ -24,3 +24,6 @@ https://moetalk.vercel.app/
 https://space.bilibili.com/13973390 
 ## 贴吧： 
 https://tieba.baidu.com/home/main?id=tb.1.d2d4f09b.LxF8uVhDXtkxCW64CyB4PQ
+## 最新版压缩包下载地址： 
+https://gitlab.com/ggg555ttt/MoeTalk/-/archive/main/MoeTalk-main.zip  
+https://mirror.ghproxy.com/https://github.com/ggg555ttt/MoeTalk/archive/refs/heads/main.zip  

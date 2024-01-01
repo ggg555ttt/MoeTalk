@@ -911,7 +911,7 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)
 				t = t.replace(`data:${localStorage['mt-image']};base64,`,'')
 				json = localStorage['archive'] === 'true' ? JSON.stringify(json) : ''
 				let title = "" !== _ ? _ : L.Z.noTitle[g]
-				combineFiles(t,json,`MoeTalk_${title}_${v.index}-${height}`);
+				combineFiles(t,json,`MoeTalk_${title}_${height}_${v.index}`);
 			})
 		})
 	}
@@ -949,7 +949,7 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)
 					t = t.replace(`data:${localStorage['mt-image']};base64,`,'')
 					json = localStorage['archive'] === 'true' ? JSON.stringify(json) : ''
 					let title = "" !== _ ? _ : L.Z.noTitle[g]
-					combineFiles(t,json,`MoeTalk_${title}_${v.index}-${height}`);
+					combineFiles(t,json,`MoeTalk_${title}_${height}_${v.index}`);
 				})
 			}).catch(function()
 			{
