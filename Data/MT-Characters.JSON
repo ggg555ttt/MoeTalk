@@ -279,6 +279,48 @@ var mt_characters = {
         },
         "charface": ""
     },
+    "凯瑟TypeC": {
+        "school": "其他",
+        "club": "十字神明",
+        "head": "凯瑟TypeC",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "kaiseTypeC"
+        },
+        "charface": ""
+    },
+    "凯瑟TypeE": {
+        "school": "其他",
+        "club": "十字神明",
+        "head": "凯瑟TypeE",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "kaiseTypeE"
+        },
+        "charface": ""
+    },
+    "凯瑟TypeV": {
+        "school": "其他",
+        "club": "十字神明",
+        "head": "凯瑟TypeV",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "kaiseTypeV"
+        },
+        "charface": ""
+    },
     "无": {
         "school": "其他",
         "club": "十字神明",
@@ -964,6 +1006,48 @@ var mt_characters = {
             "pinyin": "zidongjiqiren"
         },
         "charface": "十字神明机器人/十字神明机器人.1.webp"
+    },
+    "无人机": {
+        "school": "其他",
+        "club": "自动机器人",
+        "head": "无人机",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "wurenji"
+        },
+        "charface": ""
+    },
+    "歌利亚": {
+        "school": "其他",
+        "club": "自动机器人",
+        "head": "歌利亚",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "geliya"
+        },
+        "charface": ""
+    },
+    "清除器": {
+        "school": "其他",
+        "club": "自动机器人",
+        "head": "清除器",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "qingchuqi"
+        },
+        "charface": ""
     },
     "自动机器人": {
         "school": "其他",

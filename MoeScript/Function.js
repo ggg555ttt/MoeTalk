@@ -135,7 +135,7 @@ function loadhead(id,img)
 	{
 		return JSON.parse(sessionStorage['mt-head'])[id]
 	}
-	if(closure_char[id])return `Images/ClosureTalk/resources/ba/characters/${img}.webp`;//closure头像
+	if(closure_char[id])return `Images/ClosureTalk/ba/characters/${img}.webp`;//closure头像
 	if(mollu_char[id])return href+'Images/MolluChar/'+id+'.'+img+'.webp';//旧版头像
 	if(id === 0)return href+"Images/Ui/you.webp";//主角
 	return href+"Images/Ui/error.webp";//默认头像
@@ -547,7 +547,7 @@ function loaddata(json)//识别存档
 			}
 		})
 	}
-
+	console.log(json[0]['chars'])
 	if(json['chat'])//ct存档
 	{
 		json[1] = [];
@@ -598,7 +598,7 @@ function loaddata(json)//识别存档
 				else
 				{
 					json[1][k]['content'] = v['content'];
-					if(v['content'].indexOf('//') < 0)json[1][k]['content'] = `Images/ClosureTalk/${v['content']}`;
+					if(v['content'].indexOf('//') < 0)json[1][k]['content'] = v['content'].replace('resources/ba','Images/ClosureTalk/ba');
 				}
 			}
 			
@@ -627,7 +627,7 @@ function loaddata(json)//识别存档
 			josnsize+'+'+size+'='+(josnsize+size)+'\n'+
 			(josnsize+size)+'>'+'5120，存档可能无法读取')
 	}
-	if(json[0]['chars'] && JSON.stringify(json[0]['chars'])['selectedList'])charList = JSON.stringify(json[0]['chars'])
+	if(json[0]['chars'] && json[0]['chars']['selectedList'])charList = JSON.stringify(json[0]['chars'])
 	
 	return json
 }
@@ -716,9 +716,9 @@ function MoeToClosure()//Moe转Closure
 			ct[k]['yuzutalk']['type'] = 'IMAGE';
 			if(v['content'].indexOf('//') < 0)//本地链接
 			{
-				if(v['content'].indexOf('Images/ClosureTalk/resources/ba') > -1)
+				if(v['content'].indexOf('Images/ClosureTalk/') > -1)
 				{
-					ct[k]['content'] = v['content'].replace('Images/ClosureTalk/','')
+					ct[k]['content'] = v['content'].replace('Images/ClosureTalk','resources')
 				}
 				else
 				{
@@ -845,6 +845,8 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			let v = imageArr[0]
 			$$('.hfOSPu').show()
 			$$('.hfOSPu').slice(0,v.start).hide()
+			console.log(v.end)
+			console.log($$('.hfOSPu').length)
 			$$('.hfOSPu').slice(v.end,$$('.hfOSPu').length).hide()
 			eg()($$(".Talk__CContainer-sc-1uzn66i-1")[0],
 			{
@@ -872,7 +874,8 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 					t = t.replace(`data:${localStorage['mt-image']};base64,`,'')
 					json = localStorage['archive'] === 'true' ? JSON.stringify(json) : ''
 					let title = "" !== _ ? _ : L.Z.noTitle[g]
-					combineFiles(t,json,`MoeTalk_${title}_${height}_${v.index}`);
+					let str = v.start !== 0 ? `_${height}_${v.index}` : ''
+					combineFiles(t,json,`MoeTalk_${title}${str}`);
 				})
 			}).catch(function()
 			{
