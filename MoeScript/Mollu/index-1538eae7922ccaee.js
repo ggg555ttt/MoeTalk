@@ -1896,6 +1896,7 @@
 										}
 										return e.abrupt("return");
 									case 4:
+										$$('.imageSave').remove()
 										mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//新版截图
 									case 6:
 									case "end":
@@ -2182,10 +2183,6 @@
 												marginBottom: "1rem"
 											},
 											children: L.Z.image_download[g]
-										}), (0, m.jsx)(ev,
-										{
-											ref: I,
-											alt: "download"
 										})]
 									})
 								})]

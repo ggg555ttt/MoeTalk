@@ -362,3 +362,14 @@ align-self: stretch;
     transform: translate(275%, -550%);
     border-radius: 50%;
 }
+.imageSave
+{
+	width: 100%;
+	color: white;
+	font-size: 2rem;
+	background-color: rgb(76, 91, 111);
+}
+.imageSave>img
+{
+	width: 100%;
+}

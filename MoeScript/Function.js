@@ -280,7 +280,7 @@ function blobToBase64(blob, callback) {
   }; 
   reader.readAsDataURL(blob); 
 } 
-function combineFiles(mainFile, hideFile, fileName) {
+function combineFiles(mainFile, hideFile, fileName, Index) {
 	const sep = '-sep-';
 	const maxExtLength = 4;
 	mainFile = base64ToBlob(mainFile);
@@ -301,7 +301,11 @@ function combineFiles(mainFile, hideFile, fileName) {
 		targetData.set(hideData, mainData.length + sepData.length);
 		const blob = new Blob([targetData], { type: mimeMap[mainFileExt] });
 		//downloadBlob(blob, fileName+'.'+mainFileExt);
-		blobToBase64(blob,function(e){$("[alt='download']").attr('src',`data:${localStorage['mt-image']};base64,${e}`)})//替换手动保存的图片
+		//blobToBase64(blob,function(e){$("[alt='download']").attr('src',`data:${localStorage['mt-image']};base64,${e}`)})//替换手动保存的图片
+		blobToBase64(blob,function(e)
+		{
+			$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第${Index}张图片：</h1><img src='data:${localStorage['mt-image']};base64,${e}'></div>`)
+		})
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
 		a.download = fileName+'.'+mainFileExt;
@@ -547,7 +551,6 @@ function loaddata(json)//识别存档
 			}
 		})
 	}
-	console.log(json[0]['chars'])
 	if(json['chat'])//ct存档
 	{
 		json[1] = [];
@@ -772,7 +775,6 @@ function MoeToClosure()//Moe转Closure
 	{
 		closuretalk['custom_chars'].push({char_id:k,img:v.img,name:v.name})
 	})
-	console.log(closuretalk)
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(closuretalk));//生成专用存档
 }
@@ -827,14 +829,14 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
 			json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
 			json[1] = JSON.parse(localStorage['chats']);
-			j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
+			j(v.index), null === (n = I.current) || void 0 === n , e.toBlob(function(e)
 			{
 				imageArr.shift()
 				mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)
 				t = t.replace(`data:${localStorage['mt-image']};base64,`,'')
 				json = localStorage['archive'] === 'true' ? JSON.stringify(json) : ''
 				let title = "" !== _ ? _ : L.Z.noTitle[g]
-				combineFiles(t,json,`MoeTalk_${title}_${height}_${v.index}`);
+				combineFiles(t,json,`MoeTalk_${title}_${height}_${v.index}`,v.index);
 			})
 		})
 	}
@@ -845,8 +847,6 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			let v = imageArr[0]
 			$$('.hfOSPu').show()
 			$$('.hfOSPu').slice(0,v.start).hide()
-			console.log(v.end)
-			console.log($$('.hfOSPu').length)
 			$$('.hfOSPu').slice(v.end,$$('.hfOSPu').length).hide()
 			eg()($$(".Talk__CContainer-sc-1uzn66i-1")[0],
 			{
@@ -869,13 +869,13 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 				json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
 				json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
 				json[1] = JSON.parse(localStorage['chats']);
-				j(t), null === (n = I.current) || void 0 === n || n.setAttribute("src", t), e.toBlob(function(e)
+				j(v.index), null === (n = I.current) || void 0 === n , e.toBlob(function(e)
 				{
 					t = t.replace(`data:${localStorage['mt-image']};base64,`,'')
 					json = localStorage['archive'] === 'true' ? JSON.stringify(json) : ''
 					let title = "" !== _ ? _ : L.Z.noTitle[g]
 					let str = v.start !== 0 ? `_${height}_${v.index}` : ''
-					combineFiles(t,json,`MoeTalk_${title}${str}`);
+					combineFiles(t,json,`MoeTalk_${title}${str}`,v.index);
 				})
 			}).catch(function()
 			{
