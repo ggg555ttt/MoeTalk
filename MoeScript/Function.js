@@ -3,14 +3,8 @@ var version = '';
 if(localStorage['mt-version'])version = localStorage['mt-version']
 if(window.location.href.indexOf('file:///') === 0)
 {
-	if(confirm('请不要直接通过资源管理器进入MoeTalk\n离线版相关进入教程请点击【确定】或【取消】访问'))
-	{
-		window.location.replace('https://tieba.baidu.com/p/8551808608')
-	}
-	else
-	{
-		window.location.replace('https://tieba.baidu.com/p/8440629156')
-	}
+	alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1】')
+	href = window.location.href.replace('index.html','')
 }
 $.ajax({
 	url: './version.json',
@@ -32,27 +26,6 @@ $.ajax({
 					length=length+1
 					if(keys.length === length)
 					{
-						if(navigator.language.indexOf('ja') > -1)
-						{
-							if(confirm("(このオプションは更新ごとに通知されます)\n言語をブラウザのデフォルト言語に変更しますか?"))
-							{
-								localStorage['mt-lang'] = 'jp'
-							}
-						}
-						if(navigator.language.indexOf('en') > -1)
-						{
-							if(confirm("(This option will only be alerted with each update)\nDo you want to change the language to the browser's default language?"))
-							{
-								localStorage['mt-lang'] = 'en'
-							}
-						}
-						if(navigator.language.indexOf('ko') > -1)
-						{
-							if(confirm("(이 옵션은 업데이트할 때마다 알립니다.)\n 언어를 브라우저의 기본 언어로 변경하시겠습니까?"))
-							{
-								localStorage['mt-lang'] = 'kr'
-							}
-						}
 						localStorage['mt-version'] = version
 						localStorage['mt-rand'] = rand
 						location.reload(true)
@@ -124,7 +97,7 @@ function loadhead(id,img)
 	if(mt_characters[id])
 	{
 		img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D')
-		return href+'Images/Char/'+mt_characters[id].school+'/'+mt_characters[id].club+'/'+id+'/'+img+'.webp';
+		return `${href}Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`;
 	}
 	//自定义头像
 	if(JSON.parse(localStorage['mt-head'])[id])
@@ -135,10 +108,10 @@ function loadhead(id,img)
 	{
 		return JSON.parse(sessionStorage['mt-head'])[id]
 	}
-	if(closure_char[id])return `Images/ClosureTalk/ba/characters/${img}.webp`;//closure头像
-	if(mollu_char[id])return href+'Images/MolluChar/'+id+'.'+img+'.webp';//旧版头像
-	if(id === 0)return href+"Images/Ui/you.webp";//主角
-	return href+"Images/Ui/error.webp";//默认头像
+	if(closure_char[id])return `${href}Images/ClosureTalk/ba/characters/${img}.webp`;//closure头像
+	if(mollu_char[id])return `${href}Images/MolluChar/${id}.${img}.webp`;//旧版头像
+	if(id === 0)return `${href}Images/Ui/you.webp`;//主角
+	return `${href}Images/Ui/error.webp`;//默认头像
 }
 function loadname(id)
 {
@@ -551,11 +524,18 @@ function loaddata(json)//识别存档
 			}
 		})
 	}
+	let length = 0;
+	$.each(custom_char,function(k,v)
+	{
+		length = length+1
+	})
+	console.log(custom_char)
 	if(json['chat'])//ct存档
 	{
 		json[1] = [];
 		json[0]['title'] = 'ClosureTalk存档'
 		json[0]['nickname'] = '存档大小：'+josnsize+'KB'
+		json[0]['date'] = `${length ? length : 0}名自定义角色`
 		json[0]['replyGroup'] = 0
 		json[0]['replyNo'] = 0
 		$.each(json['chat'],function(k,v)
@@ -618,17 +598,9 @@ function loaddata(json)//识别存档
 	}
 	else
 	{
-		sessionStorage['mt-char'] = JSON.stringify(custom_char)
-		sessionStorage['mt-head'] = JSON.stringify(custom_head)
+		sessionStorage['mt-char'] = JSON.stringify({...JSON.parse(sessionStorage['mt-char']),...custom_char});
+		sessionStorage['mt-head'] = JSON.stringify({...JSON.parse(sessionStorage['mt-head']),...custom_head});
 		list()//更新列表
-	}
-
-	if(josnsize+size > 5120)
-	{
-		alert('当前存档数据：'+size+
-			'\n读取存档数据：'+josnsize+'\n'+
-			josnsize+'+'+size+'='+(josnsize+size)+'\n'+
-			(josnsize+size)+'>'+'5120，存档可能无法读取')
 	}
 	if(json[0]['chars'] && json[0]['chars']['selectedList'])charList = JSON.stringify(json[0]['chars'])
 	
@@ -754,6 +726,10 @@ function MoeToClosure()//Moe转Closure
 				img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D')
 				closuretalk['chars'][k]['char_id'] = `custom-MT-${id}-${img}`
 				closuretalk['chars'][k]['img'] = 'uploaded';
+
+				custom_chars[closuretalk['chars'][k]['char_id']] = {}
+				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`
+				custom_chars[closuretalk['chars'][k]['char_id']]['name'] = loadname(id);
 			}
 		}
 		if(id.indexOf('custom-') > -1)//自定义角色
@@ -761,9 +737,6 @@ function MoeToClosure()//Moe转Closure
 			closuretalk['chars'][k]['char_id'] = id;
 			closuretalk['chars'][k]['img'] = 'uploaded';
 		}
-		custom_chars[closuretalk['chars'][k]['char_id']] = {}
-		custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`
-		custom_chars[closuretalk['chars'][k]['char_id']]['name'] = loadname(id);
 	})
 	$.each(JSON.parse(localStorage['mt-char']),function(k,v)
 	{
@@ -776,6 +749,7 @@ function MoeToClosure()//Moe转Closure
 		closuretalk['custom_chars'].push({char_id:k,img:v.img,name:v.name})
 	})
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
+	$$('#downImg').html('')
 	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(closuretalk));//生成专用存档
 }
 function mt_title(moetalk,title,writer)

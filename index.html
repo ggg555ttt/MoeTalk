@@ -14,7 +14,6 @@ function loadjs(url)
 	document.write("<scr"+`ipt src='${url}?${ver}' defer></scr`+"ipt>");
 }
 </script>
-<!-- <script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script> -->
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 		<meta http-equiv="Pragma" content="no-cache">
 		<meta http-equiv="Expires" content="0">
@@ -43,8 +42,10 @@ function loadjs(url)
 		<link rel="shortcut icon" href="./Images/Ui/Favor_Schedule_Deco.webp">
 
 <!-- 样式 --><link rel="stylesheet" href="./MoeScript/Style/style.css" data-n-g="">
-<!-- 函数库 --><script>loadjs('./MoeScript/Function.js')</script>
-<!-- 处理器 --><script>loadjs('./MoeScript/MoeTalk.js')</script>
+		<script>
+			loadjs('./MoeScript/Function.js')//函数库
+			loadjs('./MoeScript/MoeTalk.js')//处理器
+		</script>
 		<script src="./Data/MT-Img.JSON" defer=""></script><!-- 存档图片 -->
 		<script src="./Data/MT-Text.JSON" defer=""></script><!-- 提示文本 -->
 		<script src="./Data/MT-CharFaceInfo.JSON" defer=""></script>

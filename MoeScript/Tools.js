@@ -72,7 +72,7 @@ $('body').on('change',"#loaddatafile",function()
 //更改语言
 $('body').on('click',"#language",function()
 {
-	let lang = prompt("请输入想更改的语言：\nkr(韩语)\njp(日语)\nen(英语)\nzh_cn(简体中文)\nzh_tw(繁体中文)", "zh_cn");
+	let lang = prompt("请输入想更改的语言：\nkr(韩语)\njp(日语)\nen(英语)\nzh_cn(简体中文)\nzh_tw(繁体中文)", localStorage['mt-lang']);
 	if (lang != null)
 	{
 		alert('更改完成，请返回页面!');

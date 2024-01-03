@@ -27,26 +27,18 @@ function mt_height(num)
 	}
 	return length.toFixed();
 }
-function mt_width()
-{
-	if(!num)num = 1.1
-	return ($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num).toFixed();
-}
-if(localStorage['mt-font'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g=''>");//加载字体
 
+if(localStorage['mt-font'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g=''>");//加载字体
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
-$("body").on('keydown',function()
-{
-	size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0))
-	height = mt_height()
-	$('#size').text(height+"\n"+size+"KB");
-	warning();
-})
+$(function(){if($('#readme').text() !== '')$('.vc-switch').hide()});
+
 $("body").on('click',function()
 {
 	size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0))
 	height = mt_height()
 	$('#size').text(height+"\n"+size+"KB");
+	warning();
+
 	if($('.visible').length === 0)
 	{
 		sendChar = false
@@ -65,12 +57,9 @@ $("body").on('click',function()
 		$(".operate_copy").prop('hidden',true)
 	}
 	$('.delsNum').text($(".dels:checked").length)
-	warning();
+	
 })
-$(function()
-{
-	if($('#readme').text() !== '')$('.vc-switch').hide()
-});
+
 
 //标题框
 $(".bIcduz").wait(function()
@@ -89,14 +78,14 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='https://tieba.baidu.com/p/8551808608'}.html'><button class='${class0}'><b style='color:black;'>教</b></button></a><span class='tool'>使用教程</span><br>`);
-	$(".frVjsk").append(`<a href='Setting.html?${version}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
+	$(".frVjsk").append(`<a href='Setting.html?${localStorage['mt-rand']}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
 //使用说明
 $('body').on('click',"#readme",function()
 {
 	console.log('这是开发者的调试工具，点击标题会隐藏控制台按钮\n'+
 		'B站主页 https://space.bilibili.com/13973390\n'+
-		'Gitee项目地址 https://gitee.com/moetalk/MoeTalk\n'+
+		'Gitlab项目地址 https://gitlab.com/ggg555ttt/MoeTalk\n'+
 		'Github项目地址 https://github.com/ggg555ttt/MoeTalk')
 	if($('.vc-switch').css('display') === 'none')
 	{
@@ -205,7 +194,7 @@ $("body").on('change','#custom',function()
 //警告提醒
 $('body').on('click',"#size",function()
 {
-	alert('消息长度最好不要超过16384\n存档体积不得超过5120KB\n此处的长度数值仅为估算，请以生成图片界面的数值为准')
+	alert(`消息长度最好不要超过${maxHeight}\n存档体积不得超过5120KB\n此处的长度数值仅为估算，请以生成图片界面的数值为准`)
 
 });
 //清除冗余文件数据

@@ -994,8 +994,8 @@
 												className: "club",
 												school: "自定义",
 												value: "自定义角色"
-											}),"自定义角色"]
-										}),(0, m.jsx)('li',
+											}),`自定义角色`]//
+										}),`（${(localStorage['mt-head'].length/1024).toFixed(0)}KB）`,(0, m.jsx)('li',
 										{
 											children: [(0, m.jsx)('input',
 											{
@@ -2086,7 +2086,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: [L.Z.down_comment1[g],localStorage['archive'] === 'true' ? '已包含存档' : '不包含存档']
+										children: [L.Z.down_comment1[g],localStorage['archive'] === 'true' ? `已包含${size}KB存档` : '不包含存档']
 									}), (0, m.jsx)("span",
 									{
 										style:
@@ -2109,7 +2109,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: [localStorage.getItem('mt-font') ? '若等待时间较长建议您进入设置页面禁用字体加载' : '设置页面可以开启字体加载','，也可以通过更改生成图片的格式来缩减图片体积']//L.Z.thanks[g]
+										children: '禁用字体加载或更改生成图片的格式或许可以减少生成时间和体积'//L.Z.thanks[g]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -2286,7 +2286,7 @@
 									case 6:
 										o = e.sent, (0, ef.saveAs)(o,`MoeTalk_${t.title}_${mt_height()}.png`), blobToBase64(o,function(base64)
 										{
-											$$('#downImg').attr('src','data:image/png;base64,'+base64)
+											$$('#downImg').html(`<h1>${L.Z.image_download[d]}</h1><h1>图片后缀可以改为RAR打开</h1><img src='data:image/png;base64,${base64}'>`)
 										});
 									case 9:
 									case "end":
@@ -2522,16 +2522,7 @@
 												}
 											})
 										})]
-									}), (0, m.jsx)("span",
-									{
-										style:
-										{
-											textAlign: "center",
-											fontSize: "1rem",
-											marginTop: "1rem"
-										},
-										children: L.Z.image_download[d]
-									}), (0, m.jsx)("img",
+									}), (0, m.jsx)("div",
 									{
 										id:'downImg'
 									}), (0, m.jsxs)(ea.$_,
@@ -5132,29 +5123,99 @@
 							{
 								display: n.length > 0 ? "none" : "flex"
 							},
-							children: (0, m.jsx)("span",
+							children: (0, m.jsx)(c.Bx,
 							{
+								className: "selected medium",
 								style:
 								{
+									width: 'auto',
+									height: 'auto',
 									fontSize: "1.1rem"
 								},
-								children: L.Z.select_char[e]
+								children: L.Z.select_char[e],
+								onClick: function()
+								{
+									$$('.jotOXZ')[2].click()
+								}
 							})
-						}),
-						//*
-						(0, m.jsx)(ns,
+						}), (0, m.jsx)(ns,
 						{
 							style:
 							{
 								display: n.length > 0 ? "none" : "flex"
 							},
-							children: (0, m.jsx)("span",
+							children: (0, m.jsx)(c.Bx,
 							{
+								className: "selected medium",
 								style:
 								{
+									width: 'auto',
+									height: 'auto',
 									fontSize: "1.1rem"
 								},
-								children: '设置页面可以更改语言'
+								children: '开启或取消字体加载',
+								onClick: function()
+								{
+									if(confirm(localStorage['mt-font'] ? '已加载字体\n点击“确认”取消加载字体' : '未加载字体\n点击“确认”加载字体'))
+									{
+										if(localStorage['mt-font'])
+										{
+											localStorage.removeItem('mt-font');
+										}
+										else
+										{
+											localStorage['mt-font'] = true
+										}
+										location.reload(true)
+									}
+								}
+							})
+						}), (0, m.jsx)(ns,
+						{
+							style:
+							{
+								display: n.length > 0 ? "none" : "flex"
+							},
+							children: (0, m.jsx)(c.Bx,
+							{
+								className: "selected medium",
+								style:
+								{
+									width: 'auto',
+									height: 'auto',
+									fontSize: "1.1rem"
+								},
+								children: 'Click change language',
+								onClick: function()
+								{
+									let lang = prompt("Please enter the language\nzh_cn（简体中文）\nzh_tw（繁體中文）\njp（日本語）\nen（English）\nkr（한국어）",localStorage['mt-lang']);
+									if (lang != null)
+									{
+										localStorage['mt-lang'] = lang;
+										location.reload(true)
+									}
+								}
+							})
+						}), (0, m.jsx)(ns,
+						{
+							style:
+							{
+								display: n.length > 0 ? "none" : "flex"
+							},
+							children: (0, m.jsx)(c.Bx,
+							{
+								className: "selected medium",
+								style:
+								{
+									width: 'auto',
+									height: 'auto',
+									fontSize: "1.1rem"
+								},
+								children: '点击左下照相机图标可以隐藏或显示工具',
+								onClick: function()
+								{
+									$$('#editTools').click()
+								}
 							})
 						}), (0, m.jsx)(ns,
 						{
@@ -5182,25 +5243,9 @@
 								{
 									fontSize: "1.1rem"
 								},
-								children: '点击左下照相机图标可以隐藏或显示工具'
-							})
-						}), (0, m.jsx)(ns,
-						{
-							style:
-							{
-								display: n.length > 0 ? "none" : "flex"
-							},
-							children: (0, m.jsx)("span",
-							{
-								style:
-								{
-									fontSize: "1.1rem"
-								},
 								children: `图片长度超过${maxHeight}会自动分割图片`
 							})
-						}),
-						//*
-						(0, m.jsx)(eA,
+						}), (0, m.jsx)(eA,
 						{
 							scrollRef: t
 						})]

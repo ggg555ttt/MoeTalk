@@ -10578,13 +10578,7 @@
 				 * See the License for the specific language governing permissions and
 				 * limitations under the License.
 				 */
-				function ez(
-				{
-					projectId: e
-				})
-				{
-					return `https://firebaseinstallations.googleapis.com/v1/projects/${e}/installations`
-				}
+				function ez(){}
 
 				function eA(e)
 				{
@@ -10641,51 +10635,7 @@
 				 * See the License for the specific language governing permissions and
 				 * limitations under the License.
 				 */
-				async function ej(
-				{
-					appConfig: e,
-					heartbeatServiceProvider: t
-				},
-				{
-					fid: n
-				})
-				{
-					let r = ez(e),
-						i = eC(e),
-						a = t.getImmediate(
-						{
-							optional: !0
-						});
-					if(a)
-					{
-						let e = await a.getHeartbeatsHeader();
-						e && i.append("x-firebase-client", e)
-					}
-					let o = {
-							fid: n,
-							authVersion: ew,
-							appId: e.appId,
-							sdkVersion: ey
-						},
-						s = {
-							method: "POST",
-							headers: i,
-							body: JSON.stringify(o)
-						},
-						u = await eO(() => fetch(r, s));
-					if(u.ok)
-					{
-						let e = await u.json(),
-							t = {
-								fid: e.fid || n,
-								registrationStatus: 2,
-								refreshToken: e.refreshToken,
-								authToken: eA(e.authToken)
-							};
-						return t
-					}
-					throw await ex("Create Installation", u)
-				}
+				async function ej(){}
 				/**
 				 * @license
 				 * Copyright 2019 Google LLC
@@ -10802,15 +10752,7 @@
 						}
 					})), eL
 				}
-				async function eF(e, t)
-				{
-					let n = eI(e),
-						r = await eW(),
-						i = r.transaction(eM, "readwrite"),
-						a = i.objectStore(eM),
-						o = await a.get(n);
-					return await a.put(t, n), await i.done, o && o.fid === t.fid || eN(e, t.fid), t
-				}
+				async function eF(){}
 				async function eV(e)
 				{
 					let t = eI(e),
