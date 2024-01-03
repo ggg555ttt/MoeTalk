@@ -235,7 +235,7 @@ function blobToArrayBuffer(file) {
 }
 $('body').on('click',"#mt-image",function()
 {
-	let image = prompt("请输入生成图片的格式：（不要乱输入）\npng（默认，质量最好体积最大）\njpeg（体积小，注意不是jpg）\nwebp（体积更小，但超长图片易出错）", localStorage['mt-image'].split('/')[1]);
+	let image = prompt("请输入生成图片的格式：（不要乱输入）\npng（默认，质量最好体积最大）\njpeg（体积小，注意不是jpg）\nwebp（体积更小，不推荐火狐）", localStorage['mt-image'].split('/')[1]);
 	if(image != null)
 	{
 		alert('更改完成，如果图片生成错误请尝试改为其它参数');

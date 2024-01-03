@@ -3,7 +3,7 @@ var version = '';
 if(localStorage['mt-version'])version = localStorage['mt-version']
 if(window.location.href.indexOf('file:///') === 0)
 {
-	alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1】')
+	alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1(有出错可能)】')
 	href = window.location.href.replace('index.html','')
 }
 $.ajax({
