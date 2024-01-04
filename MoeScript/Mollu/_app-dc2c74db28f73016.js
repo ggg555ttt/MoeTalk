@@ -10947,73 +10947,6 @@
 				 * See the License for the specific language governing permissions and
 				 * limitations under the License.
 				 */
-				async function eq(
-				{
-					appConfig: e,
-					heartbeatServiceProvider: t
-				}, n)
-				{
-					let r = function(e,
-						{
-							fid: t
-						})
-						{
-							return `${ez(e)}/${t}/authTokens:generate`
-						}(e, n),
-						i = function(e,
-						{
-							refreshToken: t
-						})
-						{
-							let n = eC(e);
-							return n.append("Authorization", `${ew} ${t}`), n
-						}(e, n),
-						a = t.getImmediate(
-						{
-							optional: !0
-						});
-					if(a)
-					{
-						let e = await a.getHeartbeatsHeader();
-						e && i.append("x-firebase-client", e)
-					}
-					let o = {
-							installation:
-							{
-								sdkVersion: ey,
-								appId: e.appId
-							}
-						},
-						s = {
-							method: "POST",
-							headers: i,
-							body: JSON.stringify(o)
-						},
-						u = await eO(() => fetch(r, s));
-					if(u.ok)
-					{
-						let e = await u.json(),
-							t = eA(e);
-						return t
-					}
-					throw await ex("Generate Auth Token", u)
-				}
-				/**
-				 * @license
-				 * Copyright 2019 Google LLC
-				 *
-				 * Licensed under the Apache License, Version 2.0 (the "License");
-				 * you may not use this file except in compliance with the License.
-				 * You may obtain a copy of the License at
-				 *
-				 *   http://www.apache.org/licenses/LICENSE-2.0
-				 *
-				 * Unless required by applicable law or agreed to in writing, software
-				 * distributed under the License is distributed on an "AS IS" BASIS,
-				 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-				 * See the License for the specific language governing permissions and
-				 * limitations under the License.
-				 */
 				async function eG(e, t = !1)
 				{
 					let n;
@@ -11358,72 +11291,6 @@
 							delete this.throttleMetadata[e]
 						}
 					};
-				async function ti(e)
-				{
-					var t;
-					let
-					{
-						appId: n,
-						apiKey: r
-					} = e, i = {
-						method: "GET",
-						headers: new Headers(
-						{
-							Accept: "application/json",
-							"x-goog-api-key": r
-						})
-					}, a = "/", o = await fetch(a, i);//#a = "https://firebase.googleapis.com/v1alpha/projects/-/apps/{app-id}/webConfig".replace("{app-id}", n), o = await fetch(a, i);
-					if(200 !== o.status && 304 !== o.status)
-					{
-						let e = "";
-						try
-						{
-							let n = await o.json();
-							(null === (t = n.error) || void 0 === t ? void 0 : t.message) && (e = n.error.message)
-						}
-						catch (e)
-						{}
-						throw tn.create("config-fetch-failed",
-						{
-							httpStatus: o.status,
-							responseMessage: e
-						})
-					}
-					return o.json()
-				}
-				async function ta(e, t = tr, n)
-				{
-					let
-					{
-						appId: r,
-						apiKey: i,
-						measurementId: a
-					} = e.options;
-					if(!r) throw tn.create("no-app-id");
-					if(!i)
-					{
-						if(a) return {
-							measurementId: a,
-							appId: r
-						};
-						throw tn.create("no-api-key")
-					}
-					let o = t.getThrottleMetadata(r) ||
-						{
-							backoffCount: 0,
-							throttleEndTimeMillis: Date.now()
-						},
-						s = new ts;
-					return setTimeout(async () =>
-					{
-						s.abort()
-					}, void 0 !== n ? n : 6e4), to(
-					{
-						appId: r,
-						apiKey: i,
-						measurementId: a
-					}, o, s, t)
-				}
 				async function to(e,
 				{
 					throttleEndTimeMillis: t,
@@ -11556,31 +11423,6 @@
 					}
 					return !0
 				}
-				async function tl(e, t, n, a, o, s, u)
-				{
-					var c;
-					let l = ta(e);
-					l.then(t =>
-					{
-						n[t.measurementId] = t.appId, e.options.measurementId && t.measurementId !== e.options.measurementId && e7.warn(`The measurement ID in the local Firebase config (${e.options.measurementId}) does not match the measurement ID fetched from the server (${t.measurementId}). To ensure analytics events are always sent to the correct Analytics property, update the measurement ID field in the local config or remove it from the local config.`)
-					}).catch(e => e7.error(e)), t.push(l);
-					let f = tc().then(e => e ? a.getId() : void 0),
-						[h, d] = await Promise.all([l, f]);
-					! function(e)
-					{
-						let t = window.document.getElementsByTagName("script");
-						for(let n of Object.values(t))
-							if(n.src && n.src.includes(e8) && n.src.includes(e)) return n;
-						return null
-					}(s) && function(e, t)
-					{
-						let n = document.createElement("script");
-						n.src = `${e8}?l=${e}&id=${t}`, n.async = !0, document.head.appendChild(n)
-					}(s, h.measurementId), i && (o("consent", "default", i), i = void 0), o("js", new Date);
-					let p = null !== (c = null == u ? void 0 : u.config) && void 0 !== c ? c :
-					{};
-					return p.origin = "firebase", p.update = !0, null != d && (p.firebase_id = d), o("config", h.measurementId, p), r && (o("set", r), r = void 0), h.measurementId
-				}
 				/**
 				 * @license
 				 * Copyright 2019 Google LLC
@@ -11677,7 +11519,7 @@
 							});
 							o = n, a = r, tg = !0
 						}
-						th[r] = tl(e, td, tp, t, a, tm, n);
+						//$th[r] = tl(e, td, tp, t, a, tm, n);
 						let u = new tf(e);
 						return u
 					}(n, r, t)
@@ -11733,342 +11575,45 @@
 						return r
 					}(e)
 				}(tw);
-				var tk = n(6835),
-					tS = function()
+				//var tk = n(6835),
+				var tP = function()
+				{
+					var e = (0, k.C)(function(e)
 					{
-						var e = (0, ee.vC)(
-							{
-								fixedCacheKey: "account"
-							}),
-							t = (0, tk.Z)(e, 2),
-							n = t[0],
-							r = t[1],
-							i = (0, k.T)();
-						(0, g.useEffect)(function()
-						{
-							(0, ty.v0)().onAuthStateChanged(function(e)
-							{
-								var t;
-								e && (null === (t = r.data) || void 0 === t ? void 0 : t.UID) !== e.uid && n(
-								{
-									UID: e.uid || "",
-									EMAIL: e.email || "",
-									NICKNAME: "m_" + new Date().getTime().toString(36),
-									LOCAL_NO: localStorage.getItem("local_no") || ""
-								})
-							})
-						}, [n, r.data]), (0, g.useEffect)(function()
-						{
-							var e = "Mollu",
-								t = localStorage.getItem("nickname");
-							null !== t ? e = t : localStorage.setItem("nickname", e), i((0, w.QG)(e))
-						}, [i]), (0, g.useEffect)(function()
-						{
-							var e = "";
-							localStorage.getItem("local_no") ? e = localStorage.getItem("local_no") || Math.random().toString(36).slice(2) + new Date().getTime().toString(36) : (e = Math.random().toString(36).slice(2) + new Date().getTime().toString(36), localStorage.setItem("local_no", e));
-							var t = function()
-							{
-								localStorage.getItem("local_no") || localStorage.setItem("local_no", e)
-							};
-							return t(), window.addEventListener("storage", t),
-								function()
-								{
-									return window.removeEventListener("storage", t)
-								}
-						}, [])
-					},
-					tz = n(4701),
-					tA = n(4685),
-					tx = function()
+						return e.global.isLoading
+					});
+					return (0, O.jsx)(tI,
 					{
-						var e = (0, k.T)(),
-							t = (0, k.C)(function(e)
-							{
-								return e.alert
-							}),
-							n = (0, k.C)(function(e)
-							{
-								return e.global.lang
-							}),
-							r = function()
-							{
-								e((0, _.Y2)(
-								{
-									isAlert: !1,
-									ment: "",
-									title: ""
-								}))
-							};
-						return (0, O.jsx)(O.Fragment,
+						style:
 						{
-							children: (0, O.jsx)(tA.Xf,
-							{
-								className: t.isAlert ? "visible medium" : "medium",
-								onDoubleClick: function()
-								{
-									r()
-								},
-								children: (0, O.jsxs)(tA.F0,
-								{
-									onDoubleClick: function(e)
-									{
-										e.stopPropagation()
-									},
-									children: [(0, O.jsxs)(tA.h4,
-									{
-										children: [(0, O.jsx)(tA.Dx,
-										{
-											className: "bold",
-											children: t.title
-										}), (0, O.jsx)(tA.ec,
-										{
-											onClick: function()
-											{
-												r()
-											},
-											children: (0, O.jsx)(d.j4,
-											{})
-										})]
-									}), (0, O.jsxs)(tA.$0,
-									{
-										children: [(0, O.jsx)("span",
-										{
-											className: "medium",
-											children: t.ment
-										}), (0, O.jsx)(tA.$_,
-										{
-											children: (0, O.jsx)(tA.AZ,
-											{
-												className: "bold",
-												onClick: function()
-												{
-													r()
-												},
-												children: tz.Z.confirm[n]
-											})
-										})]
-									})]
-								})
-							})
+							display: e ? "block" : "none"
+						},
+						children: (0, O.jsx)(tT,
+						{
+							children: (0, O.jsx)(tN,
+							{})
 						})
-					},
-					tC = n(29),
-					tO = n(7794),
-					tj = n.n(tO),
-					tE = function()
-					{
-						var e, t = (0, k.C)(function(e)
-							{
-								return e.global.lang
-							}),
-							n = (0, k.C)(function(e)
-							{
-								return e.global.isLogin
-							}),
-							r = (0, k.T)(),
-							i = (0, g.useState)(!1),
-							a = i[0],
-							o = i[1],
-							s = (0, ee.vC)(
-							{
-								fixedCacheKey: "account"
-							}),
-							u = (0, tk.Z)(s, 1)[0],
-							c = (0, ee.OE)(),
-							l = (0, tk.Z)(c, 1)[0],
-							f = (e = (0, tC.Z)(tj().mark(function e()
-							{
-								var n, i, o;
-								return tj().wrap(function(e)
-								{
-									for(;;) switch (e.prev = e.next)
-									{
-										case 0:
-											return e.prev = 0, n = (0, ty.v0)(), e.next = 4, (0, ty.Fb)(n, a ? ty.a$ : ty.aT);
-										case 4:
-											return i = new ty.hJ, e.next = 7, (0, ty.rh)(n, i);
-										case 7:
-											if(!(o = e.sent).user)
-											{
-												e.next = 20;
-												break
-											}
-											return e.next = 11, u(
-											{
-												UID: o.user.uid || "",
-												EMAIL: o.user.email || "",
-												NICKNAME: "m_" + new Date().getTime().toString(36),
-												LOCAL_NO: localStorage.getItem("local_no") || ""
-											});
-										case 11:
-											if(!("error" in e.sent))
-											{
-												e.next = 17;
-												break
-											}
-											return e.next = 15, l(
-											{
-												UID: o.user.uid || "",
-												EMAIL: o.user.email || "",
-												NICKNAME: "m_" + new Date().getTime().toString(36),
-												LOCAL_NO: localStorage.getItem("local_no") || ""
-											});
-										case 15:
-											"data" in e.sent ? window.location.reload() : r((0, _.Y2)(
-											{
-												isAlert: !0,
-												title: tz.Z.error[t],
-												ment: tz.Z.error_ment[t]
-											}));
-										case 17:
-											r((0, w.Aj)(!1)), e.next = 21;
-											break;
-										case 20:
-											r((0, _.Y2)(
-											{
-												isAlert: !0,
-												title: tz.Z.error[t],
-												ment: tz.Z.error_ment[t]
-											}));
-										case 21:
-											return e.abrupt("return");
-										case 24:
-											return e.prev = 24, e.t0 = e.catch(0), r((0, _.Y2)(
-											{
-												isAlert: !0,
-												title: tz.Z.error[t],
-												ment: tz.Z.error_ment[t]
-											})), e.abrupt("return");
-										case 28:
-										case "end":
-											return e.stop()
-									}
-								}, e, null, [
-									[0, 24]
-								])
-							})), function()
-							{
-								return e.apply(this, arguments)
-							});
-						return (0, O.jsx)(tA.Xf,
-						{
-							className: n ? "visible medium" : "medium",
-							onDoubleClick: function()
-							{
-								r((0, w.Aj)(!1))
-							},
-							children: (0, O.jsxs)(tA.F0,
-							{
-								onDoubleClick: function(e)
-								{
-									return e.stopPropagation(), !1
-								},
-								children: [(0, O.jsxs)(tA.h4,
-								{
-									children: [(0, O.jsx)(tA.Dx,
-									{
-										className: "bold",
-										children: tz.Z.login[t]
-									}), (0, O.jsx)(tA.ec,
-									{
-										onClick: function()
-										{
-											r((0, w.Aj)(!1))
-										},
-										children: (0, O.jsx)(d.j4,
-										{})
-									})]
-								}), (0, O.jsxs)(tA.$0,
-								{
-									children: [(0, O.jsxs)("span",
-									{
-										style:
-										{
-											fontSize: "1rem",
-											marginBottom: "1rem",
-											textAlign: "center"
-										},
-										children: ["※", tz.Z.login_comment1[t]]
-									}), (0, O.jsxs)(d.Jg,
-									{
-										htmlFor: "autoLogin",
-										style:
-										{
-											fontSize: "0.9rem",
-											marginTop: "0.5rem"
-										},
-										children: [(0, O.jsx)("input",
-										{
-											type: "checkbox",
-											id: "autoLogin",
-											onChange: function(e)
-											{
-												o(e.target.checked)
-											}
-										}), tz.Z.auto[t] + " " + tz.Z.login[t]]
-									}), (0, O.jsxs)(tA.$_,
-									{
-										children: [(0, O.jsx)(tA.Lw,
-										{
-											className: "bold",
-											onClick: function()
-											{
-												r((0, w.Aj)(!1))
-											},
-											children: tz.Z.cancel[t]
-										}), (0, O.jsx)(tA.AZ,
-										{
-											className: "bold",
-											onClick: function()
-											{
-												f()
-											},
-											children: tz.Z.confirm[t]
-										})]
-									})]
-								})]
-							})
-						})
-					},
-					tP = function()
-					{
-						var e = (0, k.C)(function(e)
-						{
-							return e.global.isLoading
-						});
-						return (0, O.jsx)(tI,
-						{
-							style:
-							{
-								display: e ? "block" : "none"
-							},
-							children: (0, O.jsx)(tT,
-							{
-								children: (0, O.jsx)(tN,
-								{})
-							})
-						})
-					},
-					tI = h.ZP.div.withConfig(
-					{
-						displayName: "Loading__MainLoading",
-						componentId: "sc-cfft3t-0"
-					})(["position:absolute;width:100%;height:100%;z-index:9999;background-color:rgb(139,187,233);transition:opacity 0.5s ease-in-out;margin:auto;background:rgb(0,0,0,0.4);"]),
-					tT = h.ZP.div.withConfig(
-					{
-						displayName: "Loading__Flex",
-						componentId: "sc-cfft3t-1"
-					})(["", ";"], function(e)
-					{
-						return e.theme.common.flexBox(
-						{})
-					}),
-					tN = h.ZP.span.withConfig(
-					{
-						displayName: "Loading__Loader",
-						componentId: "sc-cfft3t-2"
-					})(["margin:auto;height:4rem;width:4rem;border:0.4rem solid white;border-radius:100%;border-right-color:rgb(139,187,233);border-top-color:rgb(139,187,233);animation:spin 800ms infinite linear;@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(359deg);}}"]);
-
+					})
+				},
+				tI = h.ZP.div.withConfig(
+				{
+					displayName: "Loading__MainLoading",
+					componentId: "sc-cfft3t-0"
+				})(["position:absolute;width:100%;height:100%;z-index:9999;background-color:rgb(139,187,233);transition:opacity 0.5s ease-in-out;margin:auto;background:rgb(0,0,0,0.4);"]),
+				tT = h.ZP.div.withConfig(
+				{
+					displayName: "Loading__Flex",
+					componentId: "sc-cfft3t-1"
+				})(["", ";"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{})
+				}),
+				tN = h.ZP.span.withConfig(
+				{
+					displayName: "Loading__Loader",
+					componentId: "sc-cfft3t-2"
+				})(["margin:auto;height:4rem;width:4rem;border:0.4rem solid white;border-radius:100%;border-right-color:rgb(139,187,233);border-top-color:rgb(139,187,233);animation:spin 800ms infinite linear;@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(359deg);}}"]);
 				function tB(e, t)
 				{
 					var n = Object.keys(e);
@@ -12326,7 +11871,7 @@
 					},
 					tL = function(e)
 					{
-						el(), ef(), tS(), tM();
+						el(), ef()//$, tS(), tM();
 						var t = (0, k.C)(function(e)
 							{
 								return e.global.lang
@@ -12337,20 +11882,18 @@
 							a = r[1];
 						return (0, g.useEffect)(function()
 						{
-							setTimeout(function()
-							{
-								a(!1)//#, alert("MolluTalk는 금일 자정이후 서비스 종료됩니다.\n 그동안 이용해주셔서 감사했습니다.\n MolluTalkは本日午前0時以降にサービス終了となります.\n これまでご利用いただきありがとうございました.\nMoluTalk will be closed after midnight today.\nThank you for using us.")
-							}, 300)
+							a(!1)
 						}, []), (0, O.jsxs)(tW,
 						{
 							children: [(0, O.jsxs)(tF,
 							{
 								className: n,
 								lang: (0, z.Vy)(t),
-								children: [e.children, (0, O.jsx)(tx,
-								{}), (0, O.jsx)(tE,
-								{}), (0, O.jsx)(tP,
-								{})]
+								children: [e.children,(0, O.jsx)(tP,{})]
+								//$ [e.children, (0, O.jsx)(tx,
+								// {}), (0, O.jsx)(tE,
+								// {}), (0, O.jsx)(tP,
+								// {})]
 							}), (0, O.jsx)(tV,
 							{
 								style:
@@ -12515,7 +12058,7 @@
 					{
 						displayName: "_app__Wrapper",
 						componentId: "sc-xuvrnm-1"
-					})(["", " border-radius:0 0 1rem 1rem;overflow:hidden;max-width:1500px;margin:auto;@media screen and (max-width:1500px){border-radius:0;}"], function(e)
+					})(["", " border-radius:0 0 1rem 1rem;overflow:auto;max-width:1500px;margin:auto;@media screen and (max-width:1500px){border-radius:0;}"], function(e)
 					{
 						return e.theme.common.flexBox(
 						{

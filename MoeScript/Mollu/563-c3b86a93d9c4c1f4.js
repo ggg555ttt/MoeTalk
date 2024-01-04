@@ -26,7 +26,7 @@
 					{}
 				}, []), (0, a.jsxs)(a.Fragment,
 				{
-					children: [(0, a.jsx)("ins",
+					children: (0, a.jsx)("ins",
 					{
 						className: "adsbygoogle",
 						style:
@@ -45,22 +45,7 @@
 						"data-ad-format": e.format,
 						"data-full-width-responsive": e.responsive,
 						"data-ad-layout-key": e.layoutKey
-					}), (0, a.jsx)("div",
-					{
-						style:
-						{
-							width: e.width,
-							height: e.height,
-							position: "absolute",
-							backgroundColor: "rgb(224, 226, 228)",
-							overflowX: "auto",
-							overflowY: "hidden",
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center"
-						},
-						children: o.Z.display_ads[t]
-					})]
+					})
 				})
 			}
 		},

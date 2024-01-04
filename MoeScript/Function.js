@@ -529,7 +529,7 @@ function loaddata(json)//识别存档
 	{
 		length = length+1
 	})
-	console.log(custom_char)
+	//console.log(custom_char)
 	if(json['chat'])//ct存档
 	{
 		json[1] = [];

@@ -428,7 +428,7 @@
 									icon: ico.EyR
 								})
 							})]
-						}), (0, m.jsx)(g,
+						}), w.selectedList.length > 0 ? (0, m.jsx)(g,
 						{
 							style:
 							{
@@ -470,6 +470,13 @@
 									})
 								})
 							})
+						}) : (0, m.jsx)("span",
+						{
+							style:
+							{
+								fontSize: '1.5rem'
+							},
+							children:L.Z.select_char[lang]+'<'
 						}), (0, m.jsxs)(g,
 						{
 							children: [(0, m.jsx)(j,
@@ -607,6 +614,27 @@
 									onClick: function()
 									{
 										l(e)
+										selectedList = 'yes'
+										let select_char = JSON.parse(localStorage['mt-selectedList'])
+										let selected = select_char.selectedList.filter(function(t)
+										{
+											return n.no === t.no && e === t.index
+										})
+										if(selected.length === 0)
+										{
+											select_char.selected.no = 0
+											select_char.selected.index = 1
+										}
+										else
+										{
+											select_char.selected.no = n.no
+											select_char.selected.index = e
+											setTimeout(function()
+											{
+												$$('.fzoymd.selected')[0].scrollIntoView(!1)
+											}, 1)
+										}
+										localStorage['mt-selectedList'] = JSON.stringify(select_char)
 									},
 									className: 1 === r.filter(function(t)
 									{
@@ -2109,7 +2137,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: '禁用字体加载或更改生成图片的格式或许可以减少生成时间和体积'//L.Z.thanks[g]
+										children: '禁用字体加载或更改生成图片的格式可以减少生成图片的时间和体积'//L.Z.thanks[g]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -3404,6 +3432,10 @@
 										},
 										children: (0, m.jsx)(c.xL,
 										{
+											style:
+											{
+												color:'rgb(139, 187, 233)'
+											},
 											icon: ico.FKd
 										})
 									})
@@ -3489,6 +3521,7 @@
 										height: "2.2rem"
 									},
 									title: "羁绊",
+									disabled: s.no === 0,
 									onClick: function()
 									{
 										click('#tool-heart')
@@ -3524,6 +3557,7 @@
 										width: "2.2rem",
 										height: "2.2rem"
 									},
+									disabled: o.length < 1,
 									onClick: function()
 									{
 										click('#tool-image')
@@ -4038,7 +4072,7 @@
 											k()
 										}
 									},
-									children: t.file ? `图片体积：${parseInt((t.file.length/1024).toFixed(0))}KB` : '无图片文件，可以在下方输入图片链接'
+									children: t.file ? `图片体积：${parseInt((t.file.length/1024).toFixed(0))}KB` : ''
 								}), (0, m.jsx)("input",
 								{
 									type: "file",
@@ -4081,7 +4115,7 @@
 													children: (0, m.jsx)('div',
 													{
 														className:"edit_3_box3_2_1",
-														children: L.Z.input_comment[f]
+														children: a === 'image' ? '可以输入图片链接' : L.Z.input_comment[f]
 													})
 												})]
 											})
@@ -5132,59 +5166,6 @@
 									height: 'auto',
 									fontSize: "1.1rem"
 								},
-								children: L.Z.select_char[e],
-								onClick: function()
-								{
-									$$('.jotOXZ')[2].click()
-								}
-							})
-						}), (0, m.jsx)(ns,
-						{
-							style:
-							{
-								display: n.length > 0 ? "none" : "flex"
-							},
-							children: (0, m.jsx)(c.Bx,
-							{
-								className: "selected medium",
-								style:
-								{
-									width: 'auto',
-									height: 'auto',
-									fontSize: "1.1rem"
-								},
-								children: '开启或取消字体加载',
-								onClick: function()
-								{
-									if(confirm(localStorage['mt-font'] ? '已加载字体\n点击“确认”取消加载字体' : '未加载字体\n点击“确认”加载字体'))
-									{
-										if(localStorage['mt-font'])
-										{
-											localStorage.removeItem('mt-font');
-										}
-										else
-										{
-											localStorage['mt-font'] = true
-										}
-										location.reload(true)
-									}
-								}
-							})
-						}), (0, m.jsx)(ns,
-						{
-							style:
-							{
-								display: n.length > 0 ? "none" : "flex"
-							},
-							children: (0, m.jsx)(c.Bx,
-							{
-								className: "selected medium",
-								style:
-								{
-									width: 'auto',
-									height: 'auto',
-									fontSize: "1.1rem"
-								},
 								children: 'Click change language',
 								onClick: function()
 								{
@@ -5211,25 +5192,22 @@
 									height: 'auto',
 									fontSize: "1.1rem"
 								},
-								children: '点击左下照相机图标可以隐藏或显示工具',
+								children: localStorage['mt-font'] ? '已开启字体加载，点击可取消' : '已取消字体加载，点击可开启',
 								onClick: function()
 								{
-									$$('#editTools').click()
+									if(confirm(localStorage['mt-font'] ? '已加载字体\n点击“确认”取消加载字体' : '未加载字体\n点击“确认”加载字体'))
+									{
+										if(localStorage['mt-font'])
+										{
+											localStorage.removeItem('mt-font');
+										}
+										else
+										{
+											localStorage['mt-font'] = true
+										}
+										location.reload(true)
+									}
 								}
-							})
-						}), (0, m.jsx)(ns,
-						{
-							style:
-							{
-								display: n.length > 0 ? "none" : "flex"
-							},
-							children: (0, m.jsx)("span",
-							{
-								style:
-								{
-									fontSize: "1.1rem"
-								},
-								children: '右侧勾选消息后可以在其上方发送新消息'
 							})
 						}), (0, m.jsx)(ns,
 						{
@@ -5245,6 +5223,144 @@
 								},
 								children: `图片长度超过${maxHeight}会自动分割图片`
 							})
+						}), (0, m.jsx)(ns,
+						{
+							style:
+							{
+								display: n.length > 0 ? "none" : "flex"
+							},
+							children: [(0, m.jsx)("span",
+							{
+								style:
+								{
+									fontSize: "1.1rem"
+								},
+								children: [(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										color:'rgb(45, 70, 100)'
+									},
+									icon: ico.QY_
+								}),'隐藏工具',(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										color:'rgb(45, 70, 100)'
+									},
+									icon: ei.VmB
+								}),'上传图片']
+							}), (0, m.jsx)("span",
+							{
+								style:
+								{
+									fontSize: "1.1rem"
+								},
+								children: [(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										color:'rgb(45, 70, 100)'
+									},
+									icon: ei.pkM
+								}),'图片表情',(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										color:'rgb(139, 187, 233)'
+									},
+									icon: ico.FKd
+								}),'差分表情',(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										color:'rgb(45, 70, 100)'
+									},
+									icon: ico.FQ0
+								}),'发送消息']
+							}), (0, m.jsx)("span",
+							{
+								style:
+								{
+									fontSize: "1.1rem"
+								},
+								children: [(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										color:'rgb(45, 70, 100)'
+									},
+									icon: ico.Lh7
+								}),'选择肢',(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										color:'rgb(45, 70, 100)'
+									},
+									icon: ico.DBf
+								}),'旁白',(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										color:'rgb(45, 70, 100)'
+									},
+									icon: ico.m6i
+								}),'羁绊事件']
+							}), (0, m.jsx)("span",
+							{
+								style:
+								{
+									fontSize: "1.1rem"
+								},
+								children: [(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										color:'rgb(45, 70, 100)'
+									},
+									icon: ico.QY_
+								}),'传输存档',(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										color:'rgb(45, 70, 100)'
+									},
+									icon: ico.wf8
+								}),'生成图片']
+							}), (0, m.jsx)("span",
+							{
+								style:
+								{
+									fontSize: "1.1rem"
+								},
+								children: [(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										color:'rgb(45, 70, 100)'
+									},
+									icon: ico.FKd
+								}),'添加角色',(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										color:'rgb(45, 70, 100)'
+									},
+									icon: ico.k9h
+								}),'移除角色']
+							})]
 						}), (0, m.jsx)(eA,
 						{
 							scrollRef: t

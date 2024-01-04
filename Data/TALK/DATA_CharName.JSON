@@ -2016,5 +2016,53 @@
         "en": "Nomasa Rei",
         "kr": "노마사 레이",
         "pinyin": "yezhengling"
+    },
+    "凯瑟TypeC": {
+        "zh_cn": "",
+        "zh_tw": "",
+        "jp": "",
+        "en": "",
+        "kr": "",
+        "pinyin": "kaiseTypeC"
+    },
+    "凯瑟TypeE": {
+        "zh_cn": "",
+        "zh_tw": "",
+        "jp": "",
+        "en": "",
+        "kr": "",
+        "pinyin": "kaiseTypeE"
+    },
+    "凯瑟TypeV": {
+        "zh_cn": "",
+        "zh_tw": "",
+        "jp": "",
+        "en": "",
+        "kr": "",
+        "pinyin": "kaiseTypeV"
+    },
+    "无人机": {
+        "zh_cn": "",
+        "zh_tw": "",
+        "jp": "",
+        "en": "",
+        "kr": "",
+        "pinyin": "wurenji"
+    },
+    "歌利亚": {
+        "zh_cn": "",
+        "zh_tw": "",
+        "jp": "",
+        "en": "",
+        "kr": "",
+        "pinyin": "geliya"
+    },
+    "清除器": {
+        "zh_cn": "",
+        "zh_tw": "",
+        "jp": "",
+        "en": "",
+        "kr": "",
+        "pinyin": "qingchuqi"
     }
 }

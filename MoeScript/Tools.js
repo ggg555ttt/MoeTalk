@@ -48,12 +48,16 @@ $('body').on('change',"#loadcusfile",function()
 });
 $('body').on('click',"#savedata",function()
 {
-	alert('MoeTalk出现问题时可以使用此功能提取存档并向开发者反馈\n虽然可以使用【读取本地数据存档】读取，但并不推荐您这么做')
+	alert('生成的文件只能用“读取localStorage存档”读取\n建议您在MoeTalk出现错误时向开发者提交此文件')
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-	download_txt('MoeTalk本地数据存档'+time+'.json',JSON.stringify(localStorage));//生成专用存档
+	download_txt('MoeTalk_localStorage存档'+time+'.json',JSON.stringify(localStorage));//生成专用存档
 });
 $("body").append("<input id='loaddatafile' hidden type='file' accept='application/json'>");
-$('body').on('click',"#loaddata",function(){$("#loaddatafile").click();})
+$('body').on('click',"#loaddata",function()
+{
+	alert('此选项只能读取“下载localStorage存档”生成的文件\n请不要上传其他的文件')
+	$("#loaddatafile").click();
+})
 $('body').on('change',"#loaddatafile",function()
 {
 	let file = this.files[0];
