@@ -790,7 +790,6 @@ function mt_title(moetalk,title,writer)
 		$('#mt_watermark').css('background-color',localStorage['mt-style'].split(' ')[1])
 	}
 }
-var countlength = 0;
 function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 {
 	if(imageArr.length > 1)
@@ -811,7 +810,6 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			imageArr.shift()
 			var n, t = e.toDataURL(localStorage['mt-image']);
 			let height = e.height
-			countlength = height + countlength
 			let json = [];
 			json[0] = {};
 			json[0]['title'] = '备份存档';
@@ -853,7 +851,6 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 				imageArr.shift()
 				var n, t = e.toDataURL(localStorage['mt-image']);
 				let height = e.height
-				countlength = height + countlength
 				let json = [];
 				json[0] = {};
 				json[0]['title'] = '备份存档';
@@ -887,5 +884,4 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			});
 		}
 	}
-	console.log(countlength)
 }

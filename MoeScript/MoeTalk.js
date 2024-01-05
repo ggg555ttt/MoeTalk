@@ -23,7 +23,6 @@ function mt_height(num)
 
 if(localStorage['mt-font'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g=''>");//加载字体
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
-$(function(){if($('#readme').text() !== '')$('.vc-switch').hide()});
 
 $("body").on('click',function()
 {
