@@ -62,7 +62,7 @@ if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';//整体图片宽高
 if(!localStorage['mt-cfsize'])localStorage['mt-cfsize'] = '90%';//差分表情宽高百分比
 if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';//标题
 if(!localStorage['mt-order'])localStorage['mt-order'] = 'name';//排序方式
-if(!localStorage['mt-style'])localStorage['mt-style'] = 'rgb(255,255,255) transparent rgb(220,229,232)';//默认样式
+if(!localStorage['mt-style'])localStorage['mt-style'] = 'rgb(255,255,255)';//默认样式
 if(!localStorage['mt-name'])localStorage['mt-name'] = '{}';var mt_name = JSON.parse(localStorage['mt-name']);//改名
 if(!localStorage['archive'])localStorage['archive'] = true;//自定义角色名称archive
 if(!localStorage['mt-image'])localStorage['mt-image'] = 'image/png';//自定义角色名称archive
@@ -587,6 +587,22 @@ function loaddata(json)//识别存档
 			
 			json[1][k]['isFirst'] = false;
 			if(v.yuzutalk.avatarState === 'SHOW')json[1][k]['isFirst'] = true;
+
+			//判断头像显示
+			let l = json[1]
+			let t = k
+			let n = json[1][k]
+			if(!n.isRight)l[t].isRight = false
+			if(n.isFirst === false && n.sCharacter.no !== 0)
+			{
+				if(t-1 < 0)l[t].isFirst = true
+				if(t > 0 && (n.sCharacter.index !== l[t-1].sCharacter.index || ['heart','info','reply'].indexOf(l[t-1].type) > -1 || l[t-1].isRight !== l[t].isRight))
+				{
+					l[t].isFirst = true
+				}
+			}
+			if(n.sCharacter.no === 0)l[t].isRight = false
+			if(n.sCharacter.no === 0)l[t].isFirst = false
 		})
 	}
 	
@@ -774,15 +790,17 @@ function mt_title(moetalk,title,writer)
 		$('#mt_watermark').css('background-color',localStorage['mt-style'].split(' ')[1])
 	}
 }
+var countlength = 0;
 function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 {
 	if(imageArr.length > 1)
 	{
 		let v = imageArr[0]
-		$$('.hfOSPu').show()
-		$$('.hfOSPu').slice(0,v.start).hide()
-		$$('.hfOSPu').slice(v.end,$$('.hfOSPu').length).hide()
-		eg()($$(".Talk__CContainer-sc-1uzn66i-1")[0],
+		$('.hfOSPu').show()
+		if(v.start !== 0)$('#mt_watermark').hide()
+		$('.hfOSPu').slice(0,v.start).hide()
+		$('.hfOSPu').slice(v.end,$('.hfOSPu').length).hide()
+		eg()($(".Talk__CContainer-sc-1uzn66i-1")[0],
 		{
 			logging: !1,
 			allowTaint: !0,
@@ -790,8 +808,10 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			scale: S
 		}).then(function(e)
 		{
+			imageArr.shift()
 			var n, t = e.toDataURL(localStorage['mt-image']);
 			let height = e.height
+			countlength = height + countlength
 			let json = [];
 			json[0] = {};
 			json[0]['title'] = '备份存档';
@@ -805,7 +825,6 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			json[1] = JSON.parse(localStorage['chats']);
 			j(v.index), null === (n = I.current) || void 0 === n , e.toBlob(function(e)
 			{
-				imageArr.shift()
 				mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)
 				t = t.replace(`data:${localStorage['mt-image']};base64,`,'')
 				json = localStorage['archive'] === 'true' ? JSON.stringify(json) : ''
@@ -819,10 +838,11 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 		if(imageArr.length !== 0)
 		{
 			let v = imageArr[0]
-			$$('.hfOSPu').show()
-			$$('.hfOSPu').slice(0,v.start).hide()
-			$$('.hfOSPu').slice(v.end,$$('.hfOSPu').length).hide()
-			eg()($$(".Talk__CContainer-sc-1uzn66i-1")[0],
+			$('.hfOSPu').show()
+			if(v.start !== 0)$('#mt_watermark').hide()
+			$('.hfOSPu').slice(0,v.start).hide()
+			$('.hfOSPu').slice(v.end,$('.hfOSPu').length).hide()
+			eg()($(".Talk__CContainer-sc-1uzn66i-1")[0],
 			{
 				logging: !1,
 				allowTaint: !0,
@@ -830,8 +850,10 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 				scale: S
 			}).then(function(e)
 			{
+				imageArr.shift()
 				var n, t = e.toDataURL(localStorage['mt-image']);
 				let height = e.height
+				countlength = height + countlength
 				let json = [];
 				json[0] = {};
 				json[0]['title'] = '备份存档';
@@ -865,5 +887,5 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			});
 		}
 	}
-	
+	console.log(countlength)
 }

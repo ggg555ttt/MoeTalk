@@ -34,13 +34,6 @@ var mt_text = {
 		"zh_cn": "确认",
 		"zh_tw": "確認"
 	},
-	"change": {
-		"kr": "변경",
-		"en": "Change",
-		"jp": "変更",
-		"zh_cn": "变更",
-		"zh_tw": "變更"
-	},
 	"cancel": {
 		"kr": "취소",
 		"en": "Cancel",
@@ -68,13 +61,6 @@ var mt_text = {
 		"jp": "削除",
 		"zh_cn": "删除",
 		"zh_tw": "刪除"
-	},
-	"edit": {
-		"kr": "수정",
-		"en": "Edit",
-		"jp": "修正",
-		"zh_cn": "修改",
-		"zh_tw": "修改"
 	},
 	"add": {
 		"kr": "추가",
@@ -118,13 +104,6 @@ var mt_text = {
 		"zh_cn": "结束",
 		"zh_tw": "結束"
 	},
-	"error": {
-		"kr": "오류",
-		"en": "Error",
-		"jp": "エラー",
-		"zh_cn": "错误",
-		"zh_tw": "錯誤"
-	},
 	"search": {
 		"kr": "검색",
 		"en": "Search",
@@ -138,41 +117,6 @@ var mt_text = {
 		"jp": "Option",
 		"zh_cn": "Option",
 		"zh_tw": "Option"
-	},
-	"help": {
-		"kr": "도움말",
-		"en": "Help",
-		"jp": "Help",
-		"zh_cn": "Help",
-		"zh_tw": "Help"
-	},
-	"notice": {
-		"kr": "공지",
-		"en": "Notice",
-		"jp": "Notice",
-		"zh_cn": "Notice",
-		"zh_tw": "Notice"
-	},
-	"copyright": {
-		"kr": "저작권",
-		"en": "Copyright",
-		"jp": "Copyright",
-		"zh_cn": "Copyright",
-		"zh_tw": "Copyright"
-	},
-	"terms": {
-		"kr": "이용약관",
-		"en": "Terms",
-		"jp": "Terms",
-		"zh_cn": "Terms",
-		"zh_tw": "Terms"
-	},
-	"success": {
-		"kr": "성공",
-		"en": "Success",
-		"jp": "成功",
-		"zh_cn": "成功",
-		"zh_tw": "成功"
 	},
 	"select": {
 		"kr": "선택",
@@ -209,54 +153,12 @@ var mt_text = {
 		"zh_cn": "作者",
 		"zh_tw": "作者"
 	},
-	"donation": {
-		"kr": "후원",
-		"en": "Donation",
-		"jp": "寄付",
-		"zh_cn": "捐赠",
-		"zh_tw": "捐贈"
-	},
-	"board_no": {
-		"kr": "톡번호",
-		"en": "Talk_no",
-		"jp": "トーク番号",
-		"zh_cn": "转矩编号",
-		"zh_tw": "轉矩編號"
-	},
-	"member_no": {
-		"kr": "회원번호",
-		"en": "Member_no",
-		"jp": "会員番号",
-		"zh_cn": "会员编号",
-		"zh_tw": "會員編號"
-	},
 	"series": {
 		"kr": "시리즈",
 		"en": "Series",
 		"jp": "シリーズ",
 		"zh_cn": "系列",
 		"zh_tw": "系列"
-	},
-	"none_series": {
-		"kr": "시리즈 선택안함",
-		"en": "None Series",
-		"jp": "なし系列",
-		"zh_cn": "无级数",
-		"zh_tw": "無級數"
-	},
-	"add_series": {
-		"kr": "시리즈 추가",
-		"en": "Add Series",
-		"jp": "シリーズの追加",
-		"zh_cn": "添加系列",
-		"zh_tw": "添加系列"
-	},
-	"management": {
-		"kr": "관리",
-		"en": "Management",
-		"jp": "管理",
-		"zh_cn": "管理",
-		"zh_tw": "管理"
 	},
 	"date": {
 		"kr": "날짜",
@@ -286,68 +188,12 @@ var mt_text = {
 		"zh_cn": "查询",
 		"zh_tw": "查詢"
 	},
-	"views": {
-		"kr": "조회수",
-		"en": "Views",
-		"jp": "照会数",
-		"zh_cn": "查询数",
-		"zh_tw": "查詢數"
-	},
-	"good": {
-		"kr": "추천",
-		"en": "Good",
-		"jp": "おすすめ",
-		"zh_cn": "推荐",
-		"zh_tw": "推薦"
-	},
-	"bad": {
-		"kr": "비추천",
-		"en": "Bad",
-		"jp": "非推奨",
-		"zh_cn": "不推荐",
-		"zh_tw": "不推薦"
-	},
-	"bookmark": {
-		"kr": "북마크",
-		"en": "Bookmark",
-		"jp": "ブックマーク",
-		"zh_cn": "书签",
-		"zh_tw": "書籤"
-	},
-	"share": {
-		"kr": "공유",
-		"en": "Share",
-		"jp": "共有",
-		"zh_cn": "孔侑莉",
-		"zh_tw": "孔侑莉"
-	},
-	"report": {
-		"kr": "신고",
-		"en": "Report",
-		"jp": "報告",
-		"zh_cn": "报告",
-		"zh_tw": "報告"
-	},
 	"download": {
 		"kr": "다운로드",
 		"en": "Download",
 		"jp": "ダウンロード",
 		"zh_cn": "下载",
 		"zh_tw": "下載"
-	},
-	"official": {
-		"kr": "공식",
-		"en": "Official",
-		"jp": "公式",
-		"zh_cn": "公式",
-		"zh_tw": "公式"
-	},
-	"creative": {
-		"kr": "창작",
-		"en": "Creative",
-		"jp": "創作",
-		"zh_cn": "创作",
-		"zh_tw": "創作"
 	},
 	"private": {
 		"kr": "MomoTalk",
@@ -356,54 +202,12 @@ var mt_text = {
 		"zh_cn": "MomoTalk",
 		"zh_tw": "MomoTalk"
 	},
-	"open": {
-		"kr": "공개",
-		"en": "Open",
-		"jp": "公開",
-		"zh_cn": "公开",
-		"zh_tw": "公開"
-	},
 	"upload": {
 		"kr": "업로드",
 		"en": "Upload",
 		"jp": "アップロード",
 		"zh_cn": "上传",
 		"zh_tw": "上傳"
-	},
-	"auto": {
-		"kr": "자동",
-		"en": "Auto",
-		"jp": "自動",
-		"zh_cn": "自动",
-		"zh_tw": "自動"
-	},
-	"login": {
-		"kr": "로그인",
-		"en": "Login",
-		"jp": "Login",
-		"zh_cn": "Login",
-		"zh_tw": "Login"
-	},
-	"logout": {
-		"kr": "로그아웃",
-		"en": "Logout",
-		"jp": "Logout",
-		"zh_cn": "Logout",
-		"zh_tw": "Logout"
-	},
-	"email": {
-		"kr": "이메일",
-		"en": "Email",
-		"jp": "Email",
-		"zh_cn": "Email",
-		"zh_tw": "Email"
-	},
-	"account": {
-		"kr": "계정",
-		"en": "Account",
-		"jp": "アカウント",
-		"zh_cn": "帐目",
-		"zh_tw": "帳目"
 	},
 	"message": {
 		"kr": "Player",
@@ -412,47 +216,12 @@ var mt_text = {
 		"zh_cn": "播放器",
 		"zh_tw": "播放器"
 	},
-	"talk": {
-		"kr": "톡",
-		"en": "Talk",
-		"jp": "トーク",
-		"zh_cn": "Talk",
-		"zh_tw": "Talk"
-	},
-	"game": {
-		"kr": "게임",
-		"en": "Game",
-		"jp": "ゲーム",
-		"zh_cn": "游戏",
-		"zh_tw": "遊戲"
-	},
-	"nickname": {
-		"kr": "닉네임",
-		"en": "Nickname",
-		"jp": "ニックネーム",
-		"zh_cn": "昵称",
-		"zh_tw": "暱稱"
-	},
-	"language": {
-		"kr": "언어",
-		"en": "Language",
-		"jp": "言語",
-		"zh_cn": "语言",
-		"zh_tw": "語言"
-	},
 	"preset": {
 		"kr": "프리셋",
 		"en": "Preset",
 		"jp": "プリセット",
 		"zh_cn": "预设",
 		"zh_tw": "預設"
-	},
-	"none": {
-		"kr": "없음",
-		"en": "None",
-		"jp": "なし",
-		"zh_cn": "无",
-		"zh_tw": "無"
 	},
 	"url": {
 		"kr": "URL",
@@ -468,89 +237,12 @@ var mt_text = {
 		"zh_cn": "清除",
 		"zh_tw": "清除"
 	},
-	"leave": {
-		"kr": "탈퇴",
-		"en": "Delete",
-		"jp": "脱退",
-		"zh_cn": "退出",
-		"zh_tw": "退出"
-	},
-	"delete_account": {
-		"kr": "계정탈퇴",
-		"en": "Delete Account",
-		"jp": "勘定脱退",
-		"zh_cn": "注销账户",
-		"zh_tw": "註銷賬戶"
-	},
-	"clear_cache": {
-		"kr": "캐시 삭제",
-		"en": "Clear Cache",
-		"jp": "キャッシュのクリア",
-		"zh_cn": "清除缓存",
-		"zh_tw": "清除緩存"
-	},
 	"album": {
 		"kr": "앨범",
 		"en": "Album",
 		"jp": "アルバム",
 		"zh_cn": "专辑",
 		"zh_tw": "專輯"
-	},
-	"chat_speed": {
-		"kr": "채팅배속",
-		"en": "Chat Speed",
-		"jp": "チャット倍速",
-		"zh_cn": "聊天倍速",
-		"zh_tw": "聊天倍速"
-	},
-	"search_creative": {
-		"kr": "창작톡 검색",
-		"en": "Search Creative Talk",
-		"jp": "創作トーク検索",
-		"zh_cn": "自创Talk搜索",
-		"zh_tw": "自創Talk搜索"
-	},
-	"search_official": {
-		"kr": "공식톡 검색",
-		"en": "Search Official Talk",
-		"jp": "公式トークを検索",
-		"zh_cn": "正式Talk搜索",
-		"zh_tw": "公式Talk搜索"
-	},
-	"search_writer": {
-		"kr": "작성자 검색",
-		"en": "Search Author",
-		"jp": "作成者検索",
-		"zh_cn": "作者搜索",
-		"zh_tw": "作者搜索"
-	},
-	"search_series": {
-		"kr": "시리즈 검색",
-		"en": "Search Series",
-		"jp": "シリーズ検索",
-		"zh_cn": "系列搜索",
-		"zh_tw": "系列搜索"
-	},
-	"characters": {
-		"kr": "등장인물",
-		"en": "Characters",
-		"jp": "登場人物",
-		"zh_cn": "登场人物",
-		"zh_tw": "登場人物"
-	},
-	"date_created": {
-		"kr": "작성일",
-		"en": "Date Created",
-		"jp": "作成日",
-		"zh_cn": "创建日期",
-		"zh_tw": "創建日期"
-	},
-	"upload_to_server": {
-		"kr": "서버에 업로드",
-		"en": "Upload to Server",
-		"jp": "サーバーにアップロード",
-		"zh_cn": "上载到服务器",
-		"zh_tw": "上載到服務器"
 	},
 	"download_to_image": {
 		"kr": "이미지로 다운로드",
@@ -811,20 +503,6 @@ var mt_text = {
 		"zh_cn": "添加播放列表",
 		"zh_tw": "添加播放列表"
 	},
-	"add_music": {
-		"kr": "음악 추가",
-		"en": "Add Music",
-		"jp": "音楽の追加",
-		"zh_cn": "添加音乐",
-		"zh_tw": "添加音樂"
-	},
-	"to_add_playlist": {
-		"kr": "추가할 플레이리스트 제목을 적어주세요.",
-		"en": "Please write down the title of the playlist to add.",
-		"jp": "追加するプレイリストのタイトルを書いてください。",
-		"zh_cn": "请写下要添加的播放列表的标题。",
-		"zh_tw": "請寫下要添加的播放列表的標題。"
-	},
 	"no_support": {
 		"kr": "지원하지 않는 파일입니다.",
 		"en": "This file is not supported.",
@@ -845,13 +523,6 @@ var mt_text = {
 		"jp": "クリックして写真を追加してください。",
 		"zh_cn": "请点击添加图片文件。",
 		"zh_tw": "請點擊添加圖片文件。"
-	},
-	"thanks": {
-		"kr": "이용해주셔서 감사합니다.",
-		"en": "Thank you for using it.",
-		"jp": "ご利用いただきありがとうございます。",
-		"zh_cn": "感谢您的使用。",
-		"zh_tw": "感謝您的使用。"
 	},
 	"down_comment1": {
 		"kr": "몰루톡이 이미지로 저장됩니다.",
@@ -895,13 +566,6 @@ var mt_text = {
 		"zh_cn": "将删除现有已处理的谈话。",
 		"zh_tw": "將刪除現有已處理的談話。"
 	},
-	"change_talk_comment": {
-		"kr": "해당 톡으로 변경하시겠습니까?",
-		"en": "Do you want to change to that talk?",
-		"jp": "該当トークに変更しますか？",
-		"zh_cn": "您要换成相关聊天工具吗?",
-		"zh_tw": "您要換成相關聊天工具嗎?"
-	},
 	"reset_talk_comment": {
 		"kr": "처음부터 다시 시작하시겠습니까?",
 		"en": "Do you want to restart?",
@@ -936,13 +600,6 @@ var mt_text = {
 		"jp": "検索してみてください。",
 		"zh_cn": "请搜索一下。",
 		"zh_tw": "請搜索一下。"
-	},
-	"time_comment": {
-		"kr": "시간을 입력해주세요.",
-		"en": "Please enter a time.",
-		"jp": "時間を入力してください。",
-		"zh_cn": "请输入时间。",
-		"zh_tw": "請輸入時間。"
 	},
 	"ID": {
 		"kr": "ID",

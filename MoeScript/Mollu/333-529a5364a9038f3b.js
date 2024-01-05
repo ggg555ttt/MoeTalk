@@ -1023,7 +1023,7 @@
 							},
 							children: (0, m.jsx)(j,
 							{
-								className: "medium",
+								className: "bold",
 								children: t.content.replaceAll("{name}", c).split('\n')[index]//
 							})
 						})
@@ -1101,13 +1101,14 @@
 										className: "bold",
 										style: t.isFirst && t.sCharacter.no !== 0 ?
 										{
-											height: "1.8rem",
-											lineHeight: "1.5rem",
+											
+											lineHeight: "1.8rem",
+											wordBreak: "break-all"
 										} :
 										{
 											display: 'none'
 										},
-										children: t.name && t.name !== '' ? t.name : (0, l.fY)(t.sCharacter.no, !0, p)
+										children: t.name && t.name !== '' ? t.name : (0, l.fY)(t.sCharacter.no, !0, lang)//#
 									}), (0, m.jsxs)("div",
 									{
 										style:
@@ -1388,7 +1389,6 @@
 											className: "bold",
 											style: t.isFirst && t.sCharacter.no !== 0 ?
 											{
-												//height: "1.8rem",
 												lineHeight: "1.8rem",
 												wordBreak: "break-all"
 											} :
@@ -1479,6 +1479,7 @@
 								chat: t
 							})] : "info" === t.type ? (0, m.jsx)(s.vD,
 							{
+								className: "bold",
 								children: t.content
 							}) : "end" === t.type ? (0, m.jsx)(f,
 							{}) : (0, m.jsx)(m.Fragment,{})
@@ -1576,7 +1577,7 @@
 					componentId: "sc-14j003s-0"
 				})(["display:flex;height:100%;width:100%;flex-direction:column;background-color:", ";min-width:340px;@media screen and (max-width:768px){min-width:100vw;}"], function(e)
 				{
-					return e.theme.color.rgb255_255_255
+					return ''//#自定义样式
 				}),
 				A = c.ZP.div.withConfig(
 				{
@@ -1584,7 +1585,7 @@
 					componentId: "sc-14j003s-1"
 				})(["display:inline-block;height:100%;background-color:", ";overflow-y:auto;overflow-y:overlay;overflow-x:hidden;&::-webkit-scrollbar{display:inline-block;width:0.4rem;}&::-webkit-scrollbar-thumb{height:17%;background-color:", ";border-radius:1rem;}"], function(e)
 				{
-					return e.theme.color.rgb255_255_255
+					return ''//#
 				}, function(e)
 				{
 					return e.theme.color.rgb210_210_210
@@ -1595,7 +1596,7 @@
 					componentId: "sc-14j003s-2"
 				})(["display:flex;flex-direction:column;width:100%;height:max-content;padding-bottom:1rem;background-color:", ";"], function(e)
 				{
-					return localStorage['mt-style'].split(' ')[0]//#自定义样式
+					return ''//#自定义样式
 				}),
 				M = c.ZP.div.withConfig(
 				{
@@ -1607,7 +1608,7 @@
 					{})
 				}, function(e)
 				{
-					return e.theme.color.rgb255_255_255
+					return ''//#
 				}, function(e)
 				{
 					return e.theme.color.rgb111_119_127
@@ -2028,7 +2029,7 @@
 					return e.theme.color.rgb69_78_89
 				}, function(e)
 				{
-					return e.theme.color.rgb220_229_232
+					return localStorage['mt-style'] === 'rgb(255,255,255)' ? 'rgb(220,229,232)' : 'transparent'//#自定义样式
 				}),
 				f = (0, r.ZP)(o.Mm).withConfig(
 				{

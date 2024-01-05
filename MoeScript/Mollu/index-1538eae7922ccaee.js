@@ -1966,7 +1966,7 @@
 								children: [(0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
-									children: L.Z.download_to_image[g]
+									children: `${L.Z.download_to_image[g]}(${imageArr.length})`
 								}), (0, m.jsx)(ea.ec,
 								{
 									onClick: function()
@@ -2114,7 +2114,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: [L.Z.down_comment1[g],localStorage['archive'] === 'true' ? `已包含${size}KB存档` : '不包含存档']
+										children: [L.Z.down_comment1[g],localStorage['archive'] === 'true' ? `已追加${size}KB存档` : '不包含存档']
 									}), (0, m.jsx)("span",
 									{
 										style:
@@ -2137,7 +2137,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: '禁用字体加载或更改生成图片的格式可以减少生成图片的时间和体积'//L.Z.thanks[g]
+										children: '设置界面可以更改生成图片的格式以节省图片体积'//L.Z.thanks[g]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -4280,7 +4280,7 @@
 							},
 							children: (0, m.jsx)(e2,
 							{
-								className: browser.isFirefox ? "" : "medium",//#判断火狐
+								className: "bold",
 								children: n.content.split('\n')[index]//#根据分支索引判断选择肢位置
 							})
 						})]
@@ -4528,7 +4528,6 @@
 											className: "bold",
 											style: n.isFirst && n.sCharacter.no !== 0 ?
 											{
-												//height: "1.8rem",
 												lineHeight: "1.8rem",
 												wordBreak: "break-all"
 											} :
@@ -4653,6 +4652,7 @@
 								{
 									editMsg(o,n,t)//#编辑消息-旁白
 								},
+								className: "bold",
 								children: n.content
 							}) : (0, m.jsx)(m.Fragment,{})
 						}), h || (0, m.jsx)("input",
@@ -4856,7 +4856,7 @@
 							})]
 						}), (0, m.jsxs)(eD,
 						{
-							className: "tools operateTools",
+							className: "operateTools",
 							style:
 							{
 								display: 'none',
@@ -4994,7 +4994,7 @@
 									id:"mt_watermark",
 									style:
 									{
-										backgroundColor:localStorage['mt-style'].split(' ')[2],
+										backgroundColor:'transparent',
 										display:"flex",
 										width:"100%",
 										fontSize:"1rem",
@@ -5076,7 +5076,7 @@
 					componentId: "sc-1uzn66i-0"
 				})(["display:inline-block;height:100%;width:100%;background-color:", ";overflow-y:auto;overflow-y:overlay;overflow-x:hidden;position:relative;&::-webkit-scrollbar{display:inline-block;width:0.4rem;}&::-webkit-scrollbar-thumb{height:17%;background-color:", ";border-radius:1rem;}"], function(e)
 				{
-					return e.theme.color.rgb255_255_255
+					return ''//#自定义样式
 				}, function(e)
 				{
 					return e.theme.color.rgb210_210_210
@@ -5093,7 +5093,7 @@
 					})
 				}, function(e)
 				{
-					return localStorage['mt-style'].split(' ')[0]//#自定义样式
+					return localStorage['mt-style']//#自定义样式
 				}, function(e)
 				{
 					return e.theme.color.rgb255_255_255
@@ -5192,10 +5192,10 @@
 									height: 'auto',
 									fontSize: "1.1rem"
 								},
-								children: localStorage['mt-font'] ? '已开启字体加载，点击可取消' : '已取消字体加载，点击可开启',
+								children: localStorage['mt-font'] ? '已加载字体，点击取消' : '已取消字体，点击可加载',
 								onClick: function()
 								{
-									if(confirm(localStorage['mt-font'] ? '已加载字体\n点击“确认”取消加载字体' : '未加载字体\n点击“确认”加载字体'))
+									if(confirm((localStorage['mt-font'] ? '已加载字体\n点击“确认”取消加载字体' : '未加载字体\n点击“确认”加载字体')+'\n字体加载会影响生成图片的速度'))
 									{
 										if(localStorage['mt-font'])
 										{
@@ -5221,7 +5221,7 @@
 								{
 									fontSize: "1.1rem"
 								},
-								children: `图片长度超过${maxHeight}会自动分割图片`
+								children: `图片长度超过${maxHeight}会自动分割`
 							})
 						}), (0, m.jsx)(ns,
 						{
@@ -5390,7 +5390,7 @@
 					})
 				}, function(e)
 				{
-					return e.theme.color.rgb255_255_255
+					return ''//#自定义样式
 				}, function(e)
 				{
 					return e.theme.color.rgb111_119_127
@@ -5624,7 +5624,7 @@
 					return e.theme.color.rgb69_78_89
 				}, function(e)
 				{
-					return localStorage['mt-style'].split(' ')[2]//#自定义样式
+					return localStorage['mt-style'] === 'rgb(255,255,255)' ? 'rgb(220,229,232)' : 'transparent'//#自定义样式
 				}),
 				f = (0, r.ZP)(o.Mm).withConfig(
 				{

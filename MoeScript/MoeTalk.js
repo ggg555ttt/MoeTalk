@@ -12,19 +12,12 @@ var dataIndex = 0;
 var operate = false
 var copydata;
 var mt_width = '';
-var imageArr;
+var imageArr = [];
 function mt_height(num)
 {
 	if(!num)num = 1.1
 	let length = ($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num);
-	if(localStorage['watermark'] !== 'false')
-	{
-		length = Number(length) + (((80 + 16) * num) * (Math.ceil(length/maxHeight) - 1));
-	}
-	else
-	{
-		length = Number(length) + ((16 * num) * (Math.ceil(length/maxHeight) - 1));
-	}
+	length = Number(length) + ((16.6 * num) * (Math.ceil(length/maxHeight) - 1));
 	return length.toFixed();
 }
 
@@ -300,6 +293,7 @@ $('body').on('click',"#editTools",function()
 	else
 	{
 		$('.tools').hide()
+		$('.operateTools').hide()
 		$('.dels').attr('hidden',true).next().attr('hidden',true)
 	}
 })
@@ -324,17 +318,19 @@ $(window).keydown(function(event)
 });
 $('body').on('click',"#mt-style",function()
 {
-	if(localStorage['mt-style'] === 'rgb(255,247,225) rgb(255,255,255) transparent')
-	{//RightScreen__CContainer-sc-14j003s-2
-		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,255,255)');
-		$('.talk__InfoBox-sc-eq7cqw-8').css('background','rgb(220,229,232)');
-		localStorage['mt-style'] = 'rgb(255,255,255) rgb(255,255,255) rgb(220,229,232)';//transparent
+	if(localStorage['mt-style'] === 'rgb(255,255,255)')
+	{
+		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,247,225)');
+		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','rgb(255,247,225)');
+		$('.talk__InfoBox-sc-eq7cqw-8').css('background','transparent');
+		localStorage['mt-style'] = 'rgb(255,247,225)';//transparent
 	}
 	else
 	{
-		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,247,225)');
-		$('.talk__InfoBox-sc-eq7cqw-8').css('background','transparent');
-		localStorage['mt-style'] = 'rgb(255,247,225) rgb(255,255,255) transparent';
+		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,255,255)');
+		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','rgb(255,255,255)');
+		$('.talk__InfoBox-sc-eq7cqw-8').css('background','rgb(220,229,232)');
+		localStorage['mt-style'] = 'rgb(255,255,255)';//
 	}
 })
 

@@ -12058,7 +12058,7 @@
 					{
 						displayName: "_app__Wrapper",
 						componentId: "sc-xuvrnm-1"
-					})(["", " border-radius:0 0 1rem 1rem;overflow:auto;max-width:1500px;margin:auto;@media screen and (max-width:1500px){border-radius:0;}"], function(e)
+					})(["", `background-color:${localStorage['mt-style']}; border-radius:0 0 1rem 1rem;overflow:auto;max-width:1500px;margin:auto;@media screen and (max-width:1500px){border-radius:0;}`], function(e)
 					{
 						return e.theme.common.flexBox(
 						{
