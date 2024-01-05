@@ -5240,6 +5240,7 @@
 									style:
 									{
 										width: "1.1rem",
+										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ico.QY_
@@ -5248,6 +5249,7 @@
 									style:
 									{
 										width: "1.1rem",
+										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ei.VmB
@@ -5263,6 +5265,7 @@
 									style:
 									{
 										width: "1.1rem",
+										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ei.pkM
@@ -5271,6 +5274,7 @@
 									style:
 									{
 										width: "1.1rem",
+										height: "1.1rem",
 										color:'rgb(139, 187, 233)'
 									},
 									icon: ico.FKd
@@ -5279,6 +5283,7 @@
 									style:
 									{
 										width: "1.1rem",
+										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ico.FQ0
@@ -5294,6 +5299,7 @@
 									style:
 									{
 										width: "1.1rem",
+										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ico.Lh7
@@ -5302,6 +5308,7 @@
 									style:
 									{
 										width: "1.1rem",
+										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ico.DBf
@@ -5310,6 +5317,7 @@
 									style:
 									{
 										width: "1.1rem",
+										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ico.m6i
@@ -5325,6 +5333,7 @@
 									style:
 									{
 										width: "1.1rem",
+										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ico.QY_
@@ -5333,6 +5342,7 @@
 									style:
 									{
 										width: "1.1rem",
+										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ico.wf8
@@ -5348,6 +5358,7 @@
 									style:
 									{
 										width: "1.1rem",
+										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ico.FKd
@@ -5356,6 +5367,7 @@
 									style:
 									{
 										width: "1.1rem",
+										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ico.k9h
