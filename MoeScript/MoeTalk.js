@@ -20,8 +20,8 @@ function mt_height(num)
 	length = Number(length) + ((16.6 * num) * (Math.ceil(length/maxHeight) - 1));
 	return length.toFixed();
 }
-
-if(localStorage['mt-font'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g=''>");//加载字体
+var mt_font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>";
+if(localStorage['mt-font'])$("head").append(mt_font);//加载字体
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
 
 $("body").on('click',function()
@@ -66,7 +66,6 @@ $(".frVjsk").wait(function()
 {
 	$(".frVjsk").append(`<button class='${class0}' id='uphead' class='${class0}'><b style='color:black;'>傳</b></button><span class='tool'>上传头像<span id='cusname'></span></span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='changecus'><b style='color:red;'>改</b></button><span class='tool'>更改角色</span><span id='ccus'></span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='https://tieba.baidu.com/p/8551808608'}.html'><button class='${class0}'><b style='color:black;'>教</b></button></a><span class='tool'>使用教程</span><br>`);
@@ -137,11 +136,9 @@ $('body').on('click',"#uphead",function()//上传头像
 		alert('此功能为上传头像的备用方案\n如无问题无需点击');
 	}
 })
-//修改人物
-$('body').on('click',"#changecus",function()
+function mt_ChangeChar(id)
 {
-	let id = $("#ccus").text().replaceAll(' ','');
-	chararr = JSON.parse(localStorage['mt-char'])
+	let chararr = JSON.parse(localStorage['mt-char'])
 	if(chararr[id])
 	{
 		let cname = prompt(`自定义角色ID：${id}\n若不想上传头像那么则只修改角色名\n当前角色名为：`,chararr[id]);
@@ -158,14 +155,13 @@ $('body').on('click',"#changecus",function()
 	}
 	if(mt_characters[id])
 	{
-		let name = prompt("当前人物ID："+id+"\n你想改为什么名字？\n为空则使用默认名",mt_name[id] ? mt_name[id] : "");
+		let name = prompt(`角色ID：${id}\n原名：${mt_characters[id].name[lang] ? mt_characters[id].name[lang] : id}\n你想改为什么名字？\n(为空则使用原名)`,mt_name[id] ? mt_name[id] : "");
 		if(name != null && name.trim() != '')mt_name[id] = name
 		else mt_name[id] ? delete mt_name[id] : ''
 		localStorage['mt-name'] = JSON.stringify(mt_name)
 		list()//更新列表
 	}
-	if(!id)alert("请点击角色ID再点击此按钮！")
-})
+}
 //储存头像
 $("body").on('change','#custom',function()
 {
@@ -422,4 +418,3 @@ $("body").on('click',".operate",function()
 		$('.operateTools').hide()
 	}
 });
-var asd = 1;

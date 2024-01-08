@@ -667,7 +667,7 @@
 						}),
 						a = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						});
 					return (0, m.jsxs)(N,
 					{
@@ -715,33 +715,34 @@
 											className: "bold",
 											children: [(0, m.jsx)(O,
 											{
-												onClick: function()
-												{
-													if(n.club[a] !== '临时角色')$$('#ccus').text(n.no)
-												},
-												children:[(0, m.jsx)('span',
-												{
-													children:'ID：'
-												}),(0, m.jsx)('span',
-												{
-													style:
-													{
-														fontStyle:'italic',
-														color:'black',
-													},
-													className: "medium",
-													children:n.no
-												})]
-											}),(0, m.jsx)(O,
-											{
 												children: [(0, m.jsx)('span',
 												{
 													children:n.club[a] === '自定义角色' || '临时角色' ? '' : L.Z.club[a]+'：'
 												}),(0, m.jsx)('span',
 												{
 													className: "medium",
-													children:n.club[a] === '自定义角色' ? '自定义角色('+(JSON.parse(localStorage['mt-head'])[n.no].length/1024).toFixed(0)+'KB)' : n.club[a]
+													children:n.club[a]
 												})]
+											}), (0, m.jsx)(O,
+											{
+												children: (0, m.jsx)('span',
+												{
+													className: "medium",
+													children:[(0, m.jsx)(c.xL,
+													{
+														style:
+														{
+															width: "1.1rem",
+															height: "1.1rem",
+															color:'rgb(45, 70, 100)'
+														},
+														icon: ei.Yai,
+														onClick: function()
+														{
+															mt_ChangeChar(n.no)
+														}
+													}), n.club[a] === '自定义角色' ? (JSON.parse(localStorage['mt-head'])[n.no].length/1024).toFixed(0)+'KB' : '']
+												})
 											})]//@显示社团
 										})]
 									})
@@ -925,7 +926,7 @@
 						a = e.setSearch,
 						l = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						}),
 						s = (0, r.useState)(o),
 						u = s[0],
@@ -1169,7 +1170,7 @@
 						s = a[1],
 						u = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						});
 					return (0, m.jsxs)(Y,
 					{
@@ -1369,7 +1370,7 @@
 						}),
 						t = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						}),
 						o = (0, r.useState)(
 						{
@@ -1548,7 +1549,7 @@
 						s = a[1],
 						u = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						}),
 						d = function()
 						{
@@ -1638,7 +1639,7 @@
 						}),
 						g = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						}),
 						x = (0, i.T)(),
 						y = function()
@@ -1756,7 +1757,7 @@
 						r = e.handleDeleteAll,
 						o = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						});
 					return (0, m.jsx)(m.Fragment,
 					{
@@ -1877,7 +1878,7 @@
 						p = (0, i.T)(),
 						g = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						}),
 						x = (0, i.C)(function(e)
 						{
@@ -2128,8 +2129,18 @@
 											style:{color:'red'},
 											className:'bold',
 											children: mt_height(S)
-										}),`，将生成${Math.ceil(mt_height(S)/maxHeight)}张${localStorage['mt-image'].split('/')[1]}图片`]
-									}), (0, m.jsx)("span",
+										}),`，将生成${Math.ceil(mt_height(S)/maxHeight)}张`,(0, m.jsx)("span",
+										{
+											id:'mt-image',
+											className:'bold',
+											style:
+											{
+												color:'red',
+												fontSize:'1.1rem'
+											},
+											children:localStorage['mt-image'].split('/')[1]
+										}),'图片']
+									}), (0, m.jsx)("button",
 									{
 										style:
 										{
@@ -2137,7 +2148,18 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: '设置界面可以更改生成图片的格式以节省图片体积'//L.Z.thanks[g]
+										className: "bold",
+										children: '点击更改生成图片的格式',//L.Z.thanks[g]
+										onClick: function()
+										{
+											let image = prompt("请输入生成图片的格式：（不要乱输入）\npng（默认，质量最好体积最大）\njpeg（体积小，注意不是jpg）\nwebp（体积更小，不推荐火狐）", localStorage['mt-image'].split('/')[1]);
+											if(image != null)
+											{
+												alert('更改完成，如果图片生成错误请尝试改为其它参数');
+												localStorage['mt-image'] = 'image/'+image;
+												$$('#mt-image').text(image)
+											}
+										}
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -2257,7 +2279,7 @@
 						}),
 						d = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						}),
 						h = (0, r.useState)(""),
 						f = h[0],
@@ -2691,7 +2713,7 @@
 						});
 					(0, i.C)(function(e)
 					{
-						return e.global.lang
+						return localStorage['mt-lang']//#e.global.lang
 					});
 					var f = (0, ex.vC)(
 						{
@@ -2935,7 +2957,7 @@
 						}),
 						l = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						}),
 						s = function()
 						{
@@ -3209,7 +3231,7 @@
 						}),
 						h = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						}),
 						f = (0, r.useState)(!1),
 						p = f[0],
@@ -3650,7 +3672,7 @@
 						}),
 						f = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						}),
 						p = (0, i.C)(function(e)
 						{
@@ -3968,7 +3990,7 @@
 												height: '40px',
 											},
 											src:sendChar === false ? loadhead(t.sCharacter.no,t.sCharacter.index) : loadhead(p.no,p.index)
-										}),sendChar ? '自定' : '默认']
+										}),sendChar ? '选中' : '默认']
 									}), (0, m.jsx)('div',
 									{
 										className:"edit_3_box1",
@@ -4184,7 +4206,7 @@
 					var n = e.character,
 						t = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						});
 					return (0, m.jsxs)(e$,
 					{
@@ -4317,7 +4339,7 @@
 						}),
 						o = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						}),
 						a = (0, i.C)(function(e)
 						{
@@ -4454,7 +4476,7 @@
 						}),
 						d = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						}),
 						h = (0, i.C)(function(e)
 						{
@@ -5132,7 +5154,7 @@
 				{
 					var e = (0, i.C)(function(e)
 						{
-							return e.global.lang
+							return localStorage['mt-lang']//#e.global.lang
 						}),
 						n = (0, i.C)(function(e)
 						{
@@ -5169,11 +5191,11 @@
 								children: 'Click change language',
 								onClick: function()
 								{
-									let lang = prompt("Please enter the language\nzh_cn（简体中文）\nzh_tw（繁體中文）\njp（日本語）\nen（English）\nkr（한국어）",localStorage['mt-lang']);
-									if (lang != null)
+									let language = prompt("Please enter the language\nzh_cn（简体中文）\nzh_tw（繁體中文）\njp（日本語）\nen（English）\nkr（한국어）",localStorage['mt-lang']);
+									if (langarr.indexOf(language) > -1)
 									{
-										localStorage['mt-lang'] = lang;
-										location.reload(true)
+										lang = language;
+										localStorage['mt-lang'] = language;
 									}
 								}
 							})
@@ -5200,12 +5222,13 @@
 										if(localStorage['mt-font'])
 										{
 											localStorage.removeItem('mt-font');
+											$$('#mt-font').remove()
 										}
 										else
 										{
 											localStorage['mt-font'] = true
+											$$("head").append(mt_font);//加载字体
 										}
-										location.reload(true)
 									}
 								}
 							})
