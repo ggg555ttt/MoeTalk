@@ -4,7 +4,7 @@ var cf = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var batEdit = false;//批量编辑开关
 var browser = os();//获取浏览器信息
-var maxHeight = browser.isFirefox ? 16384*2 : 16384;
+var maxHeight = browser.isFirefox && localStorage['mt-image'].split('/')[1] !== 'webp' ? 16384*2 : 16384;
 var sendChar = false//发言人开关
 var chatIndex = -1//消息索引
 var chatArr = []
@@ -58,7 +58,6 @@ $(".bIcduz").wait(function()
 {
 	height = mt_height()
 	$(".bIcduz").after("<span id='size' class='"+class1+"' style='white-space:pre;'><b>"+height+"\n"+size+"KB</b></span>");
-	$(".hXhSup").prepend("<span id='warning'><b></b></span>");
 	warning();
 },".bIcduz")
 //加载工具
@@ -74,38 +73,34 @@ $(".frVjsk").wait(function()
 //使用说明
 $('body').on('click',"#readme",function()
 {
-	console.log('这是开发者的调试工具，点击标题会隐藏控制台按钮\n'+
-		'B站主页 https://space.bilibili.com/13973390\n'+
-		'Gitlab项目地址 https://gitlab.com/ggg555ttt/MoeTalk\n'+
-		'Github项目地址 https://github.com/ggg555ttt/MoeTalk')
-	if($('.vc-switch').css('display') === 'none')
+	if($('#readme').text() === 'MikuTalk')
 	{
-		$('.vc-switch').text('控制台')
-		$('.vc-switch').show()
+		alert('from：https://github.com/HFIProgramming/mikutap/')
+		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
+		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','transparent');
+		$("#view").click()
 	}
 	else
 	{
-		$('.vc-switch').hide()
-	}
-	if(confirm("MoeTalk当前版本："+version+"\n"+
-		"MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n"+
-		"你可以点击【确认】尝试更新版本并刷新页面"))
-	{
-		window.caches && caches.keys && caches.keys().then(function(keys)
+		if(confirm(`MoeTalk当前版本：${version}\nMoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n你可以点击【确认】尝试更新版本并刷新页面`))
 		{
-			let length = 0;
-			keys.forEach(function(key)
+			window.caches && caches.keys && caches.keys().then(function(keys)
 			{
-				length=length+1
-				caches.delete(key);
+				let length = 0;
+				keys.forEach(function(key)
+				{
+					length=length+1
+					caches.delete(key);
+				});
+				if(keys.length === length)
+				{
+					localStorage['mt-rand'] = Math.random()
+					location.reload(true)
+				}
 			});
-			if(keys.length === length)
-			{
-				localStorage['mt-rand'] = Math.random()
-				location.reload(true)
-			}
-		});
+		}
 	}
+
 });
 //创建人物
 $("body").append("<input id='custom' hidden type='file' accept='image/*'>");//添加上传标签
@@ -418,3 +413,5 @@ $("body").on('click',".operate",function()
 		$('.operateTools').hide()
 	}
 });
+//rgb(136, 204, 204)
+//rgb(139, 187, 233)

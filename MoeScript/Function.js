@@ -62,7 +62,7 @@ if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';//整体图片宽高
 if(!localStorage['mt-cfsize'])localStorage['mt-cfsize'] = '90%';//差分表情宽高百分比
 if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';//标题
 if(!localStorage['mt-order'])localStorage['mt-order'] = 'name';//排序方式
-if(!localStorage['mt-style'])localStorage['mt-style'] = 'rgb(255,255,255)';//默认样式
+if(!localStorage['mt-style'] || localStorage['mt-style'].split(' ').length !== 1)localStorage['mt-style'] = 'rgb(255,255,255)';//默认样式
 if(!localStorage['mt-name'])localStorage['mt-name'] = '{}';var mt_name = JSON.parse(localStorage['mt-name']);//改名
 if(!localStorage['archive'])localStorage['archive'] = true;//自定义角色名称archive
 if(!localStorage['mt-image'])localStorage['mt-image'] = 'image/png';//自定义角色名称archive

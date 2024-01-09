@@ -2158,6 +2158,7 @@
 												alert('更改完成，如果图片生成错误请尝试改为其它参数');
 												localStorage['mt-image'] = 'image/'+image;
 												$$('#mt-image').text(image)
+												if(image === "webp")maxHeight = 16384
 											}
 										}
 									}), (0, m.jsxs)(ea.$_,
@@ -5188,7 +5189,7 @@
 									height: 'auto',
 									fontSize: "1.1rem"
 								},
-								children: 'Click change language',
+								children: 'Click to change language',
 								onClick: function()
 								{
 									let language = prompt("Please enter the language\nzh_cn（简体中文）\nzh_tw（繁體中文）\njp（日本語）\nen（English）\nkr（한국어）",localStorage['mt-lang']);
@@ -5214,7 +5215,7 @@
 									height: 'auto',
 									fontSize: "1.1rem"
 								},
-								children: localStorage['mt-font'] ? '已加载字体，点击取消' : '已取消字体，点击可加载',
+								children: 'Font loading options',
 								onClick: function()
 								{
 									if(confirm((localStorage['mt-font'] ? '已加载字体\n点击“确认”取消加载字体' : '未加载字体\n点击“确认”加载字体')+'\n字体加载会影响生成图片的速度'))
@@ -5231,20 +5232,6 @@
 										}
 									}
 								}
-							})
-						}), (0, m.jsx)(ns,
-						{
-							style:
-							{
-								display: n.length > 0 ? "none" : "flex"
-							},
-							children: (0, m.jsx)("span",
-							{
-								style:
-								{
-									fontSize: "1.1rem"
-								},
-								children: `图片长度超过${maxHeight}会自动分割`
 							})
 						}), (0, m.jsx)(ns,
 						{

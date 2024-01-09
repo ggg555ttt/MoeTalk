@@ -11543,39 +11543,6 @@
 						})
 					}
 				}, "PRIVATE")), (0, eh.KN)(tv, tb), (0, eh.KN)(tv, tb, "esm2017");
-				var ty = n(6502),
-					tw = (0, eh.ZF)(
-					{
-						apiKey: "AIzaSyBvspRTlSjfNX1DvFPXL_zLXnp-H_58MqI",
-						authDomain: "mollutalk.firebaseapp.com",
-						projectId: "mollutalk",
-						storageBucket: "mollutalk.appspot.com",
-						messagingSenderId: "1074108159704",
-						appId: "1:1074108159704:web:9b41eb3b9829d70c77e9ad",
-						measurementId: "G-1BPX0RMKRD"
-					});
-				(0, ty.v0)(tw),
-				function(e = (0, eh.Mq)())
-				{
-					e = (0, ep.m9)(e);
-					let t = (0, eh.qX)(e, e6);
-					t.isInitialized() ? t.getImmediate() : function(e, t = {})
-					{
-						let n = (0, eh.qX)(e, e6);
-						if(n.isInitialized())
-						{
-							let e = n.getImmediate();
-							if((0, ep.vZ)(t, n.getOptions())) return e;
-							throw tn.create("already-initialized")
-						}
-						let r = n.initialize(
-						{
-							options: t
-						});
-						return r
-					}(e)
-				}(tw);
-				//var tk = n(6835),
 				var tP = function()
 				{
 					var e = (0, k.C)(function(e)
@@ -11889,7 +11856,7 @@
 							{
 								className: n,
 								lang: (0, z.Vy)(t),
-								children: [e.children,(0, O.jsx)(tP,{})]
+								children: [e.children,(0, O.jsx)(tP,{}),(0, O.jsx)('div',{id:'view'})]//#加入mikutap,(0, O.jsx)('div',{id:'view'})
 								//$ [e.children, (0, O.jsx)(tx,
 								// {}), (0, O.jsx)(tE,
 								// {}), (0, O.jsx)(tP,
@@ -27845,34 +27812,7 @@
 			}
 		}
 	}
-	class tY extends tU
-	{
-		constructor(e)
-		{
-			super("phone"), this.credential = e
-		}
-		static _fromCredential(e)
-		{
-			return new tY(e)
-		}
-		_finalizeEnroll(e, t, n)
-		{
-			return E(e, "POST", "/v2/accounts/mfaEnrollment:finalize", j(e,
-			{
-				idToken: t,
-				displayName: n,
-				phoneVerificationInfo: this.credential._makeVerificationRequest()
-			}))
-		}
-		_finalizeSignIn(e, t)
-		{
-			return E(e, "POST", "/v2/accounts/mfaSignIn:finalize", j(e,
-			{
-				mfaPendingCredential: t,
-				phoneVerificationInfo: this.credential._makeVerificationRequest()
-			}))
-		}
-	}
+
 	var tK = "@firebase/auth", tZ = "0.21.4";
 	/**
 	 * @license
