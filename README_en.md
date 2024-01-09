@@ -1,4 +1,4 @@
-**Read this in other languages: [English](README_en.md), [中文](README.md).**  
+**其他语言版本: [English](README_en.md), [中文](README.md).**  
 #MoeTalk Description:  
 MoeTalk is the unofficial editor for MoeTalk in the mobile game Blue Archive. The MoeTalk code has been changed from MolluTalk developed by the original author Raun0129  
 ##Offline startup method (Windows)  
