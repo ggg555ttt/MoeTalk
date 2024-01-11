@@ -2006,7 +2006,7 @@
 												placeholder: L.Z.title_comment[g],
 												maxRows: 1,
 												value: _,
-												maxLength: 14,
+												//maxLength: 14,
 												onChange: function(e)
 												{
 													var n = e.currentTarget.value;
@@ -2028,7 +2028,7 @@
 												placeholder: L.Z.nickName_comment[g],
 												maxRows: 1,
 												value: R,
-												maxLength: 9,
+												//maxLength: 9,
 												onChange: function(e)
 												{
 													var n = e.currentTarget.value;
