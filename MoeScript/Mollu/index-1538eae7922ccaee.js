@@ -3087,12 +3087,7 @@
 										children: [(0, m.jsx)(ea.Dx,
 										{
 											className: "bold",
-											children: [cf == 'Emoji' ? L.Z.emoticon[l]+'('+cfnum+')' : charname+'('+cfnum+cftype+')',(0, m.jsx)('a',
-											{
-												hidden:!customcf,
-												href: customcf,
-												children: '差分来源'
-											})]//#加入差分表情
+											children: [cf == 'Emoji' ? L.Z.emoticon[l]+'('+cfnum+')' : charname+'('+cfnum+cftype+')']//#加入差分表情
 										}), (0, m.jsx)(ea.ec,
 										{
 											id: 'close',//@
@@ -3105,7 +3100,20 @@
 										})]
 									}), (0, m.jsxs)(ea.h4,
 									{
-										children: [(0, m.jsx)(c.Bx,
+										children: [(0, m.jsx)('a',
+										{
+											style:
+											{
+												position: 'absolute',
+												left: 0
+											},
+											className: "bold",
+											children: '上传',
+											onClick: function()
+											{
+												alert('“项目”页面最下方有我的联系方式，你可以联系我上传你需要的差分，我会标明出处\n“使用教程”页面也可以向我提交使用意见和需要的差分')
+											}
+										}), (0, m.jsx)(c.Bx,
 										{
 											className: "bold",
 											style:
@@ -3124,7 +3132,6 @@
 											className: "bold",
 											style:
 											{
-												"width": "25%",
 												textAlign:"center"
 											},
 											children: (cf == 'Emoji' ? CFPI+1 : !isNaN(parseInt(sessionStorage[no])) ? (parseInt(sessionStorage[no])+1) : 0)+"/"+(cf !== 'Emoji' && mt_charface ? mt_charface.split(',').length : cf == 'Emoji' ? 4 : 0)
@@ -3142,6 +3149,17 @@
 												click('#close');
 												cf == 'Emoji' ? CFPI = CFPI+1 : sessionStorage[no] = parseInt(sessionStorage[no])+1
 											}
+										}), (0, m.jsx)('a',
+										{
+											style:
+											{
+												position: 'absolute',
+												right: 0
+											},
+											className: "bold",
+											hidden:!customcf,
+											href: customcf,
+											children: '来源'
 										})]
 									}), (0, m.jsx)(eE,
 									{
