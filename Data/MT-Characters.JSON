@@ -151,7 +151,7 @@ var mt_characters = {
             "kr": "아로나",
             "pinyin": "aluona"
         },
-        "charface": "阿罗娜/arona/arona.32.webp,阿罗娜/阿罗娜.16.webp"
+        "charface": "阿罗娜/arona/arona.32.webp,阿罗娜/阿罗娜.16.webp,阿罗娜/cv21633881/cv21633881.33.webp"
     },
     "川流诗乃": {
         "school": "其他",
@@ -3161,7 +3161,7 @@ var mt_characters = {
             "kr": "쿠로미 세리카",
             "pinyin": "heijianqinxiang"
         },
-        "charface": "黑见芹香/CH0189/CH0189.17.webp,黑见芹香/NP0047/NP0047.13.webp,黑见芹香/NP0065/NP0065.17.webp,黑见芹香/serika/serika.13.webp,黑见芹香/serika_newyear/serika_newyear.14.webp,黑见芹香/serika_robber/serika_robber.13.webp,黑见芹香/serika_shibaseki/serika_shibaseki.13.webp,黑见芹香/黑见芹香.28.webp"
+        "charface": "黑见芹香/CH0189/CH0189.17.webp,黑见芹香/NP0047/NP0047.13.webp,黑见芹香/NP0065/NP0065.17.webp,黑见芹香/serika/serika.13.webp,黑见芹香/serika_newyear/serika_newyear.14.webp,黑见芹香/serika_robber/serika_robber.13.webp,黑见芹香/serika_shibaseki/serika_shibaseki.13.webp,黑见芹香/黑见芹香.28.webp,黑见芹香/cv29495348/cv29495348.78.webp"
     },
     "阿里乌斯学生": {
         "school": "阿里乌斯",

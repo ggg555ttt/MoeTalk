@@ -3100,10 +3100,13 @@
 										})]
 									}), (0, m.jsxs)(ea.h4,
 									{
-										children: [(0, m.jsx)('a',
+										children: [(0, m.jsx)(c.Bx,
 										{
 											style:
 											{
+												"width": "auto",
+												height: '100%',
+												color: '#3f51b5',
 												position: 'absolute',
 												left: 0
 											},
@@ -3149,17 +3152,23 @@
 												click('#close');
 												cf == 'Emoji' ? CFPI = CFPI+1 : sessionStorage[no] = parseInt(sessionStorage[no])+1
 											}
-										}), (0, m.jsx)('a',
+										}), (0, m.jsx)(c.Bx,
 										{
 											style:
 											{
+												"width": "auto",
+												height: '100%',
+												color: '#3f51b5',
 												position: 'absolute',
 												right: 0
 											},
 											className: "bold",
 											hidden:!customcf,
-											href: customcf,
-											children: '来源'
+											children: '来源',
+											onClick: function()
+											{
+												location.href = customcf
+											}
 										})]
 									}), (0, m.jsx)(eE,
 									{
@@ -3975,7 +3984,7 @@
 													whiteSpace: 'nowrap',
 													overflow: 'hidden'
 												},
-												className: a === e ? "selected medium" : "medium",
+												className: a === e ? " bold selected medium" : "bold medium",
 												onClick: function()
 												{
 													l(e)
@@ -4024,7 +4033,7 @@
 													className:"edit_3_box3_1",
 													children: (0, m.jsx)('input',
 													{
-														className:"edit_3_box3_1_1 name medium",
+														className:"bold edit_3_box3_1_1 name medium",
 														placeholder: sendChar === false ? (0, u.fY)(t.sCharacter.no, !0, f) : (0, u.fY)(p.no, !0, f),
 														onChange: function(e)
 														{

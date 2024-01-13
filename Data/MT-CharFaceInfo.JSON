@@ -15,9 +15,12 @@ var mt_CharFaceInfo = {
     "cv28915078": "249137912",
     "cv28939004": "249137912",
     "cv29003553": "249137912",
+    "cv29495348": "249137912",
+    "cv21633881": "1611507597",
     "8858225712": "tb.1.9312ac00.QCOj-TpTukWX9YjgQ6yJdQ"
 }
 var mt_CharFaceIndex = {
     "249137912": "https://space.bilibili.com/249137912",
+    "1611507597": "https://space.bilibili.com/1611507597",
     "tb.1.9312ac00.QCOj-TpTukWX9YjgQ6yJdQ": "https://tieba.baidu.com/home/main?id=tb.1.9312ac00.QCOj-TpTukWX9YjgQ6yJdQ"
 }
