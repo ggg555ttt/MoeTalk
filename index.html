@@ -5,6 +5,36 @@
 <script src="./MoeScript/Script/Jquery.min.js"></script>
 <!-- <script src="./MoeScript/Script/html2canvas.min.js"></script> -->
 <script>
+$.ajax({
+	url: './version.json',
+	type: 'GET',
+	dataType:"text",
+	cache: false, // 禁用缓存
+	success: function(text)
+	{
+		version = text.split(',')[0]
+		let rand = text.split(',')[1]
+		if(!localStorage['mt-version'] || localStorage['mt-version'] !== version || !localStorage['mt-rand'] || localStorage['mt-rand'] !== rand)
+		{
+			window.caches && caches.keys && caches.keys().then(function(keys)
+			{
+				let length = 0;
+				keys.forEach(function(key)
+				{
+					caches.delete(key);
+					length=length+1
+					if(keys.length === length)
+					{
+						localStorage['mt-version'] = version
+						localStorage['mt-rand'] = rand
+						location.reload(true)
+					}
+				});
+				
+			});
+		}
+	}
+});
 const os = (u = window.navigator.userAgent) => {
 	return {
 		// 不同浏览器及终端

@@ -6,36 +6,6 @@ if(window.location.href.indexOf('file:///') === 0)
 	alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1(有出错可能)】')
 	href = window.location.href.replace('index.html','')
 }
-$.ajax({
-	url: './version.json',
-	type: 'GET',
-	dataType:"text",
-	cache: false, // 禁用缓存
-	success: function(text)
-	{
-		version = text.split(',')[0]
-		let rand = text.split(',')[1]
-		if(!localStorage['mt-version'] || localStorage['mt-version'] !== version || !localStorage['mt-rand'] || localStorage['mt-rand'] !== rand)
-		{
-			window.caches && caches.keys && caches.keys().then(function(keys)
-			{
-				let length = 0;
-				keys.forEach(function(key)
-				{
-					caches.delete(key);
-					length=length+1
-					if(keys.length === length)
-					{
-						localStorage['mt-version'] = version
-						localStorage['mt-rand'] = rand
-						location.reload(true)
-					}
-				});
-				
-			});
-		}
-	}
-});
 //解决低版本浏览器不支持replaceAll
 (function()
 {
