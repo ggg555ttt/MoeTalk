@@ -2213,6 +2213,10 @@
 														imageArr.push({start:start,end:$$(".hfOSPu").length,index:imageArr.length+1})
 													}
 												}
+												if(zip && imageArr.length > 1)
+												{
+													imageZip = new JSZip();
+												}
 												O()
 											},
 											children: L.Z.confirm[g]

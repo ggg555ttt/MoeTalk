@@ -8641,7 +8641,7 @@
 									f = c.kind,
 									h = l.length - 1;
 								return {
-									/*sizes: s || "w" !== f ? s : "100vw",///
+									sizes: s || "w" !== f ? s : "100vw",///禁用则ios截图功能失效
 									srcSet: l.map(function(e, r)
 									{
 										return "".concat(u(
@@ -8651,7 +8651,7 @@
 											quality: o,
 											width: e
 										}), " ").concat("w" === f ? e : r + 1).concat(f)
-									}).join(", "),*/
+									}).join(", "),
 									src: u(
 									{
 										config: t,

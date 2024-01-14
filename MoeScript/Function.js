@@ -325,46 +325,6 @@ function click(name)
 {
 	$(name).click();
 }
-const os = (u = window.navigator.userAgent) => {
-	return {
-		// 不同浏览器及终端
-		isMobile:
-	  !!u.match(/AppleWebKit.*Mobile/i) ||
-	  !!u.match(
-		/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/
-	  ),
-		isWechat: !!u.match(/MicroMessenger/i),
-		isQQ: !!u.match(/QQ/i),
-		isIos: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
-		isAndroid: !!u.match(/(Android);?[\s/]+([\d.]+)?/),
-		isiPhone: !!u.match(/(iPhone\sOS)\s([\d_]+)/),
-		isSafari: !!u.match(/Safari/),
-		isFirefox: !!u.match(/Firefox/),
-		isOpera: !!u.match(/Opera/),
-		isChrome: u.match(/Chrome/i) !== null &&
-	  u.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i) === null ?
-			true : false,
-		isDeskTop: (() => {
-			const Agents = [
-				'Android',
-				'iPhone',
-				'SymbianOS',
-				'Windows Phone',
-				'iPad',
-				'iPod',
-				'okhttp/3.9.1'
-			];
-			let flag = true;
-			for (let i = 0, LEN = Agents.length; i < LEN; i++) {
-				if (u.indexOf(Agents[i]) !== -1) {
-					flag = false;
-					break;
-				}
-			}
-			return flag;
-		})()
-	};
-};
 function selectClick(num)
 {
 	let select,index = $('.Footer__Flex-sc-1rjbi2j-1 img').index($('.Footer__Flex-sc-1rjbi2j-1 img.selected'));
@@ -827,7 +787,15 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 				t = t.replace(`data:${localStorage['mt-image']};base64,`,'')
 				json = localStorage['archive'] === 'true' ? JSON.stringify(json) : ''
 				let title = "" !== _ ? _ : L.Z.noTitle[g]
-				combineFiles(t,json,`MoeTalk_${title}_${height}_${v.index}`,v.index);
+				if(imageZip)
+				{
+					$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第${v.index}张图片：</h1><img src='data:${localStorage['mt-image']};base64,${t}'></div>`)
+					imageZip.file(`MoeTalk_${title}_${v.index}_${height}.${localStorage['mt-image'].split('/')[1]}`,e);
+				}
+				else
+				{
+					combineFiles(t,json,`MoeTalk_${title}_${v.index}_${height}`,v.index);
+				}
 			})
 		})
 	}
@@ -868,7 +836,33 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 					json = localStorage['archive'] === 'true' ? JSON.stringify(json) : ''
 					let title = "" !== _ ? _ : L.Z.noTitle[g]
 					let str = v.start !== 0 ? `_${height}_${v.index}` : ''
-					combineFiles(t,json,`MoeTalk_${title}${str}`,v.index);
+					if(imageZip)
+					{
+						$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第${v.index}张图片：</h1><img src='data:${localStorage['mt-image']};base64,${t}'></div>`)
+						imageZip.file(`MoeTalk_${title}_${v.index}_${height}.${localStorage['mt-image'].split('/')[1]}`,e);
+						json === "" ? "" : imageZip.file(`MoeTalk_${title}.json`,json);
+						imageZip.generateAsync({type:'blob'}).then(function(content)
+						{
+							// 下载的文件名
+							var filename = `MoeTalk_${title}_${(0, u._3)(!0, !0)}.zip`;
+							// 创建隐藏的可下载链接
+							var eleLink = document.createElement('a');
+							eleLink.download = filename;
+							eleLink.style.display = 'none';
+							// 下载内容转变成 blob 地址
+							eleLink.href = URL.createObjectURL(content);
+							// 触发点击
+							document.body.appendChild(eleLink);
+							eleLink.click();
+							// 然后移除
+							document.body.removeChild(eleLink);
+							imageZip = null
+						});
+					}
+					else
+					{
+						combineFiles(t,json,`MoeTalk_${title}${v.index === 1 ? '' : '_'+v.index}_${height}`,v.index);
+					}
 				})
 			}).catch(function()
 			{
