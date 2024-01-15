@@ -8640,7 +8640,7 @@
 									l = c.widths,
 									f = c.kind,
 									h = l.length - 1;
-								return {
+								if(browser.isIos === true || browser.isiPhone === true)return {
 									sizes: s || "w" !== f ? s : "100vw",///禁用则ios截图功能失效
 									srcSet: l.map(function(e, r)
 									{
@@ -8652,6 +8652,15 @@
 											width: e
 										}), " ").concat("w" === f ? e : r + 1).concat(f)
 									}).join(", "),
+									src: u(
+									{
+										config: t,
+										src: n,
+										quality: o,
+										width: l[h]
+									})
+								}
+								else return {
 									src: u(
 									{
 										config: t,
@@ -9957,7 +9966,7 @@
 									})
 								}), (0, O.jsx)(I,
 								{
-									children: [(0, O.jsx)(I,{id:"readme",children:localStorage['MoeTalk']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
+									children: [(0, O.jsx)(I,{id:"readme",children:month === 4 && day === 1 ? 'MikuTalk' : localStorage['MoeTalk']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
 										href: "https://gitlab.com/ggg555ttt/MoeTalk/",
 										style:
@@ -10301,7 +10310,7 @@
 							rgb252_238_240: "rgb(252, 238, 240)",
 							rgb252_238_98: "rgb(252, 238, 98)",
 							rgb252_135_155: "rgb(252, 135, 155)",
-							rgb243_247_248: "rgb(243, 247, 248)",
+							rgb243_247_248: localStorage['MoeTalk'] === 'MikuTalk' || (month === 4 && day === 1) ? "transparent" : "rgb(243, 247, 248)",//#41
 							rgb242_231_85: "rgb(242, 231, 85)",
 							rgb225_237_240: "rgb(225, 237, 240)",
 							rgb224_226_228: "rgb(224, 226, 228)",
@@ -11873,7 +11882,7 @@
 								{
 									style:{lineHeight:'141%'},//@
 									className: "bold",//@
-									children: localStorage['MoeTalk']+' '+version//#蒙版标题自定义localStorage['MoeTalk']
+									children: month === 4 && day === 1 ? 'MikuTalk' : localStorage['MoeTalk']+' '+version//#蒙版标题自定义localStorage['MoeTalk']
 								})
 							})]
 						})

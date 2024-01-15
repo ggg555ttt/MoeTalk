@@ -23,7 +23,15 @@ function mt_height(num)
 var mt_font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>";
 if(localStorage['mt-font'])$("head").append(mt_font);//加载字体
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
-
+$(function()
+{
+	if($('#readme').text() === 'MikuTalk' || (month === 4 && day === 1))
+	{
+		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
+		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','transparent');
+		$("#view").click()
+	}
+})
 $("body").on('click',function()
 {
 	size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0))
@@ -76,9 +84,6 @@ $('body').on('click',"#readme",function()
 	if($('#readme').text() === 'MikuTalk')
 	{
 		alert('from：https://github.com/HFIProgramming/mikutap/')
-		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
-		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','transparent');
-		$("#view").click()
 	}
 	else
 	{

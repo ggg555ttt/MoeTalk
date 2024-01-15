@@ -165,7 +165,7 @@ $("body").on('click','#mt-cfsize',function()
 $("body").on('click','#mt-title',function()
 {
 	let title = localStorage['MoeTalk'];
-	let msg = prompt("请输入标题文字(不要包含中文)",title);
+	let msg = prompt("请输入标题文字",title);
 	if(msg)
 	{
 		localStorage['MoeTalk'] = msg;
