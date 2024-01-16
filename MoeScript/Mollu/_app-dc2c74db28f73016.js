@@ -14504,7 +14504,7 @@
 					{
 						displayName: "popup__MyModal",
 						componentId: "sc-1ardd6p-0"
-					})(["", ";visibility:hidden;user-select:none;position:fixed;top:0;left:0;width:100%;height:100%;overflow:auto;background-color:", ";z-index:10;opacity:0;transition:opacity 300ms;&.visible{visibility:visible;opacity:1;}"], function(e)
+					})(["", ";visibility:hidden;user-select:none;position:fixed;top:0;left:0;width:100%;height:100%;overflow:auto;background-color:", ";z-index:10;opacity:0;transition:opacity 0s;&.visible{visibility:visible;opacity:1;}"], function(e)
 					{
 						return e.theme.common.flexBox(
 						{
