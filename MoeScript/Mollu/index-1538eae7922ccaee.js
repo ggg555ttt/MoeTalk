@@ -1979,11 +1979,11 @@
 								})]
 							}), (0, m.jsxs)(ea.$0,
 							{
-								/*style:
+								style:
 								{
-									minHeight: "20rem",
-									overflow: "hidden"
-								},*/
+									minHeight: imageArrL > 0 ? `${($$('body').height())*0.75}px` : "20rem",
+									overflow: "scroll"
+								},
 								children: [0 === b.length && (0, m.jsxs)(m.Fragment,
 								{
 									children: [(0, m.jsxs)(ew,
@@ -2192,7 +2192,7 @@
 												for(let end=0;end<$$(".hfOSPu").length;end++)
 												{
 													length = length+($$(`.hfOSPu:eq(${end})`).outerHeight()*S)
-													if(length > maxHeight)
+													if(length > maxHeight || $$(`.hfOSPu:eq(${end})>.dels`).css('background-color') === 'rgb(255, 0, 0)')//
 													{
 														if(json[end].isFirst === false && json[end].sCharacter.no !== 0)
 														{
@@ -2217,6 +2217,7 @@
 												{
 													imageZip = new JSZip();
 												}
+												imageArrL = imageArr.length
 												O()
 											},
 											children: L.Z.confirm[g]
@@ -2238,6 +2239,14 @@
 												marginBottom: "1rem"
 											},
 											children: L.Z.image_download[g]
+										}), (0, m.jsx)("div",
+										{
+											style:
+											{
+												fontSize: "1rem",
+												marginBottom: "1rem"
+											},
+											children: '图片无法手动保存请取消勾选“存档”选框，并将图片格式改为“webp”格式'
 										})]
 									})
 								})]
@@ -2825,6 +2834,7 @@
 								title: "Image Download",
 								onClick: function()
 								{
+									imageArrL = 0
 									y(!0)
 								},
 								children: (0, m.jsx)(c.xL,
@@ -3762,6 +3772,7 @@
 							let isRight = $$('.isRight').prop('checked')
 							let isLeft = $$('.isLeft').prop('checked')
 							let type = $$('.editType').prop('checked')
+							let is_breaking = $$('.is_breaking').prop('checked')
 							let index
 							if($$('.dels:checked').length > 1 && batEdit)
 							{
@@ -3815,11 +3826,13 @@
 									n.sCharacter = p
 								}
 								n.isRight = n.sCharacter.no === 0 ? false : isRight
+								if(is_breaking === true)n.isFirst = true
 								//#n.isFirst = n.sCharacter.no === 0 ? false : t.isFirst
 								n.content = content
 								n.time = time
 								n.name = name
 								n.type = a
+								n.is_breaking = is_breaking
 								n.sReplyNo = h.sReplyNo,
 								n.replyNo = h.replyNo+Math.random()
 								n.replyGroup = h.replyGroup+Math.random()
@@ -3970,7 +3983,12 @@
 												hidden: $$('.dels:checked').length < 2,
 												type:'checkbox',
 												className:'isLeft'
-											}),$$('.dels:checked').length > 1 ? '默认位置' : '']
+											}),$$('.dels:checked').length > 1 ? '默认位置' : '',(0, m.jsx)('input',
+											{
+												hidden: $$('.dels:checked').length > 1,
+												type:'checkbox',
+												className:'is_breaking'
+											}),$$('.dels:checked').length > 1 ? '' : '截图分割']
 										})
 									}),(0, m.jsx)('div',
 									{
@@ -4712,6 +4730,7 @@
 						}), h || (0, m.jsx)("input",
 						{
 							"data-html2canvas-ignore":"true",
+							style:{backgroundColor:n.is_breaking === true ? 'red' : 'transparent'},
 							type: "checkbox",
 							index: t,
 							className:"dels"

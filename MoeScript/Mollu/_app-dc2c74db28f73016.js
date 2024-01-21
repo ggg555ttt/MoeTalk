@@ -13246,7 +13246,7 @@
 									if(n.isFirst === false && n.sCharacter.no !== 0)
 									{
 										if(t-1 < 0)l[t].isFirst = true
-										if(t > 0 && (n.sCharacter.index !== l[t-1].sCharacter.index || ['heart','info','reply'].indexOf(l[t-1].type) > -1 || l[t-1].isRight !== l[t].isRight))
+										if(t > 0 && (n.sCharacter.index !== l[t-1].sCharacter.index || ['heart','info','reply'].indexOf(l[t-1].type) > -1 || l[t-1].isRight !== l[t].isRight || n.is_breaking === true))
 										{
 											l[t].isFirst = true
 										}

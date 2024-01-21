@@ -51,6 +51,7 @@ var charList = '';
 if(localStorage['mt-club'])clubarr = JSON.parse(localStorage['mt-club']);//读取社团
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
 var class1 = 'talk__TextBox-sc-eq7cqw-4 talk__NTextBox-sc-eq7cqw-5 fWynih fYSjWX';
+imageArrL = 0
 /*预定义区*/
 
 //保存头像
@@ -247,7 +248,7 @@ function combineFiles(mainFile, hideFile, fileName, Index) {
 		//blobToBase64(blob,function(e){$("[alt='download']").attr('src',`data:${localStorage['mt-image']};base64,${e}`)})//替换手动保存的图片
 		blobToBase64(blob,function(e)
 		{
-			$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第${Index}张图片：</h1><img src='data:${localStorage['mt-image']};base64,${e}'></div>`)
+			$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${Index}</span>/${imageArrL}张图片：</h1><img src='data:${localStorage['mt-image']};base64,${e}'></div>`)
 		})
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
@@ -349,12 +350,13 @@ function list()
 }
 function editMsg(o,n,t)//编辑消息
 {
+	let isLeft = false
 	let name = n.name
 	let time = n.time
 	let content = n.content
-	let isRight = n.isRight ? true : false
-	let isLeft = false
-	if($$('.dels:checked').length > 1)
+	let isRight = n.isRight ? n.isRight : false
+	let is_breaking = n.is_breaking ? n.is_breaking : false
+	if($('.dels:checked').length > 1)
 	{
 		name = ''
 		time = ''
@@ -362,10 +364,11 @@ function editMsg(o,n,t)//编辑消息
 		isRight = false
 		isLeft = false
 	}
-	$$('.content').val(content)
-	$$('.name').val(name)
-	$$('.time').val(time)
-	$$('.isRight').prop('checked',isRight)
+	$('.content').val(content)
+	$('.name').val(name)
+	$('.time').val(time)
+	$('.isRight').prop('checked',isRight)
+	$('.is_breaking').prop('checked',is_breaking)
 	chatIndex = t
 	o(!0, n, n.type)
 }
@@ -517,7 +520,7 @@ function loaddata(json)//识别存档
 			
 			json[1][k]['isFirst'] = false;
 			if(v.yuzutalk.avatarState === 'SHOW')json[1][k]['isFirst'] = true;
-
+			if(v.is_breaking === true)json[1][k]['is_breaking'] = true;
 			//判断头像显示
 			let l = json[1]
 			let t = k
@@ -526,7 +529,7 @@ function loaddata(json)//识别存档
 			if(n.isFirst === false && n.sCharacter.no !== 0)
 			{
 				if(t-1 < 0)l[t].isFirst = true
-				if(t > 0 && (n.sCharacter.index !== l[t-1].sCharacter.index || ['heart','info','reply'].indexOf(l[t-1].type) > -1 || l[t-1].isRight !== l[t].isRight))
+				if(t > 0 && (n.sCharacter.index !== l[t-1].sCharacter.index || ['heart','info','reply'].indexOf(l[t-1].type) > -1 || l[t-1].isRight !== l[t].isRight || n.is_breaking === true))
 				{
 					l[t].isFirst = true
 				}
@@ -616,7 +619,7 @@ function MoeToClosure()//Moe转Closure
 			ct[k]['img'] = 'uploaded';
 		}
 		ct[k]['content'] = v['content'];//文本内容
-		ct[k]['is_breaking'] = false;
+		ct[k]['is_breaking'] = v['is_breaking'];
 		ct[k]['yuzutalk'] = {};
 		ct[k]['yuzutalk']['nameOverride'] = v['name'] ? v['name'] : '';//临时名字
 		if(v['isFirst'] === true)//头像显示
@@ -759,7 +762,7 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 				let title = "" !== _ ? _ : L.Z.noTitle[g]
 				if(imageZip)
 				{
-					$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第${v.index}张图片：</h1><img src='data:${localStorage['mt-image']};base64,${t}'></div>`)
+					$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${v.index}</span>/${imageArrL}张图片：</h1><img src='data:${localStorage['mt-image']};base64,${t}'></div>`)
 					imageZip.file(`MoeTalk_${title}_${v.index}_${height}.${localStorage['mt-image'].split('/')[1]}`,e);
 				}
 				else
@@ -808,7 +811,7 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 					let str = v.start !== 0 ? `_${height}_${v.index}` : ''
 					if(imageZip)
 					{
-						$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第${v.index}张图片：</h1><img src='data:${localStorage['mt-image']};base64,${t}'></div>`)
+						$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${v.index}</span>/${imageArrL}张图片：</h1><img src='data:${localStorage['mt-image']};base64,${t}'></div>`)
 						imageZip.file(`MoeTalk_${title}_${v.index}_${height}.${localStorage['mt-image'].split('/')[1]}`,e);
 						json === "" ? "" : imageZip.file(`MoeTalk_${title}.json`,json);
 						imageZip.generateAsync({type:'blob'}).then(function(content)
