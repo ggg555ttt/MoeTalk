@@ -2102,16 +2102,30 @@ var mt_characters = {
     "伊吹": {
         "school": "格黑娜",
         "club": "万魔殿",
-        "head": "Ibuki_Collection,Ibuki",
+        "head": "Ibuki_L2D,Ibuki_Collection,CH0254,Ibuki",
         "name": {
-            "zh_cn": "伊吹",
-            "zh_tw": "伊吹",
-            "jp": "イブキ",
-            "en": "Ibuki",
-            "kr": "이부키",
+            "zh_cn": "丹花 伊吹",
+            "zh_tw": "丹花 伊吹",
+            "jp": "丹花 イブキ",
+            "en": "Tanga Ibuki",
+            "kr": "탄가 이부키",
             "pinyin": "yichui"
         },
-        "charface": "伊吹/ibuki/ibuki.9.webp,伊吹/伊吹.4.webp"
+        "charface": "伊吹/CH0254/CH0254.11.webp,伊吹/ibuki/ibuki.17.webp,伊吹/伊吹.8.webp"
+    },
+    "元宫千秋": {
+        "school": "格黑娜",
+        "club": "万魔殿",
+        "head": "CH0238",
+        "name": {
+            "zh_cn": "元宫 千秋",
+            "zh_tw": "元宫 千秋",
+            "jp": "元宮 チアキ",
+            "en": "Motomiya chiaki",
+            "kr": "모토미야 치아키",
+            "pinyin": "yuangongqianqiu"
+        },
+        "charface": "元宫千秋/CH0238/CH0238.14.webp,元宫千秋/元宫千秋.4.webp"
     },
     "枣伊吕波": {
         "school": "格黑娜",
@@ -2144,7 +2158,7 @@ var mt_characters = {
     "羽沼真琴": {
         "school": "格黑娜",
         "club": "万魔殿",
-        "head": "CH0079_Collection,CH0079",
+        "head": "CH0079_L2D,CH0079_Collection,CH0079,CH0253",
         "name": {
             "zh_cn": "羽沼 真琴",
             "zh_tw": "羽沼 真琴",
@@ -2153,7 +2167,7 @@ var mt_characters = {
             "kr": "하누마 마코토",
             "pinyin": "yuzhaozhenqin"
         },
-        "charface": "羽沼真琴/CH0079/CH0079.11.webp,羽沼真琴/羽沼真琴.4.webp"
+        "charface": "羽沼真琴/CH0079/CH0079.14.webp,羽沼真琴/CH0253/CH0253.16.webp,羽沼真琴/羽沼真琴.8.webp"
     },
     "伊草遥香": {
         "school": "格黑娜",
@@ -2410,7 +2424,7 @@ var mt_characters = {
     "天雨亚子": {
         "school": "格黑娜",
         "club": "风纪委员会",
-        "head": "Ako_L2D,NP0059_Collection,NP0111_Collection,Ako_Collection,NP0019,NP0111,Ako",
+        "head": "Ako_L2D,CH0231_L2D,NP0059_Collection,NP0111_Collection,Ako_Collection,CH0231_Collection,NP0019,NP0111,Ako,CH0231",
         "name": {
             "zh_cn": "天雨 亚子",
             "zh_tw": "天雨 亞子",
@@ -2419,7 +2433,7 @@ var mt_characters = {
             "kr": "아마우 아코",
             "pinyin": "tianyuyazi"
         },
-        "charface": "天雨亚子/ako/ako.16.webp,天雨亚子/NP0019/NP0019.16.webp,天雨亚子/NP0059/NP0059.16.webp,天雨亚子/NP0111/NP0111.14.webp,天雨亚子/天雨亚子.16.webp"
+        "charface": "天雨亚子/ako/ako.16.webp,天雨亚子/CH0231/CH0231.14.webp,天雨亚子/NP0019/NP0019.16.webp,天雨亚子/NP0059/NP0059.16.webp,天雨亚子/NP0111/NP0111.14.webp,天雨亚子/天雨亚子.20.webp"
     },
     "火宫千夏": {
         "school": "格黑娜",
@@ -2438,7 +2452,7 @@ var mt_characters = {
     "空崎日奈": {
         "school": "格黑娜",
         "club": "风纪委员会",
-        "head": "LobbyIllust_Icon_CH0063_L2D,Hina_L2D,NP0009_Collection,CH0063_Collection,Hina_Collection,NP0009,NP0017,CH0063,Hina",
+        "head": "LobbyIllust_Icon_CH0063_L2D,CH0230_L2D,Hina_L2D,NP0009_Collection,CH0063_Collection,CH0230_Collection,Hina_Collection,NP0009,NP0017,CH0063,CH0230,Hina",
         "name": {
             "zh_cn": "空崎 日奈",
             "zh_tw": "空崎 陽奈",
@@ -2447,7 +2461,7 @@ var mt_characters = {
             "kr": "소라사키 히나",
             "pinyin": "kongqirinai"
         },
-        "charface": "空崎日奈/CH0063/CH0063.10.webp,空崎日奈/hina/hina.20.webp,空崎日奈/NP0009/NP0009.6.webp,空崎日奈/NP0017/NP0017.6.webp,空崎日奈/空崎日奈.14.webp,空崎日奈/cv28323327/cv28323327.9.webp"
+        "charface": "空崎日奈/CH0063/CH0063.10.webp,空崎日奈/CH0230/CH0230.18.webp,空崎日奈/hina/hina.20.webp,空崎日奈/NP0009/NP0009.6.webp,空崎日奈/NP0017/NP0017.6.webp,空崎日奈/空崎日奈.18.webp,空崎日奈/cv28323327/cv28323327.9.webp"
     },
     "银镜伊织": {
         "school": "格黑娜",
@@ -3133,7 +3147,7 @@ var mt_characters = {
             "kr": "스나오오카미 시로코",
             "pinyin": "shalangbaizi"
         },
-        "charface": "砂狼白子/CH0188/CH0188.6.webp,砂狼白子/NP0046/NP0046.6.webp,砂狼白子/NP0064/NP0064.6.webp,砂狼白子/NP0124/NP0124.17.webp,砂狼白子/shiroko/shiroko.17.webp,砂狼白子/shiroko_ridingsuit/shiroko_ridingsuit.6.webp,砂狼白子/shiroko_robber/shiroko_robber.17.webp,砂狼白子/砂狼白子.28.webp"
+        "charface": "砂狼白子/CH0188/CH0188.6.webp,砂狼白子/NP0046/NP0046.6.webp,砂狼白子/NP0064/NP0064.6.webp,砂狼白子/NP0124/NP0124.17.webp,砂狼白子/shiroko/shiroko.17.webp,砂狼白子/shiroko_ridingsuit/shiroko_ridingsuit.6.webp,砂狼白子/shiroko_robber/shiroko_robber.17.webp,砂狼白子/砂狼白子.28.webp,砂狼白子/cv29927426/cv29927426.36.webp"
     },
     "砂狼白子？": {
         "school": "阿比多斯",

@@ -631,11 +631,11 @@
     },
     "伊吹": {
         "id": "Ibuki",
-        "zh_cn": "伊吹",
-        "zh_tw": "伊吹",
-        "jp": "イブキ",
-        "en": "Ibuki",
-        "kr": "이부키",
+        "zh_cn": "丹花 伊吹",
+        "zh_tw": "丹花 伊吹",
+        "jp": "丹花 イブキ",
+        "en": "Tanga Ibuki",
+        "kr": "탄가 이부키",
         "pinyin": "yichui"
     },
     "羽沼真琴": {
@@ -2064,5 +2064,13 @@
         "en": "",
         "kr": "",
         "pinyin": "qingchuqi"
+    },
+    "元宫千秋": {
+        "zh_cn": "元宫 千秋",
+        "zh_tw": "元宫 千秋",
+        "jp": "元宮 チアキ",
+        "en": "Motomiya chiaki",
+        "kr": "모토미야 치아키",
+        "pinyin": "yuangongqianqiu"
     }
 }
