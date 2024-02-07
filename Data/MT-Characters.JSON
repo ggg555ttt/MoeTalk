@@ -671,6 +671,20 @@ var mt_characters = {
         },
         "charface": "戈尔孔达/戈尔孔达.1.webp"
     },
+    "地下生活者": {
+        "school": "其他",
+        "club": "数秘术",
+        "head": "NP0165_Collection,NP0165",
+        "name": {
+            "zh_cn": "地下生活者",
+            "zh_tw": "地下生活者",
+            "jp": "地下生活者",
+            "en": "underground-dweller",
+            "kr": "지하생활자",
+            "pinyin": "dixiashenghuozhe"
+        },
+        "charface": "地下生活者/地下生活者.1.webp"
+    },
     "巨匠": {
         "school": "其他",
         "club": "数秘术",
@@ -2116,7 +2130,7 @@ var mt_characters = {
     "元宫千秋": {
         "school": "格黑娜",
         "club": "万魔殿",
-        "head": "CH0238",
+        "head": "CH0238_Collection,CH0238",
         "name": {
             "zh_cn": "元宫 千秋",
             "zh_tw": "元宫 千秋",
@@ -3110,7 +3124,7 @@ var mt_characters = {
     "小鸟游星野": {
         "school": "阿比多斯",
         "club": "对策委员会",
-        "head": "Hoshino_L2D,Hoshino_swimsuit_L2D,NP0045_Collection,NP0063_Collection,Hoshino_Collection,Hoshino_Robber_Collection,Hoshino_Swimsuit_Collection,小鸟游星野_昔日_Collection,NP0063,Hoshino,Hoshino_Robber,Hoshino_swimsuit",
+        "head": "Hoshino_L2D,Hoshino_swimsuit_L2D,NP0045_Collection,NP0063_Collection,CH0241_Collection,Hoshino_Collection,Hoshino_Robber_Collection,Hoshino_Swimsuit_Collection,NP0063,NP0167,CH0241,Hoshino,Hoshino_Robber,Hoshino_swimsuit",
         "name": {
             "zh_cn": "小鸟游 星野",
             "zh_tw": "小鳥遊 星野",
@@ -3119,12 +3133,12 @@ var mt_characters = {
             "kr": "타카나시 호시노",
             "pinyin": "xiaoniaoyouxingye"
         },
-        "charface": "小鸟游星野/hoshino/hoshino.17.webp,小鸟游星野/hoshino_robber/hoshino_robber.6.webp,小鸟游星野/hoshino_swimsuit/hoshino_swimsuit.21.webp,小鸟游星野/NP0045/NP0045.17.webp,小鸟游星野/NP0063/NP0063.21.webp,小鸟游星野/小鸟游星野.20.webp"
+        "charface": "小鸟游星野/CH0241/CH0241.46.webp,小鸟游星野/hoshino/hoshino.17.webp,小鸟游星野/hoshino_robber/hoshino_robber.6.webp,小鸟游星野/hoshino_swimsuit/hoshino_swimsuit.21.webp,小鸟游星野/NP0045/NP0045.17.webp,小鸟游星野/NP0063/NP0063.21.webp,小鸟游星野/NP0167/NP0167.46.webp,小鸟游星野/小鸟游星野.28.webp"
     },
     "梦": {
         "school": "阿比多斯",
         "club": "对策委员会",
-        "head": "梦_Collection",
+        "head": "CH0157_Collection,NP0166,CH0157",
         "name": {
             "zh_cn": "梦",
             "zh_tw": "夢",
@@ -3133,7 +3147,7 @@ var mt_characters = {
             "kr": "유메",
             "pinyin": "meng"
         },
-        "charface": ""
+        "charface": "梦/CH0157/CH0157.21.webp,梦/NP0166/NP0166.21.webp,梦/梦.8.webp"
     },
     "砂狼白子": {
         "school": "阿比多斯",
