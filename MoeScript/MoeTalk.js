@@ -21,7 +21,7 @@ function mt_height(num)
 	return length.toFixed();
 }
 var mt_font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>";
-if(localStorage['mt-font'])$("head").append(mt_font);//加载字体
+if(!localStorage['mt-nofont'] && !browser.isFirefox)$("head").append(mt_font);//加载字体
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
 $(function()
 {

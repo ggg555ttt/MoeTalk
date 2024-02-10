@@ -712,7 +712,6 @@
 											})
 										}), (0, m.jsx)(F,
 										{
-											className: "bold",
 											children: [(0, m.jsx)(O,
 											{
 												children: [(0, m.jsx)('span',
@@ -4006,7 +4005,7 @@
 													whiteSpace: 'nowrap',
 													overflow: 'hidden'
 												},
-												className: a === e ? " bold selected medium" : "bold medium",
+												className: a === e ? "bold selected medium" : "bold medium",
 												onClick: function()
 												{
 													l(e)
@@ -4352,7 +4351,6 @@
 							},
 							children: (0, m.jsx)(e2,
 							{
-								className: "bold",
 								children: n.content.split('\n')[index]//#根据分支索引判断选择肢位置
 							})
 						})]
@@ -4724,7 +4722,6 @@
 								{
 									editMsg(o,n,t)//#编辑消息-旁白
 								},
-								className: "bold",
 								children: n.content
 							}) : (0, m.jsx)(m.Fragment,{})
 						}), h || (0, m.jsx)("input",
@@ -5247,39 +5244,6 @@
 									{
 										lang = language;
 										localStorage['mt-lang'] = language;
-									}
-								}
-							})
-						}), (0, m.jsx)(ns,
-						{
-							style:
-							{
-								display: n.length > 0 ? "none" : "flex"
-							},
-							children: (0, m.jsx)(c.Bx,
-							{
-								className: "selected medium",
-								style:
-								{
-									width: 'auto',
-									height: 'auto',
-									fontSize: "1.1rem"
-								},
-								children: 'Font loading options',
-								onClick: function()
-								{
-									if(confirm((localStorage['mt-font'] ? '已加载字体\n点击“确认”取消加载字体' : '未加载字体\n点击“确认”加载字体')+'\n字体加载会影响生成图片的速度'))
-									{
-										if(localStorage['mt-font'])
-										{
-											localStorage.removeItem('mt-font');
-											$$('#mt-font').remove()
-										}
-										else
-										{
-											localStorage['mt-font'] = true
-											$$("head").append(mt_font);//加载字体
-										}
 									}
 								}
 							})

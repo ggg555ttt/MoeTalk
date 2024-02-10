@@ -349,9 +349,10 @@ align-items: flex-start;
 gap: 4px;
 align-self: stretch;
 }
-.bold,#readme
+.bold
 {
-	font-weight:700;
+	font-family: "Microsoft YaHei", Arial, sans-serif; /* 指定字体 */
+	font-weight: bold; /* 加粗 */
 }
 .editTools.dot::after {
     content: "";

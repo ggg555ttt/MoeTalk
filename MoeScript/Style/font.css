@@ -2,39 +2,12 @@
 	font-family:title;
 	src: url('../../Data/Font/Jalnan.TTF')
 }
-@font-face {
-	font-family:medium;
-	src:url('../../Data/Font/Title_Bold.WOFF') format("woff");
-	unicode-range:U+ac00-d7a3,U+0041-005a,U+0061-007a,U+0030-0039,U+002?,U+003a-0040,U+005b-0060,U+007b-007e,U+11??,U+3130-318f,U+a960-a97f,U+ac00-d7af,U+d7b0-d7ff
-}
-@font-face {
-	font-family:bold;
-	src:url('../../Data/Font/Title_Medium.WOFF') format("woff");
-	unicode-range:U+ac00-d7a3,U+0041-005a,U+0061-007a,U+0030-0039,U+002?,U+003a-0040,U+005b-0060,U+007b-007e,U+11??,U+3130-318f,U+a960-a97f,U+ac00-d7af,U+d7b0-d7ff
-}
-@font-face {
-	font-family:medium-cn;
-	src: url('../../Data/Font/NotoSansSC-Medium.OTF')
-}
-@font-face {
-	font-family:bold-cn;
-	src: url('../../Data/Font/NotoSansSC-Bold.OTF')
-}
-[lang=en],[lang=en] .medium,
-[lang=ja],[lang=ja] .medium,
-[lang=ko],[lang=ko] .medium,
-[lang=zh-tw],[lang=zh-tw] .medium,
-[lang=zh-CN],[lang=zh-CN] .medium,
-[lang=zh],[lang=zh] .medium
+@font-face
 {
-	font-family:medium,medium-cn
+	font-family:moetalk;
+	src: url('../../Data/Font/Blueaka.woff2') format("woff");
 }
-[lang=en] .bold,
-[lang=ja] .bold,
-[lang=ko] .bold,
-[lang=zh-tw] .bold,
-[lang=zh-CN] .bold,
-[lang=zh] .bold
+body,textarea,button
 {
-	font-family:bold,bold-cn
+	font-family:moetalk;
 }
