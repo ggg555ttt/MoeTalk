@@ -11,3 +11,7 @@ body,textarea,button
 {
 	font-family:moetalk;
 }
+.bold
+{
+	font-family: "Microsoft YaHei", Arial, sans-serif; /* 指定字体 */
+}
