@@ -2157,7 +2157,6 @@
 												alert('更改完成，如果图片生成错误请尝试改为其它参数');
 												localStorage['mt-image'] = 'image/'+image;
 												$$('#mt-image').text(image)
-												if(image === "webp")maxHeight = 16384
 											}
 										}
 									}), (0, m.jsxs)(ea.$_,

@@ -3,7 +3,8 @@ var cfemoji = 'NO';//表情差分开关
 var cf = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var batEdit = false;//批量编辑开关
-var maxHeight = browser.isFirefox && localStorage['mt-image'].split('/')[1] !== 'webp' ? 16384*2 : 16384;
+//var maxHeight = browser.isFirefox && localStorage['mt-image'].split('/')[1] !== 'webp' ? 16384*2 : 16384;
+var maxHeight = parseInt(localStorage['mt-maxheight']) < 16384 ? localStorage['mt-maxheight'] : 16384;
 var sendChar = false//发言人开关
 var chatIndex = -1//消息索引
 var chatArr = []

@@ -257,3 +257,12 @@ $('body').on('click',"#cleancache",function()
 	});
 	alert('已清除ServiceWorker缓存')
 })
+$('body').on('click',"#mt-maxheight",function()
+{
+	let maxheight = prompt("请输入生成图片的最大长度：（小于16384）", localStorage['mt-maxheight'] ? localStorage['mt-maxheight'] : 16384);
+	if(maxheight != null)
+	{
+		alert('更改完成，请返回moetalk');
+		localStorage['mt-maxheight'] = maxheight;
+	}
+})
