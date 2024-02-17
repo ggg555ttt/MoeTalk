@@ -139,7 +139,7 @@ $('body').on('click',"#uphead",function()//上传头像
 })
 function mt_ChangeChar(id)
 {
-	let chararr = JSON.parse(localStorage['mt-char'])
+	chararr = JSON.parse(localStorage['mt-char'])
 	if(chararr[id])
 	{
 		let cname = prompt(`自定义角色ID：${id}\n若不想上传头像那么则只修改角色名\n当前角色名为：`,chararr[id]);
