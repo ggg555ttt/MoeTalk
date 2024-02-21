@@ -315,7 +315,7 @@ flex: 1 0 0;
     resize: none;
 /*    padding: 0.1rem 0.5rem;*/
     font-size: 1.1rem;
-    border: none;
+    border: 1;
     border-radius: 0.5rem;
     line-height: 1.5rem;
     color: red;
@@ -372,4 +372,290 @@ align-self: stretch;
 .imageSave>img
 {
 	width: 100%;
+}
+
+.消息 {
+    display: flex;
+    flex-direction: row;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem 1rem 0px;
+    font-size: 1.1rem;
+    height: auto;
+}
+.聊天 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    width: 100%;
+    height: auto;
+}
+.头像框 {
+    display: flex;
+    width: 6rem;
+}
+.对话 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    font-size: 1.2rem;
+    color: rgb(34, 37, 41);
+}
+.时间戳 {
+    color: rgb(69, 78, 89);
+    font-size: 0.9rem;
+    margin: auto 0.5rem 0px;
+    flex-shrink: 0;
+    white-space: pre;
+}
+.名称 {
+	line-height: 1.8rem; 
+	word-break: break-all;
+	font-size:20px;
+}
+.文本 {
+    user-select: text;
+    position: relative;
+    color: white;
+    width: fit-content;
+    border-radius: 10px;
+    background: rgb(76, 91, 111);
+    border: 1px solid rgb(76, 91, 111);
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    line-break: loose;
+    padding: 0.6rem;
+    line-height: 141%;
+    font-size: 20px;
+    cursor: pointer;
+}
+.头像 {
+    box-sizing: border-box;
+    margin: 0rem;
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.左角::after {
+    content: "";
+    position: absolute;
+    left: -0.5rem;
+    top: 0.6rem;
+    border-top: 0.3rem solid transparent;
+    border-right: 0.5rem solid rgb(76, 91, 111);
+    border-bottom: 0.3rem solid transparent;
+}
+.右角{position: relative;}
+.右角::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0.6rem;
+    height: 0px;
+    border-top: 0.3rem solid transparent;
+    border-bottom: 0.3rem solid transparent;
+    border-left: 0.5rem solid rgb(74, 138, 202);
+}
+
+.羁绊
+{
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    height: auto;
+    border: 1px solid rgb(221, 210, 216);
+    border-radius: 1rem;
+    color: rgb(76, 91, 111);
+    background-color: rgb(252, 238, 240);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto 100%;
+    line-height: 1.5rem;
+}
+.羁绊_标题
+{
+	display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+}
+.竖线
+{
+    height: 1.1rem;
+    margin-right: 0.3rem;
+}
+.横线
+{
+	border: 0px;
+    height: 1px;
+    background: rgb(218, 225, 229);
+    width: 100%;
+}
+.羁绊_按钮
+{
+	padding: 0.5rem;
+    height: max-content;
+    color: white;
+    background-color: rgb(252, 135, 155);
+    border-radius: 0.5rem;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-image: initial;
+    border-bottom: 0.1rem solid rgb(169, 136, 136);
+    box-shadow: rgb(215 165 165) 0rem 0.05rem 0.2rem;
+    line-height: 1.5rem;
+    width: 100%;
+    line-height: 141%;
+    font-size: 20px;
+    cursor: pointer;
+}
+.回复
+{
+	display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    border: 1px solid rgb(221, 210, 216);
+    border-radius: 1rem;
+    color: rgb(76, 91, 111);
+    background-color: rgb(225, 237, 240);
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: auto 10rem;
+    line-height: 18px;
+}
+.回复_标题
+{
+	display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+}
+.选择肢组
+{
+	display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+}
+.选择肢
+{
+	display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    height: auto;
+}
+.选择肢按钮
+{
+	text-align: center;
+    height: 100%;
+    width: 100%;
+    padding: 0.7rem 0.5rem;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-image: initial;
+    border-bottom: 0.1rem solid rgb(174, 174, 174);
+    box-shadow: rgb(180 188 192) 0rem 0.05rem 0.2rem;
+    border-radius: 0.5rem;
+    line-height: 1.5rem;
+    background-color: white;
+    cursor: pointer;
+}
+.选择肢文字
+{
+	overflow: hidden;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    line-break: loose;
+    color: rgb(75, 105, 137);
+    line-height: 141%;
+    font-size: 20px;
+}
+.编辑按钮
+{
+	align-self: end;
+    margin: 0rem 0.5rem;
+    color: rgb(45, 70, 100);
+    height: auto;
+    width: 1.2rem;
+    flex-shrink: 0;
+    border: none;
+    background-color: transparent;
+    padding: 0rem;
+    align-content: center;
+    cursor: pointer;
+}
+.编辑图标
+{
+	margin: auto;
+    height: 100%;
+    width: 100%;
+}
+.图片
+{
+	max-width: 90%;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+    padding: 0.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.旁白
+{
+	user-select: text;
+    position: relative;
+    color: rgb(69, 78, 89);
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    line-break: loose;
+    padding: 0.2rem 1rem;
+    line-height: 141%;
+    font-size: 20px;
+    cursor: pointer;
 }

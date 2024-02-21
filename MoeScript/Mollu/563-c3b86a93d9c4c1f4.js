@@ -835,7 +835,7 @@
 								},
 								children: (0, b.jsxs)("h1",
 								{
-									children: [i.Z[(0, a.sk)(n.M_TYPE)][d] + " " + i.Z.message[d] + " ", (0, b.jsxs)("span",
+									children: [`${i.Z.private[d]} ${i.Z.message[d]}`, (0, b.jsxs)("span",
 									{
 										style:
 										{

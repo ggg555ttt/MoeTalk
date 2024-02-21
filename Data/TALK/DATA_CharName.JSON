@@ -2080,5 +2080,21 @@
         "en": "underground-dweller",
         "kr": "지하생활자",
         "pinyin": "dixiashenghuozhe"
+    },
+    "黑帮学生": {
+        "zh_cn": "工作员",
+        "zh_tw": "工作員",
+        "jp": "工作員",
+        "en": "Agent",
+        "kr": "공작원",
+        "pinyin": "heibangxuesheng"
+    },
+    "黑帮机器人": {
+        "zh_cn": "唐·阿兰西诺",
+        "zh_tw": "唐·阿蘭西諾",
+        "jp": "ドン·アランチーノ",
+        "en": "Don·Arancino",
+        "kr": "돈·아란치노",
+        "pinyin": "heibangjiqiren"
     }
 }

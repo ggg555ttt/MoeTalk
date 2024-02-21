@@ -453,6 +453,7 @@
 											return (0, m.jsx)(j,
 											{
 												alt: String(e.no),
+												title: String(e.index),
 												width: 252,
 												height: 252,
 												src: loadhead(e.no,e.index),//#下方快捷角色选择框
@@ -489,7 +490,8 @@
 								},
 								width: 252,
 								height: 252,
-								alt: "sensei",
+								alt: String(d.I.no),
+								title: String(d.I.index),
 								src: loadhead(d.I.no,d.I.index),//#右侧老师本人
 								onClick: function()
 								{
@@ -1613,7 +1615,7 @@
 										disabled: l.length < 1,
 										onClick: function()
 										{
-											o("info", l), d()
+											sendMessage({content: l},'info'), d()
 										},
 										children: L.Z.confirm[u]
 									})]
@@ -1740,7 +1742,7 @@
 										disabled: h.length < 1,
 										onClick: function()
 										{
-											b()
+											sendMessage({content: h},'reply'), y()
 										},
 										children: L.Z.confirm[g]
 									})]
@@ -1829,7 +1831,24 @@
 											className: "bold",
 											onClick: function()
 											{
-												r()
+												t(!1)//#r()
+												if($$(".dels:checked").length)
+												{
+													let indexs = []
+													$$('.dels:checked').each(function(k,v)
+													{
+														indexs.push($$('.dels').index(v))
+													})
+													sendMessage({},'','delete',indexs)
+												}
+												else
+												{
+													chats = []
+													$$(`.消息`).remove()
+													$$('.RightScreen__Box-sc-1fwinj2-1').show()//显示开头引导
+													$$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').hide()//隐藏聊天记录
+													localStorage.setItem('chats',JSON.stringify(chats))
+												}
 											},
 											children: L.Z.confirm[o]
 										})]
@@ -2157,6 +2176,7 @@
 												alert('更改完成，如果图片生成错误请尝试改为其它参数');
 												localStorage['mt-image'] = 'image/'+image;
 												$$('#mt-image').text(image)
+												if(image === "webp")maxHeight = 16384
 											}
 										}
 									}), (0, m.jsxs)(ea.$_,
@@ -2172,7 +2192,7 @@
 										}), (0, m.jsx)(ea.AZ,
 										{
 											className: "bold",
-											disabled: x,
+											disabled: chats.length < 1,
 											onClick: function()
 											{
 												let title = L.Z.title[g] + " : " + ("" !== _ ? _ : L.Z.noTitle[g])
@@ -2187,28 +2207,29 @@
 												let length = leng
 												let json = JSON.parse(localStorage['chats'])
 												imageArr = []
-												for(let end=0;end<$$(".hfOSPu").length;end++)
+												for(let end=0;end<$$(".消息").length;end++)
 												{
-													length = length+($$(`.hfOSPu:eq(${end})`).outerHeight()*S)
-													if(length > maxHeight || $$(`.hfOSPu:eq(${end})>.dels`).css('background-color') === 'rgb(255, 0, 0)')//
+													length = length+($$(`.消息:eq(${end})`).outerHeight()*S)
+													if(length > maxHeight || $$(`.消息:eq(${end})>.dels`).css('background-color') === 'rgb(255, 0, 0)')//
 													{
-														if(json[end].isFirst === false && json[end].sCharacter.no !== 0)
+														if(json[end].isFirst === false && json[end].sCharacter.no != 0)
 														{
-															operate = 'isFirst'
-															json[end].isFirst = !json[end].isFirst
-															p((0, eo.U_)(json))
-															length = leng+($$(`.hfOSPu:eq(${end})`).outerHeight()*S)+(37*S)
+															// operate = 'isFirst'
+															// json[end].isFirst = !json[end].isFirst
+															// p((0, eo.U_)(json))
+															$$(`.消息:eq(${end})`)[0].outerHTML = makeMessage(json[end].type,json[end],end)
+															length = leng+($$(`.消息:eq(${end})`).outerHeight()*S)+(37*S)
 														}
 														else
 														{
-															length = leng+($$(`.hfOSPu:eq(${end})`).outerHeight()*S)
+															length = leng+($$(`.消息:eq(${end})`).outerHeight()*S)
 														}
 														imageArr.push({start:start,end:end,index:imageArr.length+1})
 														start = end
 													}
-													if(end === $$(".hfOSPu").length-1)
+													if(end === $$(".消息").length-1)
 													{
-														imageArr.push({start:start,end:$$(".hfOSPu").length,index:imageArr.length+1})
+														imageArr.push({start:start,end:$$(".消息").length,index:imageArr.length+1})
 													}
 												}
 												if(zip && imageArr.length > 1)
@@ -2344,7 +2365,7 @@
 											mt_char: JSON.parse(localStorage['mt-char']),//@自创角色
 											mt_head: JSON.parse(localStorage['mt-head']),//@自创头像
 											chars: JSON.parse(localStorage['mt-selectedList'])//@
-										}, (0, et.Z)(s.chats)])], e.next = 6, (0, u.rU)(r);
+										}, chats])], e.next = 6, (0, u.rU)(r);
 									case 6:
 										o = e.sent, (0, ef.saveAs)(o,`MoeTalk_${t.title}_${mt_height()}.png`), blobToBase64(o,function(base64)
 										{
@@ -2396,22 +2417,16 @@
 						},
 						I = function()
 						{
-							a((0, eo.U_)(j[1])), a((0, eo.gW)(
+							chats = j[1]
+							$$('.消息').remove()
+							$$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
+							$$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
+							$$.each(chats,function(k,v)
 							{
-								sReplyNo: 0,
-								replyNo: j[0].replyNo,
-								replyGroup: j[0].replyGroup
-							})), w([
-								{
-									title: "",
-									nickname: "",
-									date: "",
-									replyNo: 0,
-									replyGroup: 0,
-									chars: []
-								},
-								[]
-							]), N()
+								$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k))
+							})
+							localStorage.setItem('chats',JSON.stringify(chats))
+							N()
 						};
 					return (0, m.jsx)(ea.Xf,
 					{
@@ -2799,7 +2814,7 @@
 							}), (0, m.jsx)(eO,
 							{
 								id: "tool-delete",//@删除工具
-								disabled: d.length < 1,
+								//#disabled: d.length < 1,
 								title: "Delete ALL",
 								onClick: function()
 								{
@@ -2819,7 +2834,7 @@
 								className: h ? "dot" : "",
 								onClick: function()
 								{
-									a((0, s.Wn)(!h))
+									//a((0, s.Wn)(!h))
 								},
 								children: (0, m.jsx)(c.xL,
 								{
@@ -2828,7 +2843,6 @@
 							}), (0, m.jsx)(eO,
 							{
 								id: "tool-image",//@截图工具
-								disabled: d.length < 1,
 								title: "Image Download",
 								onClick: function()
 								{
@@ -2877,33 +2891,7 @@
 							{
 								N(e)
 							},
-							handleDeleteAll: function()
-							{
-								//*批量删除
-								let arr = [];
-								let i = 0;
-								let rGroup = 1;
-								let rNo = 1;
-								if($$(".dels:checked").length > 0)
-								{
-									arr = JSON.parse(JSON.stringify(d));
-									rGroup = localStorage['replyGroup'];
-									rNo = localStorage['replyNo'];
-									$$(".dels:checked").each(function()
-									{
-										arr.splice($$(this).attr('index')-i,1);
-										i++;
-									})
-								}
-								click('#delsall');click('#delsall');
-								//*批量删除
-								N(!1), a((0, eo.U_)(arr)), a((0, eo.gW)(//#批量删除支持[]改arr
-								{
-									replyGroup: 1,
-									replyNo: 1,
-									sReplyNo: 0
-								}))
-							}
+							handleDeleteAll: function(){}
 						}), (0, m.jsx)(eb,
 						{
 							show: x,
@@ -3027,7 +3015,7 @@
 							no = JSON.parse(localStorage['CharFaceIndex'])[no];
 						}
 						let link;let cflink = null;let cfarr = [];cfarr[0] = 'Images/CharFace';///定义链接
-						let charname = no === 0 ? '主角' : no;
+						let charname = no == 0 ? '主角' : no;
 
 						if(JSON.parse(localStorage['mt-char'])[no])
 						{
@@ -3201,7 +3189,8 @@
 														{
 															if(cf == 'Emoji')link = `Images/${cf}/${CFPI+1}${CFPI<3?(lang=='zh_cn'?'zh_tw':lang):''}${n+1}.webp`;//@原版表情
 															if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
-															u(link)//#表情链接
+															sendMessage({content: link},'image'), s()
+															//u(link)//#表情链接
 														},
 														src: href+link//#表情链接
 													}, n)
@@ -3403,10 +3392,14 @@
 								accept: "image/*",
 								onChange: function(e)
 								{
-									(0, u.T6)(e, function(e)
+									var file = e.target.files[0]
+									var ready = new FileReader()
+									ready.readAsDataURL(file);
+									ready.onload = function(e)
 									{
-										I("image", e)
-									}, B)
+										var base64Img = e.target.result;
+										compress(base64Img,'image')
+									}
 								}
 							}), (0, m.jsx)(eU,
 							{
@@ -3436,28 +3429,31 @@
 								{
 									children: [(0, m.jsx)(c.Kx,
 									{
-										className: "medium",
+										className: "medium chatText",
 										placeholder: L.Z.input_comment[h],
 										maxRows: 5,
-										value: w,
-										ref: Z,
-										onFocus: function()
-										{
-											g(!1), k(!0)
-										},
+										// value: w,
+										// ref: Z,
+										// onFocus: function()
+										// {
+										// 	g(!1), k(!0)
+										// },
 										onKeyDown: function(e)
 										{
 											P(e, function()
 											{
-												I('chat', w), _("")///回车发送
+												if($$('.chatText').val() !== '')
+												{
+													sendMessage({content: $$('.chatText').val()},'chat')//#回车发送
+												}
 											})
 										},
-										onChange: function(e)
-										{
-											cfemoji = 'NO';//@输入文字时不读取表情
-											_(e.currentTarget.value)
-											if($$(".dels:checked").attr('index'))$$(".dels:checked")[0].scrollIntoView(!1)//@输入文字自动跳到被选处
-										}
+										// onChange: function(e)
+										// {
+										// 	cfemoji = 'NO';//@输入文字时不读取表情
+										// 	_(e.currentTarget.value)
+										// 	if($$(".dels:checked").attr('index'))$$(".dels:checked")[0].scrollIntoView(!1)//@输入文字自动跳到被选处
+										// }
 									}), (0, m.jsx)(eU,
 									{
 										style:
@@ -3509,10 +3505,13 @@
 								style:
 								{},
 								title: "send",
-								disabled: w.length < 1,
+								//disabled: w.length < 1,
 								onClick: function()
 								{
-									I('chat', w), _("")///单击发送
+									if($$('.chatText').val() !== '')
+									{
+										sendMessage({content: $$('.chatText').val()},'chat')//#单击发送
+									}
 								},
 								children: (0, m.jsx)(c.xL,
 								{
@@ -3583,10 +3582,10 @@
 										height: "2.2rem"
 									},
 									title: "羁绊",
-									disabled: s.no === 0,
+									//disabled: s.no == 0,
 									onClick: function()
 									{
-										click('#tool-heart')
+										sendMessage({content: ''},'heart')
 									},
 									children: (0, m.jsx)(c.xL,
 									{
@@ -3619,7 +3618,6 @@
 										width: "2.2rem",
 										height: "2.2rem"
 									},
-									disabled: o.length < 1,
 									onClick: function()
 									{
 										click('#tool-image')
@@ -3725,183 +3723,14 @@
 						j = b[0],
 						w = b[1],
 						_ = (0, r.useRef)(null);
-						h = JSON.parse(JSON.stringify(h));
-					(0, r.useEffect)(function()
-					{
-						w("edit" === a && "image" !== t.type ? t.content : "")//#修改变追加
-					}, [a, t, w]);
-					var C = function e(n)
-						{
-							var t = [n];
-							return h.chats.forEach(function(r)
-							{
-								n === r.replyDepth && "reply" === r.type && (t = [].concat((0, et.Z)(t), (0, et.Z)(e(r.replyNo))))
-							}), t
-						},
-						v = function()
-						{
-							var e = [],
-								n = !1,
-								r = !1,
-								o = C(t.replyNo);
-							return h.chats.forEach(function(i)
-							{
-								if(r = o.filter(function(e)
-								{
-									return e === i.replyDepth
-								}).length > 0, t === i || r) n = !0;
-								else if(n && t.isFirst)
-								{
-									var c = eY(
-									{}, i);
-									c.isFirst = !1, e.push(c), n = !1
-								}
-								else e.push(i)
-							}), e
-						},
-						//*编辑功能
-						k = function()
-						{
-							var e, n = [],
-								r = !1;
-							let name = $$('.name').val()
-							let time = $$('.time').val()
-							let content = $$('.content').val()
-							let isRight = $$('.isRight').prop('checked')
-							let isLeft = $$('.isLeft').prop('checked')
-							let type = $$('.editType').prop('checked')
-							let is_breaking = $$('.is_breaking').prop('checked')
-							let index
-							if($$('.dels:checked').length > 1 && batEdit)
-							{
-								$$(".dels:checked").each(function()
-								{
-									e = h.chats[$$(this).attr('index')]
-									if(name !== '')
-									{
-										if(name === ' ')e.name = ''
-										else e.name = name
-									}
-									if(time !== '')
-									{
-										if(time === ' ')e.time = ''
-										else e.time = time
-									}
-									if(content !== '')
-									{
-										if(content === ' ')e.content = ''
-										else e.content = content
-									}
-									if(sendChar === true)
-									{
-										e.sCharacter = p
-									}
-									if(isRight === true)
-									{
-										e.isRight = true
-									}
-									if(isLeft === true)
-									{
-										e.isRight = false
-									}
-									if(type)
-									{
-										e.type = a
-										if('image' !== a && t.file)e.file = ''
-										//#if('reply' === a)e.isFirst = true
-									}
-									e.sReplyNo = h.sReplyNo,
-									e.replyNo = h.replyNo+Math.random()
-									e.replyGroup = h.replyGroup+Math.random()
-								})
-								batEdit = false
-							}
-							else
-							{
-								n = JSON.parse(JSON.stringify(h.chats[chatIndex]));
-								if(sendChar === true)
-								{
-									n.sCharacter = p
-								}
-								n.isRight = n.sCharacter.no === 0 ? false : isRight
-								if(is_breaking === true)n.isFirst = true
-								//#n.isFirst = n.sCharacter.no === 0 ? false : t.isFirst
-								n.content = content
-								n.time = time
-								n.name = name
-								n.type = a
-								n.is_breaking = is_breaking
-								n.sReplyNo = h.sReplyNo,
-								n.replyNo = h.replyNo+Math.random()
-								n.replyGroup = h.replyGroup+Math.random()
-								if($$('.addChat').prop('checked') || (clearImage === true && t.file) || a !== 'image')
-								{
-									n.file = ''
-								}
-								if($$('.addChat').prop('checked') && !clearImage && n.type !== 'delete')
-								{
-									h.chats.splice(chatIndex+1,0,n)
-								}
-								if(!$$('.addChat').prop('checked'))
-								{
-									h.chats[chatIndex] = n
-								}
-								if(n.type === 'delete')h.chats.splice(chatIndex,1)
-								clearImage = false
-							}
-							s((0, eo.U_)(h.chats)), S()
-						},
-						Z = (0, r.useCallback)(function(e, file)///图片编辑
-						{
-							let chat = JSON.parse(JSON.stringify(h.chats[chatIndex]));
-							chat.type = 'image'
-							chat.content = $$('.content').val()
-							chat.name = $$('.name').val()
-							chat.time = $$('.time').val()
-							chat.isRight = $$('.isRight').prop('checked')
-							chat.file = file
-							if($$('.addChat').prop('checked'))
-							{
-								h.chats.splice(chatIndex+1,0,chat)
-							}
-							else
-							{
-								h.chats[chatIndex] = chat
-							}
-							s((0, eo.U_)(h.chats)), o(!1, null, "delete"), w("")
-						}, [a, h, t, s, p, o]),
-						//*编辑功能
-						N = function()
-						{
-							s((0, er.Y2)(
-							{
-								isAlert: !0,
-								title: L.Z.error[f],
-								ment: L.Z.no_support[f]
-							}))
-						},
-						S = function()
-						{
-							o(!1, null, "delete"), w("")
-						},
-						P = (0, r.useCallback)(function()
-						{
-							var e = !0;
-							return "delete" !== a && "time" !== a ? "heart" !== x ? j.length > 0 && (e = !1) : "add" === a && "heart" === x && 0 !== p.no && (e = !1) : e = !1, e
-						}, [a, x, j, p]),
-						I = (0, r.useCallback)(function()
-						{
-							var e = "";
-							return "add" !== a ? ("info" !== t.type && (e = (0, u.fY)(t.sCharacter.no, !0, f)), "heart" === t.type ? e += L.Z.go_relationship_event[f] : "image" === t.type ? "edit" === a ? e += " : " + L.Z.add_image[f] : e += " : " + L.Z.image[f] : "time" === a ? e += " : " + L.Z.time_comment[f] : "chat" === t.type ? e += " : " + t.content : e += t.content) : "chat" === x ? e = (0, u.fY)(p.no, !0, f) + " : " + L.Z.input_comment[f] : "image" === x ? e = (0, u.fY)(p.no, !0, f) + " : " + L.Z.add_image[f] : "reply" === x ? e = "Sensei : " + L.Z.input_comment[f] : "heart" === x ? e = 0 === p.no ? L.Z.select_char[f] : (0, u.fY)(p.no, !0, f) + L.Z.go_relationship_event[f] : "info" === x && (e = L.Z.input_comment[f]), e
-						}, [a, x, f, t, p]);
 					//*编辑界面
 					return (0, m.jsx)(ea.Xf,
 					{
-						className: n ? "visible medium" : "medium",
+						className: n ? "editMessage medium visible" : "editMessage medium",
 						style:{position:'absolute'},
 						onDoubleClick: function()
 						{
-							S()
+							$$('.editMessage').removeClass('visible')//S()
 						},
 						children: (0, m.jsxs)(ea.F0,
 						{
@@ -3911,40 +3740,16 @@
 							},
 							children: [(0, m.jsxs)(ea.h4,
 							{
-								children: [(0, m.jsx)(c.Bx,
+								children: [(0, m.jsx)(ea.Dx,
 								{
-									hidden: !sendChar,
-									className: "bold",
-									style:
-									{
-										"width": "auto",
-										"color": "black"
-									},
-									children: '←',
-									onClick:function(){selectClick(37)}
-								}), (0, m.jsx)(ea.Dx,
-								{
-									className: "bold",
-									children: $$('.dels:checked').length > 1 ? `批量编辑(${$$('.dels:checked').length})` : L.Z[t.type][f]
-								}), (0, m.jsx)(c.Bx,
-								{
-									hidden: !sendChar,
-									className: "bold",
-									style:
-									{
-										"width": "auto",
-										"color": "black"
-									},
-									children: '→',
-									onClick:function(){selectClick(39)}
+									className: "typeTitle bold"
 								}), (0, m.jsx)(ea.ec,
 								{
 									onClick: function()
 									{
-										S()
+										$$('.editMessage').removeClass('visible')//S()
 									},
-									children: (0, m.jsx)(c.j4,
-									{})
+									children: (0, m.jsx)(c.j4,{})
 								})]
 							}), (0, m.jsxs)(ea.$0,
 							{
@@ -3960,33 +3765,34 @@
 											className:"edit_2_1_1 bold",
 											children:[(0, m.jsx)('input',
 											{
-												hidden: $$('.dels:checked').length > 1,
+												type:'checkbox',
+												className:'editType'
+											}),(0, m.jsx)('span',{children:'修改类型'}),
+											(0, m.jsx)('input',
+											{
+												type:'checkbox',
+												className:'editTalk'
+											}),(0, m.jsx)('span',{children:'修改显示'}),
+											(0, m.jsx)('input',
+											{
 												type:'checkbox',
 												className:'addChat'
-											}),(0, m.jsx)('input',
+											}),(0, m.jsx)('span',{children:L.Z.add[f]}),
+											(0, m.jsx)('input',
 											{
-												hidden: $$('.dels:checked').length < 2,
 												type:'checkbox',
-												className:'editType',
-												onClick:function()
-												{
-													w($$('.editType').prop('checked'))
-												}
-											}),$$('.dels:checked').length < 2 ? L.Z.add[f] : '同时修改消息类型',(0, m.jsx)('input',
+												className:'isFirst'
+											}),(0, m.jsx)('span',{children:'显示头像',style:{color:'blue'}}),
+											(0, m.jsx)('input',
 											{
 												type:'checkbox',
 												className:'isRight'
-											}),'右侧显示',(0, m.jsx)('input',
+											}),(0, m.jsx)('span',{children:'右侧显示'}),
+											(0, m.jsx)('input',
 											{
-												hidden: $$('.dels:checked').length < 2,
-												type:'checkbox',
-												className:'isLeft'
-											}),$$('.dels:checked').length > 1 ? '默认位置' : '',(0, m.jsx)('input',
-											{
-												hidden: $$('.dels:checked').length > 1,
 												type:'checkbox',
 												className:'is_breaking'
-											}),$$('.dels:checked').length > 1 ? '' : '截图分割']
+											}),(0, m.jsx)('span',{children:'截图分割',style:{color:'red'}})]
 										})
 									}),(0, m.jsx)('div',
 									{
@@ -4004,11 +3810,8 @@
 													whiteSpace: 'nowrap',
 													overflow: 'hidden'
 												},
-												className: a === e ? "bold selected medium" : "bold medium",
-												onClick: function()
-												{
-													l(e)
-												},
+												className: a === e ? `${e} bold medium selected` : `${e} bold medium`,
+												title :e,
 												children: L.Z[e][f]
 											}, n)
 										})
@@ -4023,25 +3826,27 @@
 											fontSize:'12px',
 											display: 'inline-grid',
 											whiteSpace: "nowrap",
-											justifyItems: 'center'
+											justifyItems: 'center',
+											cursor: 'pointer'
 										},
-										children:[(0, m.jsx)(c.NZ,
+										children:['角色',(0, m.jsx)('img',
 										{
-											onClick:function()
-											{
-												w(sendChar)
-												sendChar === false ? sendChar = true : sendChar = false
-											},
+											className:'头像',
 											style:
 											{
 												width: '40px',
 												height: '40px',
 											},
-											src:sendChar === false ? loadhead(t.sCharacter.no,t.sCharacter.index) : loadhead(p.no,p.index)
-										}),sendChar ? '选中' : '默认']
+											src:href+'Images/Ui/setting.webp'
+										})],
+										onClick:function()
+										{
+											alert('↓点击底部角色头像可以更改发言人↓')
+										}
 									}), (0, m.jsx)('div',
 									{
 										className:"edit_3_box1",
+										style:{border: 0},
 										children:(0, m.jsx)('div',
 										{
 											className:"edit_3_box2",
@@ -4053,7 +3858,7 @@
 													className:"edit_3_box3_1",
 													children: (0, m.jsx)('input',
 													{
-														className:"bold edit_3_box3_1_1 name medium",
+														className:"edit_3_box3_1_1 name bold",
 														placeholder: sendChar === false ? (0, u.fY)(t.sCharacter.no, !0, f) : (0, u.fY)(p.no, !0, f),
 														onChange: function(e)
 														{
@@ -4065,7 +3870,7 @@
 													className:"edit_3_box3_2",
 													children: (0, m.jsx)('div',
 													{
-														className:"edit_3_box3_2_1 bold",
+														className:"edit_3_box3_2_1",
 														children: L.Z.name[f]
 													})
 												})]
@@ -4083,7 +3888,7 @@
 												children:[(0, m.jsx)('div',
 												{
 													className:"edit_3_box3_1",
-													children: (0, m.jsx)('input',
+													children: (0, m.jsx)(c.Kx,
 													{
 														className:"edit_3_box3_1_1 time medium",
 														onChange: function(e)
@@ -4107,7 +3912,7 @@
 								{
 									hidden: a !== 'image' || $$('.dels:checked').length > 1,
 									children: L.Z.add_image[f],
-									className: "medium",
+									className: "add_image medium",
 									style: 
 									{
 										"overflow": "hidden",
@@ -4120,18 +3925,12 @@
 									{
 										_.current.click()
 									}
-								}), t.file ? (0,m.jsx)('div',
+								}), (0,m.jsx)('img',
 								{
-									hidden: a !== 'image' || $$('.dels:checked').length > 1,
-									width:"64px",
+									width:"auto",
 									height:"64px",
-									children: (0,m.jsx)('img',
-									{
-										width:"auto",
-										height:"64px",
-										src:t.file,
-									})
-								}) : '',(0, m.jsx)('span',
+									hidden: a !== 'image' || $$('.dels:checked').length > 1
+								}), (0, m.jsx)('span',
 								{
 									hidden: a !== 'image' || $$('.dels:checked').length > 1,
 									onClick: function()
@@ -4151,10 +3950,14 @@
 									accept: "image/*",
 									onChange: function(e)
 									{
-										(0, u.T6)(e, function(e)
+										var file = e.target.files[0]
+										var ready = new FileReader()
+										ready.readAsDataURL(file);
+										ready.onload = function(e)
 										{
-											Z("image", e)///1
-										}, N)
+											var base64Img = e.target.result;
+											compress(base64Img,'image',$$('.addChat').prop('checked') ? 'add' : 'edit')
+										}
 									}
 								}), (0, m.jsx)('div',
 								{
@@ -4199,8 +4002,7 @@
 										title: "删除消息",
 										onClick: function()
 										{
-											a = 'delete'
-											k()
+											sendMessage({},'','delete')
 										},
 										children: (0, m.jsx)(c.xL,
 										{
@@ -4211,7 +4013,7 @@
 										className: "bold",
 										onClick: function()
 										{
-											S()
+											$$('.editMessage').removeClass('visible')//S()
 										},
 										children: L.Z.cancel[f]
 									}), (0, m.jsx)(ea.AZ,
@@ -4219,17 +4021,58 @@
 										className: "bold",
 										onClick: function()
 										{
-											if($$('.dels:checked').length > 1)
+											let type = ''
+											if($$('.dels:checked').length > 1 && confirm('※注意!!!\n只输入一个空格会判断为清空该内容\n图片转为其它类型时会清除文件\n发言人为空时则不修改发言人\n点击【确定】开始批量修改'))
 											{
-												if(confirm('※注意!!!\n空内容会判断为不修改该条目\n只输入一个空格会判断为清空内容\n图片转为其它类型时会清除文件\n发言人为默认时则不修改发言人\n点击【确定】开始批量修改'))
+												let data = {}
+
+												if($$('.editType').prop('checked'))
 												{
-													batEdit = true
-													k()
+													type = $$('.edit_button .selected').attr('title')
 												}
+
+												if($$('.name').val() && $$('.name').val() !== ' ')data.name = $$('.name').val()
+												if($$('.name').val() === ' ')data.name = ''
+												if($$('.time').val() && $$('.time').val() !== ' ')data.time = $$('.time').val()
+												if($$('.time').val() === ' ')data.time = ''
+												if($$('.content').val() && $$('.content').val() !== ' ')data.content = $$('.content').val()
+												if($$('.content').val() === ' ')data.content = ''
+
+												if($$('.editTalk').prop('checked'))
+												{
+													data.isFirst = $$('.isFirst').prop('checked')
+													data.isRight = $$('.isRight').prop('checked')
+												}
+												
+												if($$('.editMessage .头像').attr('alt'))
+												{
+													data.sCharacter = {no: $$('.editMessage .头像').attr('alt'),index: $$('.editMessage .头像').attr('title')}
+												}
+												
+												let indexs = []
+												$$('.dels:checked').each(function(k,v)
+												{
+													indexs.push($$('.dels').index(v))
+												})
+												sendMessage(data,type,'edit',indexs)
 											}
 											else
 											{
-												k()
+												type = $$('.edit_button .selected').attr('title')
+												let data = 
+												{
+													type: type,
+													name : $$('.name').val(),
+													time : $$('.time').val(),
+													content: $$('.content').val(),
+													isFirst: $$('.isFirst').prop('checked'),
+													isRight : $$('.isRight').prop('checked'),
+													is_breaking : $$('.is_breaking').prop('checked'),
+													file: type === 'image' ? $$('.addChat').prop('checked') ? '' : chats[chatIndex].file : '',
+													sCharacter: {no: $$('.editMessage .头像').attr('alt'),index: $$('.editMessage .头像').attr('title')}
+													
+												}
+												sendMessage(data,type,$$('.addChat').prop('checked') ? 'add' : 'edit')
 											}
 										},
 										children: L.Z.confirm[f]
@@ -4274,8 +4117,7 @@
 						{}), (0, m.jsx)(eN._x,
 						{
 							style:{wordBreak: "break-all"},
-							className: "medium",
-							onClick: function(){e.onClick()},//@羁绊事件编辑
+							className: "medium 编辑",
 							children: n + L.Z.go_relationship_event[t]
 						})]
 					})
@@ -4346,7 +4188,8 @@
 						{
 							onClick:function()
 							{
-								t((0, eo.Z8)(n.content.split('\n')[index]))
+								//t((0, eo.Z8)(n.content.split('\n')[index]))
+								alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新')
 							},
 							children: (0, m.jsx)(e2,
 							{
@@ -4376,7 +4219,7 @@
 				{
 					displayName: "ReplyButtonBox__Span",
 					componentId: "sc-15gyqnr-2"
-				})(["overflow:hidden;word-break:break-all;word-wrap:break-word;white-space:pre-wrap;line-break:loose;"]),
+				})(["overflow:hidden;word-break:break-all;word-wrap:break-word;white-space:pre-wrap;line-break:loose;line-height:141%;font-size:20px;"]),
 				e5 = function(e)
 				{
 					var n = e.chat,
@@ -4538,23 +4381,12 @@
 							null === (e = f.current) || void 0 === e || e.scrollIntoView(!0), a((0, eo.ZZ)(-1))
 						}
 					}, [s, n, a]);
-					var p = function()
-					{
-						operate = 'isFirst'
-						l = JSON.parse(JSON.stringify(l))
-						l[t].isFirst = !l[t].isFirst
-						a((0, eo.U_)(l))
-					};
+					let isFirst = isfirst(t,l)
 					return (0, m.jsx)(eN.uU,
 					{
+						className: '消息',
 						ref: f,
-						style: n.isFirst ?
-						{
-							padding: n.sCharacter.no === 0 ? ['heart','info','reply'].indexOf(n.type) > -1 ? "" : "0.5rem 1rem 0 1rem" : ""
-						} :
-						{
-							padding: ['heart','info','reply'].indexOf(n.type) > -1 ? "" : "0.5rem 1rem 0 1rem"
-						},
+						style: {padding: isFirst ? "" : "0.5rem 1rem 0 1rem"},
 						children: [(0, m.jsxs)(m.Fragment,
 						{
 							children: "chat" === n.type || "image" === n.type ? (0, m.jsxs)(m.Fragment,
@@ -4563,19 +4395,15 @@
 								{
 									children: [!n.isRight ? (0, m.jsx)(eN.xu,
 									{
-										onClick: function()
-										{
-											p()
-										},
-										style: n.sCharacter.no !== 0 ? 
+										className: '头像框',
+										style: n.sCharacter.no != 0 ? 
 										{
 											cursor: "pointer",
 											height: "100%"
 										} : {marginRight: '1.5rem'},
-										children: (0, m.jsx)(eN.NZ,
+										children: isFirst ? (0, m.jsx)(eN.NZ,
 										{
 											//左侧头像
-											hidden: !n.isFirst || n.sCharacter.no === 0,
 											height: 252,
 											width: 252,
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
@@ -4584,67 +4412,44 @@
 												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: n.sCharacter.index
-										})
-									}) : '', (0, m.jsxs)(n.sCharacter.no === 0 ? "div" : eN.Xp,
+										}) : ''
+									}) : '', (0, m.jsxs)(n.sCharacter.no == 0 ? "div" : eN.Xp,
 									{
 										style: n.isRight ? 
+										{alignItems: 'flex-end'} : 
+										{display: 'block',width: '100%'},
+										children: [isFirst ? (0, m.jsx)("span",
 										{
-											//display: 'block',
-											alignItems: 'flex-end'
-										} : {display: 'block',width: '100%'},
-										children: [(0, m.jsx)("span",
-										{
-											className: "bold",
-											style: n.isFirst && n.sCharacter.no !== 0 ?
-											{
-												lineHeight: "1.8rem",
-												wordBreak: "break-all"
-											} :
-											{
-												display: 'none'
-											},
-											children: n.name && n.name !== '' ? n.name : (0, u.fY)(n.sCharacter.no, !0, d)//#新增临时名称
-										}), (0, m.jsxs)("div",
+											className: "名称 bold",
+											children: n.name || loadname(n.sCharacter.no)
+										}) : '' , (0, m.jsxs)("div",
 										{
 											style:
 											{
 												display:"flex",
-												justifyContent: n.isRight || n.sCharacter.no === 0 ? 'flex-end' : 'flex-start'
+												justifyContent: n.isRight || n.sCharacter.no == 0 ? 'flex-end' : 'flex-start'
 											},
 											children: [(0, m.jsx)(eN.i9,
 											{
 												//左侧时间戳
-												hidden: (!n.time || n.sCharacter.no !== 0) && !n.isRight,
-												style:{marginRight:0},
+												hidden: (!n.time || n.sCharacter.no != 0) && !n.isRight,
+												style:{marginRight:0,textAlign:'right'},
 												children: n.time
-											}), "chat" === n.type ? [(0, m.jsx)(n.sCharacter.no === 0 ? eN.LP : 
-												!n.isRight && n.isFirst ? eN.zC : eN.Dt,
+											}), "chat" === n.type ? [(0, m.jsx)(n.sCharacter.no == 0 ? eN.LP : 
+												!n.isRight && isFirst ? eN.zC : eN.Dt,
 											{
+												className: '编辑',//文本
 												style: n.isRight ?
 												{
 													background: 'rgb(74, 138, 202)',
 													border: '1px solid rgb(74, 138, 202)'
 												} : {},
-												onClick: function()
-												{
-													editMsg(o,n,t)//#编辑消息-右侧对话
-												},
 												children: n.content
-											}), (0, m.jsx)(eN.CJ,
+											}), (n.isRight && isFirst) || n.sCharacter.no == 0 ? (0, m.jsx)(eN.CJ,{}):''//右角
+											] : (0, m.jsx)(eN.tG,
 											{
-												hidden: n.isRight && !n.isFirst,
-												style:
-												{
-													display: !n.isRight && n.sCharacter.no !== 0 ? 'none' : ''
-												}
-												
-											})] : (0, m.jsx)(eN.tG,
-											{
+												className: '编辑',//图片
 												style:{"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
-												onClick: function()
-												{
-													editMsg(o,n,t)//#编辑消息-图片
-												},
 												src: n.file || (n.content.indexOf("//") > -1 ? n.content : href+n.content),
 												onError: function(e)
 												{
@@ -4653,27 +4458,23 @@
 											}), (0, m.jsx)(eN.i9,
 											{
 												//右侧时间戳
-												hidden: !n.time || n.sCharacter.no === 0 || n.isRight,
+												hidden: !n.time || n.sCharacter.no == 0 || n.isRight,
 												style:{marginLeft:0},
 												children: n.time
 											})]
 										})]
-									}), n.isRight ? (0, m.jsx)(eN.xu,
+									}), n.isRight && n.sCharacter.no != 0 ? (0, m.jsx)(eN.xu,
 									{
+										className: '头像框',
 										style:
 										{
 											justifyContent:'flex-end',
 											cursor: "pointer",
 											height: "100%"
 										},
-										onClick: function()
+										hidden: n.sCharacter.no == 0,
+										children: isFirst ? (0, m.jsx)(eN.NZ,
 										{
-											p()
-										},
-										hidden: n.sCharacter.no === 0,
-										children: (0, m.jsx)(eN.NZ,
-										{
-											hidden: !n.isFirst,
 											height: 252,
 											width: 252,
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),//#聊天记录头像
@@ -4682,7 +4483,7 @@
 												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: n.sCharacter.index
-										})
+										}) : ''
 									}) : '']
 								})
 							}) : "reply" === n.type ? [(0, m.jsx)(eN.xu,
@@ -4690,11 +4491,8 @@
 								style:{justifyContent: 'flex-end'},
 								children: (0, m.jsx)(ne,//编辑按钮
 								{
+									className: '编辑',//回复
 									"data-html2canvas-ignore": "true",
-									onClick: function()
-									{
-										editMsg(o,n,t)//#编辑消息-回复
-									},
 									children: (0, m.jsx)(c.xL,
 									{
 										icon: ei.Yai
@@ -4710,25 +4508,18 @@
 							})] : "heart" === n.type ? [(0, m.jsx)(eN.xu,
 							{}),(0, m.jsx)(eW,
 							{
-								onClick: function()
-								{
-									editMsg(o,n,t)//#编辑消息-羁绊
-								},
-								character: n.name || (0, u.fY)(n.sCharacter.no, !0, d)
+								className: '编辑',//羁绊
+								character: n.name || loadname(n.sCharacter.no)
 							})] : "info" === n.type ? (0, m.jsx)(eN.vD,
 							{
-								onClick: function()
-								{
-									editMsg(o,n,t)//#编辑消息-旁白
-								},
+								className: '编辑',//旁白
 								children: n.content
 							}) : (0, m.jsx)(m.Fragment,{})
 						}), h || (0, m.jsx)("input",
 						{
 							"data-html2canvas-ignore":"true",
-							style:{backgroundColor:n.is_breaking === true ? 'red' : 'transparent'},
+							style:{backgroundColor:n.is_breaking === true ? 'red' : n.isFirst === true ? 'blue' : 'transparent'},
 							type: "checkbox",
-							index: t,
 							className:"dels"
 						})]
 					})
@@ -5243,6 +5034,7 @@
 									{
 										lang = language;
 										localStorage['mt-lang'] = language;
+										location.reload(true)
 									}
 								}
 							})

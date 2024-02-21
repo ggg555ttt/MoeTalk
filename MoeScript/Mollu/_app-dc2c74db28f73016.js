@@ -9966,7 +9966,7 @@
 									})
 								}), (0, O.jsx)(I,
 								{
-									children: [(0, O.jsx)(I,{id:"readme",children:month === 4 && day === 1 ? 'MikuTalk' : localStorage['MoeTalk']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
+									children: [(0, O.jsx)(I,{id:"readme",children:month === Month && day === Day ? 'MikuTalk' : localStorage['MoeTalk']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
 										href: "https://gitlab.com/ggg555ttt/MoeTalk/",
 										style:
@@ -10310,7 +10310,7 @@
 							rgb252_238_240: "rgb(252, 238, 240)",
 							rgb252_238_98: "rgb(252, 238, 98)",
 							rgb252_135_155: "rgb(252, 135, 155)",
-							rgb243_247_248: localStorage['MoeTalk'] === 'MikuTalk' || (month === 4 && day === 1) ? "transparent" : "rgb(243, 247, 248)",//#41
+							rgb243_247_248: localStorage['MoeTalk'] === 'MikuTalk' || (month === Month && day === Day) ? "transparent" : "rgb(243, 247, 248)",//#41
 							rgb242_231_85: "rgb(242, 231, 85)",
 							rgb225_237_240: "rgb(225, 237, 240)",
 							rgb224_226_228: "rgb(224, 226, 228)",
@@ -11882,7 +11882,7 @@
 								{
 									style:{lineHeight:'141%'},//@
 									className: "bold",//@
-									children: month === 4 && day === 1 ? 'MikuTalk' : localStorage['MoeTalk']+' '+version//#蒙版标题自定义localStorage['MoeTalk']
+									children: month === Month && day === Day ? 'MikuTalk' : localStorage['MoeTalk']+' '+version//#蒙版标题自定义localStorage['MoeTalk']
 								})
 							})]
 						})
@@ -13238,32 +13238,7 @@
 						{
 							setMakeChats: function(e, t)
 							{
-								//*
-								let l = JSON.parse(JSON.stringify(t.payload))
-								$$.each(l,function(t,n)
-								{
-									if(!n.isRight)l[t].isRight = false
-									if(n.isFirst === false && n.sCharacter.no !== 0)
-									{
-										if(t-1 < 0)l[t].isFirst = true
-										if(t > 0 && (n.sCharacter.index !== l[t-1].sCharacter.index || ['heart','info','reply'].indexOf(l[t-1].type) > -1 || l[t-1].isRight !== l[t].isRight || n.is_breaking === true))
-										{
-											l[t].isFirst = true
-										}
-									}
-									if(n.sCharacter.no === 0)l[t].isRight = false
-									if(n.sCharacter.no === 0)l[t].isFirst = false
-								})
-								e.chats = l
-								if(operate === 'isFirst')chatArr[dataIndex] = l
-								if(operate === false)
-								{
-									chatArr = chatArr.slice(0,dataIndex+1)
-									chatArr.push(l)
-									dataIndex = chatArr.length-1
-								}
-								operate = false
-								//*
+								e.chats = t.payload
 							},
 							setReplyNo: function(e, t)
 							{

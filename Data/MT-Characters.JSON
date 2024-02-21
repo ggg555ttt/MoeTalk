@@ -629,6 +629,34 @@ var mt_characters = {
         },
         "charface": "食蜂操祈/CH9997/CH9997.11.webp,食蜂操祈/NP0169/NP0169.11.webp,食蜂操祈/食蜂操祈.8.webp"
     },
+    "黑帮学生": {
+        "school": "其他",
+        "club": "所属不明-其他",
+        "head": "NP0181_Collection,NP0181",
+        "name": {
+            "zh_cn": "工作员",
+            "zh_tw": "工作員",
+            "jp": "工作員",
+            "en": "Agent",
+            "kr": "공작원",
+            "pinyin": "heibangxuesheng"
+        },
+        "charface": "黑帮学生/NP0181/NP0181.7.webp,黑帮学生/黑帮学生.2.webp"
+    },
+    "黑帮机器人": {
+        "school": "其他",
+        "club": "所属不明-其他",
+        "head": "NP0180_Collection,NP0180",
+        "name": {
+            "zh_cn": "唐·阿兰西诺",
+            "zh_tw": "唐·阿蘭西諾",
+            "jp": "ドン·アランチーノ",
+            "en": "Don·Arancino",
+            "kr": "돈·아란치노",
+            "pinyin": "heibangjiqiren"
+        },
+        "charface": "黑帮机器人/黑帮机器人.1.webp"
+    },
     "？？？": {
         "school": "其他",
         "club": "所属不明-其他",
@@ -2186,7 +2214,7 @@ var mt_characters = {
     "伊草遥香": {
         "school": "格黑娜",
         "club": "便利屋68",
-        "head": "CH0087_L2D,Haruka_L2D,CH0087_Collection,Haruka_Collection,CH0087,Haruka",
+        "head": "CH0087_L2D,Haruka_L2D,CH0087_Collection,CH0247_Collection,CH0249_Collection,Haruka_Collection,CH0087,CH0247,CH0249,Haruka",
         "name": {
             "zh_cn": "伊草 遥香",
             "zh_tw": "伊草 遙香",
@@ -2195,12 +2223,12 @@ var mt_characters = {
             "kr": "이구사 하루카",
             "pinyin": "yicaoyaoxiang"
         },
-        "charface": "伊草遥香/CH0087/CH0087.12.webp,伊草遥香/haruka/haruka.13.webp,伊草遥香/伊草遥香.8.webp"
+        "charface": "伊草遥香/CH0087/CH0087.12.webp,伊草遥香/CH0247/CH0247.11.webp,伊草遥香/CH0249/CH0249.11.webp,伊草遥香/haruka/haruka.13.webp,伊草遥香/伊草遥香.16.webp"
     },
     "浅黄睦月": {
         "school": "格黑娜",
         "club": "便利屋68",
-        "head": "Mutsuki_L2D,Mutsuki_Newyear_L2D,Mutsuki_Collection,Mutsuki_Newyear_Collection,Mutsuki,Mutsuki_Newyear",
+        "head": "Mutsuki_L2D,Mutsuki_Newyear_L2D,CH0246_Collection,CH0248_Collection,Mutsuki_Collection,Mutsuki_Newyear_Collection,CH0246,CH0248,Mutsuki,Mutsuki_Newyear",
         "name": {
             "zh_cn": "浅黄 睦月",
             "zh_tw": "淺黃 睦月",
@@ -2209,12 +2237,12 @@ var mt_characters = {
             "kr": "아사기 무츠키",
             "pinyin": "qianhuangmuyue"
         },
-        "charface": "浅黄睦月/mutsuki/mutsuki.13.webp,浅黄睦月/mutsuki_newyear/mutsuki_newyear.9.webp,浅黄睦月/浅黄睦月.8.webp"
+        "charface": "浅黄睦月/CH0246/CH0246.11.webp,浅黄睦月/CH0248/CH0248.10.webp,浅黄睦月/mutsuki/mutsuki.13.webp,浅黄睦月/mutsuki_newyear/mutsuki_newyear.9.webp,浅黄睦月/浅黄睦月.16.webp"
     },
     "陆八魔阿露": {
         "school": "格黑娜",
         "club": "便利屋68",
-        "head": "Aru_L2D,Aru_Newyear_L2D,Aru_Collection,Aru_Newyear_Collection,Aru,Aru_Newyear",
+        "head": "Aru_L2D,Aru_Newyear_L2D,CH0240_L2D,Aru_Collection,Aru_Newyear_Collection,CH0240_Collection,Aru,Aru_Newyear,CH0240",
         "name": {
             "zh_cn": "陆八魔 阿露",
             "zh_tw": "陸八魔 亞瑠",
@@ -2223,12 +2251,12 @@ var mt_characters = {
             "kr": "리쿠하치마 아루",
             "pinyin": "lubamoalu"
         },
-        "charface": "陆八魔阿露/aru/aru.14.webp,陆八魔阿露/aru_newyear/aru_newyear.17.webp,陆八魔阿露/陆八魔阿露.8.webp,陆八魔阿露/cv28127770/cv28127770.7.webp"
+        "charface": "陆八魔阿露/aru/aru.14.webp,陆八魔阿露/aru_newyear/aru_newyear.17.webp,陆八魔阿露/CH0240/CH0240.19.webp,陆八魔阿露/陆八魔阿露.12.webp,陆八魔阿露/cv28127770/cv28127770.7.webp"
     },
     "鬼方佳代子": {
         "school": "格黑娜",
         "club": "便利屋68",
-        "head": "CH0086_L2D,Kayoko_L2D,NP0118_Collection,CH0086_Collection,Kayoko_Collection,NP0118,CH0086,Kayoko",
+        "head": "CH0086_L2D,CH0239_L2D,Kayoko_L2D,NP0118_Collection,CH0086_Collection,CH0239_Collection,Kayoko_Collection,NP0118,CH0086,CH0239,Kayoko",
         "name": {
             "zh_cn": "鬼方 佳代子",
             "zh_tw": "鬼方 佳世子",
@@ -2237,7 +2265,7 @@ var mt_characters = {
             "kr": "오니카타 카요코",
             "pinyin": "guifangjiadaizi"
         },
-        "charface": "鬼方佳代子/CH0086/CH0086.7.webp,鬼方佳代子/kayoko/kayoko.7.webp,鬼方佳代子/NP0118/NP0118.7.webp,鬼方佳代子/鬼方佳代子.12.webp,鬼方佳代子/cv28237856/cv28237856.8.webp"
+        "charface": "鬼方佳代子/CH0086/CH0086.7.webp,鬼方佳代子/CH0239/CH0239.8.webp,鬼方佳代子/kayoko/kayoko.7.webp,鬼方佳代子/NP0118/NP0118.7.webp,鬼方佳代子/鬼方佳代子.16.webp,鬼方佳代子/cv28237856/cv28237856.8.webp"
     },
     "旗见艾丽卡": {
         "school": "格黑娜",
@@ -2466,7 +2494,7 @@ var mt_characters = {
     "空崎日奈": {
         "school": "格黑娜",
         "club": "风纪委员会",
-        "head": "LobbyIllust_Icon_CH0063_L2D,CH0230_L2D,Hina_L2D,NP0009_Collection,CH0063_Collection,CH0230_Collection,Hina_Collection,NP0009,NP0017,CH0063,CH0230,Hina",
+        "head": "LobbyIllust_Icon_CH0063_L2D,CH0230_L2D,Hina_L2D,NP0009_Collection,CH0063_Collection,CH0230_Collection,Hina_Collection,NP0009,NP0017,NP0205,CH0063,CH0230,Hina",
         "name": {
             "zh_cn": "空崎 日奈",
             "zh_tw": "空崎 陽奈",
@@ -2475,7 +2503,7 @@ var mt_characters = {
             "kr": "소라사키 히나",
             "pinyin": "kongqirinai"
         },
-        "charface": "空崎日奈/CH0063/CH0063.10.webp,空崎日奈/CH0230/CH0230.18.webp,空崎日奈/hina/hina.20.webp,空崎日奈/NP0009/NP0009.6.webp,空崎日奈/NP0017/NP0017.6.webp,空崎日奈/空崎日奈.18.webp,空崎日奈/cv28323327/cv28323327.9.webp"
+        "charface": "空崎日奈/CH0063/CH0063.10.webp,空崎日奈/CH0230/CH0230.18.webp,空崎日奈/hina/hina.20.webp,空崎日奈/NP0009/NP0009.6.webp,空崎日奈/NP0017/NP0017.6.webp,空崎日奈/NP0205/NP0205.6.webp,空崎日奈/空崎日奈.22.webp,空崎日奈/cv28323327/cv28323327.9.webp"
     },
     "银镜伊织": {
         "school": "格黑娜",
@@ -3133,7 +3161,7 @@ var mt_characters = {
             "kr": "타카나시 호시노",
             "pinyin": "xiaoniaoyouxingye"
         },
-        "charface": "小鸟游星野/CH0241/CH0241.46.webp,小鸟游星野/hoshino/hoshino.17.webp,小鸟游星野/hoshino_robber/hoshino_robber.6.webp,小鸟游星野/hoshino_swimsuit/hoshino_swimsuit.21.webp,小鸟游星野/NP0045/NP0045.17.webp,小鸟游星野/NP0063/NP0063.21.webp,小鸟游星野/NP0167/NP0167.46.webp,小鸟游星野/小鸟游星野.28.webp,小鸟游星野/cv31188154/cv31188154.19.webp"
+        "charface": "小鸟游星野/CH0241/CH0241.46.webp,小鸟游星野/hoshino/hoshino.17.webp,小鸟游星野/hoshino_robber/hoshino_robber.6.webp,小鸟游星野/hoshino_swimsuit/hoshino_swimsuit.21.webp,小鸟游星野/NP0045/NP0045.17.webp,小鸟游星野/NP0063/NP0063.21.webp,小鸟游星野/NP0167/NP0167.46.webp,小鸟游星野/小鸟游星野.28.webp,小鸟游星野/cv31188154/cv31188154.19.webp,小鸟游星野/cv31572932/cv31572932.30.webp"
     },
     "梦": {
         "school": "阿比多斯",
@@ -3250,7 +3278,7 @@ var mt_characters = {
     "锭前纱织": {
         "school": "阿里乌斯",
         "club": "特殊小队",
-        "head": "Saori_L2D,NP0012_Collection,Saori_Collection,NP0012,NP0103,Saori",
+        "head": "Saori_L2D,NP0012_Collection,CH0259_Collection,Saori_Collection,NP0012,NP0103,NP0164,CH0259,Saori",
         "name": {
             "zh_cn": "锭前 纱织",
             "zh_tw": "錠前 紗織",
@@ -3259,6 +3287,6 @@ var mt_characters = {
             "kr": "조마에 사오리",
             "pinyin": "dingqianshazhi"
         },
-        "charface": "锭前纱织/NP0012/NP0012.28.webp,锭前纱织/NP0012/NP0012-S2.28.webp,锭前纱织/saori/saori.28.webp,锭前纱织/saori/saori-S2.28.webp,锭前纱织/锭前纱织.15.webp"
+        "charface": "锭前纱织/CH0259/CH0259.16.webp,锭前纱织/CH0259/CH0259-S2.16.webp,锭前纱织/NP0012/NP0012.28.webp,锭前纱织/NP0012/NP0012-S2.28.webp,锭前纱织/NP0164/NP0164.16.webp,锭前纱织/saori/saori.28.webp,锭前纱织/saori/saori-S2.28.webp,锭前纱织/锭前纱织.26.webp"
     }
 }

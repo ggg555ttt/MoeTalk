@@ -59,7 +59,6 @@ function savehead(headindex,img64)
 {
 	let headarr = JSON.parse(localStorage['mt-head']);
 	headarr[headindex] = img64;
-	let nameloss = false
 	localStorage['mt-head'] = JSON.stringify(headarr);
 	$.each(headarr,function(k,v)
 	{
@@ -91,33 +90,35 @@ function loadhead(id,img)
 	}
 	if(closure_char[id])return `${href}Images/ClosureTalk/ba/characters/${img}.webp`;//closure头像
 	if(mollu_char[id])return `${href}Images/MolluChar/${id}.${img}.webp`;//旧版头像
-	if(id === 0)return `${href}Images/Ui/you.webp`;//主角
+	if(id == 0)return `${href}Images/Ui/you.webp`;//主角
 	return `${href}Images/Ui/error.webp`;//默认头像
 }
 function loadname(id)
 {
-	let e = id;
-	let t = !0;
-	let n = lang;
-	var r,o;
-	if(e === 0)return id
-	if(mt_characters[e])
+	let you = {kr: "주인공",en: "Lead",jp: "主役",zh_cn: "主角",zh_tw: "主角"}
+	let name = id.toString()
+	if(mollu_char[id])name = mollu_char[id][lang]
+	if(closure_char[id])name = closure_char[id][lang]
+	if(mt_characters[id])
 	{
-		o = mt_characters[e].name[n] ? mt_characters[e].name[n] : e;
+		name = mt_characters[id].name[lang] ? mt_characters[id].name[lang] : id
 	}
-	if(sessionStorage['mt-char'] && JSON.parse(sessionStorage['mt-char'])[e])
+
+	if(name.split(" ")[1])name = name.split(" ")[1]
+	name = name.replaceAll("-", " ")
+
+	if(mt_name[id])name = mt_name[lang];//@改名
+	if(sessionStorage['mt-char'] && JSON.parse(sessionStorage['mt-char'])[id])
 	{
-		o = JSON.parse(sessionStorage['mt-char'])[e]
+		name = JSON.parse(sessionStorage['mt-char'])[id]
 	}
-	if(localStorage['mt-char'] && JSON.parse(localStorage['mt-char'])[e])
+	if(localStorage['mt-char'] && JSON.parse(localStorage['mt-char'])[id])
 	{
-		o = JSON.parse(localStorage['mt-char'])[e]
+		name = JSON.parse(localStorage['mt-char'])[id]
 	}
-	if(mollu_char[e])o = mollu_char[e][n]
-	if(closure_char[e])o = closure_char[e][n]
-	if(mt_name[e])o = mt_name[e];//@改名
-	//*读取人名
-	return t && o.split(" ")[1] || o.replaceAll("-", " ")
+
+	if(id == 0)name = you[lang]
+	return name
 }
 //删除头像
 function delhead(imgindex)
@@ -153,7 +154,7 @@ jQuery.fn.wait = function (func,cls,times,interval) {
 }
 
 //图片压缩
-function compress(base64Img)
+function compress(base64Img,type = 'head',mode = 'add')
 {
 	var img = new Image();//创建一个空白图片对象
 	img.src = base64Img;//图片对象添加图片地址
@@ -161,24 +162,60 @@ function compress(base64Img)
 	{
 		w = img.width;
 		h = img.height;
+
 		let x = 0;let y = 0;let l = w;//正方形头像
-		if(w > h)x = (w-h)/2,l = h,h = w;//竖图上下居中
-		else y = (h-w)/2,l = w,w = h;//横图左右居中
-		n = localStorage['hnum'] ? localStorage['hnum'] : 300;
-		a = Math.min(1, n / w);(w *= a), (h *= a);//最大长度不得超过300
+
+		if(type === 'image')w > 600 && (h *= 600 / w, w = 600)
+		else
+		{
+			if(w > h)x = (w-h)/2,l = h,h = w;//竖图上下居中
+			else y = (h-w)/2,l = w,w = h;//横图左右居中
+			n = localStorage['hnum'] ? localStorage['hnum'] : 300;
+			a = Math.min(1, n / w);(w *= a), (h *= a);//最大长度不得超过300
+		}
+
 		//开始画压缩图
 		var canvas = document.createElement("canvas");
 		var ctx = canvas.getContext("2d");
 		canvas.width = w;//压缩图的宽度
 		canvas.height = h;//压缩图的高度
-		//ctx.drawImage(img,0,0,w,h);
-		ctx.drawImage(img,x,y,l,l,0,0,w,h);
+
+		if(type === 'image')ctx.drawImage(img,0,0,w,h);
+		else ctx.drawImage(img,x,y,l,l,0,0,w,h);
+
 		var newBase64 = canvas.toDataURL("image/webp");
 
-		localStorage['mt-char'] = JSON.stringify(chararr);
-		savehead(imgindex,newBase64)
-		list()//更新列表
-		//$($(".eLDbih")[imgindex]).attr('src',newBase64);//改写图片
+		if(type === 'image')
+		{
+			let data = 
+			{
+				content: '',
+				file: newBase64,
+				type: 'image'
+			}
+			if(mode === 'edit')
+			{
+				data = 
+				{
+					name : $('.name').val(),
+					time : $('.time').val(),
+					content: $('.content').val(),
+					isFirst: $('.isFirst').prop('checked'),
+					isRight : $('.isRight').prop('checked'),
+					is_breaking : $('.is_breaking').prop('checked'),
+					file: newBase64,
+					sCharacter: {no: $('.editMessage .头像').attr('alt'),index: $('.editMessage .头像').attr('title')},
+					type: type
+				}
+			}
+			sendMessage(data,'image',mode)
+		}
+		else
+		{
+			localStorage['mt-char'] = JSON.stringify(chararr);
+			savehead(imgindex,newBase64)
+			list()//更新列表
+		}
 	}
 }
 
@@ -297,7 +334,7 @@ function nextindex()
 	}
 	else
 	{
-		index = $('.hfOSPu:eq(-1)')[0];
+		index = $('.消息:eq(-1)')[0];
 	}
 	return index;
 }
@@ -357,30 +394,6 @@ function list()
 	setTimeout(function(){$('.editTools').click()})
 	setTimeout(function(){selectClick(37)})
 	setTimeout(function(){selectClick(39)})
-}
-function editMsg(o,n,t)//编辑消息
-{
-	let isLeft = false
-	let name = n.name
-	let time = n.time
-	let content = n.content
-	let isRight = n.isRight ? n.isRight : false
-	let is_breaking = n.is_breaking ? n.is_breaking : false
-	if($('.dels:checked').length > 1)
-	{
-		name = ''
-		time = ''
-		content = ''
-		isRight = false
-		isLeft = false
-	}
-	$('.content').val(content)
-	$('.name').val(name)
-	$('.time').val(time)
-	$('.isRight').prop('checked',isRight)
-	$('.is_breaking').prop('checked',is_breaking)
-	chatIndex = t
-	o(!0, n, n.type)
 }
 function loaddata(json)//识别存档
 {
@@ -527,25 +540,11 @@ function loaddata(json)//识别存档
 					if(v['content'].indexOf('//') < 0)json[1][k]['content'] = v['content'].replace('resources/ba','Images/ClosureTalk/ba');
 				}
 			}
-			
+
 			json[1][k]['isFirst'] = false;
+			json[1][k]['isRight'] = false;
 			if(v.yuzutalk.avatarState === 'SHOW')json[1][k]['isFirst'] = true;
 			if(v.is_breaking === true)json[1][k]['is_breaking'] = true;
-			//判断头像显示
-			let l = json[1]
-			let t = k
-			let n = json[1][k]
-			if(!n.isRight)l[t].isRight = false
-			if(n.isFirst === false && n.sCharacter.no !== 0)
-			{
-				if(t-1 < 0)l[t].isFirst = true
-				if(t > 0 && (n.sCharacter.index !== l[t-1].sCharacter.index || ['heart','info','reply'].indexOf(l[t-1].type) > -1 || l[t-1].isRight !== l[t].isRight || n.is_breaking === true))
-				{
-					l[t].isFirst = true
-				}
-			}
-			if(n.sCharacter.no === 0)l[t].isRight = false
-			if(n.sCharacter.no === 0)l[t].isFirst = false
 		})
 	}
 	
@@ -738,10 +737,10 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 	if(imageArr.length > 1)
 	{
 		let v = imageArr[0]
-		$('.hfOSPu').show()
+		$('.消息').show()
 		if(v.start !== 0)$('#mt_watermark').hide()
-		$('.hfOSPu').slice(0,v.start).hide()
-		$('.hfOSPu').slice(v.end,$('.hfOSPu').length).hide()
+		$('.消息').slice(0,v.start).hide()
+		$('.消息').slice(v.end,$('.消息').length).hide()
 		eg()($(".Talk__CContainer-sc-1uzn66i-1")[0],
 		{
 			logging: !1,
@@ -787,10 +786,10 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 		if(imageArr.length !== 0)
 		{
 			let v = imageArr[0]
-			$('.hfOSPu').show()
+			$('.消息').show()
 			if(v.start !== 0)$('#mt_watermark').hide()
-			$('.hfOSPu').slice(0,v.start).hide()
-			$('.hfOSPu').slice(v.end,$('.hfOSPu').length).hide()
+			$('.消息').slice(0,v.start).hide()
+			$('.消息').slice(v.end,$('.消息').length).hide()
 			eg()($(".Talk__CContainer-sc-1uzn66i-1")[0],
 			{
 				logging: !1,
@@ -799,6 +798,7 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 				scale: S
 			}).then(function(e)
 			{
+				$('.消息').show()
 				imageArr.shift()
 				var n, t = e.toDataURL(localStorage['mt-image']);
 				let height = e.height

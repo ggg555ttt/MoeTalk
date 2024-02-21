@@ -847,8 +847,8 @@
 				{
 					displayName: "talk__TextBox",
 					componentId: "sc-eq7cqw-4"
-				})(["user-select:text;position:relative;color:white;width:fit-content;border-radius:10px;background:", ";border:1px solid ", ";white-space:pre-wrap;overflow-wrap:break-word;word-break:break-all;word-wrap:break-all;line-break:loose;padding:0.6rem;line-height:1.7rem;::after{content:'';position:absolute;left:-0.5rem;top:0.6rem;border-top:0.3rem solid transparent;border-right:0.5rem solid ", ";border-bottom:0.3rem solid transparent;}"], function(e)
-				{//#
+				})(["user-select:text;position:relative;color:white;width:fit-content;border-radius:10px;background:", ";border:1px solid ", ";white-space:pre-wrap;overflow-wrap:break-word;word-break:break-all;word-wrap:break-all;line-break:loose;padding:0.6rem;line-height:141%;font-size:20px;::after{content:'';position:absolute;left:-0.5rem;top:0.6rem;border-top:0.3rem solid transparent;border-right:0.5rem solid ", ";border-bottom:0.3rem solid transparent;}"], function(e)
+				{//#文字样式
 					return e.theme.color.rgb76_91_111
 				}, function(e)
 				{
@@ -885,7 +885,7 @@
 				{
 					displayName: "talk__InfoBox",
 					componentId: "sc-eq7cqw-8"
-				})(["user-select:text;position:relative;color:", ";width:100%;border-radius:10px;background:", ";text-align:center;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-all;word-wrap:break-all;line-break:loose;padding:0.2rem 1rem;line-height:1.5rem;"], function(e)
+				})(["user-select:text;position:relative;color:", ";width:100%;border-radius:10px;background:", ";text-align:center;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-all;word-wrap:break-all;line-break:loose;padding:0.2rem 1rem;line-height:141%;font-size:20px;"], function(e)
 				{//#
 					return e.theme.color.rgb69_78_89
 				}, function(e)
@@ -896,7 +896,7 @@
 				{
 					displayName: "talk__HeartButton",
 					componentId: "sc-eq7cqw-9"
-				})(["padding:0.5rem;height:max-content;color:white;background-color:", ";border-radius:0.5rem;border:none;border-bottom:0.1rem solid ", ";box-shadow:0rem 0.05rem 0.2rem ", ";line-height:1.5rem;&:hover{background-color:", ";}"], function(e)
+				})(["padding:0.5rem;height:max-content;color:white;background-color:", ";border-radius:0.5rem;border:none;border-bottom:0.1rem solid ", ";box-shadow:0rem 0.05rem 0.2rem ", ";line-height:141%;font-size:20px;&:hover{background-color:", ";}"], function(e)
 				{
 					return e.theme.color.rgb252_135_155
 				}, function(e)
@@ -932,7 +932,7 @@
 				{
 					displayName: "talk__TimeSpan",
 					componentId: "sc-eq7cqw-12"
-				})(["color :", ";font-size :0.9rem;margin:auto 0.5rem 0 0.5rem;flex-shrink:0;"], function(e)
+				})(["color :", ";font-size :0.9rem;margin:auto 0.5rem 0 0.5rem;flex-shrink:0;white-space: pre;"], function(e)
 				{
 					return e.theme.color.rgb69_78_89
 				}),

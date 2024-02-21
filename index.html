@@ -90,7 +90,9 @@ function loadjs(url)
 var date = new Date();
 var month = date.getMonth() + 1; // 月
 var day = date.getDate(); // 日
-if(localStorage['MoeTalk'] === 'MikuTalk' || (month === 4 && day === 1))
+var Month = 4;
+var Day = 1;
+if(localStorage['MoeTalk'] === 'MikuTalk' || (month === Month && day === Day))
 {
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/pixi.min.js'></scr`+"ipt>");
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/gsap.min.js'></scr`+"ipt>");

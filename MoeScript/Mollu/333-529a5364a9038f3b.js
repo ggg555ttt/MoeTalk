@@ -200,6 +200,7 @@
 				v = n(4685),
 				j = n(6453),
 				k = n(5893),
+				eo = n(5740),
 				P = function(e)
 				{
 					var t = e.show,
@@ -472,6 +473,7 @@
 						{
 							return t.apply(this, arguments)
 						});
+						L((0, eo.U_)(chats))
 					return (0, k.jsxs)(Z,
 					{
 						children: [(0, k.jsxs)(E,
@@ -1064,6 +1066,7 @@
 						u = (0, a.useState)(""),
 						f = u[0],
 						p = u[1];
+					let isFirst = isfirst(n.chats.indexOf(t),n.chats)
 					return (0, m.jsx)(m.Fragment,
 					{
 						children: d ? (0, m.jsxs)(m.Fragment,//选择肢消息
@@ -1072,14 +1075,14 @@
 							{
 								children: [!t.isRight ? (0, m.jsx)(s.xu,//左侧头像
 								{
-									style: t.sCharacter.no !== 0 ? 
+									style: t.sCharacter.no != 0 ? 
 									{
 										//cursor: "pointer",
 										height: "100%"
 									} : {marginRight: '1.5rem'},
 									children: (0, m.jsx)(s.NZ,
 									{
-										hidden: !t.isFirst || t.sCharacter.no === 0,
+										hidden: !isFirst,
 										height: 252,
 										width: 252,
 										src: loadhead(t.sCharacter.no,t.sCharacter.index),
@@ -1089,7 +1092,7 @@
 										},
 										alt: t.sCharacter.index
 									})
-								}) : '', (0, m.jsxs)(t.sCharacter.no === 0 ? "div" : s.Xp,
+								}) : '', (0, m.jsxs)(t.sCharacter.no == 0 ? "div" : s.Xp,
 								{
 									style: t.isRight ? 
 									{
@@ -1099,7 +1102,7 @@
 									children: [(0, m.jsx)("span",//人物名称
 									{
 										className: "bold",
-										style: t.isFirst && t.sCharacter.no !== 0 ?
+										style: isFirst ?
 										{
 											
 											lineHeight: "1.8rem",
@@ -1114,14 +1117,14 @@
 										style:
 										{
 											display:"flex",
-											justifyContent: t.isRight || t.sCharacter.no === 0 ? 'flex-end' : 'flex-start'
+											justifyContent: t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start'
 										},
 										children: [(0, m.jsx)(s.i9,//左侧时间戳
 										{
-											hidden: (!t.time || t.sCharacter.no !== 0) && !t.isRight,
+											hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
 											style:{marginRight:0},
 											children: t.time
-										}), [(0, m.jsx)(t.sCharacter.no === 0 ? s.LP : !t.isRight && t.isFirst ? s.zC : s.Dt,//文字内容
+										}), [(0, m.jsx)(t.sCharacter.no == 0 ? s.LP : !t.isRight && isFirst ? s.zC : s.Dt,//文字内容
 										{
 											style: t.isRight ?
 											{
@@ -1131,15 +1134,15 @@
 											children: f
 										}), (0, m.jsx)(s.CJ,//对话角
 										{
-											hidden: t.isRight && !t.isFirst,
+											hidden: t.isRight && !isFirst,
 											style:
 											{
-												display: !t.isRight && t.sCharacter.no !== 0 ? 'none' : ''
+												display: !t.isRight && t.sCharacter.no != 0 ? 'none' : ''
 											}
 											
 										})], (0, m.jsx)(s.i9,//右侧时间戳
 										{
-											hidden: !t.time || t.sCharacter.no === 0 || t.isRight,
+											hidden: !t.time || t.sCharacter.no == 0 || t.isRight,
 											style:{marginLeft:0},
 											children: t.time
 										})]
@@ -1152,10 +1155,10 @@
 										//cursor: "pointer",
 										height: "100%"
 									},
-									hidden: t.sCharacter.no === 0,
+									hidden: t.sCharacter.no == 0,
 									children: (0, m.jsx)(s.NZ,
 									{
-										hidden: !t.isFirst,
+										hidden: !isFirst,
 										height: 252,
 										width: 252,
 										src: loadhead(t.sCharacter.no,t.sCharacter.index),
@@ -1319,6 +1322,7 @@
 								}))
 							}
 						}, [r]);
+					let isFirst = isfirst(c.chats.indexOf(t),c.chats)
 					return (0, a.useEffect)(function()
 					{
 						if(n(), x && !(c.chats.length < 1))
@@ -1344,13 +1348,7 @@
 						}
 					}, [c, x, t, n, y]), (0, m.jsx)(s.uU,
 					{
-						style: t.isFirst ?
-						{
-							padding: t.sCharacter.no === 0 ? ['heart','info','reply'].indexOf(t.type) > -1 ? "" : "0.5rem 1rem 0 1rem" : ""
-						} :
-						{
-							padding: ['heart','info','reply'].indexOf(t.type) > -1 ? "" : "0.5rem 1rem 0 1rem"
-						},
+						style: {padding: isFirst ? "" : "0.5rem 1rem 0 1rem"},
 						children: [(0, m.jsxs)(m.Fragment,
 						{
 							children: "chat" === t.type || "image" === t.type ? (0, m.jsxs)(m.Fragment,
@@ -1359,7 +1357,7 @@
 								{
 									children: [!t.isRight ? (0, m.jsx)(s.xu,
 									{
-										style: t.sCharacter.no !== 0 ? 
+										style: t.sCharacter.no != 0 ? 
 										{
 											//cursor: "pointer",
 											height: "100%"
@@ -1367,7 +1365,7 @@
 										children: (0, m.jsx)(s.NZ,
 										{
 											//左侧头像
-											hidden: !t.isFirst || t.sCharacter.no === 0,
+											hidden: !isFirst,
 											height: 252,
 											width: 252,
 											src: loadhead(t.sCharacter.no,t.sCharacter.index),
@@ -1377,7 +1375,7 @@
 											},
 											alt: t.sCharacter.index
 										})
-									}) : '', (0, m.jsxs)(t.sCharacter.no === 0 ? "div" : s.Xp,
+									}) : '', (0, m.jsxs)(t.sCharacter.no == 0 ? "div" : s.Xp,
 									{
 										style: t.isRight ? 
 										{
@@ -1387,7 +1385,7 @@
 										children: [(0, m.jsx)("span",
 										{
 											className: "bold",
-											style: t.isFirst && t.sCharacter.no !== 0 ?
+											style: isFirst ?
 											{
 												lineHeight: "1.8rem",
 												wordBreak: "break-all"
@@ -1401,16 +1399,16 @@
 											style:
 											{
 												display:"flex",
-												justifyContent: t.isRight || t.sCharacter.no === 0 ? 'flex-end' : 'flex-start'
+												justifyContent: t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start'
 											},
 											children: [(0, m.jsx)(s.i9,
 											{
 												//左侧时间戳
-												hidden: (!t.time || t.sCharacter.no !== 0) && !t.isRight,
+												hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
 												style:{marginRight:0},
 												children: t.time
-											}), "chat" === t.type ? [(0, m.jsx)(t.sCharacter.no === 0 ? s.LP : 
-												!t.isRight && t.isFirst ? s.zC : s.Dt,
+											}), "chat" === t.type ? [(0, m.jsx)(t.sCharacter.no == 0 ? s.LP : 
+												!t.isRight && isFirst ? s.zC : s.Dt,
 											{
 												style: t.isRight ?
 												{
@@ -1420,10 +1418,10 @@
 												children: x ? (0, m.jsx)(I,{}) : t.content
 											}), (0, m.jsx)(s.CJ,
 											{
-												hidden: t.isRight && !t.isFirst,
+												hidden: t.isRight && !isFirst,
 												style:
 												{
-													display: !t.isRight && t.sCharacter.no !== 0 ? 'none' : ''
+													display: !t.isRight && t.sCharacter.no != 0 ? 'none' : ''
 												}	
 											})] : (0, m.jsx)(s.tG,
 											{
@@ -1435,7 +1433,7 @@
 												},
 											}), (0, m.jsx)(s.i9,//右侧时间戳
 											{
-												hidden: !t.time || t.sCharacter.no === 0 || t.isRight,
+												hidden: !t.time || t.sCharacter.no == 0 || t.isRight,
 												style:{marginLeft:0},
 												children: t.time
 											})]
@@ -1448,10 +1446,10 @@
 											//cursor: "pointer",
 											height: "100%"
 										},
-										hidden: t.sCharacter.no === 0,
+										hidden: t.sCharacter.no == 0,
 										children: (0, m.jsx)(s.NZ,
 										{
-											hidden: !t.isFirst,
+											hidden: !isFirst,
 											height: 252,
 											width: 252,
 											src: loadhead(t.sCharacter.no,t.sCharacter.index),//#聊天记录头像
