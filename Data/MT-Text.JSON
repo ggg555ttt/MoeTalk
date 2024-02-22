@@ -398,13 +398,6 @@ var mt_text = {
 		"zh_cn": "Privacy",
 		"zh_tw": "Privacy"
 	},
-	"cant_upload_comment": {
-		"kr": "해당 계정은 업로드 할 수 없습니다.",
-		"en": "You cannot upload this account.",
-		"jp": "このアカウントはアップロードできません。",
-		"zh_cn": "该账号不能上传。",
-		"zh_tw": "該賬號不能上傳。"
-	},
 	"go_relationship_event": {
 		"kr": "의 인연스토리로",
 		"en": "s relationship story",

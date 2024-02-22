@@ -17,22 +17,9 @@
 .blue{color:blue;}
 .red{color:red;}
 .black{color:black;}
-#notice
-{
-	display:none;
-	font-size: 25px;
-	font-family:medium-cn;
-}
-#warning
-{
-	display:none;
-	font-size: 25px;
-	font-family:medium-cn;
-}
-
 
 .dels[type="checkbox"] {
-border: 1px solid #ccc;	/* 边框 */
+border: 1px solid #000000;	/* 边框 */
 width: 20px;	/* 宽度 */
 height: 20px;	/* 高度 */
 border-radius: 2px;	/* 圆角 */
@@ -116,11 +103,6 @@ a {
 	margin: 15px 15px;
 	text-align:center;
 }
-/*.button-container:hover {
-	font-size: 32px;
-	box-shadow: 0 3px 6px transparent, 0 3px 6px transparent;
-	transform: translateY(-2px);
-}*/
 
 .edit
 {

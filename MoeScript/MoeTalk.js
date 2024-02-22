@@ -41,11 +41,10 @@ $("body").on('click',function()
 
 	if($('.visible').length === 0)
 	{
-		sendChar = false
 		$('.addChat').prop('checked',false)
 		$(".Talk__CContainer-sc-1uzn66i-1").outerWidth('inherit')
 		$('#mt_watermark').hide()
-		$('.hfospu').show()
+		$('.消息').show()
 		$(".dels").show()
 	}
 	if($(".dels:checked").length > 0)
@@ -65,7 +64,7 @@ $("body").on('click',function()
 $(".bIcduz").wait(function()
 {
 	height = mt_height()
-	$(".bIcduz").after("<span id='size' class='"+class1+"' style='white-space:pre;'><b>"+height+"\n"+size+"KB</b></span>");
+	$(".bIcduz").after("<span id='size' class='文本' style='white-space:pre;'><b>"+height+"\n"+size+"KB</b></span>");
 	warning();
 },".bIcduz")
 //加载工具
@@ -277,14 +276,21 @@ $('body').on('click',"#delsto",function()
 	}
 })
 //隐藏工具按钮拓展
-$('body').on('click',"#editTools",function()
+$('body').on('click',".Screenshot_Mode",function()
 {
 	if($('.tools').css('display') === 'none')
 	{
 		$('.tools').show()
+		$('.消息').each(function()
+		{
+			$(this).append(`<input type="checkbox" class="dels" style="background-color: ${$(this).attr('title')};" data-html2canvas-ignore="true">`)
+		})
 	}
 	else
 	{
+		$('.消息').css('background-color','')
+		$('.dels').remove()
+
 		$('.tools').hide()
 		$('.operateTools').hide()
 	}
@@ -296,9 +302,9 @@ $('body').on('change',".dels",function()
 	else $(this).parent().css("background-color","")//
 })
 //自动跳到被选位置
-$('body').on('click',".juTGbm",function()
+$('body').on('click',".chatText",function()
 {
-	if($(".dels:checked").attr('index'))$(".dels:checked")[0].scrollIntoView(!1)
+	if($(".dels:checked").length > 0)$(".dels:checked")[0].scrollIntoView(!1)
 })
 $(window).keydown(function(event)
 {
@@ -551,9 +557,14 @@ function makeMessage(type,data,chatIndex,mode)
 			</div>
 		</div>`
 	}
-	return `<div class="消息" style="${head ? '' : 'padding: 0.5rem 1rem 0px;'}${selected ? 'background-color: rgb(202, 215, 221);' : ''}">
+	let 复选框 = ''
+	if($('.tools').css('display') !== 'none')
+	{
+		复选框 = `<input type="checkbox" ${selected ? 'checked' : ''} class="dels" style="background-color: ${color};" data-html2canvas-ignore="true">`
+	}
+	return `<div class="消息" title='${color}' style="${head ? '' : 'padding: 0.5rem 1rem 0px;'}${selected ? 'background-color: rgb(202, 215, 221);' : ''}">
 		${聊天}
-		<input type="checkbox" ${selected ? 'checked' : ''} class="dels" style="background-color: ${color};" data-html2canvas-ignore="true">
+		${复选框}
 	</div>`
 }
 function sendMessage(data,type,mode = 'add',indexs = [])

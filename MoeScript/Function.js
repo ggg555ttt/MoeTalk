@@ -50,7 +50,6 @@ var clubarr = {};
 var charList = '';
 if(localStorage['mt-club'])clubarr = JSON.parse(localStorage['mt-club']);//读取社团
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
-var class1 = 'talk__TextBox-sc-eq7cqw-4 talk__NTextBox-sc-eq7cqw-5 fWynih fYSjWX';
 imageArrL = 0
 /*预定义区*/
 
@@ -320,24 +319,6 @@ function isJSON(str) {
 	//console.log('It is not a string!')
  }　
 
-//选择框索引下移
-function nextindex()
-{
-	let index = $(".dels").index($(".dels:checked"));
-	if(index > -1)
-	{
-		$(".dels").eq(index).prop("checked",false);
-		$(".dels").eq(index+1).prop("checked",true);
-		$(".dels").eq(index).parent().css("background-color","")//
-		$(".dels").eq(index+1).parent().css("background-color","rgb(202,215,221)")//
-		index = $(".dels:checked")[0];
-	}
-	else
-	{
-		index = $('.消息:eq(-1)')[0];
-	}
-	return index;
-}
 //点击函数
 function click(name)
 {
@@ -798,7 +779,6 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 				scale: S
 			}).then(function(e)
 			{
-				$('.消息').show()
 				imageArr.shift()
 				var n, t = e.toDataURL(localStorage['mt-image']);
 				let height = e.height
