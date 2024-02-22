@@ -105,7 +105,6 @@ function loadname(id)
 	if(mt_name[id])name = mt_name[id];//@改名
 	if(name.split(" ")[1])name = name.split(" ")[1]
 	name = name.replaceAll("-", " ")
-
 	
 	if(sessionStorage['mt-char'] && JSON.parse(sessionStorage['mt-char'])[id])
 	{
