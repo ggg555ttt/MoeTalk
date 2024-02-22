@@ -3208,9 +3208,9 @@
 						{
 							children: [(0, m.jsx)(eU,
 							{
+								className:'Screenshot_Mode',
 								children: (0, m.jsx)(c.xL,
 								{
-									className:'Screenshot_Mode',
 									icon: ico.QY_
 								})
 							}), (0, m.jsx)("input",
