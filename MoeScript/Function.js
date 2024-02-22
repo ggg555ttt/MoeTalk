@@ -102,11 +102,11 @@ function loadname(id)
 	{
 		name = mt_characters[id].name[lang] ? mt_characters[id].name[lang] : id
 	}
-
+	if(mt_name[id])name = mt_name[id];//@改名
 	if(name.split(" ")[1])name = name.split(" ")[1]
 	name = name.replaceAll("-", " ")
 
-	if(mt_name[id])name = mt_name[id];//@改名
+	
 	if(sessionStorage['mt-char'] && JSON.parse(sessionStorage['mt-char'])[id])
 	{
 		name = JSON.parse(sessionStorage['mt-char'])[id]
