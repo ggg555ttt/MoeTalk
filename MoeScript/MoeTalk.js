@@ -2,17 +2,16 @@
 var cfemoji = 'NO';//表情差分开关
 var cf = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
-var batEdit = false;//批量编辑开关
-var maxHeight = parseInt(localStorage['mt-maxheight']) < 16384 ? localStorage['mt-maxheight'] : 16384;
-var sendChar = false//发言人开关
+var maxHeight = parseInt(mt_settings['高度限制']) < 16384 ? mt_settings['高度限制'] : 16384;
 var chatIndex = -1//消息索引
-var chatArr = []
-var dataIndex = 0;
+
 var operate = false
 var copydata;
-var mt_width = '';
+
 var imageArr = [];
+var imageArrL = 0
 var imageZip = null;
+
 function mt_height(num)
 {
 	if(!num)num = 1.1
@@ -21,7 +20,7 @@ function mt_height(num)
 	return length.toFixed();
 }
 var mt_font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>";
-if(!localStorage['mt-nofont'] && !browser.isFirefox)$("head").append(mt_font);//加载字体
+if(!mt_settings['禁止字体'] && !browser.isFirefox)$("head").append(mt_font);//加载字体
 $('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
 $(function()
 {
@@ -75,7 +74,7 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='https://tieba.baidu.com/p/8551808608'}.html'><button class='${class0}'><b style='color:black;'>教</b></button></a><span class='tool'>使用教程</span><br>`);
-	$(".frVjsk").append(`<a href='Setting.html?${localStorage['mt-rand']}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
+	$(".frVjsk").append(`<a href='${href}Setting.html?${localStorage['mt-rand']}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
 //使用说明
 $('body').on('click',"#readme",function()
@@ -154,10 +153,10 @@ function mt_ChangeChar(id)
 	}
 	if(mt_characters[id])
 	{
-		let name = prompt(`角色ID：${id}\n原名：${mt_characters[id].name[lang] ? mt_characters[id].name[lang] : id}\n你想改为什么名字？\n(为空则使用原名)`,mt_name[id] ? mt_name[id] : "");
-		if(name != null && name.trim() != '')mt_name[id] = name
-		else mt_name[id] ? delete mt_name[id] : ''
-		localStorage['mt-name'] = JSON.stringify(mt_name)
+		let name = prompt(`角色ID：${id}\n原名：${mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id}\n你想改为什么名字？\n(为空则使用原名)`,mt_settings['人物改名'][id] ? mt_settings['人物改名'][id] : "");
+		if(name != null && name.trim() != '')mt_settings['人物改名'][id] = name
+		else mt_settings['人物改名'][id] ? delete mt_settings['人物改名'][id] : ''
+		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 		list()//更新列表
 	}
 }
@@ -194,7 +193,7 @@ $('body').on('click',"#cf",function()
 {
 	if(CharFaceIndex == null)
 	{
-		let no = JSON.parse(localStorage['mt-selectedList'])['selected']['no'];
+		let no = mt_settings['选择角色'].no
 		CharFaceIndex = no;
 		alert('你选择了差分映射功能，根据你下方被选中的角色\n其包含的差分表情会映射到你下一个选择的角色\n如果你不想映射，请再点击一遍按钮\n如果想恢复默认映射，请再点击一下被选中的头像或与之相同的角色');
 	}
@@ -208,24 +207,20 @@ $('body').on('click',".fzOyMd",function()
 {
 	if(CharFaceIndex != null)
 	{
-		if(!localStorage['CharFaceIndex'])localStorage['CharFaceIndex'] = '{}';
-		let cfiarr = JSON.parse(localStorage['CharFaceIndex']);
-		let no = JSON.parse(localStorage['mt-selectedList'])['selected']['no'];
+		let no = mt_settings['选择角色'].no;
 		if(CharFaceIndex != no)
 		{
-			cfiarr[no] = CharFaceIndex;
-			localStorage['CharFaceIndex'] = JSON.stringify(cfiarr);
+			mt_settings['差分映射'][no] = CharFaceIndex;
 			CharFaceIndex = null;
 			alert('映射成功');
 		}
 		else
 		{
-			delete cfiarr[CharFaceIndex];
-			localStorage['CharFaceIndex'] = JSON.stringify(cfiarr);
+			delete mt_settings['差分映射'][CharFaceIndex]
 			CharFaceIndex = null;
 			alert('已恢复默认映射');
 		}
-		
+		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 	}
 })
 //全选
@@ -316,12 +311,12 @@ $(window).keydown(function(event)
 });
 $('body').on('click',"#mt-style",function()
 {
-	if(localStorage['mt-style'] === 'rgb(255,255,255)')
+	if(mt_settings['风格样式'] === 'rgb(255,255,255)')
 	{
 		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,247,225)');
 		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','rgb(255,247,225)');
 		$('.talk__InfoBox-sc-eq7cqw-8').css('background','transparent');
-		localStorage['mt-style'] = 'rgb(255,247,225)';//yuzutalk
+		mt_settings['风格样式'] = 'rgb(255,247,225)';//yuzutalk
 		$('.旁白').css('background','transparent');
 	}
 	else
@@ -329,9 +324,10 @@ $('body').on('click',"#mt-style",function()
 		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,255,255)');
 		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','rgb(255,255,255)');
 		$('.talk__InfoBox-sc-eq7cqw-8').css('background','rgb(220,229,232)');
-		localStorage['mt-style'] = 'rgb(255,255,255)';//momotalk
+		mt_settings['风格样式'] = 'rgb(255,255,255)';//momotalk
 		$('.旁白').css('background','rgb(220,229,232)');
 	}
+	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 })
 
 $('body').on('click',"#close",function()
@@ -401,8 +397,6 @@ $("body").on('click',"#cutdata",function()
 			json[0]['title'] = filename;
 			json[0]['nickname'] = '截取存档'+length.toFixed(0);
 			json[0]['date'] = `${year}-${month}-${date}`
-			json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
-			json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
 			json[1] = JSON.parse(JSON.stringify(arr));
 			download_txt(`${filename}-MoeTalk截取存档${year}_${month}_${date}-长度${length.toFixed(0)}.json`,JSON.stringify(json));
 		}
@@ -474,13 +468,13 @@ function makeMessage(type,data,chatIndex,mode)
 			内容 = `<span class="${head ? '文本 左角' : '文本'} 编辑">${data.content}</span>`
 			if(type === 'image')
 			{
-				let maxwidth = localStorage['mt-size'] || '90%'
+				let maxwidth = mt_settings['图片比例'] || '90%'
 				if(data.content.indexOf("CharFace") > -1 && !data.file)
 				{
-					maxwidth = localStorage['mt-cfsize'] || '90%'
+					maxwidth = mt_settings['差分比例'] || '90%'
 				}
 				maxheight = `style="max-width:${maxwidth};"`
-				内容 = `<img ${maxheight} class="图片 编辑" src='${data.file || (data.content.indexOf("//") > -1 ? data.content : href+data.content)}'>`
+				内容 = `<img ${maxheight} class="图片 编辑" src='${data.file || (data.content.indexOf("CharFace") > -1 ? data.content : href+data.content)}'>`
 			}
 			对话 = 
 			`<div class="对话" style="display: block; width: 100%;">
@@ -498,7 +492,7 @@ function makeMessage(type,data,chatIndex,mode)
 			头像框 = `${no == 0 ? '' : `<div class="头像框" style="justify-content: flex-end; cursor: pointer; height: 100%;">${head ? `<img height="252" width="252" src="${loadhead(no,index)}" alt="${index}" class="头像">` : ''}</div>`}`
 			名称 = `${head && no != 0 ? `<span class="名称 bold">${data.name ? data.name : loadname(no)}</span>` : ''}`
 			内容 = `<span style="background: rgb(74, 138, 202); border: 1px solid rgb(74, 138, 202);" class="文本 编辑">${data.content}</span>${head || no == 0 ? '<div class="右角"></div>' : ''}`
-			if(type === 'image')内容 = `<img class="图片 编辑" src='${data.file || (data.content.indexOf("//") > -1 ? data.content : href+data.content)}'>`
+			if(type === 'image')内容 = `<img class="图片 编辑" src='${data.file || (data.content.indexOf("CharFace") > -1 ? data.content : href+data.content)}'>`
 			对话 = 
 			`${no == 0 ? '<div class="头像框" style="margin-right: 1.5rem;"></div>' : ''}
 			<div class="对话" style="align-items: flex-end;">
@@ -519,15 +513,15 @@ function makeMessage(type,data,chatIndex,mode)
 		<div class="羁绊" style='background-image: url(${href}Images/Ui/Favor_Schedule_Deco.webp);'>
 			<div class="羁绊_标题" style="align-items: center;">
 				<div class="竖线" style='border-left: 2px solid rgb(255, 142, 155);'></div>
-				<span class="bold">${mt_text['relationship_event'][lang]}</span>
+				<span class="bold">${mt_text['relationship_event'][mtlang]}</span>
 			</div>
 			<hr class="羁绊_横线">
-			<button class="羁绊_按钮 编辑" style="word-break: break-all;">${data.name ? data.name : loadname(no)}${mt_text['go_relationship_event'][lang]}</button>
+			<button class="羁绊_按钮 编辑" style="word-break: break-all;">${data.name ? data.name : loadname(no)}${mt_text['go_relationship_event'][mtlang]}</button>
 		</div>`
 	}
 	if(type === 'info')
 	{
-		聊天 = `<span class="旁白 编辑" style='background: ${localStorage['mt-style'] === 'rgb(255,255,255)' ? 'rgb(220,229,232)' : 'transparent'};'>${data.content}</span>`
+		聊天 = `<span class="旁白 编辑" style='background: ${mt_settings['风格样式'] === 'rgb(255,255,255)' ? 'rgb(220,229,232)' : 'transparent'};'>${data.content}</span>`
 	}
 	if(type === 'reply')
 	{
@@ -579,9 +573,7 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 
 	$.each(indexs,function(k,chatIndex)
 	{
-		data.replyNo = 0
 		data.replyDepth = 0
-		data.replyGroup = Math.random()
 
 		//数据
 		if(mode === 'delete')
@@ -607,7 +599,7 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 			data.isFirst = !1
 			data.isRight = !1
 			data.is_breaking = !1
-			data.sCharacter = JSON.parse(localStorage['mt-selectedList']).selected
+			data.sCharacter = {no:mt_settings['选择角色'].no,index:mt_settings['选择角色'].index}
 			if($('.addChat').prop('checked'))
 			{
 				chatIndex = chatIndex+1//向后追加
@@ -725,7 +717,7 @@ $("body").on('click',".编辑",function()
 	}
 	else
 	{
-		$('.typeTitle').text(mt_text[chat.type][lang])
+		$('.typeTitle').text(mt_text[chat.type][mtlang])
 
 		$('.edit_button button').show()
 		

@@ -9560,7 +9560,7 @@
 					g = function(e, t, n, r)
 					{
 						var i, a;
-						n.sortCharType = localStorage['mt-order']//@读取排序方式
+						n.sortCharType = mt_settings['排序方式']//@读取排序方式
 						if(r === 'zh_cn' || r === 'zh_tw'){r = 'pinyin'}//@中文改为拼音排序
 						//*按ID排序
 						if("ID" === n.sortCharType)
@@ -9698,7 +9698,7 @@
 						}
 						if(mollu_char[e])o = mollu_char[e][n]
 						if(closure_char[e])o = closure_char[e][n]
-						if(mt_name[e])o = mt_name[e];//@改名
+						if(mt_settings['人物改名'][e])o = mt_settings['人物改名'][e];//@改名
 						//*读取人名
 						return t && o.split(" ")[1] || o.replaceAll("-", " ")
 						/*
@@ -9709,20 +9709,6 @@
 							o = (r = r || a.Y).name[n];
 						return t && o.split(" ")[1] || o.replaceAll("-", " ")
 						*/
-					},
-					z = function(e, t, n)
-					{
-						var r = document.createElement("div");
-						if(e.watermark)
-						{
-							var i = document.createElement("div"),
-								a = document.createElement("div"),
-								o = document.createElement("span"),
-								s = document.createElement("span"),
-								u = document.createElement("span");
-							r.style.backgroundColor = "rgb(139, 187, 233)", r.style.display = "flex", r.style.width = "100%", r.style.fontSize = "1rem", r.style.lineHeight = "1.5rem", r.style.minHeight = "3.5rem", r.style.justifyContent = "space-between", r.style.color = "white", r.style.boxSizing = "border-box", r.style.padding = "0.5rem 1rem", r.style.marginBottom = "1rem", i.style.display = "flex", i.style.alignItems = "center", i.style.marginRight = "1rem", a.style.display = "flex", a.style.textAlign = "right", a.style.flexDirection = "column", a.style.alignItems = "flex-end", a.style.justifyContent = "center", o.style.fontSize = "2rem", o.style.fontFamily = "title", o.style.fontWeight = 700, s.style.textShadow = "1px 1px 0px rgb(34, 37, 41)", u.style.textShadow = "1px 1px 0px rgb(34, 37, 41)", o.textContent = localStorage['MoeTalk'], s.textContent = e.title ? t : "", u.textContent = e.writer ? n : "", r.append(i, a), i.append(o), a.append(s, u)//#图片标题自定义localStorage['MoeTalk']
-						}
-						return r
 					},
 					A = function(e)
 					{
@@ -9738,7 +9724,7 @@
 								{
 									type: "image/png"
 								});
-								r.file(localStorage['MoeTalk']+".json", i), r.generateAsync(//#自定义
+								r.file(`${mt_settings['顶部标题']}.json`, i), r.generateAsync(//#自定义
 								{
 									type: "blob"
 								}).then(function(e)
@@ -9966,7 +9952,7 @@
 									})
 								}), (0, O.jsx)(I,
 								{
-									children: [(0, O.jsx)(I,{id:"readme",children:month === Month && day === Day ? 'MikuTalk' : localStorage['MoeTalk']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
+									children: [(0, O.jsx)(I,{id:"readme",children:month === Month && day === Day ? 'MikuTalk' : mt_settings['顶部标题']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
 										href: "https://gitlab.com/ggg555ttt/MoeTalk/",
 										style:
@@ -10310,7 +10296,7 @@
 							rgb252_238_240: "rgb(252, 238, 240)",
 							rgb252_238_98: "rgb(252, 238, 98)",
 							rgb252_135_155: "rgb(252, 135, 155)",
-							rgb243_247_248: localStorage['MoeTalk'] === 'MikuTalk' || (month === Month && day === Day) ? "transparent" : "rgb(243, 247, 248)",//#41
+							rgb243_247_248: mt_settings['顶部标题'] === 'MikuTalk' || (month === Month && day === Day) ? "transparent" : "rgb(243, 247, 248)",//#41
 							rgb242_231_85: "rgb(242, 231, 85)",
 							rgb225_237_240: "rgb(225, 237, 240)",
 							rgb224_226_228: "rgb(224, 226, 228)",
@@ -10475,34 +10461,13 @@
 					ec = n(1248),
 					el = function()
 					{
-						var e = (0, k.C)(function(e)
-							{
-								return e.global.lang
-							}),
-							t = (0, k.T)();
-						(0, g.useEffect)(function()
-						{
-							var e = (0, z.mF)(),
-								n = localStorage.getItem("mt-lang");//#重新设置语言字段
-							"kr" === n || "jp" === n || "en" === n || "zh_cn" === n || "zh_tw" === n ? e = n : localStorage.setItem("mt-lang", (0, z.mF)()), t((0, w.Wg)(e))//#重新设置语言字段
-						}, [t]), (0, g.useEffect)(function()
-						{
-							localStorage.setItem("mt-lang", e)//#重新设置语言字段
-						}, [e])
+						var e = mtlang
 					},
 					ef = function()
 					{
 						var e = (0, k.C)(function(e)
 							{
 								return e.makeChat.chats
-							}),
-							t = (0, k.C)(function(e)
-							{
-								return e.makeChat.replyGroup
-							}),
-							n = (0, k.C)(function(e)
-							{
-								return e.makeChat.replyNo
 							}),
 							r = (0, k.T)();
 						(0, g.useEffect)(function()
@@ -10512,24 +10477,8 @@
 							null !== t && (e = JSON.parse(t)), r((0, Q.U_)(e))
 						}, [r]), (0, g.useEffect)(function()
 						{
-							var e = 1,
-								t = localStorage.getItem("replyGroup");//#临时改永久
-							null !== t && (e = JSON.parse(t)), r((0, Q.uE)(e))
-						}, [r]), (0, g.useEffect)(function()
-						{
-							var e = 1,
-								t = localStorage.getItem("replyNo");//#临时改永久
-							null !== t && (e = JSON.parse(t)), r((0, Q.I0)(e))
-						}, [r]), (0, g.useEffect)(function()
-						{
 							localStorage.setItem("chats", JSON.stringify(e))//#临时改永久
-						}, [e]), (0, g.useEffect)(function()
-						{
-							localStorage.setItem("replyGroup", JSON.stringify(t))//#临时改永久
-						}, [t]), (0, g.useEffect)(function()
-						{
-							localStorage.setItem("replyNo", JSON.stringify(n))//#临时改永久
-						}, [n])
+						}, [e])
 					},
 					eh = n(2238);
 				/**
@@ -11882,7 +11831,7 @@
 								{
 									style:{lineHeight:'141%'},//@
 									className: "bold",//@
-									children: month === Month && day === Day ? 'MikuTalk' : localStorage['MoeTalk']+' '+version//#蒙版标题自定义localStorage['MoeTalk']
+									children: month === Month && day === Day ? 'MikuTalk' : `${mt_settings['顶部标题']} ${version}`
 								})
 							})]
 						})
@@ -12034,7 +11983,7 @@
 					{
 						displayName: "_app__Wrapper",
 						componentId: "sc-xuvrnm-1"
-					})(["", `background-color:${localStorage['mt-style']}; border-radius:0 0 1rem 1rem;overflow:auto;max-width:1500px;margin:auto;@media screen and (max-width:1500px){border-radius:0;}`], function(e)
+					})(["", `background-color:${mt_settings['风格样式']}; border-radius:0 0 1rem 1rem;overflow:auto;max-width:1500px;margin:auto;@media screen and (max-width:1500px){border-radius:0;}`], function(e)
 					{
 						return e.theme.common.flexBox(
 						{
@@ -13091,7 +13040,7 @@
 							isLogin: !1,
 							isMenu: !1,
 							isRight: !1,
-							lang: lang,//#读取设置语言
+							lang: mtlang,//#读取设置语言
 							gameName: "Mollu"
 						},
 						reducers:

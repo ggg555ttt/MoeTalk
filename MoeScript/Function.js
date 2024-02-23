@@ -23,34 +23,82 @@ if(!localStorage['mt-head'])localStorage['mt-head'] = '{}';//自定义角色头�
 if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';//自定义角色名称
 if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';//自定义角色头像
 if(!localStorage['chats'] || !isJSON(localStorage['chats']))localStorage['chats'] = '[]';//聊天记录
-//if(location.href.split('?')[1])localStorage['mt-lang'] = location.href.split('?')[1].replaceAll('sw.js','')
+
+var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
+
+if(!mt_settings['语言选项'])
+{
+	delete localStorage['lang']
+	delete localStorage['first']
+	delete localStorage['mt-font']
+	delete localStorage['replyNo']
+	delete localStorage['replyGroup']
+
+	mt_settings['语言选项'] = localStorage['mt-lang'] ? localStorage['mt-lang'] : 'zh_cn'
+	mt_settings['图片比例'] = localStorage['mt-size'] ? localStorage['mt-size'] : '90%'
+	mt_settings['差分比例'] = localStorage['mt-cfsize'] ? localStorage['mt-cfsize'] : '90%'
+	mt_settings['顶部标题'] = localStorage['MoeTalk'] ? localStorage['MoeTalk'] : 'MoeTalk'
+	mt_settings['排序方式'] = localStorage['mt-order'] ? localStorage['mt-order'] : 'name'
+	mt_settings['风格样式'] = localStorage['mt-style'] ? localStorage['mt-style'] : 'rgb(255,255,255)'
+	mt_settings['人物改名'] = localStorage['mt-name'] ? JSON.parse(localStorage['mt-name']) : {}
+	mt_settings['图片格式'] = localStorage['mt-image'] ? localStorage['mt-image'] : 'image/png'
+	mt_settings['禁止字体'] = localStorage['mt-nofont'] ? localStorage['mt-nofont'] : false
+	mt_settings['高度限制'] = localStorage['mt-maxheight'] ? localStorage['mt-maxheight'] : 16384
+	mt_settings['头像尺寸'] = localStorage['hnum'] ? localStorage['hnum'] : 300
+	mt_settings['发送方式'] = localStorage['send'] ? '点击' : '回车'
+	mt_settings['差分映射'] = localStorage['CharFaceIndex'] ? JSON.parse(localStorage['CharFaceIndex']) : {}
+	mt_settings['社团列表'] = localStorage['mt-club'] ? JSON.parse(localStorage['mt-club']) : {}
+	
+	delete localStorage['mt-lang']
+	delete localStorage['mt-size']
+	delete localStorage['mt-cfsize']
+	delete localStorage['MoeTalk']
+	delete localStorage['mt-order']
+	delete localStorage['mt-style']
+	delete localStorage['mt-name']
+	delete localStorage['mt-image']
+	delete localStorage['mt-nofont']
+	delete localStorage['mt-maxheight']
+	delete localStorage['hnum']
+	delete localStorage['send']
+	delete localStorage['CharFaceIndex']
+	delete localStorage['mt-club']
+
+	if(localStorage['mt-selectedList'])
+	{
+		mt_settings['选择角色'] = {}
+		mt_settings['选择角色'].no = JSON.parse(localStorage['mt-selectedList']).selected.no
+		mt_settings['选择角色'].index = JSON.parse(localStorage['mt-selectedList']).selected.index
+		mt_settings['选择角色'].list = JSON.parse(localStorage['mt-selectedList']).selectedList
+	}
+	if(!mt_settings['选择角色'])
+	{
+		mt_settings['选择角色'] = {}
+		mt_settings['选择角色'].no = 0
+		mt_settings['选择角色'].index = 1
+		mt_settings['选择角色'].list = []
+	}
+	delete localStorage['mt-selectedList']
+}
+localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+
+var mtlang = mt_settings['语言选项'];
 var langarr = ['zh_cn','zh_tw','jp','en','kr'];
 var langid = langarr.indexOf(window.location.href.split('?')[1])
-if(!localStorage['mt-lang'])localStorage['mt-lang'] = 'zh_cn';//默认语言
-if(langid > -1)localStorage['mt-lang'] = langarr[langid]
-if(!localStorage['mt-size'])localStorage['mt-size'] = '90%';//整体图片宽高百分比
-if(!localStorage['mt-cfsize'])localStorage['mt-cfsize'] = '90%';//差分表情宽高百分比
-if(!localStorage['MoeTalk'])localStorage['MoeTalk'] = 'MoeTalk';//标题
-if(!localStorage['mt-order'])localStorage['mt-order'] = 'name';//排序方式
-if(!localStorage['mt-style'] || localStorage['mt-style'].split(' ').length !== 1)localStorage['mt-style'] = 'rgb(255,255,255)';//默认样式
-if(!localStorage['mt-name'])localStorage['mt-name'] = '{}';var mt_name = JSON.parse(localStorage['mt-name']);//改名
-if(!localStorage['archive'])localStorage['archive'] = true;//自定义角色名称archive
-if(!localStorage['mt-image'])localStorage['mt-image'] = 'image/png';//自定义角色名称archive
-const mimeMap={'3gp':'video/3gpp',aab:'application/x-authoware-bin',aam:'application/x-authoware-map',aas:'application/x-authoware-seg',ai:'application/postscript',aif:'audio/x-aiff',aifc:'audio/x-aiff',aiff:'audio/x-aiff',als:'audio/X-Alpha5',amc:'application/x-mpeg',ani:'application/octet-stream',apk:'application/vnd.android.package-archive',asc:'text/plain',asd:'application/astound',asf:'video/x-ms-asf',asn:'application/astound',asp:'application/x-asap',asx:'video/x-ms-asf',au:'audio/basic',avb:'application/octet-stream',avi:'video/x-msvideo',awb:'audio/amr-wb',bcpio:'application/x-bcpio',bin:'application/octet-stream',bld:'application/bld',bld2:'application/bld2',bmp:'image/bmp',bpk:'application/octet-stream',bz2:'application/x-bzip2',cal:'image/x-cals',ccn:'application/x-cnc',cco:'application/x-cocoa',cdf:'application/x-netcdf',cgi:'magnus-internal/cgi',chat:'application/x-chat',class:'application/octet-stream',clp:'application/x-msclip',cmx:'application/x-cmx',co:'application/x-cult3d-object',cod:'image/cis-cod',cpio:'application/x-cpio',cpt:'application/mac-compactpro',crd:'application/x-mscardfile',csh:'application/x-csh',csm:'chemical/x-csml',csml:'chemical/x-csml',css:'text/css',cur:'application/octet-stream',dcm:'x-lml/x-evm',dcr:'application/x-director',dcx:'image/x-dcx',dhtml:'text/html',dir:'application/x-director',dll:'application/octet-stream',dmg:'application/octet-stream',dms:'application/octet-stream',doc:'application/msword',dot:'application/x-dot',dvi:'application/x-dvi',dwf:'drawing/x-dwf',dwg:'application/x-autocad',dxf:'application/x-autocad',dxr:'application/x-director',ebk:'application/x-expandedbook',emb:'chemical/x-embl-dl-nucleotide',embl:'chemical/x-embl-dl-nucleotide',eps:'application/postscript',eri:'image/x-eri',es:'audio/echospeech',esl:'audio/echospeech',etc:'application/x-earthtime',etx:'text/x-setext',evm:'x-lml/x-evm',evy:'application/x-envoy',exe:'application/octet-stream',fh4:'image/x-freehand',fh5:'image/x-freehand',fhc:'image/x-freehand',fif:'image/fif',fm:'application/x-maker',fpx:'image/x-fpx',fvi:'video/isivideo',gau:'chemical/x-gaussian-input',gca:'application/x-gca-compressed',gdb:'x-lml/x-gdb',gif:'image/gif',gps:'application/x-gps',gtar:'application/x-gtar',gz:'application/x-gzip',hdf:'application/x-hdf',hdm:'text/x-hdml',hdml:'text/x-hdml',hlp:'application/winhlp',hqx:'application/mac-binhex40',htm:'text/html',html:'text/html',hts:'text/html',ice:'x-conference/x-cooltalk',ico:'application/octet-stream',ief:'image/ief',ifm:'image/gif',ifs:'image/ifs',imy:'audio/melody',ins:'application/x-NET-Install',ips:'application/x-ipscript',ipx:'application/x-ipix',it:'audio/x-mod',itz:'audio/x-mod',ivr:'i-world/i-vrml',j2k:'image/j2k',jad:'text/vnd.sun.j2me.app-descriptor',jam:'application/x-jam',jar:'application/java-archive',jnlp:'application/x-java-jnlp-file',jpe:'image/jpeg',jpeg:'image/jpeg',jpg:'image/jpeg',jpz:'image/jpeg',js:'application/x-javascript',jwc:'application/jwc',kjx:'application/x-kjx',lak:'x-lml/x-lak',latex:'application/x-latex',lcc:'application/fastman',lcl:'application/x-digitalloca',lcr:'application/x-digitalloca',lgh:'application/lgh',lha:'application/octet-stream',lml:'x-lml/x-lml',lmlpack:'x-lml/x-lmlpack',lsf:'video/x-ms-asf',lsx:'video/x-ms-asf',lzh:'application/x-lzh',m13:'application/x-msmediaview',m14:'application/x-msmediaview',m15:'audio/x-mod',m3u:'audio/x-mpegurl',m3url:'audio/x-mpegurl',ma1:'audio/ma1',ma2:'audio/ma2',ma3:'audio/ma3',ma5:'audio/ma5',man:'application/x-troff-man',map:'magnus-internal/imagemap',mbd:'application/mbedlet',mct:'application/x-mascot',mdb:'application/x-msaccess',mdz:'audio/x-mod',me:'application/x-troff-me',mel:'text/x-vmel',mi:'application/x-mif',mid:'audio/midi',midi:'audio/midi',mif:'application/x-mif',mil:'image/x-cals',mio:'audio/x-mio',mmf:'application/x-skt-lbs',mng:'video/x-mng',mny:'application/x-msmoney',moc:'application/x-mocha',mocha:'application/x-mocha',mod:'audio/x-mod',mof:'application/x-yumekara',mol:'chemical/x-mdl-molfile',mop:'chemical/x-mopac-input',mov:'video/quicktime',movie:'video/x-sgi-movie',mp2:'audio/x-mpeg',mp3:'audio/x-mpeg',mp4:'video/mp4',mpc:'application/vnd.mpohun.certificate',mpe:'video/mpeg',mpeg:'video/mpeg',mpg:'video/mpeg',mpg4:'video/mp4',mpga:'audio/mpeg',mpn:'application/vnd.mophun.application',mpp:'application/vnd.ms-project',mps:'application/x-mapserver',mrl:'text/x-mrml',mrm:'application/x-mrm',ms:'application/x-troff-ms',mts:'application/metastream',mtx:'application/metastream',mtz:'application/metastream',mzv:'application/metastream',nar:'application/zip',nbmp:'image/nbmp',nc:'application/x-netcdf',ndb:'x-lml/x-ndb',ndwn:'application/ndwn',nif:'application/x-nif',nmz:'application/x-scream',npx:'application/x-netfpx',nsnd:'audio/nsnd',nva:'application/x-neva1',oda:'application/oda',oom:'application/x-AtlasMate-Plugin',pac:'audio/x-pac',pae:'audio/x-epac',pan:'application/x-pan',pbm:'image/x-portable-bitmap',pcx:'image/x-pcx',pda:'image/x-pda',pdb:'chemical/x-pdb',pdf:'application/pdf',pfr:'application/font-tdpfr',pgm:'image/x-portable-graymap',pict:'image/x-pict',pm:'application/x-perl',pmd:'application/x-pmd',png:'image/png',pnm:'image/x-portable-anymap',pnz:'image/png',pot:'application/vnd.ms-powerpoint',ppm:'image/x-portable-pixmap',pps:'application/vnd.ms-powerpoint',ppt:'application/vnd.ms-powerpoint',pqf:'application/x-cprplayer',pqi:'application/cprplayer',prc:'application/x-prc',proxy:'application/x-ns-proxy-autoconfig',ps:'application/postscript',ptlk:'application/listenup',pub:'application/x-mspublisher',pvx:'video/x-pv-pvx',qcp:'audio/vnd.qcelp',qt:'video/quicktime',qti:'image/x-quicktime',qtif:'image/x-quicktime',r3t:'text/vnd.rn-realtext3d',ra:'audio/x-pn-realaudio',ram:'audio/x-pn-realaudio',rar:'application/x-rar-compressed',ras:'image/x-cmu-raster',rdf:'application/rdf+xml',rf:'image/vnd.rn-realflash',rgb:'image/x-rgb',rlf:'application/x-richlink',rm:'audio/x-pn-realaudio',rmf:'audio/x-rmf',rmm:'audio/x-pn-realaudio',rmvb:'audio/x-pn-realaudio',rnx:'application/vnd.rn-realplayer',roff:'application/x-troff',rp:'image/vnd.rn-realpix',rpm:'audio/x-pn-realaudio-plugin',rt:'text/vnd.rn-realtext',rte:'x-lml/x-gps',rtf:'application/rtf',rtg:'application/metastream',rtx:'text/richtext',rv:'video/vnd.rn-realvideo',rwc:'application/x-rogerwilco',s3m:'audio/x-mod',s3z:'audio/x-mod',sca:'application/x-supercard',scd:'application/x-msschedule',sdf:'application/e-score',sea:'application/x-stuffit',sgm:'text/x-sgml',sgml:'text/x-sgml',sh:'application/x-sh',shar:'application/x-shar',shtml:'magnus-internal/parsed-html',shw:'application/presentations',si6:'image/si6',si7:'image/vnd.stiwap.sis',si9:'image/vnd.lgtwap.sis',sis:'application/vnd.symbian.install',sit:'application/x-stuffit',skd:'application/x-Koan',skm:'application/x-Koan',skp:'application/x-Koan',skt:'application/x-Koan',slc:'application/x-salsa',smd:'audio/x-smd',smi:'application/smil',smil:'application/smil',smp:'application/studiom',smz:'audio/x-smd',snd:'audio/basic',spc:'text/x-speech',spl:'application/futuresplash',spr:'application/x-sprite',sprite:'application/x-sprite',spt:'application/x-spt',src:'application/x-wais-source',stk:'application/hyperstudio',stm:'audio/x-mod',sv4cpio:'application/x-sv4cpio',sv4crc:'application/x-sv4crc',svf:'image/vnd',svg:'image/svg-xml',svh:'image/svh',svr:'x-world/x-svr',swf:'application/x-shockwave-flash',swfl:'application/x-shockwave-flash',t:'application/x-troff',tad:'application/octet-stream',talk:'text/x-speech',tar:'application/x-tar',taz:'application/x-tar',tbp:'application/x-timbuktu',tbt:'application/x-timbuktu',tcl:'application/x-tcl',tex:'application/x-tex',texi:'application/x-texinfo',texinfo:'application/x-texinfo',tgz:'application/x-tar',thm:'application/vnd.eri.thm',tif:'image/tiff',tiff:'image/tiff',tki:'application/x-tkined',tkined:'application/x-tkined',toc:'application/toc',toy:'image/toy',tr:'application/x-troff',trk:'x-lml/x-gps',trm:'application/x-msterminal',tsi:'audio/tsplayer',tsp:'application/dsptype',tsv:'text/tab-separated-values',tsv:'text/tab-separated-values',ttf:'application/octet-stream',ttz:'application/t-time',txt:'text/plain',ult:'audio/x-mod',ustar:'application/x-ustar',uu:'application/x-uuencode',uue:'application/x-uuencode',vcd:'application/x-cdlink',vcf:'text/x-vcard',vdo:'video/vdo',vib:'audio/vib',viv:'video/vivo',vivo:'video/vivo',vmd:'application/vocaltec-media-desc',vmf:'application/vocaltec-media-file',vmi:'application/x-dreamcast-vms-info',vms:'application/x-dreamcast-vms',vox:'audio/voxware',vqe:'audio/x-twinvq-plugin',vqf:'audio/x-twinvq',vql:'audio/x-twinvq',vre:'x-world/x-vream',vrml:'x-world/x-vrml',vrt:'x-world/x-vrt',vrw:'x-world/x-vream',vts:'workbook/formulaone',wav:'audio/x-wav',wax:'audio/x-ms-wax',wbmp:'image/vnd.wap.wbmp',web:'application/vnd.xara',wi:'image/wavelet',wis:'application/x-InstallShield',wm:'video/x-ms-wm',wma:'audio/x-ms-wma',wmd:'application/x-ms-wmd',wmf:'application/x-msmetafile',wml:'text/vnd.wap.wml',wmlc:'application/vnd.wap.wmlc',wmls:'text/vnd.wap.wmlscript',wmlsc:'application/vnd.wap.wmlscriptc',wmlscript:'text/vnd.wap.wmlscript',wmv:'audio/x-ms-wmv',wmx:'video/x-ms-wmx',wmz:'application/x-ms-wmz',wpng:'image/x-up-wpng',wpt:'x-lml/x-gps',wri:'application/x-mswrite',wrl:'x-world/x-vrml',wrz:'x-world/x-vrml',ws:'text/vnd.wap.wmlscript',wsc:'application/vnd.wap.wmlscriptc',wv:'video/wavelet',wvx:'video/x-ms-wvx',wxl:'application/x-wxl',xgzip:'application/x-gzip',xar:'application/vnd.xara',xbm:'image/x-xbitmap',xdm:'application/x-xdma',xdma:'application/x-xdma',xdw:'application/vnd.fujixerox.docuworks',xht:'application/xhtml+xml',xhtm:'application/xhtml+xml',xhtml:'application/xhtml+xml',xla:'application/vnd.ms-excel',xlc:'application/vnd.ms-excel',xll:'application/x-excel',xlm:'application/vnd.ms-excel',xls:'application/vnd.ms-excel',xlt:'application/vnd.ms-excel',xlw:'application/vnd.ms-excel',xm:'audio/x-mod',xml:'text/xml',xmz:'audio/x-mod',xpi:'application/x-xpinstall',xpm:'image/x-xpixmap',xsit:'text/xml',xsl:'text/xml',xul:'text/xul',xwd:'image/x-xwindowdump',xyz:'chemical/x-pdb',yz1:'application/x-yz1',z:'application/x-compress',zac:'application/x-zaurus-zac',zip:'application/zip'};
-var selectedList = 'yes';//快捷角色开关
-var imgindex;var text;//人物自定义
-var chararr = {};//自定义角色列表
-var height;//聊天记录长度
+if(langid > -1)mtlang = langarr[langid]
+
+var 选择角色 = true;//快捷角色开关
+
+var imgindex;//人物自定义
+var chararr = {};//自定义角色列表//
+
 var $$ = $;//jquery转义
+var height;//聊天记录长度
 var size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0));//数据大小
 var CFPI = 0;//差分页码
-var lang = localStorage['mt-lang'];
-var clearImage = false;
-var clubarr = {};
-var charList = '';
-if(localStorage['mt-club'])clubarr = JSON.parse(localStorage['mt-club']);//读取社团
+
+
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
-imageArrL = 0
 /*预定义区*/
 
 //保存头像
@@ -59,6 +107,7 @@ function savehead(headindex,img64)
 	let headarr = JSON.parse(localStorage['mt-head']);
 	headarr[headindex] = img64;
 	localStorage['mt-head'] = JSON.stringify(headarr);
+	let nameloss
 	$.each(headarr,function(k,v)
 	{
 		if(!chararr[k])
@@ -96,13 +145,13 @@ function loadname(id)
 {
 	let you = {kr: "주인공",en: "Lead",jp: "主役",zh_cn: "主角",zh_tw: "主角"}
 	let name = id.toString()
-	if(mollu_char[id])name = mollu_char[id][lang]
-	if(closure_char[id])name = closure_char[id][lang]
+	if(mollu_char[id])name = mollu_char[id][mtlang]
+	if(closure_char[id])name = closure_char[id][mtlang]
 	if(mt_characters[id])
 	{
-		name = mt_characters[id].name[lang] ? mt_characters[id].name[lang] : id
+		name = mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id
 	}
-	if(mt_name[id])name = mt_name[id];//@改名
+	if(mt_settings['人物改名'][id])name = mt_settings['人物改名'][id];//@改名
 	if(name.split(" ")[1])name = name.split(" ")[1]
 	name = name.replaceAll("-", " ")
 	
@@ -115,7 +164,7 @@ function loadname(id)
 		name = JSON.parse(localStorage['mt-char'])[id]
 	}
 
-	if(id == 0)name = you[lang]
+	if(id == 0)name = you[mtlang]
 	return name
 }
 //删除头像
@@ -168,7 +217,7 @@ function compress(base64Img,type = 'head',mode = 'add')
 		{
 			if(w > h)x = (w-h)/2,l = h,h = w;//竖图上下居中
 			else y = (h-w)/2,l = w,w = h;//横图左右居中
-			n = localStorage['hnum'] ? localStorage['hnum'] : 300;
+			n = mt_settings['头像尺寸'] ? mt_settings['头像尺寸'] : 300;
 			a = Math.min(1, n / w);(w *= a), (h *= a);//最大长度不得超过300
 		}
 
@@ -249,7 +298,7 @@ function base64ToBlob(base64)
 	for (let i = 0; i < binary.length; i++) {
 		array.push(binary.charCodeAt(i));
 	}
-	return new Blob([new Uint8Array(array)], { type: localStorage['mt-image'] });
+	return new Blob([new Uint8Array(array)], { type: mt_settings['图片格式'] });
 }
 function blobToArrayBuffer(file) {
 	return new Promise((resolve, reject) => {
@@ -280,7 +329,7 @@ function combineFiles(mainFile, hideFile, fileName, Index) {
 	]).then(([mainBuffer, hideBuffer]) => {
 		const mainData = new Uint8Array(mainBuffer);//图片
 		const hideData = new Uint8Array(hideBuffer);//暗件
-		const mainFileExt = localStorage['mt-image'].split('/')[1];//图片后缀
+		const mainFileExt = mt_settings['图片格式'].split('/')[1];//图片后缀
 		const hideFileExt = 'json';//暗件后缀
 		const dataView = new DataView(mainBuffer);
 		const sepData = new TextEncoder().encode(sep + hideFileExt.padEnd(maxExtLength, ' '));
@@ -288,12 +337,12 @@ function combineFiles(mainFile, hideFile, fileName, Index) {
 		targetData.set(mainData, 0);
 		targetData.set(sepData, mainData.length);
 		targetData.set(hideData, mainData.length + sepData.length);
-		const blob = new Blob([targetData], { type: mimeMap[mainFileExt] });
+		const blob = new Blob([targetData], { type: mt_settings['图片格式'] });
 		//downloadBlob(blob, fileName+'.'+mainFileExt);
 		//blobToBase64(blob,function(e){$("[alt='download']").attr('src',`data:${localStorage['mt-image']};base64,${e}`)})//替换手动保存的图片
 		blobToBase64(blob,function(e)
 		{
-			$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${Index}</span>/${imageArrL}张图片：</h1><img src='data:${localStorage['mt-image']};base64,${e}'></div>`)
+			$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${Index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${e}'></div>`)
 		})
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
@@ -345,11 +394,11 @@ function club(clear = false)
 		$('.club').each(function()
 		{
 			let club = $(this).attr('value');
-			if($(this).prop('checked') === true && !clubarr[club])
+			if($(this).prop('checked') === true && !mt_settings['社团列表'][club])
 			{
 				$(this).click();
 			}
-			if($(this).prop('checked') === false && clubarr[club])
+			if($(this).prop('checked') === false && mt_settings['社团列表'][club])
 			{
 				$(this).click();
 			}
@@ -387,9 +436,6 @@ function loaddata(json)//识别存档
 		json[0]['title'] = '错误存档'
 		json[0]['nickname'] = '无法识别的数据'
 		json[0]['date'] = '强制上传会清空当前正在编辑的数据'
-		
-		json[0]['replyGroup'] = 0
-		json[0]['replyNo'] = 0
 	}
 
 	if(json[0] && (json[0].mt_char || json[0].custom))//mt旧版自定义角色转义
@@ -433,30 +479,28 @@ function loaddata(json)//识别存档
 
 	if(json['chars'])//ct待选角色
 	{
-		json[0]['chars'] = {}
-		json[0]['chars']['selected'] = {}
-		json[0]['chars']['selected']['no'] = 0
-		json[0]['chars']['selected']['index'] = 1
-
-		json[0]['chars']['selectedList'] = []
+		json[0]['选择角色'] = {}
+		json[0]['选择角色'].no = 0
+		json[0]['选择角色'].index = 1
+		json[0]['选择角色'].list = []
 		
 		$.each(json['chars'],function(k,v)
 		{
-			json[0]['chars']['selectedList'][k] = {}
+			json[0]['选择角色'].list[k] = {}
 			if(v['char_id'].split('-')[0] === 'ba')
 			{
-				json[0]['chars']['selectedList'][k]['no'] = v['char_id'].split('-')[1]
-				json[0]['chars']['selectedList'][k]['index'] = v['img']
+				json[0]['选择角色'].list[k].no = v['char_id'].split('-')[1]
+				json[0]['选择角色'].list[k].index = v['img']
 			}
 			else if(v['char_id'].split('-')[1] === 'MT')
 			{
-				json[0]['chars']['selectedList'][k]['no'] = v['char_id'].split('-')[2]
-				json[0]['chars']['selectedList'][k]['index'] = v['char_id'].split('-')[3]
+				json[0]['选择角色'].list[k].no = v['char_id'].split('-')[2]
+				json[0]['选择角色'].list[k].index = v['char_id'].split('-')[3]
 			}
 			else
 			{
-				json[0]['chars']['selectedList'][k]['no'] = v['char_id']
-				json[0]['chars']['selectedList'][k]['index'] = v['char_id']
+				json[0]['选择角色'].list[k].no = v['char_id']
+				json[0]['选择角色'].list[k].index = v['char_id']
 			}
 		})
 	}
@@ -472,13 +516,9 @@ function loaddata(json)//识别存档
 		json[0]['title'] = 'ClosureTalk存档'
 		json[0]['nickname'] = '存档大小：'+josnsize+'KB'
 		json[0]['date'] = `${length ? length : 0}名自定义角色`
-		json[0]['replyGroup'] = 0
-		json[0]['replyNo'] = 0
 		$.each(json['chat'],function(k,v)
 		{
 			json[1][k] = {};
-			json[1][k]['replyNo'] = 0
-			json[1][k]['replyGroup'] = 0
 			json[1][k]['replyDepth'] = 0
 
 			json[1][k]['sCharacter'] = {};
@@ -502,8 +542,6 @@ function loaddata(json)//识别存档
 			if(v['yuzutalk']['type'] === 'NARRATION')json[1][k]['type'] = 'info'
 			if(v['yuzutalk']['type'] === 'CHOICES')
 			{
-				json[1][k]['replyNo'] = Math.random()
-				json[1][k]['replyGroup'] = Math.random()
 				json[1][k]['type'] = 'reply'
 			}
 			if(v['yuzutalk']['type'] === 'IMAGE')
@@ -521,8 +559,6 @@ function loaddata(json)//识别存档
 				}
 			}
 
-			json[1][k]['isFirst'] = false;
-			json[1][k]['isRight'] = false;
 			if(v.yuzutalk.avatarState === 'SHOW')json[1][k]['isFirst'] = true;
 			if(v.is_breaking === true)json[1][k]['is_breaking'] = true;
 		})
@@ -540,7 +576,11 @@ function loaddata(json)//识别存档
 		sessionStorage['mt-head'] = JSON.stringify({...JSON.parse(sessionStorage['mt-head']),...custom_head});
 		list()//更新列表
 	}
-	if(json[0]['chars'] && json[0]['chars']['selectedList'])charList = JSON.stringify(json[0]['chars'])
+	if(json[0]['选择角色'])
+	{
+		选择角色 = true
+		mt_settings['选择角色'] = json[0]['选择角色']
+	}
 	
 	return json
 }
@@ -648,7 +688,7 @@ function MoeToClosure()//Moe转Closure
 	closuretalk['chars'] = [];
 	closuretalk['custom_chars'] = [];
 	
-	$.each(JSON.parse(localStorage['mt-selectedList'])['selectedList'],function(k,v)
+	$.each(mt_settings['选择角色'].list,function(k,v)
 	{
 		closuretalk['chars'][k] = {}
 		let id = v.no;
@@ -700,7 +740,7 @@ function mt_title(moetalk,title,writer)
 		if(!writer)writer = ''
 		$('#mt_title').text(title)
 		$('#mt_writer').text(writer)
-		$('.mt_watermark').text(localStorage['MoeTalk'])
+		$('.mt_watermark').text(mt_settings['顶部标题'])
 		$('#mt_watermark').css('background-color',"rgb(139, 187, 233)")
 	}
 	else
@@ -709,7 +749,7 @@ function mt_title(moetalk,title,writer)
 		$('#mt_writer').text('')
 		$('.mt_watermark').text('')
 		if(localStorage['watermark'] === 'false')$('#mt_watermark').hide()
-		$('#mt_watermark').css('background-color',localStorage['mt-style'].split(' ')[1])
+		$('#mt_watermark').css('background-color',mt_settings['风格样式'].split(' ')[1])
 	}
 }
 function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
@@ -730,29 +770,27 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 		}).then(function(e)
 		{
 			imageArr.shift()
-			var n, t = e.toDataURL(localStorage['mt-image']);
+			var n, t = e.toDataURL(mt_settings['图片格式']);
 			let height = e.height
 			let json = [];
 			json[0] = {};
 			json[0]['title'] = '备份存档';
 			json[0]['nickname'] = 'MoeTalk';
 			json[0]['date'] = (0, u._3)(!0, !0);
-			json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
-			json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
-			json[0]['chars'] = JSON.parse(localStorage['mt-selectedList'])//@
+			json[0]['选择角色'] = mt_settings['选择角色']//@
 			json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
 			json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
 			json[1] = JSON.parse(localStorage['chats']);
 			j(v.index), null === (n = I.current) || void 0 === n , e.toBlob(function(e)
 			{
 				mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)
-				t = t.replace(`data:${localStorage['mt-image']};base64,`,'')
-				json = localStorage['archive'] === 'true' ? JSON.stringify(json) : ''
+				t = t.replace(`data:${mt_settings['图片格式']};base64,`,'')
+				json = localStorage['archive'] === 'false' ? JSON.stringify(json) : ''
 				let title = "" !== _ ? _ : L.Z.noTitle[g]
 				if(imageZip)
 				{
-					$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${v.index}</span>/${imageArrL}张图片：</h1><img src='data:${localStorage['mt-image']};base64,${t}'></div>`)
-					imageZip.file(`MoeTalk_${title}_${v.index}_${height}.${localStorage['mt-image'].split('/')[1]}`,e);
+					$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${v.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${t}'></div>`)
+					imageZip.file(`MoeTalk_${title}_${v.index}_${height}.${mt_settings['图片格式'].split('/')[1]}`,e);
 				}
 				else
 				{
@@ -779,29 +817,27 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			}).then(function(e)
 			{
 				imageArr.shift()
-				var n, t = e.toDataURL(localStorage['mt-image']);
+				var n, t = e.toDataURL(mt_settings['图片格式']);
 				let height = e.height
 				let json = [];
 				json[0] = {};
 				json[0]['title'] = '备份存档';
 				json[0]['nickname'] = 'MoeTalk';
 				json[0]['date'] = (0, u._3)(!0, !0);
-				json[0]['replyNo'] = JSON.parse(localStorage['replyNo']);
-				json[0]['replyGroup'] = JSON.parse(localStorage['replyNo']);
-				json[0]['chars'] = JSON.parse(localStorage['mt-selectedList'])//@
+				json[0]['选择角色'] = mt_settings['选择角色']//@
 				json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
 				json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
 				json[1] = JSON.parse(localStorage['chats']);
 				j(v.index), null === (n = I.current) || void 0 === n , e.toBlob(function(e)
 				{
-					t = t.replace(`data:${localStorage['mt-image']};base64,`,'')
-					json = localStorage['archive'] === 'true' ? JSON.stringify(json) : ''
+					t = t.replace(`data:${mt_settings['图片格式']};base64,`,'')
+					json = localStorage['archive'] === 'false' ? JSON.stringify(json) : ''
 					let title = "" !== _ ? _ : L.Z.noTitle[g]
 					let str = v.start !== 0 ? `_${height}_${v.index}` : ''
 					if(imageZip)
 					{
-						$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${v.index}</span>/${imageArrL}张图片：</h1><img src='data:${localStorage['mt-image']};base64,${t}'></div>`)
-						imageZip.file(`MoeTalk_${title}_${v.index}_${height}.${localStorage['mt-image'].split('/')[1]}`,e);
+						$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${v.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${t}'></div>`)
+						imageZip.file(`MoeTalk_${title}_${v.index}_${height}.${mt_settings['图片格式'].split('/')[1]}`,e);
 						json === "" ? "" : imageZip.file(`MoeTalk_${title}.json`,json);
 						imageZip.generateAsync({type:'blob'}).then(function(content)
 						{

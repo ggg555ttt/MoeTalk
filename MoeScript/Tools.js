@@ -76,11 +76,12 @@ $('body').on('change',"#loaddatafile",function()
 //更改语言
 $('body').on('click',"#language",function()
 {
-	let lang = prompt("请输入想更改的语言：\nkr(韩语)\njp(日语)\nen(英语)\nzh_cn(简体中文)\nzh_tw(繁体中文)", localStorage['mt-lang']);
+	let lang = prompt("请输入想更改的语言：\nkr(韩语)\njp(日语)\nen(英语)\nzh_cn(简体中文)\nzh_tw(繁体中文)", mt_settings['语言选项']);
 	if (lang != null)
 	{
+		mt_settings['语言选项'] = lang;
+		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 		alert('更改完成，请返回页面!');
-		localStorage['mt-lang'] = lang;
 	}
 })
 //发送方式
@@ -104,28 +105,30 @@ $('body').on('click',"#send",function()
 //字体加载
 $('body').on('click',"#font",function()
 {
-	if(localStorage['mt-nofont'])
+	if(mt_settings['禁止字体'])
 	{
 		if(confirm('是否恢复加载字体文件？恢复可以使页面布局更美观\n确认后请返回页面'))
 		{
-			localStorage.removeItem('mt-nofont');
+			mt_settings['禁止字体'] = false
 		}
 	}
 	else
 	{
 		if(confirm('是否取消加载字体文件？取消可以优化页面加载时间\n确认后请返回页面'))
 		{
-			localStorage['mt-nofont'] = true;
+			mt_settings['禁止字体'] = true;
 		}
 	}
+	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 })
 //头像质量
 $('body').on('click',"#hnum",function()
 {
-	if(localStorage['hnum'])num = "，当前数值为："+localStorage['hnum']
+	if(mt_settings['头像尺寸'])num = "，当前数值为："+mt_settings['头像尺寸']
 	else num = '，当前数值为300';
 	let hnum = prompt("数值越大上传的头像越清晰，同时也会越占用存储空间\n建议在100到300之间取值"+num,300);
-	if(!isNaN(hnum) && hnum != null && hnum.trim() != '')localStorage['hnum'] = hnum.trim()
+	if(!isNaN(hnum) && hnum != null && hnum.trim() != '')mt_settings['头像尺寸'] = hnum.trim()
+	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 })
 
 //清除数据
@@ -144,31 +147,35 @@ $("body").on('click','#clean',function()
 //设置整体上传的图片宽高百分比
 $("body").on('click','#mt-size',function()
 {
-	let size = localStorage['mt-size'];
+	let size = mt_settings['图片比例'];
 	let msg = prompt("请输入整体上传的图片宽高百分比，数字后一定要带百分号，当前数值为：",size);
 	if(msg)
 	{
-		localStorage['mt-size'] = msg;
+		mt_settings['图片比例'] = msg;
+		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 	}
 })
 //设置独立的差分表情宽高百分比
 $("body").on('click','#mt-cfsize',function()
 {
-	let size = localStorage['mt-cfsize'];
+	let size = mt_settings['差分比例'];
 	let msg = prompt("请输入独立的差分表情宽高百分比，数字后一定要带百分号，当前数值为：",size);
 	if(msg)
 	{
-		localStorage['mt-cfsize'] = msg;
+		mt_settings['差分比例'] = msg;
+		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 	}
 })
 //设置标题
 $("body").on('click','#mt-title',function()
 {
-	let title = localStorage['MoeTalk'];
+	let title = mt_settings['顶部标题'];
 	let msg = prompt("请输入标题文字",title);
 	if(msg)
 	{
-		localStorage['MoeTalk'] = msg;
+		mt_settings['顶部标题'] = msg;
+		localStorage.setItem('顶部标题',msg)
+		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 	}
 })
 
@@ -239,11 +246,12 @@ function blobToArrayBuffer(file) {
 }
 $('body').on('click',"#mt-image",function()
 {
-	let image = prompt("请输入生成图片的格式：（不要乱输入）\npng（默认，质量最好体积最大）\njpeg（体积小，注意不是jpg）\nwebp（体积更小，不推荐火狐）", localStorage['mt-image'].split('/')[1]);
+	let image = prompt("请输入生成图片的格式：（不要乱输入）\npng（默认，质量最好体积最大）\njpeg（体积小，注意不是jpg）\nwebp（体积更小，不推荐火狐）", mt_settings['图片格式'].split('/')[1]);
 	if(image != null)
 	{
 		alert('更改完成，如果图片生成错误请尝试改为其它参数');
-		localStorage['mt-image'] = 'image/'+image;
+		mt_settings['图片格式'] = 'image/'+image;
+		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 	}
 })
 $('body').on('click',"#cleancache",function()
@@ -259,10 +267,11 @@ $('body').on('click',"#cleancache",function()
 })
 $('body').on('click',"#mt-maxheight",function()
 {
-	let maxheight = prompt("请输入生成图片的最大长度：（小于16384）", localStorage['mt-maxheight'] ? localStorage['mt-maxheight'] : 16384);
+	let maxheight = prompt("请输入生成图片的最大长度：（小于16384）", mt_settings['高度限制'] ? mt_settings['高度限制'] : 16384);
 	if(maxheight != null)
 	{
 		alert('更改完成，请返回moetalk');
-		localStorage['mt-maxheight'] = maxheight;
+		mt_settings['高度限制'] = maxheight;
+		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 	}
 })

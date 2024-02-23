@@ -354,11 +354,21 @@
 						w = (0, i.C)(function(e)
 						{
 							//*储存读取快捷角色
-							if(selectedList === 'yes' && localStorage['mt-selectedList'])e.sCharacter = JSON.parse(localStorage['mt-selectedList']);
-							selectedList = 'no';
-							localStorage['mt-selectedList'] = JSON.stringify(e.sCharacter);
+							if(选择角色)
+							{
+								e.sCharacter = {}
+								e.sCharacter.selected = {}
+								e.sCharacter.selected.no = mt_settings['选择角色'].no
+								e.sCharacter.selected.index = mt_settings['选择角色'].index
+								e.sCharacter.selectedList = mt_settings['选择角色'].list
+							}
+							选择角色 = false;
+							mt_settings['选择角色'].no = e.sCharacter.selected.no
+							mt_settings['选择角色'].index = e.sCharacter.selected.index
+							mt_settings['选择角色'].list = e.sCharacter.selectedList
+							localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 							//*储存读取快捷角色
-							return selectedList === 'no' ? e.sCharacter : JSON.parse(localStorage['mt-selectedList'])
+							return e.sCharacter
 						}),
 						_ = function(n)
 						{
@@ -477,7 +487,7 @@
 							{
 								fontSize: '1.5rem'
 							},
-							children:L.Z.select_char[lang]+'<'
+							children:L.Z.select_char[mtlang]+'<'
 						}), (0, m.jsxs)(g,
 						{
 							children: [(0, m.jsx)(j,
@@ -616,27 +626,25 @@
 									onClick: function()
 									{
 										l(e)
-										selectedList = 'yes'
-										let select_char = JSON.parse(localStorage['mt-selectedList'])
-										let selected = select_char.selectedList.filter(function(t)
+										选择角色 = true
+										let selected = mt_settings['选择角色'].list.filter(function(t)
 										{
-											return n.no === t.no && e === t.index
+											return n.no == t.no && e == t.index
 										})
 										if(selected.length === 0)
 										{
-											select_char.selected.no = 0
-											select_char.selected.index = 1
+											mt_settings['选择角色'].no = 0
+											mt_settings['选择角色'].index = 1
 										}
 										else
 										{
-											select_char.selected.no = n.no
-											select_char.selected.index = e
+											mt_settings['选择角色'].no = n.no
+											mt_settings['选择角色'].index = e
 											setTimeout(function()
 											{
 												$$('.fzoymd.selected')[0].scrollIntoView(!1)
 											}, 1)
 										}
-										localStorage['mt-selectedList'] = JSON.stringify(select_char)
 									},
 									className: 1 === r.filter(function(t)
 									{
@@ -669,7 +677,7 @@
 						}),
 						a = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						});
 					return (0, m.jsxs)(N,
 					{
@@ -927,7 +935,7 @@
 						a = e.setSearch,
 						l = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						}),
 						s = (0, r.useState)(o),
 						u = s[0],
@@ -984,7 +992,7 @@
 									children: [(0, m.jsx)(G,
 									{
 										className: "bold",
-										children: mt_text['select'][lang]+mt_text['club'][lang]+"："
+										children: mt_text['select'][mtlang]+mt_text['club'][mtlang]+"："
 									}), (0, m.jsx)(c.Bx,
 									{
 										className:"bold",
@@ -996,7 +1004,7 @@
 										{
 											club(true)
 										},
-										children: mt_text['clear'][lang]+mt_text['select'][lang]
+										children: mt_text['clear'][mtlang]+mt_text['select'][mtlang]
 									})]
 								}), 
 								(0, m.jsx)('dl',
@@ -1051,7 +1059,7 @@
 											}), (0, m.jsx)('span',
 											{
 												className: "hida",
-												children: mt_schoolname[v][lang] ? mt_schoolname[v][lang] : v
+												children: mt_schoolname[v][mtlang] ? mt_schoolname[v][mtlang] : v
 											})]
 										}), (0, m.jsx)('ul',
 										{
@@ -1066,7 +1074,7 @@
 														className: "club",
 														school: v,
 														value: value
-													}),mt_clubname[value][lang] ? mt_clubname[value][lang] : value]
+													}),mt_clubname[value][mtlang] ? mt_clubname[value][mtlang] : value]
 												})
 											})
 										})]
@@ -1081,13 +1089,13 @@
 									onClick: function()
 									{
 										//*储存分类和排序方式
-										localStorage['mt-order'] = u
-										clubarr = {};
+										mt_settings['排序方式'] = u
+										mt_settings['社团列表'] = {};
 										$$(".club:checked").each(function()
 										{
-											clubarr[$$(this).attr('value')] = 'YES'
+											mt_settings['社团列表'][$$(this).attr('value')] = 'YES'
 										})
-										localStorage['mt-club'] = JSON.stringify(clubarr);
+										localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 										//*储存分类和排序方式
 										t(), a(
 										{
@@ -1171,7 +1179,7 @@
 						s = a[1],
 						u = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						});
 					return (0, m.jsxs)(Y,
 					{
@@ -1371,7 +1379,7 @@
 						}),
 						t = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						}),
 						o = (0, r.useState)(
 						{
@@ -1416,7 +1424,7 @@
 									open : true
 								})
 							})
-							if(clubarr['临时角色'] && clubarr['临时角色'] === 'YES')
+							if(mt_settings['社团列表']['临时角色'] && mt_settings['社团列表']['临时角色'] === 'YES')
 							{
 								$$.each(JSON.parse(sessionStorage['mt-char']),function(k,v)
 								{
@@ -1446,8 +1454,8 @@
 							arr.map(function(v, k)
 							{
 								let club = v.school.zh_cn === '自定义' ? v.club.zh_cn : mt_characters[v.no].club
-								if(mt_name[v.no])arr[k].name[lang] = mt_name[v.no];//@改名
-								if(JSON.stringify(clubarr) !== '{}' && !clubarr[club])delete arr[k]
+								if(mt_settings['人物改名'][v.no])arr[k].name[mtlang] = mt_settings['人物改名'][v.no];//@改名
+								if(JSON.stringify(mt_settings['社团列表']) !== '{}' && !mt_settings['社团列表'][club])delete arr[k]
 							})
 							//*更新自定义角色的读取方式
 							return arr.filter(function(e)//#_.Z换为arr
@@ -1550,7 +1558,7 @@
 						s = a[1],
 						u = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						}),
 						d = function()
 						{
@@ -1640,7 +1648,7 @@
 						}),
 						g = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						}),
 						x = (0, i.T)(),
 						y = function()
@@ -1722,7 +1730,7 @@
 						r = e.handleDeleteAll,
 						o = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						});
 					return (0, m.jsx)(m.Fragment,
 					{
@@ -1860,7 +1868,7 @@
 						p = (0, i.T)(),
 						g = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						}),
 						x = (0, i.C)(function(e)
 						{
@@ -1877,7 +1885,7 @@
 							title: !1,
 							writer: !1,
 							archive: !1
-						}, "undefined" != typeof localStorage && (t.watermark = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("watermark")) === null ? "true" : localStorage.getItem("watermark") || "false"), t.archive = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("archive")) === null ? "true" : localStorage.getItem("archive") || "false")), t)),
+						}, "undefined" != typeof localStorage && (t.watermark = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("watermark")) === null ? "true" : localStorage.getItem("watermark") || "false"), t.archive = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("archive")) === null ? "false" : localStorage.getItem("archive") || "true")), t)),
 						k = v[0],
 						Z = v[1],
 						N = (0, r.useState)(1.1),
@@ -1996,8 +2004,7 @@
 													{
 														watermark: !0,
 														writer: !0,
-														title: !0,
-														archive: !0
+														title: !0
 													}))
 												},
 												onKeyDown: function(e) {}
@@ -2018,8 +2025,7 @@
 													{
 														watermark: !0,
 														writer: !0,
-														title: !0,
-														archive: !0
+														title: !0
 													}))
 												}
 											})
@@ -2097,7 +2103,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: [L.Z.down_comment1[g],localStorage['archive'] === 'true' ? `已追加${size}KB存档` : '不包含存档']
+										children: [L.Z.down_comment1[g],localStorage['archive'] === 'false' ? `已追加${size}KB存档` : '不包含存档']
 									}), (0, m.jsx)("span",
 									{
 										style:
@@ -2120,7 +2126,7 @@
 												color:'red',
 												fontSize:'1.1rem'
 											},
-											children:localStorage['mt-image'].split('/')[1]
+											children:mt_settings['图片格式'].split('/')[1]
 										}),'图片']
 									}), (0, m.jsx)("button",
 									{
@@ -2134,11 +2140,12 @@
 										children: '点击更改生成图片的格式',//L.Z.thanks[g]
 										onClick: function()
 										{
-											let image = prompt("请输入生成图片的格式：（不要乱输入）\npng（默认，质量最好体积最大）\njpeg（体积小，注意不是jpg）\nwebp（体积更小，不推荐火狐）", localStorage['mt-image'].split('/')[1]);
+											let image = prompt("请输入生成图片的格式：（不要乱输入）\npng（默认，质量最好体积最大）\njpeg（体积小，注意不是jpg）\nwebp（体积更小，不推荐火狐）", mt_settings['图片格式'].split('/')[1]);
 											if(image != null)
 											{
 												alert('更改完成，如果图片生成错误请尝试改为其它参数');
-												localStorage['mt-image'] = 'image/'+image;
+												mt_settings['图片格式'] = 'image/'+image;
+												localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 												$$('#mt-image').text(image)
 												if(image === "webp")maxHeight = 16384
 											}
@@ -2163,13 +2170,13 @@
 												let writer = L.Z.writer[g] + " : " + ("" !== R ? R : L.Z.noName[g])
 												if(k.title === false)title = ''
 												if(k.writer === false)writer = ''
-												mt_title(localStorage['MoeTalk'],title, writer)
+												mt_title(mt_settings['顶部标题'],title, writer)
 												//let S = 1.1
 												let start = 0 
 												let end = 0 
 												let leng = (16+(localStorage['watermark'] === 'false' ? 0 : 80))*S
 												let length = leng
-												let json = JSON.parse(localStorage['chats'])
+												let json = chats
 												imageArr = []
 												for(let end=0;end<$$(".消息").length;end++)
 												{
@@ -2273,7 +2280,7 @@
 						}),
 						d = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						}),
 						h = (0, r.useState)(""),
 						f = h[0],
@@ -2311,21 +2318,13 @@
 								for(;;) switch (e.prev = e.next)
 								{
 									case 0:
-										return n = [], s.chats.forEach(function(e, t)
-										{
-											s.chats.findIndex(function(n, t)
-											{
-												return e.sCharacter.no === n.sCharacter.no
-											}) === t && 0 !== e.sCharacter.no && n.push(e.sCharacter.no)
-										}), r = [JSON.stringify([t = {
+										return r = [JSON.stringify([t = {
 											title: "" !== f ? f : L.Z.noTitle[d],
 											nickname: "" !== k ? k : L.Z.noName[d],
 											date: (0, u._3)(!0, !0),
-											replyNo: s.replyNo,
-											replyGroup: s.replyGroup,
 											mt_char: JSON.parse(localStorage['mt-char']),//@自创角色
 											mt_head: JSON.parse(localStorage['mt-head']),//@自创头像
-											chars: JSON.parse(localStorage['mt-selectedList'])//@
+											'选择角色': mt_settings['选择角色']//@
 										}, chats])], e.next = 6, (0, u.rU)(r);
 									case 6:
 										o = e.sent, (0, ef.saveAs)(o,`MoeTalk_${t.title}_${mt_height()}.png`), blobToBase64(o,function(base64)
@@ -2633,8 +2632,6 @@
 											className: "bold",
 											onClick: function()
 											{
-												selectedList = 'yes'
-												localStorage['mt-selectedList'] = charList
 												I()
 											},
 											children: L.Z.confirm[d]
@@ -2701,7 +2698,7 @@
 						});
 					(0, i.C)(function(e)
 					{
-						return lang//#e.global.lang
+						return mtlang//#e.global.lang
 					});
 					var f = (0, ex.vC)(
 						{
@@ -2886,7 +2883,7 @@
 						}),
 						l = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						}),
 						s = function()
 						{
@@ -2900,12 +2897,10 @@
 						let customcf = false;//自设差分
 						let cftype = '';//差分类型
 						let emojinum;
-						let no = JSON.parse(localStorage['mt-selectedList'])['selected']['no'];
+						let no = mt_settings['选择角色'].no;
 
-						if(localStorage['CharFaceIndex'] && JSON.parse(localStorage['CharFaceIndex'])[no] != null)
-						{
-							no = JSON.parse(localStorage['CharFaceIndex'])[no];
-						}
+						if(mt_settings['差分映射'][no])no = mt_settings['差分映射'][no];
+						
 						let link;let cflink = null;let cfarr = [];cfarr[0] = 'Images/CharFace';///定义链接
 						let charname = no == 0 ? '主角' : no;
 
@@ -2919,10 +2914,10 @@
 						}
 						if(mt_characters[no])
 						{
-							charname = mt_characters[no].name[lang] ? mt_characters[no].name[lang] : no
+							charname = mt_characters[no].name[mtlang] ? mt_characters[no].name[mtlang] : no
 						}
 
-						if(mt_name[no])charname = mt_name[no];//@改名
+						if(mt_settings['人物改名'][no])charname = mt_settings['人物改名'][no];//@改名
 						let mt_charface = mt_characters[no] ? mt_characters[no].charface : ''
 						if(cf == 'CharFace' && mt_charface !== '')
 						{
@@ -3070,7 +3065,7 @@
 												.fill(0)
 												.map(function(e, n)
 												{
-													if(cf == 'Emoji')link = `Images/${cf}/${CFPI+1}${CFPI<3?(lang=='zh_cn'?'zh_tw':lang):''}${n+1}.webp`;//@原版表情
+													if(cf == 'Emoji')link = `Images/${cf}/${CFPI+1}${CFPI<3?(mtlang=='zh_cn'?'zh_tw':mtlang):''}${n+1}.webp`;//@原版表情
 													if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
 													return (0, m.jsx)(ez,
 													{
@@ -3079,7 +3074,7 @@
 														width: 310,
 														onClick: function()
 														{
-															if(cf == 'Emoji')link = `Images/${cf}/${CFPI+1}${CFPI<3?(lang=='zh_cn'?'zh_tw':lang):''}${n+1}.webp`;//@原版表情
+															if(cf == 'Emoji')link = `Images/${cf}/${CFPI+1}${CFPI<3?(mtlang=='zh_cn'?'zh_tw':mtlang):''}${n+1}.webp`;//@原版表情
 															if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
 															sendMessage({content: link},'image'), s()
 															//u(link)//#表情链接
@@ -3152,7 +3147,7 @@
 						}),
 						h = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						}),
 						f = (0, r.useState)(!1),
 						p = f[0],
@@ -3187,12 +3182,12 @@
 					var P = function(e, n)
 						{
 							//*更改文字发送方式
-							if(13 === (e.which || e.keyCode) && !(e.ctrlKey || e.shiftKey) && "" !== e.currentTarget.value && !localStorage['send'])
+							if(13 === (e.which || e.keyCode) && !(e.ctrlKey || e.shiftKey) && "" !== e.currentTarget.value && mt_settings['发送方式'] === '回车')
 							{
 								e.preventDefault()
 								n()
 							}
-							if(13 === (e.which || e.keyCode) && (e.ctrlKey || e.shiftKey) && "" !== e.currentTarget.value && localStorage['send'] == 'click')
+							if(13 === (e.which || e.keyCode) && (e.ctrlKey || e.shiftKey) && "" !== e.currentTarget.value && mt_settings['发送方式'] === '点击')
 							{
 								e.preventDefault()
 								n()
@@ -3529,7 +3524,7 @@
 						}),
 						f = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						}),
 						p = (0, i.C)(function(e)
 						{
@@ -3746,21 +3741,9 @@
 								}), (0,m.jsx)('img',
 								{
 									width:"auto",
-									height:"64px",
-									hidden: a !== 'image' || $$('.dels:checked').length > 1
-								}), (0, m.jsx)('span',
-								{
-									hidden: a !== 'image' || $$('.dels:checked').length > 1,
-									onClick: function()
-									{
-										if(t.file && confirm('点击确认会清除这张图片，确认吗？'))
-										{
-											clearImage = true
-											k()
-										}
-									},
-									children: t.file ? `图片体积：${parseInt((t.file.length/1024).toFixed(0))}KB` : ''
-								}), (0, m.jsx)("input",
+									height:"64px"
+								}), (0, m.jsx)('span',{}), 
+								(0, m.jsx)("input",
 								{
 									type: "file",
 									ref: _,
@@ -3915,7 +3898,7 @@
 					var n = e.character,
 						t = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						});
 					return (0, m.jsxs)(e$,
 					{
@@ -3983,7 +3966,6 @@
 				}),
 				eQ = function(e)
 				{
-					let index = e.index//@加入选择分支索引
 					var n = e.chat,
 						t = (0, i.T)(),
 						o = (0, i.C)(function(e)
@@ -4006,13 +3988,10 @@
 						{
 							onClick:function()
 							{
-								//t((0, eo.Z8)(n.content.split('\n')[index]))
+								//t((0, eo.Z8)(n))
 								alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新')
 							},
-							children: (0, m.jsx)(e2,
-							{
-								children: n.content.split('\n')[index]//#根据分支索引判断选择肢位置
-							})
+							children: (0, m.jsx)(e2,{children: n})
 						})]
 					})
 				},
@@ -4047,7 +4026,7 @@
 						}),
 						o = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						}),
 						a = (0, i.C)(function(e)
 						{
@@ -4081,16 +4060,9 @@
 							{
 								flexDirection: "column"
 							},
-							children: t.map(function(e, t)
+							children: n.content.split('\n').map(function(e, t)
 							{
-								return n.replyGroup === e.replyGroup && e.content.split('\n').map(function(v, k)
-								{//@换行分割选择肢
-									return n.replyGroup === e.replyGroup && (0, m.jsx)(eQ,
-									{
-										index: k,//@加入选择分支索引
-										chat: e
-									}, t)
-								})//@换行分割选择肢
+								return (0, m.jsx)(eQ,{chat: e})
 							})
 						})]
 					})
@@ -4166,7 +4138,7 @@
 						}),
 						d = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						}),
 						h = (0, i.C)(function(e)
 						{
@@ -4250,7 +4222,7 @@
 											] : (0, m.jsx)(eN.tG,
 											{
 												className: '编辑',//图片
-												style:{"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? localStorage['mt-cfsize'] : ""},//@差分表情宽高百分比
+												style:{"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? mt_settings['差分比例'] : ""},//@差分表情宽高百分比
 												src: n.file || (n.content.indexOf("//") > -1 ? n.content : href+n.content),
 												onError: function(e)
 												{
@@ -4512,7 +4484,7 @@
 								children: (0, m.jsx)(X,
 								{
 									style:{fontSize: "1.1rem"},
-									children: L.Z['delete'][lang]
+									children: L.Z['delete'][mtlang]
 								})
 							})]
 						}), (0, m.jsxs)(eD,
@@ -4700,7 +4672,7 @@
 					})
 				}, function(e)
 				{
-					return localStorage['mt-style']//#自定义样式
+					return mt_settings['风格样式']//#自定义样式
 				}, function(e)
 				{
 					return e.theme.color.rgb255_255_255
@@ -4739,7 +4711,7 @@
 				{
 					var e = (0, i.C)(function(e)
 						{
-							return lang//#e.global.lang
+							return mtlang//#e.global.lang
 						}),
 						n = (0, i.C)(function(e)
 						{
@@ -4752,7 +4724,7 @@
 						{
 							style:
 							{
-								display: chatArr.length > 1 || n.length > 0 ? "flex" : "none"
+								display: n.length > 0 ? "flex" : "none"
 							},
 							children: (0, m.jsx)(nn,
 							{
@@ -4773,14 +4745,14 @@
 									height: 'auto',
 									fontSize: "1.1rem"
 								},
-								children: 'Click to change language',
+								children: 'click to change language',
 								onClick: function()
 								{
-									let language = prompt("Please enter the language\nzh_cn（简体中文）\nzh_tw（繁體中文）\njp（日本語）\nen（English）\nkr（한국어）",lang);
+									let language = prompt("Please enter the language\nzh_cn（简体中文）\nzh_tw（繁體中文）\njp（日本語）\nen（English）\nkr（한국어）",mtlang);
 									if (langarr.indexOf(language) > -1)
 									{
-										lang = language;
-										lang = language;
+										mt_settings['语言选项'] = language
+										localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 										location.reload(true)
 									}
 								}
@@ -4980,7 +4952,7 @@
 						{
 							children: [(0, m.jsx)("title",
 							{
-								children: localStorage['MoeTalk']//#自定义标题
+								children: mt_settings['顶部标题']
 							}), (0, m.jsx)("meta",
 							{
 								name: "description",
@@ -5146,8 +5118,7 @@
 				{
 					displayName: "talk__ImgBox",
 					componentId: "sc-eq7cqw-3"
-				})(["max-width:"+localStorage['mt-size']+";border:2px solid ", ";background-color:rgb(255,255,255);padding:0.5rem;border-radius:10px;"], function(e)
-				//#仿ClosureTalk把90%改成40%，可以考虑自定义
+				})([`max-width:${mt_settings['图片比例']};border:2px solid ", ";background-color:rgb(255,255,255);padding:0.5rem;border-radius:10px;`], function(e)
 				{
 					return e.theme.color.rgb255_255_255
 				}),
@@ -5198,7 +5169,7 @@
 					return e.theme.color.rgb69_78_89
 				}, function(e)
 				{
-					return localStorage['mt-style'] === 'rgb(255,255,255)' ? 'rgb(220,229,232)' : 'transparent'//#自定义样式
+					return mt_settings['风格样式'] === 'rgb(255,255,255)' ? 'rgb(220,229,232)' : 'transparent'//#自定义样式
 				}),
 				f = (0, r.ZP)(o.Mm).withConfig(
 				{

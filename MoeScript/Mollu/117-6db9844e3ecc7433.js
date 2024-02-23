@@ -838,8 +838,7 @@
 				{
 					displayName: "talk__ImgBox",
 					componentId: "sc-eq7cqw-3"
-				})(["max-width:"+localStorage['mt-size']+";border:2px solid ", ";background-color:rgb(255,255,255);padding:0.5rem;border-radius:10px;"], function(e)
-				//#仿ClosureTalk把90%改成40%，可以考虑自定义
+				})([`max-width:${mt_settings['图片比例']};border:2px solid ", ";background-color:rgb(255,255,255);padding:0.5rem;border-radius:10px;`], function(e)
 				{
 					return e.theme.color.rgb255_255_255
 				}),
@@ -890,7 +889,7 @@
 					return e.theme.color.rgb69_78_89
 				}, function(e)
 				{
-					return localStorage['mt-style'] === 'rgb(255,255,255)' ? 'rgb(220,229,232)' : 'transparent'//#自定义样式
+					return mt_settings['风格样式'] === 'rgb(255,255,255)' ? 'rgb(220,229,232)' : 'transparent'//#自定义样式
 				}),
 				p = (0, r.ZP)(i.Mm).withConfig(
 				{
