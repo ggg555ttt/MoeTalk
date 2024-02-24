@@ -1884,8 +1884,8 @@
 							watermark: !0,
 							title: !1,
 							writer: !1,
-							archive: !1
-						}, "undefined" != typeof localStorage && (t.watermark = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("watermark")) === null ? "true" : localStorage.getItem("watermark") || "false"), t.archive = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("archive")) === null ? "false" : localStorage.getItem("archive") || "true")), t)),
+							archive: localStorage['archive'] !== 'false' ? true : false
+						}, "undefined" != typeof localStorage && (t.watermark = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("watermark")) === null ? "true" : localStorage.getItem("watermark") || "false"), t.archive = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("archive")) === null ? "true" : localStorage.getItem("archive") || "false")), t)),
 						k = v[0],
 						Z = v[1],
 						N = (0, r.useState)(1.1),
@@ -1933,7 +1933,7 @@
 									watermark: k.watermark,
 									title: k.title,
 									writer: k.writer,
-									archive: k.archive
+									archive: localStorage['archive'] !== 'false' ? true : false
 								};
 							r[n] = t, "archive" !== n || (localStorage.setItem("archive", String(t)), t || (r.title = !1, r.writer = !1)), "watermark" !== n || (localStorage.setItem("watermark", String(t)), t || (r.title = !1, r.writer = !1)), Z(r)
 							mt_title()//@
@@ -2004,7 +2004,8 @@
 													{
 														watermark: !0,
 														writer: !0,
-														title: !0
+														title: !0,
+														archive: localStorage['archive'] !== 'false' ? true : false
 													}))
 												},
 												onKeyDown: function(e) {}
@@ -2025,7 +2026,8 @@
 													{
 														watermark: !0,
 														writer: !0,
-														title: !0
+														title: !0,
+														archive: localStorage['archive'] !== 'false' ? true : false
 													}))
 												}
 											})
@@ -2103,7 +2105,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: [L.Z.down_comment1[g],localStorage['archive'] === 'false' ? `已追加${size}KB存档` : '不包含存档']
+										children: [L.Z.down_comment1[g],localStorage['archive'] === 'false' ? '不包含存档' : `已追加${size}KB存档`]
 									}), (0, m.jsx)("span",
 									{
 										style:

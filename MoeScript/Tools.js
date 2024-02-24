@@ -202,7 +202,7 @@ function parseFile(file) {
 			const extData = data.subarray(endIndex, endIndex + maxExtLength);
 			const ext = data2str(extData);
 			const subData = data.subarray(endIndex + maxExtLength);
-			const blob = new Blob([subData], { type: mimeMap[ext]});
+			const blob = new Blob([subData], { type: mt_settings['图片格式']});
 			if (blob.size < 1) {
 				return alert('该文件没有解析出存档文件！');
 			}

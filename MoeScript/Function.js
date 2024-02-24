@@ -787,7 +787,7 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			{
 				mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)
 				t = t.replace(`data:${mt_settings['图片格式']};base64,`,'')
-				json = localStorage['archive'] === 'false' ? JSON.stringify(json) : ''
+				json = localStorage['archive'] === 'false' ? '' : JSON.stringify(json)
 				let title = "" !== _ ? _ : L.Z.noTitle[g]
 				if(imageZip)
 				{
@@ -833,7 +833,7 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 				j(v.index), null === (n = I.current) || void 0 === n , e.toBlob(function(e)
 				{
 					t = t.replace(`data:${mt_settings['图片格式']};base64,`,'')
-					json = localStorage['archive'] === 'false' ? JSON.stringify(json) : ''
+					json = localStorage['archive'] === 'false' ? '' : JSON.stringify(json)
 					let title = "" !== _ ? _ : L.Z.noTitle[g]
 					let str = v.start !== 0 ? `_${height}_${v.index}` : ''
 					if(imageZip)
