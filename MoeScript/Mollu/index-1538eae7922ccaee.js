@@ -2494,11 +2494,11 @@
 									{
 										onClick: function()
 										{
-											s.chats.length > 0 && y("download")
+											chats.length > 0 && y("download")
 										},
 										children: [(0, m.jsx)(eI,
 										{
-											disabled: s.chats.length < 1,
+											disabled: chats.length < 1,
 											children: (0, m.jsx)(c.xL,
 											{
 												icon: ico.q7m
