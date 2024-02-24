@@ -275,3 +275,22 @@ $('body').on('click',"#mt-maxheight",function()
 		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 	}
 })
+$('body').on('click',"#mt-fontszie",function()
+{
+	let val;
+	$(this).parent().find('input').each(function(k,v)
+	{
+		v.value ? val = v.value : val = ''
+		!mt_settings['文字样式'][v.title] ? mt_settings['文字样式'][v.title] = {} : ''
+		mt_settings['文字样式'][v.title]['font-size'] = val
+	})
+	alert('已提交参数，参数为空则保持默认，错误参数则导致修改失败')
+	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+})
+if(mt_settings['文字样式'])
+{
+	$.each(mt_settings['文字样式'],function(k,v)
+	{
+		$('#mt-fontszie').parent().find(`input[title="${k}"]`)[0].value = v['font-size']
+	})
+}

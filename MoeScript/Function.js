@@ -30,6 +30,7 @@ if(!mt_settings['语言选项'])
 {
 	delete localStorage['lang']
 	delete localStorage['first']
+	delete localStorage['mt-edit']
 	delete localStorage['mt-font']
 	delete localStorage['replyNo']
 	delete localStorage['replyGroup']
@@ -80,6 +81,7 @@ if(!mt_settings['语言选项'])
 	}
 	delete localStorage['mt-selectedList']
 }
+!mt_settings['文字样式'] ? mt_settings['文字样式'] = {} : ''
 localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 
 var mtlang = mt_settings['语言选项'];

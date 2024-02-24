@@ -3917,7 +3917,7 @@
 						}), (0, m.jsx)(eN.HR,
 						{}), (0, m.jsx)(eN._x,
 						{
-							style:{wordBreak: "break-all"},
+							style:e.style,
 							className: "medium 编辑",
 							children: n + L.Z.go_relationship_event[t]
 						})]
@@ -3991,7 +3991,7 @@
 								//t((0, eo.Z8)(n))
 								alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新')
 							},
-							children: (0, m.jsx)(e2,{children: n})
+							children: (0, m.jsx)(e2,{style: e.style,children: n})
 						})]
 					})
 				},
@@ -4016,7 +4016,7 @@
 				{
 					displayName: "ReplyButtonBox__Span",
 					componentId: "sc-15gyqnr-2"
-				})(["overflow:hidden;word-break:break-all;word-wrap:break-word;white-space:pre-wrap;line-break:loose;line-height:141%;font-size:20px;"]),
+				})(["overflow:hidden;word-break:break-all;word-wrap:break-word;white-space:pre-wrap;line-break:loose;line-height:1.42;"]),
 				e5 = function(e)
 				{
 					var n = e.chat,
@@ -4060,9 +4060,9 @@
 							{
 								flexDirection: "column"
 							},
-							children: n.content.split('\n').map(function(e, t)
+							children: n.content.split('\n').map(function(v, k)
 							{
-								return (0, m.jsx)(eQ,{chat: e})
+								return (0, m.jsx)(eQ,{style: e.style,chat: v})
 							})
 						})]
 					})
@@ -4154,6 +4154,7 @@
 						}
 					}, [s, n, a]);
 					let isFirst = isfirst(t,l)
+					let style = mt_settings['文字样式'][n.type] ? mt_settings['文字样式'][n.type] : {}
 					return (0, m.jsx)(eN.uU,
 					{
 						className: '消息',
@@ -4213,10 +4214,10 @@
 											{
 												className: '编辑',//文本
 												style: n.isRight ?
-												{
+												{...{
 													background: 'rgb(74, 138, 202)',
 													border: '1px solid rgb(74, 138, 202)'
-												} : {},
+												},...style} : style,
 												children: n.content
 											}), (n.isRight && isFirst) || n.sCharacter.no == 0 ? (0, m.jsx)(eN.CJ,{}):''//右角
 											] : (0, m.jsx)(eN.tG,
@@ -4276,16 +4277,19 @@
 								style:{width:"100%"},
 								children: (0, m.jsx)(e5,
 								{
+									style: style,
 									chat: n
 								})
 							})] : "heart" === n.type ? [(0, m.jsx)(eN.xu,
 							{}),(0, m.jsx)(eW,
 							{
 								className: '编辑',//羁绊
+								style: style,
 								character: n.name || loadname(n.sCharacter.no)
 							})] : "info" === n.type ? (0, m.jsx)(eN.vD,
 							{
 								className: '编辑',//旁白
+								style: style,
 								children: n.content
 							}) : (0, m.jsx)(m.Fragment,{})
 						}), h || (0, m.jsx)("input",

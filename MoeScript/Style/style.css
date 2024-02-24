@@ -68,7 +68,7 @@ cursor: pointer;	/* 鼠标形状 */
 }*/
 
 button {
-	font-size: 24px;
+	font-size: 1.1rem;
 	background-color: rgb(139, 187, 233);
 	border-radius: 2px;
 	border: none;
@@ -402,7 +402,6 @@ align-self: stretch;
 .名称 {
 	line-height: 1.8rem; 
 	word-break: break-all;
-	font-size:20px;
 }
 .文本 {
     user-select: text;
@@ -417,8 +416,7 @@ align-self: stretch;
     word-break: break-all;
     line-break: loose;
     padding: 0.6rem;
-    line-height: 141%;
-    font-size: 20px;
+    line-height: 1.42;
     cursor: pointer;
 }
 .头像 {
@@ -531,7 +529,7 @@ align-self: stretch;
     background-repeat: no-repeat;
     background-position: right top;
     background-size: auto 10rem;
-    line-height: 18px;
+    line-height: 1.5rem;
 }
 .回复_标题
 {
@@ -592,8 +590,7 @@ align-self: stretch;
     white-space: pre-wrap;
     line-break: loose;
     color: rgb(75, 105, 137);
-    line-height: 141%;
-    font-size: 20px;
+    line-height: 1.42;
 }
 .编辑按钮
 {
@@ -614,6 +611,7 @@ align-self: stretch;
 	margin: auto;
     height: 100%;
     width: 100%;
+    cursor: pointer;
 }
 .图片
 {
@@ -637,7 +635,6 @@ align-self: stretch;
     word-break: break-all;
     line-break: loose;
     padding: 0.2rem 1rem;
-    line-height: 141%;
-    font-size: 20px;
+    line-height: 1.42;
     cursor: pointer;
 }
