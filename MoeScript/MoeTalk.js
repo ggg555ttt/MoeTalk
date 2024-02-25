@@ -460,7 +460,7 @@ function makeMessage(type,data,chatIndex,mode)
 	if(data.is_breaking === true)color = 'red';
 	data.time = data.time ? data.time : ''
 
-	let style;
+	let style = '';
 	if(mt_settings['文字样式'][type])
 	{
 		style = `font-size:${mt_settings['文字样式'][type]['font-size']};`
