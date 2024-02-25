@@ -355,8 +355,25 @@ align-self: stretch;
 {
 	width: 100%;
 }
-
-.消息 {
+.头像框 {
+    display: flex;
+    width: 6rem;
+}
+.编辑按钮
+{
+	align-self: end;
+    margin: 0rem 0.5rem;
+    color: rgb(45, 70, 100);
+    height: auto;
+    width: 1.2rem;
+    flex-shrink: 0;
+    border: none;
+    background-color: transparent;
+    padding: 0rem;
+    align-content: center;
+    cursor: pointer;
+}
+.消息{
     display: flex;
     flex-direction: row;
     -webkit-box-align: stretch;
@@ -368,6 +385,17 @@ align-self: stretch;
     font-size: 1.1rem;
     height: auto;
 }
+.消息标题
+{
+	display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+}
 .聊天 {
     display: flex;
     flex-direction: row;
@@ -376,10 +404,6 @@ align-self: stretch;
     justify-content: flex-end;
     width: 100%;
     height: auto;
-}
-.头像框 {
-    display: flex;
-    width: 6rem;
 }
 .对话 {
     display: flex;
@@ -468,17 +492,6 @@ align-self: stretch;
     background-size: auto 100%;
     line-height: 1.5rem;
 }
-.羁绊_标题
-{
-	display: flex;
-    flex-direction: row;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: start;
-    justify-content: flex-start;
-    width: 100%;
-    height: auto;
-}
 .竖线
 {
     height: 1.1rem;
@@ -491,7 +504,7 @@ align-self: stretch;
     background: rgb(218, 225, 229);
     width: 100%;
 }
-.羁绊_按钮
+.羁绊按钮
 {
 	padding: 0.5rem;
     height: max-content;
@@ -507,8 +520,8 @@ align-self: stretch;
     line-height: 1.5rem;
     width: 100%;
     line-height: 141%;
-    font-size: 20px;
     cursor: pointer;
+    word-break: break-all;
 }
 .回复
 {
@@ -531,28 +544,7 @@ align-self: stretch;
     background-size: auto 10rem;
     line-height: 1.5rem;
 }
-.回复_标题
-{
-	display: flex;
-    flex-direction: row;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: start;
-    justify-content: flex-start;
-    width: 100%;
-    height: auto;
-}
-.选择肢组
-{
-	display: flex;
-    flex-direction: row;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: start;
-    justify-content: flex-start;
-    width: 100%;
-    height: auto;
-}
+
 .选择肢
 {
 	display: flex;
@@ -561,14 +553,9 @@ align-self: stretch;
     align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
-    width: 100%;
     margin-bottom: 0.5rem;
-    height: auto;
-}
-.选择肢按钮
-{
 	text-align: center;
-    height: 100%;
+    height: auto;
     width: 100%;
     padding: 0.7rem 0.5rem;
     border-top: none;
@@ -578,13 +565,9 @@ align-self: stretch;
     border-bottom: 0.1rem solid rgb(174, 174, 174);
     box-shadow: rgb(180 188 192) 0rem 0.05rem 0.2rem;
     border-radius: 0.5rem;
-    line-height: 1.5rem;
     background-color: white;
     cursor: pointer;
-}
-.选择肢文字
-{
-	overflow: hidden;
+    overflow: hidden;
     word-break: break-all;
     overflow-wrap: break-word;
     white-space: pre-wrap;
@@ -592,27 +575,7 @@ align-self: stretch;
     color: rgb(75, 105, 137);
     line-height: 1.42;
 }
-.编辑按钮
-{
-	align-self: end;
-    margin: 0rem 0.5rem;
-    color: rgb(45, 70, 100);
-    height: auto;
-    width: 1.2rem;
-    flex-shrink: 0;
-    border: none;
-    background-color: transparent;
-    padding: 0rem;
-    align-content: center;
-    cursor: pointer;
-}
-.编辑图标
-{
-	margin: auto;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-}
+
 .图片
 {
 	max-width: 90%;

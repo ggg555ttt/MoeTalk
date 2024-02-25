@@ -238,8 +238,14 @@ function compress(base64Img,type = 'head',mode = 'add')
 		{
 			let data = 
 			{
-				content: '',
+				name : $('.name').val(),
+				time : $('.time').val(),
+				content: $('.content').val(),
+				isFirst: $('.isFirst').prop('checked'),
+				isRight : $('.isRight').prop('checked'),
+				is_breaking : $('.is_breaking').prop('checked'),
 				file: newBase64,
+				sCharacter: {no: $('.editMessage .头像').attr('alt'),index: $('.editMessage .头像').attr('title')},
 				type: 'image'
 			}
 			if(mode === 'edit')

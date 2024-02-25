@@ -418,10 +418,7 @@ $("body").on('click',".operate",function()
 	// }
 	alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新')
 });
-$("body").on('click',".选择肢按钮",function()
-{
-	alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新')
-});
+
 //rgb(136, 204, 204)
 //rgb(139, 187, 233)
 var chats = JSON.parse(localStorage['chats'])
@@ -448,7 +445,7 @@ function isfirst(chatIndex,chats)
 }
 function makeMessage(type,data,chatIndex,mode)
 {
-	let 聊天,头像框,对话,名称,内容;
+	let 聊天,头像框,对话,名称,文本,图片;
 	let no = data.sCharacter.no
 	let index = data.sCharacter.index
 
@@ -467,62 +464,61 @@ function makeMessage(type,data,chatIndex,mode)
 	}
 	if(type === 'chat' || type === 'image')
 	{
+		if(type === 'image')
+		{
+			let maxwidth = mt_settings['图片比例'] || '90%'
+			if(data.content.indexOf("CharFace") > -1 && !data.file)
+			{
+				maxwidth = mt_settings['差分比例'] || '90%'
+			}
+			maxheight = `style="max-width:${maxwidth};"`
+			图片 = `<img ${maxheight} class="图片 编辑" src='${data.file || (data.content.indexOf("CharFace") > -1 ? data.content : href+data.content)}'>`
+		}
 		if(no != 0 && !data.isRight)
 		{
 			头像框 = `<div class="头像框" style="cursor: pointer; height: 100%;">${head ? `<img height="252" width="252" src="${loadhead(no,index)}" alt="${index}" class="头像">` : ''}</div>`
-			名称 = `${head ? `<span class="名称 bold">${data.name ? data.name : loadname(no)}</span>` : ''}`
-			内容 = `<span class="${head ? '文本 左角' : '文本'} 编辑" style='${style}'>${data.content}</span>`
-			if(type === 'image')
-			{
-				let maxwidth = mt_settings['图片比例'] || '90%'
-				if(data.content.indexOf("CharFace") > -1 && !data.file)
-				{
-					maxwidth = mt_settings['差分比例'] || '90%'
-				}
-				maxheight = `style="max-width:${maxwidth};"`
-				内容 = `<img ${maxheight} class="图片 编辑" src='${data.file || (data.content.indexOf("CharFace") > -1 ? data.content : href+data.content)}'>`
-			}
+			名称 = `${head ? `<span class="名称 bold">${data.name || loadname(no)}</span>` : ''}`
+			文本 = `<span class="${head ? '文本 左角' : '文本'} 编辑" style='${style}'>${data.content}</span>`
 			对话 = 
-			`<div class="对话" style="display: block; width: 100%;">
+			`${头像框}
+			<div class="对话" style="display: block; width: 100%;">
 				${名称}
 				<div style="display: flex; justify-content: flex-start;">
-					${内容}
+					${type === 'chat' ? 文本 : 图片}
 					<span class="时间戳" style="margin-left: 0px;">${data.time}</span>
 				</div>
 			</div>`
-
-			聊天 = `<div class="聊天">${头像框}${对话}</div>`
 		}
 		else
 		{
 			头像框 = `${no == 0 ? '' : `<div class="头像框" style="justify-content: flex-end; cursor: pointer; height: 100%;">${head ? `<img height="252" width="252" src="${loadhead(no,index)}" alt="${index}" class="头像">` : ''}</div>`}`
-			名称 = `${head && no != 0 ? `<span class="名称 bold">${data.name ? data.name : loadname(no)}</span>` : ''}`
-			内容 = `<span style="background: rgb(74, 138, 202); border: 1px solid rgb(74, 138, 202);${style}" class="文本 编辑">${data.content}</span>${head || no == 0 ? '<div class="右角"></div>' : ''}`
-			if(type === 'image')内容 = `<img class="图片 编辑" src='${data.file || (data.content.indexOf("CharFace") > -1 ? data.content : href+data.content)}'>`
+			名称 = `${head && no != 0 ? `<span class="名称 bold">${data.name || loadname(no)}</span>` : ''}`
+			文本 = `<span style="background: rgb(74, 138, 202); border: 1px solid rgb(74, 138, 202);${style}" class="文本 编辑">${data.content}</span>${head || no == 0 ? '<div class="右角"></div>' : ''}`
 			对话 = 
 			`${no == 0 ? '<div class="头像框" style="margin-right: 1.5rem;"></div>' : ''}
 			<div class="对话" style="align-items: flex-end;">
 				${名称}
 				<div style="display: flex; justify-content: flex-end;"">
 					<span class="时间戳" style="margin-right: 0px;text-align: right;">${data.time}</span>
-					${内容}
+					${type === 'chat' ? 文本 : 图片}
 				</div>
-			</div>`
-
-			聊天 = `<div class="聊天">${对话}${头像框}</div>`
+			</div>
+			${头像框}`
 		}
+
+		聊天 = `<div class="聊天">${对话}</div>`
 	}
 	if(type === 'heart')
 	{
 		聊天 = 
 		`<div class="头像框"></div>
 		<div class="羁绊" style='background-image: url(${href}Images/Ui/Favor_Schedule_Deco.webp);'>
-			<div class="羁绊_标题" style="align-items: center;">
+			<div class="消息标题">
 				<div class="竖线" style='border-left: 2px solid rgb(255, 142, 155);'></div>
 				<span class="bold">${mt_text['relationship_event'][mtlang]}</span>
 			</div>
-			<hr class="羁绊_横线">
-			<button class="羁绊_按钮 编辑" style="word-break: break-all;${style}">${data.name ? data.name : loadname(no)}${mt_text['go_relationship_event'][mtlang]}</button>
+			<hr class="横线">
+			<button class="羁绊按钮 编辑" style='${style}'>${data.name || loadname(no)}${mt_text['go_relationship_event'][mtlang]}</button>
 		</div>`
 	}
 	if(type === 'info')
@@ -532,29 +528,21 @@ function makeMessage(type,data,chatIndex,mode)
 	if(type === 'reply')
 	{
 		let 选择肢 = '';
+		let 编辑图标 = '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="pen-to-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"></path></svg>'
+
 		$.each(data.content.split('\n'),function(k,v)
 		{
-			选择肢 += `<div class="选择肢"><button class="选择肢按钮"><span class="选择肢文字" style='${style}'>${v}</span></button></div>`
+			选择肢 += `<button class="选择肢" style='${style}'>${v}</button>`
 		})
 		聊天 = 
-		`<div class="头像框" style="justify-content: flex-end;">
-			<button data-html2canvas-ignore="true" class="编辑按钮 编辑">
-				<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="pen-to-square" class="编辑图标" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-					<path fill="currentColor" d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"></path>
-				</svg>
-			</button>
-		</div>
-		<div style="width: 100%;">
-			<div class="回复" style='background-image: url(${href}Images/Ui/Popup_Img_Deco_2.webp);'>
-				<div class="回复_标题" style="align-items: center;">
-					<div class="竖线" style='border-left: 2px solid rgb(39, 153, 228)'></div>
-					<span class="bold">回复</span>
-				</div>
-				<hr class="横线">
-				<div class="选择肢组" style="flex-direction: column;">
-					${选择肢}
-				</div>
+		`<div class="头像框"><button data-html2canvas-ignore="true" class="编辑按钮 编辑">${编辑图标}</button></div>
+		<div class="回复" style='background-image: url(${href}Images/Ui/Popup_Img_Deco_2.webp);'>
+			<div class="消息标题">
+				<div class="竖线" style='border-left: 2px solid rgb(39, 153, 228)'></div>
+				<span class="bold">${mt_text['reply'][mtlang]}</span>
 			</div>
+			<hr class="横线">
+			${选择肢}
 		</div>`
 	}
 	let 复选框 = ''
@@ -605,7 +593,7 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 
 			if($('.addChat').prop('checked'))
 			{
-				if(type === 'image')data.file = chats[chatIndex].file
+				if(type === 'image' && !data.file)data.file = chats[chatIndex].file
 				chatIndex = chatIndex+1//向后追加
 				data.sCharacter = {no: $('.editMessage .头像').attr('alt'),index: $('.editMessage .头像').attr('title')}
 			}
@@ -735,7 +723,7 @@ $("body").on('click',".编辑",function()
 		$('.is_breaking').show().prop('checked',chat.is_breaking).next().show()
 
 		$('.name').val(chat.name).attr('placeholder',loadname(chat.sCharacter.no))
-		$('.time').val(chat.time).attr('placeholder','').innerHeight($('.time')[0].scrollHeight)
+		$('.time').val(chat.time).attr('placeholder','支持换行').innerHeight($('.time')[0].scrollHeight)
 		$('.content').val(chat.content).attr('placeholder','').innerHeight($('.content')[0].scrollHeight)
 
 		$('.editMessage .头像').attr('alt',chat.sCharacter.no)
@@ -831,6 +819,10 @@ $("body").on('click',".fzOyMd",function()
 	$('.editMessage .头像').attr('title',index)
 	$('.editMessage .头像').attr('src',loadhead(no,index))
 	$('.name').attr('placeholder',loadname(no))
+});
+$("body").on('click',".选择肢",function()
+{
+	alert('选择肢跳转功能重做中，编辑消息请点击左侧图标')
 });
 // 基础编辑
 // 批量编辑

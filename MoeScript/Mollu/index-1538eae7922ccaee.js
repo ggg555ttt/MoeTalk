@@ -3706,6 +3706,7 @@
 													children: (0, m.jsx)(c.Kx,
 													{
 														className:"edit_3_box3_1_1 time medium",
+														style:{color:'blue'},
 														onChange: function(e)
 														{
 															$$('.time').val(e.currentTarget.value)
@@ -3966,163 +3967,6 @@
 				{
 					return e.theme.color.rgb252_142_155
 				}),
-				eQ = function(e)
-				{
-					var n = e.chat,
-						t = (0, i.T)(),
-						o = (0, i.C)(function(e)
-						{
-							return e.global.isScreenshot
-						}),
-						a = (0, r.useState)(!1),
-						l = a[0],
-						s = a[1],
-						u = (0, r.useState)("delete"),
-						d = u[0],
-						h = u[1],
-						f = function(e, n, t)
-						{
-							s(e)
-						};
-					return (0, m.jsxs)(e0,
-					{
-						children: [(0, m.jsx)(eN.g4,
-						{
-							onClick:function()
-							{
-								//t((0, eo.Z8)(n))
-								alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新')
-							},
-							children: (0, m.jsx)(e2,{style: e.style,children: n})
-						})]
-					})
-				},
-				e0 = o.ZP.div.withConfig(
-				{
-					displayName: "ReplyButtonBox__Container",
-					componentId: "sc-15gyqnr-0"
-				})(["", ";margin-bottom:0.5rem;height:auto;"], function(e)
-				{
-					return e.theme.common.flexBox(
-					{})
-				}),
-				e1 = (0, o.ZP)(c.hU).withConfig(
-				{
-					displayName: "ReplyButtonBox__EditButton",
-					componentId: "sc-15gyqnr-1"
-				})(["padding:0rem 0.5rem;color:", ";height:1.2rem;"], function(e)
-				{
-					return e.theme.color.rgb45_70_100
-				}),
-				e2 = o.ZP.span.withConfig(
-				{
-					displayName: "ReplyButtonBox__Span",
-					componentId: "sc-15gyqnr-2"
-				})(["overflow:hidden;word-break:break-all;word-wrap:break-word;white-space:pre-wrap;line-break:loose;line-height:1.42;"]),
-				e5 = function(e)
-				{
-					var n = e.chat,
-						t = (0, i.C)(function(e)
-						{
-							return e.makeChat.chats
-						}),
-						o = (0, i.C)(function(e)
-						{
-							return mtlang//#e.global.lang
-						}),
-						a = (0, i.C)(function(e)
-						{
-							return e.global.isScreenshot
-						}),
-						s = (0, r.useState)(!1),
-						u = s[0],
-						d = s[1],
-						h = function(e)
-						{
-							d(e)
-						};
-					return (0, m.jsxs)(e3,
-					{
-						children: [(0, m.jsxs)(e4,
-						{
-							style:
-							{
-								alignItems: "center"
-							},
-							children: [(0, m.jsx)(e7,
-							{}), (0, m.jsx)("span",
-							{
-								className: "bold",
-								children: L.Z.go_reply[o]
-							})]
-						}), (0, m.jsx)(eN.HR,
-						{}), (0, m.jsx)(e4,
-						{
-							style:
-							{
-								flexDirection: "column"
-							},
-							children: n.content.split('\n').map(function(v, k)
-							{
-								return (0, m.jsx)(eQ,{style: e.style,chat: v})
-							})
-						})]
-					})
-				},
-				e3 = o.ZP.div.withConfig(
-				{
-					displayName: "ReplyBox__Container",
-					componentId: "sc-dwjyi3-0"
-				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}Images/Ui/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
-				//#背景
-				{
-					return e.theme.common.flexBox(
-					{
-						direction: "column"
-					})
-				}, function(e)
-				{
-					return e.theme.color.rgb221_210_216
-				}, function(e)
-				{
-					return e.theme.color.rgb76_91_111
-				}, function(e)
-				{
-					return e.theme.color.rgb225_237_240
-				}),
-				e4 = o.ZP.div.withConfig(
-				{
-					displayName: "ReplyBox__Flex",
-					componentId: "sc-dwjyi3-1"
-				})(["", ";height:auto;"], function(e)
-				{
-					return e.theme.common.flexBox(
-					{
-						justify: "flex-start"
-					})
-				}),
-				e9 = (0, o.ZP)(c.hU).withConfig(
-				{
-					displayName: "ReplyBox__PlusButton",
-					componentId: "sc-dwjyi3-2"
-				})(["margin:0;padding-left:0.05rem;align-self:center;border:2px solid ", ";border-radius:50%;height:1.5rem;width:1.5rem;font-size:1rem;color:", ";&:hover{background-color:", ";}"], function(e)
-				{
-					return e.theme.color.rgb76_91_111
-				}, function(e)
-				{
-					return e.theme.color.rgb76_91_111
-				}, function(e)
-				{
-					return e.theme.color.rgb202_215_221
-				}),
-				e7 = o.ZP.div.withConfig(
-				{
-					displayName: "ReplyBox__Line",
-					componentId: "sc-dwjyi3-3"
-				})(["border-left:2px solid ", ";height:1.1rem;margin-right:0.3rem;"], function(e)
-				{
-					return e.theme.color.rgb39_153_228
-				}),
 				//*这是消息界面
 				e6 = function(e)
 				{
@@ -4264,30 +4108,48 @@
 								})
 							}) : "reply" === n.type ? [(0, m.jsx)(eN.xu,
 							{
-								style:{justifyContent: 'flex-end'},
 								children: (0, m.jsx)(ne,//编辑按钮
 								{
 									className: '编辑',//回复
-									"data-html2canvas-ignore": "true",
-									children: (0, m.jsx)(c.xL,
-									{
-										icon: ei.Yai
-									})
+									children: (0, m.jsx)(c.xL,{icon: ei.Yai}),
+									"data-html2canvas-ignore": "true"
 								})
 							}),(0, m.jsx)('div',
 							{
-								style:{width:"100%"},
-								children: (0, m.jsx)(e5,
+								className: '回复',
+								style:{backgroundImage:`url(${href}Images/Ui/Popup_Img_Deco_2.webp)`},
+								children: [(0, m.jsx)('div',
 								{
-									style: style,
-									chat: n
-								})
+									className: '消息标题',
+									children: [(0, m.jsx)('div',
+									{
+										className: '竖线',
+										style: {borderLeft: '2px solid rgb(39, 153, 228)'}
+									}),(0, m.jsx)('span',
+									{
+										className: 'bold',
+										children: L.Z['reply'][mtlang]
+									})]
+								}),(0, m.jsx)('hr',{className:'横线'}),n.content.split('\n').map(function(v,k)
+								{
+									return (0, m.jsx)('div',
+									{
+										className: '选择肢',
+										style: style,
+										children: v,
+										onClick: function()
+										{
+											//a((0, eo.Z8)(v))
+											//a((0, eo.Z8)(v))
+										}
+									})
+								})]
 							})] : "heart" === n.type ? [(0, m.jsx)(eN.xu,
 							{}),(0, m.jsx)(eW,
 							{
 								className: '编辑',//羁绊
 								style: style,
-								character: n.name || loadname(n.sCharacter.no)
+								character: n.content || loadname(n.sCharacter.no)
 							})] : "info" === n.type ? (0, m.jsx)(eN.vD,
 							{
 								className: '编辑',//旁白
