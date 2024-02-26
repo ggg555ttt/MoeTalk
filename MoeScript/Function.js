@@ -38,7 +38,6 @@ if(!mt_settings['语言选项'])
 	mt_settings['语言选项'] = localStorage['mt-lang'] ? localStorage['mt-lang'] : 'zh_cn'
 	mt_settings['图片比例'] = localStorage['mt-size'] ? localStorage['mt-size'] : '90%'
 	mt_settings['差分比例'] = localStorage['mt-cfsize'] ? localStorage['mt-cfsize'] : '90%'
-	mt_settings['顶部标题'] = localStorage['MoeTalk'] ? localStorage['MoeTalk'] : 'MoeTalk'
 	mt_settings['排序方式'] = localStorage['mt-order'] ? localStorage['mt-order'] : 'name'
 	mt_settings['风格样式'] = localStorage['mt-style'] ? localStorage['mt-style'] : 'rgb(255,255,255)'
 	mt_settings['人物改名'] = localStorage['mt-name'] ? JSON.parse(localStorage['mt-name']) : {}
@@ -53,7 +52,6 @@ if(!mt_settings['语言选项'])
 	delete localStorage['mt-lang']
 	delete localStorage['mt-size']
 	delete localStorage['mt-cfsize']
-	delete localStorage['MoeTalk']
 	delete localStorage['mt-order']
 	delete localStorage['mt-style']
 	delete localStorage['mt-name']
@@ -81,7 +79,13 @@ if(!mt_settings['语言选项'])
 	}
 	delete localStorage['mt-selectedList']
 }
+delete localStorage['vConsole_switch_y']
+delete localStorage['vConsole_switch_x']
+delete localStorage['MoeTalk']
+delete mt_settings['顶部标题']
 !mt_settings['文字样式'] ? mt_settings['文字样式'] = {} : ''
+!mt_settings['宽度限制'] ? mt_settings['宽度限制'] = 500 : ''
+!localStorage['顶部标题'] ? localStorage['顶部标题'] = 'MoeTalk' : ''
 localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 
 var mtlang = mt_settings['语言选项'];
@@ -146,7 +150,7 @@ function loadhead(id,img)
 function loadname(id)
 {
 	let you = {kr: "주인공",en: "Lead",jp: "主役",zh_cn: "主角",zh_tw: "主角"}
-	let name = id.toString()
+	let name = toString(id)
 	if(mollu_char[id])name = mollu_char[id][mtlang]
 	if(closure_char[id])name = closure_char[id][mtlang]
 	if(mt_characters[id])
@@ -740,7 +744,7 @@ function MoeToClosure()//Moe转Closure
 }
 function mt_title(moetalk,title,writer)
 {
-	$(".Talk__CContainer-sc-1uzn66i-1").outerWidth(500)
+	$(".Talk__CContainer-sc-1uzn66i-1").outerWidth(mt_settings['宽度限制'])
 	$('#mt_watermark').show()
 	if(moetalk && localStorage['watermark'] !== 'false')
 	{
@@ -748,7 +752,7 @@ function mt_title(moetalk,title,writer)
 		if(!writer)writer = ''
 		$('#mt_title').text(title)
 		$('#mt_writer').text(writer)
-		$('.mt_watermark').text(mt_settings['顶部标题'])
+		$('.mt_watermark').text(localStorage['顶部标题'])
 		$('#mt_watermark').css('background-color',"rgb(139, 187, 233)")
 	}
 	else
@@ -884,4 +888,14 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			});
 		}
 	}
+}
+function toString(val)
+{
+	if(!val)return ''
+	else return val.toString()
+}
+function isTrue(val)
+{
+	if(!val)return false
+	else return true
 }

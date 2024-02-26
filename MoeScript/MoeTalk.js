@@ -416,7 +416,7 @@ $("body").on('click',".operate",function()
 	// {
 	// 	$('.operateTools').hide()
 	// }
-	alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新')
+	alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新\n若想使用存档功能请点击心形图标“❤”右边的→磁盘“🖬”图标')
 });
 
 //rgb(136, 204, 204)
@@ -426,19 +426,17 @@ function isfirst(chatIndex,chats)
 {
 	if(chats[chatIndex])
 	{
-		if(chats[chatIndex].sCharacter.no == 0)return false
-		if(['heart','info','reply'].indexOf(chats[chatIndex].type) > -1)return true
-		if(chatIndex < 0)return true
-		if(chatIndex-1 < 0)return true
-		if(chats[chatIndex].isFirst)return true
-		if(chats[chatIndex].is_breaking)return true
+		if(['heart','info','reply'].indexOf(chats[chatIndex].type) > -1)return true//判断类型
+		if(chats[chatIndex].sCharacter.no == 0)return false//判断角色
 		
-		chats[chatIndex].isRight = chats[chatIndex].isRight ? true : false
-		chats[chatIndex-1].isRight = chats[chatIndex-1].isRight ? true : false
+		if(chatIndex-1 < 0)return true//首条消息
+		if(chats[chatIndex].isFirst)return true//强制显示
+		if(chats[chatIndex].is_breaking)return true//截图分割
 
-		if(chats[chatIndex].sCharacter.index !== chats[chatIndex-1].sCharacter.index)return true
-		if(['heart','info','reply'].indexOf(chats[chatIndex-1].type) > -1)return true
-		if(chats[chatIndex].isRight !== chats[chatIndex-1].isRight)return true
+		if(['heart','info','reply'].indexOf(chats[chatIndex-1].type) > -1)return true//类型不符
+		if(toString(chats[chatIndex].name) != toString(chats[chatIndex-1].name))return true//名字不符
+		if(isTrue(chats[chatIndex].isRight) !== isTrue(chats[chatIndex-1].isRight))return true//位置不符
+		if(chats[chatIndex].sCharacter.index !== chats[chatIndex-1].sCharacter.index)return true//头像不符
 	}
 	return false
 
@@ -485,7 +483,7 @@ function makeMessage(type,data,chatIndex,mode)
 				${名称}
 				<div style="display: flex; justify-content: flex-start;">
 					${type === 'chat' ? 文本 : 图片}
-					<span class="时间戳" style="margin-left: 0px;">${data.time}</span>
+					${data.time ? `<span class="时间戳" style="margin-left: 0px;">${data.time}</span>` : ''}
 				</div>
 			</div>`
 		}
@@ -499,7 +497,7 @@ function makeMessage(type,data,chatIndex,mode)
 			<div class="对话" style="align-items: flex-end;">
 				${名称}
 				<div style="display: flex; justify-content: flex-end;"">
-					<span class="时间戳" style="margin-right: 0px;text-align: right;">${data.time}</span>
+					${data.time ? `<span class="时间戳" style="margin-right: 0px;text-align: right;">${data.time}</span>` : ''}
 					${type === 'chat' ? 文本 : 图片}
 				</div>
 			</div>

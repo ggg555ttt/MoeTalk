@@ -50,7 +50,7 @@ $('body').on('click',"#savedata",function()
 {
 	alert('生成的文件只能用“读取localStorage存档”读取\n建议您在MoeTalk出现错误时向开发者提交此文件')
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-	download_txt('MoeTalk_localStorage存档'+time+'.json',JSON.stringify(localStorage));//生成专用存档
+	download_txt('MoeTalk_localStorage存档'+time+'.JSON',JSON.stringify(localStorage));//生成专用存档
 });
 $("body").append("<input id='loaddatafile' hidden type='file' accept='application/json'>");
 $('body').on('click',"#loaddata",function()
@@ -169,13 +169,11 @@ $("body").on('click','#mt-cfsize',function()
 //设置标题
 $("body").on('click','#mt-title',function()
 {
-	let title = mt_settings['顶部标题'];
+	let title = localStorage['顶部标题'];
 	let msg = prompt("请输入标题文字",title);
 	if(msg)
 	{
-		mt_settings['顶部标题'] = msg;
-		localStorage.setItem('顶部标题',msg)
-		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+		localStorage['顶部标题'] = msg;
 	}
 })
 
@@ -271,7 +269,17 @@ $('body').on('click',"#mt-maxheight",function()
 	if(maxheight != null)
 	{
 		alert('更改完成，请返回moetalk');
-		mt_settings['高度限制'] = maxheight;
+		mt_settings['高度限制'] = parseInt(maxheight);
+		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+	}
+})
+$('body').on('click',"#mt-maxwidth",function()
+{
+	let maxwidth = prompt("请输入生成图片的最大宽度：（默认500）", mt_settings['宽度限制'] ? mt_settings['宽度限制'] : 500);
+	if(maxwidth != null)
+	{
+		alert('更改完成，请返回moetalk');
+		mt_settings['宽度限制'] = parseInt(maxwidth);
 		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 	}
 })

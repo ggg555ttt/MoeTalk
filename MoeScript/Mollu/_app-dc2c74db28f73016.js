@@ -9724,7 +9724,7 @@
 								{
 									type: "image/png"
 								});
-								r.file(`${mt_settings['顶部标题']}.json`, i), r.generateAsync(//#自定义
+								r.file(`${localStorage['顶部标题']}.json`, i), r.generateAsync(//#自定义
 								{
 									type: "blob"
 								}).then(function(e)
@@ -9952,9 +9952,9 @@
 									})
 								}), (0, O.jsx)(I,
 								{
-									children: [(0, O.jsx)(I,{id:"readme",children:month === Month && day === Day ? 'MikuTalk' : mt_settings['顶部标题']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
+									children: [(0, O.jsx)(I,{id:"readme",children:month === Month && day === Day ? 'MikuTalk' : localStorage['顶部标题']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
-										href: "https://gitlab.com/ggg555ttt/MoeTalk/",
+										href: "https://github.com/ggg555ttt/MoeTalk/",
 										style:
 										{
 											fontSize: "20px",
@@ -9977,7 +9977,11 @@
 											position: "relative",
 											top: "-2.5px"
 										},
-										children: '反馈'
+										children: '反馈',
+										onClick:function()
+										{
+											alert('建议您先去设置页面“下载localStorage存档”并用于反馈页面的提交\n这样有助于开发者更好的排查错误')
+										}
 									})]
 								}), a || (0, O.jsx)(T,
 								{
@@ -10051,7 +10055,7 @@
 						componentId: "sc-17b1not-2"
 					})(["font-size:2rem;color:", ";font-family:'title';"], function(e)
 					{
-						return e.theme.color.rgb0_0_0
+						return e.theme.color.rgb255_255_255
 					}),
 					T = (0, h.ZP)(d.hU).withConfig(
 					{
@@ -10296,7 +10300,7 @@
 							rgb252_238_240: "rgb(252, 238, 240)",
 							rgb252_238_98: "rgb(252, 238, 98)",
 							rgb252_135_155: "rgb(252, 135, 155)",
-							rgb243_247_248: mt_settings['顶部标题'] === 'MikuTalk' || (month === Month && day === Day) ? "transparent" : "rgb(243, 247, 248)",//#41
+							rgb243_247_248: localStorage['顶部标题'] === 'MikuTalk' || (month === Month && day === Day) ? "transparent" : "rgb(243, 247, 248)",//#41
 							rgb242_231_85: "rgb(242, 231, 85)",
 							rgb225_237_240: "rgb(225, 237, 240)",
 							rgb224_226_228: "rgb(224, 226, 228)",
@@ -11831,7 +11835,7 @@
 								{
 									style:{lineHeight:'141%'},//@
 									className: "bold",//@
-									children: month === Month && day === Day ? 'MikuTalk' : `${mt_settings['顶部标题']} ${version}`
+									children: month === Month && day === Day ? 'MikuTalk' : `${localStorage['顶部标题']} ${version}`
 								})
 							})]
 						})

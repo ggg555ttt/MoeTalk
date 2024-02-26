@@ -1714,6 +1714,7 @@
 										disabled: h.length < 1,
 										onClick: function()
 										{
+											if(h === '愚人节测试')localStorage['顶部标题'] = 'MikuTalk'
 											sendMessage({content: h},'reply'), y()
 										},
 										children: L.Z.confirm[g]
@@ -2172,7 +2173,7 @@
 												let writer = L.Z.writer[g] + " : " + ("" !== R ? R : L.Z.noName[g])
 												if(k.title === false)title = ''
 												if(k.writer === false)writer = ''
-												mt_title(mt_settings['顶部标题'],title, writer)
+												mt_title(localStorage['顶部标题'],title, writer)
 												//let S = 1.1
 												let start = 0 
 												let end = 0 
@@ -4001,7 +4002,7 @@
 					}, [s, n, a]);
 					let isFirst = isfirst(t,l)
 					let style = mt_settings['文字样式'][n.type] ? mt_settings['文字样式'][n.type] : {}
-					return (0, m.jsx)(eN.uU,
+					return (0, m.jsx)('div',
 					{
 						className: '消息',
 						title: n.is_breaking === true ? 'red' : n.isFirst === true ? 'blue' : 'transparent',
@@ -4013,7 +4014,7 @@
 							{
 								children: (0, m.jsxs)(e8,
 								{
-									children: [!n.isRight ? (0, m.jsx)(eN.xu,
+									children: [!n.isRight ? (0, m.jsx)('div',
 									{
 										className: '头像框',
 										style: n.sCharacter.no != 0 ? 
@@ -4035,6 +4036,7 @@
 										}) : ''
 									}) : '', (0, m.jsxs)(n.sCharacter.no == 0 ? "div" : eN.Xp,
 									{
+										className: "对话",
 										style: n.isRight ? 
 										{alignItems: 'flex-end'} : 
 										{display: 'block',width: '100%'},
@@ -4049,13 +4051,13 @@
 												display:"flex",
 												justifyContent: n.isRight || n.sCharacter.no == 0 ? 'flex-end' : 'flex-start'
 											},
-											children: [(0, m.jsx)(eN.i9,
+											children: [n.time ? (0, m.jsx)(eN.i9,
 											{
 												//左侧时间戳
 												hidden: (!n.time || n.sCharacter.no != 0) && !n.isRight,
 												style:{marginRight:0,textAlign:'right'},
 												children: n.time
-											}), "chat" === n.type ? [(0, m.jsx)(n.sCharacter.no == 0 ? eN.LP : 
+											}) : '', "chat" === n.type ? [(0, m.jsx)(n.sCharacter.no == 0 ? eN.LP : 
 												!n.isRight && isFirst ? eN.zC : eN.Dt,
 											{
 												className: '编辑',//文本
@@ -4075,15 +4077,15 @@
 												{
 													e.currentTarget.src = href+'Images/Ui/error.webp';
 												},
-											}), (0, m.jsx)(eN.i9,
+											}), n.time ? (0, m.jsx)(eN.i9,
 											{
 												//右侧时间戳
 												hidden: !n.time || n.sCharacter.no == 0 || n.isRight,
 												style:{marginLeft:0},
 												children: n.time
-											})]
+											}) : '']
 										})]
-									}), n.isRight && n.sCharacter.no != 0 ? (0, m.jsx)(eN.xu,
+									}), n.isRight && n.sCharacter.no != 0 ? (0, m.jsx)('div',
 									{
 										className: '头像框',
 										style:
@@ -4820,7 +4822,7 @@
 						{
 							children: [(0, m.jsx)("title",
 							{
-								children: mt_settings['顶部标题']
+								children: localStorage['顶部标题']
 							}), (0, m.jsx)("meta",
 							{
 								name: "description",
