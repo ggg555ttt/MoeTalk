@@ -750,7 +750,7 @@
 														{
 															mt_ChangeChar(n.no)
 														}
-													}), n.club[a] === '自定义角色' ? (JSON.parse(localStorage['mt-head'])[n.no].length/1024).toFixed(0)+'KB' : '']
+													}), n.club[a] === '自定义角色' ? (mt_head[n.no] ? (mt_head[n.no].length/1024).toFixed(0) : '-1')+'KB' : '']
 												})
 											})]//@显示社团
 										})]
@@ -772,21 +772,15 @@
 										{
 											if(confirm(`角色名：${n.name[a].replaceAll("-", " ")}\nID：${n.no}\n确定要删除这名角色吗？\n删除后的角色可以从临时角色列表中找回`))
 											{
-												let localChar = JSON.parse(localStorage['mt-char']);
-												let localHead = JSON.parse(localStorage['mt-head']);	
-												let sessionChar = JSON.parse(sessionStorage['mt-char']);
-												let sessionHead = JSON.parse(sessionStorage['mt-head']);
-												sessionChar[n.no] = localChar[n.no]
-												sessionHead[n.no] = localHead[n.no]
-												delete localChar[n.no];
-												delete localHead[n.no];
-												localStorage['mt-char'] = JSON.stringify(localChar);
-												localStorage['mt-head'] = JSON.stringify(localHead);
-												sessionStorage['mt-char'] = JSON.stringify(sessionChar);
-												sessionStorage['mt-head'] = JSON.stringify(sessionHead);
-												$$('.jotOXZ')[0].click()
-												setTimeout(function(){$$(`[alt="${n.no}"]`).click()})
-												setTimeout(function(){$$('.jotOXZ')[1].click()})
+												mt_schar[n.no] = mt_char[n.no]
+												mt_shead[n.no] = mt_head[n.no]
+												delete mt_char[n.no];
+												delete mt_head[n.no];
+
+												localStorage['mt-char'] = JSON.stringify(mt_char);
+												localStorage['mt-head'] = JSON.stringify(mt_head);
+												sessionStorage['mt-char'] = JSON.stringify(mt_schar);
+												sessionStorage['mt-head'] = JSON.stringify(mt_shead);
 												list()//更新列表
 											}
 										}
@@ -794,21 +788,15 @@
 										{
 											if(confirm(`角色名：${n.name[a].replaceAll("-", " ")}\nID：${n.no}\n确定将这名角色添加进自定义角色列表？`))
 											{
-												let localChar = JSON.parse(localStorage['mt-char']);
-												let localHead = JSON.parse(localStorage['mt-head']);	
-												let sessionChar = JSON.parse(sessionStorage['mt-char']);
-												let sessionHead = JSON.parse(sessionStorage['mt-head']);
-												localChar[n.no] = sessionChar[n.no]
-												localHead[n.no] = sessionHead[n.no]
-												delete sessionChar[n.no];
-												delete sessionHead[n.no];
-												localStorage['mt-char'] = JSON.stringify(localChar);
-												localStorage['mt-head'] = JSON.stringify(localHead);
-												sessionStorage['mt-char'] = JSON.stringify(sessionChar);
-												sessionStorage['mt-head'] = JSON.stringify(sessionHead);
-												// $$('.jotOXZ')[0].click()
-												// setTimeout(function(){$$(`[alt="${n.no}"]`).click()})
-												// setTimeout(function(){$$('.jotOXZ')[1].click()})
+												mt_char[n.no] = mt_schar[n.no]
+												mt_head[n.no] = mt_shead[n.no]
+												delete mt_schar[n.no];
+												delete mt_shead[n.no];
+												
+												localStorage['mt-char'] = JSON.stringify(mt_char);
+												localStorage['mt-head'] = JSON.stringify(mt_head);
+												sessionStorage['mt-char'] = JSON.stringify(mt_schar);
+												sessionStorage['mt-head'] = JSON.stringify(mt_shead);
 												list()//更新列表
 											}
 										}
@@ -1401,7 +1389,7 @@
 							//*更新自定义角色的读取方式
 							let arr = JSON.parse(JSON.stringify(_.Z));
 							let carr = [];
-							$$.each(JSON.parse(localStorage['mt-char']),function(k,v)
+							$$.each(mt_char,function(k,v)
 							{
 								if(v !== null)arr.unshift(
 								{
@@ -1426,9 +1414,9 @@
 							})
 							if(mt_settings['社团列表']['临时角色'] && mt_settings['社团列表']['临时角色'] === 'YES')
 							{
-								$$.each(JSON.parse(sessionStorage['mt-char']),function(k,v)
+								$$.each(mt_schar,function(k,v)
 								{
-									if(v !== null && !JSON.parse(localStorage['mt-char'])[k])arr.unshift(
+									if(v !== null && !mt_char[k])arr.unshift(
 									{
 										name:
 										{
@@ -1714,7 +1702,7 @@
 										disabled: h.length < 1,
 										onClick: function()
 										{
-											if(h === '愚人节测试')localStorage['顶部标题'] = 'MikuTalk'
+											if(h === '愚人节测试')mt_settings['顶部标题'] = 'MikuTalk'
 											sendMessage({content: h},'reply'), y()
 										},
 										children: L.Z.confirm[g]
@@ -2173,7 +2161,7 @@
 												let writer = L.Z.writer[g] + " : " + ("" !== R ? R : L.Z.noName[g])
 												if(k.title === false)title = ''
 												if(k.writer === false)writer = ''
-												mt_title(localStorage['顶部标题'],title, writer)
+												mt_title(mt_settings['顶部标题'],title, writer)
 												//let S = 1.1
 												let start = 0 
 												let end = 0 
@@ -2325,8 +2313,8 @@
 											title: "" !== f ? f : L.Z.noTitle[d],
 											nickname: "" !== k ? k : L.Z.noName[d],
 											date: (0, u._3)(!0, !0),
-											mt_char: JSON.parse(localStorage['mt-char']),//@自创角色
-											mt_head: JSON.parse(localStorage['mt-head']),//@自创头像
+											mt_char: mt_char,//@自创角色
+											mt_head: mt_head,//@自创头像
 											'选择角色': mt_settings['选择角色']//@
 										}, chats])], e.next = 6, (0, u.rU)(r);
 									case 6:
@@ -2907,13 +2895,13 @@
 						let link;let cflink = null;let cfarr = [];cfarr[0] = 'Images/CharFace';///定义链接
 						let charname = no == 0 ? '主角' : no;
 
-						if(JSON.parse(localStorage['mt-char'])[no])
+						if(mt_char[no])
 						{
-							charname = JSON.parse(localStorage['mt-char'])[no];
+							charname = mt_char[no];
 						}
-						if(JSON.parse(sessionStorage['mt-char'])[no])
+						if(mt_schar[no])
 						{
-							charname = JSON.parse(sessionStorage['mt-char'])[no];
+							charname = mt_schar[no];
 						}
 						if(mt_characters[no])
 						{
@@ -4825,7 +4813,7 @@
 						{
 							children: [(0, m.jsx)("title",
 							{
-								children: localStorage['顶部标题']
+								children: mt_settings['顶部标题']
 							}), (0, m.jsx)("meta",
 							{
 								name: "description",

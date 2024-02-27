@@ -143,9 +143,8 @@ $('body').on('click',"#makecus",function()
 	if(cus != null && cus.trim() != '')
 	{
 		cus = cus.trim();
-		chararr = JSON.parse(localStorage['mt-char']);
 		imgindex = 'custom-'+getNowDate()
-		chararr[imgindex] = cus
+		mt_char[imgindex] = cus
 		$("#cusname").text(cus);
 		$("#custom").click();
 	}
@@ -164,17 +163,16 @@ $('body').on('click',"#uphead",function()//上传头像
 })
 function mt_ChangeChar(id)
 {
-	chararr = JSON.parse(localStorage['mt-char'])
-	if(chararr[id])
+	if(mt_char[id])
 	{
-		let cname = prompt(`自定义角色ID：${id}\n若不想上传头像那么则只修改角色名\n当前角色名为：`,chararr[id]);
+		let cname = prompt(`自定义角色ID：${id}\n若不想上传头像那么则只修改角色名\n当前角色名为：`,mt_char[id]);
 		if(cname != null && cname.trim() != '')
 		{
 			cname = cname.trim();
-			chararr[id] = cname;
+			mt_char[id] = cname;
 			imgindex = id;
 			$("#cusname").text(cname);
-			localStorage['mt-char'] = JSON.stringify(chararr);//保存名字
+			localStorage['mt-char'] = JSON.stringify(mt_char);//保存名字
 			$("#custom").click();
 			list()//更新列表
 		}
@@ -776,9 +774,7 @@ $("body").on('click',".头像框",function()
 	chatIndex = $('.消息').index($(this).parents('.消息'))
 	if(chats[chatIndex].type === 'chat' || chats[chatIndex].type === 'image')
 	{
-		chat = chats[chatIndex]
-		chat.isFirst = !chat.isFirst
-		sendMessage(chat,chat.type,'edit')
+		sendMessage({...chats[chatIndex],...{isFirst:!chats[chatIndex].isFirst}},chats[chatIndex].type,'edit')
 	}
 });
 $("body").on('click',".editType",function()

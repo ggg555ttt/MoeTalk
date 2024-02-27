@@ -18,12 +18,15 @@ if(window.location.href.indexOf('file:///') === 0)
 	}
 })();
 /*预定义区*/
-if(!localStorage['mt-char'] || localStorage['mt-char'][0] === '[')localStorage['mt-char'] = '{}';//自定义角色名称
-if(!localStorage['mt-head'])localStorage['mt-head'] = '{}';//自定义角色头像
-if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';//自定义角色名称
-if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';//自定义角色头像
+if(!localStorage['mt-char'] || localStorage['mt-char'][0] === '[')localStorage['mt-char'] = '{}';
+if(!localStorage['mt-head'])localStorage['mt-head'] = '{}';
+if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';
+if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
+var mt_char = JSON.parse(localStorage['mt-char'])//自制角色名称
+var mt_head = JSON.parse(localStorage['mt-head'])//自制角色头像
+var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色名称
+var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时义角色头像
 if(!localStorage['chats'] || !isJSON(localStorage['chats']))localStorage['chats'] = '[]';//聊天记录
-
 if(!mt_settings['语言选项'])
 {
 	delete localStorage['lang']
@@ -95,7 +98,6 @@ if(langid > -1)mtlang = langarr[langid]
 var 选择角色 = true;//快捷角色开关
 
 var imgindex;//人物自定义
-var chararr = {};//自定义角色列表//
 
 var $$ = $;//jquery转义
 var height;//聊天记录长度
@@ -109,19 +111,18 @@ var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-
 //保存头像
 function savehead(headindex,img64)
 {
-	let headarr = JSON.parse(localStorage['mt-head']);
-	headarr[headindex] = img64;
-	localStorage['mt-head'] = JSON.stringify(headarr);
+	mt_head[headindex] = img64;
+	localStorage['mt-head'] = JSON.stringify(mt_head);
 	let nameloss
-	$.each(headarr,function(k,v)
+	$.each(mt_head,function(k,v)
 	{
-		if(!chararr[k])
+		if(!mt_char[k])
 		{
-			chararr[k] = 'NAMELOSS'
+			mt_char[k] = 'NAMELOSS'
 			nameloss = true
 		}
 	})
-	if(nameloss === true)localStorage['mt-char'] = JSON.stringify(chararr)
+	if(nameloss === true)localStorage['mt-char'] = JSON.stringify(mt_char)
 }
 //读取头像
 function loadhead(id,img)
@@ -133,13 +134,13 @@ function loadhead(id,img)
 		return `${href}Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`;
 	}
 	//自定义头像
-	if(JSON.parse(localStorage['mt-head'])[id])
+	if(mt_head[id])
 	{
-		return JSON.parse(localStorage['mt-head'])[id]
+		return mt_head[id]
 	}
-	if(JSON.parse(sessionStorage['mt-head'])[id])
+	if(mt_shead[id])
 	{
-		return JSON.parse(sessionStorage['mt-head'])[id]
+		return mt_shead[id]
 	}
 	if(closure_char[id])return `${href}Images/ClosureTalk/ba/characters/${img}.webp`;//closure头像
 	if(mollu_char[id])return `${href}Images/MolluChar/${id}.${img}.webp`;//旧版头像
@@ -160,13 +161,13 @@ function loadname(id)
 	if(name.split(" ")[1])name = name.split(" ")[1]
 	name = name.replaceAll("-", " ")
 	
-	if(sessionStorage['mt-char'] && JSON.parse(sessionStorage['mt-char'])[id])
+	if(mt_schar[id])
 	{
-		name = JSON.parse(sessionStorage['mt-char'])[id]
+		name = mt_schar[id]
 	}
-	if(localStorage['mt-char'] && JSON.parse(localStorage['mt-char'])[id])
+	if(localStorage['mt-char'] && mt_char[id])
 	{
-		name = JSON.parse(localStorage['mt-char'])[id]
+		name = mt_char[id]
 	}
 
 	if(id == 0)name = you[mtlang]
@@ -270,7 +271,7 @@ function compress(base64Img,type = 'head',mode = 'add')
 		}
 		else
 		{
-			localStorage['mt-char'] = JSON.stringify(chararr);
+			localStorage['mt-char'] = JSON.stringify(mt_char);
 			savehead(imgindex,newBase64)
 			list()//更新列表
 		}
@@ -430,8 +431,6 @@ function list()
 {
 	club()
 	$('.eIEKpg:eq(0)').click();//更新列表
-	setTimeout(function(){$('.editTools').click()})
-	setTimeout(function(){$('.editTools').click()})
 	setTimeout(function(){selectClick(37)})
 	setTimeout(function(){selectClick(39)})
 }
@@ -577,14 +576,14 @@ function loaddata(json)//识别存档
 	
 	if($('#customchar').prop('checked') === true)//读取自定义角色
 	{
-		localStorage['mt-char'] = JSON.stringify({...JSON.parse(localStorage['mt-char']),...custom_char});
-		localStorage['mt-head'] = JSON.stringify({...JSON.parse(localStorage['mt-head']),...custom_head});
+		localStorage['mt-char'] = JSON.stringify({...mt_char,...custom_char});
+		localStorage['mt-head'] = JSON.stringify({...mt_head,...custom_head});
 		list()//更新列表
 	}
 	else
 	{
-		sessionStorage['mt-char'] = JSON.stringify({...JSON.parse(sessionStorage['mt-char']),...custom_char});
-		sessionStorage['mt-head'] = JSON.stringify({...JSON.parse(sessionStorage['mt-head']),...custom_head});
+		sessionStorage['mt-char'] = JSON.stringify({...mt_schar,...custom_char});
+		sessionStorage['mt-head'] = JSON.stringify({...mt_shead,...custom_head});
 		list()//更新列表
 	}
 	if(json[0]['选择角色'])
@@ -727,10 +726,10 @@ function MoeToClosure()//Moe转Closure
 			closuretalk['chars'][k]['img'] = 'uploaded';
 		}
 	})
-	$.each(JSON.parse(localStorage['mt-char']),function(k,v)
+	$.each(mt_char,function(k,v)
 	{
 		custom_chars[k] = {}
-		custom_chars[k]['img'] = JSON.parse(localStorage['mt-head'])[k];
+		custom_chars[k]['img'] = mt_head[k];
 		custom_chars[k]['name'] = v;
 	})
 	$.each(custom_chars,function(k,v)
@@ -789,8 +788,8 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			json[0]['nickname'] = 'MoeTalk';
 			json[0]['date'] = (0, u._3)(!0, !0);
 			json[0]['选择角色'] = mt_settings['选择角色']//@
-			json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
-			json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
+			json[0]['mt_char'] = mt_char;//@自创角色
+			json[0]['mt_head'] = mt_head;//@自创头像
 			json[1] = JSON.parse(localStorage['chats']);
 			j(v.index), null === (n = I.current) || void 0 === n , e.toBlob(function(e)
 			{
@@ -836,8 +835,8 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 				json[0]['nickname'] = 'MoeTalk';
 				json[0]['date'] = (0, u._3)(!0, !0);
 				json[0]['选择角色'] = mt_settings['选择角色']//@
-				json[0]['mt_char'] = JSON.parse(localStorage['mt-char']);//@自创角色
-				json[0]['mt_head'] = JSON.parse(localStorage['mt-head']);//@自创头像
+				json[0]['mt_char'] = mt_char;//@自创角色
+				json[0]['mt_head'] = mt_head;//@自创头像
 				json[1] = JSON.parse(localStorage['chats']);
 				j(v.index), null === (n = I.current) || void 0 === n , e.toBlob(function(e)
 				{

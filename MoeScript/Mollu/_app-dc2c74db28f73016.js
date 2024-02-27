@@ -9688,13 +9688,13 @@
 						{
 							o = mt_characters[e].name[n] ? mt_characters[e].name[n] : e;
 						}
-						if(sessionStorage['mt-char'] && JSON.parse(sessionStorage['mt-char'])[e])
+						if(mt_schar && JSON.parse(mt_schar)[e])
 						{
-							o = JSON.parse(sessionStorage['mt-char'])[e]
+							o = JSON.parse(mt_schar)[e]
 						}
-						if(localStorage['mt-char'] && JSON.parse(localStorage['mt-char'])[e])
+						if(mt_char && JSON.parse(mt_char)[e])
 						{
-							o = JSON.parse(localStorage['mt-char'])[e]
+							o = JSON.parse(mt_char)[e]
 						}
 						if(mollu_char[e])o = mollu_char[e][n]
 						if(closure_char[e])o = closure_char[e][n]

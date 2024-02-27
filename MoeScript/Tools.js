@@ -338,3 +338,8 @@ $('body').on('click',"#mt-zipdownimg",function()
 	}
 	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 })
+$('.mt_settings').text(JSON.stringify(mt_settings,null,4))
+$("body").on('click',function()
+{
+	$('.mt_settings').text(JSON.stringify(mt_settings,null,4))
+})
