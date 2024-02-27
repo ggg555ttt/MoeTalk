@@ -3,6 +3,7 @@
 <html lang="zh" style="--vh:9.47px; font-size: 16px;">
 	<head>
 <script src="./MoeScript/Script/Jquery.min.js"></script>
+<!-- <script src="./MoeScript/Script/localforage.min.js"></script> -->
 <!-- <script src="./MoeScript/Script/html2canvas.min.js"></script> -->
 <script>
 $.ajax({
@@ -75,10 +76,11 @@ const os = (u = window.navigator.userAgent) => {
 		})()
 	};
 };
+var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 var browser = os();//获取浏览器信息
-if(browser.isIos === true || browser.isiPhone === true)
+if(browser.isIos === true || browser.isiPhone === true || mt_settings['打包下载'])
 {
-	var zip = true;
+	var zipDownImg = true;
 	document.write("<scr"+`ipt src='./MoeScript/Script/jszip.min.js'></scr`+"ipt>");
 }
 if(!localStorage['mt-rand'])localStorage['mt-rand'] = Math.random()
@@ -92,7 +94,7 @@ var month = date.getMonth() + 1; // 月
 var day = date.getDate(); // 日
 var Month = 4;
 var Day = 1;
-if(localStorage['顶部标题'] === 'MikuTalk' || (month === Month && day === Day))
+if(mt_settings['顶部标题'] === 'MikuTalk' || (month === Month && day === Day))
 {
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/pixi.min.js'></scr`+"ipt>");
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/gsap.min.js'></scr`+"ipt>");

@@ -9724,7 +9724,7 @@
 								{
 									type: "image/png"
 								});
-								r.file(`${localStorage['顶部标题']}.json`, i), r.generateAsync(//#自定义
+								r.file(`${mt_settings['顶部标题']}.json`, i), r.generateAsync(//#自定义
 								{
 									type: "blob"
 								}).then(function(e)
@@ -9952,7 +9952,7 @@
 									})
 								}), (0, O.jsx)(I,
 								{
-									children: [(0, O.jsx)(I,{id:"readme",children:month === Month && day === Day ? 'MikuTalk' : localStorage['顶部标题']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
+									children: [(0, O.jsx)(I,{id:"readme",children:month === Month && day === Day ? 'MikuTalk' : mt_settings['顶部标题']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
 										href: "https://github.com/ggg555ttt/MoeTalk/",
 										style:
@@ -10300,7 +10300,7 @@
 							rgb252_238_240: "rgb(252, 238, 240)",
 							rgb252_238_98: "rgb(252, 238, 98)",
 							rgb252_135_155: "rgb(252, 135, 155)",
-							rgb243_247_248: localStorage['顶部标题'] === 'MikuTalk' || (month === Month && day === Day) ? "transparent" : "rgb(243, 247, 248)",//#41
+							rgb243_247_248: mt_settings['顶部标题'] === 'MikuTalk' || (month === Month && day === Day) ? "transparent" : "rgb(243, 247, 248)",//#41
 							rgb242_231_85: "rgb(242, 231, 85)",
 							rgb225_237_240: "rgb(225, 237, 240)",
 							rgb224_226_228: "rgb(224, 226, 228)",
@@ -10477,12 +10477,9 @@
 						(0, g.useEffect)(function()
 						{
 							var e = [],
-								t = localStorage.getItem("chats");//#临时改永久
-							null !== t && (e = JSON.parse(t)), r((0, Q.U_)(e))
-						}, [r]), (0, g.useEffect)(function()
-						{
-							localStorage.setItem("chats", JSON.stringify(e))//#临时改永久
-						}, [e])
+								t = chats ? chats : [];//#临时改永久
+							null !== t && (e = t), r((0, Q.U_)(e))
+						}, [r])
 					},
 					eh = n(2238);
 				/**
@@ -11835,7 +11832,7 @@
 								{
 									style:{lineHeight:'141%'},//@
 									className: "bold",//@
-									children: month === Month && day === Day ? 'MikuTalk' : `${localStorage['顶部标题']} ${version}`
+									children: month === Month && day === Day ? 'MikuTalk' : `${mt_settings['顶部标题']} ${version}`
 								})
 							})]
 						})

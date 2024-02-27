@@ -169,12 +169,13 @@ $("body").on('click','#mt-cfsize',function()
 //设置标题
 $("body").on('click','#mt-title',function()
 {
-	let title = localStorage['顶部标题'];
+	let title = mt_settings['顶部标题'];
 	let msg = prompt("请输入标题文字",title);
 	if(msg)
 	{
-		localStorage['顶部标题'] = msg;
+		mt_settings['顶部标题'] = msg;
 	}
+	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 })
 
 //隐写回复
@@ -302,3 +303,38 @@ if(mt_settings['文字样式'])
 		$('#mt-fontszie').parent().find(`input[title="${k}"]`)[0].value = v['font-size']
 	})
 }
+$('body').on('click',"#backsave",function()
+{
+	let str = '此功能可以有效的减少更新消息时产生的延迟\n'
+	str += '在低配设备上可能会有明显的流畅度提升\n'
+	str += '因为是测试中的功能，作者无法保证稳定性\n'
+	str += '有可能会出现保存失败或其他错误\n'
+	str += '在您发现错误麻烦请向我详细反馈您之前的操作活动\n'
+	str += '我会尝试排查错误并让这个功能变得更加完善\n'
+	str += '感谢您的使用\n'
+	str += `后台保存模式：【${mt_settings['后台保存'] ? '开启' : '关闭'}】\n`
+	str += `${mt_settings['后台保存'] ? '点击“取消”关闭' : '点击“确认”开启'}`
+	if(confirm(str))
+	{
+		mt_settings['后台保存'] = '开启'
+	}
+	else
+	{
+		delete mt_settings['后台保存']
+	}
+	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+})
+$('body').on('click',"#mt-zipdownimg",function()
+{
+	let str = '如果开启此选项，生成多张图片时会以压缩文件的格式进行下载\n'
+	str += '点击“确认”开启\n点击“取消”关闭'
+	if(confirm(str))
+	{
+		mt_settings['打包下载'] = 'zip'
+	}
+	else
+	{
+		delete mt_settings['打包下载']
+	}
+	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+})

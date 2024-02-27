@@ -24,8 +24,6 @@ if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';//自定义角色
 if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';//自定义角色头像
 if(!localStorage['chats'] || !isJSON(localStorage['chats']))localStorage['chats'] = '[]';//聊天记录
 
-var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
-
 if(!mt_settings['语言选项'])
 {
 	delete localStorage['lang']
@@ -82,10 +80,11 @@ if(!mt_settings['语言选项'])
 delete localStorage['vConsole_switch_y']
 delete localStorage['vConsole_switch_x']
 delete localStorage['MoeTalk']
-delete mt_settings['顶部标题']
+delete localStorage['顶部标题']
+
 !mt_settings['文字样式'] ? mt_settings['文字样式'] = {} : ''
 !mt_settings['宽度限制'] ? mt_settings['宽度限制'] = 500 : ''
-!localStorage['顶部标题'] ? localStorage['顶部标题'] = 'MoeTalk' : ''
+!mt_settings['顶部标题'] ? mt_settings['顶部标题'] = 'MoeTalk' : ''
 localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 
 var mtlang = mt_settings['语言选项'];
@@ -752,7 +751,7 @@ function mt_title(moetalk,title,writer)
 		if(!writer)writer = ''
 		$('#mt_title').text(title)
 		$('#mt_writer').text(writer)
-		$('.mt_watermark').text(localStorage['顶部标题'])
+		$('.mt_watermark').text(mt_settings['顶部标题'])
 		$('#mt_watermark').css('background-color',"rgb(139, 187, 233)")
 	}
 	else

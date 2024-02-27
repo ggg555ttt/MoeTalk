@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 	<meta http-equiv="Pragma" content="no-cache">
@@ -26,6 +27,7 @@
 	<button class="button-container" id='mt-image'><b style='color:blue;'>更改生成图片格式</b></button>
 	<button class="button-container" id='mt-maxheight'><b style='color:blue;'>限制生成图片的长度</b></button>
 	<button class="button-container" id='mt-maxwidth'><b style='color:blue;'>限制生成图片的宽度</b></button>
+	<button class="button-container" id='mt-zipdownimg'><b style='color:blue;'>打包下载图片</b></button>
 	<h2><a>文字相关：</a></h2>
 	<button class="button-container" id='mt-title'><b style='color:green;'>设置标题</b></button>
 	<button class="button-container" id='language'><b style='color:green;'>更改语言</b></button>
@@ -43,6 +45,7 @@
 	<button class="button-container" id='loadcus'><b style='color:white;'>恢复自定义角色存档</b></button>
 	<button class="button-container" id='savedata'><b style='color:white'>下载localStorage存档</b></button>
 	<button class="button-container" id='loaddata'><b style='color:white;'>读取localStorage存档</b></button>
+	<button class="button-container" id='backsave'><b style='color:white;'>后台保存模式（测试）</b></button>
 	<h2><a>数据相关：</a></h2>
 	<button class="button-container" id='cleancache'><b style='color:black;'>清除ServiceWorker缓存</b></button>
 	<button class="button-container" id='clean'><b style='color:red;'>彻底清除本地数据</b></button>

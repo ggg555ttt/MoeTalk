@@ -12,6 +12,34 @@ var imageArr = [];
 var imageArrL = 0
 var imageZip = null;
 
+var chats = JSON.parse(localStorage['chats'])
+if(mt_settings['后台保存'])
+{
+	window.onblur = function()
+	{
+		localStorage.setItem('chats',JSON.stringify(chats))
+	}
+	window.onfocus = function()
+	{
+		localStorage.setItem('chats',JSON.stringify(chats))
+	}
+	window.onbeforeunload = function()
+	{
+		localStorage.setItem('chats',JSON.stringify(chats))
+	}
+}
+// var chats = '';
+// const moetalkStorage = localforage.createInstance({name:'moetalkStorage'})
+// moetalkStorage.getItem('chats', function(err, value)
+// {
+// 	$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
+// 	$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
+// 	chats = JSON.parse(value)
+// 	chats.map(function(v,k)
+// 	{
+// 		$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
+// 	})
+// })
 function mt_height(num)
 {
 	if(!num)num = 1.1
@@ -671,8 +699,8 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 			if(chats.length)nextindex.scrollIntoView(!1)
 		}
 	})
-
-	localStorage.setItem('chats',JSON.stringify(chats))
+	//moetalkStorage.setItem('chats',JSON.stringify(chats))
+	if(!mt_settings['后台保存'])localStorage.setItem('chats',JSON.stringify(chats))
 }
 $("body").on('click',".编辑",function()
 {

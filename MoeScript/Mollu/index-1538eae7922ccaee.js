@@ -1820,7 +1820,7 @@
 													$$(`.消息`).remove()
 													$$('.RightScreen__Box-sc-1fwinj2-1').show()//显示开头引导
 													$$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').hide()//隐藏聊天记录
-													localStorage.setItem('chats',JSON.stringify(chats))
+													if(!mt_settings['后台保存'])localStorage.setItem('chats',JSON.stringify(chats))
 												}
 											},
 											children: L.Z.confirm[o]
@@ -2203,7 +2203,7 @@
 														imageArr.push({start:start,end:$$(".消息").length,index:imageArr.length+1})
 													}
 												}
-												if(zip && imageArr.length > 1)
+												if(zipDownImg && imageArr.length > 1)
 												{
 													imageZip = new JSZip();
 												}
@@ -2388,7 +2388,7 @@
 							{
 								$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k))
 							})
-							localStorage.setItem('chats',JSON.stringify(chats))
+							if(!mt_settings['后台保存'])localStorage.setItem('chats',JSON.stringify(chats))
 							N()
 						};
 					return (0, m.jsx)(ea.Xf,
@@ -4498,6 +4498,9 @@
 									})]
 								}),t.map(function(e, n)
 								{
+									let newchats = []
+									chats.map(function(v,k){newchats[k] = v})
+									chats = newchats
 									return e.replyDepth === o && (0, m.jsx)(e6,
 									{
 										index: n,
