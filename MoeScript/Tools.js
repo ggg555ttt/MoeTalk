@@ -80,7 +80,7 @@ $('body').on('click',"#language",function()
 	if (lang != null)
 	{
 		mt_settings['语言选项'] = lang;
-		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+		saveStorage('设置选项',mt_settings,'local')
 		alert('更改完成，请返回页面!');
 	}
 })
@@ -119,7 +119,7 @@ $('body').on('click',"#font",function()
 			mt_settings['禁止字体'] = true;
 		}
 	}
-	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+	saveStorage('设置选项',mt_settings,'local')
 })
 //头像质量
 $('body').on('click',"#hnum",function()
@@ -128,7 +128,7 @@ $('body').on('click',"#hnum",function()
 	else num = '，当前数值为300';
 	let hnum = prompt("数值越大上传的头像越清晰，同时也会越占用存储空间\n建议在100到300之间取值"+num,300);
 	if(!isNaN(hnum) && hnum != null && hnum.trim() != '')mt_settings['头像尺寸'] = hnum.trim()
-	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+	saveStorage('设置选项',mt_settings,'local')
 })
 
 //清除数据
@@ -152,7 +152,7 @@ $("body").on('click','#mt-size',function()
 	if(msg)
 	{
 		mt_settings['图片比例'] = msg;
-		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+		saveStorage('设置选项',mt_settings,'local')
 	}
 })
 //设置独立的差分表情宽高百分比
@@ -163,7 +163,7 @@ $("body").on('click','#mt-cfsize',function()
 	if(msg)
 	{
 		mt_settings['差分比例'] = msg;
-		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+		saveStorage('设置选项',mt_settings,'local')
 	}
 })
 //设置标题
@@ -175,7 +175,7 @@ $("body").on('click','#mt-title',function()
 	{
 		mt_settings['顶部标题'] = msg;
 	}
-	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+	saveStorage('设置选项',mt_settings,'local')
 })
 
 //隐写回复
@@ -250,7 +250,7 @@ $('body').on('click',"#mt-image",function()
 	{
 		alert('更改完成，如果图片生成错误请尝试改为其它参数');
 		mt_settings['图片格式'] = 'image/'+image;
-		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+		saveStorage('设置选项',mt_settings,'local')
 	}
 })
 $('body').on('click',"#cleancache",function()
@@ -271,7 +271,7 @@ $('body').on('click',"#mt-maxheight",function()
 	{
 		alert('更改完成，请返回moetalk');
 		mt_settings['高度限制'] = parseInt(maxheight);
-		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+		saveStorage('设置选项',mt_settings,'local')
 	}
 })
 $('body').on('click',"#mt-maxwidth",function()
@@ -281,7 +281,7 @@ $('body').on('click',"#mt-maxwidth",function()
 	{
 		alert('更改完成，请返回moetalk');
 		mt_settings['宽度限制'] = parseInt(maxwidth);
-		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+		saveStorage('设置选项',mt_settings,'local')
 	}
 })
 $('body').on('click',"#mt-fontszie",function()
@@ -294,7 +294,7 @@ $('body').on('click',"#mt-fontszie",function()
 		mt_settings['文字样式'][v.title]['font-size'] = val
 	})
 	alert('已提交参数，参数为空则保持默认，错误参数则导致修改失败')
-	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+	saveStorage('设置选项',mt_settings,'local')
 })
 if(mt_settings['文字样式'])
 {
@@ -322,7 +322,7 @@ $('body').on('click',"#backsave",function()
 	{
 		delete mt_settings['后台保存']
 	}
-	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+	saveStorage('设置选项',mt_settings,'local')
 })
 $('body').on('click',"#mt-zipdownimg",function()
 {
@@ -336,7 +336,7 @@ $('body').on('click',"#mt-zipdownimg",function()
 	{
 		delete mt_settings['打包下载']
 	}
-	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+	saveStorage('设置选项',mt_settings,'local')
 })
 $('.mt_settings').text(JSON.stringify(mt_settings,null,4))
 $("body").on('click',function()

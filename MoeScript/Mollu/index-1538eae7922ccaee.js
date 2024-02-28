@@ -366,7 +366,6 @@
 							mt_settings['选择角色'].no = e.sCharacter.selected.no
 							mt_settings['选择角色'].index = e.sCharacter.selected.index
 							mt_settings['选择角色'].list = e.sCharacter.selectedList
-							localStorage.setItem('设置选项',JSON.stringify(mt_settings))
 							//*储存读取快捷角色
 							return e.sCharacter
 						}),
@@ -470,6 +469,7 @@
 												onClick: function()
 												{
 													_(e)
+													saveStorage('设置选项',mt_settings,'local')
 												},
 												onError: function(e)
 												{
@@ -645,6 +645,7 @@
 												$$('.fzoymd.selected')[0].scrollIntoView(!1)
 											}, 1)
 										}
+										saveStorage('设置选项',mt_settings,'local')
 									},
 									className: 1 === r.filter(function(t)
 									{
@@ -777,10 +778,10 @@
 												delete mt_char[n.no];
 												delete mt_head[n.no];
 
-												localStorage['mt-char'] = JSON.stringify(mt_char);
-												localStorage['mt-head'] = JSON.stringify(mt_head);
-												sessionStorage['mt-char'] = JSON.stringify(mt_schar);
-												sessionStorage['mt-head'] = JSON.stringify(mt_shead);
+												saveStorage('mt-char',mt_char,'local')
+												saveStorage('mt-char',mt_head,'local')
+												saveStorage('mt-char',mt_schar,'session')
+												saveStorage('mt-char',mt_shead,'session')
 												list()//更新列表
 											}
 										}
@@ -793,10 +794,10 @@
 												delete mt_schar[n.no];
 												delete mt_shead[n.no];
 												
-												localStorage['mt-char'] = JSON.stringify(mt_char);
-												localStorage['mt-head'] = JSON.stringify(mt_head);
-												sessionStorage['mt-char'] = JSON.stringify(mt_schar);
-												sessionStorage['mt-head'] = JSON.stringify(mt_shead);
+												saveStorage('mt-char',mt_char,'local')
+												saveStorage('mt-char',mt_head,'local')
+												saveStorage('mt-char',mt_schar,'session')
+												saveStorage('mt-char',mt_shead,'session')
 												list()//更新列表
 											}
 										}
@@ -1030,7 +1031,7 @@
 												school: "自定义",
 												value: "临时角色"
 											}),"临时角色"]
-										})]
+										}),`（${(sessionStorage['mt-head'].length/1024).toFixed(0)}KB）`]
 									})]
 								}),
 								mt_school.map(function(v, k)
@@ -1083,7 +1084,7 @@
 										{
 											mt_settings['社团列表'][$$(this).attr('value')] = 'YES'
 										})
-										localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+										saveStorage('设置选项',mt_settings,'local')
 										//*储存分类和排序方式
 										t(), a(
 										{
@@ -1808,7 +1809,7 @@
 													$$(`.消息`).remove()
 													$$('.RightScreen__Box-sc-1fwinj2-1').show()//显示开头引导
 													$$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').hide()//隐藏聊天记录
-													if(!mt_settings['后台保存'])localStorage.setItem('chats',JSON.stringify(chats))
+													if(!mt_settings['后台保存'])saveStorage('chats',chats,'local')
 												}
 											},
 											children: L.Z.confirm[o]
@@ -2136,7 +2137,7 @@
 											{
 												alert('更改完成，如果图片生成错误请尝试改为其它参数');
 												mt_settings['图片格式'] = 'image/'+image;
-												localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+												saveStorage('设置选项',mt_settings,'local')
 												$$('#mt-image').text(image)
 												if(image === "webp")maxHeight = 16384
 											}
@@ -2376,7 +2377,7 @@
 							{
 								$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k))
 							})
-							if(!mt_settings['后台保存'])localStorage.setItem('chats',JSON.stringify(chats))
+							if(!mt_settings['后台保存'])saveStorage('chats',chats,'local')
 							N()
 						};
 					return (0, m.jsx)(ea.Xf,
@@ -4613,7 +4614,7 @@
 									if (langarr.indexOf(language) > -1)
 									{
 										mt_settings['语言选项'] = language
-										localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+										saveStorage('设置选项',mt_settings,'local')
 										location.reload(true)
 									}
 								}

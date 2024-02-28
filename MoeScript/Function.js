@@ -88,7 +88,7 @@ delete localStorage['顶部标题']
 !mt_settings['文字样式'] ? mt_settings['文字样式'] = {} : ''
 !mt_settings['宽度限制'] ? mt_settings['宽度限制'] = 500 : ''
 !mt_settings['顶部标题'] ? mt_settings['顶部标题'] = 'MoeTalk' : ''
-localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+saveStorage('设置选项',mt_settings,'local')
 
 var mtlang = mt_settings['语言选项'];
 var langarr = ['zh_cn','zh_tw','jp','en','kr'];
@@ -112,7 +112,7 @@ var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-
 function savehead(headindex,img64)
 {
 	mt_head[headindex] = img64;
-	localStorage['mt-head'] = JSON.stringify(mt_head);
+	saveStorage('mt-head',mt_head,'local')
 	let nameloss
 	$.each(mt_head,function(k,v)
 	{
@@ -122,7 +122,7 @@ function savehead(headindex,img64)
 			nameloss = true
 		}
 	})
-	if(nameloss === true)localStorage['mt-char'] = JSON.stringify(mt_char)
+	if(nameloss === true)saveStorage('mt-char',mt_char,'local')
 }
 //读取头像
 function loadhead(id,img)
@@ -165,20 +165,13 @@ function loadname(id)
 	{
 		name = mt_schar[id]
 	}
-	if(localStorage['mt-char'] && mt_char[id])
+	if(mt_char[id])
 	{
 		name = mt_char[id]
 	}
 
 	if(id == 0)name = you[mtlang]
 	return name
-}
-//删除头像
-function delhead(imgindex)
-{
-	let headarr = JSON.parse(localStorage['heads']);
-	delete headarr[0][imgindex];
-	localStorage['heads'] = JSON.stringify(headarr);
 }
 
 //元素出现后执行代码
@@ -271,7 +264,7 @@ function compress(base64Img,type = 'head',mode = 'add')
 		}
 		else
 		{
-			localStorage['mt-char'] = JSON.stringify(mt_char);
+			saveStorage('mt-char',mt_char,'local')
 			savehead(imgindex,newBase64)
 			list()//更新列表
 		}
@@ -576,14 +569,18 @@ function loaddata(json)//识别存档
 	
 	if($('#customchar').prop('checked') === true)//读取自定义角色
 	{
-		localStorage['mt-char'] = JSON.stringify({...mt_char,...custom_char});
-		localStorage['mt-head'] = JSON.stringify({...mt_head,...custom_head});
+		mt_char = {...mt_char,...custom_char}
+		mt_head = {...mt_head,...custom_head}
+		saveStorage('mt-char',mt_char,'local')
+		saveStorage('mt-head',mt_head,'local')
 		list()//更新列表
 	}
 	else
 	{
-		sessionStorage['mt-char'] = JSON.stringify({...mt_schar,...custom_char});
-		sessionStorage['mt-head'] = JSON.stringify({...mt_shead,...custom_head});
+		mt_schar = {...mt_schar,...custom_char}
+		mt_shead = {...mt_shead,...custom_head}
+		saveStorage('mt-char',mt_schar,'session')
+		saveStorage('mt-head',mt_shead,'session')
 		list()//更新列表
 	}
 	if(json[0]['选择角色'])
@@ -630,7 +627,7 @@ function MoeToClosure()//Moe转Closure
 	let moeurl = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io'
 	let ct = [];
 	let custom_chars = {};
-	$.each(JSON.parse(localStorage['chats']),function(k,v)
+	$.each(chats,function(k,v)
 	{
 		ct[k] = {};
 		let id = v['sCharacter']['no'];
@@ -790,7 +787,7 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 			json[0]['选择角色'] = mt_settings['选择角色']//@
 			json[0]['mt_char'] = mt_char;//@自创角色
 			json[0]['mt_head'] = mt_head;//@自创头像
-			json[1] = JSON.parse(localStorage['chats']);
+			json[1] = chats;
 			j(v.index), null === (n = I.current) || void 0 === n , e.toBlob(function(e)
 			{
 				mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)
@@ -837,7 +834,7 @@ function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
 				json[0]['选择角色'] = mt_settings['选择角色']//@
 				json[0]['mt_char'] = mt_char;//@自创角色
 				json[0]['mt_head'] = mt_head;//@自创头像
-				json[1] = JSON.parse(localStorage['chats']);
+				json[1] = chats;
 				j(v.index), null === (n = I.current) || void 0 === n , e.toBlob(function(e)
 				{
 					t = t.replace(`data:${mt_settings['图片格式']};base64,`,'')
@@ -896,4 +893,31 @@ function isTrue(val)
 {
 	if(!val)return false
 	else return true
+}
+function saveStorage(key,val,mode)
+{
+	let num = 0
+	$.each(mode === 'local' ? localStorage : sessionStorage,function(k,v)
+	{
+		if(!isNaN(parseInt(v.length)))num += v.length
+	})
+	val = JSON.stringify(val)
+	let maxsize = ((num+val.length)/1024).toFixed(0)
+
+	if(maxsize < 5120)
+	{
+		if(mode === 'local')localStorage[key] = val
+		if(mode === 'session')sessionStorage[key] = val
+	}
+	else
+	{
+		if(mode === 'local' && confirm(`存储空间容量不足，请尝试删除一部分数据\n强制写入会导致MoeTalk出错，确定吗？`))
+		{
+			localStorage[key] = val
+		}
+		if(mode === 'session' && confirm(`临时空间容量不足，重启浏览器可以清空\n强制写入会导致MoeTalk出错，确定吗？`))
+		{
+			sessionStorage[key] = val
+		}
+	}
 }

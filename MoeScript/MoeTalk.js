@@ -17,15 +17,15 @@ if(mt_settings['后台保存'])
 {
 	window.onblur = function()
 	{
-		localStorage.setItem('chats',JSON.stringify(chats))
+		saveStorage('chats',chats,'local')
 	}
 	window.onfocus = function()
 	{
-		localStorage.setItem('chats',JSON.stringify(chats))
+		saveStorage('chats',chats,'local')
 	}
 	window.onbeforeunload = function()
 	{
-		localStorage.setItem('chats',JSON.stringify(chats))
+		saveStorage('chats',chats,'local')
 	}
 }
 // var chats = '';
@@ -172,7 +172,7 @@ function mt_ChangeChar(id)
 			mt_char[id] = cname;
 			imgindex = id;
 			$("#cusname").text(cname);
-			localStorage['mt-char'] = JSON.stringify(mt_char);//保存名字
+			saveStorage('mt-char',mt_char,'local')//保存名字
 			$("#custom").click();
 			list()//更新列表
 		}
@@ -182,7 +182,7 @@ function mt_ChangeChar(id)
 		let name = prompt(`角色ID：${id}\n原名：${mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id}\n你想改为什么名字？\n(为空则使用原名)`,mt_settings['人物改名'][id] ? mt_settings['人物改名'][id] : "");
 		if(name != null && name.trim() != '')mt_settings['人物改名'][id] = name
 		else mt_settings['人物改名'][id] ? delete mt_settings['人物改名'][id] : ''
-		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+		saveStorage('设置选项',mt_settings,'local')
 		list()//更新列表
 	}
 }
@@ -246,7 +246,7 @@ $('body').on('click',".fzOyMd",function()
 			CharFaceIndex = null;
 			alert('已恢复默认映射');
 		}
-		localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+		saveStorage('设置选项',mt_settings,'local')
 	}
 })
 //全选
@@ -353,7 +353,7 @@ $('body').on('click',"#mt-style",function()
 		mt_settings['风格样式'] = 'rgb(255,255,255)';//momotalk
 		$('.旁白').css('background','rgb(220,229,232)');
 	}
-	localStorage.setItem('设置选项',JSON.stringify(mt_settings))
+	saveStorage('设置选项',mt_settings,'local')
 })
 
 $('body').on('click',"#close",function()
@@ -447,7 +447,6 @@ $("body").on('click',".operate",function()
 
 //rgb(136, 204, 204)
 //rgb(139, 187, 233)
-var chats = JSON.parse(localStorage['chats'])
 function isfirst(chatIndex,chats)
 {
 	if(chats[chatIndex])
@@ -698,7 +697,7 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 		}
 	})
 	//moetalkStorage.setItem('chats',JSON.stringify(chats))
-	if(!mt_settings['后台保存'])localStorage.setItem('chats',JSON.stringify(chats))
+	if(!mt_settings['后台保存'])saveStorage('chats',chats,'local')
 }
 $("body").on('click',".编辑",function()
 {
