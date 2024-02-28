@@ -3,7 +3,6 @@
 <html lang="zh" style="--vh:9.47px; font-size: 16px;">
 	<head>
 <script src="./MoeScript/Script/Jquery.min.js"></script>
-<!-- <script src="./MoeScript/Script/localforage.min.js"></script> -->
 <!-- <script src="./MoeScript/Script/html2canvas.min.js"></script> -->
 <script>
 $.ajax({
@@ -100,6 +99,10 @@ if(mt_settings['顶部标题'] === 'MikuTalk' || (month === Month && day === Day
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/gsap.min.js'></scr`+"ipt>");
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/mikutap.js'></scr`+"ipt>");
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/common-2.min.js'></scr`+"ipt>");
+}
+if(mt_settings['存储模式'] === 'indexedDB')
+{
+	document.write("<scr"+`ipt src='./MoeScript/Script/localforage.min.js'></scr`+"ipt>");
 }
 </script>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">

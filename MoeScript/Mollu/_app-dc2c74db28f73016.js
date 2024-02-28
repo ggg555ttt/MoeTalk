@@ -11514,11 +11514,22 @@
 						{
 							display: e ? "block" : "none"
 						},
-						children: (0, O.jsx)(tT,
+						children: [(0, O.jsx)('button',
 						{
-							children: (0, O.jsx)(tN,
-							{})
-						})
+							style: {whiteSpace: 'pre-wrap'},
+							className: 'bold',
+							children: '长时间卡在加载界面\n可以点击此按钮隐藏',
+							onClick: function()
+							{
+								if(confirm('非必要情况下建议您耐心等待\n确定要隐藏吗？'))
+								{
+									$$(".dDBXxQ").hide()
+								}
+							}
+						}),(0, O.jsx)(tT,
+						{
+							children: (0, O.jsx)(tN,{})
+						})]
 					})
 				},
 				tI = h.ZP.div.withConfig(

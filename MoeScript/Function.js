@@ -26,7 +26,7 @@ var mt_char = JSON.parse(localStorage['mt-char'])//自制角色名称
 var mt_head = JSON.parse(localStorage['mt-head'])//自制角色头像
 var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色名称
 var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时义角色头像
-if(!localStorage['chats'] || !isJSON(localStorage['chats']))localStorage['chats'] = '[]';//聊天记录
+if(!localStorage['chats'] || localStorage['chats'][0] !== '[')localStorage['chats'] = '[]';//聊天记录
 if(!mt_settings['语言选项'])
 {
 	delete localStorage['lang']
@@ -740,7 +740,7 @@ function MoeToClosure()//Moe转Closure
 function mt_title(moetalk,title,writer)
 {
 	$(".Talk__CContainer-sc-1uzn66i-1").outerWidth(mt_settings['宽度限制'])
-	$('#mt_watermark').show()
+	$('#mt_watermark').css('display','flex')
 	if(moetalk && localStorage['watermark'] !== 'false')
 	{
 		if(!title)title = ''
@@ -896,6 +896,11 @@ function isTrue(val)
 }
 function saveStorage(key,val,mode)
 {
+	if(mt_settings['存储模式'] === 'indexedDB' && key === 'chats')
+	{
+		localforage.createInstance({name:'moetalkStorage'}).setItem('chats',JSON.stringify(chats))
+		return;
+	}
 	let num = 0
 	$.each(mode === 'local' ? localStorage : sessionStorage,function(k,v)
 	{
@@ -911,11 +916,11 @@ function saveStorage(key,val,mode)
 	}
 	else
 	{
-		if(mode === 'local' && confirm(`存储空间容量不足，请尝试删除一部分数据\n强制写入会导致MoeTalk出错，确定吗？`))
+		if(mode === 'local' && confirm(`存储空间容量不足，请尝试删除一部分数据\n强制写入可能会导致MoeTalk出错，确定吗？`))
 		{
 			localStorage[key] = val
 		}
-		if(mode === 'session' && confirm(`临时空间容量不足，重启浏览器可以清空\n强制写入会导致MoeTalk出错，确定吗？`))
+		if(mode === 'session' && confirm(`临时空间容量不足，重启浏览器可以清空\n强制写入可能会导致MoeTalk出错，确定吗？`))
 		{
 			sessionStorage[key] = val
 		}

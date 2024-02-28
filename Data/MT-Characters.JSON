@@ -1453,7 +1453,7 @@ var mt_characters = {
             "kr": "카가미 치히로",
             "pinyin": "gewuqianxun"
         },
-        "charface": "各务千寻/CH0160/CH0160.6.webp,各务千寻/CH0234/CH0234.11.webp,各务千寻/各务千寻.8.webp"
+        "charface": "各务千寻/CH0160/CH0160.6.webp,各务千寻/CH0234/CH0234.11.webp,各务千寻/各务千寻.8.webp,各务千寻/千寻_Velstadt-/千寻_Velstadt-.44.webp,各务千寻/千寻（野营）_Velstadt-/千寻（野营）_Velstadt-.52.webp"
     },
     "小涂真纪": {
         "school": "千年",
@@ -1467,7 +1467,7 @@ var mt_characters = {
             "kr": "코누리 마키",
             "pinyin": "xiaotuzhenji"
         },
-        "charface": "小涂真纪/CH0235/CH0235.12.webp,小涂真纪/maki/maki.7.webp,小涂真纪/NP0050/NP0050.7.webp,小涂真纪/小涂真纪.12.webp"
+        "charface": "小涂真纪/CH0235/CH0235.12.webp,小涂真纪/maki/maki.7.webp,小涂真纪/NP0050/NP0050.7.webp,小涂真纪/小涂真纪.12.webp,小涂真纪/真纪_Velstadt-/真纪_Velstadt-.25.webp,小涂真纪/真纪（野营）_Velstadt-/真纪（野营）_Velstadt-.36.webp"
     },
     "小钩晴": {
         "school": "千年",
@@ -1481,7 +1481,7 @@ var mt_characters = {
             "kr": "오마가리 하레",
             "pinyin": "xiaogouqing"
         },
-        "charface": "小钩晴/CH0233/CH0233.14.webp,小钩晴/hare/hare.6.webp,小钩晴/小钩晴.8.webp"
+        "charface": "小钩晴/CH0233/CH0233.14.webp,小钩晴/hare/hare.6.webp,小钩晴/小钩晴.8.webp,小钩晴/晴_Velstadt-/晴_Velstadt-.22.webp"
     },
     "音濑小玉": {
         "school": "千年",
@@ -1495,7 +1495,7 @@ var mt_characters = {
             "kr": "오토세 코타마",
             "pinyin": "yinlaixiaoyu"
         },
-        "charface": "音濑小玉/CH0232/CH0232.12.webp,音濑小玉/kotama/kotama.6.webp,音濑小玉/音濑小玉.8.webp"
+        "charface": "音濑小玉/CH0232/CH0232.12.webp,音濑小玉/kotama/kotama.6.webp,音濑小玉/音濑小玉.8.webp,音濑小玉/小玉_Velstadt-/小玉_Velstadt-.64.webp,音濑小玉/小玉（野营）_Velstadt-/小玉（野营）_Velstadt-.47.webp"
     },
     "早濑优香": {
         "school": "千年",
@@ -3259,7 +3259,7 @@ var mt_characters = {
             "kr": "츠치나가 히요리",
             "pinyin": "chuiyongrihe"
         },
-        "charface": "槌永日和/hiyori/hiyori.11.webp,槌永日和/槌永日和.4.webp"
+        "charface": "槌永日和/hiyori/hiyori.11.webp,槌永日和/槌永日和.4.webp,槌永日和/日和_Velstadt-/日和_Velstadt-.31.webp"
     },
     "秤亚津子": {
         "school": "阿里乌斯",

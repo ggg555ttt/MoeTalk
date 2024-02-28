@@ -1,4 +1,5 @@
 //读取人物
+const moetalkStorage = localforage.createInstance({name:'moetalkStorage'})
 $("body").append("<input id='loadcusfile' hidden type='file' accept='application/json'>");
 $('body').on('click',"#loadcus",function()
 {
@@ -309,20 +310,26 @@ $('body').on('click',"#backsave",function()
 	str += '在低配设备上可能会有明显的流畅度提升\n'
 	str += '因为是测试中的功能，作者无法保证稳定性\n'
 	str += '有可能会出现保存失败或其他错误\n'
-	str += '在您发现错误麻烦请向我详细反馈您之前的操作活动\n'
+	str += '在您发现错误后麻烦请向我详细反馈您之前的操作活动\n'
 	str += '我会尝试排查错误并让这个功能变得更加完善\n'
-	str += '感谢您的使用\n'
+	str += '感谢您的使用※为了应对保存失败我特地留了一个手动“保存”按钮\n'
 	str += `后台保存模式：【${mt_settings['后台保存'] ? '开启' : '关闭'}】\n`
-	str += `${mt_settings['后台保存'] ? '点击“取消”关闭' : '点击“确认”开启'}`
+	str += `${mt_settings['后台保存'] ? '是否关闭？' : '是否开启？'}`
 	if(confirm(str))
 	{
-		mt_settings['后台保存'] = '开启'
+		if(!mt_settings['后台保存'])
+		{
+			mt_settings['后台保存'] = '开启'
+			saveStorage('设置选项',mt_settings,'local')
+			return
+		}
+		if(mt_settings['后台保存'])
+		{
+			delete mt_settings['后台保存']
+			saveStorage('设置选项',mt_settings,'local')
+			return
+		}
 	}
-	else
-	{
-		delete mt_settings['后台保存']
-	}
-	saveStorage('设置选项',mt_settings,'local')
 })
 $('body').on('click',"#mt-zipdownimg",function()
 {
@@ -337,6 +344,40 @@ $('body').on('click',"#mt-zipdownimg",function()
 		delete mt_settings['打包下载']
 	}
 	saveStorage('设置选项',mt_settings,'local')
+})
+$('body').on('click',"#savemode",function()
+{
+	let str = '此选项可以更改MomoTalk的存储方式\n'
+	str += '可以选择容量更大的“indexedDB”或5MB容量限制的“localStorage”\n'
+	str += '但不包括您创建的自定义角色，它目前仍使用localStorage保存\n'
+	str += '因为是测试中的功能，作者无法保证稳定性\n'
+	str += '在您发现错误后麻烦请向我详细反馈您之前的操作活动\n'
+	str += '我会尝试排查错误并让这个功能变得更加完善\n'
+	str += '感谢您的使用※注意：切换前请先备份存档\n'
+	str += `存储模式：${mt_settings['存储模式'] ? 'indexedDB' : 'localStorage'}\n`
+	str += `${mt_settings['存储模式'] ? '是否切换为localStorage？' : '是否切换为indexedDB？'}\n`
+	if(confirm(str))
+	{
+		if(mt_settings['存储模式'])
+		{
+			delete mt_settings['存储模式']
+			moetalkStorage.getItem('chats', function(err, value)
+			{
+				if(value)localStorage['chats'] = value
+			})
+			saveStorage('设置选项',mt_settings,'local')
+			return
+		}
+		if(!mt_settings['存储模式'])
+		{
+			mt_settings['存储模式'] = 'indexedDB'
+			moetalkStorage.setItem('chats',localStorage['chats'])
+			delete localStorage['chats']
+			saveStorage('设置选项',mt_settings,'local')
+			return
+		}
+	}
+	
 })
 $('.mt_settings').text(JSON.stringify(mt_settings,null,4))
 $("body").on('click',function()

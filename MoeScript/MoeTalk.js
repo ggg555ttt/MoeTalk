@@ -28,18 +28,25 @@ if(mt_settings['后台保存'])
 		saveStorage('chats',chats,'local')
 	}
 }
-// var chats = '';
-// const moetalkStorage = localforage.createInstance({name:'moetalkStorage'})
-// moetalkStorage.getItem('chats', function(err, value)
-// {
-// 	$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
-// 	$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
-// 	chats = JSON.parse(value)
-// 	chats.map(function(v,k)
-// 	{
-// 		$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
-// 	})
-// })
+if(mt_settings['存储模式'] === 'indexedDB')
+{
+	chats = [];
+	$('.dDBXxQ').wait(function(){$('.dDBXxQ').show()},".dDBXxQ")//
+	localforage.createInstance({name:'moetalkStorage'}).getItem('chats', function(err, value)
+	{
+		$('.dDBXxQ').hide()
+		if(value && value !== '[]')
+		{
+			$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
+			$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
+			chats = JSON.parse(value)
+			chats.map(function(v,k)
+			{
+				$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
+			})
+		}
+	})
+}
 function mt_height(num)
 {
 	if(!num)num = 1.1
@@ -442,7 +449,8 @@ $("body").on('click',".operate",function()
 	// {
 	// 	$('.operateTools').hide()
 	// }
-	alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新\n若想使用存档功能请点击心形图标“❤”右边的→磁盘“🖬”图标')
+	saveStorage('chats',chats,'local')
+	alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新\n若想使用存档功能请点击心形图标“❤”右边的→磁盘“🖬”图标\n※此按钮在“后台保存模式”中相当于一次手动保存')
 });
 
 //rgb(136, 204, 204)
@@ -696,7 +704,6 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 			if(chats.length)nextindex.scrollIntoView(!1)
 		}
 	})
-	//moetalkStorage.setItem('chats',JSON.stringify(chats))
 	if(!mt_settings['后台保存'])saveStorage('chats',chats,'local')
 }
 $("body").on('click',".编辑",function()

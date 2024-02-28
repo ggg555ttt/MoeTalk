@@ -1809,7 +1809,7 @@
 													$$(`.消息`).remove()
 													$$('.RightScreen__Box-sc-1fwinj2-1').show()//显示开头引导
 													$$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').hide()//隐藏聊天记录
-													if(!mt_settings['后台保存'])saveStorage('chats',chats,'local')
+													saveStorage('chats',chats,'local')
 												}
 											},
 											children: L.Z.confirm[o]
@@ -2377,7 +2377,7 @@
 							{
 								$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k))
 							})
-							if(!mt_settings['后台保存'])saveStorage('chats',chats,'local')
+							saveStorage('chats',chats,'local')
 							N()
 						};
 					return (0, m.jsx)(ea.Xf,
@@ -2886,7 +2886,7 @@
 					{
 						cf = cfemoji;
 						cfemoji = 'NO';//@加入判断
-						let customcf = false;//自设差分
+						let customcf = false;//自制差分
 						let cftype = '';//差分类型
 						let emojinum;
 						let no = mt_settings['选择角色'].no;
@@ -2931,7 +2931,7 @@
 								{
 									if(mt_CharFaceIndex[mt_CharFaceInfo[arr.split('/')[1]]] !== '')
 									customcf = mt_CharFaceIndex[mt_CharFaceInfo[arr.split('/')[1]]];
-									cftype = '自设'
+									cftype = '自制'
 								}
 							}
 						}
@@ -4294,7 +4294,7 @@
 									children: (0, m.jsx)(X,
 									{
 										style:{fontSize: "1.1rem",color: "rgb(139, 187, 233)"},
-										children: '操作'
+										children: mt_settings['后台保存'] ? '保存' : '操作'
 									})
 								})
 							}), (0, m.jsx)(c.jl,
@@ -4433,7 +4433,7 @@
 									style:
 									{
 										backgroundColor:'transparent',
-										display:"flex",
+										display:"none",
 										width:"100%",
 										fontSize:"1rem",
 										lineHeight:"1.5rem",
@@ -4732,7 +4732,7 @@
 										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
-									icon: ico.QY_
+									icon: ico.EdJ
 								}),'传输存档',(0, m.jsx)(c.xL,
 								{
 									style:
