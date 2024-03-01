@@ -358,17 +358,13 @@ $('body').on('click',"#savemode",function()
 	str += `${mt_settings['存储模式'] ? '是否切换为localStorage？' : '是否切换为indexedDB？'}\n`
 	if(confirm(str))
 	{
-		if(mt_settings['存储模式'])
+		if(mt_settings['存储模式'])//localStorage
 		{
 			delete mt_settings['存储模式']
-			moetalkStorage.getItem('chats', function(err, value)
-			{
-				if(value)localStorage['chats'] = value
-			})
 			saveStorage('设置选项',mt_settings,'local')
 			return
 		}
-		if(!mt_settings['存储模式'])
+		if(!mt_settings['存储模式'])//indexedDB
 		{
 			mt_settings['存储模式'] = 'indexedDB'
 			moetalkStorage.setItem('chats',localStorage['chats'])

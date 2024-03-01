@@ -26,7 +26,7 @@ var mt_char = JSON.parse(localStorage['mt-char'])//自制角色名称
 var mt_head = JSON.parse(localStorage['mt-head'])//自制角色头像
 var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色名称
 var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时义角色头像
-if(!localStorage['chats'] || localStorage['chats'][0] !== '[')localStorage['chats'] = '[]';//聊天记录
+if(!localStorage['chats'] || localStorage['chats'][0] !== '[' || mt_settings['存储模式'] === 'indexedDB')localStorage['chats'] = '[]';//聊天记录
 if(!mt_settings['语言选项'])
 {
 	delete localStorage['lang']
@@ -101,7 +101,10 @@ var imgindex;//人物自定义
 
 var $$ = $;//jquery转义
 var height;//聊天记录长度
-var size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0));//数据大小
+var localSize = 0;//数据大小
+$.each(localStorage,function(k,v){if(!isNaN(parseInt(v.length))){localSize += v.length/1024}})
+localSize = localSize.toFixed(0)
+
 var CFPI = 0;//差分页码
 
 
@@ -264,6 +267,8 @@ function compress(base64Img,type = 'head',mode = 'add')
 		}
 		else
 		{
+			$('#uphead').hide().next().hide()
+			mt_char[imgindex] = $("#cusname").text()
 			saveStorage('mt-char',mt_char,'local')
 			savehead(imgindex,newBase64)
 			list()//更新列表
@@ -285,7 +290,7 @@ function download_txt(filename,content,contentType)
 //警告
 function warning()
 {
-	if(height > (maxHeight) || size > (5120*0.75))//检测聊天框宽度
+	if(height > (maxHeight) || localSize > (5120*0.75))//检测聊天框宽度
 	{
 		$("#size").css('color','red');//显示警告
 	}
@@ -357,21 +362,6 @@ function combineFiles(mainFile, hideFile, fileName, Index) {
 	});
 }
 
-//判断是否为JSON
-function isJSON(str) {
-	if (typeof str == 'string') {
-	    try {
-	        var obj=JSON.parse(str);
-	        //console.log('转换成功：'+obj);
-	        return true;
-	    } catch(e) {
-	        //console.log('error：'+str+'!!!'+e);
-	        return false;
-	    }
-	}
-	//console.log('It is not a string!')
- }　
-
 //点击函数
 function click(name)
 {
@@ -427,11 +417,12 @@ function list()
 	setTimeout(function(){selectClick(37)})
 	setTimeout(function(){selectClick(39)})
 }
-function loaddata(json)//识别存档
+function loaddata(json,mode)//识别存档
 {
-	let josnsize = parseInt((JSON.stringify(json).length/1024).toFixed(0))
+	let josnsize = (json.length/1024).toFixed(0)
 	let custom_char = {};
 	let custom_head = {};
+	json = JSON.parse(json)
 	if(!json[0] || (json[0] && !json[0].title))//错误数据
 	{
 		json[0] = {};
@@ -566,7 +557,38 @@ function loaddata(json)//识别存档
 			if(v.is_breaking === true)json[1][k]['is_breaking'] = true;
 		})
 	}
-	
+//
+	let otherChats = []
+	let chats = []
+	json[1].map(function(v,k)
+	{
+		if(v.replyDepth != 0)otherChats.push(v)
+		else chats.push(v)
+	})
+
+	let arr = {}
+	json[1].map(function(v,k)
+	{
+		!arr[v.replyDepth] ? arr[v.replyDepth] = [] : ''
+		arr[v.replyDepth].push(v)
+	});
+	$.each(arr,function(k,v)
+	{
+		if(k != 0)
+		{
+			let json = arr[0].filter(function(e)
+			{
+				return e.content.split('\n').filter(function(e)
+				{
+					return e == k
+				}) == k
+			})[0]
+			let index = arr[0].indexOf(json)+1
+			arr[0].splice(index,0,...arr[k]);
+		}
+	})
+	json[1] = arr[0]
+//
 	if($('#customchar').prop('checked') === true)//读取自定义角色
 	{
 		mt_char = {...mt_char,...custom_char}
@@ -583,7 +605,7 @@ function loaddata(json)//识别存档
 		saveStorage('mt-head',mt_shead,'session')
 		list()//更新列表
 	}
-	if(json[0]['选择角色'])
+	if(json[0]['选择角色'] && mode !== 'play')
 	{
 		选择角色 = true
 		mt_settings['选择角色'] = json[0]['选择角色']
@@ -759,130 +781,82 @@ function mt_title(moetalk,title,writer)
 		$('#mt_watermark').css('background-color',mt_settings['风格样式'].split(' ')[1])
 	}
 }
-function mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//截屏功能
+
+function mt_capture(清晰度,截屏,生成图片,时间,标题)//截屏功能
 {
-	if(imageArr.length > 1)
-	{
-		let v = imageArr[0]
-		$('.消息').show()
-		if(v.start !== 0)$('#mt_watermark').hide()
-		$('.消息').slice(0,v.start).hide()
-		$('.消息').slice(v.end,$('.消息').length).hide()
-		eg()($(".Talk__CContainer-sc-1uzn66i-1")[0],
-		{
-			logging: !1,
-			allowTaint: !0,
-			useCORS: !0,
-			scale: S
-		}).then(function(e)
-		{
-			imageArr.shift()
-			var n, t = e.toDataURL(mt_settings['图片格式']);
-			let height = e.height
-			let json = [];
-			json[0] = {};
-			json[0]['title'] = '备份存档';
-			json[0]['nickname'] = 'MoeTalk';
-			json[0]['date'] = (0, u._3)(!0, !0);
-			json[0]['选择角色'] = mt_settings['选择角色']//@
-			json[0]['mt_char'] = mt_char;//@自创角色
-			json[0]['mt_head'] = mt_head;//@自创头像
-			json[1] = chats;
-			j(v.index), null === (n = I.current) || void 0 === n , e.toBlob(function(e)
-			{
-				mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)
-				t = t.replace(`data:${mt_settings['图片格式']};base64,`,'')
-				json = localStorage['archive'] === 'false' ? '' : JSON.stringify(json)
-				let title = "" !== _ ? _ : L.Z.noTitle[g]
-				if(imageZip)
-				{
-					$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${v.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${t}'></div>`)
-					imageZip.file(`MoeTalk_${title}_${v.index}_${height}.${mt_settings['图片格式'].split('/')[1]}`,e);
-				}
-				else
-				{
-					combineFiles(t,json,`MoeTalk_${title}_${v.index}_${height}`,v.index);
-				}
-			})
-		})
-	}
+	let json = []
+	let filename = ''
+	let title = 标题 ? 标题 : mt_text.noTitle[mtlang]
+	let imgArea = imageArr[0]
+	if(imgArea.start !== 0)$('#mt_watermark').hide()
+
+	if(localStorage['archive'] === 'false')json = ''
 	else
 	{
-		if(imageArr.length !== 0)
-		{
-			let v = imageArr[0]
-			$('.消息').show()
-			if(v.start !== 0)$('#mt_watermark').hide()
-			$('.消息').slice(0,v.start).hide()
-			$('.消息').slice(v.end,$('.消息').length).hide()
-			eg()($(".Talk__CContainer-sc-1uzn66i-1")[0],
-			{
-				logging: !1,
-				allowTaint: !0,
-				useCORS: !0,
-				scale: S
-			}).then(function(e)
-			{
-				imageArr.shift()
-				var n, t = e.toDataURL(mt_settings['图片格式']);
-				let height = e.height
-				let json = [];
-				json[0] = {};
-				json[0]['title'] = '备份存档';
-				json[0]['nickname'] = 'MoeTalk';
-				json[0]['date'] = (0, u._3)(!0, !0);
-				json[0]['选择角色'] = mt_settings['选择角色']//@
-				json[0]['mt_char'] = mt_char;//@自创角色
-				json[0]['mt_head'] = mt_head;//@自创头像
-				json[1] = chats;
-				j(v.index), null === (n = I.current) || void 0 === n , e.toBlob(function(e)
-				{
-					t = t.replace(`data:${mt_settings['图片格式']};base64,`,'')
-					json = localStorage['archive'] === 'false' ? '' : JSON.stringify(json)
-					let title = "" !== _ ? _ : L.Z.noTitle[g]
-					let str = v.start !== 0 ? `_${height}_${v.index}` : ''
-					if(imageZip)
-					{
-						$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${v.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${t}'></div>`)
-						imageZip.file(`MoeTalk_${title}_${v.index}_${height}.${mt_settings['图片格式'].split('/')[1]}`,e);
-						json === "" ? "" : imageZip.file(`MoeTalk_${title}.json`,json);
-						imageZip.generateAsync({type:'blob'}).then(function(content)
-						{
-							// 下载的文件名
-							var filename = `MoeTalk_${title}_${(0, u._3)(!0, !0)}.zip`;
-							// 创建隐藏的可下载链接
-							var eleLink = document.createElement('a');
-							eleLink.download = filename;
-							eleLink.style.display = 'none';
-							// 下载内容转变成 blob 地址
-							eleLink.href = URL.createObjectURL(content);
-							// 触发点击
-							document.body.appendChild(eleLink);
-							eleLink.click();
-							// 然后移除
-							document.body.removeChild(eleLink);
-							imageZip = null
-						});
-					}
-					else
-					{
-						combineFiles(t,json,`MoeTalk_${title}${v.index === 1 ? '' : '_'+v.index}_${height}`,v.index);
-					}
-				})
-			}).catch(function()
-			{
-				p((0, er.Y2)(
-				{
-					isAlert: !0,
-					title: L.Z.error[g],
-					ment: L.Z.error_ment[g]
-				}))
-			}).finally(function()
-			{
-				p((0, s.jh)(!1))
-			});
-		}
+		json[0] = {};
+		json[0]['title'] = '备份存档';
+		json[0]['nickname'] = 'MoeTalk';
+		json[0]['date'] = 时间;
+		json[0]['选择角色'] = mt_settings['选择角色']//@
+		json[0]['mt_char'] = mt_char;//@自创角色
+		json[0]['mt_head'] = mt_head;//@自创头像
+		json[1] = [...chats,...otherChats];
+		json = JSON.stringify(json)
 	}
+
+	$('.消息').show()
+	$('.消息').slice(0,imgArea.start).hide()
+	$('.消息').slice(imgArea.end,$('.消息').length).hide()
+
+	截屏()($(".Talk__CContainer-sc-1uzn66i-1")[0],
+	{
+		logging: !1,
+		allowTaint: !0,
+		useCORS: !0,
+		scale: 清晰度
+	}).then(function(img)
+	{
+		
+		let imgBaes64 = img.toDataURL(mt_settings['图片格式']);
+		let height = img.height
+		imageArr.shift()
+
+		生成图片(imgArea.index), img.toBlob(function(img)
+		{
+			
+			if(imageArr.length > 0)
+			{
+				filename = `MoeTalk_${title}_${imgArea.index}_${height}`
+				mt_capture(清晰度,截屏,生成图片,时间,标题)
+			}
+			else
+			{
+				filename = `MoeTalk_${title}${imgArea.index === 1 ? '' : '_'+imgArea.index}_${height}`
+				$('.dDBXxQ').hide()
+			}
+
+			imgBaes64 = imgBaes64.replace(`data:${mt_settings['图片格式']};base64,`,'')
+
+			if(imageZip)
+			{
+				$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${imgBaes64}'></div>`)
+				imageZip.file(`MoeTalk_${title}_${imgArea.index}_${height}.${mt_settings['图片格式'].split('/')[1]}`,img);
+				if(imageArr.length === 0)
+				{
+					json ? imageZip.file(`MoeTalk_${title}.json`,json) : '';
+					imageZip.generateAsync({type:'blob'}).then(function(content)
+					{
+						let a = document.createElement('a');
+						a.href = URL.createObjectURL(content);
+						a.download = `MoeTalk_${title}_${时间}.zip`;
+						a.click();
+						imageZip = null
+					});
+				}
+			}
+			else combineFiles(imgBaes64,json,filename,imgArea.index);
+		})
+	})
 }
 function toString(val)
 {
@@ -898,13 +872,13 @@ function saveStorage(key,val,mode)
 {
 	if(mt_settings['存储模式'] === 'indexedDB' && key === 'chats')
 	{
-		localforage.createInstance({name:'moetalkStorage'}).setItem('chats',JSON.stringify(chats))
+		localforage.createInstance({name:'moetalkStorage'}).setItem('chats',JSON.stringify(val))
 		return;
 	}
 	let num = 0
 	$.each(mode === 'local' ? localStorage : sessionStorage,function(k,v)
 	{
-		if(!isNaN(parseInt(v.length)))num += v.length
+		if(!isNaN(parseInt(v.length)) && k !== key)num += v.length
 	})
 	val = JSON.stringify(val)
 	let maxsize = ((num+val.length)/1024).toFixed(0)

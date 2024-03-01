@@ -9600,7 +9600,7 @@
 						if(-1 !== t.indexOf(n))
 						{
 							for(var i = t.indexOf(n) + 1; i < t.length; i++)
-								if(t[i].replyDepth === n.replyDepth && t[i].replyGroup !== n.replyGroup)
+								if(t[i].replyDepth === n.replyDepth)//#
 								{
 									r = t[i];
 									break
@@ -9610,7 +9610,7 @@
 						{
 							var a = t.filter(function(e)
 							{
-								return e.replyNo === n.replyDepth && "reply" === e.type
+								return e.content.split('\n').indexOf(n.replyDepth) > -1 && "reply" === e.type//#
 							});
 							1 === a.length && (r = e(t, a[0]))
 						}
@@ -9688,13 +9688,13 @@
 						{
 							o = mt_characters[e].name[n] ? mt_characters[e].name[n] : e;
 						}
-						if(mt_schar && JSON.parse(mt_schar)[e])
+						if(mt_schar[e])
 						{
-							o = JSON.parse(mt_schar)[e]
+							o = mt_schar[e]
 						}
-						if(mt_char && JSON.parse(mt_char)[e])
+						if(mt_char[e])
 						{
-							o = JSON.parse(mt_char)[e]
+							o = mt_char[e]
 						}
 						if(mollu_char[e])o = mollu_char[e][n]
 						if(closure_char[e])o = closure_char[e][n]
@@ -9857,8 +9857,8 @@
 									n && clearTimeout(n), n = setTimeout(function()
 									{
 										var n;
-										t = (null === (n = window.visualViewport) || void 0 === n ? void 0 : n.height) || window.innerHeight, document.documentElement.style.setProperty("--vh", "".concat(.01 * t, "px")), window.innerWidth !== r && (r = window.innerWidth, window.innerWidth <= 768 ? (document.documentElement.style.fontSize = "14px", e((0, w.vA)(!0)), e((0, w.c1)(!1)), e((0, w.bv)(
-										{
+										t = (null === (n = window.visualViewport) || void 0 === n ? void 0 : n.height) || window.innerHeight, document.documentElement.style.setProperty("--vh", "".concat(.01 * t, "px")), window.innerWidth !== r && (r = window.innerWidth, window.innerWidth <= 768 ? (document.documentElement.style.fontSize = "14px", e((0, w.vA)(!0)), e((0, w.c1)(!1)), e((0, w.Cz)(
+										{//左bv右Cz
 											isMenu: !1,
 											isMobile: !0,
 											isRight: !1
@@ -14269,7 +14269,7 @@
 					{
 						displayName: "common__Button",
 						componentId: "sc-1ojome3-8"
-					})(["background-color:white;border:none;padding:0.5rem;height:2.5rem;border-radius:5px;font-size:1.1rem;cursor :pointer;&:active{transform:scale(0.98);}&:hover{background-color:", ";}"], function(e)
+					})(["background-color:white;border:none;height:2.5rem;border-radius:5px;font-size:1.1rem;cursor :pointer;&:active{transform:scale(0.98);}&:hover{background-color:", ";}"], function(e)
 					{
 						return e.theme.color.rgb238_238_238
 					}),

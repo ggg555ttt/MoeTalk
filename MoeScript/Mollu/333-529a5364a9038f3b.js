@@ -360,7 +360,7 @@
 									n = e.currentTarget.files[0];
 								t.onloadend = function()
 								{
-									"string" == typeof t.result && ("[" === t.result[0] || "{" === t.result[0]) ? (G(loaddata(JSON.parse(t.result))), q(!0)) : L((0, m.Y2)(//#编译存档
+									"string" == typeof t.result && ("[" === t.result[0] || "{" === t.result[0]) ? (G(loaddata(t.result,'play')), q(!0)) : L((0, m.Y2)(//#编译存档
 									{
 										isAlert: !0,
 										title: f.Z.error[b],
@@ -985,13 +985,17 @@
 						}),
 						d = function()
 						{
+							console.log(h)
+							console.log(a)
 							var e = a.filter(function(e)
 							{
 								return e.replyDepth === t.content.split('\n')[index]//
 							});
+							console.log(e)
 							if(0 === e.length)
 							{
 								var n = (0, l.G_)(a, t);
+								console.log(n)
 								if(null !== n && "{end}" !== n.content.trim())
 								{
 									r((0, i.e$)(
@@ -1052,10 +1056,6 @@
 						{
 							return e.playChat
 						}),
-						i = (0, o.C)(function(e)
-						{
-							return e.global.lang
-						}),
 						c = (0, o.C)(function(e)
 						{
 							return e.global.gameName
@@ -1065,150 +1065,154 @@
 						h = l2[1],
 						u = (0, a.useState)(""),
 						f = u[0],
-						p = u[1];
-					let isFirst = isfirst(n.chats.indexOf(t),n.chats)
-					return (0, m.jsx)(m.Fragment,
-					{
-						children: d ? (0, m.jsxs)(m.Fragment,//选择肢消息
+						p = u[1],
+						rr = (0, o.T)(),
+						aa = n.chats,
+						dd = function(v)
 						{
-							children: (0, m.jsxs)(e8,
+							let end = {content:"끝",isFirst:true,replyDepth:0,sCharacter:{no:0,index:1},type:"end"}
+							var e = aa.filter(function(e)
 							{
-								children: [!t.isRight ? (0, m.jsx)(s.xu,//左侧头像
+								return e.replyDepth === v
+							});
+							if(0 === e.length)
+							{
+								var n = (0, l.G_)(aa, t);
+								if(null !== n && "{end}" !== n.content.trim())
 								{
-									style: t.sCharacter.no != 0 ? 
+									rr((0, i.e$)(
 									{
-										//cursor: "pointer",
-										height: "100%"
-									} : {marginRight: '1.5rem'},
-									children: (0, m.jsx)(s.NZ,
-									{
-										hidden: !isFirst,
-										height: 252,
-										width: 252,
-										src: loadhead(t.sCharacter.no,t.sCharacter.index),
-										onError: function(e)
-										{
-											e.currentTarget.src = href+'Images/Ui/error.webp';
-										},
-										alt: t.sCharacter.index
-									})
-								}) : '', (0, m.jsxs)(t.sCharacter.no == 0 ? "div" : s.Xp,
+										chat: n,
+										depth: n.replyDepth
+									}));
+									return
+								}
+								rr((0, i.e$)(
 								{
-									style: t.isRight ? 
+									chat: end
+								}))
+							}
+							else "{end}" === e[0].content.trim() ? rr((0, i.e$)(
+							{
+								chat: end
+							})) : rr((0, i.e$)(
+							{
+								chat: e[0],
+								depth: v
+							}))
+						};
+					let isFirst = isfirst(n.chats.indexOf(t),n.chats,'play')
+					let style = mt_settings['文字样式']['chats'] ? mt_settings['文字样式']['chats'] : {}
+					return [(0, m.jsxs)(m.Fragment,
+						{
+							children: d ? (0, m.jsxs)(m.Fragment,
+							{
+								children: (0, m.jsxs)(e8,
+								{
+									children: [!t.isRight ? (0, m.jsx)('div',
 									{
-										display: 'flex',
-										alignItems: 'flex-end'
-									} : {width: '100%'},
-									children: [(0, m.jsx)("span",//人物名称
-									{
-										className: "bold",
-										style: isFirst ?
+										className: '头像框',
+										style: t.sCharacter.no != 0 ? 
 										{
-											
-											lineHeight: "1.8rem",
-											wordBreak: "break-all"
-										} :
+											cursor: "pointer",
+											height: "100%"
+										} : {marginRight: '1.5rem'},
+										children: isFirst ? (0, m.jsx)(s.NZ,
 										{
-											display: 'none'
-										},
-										children: t.name && t.name !== '' ? t.name : (0, l.fY)(t.sCharacter.no, !0, lang)//#
-									}), (0, m.jsxs)("div",
-									{
-										style:
-										{
-											display:"flex",
-											justifyContent: t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start'
-										},
-										children: [(0, m.jsx)(s.i9,//左侧时间戳
-										{
-											hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
-											style:{marginRight:0},
-											children: t.time
-										}), [(0, m.jsx)(t.sCharacter.no == 0 ? s.LP : !t.isRight && isFirst ? s.zC : s.Dt,//文字内容
-										{
-											style: t.isRight ?
+											//左侧头像
+											height: 252,
+											width: 252,
+											src: loadhead(t.sCharacter.no,t.sCharacter.index),
+											onError: function(e)
 											{
-												background: 'rgb(74, 138, 202)',
-												border: '1px solid rgb(74, 138, 202)'
-											} : {},
-											children: f
-										}), (0, m.jsx)(s.CJ,//对话角
+												e.currentTarget.src = href+'Images/Ui/error.webp';
+											},
+											alt: t.sCharacter.index
+										}) : ''
+									}) : '', (0, m.jsxs)(t.sCharacter.no == 0 ? "div" : s.Xp,
+									{
+										className: "对话",
+										style: t.isRight ? {alignItems: 'flex-end'} : {display: 'block',width: '100%'},
+										children: [isFirst ? (0, m.jsx)("span",
 										{
-											hidden: t.isRight && !isFirst,
+											className: "名称 bold",
+											children: t.name || loadname(t.sCharacter.no)
+										}) : '' , (0, m.jsxs)("div",
+										{
 											style:
 											{
-												display: !t.isRight && t.sCharacter.no != 0 ? 'none' : ''
-											}
-											
-										})], (0, m.jsx)(s.i9,//右侧时间戳
-										{
-											hidden: !t.time || t.sCharacter.no == 0 || t.isRight,
-											style:{marginLeft:0},
-											children: t.time
+												display:"flex",
+												justifyContent: t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start'
+											},
+											children: [t.time ? (0, m.jsx)(s.i9,
+											{
+												hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
+												style:{marginRight:0,textAlign:'right'},
+												children: t.time//左侧时间戳
+											}) : '', [(0, m.jsx)(t.sCharacter.no == 0 ? s.LP : !t.isRight && isFirst ? s.zC : s.Dt,
+											{
+												className: '编辑',//文本
+												style: t.isRight ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
+												children: t.content
+											}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)(s.CJ,{}) : '' ], t.time ? (0, m.jsx)(s.i9,
+											{
+												hidden: !t.time || t.sCharacter.no == 0 || t.isRight,
+												style:{marginLeft:0},
+												children: t.time//右侧时间戳
+											}) : '']
 										})]
-									})]
-								}), t.isRight ? (0, m.jsx)(s.xu,//右侧头像
+									}), t.isRight && t.sCharacter.no != 0 ? (0, m.jsx)('div',
+									{
+										className: '头像框',
+										style:
+										{
+											justifyContent:'flex-end',
+											cursor: "pointer",
+											height: "100%"
+										},
+										hidden: t.sCharacter.no == 0,
+										children: isFirst ? (0, m.jsx)(s.NZ,
+										{
+											height: 252,
+											width: 252,
+											src: loadhead(t.sCharacter.no,t.sCharacter.index),//#聊天记录头像
+											onError: function(e)
+											{
+												e.currentTarget.src = href+'Images/Ui/error.webp';
+											},
+											alt: t.sCharacter.index
+										}) : ''
+									}) : '']
+								})
+							}) : (0, m.jsxs)(P,
+							{
+								children: [(0, m.jsxs)(N,
 								{
 									style:
 									{
-										justifyContent:'flex-end',
-										//cursor: "pointer",
-										height: "100%"
+										alignItems: "center"
 									},
-									hidden: t.sCharacter.no == 0,
-									children: (0, m.jsx)(s.NZ,
+									children: [(0, m.jsx)(Z,
+									{}), (0, m.jsx)("span",
 									{
-										hidden: !isFirst,
-										height: 252,
-										width: 252,
-										src: loadhead(t.sCharacter.no,t.sCharacter.index),
-										onError: function(e)
+										className: "bold",
+										children: r.Z.go_reply[mtlang]
+									})]
+								}), (0, m.jsx)(s.HR,
+								{}), t.content.split('\n').map(function(v,k)
+								{
+									return (0, m.jsx)('div',
+									{
+										className: '选择肢 跳转',
+										children: v,
+										onClick: function()
 										{
-											e.currentTarget.src = href+'Images/Ui/error.webp';
-										},
-										alt: t.sCharacter.index
+											dd(v), p(v), h(!0)
+										}
 									})
-								}) : '']
-							})
-						}) : (0, m.jsxs)(P,
-						{
-							children: [(0, m.jsxs)(N,
-							{
-								style:
-								{
-									alignItems: "center"
-								},
-								children: [(0, m.jsx)(Z,
-								{}), (0, m.jsx)("span",
-								{
-									className: "bold",
-									children: r.Z.go_reply[i]
 								})]
-							}), (0, m.jsx)(s.HR,
-							{}), (0, m.jsx)(N,
-							{
-								style:
-								{
-									flexDirection: "column"
-								},
-								children: n.chats.map(function(e, n)
-								{
-									return t.replyGroup === e.replyGroup && e.content.split('\n').map(function(v, k)
-									{//@换行分割选择肢
-										return t.replyGroup === e.replyGroup && (0, m.jsx)(C,
-										{
-											index: k,//@加入选择分支索引
-											chat: e,
-											handleContent: function(e)
-											{
-												p(e), h(!0)
-											}
-										}, n)
-									})//@换行分割选择肢
-								})
-							})]
-						})
-					})
+							})
+						})]
 				},
 				P = c.ZP.div.withConfig(
 				{
@@ -1322,7 +1326,7 @@
 								}))
 							}
 						}, [r]);
-					let isFirst = isfirst(c.chats.indexOf(t),c.chats)
+					let isFirst = isfirst(c.chats.indexOf(t),c.chats,'play')
 					return (0, a.useEffect)(function()
 					{
 						if(n(), x && !(c.chats.length < 1))

@@ -642,7 +642,7 @@
 											mt_settings['选择角色'].index = e
 											setTimeout(function()
 											{
-												$$('.fzoymd.selected')[0].scrollIntoView(!1)
+												$$('.fzoymd.selected')[0].scrollIntoView({block:'center',behavior:"smooth"})
 											}, 1)
 										}
 										saveStorage('设置选项',mt_settings,'local')
@@ -680,6 +680,12 @@
 						{
 							return mtlang//#e.global.lang
 						});
+					let headsize;
+					if(n.school[a] === '自定义')
+					{
+						if(n.club[a] === '自定义角色')headsize = mt_head[n.no] ? (mt_head[n.no].length/1024).toFixed(0)+'KB' : '-1KB'
+						else headsize = mt_shead[n.no] ? (mt_shead[n.no].length/1024).toFixed(0)+'KB' : '-1KB'
+					}
 					return (0, m.jsxs)(N,
 					{
 						children: [(0, m.jsx)(S,
@@ -717,7 +723,7 @@
 												children: (0, m.jsx)(D,
 												{
 													className: "bold",
-													style:{color:'black'},
+													style:{color:'rgb(68, 72, 78)'},
 													children: n.name[a].replaceAll("-", " ")
 												})
 											})
@@ -727,32 +733,21 @@
 											{
 												children: [(0, m.jsx)('span',
 												{
-													children:n.club[a] === '自定义角色' || '临时角色' ? '' : L.Z.club[a]+'：'
-												}),(0, m.jsx)('span',
-												{
-													className: "medium",
-													children:n.club[a]
-												})]
-											}), (0, m.jsx)(O,
-											{
-												children: (0, m.jsx)('span',
-												{
-													className: "medium",
-													children:[(0, m.jsx)(c.xL,
+													children:[n.club[a],(0, m.jsx)(c.xL,
 													{
 														style:
 														{
-															width: "1.1rem",
-															height: "1.1rem",
-															color:'rgb(45, 70, 100)'
+															width: "1rem",
+															height: "1rem",
+															color:'rgb(68, 72, 78)'
 														},
 														icon: ei.Yai,
 														onClick: function()
 														{
 															mt_ChangeChar(n.no)
 														}
-													}), n.club[a] === '自定义角色' ? (mt_head[n.no] ? (mt_head[n.no].length/1024).toFixed(0) : '-1')+'KB' : '']
-												})
+													}), headsize]
+												})]
 											})]//@显示社团
 										})]
 									})
@@ -779,9 +774,9 @@
 												delete mt_head[n.no];
 
 												saveStorage('mt-char',mt_char,'local')
-												saveStorage('mt-char',mt_head,'local')
+												saveStorage('mt-head',mt_head,'local')
 												saveStorage('mt-char',mt_schar,'session')
-												saveStorage('mt-char',mt_shead,'session')
+												saveStorage('mt-head',mt_shead,'session')
 												list()//更新列表
 											}
 										}
@@ -795,9 +790,9 @@
 												delete mt_shead[n.no];
 												
 												saveStorage('mt-char',mt_char,'local')
-												saveStorage('mt-char',mt_head,'local')
+												saveStorage('mt-head',mt_head,'local')
 												saveStorage('mt-char',mt_schar,'session')
-												saveStorage('mt-char',mt_shead,'session')
+												saveStorage('mt-head',mt_shead,'session')
 												list()//更新列表
 											}
 										}
@@ -969,7 +964,7 @@
 								{
 									return (0, m.jsx)(c.Bx,
 									{
-										className: u === e ? "selected medium" : "medium",
+										className: u === e ? "selected" : "",
 										onClick: function()
 										{
 											d(e)
@@ -1806,10 +1801,11 @@
 												else
 												{
 													chats = []
+													otherChats = []
 													$$(`.消息`).remove()
 													$$('.RightScreen__Box-sc-1fwinj2-1').show()//显示开头引导
 													$$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').hide()//隐藏聊天记录
-													saveStorage('chats',chats,'local')
+													saveStorage('chats',[],'local')
 												}
 											},
 											children: L.Z.confirm[o]
@@ -1906,7 +1902,7 @@
 										return e.abrupt("return");
 									case 4:
 										$$('.imageSave').remove()
-										mt_capture(L,S,I,eg,er,s,j,p,g,p,u,_)//新版截图
+										mt_capture(S,eg,j,(0, u._3)(!0, !0),_)//新版截图
 									case 6:
 									case "end":
 										return e.stop()
@@ -2095,7 +2091,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: [L.Z.down_comment1[g],localStorage['archive'] === 'false' ? '不包含存档' : `已追加${size}KB存档`]
+										children: [L.Z.down_comment1[g],localStorage['archive'] === 'false' ? '不包含存档' : `已追加${localSize}KB存档`]
 									}), (0, m.jsx)("span",
 									{
 										style:
@@ -2317,11 +2313,11 @@
 											mt_char: mt_char,//@自创角色
 											mt_head: mt_head,//@自创头像
 											'选择角色': mt_settings['选择角色']//@
-										}, chats])], e.next = 6, (0, u.rU)(r);
+										}, [...chats,...otherChats]])], e.next = 6, (0, u.rU)(r);
 									case 6:
-										o = e.sent, (0, ef.saveAs)(o,`MoeTalk_${t.title}_${mt_height()}.png`), blobToBase64(o,function(base64)
+										o = e.sent, (0, ef.saveAs)(o,`MoeTalk${L.Z.sharedFile[d]}_${t.title}_${mt_height()}.png`), blobToBase64(o,function(base64)
 										{
-											$$('#downImg').html(`<h1>${L.Z.image_download[d]}</h1><h1>图片后缀可以改为RAR打开</h1><img src='data:image/png;base64,${base64}'>`)
+											$$('#downImg').html(`<h1>${L.Z.image_download[d]}</h1><h1>可当做压缩文件打开</h1><img src='data:image/png;base64,${base64}'>`)
 										});
 									case 9:
 									case "end":
@@ -2346,7 +2342,7 @@
 										ment: L.Z.error[d],
 										title: L.Z.no_support[d]
 									}));
-									w(loaddata(JSON.parse(n.result))), y("upload")//#编译存档
+									w(loaddata(n.result)), y("upload")//#编译存档
 								}, eZ().loadAsync(t).then(function(e)
 								{
 									e.forEach(function(e, t)
@@ -2369,15 +2365,23 @@
 						},
 						I = function()
 						{
-							chats = j[1]
+							chats = []
+							otherChats = []
+							replyDepths = [0]
+							j[1].map(function(v,k)
+							{
+								if(v.replyDepth != 0)otherChats.push(v)
+								else chats.push(v)
+							})
 							$$('.消息').remove()
+							$$('.replyBack').parent().css('display','none')
 							$$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
 							$$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
 							$$.each(chats,function(k,v)
 							{
 								$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k))
 							})
-							saveStorage('chats',chats,'local')
+							saveStorage('chats',[...chats,...otherChats],'local')
 							N()
 						};
 					return (0, m.jsx)(ea.Xf,
@@ -3968,10 +3972,6 @@
 						{
 							return e.makeChat.chats
 						}),
-						s = (0, i.C)(function(e)
-						{
-							return e.makeChat.sReplyGroup
-						}),
 						d = (0, i.C)(function(e)
 						{
 							return mtlang//#e.global.lang
@@ -3981,14 +3981,6 @@
 							return e.global.isScreenshot
 						}),
 						f = (0, r.useRef)(null);
-					(0, r.useEffect)(function()
-					{
-						if(n.replyGroup === s)
-						{
-							var e;
-							null === (e = f.current) || void 0 === e || e.scrollIntoView(!0), a((0, eo.ZZ)(-1))
-						}
-					}, [s, n, a]);
 					let isFirst = isfirst(t,l)
 					let style = mt_settings['文字样式'][n.type] ? mt_settings['文字样式'][n.type] : {}
 					return (0, m.jsx)('div',
@@ -4026,9 +4018,7 @@
 									}) : '', (0, m.jsxs)(n.sCharacter.no == 0 ? "div" : eN.Xp,
 									{
 										className: "对话",
-										style: n.isRight ? 
-										{alignItems: 'flex-end'} : 
-										{display: 'block',width: '100%'},
+										style: n.isRight ? {alignItems: 'flex-end'} : {display: 'block',width: '100%'},
 										children: [isFirst ? (0, m.jsx)("span",
 										{
 											className: "名称 bold",
@@ -4042,22 +4032,15 @@
 											},
 											children: [n.time ? (0, m.jsx)(eN.i9,
 											{
-												//左侧时间戳
 												hidden: (!n.time || n.sCharacter.no != 0) && !n.isRight,
 												style:{marginRight:0,textAlign:'right'},
-												children: n.time
-											}) : '', "chat" === n.type ? [(0, m.jsx)(n.sCharacter.no == 0 ? eN.LP : 
-												!n.isRight && isFirst ? eN.zC : eN.Dt,
+												children: n.time//左侧时间戳
+											}) : '', "chat" === n.type ? [(0, m.jsx)(n.sCharacter.no == 0 ? eN.LP : !n.isRight && isFirst ? eN.zC : eN.Dt,
 											{
 												className: '编辑',//文本
-												style: n.isRight ?
-												{...{
-													background: 'rgb(74, 138, 202)',
-													border: '1px solid rgb(74, 138, 202)'
-												},...style} : style,
+												style: n.isRight ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
 												children: n.content
-											}), (n.isRight && isFirst) || n.sCharacter.no == 0 ? (0, m.jsx)(eN.CJ,{}):''//右角
-											] : (0, m.jsx)(eN.tG,
+											}), (n.isRight && isFirst) || n.sCharacter.no == 0 ? (0, m.jsx)(eN.CJ,{}) : '' ] : (0, m.jsx)(eN.tG,
 											{
 												className: '编辑',//图片
 												style:{"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? mt_settings['差分比例'] : ""},//@差分表情宽高百分比
@@ -4068,10 +4051,9 @@
 												},
 											}), n.time ? (0, m.jsx)(eN.i9,
 											{
-												//右侧时间戳
 												hidden: !n.time || n.sCharacter.no == 0 || n.isRight,
 												style:{marginLeft:0},
-												children: n.time
+												children: n.time//右侧时间戳
 											}) : '']
 										})]
 									}), n.isRight && n.sCharacter.no != 0 ? (0, m.jsx)('div',
@@ -4121,18 +4103,13 @@
 										className: 'bold',
 										children: L.Z['reply'][mtlang]
 									})]
-								}),(0, m.jsx)('hr',{className:'横线'}),n.content.split('\n').map(function(v,k)
+								}), (0, m.jsx)(eN.HR,{}), n.content.split('\n').map(function(v,k)
 								{
 									return (0, m.jsx)('div',
 									{
-										className: '选择肢',
+										className: '选择肢 跳转',
 										style: style,
-										children: v,
-										onClick: function()
-										{
-											//a((0, eo.Z8)(v))
-											//a((0, eo.Z8)(v))
-										}
+										children: v
 									})
 								})]
 							})] : "heart" === n.type ? [(0, m.jsx)(eN.xu,
@@ -4229,6 +4206,9 @@
 								e.type === 'reply' && e.content.split('\n').indexOf(o) > -1 && (n = e.replyDepth, r = e.replyGroup)
 							}), -1 === e ? a((0, eo.Z8)(n)) : a((0, eo.Z8)(0)), a((0, eo.ZZ)(r))
 						};
+						let newchats = []
+						chats.map(function(v,k){newchats[k] = v})
+						chats = newchats
 					return (0, m.jsxs)("div",
 					{
 						style:
@@ -4242,28 +4222,21 @@
 						{
 							style:
 							{
-								display: s ? "flex" : "none"
+								display: "none"
 							},
 							children: [(0, m.jsx)(ni,
 							{
-								onClick: function()
-								{
-									C(-1)
-								},
+								className: 'replyBack',
 								children: (0, m.jsx)(c.xL,
 								{
 									icon: ei.O24
 								})
 							}), (0, m.jsxs)(nc,//
 							{
-								className: "bold",
-								children: ["Re: ", o]
+								className: "bold"
 							}, n), (0, m.jsx)(ni,
 							{
-								onClick: function()
-								{
-									C(0)
-								},
+								className: 'replyHome',
 								children: (0, m.jsx)(c.xL,
 								{
 									icon: ei.WA2
@@ -4487,9 +4460,6 @@
 									})]
 								}),t.map(function(e, n)
 								{
-									let newchats = []
-									chats.map(function(v,k){newchats[k] = v})
-									chats = newchats
 									return e.replyDepth === o && (0, m.jsx)(e6,
 									{
 										index: n,
@@ -4980,7 +4950,7 @@
 				{
 					displayName: "talk__ImgBox",
 					componentId: "sc-eq7cqw-3"
-				})([`max-width:${mt_settings['图片比例']};border:2px solid ", ";background-color:rgb(255,255,255);padding:0.5rem;border-radius:10px;`], function(e)
+				})([`max-width:${mt_settings['图片比例']};border:2px solid `, ";background-color:rgb(255,255,255);padding:0.5rem;border-radius:10px;"], function(e)
 				{
 					return e.theme.color.rgb255_255_255
 				}),

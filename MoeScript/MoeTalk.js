@@ -11,35 +11,48 @@ var copydata;
 var imageArr = [];
 var imageArrL = 0
 var imageZip = null;
+var replyDepths = [0];
 
-var chats = JSON.parse(localStorage['chats'])
+var otherChats = []
+var chats = []
+JSON.parse(localStorage['chats']).map(function(v,k)
+{
+	if(v.replyDepth != 0)otherChats.push(v)
+	else chats.push(v)
+})
+
 if(mt_settings['后台保存'])
 {
 	window.onblur = function()
 	{
-		saveStorage('chats',chats,'local')
+		saveStorage('chats',[...chats,...otherChats],'local')
 	}
 	window.onfocus = function()
 	{
-		saveStorage('chats',chats,'local')
+		saveStorage('chats',[...chats,...otherChats],'local')
 	}
 	window.onbeforeunload = function()
 	{
-		saveStorage('chats',chats,'local')
+		saveStorage('chats',[...chats,...otherChats],'local')
 	}
 }
 if(mt_settings['存储模式'] === 'indexedDB')
 {
-	chats = [];
-	$('.dDBXxQ').wait(function(){$('.dDBXxQ').show()},".dDBXxQ")//
+	$('.dDBXxQ').wait(function(){$('.dDBXxQ').show().after('<div class="loading"><div/>')},".dDBXxQ")//
 	localforage.createInstance({name:'moetalkStorage'}).getItem('chats', function(err, value)
 	{
-		$('.dDBXxQ').hide()
+		$('.loading').wait(function(){$('.dDBXxQ').hide().next().remove()},".loading")//
 		if(value && value !== '[]')
 		{
+			chats = []
+			otherChats = []
 			$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
 			$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
-			chats = JSON.parse(value)
+			JSON.parse(value).map(function(v,k)
+			{
+				if(v.replyDepth != 0)otherChats.push(v)
+				else chats.push(v)
+			})
 			chats.map(function(v,k)
 			{
 				$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
@@ -56,7 +69,6 @@ function mt_height(num)
 }
 var mt_font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>";
 if(!mt_settings['禁止字体'] && !browser.isFirefox)$("head").append(mt_font);//加载字体
-$('.jotOXZ:eq(3)').wait(function(){$(".jotOXZ:eq(3)").click()},".jotOXZ:eq(3)")//
 $(function()
 {
 	if($('#readme').text() === 'MikuTalk' || (month === Month && day === Day))
@@ -68,29 +80,31 @@ $(function()
 })
 $("body").on('click',function()
 {
-	size = parseInt((JSON.stringify(localStorage).length/1024).toFixed(0))
+	localSize = 0
+	$.each(localStorage,function(k,v){if(!isNaN(parseInt(v.length))){localSize += v.length/1024}})
+	localSize = localSize.toFixed(0)
+
 	height = mt_height()
-	$('#size').text(height+"\n"+size+"KB");
+	$('#size').text(height+"\n"+localSize+"KB");
 	warning();
 
 	if($('.visible').length === 0)
 	{
-		$('.addChat').prop('checked',false)
-		$(".Talk__CContainer-sc-1uzn66i-1").outerWidth('inherit')
 		$('#mt_watermark').hide()
 		$('.消息').show()
 		$(".dels").show()
-	}
-	if($(".dels:checked").length > 0)
-	{
-		$(".operate_copy").prop('hidden',false)
-	}
-	else
-	{
-		$(".operate_copy").prop('hidden',true)
+		$('.addChat').prop('checked',false)
+		$(".Talk__CContainer-sc-1uzn66i-1").outerWidth('inherit')
 	}
 	$('.delsNum').text($(".dels:checked").length)
-	
+	// if($(".dels:checked").length > 0)
+	// {
+	// 	$(".operate_copy").prop('hidden',false)
+	// }
+	// else
+	// {
+	// 	$(".operate_copy").prop('hidden',true)
+	// }
 })
 
 
@@ -98,13 +112,13 @@ $("body").on('click',function()
 $(".bIcduz").wait(function()
 {
 	height = mt_height()
-	$(".bIcduz").after("<span id='size' class='文本' style='white-space:pre;'><b>"+height+"\n"+size+"KB</b></span>");
+	$(".bIcduz").after("<span id='size' class='文本' style='white-space:pre;'><b>"+height+"\n"+localSize+"KB</b></span>");
 	warning();
 },".bIcduz")
 //加载工具
 $(".frVjsk").wait(function()
 {
-	$(".frVjsk").append(`<button class='${class0}' id='uphead' class='${class0}'><b style='color:black;'>傳</b></button><span class='tool'>上传头像<span id='cusname'></span></span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='uphead' hidden><b style='color:black;'>傳</b></button><span class='tool' hidden>上传头像<span id='cusname'></span></span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
@@ -151,22 +165,16 @@ $('body').on('click',"#makecus",function()
 	{
 		cus = cus.trim();
 		imgindex = 'custom-'+getNowDate()
-		mt_char[imgindex] = cus
+		
+		$('#uphead').show().next().show()
 		$("#cusname").text(cus);
 		$("#custom").click();
 	}
 })
 $('body').on('click',"#uphead",function()//上传头像
 {
-	if($('#cusname').text() != '')
-	{
-		$("#cusname").text('');
-		$("#custom").click();
-	}		
-	else
-	{
-		alert('此功能为上传头像的备用方案\n如无问题无需点击');
-	}
+	$(this).hide().next().hide()
+	$("#custom").click();
 })
 function mt_ChangeChar(id)
 {
@@ -178,26 +186,29 @@ function mt_ChangeChar(id)
 			cname = cname.trim();
 			mt_char[id] = cname;
 			imgindex = id;
-			$("#cusname").text(cname);
 			saveStorage('mt-char',mt_char,'local')//保存名字
+
+			$('#uphead').show().next().show()
+			$("#cusname").text(cname);
 			$("#custom").click();
 			list()//更新列表
+			refreshMessage(chats)//刷新mmt
 		}
 	}
 	if(mt_characters[id])
 	{
-		let name = prompt(`角色ID：${id}\n原名：${mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id}\n你想改为什么名字？\n(为空则使用原名)`,mt_settings['人物改名'][id] ? mt_settings['人物改名'][id] : "");
+		let name = prompt(`角色ID：${id}\n原名：${mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id}\n你想改为什么名字？\n(点击取消或为空则使用原名)`,mt_settings['人物改名'][id] ? mt_settings['人物改名'][id] : "");
 		if(name != null && name.trim() != '')mt_settings['人物改名'][id] = name
 		else mt_settings['人物改名'][id] ? delete mt_settings['人物改名'][id] : ''
 		saveStorage('设置选项',mt_settings,'local')
 		list()//更新列表
+		refreshMessage(chats)//刷新mmt
 	}
 }
 //储存头像
 $("body").on('change','#custom',function()
 {
 	//文件改变时,获取文件,并转化为base64字符串
-	$("#cusname").text('');
 	var file = this.files[0]
 	$(this).val('')
 	var ready = new FileReader()
@@ -205,7 +216,6 @@ $("body").on('change','#custom',function()
 	ready.onload = function(e)
 	{
 		var base64Img = e.target.result;
-		// console.log(base64Img)
 		compress(base64Img)
 	}
 })
@@ -275,6 +285,8 @@ $('body').on('click',"#delsall",function()
 			$(this).parent().css("background-color","")//
 		});
 	}
+	$('.消息').css('border-top','')
+	$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
 })
 //反选
 $('body').on('click',"#rdelsall",function()
@@ -285,6 +297,8 @@ $('body').on('click',"#rdelsall",function()
 		if($(this).prop('checked'))$(this).parent().css("background-color","rgb(202,215,221)")//
 		else $(this).parent().css("background-color","")//
 	});
+	$('.消息').css('border-top','')
+	$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
 })
 //区间选择
 $('body').on('click',"#delsto",function()
@@ -302,6 +316,8 @@ $('body').on('click',"#delsto",function()
 			}
 		});
 	}
+	$('.消息').css('border-top','')
+	$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
 })
 //隐藏工具按钮拓展
 $('body').on('click',".Screenshot_Mode",function()
@@ -316,7 +332,7 @@ $('body').on('click',".Screenshot_Mode",function()
 	}
 	else
 	{
-		$('.消息').css('background-color','')
+		$('.消息').css('background-color','').css('border-top','')
 		$('.dels').remove()
 
 		$('.tools').hide()
@@ -326,13 +342,23 @@ $('body').on('click',".Screenshot_Mode",function()
 //选框被选中背景色
 $('body').on('change',".dels",function()
 {
-	if($(this).prop('checked'))$(this).parent().css("background-color","rgb(202,215,221)")//
-	else $(this).parent().css("background-color","")//
+	if($(this).prop('checked'))
+	{
+		$(this).parent().css("background-color","rgb(202,215,221)")//
+		$('.消息').css('border-top','')
+		$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
+	}
+	else
+	{
+		$(this).parent().css("background-color","")
+		$('.消息').css('border-top','')
+		$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
+	}
 })
 //自动跳到被选位置
 $('body').on('click',".chatText",function()
 {
-	if($(".dels:checked").length > 0)$(".dels:checked")[0].scrollIntoView(!1)
+	if($(".dels:checked").length > 0)$(".dels:checked")[0].scrollIntoView({block:'center',behavior:"smooth"})
 })
 $(window).keydown(function(event)
 {
@@ -449,24 +475,26 @@ $("body").on('click',".operate",function()
 	// {
 	// 	$('.operateTools').hide()
 	// }
-	saveStorage('chats',chats,'local')
+	saveStorage('chats',[...chats,...otherChats],'local')
 	alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新\n若想使用存档功能请点击心形图标“❤”右边的→磁盘“🖬”图标\n※此按钮在“后台保存模式”中相当于一次手动保存')
 });
 
 //rgb(136, 204, 204)
 //rgb(139, 187, 233)
-function isfirst(chatIndex,chats)
+function isfirst(chatIndex,chats,mode)
 {
 	if(chats[chatIndex])
 	{
-		if(['heart','info','reply'].indexOf(chats[chatIndex].type) > -1)return true//判断类型
+		let typeArr = ['heart','info','reply']
+		if(mode === 'play')typeArr.pop()
 		if(chats[chatIndex].sCharacter.no == 0)return false//判断角色
-		
+		if(typeArr.indexOf(chats[chatIndex].type) > -1)return true//判断类型
+
 		if(chatIndex-1 < 0)return true//首条消息
 		if(chats[chatIndex].isFirst)return true//强制显示
 		if(chats[chatIndex].is_breaking)return true//截图分割
 
-		if(['heart','info','reply'].indexOf(chats[chatIndex-1].type) > -1)return true//类型不符
+		if(typeArr.indexOf(chats[chatIndex-1].type) > -1)return true//类型不符
 		if(toString(chats[chatIndex].name) != toString(chats[chatIndex-1].name))return true//名字不符
 		if(isTrue(chats[chatIndex].isRight) !== isTrue(chats[chatIndex-1].isRight))return true//位置不符
 		if(chats[chatIndex].sCharacter.index !== chats[chatIndex-1].sCharacter.index)return true//头像不符
@@ -563,7 +591,7 @@ function makeMessage(type,data,chatIndex,mode)
 
 		$.each(data.content.split('\n'),function(k,v)
 		{
-			选择肢 += `<button class="选择肢" style='${style}'>${v}</button>`
+			选择肢 += `<button class="选择肢 跳转" style='${style}'>${v}</button>`
 		})
 		聊天 = 
 		`<div class="头像框"><button data-html2canvas-ignore="true" class="编辑按钮 编辑">${编辑图标}</button></div>
@@ -595,11 +623,11 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 
 	if(indexs.length === 0)indexs[0] = chatIndex
 	let dels = $(".dels:checked").length
-
+	let nextindex;
 	$.each(indexs,function(k,chatIndex)
 	{
-		data.replyDepth = 0
-
+		data.replyDepth = replyDepths.slice(-1)[0]
+		data.replyFrom = replyDepths.slice(-2)[0]
 		//数据
 		if(mode === 'delete')
 		{
@@ -690,21 +718,25 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 		}
 		if(mode === 'add' && !$('.addChat').prop('checked'))
 		{
-			let nextindex;
 			if(dels)
 			{
 				$(".dels").eq(chatIndex+1).prop("checked",true);
 				$(".dels").eq(chatIndex+1).parent().css("background-color","rgb(202,215,221)");
+				$('.消息').css('border-top','')
+				$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
 				nextindex = $(".dels:checked")[0]
 			}
 			else
 			{
 				nextindex = $(`.消息:eq(${chatIndex})`)[0]
 			}
-			if(chats.length)nextindex.scrollIntoView(!1)
 		}
 	})
-	if(!mt_settings['后台保存'])saveStorage('chats',chats,'local')
+	setTimeout(function()
+	{
+		if(nextindex)nextindex.scrollIntoView({block:'center',behavior:"smooth"})
+	}, 1)
+	if(!mt_settings['后台保存'])saveStorage('chats',[...chats,...otherChats],'local')
 }
 $("body").on('click',".编辑",function()
 {
@@ -848,14 +880,60 @@ $("body").on('click',".fzOyMd",function()
 	$('.editMessage .头像').attr('src',loadhead(no,index))
 	$('.name').attr('placeholder',loadname(no))
 });
-$("body").on('click',".选择肢",function()
+function replyDepth(str)
 {
-	alert('选择肢跳转功能重做中，编辑消息请点击左侧图标')
-});
-// 基础编辑
-// 批量编辑
-// 读取存档
+	let allChats = [...otherChats,...chats]
+	otherChats = []
+	chats = []
 
-// 选择跳转
-// 撤回前进
-// 截取存档
+	if(str)replyDepths.push(str)
+	allChats.map(function(v,k)
+	{
+		if(v.replyDepth != replyDepths.slice(-1)[0])
+		{
+			otherChats.push(v)
+		}
+		else
+		{
+			chats.push(v)
+		}
+	})
+}
+function refreshMessage(json)
+{
+	$('.消息').remove()
+	json.map(function(v,k)
+	{
+		$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
+	})
+}
+$("body").on('click',".选择肢.跳转",function()
+{
+	replyDepth($(this).text())
+	$('.replyBack').next().text("Re: "+$(this).text()).parent().css('display','flex')
+	refreshMessage(chats)
+});
+
+$("body").on('click',".replyBack",function()
+{
+	let replyButton = replyDepths.pop()
+	$(this).next().text("Re: "+replyDepths.slice(-1)[0]).parent().css('display',replyDepths.length < 2 ? 'none' : 'flex')
+	replyDepth()
+	refreshMessage(chats)
+	setTimeout(function()
+	{
+		$(`.跳转:contains("${replyButton}")`)[0].scrollIntoView({block:'center',behavior:"smooth"})
+	}, 1)
+});
+$("body").on('click',".replyHome",function()
+{
+	let replyButton = replyDepths[1]
+	replyDepths = [0]
+	$(this).parent().hide()
+	replyDepth()
+	refreshMessage(chats)
+	setTimeout(function()
+	{
+		$(`.跳转:contains("${replyButton}")`)[0].scrollIntoView({block:'center',behavior:"smooth"})
+	}, 1)
+});

@@ -838,9 +838,9 @@
 				{
 					displayName: "talk__ImgBox",
 					componentId: "sc-eq7cqw-3"
-				})([`max-width:${mt_settings['图片比例']};border:2px solid ", ";background-color:rgb(255,255,255);padding:0.5rem;border-radius:10px;`], function(e)
+				})([`max-width:${mt_settings['图片比例']};border:1px solid `, ";background-color:rgb(255,255,255);padding:0.5rem;border-radius:10px;"], function(e)
 				{
-					return e.theme.color.rgb255_255_255
+					return e.theme.color.rgb230_233_235
 				}),
 				l = r.ZP.span.withConfig(
 				{
