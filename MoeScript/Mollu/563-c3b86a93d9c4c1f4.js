@@ -387,7 +387,7 @@
 						})
 					}, [null === (r = p.data) || void 0 === r ? void 0 : r.MEMBER_NO]), [w || i || [], j, y, function(e)
 					{
-						var t = "/" + (0, a.sk)(e.M_TYPE) + "/" + e.LANG + "/" + e.PAGE.toString();
+						var t = player;//#播放器
 						(e.O_TYPE || e.B_TYPE || e.C_TYPE || e.CONTENT) && (t += "?" + (0 !== e.O_TYPE ? "o_type=" + e.O_TYPE + "&" : "") + (0 !== e.B_TYPE ? "b_type=" + e.B_TYPE + "&" : "") + (0 !== e.C_TYPE ? "c_type=" + e.C_TYPE + "&" : "") + ("" !== e.CONTENT ? "content=" + e.CONTENT : "")), window.history.pushState(null, (0, a.sk)(e.M_TYPE), t), null !== _ && g(null), b(e)
 					}]
 				},
@@ -1227,7 +1227,7 @@
 									case 5:
 										return o = [JSON.stringify(n = t.data)], e.next = 9, (0, a.rU)(o);
 									case 9:
-										r = e.sent, (0, en.saveAs)(r, "MolluTalk_".concat(n[0].title, ".png"));
+										r = e.sent, (0, en.saveAs)(r, "MoeTalk_".concat(n[0].title, ".png"));
 									case 11:
 									case "end":
 										return e.stop()
@@ -1291,7 +1291,7 @@
 											M_TYPE: t
 										});
 									case 5:
-										m((0, S.jh)(!1)), u(!1), T.push(1 === t ? "/creative/".concat(p, "/1") : "/private/".concat(p, "/1"));
+										m((0, S.jh)(!1)), u(!1), T.push(player);
 									case 8:
 									case "end":
 										return e.stop()
@@ -1513,12 +1513,12 @@
 						{
 							l.SERIES_NO ? navigator.share(
 							{
-								title: "MolluTalk",
+								title: "MoeTalk",
 								text: l.NICKNAME + "_" + l.TITLE,
 								url: "/".concat(_.pathname.split("/")[1], "/").concat((null == P ? void 0 : P.LANG) || f, "/1?c_type=6&content=").concat(l.SERIES_NO)
 							}) : navigator.share(
 							{
-								title: "MolluTalk",
+								title: "MoeTalk",
 								text: l.NICKNAME + "_" + l.TITLE,
 								url: "/".concat(_.pathname.split("/")[1], "/").concat((null == P ? void 0 : P.LANG) || f, "/1?c_type=4&content=").concat(l.BOARD_NO)
 							})
@@ -2129,7 +2129,7 @@
 							}), (0, b.jsx)("meta",
 							{
 								name: "description",
-								content: "This is the MolluTalk ".concat(A, " Page. (몰루톡/モルトーク)")
+								content: "This is the MoeTalk ".concat(A, " Page. (몰루톡/モルトーク)")
 							}), (0, b.jsx)("meta",
 							{
 								property: "og:title",
@@ -2137,11 +2137,11 @@
 							}), (0, b.jsx)("meta",
 							{
 								property: "og:image",
-								content: "https://mollutalk.com/ogImage.png"
+								content: "https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/Images/Ui/Favor_Schedule_Deco.webp"
 							}), (0, b.jsx)("meta",
 							{
 								property: "og:description",
-								content: "This is the MolluTalk ".concat(A, " Page. (몰루톡/モルトーク)")
+								content: "This is the MoeTalk ".concat(A, " Page. (몰루톡/モルトーク)")
 							}), (0, b.jsx)("meta",
 							{
 								name: "twitter:title",
@@ -2149,11 +2149,11 @@
 							}), (0, b.jsx)("meta",
 							{
 								name: "twitter:description",
-								content: "This is the MolluTalk ".concat(A, " Page. (몰루톡/モルトーク)")
+								content: "This is the MoeTalk ".concat(A, " Page. (몰루톡/モルトーク)")
 							}), (0, b.jsx)("meta",
 							{
 								name: "twitter:image",
-								content: "https://mollutalk.com/ogImage.png"
+								content: "https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/Images/Ui/Favor_Schedule_Deco.webp"
 							})]
 						}), (0, b.jsx)(F,
 						{

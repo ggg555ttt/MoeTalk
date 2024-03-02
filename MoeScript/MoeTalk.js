@@ -15,6 +15,7 @@ var replyDepths = [0];
 
 var otherChats = []
 var chats = []
+var winHeight = window.innerHeight
 JSON.parse(localStorage['chats']).map(function(v,k)
 {
 	if(v.replyDepth != 0)otherChats.push(v)
@@ -73,7 +74,7 @@ $(function()
 {
 	if($('#readme').text() === 'MikuTalk' || (month === Month && day === Day))
 	{
-		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
+		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
 		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','transparent');
 		$("#view").click()
 	}
@@ -372,7 +373,6 @@ $('body').on('click',"#mt-style",function()
 {
 	if(mt_settings['风格样式'] === 'rgb(255,255,255)')
 	{
-		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,247,225)');
 		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','rgb(255,247,225)');
 		$('.talk__InfoBox-sc-eq7cqw-8').css('background','transparent');
 		mt_settings['风格样式'] = 'rgb(255,247,225)';//yuzutalk
@@ -380,7 +380,6 @@ $('body').on('click',"#mt-style",function()
 	}
 	else
 	{
-		$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,255,255)');
 		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','rgb(255,255,255)');
 		$('.talk__InfoBox-sc-eq7cqw-8').css('background','rgb(220,229,232)');
 		mt_settings['风格样式'] = 'rgb(255,255,255)';//momotalk
@@ -487,7 +486,7 @@ function isfirst(chatIndex,chats,mode)
 	{
 		let typeArr = ['heart','info','reply']
 		if(mode === 'play')typeArr.pop()
-		if(chats[chatIndex].sCharacter.no == 0)return false//判断角色
+		//if(chats[chatIndex].sCharacter.no == 0)return false//判断角色
 		if(typeArr.indexOf(chats[chatIndex].type) > -1)return true//判断类型
 
 		if(chatIndex-1 < 0)return true//首条消息
@@ -544,7 +543,7 @@ function makeMessage(type,data,chatIndex,mode)
 				${名称}
 				<div style="display: flex; justify-content: flex-start;">
 					${type === 'chat' ? 文本 : 图片}
-					${data.time ? `<span class="时间戳" style="margin-left: 0px;">${data.time}</span>` : ''}
+					${data.time ? `<span class="时间戳">${data.time}</span>` : ''}
 				</div>
 			</div>`
 		}
@@ -558,7 +557,7 @@ function makeMessage(type,data,chatIndex,mode)
 			<div class="对话" style="align-items: flex-end;">
 				${名称}
 				<div style="display: flex; justify-content: flex-end;"">
-					${data.time ? `<span class="时间戳" style="margin-right: 0px;text-align: right;">${data.time}</span>` : ''}
+					${data.time ? `<span class="时间戳" style="text-align: right;">${data.time}</span>` : ''}
 					${type === 'chat' ? 文本 : 图片}
 				</div>
 			</div>
@@ -722,8 +721,6 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 			{
 				$(".dels").eq(chatIndex+1).prop("checked",true);
 				$(".dels").eq(chatIndex+1).parent().css("background-color","rgb(202,215,221)");
-				$('.消息').css('border-top','')
-				$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
 				nextindex = $(".dels:checked")[0]
 			}
 			else
@@ -732,10 +729,18 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 			}
 		}
 	})
+	$('.消息').css('border-top','')
+	$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
 	setTimeout(function()
 	{
-		if(nextindex)nextindex.scrollIntoView({block:'center',behavior:"smooth"})
-	}, 1)
+		let behavior = "smooth"
+		if(['heart','info','reply'].indexOf(type) > -1 && !browser.isDeskTop)
+		{
+			behavior = "auto"
+			if(winHeight === window.innerHeight)behavior = "smooth"
+		}
+		if(nextindex)nextindex.scrollIntoView({block:'center',behavior:behavior})
+	}, 100)
 	if(!mt_settings['后台保存'])saveStorage('chats',[...chats,...otherChats],'local')
 }
 $("body").on('click',".编辑",function()
@@ -923,7 +928,7 @@ $("body").on('click',".replyBack",function()
 	setTimeout(function()
 	{
 		$(`.跳转:contains("${replyButton}")`)[0].scrollIntoView({block:'center',behavior:"smooth"})
-	}, 1)
+	}, 100)
 });
 $("body").on('click',".replyHome",function()
 {
@@ -935,5 +940,5 @@ $("body").on('click',".replyHome",function()
 	setTimeout(function()
 	{
 		$(`.跳转:contains("${replyButton}")`)[0].scrollIntoView({block:'center',behavior:"smooth"})
-	}, 1)
+	}, 100)
 });

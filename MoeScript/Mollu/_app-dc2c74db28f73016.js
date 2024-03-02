@@ -9263,7 +9263,7 @@
 								children: [(0, s.jsx)(o.Dx,
 								{
 									className: "bold",
-									children: "MolluTalk"
+									children: "MoeTalk"
 								}), (0, s.jsx)(o.ec,
 								{
 									onClick: function()
@@ -10149,6 +10149,15 @@
 										onClick: function(e)
 										{
 											h(e, "/")
+											setTimeout(function()
+											{
+												let url = window.location;
+												let arr = url.pathname.split('/');
+												arr.pop();
+												arr.push(href.replaceAll('/',''));
+												let newUrl = url.origin + arr.join('/') + url.search;
+												history.pushState('', '', newUrl); // 不刷新页面
+											}, 100)
 										},
 										className: "/" === e.pathname ? "selected" : "",
 										children: (0, O.jsx)(V,
@@ -10164,10 +10173,12 @@
 										})
 									}), (0, O.jsx)(F,
 									{
-										href: "/private/".concat(r, "/1"),
+										href: player,//#播放器
 										onClick: function(e)
 										{
-											h(e, "/private/".concat(r, "/1"))
+											$$('.cgldhY').hide()
+											if(!browser.isDeskTop)alert('移动端加载较慢，可能需要多等几秒')
+											h(e, player)//#播放器
 										},
 										className: "private" === e.pathname.split("/")[1] ? "selected" : "",
 										children: (0, O.jsx)(V,
@@ -11938,7 +11949,7 @@
 									content: "630"
 								}), (0, O.jsx)("title",
 								{
-									children: "MolluTalk"
+									children: "MoeTalk"
 								})]
 							}), (0, O.jsx)(Z,
 							{}), (0, O.jsx)(ec.zt,
@@ -14269,7 +14280,7 @@
 					{
 						displayName: "common__Button",
 						componentId: "sc-1ojome3-8"
-					})(["background-color:white;border:none;height:2.5rem;border-radius:5px;font-size:1.1rem;cursor :pointer;&:active{transform:scale(0.98);}&:hover{background-color:", ";}"], function(e)
+					})(["background-color:white;border:none;padding:0.5rem;height:2.5rem;border-radius:5px;font-size:1.1rem;cursor :pointer;&:active{transform:scale(0.98);}&:hover{background-color:", ";}"], function(e)
 					{
 						return e.theme.color.rgb238_238_238
 					}),

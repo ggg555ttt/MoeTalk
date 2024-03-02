@@ -1,5 +1,7 @@
 var href = window.location.href.split(window.location.host)[1].split('?')[0]
+var player = href+'player'
 var version = '';
+var 强制保存 = []
 if(localStorage['mt-version'])version = localStorage['mt-version']
 if(window.location.href.indexOf('file:///') === 0)
 {
@@ -890,13 +892,17 @@ function saveStorage(key,val,mode)
 	}
 	else
 	{
-		if(mode === 'local' && confirm(`存储空间容量不足，请尝试删除一部分数据\n强制写入可能会导致MoeTalk出错，确定吗？`))
+		if(mode === 'local')
 		{
-			localStorage[key] = val
+			$('#容量警告').addClass('visible')
+			$('#容量警告 p').text(`存储空间容量不足，请尝试删除一部分数据\n\n强制保存可能会导致MoeTalk出错，确定吗？`)
+			强制保存 = [localStorage,key,val]
 		}
-		if(mode === 'session' && confirm(`临时空间容量不足，重启浏览器可以清空\n强制写入可能会导致MoeTalk出错，确定吗？`))
+		if(mode === 'session')
 		{
-			sessionStorage[key] = val
+			$('#容量警告').addClass('visible')
+			$('#容量警告 p').text(`临时空间容量不足，重启浏览器可以清空\n\n强制保存可能会导致MoeTalk出错，确定吗？`)
+			强制保存 = [sessionStorage,key,val]
 		}
 	}
 }

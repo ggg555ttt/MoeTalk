@@ -450,7 +450,7 @@
 										{
 											e.toBlob(function(e)
 											{
-												e && (0, s.saveAs)(e, "MolluTalk_" + v.title + ".png")
+												e && (0, s.saveAs)(e, "MoeTalk_" + v.title + ".png")
 											})
 										}).catch(function()
 										{
@@ -576,7 +576,7 @@
 									{
 										icon: y.yOZ
 									})
-								}), (0, k.jsx)(T,
+								}), /*(0, k.jsx)(T,
 								{
 									style: o && !a ?
 									{
@@ -595,7 +595,7 @@
 									{
 										icon: w.Oi0
 									})
-								}), (0, k.jsx)(T,
+								}),*/ (0, k.jsx)(T,
 								{
 									style: o && !a ?
 									{
@@ -1117,7 +1117,7 @@
 											cursor: "pointer",
 											height: "100%"
 										} : {marginRight: '1.5rem'},
-										children: isFirst ? (0, m.jsx)(s.NZ,
+										children: isFirst && t.sCharacter.no != 0 ? (0, m.jsx)(s.NZ,
 										{
 											//左侧头像
 											height: 252,
@@ -1133,7 +1133,7 @@
 									{
 										className: "对话",
 										style: t.isRight ? {alignItems: 'flex-end'} : {display: 'block',width: '100%'},
-										children: [isFirst ? (0, m.jsx)("span",
+										children: [isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{
 											className: "名称 bold",
 											children: t.name || loadname(t.sCharacter.no)
@@ -1171,7 +1171,7 @@
 											height: "100%"
 										},
 										hidden: t.sCharacter.no == 0,
-										children: isFirst ? (0, m.jsx)(s.NZ,
+										children: isFirst && t.sCharacter.no != 0 ? (0, m.jsx)(s.NZ,
 										{
 											height: 252,
 											width: 252,
@@ -1363,13 +1363,11 @@
 									{
 										style: t.sCharacter.no != 0 ? 
 										{
-											//cursor: "pointer",
 											height: "100%"
 										} : {marginRight: '1.5rem'},
-										children: (0, m.jsx)(s.NZ,
+										children: isFirst && t.sCharacter.no != 0 ? (0, m.jsx)(s.NZ,
 										{
 											//左侧头像
-											hidden: !isFirst,
 											height: 252,
 											width: 252,
 											src: loadhead(t.sCharacter.no,t.sCharacter.index),
@@ -1378,7 +1376,7 @@
 												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: t.sCharacter.index
-										})
+										}) : ''
 									}) : '', (0, m.jsxs)(t.sCharacter.no == 0 ? "div" : s.Xp,
 									{
 										style: t.isRight ? 
@@ -1386,7 +1384,7 @@
 											display: 'flex',
 											alignItems: 'flex-end'
 										} : {display: 'block',width: '100%'},
-										children: [(0, m.jsx)("span",
+										children: [isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{
 											className: "bold",
 											style: isFirst ?
@@ -1397,8 +1395,8 @@
 											{
 												display: 'none'
 											},
-											children: t.name && t.name !== '' ? t.name : (0, l.fY)(t.sCharacter.no, !0, p)//#新增临时名称
-										}), (0, m.jsxs)("div",
+											children: t.name || loadname(t.sCharacter.no)//#新增临时名称
+										}) : '', (0, m.jsxs)("div",
 										{
 											style:
 											{
@@ -1409,7 +1407,7 @@
 											{
 												//左侧时间戳
 												hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
-												style:{marginRight:0},
+												style: {textAlign: 'right'},
 												children: t.time
 											}), "chat" === t.type ? [(0, m.jsx)(t.sCharacter.no == 0 ? s.LP : 
 												!t.isRight && isFirst ? s.zC : s.Dt,
@@ -1438,7 +1436,6 @@
 											}), (0, m.jsx)(s.i9,//右侧时间戳
 											{
 												hidden: !t.time || t.sCharacter.no == 0 || t.isRight,
-												style:{marginLeft:0},
 												children: t.time
 											})]
 										})]
@@ -1447,11 +1444,9 @@
 										style:
 										{
 											justifyContent:'flex-end',
-											//cursor: "pointer",
 											height: "100%"
 										},
-										hidden: t.sCharacter.no == 0,
-										children: (0, m.jsx)(s.NZ,
+										children: isFirst && t.sCharacter.no != 0 ? (0, m.jsx)(s.NZ,
 										{
 											hidden: !isFirst,
 											height: 252,
@@ -1462,7 +1457,7 @@
 												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: t.sCharacter.index
-										})
+										}) : ''
 									}) : '']
 								})
 							}) : "reply" === t.type ? [(0, m.jsx)(s.xu,
@@ -1481,7 +1476,6 @@
 								chat: t
 							})] : "info" === t.type ? (0, m.jsx)(s.vD,
 							{
-								className: "bold",
 								children: t.content
 							}) : "end" === t.type ? (0, m.jsx)(f,
 							{}) : (0, m.jsx)(m.Fragment,{})

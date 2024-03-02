@@ -964,6 +964,7 @@
 								{
 									return (0, m.jsx)(c.Bx,
 									{
+										style: {padding: 0},
 										className: u === e ? "selected" : "",
 										onClick: function()
 										{
@@ -1548,7 +1549,7 @@
 						{
 							t(!1), s("")
 						};
-					return (0, m.jsx)(ea.Xf,
+					return [(0, m.jsx)(ea.Xf,
 					{
 						className: n ? "visible medium" : "medium",
 						onDoubleClick: function()
@@ -1614,7 +1615,68 @@
 								})]
 							})]
 						})
-					})
+					}),(0, m.jsx)(ea.Xf,
+					{
+						id : '容量警告',
+						className: "medium",
+						onDoubleClick: function()
+						{
+							$$('#容量警告').removeClass('visible')
+							强制保存 = []
+						},
+						children: (0, m.jsxs)(ea.F0,
+						{
+							onDoubleClick: function(e)
+							{
+								return e.stopPropagation(), !1
+							},
+							children: [(0, m.jsxs)(ea.h4,
+							{
+								children: [(0, m.jsx)(ea.Dx,
+								{
+									className: "bold",
+									children: '容量警告'
+								}), (0, m.jsx)(ea.ec,
+								{
+									onClick: function()
+									{
+										$$('#容量警告').removeClass('visible')
+										强制保存 = []
+									},
+									children: (0, m.jsx)(c.j4,{})
+								})]
+							}), (0, m.jsxs)(ea.$0,
+							{
+								children: [(0, m.jsx)("p",
+								{
+									style:{whiteSpace: 'pre'},
+									children: ''
+								}), (0, m.jsxs)(ea.$_,
+								{
+									children: [(0, m.jsx)(ea.Lw,
+									{
+										className: "bold",
+										onClick: function()
+										{
+											$$('#容量警告').removeClass('visible')
+											强制保存 = []
+										},
+										children: L.Z.cancel[u]
+									}), (0, m.jsx)(ea.AZ,
+									{
+										className: "bold",
+										onClick: function()
+										{
+											$$('#容量警告').removeClass('visible')
+											强制保存[0][强制保存[1]] = 强制保存[2]
+											强制保存 = []
+										},
+										children: L.Z.confirm[u]
+									})]
+								})]
+							})]
+						})
+					})]
 				},
 				es = function(e)
 				{
@@ -4003,7 +4065,7 @@
 											cursor: "pointer",
 											height: "100%"
 										} : {marginRight: '1.5rem'},
-										children: isFirst ? (0, m.jsx)(eN.NZ,
+										children: isFirst && n.sCharacter.no != 0 ? (0, m.jsx)(eN.NZ,
 										{
 											//左侧头像
 											height: 252,
@@ -4019,7 +4081,7 @@
 									{
 										className: "对话",
 										style: n.isRight ? {alignItems: 'flex-end'} : {display: 'block',width: '100%'},
-										children: [isFirst ? (0, m.jsx)("span",
+										children: [isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{
 											className: "名称 bold",
 											children: n.name || loadname(n.sCharacter.no)
@@ -4033,7 +4095,7 @@
 											children: [n.time ? (0, m.jsx)(eN.i9,
 											{
 												hidden: (!n.time || n.sCharacter.no != 0) && !n.isRight,
-												style:{marginRight:0,textAlign:'right'},
+												style: {textAlign: 'right'},
 												children: n.time//左侧时间戳
 											}) : '', "chat" === n.type ? [(0, m.jsx)(n.sCharacter.no == 0 ? eN.LP : !n.isRight && isFirst ? eN.zC : eN.Dt,
 											{
@@ -4065,8 +4127,7 @@
 											cursor: "pointer",
 											height: "100%"
 										},
-										hidden: n.sCharacter.no == 0,
-										children: isFirst ? (0, m.jsx)(eN.NZ,
+										children: isFirst && n.sCharacter.no != 0 ? (0, m.jsx)(eN.NZ,
 										{
 											height: 252,
 											width: 252,
@@ -4788,19 +4849,19 @@
 							}), (0, m.jsx)("meta",
 							{
 								name: "description",
-								content: "MolluTalk is a Blue Archive Fandom Site. (몰루톡/モルトーク)"
+								content: "MoeTalk is a Blue Archive Fandom Site. (몰루톡/モルトーク)"
 							}), (0, m.jsx)("meta",
 							{
 								name: "keywords",
-								content: "몰루톡, MolluTalk, モルトーク"
+								content: "몰루톡, MoeTalk, モルトーク"
 							}), (0, m.jsx)("meta",
 							{
 								property: "og:title",
-								content: "MolluTalk"
+								content: "MoeTalk"
 							}), (0, m.jsx)("meta",
 							{
 								property: "og:image",
-								content: "https://mollutalk.com/ogImage.png"
+								content: "https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/Images/Ui/Favor_Schedule_Deco.webp"
 							}), (0, m.jsx)("meta",
 							{
 								property: "og:site_name",
@@ -4808,19 +4869,19 @@
 							}), (0, m.jsx)("meta",
 							{
 								property: "og:description",
-								content: "MolluTalk is a Blue Archive Fandom Site. (몰루톡/モルトーク)"
+								content: "MoeTalk is a Blue Archive Fandom Site. (몰루톡/モルトーク)"
 							}), (0, m.jsx)("meta",
 							{
 								name: "twitter:title",
-								content: "MolluTalk"
+								content: "MoeTalk"
 							}), (0, m.jsx)("meta",
 							{
 								name: "twitter:description",
-								content: "MolluTalk is a Blue Archive Fandom Site. (몰루톡/モルトーク)"
+								content: "MoeTalk is a Blue Archive Fandom Site. (몰루톡/モルトーク)"
 							}), (0, m.jsx)("meta",
 							{
 								name: "twitter:image",
-								content: "https://mollutalk.com/ogImage.png"
+								content: "https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/Images/Ui/Favor_Schedule_Deco.webp"
 							}), (0, m.jsx)("meta",
 							{
 								name: "twitter:card",
