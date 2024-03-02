@@ -72,6 +72,7 @@ var mt_font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g
 if(!mt_settings['禁止字体'] && !browser.isFirefox)$("head").append(mt_font);//加载字体
 $(function()
 {
+	$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
 	if($('#readme').text() === 'MikuTalk' || (month === Month && day === Day))
 	{
 		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
@@ -373,6 +374,7 @@ $('body').on('click',"#mt-style",function()
 {
 	if(mt_settings['风格样式'] === 'rgb(255,255,255)')
 	{
+		$(window.location.href.indexOf('player') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,247,225)');
 		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','rgb(255,247,225)');
 		$('.talk__InfoBox-sc-eq7cqw-8').css('background','transparent');
 		mt_settings['风格样式'] = 'rgb(255,247,225)';//yuzutalk
@@ -380,6 +382,7 @@ $('body').on('click',"#mt-style",function()
 	}
 	else
 	{
+		$(window.location.href.indexOf('player') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,255,255)');
 		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','rgb(255,255,255)');
 		$('.talk__InfoBox-sc-eq7cqw-8').css('background','rgb(220,229,232)');
 		mt_settings['风格样式'] = 'rgb(255,255,255)';//momotalk
