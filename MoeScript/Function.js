@@ -92,6 +92,7 @@ delete localStorage['顶部标题']
 !mt_settings['风格样式'] ? mt_settings['风格样式'] = [] : mt_settings['风格样式']
 if(['YuzuTalk','MomoTalk'].indexOf(mt_settings['风格样式'][0]) < 0)
 {
+	mt_settings['风格样式'] = []
 	mt_settings['风格样式'][0] = 'MomoTalk'
 	mt_settings['风格样式'][1] = 'transparent'
 	mt_settings['风格样式'][2] = '#DCE5E8'
