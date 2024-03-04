@@ -665,7 +665,7 @@ function MoeToClosure()//Moe转Closure
 		let img = v['sCharacter']['index'];
 		let data = 'MT-';
 		if(closure_char[id])data = "ba-"
-		if(id !== 0 && id.indexOf('custom-') < 0)//正常角色
+		if(id != 0 && id.indexOf('custom-') < 0)//正常角色
 		{
 			ct[k]['char_id'] = data+id;
 			ct[k]['img'] = img;
@@ -674,13 +674,13 @@ function MoeToClosure()//Moe转Closure
 				img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D')
 				ct[k]['char_id'] = `custom-MT-${id}-${img}`
 				ct[k]['img'] = 'uploaded';
-				
+
 				custom_chars[ct[k]['char_id']] = {}
 				custom_chars[ct[k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`
 				custom_chars[ct[k]['char_id']]['name'] = loadname(id);
 			}
 		}
-		if(id !== 0 && id.indexOf('custom-') > -1)//自定义角色
+		if(id != 0 && id.indexOf('custom-') > -1)//自定义角色
 		{
 			ct[k]['char_id'] = id;
 			ct[k]['img'] = 'uploaded';
