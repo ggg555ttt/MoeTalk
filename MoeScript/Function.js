@@ -90,7 +90,7 @@ delete localStorage['顶部标题']
 !mt_settings['宽度限制'] ? mt_settings['宽度限制'] = 500 : ''
 !mt_settings['顶部标题'] ? mt_settings['顶部标题'] = 'MoeTalk' : ''
 !mt_settings['风格样式'] ? mt_settings['风格样式'] = [] : mt_settings['风格样式']
-if(['YuzuTalk','MomoTalk'].indexOf(mt_settings['风格样式'][0]) < 0)
+if(['YuzuTalk','MomoTalk'].indexOf(mt_settings['风格样式'][0]) > -1)
 {
 	mt_settings['风格样式'][0] = 'MomoTalk'
 	mt_settings['风格样式'][1] = 'transparent'
