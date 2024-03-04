@@ -2024,7 +2024,7 @@
 					return e.theme.color.rgb69_78_89
 				}, function(e)
 				{
-					return mt_settings['风格样式'] === 'rgb(255,255,255)' ? 'rgb(220,229,232)' : 'transparent'//#自定义样式
+					return mt_settings['风格样式'][2]//#自定义样式
 				}),
 				f = (0, r.ZP)(o.Mm).withConfig(
 				{

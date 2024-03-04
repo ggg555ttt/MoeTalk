@@ -9952,7 +9952,7 @@
 									})
 								}), (0, O.jsx)(I,
 								{
-									children: [(0, O.jsx)(I,{id:"readme",children:month === Month && day === Day ? 'MikuTalk' : mt_settings['顶部标题']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
+									children: [(0, O.jsx)(I,{id:"readme",children:MikuTalk ? 'MikuTalk' : mt_settings['顶部标题']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
 										href: "https://github.com/ggg555ttt/MoeTalk/",
 										style:
@@ -10311,7 +10311,7 @@
 							rgb252_238_240: "rgb(252, 238, 240)",
 							rgb252_238_98: "rgb(252, 238, 98)",
 							rgb252_135_155: "rgb(252, 135, 155)",
-							rgb243_247_248: mt_settings['顶部标题'] === 'MikuTalk' || (month === Month && day === Day) ? "transparent" : "rgb(243, 247, 248)",//#41
+							rgb243_247_248: MikuTalk ? "transparent" : "rgb(243, 247, 248)",//#41
 							rgb242_231_85: "rgb(242, 231, 85)",
 							rgb225_237_240: "rgb(225, 237, 240)",
 							rgb224_226_228: "rgb(224, 226, 228)",
@@ -11854,7 +11854,7 @@
 								{
 									style:{lineHeight:'141%'},//@
 									className: "bold",//@
-									children: month === Month && day === Day ? 'MikuTalk' : `${mt_settings['顶部标题']} ${version}`
+									children: MikuTalk ? 'MikuTalk' : `${mt_settings['顶部标题']} ${version}`
 								})
 							})]
 						})
@@ -12006,7 +12006,7 @@
 					{
 						displayName: "_app__Wrapper",
 						componentId: "sc-xuvrnm-1"
-					})(["", `background-color:${mt_settings['风格样式']}; border-radius:0 0 1rem 1rem;overflow:auto;max-width:1500px;margin:auto;@media screen and (max-width:1500px){border-radius:0;}`], function(e)
+					})(["", `background-color:${mt_settings['风格样式'][1]}; border-radius:0 0 1rem 1rem;overflow:auto;max-width:1500px;margin:auto;@media screen and (max-width:1500px){border-radius:0;}`], function(e)
 					{
 						return e.theme.common.flexBox(
 						{

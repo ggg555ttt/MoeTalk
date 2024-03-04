@@ -32,7 +32,8 @@ var mt_CharFaceInfo = {
     "日和_Velstadt-": "tb.1.dab25569.tTQcu91BN6o2ExQyQxr5KA",
     "晴_Velstadt-": "tb.1.dab25569.tTQcu91BN6o2ExQyQxr5KA",
     "真纪_Velstadt-": "tb.1.dab25569.tTQcu91BN6o2ExQyQxr5KA",
-    "真纪（野营）_Velstadt-": "tb.1.dab25569.tTQcu91BN6o2ExQyQxr5KA"
+    "真纪（野营）_Velstadt-": "tb.1.dab25569.tTQcu91BN6o2ExQyQxr5KA",
+    "美咲_Velstadt-": "tb.1.dab25569.tTQcu91BN6o2ExQyQxr5KA"
 }
 var mt_CharFaceIndex = {
     "249137912": "https://space.bilibili.com/249137912",

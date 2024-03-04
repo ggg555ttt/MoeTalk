@@ -72,8 +72,7 @@ var mt_font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g
 if(!mt_settings['禁止字体'] && !browser.isFirefox)$("head").append(mt_font);//加载字体
 $(function()
 {
-	$(window.location.href.indexOf('private') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
-	if($('#readme').text() === 'MikuTalk' || (month === Month && day === Day))
+	if(MikuTalk)
 	{
 		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
 		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','transparent');
@@ -130,29 +129,27 @@ $(".frVjsk").wait(function()
 //使用说明
 $('body').on('click',"#readme",function()
 {
-	if($('#readme').text() === 'MikuTalk')
+	if(MikuTalk)
 	{
 		alert('from：https://github.com/HFIProgramming/mikutap/')
+		return
 	}
-	else
+	if(confirm(`MoeTalk当前版本：${version}\nMoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n你可以点击【确认】尝试更新版本并刷新页面`))
 	{
-		if(confirm(`MoeTalk当前版本：${version}\nMoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n你可以点击【确认】尝试更新版本并刷新页面`))
+		window.caches && caches.keys && caches.keys().then(function(keys)
 		{
-			window.caches && caches.keys && caches.keys().then(function(keys)
+			let length = 0;
+			keys.forEach(function(key)
 			{
-				let length = 0;
-				keys.forEach(function(key)
-				{
-					length=length+1
-					caches.delete(key);
-				});
-				if(keys.length === length)
-				{
-					localStorage['mt-rand'] = Math.random()
-					location.reload(true)
-				}
+				length=length+1
+				caches.delete(key);
 			});
-		}
+			if(keys.length === length)
+			{
+				localStorage['mt-rand'] = Math.random()
+				location.reload(true)
+			}
+		});
 	}
 
 });
@@ -372,22 +369,23 @@ $(window).keydown(function(event)
 });
 $('body').on('click',"#mt-style",function()
 {
-	if(mt_settings['风格样式'] === 'rgb(255,255,255)')
+	if(mt_settings['风格样式'][0] === 'MomoTalk')
 	{
-		$(window.location.href.indexOf('player') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,247,225)');
-		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','rgb(255,247,225)');
-		$('.talk__InfoBox-sc-eq7cqw-8').css('background','transparent');
-		mt_settings['风格样式'] = 'rgb(255,247,225)';//yuzutalk
-		$('.旁白').css('background','transparent');
+		mt_settings['风格样式'][0] = 'YuzuTalk'
+		mt_settings['风格样式'][1] = '#FFF7E1'//背景
+		mt_settings['风格样式'][2] = 'transparent'//旁白
 	}
 	else
 	{
-		$(window.location.href.indexOf('player') > 0 ? '.RightScreen__CContainer-sc-14j003s-2' : '.Talk__CContainer-sc-1uzn66i-1').css('background-color','rgb(255,255,255)');
-		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','rgb(255,255,255)');
-		$('.talk__InfoBox-sc-eq7cqw-8').css('background','rgb(220,229,232)');
-		mt_settings['风格样式'] = 'rgb(255,255,255)';//momotalk
-		$('.旁白').css('background','rgb(220,229,232)');
+		mt_settings['风格样式'][0] = 'MomoTalk'
+		mt_settings['风格样式'][1] = 'transparent'//背景
+		mt_settings['风格样式'][2] = '#DCE5E8'//旁白
 	}
+	if(!MikuTalk)$('._app__Wrapper-sc-xuvrnm-1').css('background-color',mt_settings['风格样式'][1]);
+	if(!MikuTalk)$('.RightScreen__CContainer-sc-14j003s-2').css('background-color',mt_settings['风格样式'][1]);
+	if(!MikuTalk)$('.Talk__CContainer-sc-1uzn66i-1').css('background-color',mt_settings['风格样式'][1]);
+	$('.talk__InfoBox-sc-eq7cqw-8').css('background-color',mt_settings['风格样式'][2]);
+	$('.旁白').css('background',mt_settings['风格样式'][2]);
 	saveStorage('设置选项',mt_settings,'local')
 })
 
@@ -584,7 +582,7 @@ function makeMessage(type,data,chatIndex,mode)
 	}
 	if(type === 'info')
 	{
-		聊天 = `<span class="旁白 编辑" style='${style}background: ${mt_settings['风格样式'] === 'rgb(255,255,255)' ? 'rgb(220,229,232)' : 'transparent'};'>${data.content}</span>`
+		聊天 = `<span class="旁白 编辑" style='${style}background: ${mt_settings['风格样式'][2]};'>${data.content}</span>`
 	}
 	if(type === 'reply')
 	{

@@ -1760,7 +1760,6 @@
 										disabled: h.length < 1,
 										onClick: function()
 										{
-											if(h === '愚人节测试')mt_settings['顶部标题'] = 'MikuTalk'
 											sendMessage({content: h},'reply'), y()
 										},
 										children: L.Z.confirm[g]
@@ -2216,6 +2215,7 @@
 											disabled: chats.length < 1,
 											onClick: function()
 											{
+												if(imageArr.length > 0)return;
 												let title = L.Z.title[g] + " : " + ("" !== _ ? _ : L.Z.noTitle[g])
 												let writer = L.Z.writer[g] + " : " + ("" !== R ? R : L.Z.noName[g])
 												if(k.title === false)title = ''
@@ -2227,7 +2227,7 @@
 												let leng = (16+(localStorage['watermark'] === 'false' ? 0 : 80))*S
 												let length = leng
 												let json = chats
-												imageArr = []
+												
 												for(let end=0;end<$$(".消息").length;end++)
 												{
 													length = length+($$(`.消息:eq(${end})`).outerHeight()*S)
@@ -4565,7 +4565,7 @@
 					})
 				}, function(e)
 				{
-					return mt_settings['风格样式']//#自定义样式
+					return MikuTalk ? '' : mt_settings['风格样式'][1]//#自定义样式
 				}, function(e)
 				{
 					return e.theme.color.rgb255_255_255
@@ -5062,7 +5062,7 @@
 					return e.theme.color.rgb69_78_89
 				}, function(e)
 				{
-					return mt_settings['风格样式'] === 'rgb(255,255,255)' ? 'rgb(220,229,232)' : 'transparent'//#自定义样式
+					return mt_settings['风格样式'][2]//#自定义样式
 				}),
 				f = (0, r.ZP)(o.Mm).withConfig(
 				{

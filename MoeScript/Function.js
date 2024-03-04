@@ -42,7 +42,6 @@ if(!mt_settings['语言选项'])
 	mt_settings['图片比例'] = localStorage['mt-size'] ? localStorage['mt-size'] : '90%'
 	mt_settings['差分比例'] = localStorage['mt-cfsize'] ? localStorage['mt-cfsize'] : '90%'
 	mt_settings['排序方式'] = localStorage['mt-order'] ? localStorage['mt-order'] : 'name'
-	mt_settings['风格样式'] = localStorage['mt-style'] ? localStorage['mt-style'] : 'rgb(255,255,255)'
 	mt_settings['人物改名'] = localStorage['mt-name'] ? JSON.parse(localStorage['mt-name']) : {}
 	mt_settings['图片格式'] = localStorage['mt-image'] ? localStorage['mt-image'] : 'image/png'
 	mt_settings['禁止字体'] = localStorage['mt-nofont'] ? localStorage['mt-nofont'] : false
@@ -90,6 +89,13 @@ delete localStorage['顶部标题']
 !mt_settings['文字样式'] ? mt_settings['文字样式'] = {} : ''
 !mt_settings['宽度限制'] ? mt_settings['宽度限制'] = 500 : ''
 !mt_settings['顶部标题'] ? mt_settings['顶部标题'] = 'MoeTalk' : ''
+!mt_settings['风格样式'] ? mt_settings['风格样式'] = mt_settings['风格样式'] : []
+if(['YuzuTalk','MomoTalk'].indexOf(mt_settings['风格样式'][0]) < 0)
+{
+	mt_settings['风格样式'][0] = 'MomoTalk'
+	mt_settings['风格样式'][1] = ''
+	mt_settings['风格样式'][2] = '#DCE5E8'
+}
 saveStorage('设置选项',mt_settings,'local')
 
 var mtlang = mt_settings['语言选项'];
@@ -780,7 +786,7 @@ function mt_title(moetalk,title,writer)
 		$('#mt_writer').text('')
 		$('.mt_watermark').text('')
 		if(localStorage['watermark'] === 'false')$('#mt_watermark').hide()
-		$('#mt_watermark').css('background-color',mt_settings['风格样式'].split(' ')[1])
+		$('#mt_watermark').css('background-color',MikuTalk || mt_settings['风格样式'][1])
 	}
 }
 
@@ -809,6 +815,7 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)//截屏功能
 	$('.消息').show()
 	$('.消息').slice(0,imgArea.start).hide()
 	$('.消息').slice(imgArea.end,$('.消息').length).hide()
+	if(MikuTalk)$(".Talk__CContainer-sc-1uzn66i-1").css('background-color',MikuTalk)
 
 	截屏()($(".Talk__CContainer-sc-1uzn66i-1")[0],
 	{
@@ -818,7 +825,7 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)//截屏功能
 		scale: 清晰度
 	}).then(function(img)
 	{
-		
+		if(MikuTalk)$(".Talk__CContainer-sc-1uzn66i-1").css('background-color','transparent')
 		let imgBaes64 = img.toDataURL(mt_settings['图片格式']);
 		let height = img.height
 		imageArr.shift()
