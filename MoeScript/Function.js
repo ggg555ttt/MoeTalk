@@ -94,7 +94,7 @@ if(['YuzuTalk','MomoTalk'].indexOf(mt_settings['风格样式'][0]) < 0)
 {
 	mt_settings['风格样式'] = []
 	mt_settings['风格样式'][0] = 'MomoTalk'
-	mt_settings['风格样式'][1] = 'transparent'
+	mt_settings['风格样式'][1] = '#FFFFFF'
 	mt_settings['风格样式'][2] = '#DCE5E8'
 }
 saveStorage('设置选项',mt_settings,'local')
@@ -816,7 +816,10 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)//截屏功能
 	$('.消息').show()
 	$('.消息').slice(0,imgArea.start).hide()
 	$('.消息').slice(imgArea.end,$('.消息').length).hide()
-	if(MikuTalk)$(".Talk__CContainer-sc-1uzn66i-1").css('background-color',MikuTalk)
+	if(MikuTalk && $(".Talk__CContainer-sc-1uzn66i-1").css('background-color') === 'rgba(0, 0, 0, 0)')
+	{
+		$(".Talk__CContainer-sc-1uzn66i-1").css('background-color',MikuTalk)
+	}
 
 	截屏()($(".Talk__CContainer-sc-1uzn66i-1")[0],
 	{
@@ -826,7 +829,10 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)//截屏功能
 		scale: 清晰度
 	}).then(function(img)
 	{
-		if(MikuTalk)$(".Talk__CContainer-sc-1uzn66i-1").css('background-color','transparent')
+		if(['rgb(255, 255, 255)','rgb(255, 247, 225)'].indexOf($(".Talk__CContainer-sc-1uzn66i-1").css('background-color')) < 0)
+		{
+			$(".Talk__CContainer-sc-1uzn66i-1").css('background-color','transparent')
+		}
 		let imgBaes64 = img.toDataURL(mt_settings['图片格式']);
 		let height = img.height
 		imageArr.shift()

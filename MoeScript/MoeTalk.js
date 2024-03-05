@@ -378,12 +378,12 @@ $('body').on('click',"#mt-style",function()
 	else
 	{
 		mt_settings['风格样式'][0] = 'MomoTalk'
-		mt_settings['风格样式'][1] = 'transparent'//背景
+		mt_settings['风格样式'][1] = '#FFFFFF'//背景
 		mt_settings['风格样式'][2] = '#DCE5E8'//旁白
 	}
 	if(!MikuTalk)$('._app__Wrapper-sc-xuvrnm-1').css('background-color',mt_settings['风格样式'][1]);
-	if(!MikuTalk)$('.RightScreen__CContainer-sc-14j003s-2').css('background-color',mt_settings['风格样式'][1]);
-	if(!MikuTalk)$('.Talk__CContainer-sc-1uzn66i-1').css('background-color',mt_settings['风格样式'][1]);
+	$('.RightScreen__CContainer-sc-14j003s-2').css('background-color',mt_settings['风格样式'][1]);
+	$('.Talk__CContainer-sc-1uzn66i-1').css('background-color',mt_settings['风格样式'][1]);
 	$('.talk__InfoBox-sc-eq7cqw-8').css('background-color',mt_settings['风格样式'][2]);
 	$('.旁白').css('background',mt_settings['风格样式'][2]);
 	saveStorage('设置选项',mt_settings,'local')
@@ -741,7 +741,7 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 			if(winHeight === window.innerHeight)behavior = "smooth"
 		}
 		if(nextindex)nextindex.scrollIntoView({block:'center',behavior:behavior})
-	}, 100)
+	}, 1)
 	if(!mt_settings['后台保存'])saveStorage('chats',[...chats,...otherChats],'local')
 }
 $("body").on('click',".编辑",function()
