@@ -920,3 +920,37 @@ function saveStorage(key,val,mode)
 		}
 	}
 }
+// var 表情 = {};
+// 表情.名称 = ''
+// 表情.类型 = ''
+// 表情.页码 = ''
+// 表情.列表 = []
+// function mt_emoji(S,mode,custom = false,goBack = false)
+// {
+// 	let no = mt_settings['选择角色'].no;
+// 	let school = mt_characters[no].school
+// 	let club = mt_characters[no].club
+// 	let arr = mt_characters[no] && mt_characters[no][mode] ? mt_characters[no][mode].split(',') : []
+
+// if(!sessionStorage[no] || isNaN(parseInt(sessionStorage[no])))sessionStorage[no] = 0
+
+// 	let cfindex = parseInt(sessionStorage[no]);
+// 	if(goBack === '-')cfindex = cfindex-1
+// 	if(goBack === '+')cfindex = cfindex+1
+// 	if(cfindex < 0 || cfindex >= arr.length)cfindex = 0
+// 	sessionStorage[no] = cfindex
+
+// 	let cfarr = []
+	
+// 	Array(parseInt(arr[cfindex].split('.').slice(-2)[0])).fill(0).map(function(v,k)
+// 	{
+// 		cfarr[k] = `Images/${mode}/${school}/${club}/${arr[cfindex].split('.').slice(0,-2)[0]}.${k+1}.webp`
+// 	})
+// 	表情.名称 = loadname(no)
+// 	表情.类型 = mode
+// 	表情.页码 = `${arr.length < 1 ? 0 : cfindex+1}/${arr.length}`
+// 	表情.列表 = cfarr
+// 	S(!0)
+// 	console.log(表情)
+
+// }

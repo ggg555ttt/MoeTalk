@@ -1649,7 +1649,7 @@ var mt_characters = {
             "kr": "우자와 레이사",
             "pinyin": "yuzelingsha"
         },
-        "charface": "宇泽玲纱/CH0167/CH0167.18.webp,宇泽玲纱/宇泽玲纱.4.webp"
+        "charface": "宇泽玲纱/CH0167/CH0167.18.webp,宇泽玲纱/宇泽玲纱.4.webp,宇泽玲纱/玲纱_Velstadt-/玲纱_Velstadt-.30.webp"
     },
     "守月铃美": {
         "school": "圣三一",
@@ -2391,7 +2391,7 @@ var mt_characters = {
             "kr": "아이키요 후우카",
             "pinyin": "aiqingfengxiang"
         },
-        "charface": "爱清枫香/CH0177/CH0177.18.webp,爱清枫香/fuuka/fuuka.8.webp,爱清枫香/爱清枫香.8.webp"
+        "charface": "爱清枫香/CH0177/CH0177.18.webp,爱清枫香/fuuka/fuuka.8.webp,爱清枫香/爱清枫香.8.webp,爱清枫香/cv32637684/cv32637684.10.webp"
     },
     "牛牧茱莉": {
         "school": "格黑娜",
@@ -2438,7 +2438,7 @@ var mt_characters = {
     "鳄渊明里": {
         "school": "格黑娜",
         "club": "美食研究部",
-        "head": "Akari_L2D,NP0068_Collection,Akari_Collection,CH0196_Collection,Akari,CH0196",
+        "head": "Akari_L2D,CH0196_L2D,NP0068_Collection,Akari_Collection,CH0196_Collection,Akari,CH0196",
         "name": {
             "zh_cn": "鳄渊 明里",
             "zh_tw": "鱷淵 亞伽里",
