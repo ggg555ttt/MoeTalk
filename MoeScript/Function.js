@@ -361,7 +361,8 @@ function combineFiles(mainFile, hideFile, fileName, Index) {
 		//blobToBase64(blob,function(e){$("[alt='download']").attr('src',`data:${localStorage['mt-image']};base64,${e}`)})//替换手动保存的图片
 		blobToBase64(blob,function(e)
 		{
-			$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${Index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${e}'></div>`)
+			$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${Index}</span>/${imageArrL}张图片：</h1><img class='img${Index}'></div>`)
+			$(`.img${Index}`).attr('src',`data:${mt_settings['图片格式']};base64,${e}`)
 		})
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
@@ -855,7 +856,8 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)//截屏功能
 
 			if(imageZip)
 			{
-				$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${imgBaes64}'></div>`)
+				$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1><img class='img${imgArea.index}'></div>`)
+				$(`.img${imgArea.index}`).attr('src',`data:${mt_settings['图片格式']};base64,${imgBaes64}`)
 				imageZip.file(`MoeTalk_${title}_${imgArea.index}_${height}.${mt_settings['图片格式'].split('/')[1]}`,img);
 				if(imageArr.length === 0)
 				{
