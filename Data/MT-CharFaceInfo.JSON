@@ -24,6 +24,7 @@ var mt_CharFaceInfo = {
     "cv32637684": "249137912",
     "temp": "249137912",
     "cv21633881": "1611507597",
+    "莉音_Bocchi138": "tb.1.152bee5a.BxDLty5yCWTVdLrqLpjbpA",
     "8858225712": "tb.1.9312ac00.QCOj-TpTukWX9YjgQ6yJdQ",
     "cv32284770": "tb.1.9312ac00.QCOj-TpTukWX9YjgQ6yJdQ",
     "千寻_Velstadt-": "tb.1.dab25569.tTQcu91BN6o2ExQyQxr5KA",
@@ -41,6 +42,7 @@ var mt_CharFaceInfo = {
 var mt_CharFaceIndex = {
     "249137912": "https://space.bilibili.com/249137912",
     "1611507597": "https://space.bilibili.com/1611507597",
+    "tb.1.152bee5a.BxDLty5yCWTVdLrqLpjbpA": "https://tieba.baidu.com/home/main?id=tb.1.152bee5a.BxDLty5yCWTVdLrqLpjbpA",
     "tb.1.9312ac00.QCOj-TpTukWX9YjgQ6yJdQ": "https://tieba.baidu.com/home/main?id=tb.1.9312ac00.QCOj-TpTukWX9YjgQ6yJdQ",
     "tb.1.dab25569.tTQcu91BN6o2ExQyQxr5KA": "https://tieba.baidu.com/home/main?id=tb.1.dab25569.tTQcu91BN6o2ExQyQxr5KA"
 }
