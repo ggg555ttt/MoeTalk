@@ -491,7 +491,7 @@
 								{
 									width: 252,
 									height: 252,
-									src: href+"Images/Ui/School/"+(t.school[lang] === '自定义' ? '自定义' : mt_characters[t.no].school)+'.webp',//#学校图标
+									src: href+"Images/Ui/School/"+(t.school[mtlang] === '自定义' ? '自定义' : mt_characters[t.no].school)+'.webp',//#学校图标
 									onError: function(e)
 									{
 										var t = e.currentTarget;
@@ -1092,7 +1092,7 @@
 				Q = n.n($),
 				J = n(7451),
 				ee = n(4212),
-				et = function(e)
+				/*et = function(e)
 				{
 					var t = e.show,
 						n = e.handleShow,
@@ -1185,9 +1185,9 @@
 							})]
 						})
 					})
-				},
+				},*/
 				en = n(3162),
-				eo = function(e)
+				/*eo = function(e)
 				{
 					var t, n, r, l = e.show,
 						u = e.handleShow,
@@ -1398,7 +1398,7 @@
 							})]
 						})
 					})
-				},
+				},*/
 				er = g.ZP.div.withConfig(
 				{
 					displayName: "PopupTalkSetting__Body",
@@ -1541,7 +1541,9 @@
 					{
 						style: h ?
 						{
-							maxHeight: "33rem"
+							maxHeight: "11rem",
+							overflow: 'scroll',
+							flexDirection: 'row'
 						} :
 						{
 							maxHeight: "0"
@@ -1550,7 +1552,7 @@
 						{
 							children: [(0, b.jsxs)(eh,
 							{
-								children: [(0, b.jsxs)("span",
+								children: (0, b.jsxs)("span",
 								{
 									onClick: function()
 									{
@@ -1561,178 +1563,27 @@
 										color: "rgb(48, 150, 245)",
 										cursor: "pointer"
 									},
-									children: ["[", i.Z.search_writer[f], "] "]
-								}), l.SERIES_NO && (0, b.jsxs)(b.Fragment,
-								{
-									children: ["|", (0, b.jsxs)("span",
-									{
-										onClick: function()
-										{
-											m(J(6, l.SERIES_NO.toString()))
-										},
-										style:
-										{
-											color: "rgb(48, 150, 245)",
-											cursor: "pointer"
-										},
-										children: [" [", i.Z.search_series[f], "]"]
-									})]
-								})]
+									children: '【作者搜索】'
+								})
 							}), l.SERIES_NO && (0, b.jsxs)(eh,
 							{
 								children: [i.Z.series[f], " : ", l.SERIES_TITLE]
 							}), (0, b.jsxs)(eh,
 							{
-								children: [i.Z.characters[f], " : ", String(X)]
-							}), (0, b.jsxs)(eh,
-							{
-								children: [i.Z.date_created[f], " : ", null == P ? void 0 : P.M_DATE]
-							}), (0, b.jsxs)(eh,
-							{
-								children: [i.Z.views[f], " : ", null == P ? void 0 : P.HIT]
-							}), (0, b.jsxs)(es,
-							{
-								style:
+								children: [(0, b.jsx)(ep,
 								{
-									justifyContent: "space-around",
-									flexWrap: "wrap"
-								},
-								children: [(0, b.jsxs)(em,
-								{
-									children: [(0, b.jsx)(ep,
+									style: {
+										width: '1rem',
+										height: '1rem',
+										marginRight: '1rem'
+									},
+									children: (0, b.jsx)(x.xL,
 									{
-										onClick: function()
-										{
-											(null == P ? void 0 : P.M_STAR) === 1 || 1 === z || k || V("M_STAR", ""), F(1)
-										},
-										children: (0, b.jsx)(x.xL,
-										{
-											icon: (null == P ? void 0 : P.M_STAR) === 1 || 1 === z || k ? Z.pkM : B.pkM
-										})
-									}), (0, b.jsxs)(eh,
-									{
-										style:
-										{
-											marginTop: "0.5rem"
-										},
-										children: [i.Z.good[f], " - ", ((null == P ? void 0 : P.STAR) || 0) + z]
-									})]
-								}), (0, b.jsxs)(em,
-								{
-									children: [(0, b.jsx)(ep,
-									{
-										onClick: function()
-										{
-											(null == P ? void 0 : P.M_HATE) === 1 || 1 === G || k || V("M_HATE", ""), H(1)
-										},
-										children: (0, b.jsx)(x.xL,
-										{
-											icon: (null == P ? void 0 : P.M_HATE) === 1 || 1 === G || k ? Z.qfV : B.qfV
-										})
-									}), (0, b.jsxs)(eh,
-									{
-										style:
-										{
-											marginTop: "0.5rem"
-										},
-										children: [i.Z.bad[f], " - ", ((null == P ? void 0 : P.HATE) || 0) + G]
-									})]
-								}), (0, b.jsxs)(em,
-								{
-									children: [(0, b.jsx)(ep,
-									{
-										onClick: function()
-										{
-											var e;
-											k || ((null == P ? void 0 : P.M_BOOKMARK) === 1 || 1 === U ? ($("M_BOOKMARK"), W(0)) : null !== (e = E.data) && void 0 !== e && e.MEMBER_NO ? (V("M_BOOKMARK", ""), W(1)) : p((0, S.Aj)(!0)))
-										},
-										children: (0, b.jsx)(x.xL,
-										{
-											icon: (null == P ? void 0 : P.M_BOOKMARK) === 1 || 1 === U || k ? Z.xVw : B.xVw
-										})
-									}), (0, b.jsx)(eh,
-									{
-										style:
-										{
-											marginTop: "0.5rem"
-										},
-										children: i.Z.bookmark[f]
-									})]
-								})]
-							}), (0, b.jsxs)(es,
-							{
-								style:
-								{
-									justifyContent: "space-around",
-									marginTop: "0.5rem",
-									flexWrap: "wrap"
-								},
-								children: [2 === l.M_TYPE || (0, b.jsxs)(b.Fragment,
-								{
-									children: [(0, b.jsxs)(em,
-									{
-										children: [(0, b.jsx)(ep,
-										{
-											onClick: function()
-											{
-												Q()
-											},
-											children: (0, b.jsx)(x.xL,
-											{
-												icon: Z.M6U
-											})
-										}), (0, b.jsx)(eh,
-										{
-											style:
-											{
-												marginTop: "0.5rem"
-											},
-											children: i.Z.share[f]
-										})]
-									}), (0, b.jsxs)(em,
-									{
-										children: [(0, b.jsx)(ep,
-										{
-											onClick: function()
-											{
-												(null == P ? void 0 : P.M_REPORT) === 1 || k || R(!0)
-											},
-											children: (0, b.jsx)(x.xL,
-											{
-												icon: (null == P ? void 0 : P.M_REPORT) === 1 ? Z.icc : B.icc
-											})
-										}), (0, b.jsx)(eh,
-										{
-											style:
-											{
-												marginTop: "0.5rem"
-											},
-											children: i.Z.report[f]
-										})]
-									})]
-								}), (null === (r = E.data) || void 0 === r ? void 0 : r.MEMBER_NO) === l.MEMBER_NO && (0, b.jsxs)(em,
-								{
-									children: [(0, b.jsx)(ep,
-									{
-										onClick: function()
-										{
-											L(!0)
-										},
-										children: (0, b.jsx)(x.xL,
-										{
-											icon: Z.gr5
-										})
-									}), (0, b.jsx)(eh,
-									{
-										style:
-										{
-											marginTop: "0.5rem"
-										},
-										children: i.Z.setting[f]
-									})]
-								})]
+										icon: B.iiS
+									})
+								}),'章节1']//i.Z.characters[f], " : ", String(X)
 							})]
-						}), (0, b.jsx)(et,
+						})/*, (0, b.jsx)(et,
 						{
 							show: I,
 							handleShow: function(e)
@@ -1751,7 +1602,7 @@
 								L(e)
 							},
 							board: l
-						})]
+						})*/]
 					})
 				},
 				es = g.ZP.div.withConfig(
@@ -1919,6 +1770,13 @@
 						{
 							return n.apply(this, arguments)
 						});
+						r.BOARD_NO = 'BOARD_NO'
+						r.PROFILE_IDX = 'PROFILE_IDX'
+						r.MEMBER_NO = 'MEMBER_NO'
+						r.SERIES_IDX = '作品名'
+						r.TITLE = '系列'
+						r.NICKNAME = '作者名'
+						r.SERIES_TITLE = 'SERIES_TITLE'
 					return (0, b.jsxs)(b.Fragment,
 					{
 						children: [(0, b.jsxs)(e_,
@@ -1941,18 +1799,18 @@
 										display: "flex",
 										width: "100%"
 									},
-									children: [(0, b.jsx)(x.NZ,
+									children: [/*(0, b.jsx)(x.NZ,
 									{
 										height: 252,
 										width: 252,
 										alt: "profile",
-										src: "https://server.raun0129.com/asset/" + "image/character/ch".concat(r.PROFILE_NO, "/profile/").concat(r.PROFILE_IDX, ".png"),
+										src: loadhead(r.PROFILE_NO, r.PROFILE_IDX),
 										onError: function(e)
 										{
 											var t = e.currentTarget;
 											(0, a.Mp)(t, "character")
 										}
-									}), (0, b.jsxs)(ex,
+									}), */(0, b.jsxs)(ex,
 									{
 										children: [(0, b.jsx)("h2",
 										{
@@ -1961,27 +1819,53 @@
 												className: "bold",
 												children: (0, b.jsxs)(ey,
 												{
-													children: [r.SERIES_IDX && r.SERIES_IDX + ".", " ", r.TITLE]
+													children: '播放当前编辑的文档'
+													//children: [r.SERIES_IDX && r.SERIES_IDX + ".", " ", r.TITLE]
 												})
 											})
 										}), (0, b.jsx)(ew,
 										{
 											children: (0, b.jsxs)(eb,
 											{
-												children: [i.Z.writer[g], " : ", (0, b.jsx)("span",
-												{
-													children: r.NICKNAME
-												})]
+												//children: [i.Z.writer[g], " : ", (0, b.jsx)("span",{children: r.NICKNAME})]
+												children: (0, b.jsx)("span",{children: '在线书库功能正在开发中，敬请期待'})
 											})
 										})]
 									})]
 								})
 							}), (0, b.jsx)(ej,
 							{
-								disabled: h,
+								//disabled: h,
 								onClick: function()
 								{
-									C()
+									//C()
+									
+									let playChats = 
+									{
+										nowChats: [],
+										replyDepth: 0,
+										chats: [],
+										chatSpeed: (0, a.zP)(),
+										header: {},
+										board_no: r.BOARD_NO
+									}
+									if(!h)
+									{
+										playChats.chats = chats
+										playChats.header = chats[0]
+										f((0, ee.Fe)(playChats))
+										f((0, S.Cz)(!0))
+									}
+									else
+									{
+										playChats.chats = []
+										playChats.header = {}
+										f((0, ee.Fe)(playChats))
+										f((0, S.Cz)(!0))
+									}
+									m(!h)
+									
+									
 								},
 								children: (0, b.jsx)(x.xL,
 								{
@@ -2198,11 +2082,13 @@
 							{
 								style:
 								{
-									display: f && f.length > 0 && !(2 === g.C_TYPE && !g.CONTENT) ? "block" : "none",
+									//display: f && f.length > 0 && !(2 === g.C_TYPE && !g.CONTENT) ? "block" : "none",
+									display: "block",
 									width: "100%",
 									height: "auto"
 								},
-								children: null == f ? void 0 : f.map(function(e, t)
+								//children: null == f ? void 0 : f.map(function(e, t)
+								children: [{}].map(function(e, t)
 								{
 									return (0, b.jsx)(ef,
 									{

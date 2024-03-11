@@ -9277,7 +9277,7 @@
 							{
 								children: [(0, s.jsx)("span",
 								{
-									children: "talk" === c ? r.Z.change_talk_comment[l] : "reset" === c ? r.Z.reset_talk_comment[l] : r.Z.move_page_comment[l]
+									children: "reset" === c ? r.Z.reset_talk_comment[l] : r.Z.move_page_comment[l]
 								}), (0, s.jsxs)("span",
 								{
 									style:
@@ -17183,9 +17183,8 @@
 					{
 						return null !== e && "object" == typeof e && "[object Object]" === (e.toString ? e.toString() : Object.prototype.toString.call(e)) && !(0, a.typeOf)(e)
 					},
-					y = Object.freeze([]),
-					w = Object.freeze(
-					{});
+					y = [],
+					w = {};
 
 				function k(e)
 				{
@@ -27934,16 +27933,14 @@
 				u = null === s ? "" : `:${s}`;
 			r.config.emulator = {
 				url: `${a}//${o}${u}/`
-			}, r.settings.appVerificationDisabledForTesting = !0, r.emulatorConfig = Object.freeze(
-			{
+			}, r.settings.appVerificationDisabledForTesting = !0, r.emulatorConfig = {
 				host: o,
 				port: s,
 				protocol: a.replace(":", ""),
-				options: Object.freeze(
-				{
+				options: {
 					disableWarnings: i
-				})
-			}), i || function()
+				}
+			}, i || function()
 			{
 				function e()
 				{
@@ -28278,7 +28275,7 @@
 
 	function g(e, t)
 	{
-		return void 0 === t && (t = !1), b(e) || i(e) || !a(e) || (s(e) > 1 && (e.set = e.add = e.clear = e.delete = v), Object.freeze(e), t && o(e, function(e, t)
+		return void 0 === t && (t = !1), b(e) || i(e) || !a(e) || (s(e) > 1 && (e.set = e.add = e.clear = e.delete = v), e, t && o(e, function(e, t)
 		{
 			return g(t, !0)
 		}, !0)), e

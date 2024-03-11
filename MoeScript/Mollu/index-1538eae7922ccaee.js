@@ -4178,7 +4178,7 @@
 							{
 								className: '编辑',//羁绊
 								style: style,
-								character: n.content || loadname(n.sCharacter.no)
+								character: loadname(n.sCharacter.no)
 							})] : "info" === n.type ? (0, m.jsx)(eN.vD,
 							{
 								className: '编辑',//旁白

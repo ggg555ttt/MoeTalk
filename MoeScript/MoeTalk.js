@@ -487,20 +487,20 @@ function isfirst(chatIndex,chats,mode)
 	{
 		let typeArr = ['heart','info','reply']
 		if(mode === 'play')typeArr.pop()
-		//if(chats[chatIndex].sCharacter.no == 0)return false//判断角色
-		if(typeArr.indexOf(chats[chatIndex].type) > -1)return true//判断类型
 
 		if(chatIndex-1 < 0)return true//首条消息
+		if(typeArr.indexOf(chats[chatIndex].type) > -1)return true//判断类型
+		if(typeArr.indexOf(chats[chatIndex-1].type) > -1)return true//类型不符
+		if(chats[chatIndex].sCharacter.index != chats[chatIndex-1].sCharacter.index)return true//头像不符
+
+		if(chats[chatIndex].sCharacter.no == 0 && typeArr.indexOf(chats[chatIndex].type) < 0)return false//判断主角
+
 		if(chats[chatIndex].isFirst)return true//强制显示
 		if(chats[chatIndex].is_breaking)return true//截图分割
-
-		if(typeArr.indexOf(chats[chatIndex-1].type) > -1)return true//类型不符
 		if(toString(chats[chatIndex].name) != toString(chats[chatIndex-1].name))return true//名字不符
-		if(isTrue(chats[chatIndex].isRight) !== isTrue(chats[chatIndex-1].isRight))return true//位置不符
-		if(chats[chatIndex].sCharacter.index !== chats[chatIndex-1].sCharacter.index)return true//头像不符
+		if(isTrue(chats[chatIndex].isRight) != isTrue(chats[chatIndex-1].isRight))return true//位置不符
 	}
 	return false
-
 }
 function makeMessage(type,data,chatIndex,mode)
 {
