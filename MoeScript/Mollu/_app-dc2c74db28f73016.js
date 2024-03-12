@@ -9966,7 +9966,7 @@
 										children: '项目'
 									}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
-										href: "https://wj.qq.com/s2/12952865/a1aa/",
+										href: "https://wj.qq.com/s2/14292312/3ade/",
 										className: "bold",
 										id: 'help',
 										style:
@@ -9977,11 +9977,7 @@
 											position: "relative",
 											top: "-2.5px"
 										},
-										children: '反馈',
-										onClick:function()
-										{
-											alert('建议您先去设置页面“下载localStorage存档”并用于反馈页面的提交\n这样有助于开发者更好的排查错误')
-										}
+										children: '反馈'
 									})]
 								}), a || (0, O.jsx)(T,
 								{
