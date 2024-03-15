@@ -426,12 +426,12 @@ function list()
 	setTimeout(function(){selectClick(37)})
 	setTimeout(function(){selectClick(39)})
 }
-function loaddata(json,mode)//识别存档
+function loaddata(json,mode,ARR = '')//识别存档
 {
 	let josnsize = (json.length/1024).toFixed(0)
 	let custom_char = {};
 	let custom_head = {};
-	json = JSON.parse(json)
+	if(!ARR)json = JSON.parse(json)
 	if(!json[0] || (json[0] && !json[0].title))//错误数据
 	{
 		json[0] = {};
@@ -562,6 +562,7 @@ function loaddata(json,mode)//识别存档
 				}
 			}
 
+			if(v.yuzutalk.nameOverride)json[1][k]['name'] = v.yuzutalk.nameOverride;
 			if(v.yuzutalk.avatarState === 'SHOW')json[1][k]['isFirst'] = true;
 			if(v.is_breaking === true)json[1][k]['is_breaking'] = true;
 		})
@@ -665,7 +666,7 @@ function MoeToClosure()//Moe转Closure
 		let img = v['sCharacter']['index'];
 		let data = 'MT-';
 		if(closure_char[id])data = "ba-"
-		if(id != 0 && id.indexOf('custom-') < 0)//正常角色
+		if(!mt_char[id] && !mt_schar[id] && id != 0)//正常角色
 		{
 			ct[k]['char_id'] = data+id;
 			ct[k]['img'] = img;
@@ -680,7 +681,7 @@ function MoeToClosure()//Moe转Closure
 				custom_chars[ct[k]['char_id']]['name'] = loadname(id);
 			}
 		}
-		if(id != 0 && id.indexOf('custom-') > -1)//自定义角色
+		if(mt_char[id] || mt_schar[id])//自定义角色
 		{
 			ct[k]['char_id'] = id;
 			ct[k]['img'] = 'uploaded';
@@ -733,7 +734,7 @@ function MoeToClosure()//Moe转Closure
 		let img = v.index;
 		let data = 'MT-';
 		if(closure_char[id])data = "ba-"
-		if(id.indexOf('custom-') < 0)//正常角色
+		if(!mt_char[id] && !mt_schar[id] && id != 0)//正常角色
 		{
 			closuretalk['chars'][k]['char_id'] = data+id;
 			closuretalk['chars'][k]['img'] = img;
@@ -748,7 +749,7 @@ function MoeToClosure()//Moe转Closure
 				custom_chars[closuretalk['chars'][k]['char_id']]['name'] = loadname(id);
 			}
 		}
-		if(id.indexOf('custom-') > -1)//自定义角色
+		if(mt_char[id] || mt_schar[id])//自定义角色
 		{
 			closuretalk['chars'][k]['char_id'] = id;
 			closuretalk['chars'][k]['img'] = 'uploaded';
@@ -766,7 +767,7 @@ function MoeToClosure()//Moe转Closure
 	})
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 	$$('#downImg').html('')
-	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(closuretalk));//生成专用存档
+	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(closuretalk,null,4));//生成专用存档
 }
 function mt_title(moetalk,title,writer)
 {

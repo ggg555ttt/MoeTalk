@@ -16,6 +16,13 @@ var replyDepths = [0];
 var otherChats = []
 var chats = []
 var winHeight = window.innerHeight
+
+var LibraryURL = 'Data/Library'
+var directory = []
+var nowChapter = []
+nowChapter[0] = ''
+nowChapter[1] = {}
+nowChapter[1].chapter = []
 JSON.parse(localStorage['chats']).map(function(v,k)
 {
 	if(v.replyDepth != 0)otherChats.push(v)

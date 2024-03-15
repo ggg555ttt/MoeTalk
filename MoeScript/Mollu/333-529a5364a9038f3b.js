@@ -501,6 +501,20 @@
 									accept: ".png,.json",
 									onChange: function(e)
 									{
+										let json = {
+											nowChats: [],
+											replyDepth: 0,
+											chats: [],
+											chatSpeed: (0, g.zP)(),
+											header: {},
+											board_no: 0
+										}
+										L((0, p.Fe)(json))
+										L((0, x.Cz)(!0))
+										nowChapter[0] = ''
+										nowChapter[1] = {}
+										nowChapter[1].chapter = []
+										$$('.nowChapter').text('')
 										O(e)
 									}
 								}), (0, k.jsx)(T,
@@ -555,6 +569,14 @@
 								})
 								//*速度设置按钮
 								]
+							}), (0, k.jsx)('span',
+							{
+								style:
+								{
+									//fontSize: '1.5rem'
+								},
+								className: 'nowChapter',
+								children: ''
 							}), (0, k.jsxs)(E,
 							{
 								style:
@@ -794,8 +816,41 @@
 							onClick: function()
 							{
 								n()
+								let nextindex = nowChapter[0]+1
+								let chapterlist = nowChapter[1].chapter
+								if(chapterlist[nextindex])
+								{
+									//if(isNaN(nextindex))return;
+									$$('.dDBXxQ').show()
+									fetch(`${href}${LibraryURL}/${nowChapter[1].author}/${nowChapter[1].name}/${chapterlist[nextindex]}.json`).then(function(response)
+									{
+										return response.json();
+									}).then(function(data)
+									{
+										data = loaddata(data,'palyer','arr')[1]
+										nowChapter[0] = nextindex
+										let playChat = 
+										{
+											nowChats: [],
+											replyDepth: 0,
+											chats: data,
+											chatSpeed: (0, l.zP)(),
+											header: data[0],
+											board_no: 0
+										}
+										// m((0, S.Cz)(!0))
+										$$('.dDBXxQ').hide()
+										e((0, i.Fe)(playChat))
+										e((0, u.Cz)(!0))
+										$$('.nowChapter').text(`${nowChapter[1].name}_${nextindex}：${nowChapter[1].chapter[nextindex]}`)
+									});
+								}
+								else
+								{
+									$$('.nowChapter').text('')
+								}
 							},
-							children: r.Z.end[t]
+							children: nowChapter[1].chapter[nowChapter[0]+1] ? '点击前往下一章' : r.Z.end[t]
 						})]
 					})
 				},
@@ -985,17 +1040,17 @@
 						}),
 						d = function()
 						{
-							console.log(h)
-							console.log(a)
+							//console.log(h)
+							//console.log(a)
 							var e = a.filter(function(e)
 							{
 								return e.replyDepth === t.content.split('\n')[index]//
 							});
-							console.log(e)
+							//console.log(e)
 							if(0 === e.length)
 							{
 								var n = (0, l.G_)(a, t);
-								console.log(n)
+								//console.log(n)
 								if(null !== n && "{end}" !== n.content.trim())
 								{
 									r((0, i.e$)(

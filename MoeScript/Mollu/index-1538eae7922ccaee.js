@@ -2375,7 +2375,7 @@
 											mt_char: mt_char,//@自创角色
 											mt_head: mt_head,//@自创头像
 											'选择角色': mt_settings['选择角色']//@
-										}, [...chats,...otherChats]])], e.next = 6, (0, u.rU)(r);
+										}, [...chats,...otherChats]],null,4)], e.next = 6, (0, u.rU)(r);
 									case 6:
 										o = e.sent, (0, ef.saveAs)(o,`MoeTalk${L.Z.sharedFile[d]}_${t.title}_${mt_height()}.png`), blobToBase64(o,function(base64)
 										{

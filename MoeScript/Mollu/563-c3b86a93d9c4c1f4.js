@@ -835,7 +835,7 @@
 								},
 								children: (0, b.jsxs)("h1",
 								{
-									children: [`${i.Z.private[d]} ${i.Z.message[d]}`, (0, b.jsxs)("span",
+									children: [`${i.Z.momotalk[d]} ${i.Z.library[d]}`, (0, b.jsxs)("span",
 									{
 										style:
 										{
@@ -915,10 +915,14 @@
 									})]
 								})]
 							})]
+						}), (0, b.jsxs)(H,
+						{
+							children: 'QQ反馈交流群：922392676'
 						}), (0, b.jsxs)(K,
 						{
 							style:
 							{
+								display: 'none',
 								width: "100%"
 							},
 							children: [(0, b.jsx)("div",
@@ -1187,7 +1191,7 @@
 					})
 				},*/
 				en = n(3162),
-				/*eo = function(e)
+				eo = function(e)
 				{
 					var t, n, r, l = e.show,
 						u = e.handleShow,
@@ -1319,7 +1323,8 @@
 								children: [(0, b.jsx)(I.Dx,
 								{
 									className: "bold",
-									children: i.Z.setting[p]
+									children: `${h.name} ${e.index+1}`
+									//children: i.Z.setting[p]
 								}), (0, b.jsx)(I.ec,
 								{
 									onClick: function()
@@ -1331,7 +1336,7 @@
 								})]
 							}), (0, b.jsx)(I.$0,
 							{
-								children: (0, b.jsxs)(er,
+								children: [(0, b.jsxs)(er,
 								{
 									children: [(0, b.jsxs)(ei,
 									{
@@ -1339,11 +1344,35 @@
 										{
 											onClick: function()
 											{
-												v()
+												if(isNaN(e.index+1))return;
+												$$('.dDBXxQ').show()
+												fetch(`${href}${LibraryURL}/${h.author}/${h.name}/${h.chapter[e.index]}.json`).then(function(response)
+												{
+													return response.json();
+												}).then(function(data)
+												{
+													u(!1)
+													data = loaddata(data,'palyer','arr')[1]
+													nowChapter[0] = e.index
+													nowChapter[1] = h
+													let playChat = 
+													{
+														nowChats: [],
+														replyDepth: 0,
+														chats: data,
+														chatSpeed: (0, a.zP)(),
+														header: data[0],
+														board_no: 0
+													}
+													$$('.dDBXxQ').hide()
+													m((0, ee.Fe)(playChat))
+													m((0, S.Cz)(!0))
+													$$('.nowChapter').text(`${h.name}_${e.index+1}：${h.chapter[e.index]}`)
+												});
 											},
 											children: (0, b.jsx)(x.xL,
 											{
-												icon: Z.q7m
+												icon: B.iiS
 											})
 										}), (0, b.jsx)(ea,
 										{
@@ -1351,54 +1380,21 @@
 											{
 												marginTop: "0.5rem"
 											},
-											children: i.Z.download[p]
-										})]
-									}), (0, b.jsxs)(ei,
-									{
-										children: [(0, b.jsx)(ec,
-										{
-											onClick: function()
-											{
-												C(2 === h.M_TYPE ? 1 : 2)
-											},
-											children: (0, b.jsx)(x.xL,
-											{
-												icon: 2 === h.M_TYPE ? Z.byT : Z.tAh
-											})
-										}), (0, b.jsx)(ea,
-										{
-											style:
-											{
-												marginTop: "0.5rem"
-											},
-											children: 2 === h.M_TYPE ? i.Z.open[p] : i.Z.private[p]
-										})]
-									}), (0, b.jsxs)(ei,
-									{
-										children: [(0, b.jsx)(ec,
-										{
-											onClick: function()
-											{
-												N()
-											},
-											children: (0, b.jsx)(x.xL,
-											{
-												icon: Z.Vui
-											})
-										}), (0, b.jsx)(ea,
-										{
-											style:
-											{
-												marginTop: "0.5rem"
-											},
-											children: i.Z.delete[p]
+											children: i.Z.play[p]
 										})]
 									})]
-								})
+								}), (0, b.jsx)(H,
+								{
+									style:
+									{
+										marginTop: "0.5rem"
+									},
+									children: '转载已获作者授权'
+								})]
 							})]
 						})
 					})
-				},*/
+				},
 				er = g.ZP.div.withConfig(
 				{
 					displayName: "PopupTalkSetting__Body",
@@ -1432,111 +1428,9 @@
 						{
 							return e.global.lang
 						}),
-						_ = (0, d.useRouter)(),
-						g = (0, s.vC)(
-						{
-							fixedCacheKey: "account"
-						}),
-						y = (0, o.Z)(g, 2),
-						E = (y[0], y[1]),
-						w = (0, s.s1)(
-						{
-							fixedCacheKey: l.BOARD_NO.toString()
-						}),
-						j = (0, o.Z)(w, 2),
-						T = j[0];
-					j[1];
-					var v = (0, s.uv)(
-						{
-							fixedCacheKey: l.BOARD_NO.toString()
-						}),
-						N = (0, o.Z)(v, 2),
-						C = N[0];
-					N[1];
-					var O = (0, s.Jl)(
-						{
-							BOARD_NO: l.BOARD_NO,
-							LOCAL_NO: localStorage.getItem("local_no") || "0",
-							MEMBER_NO: (null === (t = E.data) || void 0 === t ? void 0 : t.MEMBER_NO) || 0
-						},
-						{
-							skip: !h
-						}),
-						P = O.data,
-						k = O.isFetching,
-						M = (0, u.useState)(!1),
-						I = M[0],
-						R = M[1],
 						Y = (0, u.useState)(!1),
 						A = Y[0],
-						L = Y[1],
-						D = (0, u.useState)(0),
-						z = D[0],
-						F = D[1],
-						q = (0, u.useState)(0),
-						G = q[0],
-						H = q[1],
-						K = (0, u.useState)(0),
-						U = K[0],
-						W = K[1],
-						X = null == P ? void 0 : null === (n = P.CHARACTERS) || void 0 === n ? void 0 : n.split("|").filter(function(e)
-						{
-							return "" !== e
-						}).reverse().map(function(e)
-						{
-							return (0, a.fY)(Number.parseInt(e.trim()), !0, f)
-						}),
-						V = function(e, t)
-						{
-							var n;
-							localStorage.getItem("local_no") && T(
-							{
-								TABLE: e,
-								MENT: t,
-								BOARD_NO: l.BOARD_NO,
-								MEMBER_NO: (null === (n = E.data) || void 0 === n ? void 0 : n.MEMBER_NO) || 0,
-								LOCAL_NO: localStorage.getItem("local_no") || ""
-							})
-						},
-						$ = function(e)
-						{
-							var t;
-							C(
-							{
-								TABLE: e,
-								BOARD_NO: l.BOARD_NO,
-								MEMBER_NO: (null === (t = E.data) || void 0 === t ? void 0 : t.MEMBER_NO) || 0,
-								LOCAL_NO: localStorage.getItem("local_no") || ""
-							})
-						},
-						Q = function()
-						{
-							l.SERIES_NO ? navigator.share(
-							{
-								title: "MoeTalk",
-								text: l.NICKNAME + "_" + l.TITLE,
-								url: "/".concat(_.pathname.split("/")[1], "/").concat((null == P ? void 0 : P.LANG) || f, "/1?c_type=6&content=").concat(l.SERIES_NO)
-							}) : navigator.share(
-							{
-								title: "MoeTalk",
-								text: l.NICKNAME + "_" + l.TITLE,
-								url: "/".concat(_.pathname.split("/")[1], "/").concat((null == P ? void 0 : P.LANG) || f, "/1?c_type=4&content=").concat(l.BOARD_NO)
-							})
-						},
-						J = function(e, t)
-						{
-							var n;
-							return {
-								PAGE: 1,
-								M_TYPE: (0, a.MY)(_.pathname.split("/")[1]),
-								O_TYPE: 0,
-								B_TYPE: 0,
-								C_TYPE: e,
-								CONTENT: t,
-								LANG: f,
-								MEMBER_NO: (null === (n = E.data) || void 0 === n ? void 0 : n.MEMBER_NO) || 0
-							}
-						};
+						L = Y[1];
 					return (0, b.jsxs)(ed,
 					{
 						style: h ?
@@ -1552,57 +1446,62 @@
 						{
 							children: [(0, b.jsxs)(eh,
 							{
-								children: (0, b.jsxs)("span",
+								children: (0, b.jsxs)("a",
 								{
-									onClick: function()
-									{
-										m(J(5, l.MEMBER_NO.toString()))
-									},
 									style:
 									{
 										color: "rgb(48, 150, 245)",
 										cursor: "pointer"
 									},
-									children: '【作者搜索】'
+									children: '【作者主页】',
+									href: l.home,
+									target: '_blank'
 								})
-							}), l.SERIES_NO && (0, b.jsxs)(eh,
+							}), l.chapter.map(function(v,k)
 							{
-								children: [i.Z.series[f], " : ", l.SERIES_TITLE]
-							}), (0, b.jsxs)(eh,
-							{
-								children: [(0, b.jsx)(ep,
+								return (0, b.jsxs)(eh,
 								{
-									style: {
-										width: '1rem',
-										height: '1rem',
-										marginRight: '1rem'
-									},
-									children: (0, b.jsx)(x.xL,
+									children: [(0, b.jsx)(ep,
 									{
-										icon: B.iiS
-									})
-								}),'章节1']//i.Z.characters[f], " : ", String(X)
+										onClick: function()
+										{
+											$$('.nowChapter').text('')
+											L([!0,k])
+											let playChat = 
+											{
+												nowChats: [],
+												replyDepth: 0,
+												chats: [],
+												chatSpeed: (0, a.zP)(),
+												header: {},
+												board_no: 0
+											}
+											p((0, ee.Fe)(playChat))
+											p((0, S.Cz)(!0))
+										},
+										style: 
+										{
+											width: '1rem',
+											height: '1rem',
+											marginRight: '1rem'
+										},
+										children: (0, b.jsx)(x.xL,
+										{
+											icon: B.iiS
+										})
+									}),`${k+1}. ${v}`]
+								})
 							})]
-						})/*, (0, b.jsx)(et,
-						{
-							show: I,
-							handleShow: function(e)
-							{
-								R(e)
-							},
-							handleSend: function(e, t)
-							{
-								V(e, t), R(!0)
-							}
 						}), (0, b.jsx)(eo,
 						{
-							show: A,
+							show: A[0],
+							index: A[1],
+							board: l,
 							handleShow: function(e)
 							{
 								L(e)
-							},
-							board: l
-						})*/]
+							}
+						})]
 					})
 				},
 				es = g.ZP.div.withConfig(
@@ -1661,131 +1560,11 @@
 						j = (0, s.ej)(),
 						T = (0, o.Z)(j, 1)[0],
 						v = (0, s.$X)(),
-						N = (0, o.Z)(v, 1)[0],
-						C = (t = (0, V.Z)(Q().mark(function e()
-						{
-							var t, n, o;
-							return Q().wrap(function(e)
-							{
-								for(;;) switch (e.prev = e.next)
-								{
-									case 0:
-										if(m(!0), _.board_no !== r.BOARD_NO)
-										{
-											e.next = 5;
-											break
-										}
-										f((0, S.Cz)(!0)), e.next = 20;
-										break;
-									case 5:
-										if(!(_.chats.length > 0))
-										{
-											e.next = 9;
-											break
-										}
-										w(!0), e.next = 20;
-										break;
-									case 9:
-										return e.next = 11, T(r.M_PATH);
-									case 11:
-										return t = e.sent, e.next = 14, N(
-										{
-											BOARD_NO: r.BOARD_NO
-										});
-									case 14:
-										if("data" in t)
-										{
-											e.next = 16;
-											break
-										}
-										return e.abrupt("return");
-									case 16:
-										o = {
-											nowChats: [],
-											replyDepth: 0,
-											chats: (n = t.data)[1],
-											chatSpeed: (0, a.zP)(),
-											header: n[0],
-											board_no: r.BOARD_NO
-										}, f((0, ee.Fe)(o)), f((0, S.Cz)(!0));
-									case 20:
-										m(!1);
-									case 21:
-									case "end":
-										return e.stop()
-								}
-							}, e)
-						})), function()
-						{
-							return t.apply(this, arguments)
-						}),
-						O = (n = (0, V.Z)(Q().mark(function e()
-						{
-							var t, n, o;
-							return Q().wrap(function(e)
-							{
-								for(;;) switch (e.prev = e.next)
-								{
-									case 0:
-										return m(!0), t = {
-											nowChats: [],
-											replyDepth: 0,
-											chats: [],
-											chatSpeed: 1,
-											header:
-											{},
-											board_no: 0
-										}, f((0, ee.Fe)(t)), w(!1), f((0, S.Cz)(!0)), e.next = 7, T(r.M_PATH);
-									case 7:
-										return n = e.sent, e.next = 10, N(
-										{
-											BOARD_NO: r.BOARD_NO
-										});
-									case 10:
-										if("data" in n)
-										{
-											e.next = 12;
-											break
-										}
-										return e.abrupt("return");
-									case 12:
-										o = n.data, setTimeout(function()
-										{
-											var e = {
-												nowChats: [],
-												replyDepth: 0,
-												chats: o[1],
-												chatSpeed: (0, a.zP)(),
-												header: o[0],
-												board_no: r.BOARD_NO
-											};
-											f((0, ee.Fe)(e)), m(!1)
-										}, 1e3);
-									case 14:
-									case "end":
-										return e.stop()
-								}
-							}, e)
-						})), function()
-						{
-							return n.apply(this, arguments)
-						});
-						r.BOARD_NO = 'BOARD_NO'
-						r.PROFILE_IDX = 'PROFILE_IDX'
-						r.MEMBER_NO = 'MEMBER_NO'
-						r.SERIES_IDX = '作品名'
-						r.TITLE = '系列'
-						r.NICKNAME = '作者名'
-						r.SERIES_TITLE = 'SERIES_TITLE'
+						N = (0, o.Z)(v, 1)[0];
 					return (0, b.jsxs)(b.Fragment,
 					{
 						children: [(0, b.jsxs)(e_,
 						{
-							style: r.REPORT > 4 && 0 === r.STATUS ?
-							{
-								pointerEvents: "none"
-							} :
-							{},
 							children: [(0, b.jsx)(eg,
 							{
 								onClick: function()
@@ -1799,18 +1578,7 @@
 										display: "flex",
 										width: "100%"
 									},
-									children: [/*(0, b.jsx)(x.NZ,
-									{
-										height: 252,
-										width: 252,
-										alt: "profile",
-										src: loadhead(r.PROFILE_NO, r.PROFILE_IDX),
-										onError: function(e)
-										{
-											var t = e.currentTarget;
-											(0, a.Mp)(t, "character")
-										}
-									}), */(0, b.jsxs)(ex,
+									children: [(0, b.jsxs)(ex,
 									{
 										children: [(0, b.jsx)("h2",
 										{
@@ -1819,53 +1587,35 @@
 												className: "bold",
 												children: (0, b.jsxs)(ey,
 												{
-													children: '播放当前编辑的文档'
-													//children: [r.SERIES_IDX && r.SERIES_IDX + ".", " ", r.TITLE]
+													children: r.name
 												})
 											})
 										}), (0, b.jsx)(ew,
 										{
 											children: (0, b.jsxs)(eb,
 											{
-												//children: [i.Z.writer[g], " : ", (0, b.jsx)("span",{children: r.NICKNAME})]
-												children: (0, b.jsx)("span",{children: '在线书库功能正在开发中，敬请期待'})
+												children: [i.Z.writer[g], " : ", (0, b.jsx)("span",{children: r.author})]
 											})
 										})]
 									})]
 								})
 							}), (0, b.jsx)(ej,
 							{
-								//disabled: h,
 								onClick: function()
 								{
-									//C()
-									
-									let playChats = 
+									$$('.nowChapter').text('')
+									w([!0,0])
+									let playChat = 
 									{
 										nowChats: [],
 										replyDepth: 0,
 										chats: [],
 										chatSpeed: (0, a.zP)(),
 										header: {},
-										board_no: r.BOARD_NO
+										board_no: 0
 									}
-									if(!h)
-									{
-										playChats.chats = chats
-										playChats.header = chats[0]
-										f((0, ee.Fe)(playChats))
-										f((0, S.Cz)(!0))
-									}
-									else
-									{
-										playChats.chats = []
-										playChats.header = {}
-										f((0, ee.Fe)(playChats))
-										f((0, S.Cz)(!0))
-									}
-									m(!h)
-									
-									
+									f((0, ee.Fe)(playChat))
+									f((0, S.Cz)(!0))
 								},
 								children: (0, b.jsx)(x.xL,
 								{
@@ -1885,17 +1635,14 @@
 								changeOption: p
 							}), (0, b.jsx)(eE,
 							{})]
-						}), (0, b.jsx)(J.Z,
+						}), (0, b.jsx)(eo,
 						{
-							show: E,
+							show: E[0],
+							index: E[1],
+							board: r,
 							handleShow: function()
 							{
 								w(!1)
-							},
-							type: "talk",
-							handleTalk: function()
-							{
-								O()
 							}
 						})]
 					})
@@ -1977,7 +1724,7 @@
 						f = m[0],
 						_ = m[1],
 						g = m[2],
-						x = m[3],
+						xx = m[3],
 						y = (0, u.useState)(!1),
 						T = y[0],
 						v = y[1],
@@ -1988,7 +1735,7 @@
 						M = P[0],
 						S = P[1],
 						B = (0, u.useState)(0),
-						Z = B[0],
+						ZZ = B[0],
 						I = B[1],
 						R = (0, u.useRef)(null),
 						Y = (null == R ? void 0 : null === (t = R.current) || void 0 === t ? void 0 : t.clientHeight) || 0;
@@ -2003,6 +1750,7 @@
 					{
 						return e.toUpperCase()
 					});
+
 					return (0, b.jsxs)(ev,
 					{
 						children: [_ && (0, b.jsxs)(p(),
@@ -2048,7 +1796,7 @@
 								S(e)
 							},
 							rowCount: f && f[0] ? f[0].COUNT : 0,
-							changeOption: x
+							changeOption: xx
 						}), (0, b.jsxs)(eN,
 						{
 							children: [(0, b.jsx)("div",
@@ -2062,7 +1810,7 @@
 								},
 								children: (0, b.jsx)(w.Z,
 								{
-									rowHeight: Z,
+									rowHeight: ZZ,
 									clientHeight: Y,
 									selected: void 0,
 									listArr: M.filter(function(e)
@@ -2074,7 +1822,7 @@
 										{
 											character: e,
 											option: g,
-											changeOption: x
+											changeOption: xx
 										}, t)
 									})
 								})
@@ -2088,7 +1836,8 @@
 									height: "auto"
 								},
 								//children: null == f ? void 0 : f.map(function(e, t)
-								children: [{}].map(function(e, t)
+								
+								children: directory.map(function(e, t)
 								{
 									return (0, b.jsx)(ef,
 									{
@@ -2099,7 +1848,7 @@
 											O(e)
 										},
 										isTalk: T,
-										changeOption: x,
+										changeOption: xx,
 										setIsTalk: function(e)
 										{
 											v(e)
@@ -2110,26 +1859,35 @@
 							{
 								style:
 								{
-									display: f && f.length > 0 || 2 === g.C_TYPE && !g.CONTENT ? "none" : "flex",
+									display: "flex",
 									margin: "auto",
 									flexDirection: "column",
 									alignItems: "center"
 								},
-								children: [(0, b.jsx)(eC,
+								children: [ (0, b.jsx)("span",
 								{
-									width: 478,
-									height: 498,
-									alt: "404",
-									src: `${href}Images/Ui/404.webp`//#
-								}), (0, b.jsx)("span",
-								{
-									children: '请点击下方按钮上传存档'//#
+									children: ['点击',(0, b.jsx)(ep,
+									{
+										style: 
+										{
+											width: '1rem',
+											height: '1rem',
+										},
+										children: (0, b.jsx)(x.xL,
+										{
+											icon: Z.cf$
+										}),
+										onClick: function()
+										{
+											$$('[title="MakingFile Upload"]').click()
+										}
+									}),'上传存档']//#
 								}), (0, b.jsx)("span",{children: '（支持ClosureTalk存档）'})]//#
 							}, "noSearch"), 2 === g.C_TYPE && !g.CONTENT || (0, b.jsx)(k.Z,
 							{
 								rowCount: f && f[0] ? f[0].COUNT : 0,
 								option: g,
-								changeOption: x
+								changeOption: xx
 							}), (0, b.jsx)(E,
 							{
 								show: !0

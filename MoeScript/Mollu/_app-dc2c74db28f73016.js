@@ -9963,7 +9963,8 @@
 											top: "-2.5px"
 										},
 										className: "bold",
-										children: '项目'
+										children: '项目',
+										target: '_blank'
 									}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
 										href: "https://wj.qq.com/s2/14292312/3ade/",
@@ -9977,7 +9978,8 @@
 											position: "relative",
 											top: "-2.5px"
 										},
-										children: '反馈'
+										children: '反馈',
+										target: '_blank'
 									})]
 								}), a || (0, O.jsx)(T,
 								{
@@ -10167,17 +10169,26 @@
 												priority: !0
 											})
 										})
-									}), (0, O.jsx)(F,
+									}), (0, O.jsx)('button',
 									{
-										href: player,//#播放器
 										onClick: function(e)
 										{
 											$$('.cgldhY').hide()
+											$$('.dDBXxQ').show()
 											if(!browser.isDeskTop)alert('移动端加载较慢，可能需要多等几秒')
-											h(e, player)//#播放器
+											fetch(href+LibraryURL+'/Directory.json').then(function(response)
+											{
+												return response.json();
+											}).then(function(data)
+											{
+												directory = data
+												$$('.dDBXxQ').hide()
+												$$('.MMTPlayer')[0].click()
+											});
 										},
+										style:{backgroundColor: 'transparent'},
 										className: "private" === e.pathname.split("/")[1] ? "selected" : "",
-										children: (0, O.jsx)(V,
+										children: [(0, O.jsx)(V,
 										{
 											children: (0, O.jsx)(W,
 											{
@@ -10189,7 +10200,24 @@
 												src: href+"Images/Ui/private.webp",//#播放器界面
 												alt: "private"
 											})
-										})
+										})]
+									}), (0, O.jsx)(F,
+									{
+										href: player,//#播放器
+										className: "MMTPlayer",
+										hidden:true,
+										onClick: function(e)
+										{
+											h(e, player)//#播放器
+										}
+									}), (0, O.jsx)('span',
+									{
+										style:
+										{
+											color: 'white'
+										},
+										align: 'center',
+										children: `${mt_text.momotalk[mtlang]}\n${mt_text.library[mtlang]}`
 									})]
 								}), (0, O.jsxs)(L,
 								{

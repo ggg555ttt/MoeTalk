@@ -1,0 +1,150 @@
+{
+  "chat": [
+    {
+      "is_breaking": false,
+      "content": "……",
+      "yuzutalk": {
+        "type": "NARRATION",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "“现在再回到阿里乌斯自治区，除了被刻意保留下来的一小片区域以外，我们已经很难再找到任何内战留下的痕迹。”",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "“这个被称作‘花园校区’的地方，如今已是整个基沃托斯之中环境最整洁，秩序最井然，治安最良好的区域，连圣三一主校区的许多学生都对此赞叹不已。”",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "“有关阿里乌斯为何能在开放后的短短十年间产生这样翻天覆地的变化，许多分析都提出了独特的解释。”",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "“有人将其归功于从内战中成长起来的那一代阿里乌斯学生与生俱来的纪律性和自觉性，有人则认为这在很大程度上得益于千年学院在重建中输入的高新技术。还有些评论声称，要不是圣三一堪称无私的援助，阿里乌斯的废墟到现在都不可能清理干净，更别提之后的重建工作了。”",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "“但不论怎么寻找原因，有一个人的贡献绝对不可否认：那就是阿里乌斯当时的学生会长，秤亚津子。”",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "“如果没有她在被释放当晚就只身前往救护骑士团，冒着被逮捕的风险请求救护的勇气，被瘟疫席卷的阿里乌斯必将再度损失许多人口。如果没有她既往不咎的理念和愿意接纳一切同学的宽容态度的话，仍然会有许多阿里乌斯的学生流落在外，成为基沃托斯的不稳定因素。而在第二次圣公会议期间，如果她没有主动放弃同学们提出的，让她和老师缔结婚姻关系的大胆提案，其余学校会采取什么样的行动以阻止这件事的发生，则根本没有办法预计。”",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "“有关秤亚津子和夏莱的老师是否在那时便已具有超越师生的关系，一直是众说纷纭的话题。而在当事人对此缄口不言的情况下，我们也不可能知道在会议暂停的那一天当中，两人之间到底都发生了什么。”",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "“唯一能够确定的，只有众所周知的事实：亚津子和老师共同否决了这一提议，阿里乌斯学生们的期望最终没能成真。”",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "“事实上，这几乎是最好的结果，因为所有人都知道这个大胆的计划根本没有顺利实施的可能性。它存在的最大作用，便是让其余学校的代表意识到，继续把会议拖延下去的后果将是她们无法控制的。”",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "“很难说最初提出这一提议的阿里乌斯学生是否考虑到了这一点。但站在会议结束后的时间点往回看，这份提议的作用简直可以称作完美。它让阿里乌斯顺利成为了圣三一的一部分，让各方艰难建立的新秩序能够稳固地维持下去，而最为重要的是，它也正式奠定了秤亚津子的地位：她不仅仅是一个徒有虚名的公主，更是一位冷静而有分寸的领导者，名副其实的学生会长，阿里乌斯温和而明智的女王。”",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "——《蔷薇公主：秤亚津子和阿里乌斯的新生》，圣三一校立出版社",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    }
+  ],
+  "chars": [],
+  "custom_chars": []
+}

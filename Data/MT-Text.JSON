@@ -195,7 +195,7 @@ var mt_text = {
 		"zh_cn": "下载",
 		"zh_tw": "下載"
 	},
-	"private": {
+	"momotalk": {
 		"kr": "MomoTalk",
 		"en": "MomoTalk",
 		"jp": "MomoTalk",
@@ -209,12 +209,12 @@ var mt_text = {
 		"zh_cn": "上传",
 		"zh_tw": "上傳"
 	},
-	"message": {
-		"kr": "Player",
-		"en": "Player",
-		"jp": "Player",
-		"zh_cn": "播放器",
-		"zh_tw": "播放器"
+	"play": {
+		"kr": "Play",
+		"en": "Play",
+		"jp": "Play",
+		"zh_cn": "播放",
+		"zh_tw": "播放"
 	},
 	"preset": {
 		"kr": "프리셋",
@@ -377,12 +377,12 @@ var mt_text = {
 		"zh_cn": "播放列表",
 		"zh_tw": "播放列表"
 	},
-	"player": {
+	"library": {
 		"kr": "플레이어",
 		"en": "Player",
 		"jp": "プレイヤー",
-		"zh_cn": "球员",
-		"zh_tw": "球員"
+		"zh_cn": "图书馆",
+		"zh_tw": "圖書館"
 	},
 	"artist": {
 		"kr": "아티스트",

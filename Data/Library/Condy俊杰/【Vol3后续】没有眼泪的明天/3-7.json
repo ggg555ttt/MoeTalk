@@ -1,0 +1,1297 @@
+{
+  "chat": [
+    {
+      "is_breaking": false,
+      "content": "不存在的记录——陪审团讨论过程",
+      "yuzutalk": {
+        "type": "NARRATION",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "注意：所有可能泄露陪审员身份的信息均已处理。",
+      "yuzutalk": {
+        "type": "NARRATION",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "ba-valkyrie_student",
+      "img": "NP0134",
+      "is_breaking": false,
+      "content": "……从现在起到各位达成一致意见为止，任何人都不得进出这一房间。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "法警"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "ba-valkyrie_student",
+      "img": "NP0134",
+      "is_breaking": false,
+      "content": "一旦各位讨论完毕，就请把判决写在裁决书上，并按两下呼叫铃。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "法警"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "ba-valkyrie_student",
+      "img": "NP0134",
+      "is_breaking": false,
+      "content": "所有的参考资料都已准备好，各位可自行阅览。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "法警"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "行了行了，你快出去吧。我们时间紧张。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "ba-valkyrie_student",
+      "img": "NP0134",
+      "is_breaking": false,
+      "content": "不打扰了，再见。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "法警"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "（关门声）",
+      "yuzutalk": {
+        "type": "NARRATION",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "好了，来讨论吧？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "呼喵……让██先清醒一下……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员B"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "有整整四个犯人，先讨论哪一个？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "从领头的那个开始呗。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "锭前纱织……我同意。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "我先说自己的判决意见，你们听着：剥夺学籍，在矫正局关押直到毕业，而后下达全基沃托斯范围内的驱逐令。如何？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "请不要冲动，██同学。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员E"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "我们被赋予的职责，是运用高贵的理性作出判决，而非用一时的情绪去亵渎神圣的法律……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员E"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "哈啊？冲动？她可是差点把那个笨蛋给一枪打死了啊？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "我没有砸碎玻璃冲出去揍她一顿，已经相当理性了好不好？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "唉……我们还是回到事实上来吧。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "策划并实施大规模袭击，造成大量财产损失，持有并使用高杀伤力限制级武器，这都是可以让人在矫正局里蹲到毕业的罪名了。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "……而要是论严重程度，它们连故意伤害他人致死的一半都比不上。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "不考虑老师的辩护意见的话，██同学的判决其实相当合理。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "是吧？何况锭前纱织还利用了那个笨蛋的好心肠，骗他来给自己作辩护。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "要不是检察官够厉害，这一次还真就让她逃过去了……想想我都觉得恶心。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "嗯……你真觉得老师忘记了自己中枪前的经历吗，██同学？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员C"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "要不然呢？难不成他是在……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "（沉默）",
+      "yuzutalk": {
+        "type": "NARRATION",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "……哼。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "你这么说有什么证据，███的？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "检察官不是告诉我们，当时的目击证人没有一个愿意出庭作证吗。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员C"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "能同时说服那么多同学的，除了老师，还能有谁呢？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员C"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "我同意██同学的意见。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "别忘了，伊甸条约当天掩护老师撤退的正是风纪委的空崎日奈。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "她可不是那种简简单单就会妥协的人。能劝服她的人很少，老师是仅有的一个。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "嘛……██我是觉得，如果是老师的话，干出这种事也不奇怪啦……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员B"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "我也这么看。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员E"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "那个……附议……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员F"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "……哼，看来我们在老师作伪证这一问题上倒先取得了统一意见。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "愿意保护差点杀死自己的人，只因为对方是自己的学生……真是那个笨蛋的风格。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "不过，就算她没有骗人又怎么样？那发子弹不还是她射出来的？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "你总不能告诉我，是那个笨蛋自己拿枪对着肚子，给自己来了一发吧？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "……没人这么说，██同学。事实是不容否认的。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "说得好，█████。那你又有什么意见？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "我认为对锭前纱织的处罚不能仅停留在教化层面，必须要有一定的力度。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "但我并不赞同顶格量刑。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "老师的辩护意见很有道理，我认为我们应当把它纳入定刑的考量。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "而且，我们也不能忘记这场审判的真实目的。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "什么真实目的？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "你们读过老师之前写的那份报告吗？就放在联邦学生会官网上，公开的。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "没有。我讨厌报告。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "我看过。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员C"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "唔……████太偏远了，很难去关心这些事情呢……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员B"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "应该被我的简报系统归档了吧。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员E"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "这个……我们住的地方网速很慢……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员F"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "简而言之，老师之所以带特殊小队来联邦学生会受审，其目的应当是为了让她们能合法地在阿里乌斯自治区境内活动，从而让夏莱有能力介入阿里乌斯校区内部的重建工作。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "和我想的一样呢，███同学。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员C"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "所以呢？你的意思是我们只不过是在演戏而已？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "这只是老师的目的。我们作为陪审团，自然要尊重联邦学生会的法律。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "但是，在尊重法律的前提下，我们是有一定的自由裁量权的。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "如果能够在维持判决公正性的情况下，让结果变得更好一点，肯定比为了泄愤而重判要更加有意义。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "啊……你们这帮家伙，好像真的就一个比一个冷静的样子……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "你们有没有想过，要是老师真的让她给打死了，我们该怎么办啊？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "就算那个笨蛋心软好了，我们就不能替他狠心一点吗？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "既然我们有这个自由裁量的权力，那为什么不能确保那个笨蛋过的安稳一些，不要再跟那些会在他身上开一个眼的家伙打交道了怎么样？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "呃……那个……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员F"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "嗯？你这只███想说什么？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "我只是想提醒一下……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员F"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "你们有没有想过，帮助她隐瞒罪行的是老师，但主动承认罪行的又是她自己……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员F"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "那也许，纱织同学本来就想要为此而接受惩罚也说不定啊……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员F"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "这……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "我赞同██同学的意见。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员B"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "各位，你们有没有注意到，从她走上台接受质询到认罪为止，她一直都没有和老师产生任何目光接触。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员B"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "这有什么好意外的？她心虚了呗。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "但她心虚的理由是什么呢？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员B"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "既然老师不惜在法庭上公然撒谎，就证明在他原本的计划里，锭前纱织向他射击的事情是绝不应该被公开出来的。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员B"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "而直到最后一刻，老师都还在竭力试图掩盖事实。是锭前纱织自己放弃了对真相的隐瞒，连老师都没有料到她会这么做。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员B"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "因此，██我认为，锭前纱织心虚的理由不是别的，正是因为她已经做好了当庭认罪的准备，而这和老师帮她们脱罪的计划相悖，所以她才会因为自己违背了老师的意愿而感到内疚。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员B"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "……也就是说，即使有机会逃脱惩罚，她也主动放弃了它，选择了面对自己的罪过啊。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员B"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "说得有道理，██同学。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员E"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "看来，至少在悔过的态度这一方面，老师的教导是很有用的呢。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员E"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "（沉默）",
+      "yuzutalk": {
+        "type": "NARRATION",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "……那不是更好了吗。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "她想要惩罚，我们给她惩罚不就好了？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "这样的话，说不定她自己都会好受一些。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "嗯……我倒是有一个想法。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员C"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "说呗。",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员A"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "既然她试图伤害的人是老师……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员C"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "……我们就让老师来决定怎么处置她，怎么样？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员C"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "你这话是什么意思，██同学？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员D"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "夏莱不是有超法规权限吗？",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "SHOW",
+        "nameOverride": "陪审员C"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded",
+      "is_breaking": false,
+      "content": "那么，我们可以这么做……",
+      "yuzutalk": {
+        "type": "TEXT",
+        "avatarState": "AUTO",
+        "nameOverride": "陪审员C"
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    },
+    {
+      "is_breaking": false,
+      "content": "（数据缺失）",
+      "yuzutalk": {
+        "type": "NARRATION",
+        "avatarState": "AUTO",
+        "nameOverride": ""
+      },
+      "arknights": {
+        "type": "TEXT"
+      }
+    }
+  ],
+  "chars": [
+    {
+      "char_id": "ba-valkyrie_student",
+      "img": "NP0134"
+    },
+    {
+      "char_id": "???",
+      "img": "uploaded"
+    }
+  ],
+  "custom_chars": [
+    {
+      "char_id": "???",
+      "img": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAZKADAAQAAAABAAAAZAAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgAZABkAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMAAQEBAQEBAgEBAgMCAgIDBAMDAwMEBgQEBAQEBgcGBgYGBgYHBwcHBwcHBwgICAgICAkJCQkJCwsLCwsLCwsLC//bAEMBAgICAwMDBQMDBQsIBggLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLC//dAAQAB//aAAwDAQACEQMRAD8A/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigD//0P8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooA//9H/AD/6KKKACiiigAooooAKKKKACiiigAooooAKKKKAP//S/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigD//0/8AP/ooooAKKKKACiiigAooooAKKKKACiiigAooooA//9T/AD/6KKKACiiigAooooAKKKKACiiigAooooAKKKKAP//V/wA/+iiigAooooAKKKKACiiigAooooAKKKKACiiigD//2Q==",
+      "name": "？？？"
+    }
+  ]
+}
