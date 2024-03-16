@@ -1,5 +1,26 @@
 [
   {
+    "id": "ain",
+    "images": [
+      "NP0129"
+    ],
+    "names": {
+      "en": "Ain",
+      "ja": "アイン",
+      "ko": "",
+      "zh-cn": "",
+      "zh-tw": ""
+    },
+    "searches": [],
+    "short_names": {
+      "en": "Ain",
+      "ja": "アイン",
+      "ko": "",
+      "zh-cn": "",
+      "zh-tw": ""
+    }
+  },
+  {
     "id": "Airi",
     "images": [
       "Airi",
@@ -105,6 +126,8 @@
     "images": [
       "Ako",
       "Ako_Collection",
+      "CH0231",
+      "CH0231_Collection",
       "NP0019",
       "NP0111"
     ],
@@ -673,6 +696,7 @@
     "id": "Chihiro",
     "images": [
       "CH0160_Collection",
+      "CH0234",
       "Chihiro"
     ],
     "names": {
@@ -874,6 +898,7 @@
   {
     "id": "Eimi",
     "images": [
+      "CH0219",
       "Eimi",
       "Eimi_Collection"
     ],
@@ -1213,6 +1238,8 @@
   {
     "id": "Hare",
     "images": [
+      "CH0233",
+      "CH0233_Collection",
       "Hare",
       "Hare_Collection"
     ],
@@ -1444,7 +1471,8 @@
     "images": [
       "CH0159",
       "CH0159_Collection",
-      "NP0112"
+      "NP0112",
+      "NP0161"
     ],
     "names": {
       "en": "Akeboshi Himari",
@@ -1470,6 +1498,8 @@
     "id": "Hina",
     "images": [
       "CH0063_Collection",
+      "CH0230",
+      "CH0230_Collection",
       "Hina",
       "Hina_Collection",
       "Hina_Nightware",
@@ -1605,7 +1635,9 @@
     "images": [
       "NP0149",
       "NP0150",
-      "NP0156"
+      "NP0152",
+      "NP0156",
+      "NP0157"
     ],
     "names": {
       "en": "Hyakkiyako Club Member",
@@ -1626,11 +1658,12 @@
   {
     "id": "Ibuki",
     "images": [
-      "Ibuki"
+      "Ibuki",
+      "Ibuki_Collection"
     ],
     "names": {
-      "en": "Ibuki",
-      "ja": "イブキ",
+      "en": "Tanga Ibuki",
+      "ja": "丹花 イブキ",
       "ko": "",
       "zh-cn": "伊吹",
       "zh-tw": "伊吹"
@@ -2347,6 +2380,8 @@
   {
     "id": "Kotama",
     "images": [
+      "CH0232",
+      "CH0232_Collection",
       "Kotama",
       "Kotama_Collection"
     ],
@@ -2542,6 +2577,7 @@
   {
     "id": "Maki",
     "images": [
+      "CH0235",
       "Maki",
       "Maki_Collection"
     ],
@@ -2567,7 +2603,8 @@
   {
     "id": "Makoto",
     "images": [
-      "CH0079"
+      "CH0079",
+      "CH0079_Collection"
     ],
     "names": {
       "en": "Hanuma Makoto",
@@ -3613,6 +3650,27 @@
     }
   },
   {
+    "id": "ouru",
+    "images": [
+      "NP0131"
+    ],
+    "names": {
+      "en": "Ouru",
+      "ja": "オウル",
+      "ko": "",
+      "zh-cn": "",
+      "zh-tw": ""
+    },
+    "searches": [],
+    "short_names": {
+      "en": "Ouru",
+      "ja": "オウル",
+      "ko": "",
+      "zh-cn": "",
+      "zh-tw": ""
+    }
+  },
+  {
     "id": "pandemonium_student",
     "images": [
       "NP0027"
@@ -4495,6 +4553,27 @@
       "ko": "",
       "zh-cn": "修女会",
       "zh-tw": "修女會"
+    }
+  },
+  {
+    "id": "sofu",
+    "images": [
+      "NP0130"
+    ],
+    "names": {
+      "en": "Sofu",
+      "ja": "ソフ",
+      "ko": "",
+      "zh-cn": "",
+      "zh-tw": ""
+    },
+    "searches": [],
+    "short_names": {
+      "en": "Sofu",
+      "ja": "ソフ",
+      "ko": "",
+      "zh-cn": "",
+      "zh-tw": ""
     }
   },
   {

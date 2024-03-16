@@ -39,6 +39,10 @@ const os = (u = window.navigator.userAgent) => {
 		})()
 	};
 };
+$('body').on('click',"input",function()
+{
+	$("input[type='file']").val('')
+})
 $("body").append("<input id='loadcusfile' hidden type='file' accept='application/json'>");
 $('body').on('click',"#loadcus",function()
 {
@@ -125,33 +129,20 @@ $('body').on('change',"#loaddatafile",function()
 	reader.readAsText(file);
 	reader.onload = function(e)
 	{
-		
-		if(mt_settings['存储模式'] !== 'localStorage')
+		localStorage.clear()
+		let json = JSON.parse(this.result)
+		mt_settings = json['设置选项'] ? JSON.parse(json['设置选项']) : {}
+		if(mt_settings['存储模式'] !== 'localStorage')moetalkStorage.clear()
+		$.each(json,function(k,v)
 		{
-			localStorage.clear()
-			moetalkStorage.clear()
-			$.each(JSON.parse(this.result),function(k,v)
+			if(['chats','mt-char','mt-head'].indexOf(k) > -1)
 			{
-				if(['chats','mt-char','mt-head'].indexOf(k) > -1)
-				{
-					moetalkStorage.setItem(k,v)
-				}
-				else
-				{
-					localStorage[k] = v;
-				}
-			})
-		}
-		else
-		{
-			localStorage.clear()
-			$.each(JSON.parse(this.result),function(k,v)
-			{
-				localStorage[k] = v;
-			})
-		}
+				if(mt_settings['存储模式'] !== 'localStorage')moetalkStorage.setItem(k,v)
+				else localStorage[k] = v;
+			}
+			else localStorage[k] = v;
+		})
 		alert('需返回页面确认读取成功')
-		mt_settings = JSON.parse(localStorage['设置选项']);
 	}
 });
 //更改语言
@@ -222,6 +213,7 @@ $("body").on('click','#clean',function()
 	{
 		localStorage.clear();
 		sessionStorage.clear();
+		moetalkStorage.clear();
 		window.location.reload();//刷新页面
 	}
 })
@@ -440,16 +432,39 @@ $('body').on('click',"#savemode",function()
 		if(mt_settings['存储模式'])//转indexedDB
 		{
 			delete mt_settings['存储模式']
-			delete localStorage['chats']
+			if(!localStorage['mt-char'] || localStorage['mt-char'][0] === '[')localStorage['mt-char'] = '{}'
+			if(!localStorage['mt-head'])localStorage['mt-head'] = '{}'
+			if(!localStorage['chats'] || localStorage['chats'][0] !== '[')localStorage['chats'] = '[]'
+
+			moetalkStorage.setItem('mt-char',localStorage['mt-char'])
+			moetalkStorage.setItem('mt-head',localStorage['mt-head'])
+			moetalkStorage.setItem('chats',localStorage['chats'])
+
 			delete localStorage['mt-char']
 			delete localStorage['mt-head']
+			delete localStorage['chats']
 			saveStorage('设置选项',mt_settings,'local')
 			return
 		}
 		if(!mt_settings['存储模式'])//转localStorage
 		{
 			mt_settings['存储模式'] = 'localStorage'
-			moetalkStorage.clear()
+			moetalkStorage.getItem('mt-char', function(err, char)
+			{
+				if(!char)char = '{}';
+				moetalkStorage.getItem('mt-head', function(err, head)
+				{
+					if(!head)head = '{}';
+					moetalkStorage.getItem('chats', function(err, data)
+					{
+						if(!data)data = '[]';
+						localStorage['mt-char'] = char
+						localStorage['mt-head'] = head
+						localStorage['chats'] = data
+						moetalkStorage.clear()
+					})
+				})
+			})
 			saveStorage('设置选项',mt_settings,'local')
 			return
 			

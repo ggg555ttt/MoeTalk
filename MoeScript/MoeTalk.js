@@ -33,12 +33,15 @@ if(mt_settings['存储模式'] !== 'localStorage')
 		moetalkStorage.getItem('mt-head', function(err, head)
 		{
 			if(!head)head = '{}';
-			mt_char = JSON.parse(char)
-			mt_head = JSON.parse(head)
-			list()
 			moetalkStorage.getItem('chats', function(err, data)
 			{
 				if(!data)data = '[]';
+				$('.loading').wait(function(){$('.dDBXxQ').hide().next().remove()},".loading")//
+				
+				mt_char = JSON.parse(char)
+				mt_head = JSON.parse(head)
+				list()
+				
 				chats = []
 				otherChats = []
 				JSON.parse(data).map(function(v,k)
@@ -55,22 +58,14 @@ if(mt_settings['存储模式'] !== 'localStorage')
 				{
 					$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
 				})
+
 				if(mt_settings['后台保存'])
 				{
-					window.onblur = function()
-					{
-						saveStorage('chats',[...chats,...otherChats],'local')
-					}
-					window.onfocus = function()
-					{
-						saveStorage('chats',[...chats,...otherChats],'local')
-					}
-					window.onbeforeunload = function()
-					{
-						saveStorage('chats',[...chats,...otherChats],'local')
-					}
+					window.onblur = function(){saveStorage('chats',[...chats,...otherChats],'local')}
+					window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
+					window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 				}
-				$('.loading').wait(function(){$('.dDBXxQ').hide().next().remove()},".loading")//
+				
 			})
 		})
 	})
@@ -84,18 +79,9 @@ else
 	})
 	if(mt_settings['后台保存'])
 	{
-		window.onblur = function()
-		{
-			saveStorage('chats',[...chats,...otherChats],'local')
-		}
-		window.onfocus = function()
-		{
-			saveStorage('chats',[...chats,...otherChats],'local')
-		}
-		window.onbeforeunload = function()
-		{
-			saveStorage('chats',[...chats,...otherChats],'local')
-		}
+		window.onblur = function(){saveStorage('chats',[...chats,...otherChats],'local')}
+		window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
+		window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 	}
 }
 function mt_height(num)

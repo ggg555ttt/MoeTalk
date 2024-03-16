@@ -1,4 +1,11 @@
 var closure_char = {
+    "ain": {
+        "zh_cn": "アイン",
+        "zh_tw": "アイン",
+        "jp": "アイン",
+        "en": "Ain",
+        "kr": "Ain"
+    },
     "Airi": {
         "zh_cn": "栗村 爱莉",
         "zh_tw": "栗村 愛莉",
@@ -457,9 +464,9 @@ var closure_char = {
     "Ibuki": {
         "zh_cn": "伊吹",
         "zh_tw": "伊吹",
-        "jp": "イブキ",
-        "en": "Ibuki",
-        "kr": "Ibuki"
+        "jp": "丹花 イブキ",
+        "en": "Tanga Ibuki",
+        "kr": "Tanga Ibuki"
     },
     "Ichika": {
         "zh_cn": "仲正 一花",
@@ -1014,6 +1021,13 @@ var closure_char = {
         "en": "Otogi",
         "kr": "Otogi"
     },
+    "ouru": {
+        "zh_cn": "オウル",
+        "zh_tw": "オウル",
+        "jp": "オウル",
+        "en": "Ouru",
+        "kr": "Ouru"
+    },
     "pandemonium_student": {
         "zh_cn": "万魔殿成员",
         "zh_tw": "萬魔殿成員",
@@ -1265,6 +1279,13 @@ var closure_char = {
         "jp": "シスターフッド",
         "en": "Sisterhood",
         "kr": "Sisterhood"
+    },
+    "sofu": {
+        "zh_cn": "ソフ",
+        "zh_tw": "ソフ",
+        "jp": "ソフ",
+        "en": "Sofu",
+        "kr": "Sofu"
     },
     "Sora": {
         "zh_cn": "小空",
