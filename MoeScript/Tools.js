@@ -1,5 +1,44 @@
 //读取人物
-const moetalkStorage = localforage.createInstance({name:'moetalkStorage'})
+const os = (u = window.navigator.userAgent) => {
+	return {
+		// 不同浏览器及终端
+		isMobile:
+	  !!u.match(/AppleWebKit.*Mobile/i) ||
+	  !!u.match(
+		/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/
+	  ),
+		isWechat: !!u.match(/MicroMessenger/i),
+		isQQ: !!u.match(/QQ/i),
+		isIos: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+		isAndroid: !!u.match(/(Android);?[\s/]+([\d.]+)?/),
+		isiPhone: !!u.match(/(iPhone\sOS)\s([\d_]+)/),
+		isSafari: !!u.match(/Safari/),
+		isFirefox: !!u.match(/Firefox/),
+		isOpera: !!u.match(/Opera/),
+		isChrome: u.match(/Chrome/i) !== null &&
+	  u.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i) === null ?
+			true : false,
+		isDeskTop: (() => {
+			const Agents = [
+				'Android',
+				'iPhone',
+				'SymbianOS',
+				'Windows Phone',
+				'iPad',
+				'iPod',
+				'okhttp/3.9.1'
+			];
+			let flag = true;
+			for (let i = 0, LEN = Agents.length; i < LEN; i++) {
+				if (u.indexOf(Agents[i]) !== -1) {
+					flag = false;
+					break;
+				}
+			}
+			return flag;
+		})()
+	};
+};
 $("body").append("<input id='loadcusfile' hidden type='file' accept='application/json'>");
 $('body').on('click',"#loadcus",function()
 {
@@ -51,7 +90,27 @@ $('body').on('click',"#savedata",function()
 {
 	alert('生成的文件只能用“读取localStorage存档”读取\n建议您在MoeTalk出现错误时向开发者提交此文件')
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-	download_txt('MoeTalk_localStorage存档'+time+'.JSON',JSON.stringify(localStorage));//生成专用存档
+	if(mt_settings['存储模式'] !== 'localStorage')
+	{
+		moetalkStorage.getItem('mt-char', function(err, char)
+		{
+			if(!char)char = '{}';
+			moetalkStorage.getItem('mt-head', function(err, head)
+			{
+				if(!head)head = '{}';
+				moetalkStorage.getItem('chats', function(err, data)
+				{
+					if(!data)data = '[]';
+					let arr = {}
+					arr['mt-char'] = char
+					arr['mt-head'] = head
+					arr['chats'] = data
+					download_txt('MoeTalk_localStorage存档'+time+'.JSON',JSON.stringify({...localStorage,...arr},null,4));//生成专用存档
+				})
+			})
+		})
+	}
+	else download_txt('MoeTalk_localStorage存档'+time+'.JSON',JSON.stringify(localStorage,null,4));//生成专用存档
 });
 $("body").append("<input id='loaddatafile' hidden type='file' accept='application/json'>");
 $('body').on('click',"#loaddata",function()
@@ -66,12 +125,33 @@ $('body').on('change',"#loaddatafile",function()
 	reader.readAsText(file);
 	reader.onload = function(e)
 	{
-		localStorage.clear()
-		$.each(JSON.parse(this.result),function(k,v)
+		
+		if(mt_settings['存储模式'] !== 'localStorage')
 		{
-			localStorage[k] = v;
-		})
+			localStorage.clear()
+			moetalkStorage.clear()
+			$.each(JSON.parse(this.result),function(k,v)
+			{
+				if(['chats','mt-char','mt-head'].indexOf(k) > -1)
+				{
+					moetalkStorage.setItem(k,v)
+				}
+				else
+				{
+					localStorage[k] = v;
+				}
+			})
+		}
+		else
+		{
+			localStorage.clear()
+			$.each(JSON.parse(this.result),function(k,v)
+			{
+				localStorage[k] = v;
+			})
+		}
 		alert('需返回页面确认读取成功')
+		mt_settings = JSON.parse(localStorage['设置选项']);
 	}
 });
 //更改语言
@@ -349,28 +429,30 @@ $('body').on('click',"#savemode",function()
 {
 	let str = '此选项可以更改MomoTalk的存储方式\n'
 	str += '可以选择容量更大的“indexedDB”或5MB容量限制的“localStorage”\n'
-	str += '但不包括您创建的自定义角色，它目前仍使用localStorage保存\n'
 	str += '因为是测试中的功能，作者无法保证稳定性\n'
 	str += '在您发现错误后麻烦请向我详细反馈您之前的操作活动\n'
 	str += '我会尝试排查错误并让这个功能变得更加完善\n'
 	str += '感谢您的使用※注意：切换前请先备份存档\n'
-	str += `存储模式：${mt_settings['存储模式'] ? 'indexedDB' : 'localStorage'}\n`
-	str += `${mt_settings['存储模式'] ? '是否切换为localStorage？' : '是否切换为indexedDB？'}\n`
+	str += `存储模式：${mt_settings['存储模式'] ? 'localStorage' : 'indexedDB'}\n`
+	str += `${mt_settings['存储模式'] ? '是否切换为indexedDB？' : '是否切换为localStorage？'}\n`
 	if(confirm(str))
 	{
-		if(mt_settings['存储模式'])//localStorage
+		if(mt_settings['存储模式'])//转indexedDB
 		{
 			delete mt_settings['存储模式']
+			delete localStorage['chats']
+			delete localStorage['mt-char']
+			delete localStorage['mt-head']
 			saveStorage('设置选项',mt_settings,'local')
 			return
 		}
-		if(!mt_settings['存储模式'])//indexedDB
+		if(!mt_settings['存储模式'])//转localStorage
 		{
-			mt_settings['存储模式'] = 'indexedDB'
-			moetalkStorage.setItem('chats',localStorage['chats'])
-			delete localStorage['chats']
+			mt_settings['存储模式'] = 'localStorage'
+			moetalkStorage.clear()
 			saveStorage('设置选项',mt_settings,'local')
 			return
+			
 		}
 	}
 	

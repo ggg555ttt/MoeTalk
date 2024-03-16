@@ -1018,7 +1018,7 @@
 												school: "自定义",
 												value: "自定义角色"
 											}),`自定义角色`]//
-										}),`（${(localStorage['mt-head'].length/1024).toFixed(0)}KB）`,(0, m.jsx)('li',
+										}), (0, m.jsx)('li',
 										{
 											children: [(0, m.jsx)('input',
 											{
@@ -1027,7 +1027,7 @@
 												school: "自定义",
 												value: "临时角色"
 											}),"临时角色"]
-										}),`（${(sessionStorage['mt-head'].length/1024).toFixed(0)}KB）`]
+										})]
 									})]
 								}),
 								mt_school.map(function(v, k)
@@ -1659,6 +1659,8 @@
 										onClick: function()
 										{
 											$$('#容量警告').removeClass('visible')
+											if(强制保存[1] === 'mt-char')强制保存[0]['mt-head'] = '{}'
+											if(强制保存[1] === 'mt-head')强制保存[0]['mt-char'] = '{}'
 											强制保存 = []
 										},
 										children: L.Z.cancel[u]

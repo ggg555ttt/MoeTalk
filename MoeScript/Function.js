@@ -19,16 +19,38 @@ if(window.location.href.indexOf('file:///') === 0)
 		};
 	}
 })();
+
 /*预定义区*/
-if(!localStorage['mt-char'] || localStorage['mt-char'][0] === '[')localStorage['mt-char'] = '{}';
-if(!localStorage['mt-head'])localStorage['mt-head'] = '{}';
+var mt_char = {}
+var mt_head = {}
+const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});
+if(mt_settings['存储模式'] !== 'localStorage')
+{
+	if(!localStorage['mt-char'] || localStorage['mt-char'][0] === '[')mt_char = {};
+	else moetalkStorage.setItem('mt-char',localStorage['mt-char'])
+	if(!localStorage['mt-head'])mt_head = {};
+	else moetalkStorage.setItem('mt-head',localStorage['mt-head'])
+	if(localStorage['chats'] && localStorage['chats'][0] === '[')moetalkStorage.setItem('chats',localStorage['chats'])
+
+	delete localStorage['mt-char']
+	delete localStorage['mt-head']
+	delete localStorage['chats']
+}
+else
+{
+	if(!localStorage['mt-char'] || localStorage['mt-char'][0] === '[')localStorage['mt-char'] = '{}'
+	if(!localStorage['mt-head'])localStorage['mt-head'] = '{}'
+	mt_char = JSON.parse(localStorage['mt-char'])//自制角色名称
+	mt_head = JSON.parse(localStorage['mt-head'])//自制角色头像
+}
+
+
 if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';
 if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
-var mt_char = JSON.parse(localStorage['mt-char'])//自制角色名称
-var mt_head = JSON.parse(localStorage['mt-head'])//自制角色头像
 var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色名称
 var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时义角色头像
-if(!localStorage['chats'] || localStorage['chats'][0] !== '[' || mt_settings['存储模式'] === 'indexedDB')localStorage['chats'] = '[]';//聊天记录
+if(mt_settings['存储模式'] === 'localStorage' && (!localStorage['chats'] || localStorage['chats'][0] !== '['))localStorage['chats'] = '[]';//聊天记录
+
 if(!mt_settings['语言选项'])
 {
 	delete localStorage['lang']
@@ -428,6 +450,7 @@ function list()
 }
 function loaddata(json,mode,ARR = '')//识别存档
 {
+	let moeurl = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io'
 	let josnsize = (json.length/1024).toFixed(0)
 	let custom_char = {};
 	let custom_head = {};
@@ -557,8 +580,7 @@ function loaddata(json,mode,ARR = '')//识别存档
 				}
 				else
 				{
-					json[1][k]['content'] = v['content'];
-					if(v['content'].indexOf('//') < 0)json[1][k]['content'] = v['content'].replace('resources/ba','Images/ClosureTalk/ba');
+					json[1][k]['content'] = v['content'].replace('resources/ba','Images/ClosureTalk/ba').replace(moeurl+'/','');
 				}
 			}
 
@@ -887,9 +909,9 @@ function isTrue(val)
 }
 function saveStorage(key,val,mode)
 {
-	if(mt_settings['存储模式'] === 'indexedDB' && key === 'chats')
+	if(mt_settings['存储模式'] !== 'localStorage' && mode === 'local' && ['chats','mt-char','mt-head'].indexOf(key) > -1)
 	{
-		localforage.createInstance({name:'moetalkStorage'}).setItem('chats',JSON.stringify(val))
+		moetalkStorage.setItem(key,JSON.stringify(val))
 		return;
 	}
 	let num = 0
@@ -920,6 +942,15 @@ function saveStorage(key,val,mode)
 			强制保存 = [sessionStorage,key,val]
 		}
 	}
+}
+
+localStorage['启动时间'] = getNowDate()
+if(!localStorage['启动次数'])localStorage['启动次数'] = 0
+if(typeof browser !== 'undefined')localStorage['启动设备'] = JSON.stringify(browser)
+if(window.location.href.indexOf('Setting') < 0)
+{
+	localStorage['启动次数'] = parseInt(localStorage['启动次数'])+1
+	localStorage['启动网址'] = window.location.href
 }
 // var 表情 = {};
 // 表情.名称 = ''

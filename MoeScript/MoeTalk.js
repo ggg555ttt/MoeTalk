@@ -23,50 +23,80 @@ var nowChapter = []
 nowChapter[0] = ''
 nowChapter[1] = {}
 nowChapter[1].chapter = []
-JSON.parse(localStorage['chats']).map(function(v,k)
-{
-	if(v.replyDepth != 0)otherChats.push(v)
-	else chats.push(v)
-})
 
-if(mt_settings['后台保存'])
-{
-	window.onblur = function()
-	{
-		saveStorage('chats',[...chats,...otherChats],'local')
-	}
-	window.onfocus = function()
-	{
-		saveStorage('chats',[...chats,...otherChats],'local')
-	}
-	window.onbeforeunload = function()
-	{
-		saveStorage('chats',[...chats,...otherChats],'local')
-	}
-}
-if(mt_settings['存储模式'] === 'indexedDB')
+if(mt_settings['存储模式'] !== 'localStorage')
 {
 	$('.dDBXxQ').wait(function(){$('.dDBXxQ').show().after('<div class="loading"><div/>')},".dDBXxQ")//
-	localforage.createInstance({name:'moetalkStorage'}).getItem('chats', function(err, value)
+	moetalkStorage.getItem('mt-char', function(err, char)
 	{
-		$('.loading').wait(function(){$('.dDBXxQ').hide().next().remove()},".loading")//
-		if(value && value !== '[]')
+		if(!char)char = '{}';
+		moetalkStorage.getItem('mt-head', function(err, head)
 		{
-			chats = []
-			otherChats = []
-			$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
-			$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
-			JSON.parse(value).map(function(v,k)
+			if(!head)head = '{}';
+			mt_char = JSON.parse(char)
+			mt_head = JSON.parse(head)
+			list()
+			moetalkStorage.getItem('chats', function(err, data)
 			{
-				if(v.replyDepth != 0)otherChats.push(v)
-				else chats.push(v)
+				if(!data)data = '[]';
+				chats = []
+				otherChats = []
+				JSON.parse(data).map(function(v,k)
+				{
+					if(v.replyDepth != 0)otherChats.push(v)
+					else chats.push(v)
+				})
+				if(chats.length > 0)
+				{
+					$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
+					$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
+				}
+				chats.map(function(v,k)
+				{
+					$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
+				})
+				if(mt_settings['后台保存'])
+				{
+					window.onblur = function()
+					{
+						saveStorage('chats',[...chats,...otherChats],'local')
+					}
+					window.onfocus = function()
+					{
+						saveStorage('chats',[...chats,...otherChats],'local')
+					}
+					window.onbeforeunload = function()
+					{
+						saveStorage('chats',[...chats,...otherChats],'local')
+					}
+				}
+				$('.loading').wait(function(){$('.dDBXxQ').hide().next().remove()},".loading")//
 			})
-			chats.map(function(v,k)
-			{
-				$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
-			})
-		}
+		})
 	})
+}
+else
+{
+	JSON.parse(localStorage['chats']).map(function(v,k)
+	{
+		if(v.replyDepth != 0)otherChats.push(v)
+		else chats.push(v)
+	})
+	if(mt_settings['后台保存'])
+	{
+		window.onblur = function()
+		{
+			saveStorage('chats',[...chats,...otherChats],'local')
+		}
+		window.onfocus = function()
+		{
+			saveStorage('chats',[...chats,...otherChats],'local')
+		}
+		window.onbeforeunload = function()
+		{
+			saveStorage('chats',[...chats,...otherChats],'local')
+		}
+	}
 }
 function mt_height(num)
 {
@@ -91,7 +121,6 @@ $("body").on('click',function()
 	localSize = 0
 	$.each(localStorage,function(k,v){if(!isNaN(parseInt(v.length))){localSize += v.length/1024}})
 	localSize = localSize.toFixed(0)
-
 	height = mt_height()
 	$('#size').text(height+"\n"+localSize+"KB");
 	warning();
@@ -103,6 +132,10 @@ $("body").on('click',function()
 		$(".dels").show()
 		$('.addChat').prop('checked',false)
 		$(".Talk__CContainer-sc-1uzn66i-1").outerWidth('inherit')
+	}
+	if($('.消息').css('justify-content') === 'normal')
+	{
+		$("head").append('<link rel="stylesheet" href="./MoeScript/Style/style.css?2" data-n-g="">')
 	}
 	$('.delsNum').text($(".dels:checked").length)
 	// if($(".dels:checked").length > 0)
@@ -229,7 +262,10 @@ $("body").on('change','#custom',function()
 //警告提醒
 $('body').on('click',"#size",function()
 {
-	alert(`消息长度最好不要超过${maxHeight}\n存档体积不得超过5120KB\n此处的长度数值仅为估算，请以生成图片界面的数值为准`)
+	let str = `消息长度最好不要超过${maxHeight}\n存档体积不得超过5120KB\n此处的长度数值仅为估算，请以生成图片界面的数值为准\n`
+	let charL = ((JSON.stringify(mt_char).length+JSON.stringify(mt_head).length)/1024).toFixed(0)
+	let chatsL = (JSON.stringify([...chats,...otherChats]).length/1024).toFixed(0)
+	alert(`${str}\n自定义角色大小：${charL}KB\nMMT数据大小：${chatsL}KB\n在indexedDB模式下，此两项不会记录在指示器内\n当前存储模式：${mt_settings['存储模式'] ? mt_settings['存储模式'] : 'indexedDB'}`)
 
 });
 //清除冗余文件数据

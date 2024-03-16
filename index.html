@@ -3,6 +3,7 @@
 <html lang="zh" style="--vh:9.47px; font-size: 16px;">
 	<head>
 <script src="./MoeScript/Script/Jquery.min.js"></script>
+<script src="./MoeScript/Script/localforage.min.js"></script>
 <!-- <script src="./MoeScript/Script/html2canvas.min.js"></script> -->
 <script>
 $.ajax({
@@ -75,19 +76,21 @@ const os = (u = window.navigator.userAgent) => {
 		})()
 	};
 };
-var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 var browser = os();//获取浏览器信息
+if(!localStorage['mt-rand'])localStorage['mt-rand'] = Math.random()
+var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 if(browser.isIos === true || browser.isiPhone === true || mt_settings['打包下载'])
 {
 	var zipDownImg = true;
 	document.write("<scr"+`ipt src='./MoeScript/Script/jszip.min.js'></scr`+"ipt>");
 }
-if(!localStorage['mt-rand'])localStorage['mt-rand'] = Math.random()
+
 function loadjs(url)
 {
 	let ver = localStorage['mt-rand']
 	document.write("<scr"+`ipt src='${url}?${ver}' defer></scr`+"ipt>");
 }
+
 var date = new Date();
 var month = date.getMonth() + 1; // 月
 var day = date.getDate(); // 日
@@ -99,10 +102,6 @@ if(mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1))
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/gsap.min.js'></scr`+"ipt>");
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/mikutap.js'></scr`+"ipt>");
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/common-2.min.js'></scr`+"ipt>");
-}
-if(mt_settings['存储模式'] === 'indexedDB')
-{
-	document.write("<scr"+`ipt src='./MoeScript/Script/localforage.min.js'></scr`+"ipt>");
 }
 </script>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
