@@ -37,7 +37,7 @@ if(mt_settings['存储模式'] !== 'localStorage')
 			{
 				if(!data)data = '[]';
 				$('.loading').wait(function(){$('.dDBXxQ').hide().next().remove()},".loading")//
-				
+
 				mt_char = JSON.parse(char)
 				mt_head = JSON.parse(head)
 				list()
@@ -157,7 +157,7 @@ $('body').on('click',"#readme",function()
 {
 	if(MikuTalk)
 	{
-		alert('from：https://github.com/HFIProgramming/mikutap/')
+		alert('from：https://github.com/HFIProgramming/mikutap/\n特殊节日下可以在设置页面将标题改为“klaTeoM”即可关闭\n通常日期下将标题改为“MikuTalk”即可开启')
 		return
 	}
 	if(confirm(`MoeTalk当前版本：${version}\nMoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n你可以点击【确认】尝试更新版本并刷新页面`))

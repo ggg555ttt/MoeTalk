@@ -95,7 +95,7 @@ var date = new Date();
 var month = date.getMonth() + 1; // 月
 var day = date.getDate(); // 日
 var MikuTalk = false;
-if(mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1))
+if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) && mt_settings['顶部标题'] !== 'klaTeoM')
 {
 	MikuTalk = '#88CCCC';
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/pixi.min.js'></scr`+"ipt>");

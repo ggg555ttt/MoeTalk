@@ -816,6 +816,7 @@ function mt_title(moetalk,title,writer)
 
 function mt_capture(清晰度,截屏,生成图片,时间,标题)//截屏功能
 {
+	$('.dDBXxQ').show()
 	let json = []
 	let filename = ''
 	let title = 标题 ? 标题 : mt_text.noTitle[mtlang]
