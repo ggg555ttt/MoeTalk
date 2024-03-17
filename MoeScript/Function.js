@@ -24,34 +24,13 @@ if(window.location.href.indexOf('file:///') === 0)
 var mt_char = {}
 var mt_head = {}
 const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});
-if(mt_settings['存储模式'] !== 'localStorage')
-{
-	if(!localStorage['mt-char'] || localStorage['mt-char'][0] === '[')mt_char = {};
-	else moetalkStorage.setItem('mt-char',localStorage['mt-char'])
-	if(!localStorage['mt-head'])mt_head = {};
-	else moetalkStorage.setItem('mt-head',localStorage['mt-head'])
-	if(localStorage['chats'] && localStorage['chats'][0] === '[')moetalkStorage.setItem('chats',localStorage['chats'])
-
-	delete localStorage['mt-char']
-	delete localStorage['mt-head']
-	delete localStorage['chats']
-}
-else
-{
-	if(!localStorage['mt-char'] || localStorage['mt-char'][0] === '[')localStorage['mt-char'] = '{}'
-	if(!localStorage['mt-head'])localStorage['mt-head'] = '{}'
-	mt_char = JSON.parse(localStorage['mt-char'])//自制角色名称
-	mt_head = JSON.parse(localStorage['mt-head'])//自制角色头像
-}
-
 
 if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';
 if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
 var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色名称
 var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时义角色头像
-if(mt_settings['存储模式'] === 'localStorage' && (!localStorage['chats'] || localStorage['chats'][0] !== '['))localStorage['chats'] = '[]';//聊天记录
 
-if(!mt_settings['语言选项'])
+if(!localStorage['启动网址'])
 {
 	delete localStorage['lang']
 	delete localStorage['first']
@@ -86,7 +65,10 @@ if(!mt_settings['语言选项'])
 	delete localStorage['send']
 	delete localStorage['CharFaceIndex']
 	delete localStorage['mt-club']
-
+	delete localStorage['mt-date']
+	delete localStorage['Hm_lvt_3f7abc5752af46ddac2e985bb10dbb30']
+	delete localStorage['sc_medium_source']
+	
 	if(localStorage['mt-selectedList'])
 	{
 		mt_settings['选择角色'] = {}
@@ -594,7 +576,7 @@ function loaddata(json,mode,ARR = '')//识别存档
 	let chats = []
 	json[1].map(function(v,k)
 	{
-		if(v.replyDepth != 0)otherChats.push(v)
+		if(v.replyDepth !== 0)otherChats.push(v)
 		else chats.push(v)
 	})
 
@@ -606,7 +588,7 @@ function loaddata(json,mode,ARR = '')//识别存档
 	});
 	$.each(arr,function(k,v)
 	{
-		if(k != 0)
+		if(k !== 0)
 		{
 			let json = arr[0].filter(function(e)
 			{
@@ -910,7 +892,7 @@ function isTrue(val)
 }
 function saveStorage(key,val,mode)
 {
-	if(mt_settings['存储模式'] !== 'localStorage' && mode === 'local' && ['chats','mt-char','mt-head'].indexOf(key) > -1)
+	if(!mt_settings['存储模式'] && mode === 'local' && ['chats','mt-char','mt-head'].indexOf(key) > -1)
 	{
 		moetalkStorage.setItem(key,JSON.stringify(val))
 		return;

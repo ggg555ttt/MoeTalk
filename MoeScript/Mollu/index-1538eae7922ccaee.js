@@ -4082,7 +4082,7 @@
 									}) : '', (0, m.jsxs)(n.sCharacter.no == 0 ? "div" : eN.Xp,
 									{
 										className: "对话",
-										style: n.isRight ? {alignItems: 'flex-end'} : {display: 'block',width: '100%'},
+										style: n.isRight || n.sCharacter.no == 0? {alignItems: 'flex-end'} : {justifyContent: 'flex-start'},
 										children: [isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{
 											className: "名称 bold",

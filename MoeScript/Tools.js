@@ -94,7 +94,7 @@ $('body').on('click',"#savedata",function()
 {
 	alert('生成的文件只能用“读取localStorage存档”读取\n建议您在MoeTalk出现错误时向开发者提交此文件')
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-	if(mt_settings['存储模式'] !== 'localStorage')
+	if(!mt_settings['存储模式'])
 	{
 		moetalkStorage.getItem('mt-char', function(err, char)
 		{
@@ -132,12 +132,12 @@ $('body').on('change',"#loaddatafile",function()
 		localStorage.clear()
 		let json = JSON.parse(this.result)
 		mt_settings = json['设置选项'] ? JSON.parse(json['设置选项']) : {}
-		if(mt_settings['存储模式'] !== 'localStorage')moetalkStorage.clear()
+		if(!mt_settings['存储模式'])moetalkStorage.clear()
 		$.each(json,function(k,v)
 		{
 			if(['chats','mt-char','mt-head'].indexOf(k) > -1)
 			{
-				if(mt_settings['存储模式'] !== 'localStorage')moetalkStorage.setItem(k,v)
+				if(!mt_settings['存储模式'])moetalkStorage.setItem(k,v)
 				else localStorage[k] = v;
 			}
 			else localStorage[k] = v;
@@ -451,12 +451,12 @@ $('body').on('click',"#savemode",function()
 			mt_settings['存储模式'] = 'localStorage'
 			moetalkStorage.getItem('mt-char', function(err, char)
 			{
-				if(!char)char = '{}';
 				moetalkStorage.getItem('mt-head', function(err, head)
 				{
-					if(!head)head = '{}';
 					moetalkStorage.getItem('chats', function(err, data)
 					{
+						if(!char)char = '{}';
+						if(!head)head = '{}';
 						if(!data)data = '[]';
 						localStorage['mt-char'] = char
 						localStorage['mt-head'] = head

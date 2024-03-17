@@ -24,29 +24,54 @@ nowChapter[0] = ''
 nowChapter[1] = {}
 nowChapter[1].chapter = []
 
-if(mt_settings['存储模式'] !== 'localStorage')
+if(!mt_settings['存储模式'])
 {
 	$('.dDBXxQ').wait(function(){$('.dDBXxQ').show().after('<div class="loading"><div/>')},".dDBXxQ")//
 	moetalkStorage.getItem('mt-char', function(err, char)
 	{
-		if(!char)char = '{}';
 		moetalkStorage.getItem('mt-head', function(err, head)
 		{
-			if(!head)head = '{}';
 			moetalkStorage.getItem('chats', function(err, data)
 			{
-				if(!data)data = '[]';
-				$('.loading').wait(function(){$('.dDBXxQ').hide().next().remove()},".loading")//
-
-				mt_char = JSON.parse(char)
-				mt_head = JSON.parse(head)
-				list()
-				
+				if(!char || !head)
+				{
+					char = '{}'
+					head = '{}'
+					if(localStorage['mt-char'])
+					{
+						char = localStorage['mt-char']
+						moetalkStorage.setItem('mt-char',char).then(function()
+						{
+							delete localStorage['mt-char']
+						})
+					}
+					if(localStorage['mt-head'])
+					{
+						head = localStorage['mt-head']
+						moetalkStorage.setItem('mt-head',head).then(function()
+						{
+							delete localStorage['mt-head']
+						})
+					}
+				}
+				if(!data)
+				{
+					data = '[]'
+					if(localStorage['chats'])
+					{
+						data = localStorage['chats']
+						moetalkStorage.setItem('chats',data).then(function()
+						{
+							delete localStorage['chats']
+						})
+					}
+					
+				}
 				chats = []
 				otherChats = []
 				JSON.parse(data).map(function(v,k)
 				{
-					if(v.replyDepth != 0)otherChats.push(v)
+					if(v.replyDepth !== 0)otherChats.push(v)
 					else chats.push(v)
 				})
 				if(chats.length > 0)
@@ -54,10 +79,14 @@ if(mt_settings['存储模式'] !== 'localStorage')
 					$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
 					$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
 				}
+				$('.loading').wait(function(){$('.dDBXxQ').hide().next().remove()},".loading")//
 				chats.map(function(v,k)
 				{
 					$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
 				})
+				mt_char = JSON.parse(char)
+				mt_head = JSON.parse(head)
+				list()
 
 				if(mt_settings['后台保存'])
 				{
@@ -72,9 +101,14 @@ if(mt_settings['存储模式'] !== 'localStorage')
 }
 else
 {
+	if(!localStorage['mt-char'])localStorage['mt-char'] = '{}'
+	if(!localStorage['mt-head'])localStorage['mt-head'] = '{}'
+	if(!localStorage['chats'])localStorage['chats'] = '[]'
+	mt_char = JSON.parse(localStorage['mt-char'])//临时角色名称
+	mt_head = JSON.parse(localStorage['mt-head'])//临时义角色头像
 	JSON.parse(localStorage['chats']).map(function(v,k)
 	{
-		if(v.replyDepth != 0)otherChats.push(v)
+		if(v.replyDepth !== 0)otherChats.push(v)
 		else chats.push(v)
 	})
 	if(mt_settings['后台保存'])
@@ -569,9 +603,9 @@ function makeMessage(type,data,chatIndex,mode)
 			文本 = `<span class="${head ? '文本 左角' : '文本'} 编辑" style='${style}'>${data.content}</span>`
 			对话 = 
 			`${头像框}
-			<div class="对话" style="display: block; width: 100%;">
+			<div class="对话" style="justify-content: flex-start;">
 				${名称}
-				<div style="display: flex; justify-content: flex-start;">
+				<div style="display: flex;">
 					${type === 'chat' ? 文本 : 图片}
 					${data.time ? `<span class="时间戳">${data.time}</span>` : ''}
 				</div>
@@ -586,7 +620,7 @@ function makeMessage(type,data,chatIndex,mode)
 			`${no == 0 ? '<div class="头像框" style="margin-right: 1.5rem;"></div>' : ''}
 			<div class="对话" style="align-items: flex-end;">
 				${名称}
-				<div style="display: flex; justify-content: flex-end;"">
+				<div style="display: flex; justify-content: flex-end;">
 					${data.time ? `<span class="时间戳" style="text-align: right;">${data.time}</span>` : ''}
 					${type === 'chat' ? 文本 : 图片}
 				</div>
@@ -924,7 +958,7 @@ function replyDepth(str)
 	if(str)replyDepths.push(str)
 	allChats.map(function(v,k)
 	{
-		if(v.replyDepth != replyDepths.slice(-1)[0])
+		if(v.replyDepth !== replyDepths.slice(-1)[0])
 		{
 			otherChats.push(v)
 		}
@@ -944,6 +978,7 @@ function refreshMessage(json)
 }
 $("body").on('click',".选择肢.跳转",function()
 {
+	if(!$(this).text())return;
 	replyDepth($(this).text())
 	$('.replyBack').next().text("Re: "+$(this).text()).parent().css('display','flex')
 	refreshMessage(chats)

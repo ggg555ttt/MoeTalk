@@ -26,6 +26,7 @@ $.ajax({
 					length=length+1
 					if(keys.length === length)
 					{
+						delete localStorage['启动网址']
 						localStorage['mt-version'] = version
 						localStorage['mt-rand'] = rand
 						location.reload(true)
