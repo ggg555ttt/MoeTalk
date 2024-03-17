@@ -30,7 +30,7 @@ if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
 var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色名称
 var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时义角色头像
 
-if(!localStorage['启动网址'])
+if(!mt_settings['语言选项'])
 {
 	delete localStorage['lang']
 	delete localStorage['first']
