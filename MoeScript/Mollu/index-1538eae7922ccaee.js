@@ -2434,7 +2434,7 @@
 							replyDepths = [0]
 							j[1].map(function(v,k)
 							{
-								if(v.replyDepth != 0)otherChats.push(v)
+								if(v.replyDepth !== 0)otherChats.push(v)
 								else chats.push(v)
 							})
 							$$('.消息').remove()

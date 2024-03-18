@@ -32,13 +32,6 @@ var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时义角色头像
 
 if(!mt_settings['语言选项'])
 {
-	delete localStorage['lang']
-	delete localStorage['first']
-	delete localStorage['mt-edit']
-	delete localStorage['mt-font']
-	delete localStorage['replyNo']
-	delete localStorage['replyGroup']
-
 	mt_settings['语言选项'] = localStorage['mt-lang'] ? localStorage['mt-lang'] : 'zh_cn'
 	mt_settings['图片比例'] = localStorage['mt-size'] ? localStorage['mt-size'] : '90%'
 	mt_settings['差分比例'] = localStorage['mt-cfsize'] ? localStorage['mt-cfsize'] : '90%'
@@ -65,9 +58,16 @@ if(!mt_settings['语言选项'])
 	delete localStorage['send']
 	delete localStorage['CharFaceIndex']
 	delete localStorage['mt-club']
+
 	delete localStorage['mt-date']
 	delete localStorage['Hm_lvt_3f7abc5752af46ddac2e985bb10dbb30']
 	delete localStorage['sc_medium_source']
+	delete localStorage['lang']
+	delete localStorage['first']
+	delete localStorage['mt-edit']
+	delete localStorage['mt-font']
+	delete localStorage['replyNo']
+	delete localStorage['replyGroup']
 	
 	if(localStorage['mt-selectedList'])
 	{
@@ -432,6 +432,7 @@ function list()
 }
 function loaddata(json,mode,ARR = '')//识别存档
 {
+
 	let moeurl = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io'
 	let josnsize = (json.length/1024).toFixed(0)
 	let custom_char = {};
@@ -574,34 +575,37 @@ function loaddata(json,mode,ARR = '')//识别存档
 //
 	let otherChats = []
 	let chats = []
+	let arr = {}
+	let key = '';
 	json[1].map(function(v,k)
 	{
 		if(v.replyDepth !== 0)otherChats.push(v)
 		else chats.push(v)
+
+		key = v.replyDepth
+		if(v.replyDepth === 0)key = ''
+
+		if(!arr[key])arr[key] = []
+		arr[key].push(v)
 	})
 
-	let arr = {}
-	json[1].map(function(v,k)
-	{
-		!arr[v.replyDepth] ? arr[v.replyDepth] = [] : ''
-		arr[v.replyDepth].push(v)
-	});
 	$.each(arr,function(k,v)
 	{
-		if(k !== 0)
+		if(k !== '')
 		{
-			let json = arr[0].filter(function(e)
+			let json = arr[''].filter(function(e)
 			{
 				return e.content.split('\n').filter(function(e)
 				{
-					return e == k
-				}) == k
+					return e === k
+				}) === k
 			})[0]
-			let index = arr[0].indexOf(json)+1
-			arr[0].splice(index,0,...arr[k]);
+			let index = arr[''].indexOf(json)+1
+			arr[''].splice(index,0,...arr[k]);
 		}
 	})
-	json[1] = arr[0]
+
+	json[1] = arr['']
 //
 	if($('#customchar').prop('checked') === true)//读取自定义角色
 	{
