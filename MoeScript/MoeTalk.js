@@ -2,7 +2,6 @@
 var cfemoji = 'NO';//表情差分开关
 var cf = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
-var maxHeight = parseInt(mt_settings['高度限制']) < 16384 ? mt_settings['高度限制'] : 16384;
 var chatIndex = -1//消息索引
 
 var operate = false
@@ -122,7 +121,7 @@ function mt_height(num)
 {
 	if(!num)num = 1.1
 	let length = ($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num);
-	length = Number(length) + ((16.6 * num) * (Math.ceil(length/maxHeight) - 1));
+	length = Number(length) + ((16.6 * num) * (Math.ceil(length/mt_settings['高度限制']) - 1));
 	return length.toFixed();
 }
 var mt_font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>";
@@ -282,7 +281,7 @@ $("body").on('change','#custom',function()
 //警告提醒
 $('body').on('click',"#size",function()
 {
-	let str = `消息长度最好不要超过${maxHeight}\n存档体积不得超过5120KB\n此处的长度数值仅为估算，请以生成图片界面的数值为准\n`
+	let str = `消息长度最好不要超过${mt_settings['高度限制']}\n存档体积不得超过5120KB\n此处的长度数值仅为估算，请以生成图片界面的数值为准\n`
 	let charL = ((JSON.stringify(mt_char).length+JSON.stringify(mt_head).length)/1024).toFixed(0)
 	let chatsL = (JSON.stringify([...chats,...otherChats]).length/1024).toFixed(0)
 	alert(`${str}\n自定义角色大小：${charL}KB\nMMT数据大小：${chatsL}KB\n在indexedDB模式下，此两项不会记录在指示器内\n当前存储模式：${mt_settings['存储模式'] ? mt_settings['存储模式'] : 'indexedDB'}`)
@@ -594,7 +593,7 @@ function makeMessage(type,data,chatIndex,mode)
 				maxwidth = mt_settings['差分比例'] || '90%'
 			}
 			maxheight = `style="max-width:${maxwidth};"`
-			图片 = `<img ${maxheight} class="图片 编辑" src='${data.file || (data.content.indexOf("CharFace") > -1 ? data.content : href+data.content)}'>`
+			图片 = `<img ${maxheight} class="图片 编辑" src='${data.file || (data.content.indexOf("//") > -1 ? data.content : href+data.content)}'>`
 		}
 		if(no != 0 && !data.isRight)
 		{

@@ -2168,7 +2168,7 @@
 											style:{color:'red'},
 											className:'bold',
 											children: mt_height(S)
-										}),`，将生成${Math.ceil(mt_height(S)/maxHeight)}张`,(0, m.jsx)("span",
+										}),`，将生成${Math.ceil(mt_height(S)/mt_settings['高度限制'])}张`,(0, m.jsx)("span",
 										{
 											id:'mt-image',
 											className:'bold',
@@ -2198,7 +2198,6 @@
 												mt_settings['图片格式'] = 'image/'+image;
 												saveStorage('设置选项',mt_settings,'local')
 												$$('#mt-image').text(image)
-												if(image === "webp")maxHeight = 16384
 											}
 										}
 									}), (0, m.jsxs)(ea.$_,
@@ -2233,7 +2232,7 @@
 												for(let end=0;end<$$(".消息").length;end++)
 												{
 													length = length+($$(`.消息:eq(${end})`).outerHeight()*S)
-													if(length > maxHeight || $$(`.消息:eq(${end})>.dels`).css('background-color') === 'rgb(255, 0, 0)')//
+													if(length > mt_settings['高度限制'] || $$(`.消息:eq(${end})>.dels`).css('background-color') === 'rgb(255, 0, 0)')//
 													{
 														if(json[end].isFirst === false && json[end].sCharacter.no != 0)
 														{

@@ -30,21 +30,49 @@ if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
 var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色名称
 var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时义角色头像
 
-if(!mt_settings['语言选项'])
+if(localStorage['0'] || !localStorage['启动次数'])
 {
-	mt_settings['语言选项'] = localStorage['mt-lang'] ? localStorage['mt-lang'] : 'zh_cn'
-	mt_settings['图片比例'] = localStorage['mt-size'] ? localStorage['mt-size'] : '90%'
-	mt_settings['差分比例'] = localStorage['mt-cfsize'] ? localStorage['mt-cfsize'] : '90%'
-	mt_settings['排序方式'] = localStorage['mt-order'] ? localStorage['mt-order'] : 'name'
-	mt_settings['人物改名'] = localStorage['mt-name'] ? JSON.parse(localStorage['mt-name']) : {}
-	mt_settings['图片格式'] = localStorage['mt-image'] ? localStorage['mt-image'] : 'image/png'
-	mt_settings['禁止字体'] = localStorage['mt-nofont'] ? localStorage['mt-nofont'] : false
-	mt_settings['高度限制'] = localStorage['mt-maxheight'] ? localStorage['mt-maxheight'] : 16384
-	mt_settings['头像尺寸'] = localStorage['hnum'] ? localStorage['hnum'] : 300
-	mt_settings['发送方式'] = localStorage['send'] ? '点击' : '回车'
-	mt_settings['差分映射'] = localStorage['CharFaceIndex'] ? JSON.parse(localStorage['CharFaceIndex']) : {}
-	mt_settings['社团列表'] = localStorage['mt-club'] ? JSON.parse(localStorage['mt-club']) : {}
-	
+	let lang = window.navigator.language.toLowerCase()
+	if(['zh-cn','zh-sg'].indexOf(lang) > -1)lang = 'zh_cn'
+	if(['zh-tw','zh-hk'].indexOf(lang) > -1)lang = 'zh_tw'
+	if(lang.indexOf('en') > -1)lang = 'en'
+	if(['ja','ja-jp'].indexOf(lang) > -1)lang = 'zh_cn'
+	if(['ko','ko-kr'].indexOf(lang) > -1)lang = 'zh_tw'
+	if(['zh_cn','zh_tw','en','jp','kr'].indexOf(lang) < 0)lang = 'en'
+
+	if(!mt_settings['语言选项'])mt_settings['语言选项'] = lang
+	if(!mt_settings['图片比例'])mt_settings['图片比例'] = '90%'
+	if(!mt_settings['差分比例'])mt_settings['差分比例'] = '90%'
+	if(!mt_settings['排序方式'])mt_settings['排序方式'] = 'name'
+	if(!mt_settings['人物改名'])mt_settings['人物改名'] = {}
+	if(!mt_settings['图片格式'])mt_settings['图片格式'] = 'image/png'
+	//if(!mt_settings['禁止字体'])mt_settings['禁止字体'] = false
+	if(!mt_settings['高度限制'])mt_settings['高度限制'] = 16384
+	//if(!mt_settings['头像尺寸'])mt_settings['头像尺寸'] = 300
+	if(!mt_settings['发送方式'])mt_settings['发送方式'] = '回车'
+	if(!mt_settings['差分映射'])mt_settings['差分映射'] = {}
+	if(!mt_settings['社团列表'])mt_settings['社团列表'] = {}
+	if(!mt_settings['文字样式'])mt_settings['文字样式'] = {}
+	if(!mt_settings['宽度限制'])mt_settings['宽度限制'] = 500
+	if(!mt_settings['顶部标题'])mt_settings['顶部标题'] = 'MoeTalk'
+	if(!mt_settings['社团列表'])mt_settings['社团列表'] = {}
+	if(!mt_settings['选择角色'])
+	{
+		mt_settings['选择角色'] = {}
+		mt_settings['选择角色'].no = 0
+		mt_settings['选择角色'].index = 1
+		mt_settings['选择角色'].list = []
+	}
+	if(!mt_settings['风格样式'])
+	{
+		mt_settings['风格样式'] = []
+		mt_settings['风格样式'][0] = 'MomoTalk'
+		mt_settings['风格样式'][1] = '#FFFFFF'
+		mt_settings['风格样式'][2] = '#DCE5E8'
+	}
+
+	delete localStorage['0']
+	delete localStorage['1']	
 	delete localStorage['mt-lang']
 	delete localStorage['mt-size']
 	delete localStorage['mt-cfsize']
@@ -58,7 +86,6 @@ if(!mt_settings['语言选项'])
 	delete localStorage['send']
 	delete localStorage['CharFaceIndex']
 	delete localStorage['mt-club']
-
 	delete localStorage['mt-date']
 	delete localStorage['Hm_lvt_3f7abc5752af46ddac2e985bb10dbb30']
 	delete localStorage['sc_medium_source']
@@ -68,39 +95,16 @@ if(!mt_settings['语言选项'])
 	delete localStorage['mt-font']
 	delete localStorage['replyNo']
 	delete localStorage['replyGroup']
-	
-	if(localStorage['mt-selectedList'])
-	{
-		mt_settings['选择角色'] = {}
-		mt_settings['选择角色'].no = JSON.parse(localStorage['mt-selectedList']).selected.no
-		mt_settings['选择角色'].index = JSON.parse(localStorage['mt-selectedList']).selected.index
-		mt_settings['选择角色'].list = JSON.parse(localStorage['mt-selectedList']).selectedList
-	}
-	if(!mt_settings['选择角色'])
-	{
-		mt_settings['选择角色'] = {}
-		mt_settings['选择角色'].no = 0
-		mt_settings['选择角色'].index = 1
-		mt_settings['选择角色'].list = []
-	}
 	delete localStorage['mt-selectedList']
-}
-delete localStorage['vConsole_switch_y']
-delete localStorage['vConsole_switch_x']
-delete localStorage['MoeTalk']
-delete localStorage['顶部标题']
+	delete localStorage['vConsole_switch_y']
+	delete localStorage['vConsole_switch_x']
+	delete localStorage['MoeTalk']
+	delete localStorage['顶部标题']
+	//if(!mt_settings['后台保存'])delete mt_settings['后台保存']
+	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
 
-!mt_settings['文字样式'] ? mt_settings['文字样式'] = {} : ''
-!mt_settings['宽度限制'] ? mt_settings['宽度限制'] = 500 : ''
-!mt_settings['顶部标题'] ? mt_settings['顶部标题'] = 'MoeTalk' : ''
-!mt_settings['风格样式'] ? mt_settings['风格样式'] = [] : mt_settings['风格样式']
-if(['YuzuTalk','MomoTalk'].indexOf(mt_settings['风格样式'][0]) < 0)
-{
-	mt_settings['风格样式'] = []
-	mt_settings['风格样式'][0] = 'MomoTalk'
-	mt_settings['风格样式'][1] = '#FFFFFF'
-	mt_settings['风格样式'][2] = '#DCE5E8'
 }
+
 saveStorage('设置选项',mt_settings,'local')
 
 var mtlang = mt_settings['语言选项'];
@@ -161,6 +165,18 @@ function loadhead(id,img)
 	if(closure_char[id])return `${href}Images/ClosureTalk/ba/characters/${img}.webp`;//closure头像
 	if(mollu_char[id])return `${href}Images/MolluChar/${id}.${img}.webp`;//旧版头像
 	if(id == 0)return `${href}Images/Ui/you.webp`;//主角
+	if(id === 'YuukaTalk')
+	{
+		if(img && img.indexOf('file:///android_asset') > -1)
+		{
+			return img.replace('file:///android_asset','https://mirror.ghproxy.com/https://github.com/Eynnzerr/YuukaTalk/blob/dd45c56e35d64b8d9375de81985541f4f238e170/app/src/main/assets')
+		}
+		else
+		{
+			if(img && img.indexOf('moetalk') > -1)return img.replace('https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io',href)
+			return `${href}Images/Ui/you.webp`;
+		}
+	}
 	return `${href}Images/Ui/error.webp`;//默认头像
 }
 function loadname(id)
@@ -303,7 +319,7 @@ function download_txt(filename,content,contentType)
 //警告
 function warning()
 {
-	if(height > (maxHeight) || localSize > (5120*0.75))//检测聊天框宽度
+	if(height > (mt_settings['高度限制']) || localSize > (5120*0.75))//检测聊天框宽度
 	{
 		$("#size").css('color','red');//显示警告
 	}
@@ -333,13 +349,13 @@ function blobToArrayBuffer(file) {
 	});
 }
 function blobToBase64(blob, callback) { 
-  var reader = new FileReader(); 
-  reader.onload = function() { 
-    var dataUrl = reader.result; 
-    var base64 = dataUrl.split(',')[1]; 
-    callback(base64); 
-  }; 
-  reader.readAsDataURL(blob); 
+	var reader = new FileReader(); 
+	reader.onload = function() { 
+		var dataUrl = reader.result; 
+		var base64 = dataUrl.split(',')[1]; 
+		callback(base64); 
+	}; 
+	reader.readAsDataURL(blob); 
 } 
 function combineFiles(mainFile, hideFile, fileName, Index) {
 	const sep = '-sep-';
@@ -444,7 +460,7 @@ function loaddata(json,mode,ARR = '')//识别存档
 		json[1] = [];
 		json[0]['title'] = '错误存档'
 		json[0]['nickname'] = '无法识别的数据'
-		json[0]['date'] = '强制上传会清空当前正在编辑的数据'
+		json[0]['date'] = '强制上传可能会损坏您的存档'
 	}
 
 	if(json[0] && (json[0].mt_char || json[0].custom))//mt旧版自定义角色转义
@@ -572,6 +588,66 @@ function loaddata(json,mode,ARR = '')//识别存档
 			if(v.is_breaking === true)json[1][k]['is_breaking'] = true;
 		})
 	}
+	if(json['talkHistory'])
+	{
+		json[1] = [];
+		json[0]['title'] = json['name']
+		json[0]['nickname'] = 'YuukaTalk存档'
+		json[0]['date'] = '无法显示自定义角色头像和外部上传图片'
+		json['talkHistory'].map(function(v,k)
+		{
+			json[1][k] = {};
+			json[1][k].content = ''
+			json[1][k].replyDepth = 0
+			json[1][k].sCharacter = {}
+			json[1][k].sCharacter.no = 0
+			json[1][k].sCharacter.index = 1
+			v.type = v.type.split('.').slice(-1)[0]
+			if(v.talker)
+			{
+				if(v.talker.nameRoma !== 'sensei')
+				{
+					json[1][k].name = v.talker.name
+					json[1][k].sCharacter.no = 'YuukaTalk'
+					json[1][k].sCharacter.index = v.talker.currentAvatar
+				}
+			}
+			if(v.type === 'PureText')
+			{
+				json[1][k].isFirst = v.isFirst
+				json[1][k].content = v.text
+				json[1][k].type = 'chat'
+			}
+			if(v.type === 'Branch')
+			{
+				json[1][k].content = v.textOptions.join('\n')
+				json[1][k].type = 'reply'
+			}
+			if(v.type === 'LoveScene')
+			{
+				json[1][k].name = v.studentName
+				json[1][k].type = 'heart'
+			}
+			if(v.type === 'Narration')
+			{
+				json[1][k].content = v.text
+				json[1][k].type = 'info'
+			}
+			if(v.type === 'Photo')
+			{
+				if(v.uri.indexOf('file:///android_asset') > -1)
+				{
+					json[1][k].content = v.uri.replace('file:///android_asset','https://mirror.ghproxy.com/https://github.com/Eynnzerr/YuukaTalk/blob/dd45c56e35d64b8d9375de81985541f4f238e170/app/src/main/assets')
+				}
+				else
+				{
+					json[1][k].content = `Images/Ui/error.webp`;
+				}
+				json[1][k].type = 'image'
+			}
+			json[1][k].isFirst = false
+		})
+	}
 //
 	let otherChats = []
 	let chats = []
@@ -633,34 +709,34 @@ function loaddata(json,mode,ARR = '')//识别存档
 }
 // 格式化日对象
 const getNowDate = () => {
-  var date = new Date();
-  var sign2 = ":";
-  var year = date.getFullYear() // 年
-  var month = date.getMonth() + 1; // 月
-  var day = date.getDate(); // 日
-  var hour = date.getHours(); // 时
-  var minutes = date.getMinutes(); // 分
-  var seconds = date.getSeconds() //秒
-  var weekArr = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
-  var week = weekArr[date.getDay()];
-  // 给一位数的数据前面加 “0”
-  if (month >= 1 && month <= 9) {
-    month = "0" + month;
-  }
-  if (day >= 0 && day <= 9) {
-    day = "0" + day;
-  }
-  if (hour >= 0 && hour <= 9) {
-    hour = "0" + hour;
-  }
-  if (minutes >= 0 && minutes <= 9) {
-    minutes = "0" + minutes;
-  }
-  if (seconds >= 0 && seconds <= 9) {
-    seconds = "0" + seconds;
-  }
-  //return year + "-" + month + "-" + day + " " + hour + sign2 + minutes + sign2 + seconds;
-  return `${year}${month}${day}${hour}${minutes}${seconds}`;
+	var date = new Date();
+	var sign2 = ":";
+	var year = date.getFullYear() // 年
+	var month = date.getMonth() + 1; // 月
+	var day = date.getDate(); // 日
+	var hour = date.getHours(); // 时
+	var minutes = date.getMinutes(); // 分
+	var seconds = date.getSeconds() //秒
+	var weekArr = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
+	var week = weekArr[date.getDay()];
+	// 给一位数的数据前面加 “0”
+	if (month >= 1 && month <= 9) {
+		month = "0" + month;
+	}
+	if (day >= 0 && day <= 9) {
+		day = "0" + day;
+	}
+	if (hour >= 0 && hour <= 9) {
+		hour = "0" + hour;
+	}
+	if (minutes >= 0 && minutes <= 9) {
+		minutes = "0" + minutes;
+	}
+	if (seconds >= 0 && seconds <= 9) {
+		seconds = "0" + seconds;
+	}
+	//return year + "-" + month + "-" + day + " " + hour + sign2 + minutes + sign2 + seconds;
+	return `${year}${month}${day}${hour}${minutes}${seconds}`;
 }
 function MoeToClosure()//Moe转Closure
 {
@@ -932,8 +1008,8 @@ function saveStorage(key,val,mode)
 }
 
 localStorage['启动时间'] = getNowDate()
+localStorage['启动设备'] = window.navigator.userAgent
 if(!localStorage['启动次数'])localStorage['启动次数'] = 0
-if(typeof browser !== 'undefined')localStorage['启动设备'] = JSON.stringify(browser)
 if(window.location.href.indexOf('Setting') < 0)
 {
 	localStorage['启动次数'] = parseInt(localStorage['启动次数'])+1

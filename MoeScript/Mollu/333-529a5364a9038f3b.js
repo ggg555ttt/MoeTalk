@@ -1208,7 +1208,7 @@
 											{
 												className: '编辑',//文本
 												style: t.isRight ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
-												children: t.content
+												children: f//
 											}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)(s.CJ,{}) : '' ], t.time ? (0, m.jsx)(s.i9,
 											{
 												hidden: !t.time || t.sCharacter.no == 0 || t.isRight,
