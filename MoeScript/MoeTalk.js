@@ -64,8 +64,10 @@ if(!mt_settings['存储模式'])
 							delete localStorage['chats']
 						})
 					}
-					
 				}
+				mt_char = JSON.parse(char)
+				mt_head = JSON.parse(head)
+				list()
 				chats = []
 				otherChats = []
 				JSON.parse(data).map(function(v,k)
@@ -83,10 +85,6 @@ if(!mt_settings['存储模式'])
 				{
 					$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
 				})
-				mt_char = JSON.parse(char)
-				mt_head = JSON.parse(head)
-				list()
-
 				if(mt_settings['后台保存'])
 				{
 					window.onblur = function(){saveStorage('chats',[...chats,...otherChats],'local')}
@@ -595,14 +593,14 @@ function makeMessage(type,data,chatIndex,mode)
 			maxheight = `style="max-width:${maxwidth};"`
 			图片 = `<img ${maxheight} class="图片 编辑" src='${data.file || (data.content.indexOf("//") > -1 ? data.content : href+data.content)}'>`
 		}
-		if(no != 0 && !data.isRight)
+		if(no != 0 && !data.isRight)//左侧对话
 		{
 			头像框 = `<div class="头像框" style="cursor: pointer; height: 100%;">${head ? `<img height="252" width="252" src="${loadhead(no,index)}" alt="${index}" class="头像">` : ''}</div>`
 			名称 = `${head ? `<span class="名称 bold">${data.name || loadname(no)}</span>` : ''}`
 			文本 = `<span class="${head ? '文本 左角' : '文本'} 编辑" style='${style}'>${data.content}</span>`
 			对话 = 
 			`${头像框}
-			<div class="对话" style="justify-content: flex-start;">
+			<div class="对话" style="align-items: flex-start;">
 				${名称}
 				<div style="display: flex;">
 					${type === 'chat' ? 文本 : 图片}
@@ -610,7 +608,7 @@ function makeMessage(type,data,chatIndex,mode)
 				</div>
 			</div>`
 		}
-		else
+		else//右侧或老师
 		{
 			头像框 = `${no == 0 ? '' : `<div class="头像框" style="justify-content: flex-end; cursor: pointer; height: 100%;">${head ? `<img height="252" width="252" src="${loadhead(no,index)}" alt="${index}" class="头像">` : ''}</div>`}`
 			名称 = `${head && no != 0 ? `<span class="名称 bold">${data.name || loadname(no)}</span>` : ''}`
