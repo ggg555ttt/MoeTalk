@@ -30,7 +30,7 @@ if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
 var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色名称
 var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时义角色头像
 
-if(localStorage['0'] || !localStorage['启动次数'])
+if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选项'] === '{}')
 {
 	let lang = window.navigator.language.toLowerCase()
 	if(['zh-cn','zh-sg'].indexOf(lang) > -1)lang = 'zh_cn'
@@ -1015,37 +1015,97 @@ if(window.location.href.indexOf('Setting') < 0)
 	localStorage['启动次数'] = parseInt(localStorage['启动次数'])+1
 	localStorage['启动网址'] = window.location.href
 }
-// var 表情 = {};
-// 表情.名称 = ''
-// 表情.类型 = ''
-// 表情.页码 = ''
-// 表情.列表 = []
-// function mt_emoji(S,mode,custom = false,goBack = false)
-// {
-// 	let no = mt_settings['选择角色'].no;
-// 	let school = mt_characters[no].school
-// 	let club = mt_characters[no].club
-// 	let arr = mt_characters[no] && mt_characters[no][mode] ? mt_characters[no][mode].split(',') : []
+var 表情,表情类型,表情页码,表情来源;
+function mt_emojis(S,mode)
+{
+	表情 = []
+	表情类型 = ''
+	表情页码 = ''
+	表情来源 = ''
+	let id = mt_settings['选择角色'].no;
+	let maxNum = 0
+	if(mode === 'CharFace')
+	{
+		if(mt_settings['差分映射'][id] || mt_settings['差分映射'][id] == 0)id = mt_settings['差分映射'][id]
+		if(S === '+')
+		{
+			sessionStorage[id]++
+			return;
+		}
+		if(S === '-')
+		{
+			sessionStorage[id]--
+			return;
+		}
+		if(!mt_characters[id])
+		{
+			表情类型 = `${loadname(id)}(0暂无)`
+			表情页码 = `0 / 0`
+			S(!0)
+			return;
+		}
+		let cfarr = mt_characters[id].charface.split(',')
+		let pageIdnex = parseInt(sessionStorage[id]);
+		if(pageIdnex === -1)pageIdnex = sessionStorage[id] = cfarr.length-1
+		if(isNaN(pageIdnex) || !cfarr[pageIdnex])pageIdnex = sessionStorage[id] = 0
+		if(cfarr[pageIdnex])
+		{
+			cfarr[pageIdnex] = cfarr[pageIdnex].split('.')
+			cfarr[pageIdnex].pop()//删除后缀
+			maxNum = parseInt(cfarr[pageIdnex].pop())//获取总数
+			cfarr[pageIdnex] = cfarr[pageIdnex][0]//获取文件名
+			Array(maxNum).fill(cfarr[pageIdnex]).map(function(v,k)
+			{
+				表情.push(`Images/CharFace/${mt_characters[id].school}/${mt_characters[id].club}/${v}.${k+1}.webp`)
+			})
+			表情页码 = `${pageIdnex+1} / ${cfarr.length}`
 
-// if(!sessionStorage[no] || isNaN(parseInt(sessionStorage[no])))sessionStorage[no] = 0
-
-// 	let cfindex = parseInt(sessionStorage[no]);
-// 	if(goBack === '-')cfindex = cfindex-1
-// 	if(goBack === '+')cfindex = cfindex+1
-// 	if(cfindex < 0 || cfindex >= arr.length)cfindex = 0
-// 	sessionStorage[no] = cfindex
-
-// 	let cfarr = []
-	
-// 	Array(parseInt(arr[cfindex].split('.').slice(-2)[0])).fill(0).map(function(v,k)
-// 	{
-// 		cfarr[k] = `Images/${mode}/${school}/${club}/${arr[cfindex].split('.').slice(0,-2)[0]}.${k+1}.webp`
-// 	})
-// 	表情.名称 = loadname(no)
-// 	表情.类型 = mode
-// 	表情.页码 = `${arr.length < 1 ? 0 : cfindex+1}/${arr.length}`
-// 	表情.列表 = cfarr
-// 	S(!0)
-// 	console.log(表情)
-
-// }
+			cfarr[pageIdnex] = cfarr[pageIdnex].split('/')
+			表情类型 = cfarr[pageIdnex].pop()//获取差分类型
+			if(表情类型 === id)
+			{
+				表情类型 = `${loadname(id)}(${maxNum}其他)`
+			}
+			else if(mt_CharFaceInfo[表情类型])
+			{
+				表情来源 = mt_CharFaceIndex[mt_CharFaceInfo[表情类型]]
+				表情类型 = `${loadname(id)}(${maxNum}自制)`
+			}
+			else
+			{
+				表情类型 = `${loadname(id)}(${maxNum})`
+			}
+			S(!0)
+			return;
+		}
+	}
+	else
+	{
+		if(S === '+')
+		{
+			localStorage['pageIdnex']++
+			return;
+		}
+		if(S === '-')
+		{
+			localStorage['pageIdnex']--
+			return;
+		}
+		let pageIdnex = parseInt(localStorage['pageIdnex']);
+		if(pageIdnex > 3 || isNaN(pageIdnex))pageIdnex = localStorage['pageIdnex'] = 0
+		if(pageIdnex < 0)pageIdnex = localStorage['pageIdnex'] = 3;
+		if(pageIdnex == 0)maxNum = 40;
+		if(pageIdnex == 1)maxNum = 40;
+		if(pageIdnex == 2)maxNum = 64;
+		if(pageIdnex == 3)maxNum = 27;
+		let str = mtlang === 'zh_cn' ? 'zh_tw' : mtlang
+		if(pageIdnex === 3)str = ''
+		Array(maxNum).fill(str).map(function(v,k)
+		{
+			表情.push(`Images/Emoji/${pageIdnex+1}${v}${k+1}.webp`)
+		})
+		表情类型 = `图片表情(${maxNum})`
+		表情页码 = `${pageIdnex+1} / 4`
+		S(!0)
+	}
+}

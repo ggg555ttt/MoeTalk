@@ -1,6 +1,5 @@
 //https://try8.cn/tool/format/js
-var cfemoji = 'NO';//表情差分开关
-var cf = 'NO';//表情差分开关
+var cfemoji = cf = 'NO';//表情差分开关
 var CharFaceIndex = null;//差分映射
 var chatIndex = -1//消息索引
 

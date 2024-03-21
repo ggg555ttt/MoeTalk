@@ -1187,7 +1187,7 @@
 									}) : '', (0, m.jsxs)(t.sCharacter.no == 0 ? "div" : s.Xp,
 									{
 										className: "对话",
-										style: t.isRight ? {alignItems: 'flex-end'} : {display: 'block',width: '100%'},
+										style: t.isRight || t.sCharacter.no == 0 ? {alignItems: 'flex-end'} : {alignItems: 'flex-start'},
 										children: [isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{
 											className: "名称 bold",
@@ -1197,7 +1197,7 @@
 											style:
 											{
 												display:"flex",
-												justifyContent: t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start'
+												justifyContent: t.isRight || t.sCharacter.no == 0 ? '' : 'flex-start'
 											},
 											children: [t.time ? (0, m.jsx)(s.i9,
 											{
@@ -1434,11 +1434,7 @@
 										}) : ''
 									}) : '', (0, m.jsxs)(t.sCharacter.no == 0 ? "div" : s.Xp,
 									{
-										style: t.isRight ? 
-										{
-											display: 'flex',
-											alignItems: 'flex-end'
-										} : {display: 'block',width: '100%'},
+										style: t.isRight || t.sCharacter.no == 0 ? {alignItems: 'flex-end'} : {alignItems: 'flex-start'},
 										children: [isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{
 											className: "bold",
@@ -1456,7 +1452,7 @@
 											style:
 											{
 												display:"flex",
-												justifyContent: t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start'
+												justifyContent: t.isRight || t.sCharacter.no == 0 ? '' : 'flex-start'
 											},
 											children: [(0, m.jsx)(s.i9,
 											{

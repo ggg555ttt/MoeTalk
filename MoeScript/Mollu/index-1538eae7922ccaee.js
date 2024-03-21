@@ -2953,65 +2953,6 @@
 					{
 						cf = cfemoji;
 						cfemoji = 'NO';//@加入判断
-						let customcf = false;//自制差分
-						let cftype = '';//差分类型
-						let emojinum;
-						let no = mt_settings['选择角色'].no;
-
-						if(mt_settings['差分映射'][no])no = mt_settings['差分映射'][no];
-						
-						let link;let cflink = null;let cfarr = [];cfarr[0] = 'Images/CharFace';///定义链接
-						let charname = no == 0 ? '主角' : no;
-
-						if(mt_char[no])
-						{
-							charname = mt_char[no];
-						}
-						if(mt_schar[no])
-						{
-							charname = mt_schar[no];
-						}
-						if(mt_characters[no])
-						{
-							charname = mt_characters[no].name[mtlang] ? mt_characters[no].name[mtlang] : no
-						}
-
-						if(mt_settings['人物改名'][no])charname = mt_settings['人物改名'][no];//@改名
-						let mt_charface = mt_characters[no] ? mt_characters[no].charface : ''
-						if(cf == 'CharFace' && mt_charface !== '')
-						{
-							if(!sessionStorage[no] || sessionStorage[no] < 0 || sessionStorage[no] > mt_charface.split(',').length-1)
-							{
-								sessionStorage[no] < 0 ? sessionStorage[no] = mt_charface.split(',').length-1 : sessionStorage[no] = 0;
-							}
-							if(isNaN(parseInt(sessionStorage[no])))sessionStorage[no] = 0;
-							let arr = mt_charface.split(',')[parseInt(sessionStorage[no])].split('.');
-							arr.pop();//去掉后缀名
-							let maxnum = arr.pop()//获取最大数字
-							arr = arr.join('.')
-							cftype = arr === `${no}/${no}` ? '其他' : ''
-							for(let num = 1;num <= maxnum;num++)
-							{
-								cflink = `Images/CharFace/${mt_characters[no].school}/${mt_characters[no].club}/${arr}.`;
-								cfarr.push(cflink+num+'.webp')
-								if(mt_CharFaceInfo[arr.split('/')[1]])
-								{
-									if(mt_CharFaceIndex[mt_CharFaceInfo[arr.split('/')[1]]] !== '')
-									customcf = mt_CharFaceIndex[mt_CharFaceInfo[arr.split('/')[1]]];
-									cftype = '自制'
-								}
-							}
-						}
-						if(cf == 'Emoji')
-						{
-							if(4 <= CFPI)CFPI = 0;
-							if(CFPI < 0)CFPI = 3;
-							if(CFPI == 0)emojinum = 40;
-							if(CFPI == 1)emojinum = 40;
-							if(CFPI == 2)emojinum = 64;
-							if(CFPI == 3)emojinum = 27;
-						}
-						let cfnum = cf == 'Emoji' ? emojinum : cfarr.length-1;///差分总数
 						return (0, m.jsx)(m.Fragment,
 						{
 							children: (0, m.jsx)(ea.Xf,
@@ -3033,7 +2974,7 @@
 										children: [(0, m.jsx)(ea.Dx,
 										{
 											className: "bold",
-											children: [cf == 'Emoji' ? L.Z.emoticon[l]+'('+cfnum+')' : charname+'('+cfnum+cftype+')']//#加入差分表情
+											children: 表情类型//#加入差分表情
 										}), (0, m.jsx)(ea.ec,
 										{
 											id: 'close',//@
@@ -3054,14 +2995,11 @@
 												height: '100%',
 												color: '#3f51b5',
 												position: 'absolute',
-												left: 0
+												left: 0,
+												display: 'none'
 											},
 											className: "bold",
-											children: '上传',
-											onClick: function()
-											{
-												alert('“项目”页面最下方有我的联系方式，你可以联系我上传你需要的差分，我会标明出处\n“使用教程”页面也可以向我提交使用意见和需要的差分')
-											}
+											children: '自制',
 										}), (0, m.jsx)(c.Bx,
 										{
 											className: "bold",
@@ -3073,8 +3011,8 @@
 											children: '←',
 											onClick:function()
 											{
+												mt_emojis('-',cf)
 												click('#close');
-												cf == 'Emoji' ? CFPI = CFPI-1 : sessionStorage[no] = parseInt(sessionStorage[no])-1
 											}
 										}), (0, m.jsx)(ea.Dx,
 										{
@@ -3083,7 +3021,7 @@
 											{
 												textAlign:"center"
 											},
-											children: (cf == 'Emoji' ? CFPI+1 : !isNaN(parseInt(sessionStorage[no])) ? (parseInt(sessionStorage[no])+1) : 0)+"/"+(cf !== 'Emoji' && mt_charface ? mt_charface.split(',').length : cf == 'Emoji' ? 4 : 0)
+											children: 表情页码
 										}), (0, m.jsx)(c.Bx,
 										{
 											className: "bold",
@@ -3095,11 +3033,12 @@
 											children: '→',
 											onClick:function()
 											{
+												mt_emojis('+',cf)
 												click('#close');
-												cf == 'Emoji' ? CFPI = CFPI+1 : sessionStorage[no] = parseInt(sessionStorage[no])+1
 											}
 										}), (0, m.jsx)(c.Bx,
 										{
+											className: "bold",
 											style:
 											{
 												"width": "auto",
@@ -3108,40 +3047,32 @@
 												position: 'absolute',
 												right: 0
 											},
-											className: "bold",
-											hidden:!customcf,
-											children: '来源',
-											onClick: function()
+											children: (0, m.jsx)('a',
 											{
-												location.href = customcf
-											}
+												href: 表情来源,
+												children: '来源',
+												target: '_blank'
+											}),
+											hidden: !表情来源	
 										})]
 									}), (0, m.jsx)(eE,
 									{
 										children: (0, m.jsxs)(eM,
 										{
-											children: [Array(cf == 'Emoji' ? emojinum : cfnum)//#加入差分表情
-												.fill(0)
-												.map(function(e, n)
+											children: [表情.map(function(v, k)
+											{
+												return (0, m.jsx)(ez,
 												{
-													if(cf == 'Emoji')link = `Images/${cf}/${CFPI+1}${CFPI<3?(mtlang=='zh_cn'?'zh_tw':mtlang):''}${n+1}.webp`;//@原版表情
-													if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
-													return (0, m.jsx)(ez,
+													alt: cf,
+													height: 310,
+													width: 310,
+													onClick: function()
 													{
-														alt: cf,
-														height: 310,
-														width: 310,
-														onClick: function()
-														{
-															if(cf == 'Emoji')link = `Images/${cf}/${CFPI+1}${CFPI<3?(mtlang=='zh_cn'?'zh_tw':mtlang):''}${n+1}.webp`;//@原版表情
-															if(cf == 'CharFace')link = cfarr[n+1];//@差分表情
-															sendMessage({content: link},'image'), s()
-															//u(link)//#表情链接
-														},
-														src: href+link//#表情链接
-													}, n)
-												})
-											]
+														sendMessage({content: v},'image'), s()
+													},
+													src: href+v//#表情链接
+												}, n)
+											})]
 										})
 									})]
 								})
@@ -3340,7 +3271,8 @@
 										onClick: function()
 										{
 											cfemoji = 'Emoji';//@这是原版表情
-											S(!0)
+											mt_emojis(S,cfemoji)
+											//S(!0)
 										},
 										children: (0, m.jsx)(c.xL,
 										{
@@ -3360,7 +3292,8 @@
 										onClick: function()
 										{
 											cfemoji = 'CharFace';///这是差分表情
-											S(!0)
+											mt_emojis(S,cfemoji)
+											//S(!0)
 										},
 										children: (0, m.jsx)(c.xL,
 										{
@@ -4081,7 +4014,7 @@
 									}) : '', (0, m.jsxs)(n.sCharacter.no == 0 ? "div" : eN.Xp,
 									{
 										className: "对话",
-										style: n.isRight || n.sCharacter.no == 0? {alignItems: 'flex-end'} : {justifyContent: 'flex-start'},
+										style: n.isRight || n.sCharacter.no == 0? {alignItems: 'flex-end'} : {alignItems: 'flex-start'},
 										children: [isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{
 											className: "名称 bold",
@@ -4091,7 +4024,7 @@
 											style:
 											{
 												display:"flex",
-												justifyContent: n.isRight || n.sCharacter.no == 0 ? 'flex-end' : 'flex-start'
+												justifyContent: n.isRight || n.sCharacter.no == 0 ? '' : 'flex-start'
 											},
 											children: [n.time ? (0, m.jsx)(eN.i9,
 											{
