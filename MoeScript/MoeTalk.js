@@ -21,7 +21,7 @@ var nowChapter = []
 nowChapter[0] = ''
 nowChapter[1] = {}
 nowChapter[1].chapter = []
-
+var 元素尺寸;
 if(!mt_settings['存储模式'])
 {
 	$('.dDBXxQ').wait(function(){$('.dDBXxQ').show().after('<div class="loading"><div/>')},".dDBXxQ")//
@@ -143,6 +143,7 @@ $("body").on('click',function()
 
 	if($('.visible').length === 0)
 	{
+		if(元素尺寸)document.documentElement.style.fontSize = 元素尺寸
 		$('#mt_watermark').hide()
 		$('.消息').show()
 		$(".dels").show()
@@ -430,12 +431,14 @@ $('body').on('click',"#mt-style",function()
 {
 	if(mt_settings['风格样式'][0] === 'MomoTalk')
 	{
+		mt_settings['风格样式'] = []
 		mt_settings['风格样式'][0] = 'YuzuTalk'
 		mt_settings['风格样式'][1] = '#FFF7E1'//背景
 		mt_settings['风格样式'][2] = 'transparent'//旁白
 	}
 	else
 	{
+		mt_settings['风格样式'] = []
 		mt_settings['风格样式'][0] = 'MomoTalk'
 		mt_settings['风格样式'][1] = '#FFFFFF'//背景
 		mt_settings['风格样式'][2] = '#DCE5E8'//旁白

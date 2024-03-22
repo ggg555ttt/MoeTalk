@@ -9857,7 +9857,7 @@
 									n && clearTimeout(n), n = setTimeout(function()
 									{
 										var n;
-										t = (null === (n = window.visualViewport) || void 0 === n ? void 0 : n.height) || window.innerHeight, document.documentElement.style.setProperty("--vh", "".concat(.01 * t, "px")), window.innerWidth !== r && (r = window.innerWidth, window.innerWidth <= 768 ? (document.documentElement.style.fontSize = "14px", e((0, w.vA)(!0)), e((0, w.c1)(!1)), e((0, w.Cz)(
+										t = (null === (n = window.visualViewport) || void 0 === n ? void 0 : n.height) || window.innerHeight, document.documentElement.style.setProperty("--vh", "".concat(.01 * t, "px")), window.innerWidth !== r && (r = window.innerWidth, window.innerWidth <= 768 ? (document.documentElement.style.fontSize = mt_settings['元素尺寸'] ? mt_settings['元素尺寸'] : "14px", e((0, w.vA)(!0)), e((0, w.c1)(!1)), e((0, w.Cz)(
 										{//左bv右Cz
 											isMenu: !1,
 											isMobile: !0,

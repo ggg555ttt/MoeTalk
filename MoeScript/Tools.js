@@ -369,13 +369,6 @@ $('body').on('click',"#mt-fontszie",function()
 	alert('已提交参数，参数为空则保持默认，错误参数则导致修改失败')
 	saveStorage('设置选项',mt_settings,'local')
 })
-if(mt_settings['文字样式'])
-{
-	$.each(mt_settings['文字样式'],function(k,v)
-	{
-		$('#mt-fontszie').parent().find(`input[title="${k}"]`)[0].value = v['font-size']
-	})
-}
 $('body').on('click',"#backsave",function()
 {
 	let str = '此功能可以有效的减少更新消息时产生的延迟\n'
@@ -415,6 +408,23 @@ $('body').on('click',"#mt-zipdownimg",function()
 	{
 		delete mt_settings['打包下载']
 	}
+	saveStorage('设置选项',mt_settings,'local')
+})
+$('body').on('click',"#mt-fontSize",function()
+{
+	let str = '此选项可以设置移动端的元素尺寸\n'
+	str += '数值越小显示的显示的条目就越多\n'
+	str += '必须是“数字+px”，建议在10px以上，16px以下\n'
+	str += '数值过大过小可能会导致显示异常，请谨慎修改\n'
+	str += '默认值为14px'
+	let fontSize = prompt(str, mt_settings['元素尺寸'] ? mt_settings['元素尺寸'] : '');
+	if(fontSize)
+	{
+		alert('更改完成，请返回moetalk');
+		mt_settings['元素尺寸'] = fontSize;
+		saveStorage('设置选项',mt_settings,'local')
+	}
+
 	saveStorage('设置选项',mt_settings,'local')
 })
 $('body').on('click',"#savemode",function()
@@ -477,3 +487,10 @@ $("body").on('click',function()
 {
 	$('.mt_settings').text(JSON.stringify(mt_settings,null,4))
 })
+if(mt_settings['文字样式'])
+{
+	$.each(mt_settings['文字样式'],function(k,v)
+	{
+		$('#mt-fontszie').parent().find(`input[title="${k}"]`)[0].value = v['font-size']
+	})
+}

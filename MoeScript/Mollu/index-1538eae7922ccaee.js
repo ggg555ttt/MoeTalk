@@ -3428,6 +3428,8 @@
 									{
 										click('#tool-image')
 										$$(".dels").hide()
+										if(!元素尺寸)元素尺寸 = document.documentElement.style.fontSize
+										document.documentElement.style.fontSize = '16px'
 										mt_title()
 									},
 									children: (0, m.jsx)(c.xL,
