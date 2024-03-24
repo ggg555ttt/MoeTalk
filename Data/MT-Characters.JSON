@@ -11,7 +11,8 @@ var mt_characters = {
             "kr": "츠키유키 미야코",
             "pinyin": "yuexuegongzi"
         },
-        "charface": "月雪宫子/CH0215/CH0215.11.webp,月雪宫子/CH0215/CH0215-S2.11.webp,月雪宫子/miyako/miyako.12.webp,月雪宫子/NP0070/NP0070.10.webp,月雪宫子/月雪宫子.15.webp"
+        "charface": "月雪宫子/CH0215/CH0215.11,月雪宫子/CH0215/CH0215-S2.11,月雪宫子/miyako/miyako.12,月雪宫子/NP0070/NP0070.10,月雪宫子/月雪宫子.15",
+        "customface": ""
     },
     "油桶": {
         "school": "SRT",
@@ -25,7 +26,8 @@ var mt_characters = {
             "kr": "드럼통",
             "pinyin": "youtong"
         },
-        "charface": "油桶/油桶.1.webp"
+        "charface": "油桶/油桶.1",
+        "customface": ""
     },
     "空井咲": {
         "school": "SRT",
@@ -39,7 +41,8 @@ var mt_characters = {
             "kr": "소라이 사키",
             "pinyin": "kongjingxiao"
         },
-        "charface": "空井咲/CH0144/CH0144.13.webp,空井咲/CH0144/CH0144-S2.13.webp,空井咲/CH0217/CH0217.13.webp,空井咲/CH0217/CH0217-S2.13.webp,空井咲/NP0072/NP0072.13.webp,空井咲/NP0072/NP0072-S2.13.webp,空井咲/空井咲.19.webp"
+        "charface": "空井咲/CH0144/CH0144.13,空井咲/CH0144/CH0144-S2.13,空井咲/CH0217/CH0217.13,空井咲/CH0217/CH0217-S2.13,空井咲/NP0072/NP0072.13,空井咲/NP0072/NP0072-S2.13,空井咲/空井咲.19",
+        "customface": ""
     },
     "霞泽美游": {
         "school": "SRT",
@@ -53,7 +56,8 @@ var mt_characters = {
             "kr": "카스미자와 미유",
             "pinyin": "xiazemeiyou"
         },
-        "charface": "霞泽美游/CH0145/CH0145.12.webp,霞泽美游/CH0218/CH0218.12.webp,霞泽美游/CH0218/CH0218-S2.12.webp,霞泽美游/NP0071/NP0071.12.webp,霞泽美游/霞泽美游.15.webp"
+        "charface": "霞泽美游/CH0145/CH0145.12,霞泽美游/CH0218/CH0218.12,霞泽美游/CH0218/CH0218-S2.12,霞泽美游/NP0071/NP0071.12,霞泽美游/霞泽美游.15",
+        "customface": ""
     },
     "风仓萌绘": {
         "school": "SRT",
@@ -67,7 +71,8 @@ var mt_characters = {
             "kr": "카제쿠라 모에",
             "pinyin": "fengcangmenghui"
         },
-        "charface": "风仓萌绘/CH0216/CH0216.13.webp,风仓萌绘/CH0216/CH0216-S2.13.webp,风仓萌绘/moe/moe.18.webp,风仓萌绘/NP0073/NP0073.18.webp,风仓萌绘/风仓萌绘.15.webp"
+        "charface": "风仓萌绘/CH0216/CH0216.13,风仓萌绘/CH0216/CH0216-S2.13,风仓萌绘/moe/moe.18,风仓萌绘/NP0073/NP0073.18,风仓萌绘/风仓萌绘.15",
+        "customface": ""
     },
     "七度雪乃": {
         "school": "SRT",
@@ -81,7 +86,8 @@ var mt_characters = {
             "kr": "유키노",
             "pinyin": "qiduxuenai"
         },
-        "charface": "七度雪乃/CH0171/CH0171.15.webp,七度雪乃/七度雪乃.4.webp"
+        "charface": "七度雪乃/CH0171/CH0171.15,七度雪乃/七度雪乃.4",
+        "customface": ""
     },
     "妮可": {
         "school": "SRT",
@@ -95,7 +101,8 @@ var mt_characters = {
             "kr": "니코",
             "pinyin": "nike"
         },
-        "charface": "妮可/CH0172/CH0172.12.webp,妮可/NP0139/NP0139.12.webp,妮可/妮可.8.webp"
+        "charface": "妮可/CH0172/CH0172.12,妮可/NP0139/NP0139.12,妮可/妮可.8",
+        "customface": ""
     },
     "胡桃": {
         "school": "SRT",
@@ -109,7 +116,8 @@ var mt_characters = {
             "kr": "쿠루미",
             "pinyin": "hutao"
         },
-        "charface": "胡桃/CH0173/CH0173.12.webp,胡桃/NP0140/NP0140.12.webp,胡桃/胡桃.8.webp"
+        "charface": "胡桃/CH0173/CH0173.12,胡桃/NP0140/NP0140.12,胡桃/胡桃.8",
+        "customface": ""
     },
     "音葵": {
         "school": "SRT",
@@ -123,7 +131,8 @@ var mt_characters = {
             "kr": "오토기",
             "pinyin": "yinkui"
         },
-        "charface": "音葵/CH0174/CH0174.16.webp,音葵/NP0141/NP0141.16.webp,音葵/音葵.8.webp"
+        "charface": "音葵/CH0174/CH0174.16,音葵/NP0141/NP0141.16,音葵/音葵.8",
+        "customface": ""
     },
     "普拉娜": {
         "school": "其他",
@@ -137,7 +146,8 @@ var mt_characters = {
             "kr": "프라나",
             "pinyin": "pulana"
         },
-        "charface": "普拉娜/NP0035/NP0035.20.webp,普拉娜/普拉娜.28.webp"
+        "charface": "普拉娜/NP0035/NP0035.20,普拉娜/普拉娜.28",
+        "customface": ""
     },
     "阿罗娜": {
         "school": "其他",
@@ -151,7 +161,8 @@ var mt_characters = {
             "kr": "아로나",
             "pinyin": "aluona"
         },
-        "charface": "阿罗娜/arona/arona.32.webp,阿罗娜/阿罗娜.16.webp,阿罗娜/cv21633881/cv21633881.33.webp"
+        "charface": "阿罗娜/arona/arona.32,阿罗娜/阿罗娜.16",
+        "customface": "小沫不是末/阿罗娜_应援团/阿罗娜_应援团.33,小沫不是末/阿罗娜_旗袍/阿罗娜_旗袍.33,小沫不是末/阿罗娜_泳装/阿罗娜_泳装.33"
     },
     "川流诗乃": {
         "school": "其他",
@@ -165,7 +176,8 @@ var mt_characters = {
             "kr": "카와루 시논",
             "pinyin": "chuanliushinai"
         },
-        "charface": "川流诗乃/shinon/shinon.8.webp,川流诗乃/川流诗乃.4.webp"
+        "charface": "川流诗乃/shinon/shinon.8,川流诗乃/川流诗乃.4",
+        "customface": ""
     },
     "舞": {
         "school": "其他",
@@ -179,7 +191,8 @@ var mt_characters = {
             "kr": "카제마키 마이",
             "pinyin": "wu"
         },
-        "charface": "舞/mai/mai.6.webp,舞/舞.4.webp"
+        "charface": "舞/mai/mai.6,舞/舞.4",
+        "customface": ""
     },
     "KAITENFXMK0": {
         "school": "其他",
@@ -193,7 +206,8 @@ var mt_characters = {
             "kr": "KAITEN-FX-Mk.0",
             "pinyin": "KAITENFXMK0"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "回转寿司战队": {
         "school": "其他",
@@ -207,7 +221,8 @@ var mt_characters = {
             "kr": "카이텐레인저",
             "pinyin": "huizhuanshousizhandui"
         },
-        "charface": "回转寿司战队/回转寿司战队.5.webp"
+        "charface": "回转寿司战队/回转寿司战队.5",
+        "customface": ""
     },
     "凯撒PMC将军": {
         "school": "其他",
@@ -221,7 +236,8 @@ var mt_characters = {
             "kr": "카이저-PMC-장군",
             "pinyin": "kaisaPMCjiangjun"
         },
-        "charface": "凯撒PMC将军/凯撒PMC将军.1.webp"
+        "charface": "凯撒PMC将军/凯撒PMC将军.1",
+        "customface": ""
     },
     "凯撒PMC理事": {
         "school": "其他",
@@ -235,7 +251,8 @@ var mt_characters = {
             "kr": "카이저-PMC-이사",
             "pinyin": "kaisaPMClishi"
         },
-        "charface": "凯撒PMC理事/凯撒PMC理事.2.webp"
+        "charface": "凯撒PMC理事/凯撒PMC理事.2",
+        "customface": ""
     },
     "凯撒总裁": {
         "school": "其他",
@@ -249,7 +266,8 @@ var mt_characters = {
             "kr": "카이저-회장",
             "pinyin": "kaisazongcai"
         },
-        "charface": "凯撒总裁/凯撒总裁.1.webp"
+        "charface": "凯撒总裁/凯撒总裁.1",
+        "customface": ""
     },
     "光": {
         "school": "其他",
@@ -263,7 +281,8 @@ var mt_characters = {
             "kr": "오르",
             "pinyin": "guang"
         },
-        "charface": "光/NP0131/NP0131.17.webp,光/光.3.webp"
+        "charface": "光/NP0131/NP0131.17,光/光.3",
+        "customface": ""
     },
     "凯瑟": {
         "school": "其他",
@@ -277,7 +296,8 @@ var mt_characters = {
             "kr": "케테르",
             "pinyin": "kaise"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "凯瑟TypeC": {
         "school": "其他",
@@ -291,7 +311,8 @@ var mt_characters = {
             "kr": "",
             "pinyin": "kaiseTypeC"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "凯瑟TypeE": {
         "school": "其他",
@@ -305,7 +326,8 @@ var mt_characters = {
             "kr": "",
             "pinyin": "kaiseTypeE"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "凯瑟TypeV": {
         "school": "其他",
@@ -319,7 +341,8 @@ var mt_characters = {
             "kr": "",
             "pinyin": "kaiseTypeV"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "无": {
         "school": "其他",
@@ -333,7 +356,8 @@ var mt_characters = {
             "kr": "아인",
             "pinyin": "wu"
         },
-        "charface": "无/NP0129/NP0129.16.webp,无/无.4.webp"
+        "charface": "无/NP0129/NP0129.16,无/无.4",
+        "customface": ""
     },
     "盖布拉": {
         "school": "其他",
@@ -347,7 +371,8 @@ var mt_characters = {
             "kr": "게부라",
             "pinyin": "gaibula"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "薇娜": {
         "school": "其他",
@@ -361,7 +386,8 @@ var mt_characters = {
             "kr": "비나",
             "pinyin": "weina"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "赫赛德": {
         "school": "其他",
@@ -375,7 +401,8 @@ var mt_characters = {
             "kr": "헤세드",
             "pinyin": "hesaide"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "限": {
         "school": "其他",
@@ -389,7 +416,8 @@ var mt_characters = {
             "kr": "소프",
             "pinyin": "xian"
         },
-        "charface": "限/NP0130/NP0130.13.webp,限/限.4.webp"
+        "charface": "限/NP0130/NP0130.13,限/限.4",
+        "customface": ""
     },
     "霍德": {
         "school": "其他",
@@ -403,7 +431,8 @@ var mt_characters = {
             "kr": "호드",
             "pinyin": "huode"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "老师": {
         "school": "其他",
@@ -417,7 +446,8 @@ var mt_characters = {
             "kr": "선생님",
             "pinyin": "laoshi"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "空": {
         "school": "其他",
@@ -431,7 +461,8 @@ var mt_characters = {
             "kr": "소라",
             "pinyin": "kong"
         },
-        "charface": "空/sora/sora.27.webp,空/空.4.webp"
+        "charface": "空/sora/sora.27,空/空.4",
+        "customface": ""
     },
     "头盔团成员": {
         "school": "其他",
@@ -445,7 +476,8 @@ var mt_characters = {
             "kr": "헬멧단",
             "pinyin": "toukuituanchengyuan"
         },
-        "charface": "头盔团成员/头盔团成员.3.webp"
+        "charface": "头盔团成员/头盔团成员.3",
+        "customface": ""
     },
     "河驹风兰舞": {
         "school": "其他",
@@ -459,7 +491,8 @@ var mt_characters = {
             "kr": "코마카제 라브",
             "pinyin": "hejufenglanwu"
         },
-        "charface": "河驹风兰舞/CH0166/CH0166.11.webp,河驹风兰舞/河驹风兰舞.4.webp"
+        "charface": "河驹风兰舞/CH0166/CH0166.11,河驹风兰舞/河驹风兰舞.4",
+        "customface": ""
     },
     "乘务员": {
         "school": "其他",
@@ -473,7 +506,8 @@ var mt_characters = {
             "kr": "열차-승무원",
             "pinyin": "chengwuyuan"
         },
-        "charface": "乘务员/NP0138/NP0138.10.webp,乘务员/NP0158/NP0158.9.webp,乘务员/NP0159/NP0159.7.webp,乘务员/乘务员.9.webp"
+        "charface": "乘务员/NP0138/NP0138.10,乘务员/NP0158/NP0158.9,乘务员/NP0159/NP0159.7,乘务员/乘务员.9",
+        "customface": ""
     },
     "佐天泪子": {
         "school": "其他",
@@ -487,7 +521,8 @@ var mt_characters = {
             "kr": "사텐 루이코",
             "pinyin": "zuotianleizi"
         },
-        "charface": "佐天泪子/CH9996/CH9996.14.webp,佐天泪子/佐天泪子.4.webp"
+        "charface": "佐天泪子/CH9996/CH9996.14,佐天泪子/佐天泪子.4",
+        "customface": ""
     },
     "佩洛洛": {
         "school": "其他",
@@ -501,7 +536,8 @@ var mt_characters = {
             "kr": "페로로님",
             "pinyin": "peiluoluo"
         },
-        "charface": "佩洛洛/佩洛洛.1.webp"
+        "charface": "佩洛洛/佩洛洛.1",
+        "customface": ""
     },
     "兔女郎守卫": {
         "school": "其他",
@@ -515,7 +551,8 @@ var mt_characters = {
             "kr": "바니걸-가드",
             "pinyin": "tunvlangshouwei"
         },
-        "charface": "兔女郎守卫/BunnyGirl_SR/BunnyGirl_SR.8.webp,兔女郎守卫/兔女郎守卫.4.webp"
+        "charface": "兔女郎守卫/BunnyGirl_SR/BunnyGirl_SR.8,兔女郎守卫/兔女郎守卫.4",
+        "customface": ""
     },
     "初音未来": {
         "school": "其他",
@@ -529,7 +566,8 @@ var mt_characters = {
             "kr": "하츠네-미쿠",
             "pinyin": "chuyinweilai"
         },
-        "charface": "初音未来/CH9999/CH9999.14.webp,初音未来/初音未来.4.webp"
+        "charface": "初音未来/CH9999/CH9999.14,初音未来/初音未来.4",
+        "customface": ""
     },
     "尤斯蒂娅圣徒会": {
         "school": "其他",
@@ -543,7 +581,8 @@ var mt_characters = {
             "kr": "유스티나-성도회",
             "pinyin": "yousidiyashengtuhui"
         },
-        "charface": "尤斯蒂娅圣徒会/尤斯蒂娅圣徒会.3.webp"
+        "charface": "尤斯蒂娅圣徒会/尤斯蒂娅圣徒会.3",
+        "customface": ""
     },
     "市民": {
         "school": "其他",
@@ -557,7 +596,8 @@ var mt_characters = {
             "kr": "시민",
             "pinyin": "shimin"
         },
-        "charface": "市民/citizen_borot1/citizen_borot1.11.webp,市民/NP0092/NP0092.2.webp,市民/NP0093/NP0093.2.webp,市民/NP0094/NP0094.2.webp,市民/市民.26.webp"
+        "charface": "市民/citizen_borot1/citizen_borot1.11,市民/NP0092/NP0092.2,市民/NP0093/NP0093.2,市民/NP0094/NP0094.2,市民/市民.26",
+        "customface": ""
     },
     "废案学生": {
         "school": "其他",
@@ -571,7 +611,8 @@ var mt_characters = {
             "kr": "Student",
             "pinyin": "feianxuesheng"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "御坂美琴": {
         "school": "其他",
@@ -585,7 +626,8 @@ var mt_characters = {
             "kr": "미사카 미코토",
             "pinyin": "yubanmeiqin"
         },
-        "charface": "御坂美琴/CH9998/CH9998.18.webp,御坂美琴/御坂美琴.4.webp"
+        "charface": "御坂美琴/CH9998/CH9998.18,御坂美琴/御坂美琴.4",
+        "customface": ""
     },
     "打工学生": {
         "school": "其他",
@@ -599,7 +641,8 @@ var mt_characters = {
             "kr": "용역",
             "pinyin": "dagongxuesheng"
         },
-        "charface": "打工学生/yoheki_normal1/yoheki_normal1.2.webp,打工学生/打工学生.2.webp"
+        "charface": "打工学生/yoheki_normal1/yoheki_normal1.2,打工学生/打工学生.2",
+        "customface": ""
     },
     "混混": {
         "school": "其他",
@@ -613,7 +656,8 @@ var mt_characters = {
             "kr": "불량배",
             "pinyin": "hunhun"
         },
-        "charface": "混混/schoolGirl01_SukebanSwim_SMG/schoolGirl01_SukebanSwim_SMG.6.webp,混混/schoolGirl02_SukebanSwim_MG/schoolGirl02_SukebanSwim_MG.6.webp,混混/sukeban_HMG/sukeban_HMG.6.webp,混混/sukeban_SMG/sukeban_SMG.6.webp,混混/sukeban_SR/sukeban_SR.6.webp,混混/混混.20.webp"
+        "charface": "混混/schoolGirl01_SukebanSwim_SMG/schoolGirl01_SukebanSwim_SMG.6,混混/schoolGirl02_SukebanSwim_MG/schoolGirl02_SukebanSwim_MG.6,混混/sukeban_HMG/sukeban_HMG.6,混混/sukeban_SMG/sukeban_SMG.6,混混/sukeban_SR/sukeban_SR.6,混混/混混.20",
+        "customface": ""
     },
     "食蜂操祈": {
         "school": "其他",
@@ -627,7 +671,8 @@ var mt_characters = {
             "kr": "쇼쿠호 미사키",
             "pinyin": "shifengcaoqi"
         },
-        "charface": "食蜂操祈/CH9997/CH9997.11.webp,食蜂操祈/NP0169/NP0169.11.webp,食蜂操祈/食蜂操祈.8.webp"
+        "charface": "食蜂操祈/CH9997/CH9997.11,食蜂操祈/NP0169/NP0169.11,食蜂操祈/食蜂操祈.8",
+        "customface": ""
     },
     "黑帮学生": {
         "school": "其他",
@@ -641,7 +686,8 @@ var mt_characters = {
             "kr": "공작원",
             "pinyin": "heibangxuesheng"
         },
-        "charface": "黑帮学生/NP0181/NP0181.7.webp,黑帮学生/黑帮学生.2.webp"
+        "charface": "黑帮学生/NP0181/NP0181.7,黑帮学生/黑帮学生.2",
+        "customface": ""
     },
     "黑帮机器人": {
         "school": "其他",
@@ -655,7 +701,8 @@ var mt_characters = {
             "kr": "돈·아란치노",
             "pinyin": "heibangjiqiren"
         },
-        "charface": "黑帮机器人/黑帮机器人.1.webp"
+        "charface": "黑帮机器人/黑帮机器人.1",
+        "customface": ""
     },
     "？？？": {
         "school": "其他",
@@ -669,7 +716,8 @@ var mt_characters = {
             "kr": "？？？",
             "pinyin": "？？？"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "笛卡尔": {
         "school": "其他",
@@ -683,7 +731,8 @@ var mt_characters = {
             "kr": "데카르트",
             "pinyin": "dikaer"
         },
-        "charface": "笛卡尔/NP0031/NP0031.6.webp,笛卡尔/NP0142/NP0142.6.webp,笛卡尔/笛卡尔.4.webp"
+        "charface": "笛卡尔/NP0031/NP0031.6,笛卡尔/NP0142/NP0142.6,笛卡尔/笛卡尔.4",
+        "customface": ""
     },
     "印花釉法": {
         "school": "其他",
@@ -697,7 +746,8 @@ var mt_characters = {
             "kr": "데칼코마니",
             "pinyin": "yinhuayoufa"
         },
-        "charface": "戈尔孔达/戈尔孔达.1.webp"
+        "charface": "戈尔孔达/戈尔孔达.1",
+        "customface": ""
     },
     "地下生活者": {
         "school": "其他",
@@ -711,7 +761,8 @@ var mt_characters = {
             "kr": "지하생활자",
             "pinyin": "dixiashenghuozhe"
         },
-        "charface": "地下生活者/地下生活者.1.webp"
+        "charface": "地下生活者/地下生活者.1",
+        "customface": ""
     },
     "巨匠": {
         "school": "其他",
@@ -725,7 +776,8 @@ var mt_characters = {
             "kr": "마에스트로",
             "pinyin": "jujiang"
         },
-        "charface": "巨匠/巨匠.2.webp"
+        "charface": "巨匠/巨匠.2",
+        "customface": ""
     },
     "弗朗西斯": {
         "school": "其他",
@@ -739,7 +791,8 @@ var mt_characters = {
             "kr": "프랜시스",
             "pinyin": "fulangxisi"
         },
-        "charface": "弗朗西斯/弗朗西斯.1.webp"
+        "charface": "弗朗西斯/弗朗西斯.1",
+        "customface": ""
     },
     "戈尔孔达": {
         "school": "其他",
@@ -753,7 +806,8 @@ var mt_characters = {
             "kr": "골콩드",
             "pinyin": "geerkongda"
         },
-        "charface": "戈尔孔达/戈尔孔达.1.webp"
+        "charface": "戈尔孔达/戈尔孔达.1",
+        "customface": ""
     },
     "贝阿朵莉切": {
         "school": "其他",
@@ -767,7 +821,8 @@ var mt_characters = {
             "kr": "베아트리체",
             "pinyin": "beiaduoliqie"
         },
-        "charface": "贝阿朵莉切/NP0029/NP0029.2.webp,贝阿朵莉切/贝阿朵莉切.2.webp"
+        "charface": "贝阿朵莉切/NP0029/NP0029.2,贝阿朵莉切/贝阿朵莉切.2",
+        "customface": ""
     },
     "黑服": {
         "school": "其他",
@@ -781,7 +836,8 @@ var mt_characters = {
             "kr": "검은-양복",
             "pinyin": "heifu"
         },
-        "charface": "黑服/黑服.2.webp"
+        "charface": "黑服/黑服.2",
+        "customface": ""
     },
     "白": {
         "school": "其他",
@@ -795,7 +851,8 @@ var mt_characters = {
             "kr": "시로",
             "pinyin": "bai"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "高兹": {
         "school": "其他",
@@ -809,7 +866,8 @@ var mt_characters = {
             "kr": "고즈",
             "pinyin": "gaozi"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "黑": {
         "school": "其他",
@@ -823,7 +881,8 @@ var mt_characters = {
             "kr": "쿠로",
             "pinyin": "hei"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "无名机器人": {
         "school": "其他",
@@ -837,7 +896,8 @@ var mt_characters = {
             "kr": "Divi:Sion",
             "pinyin": "wumingjiqiren"
         },
-        "charface": "无名机器人/NP0091/NP0091.2.webp,无名机器人/无名机器人.2.webp"
+        "charface": "无名机器人/NP0091/NP0091.2,无名机器人/无名机器人.2",
+        "customface": ""
     },
     "无名祭祀": {
         "school": "其他",
@@ -851,7 +911,8 @@ var mt_characters = {
             "kr": "무명사제",
             "pinyin": "wumingjisi"
         },
-        "charface": "无名祭祀/无名祭祀.1.webp"
+        "charface": "无名祭祀/无名祭祀.1",
+        "customface": ""
     },
     "佩洛洛斯拉": {
         "school": "其他",
@@ -865,7 +926,8 @@ var mt_characters = {
             "kr": "페로로질라",
             "pinyin": "peiluoluosila"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "柴大将": {
         "school": "其他",
@@ -879,7 +941,8 @@ var mt_characters = {
             "kr": "시바세키-사장",
             "pinyin": "chaidajiang"
         },
-        "charface": "柴大将/柴大将.1.webp"
+        "charface": "柴大将/柴大将.1",
+        "customface": ""
     },
     "七神凛": {
         "school": "其他",
@@ -893,7 +956,8 @@ var mt_characters = {
             "kr": "나나가미 린",
             "pinyin": "qishenlin"
         },
-        "charface": "七神凛/NP0097/NP0097.16.webp,七神凛/rin/rin.43.webp,七神凛/rin/rin-S2.43.webp,七神凛/七神凛.10.webp,七神凛/temp/temp.3.webp"
+        "charface": "七神凛/NP0097/NP0097.16,七神凛/rin/rin.43,七神凛/rin/rin-S2.43,七神凛/七神凛.10",
+        "customface": ""
     },
     "不知火花耶": {
         "school": "其他",
@@ -907,7 +971,8 @@ var mt_characters = {
             "kr": "시라누이 카야",
             "pinyin": "buzhihuohuaye"
         },
-        "charface": "不知火花耶/NP0015/NP0015.23.webp,不知火花耶/不知火花耶.4.webp"
+        "charface": "不知火花耶/NP0015/NP0015.23,不知火花耶/不知火花耶.4",
+        "customface": ""
     },
     "岩柜步梦": {
         "school": "其他",
@@ -921,7 +986,8 @@ var mt_characters = {
             "kr": "이와비츠 아유무",
             "pinyin": "yanguibumeng"
         },
-        "charface": "岩柜步梦/NP0013/NP0013.15.webp,岩柜步梦/NP0099/NP0099.15.webp,岩柜步梦/岩柜步梦.8.webp"
+        "charface": "岩柜步梦/NP0013/NP0013.15,岩柜步梦/NP0099/NP0099.15,岩柜步梦/岩柜步梦.8",
+        "customface": ""
     },
     "扇喜葵": {
         "school": "其他",
@@ -935,7 +1001,8 @@ var mt_characters = {
             "kr": "오키 아오이",
             "pinyin": "shanxikui"
         },
-        "charface": "扇喜葵/NP0032/NP0032.7.webp,扇喜葵/扇喜葵.4.webp"
+        "charface": "扇喜葵/NP0032/NP0032.7,扇喜葵/扇喜葵.4",
+        "customface": ""
     },
     "李": {
         "school": "其他",
@@ -949,7 +1016,8 @@ var mt_characters = {
             "kr": "스모모",
             "pinyin": "li"
         },
-        "charface": "李/NP0037/NP0037.11.webp,李/李.4.webp"
+        "charface": "李/NP0037/NP0037.11,李/李.4",
+        "customface": ""
     },
     "灰音": {
         "school": "其他",
@@ -963,7 +1031,8 @@ var mt_characters = {
             "kr": "하이네",
             "pinyin": "huiyin"
         },
-        "charface": "灰音/NP0033/NP0033.20.webp,灰音/灰音.4.webp"
+        "charface": "灰音/NP0033/NP0033.20,灰音/灰音.4",
+        "customface": ""
     },
     "由良木桃香": {
         "school": "其他",
@@ -977,7 +1046,8 @@ var mt_characters = {
             "kr": "유라기 모모카",
             "pinyin": "youliangmutaoxiang"
         },
-        "charface": "由良木桃香/momoka/momoka.46.webp,由良木桃香/NP0098/NP0098.11.webp,由良木桃香/由良木桃香.8.webp"
+        "charface": "由良木桃香/momoka/momoka.46,由良木桃香/NP0098/NP0098.11,由良木桃香/由良木桃香.8",
+        "customface": ""
     },
     "联邦学生会成员": {
         "school": "其他",
@@ -991,7 +1061,8 @@ var mt_characters = {
             "kr": "총학생회-임원",
             "pinyin": "lianbangxueshenghuichengyuan"
         },
-        "charface": "联邦学生会成员/NP0106/NP0106.8.webp,联邦学生会成员/NP0107/NP0107.8.webp,联邦学生会成员/联邦学生会成员.6.webp"
+        "charface": "联邦学生会成员/NP0106/NP0106.8,联邦学生会成员/NP0107/NP0107.8,联邦学生会成员/联邦学生会成员.6",
+        "customface": ""
     },
     "联邦学生会长": {
         "school": "其他",
@@ -1005,7 +1076,8 @@ var mt_characters = {
             "kr": "총학생회장",
             "pinyin": "lianbangxueshenghuichang"
         },
-        "charface": "联邦学生会长/NP0040/NP0040.24.webp,联邦学生会长/联邦学生会长.4.webp"
+        "charface": "联邦学生会长/NP0040/NP0040.24,联邦学生会长/联邦学生会长.4",
+        "customface": "巴啦啦小凉蛋/会长/会长.3"
     },
     "凯撒士兵": {
         "school": "其他",
@@ -1019,7 +1091,8 @@ var mt_characters = {
             "kr": "카이저-오토마타",
             "pinyin": "zidongjiqiren"
         },
-        "charface": "凯撒士兵/凯撒士兵.1.webp"
+        "charface": "凯撒士兵/凯撒士兵.1",
+        "customface": ""
     },
     "凯撒特种部队": {
         "school": "其他",
@@ -1033,7 +1106,8 @@ var mt_characters = {
             "kr": "카이저-SOF",
             "pinyin": "kaisatezhongbudui"
         },
-        "charface": "凯撒特种部队/凯撒特种部队.1.webp"
+        "charface": "凯撒特种部队/凯撒特种部队.1",
+        "customface": ""
     },
     "十字神明机器人": {
         "school": "其他",
@@ -1047,7 +1121,8 @@ var mt_characters = {
             "kr": "데카그라마톤-오토마타",
             "pinyin": "zidongjiqiren"
         },
-        "charface": "十字神明机器人/十字神明机器人.1.webp"
+        "charface": "十字神明机器人/十字神明机器人.1",
+        "customface": ""
     },
     "无人机": {
         "school": "其他",
@@ -1061,7 +1136,8 @@ var mt_characters = {
             "kr": "",
             "pinyin": "wurenji"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "歌利亚": {
         "school": "其他",
@@ -1075,7 +1151,8 @@ var mt_characters = {
             "kr": "",
             "pinyin": "geliya"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "清除器": {
         "school": "其他",
@@ -1089,7 +1166,8 @@ var mt_characters = {
             "kr": "",
             "pinyin": "qingchuqi"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "自动机器人": {
         "school": "其他",
@@ -1103,7 +1181,8 @@ var mt_characters = {
             "kr": "오토마타",
             "pinyin": "zidongjiqiren"
         },
-        "charface": "自动机器人/自动机器人.1.webp"
+        "charface": "自动机器人/自动机器人.1",
+        "customface": ""
     },
     "黑龟组机器人": {
         "school": "其他",
@@ -1117,7 +1196,8 @@ var mt_characters = {
             "kr": "검은거북파-오토마타",
             "pinyin": "zidongjiqiren"
         },
-        "charface": "黑龟组机器人/黑龟组机器人.1.webp"
+        "charface": "黑龟组机器人/黑龟组机器人.1",
+        "customface": ""
     },
     "普雷纳帕特斯": {
         "school": "其他",
@@ -1131,7 +1211,8 @@ var mt_characters = {
             "kr": "프레나파테스",
             "pinyin": "puleinapatesi"
         },
-        "charface": "普雷纳帕特斯/普雷纳帕特斯.1.webp"
+        "charface": "普雷纳帕特斯/普雷纳帕特斯.1",
+        "customface": ""
     },
     "格里高利": {
         "school": "其他",
@@ -1145,7 +1226,8 @@ var mt_characters = {
             "kr": "그레고리오",
             "pinyin": "geligaoli"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "耶罗尼姆斯": {
         "school": "其他",
@@ -1159,7 +1241,8 @@ var mt_characters = {
             "kr": "예로니무스",
             "pinyin": "yeluonimusi"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "一之濑明日奈": {
         "school": "千年",
@@ -1173,7 +1256,8 @@ var mt_characters = {
             "kr": "이치노세 아스나",
             "pinyin": "yizhilaimingrinai"
         },
-        "charface": "一之濑明日奈/asuna/asuna.6.webp,一之濑明日奈/CH0098/CH0098.8.webp,一之濑明日奈/NP0081/NP0081.8.webp,一之濑明日奈/一之濑明日奈.12.webp"
+        "charface": "一之濑明日奈/asuna/asuna.6,一之濑明日奈/CH0098/CH0098.8,一之濑明日奈/NP0081/NP0081.8,一之濑明日奈/一之濑明日奈.12",
+        "customface": ""
     },
     "室笠茜": {
         "school": "千年",
@@ -1187,7 +1271,8 @@ var mt_characters = {
             "kr": "무로카사 아카네",
             "pinyin": "shiliqian"
         },
-        "charface": "室笠茜/akane/akane.7.webp,室笠茜/CH0099/CH0099.6.webp,室笠茜/室笠茜.9.webp"
+        "charface": "室笠茜/akane/akane.7,室笠茜/CH0099/CH0099.6,室笠茜/室笠茜.9",
+        "customface": ""
     },
     "美甘尼禄": {
         "school": "千年",
@@ -1201,7 +1286,8 @@ var mt_characters = {
             "kr": "미카모 네루",
             "pinyin": "meigannilu"
         },
-        "charface": "美甘尼禄/CH0101/CH0101.9.webp,美甘尼禄/neru/neru.10.webp,美甘尼禄/NP0088/NP0088.10.webp,美甘尼禄/NP0089/NP0089.10.webp,美甘尼禄/美甘尼禄.16.webp"
+        "charface": "美甘尼禄/CH0101/CH0101.9,美甘尼禄/neru/neru.10,美甘尼禄/NP0088/NP0088.10,美甘尼禄/NP0089/NP0089.10,美甘尼禄/美甘尼禄.16",
+        "customface": ""
     },
     "角楯花凛": {
         "school": "千年",
@@ -1215,7 +1301,8 @@ var mt_characters = {
             "kr": "카쿠다테 카린",
             "pinyin": "jiaodunhualin"
         },
-        "charface": "角楯花凛/CH0100/CH0100.7.webp,角楯花凛/karin/karin.6.webp,角楯花凛/NP0082/NP0082.8.webp,角楯花凛/角楯花凛.12.webp"
+        "charface": "角楯花凛/CH0100/CH0100.7,角楯花凛/karin/karin.6,角楯花凛/NP0082/NP0082.8,角楯花凛/角楯花凛.12",
+        "customface": ""
     },
     "飞鸟马时": {
         "school": "千年",
@@ -1229,7 +1316,8 @@ var mt_characters = {
             "kr": "아스마 토키",
             "pinyin": "feiniaomashi"
         },
-        "charface": "飞鸟马时/CH0187/CH0187.7.webp,飞鸟马时/CH0211/CH0211.7.webp,飞鸟马时/NP0078/NP0078.7.webp,飞鸟马时/NP0079/NP0079.12.webp,飞鸟马时/NP0080/NP0080.7.webp,飞鸟马时/NP0123/NP0123.7.webp,飞鸟马时/飞鸟马时.24.webp"
+        "charface": "飞鸟马时/CH0187/CH0187.7,飞鸟马时/CH0211/CH0211.7,飞鸟马时/NP0078/NP0078.7,飞鸟马时/NP0079/NP0079.12,飞鸟马时/NP0080/NP0080.7,飞鸟马时/NP0123/NP0123.7,飞鸟马时/飞鸟马时.24",
+        "customface": ""
     },
     "乙花堇": {
         "school": "千年",
@@ -1243,7 +1331,8 @@ var mt_characters = {
             "kr": "오토하나 스미레",
             "pinyin": "yihuajin"
         },
-        "charface": "乙花堇/NP0061/NP0061.13.webp,乙花堇/sumire/sumire.13.webp,乙花堇/乙花堇.7.webp"
+        "charface": "乙花堇/NP0061/NP0061.13,乙花堇/sumire/sumire.13,乙花堇/乙花堇.7",
+        "customface": ""
     },
     "野正玲": {
         "school": "千年",
@@ -1257,7 +1346,8 @@ var mt_characters = {
             "kr": "노마사 레이",
             "pinyin": "yezhengling"
         },
-        "charface": "野正玲/CH0245/CH0245.19.webp,野正玲/野正玲.4.webp"
+        "charface": "野正玲/CH0245/CH0245.19,野正玲/野正玲.4",
+        "customface": ""
     },
     "丰见小鸟": {
         "school": "千年",
@@ -1271,7 +1361,8 @@ var mt_characters = {
             "kr": "토요미 코토리",
             "pinyin": "fengjianxiaoniao"
         },
-        "charface": "丰见小鸟/CH0185/CH0185.21.webp,丰见小鸟/kotori/kotori.6.webp,丰见小鸟/NP0069/NP0069.6.webp,丰见小鸟/丰见小鸟.12.webp"
+        "charface": "丰见小鸟/CH0185/CH0185.21,丰见小鸟/kotori/kotori.6,丰见小鸟/NP0069/NP0069.6,丰见小鸟/丰见小鸟.12",
+        "customface": ""
     },
     "猫塚响": {
         "school": "千年",
@@ -1285,7 +1376,8 @@ var mt_characters = {
             "kr": "네코즈카 히비키",
             "pinyin": "maozhongxiang"
         },
-        "charface": "猫塚响/CH0181/CH0181.21.webp,猫塚响/hibiki/hibiki.13.webp,猫塚响/猫塚响.8.webp"
+        "charface": "猫塚响/CH0181/CH0181.21,猫塚响/hibiki/hibiki.13,猫塚响/猫塚响.8",
+        "customface": ""
     },
     "白石歌原": {
         "school": "千年",
@@ -1299,7 +1391,8 @@ var mt_characters = {
             "kr": "시라이시 우타하",
             "pinyin": "baishigeyuan"
         },
-        "charface": "白石歌原/CH0182/CH0182.15.webp,白石歌原/utaha/utaha.7.webp,白石歌原/白石歌原.8.webp"
+        "charface": "白石歌原/CH0182/CH0182.15,白石歌原/utaha/utaha.7,白石歌原/白石歌原.8",
+        "customface": ""
     },
     "雷酱": {
         "school": "千年",
@@ -1313,7 +1406,8 @@ var mt_characters = {
             "kr": "천둥이",
             "pinyin": "leijiang"
         },
-        "charface": "雷酱/雷酱.1.webp"
+        "charface": "雷酱/雷酱.1",
+        "customface": ""
     },
     "AMAS": {
         "school": "千年",
@@ -1327,7 +1421,8 @@ var mt_characters = {
             "kr": "AMAS",
             "pinyin": "AMAS"
         },
-        "charface": "AMAS/AMAS.2.webp"
+        "charface": "AMAS/AMAS.2",
+        "customface": ""
     },
     "千年学生": {
         "school": "千年",
@@ -1341,7 +1436,8 @@ var mt_characters = {
             "kr": "밀레니엄-학생",
             "pinyin": "qiannianxuesheng"
         },
-        "charface": "千年学生/NP0036/NP0036.7.webp,千年学生/NP0084/NP0084.13.webp,千年学生/千年学生.7.webp"
+        "charface": "千年学生/NP0036/NP0036.7,千年学生/NP0084/NP0084.13,千年学生/千年学生.7",
+        "customface": ""
     },
     "Kei": {
         "school": "千年",
@@ -1355,7 +1451,8 @@ var mt_characters = {
             "kr": "Kei",
             "pinyin": "Kei"
         },
-        "charface": "天童爱丽丝/aris/aris.19.webp,天童爱丽丝/CH0200/CH0200.9.webp,天童爱丽丝/天童爱丽丝.8.webp,天童爱丽丝/8858225712/8858225712.21.webp"
+        "charface": "天童爱丽丝/aris/aris.19,天童爱丽丝/CH0200/CH0200.9,天童爱丽丝/天童爱丽丝.8",
+        "customface": "女仆优香/KEI/KEI.9,女仆优香/KEI_女仆装/KEI_女仆装.12"
     },
     "天童爱丽丝": {
         "school": "千年",
@@ -1369,7 +1466,8 @@ var mt_characters = {
             "kr": "텐도 아리스",
             "pinyin": "tiantongailisi"
         },
-        "charface": "天童爱丽丝/aris/aris.19.webp,天童爱丽丝/CH0200/CH0200.9.webp,天童爱丽丝/天童爱丽丝.8.webp,天童爱丽丝/8858225712/8858225712.21.webp"
+        "charface": "天童爱丽丝/aris/aris.19,天童爱丽丝/CH0200/CH0200.9,天童爱丽丝/天童爱丽丝.8",
+        "customface": "女仆优香/KEI/KEI.9,女仆优香/KEI_女仆装/KEI_女仆装.12"
     },
     "才羽桃井": {
         "school": "千年",
@@ -1383,7 +1481,8 @@ var mt_characters = {
             "kr": "사이바 모모이",
             "pinyin": "caiyutaojing"
         },
-        "charface": "才羽桃井/CH0201/CH0201.11.webp,才羽桃井/momoi/momoi.8.webp,才羽桃井/才羽桃井.8.webp"
+        "charface": "才羽桃井/CH0201/CH0201.11,才羽桃井/momoi/momoi.8,才羽桃井/才羽桃井.8",
+        "customface": ""
     },
     "才羽绿": {
         "school": "千年",
@@ -1397,7 +1496,8 @@ var mt_characters = {
             "kr": "사이바 미도리",
             "pinyin": "caiyulv"
         },
-        "charface": "才羽绿/CH0202/CH0202.13.webp,才羽绿/midori/midori.10.webp,才羽绿/才羽绿.8.webp"
+        "charface": "才羽绿/CH0202/CH0202.13,才羽绿/midori/midori.10,才羽绿/才羽绿.8",
+        "customface": ""
     },
     "花冈柚子": {
         "school": "千年",
@@ -1411,7 +1511,8 @@ var mt_characters = {
             "kr": "하나오카 유즈",
             "pinyin": "huagangyouzi"
         },
-        "charface": "花冈柚子/CH0203/CH0203.10.webp,花冈柚子/yuzu/yuzu.8.webp,花冈柚子/花冈柚子.9.webp"
+        "charface": "花冈柚子/CH0203/CH0203.10,花冈柚子/yuzu/yuzu.8,花冈柚子/花冈柚子.9",
+        "customface": ""
     },
     "和泉元艾米": {
         "school": "千年",
@@ -1425,7 +1526,8 @@ var mt_characters = {
             "kr": "이즈미모토 에이미",
             "pinyin": "hequanyuanaimi"
         },
-        "charface": "和泉元艾米/CH0219/CH0219.8.webp,和泉元艾米/eimi/eimi.6.webp,和泉元艾米/和泉元艾米.8.webp"
+        "charface": "和泉元艾米/CH0219/CH0219.8,和泉元艾米/eimi/eimi.6,和泉元艾米/和泉元艾米.8",
+        "customface": ""
     },
     "明星日鞠": {
         "school": "千年",
@@ -1439,7 +1541,8 @@ var mt_characters = {
             "kr": "아케보시 히마리",
             "pinyin": "mingxingriju"
         },
-        "charface": "明星日鞠/CH0159/CH0159.12.webp,明星日鞠/CH0159/CH0159-S2.12.webp,明星日鞠/NP0112/NP0112.12.webp,明星日鞠/NP0161/NP0161.12.webp,明星日鞠/明星日鞠.14.webp"
+        "charface": "明星日鞠/CH0159/CH0159.12,明星日鞠/CH0159/CH0159-S2.12,明星日鞠/NP0112/NP0112.12,明星日鞠/NP0161/NP0161.12,明星日鞠/明星日鞠.14",
+        "customface": ""
     },
     "各务千寻": {
         "school": "千年",
@@ -1453,7 +1556,8 @@ var mt_characters = {
             "kr": "카가미 치히로",
             "pinyin": "gewuqianxun"
         },
-        "charface": "各务千寻/CH0160/CH0160.6.webp,各务千寻/CH0234/CH0234.11.webp,各务千寻/各务千寻.8.webp,各务千寻/千寻_Velstadt-/千寻_Velstadt-.44.webp,各务千寻/千寻（野营）_Velstadt-/千寻（野营）_Velstadt-.52.webp"
+        "charface": "各务千寻/CH0160/CH0160.6,各务千寻/CH0234/CH0234.11,各务千寻/各务千寻.8",
+        "customface": "Velstadt-/千寻/千寻.44,Velstadt-/千寻_野营/千寻_野营.52"
     },
     "小涂真纪": {
         "school": "千年",
@@ -1467,7 +1571,8 @@ var mt_characters = {
             "kr": "코누리 마키",
             "pinyin": "xiaotuzhenji"
         },
-        "charface": "小涂真纪/CH0235/CH0235.12.webp,小涂真纪/maki/maki.7.webp,小涂真纪/NP0050/NP0050.7.webp,小涂真纪/小涂真纪.12.webp,小涂真纪/真纪_Velstadt-/真纪_Velstadt-.25.webp,小涂真纪/真纪（野营）_Velstadt-/真纪（野营）_Velstadt-.36.webp"
+        "charface": "小涂真纪/CH0235/CH0235.12,小涂真纪/maki/maki.7,小涂真纪/NP0050/NP0050.7,小涂真纪/小涂真纪.12",
+        "customface": "Velstadt-/真纪/真纪.26,Velstadt-/真纪_野营/真纪_野营.36"
     },
     "小钩晴": {
         "school": "千年",
@@ -1481,7 +1586,8 @@ var mt_characters = {
             "kr": "오마가리 하레",
             "pinyin": "xiaogouqing"
         },
-        "charface": "小钩晴/CH0233/CH0233.14.webp,小钩晴/hare/hare.6.webp,小钩晴/小钩晴.8.webp,小钩晴/晴_Velstadt-/晴_Velstadt-.22.webp"
+        "charface": "小钩晴/CH0233/CH0233.14,小钩晴/hare/hare.6,小钩晴/小钩晴.8",
+        "customface": "Velstadt-/晴/晴.22"
     },
     "音濑小玉": {
         "school": "千年",
@@ -1495,7 +1601,8 @@ var mt_characters = {
             "kr": "오토세 코타마",
             "pinyin": "yinlaixiaoyu"
         },
-        "charface": "音濑小玉/CH0232/CH0232.12.webp,音濑小玉/kotama/kotama.6.webp,音濑小玉/音濑小玉.8.webp,音濑小玉/小玉_Velstadt-/小玉_Velstadt-.64.webp,音濑小玉/小玉（野营）_Velstadt-/小玉（野营）_Velstadt-.47.webp"
+        "charface": "音濑小玉/CH0232/CH0232.12,音濑小玉/kotama/kotama.6,音濑小玉/音濑小玉.8",
+        "customface": "Velstadt-/小玉/小玉.65,Velstadt-/小玉_野营/小玉_野营.48"
     },
     "早濑优香": {
         "school": "千年",
@@ -1509,7 +1616,8 @@ var mt_characters = {
             "kr": "하야세 유우카",
             "pinyin": "zaolaiyouxiang"
         },
-        "charface": "早濑优香/CH0184/CH0184.15.webp,早濑优香/NP0109/NP0109.7.webp,早濑优香/yuuka/yuuka.7.webp,早濑优香/早濑优香.12.webp,早濑优香/cv28397710/cv28397710.19.webp,早濑优香/cv32284770/cv32284770.21.webp"
+        "charface": "早濑优香/CH0184/CH0184.15,早濑优香/NP0109/NP0109.7,早濑优香/yuuka/yuuka.7,早濑优香/早濑优香.12",
+        "customface": "女仆优香/优香_体操服/优香_体操服.21,巴啦啦小凉蛋/优香/优香.19"
     },
     "生盐诺亚": {
         "school": "千年",
@@ -1523,7 +1631,8 @@ var mt_characters = {
             "kr": "우시노 노아",
             "pinyin": "shengyannuoya"
         },
-        "charface": "生盐诺亚/CH0095/CH0095.7.webp,生盐诺亚/NP0043/NP0043.7.webp,生盐诺亚/生盐诺亚.8.webp,生盐诺亚/cv28416552/cv28416552.28.webp"
+        "charface": "生盐诺亚/CH0095/CH0095.7,生盐诺亚/NP0043/NP0043.7,生盐诺亚/生盐诺亚.8",
+        "customface": "巴啦啦小凉蛋/诺亚/诺亚.28"
     },
     "调月莉音": {
         "school": "千年",
@@ -1537,7 +1646,8 @@ var mt_characters = {
             "kr": "츠카츠키 리오",
             "pinyin": "tiaoyueliyin"
         },
-        "charface": "调月莉音/CH0158/CH0158.9.webp,调月莉音/调月莉音.4.webp,调月莉音/莉音_Bocchi138/莉音_Bocchi138.3.webp"
+        "charface": "调月莉音/CH0158/CH0158.9,调月莉音/调月莉音.4",
+        "customface": "Bocchi138/莉音/莉音.3"
     },
     "黑崎小雪": {
         "school": "千年",
@@ -1551,7 +1661,8 @@ var mt_characters = {
             "kr": "쿠로사키 코유키",
             "pinyin": "heiqixiaoxue"
         },
-        "charface": "黑崎小雪/CH0162/CH0162.11.webp,黑崎小雪/CH0198/CH0198.15.webp,黑崎小雪/黑崎小雪.8.webp"
+        "charface": "黑崎小雪/CH0162/CH0162.11,黑崎小雪/CH0198/CH0198.15,黑崎小雪/黑崎小雪.8",
+        "customface": ""
     },
     "伊落玛丽": {
         "school": "圣三一",
@@ -1565,7 +1676,8 @@ var mt_characters = {
             "kr": "이오치 마리",
             "pinyin": "yiluomali"
         },
-        "charface": "伊落玛丽/CH0186/CH0186.9.webp,伊落玛丽/mari/mari.9.webp,伊落玛丽/伊落玛丽.8.webp"
+        "charface": "伊落玛丽/CH0186/CH0186.9,伊落玛丽/mari/mari.9,伊落玛丽/伊落玛丽.8",
+        "customface": "Velstadt-/玛丽/玛丽.32"
     },
     "修女会成员": {
         "school": "圣三一",
@@ -1579,7 +1691,8 @@ var mt_characters = {
             "kr": "시스터후드",
             "pinyin": "xiunvhuichengyuan"
         },
-        "charface": "修女会成员/NP0025/NP0025.7.webp,修女会成员/修女会成员.4.webp"
+        "charface": "修女会成员/NP0025/NP0025.7,修女会成员/修女会成员.4",
+        "customface": ""
     },
     "歌住樱子": {
         "school": "圣三一",
@@ -1593,7 +1706,8 @@ var mt_characters = {
             "kr": "우타즈미 사쿠라코",
             "pinyin": "gezhuyingzi"
         },
-        "charface": "歌住樱子/NP0090/NP0090.13.webp,歌住樱子/sakurako/sakurako.13.webp,歌住樱子/歌住樱子.8.webp"
+        "charface": "歌住樱子/NP0090/NP0090.13,歌住樱子/sakurako/sakurako.13,歌住樱子/歌住樱子.8",
+        "customface": "Velstadt-/樱子/樱子.21"
     },
     "若叶日向": {
         "school": "圣三一",
@@ -1607,7 +1721,8 @@ var mt_characters = {
             "kr": "와카바 히나타",
             "pinyin": "ruoyerixiang"
         },
-        "charface": "若叶日向/CH0210/CH0210.12.webp,若叶日向/hinata/hinata.6.webp,若叶日向/若叶日向.8.webp"
+        "charface": "若叶日向/CH0210/CH0210.12,若叶日向/hinata/hinata.6,若叶日向/若叶日向.8",
+        "customface": ""
     },
     "古关忧": {
         "school": "圣三一",
@@ -1621,7 +1736,8 @@ var mt_characters = {
             "kr": "코제키 우이",
             "pinyin": "guguanyou"
         },
-        "charface": "古关忧/CH0169/CH0169.23.webp,古关忧/CH0204/CH0204.29.webp,古关忧/古关忧.8.webp"
+        "charface": "古关忧/CH0169/CH0169.23,古关忧/CH0204/CH0204.29,古关忧/古关忧.8",
+        "customface": ""
     },
     "圆堂志美子": {
         "school": "圣三一",
@@ -1635,7 +1751,8 @@ var mt_characters = {
             "kr": "엔도우 시미코",
             "pinyin": "yuantangzhimeizi"
         },
-        "charface": "圆堂志美子/shimiko/shimiko.6.webp,圆堂志美子/圆堂志美子.4.webp"
+        "charface": "圆堂志美子/shimiko/shimiko.6,圆堂志美子/圆堂志美子.4",
+        "customface": ""
     },
     "宇泽玲纱": {
         "school": "圣三一",
@@ -1649,7 +1766,8 @@ var mt_characters = {
             "kr": "우자와 레이사",
             "pinyin": "yuzelingsha"
         },
-        "charface": "宇泽玲纱/CH0167/CH0167.18.webp,宇泽玲纱/宇泽玲纱.4.webp,宇泽玲纱/玲纱_Velstadt-/玲纱_Velstadt-.30.webp"
+        "charface": "宇泽玲纱/CH0167/CH0167.18,宇泽玲纱/宇泽玲纱.4",
+        "customface": "Velstadt-/玲纱/玲纱.30"
     },
     "守月铃美": {
         "school": "圣三一",
@@ -1663,7 +1781,8 @@ var mt_characters = {
             "kr": "모리즈키 스즈미",
             "pinyin": "shouyuelingmei"
         },
-        "charface": "守月铃美/suzumi/suzumi.6.webp,守月铃美/守月铃美.4.webp,守月铃美/铃美_Velstadt-/铃美_Velstadt-.25.webp"
+        "charface": "守月铃美/suzumi/suzumi.6,守月铃美/守月铃美.4",
+        "customface": "Velstadt-/铃美/铃美.25"
     },
     "圣三一学生": {
         "school": "圣三一",
@@ -1677,7 +1796,8 @@ var mt_characters = {
             "kr": "트리니티-학생",
             "pinyin": "shengsanyixuesheng"
         },
-        "charface": "圣三一学生/NP0024/NP0024.8.webp,圣三一学生/圣三一学生.4.webp"
+        "charface": "圣三一学生/NP0024/NP0024.8,圣三一学生/圣三一学生.4",
+        "customface": ""
     },
     "清澄晶": {
         "school": "圣三一",
@@ -1691,7 +1811,8 @@ var mt_characters = {
             "kr": "키요스미 아키라",
             "pinyin": "qingchengjing"
         },
-        "charface": "清澄晶/CH0212/CH0212.14.webp,清澄晶/CH0212/CH0212-S2.14.webp,清澄晶/清澄晶.6.webp"
+        "charface": "清澄晶/CH0212/CH0212.14,清澄晶/CH0212/CH0212-S2.14,清澄晶/清澄晶.6",
+        "customface": ""
     },
     "伊原木好美": {
         "school": "圣三一",
@@ -1705,7 +1826,8 @@ var mt_characters = {
             "kr": "이바라기 요시미",
             "pinyin": "yiyuanmuhaomei"
         },
-        "charface": "伊原木好美/yoshimi/yoshimi.10.webp,伊原木好美/伊原木好美.4.webp"
+        "charface": "伊原木好美/yoshimi/yoshimi.10,伊原木好美/伊原木好美.4",
+        "customface": ""
     },
     "杏山和纱": {
         "school": "圣三一",
@@ -1719,7 +1841,8 @@ var mt_characters = {
             "kr": "코야마 카즈사",
             "pinyin": "xingshanhesha"
         },
-        "charface": "杏山和纱/kazusa/kazusa.13.webp,杏山和纱/杏山和纱.4.webp,杏山和纱/cv28575193/cv28575193.75.webp"
+        "charface": "杏山和纱/kazusa/kazusa.13,杏山和纱/杏山和纱.4",
+        "customface": "巴啦啦小凉蛋/和纱/和纱.75"
     },
     "柚鸟夏": {
         "school": "圣三一",
@@ -1733,7 +1856,8 @@ var mt_characters = {
             "kr": "유토리 나츠",
             "pinyin": "youniaoxia"
         },
-        "charface": "柚鸟夏/CH0155/CH0155.7.webp,柚鸟夏/NP0057/NP0057.7.webp,柚鸟夏/柚鸟夏.8.webp"
+        "charface": "柚鸟夏/CH0155/CH0155.7,柚鸟夏/NP0057/NP0057.7,柚鸟夏/柚鸟夏.8",
+        "customface": ""
     },
     "栗村爱莉": {
         "school": "圣三一",
@@ -1747,7 +1871,8 @@ var mt_characters = {
             "kr": "쿠리무라 아이리",
             "pinyin": "licunaili"
         },
-        "charface": "栗村爱莉/airi/airi.7.webp,栗村爱莉/栗村爱莉.4.webp"
+        "charface": "栗村爱莉/airi/airi.7,栗村爱莉/栗村爱莉.4",
+        "customface": ""
     },
     "朝颜花绘": {
         "school": "圣三一",
@@ -1761,7 +1886,8 @@ var mt_characters = {
             "kr": "아사가오 하나에",
             "pinyin": "zhaoyanhuahui"
         },
-        "charface": "朝颜花绘/CH0195/CH0195.9.webp,朝颜花绘/hanae/hanae.6.webp,朝颜花绘/NP0076/NP0076.8.webp,朝颜花绘/朝颜花绘.12.webp"
+        "charface": "朝颜花绘/CH0195/CH0195.9,朝颜花绘/hanae/hanae.6,朝颜花绘/NP0076/NP0076.8,朝颜花绘/朝颜花绘.12",
+        "customface": ""
     },
     "苍森美弥": {
         "school": "圣三一",
@@ -1775,7 +1901,8 @@ var mt_characters = {
             "kr": "아오모리 미네",
             "pinyin": "cangsenmeimi"
         },
-        "charface": "苍森美弥/CH0152/CH0152.9.webp,苍森美弥/苍森美弥.4.webp"
+        "charface": "苍森美弥/CH0152/CH0152.9,苍森美弥/苍森美弥.4",
+        "customface": ""
     },
     "鹫见芹娜": {
         "school": "圣三一",
@@ -1789,7 +1916,8 @@ var mt_characters = {
             "kr": "스미 세리나",
             "pinyin": "jiujianqinna"
         },
-        "charface": "鹫见芹娜/CH0194/CH0194.10.webp,鹫见芹娜/NP0075/NP0075.7.webp,鹫见芹娜/serina/serina.6.webp,鹫见芹娜/鹫见芹娜.12.webp"
+        "charface": "鹫见芹娜/CH0194/CH0194.10,鹫见芹娜/NP0075/NP0075.7,鹫见芹娜/serina/serina.6,鹫见芹娜/鹫见芹娜.12",
+        "customface": ""
     },
     "一花": {
         "school": "圣三一",
@@ -1803,7 +1931,8 @@ var mt_characters = {
             "kr": "나카마사 이치카",
             "pinyin": "yihua"
         },
-        "charface": "一花/CH0071/CH0071.21.webp,一花/一花.3.webp"
+        "charface": "一花/CH0071/CH0071.21,一花/一花.3",
+        "customface": ""
     },
     "剑先鹤城": {
         "school": "圣三一",
@@ -1817,7 +1946,8 @@ var mt_characters = {
             "kr": "켄자키 츠루기",
             "pinyin": "jianxianhecheng"
         },
-        "charface": "剑先鹤城/CH0060/CH0060.10.webp,剑先鹤城/NP0058/NP0058.14.webp,剑先鹤城/tsurugi/tsurugi.14.webp,剑先鹤城/剑先鹤城.12.webp"
+        "charface": "剑先鹤城/CH0060/CH0060.10,剑先鹤城/NP0058/NP0058.14,剑先鹤城/tsurugi/tsurugi.14,剑先鹤城/剑先鹤城.12",
+        "customface": ""
     },
     "正以实现委员会成员": {
         "school": "圣三一",
@@ -1831,7 +1961,8 @@ var mt_characters = {
             "kr": "정의실현부원",
             "pinyin": "zhengyishixianweiyuanhuichengyuan"
         },
-        "charface": "正以实现委员会成员/Justice_normal1/Justice_normal1.7.webp,正以实现委员会成员/NP0060/NP0060.7.webp,正以实现委员会成员/正以实现委员会成员.6.webp"
+        "charface": "正以实现委员会成员/Justice_normal1/Justice_normal1.7,正以实现委员会成员/NP0060/NP0060.7,正以实现委员会成员/正以实现委员会成员.6",
+        "customface": ""
     },
     "羽川莲见": {
         "school": "圣三一",
@@ -1845,7 +1976,8 @@ var mt_characters = {
             "kr": "하네카와 하스미",
             "pinyin": "yuchuanlianjian"
         },
-        "charface": "羽川莲见/CH0190/CH0190.10.webp,羽川莲见/hasumi/hasumi.8.webp,羽川莲见/羽川莲见.8.webp"
+        "charface": "羽川莲见/CH0190/CH0190.10,羽川莲见/hasumi/hasumi.8,羽川莲见/羽川莲见.8",
+        "customface": ""
     },
     "静山真白": {
         "school": "圣三一",
@@ -1859,7 +1991,8 @@ var mt_characters = {
             "kr": "시즈야마 마시로",
             "pinyin": "jingshanzhenbai"
         },
-        "charface": "静山真白/mashiro/mashiro.6.webp,静山真白/mashiro_swimsuit/mashiro_swimsuit.7.webp,静山真白/NP0062/NP0062.6.webp,静山真白/静山真白.12.webp"
+        "charface": "静山真白/mashiro/mashiro.6,静山真白/mashiro_swimsuit/mashiro_swimsuit.7,静山真白/NP0062/NP0062.6,静山真白/静山真白.12",
+        "customface": ""
     },
     "圣园未花": {
         "school": "圣三一",
@@ -1873,7 +2006,8 @@ var mt_characters = {
             "kr": "미소노 미카",
             "pinyin": "shengyuanweihua"
         },
-        "charface": "圣园未花/CH0069/CH0069.29.webp,圣园未花/NP0041/NP0041.29.webp,圣园未花/NP0100/NP0100.29.webp,圣园未花/NP0101/NP0101.29.webp,圣园未花/NP0102/NP0102.29.webp,圣园未花/圣园未花.20.webp,圣园未花/cv28719608/cv28719608.31.webp"
+        "charface": "圣园未花/CH0069/CH0069.29,圣园未花/NP0041/NP0041.29,圣园未花/NP0100/NP0100.29,圣园未花/NP0101/NP0101.29,圣园未花/NP0102/NP0102.29,圣园未花/圣园未花.20",
+        "customface": "巴啦啦小凉蛋/未花/未花.31"
     },
     "桐藤渚": {
         "school": "圣三一",
@@ -1887,7 +2021,8 @@ var mt_characters = {
             "kr": "키리후지 나기사",
             "pinyin": "tongtengzhu"
         },
-        "charface": "桐藤渚/nagisa/nagisa.16.webp,桐藤渚/桐藤渚.4.webp,桐藤渚/cv28267755/cv28267755.10.webp"
+        "charface": "桐藤渚/nagisa/nagisa.16,桐藤渚/桐藤渚.4",
+        "customface": "巴啦啦小凉蛋/渚/渚.10"
     },
     "百合园圣娅": {
         "school": "圣三一",
@@ -1901,7 +2036,8 @@ var mt_characters = {
             "kr": "유리조노 세이아",
             "pinyin": "baiheyuanshengya"
         },
-        "charface": "百合园圣娅/CH0070/CH0070.9.webp,百合园圣娅/百合园圣娅.4.webp,百合园圣娅/cv28802361/cv28802361.17.webp"
+        "charface": "百合园圣娅/CH0070/CH0070.9,百合园圣娅/百合园圣娅.4",
+        "customface": "巴啦啦小凉蛋/圣娅/圣娅.17"
     },
     "茶会成员": {
         "school": "圣三一",
@@ -1915,7 +2051,8 @@ var mt_characters = {
             "kr": "티파티",
             "pinyin": "chahuichengyuan"
         },
-        "charface": "茶会成员/NP0022/NP0022.7.webp,茶会成员/NP0028/NP0028.7.webp,茶会成员/茶会成员.8.webp"
+        "charface": "茶会成员/NP0022/NP0022.7,茶会成员/NP0028/NP0028.7,茶会成员/茶会成员.8",
+        "customface": ""
     },
     "下江小春": {
         "school": "圣三一",
@@ -1929,7 +2066,8 @@ var mt_characters = {
             "kr": "시모에 코하루",
             "pinyin": "xiajiangxiaochun"
         },
-        "charface": "下江小春/CH0205/CH0205.20.webp,下江小春/koharu/koharu.12.webp,下江小春/NP0007/NP0007.12.webp,下江小春/NP0008/NP0008.12.webp,下江小春/下江小春.16.webp,下江小春/cv28619873/cv28619873.41.webp"
+        "charface": "下江小春/CH0205/CH0205.20,下江小春/koharu/koharu.12,下江小春/NP0007/NP0007.12,下江小春/NP0008/NP0008.12,下江小春/下江小春.16",
+        "customface": "巴啦啦小凉蛋/小春/小春.41"
     },
     "浦和花子": {
         "school": "圣三一",
@@ -1943,7 +2081,8 @@ var mt_characters = {
             "kr": "우라와 하나코",
             "pinyin": "puhehuazi"
         },
-        "charface": "浦和花子/CH0209/CH0209.9.webp,浦和花子/hanako/hanako.6.webp,浦和花子/NP0003/NP0003.6.webp,浦和花子/NP0004/NP0004.6.webp,浦和花子/NP0110/NP0110.6.webp,浦和花子/NP0151/NP0151.9.webp,浦和花子/浦和花子.24.webp,浦和花子/cv28645077/cv28645077.31.webp"
+        "charface": "浦和花子/CH0209/CH0209.9,浦和花子/hanako/hanako.6,浦和花子/NP0003/NP0003.6,浦和花子/NP0004/NP0004.6,浦和花子/NP0110/NP0110.6,浦和花子/NP0151/NP0151.9,浦和花子/浦和花子.24",
+        "customface": "巴啦啦小凉蛋/花子/花子.31"
     },
     "白洲梓": {
         "school": "圣三一",
@@ -1957,7 +2096,8 @@ var mt_characters = {
             "kr": "시라스 아즈사",
             "pinyin": "baizhouzi"
         },
-        "charface": "白洲梓/azusa/azusa.9.webp,白洲梓/azusa_swimsuit/azusa_swimsuit.8.webp,白洲梓/NP0001/NP0001.9.webp,白洲梓/NP0002/NP0002.9.webp,白洲梓/NP0020/NP0020.9.webp,白洲梓/白洲梓.20.webp"
+        "charface": "白洲梓/azusa/azusa.9,白洲梓/azusa_swimsuit/azusa_swimsuit.8,白洲梓/NP0001/NP0001.9,白洲梓/NP0002/NP0002.9,白洲梓/NP0020/NP0020.9,白洲梓/白洲梓.20",
+        "customface": ""
     },
     "阿慈谷日富美": {
         "school": "圣三一",
@@ -1971,7 +2111,8 @@ var mt_characters = {
             "kr": "아지타니 히후미",
             "pinyin": "acigurifumei"
         },
-        "charface": "阿慈谷日富美/CH0058/CH0058.10.webp,阿慈谷日富美/hihumi/hihumi.12.webp,阿慈谷日富美/hihumi_robber/hihumi_robber.6.webp,阿慈谷日富美/NP0005/NP0005.6.webp,阿慈谷日富美/NP0006/NP0006.6.webp,阿慈谷日富美/阿慈谷日富美.20.webp"
+        "charface": "阿慈谷日富美/CH0058/CH0058.10,阿慈谷日富美/hihumi/hihumi.12,阿慈谷日富美/hihumi_robber/hihumi_robber.6,阿慈谷日富美/NP0005/NP0005.6,阿慈谷日富美/NP0006/NP0006.6,阿慈谷日富美/阿慈谷日富美.20",
+        "customface": ""
     },
     "山海经学生": {
         "school": "山海经",
@@ -1985,7 +2126,8 @@ var mt_characters = {
             "kr": "산해경-학생",
             "pinyin": "shanhaijingxuesheng"
         },
-        "charface": "山海经学生/NP0152/NP0152.6.webp,山海经学生/NP0157/NP0157.6.webp,山海经学生/山海经学生.5.webp"
+        "charface": "山海经学生/NP0152/NP0152.6,山海经学生/NP0157/NP0157.6,山海经学生/山海经学生.5",
+        "customface": ""
     },
     "申谷启": {
         "school": "山海经",
@@ -1999,7 +2141,8 @@ var mt_characters = {
             "kr": "신타니 카이",
             "pinyin": "shenguqi"
         },
-        "charface": "申谷启/CH0213/CH0213.13.webp,申谷启/申谷启.4.webp"
+        "charface": "申谷启/CH0213/CH0213.13,申谷启/申谷启.4",
+        "customface": ""
     },
     "春原心奈": {
         "school": "山海经",
@@ -2013,7 +2156,8 @@ var mt_characters = {
             "kr": "스노하라 코코나",
             "pinyin": "chunyuanxinnai"
         },
-        "charface": "春原心奈/CH0137/CH0137.12.webp,春原心奈/春原心奈.4.webp"
+        "charface": "春原心奈/CH0137/CH0137.12,春原心奈/春原心奈.4",
+        "customface": ""
     },
     "春原瞬": {
         "school": "山海经",
@@ -2027,7 +2171,8 @@ var mt_characters = {
             "kr": "스노하라 슌",
             "pinyin": "chunyuanshun"
         },
-        "charface": "春原瞬/CH0066/CH0066.29.webp,春原瞬/shun/shun.14.webp,春原瞬/春原瞬.8.webp"
+        "charface": "春原瞬/CH0066/CH0066.29,春原瞬/shun/shun.14,春原瞬/春原瞬.8",
+        "customface": ""
     },
     "药子纱绫": {
         "school": "山海经",
@@ -2041,7 +2186,8 @@ var mt_characters = {
             "kr": "야쿠시 사야",
             "pinyin": "yaozishaling"
         },
-        "charface": "药子纱绫/saya/saya.7.webp,药子纱绫/saya_casual/saya_casual.6.webp,药子纱绫/药子纱绫.8.webp"
+        "charface": "药子纱绫/saya/saya.7,药子纱绫/saya_casual/saya_casual.6,药子纱绫/药子纱绫.8",
+        "customface": ""
     },
     "朱城瑠美": {
         "school": "山海经",
@@ -2055,7 +2201,8 @@ var mt_characters = {
             "kr": "아케시로 루미",
             "pinyin": "zhuchengliumei"
         },
-        "charface": "朱城瑠美/CH0135/CH0135.7.webp,朱城瑠美/朱城瑠美.4.webp"
+        "charface": "朱城瑠美/CH0135/CH0135.7,朱城瑠美/朱城瑠美.4",
+        "customface": ""
     },
     "玄武商会成员": {
         "school": "山海经",
@@ -2069,7 +2216,8 @@ var mt_characters = {
             "kr": "현무상회-직원",
             "pinyin": "xuanwushanghuichengyuan"
         },
-        "charface": "玄武商会成员/Cook_GenbuStore_SG/Cook_GenbuStore_SG.8.webp,玄武商会成员/玄武商会成员.4.webp"
+        "charface": "玄武商会成员/Cook_GenbuStore_SG/Cook_GenbuStore_SG.8,玄武商会成员/玄武商会成员.4",
+        "customface": ""
     },
     "鹿山丽情": {
         "school": "山海经",
@@ -2083,7 +2231,8 @@ var mt_characters = {
             "kr": "카야마 레이죠",
             "pinyin": "lushanliqing"
         },
-        "charface": "鹿山丽情/reizyo/reizyo.18.webp,鹿山丽情/鹿山丽情.4.webp"
+        "charface": "鹿山丽情/reizyo/reizyo.18,鹿山丽情/鹿山丽情.4",
+        "customface": ""
     },
     "玄龙门成员": {
         "school": "山海经",
@@ -2097,7 +2246,8 @@ var mt_characters = {
             "kr": "현룡문-임원",
             "pinyin": "xuanlongmenchengyuan"
         },
-        "charface": "玄龙门成员/NP0121/NP0121.7.webp,玄龙门成员/玄龙门成员.4.webp"
+        "charface": "玄龙门成员/NP0121/NP0121.7,玄龙门成员/玄龙门成员.4",
+        "customface": ""
     },
     "近卫南": {
         "school": "山海经",
@@ -2111,7 +2261,8 @@ var mt_characters = {
             "kr": "코노에 미나",
             "pinyin": "jinweinan"
         },
-        "charface": "近卫南/CH0138/CH0138.16.webp,近卫南/近卫南.4.webp"
+        "charface": "近卫南/CH0138/CH0138.16,近卫南/近卫南.4",
+        "customface": ""
     },
     "龙华妃咲": {
         "school": "山海经",
@@ -2125,7 +2276,8 @@ var mt_characters = {
             "kr": "키사키",
             "pinyin": "longhuafeixiao"
         },
-        "charface": "龙华妃咲/CH0139/CH0139.9.webp,龙华妃咲/龙华妃咲.4.webp"
+        "charface": "龙华妃咲/CH0139/CH0139.9,龙华妃咲/龙华妃咲.4",
+        "customface": ""
     },
     "万魔殿成员": {
         "school": "格黑娜",
@@ -2139,7 +2291,8 @@ var mt_characters = {
             "kr": "만마전-임원",
             "pinyin": "wanmodianchengyuan"
         },
-        "charface": "万魔殿成员/NP0027/NP0027.7.webp,万魔殿成员/万魔殿成员.4.webp"
+        "charface": "万魔殿成员/NP0027/NP0027.7,万魔殿成员/万魔殿成员.4",
+        "customface": ""
     },
     "伊吹": {
         "school": "格黑娜",
@@ -2153,7 +2306,8 @@ var mt_characters = {
             "kr": "탄가 이부키",
             "pinyin": "yichui"
         },
-        "charface": "伊吹/CH0254/CH0254.11.webp,伊吹/ibuki/ibuki.17.webp,伊吹/伊吹.8.webp"
+        "charface": "伊吹/CH0254/CH0254.11,伊吹/ibuki/ibuki.17,伊吹/伊吹.8",
+        "customface": ""
     },
     "元宫千秋": {
         "school": "格黑娜",
@@ -2167,7 +2321,8 @@ var mt_characters = {
             "kr": "모토미야 치아키",
             "pinyin": "yuangongqianqiu"
         },
-        "charface": "元宫千秋/CH0238/CH0238.14.webp,元宫千秋/元宫千秋.4.webp"
+        "charface": "元宫千秋/CH0238/CH0238.14,元宫千秋/元宫千秋.4",
+        "customface": ""
     },
     "枣伊吕波": {
         "school": "格黑娜",
@@ -2181,7 +2336,8 @@ var mt_characters = {
             "kr": "나츠메 이로하",
             "pinyin": "zaoyilvbo"
         },
-        "charface": "枣伊吕波/CH0156/CH0156.7.webp,枣伊吕波/枣伊吕波.4.webp,枣伊吕波/cv28363757/cv28363757.23.webp"
+        "charface": "枣伊吕波/CH0156/CH0156.7,枣伊吕波/枣伊吕波.4",
+        "customface": "巴啦啦小凉蛋/伊吕波/伊吕波.23"
     },
     "皐月": {
         "school": "格黑娜",
@@ -2195,7 +2351,8 @@ var mt_characters = {
             "kr": "사츠키",
             "pinyin": "gaoyue"
         },
-        "charface": "皐月/CH0080/CH0080.11.webp,皐月/皐月.4.webp"
+        "charface": "皐月/CH0080/CH0080.11,皐月/皐月.4",
+        "customface": ""
     },
     "羽沼真琴": {
         "school": "格黑娜",
@@ -2209,7 +2366,8 @@ var mt_characters = {
             "kr": "하누마 마코토",
             "pinyin": "yuzhaozhenqin"
         },
-        "charface": "羽沼真琴/CH0079/CH0079.14.webp,羽沼真琴/CH0253/CH0253.16.webp,羽沼真琴/羽沼真琴.8.webp"
+        "charface": "羽沼真琴/CH0079/CH0079.14,羽沼真琴/CH0253/CH0253.16,羽沼真琴/羽沼真琴.8",
+        "customface": ""
     },
     "伊草遥香": {
         "school": "格黑娜",
@@ -2223,7 +2381,8 @@ var mt_characters = {
             "kr": "이구사 하루카",
             "pinyin": "yicaoyaoxiang"
         },
-        "charface": "伊草遥香/CH0087/CH0087.12.webp,伊草遥香/CH0247/CH0247.11.webp,伊草遥香/CH0249/CH0249.11.webp,伊草遥香/haruka/haruka.13.webp,伊草遥香/伊草遥香.16.webp"
+        "charface": "伊草遥香/CH0087/CH0087.12,伊草遥香/CH0247/CH0247.11,伊草遥香/CH0249/CH0249.11,伊草遥香/haruka/haruka.13,伊草遥香/伊草遥香.16",
+        "customface": ""
     },
     "浅黄睦月": {
         "school": "格黑娜",
@@ -2237,7 +2396,8 @@ var mt_characters = {
             "kr": "아사기 무츠키",
             "pinyin": "qianhuangmuyue"
         },
-        "charface": "浅黄睦月/CH0246/CH0246.11.webp,浅黄睦月/CH0248/CH0248.10.webp,浅黄睦月/mutsuki/mutsuki.13.webp,浅黄睦月/mutsuki_newyear/mutsuki_newyear.9.webp,浅黄睦月/浅黄睦月.16.webp"
+        "charface": "浅黄睦月/CH0246/CH0246.11,浅黄睦月/CH0248/CH0248.10,浅黄睦月/mutsuki/mutsuki.13,浅黄睦月/mutsuki_newyear/mutsuki_newyear.9,浅黄睦月/浅黄睦月.16",
+        "customface": ""
     },
     "陆八魔阿露": {
         "school": "格黑娜",
@@ -2251,7 +2411,8 @@ var mt_characters = {
             "kr": "리쿠하치마 아루",
             "pinyin": "lubamoalu"
         },
-        "charface": "陆八魔阿露/aru/aru.14.webp,陆八魔阿露/aru_newyear/aru_newyear.17.webp,陆八魔阿露/CH0240/CH0240.19.webp,陆八魔阿露/陆八魔阿露.12.webp,陆八魔阿露/cv28127770/cv28127770.7.webp"
+        "charface": "陆八魔阿露/aru/aru.14,陆八魔阿露/aru_newyear/aru_newyear.17,陆八魔阿露/CH0240/CH0240.19,陆八魔阿露/陆八魔阿露.12",
+        "customface": "巴啦啦小凉蛋/阿露/阿露.7"
     },
     "鬼方佳代子": {
         "school": "格黑娜",
@@ -2265,7 +2426,8 @@ var mt_characters = {
             "kr": "오니카타 카요코",
             "pinyin": "guifangjiadaizi"
         },
-        "charface": "鬼方佳代子/CH0086/CH0086.7.webp,鬼方佳代子/CH0239/CH0239.8.webp,鬼方佳代子/kayoko/kayoko.7.webp,鬼方佳代子/NP0118/NP0118.7.webp,鬼方佳代子/鬼方佳代子.16.webp,鬼方佳代子/cv28237856/cv28237856.8.webp"
+        "charface": "鬼方佳代子/CH0086/CH0086.7,鬼方佳代子/CH0239/CH0239.8,鬼方佳代子/kayoko/kayoko.7,鬼方佳代子/NP0118/NP0118.7,鬼方佳代子/鬼方佳代子.16",
+        "customface": "巴啦啦小凉蛋/佳代子/佳代子.8"
     },
     "旗见艾丽卡": {
         "school": "格黑娜",
@@ -2279,7 +2441,8 @@ var mt_characters = {
             "kr": "하타미 에리카",
             "pinyin": "qijianailika"
         },
-        "charface": "旗见艾丽卡/erika/erika.15.webp,旗见艾丽卡/旗见艾丽卡.4.webp"
+        "charface": "旗见艾丽卡/erika/erika.15,旗见艾丽卡/旗见艾丽卡.4",
+        "customface": ""
     },
     "绮良良": {
         "school": "格黑娜",
@@ -2293,7 +2456,8 @@ var mt_characters = {
             "kr": "키라라",
             "pinyin": "qiliangliang"
         },
-        "charface": "绮良良/kirara/kirara.11.webp,绮良良/绮良良.4.webp"
+        "charface": "绮良良/kirara/kirara.11,绮良良/绮良良.4",
+        "customface": ""
     },
     "格黑娜学生": {
         "school": "格黑娜",
@@ -2307,7 +2471,8 @@ var mt_characters = {
             "kr": "게헨나-학생",
             "pinyin": "geheinaxuesheng"
         },
-        "charface": "格黑娜学生/NP0026/NP0026.8.webp,格黑娜学生/格黑娜学生.4.webp"
+        "charface": "格黑娜学生/NP0026/NP0026.8,格黑娜学生/格黑娜学生.4",
+        "customface": ""
     },
     "冰室濑名": {
         "school": "格黑娜",
@@ -2321,7 +2486,8 @@ var mt_characters = {
             "kr": "히무로 세나",
             "pinyin": "bingshilaiming"
         },
-        "charface": "冰室濑名/sena/sena.6.webp,冰室濑名/冰室濑名.4.webp"
+        "charface": "冰室濑名/sena/sena.6,冰室濑名/冰室濑名.4",
+        "customface": ""
     },
     "救急医学部成员": {
         "school": "格黑娜",
@@ -2335,7 +2501,8 @@ var mt_characters = {
             "kr": "구급의학부원",
             "pinyin": "jiujiyixuebuchengyuan"
         },
-        "charface": "救急医学部成员/NP0023/NP0023.7.webp,救急医学部成员/救急医学部成员.4.webp"
+        "charface": "救急医学部成员/NP0023/NP0023.7,救急医学部成员/救急医学部成员.4",
+        "customface": ""
     },
     "下仓惠": {
         "school": "格黑娜",
@@ -2349,7 +2516,8 @@ var mt_characters = {
             "kr": "시모쿠라 메구",
             "pinyin": "xiacanghui"
         },
-        "charface": "下仓惠/CH0088/CH0088.7.webp,下仓惠/下仓惠.4.webp"
+        "charface": "下仓惠/CH0088/CH0088.7,下仓惠/下仓惠.4",
+        "customface": ""
     },
     "温泉开发部成员": {
         "school": "格黑娜",
@@ -2363,7 +2531,8 @@ var mt_characters = {
             "kr": "온천개발부원",
             "pinyin": "wenquankaifabuchengyuan"
         },
-        "charface": "温泉开发部成员/Soldier_OnsenDev_RL/Soldier_OnsenDev_RL.6.webp,温泉开发部成员/温泉开发部成员.3.webp"
+        "charface": "温泉开发部成员/Soldier_OnsenDev_RL/Soldier_OnsenDev_RL.6,温泉开发部成员/温泉开发部成员.3",
+        "customface": ""
     },
     "霞": {
         "school": "格黑娜",
@@ -2377,7 +2546,8 @@ var mt_characters = {
             "kr": "카스미",
             "pinyin": "xia"
         },
-        "charface": "霞/CH0089/CH0089.15.webp,霞/霞.4.webp"
+        "charface": "霞/CH0089/CH0089.15,霞/霞.4",
+        "customface": ""
     },
     "爱清枫香": {
         "school": "格黑娜",
@@ -2391,7 +2561,8 @@ var mt_characters = {
             "kr": "아이키요 후우카",
             "pinyin": "aiqingfengxiang"
         },
-        "charface": "爱清枫香/CH0177/CH0177.18.webp,爱清枫香/fuuka/fuuka.8.webp,爱清枫香/爱清枫香.8.webp,爱清枫香/cv32637684/cv32637684.10.webp,爱清枫香/cv33202517/cv33202517.33.webp"
+        "charface": "爱清枫香/CH0177/CH0177.18,爱清枫香/fuuka/fuuka.8,爱清枫香/爱清枫香.8",
+        "customface": "巴啦啦小凉蛋/枫香/枫香.33,巴啦啦小凉蛋/枫香_修复/枫香_修复.10"
     },
     "牛牧茱莉": {
         "school": "格黑娜",
@@ -2405,7 +2576,8 @@ var mt_characters = {
             "kr": "우시마키 주리",
             "pinyin": "niumuzhuli"
         },
-        "charface": "牛牧茱莉/juri/juri.12.webp,牛牧茱莉/牛牧茱莉.4.webp"
+        "charface": "牛牧茱莉/juri/juri.12,牛牧茱莉/牛牧茱莉.4",
+        "customface": ""
     },
     "狮子堂泉": {
         "school": "格黑娜",
@@ -2419,7 +2591,8 @@ var mt_characters = {
             "kr": "시시도우 이즈미",
             "pinyin": "shizitangquan"
         },
-        "charface": "狮子堂泉/CH0197/CH0197.10.webp,狮子堂泉/izumi/izumi.9.webp,狮子堂泉/izumi_swimsuit/izumi_swimsuit.10.webp,狮子堂泉/NP0051/NP0051.9.webp,狮子堂泉/狮子堂泉.16.webp"
+        "charface": "狮子堂泉/CH0197/CH0197.10,狮子堂泉/izumi/izumi.9,狮子堂泉/izumi_swimsuit/izumi_swimsuit.10,狮子堂泉/NP0051/NP0051.9,狮子堂泉/狮子堂泉.16",
+        "customface": ""
     },
     "赤司纯子": {
         "school": "格黑娜",
@@ -2433,7 +2606,8 @@ var mt_characters = {
             "kr": "아카시 준코",
             "pinyin": "chisichunzi"
         },
-        "charface": "赤司纯子/CH0192/CH0192.17.webp,赤司纯子/NP0049/NP0049.15.webp,赤司纯子/zunko/zunko.15.webp,赤司纯子/赤司纯子.12.webp"
+        "charface": "赤司纯子/CH0192/CH0192.17,赤司纯子/NP0049/NP0049.15,赤司纯子/zunko/zunko.15,赤司纯子/赤司纯子.12",
+        "customface": ""
     },
     "鳄渊明里": {
         "school": "格黑娜",
@@ -2447,7 +2621,8 @@ var mt_characters = {
             "kr": "와니부치 아카리",
             "pinyin": "eyuanmingli"
         },
-        "charface": "鳄渊明里/akari/akari.6.webp,鳄渊明里/CH0196/CH0196.12.webp,鳄渊明里/NP0068/NP0068.6.webp,鳄渊明里/鳄渊明里.12.webp"
+        "charface": "鳄渊明里/akari/akari.6,鳄渊明里/CH0196/CH0196.12,鳄渊明里/NP0068/NP0068.6,鳄渊明里/鳄渊明里.12",
+        "customface": ""
     },
     "黑馆晴奈": {
         "school": "格黑娜",
@@ -2461,7 +2636,8 @@ var mt_characters = {
             "kr": "쿠로다테 하루나",
             "pinyin": "heiguanqingnai"
         },
-        "charface": "黑馆晴奈/CH0191/CH0191.13.webp,黑馆晴奈/CH0193/CH0193.14.webp,黑馆晴奈/haruna/haruna.8.webp,黑馆晴奈/黑馆晴奈.12.webp"
+        "charface": "黑馆晴奈/CH0191/CH0191.13,黑馆晴奈/CH0193/CH0193.14,黑馆晴奈/haruna/haruna.8,黑馆晴奈/黑馆晴奈.12",
+        "customface": ""
     },
     "天雨亚子": {
         "school": "格黑娜",
@@ -2475,7 +2651,8 @@ var mt_characters = {
             "kr": "아마우 아코",
             "pinyin": "tianyuyazi"
         },
-        "charface": "天雨亚子/ako/ako.16.webp,天雨亚子/CH0231/CH0231.14.webp,天雨亚子/NP0019/NP0019.16.webp,天雨亚子/NP0059/NP0059.16.webp,天雨亚子/NP0111/NP0111.14.webp,天雨亚子/天雨亚子.20.webp"
+        "charface": "天雨亚子/ako/ako.16,天雨亚子/CH0231/CH0231.14,天雨亚子/NP0019/NP0019.16,天雨亚子/NP0059/NP0059.16,天雨亚子/NP0111/NP0111.14,天雨亚子/天雨亚子.20",
+        "customface": ""
     },
     "火宫千夏": {
         "school": "格黑娜",
@@ -2489,7 +2666,8 @@ var mt_characters = {
             "kr": "히노미야 치나츠",
             "pinyin": "huogongqianxia"
         },
-        "charface": "火宫千夏/CH0163/CH0163.9.webp,火宫千夏/chinatsu/chinatsu.7.webp,火宫千夏/火宫千夏.8.webp"
+        "charface": "火宫千夏/CH0163/CH0163.9,火宫千夏/chinatsu/chinatsu.7,火宫千夏/火宫千夏.8",
+        "customface": ""
     },
     "空崎日奈": {
         "school": "格黑娜",
@@ -2503,7 +2681,8 @@ var mt_characters = {
             "kr": "소라사키 히나",
             "pinyin": "kongqirinai"
         },
-        "charface": "空崎日奈/CH0063/CH0063.10.webp,空崎日奈/CH0230/CH0230.18.webp,空崎日奈/hina/hina.20.webp,空崎日奈/NP0009/NP0009.6.webp,空崎日奈/NP0017/NP0017.6.webp,空崎日奈/NP0205/NP0205.6.webp,空崎日奈/空崎日奈.22.webp,空崎日奈/cv28323327/cv28323327.9.webp"
+        "charface": "空崎日奈/CH0063/CH0063.10,空崎日奈/CH0230/CH0230.18,空崎日奈/hina/hina.20,空崎日奈/NP0009/NP0009.6,空崎日奈/NP0017/NP0017.6,空崎日奈/NP0205/NP0205.6,空崎日奈/空崎日奈.22",
+        "customface": "巴啦啦小凉蛋/日奈/日奈.9"
     },
     "银镜伊织": {
         "school": "格黑娜",
@@ -2517,7 +2696,8 @@ var mt_characters = {
             "kr": "시로미 이오리",
             "pinyin": "yinjingyizhi"
         },
-        "charface": "银镜伊织/CH0064/CH0064.10.webp,银镜伊织/iori/iori.7.webp,银镜伊织/银镜伊织.8.webp,银镜伊织/cv32086479/cv32086479.24.webp"
+        "charface": "银镜伊织/CH0064/CH0064.10,银镜伊织/iori/iori.7,银镜伊织/银镜伊织.8",
+        "customface": "巴啦啦小凉蛋/伊织/伊织.24"
     },
     "风纪委员会成员": {
         "school": "格黑娜",
@@ -2531,7 +2711,8 @@ var mt_characters = {
             "kr": "선도부원",
             "pinyin": "fengjiweiyuanhuichengyuan"
         },
-        "charface": "风纪委员会成员/fuuki_normal1/fuuki_normal1.8.webp,风纪委员会成员/风纪委员会成员.4.webp"
+        "charface": "风纪委员会成员/fuuki_normal1/fuuki_normal1.8,风纪委员会成员/风纪委员会成员.4",
+        "customface": ""
     },
     "尾刃叶渚": {
         "school": "瓦尔基里",
@@ -2545,7 +2726,8 @@ var mt_characters = {
             "kr": "오가타 칸나",
             "pinyin": "weirenyezhu"
         },
-        "charface": "尾刃叶渚/CH0170/CH0170.8.webp,尾刃叶渚/NP0105/NP0105.9.webp,尾刃叶渚/尾刃叶渚.8.webp"
+        "charface": "尾刃叶渚/CH0170/CH0170.8,尾刃叶渚/NP0105/NP0105.9,尾刃叶渚/尾刃叶渚.8",
+        "customface": ""
     },
     "瓦尔基里学生": {
         "school": "瓦尔基里",
@@ -2559,7 +2741,8 @@ var mt_characters = {
             "kr": "발키리-학생",
             "pinyin": "waerjilixuesheng"
         },
-        "charface": "瓦尔基里学生/NP0134/NP0134.9.webp,瓦尔基里学生/Police_Valkyrie_SG/Police_Valkyrie_SG.9.webp,瓦尔基里学生/瓦尔基里学生.7.webp"
+        "charface": "瓦尔基里学生/NP0134/NP0134.9,瓦尔基里学生/Police_Valkyrie_SG/Police_Valkyrie_SG.9,瓦尔基里学生/瓦尔基里学生.7",
+        "customface": ""
     },
     "中务桐乃": {
         "school": "瓦尔基里",
@@ -2573,7 +2756,8 @@ var mt_characters = {
             "kr": "나카츠카사 키리노",
             "pinyin": "zhongwutongnai"
         },
-        "charface": "中务桐乃/kirino/kirino.9.webp,中务桐乃/中务桐乃.4.webp"
+        "charface": "中务桐乃/kirino/kirino.9,中务桐乃/中务桐乃.4",
+        "customface": ""
     },
     "合欢垣吹雪": {
         "school": "瓦尔基里",
@@ -2587,7 +2771,8 @@ var mt_characters = {
             "kr": "네무가키 후부키",
             "pinyin": "hehuanyuanchuixue"
         },
-        "charface": "合欢垣吹雪/CH0141/CH0141.10.webp,合欢垣吹雪/合欢垣吹雪.4.webp"
+        "charface": "合欢垣吹雪/CH0141/CH0141.10,合欢垣吹雪/合欢垣吹雪.4",
+        "customface": ""
     },
     "勇美枫": {
         "school": "百鬼夜行",
@@ -2601,7 +2786,8 @@ var mt_characters = {
             "kr": "이사미 카에데",
             "pinyin": "yongmeifeng"
         },
-        "charface": "勇美枫/kaede/kaede.15.webp,勇美枫/NP0054/NP0054.15.webp,勇美枫/勇美枫.8.webp"
+        "charface": "勇美枫/kaede/kaede.15,勇美枫/NP0054/NP0054.15,勇美枫/勇美枫.8",
+        "customface": ""
     },
     "春日椿": {
         "school": "百鬼夜行",
@@ -2615,7 +2801,8 @@ var mt_characters = {
             "kr": "카스가 츠바키",
             "pinyin": "chunrichun"
         },
-        "charface": "春日椿/Tsubaki/Tsubaki.10.webp,春日椿/春日椿.4.webp"
+        "charface": "春日椿/Tsubaki/Tsubaki.10,春日椿/春日椿.4",
+        "customface": ""
     },
     "水羽三森": {
         "school": "百鬼夜行",
@@ -2629,7 +2816,8 @@ var mt_characters = {
             "kr": "미즈하 미모리",
             "pinyin": "shuiyusansen"
         },
-        "charface": "水羽三森/CH0183/CH0183.8.webp,水羽三森/mimori/mimori.10.webp,水羽三森/水羽三森.8.webp"
+        "charface": "水羽三森/CH0183/CH0183.8,水羽三森/mimori/mimori.10,水羽三森/水羽三森.8",
+        "customface": ""
     },
     "朝比奈菲娜": {
         "school": "百鬼夜行",
@@ -2643,7 +2831,8 @@ var mt_characters = {
             "kr": "아사히나 피나",
             "pinyin": "zhaobinaifeina"
         },
-        "charface": "朝比奈菲娜/pina/pina.8.webp,朝比奈菲娜/朝比奈菲娜.4.webp"
+        "charface": "朝比奈菲娜/pina/pina.8,朝比奈菲娜/朝比奈菲娜.4",
+        "customface": ""
     },
     "河和静子": {
         "school": "百鬼夜行",
@@ -2657,7 +2846,8 @@ var mt_characters = {
             "kr": "카와와 시즈코",
             "pinyin": "hehejingzi"
         },
-        "charface": "河和静子/CH0180/CH0180.9.webp,河和静子/NP0053/NP0053.6.webp,河和静子/shizuko/shizuko.6.webp,河和静子/河和静子.12.webp"
+        "charface": "河和静子/CH0180/CH0180.9,河和静子/NP0053/NP0053.6,河和静子/shizuko/shizuko.6,河和静子/河和静子.12",
+        "customface": ""
     },
     "海夏": {
         "school": "百鬼夜行",
@@ -2671,7 +2861,8 @@ var mt_characters = {
             "kr": "우미카",
             "pinyin": "haixia"
         },
-        "charface": "海夏/CH0110/CH0110.16.webp,海夏/海夏.4.webp"
+        "charface": "海夏/CH0110/CH0110.16,海夏/海夏.4",
+        "customface": ""
     },
     "久田泉奈": {
         "school": "百鬼夜行",
@@ -2685,7 +2876,8 @@ var mt_characters = {
             "kr": "쿠다 이즈나",
             "pinyin": "jiutianquannai"
         },
-        "charface": "久田泉奈/CH0179/CH0179.11.webp,久田泉奈/izuna/izuna.7.webp,久田泉奈/NP0052/NP0052.7.webp,久田泉奈/久田泉奈.12.webp"
+        "charface": "久田泉奈/CH0179/CH0179.11,久田泉奈/izuna/izuna.7,久田泉奈/NP0052/NP0052.7,久田泉奈/久田泉奈.12",
+        "customface": ""
     },
     "千鸟满": {
         "school": "百鬼夜行",
@@ -2699,7 +2891,8 @@ var mt_characters = {
             "kr": "치도리 미치루",
             "pinyin": "qianniaoman"
         },
-        "charface": "千鸟满/CH0113/CH0113.9.webp,千鸟满/千鸟满.4.webp"
+        "charface": "千鸟满/CH0113/CH0113.9,千鸟满/千鸟满.4",
+        "customface": ""
     },
     "大野月咏": {
         "school": "百鬼夜行",
@@ -2713,7 +2906,8 @@ var mt_characters = {
             "kr": "오오노 츠쿠요",
             "pinyin": "dayeyueyong"
         },
-        "charface": "大野月咏/CH0114/CH0114.7.webp,大野月咏/NP0056/NP0056.7.webp,大野月咏/大野月咏.8.webp"
+        "charface": "大野月咏/CH0114/CH0114.7,大野月咏/NP0056/NP0056.7,大野月咏/大野月咏.8",
+        "customface": ""
     },
     "狐坂若藻": {
         "school": "百鬼夜行",
@@ -2727,7 +2921,8 @@ var mt_characters = {
             "kr": "코사카 와카모",
             "pinyin": "hubanruozao"
         },
-        "charface": "狐坂若藻/CH0175/CH0175.1.webp,狐坂若藻/CH0175/CH0175-S2.15.webp,狐坂若藻/NP0014/NP0014.8.webp,狐坂若藻/wakamo/wakamo.1.webp,狐坂若藻/wakamo/wakamo-S2.11.webp,狐坂若藻/狐坂若藻.13.webp"
+        "charface": "狐坂若藻/CH0175/CH0175.1,狐坂若藻/CH0175/CH0175-S2.15,狐坂若藻/NP0014/NP0014.8,狐坂若藻/wakamo/wakamo.1,狐坂若藻/wakamo/wakamo-S2.11,狐坂若藻/狐坂若藻.13",
+        "customface": ""
     },
     "百鬼夜行学生": {
         "school": "百鬼夜行",
@@ -2741,7 +2936,8 @@ var mt_characters = {
             "kr": "백귀야행-학생",
             "pinyin": "baiguiyexingxuesheng"
         },
-        "charface": "百鬼夜行学生/NP0149/NP0149.7.webp,百鬼夜行学生/NP0150/NP0150.6.webp,百鬼夜行学生/NP0156/NP0156.6.webp,百鬼夜行学生/百鬼夜行学生.7.webp"
+        "charface": "百鬼夜行学生/NP0149/NP0149.7,百鬼夜行学生/NP0150/NP0150.6,百鬼夜行学生/NP0156/NP0156.6,百鬼夜行学生/百鬼夜行学生.7",
+        "customface": ""
     },
     "幻魉百物语": {
         "school": "百鬼夜行",
@@ -2755,7 +2951,8 @@ var mt_characters = {
             "kr": "환량백물어",
             "pinyin": "huanliangbaiwuyu"
         },
-        "charface": "幻魉百物语/幻魉百物语.1.webp"
+        "charface": "幻魉百物语/幻魉百物语.1",
+        "customface": ""
     },
     "无面之形代": {
         "school": "百鬼夜行",
@@ -2769,7 +2966,8 @@ var mt_characters = {
             "kr": "얼굴없는-카타시로",
             "pinyin": "wumianzhixingdai"
         },
-        "charface": "无面之形代/无面之形代.1.webp"
+        "charface": "无面之形代/无面之形代.1",
+        "customface": ""
     },
     "猫鬼黑影": {
         "school": "百鬼夜行",
@@ -2783,7 +2981,8 @@ var mt_characters = {
             "kr": "묘귀쿠로카게",
             "pinyin": "maoguiheiying"
         },
-        "charface": ""
+        "charface": "",
+        "customface": ""
     },
     "不破莲华": {
         "school": "百鬼夜行",
@@ -2797,7 +2996,8 @@ var mt_characters = {
             "kr": "후와 렌지",
             "pinyin": "bupolianhua"
         },
-        "charface": "不破莲华/CH0224/CH0224.15.webp,不破莲华/不破莲华.4.webp"
+        "charface": "不破莲华/CH0224/CH0224.15,不破莲华/不破莲华.4",
+        "customface": ""
     },
     "勘解由小路紫蓠": {
         "school": "百鬼夜行",
@@ -2811,7 +3011,8 @@ var mt_characters = {
             "kr": "감해유코지 유카리",
             "pinyin": "kanjieyouxiaoluzili"
         },
-        "charface": "勘解由小路紫蓠/CH0161/CH0161.14.webp,勘解由小路紫蓠/NP0147/NP0147.14.webp,勘解由小路紫蓠/NP0148/NP0148.15.webp,勘解由小路紫蓠/勘解由小路紫蓠.12.webp"
+        "charface": "勘解由小路紫蓠/CH0161/CH0161.14,勘解由小路紫蓠/NP0147/NP0147.14,勘解由小路紫蓠/NP0148/NP0148.15,勘解由小路紫蓠/勘解由小路紫蓠.12",
+        "customface": ""
     },
     "御稜名草": {
         "school": "百鬼夜行",
@@ -2825,7 +3026,8 @@ var mt_characters = {
             "kr": "고료 나구사",
             "pinyin": "yulingmingcao"
         },
-        "charface": "御稜名草/CH0222/CH0222.17.webp,御稜名草/御稜名草.4.webp"
+        "charface": "御稜名草/CH0222/CH0222.17,御稜名草/御稜名草.4",
+        "customface": ""
     },
     "桐生桔梗": {
         "school": "百鬼夜行",
@@ -2839,7 +3041,8 @@ var mt_characters = {
             "kr": "키쿄",
             "pinyin": "tongshengjugeng"
         },
-        "charface": "桐生桔梗/CH0225/CH0225.16.webp,桐生桔梗/桐生桔梗.4.webp"
+        "charface": "桐生桔梗/CH0225/CH0225.16,桐生桔梗/桐生桔梗.4",
+        "customface": ""
     },
     "葛叶": {
         "school": "百鬼夜行",
@@ -2853,7 +3056,8 @@ var mt_characters = {
             "kr": "쿠즈노하",
             "pinyin": "geye"
         },
-        "charface": "葛叶/NP0038/NP0038.11.webp,葛叶/葛叶.4.webp"
+        "charface": "葛叶/NP0038/NP0038.11,葛叶/葛叶.4",
+        "customface": ""
     },
     "箭吹棕榈": {
         "school": "百鬼夜行",
@@ -2867,7 +3071,8 @@ var mt_characters = {
             "kr": "야부키 슈로",
             "pinyin": "jianchuizonglv"
         },
-        "charface": "箭吹棕榈/CH0227/CH0227.24.webp,箭吹棕榈/箭吹棕榈.4.webp"
+        "charface": "箭吹棕榈/CH0227/CH0227.24,箭吹棕榈/箭吹棕榈.4",
+        "customface": ""
     },
     "雏芥子": {
         "school": "百鬼夜行",
@@ -2881,7 +3086,8 @@ var mt_characters = {
             "kr": "코쿠리코",
             "pinyin": "chujiezi"
         },
-        "charface": "雏芥子/CH0226/CH0226.18.webp,雏芥子/雏芥子.4.webp"
+        "charface": "雏芥子/CH0226/CH0226.18,雏芥子/雏芥子.4",
+        "customface": ""
     },
     "和乐千世": {
         "school": "百鬼夜行",
@@ -2895,7 +3101,8 @@ var mt_characters = {
             "kr": "와라쿠 치세",
             "pinyin": "heleqianshi"
         },
-        "charface": "和乐千世/CH0178/CH0178.14.webp,和乐千世/chise/chise.9.webp,和乐千世/NP0055/NP0055.9.webp,和乐千世/和乐千世.12.webp"
+        "charface": "和乐千世/CH0178/CH0178.14,和乐千世/chise/chise.9,和乐千世/NP0055/NP0055.9,和乐千世/和乐千世.12",
+        "customface": ""
     },
     "天地尼娅": {
         "school": "百鬼夜行",
@@ -2909,7 +3116,8 @@ var mt_characters = {
             "kr": "아마치 니야",
             "pinyin": "tiandiniya"
         },
-        "charface": "天地尼娅/CH0109/CH0109.7.webp,天地尼娅/天地尼娅.3.webp"
+        "charface": "天地尼娅/CH0109/CH0109.7,天地尼娅/天地尼娅.3",
+        "customface": ""
     },
     "桑上果穗": {
         "school": "百鬼夜行",
@@ -2923,7 +3131,8 @@ var mt_characters = {
             "kr": "쿠와카미 카호",
             "pinyin": "sangshangguosui"
         },
-        "charface": "桑上果穗/CH0107/CH0107.17.webp,桑上果穗/桑上果穗.4.webp"
+        "charface": "桑上果穗/CH0107/CH0107.17,桑上果穗/桑上果穗.4",
+        "customface": ""
     },
     "新": {
         "school": "百鬼夜行",
@@ -2937,7 +3146,8 @@ var mt_characters = {
             "kr": "아라타",
             "pinyin": "xin"
         },
-        "charface": "新/CH0236/CH0236.12.webp,新/新.4.webp"
+        "charface": "新/CH0236/CH0236.12,新/新.4",
+        "customface": ""
     },
     "魑魅一座成员": {
         "school": "百鬼夜行",
@@ -2951,7 +3161,8 @@ var mt_characters = {
             "kr": "이매일좌",
             "pinyin": "chimeiyizuochengyuan"
         },
-        "charface": "魑魅一座成员/Yukata_StreetGhostes_RL/Yukata_StreetGhostes_RL.6.webp,魑魅一座成员/魑魅一座成员.3.webp"
+        "charface": "魑魅一座成员/Yukata_StreetGhostes_RL/Yukata_StreetGhostes_RL.6,魑魅一座成员/魑魅一座成员.3",
+        "customface": ""
     },
     "天见和香": {
         "school": "赤冬",
@@ -2965,7 +3176,8 @@ var mt_characters = {
             "kr": "아마미 노도카",
             "pinyin": "tianjianhexiang"
         },
-        "charface": "天见和香/CH0165/CH0165.36.webp,天见和香/nodoka/nodoka.7.webp,天见和香/天见和香.8.webp"
+        "charface": "天见和香/CH0165/CH0165.36,天见和香/nodoka/nodoka.7,天见和香/天见和香.8",
+        "customface": ""
     },
     "间宵时雨": {
         "school": "赤冬",
@@ -2979,7 +3191,8 @@ var mt_characters = {
             "kr": "마요이 시구레",
             "pinyin": "jianxiaoshiyu"
         },
-        "charface": "间宵时雨/CH0123/CH0123.9.webp,间宵时雨/shigure/shigure.11.webp,间宵时雨/间宵时雨.8.webp"
+        "charface": "间宵时雨/CH0123/CH0123.9,间宵时雨/shigure/shigure.11,间宵时雨/间宵时雨.8",
+        "customface": ""
     },
     "三善贵音": {
         "school": "赤冬",
@@ -2993,7 +3206,8 @@ var mt_characters = {
             "kr": "미요시 타카네",
             "pinyin": "sanshanguiyin"
         },
-        "charface": "三善贵音/CH0229/CH0229.18.webp,三善贵音/三善贵音.4.webp"
+        "charface": "三善贵音/CH0229/CH0229.18,三善贵音/三善贵音.4",
+        "customface": ""
     },
     "荒槙八云": {
         "school": "赤冬",
@@ -3007,7 +3221,8 @@ var mt_characters = {
             "kr": "아라마키 야쿠모",
             "pinyin": "huangzhenbayun"
         },
-        "charface": "荒槙八云/CH0228/CH0228.13.webp,荒槙八云/荒槙八云.4.webp"
+        "charface": "荒槙八云/CH0228/CH0228.13,荒槙八云/荒槙八云.4",
+        "customface": ""
     },
     "安守实梨": {
         "school": "赤冬",
@@ -3021,7 +3236,8 @@ var mt_characters = {
             "kr": "야스모리 미노리",
             "pinyin": "anshoushili"
         },
-        "charface": "安守实梨/CH0214/CH0214.9.webp,安守实梨/minori/minori.9.webp,安守实梨/安守实梨.8.webp"
+        "charface": "安守实梨/CH0214/CH0214.9,安守实梨/minori/minori.9,安守实梨/安守实梨.8",
+        "customface": ""
     },
     "工务部成员": {
         "school": "赤冬",
@@ -3035,7 +3251,8 @@ var mt_characters = {
             "kr": "용역부원",
             "pinyin": "gongwubuchengyuan"
         },
-        "charface": "工务部成员/yoheki_redwinter1/yoheki_redwinter1.2.webp,工务部成员/工务部成员.2.webp"
+        "charface": "工务部成员/yoheki_redwinter1/yoheki_redwinter1.2,工务部成员/工务部成员.2",
+        "customface": ""
     },
     "姬木梅露": {
         "school": "赤冬",
@@ -3049,7 +3266,8 @@ var mt_characters = {
             "kr": "히메키 메루",
             "pinyin": "jimumeilu"
         },
-        "charface": "姬木梅露/CH0124/CH0124.16.webp,姬木梅露/CH0125/CH0125.9.webp,姬木梅露/姬木梅露.8.webp"
+        "charface": "姬木梅露/CH0124/CH0124.16,姬木梅露/CH0125/CH0125.9,姬木梅露/姬木梅露.8",
+        "customface": ""
     },
     "秋泉红叶": {
         "school": "赤冬",
@@ -3063,7 +3281,8 @@ var mt_characters = {
             "kr": "아키이즈미 모미지",
             "pinyin": "qiuquanhongye"
         },
-        "charface": "秋泉红叶/momiji/momiji.7.webp,秋泉红叶/秋泉红叶.4.webp"
+        "charface": "秋泉红叶/momiji/momiji.7,秋泉红叶/秋泉红叶.4",
+        "customface": ""
     },
     "亲卫队员": {
         "school": "赤冬",
@@ -3077,7 +3296,8 @@ var mt_characters = {
             "kr": "친위대원",
             "pinyin": "qinweiduiyuan"
         },
-        "charface": "亲卫队员/亲卫队员.1.webp"
+        "charface": "亲卫队员/亲卫队员.1",
+        "customface": ""
     },
     "佐城智惠": {
         "school": "赤冬",
@@ -3091,7 +3311,8 @@ var mt_characters = {
             "kr": "사시로 토모에",
             "pinyin": "zuochengzhihui"
         },
-        "charface": "佐城智惠/tomoe/tomoe.6.webp,佐城智惠/佐城智惠.4.webp"
+        "charface": "佐城智惠/tomoe/tomoe.6,佐城智惠/佐城智惠.4",
+        "customface": ""
     },
     "池仓玛利娜": {
         "school": "赤冬",
@@ -3105,7 +3326,8 @@ var mt_characters = {
             "kr": "이케쿠라 마리나",
             "pinyin": "chicangmalina"
         },
-        "charface": "池仓玛利娜/marina/marina.12.webp,池仓玛利娜/池仓玛利娜.4.webp"
+        "charface": "池仓玛利娜/marina/marina.12,池仓玛利娜/池仓玛利娜.4",
+        "customface": ""
     },
     "连河切里诺": {
         "school": "赤冬",
@@ -3119,7 +3341,8 @@ var mt_characters = {
             "kr": "렌카와 체리노",
             "pinyin": "lianheqielinuo"
         },
-        "charface": "连河切里诺/CH0164/CH0164.9.webp,连河切里诺/CH0164/CH0164-S2.13.webp,连河切里诺/cherino/cherino.6.webp,连河切里诺/cherino/cherino-S2.6.webp,连河切里诺/连河切里诺.13.webp"
+        "charface": "连河切里诺/CH0164/CH0164.9,连河切里诺/CH0164/CH0164-S2.13,连河切里诺/cherino/cherino.6,连河切里诺/cherino/cherino-S2.6,连河切里诺/连河切里诺.13",
+        "customface": ""
     },
     "十六夜野宫": {
         "school": "阿比多斯",
@@ -3133,7 +3356,8 @@ var mt_characters = {
             "kr": "이자요이 노노미",
             "pinyin": "shiliuyeyegong"
         },
-        "charface": "十六夜野宫/CH0092/CH0092.22.webp,十六夜野宫/nonomi/nonomi.19.webp,十六夜野宫/nonomi_robber/nonomi_robber.6.webp,十六夜野宫/NP0044/NP0044.19.webp,十六夜野宫/NP0067/NP0067.22.webp,十六夜野宫/十六夜野宫.20.webp,十六夜野宫/cv28939004/cv28939004.18.webp,十六夜野宫/cv29003553/cv29003553.42.webp"
+        "charface": "十六夜野宫/CH0092/CH0092.22,十六夜野宫/nonomi/nonomi.19,十六夜野宫/nonomi_robber/nonomi_robber.6,十六夜野宫/NP0044/NP0044.19,十六夜野宫/NP0067/NP0067.22,十六夜野宫/十六夜野宫.20",
+        "customface": "巴啦啦小凉蛋/野宫/野宫.42,巴啦啦小凉蛋/野宫_修复/野宫_修复.18"
     },
     "奥空绫音": {
         "school": "阿比多斯",
@@ -3147,7 +3371,8 @@ var mt_characters = {
             "kr": "오쿠소라 아야네",
             "pinyin": "aokonglingyin"
         },
-        "charface": "奥空绫音/ayane/ayane.15.webp,奥空绫音/ayane_robber/ayane_robber.15.webp,奥空绫音/CH0176/CH0176.16.webp,奥空绫音/NP0048/NP0048.15.webp,奥空绫音/NP0066/NP0066.16.webp,奥空绫音/NP0108/NP0108.15.webp,奥空绫音/奥空绫音.24.webp,奥空绫音/cv28915078/cv28915078.39.webp"
+        "charface": "奥空绫音/ayane/ayane.15,奥空绫音/ayane_robber/ayane_robber.15,奥空绫音/CH0176/CH0176.16,奥空绫音/NP0048/NP0048.15,奥空绫音/NP0066/NP0066.16,奥空绫音/NP0108/NP0108.15,奥空绫音/奥空绫音.24",
+        "customface": "巴啦啦小凉蛋/绫音/绫音.39"
     },
     "小鸟游星野": {
         "school": "阿比多斯",
@@ -3161,7 +3386,8 @@ var mt_characters = {
             "kr": "타카나시 호시노",
             "pinyin": "xiaoniaoyouxingye"
         },
-        "charface": "小鸟游星野/CH0241/CH0241.46.webp,小鸟游星野/hoshino/hoshino.17.webp,小鸟游星野/hoshino_robber/hoshino_robber.6.webp,小鸟游星野/hoshino_swimsuit/hoshino_swimsuit.21.webp,小鸟游星野/NP0045/NP0045.17.webp,小鸟游星野/NP0063/NP0063.21.webp,小鸟游星野/NP0167/NP0167.46.webp,小鸟游星野/小鸟游星野.28.webp,小鸟游星野/cv31188154/cv31188154.19.webp,小鸟游星野/cv31572932/cv31572932.30.webp"
+        "charface": "小鸟游星野/CH0241/CH0241.46,小鸟游星野/hoshino/hoshino.17,小鸟游星野/hoshino_robber/hoshino_robber.6,小鸟游星野/hoshino_swimsuit/hoshino_swimsuit.21,小鸟游星野/NP0045/NP0045.17,小鸟游星野/NP0063/NP0063.21,小鸟游星野/NP0167/NP0167.46,小鸟游星野/小鸟游星野.28",
+        "customface": "巴啦啦小凉蛋/星野/星野.30,巴啦啦小凉蛋/星野_修复/星野_修复.19"
     },
     "梦": {
         "school": "阿比多斯",
@@ -3175,7 +3401,8 @@ var mt_characters = {
             "kr": "유메",
             "pinyin": "meng"
         },
-        "charface": "梦/CH0157/CH0157.21.webp,梦/NP0166/NP0166.21.webp,梦/梦.8.webp"
+        "charface": "梦/CH0157/CH0157.21,梦/NP0166/NP0166.21,梦/梦.8",
+        "customface": ""
     },
     "砂狼白子": {
         "school": "阿比多斯",
@@ -3189,7 +3416,8 @@ var mt_characters = {
             "kr": "스나오오카미 시로코",
             "pinyin": "shalangbaizi"
         },
-        "charface": "砂狼白子/CH0188/CH0188.6.webp,砂狼白子/NP0046/NP0046.6.webp,砂狼白子/NP0064/NP0064.6.webp,砂狼白子/NP0124/NP0124.17.webp,砂狼白子/shiroko/shiroko.17.webp,砂狼白子/shiroko_ridingsuit/shiroko_ridingsuit.6.webp,砂狼白子/shiroko_robber/shiroko_robber.17.webp,砂狼白子/砂狼白子.28.webp,砂狼白子/cv29927426/cv29927426.36.webp"
+        "charface": "砂狼白子/CH0188/CH0188.6,砂狼白子/NP0046/NP0046.6,砂狼白子/NP0064/NP0064.6,砂狼白子/NP0124/NP0124.17,砂狼白子/shiroko/shiroko.17,砂狼白子/shiroko_ridingsuit/shiroko_ridingsuit.6,砂狼白子/shiroko_robber/shiroko_robber.17,砂狼白子/砂狼白子.28",
+        "customface": "巴啦啦小凉蛋/白子/白子.36"
     },
     "砂狼白子？": {
         "school": "阿比多斯",
@@ -3203,7 +3431,8 @@ var mt_characters = {
             "kr": "스나오오카미 시로코？",
             "pinyin": "shalangbaizi？"
         },
-        "charface": "砂狼白子？/CH0199/CH0199.8.webp,砂狼白子？/NP0125/NP0125.8.webp,砂狼白子？/砂狼白子？.8.webp"
+        "charface": "砂狼白子？/CH0199/CH0199.8,砂狼白子？/NP0125/NP0125.8,砂狼白子？/砂狼白子？.8",
+        "customface": ""
     },
     "黑见芹香": {
         "school": "阿比多斯",
@@ -3217,7 +3446,8 @@ var mt_characters = {
             "kr": "쿠로미 세리카",
             "pinyin": "heijianqinxiang"
         },
-        "charface": "黑见芹香/CH0189/CH0189.17.webp,黑见芹香/NP0047/NP0047.13.webp,黑见芹香/NP0065/NP0065.17.webp,黑见芹香/serika/serika.13.webp,黑见芹香/serika_newyear/serika_newyear.14.webp,黑见芹香/serika_robber/serika_robber.13.webp,黑见芹香/serika_shibaseki/serika_shibaseki.13.webp,黑见芹香/黑见芹香.28.webp,黑见芹香/cv29495348/cv29495348.78.webp,黑见芹香/cv29529044/cv29529044.35.webp"
+        "charface": "黑见芹香/CH0189/CH0189.17,黑见芹香/NP0047/NP0047.13,黑见芹香/NP0065/NP0065.17,黑见芹香/serika/serika.13,黑见芹香/serika_newyear/serika_newyear.14,黑见芹香/serika_robber/serika_robber.13,黑见芹香/serika_shibaseki/serika_shibaseki.13,黑见芹香/黑见芹香.28",
+        "customface": "巴啦啦小凉蛋/芹香/芹香.113"
     },
     "阿里乌斯学生": {
         "school": "阿里乌斯",
@@ -3231,7 +3461,8 @@ var mt_characters = {
             "kr": "아리우스-학생",
             "pinyin": "aliwusixuesheng"
         },
-        "charface": "阿里乌斯学生/阿里乌斯学生.1.webp"
+        "charface": "阿里乌斯学生/阿里乌斯学生.1",
+        "customface": ""
     },
     "戒野美咲": {
         "school": "阿里乌斯",
@@ -3245,7 +3476,8 @@ var mt_characters = {
             "kr": "이마시노 미사키",
             "pinyin": "jieyemeixiao"
         },
-        "charface": "戒野美咲/misaki/misaki.19.webp,戒野美咲/misaki/misaki-S2.19.webp,戒野美咲/戒野美咲.7.webp,戒野美咲/美咲_Velstadt-/美咲_Velstadt-.39.webp"
+        "charface": "戒野美咲/misaki/misaki.19,戒野美咲/misaki/misaki-S2.19,戒野美咲/戒野美咲.7",
+        "customface": "Velstadt-/美咲/美咲.40"
     },
     "槌永日和": {
         "school": "阿里乌斯",
@@ -3259,7 +3491,8 @@ var mt_characters = {
             "kr": "츠치나가 히요리",
             "pinyin": "chuiyongrihe"
         },
-        "charface": "槌永日和/hiyori/hiyori.11.webp,槌永日和/槌永日和.4.webp,槌永日和/日和_Velstadt-/日和_Velstadt-.31.webp"
+        "charface": "槌永日和/hiyori/hiyori.11,槌永日和/槌永日和.4",
+        "customface": "Velstadt-/日和/日和.31"
     },
     "秤亚津子": {
         "school": "阿里乌斯",
@@ -3273,7 +3506,8 @@ var mt_characters = {
             "kr": "하카리 아츠코",
             "pinyin": "chengyajinzi"
         },
-        "charface": "秤亚津子/atsuko/atsuko.1.webp,秤亚津子/atsuko/atsuko-S2.7.webp,秤亚津子/NP0021/NP0021.7.webp,秤亚津子/NP0077/NP0077.8.webp,秤亚津子/秤亚津子.12.webp,秤亚津子/cv28510120/cv28510120.29.webp"
+        "charface": "秤亚津子/atsuko/atsuko.1,秤亚津子/atsuko/atsuko-S2.7,秤亚津子/NP0021/NP0021.7,秤亚津子/NP0077/NP0077.8,秤亚津子/秤亚津子.12",
+        "customface": "巴啦啦小凉蛋/亚津子/亚津子.29"
     },
     "锭前纱织": {
         "school": "阿里乌斯",
@@ -3287,6 +3521,7 @@ var mt_characters = {
             "kr": "조마에 사오리",
             "pinyin": "dingqianshazhi"
         },
-        "charface": "锭前纱织/CH0259/CH0259.16.webp,锭前纱织/CH0259/CH0259-S2.16.webp,锭前纱织/NP0012/NP0012.28.webp,锭前纱织/NP0012/NP0012-S2.28.webp,锭前纱织/NP0164/NP0164.16.webp,锭前纱织/saori/saori.28.webp,锭前纱织/saori/saori-S2.28.webp,锭前纱织/锭前纱织.26.webp"
+        "charface": "锭前纱织/CH0259/CH0259.16,锭前纱织/CH0259/CH0259-S2.16,锭前纱织/NP0012/NP0012.28,锭前纱织/NP0012/NP0012-S2.28,锭前纱织/NP0164/NP0164.16,锭前纱织/saori/saori.28,锭前纱织/saori/saori-S2.28,锭前纱织/锭前纱织.26",
+        "customface": ""
     }
 }

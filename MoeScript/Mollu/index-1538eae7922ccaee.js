@@ -2995,11 +2995,23 @@
 												height: '100%',
 												color: '#3f51b5',
 												position: 'absolute',
-												left: 0,
-												display: 'none'
+												left: 0
 											},
 											className: "bold",
-											children: '自制',
+											hidden: !自设差分[0],
+											children: 自设差分[1]  ? '切换原装' : '切换自制',
+											onClick:function()
+											{
+												if(自设差分[1])
+												{
+													mt_emojis('charface',cf)
+												}
+												else
+												{
+													mt_emojis('customface',cf)
+												}
+												click('#close');
+											}
 										}), (0, m.jsx)(c.Bx,
 										{
 											className: "bold",
@@ -3009,6 +3021,7 @@
 												"color": "black"
 											},
 											children: '←',
+											hidden: 表情页码 == '0 / 0' || 表情页码 == '1 / 1',
 											onClick:function()
 											{
 												mt_emojis('-',cf)
@@ -3031,6 +3044,7 @@
 												"color": "black"
 											},
 											children: '→',
+											hidden: 表情页码 == '0 / 0' || 表情页码 == '1 / 1',
 											onClick:function()
 											{
 												mt_emojis('+',cf)
@@ -3049,11 +3063,11 @@
 											},
 											children: (0, m.jsx)('a',
 											{
-												href: 表情来源,
+												href: 自设差分[2],
 												children: '来源',
 												target: '_blank'
 											}),
-											hidden: !表情来源	
+											hidden: !自设差分[2]
 										})]
 									}), (0, m.jsx)(eE,
 									{

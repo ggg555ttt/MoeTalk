@@ -100,6 +100,9 @@ if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选
 	delete localStorage['vConsole_switch_x']
 	delete localStorage['MoeTalk']
 	delete localStorage['顶部标题']
+	delete localStorage['heads']
+	delete localStorage['qchar']
+	delete localStorage['png']
 	//if(!mt_settings['后台保存'])delete mt_settings['后台保存']
 	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
 
@@ -1015,69 +1018,107 @@ if(window.location.href.indexOf('Setting') < 0)
 	localStorage['启动次数'] = parseInt(localStorage['启动次数'])+1
 	localStorage['启动网址'] = window.location.href
 }
-var 表情,表情类型,表情页码,表情来源;
+var 表情,表情类型,表情页码;
+var 自设差分,差分书签 = sessionStorage['差分书签'] ? JSON.parse(sessionStorage['差分书签']) : {}
 function mt_emojis(S,mode)
 {
 	表情 = []
 	表情类型 = ''
-	表情页码 = ''
-	表情来源 = ''
+	自设差分 = []
 	let id = mt_settings['选择角色'].no;
+	let str = '';
 	let maxNum = 0
 	if(mode === 'CharFace')
 	{
-		if(mt_settings['差分映射'][id] || mt_settings['差分映射'][id] == 0)id = mt_settings['差分映射'][id]
-		if(S === '+')
+		if(mt_settings['差分映射'][id] || mt_settings['差分映射'][id] == 0)
 		{
-			sessionStorage[id]++
+			str = loadname(id)+'->'
+			id = mt_settings['差分映射'][id]
+		}
+		if(!差分书签[id])//添加书签
+		{
+			差分书签[id] = {}
+			差分书签[id].type = 'charface'
+			差分书签[id].charface = 0
+			差分书签[id].customface = 0
+		}
+		if(S === '+')//下一页
+		{
+			差分书签[id][差分书签[id].type]++
 			return;
 		}
-		if(S === '-')
+		if(S === '-')//上一页
 		{
-			sessionStorage[id]--
+			差分书签[id][差分书签[id].type]--
 			return;
 		}
-		if(!mt_characters[id])
+		if(S === 'charface' || S === 'customface')//切换类型
 		{
-			表情类型 = `${loadname(id)}(0暂无)`
-			表情页码 = `0 / 0`
+			差分书签[id].type = S
+			return;
+		}
+		if(!mt_characters[id])//人物不存在
+		{
+			表情类型 = `${str}${loadname(id)}(0暂无)`
+			表情页码 = '0 / 0'
 			S(!0)
 			return;
 		}
-		let cfarr = mt_characters[id].charface.split(',')
-		let pageIdnex = parseInt(sessionStorage[id]);
-		if(pageIdnex === -1)pageIdnex = sessionStorage[id] = cfarr.length-1
-		if(isNaN(pageIdnex) || !cfarr[pageIdnex])pageIdnex = sessionStorage[id] = 0
+		
+		let cfarr = mt_characters[id][差分书签[id].type].split(',')
+		let pageIdnex = parseInt(差分书签[id][差分书签[id].type]);
+		if(pageIdnex === -1)pageIdnex = 差分书签[id][差分书签[id].type] = cfarr.length-1
+		if(isNaN(pageIdnex) || !cfarr[pageIdnex])pageIdnex = 差分书签[id][差分书签[id].type] = 0
 		if(cfarr[pageIdnex])
 		{
 			cfarr[pageIdnex] = cfarr[pageIdnex].split('.')
-			cfarr[pageIdnex].pop()//删除后缀
 			maxNum = parseInt(cfarr[pageIdnex].pop())//获取总数
 			cfarr[pageIdnex] = cfarr[pageIdnex][0]//获取文件名
 			Array(maxNum).fill(cfarr[pageIdnex]).map(function(v,k)
 			{
-				表情.push(`Images/CharFace/${mt_characters[id].school}/${mt_characters[id].club}/${v}.${k+1}.webp`)
+				if(差分书签[id].type === 'charface')
+				{
+					表情.push(`Images/CharFace/${mt_characters[id].school}/${mt_characters[id].club}/${v}.${k+1}.webp`)
+				}
+				else
+				{
+					表情.push(`Images/CustomFace/${v}.${k+1}.webp`)
+				}
+				
 			})
-			表情页码 = `${pageIdnex+1} / ${cfarr.length}`
 
+			表情页码 = `${pageIdnex+1} / ${cfarr.length}`
 			cfarr[pageIdnex] = cfarr[pageIdnex].split('/')
 			表情类型 = cfarr[pageIdnex].pop()//获取差分类型
+
 			if(表情类型 === id)
 			{
-				表情类型 = `${loadname(id)}(${maxNum}其他)`
+				表情类型 = `${str}${loadname(id)}(${maxNum}其他)`
 			}
-			else if(mt_CharFaceInfo[表情类型])
+			else if(表情类型.indexOf('_修复') > -1)
 			{
-				表情来源 = mt_CharFaceIndex[mt_CharFaceInfo[表情类型]]
-				表情类型 = `${loadname(id)}(${maxNum}自制)`
+				表情类型 = `${str}${loadname(id)}(${maxNum}修复)`
+			}
+			else if(CustomFaceAuthor[cfarr[pageIdnex][0]])
+			{
+				表情类型 = `${str}${loadname(id)}(${maxNum}自制)`
 			}
 			else
 			{
-				表情类型 = `${loadname(id)}(${maxNum})`
+				表情类型 = `${str}${loadname(id)}(${maxNum})`
 			}
+
+			自设差分[0] = mt_characters[id]['customface'] ? !0 : !1
+			自设差分[1] = 差分书签[id].type === 'customface' ? !0 : !1
+			自设差分[2] = CustomFaceAuthor[cfarr[pageIdnex][0]]
 			S(!0)
+			saveStorage('差分书签',差分书签,'session')
 			return;
 		}
+		表情类型 = `${str}${loadname(id)}(0暂无)`
+		表情页码 = '0 / 0'
+		S(!0)
+		return;
 	}
 	else
 	{
