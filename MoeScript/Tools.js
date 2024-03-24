@@ -109,14 +109,14 @@ $('body').on('click',"#savedata",function()
 					arr['mt-char'] = char
 					arr['mt-head'] = head
 					arr['chats'] = data
-					download_txt('MoeTalk_localStorage存档'+time+'.JSON',JSON.stringify({...localStorage,...arr},null,4));//生成专用存档
+					download_txt('MoeTalk_localStorage存档'+time+'.TXT',JSON.stringify({...localStorage,...arr},null,4));//生成专用存档
 				})
 			})
 		})
 	}
 	else download_txt('MoeTalk_localStorage存档'+time+'.JSON',JSON.stringify(localStorage,null,4));//生成专用存档
 });
-$("body").append("<input id='loaddatafile' hidden type='file' accept='application/json'>");
+$("body").append("<input id='loaddatafile' hidden type='file'>");
 $('body').on('click',"#loaddata",function()
 {
 	alert('此选项只能读取“下载localStorage存档”生成的文件\n请不要上传其他的文件')

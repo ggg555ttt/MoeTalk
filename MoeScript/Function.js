@@ -977,7 +977,13 @@ function saveStorage(key,val,mode)
 {
 	if(!mt_settings['存储模式'] && mode === 'local' && ['chats','mt-char','mt-head'].indexOf(key) > -1)
 	{
-		moetalkStorage.setItem(key,JSON.stringify(val))
+		moetalkStorage.setItem(key,JSON.stringify(val)).catch(function(error)
+		{
+			let arr = []
+			arr[0] = error
+			localStorage['error'] = JSON.stringify(arr)
+			alert('数据写入失败！麻烦请在设置页面“下载localStorage存档”后并向开发者提交')
+		});
 		return;
 	}
 	let num = 0
@@ -1072,6 +1078,7 @@ function mt_emojis(S,mode)
 		if(cfarr[pageIdnex])
 		{
 			cfarr[pageIdnex] = cfarr[pageIdnex].split('.')
+			if(cfarr[pageIdnex].length > 2)cfarr[pageIdnex].pop()//
 			maxNum = parseInt(cfarr[pageIdnex].pop())//获取总数
 			cfarr[pageIdnex] = cfarr[pageIdnex][0]//获取文件名
 			Array(maxNum).fill(cfarr[pageIdnex]).map(function(v,k)
