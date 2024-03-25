@@ -33,8 +33,8 @@ if(!mt_settings['存储模式'])
 			{
 				if(!char || !head)
 				{
-					char = '{}'
-					head = '{}'
+					char = {}
+					head = {}
 					if(localStorage['mt-char'])
 					{
 						char = localStorage['mt-char']
@@ -54,7 +54,7 @@ if(!mt_settings['存储模式'])
 				}
 				if(!data)
 				{
-					data = '[]'
+					data = []
 					if(localStorage['chats'])
 					{
 						data = localStorage['chats']
@@ -64,12 +64,15 @@ if(!mt_settings['存储模式'])
 						})
 					}
 				}
-				mt_char = JSON.parse(char)
-				mt_head = JSON.parse(head)
+				if(typeof char === 'string')char = JSON.parse(char)
+				if(typeof head === 'string')head = JSON.parse(head)
+				if(typeof data === 'string')data = JSON.parse(data)
+				mt_char = char
+				mt_head = head
 				list()
 				chats = []
 				otherChats = []
-				JSON.parse(data).map(function(v,k)
+				data.map(function(v,k)
 				{
 					if(v.replyDepth !== 0)otherChats.push(v)
 					else chats.push(v)
@@ -678,6 +681,7 @@ function makeMessage(type,data,chatIndex,mode)
 }
 function sendMessage(data,type,mode = 'add',indexs = [])
 {
+	moeLog(type,data,mode,indexs)
 	$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
 	$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
 	$$('.editMessage').removeClass('visible')

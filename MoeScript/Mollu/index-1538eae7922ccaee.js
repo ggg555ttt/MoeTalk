@@ -1863,6 +1863,7 @@
 												}
 												else
 												{
+													moeLog('',{},"delete",[])
 													chats = []
 													otherChats = []
 													$$(`.消息`).remove()

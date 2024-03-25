@@ -977,7 +977,7 @@ function saveStorage(key,val,mode)
 {
 	if(!mt_settings['存储模式'] && mode === 'local' && ['chats','mt-char','mt-head'].indexOf(key) > -1)
 	{
-		moetalkStorage.setItem(key,JSON.stringify(val)).catch(function(error)
+		moetalkStorage.setItem(key,val).catch(function(error)
 		{
 			let arr = []
 			arr[0] = error
@@ -1156,4 +1156,21 @@ function mt_emojis(S,mode)
 		表情页码 = `${pageIdnex+1} / 4`
 		S(!0)
 	}
+}
+function moeLog(type,data,mode,indexs)
+{
+	moetalkStorage.getItem('moeLog', function(err, moeLog)
+	{
+		if(!moeLog)moeLog = []
+		if(moeLog.length > 9)moeLog.shift()
+		moeLog.push({
+			date: `${month}.${day}`,
+			type: type,
+			data: data,
+			index: indexs,
+			mode: mode
+		})
+		moetalkStorage.setItem('moeLog', moeLog);
+		//console.log(moeLog)
+	});
 }

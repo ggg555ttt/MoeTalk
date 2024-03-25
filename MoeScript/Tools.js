@@ -98,18 +98,23 @@ $('body').on('click',"#savedata",function()
 	{
 		moetalkStorage.getItem('mt-char', function(err, char)
 		{
-			if(!char)char = '{}';
 			moetalkStorage.getItem('mt-head', function(err, head)
 			{
-				if(!head)head = '{}';
-				moetalkStorage.getItem('chats', function(err, data)
+				moetalkStorage.getItem('chats', function(err, chats)
 				{
-					if(!data)data = '[]';
-					let arr = {}
-					arr['mt-char'] = char
-					arr['mt-head'] = head
-					arr['chats'] = data
-					download_txt('MoeTalk_localStorage存档'+time+'.TXT',JSON.stringify({...localStorage,...arr},null,4));//生成专用存档
+					moetalkStorage.getItem('moeLog', function(err, moeLog)
+					{
+						if(!char)char = {};
+						if(!head)head = {};
+						if(!chats)chats = [];
+						if(!moeLog)moeLog = [];
+						let arr = {}
+						arr['mt-char'] = char
+						arr['mt-head'] = head
+						arr['chats'] = chats
+						arr['moeLog'] = moeLog
+						download_txt('MoeTalk_localStorage存档'+time+'.TXT',JSON.stringify({...localStorage,...arr},null,4));//生成专用存档
+					})
 				})
 			})
 		})
@@ -135,7 +140,7 @@ $('body').on('change',"#loaddatafile",function()
 		if(!mt_settings['存储模式'])moetalkStorage.clear()
 		$.each(json,function(k,v)
 		{
-			if(['chats','mt-char','mt-head'].indexOf(k) > -1)
+			if(['chats','mt-char','mt-head','moeLog'].indexOf(k) > -1)
 			{
 				if(!mt_settings['存储模式'])moetalkStorage.setItem(k,v)
 				else localStorage[k] = v;

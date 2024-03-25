@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <!-- saved from url=(0022)https://mollutalk.com/ -->
-<html lang="zh" style="--vh:9.47px; font-size: 16px;">
+<html lang="zh" style="--vh:9.47px; font-size: 16px;position:fixed;">
 	<head>
 <script src="./MoeScript/Script/Jquery.min.js"></script>
 <script src="./MoeScript/Script/localforage.min.js"></script>
@@ -205,11 +205,14 @@ if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) &&
 		<script src="./MoeScript/Mollu/music-328e8f3388aab8f7.js"></script>
 	</body>
 </html>
-<p>MoeTalk正在加载中，请耐心等待一段时间</p>
 <p>如果长时间卡在此页面建议您清除浏览器缓存后再重新访问</p>
-<p>如果以上方法均无效请通过反馈页面提交您的问题，最好带上“本地数据存档”和您的联系方式</p>
+<p>清除缓存前请注意备份存档</p>
+<p>如果以上方法仍无效请进入设置页面并点击<b class="red">问题反馈</b>提交您的问题</p>
+<p>最好带上localStorage存档，这使我可以更好的排查错误</p>
 <p>另外相关使用建议也可以向我提交，感谢您的使用</p>
-<p><a href="https://wj.qq.com/s2/12952865/a1aa/">反馈页面</a></p>
+<button><a href='./Setting.html' target='_blank' style="color: white;">点击进入设置页面</a></button>
+<p></p>
+<img style="width: 100%;height: auto;" id="help" src="./Images/UI/help.webp" onclick="document.documentElement.style.position = '';" />
 <p><a href="https://space.bilibili.com/13973390">B站主页</a></p>
 <p><a href="https://github.com/ggg555ttt/MoeTalk">项目地址（github）</a></p>
-<iframe id="iframe" src='./Setting.html' width="100%" height="100%"></iframe>
+<!-- <iframe id="iframe" src='./Setting.html' width="100%" height="100%"></iframe> -->
