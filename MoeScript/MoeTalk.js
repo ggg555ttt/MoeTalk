@@ -508,10 +508,10 @@ $("body").on('click',"#cutdata",function()
 		let year = time.getFullYear(); // 年
 		let month = time.getMonth() + 1; // 月
 		let date = time.getDate(); // 日
-		$(".dels:checked").each(function()
+		$(".dels:checked").each(function(k,v)
 		{
 			length = length+$(this).parent().outerHeight();
-			arr.push(JSON.parse(localStorage['chats'])[$(this).attr('index')]);
+			arr.push(chats[$(".dels").index($(this))]);
 		})
 
 		let filename = prompt(`【截取存档】\n你一共选中了${$(".dels:checked").length}条数据\n长度大概在${length.toFixed(0)}左右\n请输入文件名：`);
@@ -521,8 +521,8 @@ $("body").on('click',"#cutdata",function()
 			json[0]['title'] = filename;
 			json[0]['nickname'] = '截取存档'+length.toFixed(0);
 			json[0]['date'] = `${year}-${month}-${date}`
-			json[1] = JSON.parse(JSON.stringify(arr));
-			download_txt(`${filename}-MoeTalk截取存档${year}_${month}_${date}-长度${length.toFixed(0)}.json`,JSON.stringify(json));
+			json[1] = arr;
+			download_txt(`${filename}-MoeTalk截取存档${year}_${month}_${date}-长度${length.toFixed(0)}.json`,JSON.stringify(json,null,4));
 		}
 	}
 	else
@@ -532,16 +532,16 @@ $("body").on('click',"#cutdata",function()
 });
 $("body").on('click',".operate",function()
 {
-	// if($('.operateTools').css('display') === 'none')
-	// {
-	// 	$('.operateTools').show()
-	// }
-	// else
-	// {
-	// 	$('.operateTools').hide()
-	// }
+	if($('.operateTools').css('display') === 'none')
+	{
+		$('.operateTools').show()
+	}
+	else
+	{
+		$('.operateTools').hide()
+	}
 	saveStorage('chats',[...chats,...otherChats],'local')
-	alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新\n若想使用存档功能请点击心形图标“❤”右边的→磁盘“🖬”图标\n※此按钮在“后台保存模式”中相当于一次手动保存')
+	//alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新\n若想使用存档功能请点击心形图标“❤”右边的→磁盘“🖬”图标\n※此按钮在“后台保存模式”中相当于一次手动保存')
 });
 
 //rgb(136, 204, 204)

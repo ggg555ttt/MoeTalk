@@ -4279,7 +4279,7 @@
 									children: (0, m.jsx)(X,
 									{
 										style:{fontSize: "1.1rem",color: "rgb(139, 187, 233)"},
-										children: mt_settings['后台保存'] ? '保存' : '操作'
+										children: '操作'
 									})
 								})
 							}), (0, m.jsx)(c.jl,
@@ -4342,6 +4342,7 @@
 							},
 							children: [(0, m.jsx)(c.jl,
 							{
+								hidden: !0,
 								style:{height: "auto","width": "auto"},
 								className: 'operate_back',
 								children: (0, m.jsx)(W,
@@ -4355,6 +4356,7 @@
 								})
 							}), (0, m.jsx)(c.jl,
 							{
+								hidden: !0,
 								style:{height: "auto","width": "auto"},
 								children: (0, m.jsx)(W,
 								{
@@ -4367,6 +4369,7 @@
 								})
 							}), (0, m.jsx)(c.jl,
 							{
+								hidden: !0,
 								style:{height: "auto","width": "auto"},
 								className: 'operate_copy',
 								children: (0, m.jsx)(W,
@@ -4380,6 +4383,7 @@
 								}),
 							}), (0, m.jsx)(c.jl,
 							{
+								hidden: !0,
 								style:{height: "auto","width": "auto"},
 								className: 'operate_paste',
 								children: (0, m.jsx)(W,

