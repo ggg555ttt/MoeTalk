@@ -107,7 +107,7 @@ if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选
 	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
 
 }
-
+if(window.location.href === 'http://moetalk.gitee.io/' || browser.isFirefox)mt_settings['禁止字体'] = true
 saveStorage('设置选项',mt_settings,'local')
 
 var mtlang = mt_settings['语言选项'];
@@ -1158,6 +1158,7 @@ function mt_emojis(S,mode)
 	}
 }
 var send = true;
+if(window.location.href === 'http://moetalk.gitee.io/')send = false;
 function moeLog(type,data,mode,indexs)
 {
 	moetalkStorage.getItem('moeLog', function(err, moeLog)

@@ -6,37 +6,42 @@
 <script src="./MoeScript/Script/localforage.min.js"></script>
 <!-- <script src="./MoeScript/Script/html2canvas.min.js"></script> -->
 <script>
-$.ajax({
-	url: './version.json',
-	type: 'GET',
-	dataType:"text",
-	cache: false, // 禁用缓存
-	success: function(text)
-	{
-		version = text.split(',')[0]
-		let rand = text.split(',')[1]
-		if(!localStorage['mt-version'] || localStorage['mt-version'] !== version || !localStorage['mt-rand'] || localStorage['mt-rand'] !== rand)
+function checkVer(e)
+{
+	if(e)return;
+	$.ajax({
+		url: './version.json',
+		type: 'GET',
+		dataType:"text",
+		cache: false, // 禁用缓存
+		success: function(text)
 		{
-			window.caches && caches.keys && caches.keys().then(function(keys)
+			version = text.split(',')[0]
+			let rand = text.split(',')[1]
+			if(!localStorage['mt-version'] || localStorage['mt-version'] !== version || !localStorage['mt-rand'] || localStorage['mt-rand'] !== rand)
 			{
-				let length = 0;
-				keys.forEach(function(key)
+				window.caches && caches.keys && caches.keys().then(function(keys)
 				{
-					caches.delete(key);
-					length=length+1
-					if(keys.length === length)
+					let length = 0;
+					keys.forEach(function(key)
 					{
-						delete localStorage['启动网址']
-						localStorage['mt-version'] = version
-						localStorage['mt-rand'] = rand
-						location.reload(true)
-					}
+						caches.delete(key);
+						length=length+1
+						if(keys.length === length)
+						{
+							delete localStorage['启动网址']
+							localStorage['mt-version'] = version
+							localStorage['mt-rand'] = rand
+							location.reload(true)
+						}
+					});
+					
 				});
-				
-			});
+			}
 		}
-	}
-});
+	});
+}
+checkVer(window.location.href === 'http://moetalk.gitee.io/')
 const os = (u = window.navigator.userAgent) => {
 	return {
 		// 不同浏览器及终端
@@ -212,7 +217,7 @@ if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) &&
 <p>另外相关使用建议也可以向我提交，感谢您的使用</p>
 <button><a href='./Setting.html' target='_blank' style="color: white;">点击进入设置页面</a></button>
 <p></p>
-<img style="width: 100%;height: auto;" id="help" src="./Images/UI/help.webp" onclick="document.documentElement.style.position = '';" />
+<img style="width: 100%;height: auto;" id="help" src="./Images/Ui/help.webp" onclick="document.documentElement.style.position = '';" />
 <p><a href="https://space.bilibili.com/13973390">B站主页</a></p>
 <p><a href="https://github.com/ggg555ttt/MoeTalk">项目地址（github）</a></p>
 <!-- <iframe id="iframe" src='./Setting.html' width="100%" height="100%"></iframe> -->

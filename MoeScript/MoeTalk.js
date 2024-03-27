@@ -124,8 +124,7 @@ function mt_height(num)
 	length = Number(length) + ((16.6 * num) * (Math.ceil(length/mt_settings['高度限制']) - 1));
 	return length.toFixed();
 }
-var mt_font = "<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>";
-if(!mt_settings['禁止字体'] && !browser.isFirefox)$("head").append(mt_font);//加载字体
+if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>");//加载字体
 $(function()
 {
 	if(MikuTalk)
