@@ -1317,7 +1317,7 @@ var mt_characters = {
             "pinyin": "feiniaomashi"
         },
         "charface": "飞鸟马时/CH0187/CH0187.7,飞鸟马时/CH0211/CH0211.7,飞鸟马时/NP0078/NP0078.7,飞鸟马时/NP0079/NP0079.12,飞鸟马时/NP0080/NP0080.7,飞鸟马时/NP0123/NP0123.7,飞鸟马时/飞鸟马时.24",
-        "customface": ""
+        "customface": "Velstadt-/时/时.36"
     },
     "乙花堇": {
         "school": "千年",
@@ -2777,7 +2777,7 @@ var mt_characters = {
     "勇美枫": {
         "school": "百鬼夜行",
         "club": "修行部",
-        "head": "Kaede_L2D,NP0054_Collection,Kaede_Collection,Kaede",
+        "head": "Kaede_L2D,NP0054_Collection,CH0256_Collection,Kaede_Collection,CH0256,Kaede",
         "name": {
             "zh_cn": "勇美 枫",
             "zh_tw": "勇美 楓",
@@ -2786,13 +2786,13 @@ var mt_characters = {
             "kr": "이사미 카에데",
             "pinyin": "yongmeifeng"
         },
-        "charface": "勇美枫/kaede/kaede.15,勇美枫/NP0054/NP0054.15,勇美枫/勇美枫.8",
+        "charface": "勇美枫/CH0256/CH0256.15,勇美枫/kaede/kaede.15,勇美枫/NP0054/NP0054.15,勇美枫/勇美枫.12",
         "customface": ""
     },
     "春日椿": {
         "school": "百鬼夜行",
         "club": "修行部",
-        "head": "Tsubaki_L2D,Tsubaki_Collection,Tsubaki",
+        "head": "CH0255_L2D,Tsubaki_L2D,CH0255_Collection,Tsubaki_Collection,CH0255,Tsubaki",
         "name": {
             "zh_cn": "春日 椿",
             "zh_tw": "春日 椿",
@@ -2801,7 +2801,7 @@ var mt_characters = {
             "kr": "카스가 츠바키",
             "pinyin": "chunrichun"
         },
-        "charface": "春日椿/Tsubaki/Tsubaki.10,春日椿/春日椿.4",
+        "charface": "春日椿/CH0255/CH0255.10,春日椿/Tsubaki/Tsubaki.10,春日椿/春日椿.8",
         "customface": ""
     },
     "水羽三森": {
@@ -2822,7 +2822,7 @@ var mt_characters = {
     "朝比奈菲娜": {
         "school": "百鬼夜行",
         "club": "庆典运营委员会",
-        "head": "Pina_L2D,Pina_Collection,Pina",
+        "head": "Pina_L2D,CH0257_Collection,Pina_Collection,CH0257,Pina",
         "name": {
             "zh_cn": "朝比奈 菲娜",
             "zh_tw": "朝比奈 菲娜",
@@ -2831,7 +2831,7 @@ var mt_characters = {
             "kr": "아사히나 피나",
             "pinyin": "zhaobinaifeina"
         },
-        "charface": "朝比奈菲娜/pina/pina.8,朝比奈菲娜/朝比奈菲娜.4",
+        "charface": "朝比奈菲娜/CH0257/CH0257.9,朝比奈菲娜/pina/pina.8,朝比奈菲娜/朝比奈菲娜.8",
         "customface": ""
     },
     "河和静子": {
@@ -2852,16 +2852,16 @@ var mt_characters = {
     "海夏": {
         "school": "百鬼夜行",
         "club": "庆典运营委员会",
-        "head": "CH0110_Collection,CH0110",
+        "head": "CH0110_L2D,CH0110_Collection,CH0110",
         "name": {
-            "zh_cn": "海夏",
-            "zh_tw": "海夏",
-            "jp": "ウミカ",
-            "en": "Umika",
-            "kr": "우미카",
+            "zh_cn": "里浜 海夏",
+            "zh_tw": "里浜 海夏",
+            "jp": "里浜 ウミカ",
+            "en": "Satohama Umika",
+            "kr": "사토하마 우미카",
             "pinyin": "haixia"
         },
-        "charface": "海夏/CH0110/CH0110.16,海夏/海夏.4",
+        "charface": "海夏/CH0110/CH0110.18,海夏/海夏.4",
         "customface": ""
     },
     "久田泉奈": {
@@ -2927,7 +2927,7 @@ var mt_characters = {
     "百鬼夜行学生": {
         "school": "百鬼夜行",
         "club": "所属不明-百鬼夜行",
-        "head": "NP0149_Collection,NP0150_Collection,NP0156_Collection,NP0149,NP0150,NP0156",
+        "head": "NP0149_Collection,NP0150_Collection,NP0156_Collection,NP0182_Collection,NP0149,NP0150,NP0156,NP0182",
         "name": {
             "zh_cn": "百鬼夜行学生",
             "zh_tw": "百鬼夜行學生",
@@ -2936,7 +2936,7 @@ var mt_characters = {
             "kr": "백귀야행-학생",
             "pinyin": "baiguiyexingxuesheng"
         },
-        "charface": "百鬼夜行学生/NP0149/NP0149.7,百鬼夜行学生/NP0150/NP0150.6,百鬼夜行学生/NP0156/NP0156.6,百鬼夜行学生/百鬼夜行学生.7",
+        "charface": "百鬼夜行学生/NP0149/NP0149.7,百鬼夜行学生/NP0150/NP0150.6,百鬼夜行学生/NP0156/NP0156.6,百鬼夜行学生/NP0182/NP0182.7,百鬼夜行学生/百鬼夜行学生.11",
         "customface": ""
     },
     "幻魉百物语": {
