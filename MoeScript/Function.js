@@ -1158,7 +1158,7 @@ function mt_emojis(S,mode)
 	}
 }
 var send = true;
-if(window.location.href === 'http://moetalk.gitee.io/')send = false;
+if(document.location.protocol === 'https:')send = false;
 function moeLog(type,data,mode,indexs)
 {
 	moetalkStorage.getItem('moeLog', function(err, moeLog)
