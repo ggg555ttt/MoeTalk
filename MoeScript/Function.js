@@ -878,8 +878,8 @@ function mt_title(moetalk,title,writer)
 		$('#mt_watermark').css('background-color',MikuTalk || mt_settings['风格样式'][1])
 	}
 }
-
-function mt_capture(清晰度,截屏,生成图片,时间,标题)//截屏功能
+//截屏功能
+function mt_capture(清晰度,截屏,生成图片,时间,标题)
 {
 	$('.dDBXxQ').show()
 	let json = []

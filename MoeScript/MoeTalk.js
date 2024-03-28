@@ -572,7 +572,7 @@ function makeMessage(type,data,chatIndex,mode)
 	let no = data.sCharacter.no
 	let index = data.sCharacter.index
 
-	let head = isfirst(chatIndex,chats)
+	let head = mode === 'screen' ? true : isfirst(chatIndex,chats)
 	let color = 'transparent';
 	let selected = $(`.dels:eq(${chatIndex})`).prop('checked') && mode !== 'add'
 	

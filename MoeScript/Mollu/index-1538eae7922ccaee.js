@@ -2235,9 +2235,9 @@
 													length = length+($$(`.消息:eq(${end})`).outerHeight()*S)
 													if(length > mt_settings['高度限制'] || $$(`.消息:eq(${end})>.dels`).css('background-color') === 'rgb(255, 0, 0)')//
 													{
-														if(json[end].isFirst === false && json[end].sCharacter.no != 0)
+														if(!json[end].isFirst && json[end].sCharacter.no != 0)
 														{
-															$$(`.消息:eq(${end})`)[0].outerHTML = makeMessage(json[end].type,json[end],end)
+															$$(`.消息:eq(${end})`)[0].outerHTML = makeMessage(json[end].type,json[end],end,'screen')
 															length = leng+($$(`.消息:eq(${end})`).outerHeight()*S)+(37*S)
 														}
 														else
