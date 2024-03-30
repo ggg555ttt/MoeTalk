@@ -77,16 +77,8 @@ if(!mt_settings['存储模式'])
 					if(v.replyDepth !== 0)otherChats.push(v)
 					else chats.push(v)
 				})
-				if(chats.length > 0)
-				{
-					$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
-					$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
-				}
+				$('#mt_watermark').click()//显示消息
 				$('.loading').wait(function(){$('.dDBXxQ').hide().next().remove()},".loading")//
-				chats.map(function(v,k)
-				{
-					$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
-				})
 				if(mt_settings['后台保存'])
 				{
 					window.onblur = function(){saveStorage('chats',[...chats,...otherChats],'local')}
@@ -145,12 +137,7 @@ $("body").on('click',function()
 
 	if($('.visible').length === 0)
 	{
-		if(元素尺寸)document.documentElement.style.fontSize = 元素尺寸
-		$('#mt_watermark').hide()
-		$('.消息').show()
-		$(".dels").show()
 		$('.addChat').prop('checked',false)
-		$(".Talk__CContainer-sc-1uzn66i-1").outerWidth('inherit')
 	}
 	if($('.消息').css('justify-content') === 'normal')
 	{
@@ -572,10 +559,11 @@ function makeMessage(type,data,chatIndex,mode)
 	let no = data.sCharacter.no
 	let index = data.sCharacter.index
 
+	let alt = mode === 'screen' ? 'alt="screen"' : ''
 	let head = mode === 'screen' ? true : isfirst(chatIndex,chats)
 	let color = 'transparent';
 	let selected = $(`.dels:eq(${chatIndex})`).prop('checked') && mode !== 'add'
-	
+
 	if(data.isFirst === true)color = 'blue';
 	if(data.is_breaking === true)color = 'red';
 	data.time = data.time ? data.time : ''
@@ -673,7 +661,7 @@ function makeMessage(type,data,chatIndex,mode)
 	{
 		复选框 = `<input type="checkbox" ${selected ? 'checked' : ''} class="dels" style="background-color: ${color};" data-html2canvas-ignore="true">`
 	}
-	return `<div class="消息" title='${color}' style="${head ? '' : 'padding: 0.5rem 1rem 0px;'}${selected ? 'background-color: rgb(202, 215, 221);' : ''}">
+	return `<div class="消息" title='${color}' style="${head ? '' : 'padding: 0.5rem 1rem 0px;'}${selected && mode !== 'screen' ? 'background-color: rgb(202, 215, 221);' : ''}" ${alt}>
 		${聊天}
 		${复选框}
 	</div>`

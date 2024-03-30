@@ -1994,12 +1994,14 @@
 						className: d ? "visible medium" : "medium",
 						onDoubleClick: function()
 						{
+							srceenMode()
 							D()
 						},
 						children: (0, m.jsxs)(ea.F0,
 						{
 							onDoubleClick: function(e)
 							{
+								srceenMode()
 								return e.stopPropagation(), !1
 							},
 							children: [(0, m.jsxs)(ea.h4,
@@ -2007,11 +2009,12 @@
 								children: [(0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
-									children: `${L.Z.download_to_image[g]}(${imageArr.length})`
+									children: `${$$('.dels:checked').length ? '区域截图' : L.Z.download_to_image[g]}(${imageArr.length})`
 								}), (0, m.jsx)(ea.ec,
 								{
 									onClick: function()
 									{
+										srceenMode()
 										D()
 									},
 									children: (0, m.jsx)(c.j4,
@@ -2164,12 +2167,17 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: ['图片长度约为',(0, m.jsx)("span",
+										children: ['已选中', (0, m.jsx)("span",
+										{
+											style:{color:'red'},
+											className:'bold',
+											children: $$('.dels:checked').length
+										}), '条消息，长度约为',(0, m.jsx)("span",
 										{
 											style:{color:'red'},
 											className:'bold',
 											children: mt_height(S)
-										}),`，将生成${Math.ceil(mt_height(S)/mt_settings['高度限制'])}张`,(0, m.jsx)("span",
+										}), `，将生成${Math.ceil(mt_height(S)/mt_settings['高度限制'])}张`,(0, m.jsx)("span",
 										{
 											id:'mt-image',
 											className:'bold',
@@ -2179,7 +2187,7 @@
 												fontSize:'1.1rem'
 											},
 											children:mt_settings['图片格式'].split('/')[1]
-										}),'图片']
+										}), '图片']
 									}), (0, m.jsx)("button",
 									{
 										style:
@@ -2208,6 +2216,7 @@
 											className: "bold",
 											onClick: function()
 											{
+												srceenMode()
 												D()
 											},
 											children: L.Z.cancel[g]
@@ -2229,27 +2238,37 @@
 												let leng = (16+(localStorage['watermark'] === 'false' ? 0 : 80))*S
 												let length = leng
 												let json = chats
-												
-												for(let end=0;end<$$(".消息").length;end++)
+												if($$(".dels:checked").length)//区域截图
 												{
-													length = length+($$(`.消息:eq(${end})`).outerHeight()*S)
-													if(length > mt_settings['高度限制'] || $$(`.消息:eq(${end})>.dels`).css('background-color') === 'rgb(255, 0, 0)')//
+													json = []
+													$$(".dels:checked").each(function(k,v)
+													{
+														json.push(chats[$$('.消息').index($$(this).parent())])
+													})
+												}
+												let 消息;
+												for(let end = 0;end < json.length;end++)
+												{
+													if($$(".dels:checked").length)消息 = $$(`.消息 :checked:eq(${end})`).parent()//区域截图
+													else 消息 = $$(`.消息:eq(${end})`)
+													length = length+(消息.outerHeight()*S)
+													if(length > mt_settings['高度限制'] || 消息.attr('title') === 'red')//
 													{
 														if(!json[end].isFirst && json[end].sCharacter.no != 0)
 														{
-															$$(`.消息:eq(${end})`)[0].outerHTML = makeMessage(json[end].type,json[end],end,'screen')
-															length = leng+($$(`.消息:eq(${end})`).outerHeight()*S)+(37*S)
+															length = leng+(消息.outerHeight()*S)+(37*S)
+															消息[0].outerHTML = makeMessage(json[end].type,json[end],end,'screen')
 														}
 														else
 														{
-															length = leng+($$(`.消息:eq(${end})`).outerHeight()*S)
+															length = leng+(消息.outerHeight()*S)
 														}
 														imageArr.push({start:start,end:end,index:imageArr.length+1})
 														start = end
 													}
-													if(end === $$(".消息").length-1)
+													if(end === json.length-1)
 													{
-														imageArr.push({start:start,end:$$(".消息").length,index:imageArr.length+1})
+														imageArr.push({start: start,end: json.length,index: imageArr.length+1})
 													}
 												}
 												if(zipDownImg && imageArr.length > 1)
@@ -3443,6 +3462,24 @@
 									{
 										click('#tool-image')
 										$$(".dels").hide()
+										if($$(".dels:checked").length)//区域截图
+										{
+											let json = []
+											let index;
+											$$('.消息').hide()
+											$$(".dels:checked").each(function(k,v)
+											{
+												$$(this).parent().show()
+												index = $$('.消息').index($$(this).parent())
+												json.push(chats[index])
+												if(isfirst(k,json))
+												{
+													$$('.消息')[index].outerHTML = makeMessage(json[k].type,json[k],index,'screen')
+												}
+											})
+											$$('.消息').css("background-color","")
+											$$('.消息').css('border-top','')
+										}
 										if(!元素尺寸)元素尺寸 = document.documentElement.style.fontSize
 										document.documentElement.style.fontSize = '16px'
 										mt_title()
@@ -4418,6 +4455,10 @@
 								ref: n,
 								children: [(0, m.jsx)('div',
 								{
+									onClick: function()
+									{
+										a((0, eo.U_)(chats))
+									},
 									id:"mt_watermark",
 									style:
 									{

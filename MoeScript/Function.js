@@ -881,7 +881,7 @@ function mt_title(moetalk,title,writer)
 //截屏功能
 function mt_capture(清晰度,截屏,生成图片,时间,标题)
 {
-	$('.dDBXxQ').show()
+	$('.dDBXxQ').show()//开始加载
 	let json = []
 	let filename = ''
 	let title = 标题 ? 标题 : mt_text.noTitle[mtlang]
@@ -901,10 +901,11 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)
 		json[1] = [...chats,...otherChats];
 		json = JSON.stringify(json)
 	}
-
-	$('.消息').show()
-	$('.消息').slice(0,imgArea.start).hide()
-	$('.消息').slice(imgArea.end,$('.消息').length).hide()
+	let 消息 = $('.消息');
+	if($$(".dels:checked").length)消息 = $$(`.消息 :checked`).parent()//区域截图
+	消息.show()
+	消息.slice(0,imgArea.start).hide()
+	消息.slice(imgArea.end,消息.length).hide()
 	if(MikuTalk && $(".Talk__CContainer-sc-1uzn66i-1").css('background-color') === 'rgba(0, 0, 0, 0)')
 	{
 		$(".Talk__CContainer-sc-1uzn66i-1").css('background-color',MikuTalk)
@@ -937,7 +938,7 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)
 			else
 			{
 				filename = `MoeTalk_${title}${imgArea.index === 1 ? '' : '_'+imgArea.index}_${height}`
-				$('.dDBXxQ').hide()
+				$('.dDBXxQ').hide()//结束加载
 			}
 
 			imgBaes64 = imgBaes64.replace(`data:${mt_settings['图片格式']};base64,`,'')
@@ -1192,4 +1193,25 @@ function moeLog(type,data,mode,indexs)
 		//console.log('1')
 		send = false;
 	});
+}
+function srceenMode()
+{
+	if($(".dels:checked").length)
+	{
+		$('.消息 :checked').parent().css("background-color","rgb(202,215,221)")
+		$(".消息 :checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
+	}
+	if(元素尺寸)document.documentElement.style.fontSize = 元素尺寸
+	$('#mt_watermark').hide()
+	$('.消息').show()
+	$(".dels").show()
+	$(".Talk__CContainer-sc-1uzn66i-1").outerWidth('inherit')
+	$('.消息[alt="screen"]').each(function(k,v)
+	{
+		k = $('.消息').index($(this))
+		if(!isfirst(k,chats))
+		{
+			$('.消息')[k].outerHTML = makeMessage(chats[k].type,chats[k],k)
+		}
+	})
 }
