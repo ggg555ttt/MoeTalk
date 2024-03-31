@@ -1196,11 +1196,6 @@ function moeLog(type,data,mode,indexs)
 }
 function srceenMode()
 {
-	if($(".dels:checked").length)
-	{
-		$('.消息 :checked').parent().css("background-color","rgb(202,215,221)")
-		$(".消息 :checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
-	}
 	if(元素尺寸)document.documentElement.style.fontSize = 元素尺寸
 	$('#mt_watermark').hide()
 	$('.消息').show()
@@ -1214,4 +1209,9 @@ function srceenMode()
 			$('.消息')[k].outerHTML = makeMessage(chats[k].type,chats[k],k)
 		}
 	})
+	if($(".dels:checked").length)
+	{
+		$('.dels:checked').parent().css("background-color","rgb(202,215,221)")
+		$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
+	}
 }

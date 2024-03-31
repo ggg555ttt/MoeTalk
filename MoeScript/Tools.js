@@ -39,6 +39,7 @@ const os = (u = window.navigator.userAgent) => {
 		})()
 	};
 };
+var browser = os();//获取浏览器信息
 $('body').on('click',"input",function()
 {
 	$("input[type='file']").val('')

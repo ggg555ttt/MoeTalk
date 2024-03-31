@@ -135,10 +135,7 @@ $("body").on('click',function()
 	$('#size').text(height+"\n"+localSize+"KB");
 	warning();
 
-	if($('.visible').length === 0)
-	{
-		$('.addChat').prop('checked',false)
-	}
+	if($('.visible').length === 0)$('.addChat').prop('checked',false)
 	if($('.消息').css('justify-content') === 'normal')
 	{
 		$("head").append('<link rel="stylesheet" href="./MoeScript/Style/style.css?2" data-n-g="">')

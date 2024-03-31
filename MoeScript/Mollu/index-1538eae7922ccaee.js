@@ -3460,7 +3460,6 @@
 									},
 									onClick: function()
 									{
-										click('#tool-image')
 										$$(".dels").hide()
 										if($$(".dels:checked").length)//区域截图
 										{
@@ -3479,10 +3478,13 @@
 											})
 											$$('.消息').css("background-color","")
 											$$('.消息').css('border-top','')
+											$$(".dels").hide()
 										}
 										if(!元素尺寸)元素尺寸 = document.documentElement.style.fontSize
 										document.documentElement.style.fontSize = '16px'
 										mt_title()
+										setTimeout(function(){click('#tool-image')},1)
+										
 									},
 									children: (0, m.jsx)(c.xL,
 									{
