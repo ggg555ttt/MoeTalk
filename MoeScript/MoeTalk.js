@@ -574,16 +574,18 @@ function makeMessage(type,data,chatIndex,mode)
 	{
 		if(type === 'image')
 		{
+			let width = ''
 			let maxwidth = mt_settings['图片比例'] || '90%'
-			if(data.content.indexOf("CharFace") > -1 && !data.file)
-			{
+			if(data.content.indexOf("Face") > -1 && !data.file)
+			{//如果是差分表情
+				width = 'width:400px;'
 				maxwidth = mt_settings['差分比例'] || '90%'
 			}
-			maxheight = `style="max-width:${maxwidth};"`
-			图片 = `<img ${maxheight} class="图片 编辑" src='${data.file || (data.content.indexOf("//") > -1 ? data.content : href+data.content)}'>`
+			maxwidth = `max-width:${maxwidth};`
+			图片 = `<img style="${width}${maxwidth};" class="图片 编辑" src='${data.file || (data.content.indexOf("//") > -1 ? data.content : href+data.content)}'>`
 		}
-		if(no != 0 && !data.isRight)//左侧对话
-		{
+		if(no != 0 && !data.isRight)
+		{//左侧对话
 			头像框 = `<div class="头像框" style="cursor: pointer; height: 100%;">${head ? `<img height="252" width="252" src="${loadhead(no,index)}" alt="${index}" class="头像">` : ''}</div>`
 			名称 = `${head ? `<span class="名称 bold">${data.name || loadname(no)}</span>` : ''}`
 			文本 = `<span class="${head ? '文本 左角' : '文本'} 编辑" style='${style}'>${data.content}</span>`
@@ -597,8 +599,8 @@ function makeMessage(type,data,chatIndex,mode)
 				</div>
 			</div>`
 		}
-		else//右侧或老师
-		{
+		else
+		{//右侧对话或主角发言
 			头像框 = `${no == 0 ? '' : `<div class="头像框" style="justify-content: flex-end; cursor: pointer; height: 100%;">${head ? `<img height="252" width="252" src="${loadhead(no,index)}" alt="${index}" class="头像">` : ''}</div>`}`
 			名称 = `${head && no != 0 ? `<span class="名称 bold">${data.name || loadname(no)}</span>` : ''}`
 			文本 = `<span style="background: rgb(74, 138, 202); border: 1px solid rgb(74, 138, 202);${style}" class="文本 编辑">${data.content}</span>${head || no == 0 ? '<div class="右角"></div>' : ''}`

@@ -1287,7 +1287,7 @@ var mt_characters = {
             "pinyin": "meigannilu"
         },
         "charface": "美甘尼禄/CH0101/CH0101.9,美甘尼禄/neru/neru.10,美甘尼禄/NP0088/NP0088.10,美甘尼禄/NP0089/NP0089.10,美甘尼禄/美甘尼禄.16",
-        "customface": ""
+        "customface": "Velstadt-/尼禄/尼禄.37"
     },
     "角楯花凛": {
         "school": "千年",
@@ -1617,7 +1617,7 @@ var mt_characters = {
             "pinyin": "zaolaiyouxiang"
         },
         "charface": "早濑优香/CH0184/CH0184.15,早濑优香/NP0109/NP0109.7,早濑优香/yuuka/yuuka.7,早濑优香/早濑优香.12",
-        "customface": "女仆优香/优香_体操服/优香_体操服.21,巴啦啦小凉蛋/优香/优香.19"
+        "customface": "女仆优香/优香_体操服/优香_体操服.21,女仆优香/优香_体操服_1/优香_体操服_1.53,巴啦啦小凉蛋/优香/优香.19"
     },
     "生盐诺亚": {
         "school": "千年",

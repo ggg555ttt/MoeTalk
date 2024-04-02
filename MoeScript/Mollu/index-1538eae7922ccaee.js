@@ -4044,11 +4044,11 @@
 						children: [(0, m.jsxs)(m.Fragment,
 						{
 							children: "chat" === n.type || "image" === n.type ? (0, m.jsxs)(m.Fragment,
-							{
+							{//整体图文消息
 								children: (0, m.jsxs)(e8,
-								{
+								{//整体图文消息
 									children: [!n.isRight ? (0, m.jsx)('div',
-									{
+									{//左侧头像框
 										className: '头像框',
 										style: n.sCharacter.no != 0 ? 
 										{
@@ -4056,8 +4056,7 @@
 											height: "100%"
 										} : {marginRight: '1.5rem'},
 										children: isFirst && n.sCharacter.no != 0 ? (0, m.jsx)(eN.NZ,
-										{
-											//左侧头像
+										{//左侧头像
 											height: 252,
 											width: 252,
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
@@ -4068,48 +4067,52 @@
 											alt: n.sCharacter.index
 										}) : ''
 									}) : '', (0, m.jsxs)(n.sCharacter.no == 0 ? "div" : eN.Xp,
-									{
+									{//图文消息
 										className: "对话",
 										style: n.isRight || n.sCharacter.no == 0? {alignItems: 'flex-end'} : {alignItems: 'flex-start'},
 										children: [isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
-										{
+										{//人物名称
 											className: "名称 bold",
 											children: n.name || loadname(n.sCharacter.no)
 										}) : '' , (0, m.jsxs)("div",
-										{
+										{//消息内容
 											style:
 											{
 												display:"flex",
 												justifyContent: n.isRight || n.sCharacter.no == 0 ? '' : 'flex-start'
 											},
 											children: [n.time ? (0, m.jsx)(eN.i9,
-											{
+											{//左侧时间戳
 												hidden: (!n.time || n.sCharacter.no != 0) && !n.isRight,
 												style: {textAlign: 'right'},
-												children: n.time//左侧时间戳
+												children: n.time
 											}) : '', "chat" === n.type ? [(0, m.jsx)(n.sCharacter.no == 0 ? eN.LP : !n.isRight && isFirst ? eN.zC : eN.Dt,
-											{
-												className: '编辑',//文本
+											{//文本消息
+												className: '编辑',
 												style: n.isRight ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
 												children: n.content
 											}), (n.isRight && isFirst) || n.sCharacter.no == 0 ? (0, m.jsx)(eN.CJ,{}) : '' ] : (0, m.jsx)(eN.tG,
-											{
-												className: '编辑',//图片
-												style:{"max-width":n.content.indexOf("CharFace") > -1 && !n.file ? mt_settings['差分比例'] : ""},//@差分表情宽高百分比
+											{//图片消息
+												className: '编辑',
+												style:
+												{
+													"width":n.content.indexOf("Face") > -1 && !n.file ? '400px' : "",
+													"max-width":n.content.indexOf("Face") > -1 && !n.file ? mt_settings['差分比例'] : ""
+												},//@差分表情宽高百分比
 												src: n.file || (n.content.indexOf("//") > -1 ? n.content : href+n.content),
 												onError: function(e)
 												{
 													e.currentTarget.src = href+'Images/Ui/error.webp';
 												},
 											}), n.time ? (0, m.jsx)(eN.i9,
-											{
+											{//右侧时间戳
 												hidden: !n.time || n.sCharacter.no == 0 || n.isRight,
 												style:{marginLeft:0},
-												children: n.time//右侧时间戳
+												children: n.time
 											}) : '']
 										})]
 									}), n.isRight && n.sCharacter.no != 0 ? (0, m.jsx)('div',
-									{
+									{//右侧头像框
 										className: '头像框',
 										style:
 										{
@@ -4118,10 +4121,10 @@
 											height: "100%"
 										},
 										children: isFirst && n.sCharacter.no != 0 ? (0, m.jsx)(eN.NZ,
-										{
+										{//右侧头像
 											height: 252,
 											width: 252,
-											src: loadhead(n.sCharacter.no,n.sCharacter.index),//#聊天记录头像
+											src: loadhead(n.sCharacter.no,n.sCharacter.index),
 											onError: function(e)
 											{
 												e.currentTarget.src = href+'Images/Ui/error.webp';
@@ -4131,10 +4134,10 @@
 									}) : '']
 								})
 							}) : "reply" === n.type ? [(0, m.jsx)(eN.xu,
-							{
-								children: (0, m.jsx)(ne,//编辑按钮
+							{//回复
+								children: (0, m.jsx)(ne,
 								{
-									className: '编辑',//回复
+									className: '编辑',
 									children: (0, m.jsx)(c.xL,{icon: ei.Yai}),
 									"data-html2canvas-ignore": "true"
 								})
@@ -4165,18 +4168,18 @@
 								})]
 							})] : "heart" === n.type ? [(0, m.jsx)(eN.xu,
 							{}),(0, m.jsx)(eW,
-							{
-								className: '编辑',//羁绊
+							{//羁绊
+								className: '编辑',
 								style: style,
 								character: loadname(n.sCharacter.no)
 							})] : "info" === n.type ? (0, m.jsx)(eN.vD,
-							{
-								className: '编辑',//旁白
+							{//旁白
+								className: '编辑',
 								style: style,
 								children: n.content
 							}) : (0, m.jsx)(m.Fragment,{})
 						}), h || (0, m.jsx)("input",
-						{
+						{//复选框
 							"data-html2canvas-ignore":"true",
 							style:{backgroundColor:n.is_breaking === true ? 'red' : n.isFirst === true ? 'blue' : 'transparent'},
 							type: "checkbox",

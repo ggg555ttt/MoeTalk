@@ -1039,7 +1039,7 @@ function mt_emojis(S,mode)
 	{
 		if(mt_settings['差分映射'][id] || mt_settings['差分映射'][id] == 0)
 		{
-			str = loadname(id)+'->'
+			str = '->'+loadname(id)
 			id = mt_settings['差分映射'][id]
 		}
 		if(!差分书签[id])//添加书签
@@ -1066,7 +1066,7 @@ function mt_emojis(S,mode)
 		}
 		if(!mt_characters[id])//人物不存在
 		{
-			表情类型 = `${str}${loadname(id)}(0暂无)`
+			表情类型 = `${loadname(id)}${str}(0暂无)`
 			表情页码 = '0 / 0'
 			S(!0)
 			return;
@@ -1101,19 +1101,19 @@ function mt_emojis(S,mode)
 
 			if(表情类型 === id)
 			{
-				表情类型 = `${str}${loadname(id)}(${maxNum}其他)`
+				表情类型 = `${loadname(id)}${str}(${maxNum}其他)`
 			}
 			else if(表情类型.indexOf('_修复') > -1)
 			{
-				表情类型 = `${str}${loadname(id)}(${maxNum}修复)`
+				表情类型 = `${loadname(id)}${str}(${maxNum}修复)`
 			}
 			else if(CustomFaceAuthor[cfarr[pageIdnex][0]])
 			{
-				表情类型 = `${str}${loadname(id)}(${maxNum}自制)`
+				表情类型 = `${loadname(id)}${str}(${maxNum}自制)`
 			}
 			else
 			{
-				表情类型 = `${str}${loadname(id)}(${maxNum})`
+				表情类型 = `${loadname(id)}${str}(${maxNum})`
 			}
 
 			自设差分[0] = mt_characters[id]['customface'] ? !0 : !1
@@ -1123,7 +1123,7 @@ function mt_emojis(S,mode)
 			saveStorage('差分书签',差分书签,'session')
 			return;
 		}
-		表情类型 = `${str}${loadname(id)}(0暂无)`
+		表情类型 = `${loadname(id)}${str}(0暂无)`
 		表情页码 = '0 / 0'
 		S(!0)
 		return;
