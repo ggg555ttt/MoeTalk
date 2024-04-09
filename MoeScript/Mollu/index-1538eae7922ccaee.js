@@ -330,7 +330,7 @@
 				o = t(9521),
 				i = t(6150),
 				c = t(1563),
-				a = t(8727),
+				HList = t(8727),
 				ico = t(9417),//#图标库
 				s = t(8586),
 				u = t(3380),
@@ -448,7 +448,7 @@
 							},
 							children: (0, m.jsx)(x,
 							{
-								children: (0, m.jsx)(a.Z,
+								children: (0, m.jsx)(HList.Z,
 								{
 									children: (0, m.jsx)(g,
 									{
@@ -607,7 +607,7 @@
 								return !(n.no === t.no && e === t.index)
 							})).length === r.length ? o((0, h.AU)(c)) : o((0, h.F5)(i))//#, t(null)
 						};
-					return (0, m.jsx)(a.Z,
+					return (0, m.jsx)(HList.Z,
 					{
 						children: (0, m.jsx)(k,
 						{
@@ -683,8 +683,7 @@
 					let headsize;
 					if(n.school[a] === '自定义')
 					{
-						if(n.club[a] === '自定义角色')headsize = mt_head[n.no] ? (mt_head[n.no].length/1024).toFixed(0)+'KB' : '-1KB'
-						else headsize = mt_shead[n.no] ? (mt_shead[n.no].length/1024).toFixed(0)+'KB' : '-1KB'
+						headsize = mt_head[n.no] ? (mt_head[n.no].length/1024).toFixed(0)+'KB' : '-1KB'
 					}
 					return (0, m.jsxs)(N,
 					{
@@ -724,7 +723,7 @@
 												{
 													className: "bold",
 													style:{color:'rgb(68, 72, 78)'},
-													children: n.name[a].replaceAll("-", " ")
+													children: mt_settings['人物改名'][n.no] || n.name[a].replaceAll("-", " ")
 												})
 											})
 										}), (0, m.jsx)(F,
@@ -744,7 +743,7 @@
 														icon: ei.Yai,
 														onClick: function()
 														{
-															mt_ChangeChar(n.no)
+															custom_char(n);
 														}
 													}), headsize]
 												})]
@@ -757,45 +756,14 @@
 								{
 									width: 252,
 									height: 252,
-									src: href+"Images/Ui/School/"+(!mt_schoolname[n.school['zh_cn']] ? n.club['zh_cn'] : mt_characters[n.no].school)+'.webp',//#学校图标
+									src: href+"Images/Ui/School/"+(!mt_schoolname[n.school['zh_cn']] ? n.club['zh_cn'] === '临时角色' ? n.club['zh_cn'] : n.school['zh_cn'] : mt_characters[n.no].school)+'.webp',//#学校图标
 									onError: function(e)
 									{
 										e.currentTarget.src = href+'Images/Ui/error.webp';
 									},
 									onClick: function()
 									{
-										if(n.club[a] === '自定义角色')
-										{
-											if(confirm(`角色名：${n.name[a].replaceAll("-", " ")}\nID：${n.no}\n确定要删除这名角色吗？\n删除后的角色可以从临时角色列表中找回`))
-											{
-												mt_schar[n.no] = mt_char[n.no]
-												mt_shead[n.no] = mt_head[n.no]
-												delete mt_char[n.no];
-												delete mt_head[n.no];
-
-												saveStorage('mt-char',mt_char,'local')
-												saveStorage('mt-head',mt_head,'local')
-												saveStorage('mt-char',mt_schar,'session')
-												saveStorage('mt-head',mt_shead,'session')
-												list()//更新列表
-											}
-										}
-										if(n.club[a] === '临时角色')
-										{
-											if(confirm(`角色名：${n.name[a].replaceAll("-", " ")}\nID：${n.no}\n确定将这名角色添加进自定义角色列表？`))
-											{
-												mt_char[n.no] = mt_schar[n.no]
-												mt_head[n.no] = mt_shead[n.no]
-												delete mt_schar[n.no];
-												delete mt_shead[n.no];
-												
-												saveStorage('mt-char',mt_char,'local')
-												saveStorage('mt-head',mt_head,'local')
-												saveStorage('mt-char',mt_schar,'session')
-												saveStorage('mt-head',mt_shead,'session')
-												list()//更新列表
-											}
-										}
+										if(n.school['zh_cn'] === '自定义' || n.club['zh_cn'] === '临时角色')removeChar(n);
 									},
 									alt: "school"
 								})]
@@ -951,7 +919,7 @@
 									onClick: function()
 									{
 										t()
-										club()//@
+										club(true)
 									},
 									children: (0, m.jsx)(U,
 									{})
@@ -1009,15 +977,18 @@
 									}), (0, m.jsx)('ul',
 									{
 										className: "mutliSelect",
-										children: [(0, m.jsx)('li',
+										children: [mt_clubs.map(function(v,k)
 										{
-											children: [(0, m.jsx)('input',
+											return (0, m.jsx)('li',
 											{
-												type: "checkbox",
-												className: "club",
-												school: "自定义",
-												value: "自定义角色"
-											}),`自定义角色`]//
+												children: [(0, m.jsx)('input',
+												{
+													type: "checkbox",
+													className: "club",
+													school: "自定义",
+													value: v
+												}),v]//
+											})
 										}), (0, m.jsx)('li',
 										{
 											children: [(0, m.jsx)('input',
@@ -1075,12 +1046,8 @@
 									{
 										//*储存分类和排序方式
 										mt_settings['排序方式'] = u
-										mt_settings['社团列表'] = {};
-										$$(".club:checked").each(function()
-										{
-											mt_settings['社团列表'][$$(this).attr('value')] = 'YES'
-										})
-										saveStorage('设置选项',mt_settings,'local')
+										if(saveClub)saveclub()
+										custom_chars(mt_char,mt_schar)
 										//*储存分类和排序方式
 										t(), a(
 										{
@@ -1382,68 +1349,14 @@
 						p = h[1],
 						g = (0, r.useRef)(null),
 						x = (0, r.useMemo)(function()
-						{
-							//*更新自定义角色的读取方式
-							let arr = JSON.parse(JSON.stringify(_.Z));
-							let carr = [];
-							$$.each(mt_char,function(k,v)
+						{//@新版角色列表读取
+							if(!mt_chars)return [];
+							let chars = []
+							chars = [...mt_schars,...mt_chars,..._.Z].filter(function(char)
 							{
-								if(v !== null)arr.unshift(
-								{
-									name:
-									{
-										zh_cn:v,zh_tw:v,en:v,jp:v,kr:v,pinyin:v
-									},
-									club:
-									{
-										zh_cn:'自定义角色',zh_tw:'自定义角色',en:'自定义角色',jp:'自定义角色',kr:'自定义角色',pinyin:'自定义角色'
-									},
-									school : 
-									{
-										zh_cn:'自定义',zh_tw:'自定义',en:'自定义',jp:'自定义',kr:'自定义',pinyin:'自定义'
-									},
-									no:k,
-									illust : 0,
-									profile : [k],
-									momotalk : true,
-									open : true
-								})
+								return mt_settings['社团列表'][char.club.id]
 							})
-							if(mt_settings['社团列表']['临时角色'] && mt_settings['社团列表']['临时角色'] === 'YES')
-							{
-								$$.each(mt_schar,function(k,v)
-								{
-									if(v !== null && !mt_char[k])arr.unshift(
-									{
-										name:
-										{
-											zh_cn:v,zh_tw:v,en:v,jp:v,kr:v,pinyin:v
-										},
-										club:
-										{
-											zh_cn:'临时角色',zh_tw:'临时角色',en:'临时角色',jp:'临时角色',kr:'临时角色',pinyin:'临时角色'
-										},
-										school : 
-										{
-											zh_cn:'自定义',zh_tw:'自定义',en:'自定义',jp:'自定义',kr:'自定义',pinyin:'自定义'
-										},
-										no:k,
-										illust : 0,
-										profile : ['session'],
-										momotalk : true,
-										open : true
-									})
-								})
-							}
-							
-							arr.map(function(v, k)
-							{
-								let club = v.school.zh_cn === '自定义' ? v.club.zh_cn : mt_characters[v.no].club
-								if(mt_settings['人物改名'][v.no])arr[k].name[mtlang] = mt_settings['人物改名'][v.no];//@改名
-								if(JSON.stringify(mt_settings['社团列表']) !== '{}' && !mt_settings['社团列表'][club])delete arr[k]
-							})
-							//*更新自定义角色的读取方式
-							return arr.filter(function(e)//#_.Z换为arr
+							return (chars.length < 1 ? [...mt_schars,...mt_chars,..._.Z] : chars).filter(function(e)
 							{
 								return null !== (0, u.oG)(e, c.text)
 							}).sort(function(e, n)
@@ -1617,12 +1530,11 @@
 						})
 					}),(0, m.jsx)(ea.Xf,
 					{
-						id : '容量警告',
-						className: "medium",
+						id: 'custom-char',
 						onDoubleClick: function()
 						{
-							$$('#容量警告').removeClass('visible')
-							强制保存 = []
+							char_info = []
+							$$('#custom-char').removeClass('visible')//S()
 						},
 						children: (0, m.jsxs)(ea.F0,
 						{
@@ -1634,23 +1546,222 @@
 							{
 								children: [(0, m.jsx)(ea.Dx,
 								{
-									className: "bold",
-									children: '容量警告'
+									className: "typeTitle bold"
 								}), (0, m.jsx)(ea.ec,
 								{
 									onClick: function()
 									{
-										$$('#容量警告').removeClass('visible')
-										强制保存 = []
+										char_info = []
+										$$('#custom-char').removeClass('visible')//S()
 									},
 									children: (0, m.jsx)(c.j4,{})
 								})]
+							}), (0, m.jsx)('h1',
+							{
+								style:{whiteSpace: 'pre'},
+								children: `学校：########\nID：########`
 							}), (0, m.jsxs)(ea.$0,
 							{
-								children: [(0, m.jsx)("p",
+								children: [(0, m.jsx)('div',
 								{
-									style:{whiteSpace: 'pre'},
-									children: ''
+									className: "edit_2",
+									children: [(0, m.jsx)('div',
+									{
+										className:"edit_4",
+										children:[(0, m.jsx)('div',
+										{
+											className:"edit_3_box1",
+											style:{border: 0},
+											children:(0, m.jsx)('div',
+											{
+												className:"edit_3_box2",
+												children:(0, m.jsx)('div',
+												{
+													className:"edit_3_box3",
+													children:[(0, m.jsx)('div',
+													{
+														className:"edit_3_box3_1",
+														children: (0, m.jsx)('input',
+														{
+															className:"edit_3_box3_1_1 charname bold",
+															onChange: function(e)
+															{
+																$$('.charname').val(e.currentTarget.value)
+															}
+														})
+													}),(0, m.jsx)('div',
+													{
+														className:"edit_3_box3_2",
+														children: (0, m.jsx)('div',
+														{
+															className:"edit_3_box3_2_1",
+															children: mt_text.name[mtlang]
+														})
+													})]
+												})
+											})
+										}), (0, m.jsx)('div',
+										{
+											className:"edit_3_box1",
+											style:{border: 0},
+											children:(0, m.jsx)('div',
+											{
+												className:"edit_3_box2",
+												children:(0, m.jsx)('div',
+												{
+													className:"edit_3_box3",
+													children:[(0, m.jsx)('div',
+													{
+														className:"edit_3_box3_1",
+														children: (0, m.jsx)('input',
+														{
+															className:"edit_3_box3_1_1 clubname bold",
+															onChange: function(e)
+															{
+																$$('.clubname').val(e.currentTarget.value)
+															}
+														})
+													}),(0, m.jsx)('div',
+													{
+														className:"edit_3_box3_2",
+														children: (0, m.jsx)('div',
+														{
+															className:"edit_3_box3_2_1",
+															children: mt_text.club[mtlang]
+														})
+													})]
+												})
+											})
+										}), (0, m.jsx)('div',
+										{
+											className: 'edithead',
+											style:
+											{
+												fontSize:'12px',
+												display: 'inline-grid',
+												whiteSpace: "nowrap",
+												justifyItems: 'center',
+												cursor: 'pointer'
+											},
+											children:['添加头像',(0, m.jsx)('img',
+											{
+												style:
+												{
+													width: '40px',
+													height: '40px'
+												},
+												src:href+'Images/Ui/School/临时角色.webp'
+											})],
+											onClick:function()
+											{
+												$$("#custom").attr('title','add').click()
+											}
+										})]
+									}), (0, m.jsx)('div',{
+										className:"edit_3_box3_2_1",
+										children: '分支头像：'
+									}),(0, m.jsx)(HList.Z,
+									{
+										children: (0, m.jsx)(k,
+										{
+											style:{padding:0},
+											className: 'heads'
+										})
+									})]
+								}), (0, m.jsx)('div',
+								{
+									className: "edit_2",
+									children: [(0, m.jsx)('div',
+									{
+										className:"edit_4 headinfo",
+										children:[(0, m.jsx)('div',
+										{
+											className:"edit_3_box1",
+											style:{border: 0},
+											children:(0, m.jsx)('div',
+											{
+												className:"edit_3_box2",
+												children:(0, m.jsx)('div',
+												{
+													className:"edit_3_box3",
+													children:[(0, m.jsx)('div',
+													{
+														className:"edit_3_box3_1",
+														children: (0, m.jsx)('input',
+														{
+															className:"edit_3_box3_1_1 bold headname",
+															placeholder: '默认',
+															onChange: function(e)
+															{
+																char_info.names[$$(".heads .selected").attr('title')] = e.currentTarget.value
+																$$('.headname').val(e.currentTarget.value)
+															}
+														})
+													}), (0, m.jsx)('div',
+													{
+														className:"edit_3_box3_2",
+														children: (0, m.jsx)('div',
+														{
+															className:"edit_3_box3_2_1",
+															children: '分支头像名称：'
+														})
+													})]
+												})
+											})
+										}), (0, m.jsx)('div',
+										{
+											className: 'edithead',
+											style:
+											{
+												fontSize:'12px',
+												display: 'inline-grid',
+												whiteSpace: "nowrap",
+												justifyItems: 'center',
+												cursor: 'pointer'
+											},
+											children:['删除头像',(0, m.jsx)('img',
+											{
+												style:
+												{
+													width: '40px',
+													height: '40px'
+												},
+												src:href+'Images/Ui/School/自定义.webp'
+											})],
+											onClick:function()
+											{
+												delete char_info.names[$$(".heads .selected").remove().attr('title')]
+												$$('.headinfo').hide()
+											}
+										}), (0, m.jsx)('div',
+										{
+											className: 'edithead',
+											style:
+											{
+												fontSize:'12px',
+												display: 'inline-grid',
+												whiteSpace: "nowrap",
+												justifyItems: 'center',
+												cursor: 'pointer'
+											},
+											children:['更改头像',(0, m.jsx)('img',
+											{
+												style:
+												{
+													width: '40px',
+													height: '40px'
+												},
+												src:href+'Images/Ui/edit.png'
+											})],
+											onClick:function()
+											{
+												$$("#custom").attr('title','edit').click()
+											}
+										})]
+									}), (0, m.jsx)('span',
+									{
+										children:'名称显示优先级：发言人名字 > 分支头像名字 > 角色名字'
+									})]
 								}), (0, m.jsxs)(ea.$_,
 								{
 									children: [(0, m.jsx)(ea.Lw,
@@ -1658,22 +1769,18 @@
 										className: "bold",
 										onClick: function()
 										{
-											$$('#容量警告').removeClass('visible')
-											if(强制保存[1] === 'mt-char')强制保存[0]['mt-head'] = '{}'
-											if(强制保存[1] === 'mt-head')强制保存[0]['mt-char'] = '{}'
-											强制保存 = []
+											char_info = []
+											$$('#custom-char').removeClass('visible')//S()
 										},
-										children: L.Z.cancel[u]
+										children: mt_text.cancel[mtlang]
 									}), (0, m.jsx)(ea.AZ,
 									{
-										className: "bold",
+										className: "bold confirm",
 										onClick: function()
 										{
-											$$('#容量警告').removeClass('visible')
-											强制保存[0][强制保存[1]] = 强制保存[2]
-											强制保存 = []
+											edit_char()
 										},
-										children: L.Z.confirm[u]
+										children: mt_text.confirm[mtlang]
 									})]
 								})]
 							})]
@@ -4073,7 +4180,7 @@
 										children: [isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{//人物名称
 											className: "名称 bold",
-											children: n.name || loadname(n.sCharacter.no)
+											children: n.name || loadname(n.sCharacter.no,n.sCharacter.index)
 										}) : '' , (0, m.jsxs)("div",
 										{//消息内容
 											style:
@@ -4171,7 +4278,7 @@
 							{//羁绊
 								className: '编辑',
 								style: style,
-								character: loadname(n.sCharacter.no)
+								character: loadname(n.sCharacter.no,n.sCharacter.index)
 							})] : "info" === n.type ? (0, m.jsx)(eN.vD,
 							{//旁白
 								className: '编辑',

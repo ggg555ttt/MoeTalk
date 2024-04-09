@@ -9332,7 +9332,8 @@
 								jp: mt_schoolname[v.school].jp ? mt_schoolname[v.school].jp : v.school,
 								en: mt_schoolname[v.school].en ? mt_schoolname[v.school].en : v.school,
 								kr: mt_schoolname[v.school].kr ? mt_schoolname[v.school].kr : v.school,
-								pinyin: mt_schoolname[v.school].pinyin ? mt_schoolname[v.school].pinyin : v.school
+								pinyin: mt_schoolname[v.school].pinyin ? mt_schoolname[v.school].pinyin : v.school,
+								id: v.school
 							},
 							club:{
 								zh_cn: mt_clubname[v.club].zh_cn ? mt_clubname[v.club].zh_cn : v.club,
@@ -9340,7 +9341,8 @@
 								jp: mt_clubname[v.club].jp ? mt_clubname[v.club].jp : v.club,
 								en: mt_clubname[v.club].en ? mt_clubname[v.club].en : v.club,
 								kr: mt_clubname[v.club].kr ? mt_clubname[v.club].kr : v.club,
-								pinyin: mt_clubname[v.club].pinyin ? mt_clubname[v.club].pinyin : v.club
+								pinyin: mt_clubname[v.club].pinyin ? mt_clubname[v.club].pinyin : v.club,
+								id: v.club
 							},
 							name:{
 								zh_cn: v.name.zh_cn ? v.name.zh_cn : k,

@@ -3,7 +3,7 @@ var mt_text = {
 		"kr": "이름",
 		"en": "Name",
 		"jp": "名前",
-		"zh_cn": "名字",
+		"zh_cn": "名称",
 		"zh_tw": "名稱"
 	},
 	"club": {

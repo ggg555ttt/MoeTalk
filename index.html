@@ -20,6 +20,7 @@ function checkVer(e)
 			let rand = text.split(',')[1]
 			if(!localStorage['mt-version'] || localStorage['mt-version'] !== version || !localStorage['mt-rand'] || localStorage['mt-rand'] !== rand)
 			{
+				localStorage['mt-version'] = version
 				window.caches && caches.keys && caches.keys().then(function(keys)
 				{
 					let length = 0;

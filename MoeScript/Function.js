@@ -23,6 +23,13 @@ if(window.location.href.indexOf('file:///') === 0)
 /*预定义区*/
 var mt_char = {}
 var mt_head = {}
+var mt_chars = false
+var mt_schars = false
+
+var char_info = {}
+
+var saveClub = true;
+var mt_clubs = []
 const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});
 
 if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';
@@ -157,13 +164,13 @@ function loadhead(id,img)
 		return `${href}Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`;
 	}
 	//自定义头像
-	if(mt_head[id])
+	if(mt_head[img])
 	{
-		return mt_head[id]
+		return mt_head[img]
 	}
-	if(mt_shead[id])
+	if(mt_shead[img])
 	{
-		return mt_shead[id]
+		return mt_shead[img]
 	}
 	if(closure_char[id])return `${href}Images/ClosureTalk/ba/characters/${img}.webp`;//closure头像
 	if(mollu_char[id])return `${href}Images/MolluChar/${id}.${img}.webp`;//旧版头像
@@ -182,7 +189,7 @@ function loadhead(id,img)
 	}
 	return `${href}Images/Ui/error.webp`;//默认头像
 }
-function loadname(id)
+function loadname(id,index)
 {
 	let you = {kr: "주인공",en: "Lead",jp: "主役",zh_cn: "主角",zh_tw: "主角"}
 	let name = toString(id)
@@ -192,17 +199,21 @@ function loadname(id)
 	{
 		name = mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id
 	}
-	if(mt_settings['人物改名'][id])name = mt_settings['人物改名'][id];//@改名
 	if(name.split(" ")[1])name = name.split(" ")[1]
 	name = name.replaceAll("-", " ")
-	
+
+	if(mt_settings['人物改名'][id])name = mt_settings['人物改名'][id];//@改名
+	if(mt_settings['人物改名'][index])name = mt_settings['人物改名'][index];//@改名
+
 	if(mt_schar[id])
 	{
-		name = mt_schar[id]
+		name = mt_schar[id].name
+		if(mt_schar[id].names && mt_schar[id].names[index])name = mt_schar[id].names[index]
 	}
 	if(mt_char[id])
 	{
-		name = mt_char[id]
+		name = mt_char[id].name
+		if(mt_char[id].names && mt_char[id].names[index])name = mt_char[id].names[index]
 	}
 
 	if(id == 0)name = you[mtlang]
@@ -299,11 +310,29 @@ function compress(base64Img,type = 'head',mode = 'add')
 		}
 		else
 		{
-			$('#uphead').hide().next().hide()
-			mt_char[imgindex] = $("#cusname").text()
-			saveStorage('mt-char',mt_char,'local')
-			savehead(imgindex,newBase64)
-			list()//更新列表
+			$('.dDBXxQ').hide()
+			if(type === 'edit')
+			{
+				$(".heads .selected").attr('src',newBase64)
+			}
+			else
+			{
+				let attr = 'width="252" height="252" decoding="async" data-nimg="1" loading="lazy" style="color: transparent; margin-right: 0.5rem;" class="common__Profile-sc-1ojome3-6 common__ProfileClick-sc-1ojome3-7 eLaCqa fuyFOl"'
+				let index = $('.heads img:eq(-1)').attr('title')
+				if(index)
+				{
+					index = parseInt(index.replace(char_info.no,'').replace('_',''))
+					if(isNaN(index))index = `${char_info.no}_0`
+					else index = `${char_info.no}_${index+1}`
+				}
+				else
+				{
+					index = char_info.no
+				}
+				$('.heads').append(`<img src="${newBase64}" title="${index}" ${attr}>`)
+				$('#custom-char .confirm').removeAttr('disabled')
+
+			}
 		}
 	}
 }
@@ -442,12 +471,23 @@ function club(clear = false)
 		})
 	}
 }
+function saveclub()
+{
+	mt_settings['社团列表'] = {};
+	$$(".club:checked").each(function()
+	{
+		mt_settings['社团列表'][$$(this).attr('value')] = 'YES'
+	})
+	saveStorage('设置选项',mt_settings,'local')
+}
 function list()
 {
-	club()
+	saveClub = false;
+	custom_chars()
 	$('.eIEKpg:eq(0)').click();//更新列表
 	setTimeout(function(){selectClick(37)})
 	setTimeout(function(){selectClick(39)})
+	saveClub = true;
 }
 function loaddata(json,mode,ARR = '')//识别存档
 {
@@ -499,7 +539,8 @@ function loaddata(json,mode,ARR = '')//识别存档
 		{
 			if(v['char_id'].split('-')[1] !== 'MT')
 			{
-				custom_char[v.char_id] = v.name
+				custom_char[v.char_id] = {}
+				custom_char[v.char_id].name = v.name
 				custom_head[v.char_id] = v.img
 			}
 		})
@@ -690,17 +731,17 @@ function loaddata(json,mode,ARR = '')//识别存档
 	{
 		mt_char = {...mt_char,...custom_char}
 		mt_head = {...mt_head,...custom_head}
+		list()//更新列表
 		saveStorage('mt-char',mt_char,'local')
 		saveStorage('mt-head',mt_head,'local')
-		list()//更新列表
 	}
 	else
 	{
 		mt_schar = {...mt_schar,...custom_char}
 		mt_shead = {...mt_shead,...custom_head}
+		list()//更新列表
 		saveStorage('mt-char',mt_schar,'session')
 		saveStorage('mt-head',mt_shead,'session')
-		list()//更新列表
 	}
 	if(json[0]['选择角色'] && mode !== 'play')
 	{
@@ -846,7 +887,7 @@ function MoeToClosure()//Moe转Closure
 	{
 		custom_chars[k] = {}
 		custom_chars[k]['img'] = mt_head[k];
-		custom_chars[k]['name'] = v;
+		custom_chars[k]['name'] = v.name;
 	})
 	$.each(custom_chars,function(k,v)
 	{
@@ -967,7 +1008,7 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)
 function toString(val)
 {
 	if(!val)return ''
-	else return val.toString()
+	else return val.toString().trim()
 }
 function isTrue(val)
 {
@@ -1213,5 +1254,235 @@ function srceenMode()
 	{
 		$('.dels:checked').parent().css("background-color","rgb(202,215,221)")
 		$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
+	}
+}
+function test(str)
+{
+	return {zh_cn:str,zh_tw:str,en:str,jp:str,kr:str,pinyin:str,id:str}
+}
+function custom_chars()
+{
+	mt_chars = []
+	mt_schars = []
+	let club = {}
+	let char = {}
+	let schar = {}
+	for (let key in mt_char)
+	{
+		if(!mt_char[key].name)
+		{
+			char[key] = {}
+			char[key].name = mt_char[key];
+		}
+		else
+		{
+			char[key] = mt_char[key]
+		}
+		if(!char[key].club)char[key].club = '自定义角色'
+		mt_chars.push({
+			no: key,
+			name: test(char[key].name),
+			club: test('#'+char[key].club),
+			school: char[key].school ? test(char[key].school) : test('自定义'),
+			profile: char[key].head ? char[key].head : [key],
+			illust: 0,//#改为默认
+			open: !0,//#改为默认
+			momotalk: !0//#改为默认
+		})
+		if(char[key].club && char[key].club !== '#自定义角色')club['#'+char[key].club] = char[key].club
+		mt_char[key] = char[key]
+	}
+	mt_clubs = Object.keys(club)
+	if(mt_settings['社团列表']['临时角色'])
+	{
+		for (let key in mt_schar)
+		{
+			if(!mt_schar[key].name)
+			{
+				schar[key] = {}
+				schar[key].name = mt_schar[key];
+			}
+			else
+			{
+				schar[key] = mt_schar[key]
+			}
+			if(!mt_char[key])
+			{
+				mt_schars.push({
+					no: key,
+					name: test(schar[key].name),
+					club: test('临时角色'),
+					school: schar[key].school ? test(schar[key].school) : test('自定义角色'),
+					profile: schar[key].head ? schar[key].head : [key],
+					illust: 0,//#改为默认
+					open: !0,//#改为默认
+					momotalk: !0//#改为默认
+				})
+			}
+			mt_schar[key] = schar[key]
+		}
+	}
+}
+function custom_char(info)
+{
+	club(true)
+	char_info = {...info,names: {}}
+	let names = mt_settings.人物改名;
+	$('#custom-char .typeTitle').text('修改角色')
+	$('#custom-char .confirm').removeAttr('disabled')
+	$('#custom-char h1').text(`${mt_text.school[mtlang]}：${char_info.make ? '自定义' : char_info.school[mtlang]}\nID：${char_info.no}`)
+	$('.charname').val(toString(names[char_info.no])).attr('placeholder',`${char_info.make ? '' : char_info.name[mtlang]}`)
+	$('.clubname').val(`${char_info.make ? '自定义角色' : char_info.club[mtlang].replace('#','')}`).removeAttr('disabled')
+	if(mt_char[char_info.no])
+	{
+		if(!mt_char[char_info.no].club)$('.clubname').val('自定义角色')
+		names = mt_char[char_info.no].names ? mt_char[char_info.no].names : {}
+	}
+	else
+	{
+		if(!char_info.make)$('.clubname').attr('disabled','disabled')
+		else
+		{
+			$('#custom-char .typeTitle').text('创建角色')
+			$('#custom-char .confirm').attr('disabled','disabled')
+		}
+	}
+	if(char_info.club && char_info.club.id === '临时角色')
+	{
+		names = mt_schar[char_info.no].names ? mt_schar[char_info.no].names : {}
+		$('#custom-char .typeTitle').text('临时角色（无法修改）')
+		$('#custom-char .confirm').attr('disabled','disabled')
+	}
+	if(char_info.school && char_info.school[mtlang] !== '自定义')$('.edithead').hide()
+	else $('.edithead').show()
+
+	let length = char_info.make ? 0 : char_info.profile.length
+	let attr = 'width="252" height="252" decoding="async" data-nimg="1" loading="lazy" style="color: transparent; margin-right: 0.5rem;" class="common__Profile-sc-1ojome3-6 common__ProfileClick-sc-1ojome3-7 eLaCqa fuyFOl"'
+	$('.heads img').remove()
+	for(let i = 0; i < length; i++)
+	{
+		if(names[char_info.profile[i]])char_info.names[char_info.profile[i]] = names[char_info.profile[i]]
+		$('.heads').append(`<img src="${loadhead(char_info.no,char_info.profile[i])}" title="${char_info.profile[i]}" ${attr}>`)
+	}
+
+	if(char_info.selected || char_info.selected === 0)
+	{
+		let name = char_info.names[char_info.profile[char_info.selected]]
+		$(`.heads img:eq(${char_info.selected})`).addClass('selected')
+		$('.headinfo').show()
+		$('.headname').val(toString(name))
+	}
+	else
+	{
+		$('.headinfo').hide()
+	}
+	$('#custom-char').addClass('visible')
+}
+function edit_char()
+{
+	let name = toString($('.charname').val().trim() ? $('.charname').val().trim() : $('.charname').attr('placeholder'))
+	let club = toString($('.clubname').val().trim()).replace('#','')
+	let id = char_info.no
+	let index;
+
+	if(mt_char[id] || char_info.make)
+	{
+		if(!mt_char[id])mt_char[id] = {}
+		if(!name && char_info.make)name = 'NAMELOSS'
+		if(name)mt_char[id].name = name
+		if(!club)club = '自定义角色'
+	
+		mt_char[id].club = club
+		mt_char[id].head = []
+		mt_char[id].names = {}
+	}
+	else
+	{
+		if(name === $('.charname').attr('placeholder'))name = ''
+		mt_settings.人物改名[id] = name
+		if(!mt_settings.人物改名[id])delete mt_settings.人物改名[id]
+	}
+	if(!char_info.profile)char_info.profile = []
+	let length = char_info.profile.length
+	for(let i = 0;i < length;i++)
+	{
+		delete mt_head[char_info.profile[i]]
+	}
+	$('.heads img').each(function()
+	{
+		index = $(this).attr('title')
+		if(mt_char[id])
+		{
+			mt_char[id].head.push(index)
+			mt_head[index] = $(this).attr('src')
+			if(index !== char_info.no)mt_char[id].names[index] = toString(char_info.names[index])
+		}
+		else
+		{
+			mt_settings.人物改名[index] = toString(char_info.names[index])
+			if(!mt_settings.人物改名[index])delete mt_settings.人物改名[index]
+		}
+	})
+	saveStorage('mt-char',mt_char,'local')
+	saveStorage('mt-head',mt_head,'local')
+	saveStorage('设置选项',mt_settings,'local')
+	char_info = []
+	$('#custom-char').removeClass('visible')//S()
+	list()
+}
+$.each(mt_char,function(k,v)
+{
+	mt_char[k].club = '自定义角色'
+})
+
+function removeChar(n)
+{
+	club(true)
+	if(n.club.zh_cn === '临时角色')
+	{
+		if(confirm(`角色名：${mt_schar[n.no].name.replaceAll("-", " ")}\nID：${n.no}\n确定将这名角色添加进自定义角色列表？`))
+		{
+			mt_char[n.no] = mt_schar[n.no]
+			mt_head[n.no] = mt_shead[n.no]
+			mt_char[n.no].club = n.school.zh_cn
+			mt_char[n.no].school = '自定义'
+			let length = mt_schar[n.no].head ? mt_schar[n.no].head.length : 0
+			for(let i = 0;i < length;i++)
+			{
+				mt_head[mt_schar[n.no].head[i]] = mt_shead[mt_schar[n.no].head[i]]
+				delete mt_shead[mt_schar[n.no].head[i]];
+			}
+			delete mt_schar[n.no];
+			delete mt_shead[n.no];
+			saveStorage('mt-char',mt_char,'local')
+			saveStorage('mt-head',mt_head,'local')
+			saveStorage('mt-char',mt_schar,'session')
+			saveStorage('mt-head',mt_shead,'session')
+			list()//更新列表
+		}
+	}
+	if(n.school.zh_cn === '自定义')
+	{
+		if(confirm(`角色名：${mt_char[n.no].name.replaceAll("-", " ")}\nID：${n.no}\n确定要删除这名角色吗？\n删除后的角色可以从临时角色列表中找回`))
+		{
+			mt_schar[n.no] = mt_char[n.no]
+			mt_shead[n.no] = mt_head[n.no]
+			mt_schar[n.no].club = '临时角色'
+			mt_schar[n.no].school = n.club.zh_cn.replace('#','')
+			let length = mt_char[n.no].head ? mt_char[n.no].head.length : 0
+			for(let i = 0;i < length;i++)
+			{
+				mt_shead[mt_char[n.no].head[i]] = mt_head[mt_char[n.no].head[i]]
+				delete mt_head[mt_char[n.no].head[i]];
+			}
+			delete mt_char[n.no];
+			delete mt_head[n.no];
+
+			saveStorage('mt-char',mt_char,'local')
+			saveStorage('mt-head',mt_head,'local')
+			saveStorage('mt-char',mt_schar,'session')
+			saveStorage('mt-head',mt_shead,'session')
+			list()//更新列表
+		}
 	}
 }

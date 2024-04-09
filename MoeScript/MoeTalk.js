@@ -24,7 +24,7 @@ nowChapter[1].chapter = []
 var 元素尺寸;
 if(!mt_settings['存储模式'])
 {
-	$('.dDBXxQ').wait(function(){$('.dDBXxQ').show().after('<div class="loading"><div/>')},".dDBXxQ")//
+	$('.dDBXxQ').wait(function(){$('.dDBXxQ').show().after('<div class="loading"><div/>')},".dDBXxQ")//开始加载
 	moetalkStorage.getItem('mt-char', function(err, char)
 	{
 		moetalkStorage.getItem('mt-head', function(err, head)
@@ -69,16 +69,18 @@ if(!mt_settings['存储模式'])
 				if(typeof data === 'string')data = JSON.parse(data)
 				mt_char = char
 				mt_head = head
+				
 				list()
 				chats = []
 				otherChats = []
-				data.map(function(v,k)
+				let length = data.length;
+				for(let i = 0;i < length;i++)
 				{
-					if(v.replyDepth !== 0)otherChats.push(v)
-					else chats.push(v)
-				})
+					if(data[i].replyDepth !== 0)otherChats.push(data[i])
+					else chats.push(data[i])
+				}
 				$('#mt_watermark').click()//显示消息
-				$('.loading').wait(function(){$('.dDBXxQ').hide().next().remove()},".loading")//
+				$('.loading').wait(function(){$('.dDBXxQ').hide().next().remove()},".loading")//停止加载
 				if(mt_settings['后台保存'])
 				{
 					window.onblur = function(){saveStorage('chats',[...chats,...otherChats],'local')}
@@ -200,65 +202,23 @@ $('body').on('click',"#readme",function()
 $("body").append("<input id='custom' hidden type='file' accept='image/*'>");//添加上传标签
 $('body').on('click',"#makecus",function()
 {
-	let cus = prompt("请输入角色姓名，创建成功后自动更新列表\n"+
-		"如果未弹出文件上传界面，请点击最上方的【傳】字按钮");
-
-	if(cus != null && cus.trim() != '')
-	{
-		cus = cus.trim();
-		imgindex = 'custom-'+getNowDate()
-		
-		$('#uphead').show().next().show()
-		$("#cusname").text(cus);
-		$("#custom").click();
+	let info = {
+		no: 'custom-'+getNowDate(),
+		make: !0
 	}
+	custom_char(info)
 })
-$('body').on('click',"#uphead",function()//上传头像
-{
-	$(this).hide().next().hide()
-	$("#custom").click();
-})
-function mt_ChangeChar(id)
-{
-	if(mt_char[id])
-	{
-		let cname = prompt(`自定义角色ID：${id}\n若不想上传头像那么则只修改角色名\n当前角色名为：`,mt_char[id]);
-		if(cname != null && cname.trim() != '')
-		{
-			cname = cname.trim();
-			mt_char[id] = cname;
-			imgindex = id;
-			saveStorage('mt-char',mt_char,'local')//保存名字
-
-			$('#uphead').show().next().show()
-			$("#cusname").text(cname);
-			$("#custom").click();
-			list()//更新列表
-			refreshMessage(chats)//刷新mmt
-		}
-	}
-	if(mt_characters[id])
-	{
-		let name = prompt(`角色ID：${id}\n原名：${mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id}\n你想改为什么名字？\n(点击取消或为空则使用原名)`,mt_settings['人物改名'][id] ? mt_settings['人物改名'][id] : "");
-		if(name != null && name.trim() != '')mt_settings['人物改名'][id] = name
-		else mt_settings['人物改名'][id] ? delete mt_settings['人物改名'][id] : ''
-		saveStorage('设置选项',mt_settings,'local')
-		list()//更新列表
-		refreshMessage(chats)//刷新mmt
-	}
-}
 //储存头像
 $("body").on('change','#custom',function()
 {
+	$('.dDBXxQ').show()
 	//文件改变时,获取文件,并转化为base64字符串
-	var file = this.files[0]
-	$(this).val('')
-	var ready = new FileReader()
-	ready.readAsDataURL(file);
+	let ready = new FileReader()
+	ready.readAsDataURL(this.files[0]);
+	let type = $(this).val('').attr('title')
 	ready.onload = function(e)
 	{
-		var base64Img = e.target.result;
-		compress(base64Img)
+		compress(e.target.result,type)
 	}
 })
 
@@ -587,7 +547,7 @@ function makeMessage(type,data,chatIndex,mode)
 		if(no != 0 && !data.isRight)
 		{//左侧对话
 			头像框 = `<div class="头像框" style="cursor: pointer; height: 100%;">${head ? `<img height="252" width="252" src="${loadhead(no,index)}" alt="${index}" class="头像">` : ''}</div>`
-			名称 = `${head ? `<span class="名称 bold">${data.name || loadname(no)}</span>` : ''}`
+			名称 = `${head ? `<span class="名称 bold">${data.name || loadname(no,index)}</span>` : ''}`
 			文本 = `<span class="${head ? '文本 左角' : '文本'} 编辑" style='${style}'>${data.content}</span>`
 			对话 = 
 			`${头像框}
@@ -602,7 +562,7 @@ function makeMessage(type,data,chatIndex,mode)
 		else
 		{//右侧对话或主角发言
 			头像框 = `${no == 0 ? '' : `<div class="头像框" style="justify-content: flex-end; cursor: pointer; height: 100%;">${head ? `<img height="252" width="252" src="${loadhead(no,index)}" alt="${index}" class="头像">` : ''}</div>`}`
-			名称 = `${head && no != 0 ? `<span class="名称 bold">${data.name || loadname(no)}</span>` : ''}`
+			名称 = `${head && no != 0 ? `<span class="名称 bold">${data.name || loadname(no,index)}</span>` : ''}`
 			文本 = `<span style="background: rgb(74, 138, 202); border: 1px solid rgb(74, 138, 202);${style}" class="文本 编辑">${data.content}</span>${head || no == 0 ? '<div class="右角"></div>' : ''}`
 			对话 = 
 			`${no == 0 ? '<div class="头像框" style="margin-right: 1.5rem;"></div>' : ''}
@@ -628,7 +588,7 @@ function makeMessage(type,data,chatIndex,mode)
 				<span class="bold">${mt_text['relationship_event'][mtlang]}</span>
 			</div>
 			<hr class="横线">
-			<button class="羁绊按钮 编辑" style='${style}'>${data.name || loadname(no)}${mt_text['go_relationship_event'][mtlang]}</button>
+			<button class="羁绊按钮 编辑" style='${style}'>${data.name || loadname(no,index)}${mt_text['go_relationship_event'][mtlang]}</button>
 		</div>`
 	}
 	if(type === 'info')
@@ -842,7 +802,7 @@ $("body").on('click',".编辑",function()
 		$('.isFirst').show().prop('checked',chat.isFirst).next().show()
 		$('.is_breaking').show().prop('checked',chat.is_breaking).next().show()
 
-		$('.name').val(chat.name).attr('placeholder',loadname(chat.sCharacter.no))
+		$('.name').val(chat.name).attr('placeholder',loadname(chat.sCharacter.no,chat.sCharacter.index))
 		$('.time').val(chat.time).attr('placeholder','支持换行').innerHeight($('.time')[0].scrollHeight)
 		$('.content').val(chat.content).attr('placeholder','').innerHeight($('.content')[0].scrollHeight)
 
@@ -936,7 +896,7 @@ $("body").on('click',".fzOyMd",function()
 	$('.editMessage .头像').attr('alt',no)
 	$('.editMessage .头像').attr('title',index)
 	$('.editMessage .头像').attr('src',loadhead(no,index))
-	$('.name').attr('placeholder',loadname(no))
+	$('.name').attr('placeholder',loadname(no,index))
 });
 function replyDepth(str)
 {
@@ -995,4 +955,23 @@ $("body").on('click',".replyHome",function()
 	{
 		$(`.跳转:contains("${replyButton}")`)[0].scrollIntoView({block:'center',behavior:"smooth"})
 	}, 100)
+});
+$("body").on('click',".heads img",function()
+{
+	let index = $(this).attr('title')
+	$(".heads img").removeClass('selected')
+	$(this).addClass('selected')
+	$('.headinfo').show()
+	
+	$('.headname').val(toString(char_info.names[index])).removeAttr('disabled')
+	if(index === char_info.no)
+	{
+		$('.headname').val(char_info.make ? '' : mt_char[index] ? mt_char[index].name : mt_schar[index].name).attr('disabled','disabled')
+		$('.edithead:eq(1)').hide()
+	}
+	else
+	{
+		if(mt_char[char_info.no] || char_info.make)$('.edithead:eq(1)').show()
+	}
+	//custom_char()
 });
