@@ -6,21 +6,19 @@ var chatIndex = -1//消息索引
 var operate = false
 var copydata;
 
-var imageArr = [];
-var imageArrL = 0
-var imageZip = null;
-var replyDepths = [0];
+var imageArr = [];//截图分段列表
+var imageArrL = 0//截图分段数量
+var imageZip = null;//压缩文件
+var replyDepths = [0];//选择肢总集
 
-var otherChats = []
-var chats = []
+var otherChats = []//其他分支内容
+var chats = []//当前分支内容
+
+var LibraryURL = 'Data/Library'//图书馆地址
+var directory = []//目录
+var nowChapter = ['',{chapter:[]}]//当前章节
+
 var winHeight = window.innerHeight
-
-var LibraryURL = 'Data/Library'
-var directory = []
-var nowChapter = []
-nowChapter[0] = ''
-nowChapter[1] = {}
-nowChapter[1].chapter = []
 var 元素尺寸;
 if(!mt_settings['存储模式'])
 {
@@ -406,12 +404,6 @@ $('body').on('click',"#close",function()
 $("body").on('click',".dropdown button",function()
 {
 	$(this).next().slideToggle('fast');
-});
-
-$(document).bind('click', function(e)
-{
-	var $clicked = $(e.target);
-	if (!$clicked.parents().hasClass("dropdown")) $(".dropdown ul").hide();
 });
 
 $("body").on('click','.mutliSelect input[type="checkbox"]',function()

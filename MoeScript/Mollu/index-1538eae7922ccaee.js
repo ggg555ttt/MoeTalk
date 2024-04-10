@@ -1668,7 +1668,11 @@
 											className: 'heads'
 										})
 									})]
-								}), (0, m.jsx)('div',
+								}), (0, m.jsx)('span',
+									{
+										className: 'edit_3_box3_2_1',
+										children: '名称显示优先级：发言人名字 > 分支头像名字 > 角色名字'
+									}), (0, m.jsx)('div',
 								{
 									className: "edit_2",
 									children: [(0, m.jsx)('div',
@@ -1758,9 +1762,6 @@
 												$$("#custom").attr('title','edit').click()
 											}
 										})]
-									}), (0, m.jsx)('span',
-									{
-										children:'名称显示优先级：发言人名字 > 分支头像名字 > 角色名字'
 									})]
 								}), (0, m.jsxs)(ea.$_,
 								{

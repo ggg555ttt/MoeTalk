@@ -1,8 +1,4 @@
-var href = window.location.href.split(window.location.host)[1].split('?')[0]
-var player = href+'player'
-var version = '';
-var 强制保存 = []
-if(localStorage['mt-version'])version = localStorage['mt-version']
+var href = window.location.href.split(window.location.host)[1].split('?')[0]//文件目录地址
 if(window.location.href.indexOf('file:///') === 0)
 {
 	alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1(有出错可能)】')
@@ -21,21 +17,26 @@ if(window.location.href.indexOf('file:///') === 0)
 })();
 
 /*预定义区*/
-var mt_char = {}
-var mt_head = {}
-var mt_chars = false
-var mt_schars = false
-
-var char_info = {}
-
-var saveClub = true;
-var mt_clubs = []
-const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});
+var mt_char = {}//自定义角色数据
+var mt_head = {}//自定义头像数据
+var mt_chars = false//自定义角色列表
+var mt_schars = false//临时角色列表
+var mt_clubs = []//自定义社团列表
+var char_info = {}//角色信息
+var saveClub = true;//社团保存开关
+var 选择角色 = true;//快捷角色开关
+var $$ = $;//jquery转义
+var height;//聊天记录长度
+var send = true;if(document.location.protocol === 'https:')send = false;//服务同步开关
+var 表情,表情类型,表情页码,自设差分,差分书签 = sessionStorage['差分书签'] ? JSON.parse(sessionStorage['差分书签']) : {};//表情功能
+var player = href+'player'//播放器地址
+var version = '';if(localStorage['mt-version'])version = localStorage['mt-version']//MoeTalk版本号
+const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});//数据库
 
 if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';
 if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
-var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色名称
-var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时义角色头像
+var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色数据
+var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时头像数据
 
 if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选项'] === '{}')
 {
@@ -122,37 +123,37 @@ var langarr = ['zh_cn','zh_tw','jp','en','kr'];
 var langid = langarr.indexOf(window.location.href.split('?')[1])
 if(langid > -1)mtlang = langarr[langid]
 
-var 选择角色 = true;//快捷角色开关
-
-var imgindex;//人物自定义
-
-var $$ = $;//jquery转义
-var height;//聊天记录长度
 var localSize = 0;//数据大小
 $.each(localStorage,function(k,v){if(!isNaN(parseInt(v.length))){localSize += v.length/1024}})
 localSize = localSize.toFixed(0)
-
-var CFPI = 0;//差分页码
-
-
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
 /*预定义区*/
 
-//保存头像
-function savehead(headindex,img64)
-{
-	mt_head[headindex] = img64;
-	saveStorage('mt-head',mt_head,'local')
-	let nameloss
-	$.each(mt_head,function(k,v)
-	{
-		if(!mt_char[k])
-		{
-			mt_char[k] = 'NAMELOSS'
-			nameloss = true
-		}
-	})
-	if(nameloss === true)saveStorage('mt-char',mt_char,'local')
+
+
+//元素出现后执行代码
+jQuery.fn.wait = function (func,cls,times,interval) {
+	var _times = times || -1, //100次
+		_interval = interval || 10, //20毫秒每次
+		_self = this,
+		_selector = this.selector, //选择器
+		_iIntervalID; //定时器id
+	if( $(cls).length ){ //如果已经获取到了，就直接执行函数
+		func && func.call($(cls));
+	} else {
+		_iIntervalID = setInterval(function() {
+			if(!_times) { //是0就退出
+				clearInterval(_iIntervalID);
+			}
+			_times <= 0 || _times--; //如果是正数就 --
+			_self = $(cls); //再次选择
+			if( $(cls).length ) { //判断是否取到
+				func && func.call($(cls));
+				clearInterval(_iIntervalID);
+			}
+		}, _interval);
+	}
+	return this;
 }
 //读取头像
 function loadhead(id,img)
@@ -218,31 +219,6 @@ function loadname(id,index)
 
 	if(id == 0)name = you[mtlang]
 	return name
-}
-
-//元素出现后执行代码
-jQuery.fn.wait = function (func,cls,times,interval) {
-	var _times = times || -1, //100次
-		_interval = interval || 10, //20毫秒每次
-		_self = this,
-		_selector = this.selector, //选择器
-		_iIntervalID; //定时器id
-	if( $(cls).length ){ //如果已经获取到了，就直接执行函数
-		func && func.call($(cls));
-	} else {
-		_iIntervalID = setInterval(function() {
-			if(!_times) { //是0就退出
-				clearInterval(_iIntervalID);
-			}
-			_times <= 0 || _times--; //如果是正数就 --
-			_self = $(cls); //再次选择
-			if( $(cls).length ) { //判断是否取到
-				func && func.call($(cls));
-				clearInterval(_iIntervalID);
-			}
-		}, _interval);
-	}
-	return this;
 }
 
 //图片压缩
@@ -596,7 +572,7 @@ function loaddata(json,mode,ARR = '')//识别存档
 			if(v['img'] === 'uploaded')
 			{
 				json[1][k]['sCharacter']['no'] = v['char_id']
-				json[1][k]['sCharacter']['index'] = v['img']
+				json[1][k]['sCharacter']['index'] = v['char_id']
 				if(v['char_id'].split('-')[1] === 'MT')
 				{
 					json[1][k]['sCharacter']['no'] = v['char_id'].split('-')[2]
@@ -885,9 +861,22 @@ function MoeToClosure()//Moe转Closure
 	})
 	$.each(mt_char,function(k,v)
 	{
-		custom_chars[k] = {}
-		custom_chars[k]['img'] = mt_head[k];
-		custom_chars[k]['name'] = v.name;
+		if(v.head)
+		{
+			let length = v.head.length
+			for(let i = 0;i < length;i++)
+			{
+				custom_chars[v.head[i]] = {}
+				custom_chars[v.head[i]]['img'] = mt_head[v.head[i]];
+				custom_chars[v.head[i]]['name'] = v.name;
+			}
+		}
+		else
+		{
+			custom_chars[k] = {}
+			custom_chars[k]['img'] = mt_head[k];
+			custom_chars[k]['name'] = v.name;
+		}
 	})
 	$.each(custom_chars,function(k,v)
 	{
@@ -1036,25 +1025,10 @@ function saveStorage(key,val,mode)
 	val = JSON.stringify(val)
 	let maxsize = ((num+val.length)/1024).toFixed(0)
 
-	if(maxsize < 5120)
+	if(maxsize < 5120)//在容量限制内保存数据
 	{
 		if(mode === 'local')localStorage[key] = val
 		if(mode === 'session')sessionStorage[key] = val
-	}
-	else
-	{
-		if(mode === 'local')
-		{
-			$('#容量警告').addClass('visible')
-			$('#容量警告 p').text(`存储空间容量不足，请尝试删除一部分数据\n\n强制保存可能会导致MoeTalk出错，确定吗？`)
-			强制保存 = [localStorage,key,val]
-		}
-		if(mode === 'session')
-		{
-			$('#容量警告').addClass('visible')
-			$('#容量警告 p').text(`临时空间容量不足，重启浏览器可以清空\n\n强制保存可能会导致MoeTalk出错，确定吗？`)
-			强制保存 = [sessionStorage,key,val]
-		}
 	}
 }
 
@@ -1066,8 +1040,7 @@ if(window.location.href.indexOf('Setting') < 0)
 	localStorage['启动次数'] = parseInt(localStorage['启动次数'])+1
 	localStorage['启动网址'] = window.location.href
 }
-var 表情,表情类型,表情页码;
-var 自设差分,差分书签 = sessionStorage['差分书签'] ? JSON.parse(sessionStorage['差分书签']) : {}
+
 function mt_emojis(S,mode)
 {
 	表情 = []
@@ -1199,8 +1172,7 @@ function mt_emojis(S,mode)
 		S(!0)
 	}
 }
-var send = true;
-if(document.location.protocol === 'https:')send = false;
+
 function moeLog(type,data,mode,indexs)
 {
 	moetalkStorage.getItem('moeLog', function(err, moeLog)
@@ -1256,10 +1228,6 @@ function srceenMode()
 		$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
 	}
 }
-function test(str)
-{
-	return {zh_cn:str,zh_tw:str,en:str,jp:str,kr:str,pinyin:str,id:str}
-}
 function custom_chars()
 {
 	mt_chars = []
@@ -1281,9 +1249,9 @@ function custom_chars()
 		if(!char[key].club)char[key].club = '自定义角色'
 		mt_chars.push({
 			no: key,
-			name: test(char[key].name),
-			club: test('#'+char[key].club),
-			school: char[key].school ? test(char[key].school) : test('自定义'),
+			name: localization(char[key].name),
+			club: localization('#'+char[key].club),
+			school: char[key].school ? localization(char[key].school) : localization('自定义'),
 			profile: char[key].head ? char[key].head : [key],
 			illust: 0,//#改为默认
 			open: !0,//#改为默认
@@ -1310,9 +1278,9 @@ function custom_chars()
 			{
 				mt_schars.push({
 					no: key,
-					name: test(schar[key].name),
-					club: test('临时角色'),
-					school: schar[key].school ? test(schar[key].school) : test('自定义角色'),
+					name: localization(schar[key].name),
+					club: localization('临时角色'),
+					school: schar[key].school ? localization(schar[key].school) : localization('自定义角色'),
 					profile: schar[key].head ? schar[key].head : [key],
 					illust: 0,//#改为默认
 					open: !0,//#改为默认
@@ -1485,4 +1453,13 @@ function removeChar(n)
 			list()//更新列表
 		}
 	}
+}
+function localization(str)
+{
+	return {zh_cn:str,zh_tw:str,en:str,jp:str,kr:str,pinyin:str,id:str}
+}
+function Translator(str)
+{
+	if(!mt_text[str] || !mt_text[str][mtlang])return str;
+	return mt_text[str][mtlang];
 }
