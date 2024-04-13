@@ -1837,11 +1837,11 @@
     },
     "乘务员": {
         "id": "train_attendant",
-        "zh_cn": "列车乘务员",
-        "zh_tw": "列車乘務員",
-        "jp": "列車乗務員",
-        "en": "Train-Attendant",
-        "kr": "열차-승무원",
+        "zh_cn": "海兰德学生",
+        "zh_tw": "海蘭德學生",
+        "jp": "ハイランダー生徒",
+        "en": "Highlander-Student",
+        "kr": "하이랜더-승무원",
         "pinyin": "chengwuyuan"
     },
     "佐天泪子": {
@@ -2096,5 +2096,29 @@
         "en": "Don·Arancino",
         "kr": "돈·아란치노",
         "pinyin": "heibangjiqiren"
+    },
+    "橘光": {
+        "zh_cn": "橘 光",
+        "zh_tw": "橘 光",
+        "jp": "橘 ヒカリ",
+        "en": "Tachibana Hikari",
+        "kr": "타치바나 히카리",
+        "pinyin": "juguang"
+    },
+    "橘望": {
+        "zh_cn": "橘 望",
+        "zh_tw": "橘 望",
+        "jp": "橘 ノゾミ",
+        "en": "Tachibana Nozomi",
+        "kr": "타치바나 노조미",
+        "pinyin": "juwang"
+    },
+    "朝霧苏枋": {
+        "zh_cn": "朝霧 苏枋",
+        "zh_tw": "朝霧 蘇枋",
+        "jp": "朝霧 スオウ",
+        "en": "Asagiri Suou",
+        "kr": "아사기리 스오우",
+        "pinyin": "zhaowusufang"
     }
 }

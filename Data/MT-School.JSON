@@ -86,6 +86,14 @@ var mt_schoolname = {
         "en": "VALKYRIE",
         "kr": "발키리",
         "pinyin": "waerjili"
+    },
+    "海兰德": {
+        "zh_cn": "海兰德铁道学院",
+        "zh_tw": "海蘭德鐵道學院",
+        "jp": "ハイランダー鉄道学園",
+        "en": "Highlander Railroad Academy",
+        "kr": "하이랜더 철도학원",
+        "pinyin": "hailande"
     }
 }
 var mt_school = [
@@ -95,6 +103,7 @@ var mt_school = [
     "圣三一",
     "山海经",
     "格黑娜",
+    "海兰德",
     "瓦尔基里",
     "百鬼夜行",
     "赤冬",

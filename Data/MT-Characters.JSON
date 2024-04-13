@@ -494,21 +494,6 @@ var mt_characters = {
         "charface": "河驹风兰舞/CH0166/CH0166.11,河驹风兰舞/河驹风兰舞.4",
         "customface": ""
     },
-    "乘务员": {
-        "school": "其他",
-        "club": "所属不明-其他",
-        "head": "NP0138_Collection,NP0158_Collection,NP0159_Collection,NP0138,NP0158,NP0159",
-        "name": {
-            "zh_cn": "列车乘务员",
-            "zh_tw": "列車乘務員",
-            "jp": "列車乗務員",
-            "en": "Train-Attendant",
-            "kr": "열차-승무원",
-            "pinyin": "chengwuyuan"
-        },
-        "charface": "乘务员/NP0138/NP0138.10,乘务员/NP0158/NP0158.9,乘务员/NP0159/NP0159.7,乘务员/乘务员.9",
-        "customface": ""
-    },
     "佐天泪子": {
         "school": "其他",
         "club": "所属不明-其他",
@@ -2714,6 +2699,66 @@ var mt_characters = {
         "charface": "风纪委员会成员/fuuki_normal1/fuuki_normal1.8,风纪委员会成员/风纪委员会成员.4",
         "customface": ""
     },
+    "橘光": {
+        "school": "海兰德",
+        "club": "CCC",
+        "head": "CH0242",
+        "name": {
+            "zh_cn": "橘 光",
+            "zh_tw": "橘 光",
+            "jp": "橘 ヒカリ",
+            "en": "Tachibana Hikari",
+            "kr": "타치바나 히카리",
+            "pinyin": "juguang"
+        },
+        "charface": "橘光/CH0242/CH0242.16,橘光/橘光.4",
+        "customface": ""
+    },
+    "橘望": {
+        "school": "海兰德",
+        "club": "CCC",
+        "head": "CH0243",
+        "name": {
+            "zh_cn": "橘 望",
+            "zh_tw": "橘 望",
+            "jp": "橘 ノゾミ",
+            "en": "Tachibana Nozomi",
+            "kr": "타치바나 노조미",
+            "pinyin": "juwang"
+        },
+        "charface": "橘望/CH0243/CH0243.19,橘望/橘望.4",
+        "customface": ""
+    },
+    "乘务员": {
+        "school": "海兰德",
+        "club": "所属不明-海兰德",
+        "head": "NP0138_Collection,NP0158_Collection,NP0159_Collection,NP0138,NP0158,NP0159",
+        "name": {
+            "zh_cn": "海兰德学生",
+            "zh_tw": "海蘭德學生",
+            "jp": "ハイランダー生徒",
+            "en": "Highlander-Student",
+            "kr": "하이랜더-승무원",
+            "pinyin": "chengwuyuan"
+        },
+        "charface": "乘务员/NP0138/NP0138.10,乘务员/NP0158/NP0158.9,乘务员/NP0159/NP0159.7,乘务员/乘务员.9",
+        "customface": ""
+    },
+    "朝霧苏枋": {
+        "school": "海兰德",
+        "club": "海兰德监理室",
+        "head": "CH0244_Collection,CH0244",
+        "name": {
+            "zh_cn": "朝霧 苏枋",
+            "zh_tw": "朝霧 蘇枋",
+            "jp": "朝霧 スオウ",
+            "en": "Asagiri Suou",
+            "kr": "아사기리 스오우",
+            "pinyin": "zhaowusufang"
+        },
+        "charface": "朝霧苏枋/CH0244/CH0244.11,朝霧苏枋/朝霧苏枋.4",
+        "customface": ""
+    },
     "尾刃叶渚": {
         "school": "瓦尔基里",
         "club": "公安局",
@@ -3347,7 +3392,7 @@ var mt_characters = {
     "十六夜野宫": {
         "school": "阿比多斯",
         "club": "对策委员会",
-        "head": "CH0092_L2D,Nonomi_L2D,NP0044_Collection,NP0067_Collection,CH0092_Collection,Nonomi_Collection,Nonomi_Robber_Collection,NP0067,CH0092,Nonomi,Nonomi_Robber",
+        "head": "CH0092_L2D,Nonomi_L2D,NP0044_Collection,NP0067_Collection,CH0092_Collection,Nonomi_Collection,Nonomi_Robber_Collection,NP0067,NP0171,CH0092,Nonomi,Nonomi_Robber",
         "name": {
             "zh_cn": "十六夜 野宫",
             "zh_tw": "十六夜 野乃美",
@@ -3356,7 +3401,7 @@ var mt_characters = {
             "kr": "이자요이 노노미",
             "pinyin": "shiliuyeyegong"
         },
-        "charface": "十六夜野宫/CH0092/CH0092.22,十六夜野宫/nonomi/nonomi.19,十六夜野宫/nonomi_robber/nonomi_robber.6,十六夜野宫/NP0044/NP0044.19,十六夜野宫/NP0067/NP0067.22,十六夜野宫/十六夜野宫.20",
+        "charface": "十六夜野宫/CH0092/CH0092.22,十六夜野宫/nonomi/nonomi.19,十六夜野宫/nonomi_robber/nonomi_robber.6,十六夜野宫/NP0044/NP0044.19,十六夜野宫/NP0067/NP0067.22,十六夜野宫/NP0171/NP0171.7,十六夜野宫/十六夜野宫.24",
         "customface": "巴啦啦小凉蛋/野宫/野宫.42,巴啦啦小凉蛋/野宫_修复/野宫_修复.18"
     },
     "奥空绫音": {
@@ -3377,7 +3422,7 @@ var mt_characters = {
     "小鸟游星野": {
         "school": "阿比多斯",
         "club": "对策委员会",
-        "head": "Hoshino_L2D,Hoshino_swimsuit_L2D,NP0045_Collection,NP0063_Collection,CH0241_Collection,Hoshino_Collection,Hoshino_Robber_Collection,Hoshino_Swimsuit_Collection,NP0063,NP0167,CH0241,Hoshino,Hoshino_Robber,Hoshino_swimsuit",
+        "head": "Hoshino_L2D,Hoshino_swimsuit_L2D,NP0045_Collection,NP0063_Collection,CH0241_Collection,Hoshino_Collection,Hoshino_Robber_Collection,Hoshino_Swimsuit_Collection,NP0063,NP0167,NP0173,NP0204,CH0241,Hoshino,Hoshino_Robber,Hoshino_swimsuit",
         "name": {
             "zh_cn": "小鸟游 星野",
             "zh_tw": "小鳥遊 星野",
@@ -3386,7 +3431,7 @@ var mt_characters = {
             "kr": "타카나시 호시노",
             "pinyin": "xiaoniaoyouxingye"
         },
-        "charface": "小鸟游星野/CH0241/CH0241.46,小鸟游星野/hoshino/hoshino.17,小鸟游星野/hoshino_robber/hoshino_robber.6,小鸟游星野/hoshino_swimsuit/hoshino_swimsuit.21,小鸟游星野/NP0045/NP0045.17,小鸟游星野/NP0063/NP0063.21,小鸟游星野/NP0167/NP0167.46,小鸟游星野/小鸟游星野.28",
+        "charface": "小鸟游星野/CH0241/CH0241.46,小鸟游星野/hoshino/hoshino.17,小鸟游星野/hoshino_robber/hoshino_robber.6,小鸟游星野/hoshino_swimsuit/hoshino_swimsuit.21,小鸟游星野/NP0045/NP0045.17,小鸟游星野/NP0063/NP0063.21,小鸟游星野/NP0167/NP0167.46,小鸟游星野/NP0173/NP0173.27,小鸟游星野/NP0204/NP0204.27,小鸟游星野/小鸟游星野.36",
         "customface": "巴啦啦小凉蛋/星野/星野.30,巴啦啦小凉蛋/星野_修复/星野_修复.19"
     },
     "梦": {

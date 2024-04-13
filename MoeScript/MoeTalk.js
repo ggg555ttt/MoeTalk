@@ -1,6 +1,6 @@
 //https://try8.cn/tool/format/js
 var cfemoji = cf = 'NO';//表情差分开关
-var CharFaceIndex = null;//差分映射
+
 var chatIndex = -1//消息索引
 
 var operate = false
@@ -19,7 +19,14 @@ var directory = []//目录
 var nowChapter = ['',{chapter:[]}]//当前章节
 
 var winHeight = window.innerHeight
+
 var 元素尺寸;
+var 差分映射 = false
+
+var 操作历史 = {
+	index: -1,
+	list: []
+}
 if(!mt_settings['存储模式'])
 {
 	$('.dDBXxQ').wait(function(){$('.dDBXxQ').show().after('<div class="loading"><div/>')},".dDBXxQ")//开始加载
@@ -114,7 +121,7 @@ function mt_height(num)
 	if(!num)num = 1.1
 	let length = ($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num);
 	length = Number(length) + ((16.6 * num) * (Math.ceil(length/mt_settings['高度限制']) - 1));
-	return length.toFixed();
+	return parseInt(length.toFixed());
 }
 if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>");//加载字体
 $(function()
@@ -164,7 +171,6 @@ $(".frVjsk").wait(function()
 {
 	$(".frVjsk").append(`<button class='${class0}' id='uphead' hidden><b style='color:black;'>傳</b></button><span class='tool' hidden>上传头像<span id='cusname'></span></span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='https://tieba.baidu.com/p/8551808608'}.html'><button class='${class0}'><b style='color:black;'>教</b></button></a><span class='tool'>使用教程</span><br>`);
 	$(".frVjsk").append(`<a href='${href}Setting.html?${localStorage['mt-rand']}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
@@ -233,41 +239,6 @@ $('body').on('click',"#size",function()
 $('body').on('click',"input",function()
 {
 	$("input[type='file']").val('')
-})
-//差分映射
-$('body').on('click',"#cf",function()
-{
-	if(CharFaceIndex == null)
-	{
-		let no = mt_settings['选择角色'].no
-		CharFaceIndex = no;
-		alert('你选择了差分映射功能，根据你下方被选中的角色\n其包含的差分表情会映射到你下一个选择的角色\n如果你不想映射，请再点击一遍按钮\n如果想恢复默认映射，请再点击一下被选中的头像或与之相同的角色');
-	}
-	else
-	{
-		CharFaceIndex = null;
-		alert('取消映射');
-	}
-})
-$('body').on('click',".fzOyMd",function()
-{
-	if(CharFaceIndex != null)
-	{
-		let no = mt_settings['选择角色'].no;
-		if(CharFaceIndex != no)
-		{
-			mt_settings['差分映射'][no] = CharFaceIndex;
-			CharFaceIndex = null;
-			alert('映射成功');
-		}
-		else
-		{
-			delete mt_settings['差分映射'][CharFaceIndex]
-			CharFaceIndex = null;
-			alert('已恢复默认映射');
-		}
-		saveStorage('设置选项',mt_settings,'local')
-	}
 })
 //全选
 $('body').on('click',"#delsall",function()
@@ -617,9 +588,8 @@ function makeMessage(type,data,chatIndex,mode)
 		${复选框}
 	</div>`
 }
-function sendMessage(data,type,mode = 'add',indexs = [])
+function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 {
-	moeLog(type,data,mode,indexs)
 	$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
 	$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
 	$$('.editMessage').removeClass('visible')
@@ -628,18 +598,25 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 	if(indexs.length === 0)indexs[0] = chatIndex
 	let dels = $(".dels:checked").length
 	let nextindex;
+	let arr = {};arr.chats = [];arr.indexs = indexs;arr.mode = mode;//
 	$.each(indexs,function(k,chatIndex)
 	{
+		
 		data.replyDepth = replyDepths.slice(-1)[0]
-		data.replyFrom = replyDepths.slice(-2)[0]
+		if(chatIndex === -1)chatIndex = chats.length-1
+		//追加：返回追加的数据和位置
+		//删除：记载每个选中的索引和原内容
 		//数据
+		if(撤销)data = 撤销[k]
 		if(mode === 'delete')
 		{
 			chatIndex = chatIndex-k
+			arr.chats.push(chats[chatIndex])//删除前的消息
 			chats.splice(chatIndex,1)
 		}
 		if(mode === 'edit')
 		{
+			arr.chats.push(chats[chatIndex])//编辑前的消息
 			chats[chatIndex] = {...chats[chatIndex],...data}
 			if(type)
 			{
@@ -652,23 +629,26 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 		}
 		if(mode === 'add')
 		{
-			data.type = type
-
-			if($('.addChat').prop('checked'))
+			if(!撤销)
 			{
-				if(type === 'image' && !data.file)data.file = chats[chatIndex].file
-				chatIndex = chatIndex+1//向后追加
-				data.sCharacter = {no: $('.editMessage .头像').attr('alt'),index: $('.editMessage .头像').attr('title')}
+				data.type = type
+				if($('.addChat').prop('checked'))
+				{
+					if(type === 'image' && !data.file)data.file = chats[chatIndex].file
+					chatIndex = chatIndex+1//向后追加
+					data.sCharacter = {no: $('.editMessage .头像').attr('alt'),index: $('.editMessage .头像').attr('title')}
+				}
+				else
+				{
+					data.isFirst = !1
+					data.isRight = !1
+					data.is_breaking = !1
+					data.sCharacter = {no:mt_settings['选择角色'].no,index:mt_settings['选择角色'].index}
+					if($(".dels:checked").length)chatIndex = $('.dels').index($(".dels:checked"))//向前追加
+					else chatIndex = chats.length//末尾追加
+				}
 			}
-			else
-			{
-				data.isFirst = !1
-				data.isRight = !1
-				data.is_breaking = !1
-				data.sCharacter = {no:mt_settings['选择角色'].no,index:mt_settings['选择角色'].index}
-				if($(".dels:checked").length)chatIndex = $('.dels').index($(".dels:checked"))//向前追加
-				else chatIndex = chats.length//末尾追加
-			}
+			if(type === 'go')chatIndex++
 			try
 			{
 				chats.splice(chatIndex,0,data)
@@ -681,6 +661,7 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 				chats.splice(chatIndex,0,data)
 				//console.log(error)
 			}
+			arr.chats.push(chats[chatIndex])//追加的新消息
 		}
 		//显示
 		let message = mode === 'delete' ? '' : makeMessage(chats[chatIndex].type,chats[chatIndex],chatIndex,mode)
@@ -691,7 +672,7 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 			if(chats.length === 0)
 			{
 				$('.RightScreen__Box-sc-1fwinj2-1').show()//显示开头引导
-				$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').hide()//隐藏聊天记录
+				if(操作历史.list.length === 0)$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').hide()//隐藏聊天记录
 			}
 		}
 		if(mode === 'edit')
@@ -715,7 +696,7 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 			}
 		}
 		//处理下条消息
-		let nextchat = chats[chatIndex+1] ? chats[chatIndex+1] : false
+		let nextchat = chats[chatIndex+1] && (!indexs[k+1] || indexs[k]+1 !== indexs[k+1]) ? chats[chatIndex+1] : false
 		if(nextchat)
 		{
 			$(`.消息:eq(${chatIndex+1})`)[0].outerHTML = makeMessage(nextchat.type,nextchat,chatIndex+1)
@@ -734,6 +715,7 @@ function sendMessage(data,type,mode = 'add',indexs = [])
 			}
 		}
 	})
+	moeLog(arr,撤销)
 	$('.消息').css('border-top','')
 	$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
 	setTimeout(function()
@@ -965,5 +947,12 @@ $("body").on('click',".heads img",function()
 	{
 		if(mt_char[char_info.no] || char_info.make)$('.edithead:eq(1)').show()
 	}
-	//custom_char()
+});
+
+$("body").on('click',".差分映射",function()
+{
+	差分映射 = []
+	差分映射.id = $(this).attr('alt')
+	差分映射.index = $(this).attr('title')
+	click('#close');
 });

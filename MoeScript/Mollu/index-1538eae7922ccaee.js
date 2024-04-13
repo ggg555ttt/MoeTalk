@@ -756,7 +756,7 @@
 								{
 									width: 252,
 									height: 252,
-									src: href+"Images/Ui/School/"+(!mt_schoolname[n.school['zh_cn']] ? n.club['zh_cn'] === '临时角色' ? n.club['zh_cn'] : n.school['zh_cn'] : mt_characters[n.no].school)+'.webp',//#学校图标
+									src: href+"Images/Ui/School/"+(!mt_schoolname[n.school['zh_cn']] ? n.club['zh_cn'] === '临时角色' ? n.club['id'] : n.school['id'] : mt_characters[n.no].school)+'.webp',//#学校图标
 									onError: function(e)
 									{
 										e.currentTarget.src = href+'Images/Ui/error.webp';
@@ -1971,12 +1971,19 @@
 												}
 												else
 												{
-													moeLog('',{},"delete",[])
+													let indexs =  Object.keys(chats)
+													let length = indexs.length
+													for (let i = 0; i < length; i++)
+													{
+														indexs[i] = i
+													}
+													let arr = {};arr.chats = chats;arr.indexs = indexs;arr.mode = 'delete';//
+													moeLog(arr)
 													chats = []
 													otherChats = []
 													$$(`.消息`).remove()
 													$$('.RightScreen__Box-sc-1fwinj2-1').show()//显示开头引导
-													$$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').hide()//隐藏聊天记录
+													if(操作历史.list.length === 0)$$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').hide()//隐藏聊天记录
 													saveStorage('chats',[],'local')
 												}
 											},
@@ -2564,7 +2571,13 @@
 								if(v.replyDepth !== 0)otherChats.push(v)
 								else chats.push(v)
 							})
+							操作历史 = {
+								index: -1,
+								list: []
+							}
 							$$('.消息').remove()
+							$$('.operate_go').hide()
+							$$('.operate_back').hide()
 							$$('.replyBack').parent().css('display','none')
 							$$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
 							$$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
@@ -3099,9 +3112,38 @@
 									},
 									children: [(0, m.jsxs)(ea.h4,
 									{
-										children: [(0, m.jsx)(ea.Dx,
+										children: [(0, m.jsx)(c.Bx,
+										{
+											style:
+											{
+												"width": "auto",
+												height: '100%',
+												color: '#3f51b5',
+												position: 'absolute',
+												left: 0,
+												color: 差分映射 ? 'red' : 'rgb(63, 81, 181)'
+											},
+											className: "bold",
+											hidden: cf === 'Emoji',
+											children: 差分映射 ? '默认角色' : '切换角色',
+											onClick:function()
+											{
+												if(差分映射)
+												{
+													差分映射 = false
+												}
+												else
+												{
+													差分映射 = []
+													差分映射.id = mt_settings.选择角色.no
+													差分映射.index = mt_settings.选择角色.index
+												}
+												click('#close');
+											}
+										}), (0, m.jsx)(ea.Dx,
 										{
 											className: "bold",
+											style: 差分映射 && cf === 'CharFace' ? {'color': 'red'} : {},
 											children: 表情类型//#加入差分表情
 										}), (0, m.jsx)(ea.ec,
 										{
@@ -3197,6 +3239,27 @@
 											}),
 											hidden: !自设差分[2]
 										})]
+									}), (0, m.jsxs)(ea.h4,
+									{
+										style: {height: '4rem'},
+										hidden: !差分映射 || cf === 'Emoji',
+										children: !差分映射 || cf === 'Emoji' ? '' : (0, m.jsx)(HList.Z,
+										{
+											children: (0, m.jsx)(k,
+											{
+												style: {padding:0},
+												children: mt_settings['选择角色'].list.map(function(e, n)
+												{
+													return (0, m.jsx)(c.t_,
+													{
+														alt: String(e.no),
+														title: String(e.index),
+														src: loadhead(e.no,e.index),
+														className: '差分映射 '+ (e.no === 差分映射.id && e.index === 差分映射.index ? 'selected' : '')
+													}, n)
+												})
+											})
+										})
 									}), (0, m.jsx)(eE,
 									{
 										children: (0, m.jsxs)(eM,
@@ -4503,11 +4566,16 @@
 										style:{fontSize: "1.1rem"},
 										children: '撤销'
 									})
-								})
+								}),
+								onClick: function()
+								{
+									撤销('back')
+								}
 							}), (0, m.jsx)(c.jl,
 							{
 								hidden: !0,
 								style:{height: "auto","width": "auto"},
+								className: 'operate_go',
 								children: (0, m.jsx)(W,
 								{
 									className: "bold",
@@ -4516,7 +4584,11 @@
 										style:{fontSize: "1.1rem"},
 										children: '前进'
 									})
-								})
+								}),
+								onClick: function()
+								{
+									撤销('go')
+								}
 							}), (0, m.jsx)(c.jl,
 							{
 								hidden: !0,

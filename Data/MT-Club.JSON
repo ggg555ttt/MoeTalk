@@ -574,6 +574,30 @@ var mt_clubname = {
         "en": "Kachouhuugetsu",
         "kr": "화조풍월부",
         "pinyin": "huaniaofengyuebu"
+    },
+    "CCC": {
+        "zh_cn": "中央管制中心",
+        "zh_tw": "中央管制中心",
+        "jp": "CCC",
+        "en": "CCC",
+        "kr": "CCC",
+        "pinyin": "CCC"
+    },
+    "所属不明-海兰德": {
+        "zh_cn": "所属不明",
+        "zh_tw": "所屬不明",
+        "jp": "所属不明",
+        "en": "Unknown",
+        "kr": "소속 불명",
+        "pinyin": "suoshubuming-hailande"
+    },
+    "海兰德监理室": {
+        "zh_cn": "海兰德监理室",
+        "zh_tw": "海蘭德監理室",
+        "jp": "ハイランダー監理室",
+        "en": "Highlander Supervision Office",
+        "kr": "하이랜더 감리실",
+        "pinyin": "hailandejianlishi"
     }
 }
 var mt_club = {
@@ -640,6 +664,11 @@ var mt_club = {
         "给食部",
         "美食研究部",
         "风纪委员会"
+    ],
+    "海兰德": [
+        "CCC",
+        "所属不明-海兰德",
+        "海兰德监理室"
     ],
     "瓦尔基里": [
         "公安局",

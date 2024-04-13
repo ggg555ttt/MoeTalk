@@ -474,6 +474,9 @@ $('body').on('click',"#savemode",function()
 						if(!char)char = '{}';
 						if(!head)head = '{}';
 						if(!data)data = '[]';
+						if(typeof char !== 'string')char = JSON.stringify(char)
+						if(typeof head !== 'string')head = JSON.stringify(head)
+						if(typeof data !== 'string')data = JSON.stringify(data)
 						localStorage['mt-char'] = char
 						localStorage['mt-head'] = head
 						localStorage['chats'] = data

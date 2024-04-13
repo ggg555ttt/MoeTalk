@@ -58,7 +58,6 @@ if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选
 	if(!mt_settings['高度限制'])mt_settings['高度限制'] = 16384
 	//if(!mt_settings['头像尺寸'])mt_settings['头像尺寸'] = 300
 	if(!mt_settings['发送方式'])mt_settings['发送方式'] = '回车'
-	if(!mt_settings['差分映射'])mt_settings['差分映射'] = {}
 	if(!mt_settings['社团列表'])mt_settings['社团列表'] = {}
 	if(!mt_settings['文字样式'])mt_settings['文字样式'] = {}
 	if(!mt_settings['宽度限制'])mt_settings['宽度限制'] = 500
@@ -1047,15 +1046,11 @@ function mt_emojis(S,mode)
 	表情类型 = ''
 	自设差分 = []
 	let id = mt_settings['选择角色'].no;
-	let str = '';
+	let name = loadname(id);
 	let maxNum = 0
 	if(mode === 'CharFace')
 	{
-		if(mt_settings['差分映射'][id] || mt_settings['差分映射'][id] == 0)
-		{
-			str = '->'+loadname(id)
-			id = mt_settings['差分映射'][id]
-		}
+		if(差分映射 !== false)id = 差分映射.id
 		if(!差分书签[id])//添加书签
 		{
 			差分书签[id] = {}
@@ -1078,9 +1073,10 @@ function mt_emojis(S,mode)
 			差分书签[id].type = S
 			return;
 		}
+		if(!S)return;
 		if(!mt_characters[id])//人物不存在
 		{
-			表情类型 = `${loadname(id)}${str}(0暂无)`
+			表情类型 = `${name}(0暂无)`
 			表情页码 = '0 / 0'
 			S(!0)
 			return;
@@ -1115,19 +1111,19 @@ function mt_emojis(S,mode)
 
 			if(表情类型 === id)
 			{
-				表情类型 = `${loadname(id)}${str}(${maxNum}其他)`
+				表情类型 = `${name}(${maxNum}其他)`
 			}
 			else if(表情类型.indexOf('_修复') > -1)
 			{
-				表情类型 = `${loadname(id)}${str}(${maxNum}修复)`
+				表情类型 = `${name}(${maxNum}修复)`
 			}
 			else if(CustomFaceAuthor[cfarr[pageIdnex][0]])
 			{
-				表情类型 = `${loadname(id)}${str}(${maxNum}自制)`
+				表情类型 = `${name}(${maxNum}自制)`
 			}
 			else
 			{
-				表情类型 = `${loadname(id)}${str}(${maxNum})`
+				表情类型 = `${name}(${maxNum})`
 			}
 
 			自设差分[0] = mt_characters[id]['customface'] ? !0 : !1
@@ -1137,7 +1133,7 @@ function mt_emojis(S,mode)
 			saveStorage('差分书签',差分书签,'session')
 			return;
 		}
-		表情类型 = `${loadname(id)}${str}(0暂无)`
+		表情类型 = `${name}(0暂无)`
 		表情页码 = '0 / 0'
 		S(!0)
 		return;
@@ -1171,41 +1167,6 @@ function mt_emojis(S,mode)
 		表情页码 = `${pageIdnex+1} / 4`
 		S(!0)
 	}
-}
-
-function moeLog(type,data,mode,indexs)
-{
-	moetalkStorage.getItem('moeLog', function(err, moeLog)
-	{
-		if(!moeLog)moeLog = []
-		if(moeLog.length > 9)moeLog.shift()
-		moeLog.push({
-			date: `${month}.${day}`,
-			type: type,
-			data: data,
-			index: indexs,
-			mode: mode
-		})
-		moetalkStorage.setItem('moeLog', moeLog);
-		//console.log(moeLog)
-		if(send)//
-		{
-			localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
-			$.ajax({
-				url:'http://frp.freefrp.net:40404/moetalk.php',
-				async:true,
-				type:'POST',
-				data:{'chats':JSON.stringify(chats),'local_no':localStorage['local_no']},
-				dataType:'text',
-				success:function(data){
-					//console.log('2')
-					send = true
-				}
-			});
-		}
-		//console.log('1')
-		send = false;
-	});
 }
 function srceenMode()
 {
@@ -1462,4 +1423,77 @@ function Translator(str)
 {
 	if(!mt_text[str] || !mt_text[str][mtlang])return str;
 	return mt_text[str][mtlang];
+}
+function moeLog(arr,mode = false)
+{
+	if(!mode)
+	{
+		操作历史.list.length = 操作历史.index+1
+		操作历史.index++
+		if(操作历史.list.length > 9)
+		{
+			操作历史.list.shift()
+			操作历史.index--
+		}
+		操作历史.list.push(arr)
+		$('.operate_go').hide()
+		$('.operate_back').show()
+	}
+	else
+	{
+		操作历史.list[操作历史.index] = arr
+	}
+	
+
+	moetalkStorage.setItem('moeLog', 操作历史);
+	if(send)//
+	{
+		localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
+		$.ajax({
+			url:'http://frp.freefrp.net:40404/moetalk.php',
+			async:true,
+			type:'POST',
+			data:{'chats':JSON.stringify(chats),'local_no':localStorage['local_no']},
+			dataType:'text',
+			success:function(data){
+				//console.log('2')
+				send = true
+			}
+		});
+	}
+	//console.log('1')
+	send = false;
+}
+function 撤销(goback)
+{
+	$(".dels").prop("checked",false).parent().css("background-color","").css('border-top','')
+	if(goback === 'go')操作历史.index++
+	let data = 操作历史.list[操作历史.index].chats
+	let indexs = 操作历史.list[操作历史.index].indexs
+	let mode = 操作历史.list[操作历史.index].mode
+
+	if(mode === 'add')
+	{
+		sendMessage({},'','delete',indexs,data)
+	}
+	else if(mode === 'delete')
+	{
+		sendMessage({},goback,'add',indexs,data)
+	}
+	else
+	{
+		sendMessage({},'','edit',indexs,data)
+	}
+
+	if(goback === 'back')操作历史.index--
+
+	if(操作历史.index > -1 && 操作历史.index < 操作历史.list.length-1)$('.operate_back').show()
+	else $('.operate_back').hide()
+
+	if(操作历史.index < 操作历史.list.length-1)$('.operate_go').show()
+	else
+	{
+		$('.operate_go').hide()
+		$('.operate_back').show()
+	}
 }
