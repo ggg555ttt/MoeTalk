@@ -3,8 +3,7 @@ var cfemoji = cf = 'NO';//表情差分开关
 
 var chatIndex = -1//消息索引
 
-var operate = false
-var copydata;
+var 粘贴板;
 
 var imageArr = [];//截图分段列表
 var imageArrL = 0//截图分段数量
@@ -148,14 +147,6 @@ $("body").on('click',function()
 		$("head").append('<link rel="stylesheet" href="./MoeScript/Style/style.css?2" data-n-g="">')
 	}
 	$('.delsNum').text($(".dels:checked").length)
-	// if($(".dels:checked").length > 0)
-	// {
-	// 	$(".operate_copy").prop('hidden',false)
-	// }
-	// else
-	// {
-	// 	$(".operate_copy").prop('hidden',true)
-	// }
 })
 
 
@@ -171,6 +162,7 @@ $(".frVjsk").wait(function()
 {
 	$(".frVjsk").append(`<button class='${class0}' id='uphead' hidden><b style='color:black;'>傳</b></button><span class='tool' hidden>上传头像<span id='cusname'></span></span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='https://tieba.baidu.com/p/8551808608'}.html'><button class='${class0}'><b style='color:black;'>教</b></button></a><span class='tool'>使用教程</span><br>`);
 	$(".frVjsk").append(`<a href='${href}Setting.html?${localStorage['mt-rand']}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
@@ -203,7 +195,6 @@ $('body').on('click',"#readme",function()
 
 });
 //创建人物
-$("body").append("<input id='custom' hidden type='file' accept='image/*'>");//添加上传标签
 $('body').on('click',"#makecus",function()
 {
 	let info = {
@@ -213,6 +204,7 @@ $('body').on('click',"#makecus",function()
 	custom_char(info)
 })
 //储存头像
+$("body").append("<input id='custom' hidden type='file' accept='image/*'>");//添加上传标签
 $("body").on('change','#custom',function()
 {
 	$('.dDBXxQ').show()
@@ -447,7 +439,6 @@ $("body").on('click',".operate",function()
 		$('.operateTools').hide()
 	}
 	saveStorage('chats',[...chats,...otherChats],'local')
-	//alert('功能重做中，后期更新恢复\n急用请向我反馈，我会及时更新\n若想使用存档功能请点击心形图标“❤”右边的→磁盘“🖬”图标\n※此按钮在“后台保存模式”中相当于一次手动保存')
 });
 
 //rgb(136, 204, 204)
@@ -482,7 +473,7 @@ function makeMessage(type,data,chatIndex,mode)
 	let alt = mode === 'screen' ? 'alt="screen"' : ''
 	let head = mode === 'screen' ? true : isfirst(chatIndex,chats)
 	let color = 'transparent';
-	let selected = $(`.dels:eq(${chatIndex})`).prop('checked') && mode !== 'add'
+	let selected = $(`.dels:eq(${chatIndex})`).prop('checked') && mode !== 'add' && mode !== '追加'
 
 	if(data.isFirst === true)color = 'blue';
 	if(data.is_breaking === true)color = 'red';
@@ -590,24 +581,21 @@ function makeMessage(type,data,chatIndex,mode)
 }
 function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 {
-	$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
-	$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
-	$$('.editMessage').removeClass('visible')
-	$$('.chatText').val('').innerHeight(27)
+	$('.editMessage').removeClass('visible')
+	$('.chatText').val('').innerHeight(27)
 
-	if(indexs.length === 0)indexs[0] = chatIndex
-	let dels = $(".dels:checked").length
+	if(indexs.length === 0)indexs[0] = $('.dels').index($(".dels:checked"))
+	let replyDepth = replyDepths.slice(-1)[0]
 	let nextindex;
-	let arr = {};arr.chats = [];arr.indexs = indexs;arr.mode = mode;//
+	let arr = {chats: [],mode: mode};//操作记录
+	if(!data[0])data.replyDepth = replyDepth//单条消息发送专用
 	$.each(indexs,function(k,chatIndex)
 	{
-		
-		data.replyDepth = replyDepths.slice(-1)[0]
-		if(chatIndex === -1)chatIndex = chats.length-1
-		//追加：返回追加的数据和位置
-		//删除：记载每个选中的索引和原内容
-		//数据
-		if(撤销)data = 撤销[k]
+		if(chatIndex === -1)
+		{//末尾追加
+			chatIndex = chats.length
+			indexs[k] = chatIndex
+		}
 		if(mode === 'delete')
 		{
 			chatIndex = chatIndex-k
@@ -617,7 +605,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		if(mode === 'edit')
 		{
 			arr.chats.push(chats[chatIndex])//编辑前的消息
-			chats[chatIndex] = {...chats[chatIndex],...data}
+			chats[chatIndex] = {...chats[chatIndex],...data[k] ? data[k] : data}
 			if(type)
 			{
 				if(chats[chatIndex].type === 'image' && type !== 'image')
@@ -629,26 +617,22 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		}
 		if(mode === 'add')
 		{
-			if(!撤销)
+			data.type = type
+			if($('.addChat').prop('checked'))
 			{
-				data.type = type
-				if($('.addChat').prop('checked'))
-				{
-					if(type === 'image' && !data.file)data.file = chats[chatIndex].file
-					chatIndex = chatIndex+1//向后追加
-					data.sCharacter = {no: $('.editMessage .头像').attr('alt'),index: $('.editMessage .头像').attr('title')}
-				}
-				else
-				{
-					data.isFirst = !1
-					data.isRight = !1
-					data.is_breaking = !1
-					data.sCharacter = {no:mt_settings['选择角色'].no,index:mt_settings['选择角色'].index}
-					if($(".dels:checked").length)chatIndex = $('.dels').index($(".dels:checked"))//向前追加
-					else chatIndex = chats.length//末尾追加
-				}
+				if(type === 'image' && !data.file)data.file = chats[chatIndex].file
+				chatIndex = chatIndex+1//向后追加
+				data.sCharacter = {no: $('.editMessage .头像').attr('alt'),index: $('.editMessage .头像').attr('title')}
 			}
-			if(type === 'go')chatIndex++
+			else
+			{
+				data.isFirst = !1
+				data.isRight = !1
+				data.is_breaking = !1
+				data.sCharacter = {no:mt_settings['选择角色'].no,index:mt_settings['选择角色'].index}
+				if($(".dels:checked").length)chatIndex = $('.dels').index($(".dels:checked"))//向前追加
+				else chatIndex = chats.length//末尾追加
+			}
 			try
 			{
 				chats.splice(chatIndex,0,data)
@@ -661,7 +645,12 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 				chats.splice(chatIndex,0,data)
 				//console.log(error)
 			}
-			arr.chats.push(chats[chatIndex])//追加的新消息
+			arr.chats.push(chats[chatIndex])//追加后的消息
+		}
+		if(mode === '追加')
+		{
+			chats.splice(chatIndex,0,{...data[k],...{replyDepth:replyDepth}})//防止变量被连带修改
+			arr.chats.push(chats[chatIndex])//追加后的消息
 		}
 		//显示
 		let message = mode === 'delete' ? '' : makeMessage(chats[chatIndex].type,chats[chatIndex],chatIndex,mode)
@@ -669,11 +658,6 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		{
 			$(`.消息:eq(${chatIndex})`).remove()
 			chatIndex = chatIndex-1
-			if(chats.length === 0)
-			{
-				$('.RightScreen__Box-sc-1fwinj2-1').show()//显示开头引导
-				if(操作历史.list.length === 0)$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').hide()//隐藏聊天记录
-			}
 		}
 		if(mode === 'edit')
 		{
@@ -695,18 +679,25 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 				}
 			}
 		}
+		if(mode === '追加')
+		{
+			if($('.dels').length <= chatIndex)$(".Talk__CContainer-sc-1uzn66i-1").append(message)
+			else
+			{
+				$(`.消息:eq(${chatIndex})`).before(message)
+			}
+		}
 		//处理下条消息
 		let nextchat = chats[chatIndex+1] && (!indexs[k+1] || indexs[k]+1 !== indexs[k+1]) ? chats[chatIndex+1] : false
 		if(nextchat)
 		{
 			$(`.消息:eq(${chatIndex+1})`)[0].outerHTML = makeMessage(nextchat.type,nextchat,chatIndex+1)
 		}
-		if(mode === 'add' && !$('.addChat').prop('checked'))
+		if((mode === 'add' || mode === '追加') && !$('.addChat').prop('checked'))
 		{
-			if(dels)
+			if($(".dels:checked").length)
 			{
-				$(".dels").eq(chatIndex+1).prop("checked",true);
-				$(".dels").eq(chatIndex+1).parent().css("background-color","rgb(202,215,221)");
+				$(".dels").eq(chatIndex+1).prop("checked",true).parent().css("background-color","rgb(202,215,221)");
 				nextindex = $(".dels:checked")[0]
 			}
 			else
@@ -715,11 +706,10 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 			}
 		}
 	})
-	moeLog(arr,撤销)
-	$('.消息').css('border-top','')
-	$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
+	arr.indexs = indexs;moeLog(arr,撤销)//添加操作记录
+	$('.消息').css('border-top','').find(".dels:checked").eq(0).parent().css('border-top','2px dashed #a2a2a2')//更新追加虚线
 	setTimeout(function()
-	{
+	{//编辑位置跳转
 		let behavior = "smooth"
 		if(['heart','info','reply'].indexOf(type) > -1 && !browser.isDeskTop)
 		{
@@ -729,6 +719,15 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		if(nextindex)nextindex.scrollIntoView({block:'center',behavior:behavior})
 	}, 1)
 	if(!mt_settings['后台保存'])saveStorage('chats',[...chats,...otherChats],'local')
+	if(!chats.length && !otherChats.length)
+	{
+		$('.RightScreen__Box-sc-1fwinj2-1').show()//显示开头引导
+		if(!操作历史.list.length && !粘贴板)$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').hide()//隐藏聊天记录
+	}
+	else
+	{
+		$('.RightScreen__Box-sc-1fwinj2-1').hide().eq(0).show()//隐藏开头引导
+	}
 }
 $("body").on('click',".编辑",function()
 {
@@ -739,13 +738,10 @@ $("body").on('click',".编辑",function()
 	$('.edit_2_1_1 input').hide().prop('checked',false)
 	$('.edit_2_1_1 span').hide()
 
-	$('.edit_button button').hide()
-	$('.edit_button button').removeClass('selected')
+	$('.edit_button button').hide().removeClass('selected')
 	$(`.edit_button .${chat.type}`).addClass('selected') 
 
-	$('.add_image').hide()
-	$('.add_image').next().hide()
-	$('.add_image').next().next().hide()
+	$('.add_image').hide().next().hide().next().hide()
 	
 	$('.content').innerHeight(27)
 	$('.time').innerHeight(27)
@@ -753,9 +749,7 @@ $("body").on('click',".编辑",function()
 	{
 		$('.typeTitle').text('批量编辑')
 
-		$('.editMessage .头像').removeAttr('alt')
-		$('.editMessage .头像').removeAttr('title')
-		$('.editMessage .头像').attr('src',href+'Images/Ui/setting.webp')
+		$('.editMessage .头像').removeAttr('alt').removeAttr('title').attr('src',href+'Images/Ui/setting.webp')
 
 		$('.editType').show().next().show()
 		$('.editTalk').show().next().show()
@@ -780,19 +774,14 @@ $("body").on('click',".编辑",function()
 		$('.time').val(chat.time).attr('placeholder','支持换行').innerHeight($('.time')[0].scrollHeight)
 		$('.content').val(chat.content).attr('placeholder','').innerHeight($('.content')[0].scrollHeight)
 
-		$('.editMessage .头像').attr('alt',chat.sCharacter.no)
-		$('.editMessage .头像').attr('title',chat.sCharacter.index)
-		$('.editMessage .头像').attr('src',loadhead(chat.sCharacter.no,chat.sCharacter.index))
+		$('.editMessage .头像').attr('alt',chat.sCharacter.no).attr('title',chat.sCharacter.index).attr('src',loadhead(chat.sCharacter.no,chat.sCharacter.index))
 
 		if(chat.type === 'image')
 		{
 			$('.add_image').show()
 			if(chat.file)
 			{
-				$('.add_image').next().show()
-				$('.add_image').next().next().show()
-				$('.add_image').next().attr('src',chat.file)
-				$('.add_image').next().next().text(`图片体积：${parseInt((chat.file.length/1024).toFixed(0))}KB`)
+				$('.add_image').next().show().attr('src',chat.file).next().text(`图片体积：${parseInt((chat.file.length/1024).toFixed(0))}KB`).show()
 			}
 		}
 	}
@@ -804,7 +793,7 @@ $("body").on('click',".头像框",function()
 	chatIndex = $('.消息').index($(this).parents('.消息'))
 	if(chats[chatIndex].type === 'chat' || chats[chatIndex].type === 'image')
 	{
-		sendMessage({...chats[chatIndex],...{isFirst:!chats[chatIndex].isFirst}},chats[chatIndex].type,'edit')
+		sendMessage({...chats[chatIndex],...{isFirst:!chats[chatIndex].isFirst}},chats[chatIndex].type,'edit',[chatIndex])
 	}
 });
 $("body").on('click',".editType",function()
@@ -842,34 +831,24 @@ $("body").on('click',".edit_button button",function()
 		$('.add_image').show()
 		if(chat.file)
 		{
-			$('.add_image').next().show()
-			$('.add_image').next().next().show()
-			$('.add_image').next().attr('src',chat.file)
-			$('.add_image').next().next().text(`图片体积：${parseInt((chat.file.length/1024).toFixed(0))}KB`)
+			$('.add_image').next().show().attr('src',chat.file).next().text(`图片体积：${parseInt((chat.file.length/1024).toFixed(0))}KB`).show()
 		}
 		else
 		{
-			$('.add_image').next().hide()
-			$('.add_image').next().next().hide()
-			$('.add_image').next().attr('src','')
-			$('.add_image').next().next().text('')
+			$('.add_image').next().hide().attr('src','').next().text('').hide()
 		}
 		
 	}
 	else
 	{
-		$('.add_image').hide()
-		$('.add_image').next().hide()
-		$('.add_image').next().next().hide()
+		$('.add_image').hide().next().hide().next().hide()
 	}
 });
 $("body").on('click',".fzOyMd",function()
 {
 	let no = $(this).attr('alt')
 	let index = $(this).attr('title')
-	$('.editMessage .头像').attr('alt',no)
-	$('.editMessage .头像').attr('title',index)
-	$('.editMessage .头像').attr('src',loadhead(no,index))
+	$('.editMessage .头像').attr('alt',no).attr('title',index).attr('src',loadhead(no,index))
 	$('.name').attr('placeholder',loadname(no,index))
 });
 function replyDepth(str)

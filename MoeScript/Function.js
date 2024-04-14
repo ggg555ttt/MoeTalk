@@ -1426,6 +1426,7 @@ function Translator(str)
 }
 function moeLog(arr,mode = false)
 {
+	if(replyDepths.slice(-1)[0] !== 0)return;
 	if(!mode)
 	{
 		操作历史.list.length = 操作历史.index+1
@@ -1436,14 +1437,13 @@ function moeLog(arr,mode = false)
 			操作历史.index--
 		}
 		操作历史.list.push(arr)
-		$('.operate_go').hide()
-		$('.operate_back').show()
+		$('.前进').hide()
+		$('.撤销').show()
 	}
 	else
 	{
 		操作历史.list[操作历史.index] = arr
 	}
-	
 
 	moetalkStorage.setItem('moeLog', 操作历史);
 	if(send)//
@@ -1466,34 +1466,65 @@ function moeLog(arr,mode = false)
 }
 function 撤销(goback)
 {
+	if(replyDepths.slice(-1)[0] !== 0)return;
 	$(".dels").prop("checked",false).parent().css("background-color","").css('border-top','')
-	if(goback === 'go')操作历史.index++
+	if(goback === '前进')操作历史.index++
 	let data = 操作历史.list[操作历史.index].chats
 	let indexs = 操作历史.list[操作历史.index].indexs
 	let mode = 操作历史.list[操作历史.index].mode
-
-	if(mode === 'add')
+	if(mode === 'add' || mode === '追加')
 	{
-		sendMessage({},'','delete',indexs,data)
+		sendMessage(data,'','delete',indexs,!0)
 	}
 	else if(mode === 'delete')
 	{
-		sendMessage({},goback,'add',indexs,data)
+		sendMessage(data,'','追加',indexs,!0)
 	}
 	else
 	{
-		sendMessage({},'','edit',indexs,data)
+		sendMessage(data,'','edit',indexs,!0)
 	}
 
-	if(goback === 'back')操作历史.index--
+	if(goback === '撤销')操作历史.index--
 
-	if(操作历史.index > -1 && 操作历史.index < 操作历史.list.length-1)$('.operate_back').show()
-	else $('.operate_back').hide()
+	if(操作历史.index > -1 && 操作历史.index < 操作历史.list.length-1)$('.撤销').show()
+	else $('.撤销').hide()
 
-	if(操作历史.index < 操作历史.list.length-1)$('.operate_go').show()
+	if(操作历史.index < 操作历史.list.length-1)$('.前进').show()
 	else
 	{
-		$('.operate_go').hide()
-		$('.operate_back').show()
+		$('.前进').hide()
+		$('.撤销').show()
 	}
+}
+function 复制()
+{
+	粘贴板 = []
+	if($(".dels:checked").length)
+	{
+		let index;
+		$(".dels:checked").each(function()
+		{
+			index = $('.dels').index($(this))
+			粘贴板.push(chats[index])
+		})
+		$(".粘贴").show()
+		$(".dels").prop("checked",false).parent().css("background-color","").css('border-top','')
+	}
+	else
+	{
+		$(".粘贴").hide()
+	}
+}
+function 粘贴()
+{
+	let index = $('.dels').index($(".dels:checked:eq(0)"))
+	let indexs = []
+	let length = 粘贴板.length
+	for(let i = 0;i < length;i++)
+	{
+		if(index !== -1)indexs.push(index+i)
+		else indexs.push(index)
+	}
+	sendMessage(粘贴板,'','追加',indexs)
 }

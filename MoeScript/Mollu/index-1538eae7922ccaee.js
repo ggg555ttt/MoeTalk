@@ -1960,32 +1960,25 @@
 											onClick: function()
 											{
 												t(!1)//#r()
+												let indexs = []
 												if($$(".dels:checked").length)
 												{
-													let indexs = []
 													$$('.dels:checked').each(function(k,v)
 													{
 														indexs.push($$('.dels').index(v))
 													})
-													sendMessage({},'','delete',indexs)
 												}
 												else
 												{
-													let indexs =  Object.keys(chats)
+													indexs =  Object.keys(chats)
 													let length = indexs.length
 													for (let i = 0; i < length; i++)
 													{
 														indexs[i] = i
 													}
-													let arr = {};arr.chats = chats;arr.indexs = indexs;arr.mode = 'delete';//
-													moeLog(arr)
-													chats = []
-													otherChats = []
-													$$(`.消息`).remove()
-													$$('.RightScreen__Box-sc-1fwinj2-1').show()//显示开头引导
-													if(操作历史.list.length === 0)$$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').hide()//隐藏聊天记录
-													saveStorage('chats',[],'local')
+													if(replyDepths.slice(-1)[0] === 0)otherChats = []
 												}
+												sendMessage({},'','delete',indexs)
 											},
 											children: L.Z.confirm[o]
 										})]
@@ -2576,8 +2569,8 @@
 								list: []
 							}
 							$$('.消息').remove()
-							$$('.operate_go').hide()
-							$$('.operate_back').hide()
+							$$('.前进').hide()
+							$$('.撤销').hide()
 							$$('.replyBack').parent().css('display','none')
 							$$('.RightScreen__Box-sc-1fwinj2-1').hide()//隐藏开头引导
 							$$('.RightScreen__Box-sc-1fwinj2-1:eq(0)').show()//显示聊天记录
@@ -2956,7 +2949,7 @@
 								title: "Delete ALL",
 								onClick: function()
 								{
-									N(!0)
+									if(chats.length)N(!0)
 								},
 								children: (0, m.jsx)(c.xL,
 								{
@@ -4093,7 +4086,7 @@
 													sCharacter: {no: $$('.editMessage .头像').attr('alt'),index: $$('.editMessage .头像').attr('title')}
 													
 												}
-												sendMessage(data,type,$$('.addChat').prop('checked') ? 'add' : 'edit')
+												sendMessage(data,type,$$('.addChat').prop('checked') ? 'add' : 'edit',[chatIndex])
 											}
 										},
 										children: L.Z.confirm[f]
@@ -4557,7 +4550,7 @@
 							{
 								hidden: !0,
 								style:{height: "auto","width": "auto"},
-								className: 'operate_back',
+								className: '撤销',
 								children: (0, m.jsx)(W,
 								{
 									className: "bold",
@@ -4567,15 +4560,12 @@
 										children: '撤销'
 									})
 								}),
-								onClick: function()
-								{
-									撤销('back')
-								}
+								onClick: function(){撤销('撤销')}
 							}), (0, m.jsx)(c.jl,
 							{
 								hidden: !0,
 								style:{height: "auto","width": "auto"},
-								className: 'operate_go',
+								className: '前进',
 								children: (0, m.jsx)(W,
 								{
 									className: "bold",
@@ -4584,16 +4574,11 @@
 										style:{fontSize: "1.1rem"},
 										children: '前进'
 									})
-								}),
-								onClick: function()
-								{
-									撤销('go')
-								}
+								}),onClick: function(){撤销('前进')}
 							}), (0, m.jsx)(c.jl,
 							{
-								hidden: !0,
 								style:{height: "auto","width": "auto"},
-								className: 'operate_copy',
+								className: '复制',
 								children: (0, m.jsx)(W,
 								{
 									className: "bold",
@@ -4603,11 +4588,12 @@
 										children: '复制'
 									})
 								}),
+								onClick: function(){复制()}
 							}), (0, m.jsx)(c.jl,
 							{
-								hidden: !0,
+								hidden: !粘贴板,
 								style:{height: "auto","width": "auto"},
-								className: 'operate_paste',
+								className: '粘贴',
 								children: (0, m.jsx)(W,
 								{
 									className: "bold",
@@ -4616,7 +4602,8 @@
 										style:{fontSize: "1.1rem"},
 										children: '粘贴'
 									})
-								})
+								}),
+								onClick: function(){粘贴()}
 							}), (0, m.jsx)(c.jl,
 							{
 								style:{height: "auto","width": "auto"},
