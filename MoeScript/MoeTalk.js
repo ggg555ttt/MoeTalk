@@ -26,6 +26,13 @@ var 操作历史 = {
 	index: -1,
 	list: []
 }
+// moetalkStorage.getItem('moeLog', function(err, moeLog)
+// {
+// 	if(!moeLog)return;
+// 	操作历史 = moeLog
+// 	$('.RightScreen__Box-sc-1fwinj2-1').show()
+// 	$('.撤销').show()
+// })
 if(!mt_settings['存储模式'])
 {
 	$('.dDBXxQ').wait(function(){$('.dDBXxQ').show().after('<div class="loading"><div/>')},".dDBXxQ")//开始加载
@@ -693,16 +700,16 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		{
 			$(`.消息:eq(${chatIndex+1})`)[0].outerHTML = makeMessage(nextchat.type,nextchat,chatIndex+1)
 		}
-		if((mode === 'add' || mode === '追加') && !$('.addChat').prop('checked'))
+		if((mode === 'add' || mode === '追加' || (撤销 && (mode === 'edit' || mode === 'delete'))) && !$('.addChat').prop('checked'))
 		{
 			if($(".dels:checked").length)
 			{
 				$(".dels").eq(chatIndex+1).prop("checked",true).parent().css("background-color","rgb(202,215,221)");
-				nextindex = $(".dels:checked")[0]
+				nextindex = ".dels:checked"
 			}
 			else
 			{
-				nextindex = $(`.消息:eq(${chatIndex})`)[0]
+				nextindex = `.消息:eq(${chatIndex})`
 			}
 		}
 	})
@@ -716,7 +723,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 			behavior = "auto"
 			if(winHeight === window.innerHeight)behavior = "smooth"
 		}
-		if(nextindex)nextindex.scrollIntoView({block:'center',behavior:behavior})
+		if(nextindex)blink(nextindex,撤销,mode).scrollIntoView({block:'center',behavior:behavior})
 	}, 1)
 	if(!mt_settings['后台保存'])saveStorage('chats',[...chats,...otherChats],'local')
 	if(!chats.length && !otherChats.length)
@@ -728,6 +735,17 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 	{
 		$('.RightScreen__Box-sc-1fwinj2-1').hide().eq(0).show()//隐藏开头引导
 	}
+}
+function blink(element,撤销,mode)
+{
+	if(撤销 || mode === '追加')
+	{
+		return $(element).fadeOut(500, function() 
+		{
+			$(this).fadeIn(500, function() {});
+		})[0];
+	}
+	return $(element)[0]
 }
 $("body").on('click',".编辑",function()
 {

@@ -4016,7 +4016,7 @@
 										title: "删除消息",
 										onClick: function()
 										{
-											sendMessage({},'','delete')
+											sendMessage({},'','delete',[chatIndex])
 										},
 										children: (0, m.jsx)(c.xL,
 										{

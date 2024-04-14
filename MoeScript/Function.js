@@ -1466,7 +1466,11 @@ function moeLog(arr,mode = false)
 }
 function 撤销(goback)
 {
-	if(replyDepths.slice(-1)[0] !== 0)return;
+	if(replyDepths.slice(-1)[0] !== 0)
+	{
+		alert('非主分支下无法使用撤回前进功能')
+		return;
+	}
 	$(".dels").prop("checked",false).parent().css("background-color","").css('border-top','')
 	if(goback === '前进')操作历史.index++
 	let data = 操作历史.list[操作历史.index].chats
