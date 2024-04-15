@@ -91,13 +91,13 @@ if(!mt_settings['存储模式'])
 					window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 					window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 				}
-				moetalkStorage.getItem('moeLog', function(err, moeLog)
-				{
-					if(!moeLog)return;
-					操作历史 = moeLog
-					$('.RightScreen__Box-sc-1fwinj2-1').show()
-					$('.撤销').show()
-				})
+				// moetalkStorage.getItem('moeLog', function(err, moeLog)
+				// {
+				// 	if(!moeLog)return;
+				// 	操作历史 = moeLog
+				// 	$('.RightScreen__Box-sc-1fwinj2-1').show()
+				// 	$('.撤销').show()
+				// })
 			})
 		})
 	})
