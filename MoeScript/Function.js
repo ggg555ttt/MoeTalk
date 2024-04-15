@@ -1438,7 +1438,7 @@ function moeLog(arr,mode = false)
 		}
 		操作历史.list.push(arr)
 		$('.前进').hide()
-		$('.撤销').show()
+		$('.撤销').show().text(arr.mode === 'add' || arr.mode === '追加' ? '撤销追加' : arr.mode === 'delete' ? '撤销删除' : '撤销编辑')
 	}
 	else
 	{
@@ -1490,15 +1490,22 @@ function 撤销(goback)
 	}
 
 	if(goback === '撤销')操作历史.index--
-
-	if(操作历史.index > -1 && 操作历史.index < 操作历史.list.length-1)$('.撤销').show()
+	mode = 操作历史.list[操作历史.index] ? 操作历史.list[操作历史.index].mode : mode
+	if(操作历史.index > -1 && 操作历史.index < 操作历史.list.length-1)
+	{
+		$('.撤销').show().text(mode === 'add' || mode === '追加' ? '撤销追加' : mode === 'delete' ? '撤销删除' : '撤销编辑')
+	}
 	else $('.撤销').hide()
 
-	if(操作历史.index < 操作历史.list.length-1)$('.前进').show()
+	if(操作历史.index < 操作历史.list.length-1)
+	{
+		mode = 操作历史.list[操作历史.index+1] ? 操作历史.list[操作历史.index+1].mode : mode
+		$('.前进').show().text(mode === 'add' || mode === '追加' ? '恢复删除' : mode === 'delete' ? '恢复追加' : '恢复编辑')
+	}
 	else
 	{
 		$('.前进').hide()
-		$('.撤销').show()
+		$('.撤销').show().text(mode === 'add' || mode === '追加' ? '撤销追加' : mode === 'delete' ? '撤销删除' : '撤销编辑')
 	}
 }
 function 复制()
@@ -1531,4 +1538,15 @@ function 粘贴()
 		else indexs.push(index)
 	}
 	sendMessage(粘贴板,'','追加',indexs)
+}
+function test(val)
+{
+	console.log(val)
+}
+function blink(element)
+{
+	return $(element).fadeOut(500, function() 
+	{
+		$(this).fadeIn(500, function() {});
+	})[0];
 }

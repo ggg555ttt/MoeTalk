@@ -26,13 +26,6 @@ var 操作历史 = {
 	index: -1,
 	list: []
 }
-// moetalkStorage.getItem('moeLog', function(err, moeLog)
-// {
-// 	if(!moeLog)return;
-// 	操作历史 = moeLog
-// 	$('.RightScreen__Box-sc-1fwinj2-1').show()
-// 	$('.撤销').show()
-// })
 if(!mt_settings['存储模式'])
 {
 	$('.dDBXxQ').wait(function(){$('.dDBXxQ').show().after('<div class="loading"><div/>')},".dDBXxQ")//开始加载
@@ -98,7 +91,13 @@ if(!mt_settings['存储模式'])
 					window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 					window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 				}
-				
+				moetalkStorage.getItem('moeLog', function(err, moeLog)
+				{
+					if(!moeLog)return;
+					操作历史 = moeLog
+					$('.RightScreen__Box-sc-1fwinj2-1').show()
+					$('.撤销').show()
+				})
 			})
 		})
 	})
@@ -447,9 +446,6 @@ $("body").on('click',".operate",function()
 	}
 	saveStorage('chats',[...chats,...otherChats],'local')
 });
-
-//rgb(136, 204, 204)
-//rgb(139, 187, 233)
 function isfirst(chatIndex,chats,mode)
 {
 	if(chats[chatIndex])
@@ -594,6 +590,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 	if(indexs.length === 0)indexs[0] = $('.dels').index($(".dels:checked"))
 	let replyDepth = replyDepths.slice(-1)[0]
 	let nextindex;
+	let addChat = $('.addChat').prop('checked')
 	let arr = {chats: [],mode: mode};//操作记录
 	if(!data[0])data.replyDepth = replyDepth//单条消息发送专用
 	$.each(indexs,function(k,chatIndex)
@@ -625,7 +622,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		if(mode === 'add')
 		{
 			data.type = type
-			if($('.addChat').prop('checked'))
+			if(addChat)
 			{
 				if(type === 'image' && !data.file)data.file = chats[chatIndex].file
 				chatIndex = chatIndex+1//向后追加
@@ -676,7 +673,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 			if(chats.length === 1)$(".Talk__CContainer-sc-1uzn66i-1").append(message)
 			else
 			{
-				if($(".dels:checked").length && !$('.addChat').prop('checked'))
+				if($(".dels:checked").length && !addChat)
 				{
 					$(`.消息:eq(${chatIndex})`).before(message)
 				}
@@ -696,21 +693,11 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		}
 		//处理下条消息
 		let nextchat = chats[chatIndex+1] && (!indexs[k+1] || indexs[k]+1 !== indexs[k+1]) ? chats[chatIndex+1] : false
-		if(nextchat)
+		if(nextchat)$(`.消息:eq(${chatIndex+1})`)[0].outerHTML = makeMessage(nextchat.type,nextchat,chatIndex+1)
+		nextindex = (mode === 'add' || mode === 'delete') && chatIndex !== -1 ? `.消息:eq(${chatIndex})` : ''
+		if((撤销 || addChat || mode === '追加' || (mode === 'edit' && 撤销 !== null)) && mode !== 'delete')
 		{
-			$(`.消息:eq(${chatIndex+1})`)[0].outerHTML = makeMessage(nextchat.type,nextchat,chatIndex+1)
-		}
-		if((mode === 'add' || mode === '追加' || (撤销 && (mode === 'edit' || mode === 'delete'))) && !$('.addChat').prop('checked'))
-		{
-			if($(".dels:checked").length)
-			{
-				$(".dels").eq(chatIndex+1).prop("checked",true).parent().css("background-color","rgb(202,215,221)");
-				nextindex = ".dels:checked"
-			}
-			else
-			{
-				nextindex = `.消息:eq(${chatIndex})`
-			}
+			nextindex = blink(`.消息:eq(${chatIndex})`) ? `.消息:eq(${chatIndex})` : ''
 		}
 	})
 	arr.indexs = indexs;moeLog(arr,撤销)//添加操作记录
@@ -723,7 +710,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 			behavior = "auto"
 			if(winHeight === window.innerHeight)behavior = "smooth"
 		}
-		if(nextindex)blink(nextindex,撤销,mode).scrollIntoView({block:'center',behavior:behavior})
+		if(nextindex)$(nextindex)[0].scrollIntoView({block:'center',behavior:behavior})
 	}, 1)
 	if(!mt_settings['后台保存'])saveStorage('chats',[...chats,...otherChats],'local')
 	if(!chats.length && !otherChats.length)
@@ -735,17 +722,6 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 	{
 		$('.RightScreen__Box-sc-1fwinj2-1').hide().eq(0).show()//隐藏开头引导
 	}
-}
-function blink(element,撤销,mode)
-{
-	if(撤销 || mode === '追加')
-	{
-		return $(element).fadeOut(500, function() 
-		{
-			$(this).fadeIn(500, function() {});
-		})[0];
-	}
-	return $(element)[0]
 }
 $("body").on('click',".编辑",function()
 {
@@ -811,7 +787,7 @@ $("body").on('click',".头像框",function()
 	chatIndex = $('.消息').index($(this).parents('.消息'))
 	if(chats[chatIndex].type === 'chat' || chats[chatIndex].type === 'image')
 	{
-		sendMessage({...chats[chatIndex],...{isFirst:!chats[chatIndex].isFirst}},chats[chatIndex].type,'edit',[chatIndex])
+		sendMessage({...chats[chatIndex],...{isFirst:!chats[chatIndex].isFirst}},chats[chatIndex].type,'edit',[chatIndex],null)
 	}
 });
 $("body").on('click',".editType",function()
