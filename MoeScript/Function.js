@@ -1073,6 +1073,10 @@ function mt_emojis(S,mode)
 			表情类型 = `${name}(0暂无)`
 			表情页码 = '0 / 0'
 			S(!0)
+			setTimeout(function()
+			{
+				if($$(`.差分映射.selected`).length)$$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',behavior:"smooth"})
+			}, 100)
 			return;
 		}
 		
@@ -1125,6 +1129,10 @@ function mt_emojis(S,mode)
 			自设差分[2] = CustomFaceAuthor[cfarr[pageIdnex][0]]
 			S(!0)
 			saveStorage('差分书签',差分书签,'session')
+			setTimeout(function()
+			{
+				if($$(`.差分映射.selected`).length)$$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',behavior:"smooth"})
+			}, 100)
 			return;
 		}
 		表情类型 = `${name}(0暂无)`
