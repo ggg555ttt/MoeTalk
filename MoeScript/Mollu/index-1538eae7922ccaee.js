@@ -3131,7 +3131,7 @@
 													差分映射.id = mt_settings.选择角色.no
 													差分映射.index = mt_settings.选择角色.index
 												}
-												click('#close');
+												$$('.切换表情').click()
 											}
 										}), (0, m.jsx)(ea.Dx,
 										{
@@ -3140,13 +3140,16 @@
 											children: 表情类型//#加入差分表情
 										}), (0, m.jsx)(ea.ec,
 										{
-											id: 'close',//@
 											onClick: function()
 											{
 												s()
 											},
 											children: (0, m.jsx)(c.j4,
 											{})
+										}), (0, m.jsx)(ea.ec,
+										{
+											className: '切换表情',hidden: !0,
+											onClick: function(){s()}
 										})]
 									}), (0, m.jsxs)(ea.h4,
 									{
@@ -3173,7 +3176,7 @@
 												{
 													mt_emojis('customface',cf)
 												}
-												click('#close');
+												$$('.切换表情').click()
 											}
 										}), (0, m.jsx)(c.Bx,
 										{
@@ -3181,14 +3184,14 @@
 											style:
 											{
 												"width": "auto",
-												"color": "black"
+												"color": "rgb(63, 81, 181)"
 											},
-											children: '←',
+											children: '◀',
 											hidden: 表情页码 == '0 / 0' || 表情页码 == '1 / 1',
 											onClick:function()
 											{
 												mt_emojis('-',cf)
-												click('#close');
+												$$('.切换表情').click()
 											}
 										}), (0, m.jsx)(ea.Dx,
 										{
@@ -3204,14 +3207,14 @@
 											style:
 											{
 												"width": "auto",
-												"color": "black"
+												"color": "rgb(63, 81, 181)"
 											},
-											children: '→',
+											children: '▶',
 											hidden: 表情页码 == '0 / 0' || 表情页码 == '1 / 1',
 											onClick:function()
 											{
 												mt_emojis('+',cf)
-												click('#close');
+												$$('.切换表情').click()
 											}
 										}), (0, m.jsx)(c.Bx,
 										{
@@ -3266,7 +3269,17 @@
 													width: 310,
 													onClick: function()
 													{
-														sendMessage({content: v},'image'), s()
+														if($$('.editMessage.visible').length)
+														{
+															$$('.content').val(v)
+															$$('.图片文件').show().attr('src',v)
+															$$('.图片信息').show().text('链接图片').attr('title','链接')
+															s()
+														}
+														else
+														{
+															sendMessage({content: v},'image'), s()
+														}
 													},
 													src: href+v//#表情链接
 												}, n)
@@ -3465,12 +3478,11 @@
 											width: "2.2rem",
 											height: "2.2rem"
 										},
-										title: "emoticon",
+										className: "图片表情",
 										onClick: function()
 										{
-											cfemoji = 'Emoji';//@这是原版表情
+											cfemoji = 'Emoji';//@这是图片表情
 											mt_emojis(S,cfemoji)
-											//S(!0)
 										},
 										children: (0, m.jsx)(c.xL,
 										{
@@ -3486,12 +3498,11 @@
 											width: "2.2rem",
 											height: "2.2rem"
 										},
-										id: "CharFace",
+										className: "差分表情",
 										onClick: function()
 										{
 											cfemoji = 'CharFace';///这是差分表情
 											mt_emojis(S,cfemoji)
-											//S(!0)
 										},
 										children: (0, m.jsx)(c.xL,
 										{
@@ -3938,7 +3949,7 @@
 								{
 									hidden: a !== 'image' || $$('.dels:checked').length > 1,
 									children: L.Z.add_image[f],
-									className: "add_image medium",
+									className: "图片选项 选择图片 medium",
 									style: 
 									{
 										"overflow": "hidden",
@@ -3953,11 +3964,50 @@
 									}
 								}), (0,m.jsx)('img',
 								{
+									className: "图片选项 图片文件",
 									width:"auto",
 									height:"64px"
-								}), (0, m.jsx)('span',{}), 
-								(0, m.jsx)("input",
+								}), (0, m.jsx)('span',
 								{
+									className: "图片选项 图片信息"
+								}), (0, m.jsx)("div",
+								{
+									className:"图片选项 edit_4",
+									style:{justifyContent: 'center'},
+									children: [(0, m.jsx)(eN.g4,
+									{
+										children: '选择表情',
+										style: 
+										{
+											"overflow": "hidden",
+											"text-overflow": "ellipsis",
+											"white-space": "nowrap",
+											"width": "30%",
+											"padding": "0"
+										},
+										onClick: function(e)
+										{
+											$$('.图片表情').click()
+										}
+									}), (0, m.jsx)(eN.g4,
+									{
+										children: '选择差分',
+										style: 
+										{
+											"overflow": "hidden",
+											"text-overflow": "ellipsis",
+											"white-space": "nowrap",
+											"width": "30%",
+											"padding": "0"
+										},
+										onClick: function(e)
+										{
+											$$('.差分表情').click()
+										}
+									})]
+								}), (0, m.jsx)("input",
+								{
+									className: "上传图片",
 									type: "file",
 									ref: _,
 									hidden: 1,
@@ -3970,7 +4020,7 @@
 										ready.onload = function(e)
 										{
 											var base64Img = e.target.result;
-											compress(base64Img,'image',$$('.addChat').prop('checked') ? 'add' : 'edit')
+											compress(base64Img,'image','edit')
 										}
 									}
 								}), (0, m.jsx)('div',
@@ -4002,7 +4052,7 @@
 													children: (0, m.jsx)('div',
 													{
 														className:"edit_3_box3_2_1",
-														children: a === 'image' ? '可以输入图片链接' : L.Z.input_comment[f]
+														children: L.Z.input_comment[f]
 													})
 												})]
 											})
@@ -4012,11 +4062,10 @@
 								{
 									children: [(0, m.jsx)(eO,
 									{
-										hidden: $$('.dels:checked').length > 1,
 										title: "删除消息",
 										onClick: function()
 										{
-											sendMessage({},'','delete',[chatIndex])
+											$$('.dels:checked').length > 1 ? $$('#tool-delete').click() : sendMessage({},'','delete',[chatIndex])
 										},
 										children: (0, m.jsx)(c.xL,
 										{
@@ -4036,11 +4085,10 @@
 										onClick: function()
 										{
 											let type = ''
-											if($$('.dels:checked').length > 1 && confirm('※注意!!!\n只输入一个空格会判断为清空该内容\n图片转为其它类型时会清除文件\n发言人为空时则不修改发言人\n点击【确定】开始批量修改'))
+											if($$('.dels:checked').length > 1)
 											{
 												let data = {}
-
-												if($$('.editType').prop('checked'))
+												if($$('.edit_button .selected').attr('title'))
 												{
 													type = $$('.edit_button .selected').attr('title')
 												}
@@ -4051,6 +4099,8 @@
 												if($$('.time').val() === ' ')data.time = ''
 												if($$('.content').val() && $$('.content').val() !== ' ')data.content = $$('.content').val()
 												if($$('.content').val() === ' ')data.content = ''
+
+												if(type === 'image' && $$('.图片文件').attr('src') && $$('.图片信息').attr('title') !== '链接')data.file = $$('.图片文件').attr('src')
 
 												if($$('.editTalk').prop('checked'))
 												{
@@ -4068,7 +4118,7 @@
 												{
 													indexs.push($$('.dels').index(v))
 												})
-												sendMessage(data,type,'edit',indexs)
+												if(confirm('※注意!!!\n只输入一个空格会判断为清空该内容\n图片转为其它类型时会清除文件\n发言人为空时则不修改发言人\n点击【确定】开始批量修改'))sendMessage(data,type,'edit',indexs)
 											}
 											else
 											{
@@ -4082,7 +4132,7 @@
 													isFirst: $$('.isFirst').prop('checked'),
 													isRight : $$('.isRight').prop('checked'),
 													is_breaking : $$('.is_breaking').prop('checked'),
-													file: type === 'image' ? $$('.addChat').prop('checked') ? '' : chats[chatIndex].file : '',
+													file: type === 'image' && $$('.图片文件').attr('src') && $$('.图片信息').attr('title') !== '链接' ? $$('.图片文件').attr('src') : '',
 													sCharacter: {no: $$('.editMessage .头像').attr('alt'),index: $$('.editMessage .头像').attr('title')}
 													
 												}

@@ -942,7 +942,7 @@ var mt_characters = {
             "pinyin": "qishenlin"
         },
         "charface": "七神凛/NP0097/NP0097.16,七神凛/rin/rin.43,七神凛/rin/rin-S2.43,七神凛/七神凛.10",
-        "customface": ""
+        "customface": "巴啦啦小凉蛋/凛/凛.3"
     },
     "不知火花耶": {
         "school": "其他",
@@ -1062,7 +1062,7 @@ var mt_characters = {
             "pinyin": "lianbangxueshenghuichang"
         },
         "charface": "联邦学生会长/NP0040/NP0040.24,联邦学生会长/联邦学生会长.4",
-        "customface": "巴啦啦小凉蛋/会长/会长.3"
+        "customface": ""
     },
     "凯撒士兵": {
         "school": "其他",

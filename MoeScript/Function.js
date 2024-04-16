@@ -254,21 +254,14 @@ function compress(base64Img,type = 'head',mode = 'add')
 
 		if(type === 'image')
 		{
-			let data = 
-			{
-				name : $('.name').val(),
-				time : $('.time').val(),
-				content: $('.content').val(),
-				isFirst: $('.isFirst').prop('checked'),
-				isRight : $('.isRight').prop('checked'),
-				is_breaking : $('.is_breaking').prop('checked'),
-				file: newBase64,
-				sCharacter: {no: $('.editMessage .头像').attr('alt'),index: $('.editMessage .头像').attr('title')},
-				type: 'image'
-			}
 			if(mode === 'edit')
 			{
-				data = 
+				$('.图片文件').show().attr('src',newBase64)
+				$('.图片信息').show().text(`图片体积：${parseInt((newBase64.length/1024).toFixed(0))}KB`).attr('title','图片')
+			}
+			else
+			{
+				let data = 
 				{
 					name : $('.name').val(),
 					time : $('.time').val(),
@@ -278,10 +271,11 @@ function compress(base64Img,type = 'head',mode = 'add')
 					is_breaking : $('.is_breaking').prop('checked'),
 					file: newBase64,
 					sCharacter: {no: $('.editMessage .头像').attr('alt'),index: $('.editMessage .头像').attr('title')},
-					type: type
+					type: 'image'
 				}
+				sendMessage(data,'image',mode)
 			}
-			sendMessage(data,'image',mode)
+			
 		}
 		else
 		{
@@ -1438,7 +1432,7 @@ function moeLog(arr,mode = false)
 		}
 		操作历史.list.push(arr)
 		$('.前进').hide()
-		$('.撤销').show().text(arr.mode === 'add' || arr.mode === '追加' ? '撤销追加' : arr.mode === 'delete' ? '撤销删除' : '撤销编辑')
+		$('.撤销').show().text(arr.mode === 'add' || arr.mode === '追加' ? '◀撤销追加' : arr.mode === 'delete' ? '◀撤销删除' : '◀撤销编辑')
 	}
 	else
 	{
@@ -1493,19 +1487,19 @@ function 撤销(goback)
 	mode = 操作历史.list[操作历史.index] ? 操作历史.list[操作历史.index].mode : mode
 	if(操作历史.index > -1 && 操作历史.index < 操作历史.list.length-1)
 	{
-		$('.撤销').show().text(mode === 'add' || mode === '追加' ? '撤销追加' : mode === 'delete' ? '撤销删除' : '撤销编辑')
+		$('.撤销').show().text(mode === 'add' || mode === '追加' ? '◀撤销追加' : mode === 'delete' ? '◀撤销删除' : '◀撤销编辑')
 	}
 	else $('.撤销').hide()
 
 	if(操作历史.index < 操作历史.list.length-1)
 	{
 		mode = 操作历史.list[操作历史.index+1] ? 操作历史.list[操作历史.index+1].mode : mode
-		$('.前进').show().text(mode === 'add' || mode === '追加' ? '恢复删除' : mode === 'delete' ? '恢复追加' : '恢复编辑')
+		$('.前进').show().text(mode === 'add' || mode === '追加' ? '恢复删除▶' : mode === 'delete' ? '恢复追加▶' : '恢复编辑▶')
 	}
 	else
 	{
 		$('.前进').hide()
-		$('.撤销').show().text(mode === 'add' || mode === '追加' ? '撤销追加' : mode === 'delete' ? '撤销删除' : '撤销编辑')
+		$('.撤销').show().text(mode === 'add' || mode === '追加' ? '◀撤销追加' : mode === 'delete' ? '◀撤销删除' : '◀撤销编辑')
 	}
 }
 function 复制()

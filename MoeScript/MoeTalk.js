@@ -364,10 +364,10 @@ $('body').on('click',"#mt-style",function()
 	saveStorage('设置选项',mt_settings,'local')
 })
 
-$('body').on('click',"#close",function()
+$('body').on('click',".切换表情",function()
 {
-	if(cf == 'CharFace')setTimeout(function(){$('#CharFace').click()})
-	if(cf == 'Emoji')setTimeout(function(){$('[title="emoticon"]').click()})
+	if(cf == 'CharFace')setTimeout(function(){$('.差分表情').click()})
+	if(cf == 'Emoji')setTimeout(function(){$('.图片表情').click()})
 })
 
 $("body").on('click',".dropdown button",function()
@@ -666,6 +666,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		if(mode === 'edit')
 		{
 			let chat = chats[chatIndex]
+
 			$(`.消息:eq(${chatIndex})`)[0].outerHTML = message
 		}
 		if(mode === 'add')
@@ -733,9 +734,10 @@ $("body").on('click',".编辑",function()
 	$('.edit_2_1_1 span').hide()
 
 	$('.edit_button button').hide().removeClass('selected')
-	$(`.edit_button .${chat.type}`).addClass('selected') 
+	if($('.dels:checked').length < 2)$(`.edit_button .${chat.type}`).addClass('selected') 
 
-	$('.add_image').hide().next().hide().next().hide()
+	$('.图片选项').hide()
+	$('.图片文件').attr('src','')
 	
 	$('.content').innerHeight(27)
 	$('.time').innerHeight(27)
@@ -772,10 +774,21 @@ $("body").on('click',".编辑",function()
 
 		if(chat.type === 'image')
 		{
-			$('.add_image').show()
+			$('.图片选项').show()
 			if(chat.file)
 			{
-				$('.add_image').next().show().attr('src',chat.file).next().text(`图片体积：${parseInt((chat.file.length/1024).toFixed(0))}KB`).show()
+				$('.图片文件').attr('src',chat.file)
+				$('.图片信息').text(`图片体积：${parseInt((chat.file.length/1024).toFixed(0))}KB`)
+			}
+			else if(chat.content)
+			{
+				$('.图片文件').attr('src',chat.content)
+				$('.图片信息').text('链接图片')
+			}
+			else
+			{
+				$('.图片文件').hide()
+				$('.图片信息').text('无图片')
 			}
 		}
 	}
@@ -816,26 +829,26 @@ $("body").on('click',".editTalk",function()
 });
 $("body").on('click',".edit_button button",function()
 {
-	let chat = chats[chatIndex]
+	let file = $('.图片文件').attr('src')
 	let type = $(this).attr('title')
 	$('.edit_button button').removeClass('selected')
 	$(`.edit_button .${type}`).addClass('selected')
-	if(type === 'image' && $('.dels:checked').length < 2)
+	if(type === 'image')
 	{
-		$('.add_image').show()
-		if(chat.file)
+		$('.图片选项').show()
+		if(file)
 		{
-			$('.add_image').next().show().attr('src',chat.file).next().text(`图片体积：${parseInt((chat.file.length/1024).toFixed(0))}KB`).show()
+			$('.图片文件').attr('src',file)
 		}
 		else
 		{
-			$('.add_image').next().hide().attr('src','').next().text('').hide()
+			$('.图片文件').hide().attr('src','')
+			$('.图片信息').text($('.dels:checked').length < 2 ? '无图片' : '默认')
 		}
-		
 	}
 	else
 	{
-		$('.add_image').hide().next().hide().next().hide()
+		$('.图片选项').hide()
 	}
 });
 $("body").on('click',".fzOyMd",function()
@@ -927,5 +940,5 @@ $("body").on('click',".差分映射",function()
 	差分映射 = []
 	差分映射.id = $(this).attr('alt')
 	差分映射.index = $(this).attr('title')
-	click('#close');
+	$('.切换表情').click()
 });
