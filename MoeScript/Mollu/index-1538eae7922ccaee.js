@@ -2074,7 +2074,7 @@
 										return e.abrupt("return");
 									case 4:
 										$$('.imageSave').remove()
-										mt_capture(S,eg,j,(0, u._3)(!0, !0),_)//新版截图
+										$$('.mt_capture').click()
 									case 6:
 									case "end":
 										return e.stop()
@@ -2109,7 +2109,6 @@
 						{
 							onDoubleClick: function(e)
 							{
-								srceenMode()
 								return e.stopPropagation(), !1
 							},
 							children: [(0, m.jsxs)(ea.h4,
@@ -2117,7 +2116,11 @@
 								children: [(0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
-									children: `${$$('.dels:checked').length ? '区域截图' : L.Z.download_to_image[g]}(${imageArr.length})`
+									children: [`${$$('.dels:checked').length ? '区域截图' : L.Z.download_to_image[g]}`,'(',(0, m.jsx)('span',
+									{
+										className: "截图数量",
+										children: imageArr.length
+									}),')']
 								}), (0, m.jsx)(ea.ec,
 								{
 									onClick: function()
@@ -2127,6 +2130,13 @@
 									},
 									children: (0, m.jsx)(c.j4,
 									{})
+								}), (0, m.jsx)('截图',{
+									hidden: true,
+									className: 'mt_capture',
+									onClick: function()
+									{
+										mt_capture(S,eg,j,(0, u._3)(!0, !0),_)//新版截图
+									}
 								})]
 							}), (0, m.jsxs)(ea.$0,
 							{
@@ -2280,12 +2290,7 @@
 											style:{color:'red'},
 											className:'bold',
 											children: $$('.dels:checked').length
-										}), '条消息，长度约为',(0, m.jsx)("span",
-										{
-											style:{color:'red'},
-											className:'bold',
-											children: mt_height(S)
-										}), `，将生成${Math.ceil(mt_height(S)/mt_settings['高度限制'])}张`,(0, m.jsx)("span",
+										}), `条消息，将生成${截图数量(S)}张`,(0, m.jsx)("span",
 										{
 											id:'mt-image',
 											className:'bold',
@@ -2346,6 +2351,7 @@
 												let leng = (16+(localStorage['watermark'] === 'false' ? 0 : 80))*S
 												let length = leng
 												let json = chats
+												let 平均 = false,平均数 = 截图数量(S),总长度 = mt_height(S)+((平均数-1)*16*S),平均长度 = Math.ceil(总长度/平均数)
 												if($$(".dels:checked").length)//区域截图
 												{
 													json = []
@@ -2360,7 +2366,7 @@
 													if($$(".dels:checked").length)消息 = $$(`.消息 :checked:eq(${end})`).parent()//区域截图
 													else 消息 = $$(`.消息:eq(${end})`)
 													length = length+(消息.outerHeight()*S)
-													if(length > mt_settings['高度限制'] || 消息.attr('title') === 'red')//
+													if(length > mt_settings['高度限制'] || 消息.attr('title') === 'red' || 平均)//
 													{
 														if(!json[end].isFirst && json[end].sCharacter.no != 0)
 														{
@@ -2373,7 +2379,9 @@
 														}
 														imageArr.push({start:start,end:end,index:imageArr.length+1})
 														start = end
+														平均 = false
 													}
+													if(length > 平均长度)平均 = true
 													if(end === json.length-1)
 													{
 														imageArr.push({start: start,end: json.length,index: imageArr.length+1})

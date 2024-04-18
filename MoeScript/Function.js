@@ -383,6 +383,7 @@ function combineFiles(mainFile, hideFile, fileName, Index) {
 		blobToBase64(blob,function(e)
 		{
 			$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${Index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${e}'></div>`)
+			$('.截图数量').text(imageArr.length)
 		})
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
@@ -948,15 +949,17 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)
 		}
 		let imgBaes64 = img.toDataURL(mt_settings['图片格式']);
 		let height = img.height
-		imageArr.shift()
 
-		生成图片(imgArea.index), img.toBlob(function(img)
+		if(imageArr.length === imageArrL)生成图片(imgArea.index)
+		imageArr.shift()
+		img.toBlob(function(img)
 		{
 			
 			if(imageArr.length > 0)
 			{
 				filename = `MoeTalk_${title}_${imgArea.index}_${height}`
-				mt_capture(清晰度,截屏,生成图片,时间,标题)
+				//mt_capture(清晰度,截屏,生成图片,时间,标题)
+				$('.mt_capture').click()
 			}
 			else
 			{
@@ -969,6 +972,7 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)
 			if(imageZip)
 			{
 				$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${imgBaes64}'></div>`)
+				$('.截图数量').text(imageArr.length)
 				imageZip.file(`MoeTalk_${title}_${imgArea.index}_${height}.${mt_settings['图片格式'].split('/')[1]}`,img);
 				if(imageArr.length === 0)
 				{
@@ -1551,4 +1555,22 @@ function blink(element)
 	{
 		$(this).fadeIn(500, function() {});
 	})[0];
+}
+function 截图数量(num)
+{
+	let i = 1,height = 0,height2 = 0
+	$('.消息:visible').each(function()
+	{
+		height = $(this).outerHeight()+height
+		height2 = $(this).next().outerHeight()
+		if((height+height2+16)*num > mt_settings['高度限制'])
+		{
+			i++
+			height = 0
+			
+		}
+	})
+	let height3 = parseInt($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num);
+	//test(height3+((i-1)*16*num))
+	return i;
 }

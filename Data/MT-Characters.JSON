@@ -1572,7 +1572,7 @@ var mt_characters = {
             "pinyin": "xiaogouqing"
         },
         "charface": "小钩晴/CH0233/CH0233.14,小钩晴/hare/hare.6,小钩晴/小钩晴.8",
-        "customface": "Velstadt-/晴/晴.22"
+        "customface": "Velstadt-/晴/晴.22,Velstadt-/晴_野营/晴_野营.46"
     },
     "音濑小玉": {
         "school": "千年",

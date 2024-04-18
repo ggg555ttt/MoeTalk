@@ -124,9 +124,7 @@ else
 function mt_height(num)
 {
 	if(!num)num = 1.1
-	let length = ($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num);
-	length = Number(length) + ((16.6 * num) * (Math.ceil(length/mt_settings['高度限制']) - 1));
-	return parseInt(length.toFixed());
+	return parseInt($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num);
 }
 if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>");//加载字体
 $(function()
@@ -166,9 +164,7 @@ $(".bIcduz").wait(function()
 //加载工具
 $(".frVjsk").wait(function()
 {
-	$(".frVjsk").append(`<button class='${class0}' id='uphead' hidden><b style='color:black;'>傳</b></button><span class='tool' hidden>上传头像<span id='cusname'></span></span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='cf'><b style='color:black;'>差</b></button><span class='tool'>差分映射</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='https://tieba.baidu.com/p/8551808608'}.html'><button class='${class0}'><b style='color:black;'>教</b></button></a><span class='tool'>使用教程</span><br>`);
 	$(".frVjsk").append(`<a href='${href}Setting.html?${localStorage['mt-rand']}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
@@ -624,7 +620,6 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 			data.type = type
 			if(addChat)
 			{
-				if(type === 'image' && !data.file)data.file = chats[chatIndex].file
 				chatIndex = chatIndex+1//向后追加
 				data.sCharacter = {no: $('.editMessage .头像').attr('alt'),index: $('.editMessage .头像').attr('title')}
 			}
