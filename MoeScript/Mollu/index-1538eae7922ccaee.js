@@ -3238,7 +3238,7 @@
 											children: (0, m.jsx)('a',
 											{
 												href: 自设差分[2],
-												children: '来源',
+												children: '作者',
 												target: '_blank'
 											}),
 											hidden: !自设差分[2]
@@ -3832,12 +3832,12 @@
 											{
 												type:'checkbox',
 												className:'isRight'
-											}),(0, m.jsx)('span',{children:'右侧显示'}),
+											}),(0, m.jsx)('span',{children:'右侧发言'}),
 											(0, m.jsx)('input',
 											{
 												type:'checkbox',
 												className:'is_breaking'
-											}),(0, m.jsx)('span',{children:'截图分割',style:{color:'red'}})]
+											}),(0, m.jsx)('span',{children:'分割图片',style:{color:'red'}})]
 										})
 									}),(0, m.jsx)('div',
 									{

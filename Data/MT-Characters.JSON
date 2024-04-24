@@ -629,6 +629,21 @@ var mt_characters = {
         "charface": "打工学生/yoheki_normal1/yoheki_normal1.2,打工学生/打工学生.2",
         "customface": ""
     },
+    "椎名䌷": {
+        "school": "其他",
+        "club": "所属不明-其他",
+        "head": "CH0252_Collection,CH0252",
+        "name": {
+            "zh_cn": "椎名 䌷",
+            "zh_tw": "椎名 紬",
+            "jp": "椎名 ツムギ",
+            "en": "Shiina Tsumugi",
+            "kr": "시이나 츠무기",
+            "pinyin": "zhuimingchou"
+        },
+        "charface": "椎名䌷/CH0252/CH0252.12,椎名䌷/椎名䌷.4",
+        "customface": ""
+    },
     "混混": {
         "school": "其他",
         "club": "所属不明-其他",
@@ -1257,7 +1272,7 @@ var mt_characters = {
             "pinyin": "shiliqian"
         },
         "charface": "室笠茜/akane/akane.7,室笠茜/CH0099/CH0099.6,室笠茜/室笠茜.9",
-        "customface": ""
+        "customface": "Velstadt-/茜/茜.67"
     },
     "美甘尼禄": {
         "school": "千年",
@@ -1802,7 +1817,7 @@ var mt_characters = {
     "伊原木好美": {
         "school": "圣三一",
         "club": "放学后甜品部",
-        "head": "Yoshimi_L2D,Yoshimi_Collection,Yoshimi",
+        "head": "CH0220_L2D,Yoshimi_L2D,CH0220_Collection,Yoshimi_Collection,CH0220,Yoshimi",
         "name": {
             "zh_cn": "伊原木 好美",
             "zh_tw": "伊原木 好美",
@@ -1811,13 +1826,13 @@ var mt_characters = {
             "kr": "이바라기 요시미",
             "pinyin": "yiyuanmuhaomei"
         },
-        "charface": "伊原木好美/yoshimi/yoshimi.10,伊原木好美/伊原木好美.4",
+        "charface": "伊原木好美/CH0220/CH0220.11,伊原木好美/yoshimi/yoshimi.10,伊原木好美/伊原木好美.8",
         "customface": ""
     },
     "杏山和纱": {
         "school": "圣三一",
         "club": "放学后甜品部",
-        "head": "Kazusa_L2D,Kazusa_Collection,Kazusa",
+        "head": "CH0250_L2D,Kazusa_L2D,CH0250_Collection,Kazusa_Collection,CH0250,Kazusa",
         "name": {
             "zh_cn": "杏山 和纱",
             "zh_tw": "杏山 和紗",
@@ -1826,13 +1841,13 @@ var mt_characters = {
             "kr": "코야마 카즈사",
             "pinyin": "xingshanhesha"
         },
-        "charface": "杏山和纱/kazusa/kazusa.13,杏山和纱/杏山和纱.4",
+        "charface": "杏山和纱/CH0250/CH0250.18,杏山和纱/kazusa/kazusa.13,杏山和纱/杏山和纱.8",
         "customface": "巴啦啦小凉蛋/和纱/和纱.75"
     },
     "柚鸟夏": {
         "school": "圣三一",
         "club": "放学后甜品部",
-        "head": "CH0155_L2D,NP0057_Collection,CH0155_Collection,CH0155",
+        "head": "CH0155_L2D,NP0057_Collection,CH0155_Collection,CH0221_Collection,CH0155,CH0221",
         "name": {
             "zh_cn": "柚鸟 夏",
             "zh_tw": "柚鳥 夏",
@@ -1841,13 +1856,13 @@ var mt_characters = {
             "kr": "유토리 나츠",
             "pinyin": "youniaoxia"
         },
-        "charface": "柚鸟夏/CH0155/CH0155.7,柚鸟夏/NP0057/NP0057.7,柚鸟夏/柚鸟夏.8",
+        "charface": "柚鸟夏/CH0155/CH0155.7,柚鸟夏/CH0221/CH0221.10,柚鸟夏/NP0057/NP0057.7,柚鸟夏/柚鸟夏.12",
         "customface": ""
     },
     "栗村爱莉": {
         "school": "圣三一",
         "club": "放学后甜品部",
-        "head": "Airi_L2D,Airi_Collection,Airi",
+        "head": "Airi_L2D,CH0251_L2D,Airi_Collection,CH0251_Collection,Airi,CH0251",
         "name": {
             "zh_cn": "栗村 爱莉",
             "zh_tw": "栗村 愛莉",
@@ -1856,7 +1871,7 @@ var mt_characters = {
             "kr": "쿠리무라 아이리",
             "pinyin": "licunaili"
         },
-        "charface": "栗村爱莉/airi/airi.7,栗村爱莉/栗村爱莉.4",
+        "charface": "栗村爱莉/airi/airi.7,栗村爱莉/CH0251/CH0251.13,栗村爱莉/栗村爱莉.8",
         "customface": ""
     },
     "朝颜花绘": {
