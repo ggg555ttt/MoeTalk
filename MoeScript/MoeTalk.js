@@ -164,6 +164,7 @@ $(".bIcduz").wait(function()
 //加载工具
 $(".frVjsk").wait(function()
 {
+	$(".frVjsk").append(`<button class='${class0}' onclick='location.reload(true)'><b style='color:blue;'>刷</b></button><span class='tool'>刷新页面</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='https://tieba.baidu.com/p/8551808608'}.html'><button class='${class0}'><b style='color:black;'>教</b></button></a><span class='tool'>使用教程</span><br>`);
@@ -937,3 +938,29 @@ $("body").on('click',".差分映射",function()
 	差分映射.index = $(this).attr('title')
 	$('.切换表情').click()
 });
+if(window.navigator.userAgent.match('Html5Plus'))
+{
+	var time = 0;//初始化起始时间  
+	$("body").on('touchstart', 'img', function(e)
+	{
+		let src = $(this).attr('src')
+		e.stopPropagation();  
+		time = setTimeout(function()
+		{
+			showCloseImg(src);  
+		}, 500);//这里设置长按响应时间  
+	});
+	$("body").on('touchend', 'img', function(e)
+	{
+		e.stopPropagation();  
+		clearTimeout(time);    
+	});
+	function showCloseImg(src)
+	{
+		if(src.indexOf(':image/') > 0 && confirm('确定要将这张图保存到图库吗？'))
+		{
+			let ext = src.match(/:image\/(\S*);base64/)[1]
+			saveImg(`${getNowDate()}.${ext}`, src)
+		}
+	}
+}

@@ -878,7 +878,15 @@ function MoeToClosure()//Moe转Closure
 	})
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 	$$('#downImg').html('')
-	download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(closuretalk,null,4));//生成专用存档
+	if(window.navigator.userAgent.match('Html5Plus'))
+	{
+		saveServerDatatoFile('ClosureTalk转换存档'+time, JSON.stringify(closuretalk,null,4) ,'json')
+	}
+	else
+	{
+		download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(closuretalk,null,4));//生成专用存档
+	}
+	
 }
 function mt_title(moetalk,title,writer)
 {
@@ -987,7 +995,19 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)
 					});
 				}
 			}
-			else combineFiles(imgBaes64,json,filename,imgArea.index);
+			else 
+			{
+				if(window.navigator.userAgent.match('Html5Plus'))
+				{
+					$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${imgBaes64}'></div>`)
+					$('.截图数量').text(imageArr.length)
+					saveImg(`${filename}.${mt_settings['图片格式'].split('/')[1]}`, imgBaes64)
+				}
+				else
+				{
+					combineFiles(imgBaes64,json,filename,imgArea.index);
+				}
+			}
 		})
 	})
 }
@@ -1573,4 +1593,121 @@ function 截图数量(num)
 	let height3 = parseInt($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num);
 	//test(height3+((i-1)*16*num))
 	return i;
+}
+function saveImg(fileName, base64, quality)
+{
+	quality = quality || 10
+	const bitmap = new plus.nativeObj.Bitmap()
+	// 从本地加载Bitmap图片
+	bitmap.loadBase64Data(base64, function()
+	{
+		bitmap.save("_doc/" + fileName,
+		{
+			overwrite: true
+		}, 
+		function(i) 
+		{
+			// callback(i);
+			// mui.alert("保存图片成功：" + JSON.stringify(i))
+			plus.gallery.save(i.target, function()
+			{// 保存到相册
+				bitmap.clear()
+			}, 
+			function(e)
+			{
+				if(e.code === -3310 || e.code === 8)
+				{
+					bitmap.clear()
+					alert("您已禁止访问相册,请设置开启权限")
+				}
+				else
+				{
+					bitmap.clear()
+					alert("图片保存失败:" + JSON.stringify(e))
+				}
+			})
+		}, 
+		function(e)
+		{
+			bitmap.clear()
+			alert("保存图片失败：" + JSON.stringify(e))
+		})
+	}, 
+	function(e) 
+	{
+		bitmap.clear()
+		alert("加载图片失败：" + JSON.stringify(e))
+	})
+}
+
+function saveServerDatatoFile(filename, jsonData ,ext)
+{ //jsonData要求是String格式
+	plus.io.requestFileSystem(plus.io.PUBLIC_DOCUMENTS,function(fs)
+	{
+		//fs.root 是根目录操作对象
+		fs.root.getDirectory("MoeTalk_Data",
+		{//创建一个文件夹名为MoeTalk_Data
+			create: true,
+			exclusive: false
+		},
+		function(dir)
+		{
+			//console.log("Directory Entry Name: " + dir.name);
+			dir.getFile(filename + "." + ext,
+			{ //在MoeTalk_Data文件夹中创建一个json文件
+				create: true
+			},
+			function(fileEntry)
+			{
+				fileEntry.file(function(file)
+				{
+					//写入文件
+					fileEntry.createWriter(function(writer)
+					{
+						// writer.onwritestart = function(e)
+						// {
+						// 	console.log("写入数据开始");
+						// }
+						writer.onwrite = function(e)
+						{
+							//console.log("写入数据成功");
+							$('.dDBXxQ').hide()//开始加载
+							alert('下载完成！\n可以在“Android/data/plus.H59EC0058/documents/MoeTalk_Data”中找到您下载的存档！')
+						}
+						//定位至文件结尾，即每次都是追加内容
+						//writer.seek(writer.length);
+						//定位至开头，即每次都是重写文件。（默认）
+						//writer.seek(0);
+						writer.write(jsonData);
+					},
+					function(error)
+					{
+						alert("创建Writer失败" + error.message);
+					});
+
+					//读取文件
+					// var fileReader = new plus.io.FileReader();
+					// console.log("getFile:" + JSON.stringify(file));
+					// fileReader.readAsText(file, 'utf-8');
+					// fileReader.onloadend = function(evt) {
+					// 	console.log("11" + JSON.stringify(evt));
+					// 	console.log("evt.target" + JSON.stringify(evt.target));
+					// 	console.log("evt.target.result" + JSON.stringify(evt.target.result));
+					// }
+				});
+			},
+			function(err)
+			{
+				alert("访问File失败" + err.message);
+			})
+		},
+		function()
+		{
+			alert("创建MoeTalk_Data目录失败" + err.message);
+		});
+	},
+	function(error)
+	{
+		alert("访问_DOC目录失败" + error.message);
+	});
 }

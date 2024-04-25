@@ -2412,7 +2412,7 @@
 												fontSize: "1rem",
 												marginBottom: "1rem"
 											},
-											children: L.Z.image_download[g]
+											children: window.navigator.userAgent.match('Html5Plus') ? '可以手动长按保存下方的图片' : L.Z.image_download[g]
 										}), (0, m.jsx)("div",
 										{
 											style:
@@ -2420,7 +2420,7 @@
 												fontSize: "1rem",
 												marginBottom: "1rem"
 											},
-											children: '图片无法手动保存请取消勾选“存档”选框，并将图片格式改为“webp”格式'
+											children: window.navigator.userAgent.match('Html5Plus') ? '可以在图库中找到保存的图片' : '图片无法手动保存请取消勾选“存档”选框，并将图片格式改为“webp”格式'
 										})]
 									})
 								})]
@@ -2514,10 +2514,18 @@
 											'选择角色': mt_settings['选择角色']//@
 										}, [...chats,...otherChats]],null,4)], e.next = 6, (0, u.rU)(r);
 									case 6:
-										o = e.sent, (0, ef.saveAs)(o,`MoeTalk${L.Z.sharedFile[d]}_${t.title}_${mt_height()}.png`), blobToBase64(o,function(base64)
+										if(window.navigator.userAgent.match('Html5Plus'))
 										{
-											$$('#downImg').html(`<h1>${L.Z.image_download[d]}</h1><h1>可当做压缩文件打开</h1><img src='data:image/png;base64,${base64}'>`)
-										});
+											$$('.dDBXxQ').show()//开始加载
+											saveServerDatatoFile(`MoeTalk${L.Z.sharedFile[d]}_${t.title}_${(0, u._3)(!0, !0)}_${mt_height()}`, r[0] ,'json');
+										}
+										else
+										{
+											o = e.sent, (0, ef.saveAs)(o,`MoeTalk${L.Z.sharedFile[d]}_${t.title}_${mt_height()}.png`), blobToBase64(o,function(base64)
+											{
+												$$('#downImg').html(`<h1>${L.Z.image_download[d]}</h1><h1>可当做压缩文件打开</h1><img src='data:image/png;base64,${base64}'>`)
+											});
+										}
 									case 9:
 									case "end":
 										return e.stop()

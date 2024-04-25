@@ -114,7 +114,14 @@ $('body').on('click',"#savedata",function()
 						arr['mt-head'] = head
 						arr['chats'] = chats
 						arr['moeLog'] = moeLog
-						download_txt('MoeTalk_localStorage存档'+time+'.TXT',JSON.stringify({...localStorage,...arr},null,4));//生成专用存档
+						if(window.navigator.userAgent.match('Html5Plus'))
+						{
+							saveServerDatatoFile('MoeTalk_localStorage存档'+time, JSON.stringify({...localStorage,...arr},null,4) ,'TXT');
+						}
+						else
+						{
+							download_txt('MoeTalk_localStorage存档'+time+'.TXT',JSON.stringify({...localStorage,...arr},null,4));//生成专用存档
+						}
 					})
 				})
 			})
