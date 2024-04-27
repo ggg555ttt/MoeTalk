@@ -756,7 +756,7 @@
 								{
 									width: 252,
 									height: 252,
-									src: href+"Images/Ui/School/"+(!mt_schoolname[n.school['zh_cn']] ? n.club['zh_cn'] === '临时角色' ? n.club['id'] : n.school['id'] : mt_characters[n.no].school)+'.webp',//#学校图标
+									src: href+"Images/Ui/School/"+(!mt_schoolname[n.school.id] ? n.club['zh_cn'] === '临时角色' ? 'RECYCLE' : 'CUSTOM' : mt_schoolname[n.school.id].en)+'.webp',//#学校图标
 									onError: function(e)
 									{
 										e.currentTarget.src = href+'Images/Ui/error.webp';
@@ -1650,7 +1650,7 @@
 													width: '40px',
 													height: '40px'
 												},
-												src:href+'Images/Ui/School/临时角色.webp'
+												src:href+'Images/Ui/School/RECYCLE.webp'
 											})],
 											onClick:function()
 											{
@@ -1730,7 +1730,7 @@
 													width: '40px',
 													height: '40px'
 												},
-												src:href+'Images/Ui/School/自定义.webp'
+												src:href+'Images/Ui/School/CUSTOM.webp'
 											})],
 											onClick:function()
 											{

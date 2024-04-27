@@ -160,8 +160,8 @@ function loadhead(id,img)
 	//MoeTalk头像
 	if(mt_characters[id])
 	{
-		img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D')
-		return `${href}Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`;
+		img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
+		return `${href}Images/Char/${mt_characters[id].id}/${img}.webp`;
 	}
 	//自定义头像
 	if(mt_head[img])
@@ -172,7 +172,6 @@ function loadhead(id,img)
 	{
 		return mt_shead[img]
 	}
-	if(closure_char[id])return `${href}Images/ClosureTalk/ba/characters/${img}.webp`;//closure头像
 	if(mollu_char[id])return `${href}Images/MolluChar/${id}.${img}.webp`;//旧版头像
 	if(id == 0)return `${href}Images/Ui/you.webp`;//主角
 	if(id === 'YuukaTalk')
@@ -194,7 +193,6 @@ function loadname(id,index)
 	let you = {kr: "주인공",en: "Lead",jp: "主役",zh_cn: "主角",zh_tw: "主角"}
 	let name = toString(id)
 	if(mollu_char[id])name = mollu_char[id][mtlang]
-	if(closure_char[id])name = closure_char[id][mtlang]
 	if(mt_characters[id])
 	{
 		name = mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id
@@ -541,6 +539,8 @@ function loaddata(json,mode,ARR = '')//识别存档
 				json[0]['选择角色'].list[k].no = v['char_id']
 				json[0]['选择角色'].list[k].index = v['char_id']
 			}
+			closure_char[0][json[0]['选择角色'].list[k].no] ? json[0]['选择角色'].list[k].no = closure_char[0][json[0]['选择角色'].list[k].no] : ''
+			closure_char[1][json[0]['选择角色'].list[k].index] ? json[0]['选择角色'].list[k].index = closure_char[1][json[0]['选择角色'].list[k].index] : ''
 		})
 	}
 	let length = 0;
@@ -573,6 +573,8 @@ function loaddata(json,mode,ARR = '')//识别存档
 					json[1][k]['sCharacter']['index'] = v['char_id'].split('-')[3]
 				}
 			}
+			closure_char[0][json[1][k]['sCharacter']['no']] ? json[1][k]['sCharacter']['no'] = closure_char[0][json[1][k]['sCharacter']['no']] : ''
+			closure_char[1][json[1][k]['sCharacter']['index']] ? json[1][k]['sCharacter']['index'] = closure_char[1][json[1][k]['sCharacter']['index']] : ''
 
 			json[1][k]['content'] = v['content'];
 
@@ -593,7 +595,7 @@ function loaddata(json,mode,ARR = '')//识别存档
 				}
 				else
 				{
-					json[1][k]['content'] = v['content'].replace('resources/ba','Images/ClosureTalk/ba').replace(moeurl+'/','');
+					json[1][k]['content'] = v['content'].replace('resources/ba','Images/Emoji').replace(moeurl+'/','');
 				}
 			}
 
@@ -669,6 +671,7 @@ function loaddata(json,mode,ARR = '')//识别存档
 	let key = '';
 	json[1].map(function(v,k)
 	{
+		repairCF(v);
 		if(v.replyDepth !== 0)otherChats.push(v)
 		else chats.push(v)
 
@@ -775,7 +778,7 @@ function MoeToClosure()//Moe转Closure
 				ct[k]['img'] = 'uploaded';
 
 				custom_chars[ct[k]['char_id']] = {}
-				custom_chars[ct[k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`
+				custom_chars[ct[k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].id}/${img}.webp`
 				custom_chars[ct[k]['char_id']]['name'] = loadname(id);
 			}
 		}
@@ -806,9 +809,9 @@ function MoeToClosure()//Moe转Closure
 			ct[k]['yuzutalk']['type'] = 'IMAGE';
 			if(v['content'].indexOf('//') < 0)//本地链接
 			{
-				if(v['content'].indexOf('Images/ClosureTalk/') > -1)
+				if(v['content'].indexOf('Images/Emoji/stamps') > -1)
 				{
-					ct[k]['content'] = v['content'].replace('Images/ClosureTalk','resources')
+					ct[k]['content'] = v['content'].replace('Images/Emoji','resources/ba')
 				}
 				else
 				{
@@ -843,7 +846,7 @@ function MoeToClosure()//Moe转Closure
 				closuretalk['chars'][k]['img'] = 'uploaded';
 
 				custom_chars[closuretalk['chars'][k]['char_id']] = {}
-				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].school}/${mt_characters[id].club}/${id}/${img}.webp`
+				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].id}/${img}.webp`
 				custom_chars[closuretalk['chars'][k]['char_id']]['name'] = loadname(id);
 			}
 		}
@@ -1118,7 +1121,7 @@ function mt_emojis(S,mode)
 			{
 				if(差分书签[id].type === 'charface')
 				{
-					表情.push(`Images/CharFace/${mt_characters[id].school}/${mt_characters[id].club}/${v}.${k+1}.webp`)
+					表情.push(`Images/CharFace/${v}.${k+1}.webp`)
 				}
 				else
 				{
@@ -1131,17 +1134,17 @@ function mt_emojis(S,mode)
 			cfarr[pageIdnex] = cfarr[pageIdnex].split('/')
 			表情类型 = cfarr[pageIdnex].pop()//获取差分类型
 
-			if(表情类型 === id)
+			if(表情类型 === mt_characters[id].id)
 			{
 				表情类型 = `${name}(${maxNum}其他)`
+				if(CustomFaceAuthor[cfarr[pageIdnex][0]])
+				{
+					表情类型 = `${name}(${maxNum}自制)`
+				}
 			}
-			else if(表情类型.indexOf('_修复') > -1)
+			else if(表情类型.indexOf('_REPAIR') > -1)
 			{
 				表情类型 = `${name}(${maxNum}修复)`
-			}
-			else if(CustomFaceAuthor[cfarr[pageIdnex][0]])
-			{
-				表情类型 = `${name}(${maxNum}自制)`
 			}
 			else
 			{
@@ -1710,4 +1713,13 @@ function saveServerDatatoFile(filename, jsonData ,ext)
 	{
 		alert("访问_DOC目录失败" + error.message);
 	});
+}
+function repairCF(data)
+{
+	let no = data.sCharacter.no
+	if(!mt_characters[no] || data.type !== 'image' || data.file)return;
+	let school = mt_characters[no].school
+	let club = mt_characters[no].club
+	let id = mt_characters[no].id
+	data.content = data.content.replace(`${school}/${club}/${no}`,id)
 }

@@ -49,15 +49,15 @@
     },
     "Automata_Decagrammaton1": {
         "xy": "630.0",
-        "name": "十字神明机器人"
+        "name": "自动机器人"
     },
     "Automata_Kurokamegumi1": {
         "xy": "800.0",
-        "name": "黑龟组机器人"
+        "name": "自动机器人"
     },
     "Automata_PMC1": {
         "xy": "800.0",
-        "name": "凯撒士兵"
+        "name": "自动机器人"
     },
     "ayane_robber": {
         "xy": "110.90",

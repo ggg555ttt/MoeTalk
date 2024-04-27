@@ -1151,38 +1151,11 @@
         "kr": "카이저-SOF",
         "pinyin": "kaisatezhongbudui"
     },
-    "凯撒士兵": {
-        "id": "",
-        "zh_cn": "凯撒机器人",
-        "zh_tw": "凱撒機器人",
-        "jp": "カイザー-オートマタ",
-        "en": "Kaiser-Automata",
-        "kr": "카이저-오토마타",
-        "pinyin": "zidongjiqiren"
-    },
-    "十字神明机器人": {
-        "id": "",
-        "zh_cn": "十字神明机器人",
-        "zh_tw": "十字神明機器人",
-        "jp": "デカグラマトン-カイザー",
-        "en": "Decagrammaton-Automata",
-        "kr": "데카그라마톤-오토마타",
-        "pinyin": "zidongjiqiren"
-    },
-    "黑龟组机器人": {
-        "id": "",
-        "zh_cn": "黑龟组机器人",
-        "zh_tw": "黑龜組機器人",
-        "jp": "黒亀組-オートマタ",
-        "en": "BlackTurtles-Automata",
-        "kr": "검은거북파-오토마타",
-        "pinyin": "zidongjiqiren"
-    },
     "自动机器人": {
         "id": "Android",
         "zh_cn": "自动机器人",
         "zh_tw": "自動機器人",
-        "jp": "黑龟组-オートマタ",
+        "jp": "アンドロイド",
         "en": "Automata",
         "kr": "오토마타",
         "pinyin": "zidongjiqiren"
@@ -1826,7 +1799,7 @@
         "kr": "나카츠카사 키리노",
         "pinyin": "zhongwutongnai"
     },
-    "KAITENFXMK0": {
+    "KaitenFxMk0": {
         "id": "KAITEN_FX_Mk_0",
         "zh_cn": "KAITEN-FX-Mk.0",
         "zh_tw": "KAITEN-FX-Mk.0",

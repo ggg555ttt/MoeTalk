@@ -80,6 +80,8 @@ if(!mt_settings['存储模式'])
 				let length = data.length;
 				for(let i = 0;i < length;i++)
 				{
+					
+					repairCF(data[i]);
 					if(data[i].replyDepth !== 0)otherChats.push(data[i])
 					else chats.push(data[i])
 				}

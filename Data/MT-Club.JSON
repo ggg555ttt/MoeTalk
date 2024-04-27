@@ -351,13 +351,13 @@ var mt_clubname = {
         "kr": "코뮤니오 상토룸",
         "pinyin": "zhushengxiangtong"
     },
-    "自动机器人": {
-        "zh_cn": "自动机器人",
-        "zh_tw": "自動機器人",
+    "机器人": {
+        "zh_cn": "机器人",
+        "zh_tw": "機器人",
         "jp": "オートマタ",
         "en": "Automata",
         "kr": "오토마타",
-        "pinyin": "zidongjiqiren"
+        "pinyin": "jiqiren"
     },
     "C&C": {
         "zh_cn": "C&C",
@@ -620,9 +620,9 @@ var mt_club = {
         "斯兰皮亚",
         "无名众神",
         "无限怪谈图书馆",
+        "机器人",
         "柴关拉面",
         "联邦学生会",
-        "自动机器人",
         "色彩",
         "诸圣相通"
     ],

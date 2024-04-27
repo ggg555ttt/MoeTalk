@@ -980,7 +980,7 @@
 							{
 								g(), p(!0)
 							},
-							children: (t.name || (0, l.fY)(t.sCharacter.no, !0, d)) + r.Z.go_relationship_event[d]
+							children: loadname(t.sCharacter.no,t.sCharacter.index) + r.Z.go_relationship_event[d]
 						})]
 					})
 				},
@@ -1191,7 +1191,7 @@
 										children: [isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{
 											className: "名称 bold",
-											children: t.name || loadname(t.sCharacter.no)
+											children: t.name || loadname(t.sCharacter.no,t.sCharacter.index)
 										}) : '' , (0, m.jsxs)("div",
 										{
 											style:
@@ -1446,7 +1446,7 @@
 											{
 												display: 'none'
 											},
-											children: t.name || loadname(t.sCharacter.no)//#新增临时名称
+											children: t.name || loadname(t.sCharacter.no,t.sCharacter.index)//#新增临时名称
 										}) : '', (0, m.jsxs)("div",
 										{
 											style:
