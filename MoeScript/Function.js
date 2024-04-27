@@ -1,7 +1,7 @@
 var href = window.location.href.split(window.location.host)[1].split('?')[0]//文件目录地址
 if(window.location.href.indexOf('file:///') === 0)
 {
-	alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1(有出错可能)】')
+	if(!window.navigator.userAgent.match('Html5Plus'))alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1(有出错可能)】')
 	href = window.location.href.replace('index.html','')
 }
 //解决低版本浏览器不支持replaceAll
@@ -1722,4 +1722,40 @@ function repairCF(data)
 	let club = mt_characters[no].club
 	let id = mt_characters[no].id
 	data.content = data.content.replace(`${school}/${club}/${no}`,id)
+}
+var baseArr = []
+function urlToBase64(img,length)
+{
+	if(img.src.indexOf('data:image/') > -1)
+	{
+		baseArr.push('base64')
+		if(baseArr.length === length)$('.dDBXxQ').hide()
+	}
+	else
+	{
+		return new Promise(resolve =>
+		{
+			let xhr = new XMLHttpRequest()
+			xhr.open('get', img.src, true)
+			xhr.responseType = 'blob'
+			xhr.onload = function()
+			{
+				if(this.status == 200)
+				{
+					let blob = this.response
+					let oFileReader = new FileReader()
+					oFileReader.onloadend = function(e)
+					{
+						const base64 = e.target.result
+						img.src = base64
+						baseArr.push('url')
+						if(baseArr.length === length)$('.dDBXxQ').hide()
+						resolve(base64)
+					}
+					oFileReader.readAsDataURL(blob)
+				}
+			}
+			xhr.send()
+		})
+	}
 }

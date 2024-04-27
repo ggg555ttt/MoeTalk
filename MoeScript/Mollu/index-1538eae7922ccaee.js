@@ -2351,7 +2351,7 @@
 												let leng = (16+(localStorage['watermark'] === 'false' ? 0 : 80))*S
 												let length = leng
 												let json = chats
-												let 平均 = false,平均数 = 截图数量(S),总长度 = mt_height(S)+((平均数-1)*16*S),平均长度 = Math.ceil(总长度/平均数)
+												let 平均 = false//,平均数 = 截图数量(S),总长度 = mt_height(S)+((平均数-1)*16*S),平均长度 = Math.ceil(总长度/平均数)
 												if($$(".dels:checked").length)//区域截图
 												{
 													json = []
@@ -2368,10 +2368,10 @@
 													length = length+(消息.outerHeight()*S)
 													if(length > mt_settings['高度限制'] || 消息.attr('title') === 'red' || 平均)//
 													{
-														if(!json[end].isFirst && json[end].sCharacter.no != 0)
+														if(!json[end].isFirst && json[end].sCharacter.no != 0 && !json[end].is_breaking)
 														{
 															length = leng+(消息.outerHeight()*S)+(37*S)
-															消息[0].outerHTML = makeMessage(json[end].type,json[end],end,'screen')
+															if(!window.navigator.userAgent.match('Html5Plus'))消息[0].outerHTML = makeMessage(json[end].type,json[end],end,'screen')
 														}
 														else
 														{
@@ -2381,7 +2381,7 @@
 														start = end
 														平均 = false
 													}
-													if(length > 平均长度)平均 = true
+													//if(length > 平均长度)平均 = true
 													if(end === json.length-1)
 													{
 														imageArr.push({start: start,end: json.length,index: imageArr.length+1})
@@ -2980,6 +2980,17 @@
 								title: "Image Download",
 								onClick: function()
 								{
+									if(window.navigator.userAgent.match('Html5Plus'))
+									{
+										$$('.dDBXxQ').show()
+										baseArr = [];
+										let length = $$(".Talk__CContainer-sc-1uzn66i-1 img").length
+										$$(".Talk__CContainer-sc-1uzn66i-1 img").each(function(k)
+										{
+											urlToBase64($$(this)[0],length)
+											// ? arr.push(k) : 
+										})
+									}
 									imageArrL = 0
 									y(!0)
 								},

@@ -822,7 +822,7 @@
 								{
 									//if(isNaN(nextindex))return;
 									$$('.dDBXxQ').show()
-									fetch(`${href}${LibraryURL}/${nowChapter[1].author}/${nowChapter[1].name}/${chapterlist[nextindex]}.json`).then(function(response)
+									fetch(`${href}${LibraryURL}/${nowChapter[1].authorid}/${nowChapter[1].bookid}/${chapterlist[nextindex]}.json`).then(function(response)
 									{
 										return response.json();
 									}).then(function(data)

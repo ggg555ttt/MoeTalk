@@ -2,6 +2,8 @@
     {
         "name": "【Vol3后续】没有眼泪的明天",
         "author": "Condy俊杰",
+        "bookid": "BookID_0",
+        "authorid": "AuthorID_0",
         "chapter": [
             "0-1",
             "1-1",
@@ -85,6 +87,8 @@
     {
         "name": "天使的羽毛",
         "author": "Condy俊杰",
+        "bookid": "BookID_1",
+        "authorid": "AuthorID_0",
         "chapter": [
             "1",
             "2-3",
@@ -100,6 +104,8 @@
     {
         "name": "阿里乌斯审判",
         "author": "Condy俊杰",
+        "bookid": "BookID_2",
+        "authorid": "AuthorID_0",
         "chapter": [
             "1",
             "2",

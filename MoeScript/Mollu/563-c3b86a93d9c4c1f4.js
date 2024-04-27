@@ -1346,7 +1346,7 @@
 											{
 												if(isNaN(e.index+1))return;
 												$$('.dDBXxQ').show()
-												fetch(`${href}${LibraryURL}/${h.author}/${h.name}/${h.chapter[e.index]}.json`).then(function(response)
+												fetch(`${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index]}.json`).then(function(response)
 												{
 													return response.json();
 												}).then(function(data)
