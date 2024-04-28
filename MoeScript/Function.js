@@ -1,6 +1,8 @@
 var href = window.location.href.split(window.location.host)[1].split('?')[0]//文件目录地址
+var appname = 'plus.H59EC0058'
 if(window.location.href.indexOf('file:///') === 0)
 {
+	appname = 'mmt.MoeTalk.WumberBee'
 	if(!window.navigator.userAgent.match('Html5Plus'))alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1(有出错可能)】')
 	href = window.location.href.replace('index.html','')
 }
@@ -32,7 +34,7 @@ var 表情,表情类型,表情页码,自设差分,差分书签 = sessionStorage[
 var player = href+'player'//播放器地址
 var version = '';if(localStorage['mt-version'])version = localStorage['mt-version']//MoeTalk版本号
 const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});//数据库
-
+var moeurl = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/'
 if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';
 if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
 var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色数据
@@ -459,8 +461,6 @@ function list()
 }
 function loaddata(json,mode,ARR = '')//识别存档
 {
-
-	let moeurl = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io'
 	let josnsize = (json.length/1024).toFixed(0)
 	let custom_char = {};
 	let custom_head = {};
@@ -595,7 +595,7 @@ function loaddata(json,mode,ARR = '')//识别存档
 				}
 				else
 				{
-					json[1][k]['content'] = v['content'].replace('resources/ba','Images/Emoji').replace(moeurl+'/','');
+					json[1][k]['content'] = v['content'].replace('resources/ba','Images/Emoji').replace(moeurl,'');
 				}
 			}
 
@@ -757,7 +757,6 @@ const getNowDate = () => {
 }
 function MoeToClosure()//Moe转Closure
 {
-	let moeurl = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io'
 	let ct = [];
 	let custom_chars = {};
 	$.each(chats,function(k,v)
@@ -766,7 +765,7 @@ function MoeToClosure()//Moe转Closure
 		let id = v['sCharacter']['no'];
 		let img = v['sCharacter']['index'];
 		let data = 'MT-';
-		if(closure_char[id])data = "ba-"
+		if(closure_char[0][id])data = "ba-"
 		if(!mt_char[id] && !mt_schar[id] && id != 0)//正常角色
 		{
 			ct[k]['char_id'] = data+id;
@@ -778,7 +777,7 @@ function MoeToClosure()//Moe转Closure
 				ct[k]['img'] = 'uploaded';
 
 				custom_chars[ct[k]['char_id']] = {}
-				custom_chars[ct[k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].id}/${img}.webp`
+				custom_chars[ct[k]['char_id']]['img'] = `${moeurl}Images/Char/${mt_characters[id].id}/${img}.webp`
 				custom_chars[ct[k]['char_id']]['name'] = loadname(id);
 			}
 		}
@@ -815,7 +814,7 @@ function MoeToClosure()//Moe转Closure
 				}
 				else
 				{
-					ct[k]['content'] = `${moeurl}/${v['content']}`;
+					ct[k]['content'] = moeurl+v['content'];
 				}
 			}
 			if(v['file'])ct[k]['content'] = v['file'];
@@ -834,7 +833,7 @@ function MoeToClosure()//Moe转Closure
 		let id = v.no;
 		let img = v.index;
 		let data = 'MT-';
-		if(closure_char[id])data = "ba-"
+		if(closure_char[0][id])data = "ba-"
 		if(!mt_char[id] && !mt_schar[id] && id != 0)//正常角色
 		{
 			closuretalk['chars'][k]['char_id'] = data+id;
@@ -846,7 +845,7 @@ function MoeToClosure()//Moe转Closure
 				closuretalk['chars'][k]['img'] = 'uploaded';
 
 				custom_chars[closuretalk['chars'][k]['char_id']] = {}
-				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${moeurl}/Images/Char/${mt_characters[id].id}/${img}.webp`
+				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${moeurl}Images/Char/${mt_characters[id].id}/${img}.webp`
 				custom_chars[closuretalk['chars'][k]['char_id']]['name'] = loadname(id);
 			}
 		}
@@ -916,7 +915,6 @@ function mt_title(moetalk,title,writer)
 //截屏功能
 function mt_capture(清晰度,截屏,生成图片,时间,标题)
 {
-	$('.dDBXxQ').show()//开始加载
 	let json = []
 	let filename = ''
 	let title = 标题 ? 标题 : mt_text.noTitle[mtlang]
@@ -1675,7 +1673,7 @@ function saveServerDatatoFile(filename, jsonData ,ext)
 						{
 							//console.log("写入数据成功");
 							$('.dDBXxQ').hide()//开始加载
-							alert('下载完成！\n可以在“Android/data/plus.H59EC0058/documents/MoeTalk_Data”中找到您下载的存档！')
+							alert(`下载完成！\n可以在“Android/data/${appname}/documents/MoeTalk_Data”中找到您下载的存档！`)
 						}
 						//定位至文件结尾，即每次都是追加内容
 						//writer.seek(writer.length);
@@ -1724,7 +1722,7 @@ function repairCF(data)
 	data.content = data.content.replace(`${school}/${club}/${no}`,id)
 }
 var baseArr = []
-function urlToBase64(img,length)
+function urlToBase64(img,length,O)
 {
 	if(img.src.indexOf('data:image/') > -1)
 	{
@@ -1749,7 +1747,7 @@ function urlToBase64(img,length)
 						const base64 = e.target.result
 						img.src = base64
 						baseArr.push('url')
-						if(baseArr.length === length)$('.dDBXxQ').hide()
+						if(baseArr.length === length)O()
 						resolve(base64)
 					}
 					oFileReader.readAsDataURL(blob)

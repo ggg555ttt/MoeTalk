@@ -2340,6 +2340,7 @@
 											onClick: function()
 											{
 												if(imageArr.length > 0)return;
+												$$('.dDBXxQ').show()
 												let title = L.Z.title[g] + " : " + ("" !== _ ? _ : L.Z.noTitle[g])
 												let writer = L.Z.writer[g] + " : " + ("" !== R ? R : L.Z.noName[g])
 												if(k.title === false)title = ''
@@ -2348,7 +2349,7 @@
 												//let S = 1.1
 												let start = 0 
 												let end = 0 
-												let leng = (16+(localStorage['watermark'] === 'false' ? 0 : 80))*S
+												let leng = (16+(localStorage['watermark'] === 'false' ? 0 : $$('#mt_watermark').outerHeight()))*S
 												let length = leng
 												let json = chats
 												let 平均 = false//,平均数 = 截图数量(S),总长度 = mt_height(S)+((平均数-1)*16*S),平均长度 = Math.ceil(总长度/平均数)
@@ -2368,10 +2369,10 @@
 													length = length+(消息.outerHeight()*S)
 													if(length > mt_settings['高度限制'] || 消息.attr('title') === 'red' || 平均)//
 													{
-														if(!json[end].isFirst && json[end].sCharacter.no != 0 && !json[end].is_breaking)
+														if(['chat','image'].indexOf(json[end].type) > -1 && !isfirst(end,json))
 														{
 															length = leng+(消息.outerHeight()*S)+(37*S)
-															if(!window.navigator.userAgent.match('Html5Plus'))消息[0].outerHTML = makeMessage(json[end].type,json[end],end,'screen')
+															消息[0].outerHTML = makeMessage(json[end].type,json[end],end,'screen')
 														}
 														else
 														{
@@ -2392,7 +2393,19 @@
 													imageZip = new JSZip();
 												}
 												imageArrL = imageArr.length
-												O()
+												if(window.navigator.userAgent.match('Html5Plus'))
+												{
+													baseArr = [];
+													let length = $$(".Talk__CContainer-sc-1uzn66i-1 img").length
+													$$(".Talk__CContainer-sc-1uzn66i-1 img").each(function(k)
+													{
+														urlToBase64($$(this)[0],length,O)
+													})
+												}
+												else
+												{
+													O()
+												}
 											},
 											children: L.Z.confirm[g]
 										})]
@@ -2980,17 +2993,6 @@
 								title: "Image Download",
 								onClick: function()
 								{
-									if(window.navigator.userAgent.match('Html5Plus'))
-									{
-										$$('.dDBXxQ').show()
-										baseArr = [];
-										let length = $$(".Talk__CContainer-sc-1uzn66i-1 img").length
-										$$(".Talk__CContainer-sc-1uzn66i-1 img").each(function(k)
-										{
-											urlToBase64($$(this)[0],length)
-											// ? arr.push(k) : 
-										})
-									}
 									imageArrL = 0
 									y(!0)
 								},
@@ -4750,7 +4752,8 @@
 											textAlign:"right",
 											flexDirection:"column",
 											alignItems:"flex-end",
-											justifyContent:"center"
+											justifyContent:"center",
+											wordBreak: 'break-all'
 										},
 										children: [(0, m.jsx)('span',
 										{

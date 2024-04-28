@@ -2029,7 +2029,7 @@ var mt_characters = {
             "pinyin": "jianxianhecheng"
         },
         "charface": "CharID_126/CH0060/CH0060.10,CharID_126/NP0058/NP0058.14,CharID_126/tsurugi/tsurugi.14,CharID_126/CharID_126.12",
-        "customface": ""
+        "customface": "CFID_1/CharID_126/CharID_126.23"
     },
     "正以实现委员会成员": {
         "id": "CharID_127",

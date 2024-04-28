@@ -166,8 +166,15 @@ $(".bIcduz").wait(function()
 //加载工具
 $(".frVjsk").wait(function()
 {
-	$(".frVjsk").append(`<a href='https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda'><button class='${class0}'><b style='color:black;'>安</b></button></a><span class='tool'>安卓下载</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' onclick='location.reload(true)'><b style='color:blue;'>刷</b></button><span class='tool'>刷新页面</span><br>`);
+	if(window.navigator.userAgent.match('Html5Plus'))
+	{
+		$(".frVjsk").append(`<button class='${class0}' onclick='location.reload(true)'><b style='color:blue;'>刷</b></button><span class='tool'>刷新页面</span><br>`);
+	}
+	else
+	{
+		$(".frVjsk").append(`<a href='https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda' target='_blank'><button class='${class0}'><b style='color:blue;'>A</b></button></a><span class='tool'>下载客户端APP</span><br>`);	
+	}
+	
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='https://tieba.baidu.com/p/8551808608'}.html'><button class='${class0}'><b style='color:black;'>教</b></button></a><span class='tool'>使用教程</span><br>`);

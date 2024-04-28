@@ -10175,6 +10175,14 @@
 									{
 										onClick: function(e)
 										{
+											if(window.location.href.indexOf('file:///') === 0)
+											{
+												if(confirm('客户端无法使用图书馆\n点击“确定”将转到网页端\n※若想返回客户端请退出软件并重新进入'))
+												{
+													window.location.href = moeurl;
+												}
+												return;
+											}
 											$$('.cgldhY').hide()
 											$$('.dDBXxQ').show()
 											if(!browser.isDeskTop)alert('移动端加载较慢，可能需要多等几秒')
