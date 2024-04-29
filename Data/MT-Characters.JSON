@@ -3637,11 +3637,11 @@ var mt_characters = {
         "club": "对策委员会",
         "head": "CH0157_BG,NP0166,CH0157",
         "name": {
-            "zh_cn": "梦",
-            "zh_tw": "夢",
-            "jp": "ユメ",
-            "en": "Yume",
-            "kr": "유메",
+            "zh_cn": "栀子 梦",
+            "zh_tw": "梔子 夢",
+            "jp": "梔子 ユメ",
+            "en": "Kuchinashi Yume",
+            "kr": "쿠치나시 유메",
             "pinyin": "meng"
         },
         "charface": "CharID_227/CH0157/CH0157.21,CharID_227/NP0166/NP0166.21,CharID_227/CharID_227.8",

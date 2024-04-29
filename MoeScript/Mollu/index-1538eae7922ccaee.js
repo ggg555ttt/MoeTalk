@@ -2038,14 +2038,6 @@
 						w = (0, r.useState)(""),
 						_ = w[0],
 						C = w[1],
-						v = (0, r.useState)((t = {
-							watermark: !0,
-							title: !1,
-							writer: !1,
-							archive: localStorage['archive'] !== 'false' ? true : false
-						}, "undefined" != typeof localStorage && (t.watermark = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("watermark")) === null ? "true" : localStorage.getItem("watermark") || "false"), t.archive = JSON.parse((null === (n = localStorage) || void 0 === n ? void 0 : n.getItem("archive")) === null ? "true" : localStorage.getItem("archive") || "false")), t)),
-						k = v[0],
-						Z = v[1],
 						N = (0, r.useState)(1.1),
 						S = N[0],
 						P = N[1],
@@ -2083,19 +2075,7 @@
 						})), function()
 						{
 							return l.apply(this, arguments)
-						}),
-						E = function(e, n)
-						{
-							var t = e.target.checked,
-								r = {
-									watermark: k.watermark,
-									title: k.title,
-									writer: k.writer,
-									archive: localStorage['archive'] !== 'false' ? true : false
-								};
-							r[n] = t, "archive" !== n || (localStorage.setItem("archive", String(t)), t || (r.title = !1, r.writer = !1)), "watermark" !== n || (localStorage.setItem("watermark", String(t)), t || (r.title = !1, r.writer = !1)), Z(r)
-							mt_title()//@
-						};
+						});
 					return (0, m.jsx)(ea.Xf,
 					{
 						id:"download_to_image",
@@ -2135,7 +2115,7 @@
 									className: 'mt_capture',
 									onClick: function()
 									{
-										mt_capture(S,eg,j,(0, u._3)(!0, !0),_)//新版截图
+										mt_capture(S,eg,j,(0, u._3)(!0, !0),$$('#mt_title').text().split(':').pop().trim())//新版截图
 									}
 								})]
 							}), (0, m.jsxs)(ea.$0,
@@ -2166,18 +2146,11 @@
 												className: "medium",
 												placeholder: L.Z.title_comment[g],
 												maxRows: 1,
-												value: _,
 												//maxLength: 14,
 												onChange: function(e)
 												{
-													var n = e.currentTarget.value;
-													n.match("\n") || (C(n), Z(
-													{
-														watermark: !0,
-														writer: !0,
-														title: !0,
-														archive: localStorage['archive'] !== 'false' ? true : false
-													}))
+													if(!$$(".截图选项").eq(1).prop('checked'))$$(".截图选项").eq(1).click()
+													$$('#mt_title').text(mt_text.title[mtlang]+" : "+(e.currentTarget.value ? e.currentTarget.value : mt_text.noTitle[mtlang]))
 												},
 												onKeyDown: function(e) {}
 											})
@@ -2188,18 +2161,11 @@
 												className: "medium",
 												placeholder: L.Z.nickName_comment[g],
 												maxRows: 1,
-												value: R,
 												//maxLength: 9,
 												onChange: function(e)
 												{
-													var n = e.currentTarget.value;
-													n.match("\n") || (F(n), Z(
-													{
-														watermark: !0,
-														writer: !0,
-														title: !0,
-														archive: localStorage['archive'] !== 'false' ? true : false
-													}))
+													if(!$$(".截图选项").eq(2).prop('checked'))$$(".截图选项").eq(2).click()
+													$$('#mt_writer').text(mt_text.writer[mtlang]+" : "+(e.currentTarget.value ? e.currentTarget.value : mt_text.noName[mtlang]))
 												}
 											})
 										})]
@@ -2234,8 +2200,10 @@
 														type: "checkbox",
 														id: "iq_".concat(e),
 														checked: S === e,
+														className: "scale",
 														onChange: function()
 														{
+															截屏预览(e)
 															P(e)
 														},
 														value: e
@@ -2258,12 +2226,8 @@
 												children: [(0, m.jsx)("input",
 												{
 													type: "checkbox",
-													id: e,
-													checked: k[e],
-													onChange: function(n)
-													{
-														return E(n, e)
-													},
+													className: '截图选项',
+													title: e,
 													value: n
 												}), L.Z[e][g]]
 											}, n)
@@ -2276,7 +2240,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: [L.Z.down_comment1[g],localStorage['archive'] === 'false' ? '不包含存档' : `已追加${localSize}KB存档`]
+										children: L.Z.down_comment1[g]
 									}), (0, m.jsx)("span",
 									{
 										style:
@@ -2339,73 +2303,7 @@
 											disabled: chats.length < 1,
 											onClick: function()
 											{
-												if(imageArr.length > 0)return;
-												$$('.dDBXxQ').show()
-												let title = L.Z.title[g] + " : " + ("" !== _ ? _ : L.Z.noTitle[g])
-												let writer = L.Z.writer[g] + " : " + ("" !== R ? R : L.Z.noName[g])
-												if(k.title === false)title = ''
-												if(k.writer === false)writer = ''
-												mt_title(mt_settings['顶部标题'],title, writer)
-												//let S = 1.1
-												let start = 0 
-												let end = 0 
-												let leng = (16+(localStorage['watermark'] === 'false' ? 0 : $$('#mt_watermark').outerHeight()))*S
-												let length = leng
-												let json = chats
-												let 平均 = false//,平均数 = 截图数量(S),总长度 = mt_height(S)+((平均数-1)*16*S),平均长度 = Math.ceil(总长度/平均数)
-												if($$(".dels:checked").length)//区域截图
-												{
-													json = []
-													$$(".dels:checked").each(function(k,v)
-													{
-														json.push(chats[$$('.消息').index($$(this).parent())])
-													})
-												}
-												let 消息;
-												for(let end = 0;end < json.length;end++)
-												{
-													if($$(".dels:checked").length)消息 = $$(`.消息 :checked:eq(${end})`).parent()//区域截图
-													else 消息 = $$(`.消息:eq(${end})`)
-													length = length+(消息.outerHeight()*S)
-													if(length > mt_settings['高度限制'] || 消息.attr('title') === 'red' || 平均)//
-													{
-														if(['chat','image'].indexOf(json[end].type) > -1 && !isfirst(end,json))
-														{
-															length = leng+(消息.outerHeight()*S)+(37*S)
-															消息[0].outerHTML = makeMessage(json[end].type,json[end],end,'screen')
-														}
-														else
-														{
-															length = leng+(消息.outerHeight()*S)
-														}
-														imageArr.push({start:start,end:end,index:imageArr.length+1})
-														start = end
-														平均 = false
-													}
-													//if(length > 平均长度)平均 = true
-													if(end === json.length-1)
-													{
-														imageArr.push({start: start,end: json.length,index: imageArr.length+1})
-													}
-												}
-												if(zipDownImg && imageArr.length > 1)
-												{
-													imageZip = new JSZip();
-												}
-												imageArrL = imageArr.length
-												if(window.navigator.userAgent.match('Html5Plus'))
-												{
-													baseArr = [];
-													let length = $$(".Talk__CContainer-sc-1uzn66i-1 img").length
-													$$(".Talk__CContainer-sc-1uzn66i-1 img").each(function(k)
-													{
-														urlToBase64($$(this)[0],length,O)
-													})
-												}
-												else
-												{
-													O()
-												}
+												O()
 											},
 											children: L.Z.confirm[g]
 										})]
@@ -2994,6 +2892,7 @@
 								onClick: function()
 								{
 									imageArrL = 0
+									截屏预览()
 									y(!0)
 								},
 								children: (0, m.jsx)(c.xL,
@@ -3664,31 +3563,7 @@
 									},
 									onClick: function()
 									{
-										$$(".dels").hide()
-										if($$(".dels:checked").length)//区域截图
-										{
-											let json = []
-											let index;
-											$$('.消息').hide()
-											$$(".dels:checked").each(function(k,v)
-											{
-												$$(this).parent().show()
-												index = $$('.消息').index($$(this).parent())
-												json.push(chats[index])
-												if(isfirst(k,json))
-												{
-													$$('.消息')[index].outerHTML = makeMessage(json[k].type,json[k],index,'screen')
-												}
-											})
-											$$('.消息').css("background-color","")
-											$$('.消息').css('border-top','')
-											$$(".dels").hide()
-										}
-										if(!元素尺寸)元素尺寸 = document.documentElement.style.fontSize
-										document.documentElement.style.fontSize = '16px'
 										mt_title()
-										setTimeout(function(){click('#tool-image')},1)
-										
 									},
 									children: (0, m.jsx)(c.xL,
 									{
@@ -4713,17 +4588,7 @@
 									id:"mt_watermark",
 									style:
 									{
-										backgroundColor:'transparent',
-										display:"none",
-										width:"100%",
-										fontSize:"1rem",
-										lineHeight:"1.5rem",
-										minHeight:"64px",
-										justifyContent:"space-between",
-										color:"white",
-										boxSizing:"border-box",
-										padding:"0.5rem 1rem",
-										marginBottom:"1rem"
+										display:"none"
 									},
 									children: [(0, m.jsx)('div',
 									{
@@ -4742,7 +4607,7 @@
 												fontFamily:"title",
 												fontWeight:700
 											},
-											children: ''
+											children: mt_settings['顶部标题']
 										})
 									}),(0, m.jsx)('div',
 									{

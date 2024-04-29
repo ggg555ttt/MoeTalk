@@ -602,3 +602,16 @@ align-self: stretch;
     line-height: 1.42;
     cursor: pointer;
 }
+#mt_watermark
+{
+	background-color:rgb(139, 187, 233);
+	display:flex;
+	width:100%;
+	font-size:1rem;
+	line-height:1.5rem;
+	min-height:64px;
+	justify-content:space-between;
+	box-sizing:border-box;
+	padding:0.5rem 1rem;
+	margin-bottom:1rem
+}

@@ -479,9 +479,24 @@ function makeMessage(type,data,chatIndex,mode)
 	let 聊天,头像框,对话,名称,文本,图片;
 	let no = data.sCharacter.no
 	let index = data.sCharacter.index
+	let alt = ''
+	let head = ''
+	if(mode === 'screen')
+	{
+		alt = 'alt="screen"'
+		head = true
+	}
+	else if(mode === 'capture')
+	{
+		alt = 'alt="screen" alt2="capture"'
+		head = true
+	}
+	else
+	{
+		alt = ''
+		head = isfirst(chatIndex,chats)
+	}
 
-	let alt = mode === 'screen' ? 'alt="screen"' : ''
-	let head = mode === 'screen' ? true : isfirst(chatIndex,chats)
 	let color = 'transparent';
 	let selected = $(`.dels:eq(${chatIndex})`).prop('checked') && mode !== 'add' && mode !== '追加'
 
@@ -974,3 +989,28 @@ if(window.navigator.userAgent.match('Html5Plus'))
 		}
 	}
 }
+$("body").on('click',".截图选项",function()
+{
+	let val = $(this).val()
+	let str = $(this).attr('title')
+	if(val < 3)
+	{
+		if($(this).prop('checked'))
+		{
+			$('#mt_'+str).show()
+			mt_settings['截图选项'].watermark = mt_settings['截图选项'][str] = !0
+			$('#mt_watermark').show()
+			$(".截图选项").eq(0).prop('checked',true)
+		}
+		else
+		{
+			$('#mt_'+str).hide()
+			delete mt_settings['截图选项'][str]
+		}
+	}
+	else
+	{
+		$(this).prop('checked') ? mt_settings['截图选项'][str] = !0 : delete mt_settings['截图选项'][str]
+	}
+	saveStorage('设置选项',mt_settings,'local')
+});

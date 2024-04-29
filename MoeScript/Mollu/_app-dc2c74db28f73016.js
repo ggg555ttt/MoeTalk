@@ -13098,7 +13098,7 @@
 							isMenu: !1,
 							isRight: !1,
 							lang: mtlang,//#读取设置语言
-							gameName: "Mollu"
+							gameName: ""
 						},
 						reducers:
 						{

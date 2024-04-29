@@ -39,7 +39,6 @@ if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';
 if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
 var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色数据
 var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时头像数据
-
 if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选项'] === '{}')
 {
 	let lang = window.navigator.language.toLowerCase()
@@ -116,6 +115,7 @@ if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选
 	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
 
 }
+if(!mt_settings['截图选项'])mt_settings['截图选项'] = {}
 if(browser.isFirefox)mt_settings['禁止字体'] = true
 saveStorage('设置选项',mt_settings,'local')
 
@@ -444,9 +444,9 @@ function club(clear = false)
 function saveclub()
 {
 	mt_settings['社团列表'] = {};
-	$$(".club:checked").each(function()
+	$(".club:checked").each(function()
 	{
-		mt_settings['社团列表'][$$(this).attr('value')] = 'YES'
+		mt_settings['社团列表'][$(this).attr('value')] = 'YES'
 	})
 	saveStorage('设置选项',mt_settings,'local')
 }
@@ -879,7 +879,7 @@ function MoeToClosure()//Moe转Closure
 		closuretalk['custom_chars'].push({char_id:k,img:v.img,name:v.name})
 	})
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-	$$('#downImg').html('')
+	$('#downImg').html('')
 	if(window.navigator.userAgent.match('Html5Plus'))
 	{
 		saveServerDatatoFile('ClosureTalk转换存档'+time, JSON.stringify(closuretalk,null,4) ,'json')
@@ -889,128 +889,6 @@ function MoeToClosure()//Moe转Closure
 		download_txt('ClosureTalk转换存档'+time+'.json',JSON.stringify(closuretalk,null,4));//生成专用存档
 	}
 	
-}
-function mt_title(moetalk,title,writer)
-{
-	$(".Talk__CContainer-sc-1uzn66i-1").outerWidth(mt_settings['宽度限制'])
-	$('#mt_watermark').css('display','flex')
-	if(moetalk && localStorage['watermark'] !== 'false')
-	{
-		if(!title)title = ''
-		if(!writer)writer = ''
-		$('#mt_title').text(title)
-		$('#mt_writer').text(writer)
-		$('.mt_watermark').text(mt_settings['顶部标题'])
-		$('#mt_watermark').css('background-color',"rgb(139, 187, 233)")
-	}
-	else
-	{
-		$('#mt_title').text('')
-		$('#mt_writer').text('')
-		$('.mt_watermark').text('')
-		if(localStorage['watermark'] === 'false')$('#mt_watermark').hide()
-		$('#mt_watermark').css('background-color',MikuTalk || mt_settings['风格样式'][1])
-	}
-}
-//截屏功能
-function mt_capture(清晰度,截屏,生成图片,时间,标题)
-{
-	let json = []
-	let filename = ''
-	let title = 标题 ? 标题 : mt_text.noTitle[mtlang]
-	let imgArea = imageArr[0]
-	if(imgArea.start !== 0)$('#mt_watermark').hide()
-
-	if(localStorage['archive'] === 'false')json = ''
-	else
-	{
-		json[0] = {};
-		json[0]['title'] = '备份存档';
-		json[0]['nickname'] = 'MoeTalk';
-		json[0]['date'] = 时间;
-		json[0]['选择角色'] = mt_settings['选择角色']//@
-		json[0]['mt_char'] = mt_char;//@自创角色
-		json[0]['mt_head'] = mt_head;//@自创头像
-		json[1] = [...chats,...otherChats];
-		json = JSON.stringify(json)
-	}
-	let 消息 = $('.消息');
-	if($$(".dels:checked").length)消息 = $$(`.消息 :checked`).parent()//区域截图
-	消息.show()
-	消息.slice(0,imgArea.start).hide()
-	消息.slice(imgArea.end,消息.length).hide()
-	if(MikuTalk && $(".Talk__CContainer-sc-1uzn66i-1").css('background-color') === 'rgba(0, 0, 0, 0)')
-	{
-		$(".Talk__CContainer-sc-1uzn66i-1").css('background-color',MikuTalk)
-	}
-
-	截屏()($(".Talk__CContainer-sc-1uzn66i-1")[0],
-	{
-		logging: !1,
-		allowTaint: !0,
-		useCORS: !0,
-		scale: 清晰度
-	}).then(function(img)
-	{
-		if(['rgb(255, 255, 255)','rgb(255, 247, 225)'].indexOf($(".Talk__CContainer-sc-1uzn66i-1").css('background-color')) < 0)
-		{
-			$(".Talk__CContainer-sc-1uzn66i-1").css('background-color','transparent')
-		}
-		let imgBaes64 = img.toDataURL(mt_settings['图片格式']);
-		let height = img.height
-
-		if(imageArr.length === imageArrL)生成图片(imgArea.index)
-		imageArr.shift()
-		img.toBlob(function(img)
-		{
-			
-			if(imageArr.length > 0)
-			{
-				filename = `MoeTalk_${title}_${imgArea.index}_${height}`
-				//mt_capture(清晰度,截屏,生成图片,时间,标题)
-				$('.mt_capture').click()
-			}
-			else
-			{
-				filename = `MoeTalk_${title}${imgArea.index === 1 ? '' : '_'+imgArea.index}_${height}`
-				$('.dDBXxQ').hide()//结束加载
-			}
-
-			imgBaes64 = imgBaes64.replace(`data:${mt_settings['图片格式']};base64,`,'')
-
-			if(imageZip)
-			{
-				$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${imgBaes64}'></div>`)
-				$('.截图数量').text(imageArr.length)
-				imageZip.file(`MoeTalk_${title}_${imgArea.index}_${height}.${mt_settings['图片格式'].split('/')[1]}`,img);
-				if(imageArr.length === 0)
-				{
-					json ? imageZip.file(`MoeTalk_${title}.json`,json) : '';
-					imageZip.generateAsync({type:'blob'}).then(function(content)
-					{
-						let a = document.createElement('a');
-						a.href = URL.createObjectURL(content);
-						a.download = `MoeTalk_${title}_${时间}.zip`;
-						a.click();
-						imageZip = null
-					});
-				}
-			}
-			else 
-			{
-				if(window.navigator.userAgent.match('Html5Plus'))
-				{
-					$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${imgBaes64}'></div>`)
-					$('.截图数量').text(imageArr.length)
-					saveImg(`${filename}.${mt_settings['图片格式'].split('/')[1]}`, imgBaes64)
-				}
-				else
-				{
-					combineFiles(imgBaes64,json,filename,imgArea.index);
-				}
-			}
-		})
-	})
 }
 function toString(val)
 {
@@ -1100,7 +978,7 @@ function mt_emojis(S,mode)
 			S(!0)
 			setTimeout(function()
 			{
-				if($$(`.差分映射.selected`).length)$$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',behavior:"smooth"})
+				if($(`.差分映射.selected`).length)$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',behavior:"smooth"})
 			}, 100)
 			return;
 		}
@@ -1156,7 +1034,7 @@ function mt_emojis(S,mode)
 			saveStorage('差分书签',差分书签,'session')
 			setTimeout(function()
 			{
-				if($$(`.差分映射.selected`).length)$$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',behavior:"smooth"})
+				if($(`.差分映射.selected`).length)$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',behavior:"smooth"})
 			}, 100)
 			return;
 		}
@@ -1195,27 +1073,7 @@ function mt_emojis(S,mode)
 		S(!0)
 	}
 }
-function srceenMode()
-{
-	if(元素尺寸)document.documentElement.style.fontSize = 元素尺寸
-	$('#mt_watermark').hide()
-	$('.消息').show()
-	$(".dels").show()
-	$(".Talk__CContainer-sc-1uzn66i-1").outerWidth('inherit')
-	$('.消息[alt="screen"]').each(function(k,v)
-	{
-		k = $('.消息').index($(this))
-		if(!isfirst(k,chats))
-		{
-			$('.消息')[k].outerHTML = makeMessage(chats[k].type,chats[k],k)
-		}
-	})
-	if($(".dels:checked").length)
-	{
-		$('.dels:checked').parent().css("background-color","rgb(202,215,221)")
-		$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
-	}
-}
+
 function custom_chars()
 {
 	mt_chars = []
@@ -1566,10 +1424,7 @@ function 粘贴()
 	}
 	sendMessage(粘贴板,'','追加',indexs)
 }
-function test(val)
-{
-	console.log(val)
-}
+var test = console.log
 function blink(element)
 {
 	return $(element).fadeOut(500, function() 
@@ -1612,6 +1467,10 @@ function saveImg(fileName, base64, quality)
 			// mui.alert("保存图片成功：" + JSON.stringify(i))
 			plus.gallery.save(i.target, function()
 			{// 保存到相册
+				plus.io.resolveLocalFileSystemURL(i.target, function(fileEntry)
+				{
+					fileEntry.remove()
+				})
 				bitmap.clear()
 			}, 
 			function(e)
@@ -1665,36 +1524,18 @@ function saveServerDatatoFile(filename, jsonData ,ext)
 					//写入文件
 					fileEntry.createWriter(function(writer)
 					{
-						// writer.onwritestart = function(e)
-						// {
-						// 	console.log("写入数据开始");
-						// }
 						writer.onwrite = function(e)
 						{
 							//console.log("写入数据成功");
 							$('.dDBXxQ').hide()//开始加载
 							alert(`下载完成！\n可以在“Android/data/${appname}/documents/MoeTalk_Data”中找到您下载的存档！`)
 						}
-						//定位至文件结尾，即每次都是追加内容
-						//writer.seek(writer.length);
-						//定位至开头，即每次都是重写文件。（默认）
-						//writer.seek(0);
 						writer.write(jsonData);
 					},
 					function(error)
 					{
 						alert("创建Writer失败" + error.message);
 					});
-
-					//读取文件
-					// var fileReader = new plus.io.FileReader();
-					// console.log("getFile:" + JSON.stringify(file));
-					// fileReader.readAsText(file, 'utf-8');
-					// fileReader.onloadend = function(evt) {
-					// 	console.log("11" + JSON.stringify(evt));
-					// 	console.log("evt.target" + JSON.stringify(evt.target));
-					// 	console.log("evt.target.result" + JSON.stringify(evt.target.result));
-					// }
 				});
 			},
 			function(err)
@@ -1722,7 +1563,7 @@ function repairCF(data)
 	data.content = data.content.replace(`${school}/${club}/${no}`,id)
 }
 var baseArr = []
-function urlToBase64(img,length,O)
+function urlToBase64(img,length)
 {
 	if(img.src.indexOf('data:image/') > -1)
 	{
@@ -1747,7 +1588,7 @@ function urlToBase64(img,length,O)
 						const base64 = e.target.result
 						img.src = base64
 						baseArr.push('url')
-						if(baseArr.length === length)O()
+						if(baseArr.length === length)$('.dDBXxQ').hide()
 						resolve(base64)
 					}
 					oFileReader.readAsDataURL(blob)
@@ -1756,4 +1597,241 @@ function urlToBase64(img,length,O)
 			xhr.send()
 		})
 	}
+}
+function mt_title()
+{
+	$(".Talk__CContainer-sc-1uzn66i-1").outerWidth(mt_settings['宽度限制'])
+	$.each(mt_settings['截图选项'],function(k,v)
+	{
+		if(v)
+		{
+			$('#mt_'+k).show()
+			$(`.截图选项[title="${k}"]`).prop('checked',true)
+		}
+		else
+		{
+			$('#mt_'+k).hide()
+			$(`.截图选项[title="${k}"]`).prop('checked',false)
+		}
+	})
+	mt_settings['截图选项'].watermark ? $('#mt_watermark').show() : $('#mt_watermark').hide()
+	mt_settings['截图选项'].title ? $('#mt_title').show() : $('#mt_title').hide()
+	mt_settings['截图选项'].writer ? $('#mt_writer').show() : $('#mt_writer').hide()
+	$(".dels").hide()
+	if($(".dels:checked").length)//区域截图
+	{
+		let json = []
+		let index;
+		$('.消息').hide()
+		$(".dels:checked").each(function(k,v)
+		{
+			$(this).parent().show()
+			index = $('.消息').index($(this).parent())
+			json.push(chats[index])
+			if(isfirst(k,json))
+			{
+				$('.消息')[index].outerHTML = makeMessage(json[k].type,json[k],index,'screen')
+			}
+		})
+		$('.消息').css("background-color","")
+		$('.消息').css('border-top','')
+		$(".dels").hide()
+	}
+	if(!元素尺寸)元素尺寸 = document.documentElement.style.fontSize
+	document.documentElement.style.fontSize = '16px'
+	setTimeout(function(){click('#tool-image')},1)
+}
+function srceenMode()
+{
+	if(元素尺寸)document.documentElement.style.fontSize = 元素尺寸
+	$('#mt_watermark').hide()
+	$('.消息').show()
+	$(".dels").show()
+	$(".Talk__CContainer-sc-1uzn66i-1").outerWidth('inherit')
+	$('.消息[alt="screen"]').each(function(k,v)
+	{
+		k = $('.消息').index($(this))
+		if(!isfirst(k,chats))
+		{
+			$('.消息')[k].outerHTML = makeMessage(chats[k].type,chats[k],k)
+		}
+	})
+	if($(".dels:checked").length)
+	{
+		$('.dels:checked').parent().css("background-color","rgb(202,215,221)")
+		$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
+	}
+}
+function 截屏预览(S)
+{
+	if($('.消息[alt2="capture"]').length)
+	{
+		$('.消息[alt2="capture"] .名称,.消息[alt2="capture"] .头像框 img').remove()
+		$('.消息[alt2="capture"]').removeAttr('alt2').css('padding','0.5rem 1rem 0px').find('.文本').removeClass('左角').removeClass('右角')
+	}
+
+	$('.dDBXxQ').show()
+	imageArr = []
+
+	if(typeof S !== 'number')S = parseFloat($('.scale:checked').val())
+
+	let start = 0 
+	let end = 0 
+	let leng = (16+(localStorage['watermark'] === 'false' ? 0 : $('#mt_watermark').outerHeight()))*S
+	let length = leng
+	let json = chats
+	let 平均 = false//,平均数 = 截图数量(S),总长度 = mt_height(S)+((平均数-1)*16*S),平均长度 = Math.ceil(总长度/平均数)
+	if($(".dels:checked").length)//区域截图
+	{
+		json = []
+		$(".dels:checked").each(function(k,v)
+		{
+			json.push(chats[$('.消息').index($(this).parent())])
+		})
+	}
+	let 消息;
+	for(let end = 0;end < json.length;end++)
+	{
+		if($(".dels:checked").length)消息 = $(`.消息 :checked:eq(${end})`).parent()//区域截图
+		else 消息 = $(`.消息:eq(${end})`)
+		length = length+(消息.outerHeight()*S)
+		if(length > mt_settings['高度限制'] || 消息.attr('title') === 'red' || 平均)//
+		{
+			if(['chat','image'].indexOf(json[end].type) > -1 && !isfirst(end,json))
+			{
+				length = leng+(消息.outerHeight()*S)+(37*S)
+				消息[0].outerHTML = makeMessage(json[end].type,json[end],end,'capture')
+			}
+			else
+			{
+				length = leng+(消息.outerHeight()*S)
+			}
+			imageArr.push({start:start,end:end,index:imageArr.length+1})
+			start = end
+			平均 = false
+		}
+		//if(length > 平均长度)平均 = true
+		if(end === json.length-1)
+		{
+			imageArr.push({start: start,end: json.length,index: imageArr.length+1})
+		}
+	}
+	if(zipDownImg && imageArr.length > 1)
+	{
+		imageZip = new JSZip();
+	}
+	imageArrL = imageArr.length
+	if(window.navigator.userAgent.match('Html5Plus'))
+	{
+		baseArr = [];
+		let length = $(".Talk__CContainer-sc-1uzn66i-1 img").length
+		$(".Talk__CContainer-sc-1uzn66i-1 img").each(function(k)
+		{
+			urlToBase64($(this)[0],length)
+		})
+	}
+	else
+	{
+		$('.dDBXxQ').hide()
+	}
+}
+//截屏功能
+function mt_capture(清晰度,截屏,生成图片,时间,标题)
+{
+	let json = []
+	let filename = ''
+	let title = 标题 ? 标题 : mt_text.noTitle[mtlang]
+	let imgArea = imageArr[0]
+	if(imgArea.start !== 0)$('#mt_watermark').hide()
+
+	if(!mt_settings['截图选项'].archive)json = ''
+	else
+	{
+		json[0] = {};
+		json[0]['title'] = '备份存档';
+		json[0]['nickname'] = 'MoeTalk';
+		json[0]['date'] = 时间;
+		json[0]['选择角色'] = mt_settings['选择角色']//@
+		json[0]['mt_char'] = mt_char;//@自创角色
+		json[0]['mt_head'] = mt_head;//@自创头像
+		json[1] = [...chats,...otherChats];
+		json = JSON.stringify(json)
+	}
+	let 消息 = $('.消息');
+	if($(".dels:checked").length)消息 = $(`.消息 :checked`).parent()//区域截图
+	消息.show()
+	消息.slice(0,imgArea.start).hide()
+	消息.slice(imgArea.end,消息.length).hide()
+	if(MikuTalk && $(".Talk__CContainer-sc-1uzn66i-1").css('background-color') === 'rgba(0, 0, 0, 0)')
+	{
+		$(".Talk__CContainer-sc-1uzn66i-1").css('background-color',MikuTalk)
+	}
+	$('.dDBXxQ').show()
+	截屏()($(".Talk__CContainer-sc-1uzn66i-1")[0],
+	{
+		logging: !1,
+		allowTaint: !0,
+		useCORS: !0,
+		scale: 清晰度
+	}).then(function(img)
+	{
+		if(['rgb(255, 255, 255)','rgb(255, 247, 225)'].indexOf($(".Talk__CContainer-sc-1uzn66i-1").css('background-color')) < 0)
+		{
+			$(".Talk__CContainer-sc-1uzn66i-1").css('background-color','transparent')
+		}
+		let imgBaes64 = img.toDataURL(mt_settings['图片格式']);
+		let height = img.height
+
+		if(imageArr.length === imageArrL)生成图片(imgArea.index)
+		imageArr.shift()
+		img.toBlob(function(img)
+		{
+			
+			if(imageArr.length > 0)
+			{
+				filename = `MoeTalk_${title}_${imgArea.index}_${height}`
+				//mt_capture(清晰度,截屏,生成图片,时间,标题)
+				$('.mt_capture').click()
+			}
+			else
+			{
+				filename = `MoeTalk_${title}${imgArea.index === 1 ? '' : '_'+imgArea.index}_${height}`
+				$('.dDBXxQ').hide()//结束加载
+			}
+
+			imgBaes64 = imgBaes64.replace(`data:${mt_settings['图片格式']};base64,`,'')
+
+			if(imageZip)
+			{
+				$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${imgBaes64}'></div>`)
+				$('.截图数量').text(imageArr.length)
+				imageZip.file(`MoeTalk_${title}_${imgArea.index}_${height}.${mt_settings['图片格式'].split('/')[1]}`,img);
+				if(imageArr.length === 0)
+				{
+					json ? imageZip.file(`MoeTalk_${title}.json`,json) : '';
+					imageZip.generateAsync({type:'blob'}).then(function(content)
+					{
+						let a = document.createElement('a');
+						a.href = URL.createObjectURL(content);
+						a.download = `MoeTalk_${title}_${时间}.zip`;
+						a.click();
+						imageZip = null
+					});
+				}
+			}
+			else 
+			{
+				if(window.navigator.userAgent.match('Html5Plus'))
+				{
+					$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${imgBaes64}'></div>`)
+					$('.截图数量').text(imageArr.length)
+					saveImg(`${filename}.${mt_settings['图片格式'].split('/')[1]}`, imgBaes64)
+				}
+				else
+				{
+					combineFiles(imgBaes64,json,filename,imgArea.index);
+				}
+			}
+		})
+	})
 }
