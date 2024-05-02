@@ -45,8 +45,8 @@ if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选
 	if(['zh-cn','zh-sg'].indexOf(lang) > -1)lang = 'zh_cn'
 	if(['zh-tw','zh-hk'].indexOf(lang) > -1)lang = 'zh_tw'
 	if(lang.indexOf('en') > -1)lang = 'en'
-	if(['ja','ja-jp'].indexOf(lang) > -1)lang = 'zh_cn'
-	if(['ko','ko-kr'].indexOf(lang) > -1)lang = 'zh_tw'
+	if(['ja','ja-jp'].indexOf(lang) > -1)lang = 'jp'
+	if(['ko','ko-kr'].indexOf(lang) > -1)lang = 'kr'
 	if(['zh_cn','zh_tw','en','jp','kr'].indexOf(lang) < 0)lang = 'en'
 
 	if(!mt_settings['语言选项'])mt_settings['语言选项'] = lang
@@ -1331,6 +1331,7 @@ function moeLog(arr,mode = false)
 	}
 
 	moetalkStorage.setItem('moeLog', 操作历史);
+	send = false;//默认关闭
 	if(send)//
 	{
 		localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()

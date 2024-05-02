@@ -2013,7 +2013,7 @@ var mt_characters = {
             "pinyin": "yihua"
         },
         "charface": "CharID_125/CH0071/CH0071.21,CharID_125/CharID_125.3",
-        "customface": ""
+        "customface": "CFID_1/CharID_125/CharID_125.49"
     },
     "剑先鹤城": {
         "id": "CharID_126",
