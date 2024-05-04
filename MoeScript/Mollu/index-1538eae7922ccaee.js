@@ -3722,18 +3722,38 @@
 											(0, m.jsx)('input',
 											{
 												type:'checkbox',
-												className:'isFirst'
+												className:'isFirst',
+												onClick: function()
+												{
+													$$('.isCenter').prop('checked',false)
+													.next().next().prop('checked',false)
+												}
 											}),(0, m.jsx)('span',{children:'显示头像',style:{color:'blue'}}),
 											(0, m.jsx)('input',
 											{
 												type:'checkbox',
-												className:'isRight'
+												className:'isRight',
+												onClick: function()
+												{
+													$$('.isCenter').prop('checked',false)
+													.next().next().prop('checked',false)
+												}
 											}),(0, m.jsx)('span',{children:'右侧发言'}),
 											(0, m.jsx)('input',
 											{
 												type:'checkbox',
 												className:'is_breaking'
-											}),(0, m.jsx)('span',{children:'分割图片',style:{color:'red'}})]
+											}),(0, m.jsx)('span',{children:'截图时分割图片',style:{color:'red'}}),
+											(0, m.jsx)('input',
+											{
+												type:'checkbox',
+												className:'isCenter',
+												onClick: function()
+												{
+													$$('.isFirst').prop('checked',false)
+													.next().next().prop('checked',false)
+												}
+											}),(0, m.jsx)('span',{children:'图片中央显示'})]
 										})
 									}),(0, m.jsx)('div',
 									{
@@ -4010,6 +4030,7 @@
 												{
 													data.isFirst = $$('.isFirst').prop('checked')
 													data.isRight = $$('.isRight').prop('checked')
+													data.isCenter = $$('.isCenter').prop('checked')
 												}
 												
 												if($$('.editMessage .头像').attr('alt'))
@@ -4034,6 +4055,7 @@
 													time : $$('.time').val(),
 													content: $$('.content').val(),
 													isFirst: $$('.isFirst').prop('checked'),
+													isCenter: type === 'image' && $$('.isCenter').prop('checked'),
 													isRight : $$('.isRight').prop('checked'),
 													is_breaking : $$('.is_breaking').prop('checked'),
 													file: type === 'image' && $$('.图片文件').attr('src') && $$('.图片信息').attr('title') !== '链接' ? $$('.图片文件').attr('src') : '',
@@ -4153,6 +4175,11 @@
 						f = (0, r.useRef)(null);
 					let isFirst = isfirst(t,l)
 					let style = mt_settings['文字样式'][n.type] ? mt_settings['文字样式'][n.type] : {}
+					if(n.type === 'info')
+					{
+						n.isFirst && !n.isRight ? style.textAlign = 'left' : ''
+						n.isRight && !n.isFirst ? style.textAlign = 'right' : ''
+					}
 					return (0, m.jsx)('div',
 					{
 						className: '消息',
@@ -4165,7 +4192,7 @@
 							{//整体图文消息
 								children: (0, m.jsxs)(e8,
 								{//整体图文消息
-									children: [!n.isRight ? (0, m.jsx)('div',
+									children: [!n.isCenter && !n.isRight ? (0, m.jsx)('div',
 									{//左侧头像框
 										className: '头像框',
 										style: n.sCharacter.no != 0 ? 
@@ -4187,8 +4214,11 @@
 									}) : '', (0, m.jsxs)(n.sCharacter.no == 0 ? "div" : eN.Xp,
 									{//图文消息
 										className: "对话",
-										style: n.isRight || n.sCharacter.no == 0? {alignItems: 'flex-end'} : {alignItems: 'flex-start'},
-										children: [isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
+										style: 
+										{
+											alignItems: n.isCenter ? 'center' : n.isRight || n.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
+										},
+										children: [!n.isCenter && isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{//人物名称
 											className: "名称 bold",
 											children: n.name || loadname(n.sCharacter.no,n.sCharacter.index)
@@ -4197,7 +4227,7 @@
 											style:
 											{
 												display:"flex",
-												justifyContent: n.isRight || n.sCharacter.no == 0 ? '' : 'flex-start'
+												justifyContent: n.isCenter ? 'center' :  '',
 											},
 											children: [n.time ? (0, m.jsx)(eN.i9,
 											{//左侧时间戳
@@ -4229,7 +4259,7 @@
 												children: n.time
 											}) : '']
 										})]
-									}), n.isRight && n.sCharacter.no != 0 ? (0, m.jsx)('div',
+									}), !n.isCenter && n.isRight && n.sCharacter.no != 0 ? (0, m.jsx)('div',
 									{//右侧头像框
 										className: '头像框',
 										style:

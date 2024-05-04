@@ -575,6 +575,7 @@ align-self: stretch;
     line-break: loose;
     color: rgb(75, 105, 137);
     line-height: 1.42;
+    width: 100%;
 }
 
 .图片

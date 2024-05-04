@@ -9302,6 +9302,18 @@
 										onClick: function()
 										{
 											u()
+											if("page" === c)
+											{
+												setTimeout(function()
+												{
+													let url = window.location;
+													let arr = url.pathname.split('/');
+													arr.pop();
+													arr.push(href.replaceAll('/',''));
+													let newUrl = url.origin + arr.join('/') + url.search;
+													history.pushState('', '', newUrl); // 不刷新页面
+												}, 100)
+											}
 										},
 										children: r.Z.confirm[l]
 									})]

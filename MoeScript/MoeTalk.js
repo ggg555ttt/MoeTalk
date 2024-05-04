@@ -461,8 +461,10 @@ function isfirst(chatIndex,chats,mode)
 		if(mode === 'play')typeArr.pop()
 
 		if(chatIndex-1 < 0)return true//首条消息
+		if(chats[chatIndex-1].isCenter)return true//isCenter
 		if(typeArr.indexOf(chats[chatIndex].type) > -1)return true//判断类型
 		if(typeArr.indexOf(chats[chatIndex-1].type) > -1)return true//类型不符
+
 		if(chats[chatIndex].sCharacter.index != chats[chatIndex-1].sCharacter.index)return true//头像不符
 
 		if(chats[chatIndex].sCharacter.no == 0 && typeArr.indexOf(chats[chatIndex].type) < 0)return false//判断主角
@@ -547,14 +549,23 @@ function makeMessage(type,data,chatIndex,mode)
 			`${no == 0 ? '<div class="头像框" style="margin-right: 1.5rem;"></div>' : ''}
 			<div class="对话" style="align-items: flex-end;">
 				${名称}
-				<div style="display: flex; justify-content: flex-end;">
+				<div style="display: flex;">
 					${data.time ? `<span class="时间戳" style="text-align: right;">${data.time}</span>` : ''}
 					${type === 'chat' ? 文本 : 图片}
 				</div>
 			</div>
 			${头像框}`
 		}
-
+		if(data.isCenter && type === 'image')
+		{
+			对话 = 
+			`<div class="对话" style="align-items: center;">
+				<div style="display: flex;justify-content: center;">
+					${type === 'chat' ? 文本 : 图片}
+					${data.time ? `<span class="时间戳">${data.time}</span>` : ''}
+				</div>
+			</div>`
+		}
 		聊天 = `<div class="聊天">${对话}</div>`
 	}
 	if(type === 'heart')
@@ -572,6 +583,8 @@ function makeMessage(type,data,chatIndex,mode)
 	}
 	if(type === 'info')
 	{
+		data.isFirst && !data.isRight ? style += 'text-align: left;' : ''
+		data.isRight && !data.isFirst ? style += 'text-align: right;' : ''
 		聊天 = `<span class="旁白 编辑" style='${style}background: ${mt_settings['风格样式'][2]};'>${data.content}</span>`
 	}
 	if(type === 'reply')
@@ -795,6 +808,7 @@ $("body").on('click',".编辑",function()
 
 		if(chat.type === 'image')
 		{
+			$('.isCenter').show().prop('checked',chat.isCenter).next().show()
 			$('.图片选项').show()
 			if(chat.file)
 			{
@@ -811,6 +825,14 @@ $("body").on('click',".编辑",function()
 				$('.图片文件').hide()
 				$('.图片信息').text('无图片')
 			}
+		}
+		if(chat.type === 'info')
+		{
+			$('.isFirst').next().text('左侧对其').next().next().text('右侧对其')
+		}
+		else
+		{
+			$('.isFirst').next().text('显示头像').next().next().text('右侧发言')
 		}
 	}
 	
@@ -841,11 +863,13 @@ $("body").on('click',".editTalk",function()
 	{
 		$('.isRight').show().next().show()
 		$('.isFirst').show().next().show()
+		$('.edit_button .selected').attr('title') === 'image' ? $('.isCenter').show().next().show() : ''
 	}
 	else
 	{
 		$('.isRight').hide().next().hide()
 		$('.isFirst').hide().next().hide()
+		$('.isCenter').hide().next().hide()
 	}
 });
 $("body").on('click',".edit_button button",function()
@@ -856,6 +880,7 @@ $("body").on('click',".edit_button button",function()
 	$(`.edit_button .${type}`).addClass('selected')
 	if(type === 'image')
 	{
+		$('.dels:checked').length < 2 || $('.editTalk').prop('checked') ? $('.isCenter').show().next().show() : ''
 		$('.图片选项').show()
 		if(file)
 		{
@@ -869,7 +894,16 @@ $("body").on('click',".edit_button button",function()
 	}
 	else
 	{
+		$('.isCenter').hide().next().hide()
 		$('.图片选项').hide()
+	}
+	if(type === 'info')
+	{
+		$('.isFirst').next().text('左侧对其').next().next().text('右侧对其')
+	}
+	else
+	{
+		$('.isFirst').next().text('显示头像').next().next().text('右侧发言')
 	}
 });
 $("body").on('click',".fzOyMd",function()
