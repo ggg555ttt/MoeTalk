@@ -461,7 +461,7 @@ function isfirst(chatIndex,chats,mode)
 		if(mode === 'play')typeArr.pop()
 
 		if(chatIndex-1 < 0)return true//首条消息
-		if(chats[chatIndex-1].isCenter)return true//isCenter
+		if(chats[chatIndex].isCenter || chats[chatIndex-1].isCenter)return true//isCenter
 		if(typeArr.indexOf(chats[chatIndex].type) > -1)return true//判断类型
 		if(typeArr.indexOf(chats[chatIndex-1].type) > -1)return true//类型不符
 
@@ -828,7 +828,7 @@ $("body").on('click',".编辑",function()
 		}
 		if(chat.type === 'info')
 		{
-			$('.isFirst').next().text('左侧对其').next().next().text('右侧对其')
+			$('.isFirst').next().text('左侧对齐').next().next().text('右侧对齐')
 		}
 		else
 		{
@@ -899,7 +899,7 @@ $("body").on('click',".edit_button button",function()
 	}
 	if(type === 'info')
 	{
-		$('.isFirst').next().text('左侧对其').next().next().text('右侧对其')
+		$('.isFirst').next().text('左侧对齐').next().next().text('右侧对齐')
 	}
 	else
 	{

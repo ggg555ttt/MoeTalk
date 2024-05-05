@@ -1500,7 +1500,7 @@ var mt_characters = {
             "kr": "Kei",
             "pinyin": "Kei"
         },
-        "charface": "CharID_97/aris/aris.19,CharID_97/CH0200/CH0200.9,CharID_97/CharID_97.8",
+        "charface": "CharID_94/aris/aris.19,CharID_94/CH0200/CH0200.9,CharID_94/CharID_94.8",
         "customface": "CFID_2/CharID_93/CharID_93.9,CFID_2/CharID_93_1/CharID_93_1.12"
     },
     "天童爱丽丝": {
@@ -1517,7 +1517,7 @@ var mt_characters = {
             "pinyin": "tiantongailisi"
         },
         "charface": "CharID_94/aris/aris.19,CharID_94/CH0200/CH0200.9,CharID_94/CharID_94.8",
-        "customface": "CFID_2/CharID_96/CharID_96.9,CFID_2/CharID_96_1/CharID_96_1.12"
+        "customface": "CFID_2/CharID_93/CharID_93.9,CFID_2/CharID_93_1/CharID_93_1.12"
     },
     "才羽桃井": {
         "id": "CharID_95",
@@ -2565,11 +2565,11 @@ var mt_characters = {
         "club": "归宅部",
         "head": "Kirara_BG,Kirara",
         "name": {
-            "zh_cn": "绮良良",
-            "zh_tw": "綺良良",
-            "jp": "キララ",
-            "en": "Kirara",
-            "kr": "키라라",
+            "zh_cn": "夜樱 绮良良",
+            "zh_tw": "夜樱 绮罗罗",
+            "jp": "夜桜 キララ",
+            "en": "Yozakura Kirara",
+            "kr": "요자쿠라 키라라",
             "pinyin": "qiliangliang"
         },
         "charface": "CharID_160/kirara/kirara.11,CharID_160/CharID_160.4",

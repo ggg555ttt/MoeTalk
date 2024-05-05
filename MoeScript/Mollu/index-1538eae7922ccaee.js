@@ -3703,6 +3703,7 @@
 										className:"edit_2_1",
 										children:(0, m.jsx)('div',
 										{
+											style:{textAlign: 'left'},
 											className:"edit_2_1_1 bold",
 											children:[(0, m.jsx)('input',
 											{
@@ -3743,7 +3744,7 @@
 											{
 												type:'checkbox',
 												className:'is_breaking'
-											}),(0, m.jsx)('span',{children:'截图时分割图片',style:{color:'red'}}),
+											}),(0, m.jsx)('span',{children:'截图时在此处分割',style:{color:'red'}}),
 											(0, m.jsx)('input',
 											{
 												type:'checkbox',
