@@ -1411,8 +1411,9 @@
 								return clearTimeout(r)
 							}
 						}
-					}, [c, x, t, n, y]), (0, m.jsx)(s.uU,
+					}, [c, x, t, n, y]), (0, m.jsx)('div',
 					{
+						className: '消息',
 						style: {padding: isFirst ? "" : "0.5rem 1rem 0 1rem"},
 						children: [(0, m.jsxs)(m.Fragment,
 						{
@@ -1420,8 +1421,9 @@
 							{
 								children: (0, m.jsxs)(e8,
 								{
-									children: [!t.isCenter && !t.isRight ? (0, m.jsx)(s.xu,
+									children: [!t.isCenter && !t.isRight ? (0, m.jsx)('div',
 									{//左侧头像框
+										className: '头像框',
 										style: t.sCharacter.no != 0 ? 
 										{
 											height: "100%"
@@ -1439,6 +1441,7 @@
 										}) : ''
 									}) : '', (0, m.jsxs)(t.sCharacter.no == 0 ? "div" : s.Xp,
 									{//图文消息
+										className: "对话",
 										style: 
 										{
 											alignItems: t.isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
@@ -1452,7 +1455,7 @@
 											style:
 											{
 												display:"flex",
-												justifyContent: t.isCenter ? 'center' :  '',
+												justifyContent: t.isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : '',
 											},
 											children: [t.time ? (0, m.jsx)(s.i9,
 											{//左侧时间戳

@@ -549,7 +549,7 @@ function makeMessage(type,data,chatIndex,mode)
 			`${no == 0 ? '<div class="头像框" style="margin-right: 1.5rem;"></div>' : ''}
 			<div class="对话" style="align-items: flex-end;">
 				${名称}
-				<div style="display: flex;">
+				<div style="display: flex;justify-content: flex-end;">
 					${data.time ? `<span class="时间戳" style="text-align: right;">${data.time}</span>` : ''}
 					${type === 'chat' ? 文本 : 图片}
 				</div>
@@ -818,7 +818,7 @@ $("body").on('click',".编辑",function()
 			else if(chat.content)
 			{
 				$('.图片文件').attr('src',chat.content)
-				$('.图片信息').text('链接图片')
+				$('.图片信息').text('链接图片').attr('title','链接')
 			}
 			else
 			{

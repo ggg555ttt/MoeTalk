@@ -4228,7 +4228,7 @@
 											style:
 											{
 												display:"flex",
-												justifyContent: n.isCenter ? 'center' :  '',
+												justifyContent: n.isCenter ? 'center' : n.isRight || n.sCharacter.no == 0 ? 'flex-end' : '',
 											},
 											children: [n.time ? (0, m.jsx)(eN.i9,
 											{//左侧时间戳
