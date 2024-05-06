@@ -4109,7 +4109,7 @@
 						{
 							style:e.style,
 							className: "medium 编辑",
-							children: n + L.Z.go_relationship_event[t]
+							children: n
 						})]
 					})
 				},
@@ -4320,7 +4320,7 @@
 							{//羁绊
 								className: '编辑',
 								style: style,
-								character: loadname(n.sCharacter.no,n.sCharacter.index)
+								character: n.content || ((n.name || loadname(n.sCharacter.no,n.sCharacter.index))+mt_text.go_relationship_event[mtlang])
 							})] : "info" === n.type ? (0, m.jsx)(eN.vD,
 							{//旁白
 								className: '编辑',

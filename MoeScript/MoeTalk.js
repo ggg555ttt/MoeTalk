@@ -579,7 +579,7 @@ function makeMessage(type,data,chatIndex,mode)
 				<span class="bold">${mt_text['relationship_event'][mtlang]}</span>
 			</div>
 			<hr class="横线">
-			<button class="羁绊按钮 编辑" style='${style}'>${data.name || loadname(no,index)}${mt_text['go_relationship_event'][mtlang]}</button>
+			<button class="羁绊按钮 编辑" style='${style}'>${data.content || ((data.name || loadname(no,index))+mt_text['go_relationship_event'][mtlang])}</button>
 		</div>`
 	}
 	if(type === 'info')

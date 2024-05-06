@@ -981,7 +981,7 @@
 							{
 								g(), p(!0)
 							},
-							children: loadname(t.sCharacter.no,t.sCharacter.index) + r.Z.go_relationship_event[d]
+							children: t.content || ((t.name || loadname(t.sCharacter.no,t.sCharacter.index))+r.Z.go_relationship_event[d])
 						})]
 					})
 				},
