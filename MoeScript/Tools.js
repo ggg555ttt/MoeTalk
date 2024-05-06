@@ -1,45 +1,4 @@
 //读取人物
-const os = (u = window.navigator.userAgent) => {
-	return {
-		// 不同浏览器及终端
-		isMobile:
-	  !!u.match(/AppleWebKit.*Mobile/i) ||
-	  !!u.match(
-		/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/
-	  ),
-		isWechat: !!u.match(/MicroMessenger/i),
-		isQQ: !!u.match(/QQ/i),
-		isIos: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
-		isAndroid: !!u.match(/(Android);?[\s/]+([\d.]+)?/),
-		isiPhone: !!u.match(/(iPhone\sOS)\s([\d_]+)/),
-		isSafari: !!u.match(/Safari/),
-		isFirefox: !!u.match(/Firefox/),
-		isOpera: !!u.match(/Opera/),
-		isChrome: u.match(/Chrome/i) !== null &&
-	  u.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i) === null ?
-			true : false,
-		isDeskTop: (() => {
-			const Agents = [
-				'Android',
-				'iPhone',
-				'SymbianOS',
-				'Windows Phone',
-				'iPad',
-				'iPod',
-				'okhttp/3.9.1'
-			];
-			let flag = true;
-			for (let i = 0, LEN = Agents.length; i < LEN; i++) {
-				if (u.indexOf(Agents[i]) !== -1) {
-					flag = false;
-					break;
-				}
-			}
-			return flag;
-		})()
-	};
-};
-var browser = os();//获取浏览器信息
 $('body').on('click',"input",function()
 {
 	$("input[type='file']").val('')
@@ -510,3 +469,35 @@ if(mt_settings['文字样式'])
 		$('#mt-fontszie').parent().find(`input[title="${k}"]`)[0].value = v['font-size']
 	})
 }
+// document.write("<scr"+`ipt src='https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/MoeScript/Script/localforage.min.js'></scr`+"ipt>");
+// const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});
+// moetalkStorage.getItem('mt-char', function(err, char)
+// {
+// 	moetalkStorage.getItem('mt-head', function(err, head)
+// 	{
+// 		moetalkStorage.getItem('chats', function(err, chats)
+// 		{
+// 			moetalkStorage.getItem('moeLog', function(err, moeLog)
+// 			{
+// 				if(!char)char = {};
+// 				if(!head)head = {};
+// 				if(!chats)chats = [];
+// 				if(!moeLog)moeLog = [];
+
+// 				let arr = {}
+// 				arr['mt-char'] = char
+// 				arr['mt-head'] = head
+// 				arr['chats'] = chats
+// 				arr['moeLog'] = moeLog
+
+// 				let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
+// 				let contentType = 'application/octet-stream';
+// 				let a = document.createElement('a');
+// 				let blob = new Blob([JSON.stringify({...localStorage,...arr},null,4)],{ 'type': contentType });
+// 				a.href = window.URL.createObjectURL(blob);
+// 				a.download = 'MoeTalk_localStorage存档'+time+'.TXT';
+// 				a.click();
+// 			})
+// 		})
+// 	})
+// })

@@ -1,7 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}</script>
+	<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.js"></script>
+<script>
+const os = (u = window.navigator.userAgent) => {
+	return {
+		// 不同浏览器及终端
+		isMobile:
+	  !!u.match(/AppleWebKit.*Mobile/i) ||
+	  !!u.match(
+		/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/
+	  ),
+		isWechat: !!u.match(/MicroMessenger/i),
+		isQQ: !!u.match(/QQ/i),
+		isIos: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+		isAndroid: !!u.match(/(Android);?[\s/]+([\d.]+)?/),
+		isiPhone: !!u.match(/(iPhone\sOS)\s([\d_]+)/),
+		isSafari: !!u.match(/Safari/),
+		isFirefox: !!u.match(/Firefox/),
+		isOpera: !!u.match(/Opera/),
+		isChrome: u.match(/Chrome/i) !== null &&
+	  u.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i) === null ?
+			true : false,
+		isDeskTop: (() => {
+			const Agents = [
+				'Android',
+				'iPhone',
+				'SymbianOS',
+				'Windows Phone',
+				'iPad',
+				'iPod',
+				'okhttp/3.9.1'
+			];
+			let flag = true;
+			for (let i = 0, LEN = Agents.length; i < LEN; i++) {
+				if (u.indexOf(Agents[i]) !== -1) {
+					flag = false;
+					break;
+				}
+			}
+			return flag;
+		})()
+	};
+};
+var browser = os();//获取浏览器信息
+var Html5Plus = window.navigator.userAgent.match('Html5Plus') ? 'plus.H59EC0058' : false
+var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
+</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 	<meta http-equiv="Pragma" content="no-cache">
@@ -64,6 +113,6 @@
 	<p><a href="https://gitlab.com/ggg555ttt/MoeTalk">项目地址（gitlab）</a></p>
 	<p><a href="https://github.com/ggg555ttt/MoeTalk">项目地址（github）</a></p>
 	<h1 class="bold">设置信息：</h1>
-	<p class="mt_settings bold" style="white-space: pre;"></p>
+	<p class="mt_settings bold" style="white-space: pre-wrap;"></p>
 </body>
 </html>

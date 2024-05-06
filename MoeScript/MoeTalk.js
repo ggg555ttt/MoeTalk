@@ -93,13 +93,6 @@ if(!mt_settings['存储模式'])
 					window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 					window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 				}
-				// moetalkStorage.getItem('moeLog', function(err, moeLog)
-				// {
-				// 	if(!moeLog)return;
-				// 	操作历史 = moeLog
-				// 	$('.RightScreen__Box-sc-1fwinj2-1').show()
-				// 	$('.撤销').show()
-				// })
 			})
 		})
 	})
@@ -166,7 +159,7 @@ $(".bIcduz").wait(function()
 //加载工具
 $(".frVjsk").wait(function()
 {
-	if(window.navigator.userAgent.match('Html5Plus'))
+	if(Html5Plus)
 	{
 		$(".frVjsk").append(`<button class='${class0}' onclick='location.reload(true)'><b style='color:blue;'>刷</b></button><span class='tool'>刷新页面</span><br>`);
 	}
@@ -183,13 +176,23 @@ $(".frVjsk").wait(function()
 //使用说明
 $('body').on('click',"#readme",function()
 {
+	let str = '点击【确定】尝试更新版本并刷新页面'
 	if(MikuTalk)
 	{
 		alert('from：https://github.com/HFIProgramming/mikutap/\n特殊节日下可以在设置页面将标题改为“klaTeoM”即可关闭\n通常日期下将标题改为“MikuTalk”即可开启')
-		return
 	}
-	if(confirm(`MoeTalk当前版本：${version}\nMoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n你可以点击【确认】尝试更新版本并刷新页面`))
+	if(Html5Plus)
 	{
+		str = localStorage['最新版本'] ? '客户端版本已更新，确定跳转到下载链接吗？' : '点击【确定】可以访问客户端下载链接'
+	}
+	
+	if(confirm('MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n'+str))
+	{
+		if(Html5Plus)
+		{
+			plus.runtime.openURL("https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda");
+			return;
+		}
 		window.caches && caches.keys && caches.keys().then(function(keys)
 		{
 			let length = 0;
@@ -205,7 +208,6 @@ $('body').on('click',"#readme",function()
 			}
 		});
 	}
-
 });
 //创建人物
 $('body').on('click',"#makecus",function()
@@ -238,7 +240,6 @@ $('body').on('click',"#size",function()
 	let charL = ((JSON.stringify(mt_char).length+JSON.stringify(mt_head).length)/1024).toFixed(0)
 	let chatsL = (JSON.stringify([...chats,...otherChats]).length/1024).toFixed(0)
 	alert(`${str}\n自定义角色大小：${charL}KB\nMMT数据大小：${chatsL}KB\n在indexedDB模式下，此两项不会记录在指示器内\n当前存储模式：${mt_settings['存储模式'] ? mt_settings['存储模式'] : 'indexedDB'}`)
-
 });
 //清除冗余文件数据
 $('body').on('click',"input",function()
@@ -997,7 +998,7 @@ $("body").on('click',".差分映射",function()
 	差分映射.index = $(this).attr('title')
 	$('.切换表情').click()
 });
-if(window.navigator.userAgent.match('Html5Plus'))
+if(Html5Plus)
 {
 	var time = 0;//初始化起始时间  
 	$("body").on('touchstart', 'img', function(e)
@@ -1007,7 +1008,7 @@ if(window.navigator.userAgent.match('Html5Plus'))
 		time = setTimeout(function()
 		{
 			showCloseImg(src);  
-		}, 500);//这里设置长按响应时间  
+		}, 2000);//这里设置长按响应时间  
 	});
 	$("body").on('touchend', 'img', function(e)
 	{

@@ -6,43 +6,6 @@
 <script src="./MoeScript/Script/localforage.min.js"></script>
 <!-- <script src="./MoeScript/Script/html2canvas.min.js"></script> -->
 <script>
-function checkVer(e)
-{
-	if(e)return;
-	$.ajax({
-		url: './version.json',
-		type: 'GET',
-		dataType:"text",
-		cache: false, // 禁用缓存
-		success: function(text)
-		{
-			version = text.split(',')[0]
-			let rand = text.split(',')[1]
-			if(!localStorage['mt-version'] || localStorage['mt-version'] !== version || !localStorage['mt-rand'] || localStorage['mt-rand'] !== rand)
-			{
-				localStorage['mt-version'] = version
-				window.caches && caches.keys && caches.keys().then(function(keys)
-				{
-					let length = 0;
-					keys.forEach(function(key)
-					{
-						caches.delete(key);
-						length=length+1
-						if(keys.length === length)
-						{
-							delete localStorage['启动网址']
-							localStorage['mt-version'] = version
-							localStorage['mt-rand'] = rand
-							location.reload(true)
-						}
-					});
-					
-				});
-			}
-		}
-	});
-}
-checkVer(window.location.href === 'http://moetalk.gitee.io/')
 const os = (u = window.navigator.userAgent) => {
 	return {
 		// 不同浏览器及终端
@@ -84,20 +47,93 @@ const os = (u = window.navigator.userAgent) => {
 	};
 };
 var browser = os();//获取浏览器信息
-if(!localStorage['mt-rand'])localStorage['mt-rand'] = Math.random()
+var Html5Plus = window.navigator.userAgent.match('Html5Plus') ? 'plus.H59EC0058' : false
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
+function checkVer(e)
+{
+	if(Html5Plus)
+	{
+		$.ajax({
+			url: './manifest.json',
+			type: 'GET',
+			dataType:"text",
+			cache: false, // 禁用缓存
+			success: function(text)
+			{
+				mt_settings['应用版本'] = JSON.parse(text.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '')).version.code
+				$.ajax({
+					url: 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/manifest.json',
+					type: 'GET',
+					dataType:"text",
+					cache: false, // 禁用缓存
+					success: function(text)
+					{
+						let json = JSON.parse(text.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, ''));
+						if(!localStorage['最新版本'] && mt_settings['应用版本'] < json.version.code)
+						{
+							localStorage['最新版本'] = json.version.code
+							if(confirm('客户端版本已更新，确定跳转到下载链接吗？'))
+							{
+								plus.runtime.openURL("https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda");
+							}	
+						}
+						if(mt_settings['应用版本'] === json.version.code)localStorage['最新版本'] = ''
+					}
+				});
+			}
+		});
+		return;
+	}
+	$.ajax({
+		url: './version.json',
+		type: 'GET',
+		dataType:"text",
+		cache: false, // 禁用缓存
+		success: function(text)
+		{
+			version = text.split(',')[0]
+			let rand = text.split(',')[1]
+			if(!localStorage['mt-version'] || localStorage['mt-version'] !== version || !localStorage['mt-rand'] || localStorage['mt-rand'] !== rand)
+			{
+				localStorage['mt-version'] = version
+				window.caches && caches.keys && caches.keys().then(function(keys)
+				{
+					let length = 0;
+					keys.forEach(function(key)
+					{
+						caches.delete(key);
+						length=length+1
+						if(keys.length === length)
+						{
+							delete localStorage['启动网址']
+							localStorage['mt-version'] = version
+							localStorage['mt-rand'] = rand
+							location.reload(true)
+						}
+					});
+					
+				});
+			}
+		}
+	});
+}
+checkVer(Html5Plus)
+if(!localStorage['mt-rand'])localStorage['mt-rand'] = Math.random()
+
 if(browser.isIos === true || browser.isiPhone === true || mt_settings['打包下载'])
 {
 	var zipDownImg = true;
 	document.write("<scr"+`ipt src='./MoeScript/Script/jszip.min.js'></scr`+"ipt>");
 }
-
+if(document.location.protocol !== 'https:')
+{
+	document.write("<scr"+`ipt src='./MoeScript/Script/rrweb.min.js'></scr`+"ipt>");
+}
 function loadjs(url)
 {
 	let ver = localStorage['mt-rand']
 	document.write("<scr"+`ipt src='${url}?${ver}' defer></scr`+"ipt>");
 }
-
 var date = new Date();
 var month = date.getMonth() + 1; // 月
 var day = date.getDate(); // 日
@@ -221,4 +257,29 @@ if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) &&
 <img style="width: 100%;height: auto;" id="help" src="./Images/Ui/help.webp" onclick="document.documentElement.style.position = '';" />
 <p><a href="https://space.bilibili.com/13973390">B站主页</a></p>
 <p><a href="https://github.com/ggg555ttt/MoeTalk">项目地址（github）</a></p>
-<!-- <iframe id="iframe" src='./Setting.html' width="100%" height="100%"></iframe> -->
+<!-- Default Statcounter code for MoeTalk http://*.* -->
+<script>
+var _hmt = _hmt || [];
+(function()
+{
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?c4c1ee74a1c6c23d615939977072ba05";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript">
+var sc_project=12996076; 
+var sc_invisible=1; 
+var sc_security="d8d43c48"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/12996076/0/d8d43c48/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
