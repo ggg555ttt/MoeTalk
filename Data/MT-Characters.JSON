@@ -1597,7 +1597,7 @@ var mt_characters = {
             "pinyin": "mingxingriju"
         },
         "charface": "CharID_99/CH0159/CH0159.12,CharID_99/CH0159/CH0159-S2.12,CharID_99/NP0112/NP0112.12,CharID_99/NP0161/NP0161.12,CharID_99/CharID_99.14",
-        "customface": ""
+        "customface": "CFID_1/CharID_99/CharID_99.32"
     },
     "各务千寻": {
         "id": "CharID_100",
