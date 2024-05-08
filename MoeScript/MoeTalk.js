@@ -130,6 +130,7 @@ $(function()
 		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','transparent');
 		$("#view").click()
 	}
+	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
 })
 $("body").on('click',function()
 {
@@ -183,10 +184,10 @@ $('body').on('click',"#readme",function()
 	}
 	if(Html5Plus)
 	{
-		str = localStorage['最新版本'] ? '客户端版本已更新，确定跳转到下载链接吗？' : '点击【确定】可以访问客户端下载链接'
+		str = localStorage['最新版本'] ? '安卓客户端版本已更新，确定跳转到下载链接吗？' : '点击【确定】可以访问安卓客户端下载链接'
 	}
 	
-	if(confirm('MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n'+str))
+	if(confirm('MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\nPC客户端使用请进入设置页面点击“下载最新版压缩包”\n'+str))
 	{
 		if(Html5Plus)
 		{

@@ -3093,7 +3093,7 @@
 											},
 											className: "bold",
 											hidden: !自设差分[0],
-											children: 自设差分[1]  ? '切换原装' : '切换自制',
+											children: 自设差分[1]  ? '原装表情' : '其他表情',
 											onClick:function()
 											{
 												if(自设差分[1])
@@ -3158,7 +3158,7 @@
 											children: (0, m.jsx)('a',
 											{
 												href: 自设差分[2],
-												children: '作者',
+												children: '来源',
 												target: '_blank'
 											}),
 											hidden: !自设差分[2]
@@ -4635,7 +4635,7 @@
 											style:
 											{
 												fontSize:"2rem",
-												fontFamily:"title",
+												fontFamily:/[\u4e00-\u9fff]/.test(mt_settings['顶部标题']) ? "moetalk" : "title",
 												fontWeight:700
 											},
 											children: mt_settings['顶部标题']

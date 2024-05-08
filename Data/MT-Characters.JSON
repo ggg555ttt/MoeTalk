@@ -13,7 +13,7 @@ var mt_characters = {
             "pinyin": "yuexuegongzi"
         },
         "charface": "CharID_0/CH0215/CH0215.11,CharID_0/CH0215/CH0215-S2.11,CharID_0/miyako/miyako.12,CharID_0/NP0070/NP0070.10,CharID_0/CharID_0.15",
-        "customface": ""
+        "customface": "CFID_5/CharID_0_OLD/CharID_0_OLD.9"
     },
     "油桶": {
         "id": "CharID_1",
@@ -653,7 +653,7 @@ var mt_characters = {
             "pinyin": "feianxuesheng"
         },
         "charface": "",
-        "customface": ""
+        "customface": "CFID_5/CharID_40_1_OLD/CharID_40_1_OLD.12,CFID_5/CharID_40_2_OLD/CharID_40_2_OLD.11,CFID_5/CharID_40_3_OLD/CharID_40_3_OLD.17,CFID_5/CharID_40_4_OLD/CharID_40_4_OLD.8,CFID_5/CharID_40_5_OLD/CharID_40_5_OLD.8,CFID_5/CharID_40_6_OLD/CharID_40_6_OLD.10"
     },
     "御坂美琴": {
         "id": "CharID_41",
@@ -1325,7 +1325,7 @@ var mt_characters = {
             "pinyin": "meigannilu"
         },
         "charface": "CharID_82/CH0101/CH0101.9,CharID_82/neru/neru.10,CharID_82/NP0088/NP0088.10,CharID_82/NP0089/NP0089.10,CharID_82/CharID_82.16",
-        "customface": "CFID_1/CharID_82/CharID_82.37"
+        "customface": "CFID_1/CharID_82/CharID_82.37,CFID_5/CharID_82_OLD/CharID_82_OLD.12"
     },
     "角楯花凛": {
         "id": "CharID_83",
@@ -1741,7 +1741,7 @@ var mt_characters = {
             "pinyin": "yiluomali"
         },
         "charface": "CharID_108/CH0186/CH0186.9,CharID_108/mari/mari.9,CharID_108/CharID_108.8",
-        "customface": "CFID_1/CharID_108/CharID_108.32"
+        "customface": "CFID_1/CharID_108/CharID_108.32,CFID_5/CharID_108_OLD/CharID_108_OLD.8"
     },
     "修女会成员": {
         "id": "CharID_109",
@@ -1773,7 +1773,7 @@ var mt_characters = {
             "pinyin": "gezhuyingzi"
         },
         "charface": "CharID_110/NP0090/NP0090.13,CharID_110/sakurako/sakurako.13,CharID_110/CharID_110.8",
-        "customface": "CFID_1/CharID_110/CharID_110.21"
+        "customface": "CFID_1/CharID_110/CharID_110.21,CFID_5/CharID_110_OLD/CharID_110_OLD.29"
     },
     "若叶日向": {
         "id": "CharID_111",
@@ -1917,7 +1917,7 @@ var mt_characters = {
             "pinyin": "xingshanhesha"
         },
         "charface": "CharID_119/CH0250/CH0250.18,CharID_119/kazusa/kazusa.13,CharID_119/CharID_119.8",
-        "customface": "CFID_4/CharID_119/CharID_119.75"
+        "customface": "CFID_4/CharID_119/CharID_119.75,CFID_5/CharID_119_OLD/CharID_119_OLD.27"
     },
     "柚鸟夏": {
         "id": "CharID_120",
@@ -2109,7 +2109,7 @@ var mt_characters = {
             "pinyin": "tongtengzhu"
         },
         "charface": "CharID_131/nagisa/nagisa.16,CharID_131/CharID_131.4",
-        "customface": "CFID_4/CharID_131/CharID_131.10"
+        "customface": "CFID_4/CharID_131/CharID_131.10,CFID_5/CharID_131_OLD/CharID_131_OLD.53"
     },
     "百合园圣娅": {
         "id": "CharID_132",
@@ -2333,7 +2333,7 @@ var mt_characters = {
             "pinyin": "lushanliqing"
         },
         "charface": "CharID_145/reizyo/reizyo.18,CharID_145/CharID_145.4",
-        "customface": ""
+        "customface": "CFID_5/CharID_145_OLD/CharID_145_OLD.11"
     },
     "玄龙门成员": {
         "id": "CharID_146",
@@ -2453,15 +2453,15 @@ var mt_characters = {
         "club": "万魔殿",
         "head": "CH0080_BG,CH0080",
         "name": {
-            "zh_cn": "皋月",
-            "zh_tw": "皋月",
-            "jp": "サツキ",
-            "en": "Satsuki",
-            "kr": "사츠키",
+            "zh_cn": "京极 皋月",
+            "zh_tw": "京極 皋月",
+            "jp": "京極 サツキ",
+            "en": "Kyougoku Satsuki",
+            "kr": "쿄고쿠 사츠키",
             "pinyin": "gaoyue"
         },
         "charface": "CharID_153/CH0080/CH0080.11,CharID_153/CharID_153.4",
-        "customface": ""
+        "customface": "CFID_5/CharID_153_OLD/CharID_153_OLD.11"
     },
     "羽沼真琴": {
         "id": "CharID_154",
@@ -2477,7 +2477,7 @@ var mt_characters = {
             "pinyin": "yuzhaozhenqin"
         },
         "charface": "CharID_154/CH0079/CH0079.14,CharID_154/CH0253/CH0253.16,CharID_154/CharID_154.8",
-        "customface": ""
+        "customface": "CFID_5/CharID_154_OLD/CharID_154_OLD.9"
     },
     "伊草遥香": {
         "id": "CharID_155",
@@ -2557,13 +2557,13 @@ var mt_characters = {
             "pinyin": "qijianailika"
         },
         "charface": "CharID_159/erika/erika.15,CharID_159/CharID_159.4",
-        "customface": ""
+        "customface": "CFID_5/CharID_159_OLD/CharID_159_OLD.8"
     },
     "绮良良": {
         "id": "CharID_160",
         "school": "格黑娜",
         "club": "归宅部",
-        "head": "Kirara_BG,Kirara",
+        "head": "Kirara_L2D,Kirara_BG,Kirara",
         "name": {
             "zh_cn": "夜樱 绮良良",
             "zh_tw": "夜樱 绮罗罗",
@@ -2573,7 +2573,7 @@ var mt_characters = {
             "pinyin": "qiliangliang"
         },
         "charface": "CharID_160/kirara/kirara.11,CharID_160/CharID_160.4",
-        "customface": ""
+        "customface": "CFID_5/CharID_160_OLD/CharID_160_OLD.14"
     },
     "格黑娜学生": {
         "id": "CharID_161",
@@ -2917,8 +2917,8 @@ var mt_characters = {
         "club": "公安局",
         "head": "CH0170_L2D,CH0170_BG,NP0105,CH0170",
         "name": {
-            "zh_cn": "尾刃 康纳",
-            "zh_tw": "尾刃 康娜",
+            "zh_cn": "尾刃 叶渚",
+            "zh_tw": "尾刃 葉渚",
             "jp": "尾刃 カンナ",
             "en": "Ogata Kanna",
             "kr": "오가타 칸나",
@@ -2957,7 +2957,7 @@ var mt_characters = {
             "pinyin": "zhongwutongnai"
         },
         "charface": "CharID_184/kirino/kirino.9,CharID_184/CharID_184.4",
-        "customface": ""
+        "customface": "CFID_5/CharID_184_OLD/CharID_184_OLD.9"
     },
     "合欢垣吹雪": {
         "id": "CharID_185",
@@ -3565,7 +3565,7 @@ var mt_characters = {
             "pinyin": "chicangmalina"
         },
         "charface": "CharID_222/marina/marina.12,CharID_222/CharID_222.4",
-        "customface": ""
+        "customface": "CFID_5/CharID_222_OLD/CharID_222_OLD.9"
     },
     "连河切里诺": {
         "id": "CharID_223",
@@ -3693,7 +3693,7 @@ var mt_characters = {
             "pinyin": "heijianqinxiang"
         },
         "charface": "CharID_230/CH0189/CH0189.17,CharID_230/NP0047/NP0047.13,CharID_230/NP0065/NP0065.17,CharID_230/serika/serika.13,CharID_230/serika_newyear/serika_newyear.14,CharID_230/serika_robber/serika_robber.13,CharID_230/serika_shibaseki/serika_shibaseki.13,CharID_230/CharID_230.28",
-        "customface": "CFID_4/CharID_230/CharID_230.113"
+        "customface": "CFID_4/CharID_230/CharID_230.113,CFID_5/CharID_230_OLD/CharID_230_OLD.15"
     },
     "阿里乌斯学生": {
         "id": "CharID_231",

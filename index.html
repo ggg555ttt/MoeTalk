@@ -4,7 +4,6 @@
 	<head>
 <script src="./MoeScript/Script/Jquery.min.js"></script>
 <script src="./MoeScript/Script/localforage.min.js"></script>
-<!-- <script src="./MoeScript/Script/html2canvas.min.js"></script> -->
 <script>
 const os = (u = window.navigator.userAgent) => {
 	return {
@@ -51,7 +50,7 @@ var Html5Plus = window.navigator.userAgent.match('Html5Plus') ? 'plus.H59EC0058'
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 function checkVer(e)
 {
-	if(Html5Plus)
+	if(Html5Plus || window.location.host.toLowerCase() == 'localhost')
 	{
 		$.ajax({
 			url: './manifest.json',
@@ -74,7 +73,14 @@ function checkVer(e)
 							localStorage['最新版本'] = json.version.code
 							if(confirm('客户端版本已更新，确定跳转到下载链接吗？'))
 							{
-								plus.runtime.openURL("https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda");
+								if(Html5Plus)
+								{
+									plus.runtime.openURL("https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda");
+								}
+								else
+								{
+									window.location.href = "https://mirror.ghproxy.com/https://github.com/ggg555ttt/MoeTalk/archive/refs/heads/main.zip"
+								}
 							}	
 						}
 						if(mt_settings['应用版本'] === json.version.code)localStorage['最新版本'] = ''
@@ -127,6 +133,7 @@ if(browser.isIos === true || browser.isiPhone === true || mt_settings['打包下
 }
 if(document.location.protocol !== 'https:')
 {
+	document.write("<scr"+`ipt src='./MoeScript/Script/pako.min.js'></scr`+"ipt>");
 	document.write("<scr"+`ipt src='./MoeScript/Script/rrweb.min.js'></scr`+"ipt>");
 }
 function loadjs(url)

