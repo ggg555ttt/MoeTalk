@@ -1882,7 +1882,15 @@
 											$$('[title="MakingFile Upload"]').click()
 										}
 									}),'上传存档']//#
-								}), (0, b.jsx)("span",{children: '（支持ClosureTalk存档）'})]//#
+								}), (0, b.jsx)("span",
+								{
+									style:
+									{
+										whiteSpace: 'break-spaces',
+										textAlign: 'center'
+									},
+									children: '（支持ClosureTalk存档）\n作品收录条件：无明显违规或争议内容\n您可以在交流群或反馈页面向我提交您的作品\n推荐带上您的主页和昵称'
+								})]//#
 							}, "noSearch"), 2 === g.C_TYPE && !g.CONTENT || (0, b.jsx)(k.Z,
 							{
 								rowCount: f && f[0] ? f[0].COUNT : 0,
