@@ -131,6 +131,12 @@ $(function()
 		$("#view").click()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
+	if(!localStorage['通知文档'])
+	{
+		let notice = '大家好，我是MoeTalk的开发者\n考虑到MoeTalk目前只内置了碧蓝档案的角色，我决定为使用此工具的其他游戏玩家添加对应的游戏角色\n但因为我不会解包别的游戏的文件，希望各位创作者能将自己的存档通过反馈页面提交到我这里\nMoeTalk的存档自动会自动保存您创建的自定义角色，我会将其中的角色提取出来同步进MoeTalk内\n角色的差分和聊天表情也在我的同步范围内\n日后您可以在设置页面中的“切换游戏”选项中选择你需要的游戏角色类型\n或者在链接后面加入对应游戏的首字母如：https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/?CBJQ\n或：https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/?BLDA'
+		alert(notice)
+		localStorage['通知文档'] = notice
+	}
 })
 $("body").on('click',function()
 {

@@ -756,7 +756,7 @@
 								{
 									width: 252,
 									height: 252,
-									src: href+"Images/Ui/School/"+(!mt_schoolname[n.school.id] ? n.club['zh_cn'] === '临时角色' ? 'RECYCLE' : 'CUSTOM' : mt_schoolname[n.school.id].en || '#')+'.webp',//#学校图标
+									src: href+"Images/Ui/School/"+(!mt_schoolname[n.school.id] ? n.club['zh_cn'] === '临时角色' ? 'RECYCLE' : 'CUSTOM' : mt_schoolname[n.school.id].en || 'none')+'.webp',//#学校图标
 									onError: function(e)
 									{
 										e.currentTarget.src = href+'Images/Ui/error.webp';
