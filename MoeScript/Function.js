@@ -164,7 +164,7 @@ function loadhead(id,img)
 	if(mt_characters[id])
 	{
 		img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
-		return `${href}Images/Char/${mt_characters[id].id}/${img}.webp`;
+		return `${href}Images/Char/${mt_characters[id].id}/${img}.webp`.replace('Images/Char/',`Images/${mt_settings['选择游戏']}/Char/`);
 	}
 	//自定义头像
 	if(mt_head[img])
@@ -778,7 +778,7 @@ function MoeToClosure()//Moe转Closure
 				ct[k]['img'] = 'uploaded';
 
 				custom_chars[ct[k]['char_id']] = {}
-				custom_chars[ct[k]['char_id']]['img'] = `${moeurl}Images/Char/${mt_characters[id].id}/${img}.webp`
+				custom_chars[ct[k]['char_id']]['img'] = `${moeurl}Images/Char/${mt_settings['选择游戏']}/${mt_characters[id].id}/${img}.webp`
 				custom_chars[ct[k]['char_id']]['name'] = loadname(id);
 			}
 		}
@@ -846,7 +846,7 @@ function MoeToClosure()//Moe转Closure
 				closuretalk['chars'][k]['img'] = 'uploaded';
 
 				custom_chars[closuretalk['chars'][k]['char_id']] = {}
-				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${moeurl}Images/Char/${mt_characters[id].id}/${img}.webp`
+				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${moeurl}Images/Char/${mt_settings['选择游戏']}/${mt_characters[id].id}/${img}.webp`
 				custom_chars[closuretalk['chars'][k]['char_id']]['name'] = loadname(id);
 			}
 		}
@@ -1310,7 +1310,7 @@ function Translator(str)
 	if(!mt_text[str] || !mt_text[str][mtlang])return str;
 	return mt_text[str][mtlang];
 }
-if(document.location.protocol !== 'https:')
+if(document.location.protocol !== 'https:' && typeof rrweb !== 'undefined')
 {
 	var record = [],recordName = getNowDate();
 	localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()

@@ -469,6 +469,18 @@ if(mt_settings['文字样式'])
 		$('#mt-fontszie').parent().find(`input[title="${k}"]`)[0].value = v['font-size']
 	})
 }
+$('body').on('click',"#selectgame",function()
+{
+	let str = '请选择游戏（英文首字母）\n'
+	str += 'BLDA = 碧蓝档案\nCBJQ = 尘白禁区'
+	str = prompt(str, mt_settings['选择游戏']);
+	if (str != null)
+	{
+		mt_settings['选择游戏'] = str;
+		saveStorage('设置选项',mt_settings,'local')
+		alert('更改完成，请返回页面!');
+	}
+})
 // document.write("<scr"+`ipt src='https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/MoeScript/Script/localforage.min.js'></scr`+"ipt>");
 // const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});
 // moetalkStorage.getItem('mt-char', function(err, char)

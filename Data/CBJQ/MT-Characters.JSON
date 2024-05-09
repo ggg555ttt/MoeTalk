@@ -1,0 +1,66 @@
+var mt_characters = {
+    "分析员": {
+        "id": "CharID_0",
+        "school": "世界树",
+        "club": "海姆达尔",
+        "head": "0",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "fenxiyuan"
+        },
+        "charface": "",
+        "customface": ""
+    },
+    "安卡希雅": {
+        "id": "CharID_1",
+        "school": "世界树",
+        "club": "海姆达尔",
+        "head": "0",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "ankaxiya"
+        },
+        "charface": "",
+        "customface": ""
+    },
+    "芬妮": {
+        "id": "CharID_2",
+        "school": "世界树",
+        "club": "海姆达尔",
+        "head": "0",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "fenni"
+        },
+        "charface": "",
+        "customface": ""
+    },
+    "苔丝": {
+        "id": "CharID_3",
+        "school": "世界树",
+        "club": "海姆达尔",
+        "head": "0,1,2,3",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "taisi"
+        },
+        "charface": "",
+        "customface": ""
+    }
+}

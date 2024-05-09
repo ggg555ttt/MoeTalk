@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.css"
-/>
-<script src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.js"></script>
 <script>
 const os = (u = window.navigator.userAgent) => {
 	return {
@@ -61,15 +56,14 @@ var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置
 	<script src="./MoeScript/Script/localforage.min.js"></script>
 	<script src="./MoeScript/Tools.js" defer=""></script>
 	<script src="./MoeScript/Function.js" defer=""></script>
-	<script src="./Data/MolluChar.json" defer=""></script><!-- 旧版学生 -->
-	<script src="./Data/ClosureChar.json" defer=""></script><!-- closure学生 -->
-	<script src="./Data/MT-Characters.JSON" defer=""></script><!-- 学生数据 -->
 </head>
 <body style="height:100%;overflow:auto;background-image:linear-gradient( rgba(255,255,255,0.5),rgba(255,255,255,0.5) ),url(Images/Ui/hexa_back_01.webp);background-repeat :no-repeat;background-size :cover;user-select:none;">
 	<a href='#' onclick="window.history.back();"><b>返回MoeTalk</a></b>
 	<h1>设置选项：</h1>
-	<button class="button-container" ><a href='https://mirror.ghproxy.com/https://github.com/ggg555ttt/MoeTalk/archive/refs/heads/main.zip'><b style='color:black;'>下载最新版压缩包</a></b></button>
+	<button class="button-container" id='selectgame'><b style='color:red;'>切换游戏</b></button>
 	<button class="button-container" ><a href='https://wj.qq.com/s2/14292312/3ade/' target='_blank'><b style='color:red;'>问题反馈</a></b></button>
+	<button class="button-container" ><a href='https://mirror.ghproxy.com/https://github.com/ggg555ttt/MoeTalk/archive/refs/heads/main.zip'><b style='color:black;'>下载最新版压缩包</a></b></button>
+	
 	<h2><a>编辑界面相关：</a></h2>
 	<button class="button-container" id='hnum'><b style='color:blue;'>设置自定义头像质量</b></button>
 	<button class="button-container" id='mt-size'><b style='color:blue;'>设置整体图片宽高百分比</b></button>

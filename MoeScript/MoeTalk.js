@@ -468,6 +468,7 @@ function isfirst(chatIndex,chats,mode)
 		if(typeArr.indexOf(chats[chatIndex-1].type) > -1)return true//类型不符
 
 		if(chats[chatIndex].sCharacter.index != chats[chatIndex-1].sCharacter.index)return true//头像不符
+		if(chats[chatIndex].sCharacter.no != chats[chatIndex-1].sCharacter.no)return true//ID不符
 
 		if(chats[chatIndex].sCharacter.no == 0 && typeArr.indexOf(chats[chatIndex].type) < 0)return false//判断主角
 
