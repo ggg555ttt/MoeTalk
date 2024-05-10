@@ -164,6 +164,7 @@ function loadhead(id,img)
 	if(mt_characters[id])
 	{
 		img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
+		mt_characters[id].head.split(',').indexOf(img) < 0 ? img = mt_characters[id].head.split(',')[0] : ''
 		return `${href}Images/Char/${mt_characters[id].id}/${img}.webp`.replace('Images/Char/',`Images/${mt_settings['选择游戏']}/Char/`);
 	}
 	//自定义头像
