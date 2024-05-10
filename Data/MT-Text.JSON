@@ -14,11 +14,11 @@ var mt_text = {
 		"zh_tw": "社團"
 	},
 	"school": {
-		"kr": "학원",
-		"en": "School",
-		"jp": "学園",
-		"zh_cn": "学院",
-		"zh_tw": "學院"
+		"kr": "조직",
+		"en": "Group",
+		"jp": "組織",
+		"zh_cn": "组织",
+		"zh_tw": "組織"
 	},
 	"sort": {
 		"kr": "정렬",
@@ -49,11 +49,11 @@ var mt_text = {
 		"zh_tw": "時間"
 	},
 	"student": {
-		"kr": "학생",
-		"en": "Student",
-		"jp": "生徒",
-		"zh_cn": "学生",
-		"zh_tw": "學生"
+		"kr": "역할",
+		"en": "Character",
+		"jp": "役割",
+		"zh_cn": "角色",
+		"zh_tw": "角色"
 	},
 	"delete": {
 		"kr": "삭제",
