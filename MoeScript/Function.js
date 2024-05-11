@@ -121,12 +121,13 @@ if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选
 }
 
 if(browser.isFirefox)mt_settings['禁止字体'] = true
-saveStorage('设置选项',mt_settings,'local')
-
 var mtlang = mt_settings['语言选项'];
 var langarr = ['zh_cn','zh_tw','jp','en','kr'];
 var langid = langarr.indexOf(window.location.href.split('?')[1])
-if(langid > -1)mtlang = langarr[langid]
+if(langid > -1)mt_settings['语言选项'] = mtlang = langarr[langid]
+saveStorage('设置选项',mt_settings,'local')
+if(window.location.href.split('?').length > 1)window.location.replace(window.location.href.split('?')[0])
+
 var localSize = 0;//数据大小
 $.each(localStorage,function(k,v){if(!isNaN(parseInt(v.length))){localSize += v.length/1024}})
 localSize = localSize.toFixed(0)
@@ -163,7 +164,6 @@ function loadhead(id,img)
 	//MoeTalk头像
 	if(mt_characters[id])
 	{
-		img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
 		mt_characters[id].head.split(',').indexOf(img) < 0 ? img = mt_characters[id].head.split(',')[0] : ''
 		return `${href}Images/Char/${mt_characters[id].id}/${img}.webp`.replace('Images/Char/',`Images/${mt_settings['选择游戏']}/Char/`);
 	}
@@ -176,7 +176,6 @@ function loadhead(id,img)
 	{
 		return mt_shead[img]
 	}
-	if(mollu_char[id])return `${href}Images/MolluChar/${id}.${img}.webp`;//旧版头像
 	if(id == 0)return `${href}Images/Ui/you.webp`;//主角
 	if(id === 'YuukaTalk')
 	{
@@ -196,7 +195,6 @@ function loadname(id,index)
 {
 	let you = {kr: "주인공",en: "Lead",jp: "主役",zh_cn: "主角",zh_tw: "主角"}
 	let name = toString(id)
-	if(mollu_char[id])name = mollu_char[id][mtlang]
 	if(mt_characters[id])
 	{
 		name = mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id
@@ -541,8 +539,9 @@ function loaddata(json,mode,ARR = '')//识别存档
 				json[0]['选择角色'].list[k].no = v['char_id']
 				json[0]['选择角色'].list[k].index = v['char_id']
 			}
-			closure_char[0][json[0]['选择角色'].list[k].no] ? json[0]['选择角色'].list[k].no = closure_char[0][json[0]['选择角色'].list[k].no] : ''
-			closure_char[1][json[0]['选择角色'].list[k].index] ? json[0]['选择角色'].list[k].index = closure_char[1][json[0]['选择角色'].list[k].index] : ''
+			json[0]['选择角色'].list[k].index = json[0]['选择角色'].list[k].index.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
+			id_map[0][json[0]['选择角色'].list[k].no] ? json[0]['选择角色'].list[k].no = id_map[0][json[0]['选择角色'].list[k].no] : ''
+			id_map[1][json[0]['选择角色'].list[k].index] ? json[0]['选择角色'].list[k].index = id_map[1][json[0]['选择角色'].list[k].index] : ''
 		})
 	}
 	let length = 0;
@@ -575,8 +574,6 @@ function loaddata(json,mode,ARR = '')//识别存档
 					json[1][k]['sCharacter']['index'] = v['char_id'].split('-')[3]
 				}
 			}
-			closure_char[0][json[1][k]['sCharacter']['no']] ? json[1][k]['sCharacter']['no'] = closure_char[0][json[1][k]['sCharacter']['no']] : ''
-			closure_char[1][json[1][k]['sCharacter']['index']] ? json[1][k]['sCharacter']['index'] = closure_char[1][json[1][k]['sCharacter']['index']] : ''
 
 			json[1][k]['content'] = v['content'];
 
@@ -767,14 +764,14 @@ function MoeToClosure()//Moe转Closure
 		let id = v['sCharacter']['no'];
 		let img = v['sCharacter']['index'];
 		let data = 'MT-';
-		if(closure_char[0][id])data = "ba-"
+		if(id_map[0][id])data = "ba-"
 		if(!mt_char[id] && !mt_schar[id] && id != 0)//正常角色
 		{
 			ct[k]['char_id'] = data+id;
 			ct[k]['img'] = img;
 			if(data === "MT-")
 			{
-				img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D')
+				img = img.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
 				ct[k]['char_id'] = `custom-MT-${id}-${img}`
 				ct[k]['img'] = 'uploaded';
 
@@ -835,7 +832,7 @@ function MoeToClosure()//Moe转Closure
 		let id = v.no;
 		let img = v.index;
 		let data = 'MT-';
-		if(closure_char[0][id])data = "ba-"
+		if(id_map[0][id])data = "ba-"
 		if(!mt_char[id] && !mt_schar[id] && id != 0)//正常角色
 		{
 			closuretalk['chars'][k]['char_id'] = data+id;
@@ -1591,6 +1588,9 @@ function saveServerDatatoFile(filename, jsonData ,ext)
 }
 function repairCF(data)
 {
+	data.sCharacter.no = id_map[0][data.sCharacter.no] || data.sCharacter.no
+	data.sCharacter.index = toString(id_map[1][data.sCharacter.index] || data.sCharacter.index)
+	data.sCharacter.index = data.sCharacter.index.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
 	let no = data.sCharacter.no
 	if(!mt_characters[no] || data.type !== 'image' || data.file)return;
 	let school = mt_characters[no].school

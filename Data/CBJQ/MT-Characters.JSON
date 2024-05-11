@@ -3,7 +3,7 @@ var mt_characters = {
         "id": "CharID_4",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240304205301,custom-20240507231857",
+        "head": "custom-20240304205301,custom-20240507214500,custom-20240507231857",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -19,7 +19,7 @@ var mt_characters = {
         "id": "CharID_5",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125195103,custom-20240507232208_0",
+        "head": "custom-20240125195103,custom-20240507214351,custom-20240507232208_0",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -51,7 +51,7 @@ var mt_characters = {
         "id": "CharID_6",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125195115",
+        "head": "custom-20240125195115,custom-20240507215442",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -83,7 +83,7 @@ var mt_characters = {
         "id": "CharID_8",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125195018,custom-20240507232131_0",
+        "head": "custom-20240125195018,custom-20240507214030,custom-20240507232131_0",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -99,7 +99,7 @@ var mt_characters = {
         "id": "CharID_1",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125194758,custom-20240507231942_0",
+        "head": "custom-20240125194758,custom-20240507213629,custom-20240507231942_0",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -115,7 +115,7 @@ var mt_characters = {
         "id": "CharID_9",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125195138,custom-20240507231932_0",
+        "head": "custom-20240125195138,custom-20240507213943,custom-20240507231932_0",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -131,7 +131,7 @@ var mt_characters = {
         "id": "CharID_10",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125195049,custom-20240507232057_0",
+        "head": "custom-20240125195049,custom-20240507214128,custom-20240507232057_0",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -147,7 +147,7 @@ var mt_characters = {
         "id": "CharID_11",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125195034,custom-20240507231843",
+        "head": "custom-20240125195034,custom-20240507212709,custom-20240507231843",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -163,7 +163,7 @@ var mt_characters = {
         "id": "CharID_12",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125194833,custom-20240507231715_0",
+        "head": "custom-20240125194833,custom-20240507214434,custom-20240507231715_0",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -195,7 +195,7 @@ var mt_characters = {
         "id": "CharID_14",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125194900,custom-20240403193151,custom-20240507232117_0",
+        "head": "custom-20240403193151,custom-20240507214057,custom-20240507232117_0",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -211,7 +211,7 @@ var mt_characters = {
         "id": "CharID_15",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125195156,custom-20240507232013",
+        "head": "custom-20240125195156,custom-20240507213732,custom-20240507232013",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -227,7 +227,7 @@ var mt_characters = {
         "id": "CharID_2",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125194744,custom-20240507231818",
+        "head": "custom-20240125194744,custom-20240507213600,custom-20240507231818",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -243,7 +243,7 @@ var mt_characters = {
         "id": "CharID_3",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125194950,custom-20240506223619,custom-20240506223619_0,custom-20240506223619_1,custom-20240506223619_2,custom-20240507231832_0",
+        "head": "custom-20240125194950,custom-20240506223619,custom-20240506223619_0,custom-20240506223619_1,custom-20240506223619_2,custom-20240507214250,custom-20240507231832_0",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -259,7 +259,7 @@ var mt_characters = {
         "id": "CharID_16",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125195005,custom-20240507232157_0",
+        "head": "custom-20240125195005,custom-20240507214005,custom-20240507232157_0",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -275,7 +275,7 @@ var mt_characters = {
         "id": "CharID_17",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240227075850",
+        "head": "custom-20240227075850,custom-20240507214534",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -307,7 +307,7 @@ var mt_characters = {
         "id": "CharID_19",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125195421,custom-20240507232036_0",
+        "head": "custom-20240125195421,custom-20240507214215,custom-20240507232036_0",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -323,7 +323,7 @@ var mt_characters = {
         "id": "CharID_20",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125194722,custom-20240507231547",
+        "head": "custom-20240125194722,custom-20240507213507,custom-20240507231547",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -335,18 +335,18 @@ var mt_characters = {
         "charface": "",
         "customface": ""
     },
-    "陶董": {
+    "陶": {
         "id": "CharID_21",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240125194933",
+        "head": "custom-20240125194933,custom-20240507215415",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
             "jp": "",
             "en": "",
             "kr": "",
-            "pinyin": "taodong"
+            "pinyin": "tao"
         },
         "charface": "",
         "customface": ""
@@ -355,7 +355,7 @@ var mt_characters = {
         "id": "CharID_22",
         "school": "世界树",
         "club": "海姆达尔",
-        "head": "custom-20240507231917",
+        "head": "custom-20240507213657,custom-20240507231917",
         "name": {
             "zh_cn": "",
             "zh_tw": "",

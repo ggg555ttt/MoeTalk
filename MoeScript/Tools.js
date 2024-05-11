@@ -472,7 +472,7 @@ if(mt_settings['文字样式'])
 $('body').on('click',"#selectgame",function()
 {
 	let str = '请选择游戏（英文首字母）\n'
-	str += 'BLDA = 碧蓝档案\nCBJQ = 尘白禁区'
+	str += 'BLDA = 碧蓝档案\nCBJQ = 尘白禁区\nQNZL = 千年之旅'
 	str = prompt(str, mt_settings['选择游戏']);
 	if (str != null)
 	{
@@ -512,4 +512,9 @@ $('body').on('click',"#selectgame",function()
 // 			})
 // 		})
 // 	})
+// })
+
+// $('[alt*="头像"]:visible').each(function()
+// {
+// 	console.log($(this).attr('srcset').replaceAll(' ',"\n"))
 // })

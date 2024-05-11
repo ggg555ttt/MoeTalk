@@ -1773,7 +1773,7 @@ var mt_characters = {
             "pinyin": "gezhuyingzi"
         },
         "charface": "CharID_110/NP0090/NP0090.13,CharID_110/sakurako/sakurako.13,CharID_110/CharID_110.8",
-        "customface": "CFID_1/CharID_110/CharID_110.21,CFID_5/CharID_110_OLD/CharID_110_OLD.29"
+        "customface": "CFID_1/CharID_110/CharID_110.21,CFID_5/CharID_110_OLD/CharID_110_OLD.10"
     },
     "若叶日向": {
         "id": "CharID_111",
@@ -1917,7 +1917,7 @@ var mt_characters = {
             "pinyin": "xingshanhesha"
         },
         "charface": "CharID_119/CH0250/CH0250.18,CharID_119/kazusa/kazusa.13,CharID_119/CharID_119.8",
-        "customface": "CFID_4/CharID_119/CharID_119.75,CFID_5/CharID_119_OLD/CharID_119_OLD.27"
+        "customface": "CFID_4/CharID_119/CharID_119.75,CFID_5/CharID_119_OLD/CharID_119_OLD.9"
     },
     "柚鸟夏": {
         "id": "CharID_120",
@@ -2109,7 +2109,7 @@ var mt_characters = {
             "pinyin": "tongtengzhu"
         },
         "charface": "CharID_131/nagisa/nagisa.16,CharID_131/CharID_131.4",
-        "customface": "CFID_4/CharID_131/CharID_131.10,CFID_5/CharID_131_OLD/CharID_131_OLD.53"
+        "customface": "CFID_4/CharID_131/CharID_131.10,CFID_5/CharID_131_OLD/CharID_131_OLD.14"
     },
     "百合园圣娅": {
         "id": "CharID_132",
