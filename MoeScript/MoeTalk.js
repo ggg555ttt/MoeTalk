@@ -74,7 +74,7 @@ if(!mt_settings['存储模式'])
 				mt_char = char
 				mt_head = head
 				
-				list()
+				charList()
 				chats = []
 				otherChats = []
 				let length = data.length;

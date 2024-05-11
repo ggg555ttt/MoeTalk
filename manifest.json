@@ -4,7 +4,7 @@
     "name" : "【MoeTalk】", /*应用名称，程序桌面图标名称*/
     "version" : {
         "name" : "3.3", /*应用版本名称*/
-        "code" : 10
+        "code" : 11
     },
     "description" : "MMT离线编辑器", /*应用描述信息*/
     "icons" : {

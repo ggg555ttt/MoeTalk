@@ -2,8 +2,7 @@ var href = window.location.href.split(window.location.host)[1].split('?')[0]//�
 if(window.location.href.indexOf('file:///') === 0)
 {
 	href = window.location.href.replace('index.html','')
-	!Html5Plus && alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1(有出错可能)】')
-	Html5Plus = 'mmt.MoeTalk.WumberBee'
+	if(window.navigator.userAgent.match('Html5Plus'))Html5Plus = 'mmt.MoeTalk.WumberBee'
 }
 //解决低版本浏览器不支持replaceAll
 (function()
@@ -450,13 +449,18 @@ function saveclub()
 	})
 	saveStorage('设置选项',mt_settings,'local')
 }
-function list()
+function charList(selected = !1)
 {
+	$('.fzoymd.selected')[0].scrollIntoView()//只有放在首行才会生效
 	saveClub = false;
 	custom_chars()
 	$('.eIEKpg:eq(0)').click();//更新列表
-	setTimeout(function(){selectClick(37)})
-	setTimeout(function(){selectClick(39)})
+	if(selected)
+	{
+		setTimeout(function(){$('.jotOXZ:eq(0)').click()})
+		setTimeout(function(){$('.jotOXZ:eq(1)').click()})
+	}
+	
 	saveClub = true;
 }
 function loaddata(json,mode,ARR = '')//识别存档
@@ -680,7 +684,6 @@ function loaddata(json,mode,ARR = '')//识别存档
 		if(!arr[key])arr[key] = []
 		arr[key].push(v)
 	})
-
 	$.each(arr,function(k,v)
 	{
 		if(k !== '')
@@ -696,14 +699,12 @@ function loaddata(json,mode,ARR = '')//识别存档
 			arr[''].splice(index,0,...arr[k]);
 		}
 	})
-
 	json[1] = arr['']
 //
 	if($('#customchar').prop('checked') === true)//读取自定义角色
 	{
 		mt_char = {...mt_char,...custom_char}
 		mt_head = {...mt_head,...custom_head}
-		list()//更新列表
 		saveStorage('mt-char',mt_char,'local')
 		saveStorage('mt-head',mt_head,'local')
 	}
@@ -711,16 +712,11 @@ function loaddata(json,mode,ARR = '')//识别存档
 	{
 		mt_schar = {...mt_schar,...custom_char}
 		mt_shead = {...mt_shead,...custom_head}
-		list()//更新列表
 		saveStorage('mt-char',mt_schar,'session')
 		saveStorage('mt-head',mt_shead,'session')
 	}
-	if(json[0]['选择角色'] && mode !== 'play')
-	{
-		选择角色 = true
-		mt_settings['选择角色'] = json[0]['选择角色']
-	}
-	
+	if(json[0]['选择角色'] && mode !== 'play')mt_settings['选择角色'] = json[0]['选择角色']
+	saveStorage('设置选项',mt_settings,'local')
 	return json
 }
 // 格式化日对象
@@ -901,6 +897,10 @@ function isTrue(val)
 }
 function saveStorage(key,val,mode)
 {
+	if(window.location.href.indexOf('file:///') === 0 && !Html5Plus)
+	{
+		alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1】')
+	}
 	if(!mt_settings['存储模式'] && mode === 'local' && ['chats','mt-char','mt-head'].indexOf(key) > -1)
 	{
 		moetalkStorage.setItem(key,val).catch(function(error)
@@ -1241,7 +1241,7 @@ function edit_char()
 	saveStorage('设置选项',mt_settings,'local')
 	char_info = []
 	$('#custom-char').removeClass('visible')//S()
-	list()
+	charList(!0)
 }
 $.each(mt_char,function(k,v)
 {
@@ -1271,7 +1271,7 @@ function removeChar(n)
 			saveStorage('mt-head',mt_head,'local')
 			saveStorage('mt-char',mt_schar,'session')
 			saveStorage('mt-head',mt_shead,'session')
-			list()//更新列表
+			charList(!0)//更新列表
 		}
 	}
 	if(n.school.zh_cn === '自定义')
@@ -1295,7 +1295,7 @@ function removeChar(n)
 			saveStorage('mt-head',mt_head,'local')
 			saveStorage('mt-char',mt_schar,'session')
 			saveStorage('mt-head',mt_shead,'session')
-			list()//更新列表
+			charList(!0)//更新列表
 		}
 	}
 }

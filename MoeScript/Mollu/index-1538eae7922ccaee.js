@@ -2752,6 +2752,8 @@
 											className: "bold",
 											onClick: function()
 											{
+												选择角色 = true
+												charList(!0)
 												I()
 											},
 											children: L.Z.confirm[d]
