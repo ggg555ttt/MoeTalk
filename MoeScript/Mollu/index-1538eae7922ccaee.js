@@ -3094,8 +3094,8 @@
 												left: 0
 											},
 											className: "bold",
-											hidden: !自设差分[0],
-											children: 自设差分[1]  ? '原装表情' : '其他表情',
+											hidden: !自设差分[0] || 自设差分[3],
+											children: 自设差分[1]  ? '原版表情' : '拓展表情',
 											onClick:function()
 											{
 												if(自设差分[1])

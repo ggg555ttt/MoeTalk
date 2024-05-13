@@ -1805,7 +1805,7 @@ var mt_characters = {
             "pinyin": "guguanyou"
         },
         "charface": "CharID_112/CH0169/CH0169.23,CharID_112/CH0204/CH0204.29,CharID_112/CharID_112.8",
-        "customface": ""
+        "customface": "CFID_1/CharID_112/CharID_112.42"
     },
     "圆堂志美子": {
         "id": "CharID_113",

@@ -937,43 +937,50 @@ function mt_emojis(S,mode)
 	if(mode === 'CharFace')
 	{
 		if(差分映射 !== false)id = 差分映射.id
-		if(!差分书签[id])//添加书签
-		{
+		if(!差分书签[id])
+		{//添加书签
 			差分书签[id] = {}
 			差分书签[id].type = 'charface'
 			差分书签[id].charface = 0
 			差分书签[id].customface = 0
 		}
-		if(S === '+')//下一页
-		{
+		if(S === '+')
+		{//下一页
 			差分书签[id][差分书签[id].type]++
 			return;
 		}
-		if(S === '-')//上一页
-		{
+		if(S === '-')
+		{//上一页
 			差分书签[id][差分书签[id].type]--
 			return;
 		}
-		if(S === 'charface' || S === 'customface')//切换类型
-		{
+		if(S === 'charface' || S === 'customface')
+		{//切换类型
 			差分书签[id].type = S
 			return;
 		}
 		if(!S)return;
-		if(!mt_characters[id])//人物不存在
-		{
+
+		if(!mt_characters[id])
+		{//人物不存在
 			表情类型 = `${name}(0暂无)`
 			表情页码 = '0 / 0'
-			S(!0)
+			S(!0)//空列表差分
 			setTimeout(function()
 			{
 				if($(`.差分映射.selected`).length)$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',behavior:"smooth"})
 			}, 100)
 			return;
 		}
-		
+
+		if(!mt_characters[id].charface && mt_characters[id].customface)
+		{//只存在拓展差分
+			差分书签[id].type = 'customface'
+			自设差分[3] = !0
+		}
+
 		let cfarr = mt_characters[id][差分书签[id].type].split(',')
-		let pageIdnex = parseInt(差分书签[id][差分书签[id].type]);
+		let pageIdnex = parseInt(差分书签[id][差分书签[id].type])
 		if(pageIdnex === -1)pageIdnex = 差分书签[id][差分书签[id].type] = cfarr.length-1
 		if(isNaN(pageIdnex) || !cfarr[pageIdnex])pageIdnex = 差分书签[id][差分书签[id].type] = 0
 		if(cfarr[pageIdnex])
@@ -983,7 +990,7 @@ function mt_emojis(S,mode)
 			maxNum = parseInt(cfarr[pageIdnex].pop())//获取总数
 			cfarr[pageIdnex] = cfarr[pageIdnex][0]//获取文件名
 			Array(maxNum).fill(cfarr[pageIdnex]).map(function(v,k)
-			{
+			{//生成差分链接
 				if(差分书签[id].type === 'charface')
 				{
 					表情.push(`Images/CharFace/${v}.${k+1}.webp`)
@@ -999,31 +1006,38 @@ function mt_emojis(S,mode)
 			cfarr[pageIdnex] = cfarr[pageIdnex].split('/')
 			表情类型 = cfarr[pageIdnex].pop()//获取差分类型
 
-			if(表情类型 === mt_characters[id].id)
-			{
-				表情类型 = `${name}(${maxNum}其他)`
-				if(CustomFaceAuthor[cfarr[pageIdnex][0]])
+			if(差分书签[id].type === 'charface')
+			{//原版差分
+				if(表情类型 === mt_characters[id].id)
 				{
-					表情类型 = `${name}(${maxNum}自制)`
+					表情类型 = `${name}(${maxNum}补充)`
+				}
+				else
+				{
+					表情类型 = `${name}(${maxNum})`
 				}
 			}
-			else if(表情类型.indexOf('_REPAIR') > -1)
-			{
-				表情类型 = `${name}(${maxNum}修复)`
-			}
-			else if(表情类型.indexOf('_OLD') > -1)
-			{
-				表情类型 = `${name}(${maxNum}废案)`
-			}
 			else
-			{
-				表情类型 = `${name}(${maxNum})`
+			{//拓展差分
+				if(表情类型.indexOf('_REPAIR') > -1)
+				{
+					表情类型 = `${name}(${maxNum}修复)`
+				}
+				else if(表情类型.indexOf('_OLD') > -1)
+				{
+					表情类型 = `${name}(${maxNum}旧设)`
+				}
+				else
+				{
+					表情类型 = `${name}(${maxNum}拓展)`
+				}
 			}
 
 			自设差分[0] = mt_characters[id]['customface'] ? !0 : !1
 			自设差分[1] = 差分书签[id].type === 'customface' ? !0 : !1
 			自设差分[2] = CustomFaceAuthor[cfarr[pageIdnex][0]]
-			S(!0)
+			S(!0)//显示差分列表
+
 			saveStorage('差分书签',差分书签,'session')
 			setTimeout(function()
 			{
@@ -1031,15 +1045,10 @@ function mt_emojis(S,mode)
 			}, 100)
 			return;
 		}
-		else
-		{
-			自设差分[0] = mt_characters[id]['customface'] ? !0 : !1
-			自设差分[1] = 差分书签[id].type === 'customface' ? !0 : !1
-			自设差分[2] = CustomFaceAuthor[cfarr[pageIdnex][0]]
-		}
+
 		表情类型 = `${name}(0暂无)`
 		表情页码 = '0 / 0'
-		S(!0)
+		S(!0)//空列表差分
 		return;
 	}
 	else

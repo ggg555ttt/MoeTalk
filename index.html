@@ -182,8 +182,8 @@ if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) &&
 		<link rel="stylesheet" href="./MoeScript/Style/style.css" data-n-g=""><!-- 样式 -->
 		<link rel="shortcut icon" href="./Images/Ui/Favor_Schedule_Deco.webp">
 
-		<script src="./Data/MT-Img.JSON" defer=""></script><!-- 存档图片 -->
-		<script src="./Data/MT-Text.JSON" defer=""></script><!-- 提示文本 -->
+		<script src="./Data/MT-Img.js" defer=""></script><!-- 存档图片 -->
+		<script src="./Data/MT-Text.js" defer=""></script><!-- 提示文本 -->
 		<script>
 			mt_settings['选择游戏'] = mt_settings['选择游戏'] || 'BLDA'
 			let gaemarr = ['BLDA','CBJQ','QNZL'];
@@ -191,15 +191,15 @@ if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) &&
 			gaemid < 0 ? gaemid = gaemarr.indexOf(mt_settings['选择游戏']) : ''
 
 			mt_settings['选择游戏'] = gaemid > -1 ? gaemarr[gaemid] : 'BLDA'
-			loadjs(`./Data/${mt_settings['选择游戏']}/MT-School.JSON`)
-			loadjs(`./Data/${mt_settings['选择游戏']}/MT-Club.JSON`)
-			loadjs(`./Data/${mt_settings['选择游戏']}/MT-Characters.JSON`)
+			loadjs(`./Data/${mt_settings['选择游戏']}/MT-School.js`)
+			loadjs(`./Data/${mt_settings['选择游戏']}/MT-Club.js`)
+			loadjs(`./Data/${mt_settings['选择游戏']}/MT-Characters.js`)
 			
 
 			if(mt_settings['选择游戏'] === 'BLDA')
 			{
-				loadjs(`./Data/${mt_settings['选择游戏']}/IdMap.json`)
-				loadjs(`./Data/${mt_settings['选择游戏']}/CustomFaceAuthor.json`)
+				loadjs(`./Data/${mt_settings['选择游戏']}/IdMap.js`)
+				loadjs(`./Data/${mt_settings['选择游戏']}/CustomFaceAuthor.js`)
 			}
 			else
 			{
