@@ -122,6 +122,7 @@
 				{
 					var n = e.index,
 						r = e.style;
+						r.height = 'auto';
 					return (0, s.jsx)("div",
 					{
 						style: l(l(
@@ -920,7 +921,7 @@
 				{
 					displayName: "talk__ReplyButton",
 					componentId: "sc-eq7cqw-11"
-				})(["text-align:center;height:100%;width:100%;padding:0.7rem 0.5rem;border:none;border-bottom:0.1rem solid ", ";box-shadow:0rem 0.05rem 0.2rem ", ";border-radius:0.5rem;line-height:1.5rem;"], function(e)
+				})(["text-align:center;height:auto;width:100%;padding:0.7rem 0.5rem;border:none;border-bottom:0.1rem solid ", ";box-shadow:0rem 0.05rem 0.2rem ", ";border-radius:0.5rem;line-height:1.5rem;"], function(e)
 				{
 					return e.theme.color.rgb174_174_174
 				}, function(e)

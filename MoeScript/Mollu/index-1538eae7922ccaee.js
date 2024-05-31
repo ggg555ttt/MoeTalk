@@ -118,7 +118,7 @@
 					overflow: "hidden",
 					fontSize: "0",
 					width: "100%",
-					height: "100%"
+					height: "auto"
 				};
 			n.Z = function(e)
 			{
@@ -660,7 +660,7 @@
 				{
 					displayName: "Profiles__PContainer",
 					componentId: "sc-6ar1q-0"
-				})(["", " padding:1rem 0rem;width:100%;"], function(e)
+				})(["", ";padding:1rem 0rem;width:100%;height:auto;"], function(e)
 				{
 					return e.theme.common.flexBox(
 					{
@@ -701,6 +701,7 @@
 								},
 								children: [(0, m.jsxs)(S,
 								{
+									style:{height:'auto'},
 									children: [(0, m.jsx)(c.NZ,
 									{
 										width: 252,
@@ -2143,7 +2144,7 @@
 											},
 											children: (0, m.jsx)(c.Kx,
 											{
-												className: "medium",
+												className: "medium mt_title",
 												placeholder: L.Z.title_comment[g],
 												maxRows: 1,
 												//maxLength: 14,
@@ -2151,6 +2152,7 @@
 												{
 													if(!$$(".截图选项").eq(1).prop('checked'))$$(".截图选项").eq(1).click()
 													$$('#mt_title').text(mt_text.title[mtlang]+" : "+(e.currentTarget.value ? e.currentTarget.value : mt_text.noTitle[mtlang]))
+													mt_settings['截图选项'].titleStr = $$('#mt_title').text()
 												},
 												onKeyDown: function(e) {}
 											})
@@ -2158,7 +2160,7 @@
 										{
 											children: (0, m.jsx)(c.Kx,
 											{
-												className: "medium",
+												className: "medium mt_writer",
 												placeholder: L.Z.nickName_comment[g],
 												maxRows: 1,
 												//maxLength: 9,
@@ -2166,6 +2168,7 @@
 												{
 													if(!$$(".截图选项").eq(2).prop('checked'))$$(".截图选项").eq(2).click()
 													$$('#mt_writer').text(mt_text.writer[mtlang]+" : "+(e.currentTarget.value ? e.currentTarget.value : mt_text.noName[mtlang]))
+													mt_settings['截图选项'].writerStr = $$('#mt_writer').text()
 												}
 											})
 										})]
@@ -2344,7 +2347,7 @@
 				{
 					displayName: "PopupImageDownload__Wrapper",
 					componentId: "sc-uicakl-0"
-				})(["", ";margin-bottom:1rem;"], function(e)
+				})(["", ";height:auto;margin-bottom:1rem;"], function(e)
 				{
 					return e.theme.common.flexBox(
 					{})
@@ -2353,7 +2356,7 @@
 				{
 					displayName: "PopupImageDownload__ImgContainer",
 					componentId: "sc-uicakl-1"
-				})(["position:relative;width:100%;height:100%;"]),
+				})(["position:relative;width:100%;height:auto;"]),
 				eC = o.ZP.div.withConfig(
 				{
 					displayName: "PopupImageDownload__ImgWrapper",
@@ -2768,7 +2771,7 @@
 				{
 					displayName: "PopupFileShare__IconBox",
 					componentId: "sc-ynp9rx-0"
-				})(["", ";flex-direction:column;width:100%;text-align:center;cursor:pointer;"], function(e)
+				})(["", ";height:auto;flex-direction:column;width:100%;text-align:center;cursor:pointer;"], function(e)
 				{
 					return e.theme.common.flexBox(
 					{
@@ -2779,7 +2782,7 @@
 				{
 					displayName: "PopupFileShare__ShareButton",
 					componentId: "sc-ynp9rx-1"
-				})(["margin-bottom:1rem;width:3rem;color:", ";"], function(e)
+				})(["margin-bottom:1rem;width:3rem;height:3rem;color:", ";"], function(e)
 				{
 					return e.theme.color.rgb45_70_100
 				}),
@@ -2787,7 +2790,7 @@
 				{
 					displayName: "PopupFileShare__StyledForm",
 					componentId: "sc-ynp9rx-2"
-				})(["", ";line-height:2rem;"], function(e)
+				})(["", ";height:auto;line-height:2rem;"], function(e)
 				{
 					return e.theme.common.flexBox(
 					{
@@ -3253,7 +3256,7 @@
 				{
 					displayName: "PopupEmoticonChat__ImgBox",
 					componentId: "sc-vzjcea-2"
-				})(["width:32%;border:2px solid ", ";background-color:", ";border-radius:10px;margin-bottom:0.5rem;cursor:pointer;&:active{transform:scale(0.95);}"], function(e)
+				})(["width:32%;height:32%;border:2px solid ", ";background-color:", ";border-radius:10px;margin-bottom:0.5rem;cursor:pointer;&:active{transform:scale(0.95);}"], function(e)
 				{
 					return e.theme.color.rgb230_233_235
 				}, function(e)
@@ -3604,7 +3607,7 @@
 				{
 					displayName: "InputBar__InputButton",
 					componentId: "sc-1fvyhr8-2"
-				})(["padding:0 1rem;width:4rem;height:100%;align-self:center;color:", ";"], function(e)
+				})(["padding:0 1rem;width:4rem;height:4rem;align-self:center;color:", ";"], function(e)
 				{
 					return e.theme.color.rgb45_70_100
 				});
@@ -4355,7 +4358,7 @@
 				{
 					displayName: "Chat__EditButton",
 					componentId: "sc-5hhx0-1"
-				})(["align-self:end;margin:0rem 0.5rem;color:", ";height:auto;width:1.2rem;flex-shrink:0;"], function(e)
+				})(["align-self:end;margin:0rem 0.5rem;color:", ";height:1.2rem;width:1.2rem;flex-shrink:0;"], function(e)
 				//#height:auto;防止编辑按钮下移
 				{
 					return e.theme.color.rgb45_70_100

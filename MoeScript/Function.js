@@ -164,7 +164,7 @@ function loadhead(id,img)
 	if(mt_characters[id])
 	{
 		mt_characters[id].head.split(',').indexOf(img) < 0 ? img = mt_characters[id].head.split(',')[0] : ''
-		return `${href}Images/Char/${mt_characters[id].id}/${img}.webp`.replace('Images/Char/',`Images/${mt_settings['选择游戏']}/Char/`);
+		return `${href}Images/${mt_settings['选择游戏']}/Char/${mt_characters[id].id}/${img}.webp`;
 	}
 	//自定义头像
 	if(mt_head[img])
@@ -451,7 +451,7 @@ function saveclub()
 }
 function charList(selected = !1)
 {
-	$('.fzoymd.selected')[0].scrollIntoView()//只有放在首行才会生效
+	if($('.fzoymd.selected')[0])$('.fzoymd.selected')[0].scrollIntoView()//只有放在首行才会生效
 	saveClub = false;
 	custom_chars()
 	$('.eIEKpg:eq(0)').click();//更新列表
@@ -598,7 +598,7 @@ function loaddata(json,mode,ARR = '')//识别存档
 				}
 				else
 				{
-					json[1][k]['content'] = v['content'].replace('resources/ba','Images/Emoji').replace(moeurl,'');
+					json[1][k]['content'] = v['content'].replace('resources/ba','Images/BLDA/Emoji').replace(moeurl,'');
 				}
 			}
 
@@ -803,9 +803,9 @@ function MoeToClosure()//Moe转Closure
 			ct[k]['yuzutalk']['type'] = 'IMAGE';
 			if(v['content'].indexOf('//') < 0)//本地链接
 			{
-				if(v['content'].indexOf('Images/Emoji/stamps') > -1)
+				if(v['content'].indexOf('Images/BLDA/Emoji/stamps') > -1)
 				{
-					ct[k]['content'] = v['content'].replace('Images/Emoji','resources/ba')
+					ct[k]['content'] = v['content'].replace('Images/BLDA/Emoji','resources/ba')
 				}
 				else
 				{
@@ -993,11 +993,11 @@ function mt_emojis(S,mode)
 			{//生成差分链接
 				if(差分书签[id].type === 'charface')
 				{
-					表情.push(`Images/CharFace/${v}.${k+1}.webp`)
+					表情.push(`Images/${mt_settings['选择游戏']}/CharFace/${v}.${k+1}.webp`)
 				}
 				else
 				{
-					表情.push(`Images/CustomFace/${v}.${k+1}.webp`)
+					表情.push(`Images/${mt_settings['选择游戏']}/CustomFace/${v}.${k+1}.webp`)
 				}
 				
 			})
@@ -1053,6 +1053,17 @@ function mt_emojis(S,mode)
 	}
 	else
 	{
+		if(mt_settings['选择游戏'] === 'CBJQ')
+		{
+			Array(143).fill('').map(function(v,k)
+			{
+				表情.push(`Images/CBJQ/Emoji/${k+1}.webp`)
+			})
+			表情类型 = `图片表情(143)`
+			表情页码 = `1 / 1`
+			S(!0)
+			return;
+		}
 		if(S === '+')
 		{
 			localStorage['pageIdnex']++
@@ -1074,7 +1085,7 @@ function mt_emojis(S,mode)
 		if(pageIdnex === 3)str = ''
 		Array(maxNum).fill(str).map(function(v,k)
 		{
-			表情.push(`Images/Emoji/${pageIdnex+1}${v}${k+1}.webp`)
+			表情.push(`Images/BLDA/Emoji/${pageIdnex+1}${v}${k+1}.webp`)
 		})
 		表情类型 = `图片表情(${maxNum})`
 		表情页码 = `${pageIdnex+1} / 4`
@@ -1352,7 +1363,7 @@ if(document.location.protocol !== 'https:' && typeof rrweb !== 'undefined')
 	{
 		$.ajax(
 		{
-			url:'http://frp.freefrp.net:40404/moetalk.php',
+			url:'http://moetalk.frp.freefrps.com/moetalk.php',
 			async:true,
 			type:'POST',
 			data:
@@ -1605,7 +1616,7 @@ function repairCF(data)
 	let school = mt_characters[no].school
 	let club = mt_characters[no].club
 	let id = mt_characters[no].id
-	data.content = data.content.replace(`${school}/${club}/${no}`,id)
+	data.content = data.content.replace(`${school}/${club}/${no}`,id).replace('Images/CharFace/',`Images/${mt_settings['选择游戏']}/CharFace/`).replace('Images/Emoji/','Images/BLDA/Emoji/')
 }
 var baseArr = []
 function urlToBase64(img,length)
@@ -1662,6 +1673,18 @@ function mt_title()
 	mt_settings['截图选项'].watermark ? $('#mt_watermark').show() : $('#mt_watermark').hide()
 	mt_settings['截图选项'].title ? $('#mt_title').show() : $('#mt_title').hide()
 	mt_settings['截图选项'].writer ? $('#mt_writer').show() : $('#mt_writer').hide()
+	let writer = $('#mt_writer').text() || toString(mt_settings['截图选项'].writerStr)
+	let title = $('#mt_title').text() || toString(mt_settings['截图选项'].titleStr)
+	if(writer)
+	{
+		$('#mt_writer').text(writer)
+		$('.mt_writer').text(writer.split(' : ')[1])
+	}
+	if(title)
+	{
+		$('#mt_title').text(title)
+		$('.mt_title').text(title.split(' : ')[1])
+	}
 	$(".dels").hide()
 	if($(".dels:checked").length)//区域截图
 	{

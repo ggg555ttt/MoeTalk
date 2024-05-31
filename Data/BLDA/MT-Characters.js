@@ -1501,7 +1501,7 @@ var mt_characters = {
             "pinyin": "Kei"
         },
         "charface": "CharID_94/aris/aris.19,CharID_94/CH0200/CH0200.9,CharID_94/CharID_94.8",
-        "customface": "CFID_2/CharID_93/CharID_93.9,CFID_2/CharID_93_1/CharID_93_1.12"
+        "customface": "CFID_2/CharID_93/CharID_93.9,CFID_2/CharID_93_1/CharID_93_1.12,CFID_2/CharID_93_2/CharID_93_2.9"
     },
     "天童爱丽丝": {
         "id": "CharID_94",
@@ -1523,7 +1523,7 @@ var mt_characters = {
         "id": "CharID_95",
         "school": "千年",
         "club": "游戏开发部",
-        "head": "Momoi_L2D,CH0201_BG,Momoi_BG,CH0201,Momoi",
+        "head": "CH0201_L2D,Momoi_L2D,CH0201_BG,Momoi_BG,CH0201,Momoi",
         "name": {
             "zh_cn": "才羽 桃井",
             "zh_tw": "才羽 桃井",
@@ -1539,7 +1539,7 @@ var mt_characters = {
         "id": "CharID_96",
         "school": "千年",
         "club": "游戏开发部",
-        "head": "Midori_L2D,CH0202_BG,Midori_BG,CH0202,Midori",
+        "head": "CH0202_L2D,Midori_L2D,CH0202_BG,Midori_BG,CH0202,Midori",
         "name": {
             "zh_cn": "才羽 绿",
             "zh_tw": "才羽 綠",
@@ -2189,7 +2189,7 @@ var mt_characters = {
             "pinyin": "baizhouzi"
         },
         "charface": "CharID_136/azusa/azusa.9,CharID_136/azusa_swimsuit/azusa_swimsuit.8,CharID_136/NP0001/NP0001.9,CharID_136/NP0002/NP0002.9,CharID_136/NP0020/NP0020.9,CharID_136/CharID_136.20",
-        "customface": ""
+        "customface": "CFID_1/CharID_136/CharID_136.36"
     },
     "阿慈谷日富美": {
         "id": "CharID_137",
@@ -2509,7 +2509,7 @@ var mt_characters = {
             "pinyin": "qianhuangmuyue"
         },
         "charface": "CharID_156/CH0246/CH0246.11,CharID_156/CH0248/CH0248.10,CharID_156/mutsuki/mutsuki.13,CharID_156/mutsuki_newyear/mutsuki_newyear.9,CharID_156/CharID_156.16",
-        "customface": ""
+        "customface": "CFID_4/CharID_156/CharID_156.56"
     },
     "陆八魔阿露": {
         "id": "CharID_157",
@@ -2781,7 +2781,7 @@ var mt_characters = {
             "pinyin": "tianyuyazi"
         },
         "charface": "CharID_173/ako/ako.16,CharID_173/CH0231/CH0231.14,CharID_173/NP0019/NP0019.16,CharID_173/NP0059/NP0059.16,CharID_173/NP0111/NP0111.14,CharID_173/CharID_173.20",
-        "customface": ""
+        "customface": "CFID_4/CharID_173/CharID_173.58"
     },
     "火宫千夏": {
         "id": "CharID_174",
@@ -3677,7 +3677,7 @@ var mt_characters = {
             "pinyin": "shalangbaizi？"
         },
         "charface": "CharID_229/CH0199/CH0199.8,CharID_229/NP0125/NP0125.8,CharID_229/CharID_229.8",
-        "customface": ""
+        "customface": "CFID_1/CharID_229/CharID_229.30"
     },
     "黑见芹香": {
         "id": "CharID_230",

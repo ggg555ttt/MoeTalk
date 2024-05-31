@@ -1701,7 +1701,7 @@
 				{
 					displayName: "Talk__PlayButton",
 					componentId: "sc-1340qk3-7"
-				})(["position:absolute;right:1rem;top:1.8rem;width:2.5rem;color:", ";"], function(e)
+				})(["position:absolute;right:1rem;top:1.8rem;width:2.5rem;height:2.5rem;color:", ";"], function(e)
 				{
 					return e.theme.color.rgb45_70_100
 				}),

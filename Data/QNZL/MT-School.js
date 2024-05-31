@@ -1,31 +1,22 @@
 var mt_schoolname = {
-    "怪物": {
+    "NPC角色": {
         "zh_cn": "",
         "zh_tw": "",
         "jp": "",
         "en": "",
         "kr": "",
-        "pinyin": "guaiwu"
+        "pinyin": "NPCjiaose"
     },
-    "星痕": {
+    "你的后宫": {
         "zh_cn": "",
         "zh_tw": "",
         "jp": "",
         "en": "",
         "kr": "",
-        "pinyin": "xinghen"
-    },
-    "魔女": {
-        "zh_cn": "",
-        "zh_tw": "",
-        "jp": "",
-        "en": "",
-        "kr": "",
-        "pinyin": "monv"
+        "pinyin": "nidehougong"
     }
 }
 var mt_school = [
-    "怪物",
-    "星痕",
-    "魔女"
+    "NPC角色",
+    "你的后宫"
 ]
