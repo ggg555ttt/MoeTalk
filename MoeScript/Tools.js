@@ -1,3 +1,12 @@
+function rgbToHex(rgb) {
+  const values = rgb.match(/\d+/g); // 提取RGB值
+  const hex = values.reduce((hexValue, currentValue) => {
+    const hexString = Number(currentValue).toString(16); // 将每个RGB值转换成16进制字符串
+    const paddedHexString = hexString.padStart(2, '0'); // 在不满两位的字符串前补0
+    return hexValue + paddedHexString;  // 拼接每个RGB值对应的16进制字符串
+  }, '');
+  return `#${hex.toUpperCase()}`; // 返回完整的HEX颜色代码（需将字母转换为大写）
+}
 //读取人物
 $('body').on('click',"input",function()
 {
@@ -481,6 +490,17 @@ $('body').on('click',"#selectgame",function()
 		alert('更改完成，请返回页面!');
 	}
 })
+$('body').on('click',".selectColor",function()
+{
+	$('#titleColor').val(rgbToHex($(this).css('background-color')))
+})
+$('body').on('click',"#mt-titleColor",function()
+{
+	mt_settings['标题颜色'] = $('#titleColor').val();
+	saveStorage('设置选项',mt_settings,'local')
+	alert('标题颜色提交完成，请返回页面查看效果');
+})
+$('#titleColor').val(mt_settings['标题颜色'] ? mt_settings['标题颜色'] : '#8BBBE9')
 // document.write("<scr"+`ipt src='https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/MoeScript/Script/localforage.min.js'></scr`+"ipt>");
 // const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});
 // moetalkStorage.getItem('mt-char', function(err, char)

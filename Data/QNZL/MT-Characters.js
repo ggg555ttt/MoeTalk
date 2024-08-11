@@ -1,6 +1,5 @@
 var mt_characters = {
     "刺客": {
-        "id": "CharID_139",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "cike",
@@ -12,11 +11,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "cike"
         },
-        "charface": "CharID_139/cike/cike.1",
+        "charface": "cike/cike.1",
         "customface": ""
     },
     "医生": {
-        "id": "CharID_140",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "yisheng",
@@ -28,11 +26,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "yisheng"
         },
-        "charface": "CharID_140/yisheng/yisheng.1",
+        "charface": "yisheng/yisheng.1",
         "customface": ""
     },
     "占卜师": {
-        "id": "CharID_141",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "zhanbushi",
@@ -44,11 +41,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "zhanbushi"
         },
-        "charface": "CharID_141/zhanbushi/zhanbushi.1",
+        "charface": "zhanbushi/zhanbushi.1",
         "customface": ""
     },
     "彼得": {
-        "id": "CharID_142",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "egunbide,egunbide2",
@@ -60,11 +56,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "bide"
         },
-        "charface": "CharID_142/egunbide/egunbide.1,CharID_142/egunbide2/egunbide2.1",
+        "charface": "egunbide/egunbide.1,egunbide2/egunbide2.1",
         "customface": ""
     },
     "德奥": {
-        "id": "CharID_143",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "deao",
@@ -76,11 +71,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "deao"
         },
-        "charface": "CharID_143/deao/deao.1",
+        "charface": "deao/deao.1",
         "customface": ""
     },
     "扎拉尔": {
-        "id": "CharID_144",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "xiongtu1",
@@ -92,11 +86,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "zhalaer"
         },
-        "charface": "CharID_144/xiongtu1/xiongtu1.1",
+        "charface": "xiongtu1/xiongtu1.1",
         "customface": ""
     },
     "梅克罗卡": {
-        "id": "CharID_145",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "meikeluoka",
@@ -108,11 +101,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "meikeluoka"
         },
-        "charface": "CharID_145/meikeluoka/meikeluoka.2",
+        "charface": "meikeluoka/meikeluoka.2",
         "customface": ""
     },
     "碧桂": {
-        "id": "CharID_146",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "bigui",
@@ -124,11 +116,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "bigui"
         },
-        "charface": "CharID_146/bigui/bigui.7",
+        "charface": "bigui/bigui.7",
         "customface": ""
     },
     "神灯精灵": {
-        "id": "CharID_147",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "shendengjinglingR",
@@ -140,11 +131,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "shendengjingling"
         },
-        "charface": "CharID_147/shendengjinglingR/shendengjinglingR.1",
+        "charface": "shendengjinglingR/shendengjinglingR.1",
         "customface": ""
     },
     "罗德": {
-        "id": "CharID_148",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "luode",
@@ -156,11 +146,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "luode"
         },
-        "charface": "CharID_148/luode/luode.4",
+        "charface": "luode/luode.4",
         "customface": ""
     },
     "辰龙侍女": {
-        "id": "CharID_149",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "chenlongshinv",
@@ -172,11 +161,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "chenlongshinv"
         },
-        "charface": "CharID_149/chenlongshinv/chenlongshinv.1",
+        "charface": "chenlongshinv/chenlongshinv.1",
         "customface": ""
     },
     "迪亚里托": {
-        "id": "CharID_150",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "diyalituo",
@@ -188,11 +176,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "diyalituo"
         },
-        "charface": "CharID_150/diyalituo/diyalituo.3",
+        "charface": "diyalituo/diyalituo.3",
         "customface": ""
     },
     "阿桑斯": {
-        "id": "CharID_151",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "asangsi",
@@ -204,11 +191,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "asangsi"
         },
-        "charface": "CharID_151/asangsi/asangsi.1",
+        "charface": "asangsi/asangsi.1",
         "customface": ""
     },
     "韦布里恩": {
-        "id": "CharID_152",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "weibulien",
@@ -220,11 +206,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "weibulien"
         },
-        "charface": "CharID_152/weibulien/weibulien.1",
+        "charface": "weibulien/weibulien.1",
         "customface": ""
     },
     "马尔吉纳": {
-        "id": "CharID_153",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "maerjina",
@@ -236,11 +221,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "maerjina"
         },
-        "charface": "CharID_153/maerjina/maerjina.1",
+        "charface": "maerjina/maerjina.1",
         "customface": ""
     },
     "黑面纱": {
-        "id": "CharID_154",
         "school": "NPC角色",
         "club": "剧情NPC",
         "head": "heimiansha",
@@ -252,11 +236,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "heimiansha"
         },
-        "charface": "CharID_154/heimiansha/heimiansha.2",
+        "charface": "heimiansha/heimiansha.2",
         "customface": ""
     },
     "使徒": {
-        "id": "CharID_155",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "renxingshitu",
@@ -268,11 +251,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "shitu"
         },
-        "charface": "CharID_155/renxingshitu/renxingshitu.1",
+        "charface": "renxingshitu/renxingshitu.1",
         "customface": ""
     },
     "厨怪": {
-        "id": "CharID_9",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "chuguai",
@@ -284,11 +266,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "chuguai"
         },
-        "charface": "CharID_9/chuguai/chuguai.2",
+        "charface": "chuguai/chuguai.2",
         "customface": ""
     },
     "咎瓦尤斯": {
-        "id": "CharID_13",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "jiuwayousi,jiuwayousiwuci",
@@ -300,11 +281,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "jiuwayousi"
         },
-        "charface": "CharID_13/jiuwayousi/jiuwayousi.1,CharID_13/jiuwayousiwuci/jiuwayousiwuci.1",
+        "charface": "jiuwayousi/jiuwayousi.1,jiuwayousiwuci/jiuwayousiwuci.1",
         "customface": ""
     },
     "年兽": {
-        "id": "CharID_156",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "nianshourenxing",
@@ -316,11 +296,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "nianshou"
         },
-        "charface": "CharID_156/nianshourenxing/nianshourenxing.1",
+        "charface": "nianshourenxing/nianshourenxing.1",
         "customface": ""
     },
     "愤怒": {
-        "id": "CharID_157",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "fennubai,fennuhong",
@@ -332,11 +311,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "fennu"
         },
-        "charface": "CharID_157/fennubai/fennubai.1,CharID_157/fennuhong/fennuhong.1",
+        "charface": "fennubai/fennubai.1,fennuhong/fennuhong.1",
         "customface": ""
     },
     "懒惰": {
-        "id": "CharID_158",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "landuo",
@@ -348,11 +326,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "landuo"
         },
-        "charface": "CharID_158/landuo/landuo.26",
+        "charface": "landuo/landuo.26",
         "customface": ""
     },
     "戏剧家": {
-        "id": "CharID_159",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "xijujia",
@@ -364,11 +341,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "xijujia"
         },
-        "charface": "CharID_159/xijujia/xijujia.2",
+        "charface": "xijujia/xijujia.17",
         "customface": ""
     },
     "暴食": {
-        "id": "CharID_31",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "baoshi",
@@ -380,11 +356,25 @@ var mt_characters = {
             "kr": "",
             "pinyin": "baoshi"
         },
-        "charface": "CharID_31/baoshi/baoshi.3",
+        "charface": "baoshi/baoshi.3",
+        "customface": ""
+    },
+    "狄妮莎": {
+        "school": "NPC角色",
+        "club": "反派角色",
+        "head": "dinisha,dinisha2",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "dinisha"
+        },
+        "charface": "dinisha/dinisha.14,dinisha2/dinisha2.10",
         "customface": ""
     },
     "色欲": {
-        "id": "CharID_54",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "seyu",
@@ -396,11 +386,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "seyu"
         },
-        "charface": "CharID_54/seyu/seyu.18",
+        "charface": "seyu/seyu.18",
         "customface": ""
     },
     "莉莉布朗尼": {
-        "id": "CharID_56",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "lilibulangni,lilibulangnishitu",
@@ -412,11 +401,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "lilibulangni"
         },
-        "charface": "CharID_56/lilibulangni/lilibulangni.2,CharID_56/lilibulangnishitu/lilibulangnishitu.1",
+        "charface": "lilibulangni/lilibulangni.2,lilibulangnishitu/lilibulangnishitu.1",
         "customface": ""
     },
     "西蒙": {
-        "id": "CharID_60",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "ximengshitu",
@@ -428,11 +416,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "ximeng"
         },
-        "charface": "CharID_60/ximengshitu/ximengshitu.1",
+        "charface": "ximengshitu/ximengshitu.1",
         "customface": ""
     },
     "金主": {
-        "id": "CharID_160",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "jinzhu",
@@ -444,11 +431,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "jinzhu"
         },
-        "charface": "CharID_160/jinzhu/jinzhu.16",
+        "charface": "jinzhu/jinzhu.16",
         "customface": ""
     },
     "黑影": {
-        "id": "CharID_161",
         "school": "NPC角色",
         "club": "反派角色",
         "head": "xiaoguaiheiying",
@@ -460,11 +446,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "heiying"
         },
-        "charface": "CharID_161/xiaoguaiheiying/xiaoguaiheiying.1",
+        "charface": "xiaoguaiheiying/xiaoguaiheiying.1",
         "customface": ""
     },
     "丹鼠": {
-        "id": "CharID_0",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_0",
@@ -480,7 +465,6 @@ var mt_characters = {
         "customface": ""
     },
     "云沫狐": {
-        "id": "CharID_1",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_1",
@@ -496,7 +480,6 @@ var mt_characters = {
         "customface": ""
     },
     "公主骑士偶": {
-        "id": "CharID_2",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_2",
@@ -512,7 +495,6 @@ var mt_characters = {
         "customface": ""
     },
     "凋败妖蝇": {
-        "id": "CharID_3",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_3",
@@ -528,7 +510,6 @@ var mt_characters = {
         "customface": ""
     },
     "刃行怪": {
-        "id": "CharID_4",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_4",
@@ -544,7 +525,6 @@ var mt_characters = {
         "customface": ""
     },
     "刃行者": {
-        "id": "CharID_5",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_5",
@@ -560,7 +540,6 @@ var mt_characters = {
         "customface": ""
     },
     "刃行魔": {
-        "id": "CharID_6",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_6",
@@ -576,7 +555,6 @@ var mt_characters = {
         "customface": ""
     },
     "厚垣蕈人": {
-        "id": "CharID_7",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_7",
@@ -592,7 +570,6 @@ var mt_characters = {
         "customface": ""
     },
     "厨妖": {
-        "id": "CharID_8",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_8",
@@ -608,7 +585,6 @@ var mt_characters = {
         "customface": ""
     },
     "厨鬼": {
-        "id": "CharID_10",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_10",
@@ -624,7 +600,6 @@ var mt_characters = {
         "customface": ""
     },
     "吞噬怪": {
-        "id": "CharID_11",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_11",
@@ -640,7 +615,6 @@ var mt_characters = {
         "customface": ""
     },
     "命鼠": {
-        "id": "CharID_12",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_12",
@@ -656,7 +630,6 @@ var mt_characters = {
         "customface": ""
     },
     "咒行鵺": {
-        "id": "CharID_14",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_14",
@@ -672,7 +645,6 @@ var mt_characters = {
         "customface": ""
     },
     "器傀": {
-        "id": "CharID_15",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_15",
@@ -688,7 +660,6 @@ var mt_characters = {
         "customface": ""
     },
     "噬命刃": {
-        "id": "CharID_16",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_16",
@@ -704,7 +675,6 @@ var mt_characters = {
         "customface": ""
     },
     "噬怒魔": {
-        "id": "CharID_17",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_17",
@@ -720,7 +690,6 @@ var mt_characters = {
         "customface": ""
     },
     "夺心魔": {
-        "id": "CharID_18",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_18",
@@ -736,7 +705,6 @@ var mt_characters = {
         "customface": ""
     },
     "妄兽": {
-        "id": "CharID_19",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_19",
@@ -752,7 +720,6 @@ var mt_characters = {
         "customface": ""
     },
     "婴狐": {
-        "id": "CharID_20",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_20",
@@ -768,7 +735,6 @@ var mt_characters = {
         "customface": ""
     },
     "宁芙妖": {
-        "id": "CharID_21",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_21",
@@ -784,7 +750,6 @@ var mt_characters = {
         "customface": ""
     },
     "巨食花": {
-        "id": "CharID_22",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_22",
@@ -800,7 +765,6 @@ var mt_characters = {
         "customface": ""
     },
     "影巫女": {
-        "id": "CharID_23",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_23",
@@ -816,7 +780,6 @@ var mt_characters = {
         "customface": ""
     },
     "怒魔人": {
-        "id": "CharID_24",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_24",
@@ -832,7 +795,6 @@ var mt_characters = {
         "customface": ""
     },
     "怪邪妖精": {
-        "id": "CharID_25",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_25",
@@ -848,7 +810,6 @@ var mt_characters = {
         "customface": ""
     },
     "恶神-桃": {
-        "id": "CharID_26",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_26",
@@ -864,7 +825,6 @@ var mt_characters = {
         "customface": ""
     },
     "恶诞花妖": {
-        "id": "CharID_27",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_27",
@@ -880,7 +840,6 @@ var mt_characters = {
         "customface": ""
     },
     "憎恶异魔": {
-        "id": "CharID_28",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_28",
@@ -896,7 +855,6 @@ var mt_characters = {
         "customface": ""
     },
     "掠夺怪": {
-        "id": "CharID_29",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_29",
@@ -912,7 +870,6 @@ var mt_characters = {
         "customface": ""
     },
     "播疫妖蝇": {
-        "id": "CharID_30",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_30",
@@ -928,7 +885,6 @@ var mt_characters = {
         "customface": ""
     },
     "梦游羊·幻魇": {
-        "id": "CharID_32",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_32",
@@ -944,7 +900,6 @@ var mt_characters = {
         "customface": ""
     },
     "梦游羊·惊爆": {
-        "id": "CharID_33",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_33",
@@ -960,7 +915,6 @@ var mt_characters = {
         "customface": ""
     },
     "梦游羊·白夜": {
-        "id": "CharID_34",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_34",
@@ -976,7 +930,6 @@ var mt_characters = {
         "customface": ""
     },
     "梦游羊·苏生": {
-        "id": "CharID_35",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_35",
@@ -992,7 +945,6 @@ var mt_characters = {
         "customface": ""
     },
     "深渊刺": {
-        "id": "CharID_36",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_36",
@@ -1008,7 +960,6 @@ var mt_characters = {
         "customface": ""
     },
     "深红射手": {
-        "id": "CharID_37",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_37",
@@ -1024,7 +975,6 @@ var mt_characters = {
         "customface": ""
     },
     "潜伏怪": {
-        "id": "CharID_38",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_38",
@@ -1040,7 +990,6 @@ var mt_characters = {
         "customface": ""
     },
     "灰烬射手": {
-        "id": "CharID_39",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_39",
@@ -1056,7 +1005,6 @@ var mt_characters = {
         "customface": ""
     },
     "炎射手": {
-        "id": "CharID_40",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_40",
@@ -1072,7 +1020,6 @@ var mt_characters = {
         "customface": ""
     },
     "炽炎翼": {
-        "id": "CharID_41",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_41",
@@ -1088,7 +1035,6 @@ var mt_characters = {
         "customface": ""
     },
     "炽贤者": {
-        "id": "CharID_42",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_42",
@@ -1104,7 +1050,6 @@ var mt_characters = {
         "customface": ""
     },
     "烛贤者": {
-        "id": "CharID_43",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_43",
@@ -1120,7 +1065,6 @@ var mt_characters = {
         "customface": ""
     },
     "烬贤者": {
-        "id": "CharID_44",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_44",
@@ -1136,7 +1080,6 @@ var mt_characters = {
         "customface": ""
     },
     "狐魑": {
-        "id": "CharID_45",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_45",
@@ -1152,7 +1095,6 @@ var mt_characters = {
         "customface": ""
     },
     "猩红骑士偶": {
-        "id": "CharID_46",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_46",
@@ -1168,7 +1110,6 @@ var mt_characters = {
         "customface": ""
     },
     "瓷傀": {
-        "id": "CharID_47",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_47",
@@ -1184,7 +1125,6 @@ var mt_characters = {
         "customface": ""
     },
     "白银骑士": {
-        "id": "CharID_48",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_48",
@@ -1200,7 +1140,6 @@ var mt_characters = {
         "customface": ""
     },
     "皇家骑士偶": {
-        "id": "CharID_49",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_49",
@@ -1216,7 +1155,6 @@ var mt_characters = {
         "customface": ""
     },
     "祸兽": {
-        "id": "CharID_50",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_50",
@@ -1232,7 +1170,6 @@ var mt_characters = {
         "customface": ""
     },
     "竹傀儡": {
-        "id": "CharID_51",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_51",
@@ -1248,7 +1185,6 @@ var mt_characters = {
         "customface": ""
     },
     "竹筒王": {
-        "id": "CharID_52",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_52",
@@ -1264,7 +1200,6 @@ var mt_characters = {
         "customface": ""
     },
     "糖豆妖精": {
-        "id": "CharID_53",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_53",
@@ -1280,7 +1215,6 @@ var mt_characters = {
         "customface": ""
     },
     "艾卡希猎手": {
-        "id": "CharID_55",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_55",
@@ -1296,7 +1230,6 @@ var mt_characters = {
         "customface": ""
     },
     "蕈人": {
-        "id": "CharID_57",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_57",
@@ -1312,7 +1245,6 @@ var mt_characters = {
         "customface": ""
     },
     "蕈人酋长": {
-        "id": "CharID_58",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_58",
@@ -1328,7 +1260,6 @@ var mt_characters = {
         "customface": ""
     },
     "蝇斥候": {
-        "id": "CharID_59",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_59",
@@ -1344,7 +1275,6 @@ var mt_characters = {
         "customface": ""
     },
     "诡戏妖精": {
-        "id": "CharID_61",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_61",
@@ -1360,7 +1290,6 @@ var mt_characters = {
         "customface": ""
     },
     "赤面": {
-        "id": "CharID_62",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_62",
@@ -1376,7 +1305,6 @@ var mt_characters = {
         "customface": ""
     },
     "铁骑士": {
-        "id": "CharID_63",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_63",
@@ -1392,7 +1320,6 @@ var mt_characters = {
         "customface": ""
     },
     "食人花": {
-        "id": "CharID_64",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_64",
@@ -1408,7 +1335,6 @@ var mt_characters = {
         "customface": ""
     },
     "黄金骑士": {
-        "id": "CharID_65",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_65",
@@ -1424,7 +1350,6 @@ var mt_characters = {
         "customface": ""
     },
     "黑面纱之怨": {
-        "id": "CharID_66",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_66",
@@ -1440,7 +1365,6 @@ var mt_characters = {
         "customface": ""
     },
     "黑面纱之魅": {
-        "id": "CharID_67",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_67",
@@ -1456,7 +1380,6 @@ var mt_characters = {
         "customface": ""
     },
     "黑面纱之魇": {
-        "id": "CharID_68",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_68",
@@ -1472,7 +1395,6 @@ var mt_characters = {
         "customface": ""
     },
     "鼎生": {
-        "id": "CharID_69",
         "school": "NPC角色",
         "club": "怪物(无差分)",
         "head": "CharID_69",
@@ -1488,7 +1410,6 @@ var mt_characters = {
         "customface": ""
     },
     "信隼": {
-        "id": "CharID_162",
         "school": "NPC角色",
         "club": "龙套",
         "head": "xinsun",
@@ -1500,11 +1421,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "xinsun"
         },
-        "charface": "CharID_162/xinsun/xinsun.1",
+        "charface": "xinsun/xinsun.1",
         "customface": ""
     },
     "农民": {
-        "id": "CharID_163",
         "school": "NPC角色",
         "club": "龙套",
         "head": "nanrenshoushang_tao_huodong,nanren_tao_huodong,nongfu_tao_huodong",
@@ -1516,11 +1436,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "nongmin"
         },
-        "charface": "CharID_163/nanrenshoushang_tao_huodong/nanrenshoushang_tao_huodong.1,CharID_163/nanren_tao_huodong/nanren_tao_huodong.1,CharID_163/nongfu_tao_huodong/nongfu_tao_huodong.1",
+        "charface": "nanrenshoushang_tao_huodong/nanrenshoushang_tao_huodong.1,nanren_tao_huodong/nanren_tao_huodong.1,nongfu_tao_huodong/nongfu_tao_huodong.1",
         "customface": ""
     },
     "女性": {
-        "id": "CharID_164",
         "school": "NPC角色",
         "club": "龙套",
         "head": "nvzhongnian",
@@ -1532,11 +1451,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "nvxing"
         },
-        "charface": "CharID_164/nvzhongnian/nvzhongnian.1",
+        "charface": "nvzhongnian/nvzhongnian.1",
         "customface": ""
     },
     "富商": {
-        "id": "CharID_165",
         "school": "NPC角色",
         "club": "龙套",
         "head": "furen_tao_huodong",
@@ -1548,11 +1466,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "fushang"
         },
-        "charface": "CharID_165/furen_tao_huodong/furen_tao_huodong.1",
+        "charface": "furen_tao_huodong/furen_tao_huodong.1",
         "customface": ""
     },
     "小孩": {
-        "id": "CharID_166",
         "school": "NPC角色",
         "club": "龙套",
         "head": "liulangertong,liulangertong2,xiaonanhai,xiaonanhai_qingdian,xiaonvhai,xiaonvhai_qingdian,xiaonvhai_tao_huodong",
@@ -1564,11 +1481,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "xiaohai"
         },
-        "charface": "CharID_166/liulangertong/liulangertong.1,CharID_166/liulangertong2/liulangertong2.1,CharID_166/xiaonanhai/xiaonanhai.1,CharID_166/xiaonanhai_qingdian/xiaonanhai_qingdian.1,CharID_166/xiaonvhai/xiaonvhai.1,CharID_166/xiaonvhai_qingdian/xiaonvhai_qingdian.1,CharID_166/xiaonvhai_tao_huodong/xiaonvhai_tao_huodong.1",
+        "charface": "liulangertong/liulangertong.1,liulangertong2/liulangertong2.1,xiaonanhai/xiaonanhai.1,xiaonanhai_qingdian/xiaonanhai_qingdian.1,xiaonvhai/xiaonvhai.1,xiaonvhai_qingdian/xiaonvhai_qingdian.1,xiaonvhai_tao_huodong/xiaonvhai_tao_huodong.1",
         "customface": ""
     },
     "少女": {
-        "id": "CharID_167",
         "school": "NPC角色",
         "club": "龙套",
         "head": "banshourenshaonv",
@@ -1580,11 +1496,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "shaonv"
         },
-        "charface": "CharID_167/banshourenshaonv/banshourenshaonv.1",
+        "charface": "banshourenshaonv/banshourenshaonv.1",
         "customface": ""
     },
     "帽将": {
-        "id": "CharID_168",
         "school": "NPC角色",
         "club": "龙套",
         "head": "maojiang",
@@ -1596,11 +1511,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "maojiang"
         },
-        "charface": "CharID_168/maojiang/maojiang.2",
+        "charface": "maojiang/maojiang.2",
         "customface": ""
     },
     "平民": {
-        "id": "CharID_169",
         "school": "NPC角色",
         "club": "龙套",
         "head": "pingmin",
@@ -1612,11 +1526,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "pingmin"
         },
-        "charface": "CharID_169/pingmin/pingmin.1",
+        "charface": "pingmin/pingmin.1",
         "customface": ""
     },
     "拉亚谢尔": {
-        "id": "CharID_170",
         "school": "NPC角色",
         "club": "龙套",
         "head": "layaxieerdekaerpeien",
@@ -1628,11 +1541,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "layaxieer"
         },
-        "charface": "CharID_170/layaxieerdekaerpeien/layaxieerdekaerpeien.1",
+        "charface": "layaxieerdekaerpeien/layaxieerdekaerpeien.1",
         "customface": ""
     },
     "服务员": {
-        "id": "CharID_171",
         "school": "NPC角色",
         "club": "龙套",
         "head": "maoniangfuwuyuan",
@@ -1644,11 +1556,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "fuwuyuan"
         },
-        "charface": "CharID_171/maoniangfuwuyuan/maoniangfuwuyuan.3",
+        "charface": "maoniangfuwuyuan/maoniangfuwuyuan.3",
         "customface": ""
     },
     "游民": {
-        "id": "CharID_172",
         "school": "NPC角色",
         "club": "龙套",
         "head": "youmin",
@@ -1660,11 +1571,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "youmin"
         },
-        "charface": "CharID_172/youmin/youmin.2",
+        "charface": "youmin/youmin.2",
         "customface": ""
     },
     "矿工": {
-        "id": "CharID_173",
         "school": "NPC角色",
         "club": "龙套",
         "head": "emokuanggongnan,emokuanggongnv",
@@ -1676,11 +1586,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "kuanggong"
         },
-        "charface": "CharID_173/emokuanggongnan/emokuanggongnan.1,CharID_173/emokuanggongnv/emokuanggongnv.1",
+        "charface": "emokuanggongnan/emokuanggongnan.1,emokuanggongnv/emokuanggongnv.1",
         "customface": ""
     },
     "精灵": {
-        "id": "CharID_174",
         "school": "NPC角色",
         "club": "龙套",
         "head": "jinglingnan,jinglingnv",
@@ -1692,11 +1601,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "jingling"
         },
-        "charface": "CharID_174/jinglingnan/jinglingnan.1,CharID_174/jinglingnv/jinglingnv.1",
+        "charface": "jinglingnan/jinglingnan.1,jinglingnv/jinglingnv.1",
         "customface": ""
     },
     "老人": {
-        "id": "CharID_175",
         "school": "NPC角色",
         "club": "龙套",
         "head": "laonainai",
@@ -1708,11 +1616,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "laoren"
         },
-        "charface": "CharID_175/laonainai/laonainai.1",
+        "charface": "laonainai/laonainai.1",
         "customface": ""
     },
     "贵族": {
-        "id": "CharID_176",
         "school": "NPC角色",
         "club": "龙套",
         "head": "guizu,guizulaotou,guizunv,longnvguizu",
@@ -1724,11 +1631,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "guizu"
         },
-        "charface": "CharID_176/guizu/guizu.1,CharID_176/guizulaotou/guizulaotou.3,CharID_176/guizunv/guizunv.1,CharID_176/longnvguizu/longnvguizu.1",
+        "charface": "guizu/guizu.1,guizulaotou/guizulaotou.3,guizunv/guizunv.1,longnvguizu/longnvguizu.1",
         "customface": ""
     },
     "青年": {
-        "id": "CharID_177",
         "school": "NPC角色",
         "club": "龙套",
         "head": "eba_tao_huodong",
@@ -1740,11 +1646,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "qingnian"
         },
-        "charface": "CharID_177/eba_tao_huodong/eba_tao_huodong.1",
+        "charface": "eba_tao_huodong/eba_tao_huodong.1",
         "customface": ""
     },
     "餐厅老板": {
-        "id": "CharID_178",
         "school": "NPC角色",
         "club": "龙套",
         "head": "cantinglaoban",
@@ -1756,11 +1661,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "cantinglaoban"
         },
-        "charface": "CharID_178/cantinglaoban/cantinglaoban.3",
+        "charface": "cantinglaoban/cantinglaoban.3",
         "customface": ""
     },
     "骑士": {
-        "id": "CharID_179",
         "school": "NPC角色",
         "club": "龙套",
         "head": "hongqishi,lanqishi",
@@ -1772,11 +1676,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "qishi"
         },
-        "charface": "CharID_179/hongqishi/hongqishi.1,CharID_179/lanqishi/lanqishi.1",
+        "charface": "hongqishi/hongqishi.1,lanqishi/lanqishi.1",
         "customface": ""
     },
     "魔女": {
-        "id": "CharID_180",
         "school": "NPC角色",
         "club": "龙套",
         "head": "putongmonv,xunhuimonv",
@@ -1788,14 +1691,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "monv"
         },
-        "charface": "CharID_180/putongmonv/putongmonv.1,CharID_180/xunhuimonv/xunhuimonv.1",
+        "charface": "putongmonv/putongmonv.1,xunhuimonv/xunhuimonv.1",
         "customface": ""
     },
     "丘吉尔": {
-        "id": "CharID_70",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014022_2,head_301402201_2,qiujier",
+        "head": "3014022,301402201,qiujier",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1804,14 +1706,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "qiujier"
         },
-        "charface": "CharID_70/qiujier/qiujier.8",
+        "charface": "3014022/3014022.1,301402201/301402201.1,qiujier/qiujier.8",
         "customface": ""
     },
     "丹妮": {
-        "id": "CharID_71",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "danni,head_3015002_2",
+        "head": "3015002,301500201,danni",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1820,14 +1721,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "danni"
         },
-        "charface": "CharID_71/danni/danni.12",
+        "charface": "3015002/3015002.1,301500201/301500201.1,danni/danni.13",
         "customface": ""
     },
     "仙蒂": {
-        "id": "CharID_72",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016038_2",
+        "head": "3016038,xiandi",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1836,14 +1736,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "xiandi"
         },
-        "charface": "",
+        "charface": "3016038/3016038.1",
         "customface": ""
     },
     "伊卡洛斯": {
-        "id": "CharID_73",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016130_2,head_301613001_2,yikaluosi",
+        "head": "3016130,301613001,yikaluosi",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1852,14 +1751,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "yikaluosi"
         },
-        "charface": "CharID_73/yikaluosi/yikaluosi.11",
+        "charface": "3016130/3016130.1,301613001/301613001.1,yikaluosi/yikaluosi.11",
         "customface": ""
     },
     "伊拉": {
-        "id": "CharID_74",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014031_2,head_301403101_2,yila",
+        "head": "3014031,301403101,yila",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1868,14 +1766,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "yila"
         },
-        "charface": "CharID_74/yila/yila.5",
+        "charface": "3014031/3014031.1,301403101/301403101.1,yila/yila.23",
         "customface": ""
     },
     "佩内洛普": {
-        "id": "CharID_75",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016023_2,peineiluopu,peineiluopu_x",
+        "head": "3016023,peineiluopu,peineiluopu_x",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1884,14 +1781,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "peineiluopu"
         },
-        "charface": "CharID_75/peineiluopu/peineiluopu.23,CharID_75/peineiluopu_x/peineiluopu_x.1",
+        "charface": "3016023/3016023.1,peineiluopu/peineiluopu.23,peineiluopu_x/peineiluopu_x.1",
         "customface": ""
     },
     "克尔苏娜": {
-        "id": "CharID_76",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016013_2,keersuna",
+        "head": "3016013,301601301,keersuna",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1900,14 +1796,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "keersuna"
         },
-        "charface": "CharID_76/keersuna/keersuna.13",
+        "charface": "3016013/3016013.1,301601301/301601301.1,keersuna/keersuna.13",
         "customface": ""
     },
     "卡萝琳": {
-        "id": "CharID_77",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016011_2,kaluolin",
+        "head": "3016011,243016011,kaluolin",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1916,14 +1811,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "kaluolin"
         },
-        "charface": "CharID_77/kaluolin/kaluolin.11",
+        "charface": "3016011/3016011.1,243016011/243016011.1,kaluolin/kaluolin.11",
         "customface": ""
     },
     "吉拉蒂亚": {
-        "id": "CharID_78",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016009_2,head_301600903_2,jiladiya,jiladiya2,jiladiya_SHMY",
+        "head": "3016009,301600901,301600903,jiladiya,jiladiya2,jiladiya_SHMY",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1932,14 +1826,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "jiladiya"
         },
-        "charface": "CharID_78/jiladiya/jiladiya.15,CharID_78/jiladiya2/jiladiya2.15,CharID_78/jiladiya_SHMY/jiladiya_SHMY.14",
+        "charface": "3016009/3016009.1,301600901/301600901.1,301600903/301600903.1,jiladiya/jiladiya.15,jiladiya2/jiladiya2.15,jiladiya_SHMY/jiladiya_SHMY.14",
         "customface": ""
     },
     "哀歌": {
-        "id": "CharID_79",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "aige,head_3013015_2",
+        "head": "3013015,aige",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1948,14 +1841,28 @@ var mt_characters = {
             "kr": "",
             "pinyin": "aige"
         },
-        "charface": "CharID_79/aige/aige.9",
+        "charface": "3013015/3013015.1,aige/aige.9",
+        "customface": ""
+    },
+    "塔嘉娜": {
+        "school": "你的后宫",
+        "club": "星痕",
+        "head": "3016189,tajiana",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "tajiana"
+        },
+        "charface": "3016189/3016189.1,tajiana/tajiana.12",
         "customface": ""
     },
     "塞蕾丝蒂娜": {
-        "id": "CharID_80",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016024_2,head_301602401_2,saileisidina,saileisidina_YDZB",
+        "head": "3016024,213016024,301602401,saileisidina,saileisidina_YDZB",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1964,14 +1871,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "saileisidina"
         },
-        "charface": "CharID_80/saileisidina/saileisidina.17,CharID_80/saileisidina_YDZB/saileisidina_YDZB.14",
+        "charface": "3016024/3016024.1,213016024/213016024.1,301602401/301602401.1,saileisidina/saileisidina.17,saileisidina_YDZB/saileisidina_YDZB.13",
         "customface": ""
     },
     "多萝西": {
-        "id": "CharID_81",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3013025_2",
+        "head": "3013025",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1980,14 +1886,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "duoluoxi"
         },
-        "charface": "",
+        "charface": "3013025/3013025.1",
         "customface": ""
     },
     "奈奈芙": {
-        "id": "CharID_82",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3013009_2,nainaifu",
+        "head": "3013009,nainaifu",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -1996,14 +1901,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "nainaifu"
         },
-        "charface": "CharID_82/nainaifu/nainaifu.18",
+        "charface": "3013009/3013009.1,nainaifu/nainaifu.18",
         "customface": ""
     },
     "奈奥米": {
-        "id": "CharID_83",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016020_2,naiaomi",
+        "head": "3016020,naiaomi",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2012,14 +1916,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "naiaomi"
         },
-        "charface": "CharID_83/naiaomi/naiaomi.20",
+        "charface": "3016020/3016020.1,301500401/301500401.1,naiaomi/naiaomi.20",
         "customface": ""
     },
     "安娜": {
-        "id": "CharID_84",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "aluweier,head_3014030_2,head_301403001_2,shaonvanna",
+        "head": "3014030,301403001,aluweier,shaonvanna",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2028,14 +1931,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "anna"
         },
-        "charface": "CharID_84/aluweier/aluweier.16,CharID_84/shaonvanna/shaonvanna.12",
+        "charface": "3014030/3014030.1,301403001/301403001.1,aluweier/aluweier.16,shaonvanna/shaonvanna.12",
         "customface": ""
     },
     "安普莎": {
-        "id": "CharID_85",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "anpusha,head_3014025_2,head_301402501_2",
+        "head": "3014025,301402501,301402502,anpusha",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2044,14 +1946,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "anpusha"
         },
-        "charface": "CharID_85/anpusha/anpusha.10",
+        "charface": "3014025/3014025.1,301402501/301402501.1,301402502/301402502.1,anpusha/anpusha.12",
         "customface": ""
     },
     "小闪": {
-        "id": "CharID_86",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016031_2,xiaoshan",
+        "head": "3016031,xiaoshan",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2060,14 +1961,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "xiaoshan"
         },
-        "charface": "CharID_86/xiaoshan/xiaoshan.9",
+        "charface": "3016031/3016031.1,xiaoshan/xiaoshan.9",
         "customface": ""
     },
     "希夕莉": {
-        "id": "CharID_87",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3015006_2,xixili",
+        "head": "3015006,301500601,xixili",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2076,14 +1976,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "xixili"
         },
-        "charface": "CharID_87/xixili/xixili.9",
+        "charface": "3015006/3015006.1,301500601/301500601.1,xixili/xixili.9",
         "customface": ""
     },
     "希尔芙": {
-        "id": "CharID_181",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3011002_2,xierfu",
+        "head": "3011002,xierfu",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2092,14 +1991,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "xierfu"
         },
-        "charface": "CharID_181/xierfu/xierfu.1",
+        "charface": "3011002/3011002.1,xierfu/xierfu.1",
         "customface": ""
     },
     "库萝心": {
-        "id": "CharID_88",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3013019_2,kuluoxin",
+        "head": "3013019,kuluoxin",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2108,14 +2006,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "kuluoxin"
         },
-        "charface": "CharID_88/kuluoxin/kuluoxin.10",
+        "charface": "3013019/3013019.1,kuluoxin/kuluoxin.10",
         "customface": ""
     },
     "库萝爱": {
-        "id": "CharID_89",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014026_2,kuluoai",
+        "head": "3014026,kuluoai",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2124,14 +2021,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "kuluoai"
         },
-        "charface": "CharID_89/kuluoai/kuluoai.9",
+        "charface": "3014026/3014026.1,kuluoai/kuluoai.9",
         "customface": ""
     },
     "异邦波斯菊": {
-        "id": "CharID_90",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016187_2",
+        "head": "3016187",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2140,14 +2036,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "yibangbosiju"
         },
-        "charface": "CharID_102/dabosiju/dabosiju.18,CharID_102/xiaobosiju/xiaobosiju.14",
+        "charface": "3016187/3016187.1,dabosiju/dabosiju.18,xiaobosiju/xiaobosiju.14",
         "customface": ""
     },
     "弥生": {
-        "id": "CharID_91",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014005_2,misheng",
+        "head": "3014005,misheng",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2156,11 +2051,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "misheng"
         },
-        "charface": "CharID_91/misheng/misheng.9",
+        "charface": "3014005/3014005.1,misheng/misheng.9",
         "customface": ""
     },
     "念": {
-        "id": "CharID_182",
         "school": "你的后宫",
         "club": "星痕",
         "head": "nian",
@@ -2172,14 +2066,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "nian"
         },
-        "charface": "CharID_182/nian/nian.1",
+        "charface": "nian/nian.1",
         "customface": ""
     },
     "恋花": {
-        "id": "CharID_92",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014006_2,lianhua",
+        "head": "3014006,lianhua",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2188,14 +2081,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "lianhua"
         },
-        "charface": "CharID_92/lianhua/lianhua.16",
+        "charface": "3014006/3014006.1,lianhua/lianhua.16",
         "customface": ""
     },
     "昔莱": {
-        "id": "CharID_93",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016078_2,xilai",
+        "head": "3016078,xilai",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2204,14 +2096,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "xilai"
         },
-        "charface": "CharID_93/xilai/xilai.17",
+        "charface": "3016078/3016078.1,xilai/xilai.17",
         "customface": ""
     },
     "普琳普顿": {
-        "id": "CharID_94",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014001_2,pulinpudun",
+        "head": "3014001,pulinpudun",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2220,14 +2111,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "pulinpudun"
         },
-        "charface": "CharID_94/pulinpudun/pulinpudun.9",
+        "charface": "3014001/3014001.1,pulinpudun/pulinpudun.9",
         "customface": ""
     },
     "未来": {
-        "id": "CharID_95",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014012_2",
+        "head": "3014012,weilai",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2236,14 +2126,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "weilai"
         },
-        "charface": "",
+        "charface": "3014012/3014012.1",
         "customface": ""
     },
     "杏林": {
-        "id": "CharID_96",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014016_2",
+        "head": "3014016",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2252,14 +2141,28 @@ var mt_characters = {
             "kr": "",
             "pinyin": "xinglin"
         },
-        "charface": "",
+        "charface": "3014016/3014016.1",
+        "customface": ""
+    },
+    "杜达戴维": {
+        "school": "你的后宫",
+        "club": "星痕",
+        "head": "3016119,dudadaiwei",
+        "name": {
+            "zh_cn": "杜达",
+            "zh_tw": "杜達",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "dudadaiwei"
+        },
+        "charface": "3016119/3016119.1,dudadaiwei/dudadaiwei.12",
         "customface": ""
     },
     "极焰": {
-        "id": "CharID_97",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016188_2,head_301618801_2,jiyan,jiyan_CLHQ",
+        "head": "3016188,223016188,301618801,jiyan,jiyan_CLHQ",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2268,14 +2171,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "jiyan"
         },
-        "charface": "CharID_97/jiyan/jiyan.16,CharID_97/jiyan_CLHQ/jiyan_CLHQ.16",
+        "charface": "3016188/3016188.1,223016188/223016188.1,301618801/301618801.1,jiyan/jiyan.16,jiyan_CLHQ/jiyan_CLHQ.16",
         "customface": ""
     },
     "格蕾": {
-        "id": "CharID_98",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3013001_2",
+        "head": "3013001,gelei",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2284,14 +2186,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "gelei"
         },
-        "charface": "",
+        "charface": "3013001/3013001.1",
         "customface": ""
     },
     "桃": {
-        "id": "CharID_99",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014009_2,head_113014009_2,heihuatao,tao,taoshouxingtai",
+        "head": "3014009,113014009,301400901,heihuatao,shaonvtao,tao,taoshouxingtai,tao_SFDQC",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2300,14 +2201,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "tao"
         },
-        "charface": "CharID_99/heihuatao/heihuatao.2,CharID_99/tao/tao.12,CharID_99/taoshouxingtai/taoshouxingtai.1",
+        "charface": "3014009/3014009.1,113014009/113014009.1,301400901/301400901.1,heihuatao/heihuatao.2,shaonvtao/shaonvtao.1,tao/tao.12,taoshouxingtai/taoshouxingtai.1,tao_SFDQC/tao_SFDQC.12",
         "customface": ""
     },
     "梅露特": {
-        "id": "CharID_100",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3013008_2",
+        "head": "3013008",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2316,11 +2216,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "meilute"
         },
-        "charface": "",
+        "charface": "3013008/3013008.1",
         "customface": ""
     },
     "梨多": {
-        "id": "CharID_183",
         "school": "你的后宫",
         "club": "星痕",
         "head": "liduo",
@@ -2332,14 +2231,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "liduo"
         },
-        "charface": "CharID_183/liduo/liduo.17",
+        "charface": "liduo/liduo.17",
         "customface": ""
     },
     "水仙": {
-        "id": "CharID_101",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3013006_2,shuixian",
+        "head": "3013006,shuixian",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2348,14 +2246,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "shuixian"
         },
-        "charface": "CharID_101/shuixian/shuixian.9",
+        "charface": "3013006/3013006.1,shuixian/shuixian.9",
         "customface": ""
     },
     "波斯菊": {
-        "id": "CharID_102",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "dabosiju,head_3013017_2,xiaobosiju",
+        "head": "3013017,dabosiju,xiaobosiju",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2364,14 +2261,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "bosiju"
         },
-        "charface": "CharID_102/dabosiju/dabosiju.18,CharID_102/xiaobosiju/xiaobosiju.14",
+        "charface": "3013017/3013017.1,dabosiju/dabosiju.18,xiaobosiju/xiaobosiju.14",
         "customface": ""
     },
     "炽爱": {
-        "id": "CharID_103",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "chiai,head_3013004_2,head_301300401_2",
+        "head": "3013004,301300401,chiai",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2380,14 +2276,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "chiai"
         },
-        "charface": "CharID_103/chiai/chiai.8",
+        "charface": "3013004/3013004.1,301300401/301300401.1,chiai/chiai.8",
         "customface": ""
     },
     "焰心": {
-        "id": "CharID_104",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014003_2",
+        "head": "3014003",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2396,14 +2291,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "yanxin"
         },
-        "charface": "",
+        "charface": "3014003/3014003.1",
         "customface": ""
     },
     "牧": {
-        "id": "CharID_106",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3015008_2,head_301500801_2,mu,mudeheiying,mu_DXQMY",
+        "head": "3015008,301500801,mu,mudeheiying,mu_DXQMY",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2412,11 +2306,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "mu"
         },
-        "charface": "CharID_106/mu/mu.36,CharID_106/mudeheiying/mudeheiying.1,CharID_106/mu_DXQMY/mu_DXQMY.32",
+        "charface": "3015008/3015008.1,301500801/301500801.1,mu/mu.37,mudeheiying/mudeheiying.1,mu_DXQMY/mu_DXQMY.32",
         "customface": ""
     },
     "狄安娜": {
-        "id": "CharID_184",
         "school": "你的后宫",
         "club": "星痕",
         "head": "dianna",
@@ -2428,14 +2321,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "dianna"
         },
-        "charface": "CharID_184/dianna/dianna.2",
+        "charface": "dianna/dianna.2",
         "customface": ""
     },
     "玛瑙": {
-        "id": "CharID_107",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3013014_2",
+        "head": "3013014",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2444,14 +2336,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "manao"
         },
-        "charface": "",
+        "charface": "3013014/3013014.1",
         "customface": ""
     },
     "瑞比娅": {
-        "id": "CharID_108",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016010_2,ruibiya,ruibiya2",
+        "head": "3016010,233016010,ruibiya,ruibiya2",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2460,14 +2351,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "ruibiya"
         },
-        "charface": "CharID_108/ruibiya/ruibiya.16,CharID_108/ruibiya2/ruibiya2.19",
+        "charface": "3016010/3016010.1,233016010/233016010.1,ruibiya/ruibiya.16,ruibiya2/ruibiya2.19",
         "customface": ""
     },
     "神光": {
-        "id": "CharID_109",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014023_2,shenguang",
+        "head": "3014023,shenguang",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2476,14 +2366,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "shenguang"
         },
-        "charface": "CharID_109/shenguang/shenguang.7",
+        "charface": "3014023/3014023.1,shenguang/shenguang.7",
         "customface": ""
     },
     "索菲": {
-        "id": "CharID_110",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014004_2",
+        "head": "3014004",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2492,14 +2381,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "suofei"
         },
-        "charface": "",
+        "charface": "3014004/3014004.1",
         "customface": ""
     },
     "纳菲": {
-        "id": "CharID_111",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014021_2,head_123014021_2,head_301402101_2,nafei",
+        "head": "3014021,123014021,301402101,nafei",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2508,14 +2396,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "nafei"
         },
-        "charface": "CharID_111/nafei/nafei.11",
+        "charface": "3014021/3014021.1,123014021/123014021.1,301402101/301402101.1,nafei/nafei.11",
         "customface": ""
     },
     "维达": {
-        "id": "CharID_112",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3013020_2",
+        "head": "3013020",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2524,14 +2411,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "weida"
         },
-        "charface": "",
+        "charface": "3013020/3013020.1",
         "customface": ""
     },
     "罗莎莉": {
-        "id": "CharID_113",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016017_2,luoshali",
+        "head": "3016017,luoshali",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2540,14 +2426,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "luoshali"
         },
-        "charface": "CharID_113/luoshali/luoshali.9",
+        "charface": "3016017/3016017.1,luoshali/luoshali.9",
         "customface": ""
     },
     "耶坦尼娅": {
-        "id": "CharID_114",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3015004_2,head_301500401_2,head_301500402_2,yetanniya,yetanniya_ZDYS",
+        "head": "3015004,301500401,301500402,yetanniya,yetanniya_ZDYS",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2556,14 +2441,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "yetanniya"
         },
-        "charface": "CharID_114/yetanniya/yetanniya.16,CharID_114/yetanniya_ZDYS/yetanniya_ZDYS.14",
+        "charface": "3015004/3015004.1,301500402/301500402.1,yetanniya/yetanniya.15,yetanniya_ZDYS/yetanniya_ZDYS.14",
         "customface": ""
     },
     "艾什尔": {
-        "id": "CharID_115",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "aishier,head_3014019_2",
+        "head": "3014019,aishier",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2572,14 +2456,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "aishener"
         },
-        "charface": "CharID_115/aishier/aishier.8",
+        "charface": "3014019/3014019.1,aishier/aishier.8",
         "customface": ""
     },
     "艾斯塔利亚": {
-        "id": "CharID_116",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "aisitaliya,head_3014011_2",
+        "head": "3014011,aisitaliya",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2588,14 +2471,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "aisitaliya"
         },
-        "charface": "CharID_116/aisitaliya/aisitaliya.20",
+        "charface": "3014011/3014011.1,aisitaliya/aisitaliya.20",
         "customface": ""
     },
     "艾琳": {
-        "id": "CharID_185",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "ailin,head_3013018_2",
+        "head": "3013018,ailin",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2604,14 +2486,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "ailin"
         },
-        "charface": "CharID_185/ailin/ailin.6",
+        "charface": "3013018/3013018.1,ailin/ailin.6",
         "customface": ""
     },
     "艾琳娜": {
-        "id": "CharID_117",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "ailinna,head_3016049_2,shaonvailinna",
+        "head": "3016049,ailinna,shaonvailinna",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2620,14 +2501,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "ailinna"
         },
-        "charface": "CharID_117/ailinna/ailinna.16,CharID_117/shaonvailinna/shaonvailinna.7",
+        "charface": "3016049/3016049.1,ailinna/ailinna.16,shaonvailinna/shaonvailinna.7",
         "customface": ""
     },
     "芙洛拉": {
-        "id": "CharID_118",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "fuluola,head_3013023_2",
+        "head": "3013023,fuluola",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2636,14 +2516,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "fuluola"
         },
-        "charface": "CharID_118/fuluola/fuluola.10",
+        "charface": "3013023/3013023.1,fuluola/fuluola.10",
         "customface": ""
     },
     "花梨": {
-        "id": "CharID_119",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014017_2,huali",
+        "head": "3014017,huali",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2652,14 +2531,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "huali"
         },
-        "charface": "CharID_119/huali/huali.24",
+        "charface": "3014017/3014017.1,huali/huali.24",
         "customface": ""
     },
     "莱拉": {
-        "id": "CharID_120",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3013022_2",
+        "head": "3013022,laila",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2668,14 +2546,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "laila"
         },
-        "charface": "",
+        "charface": "3013022/3013022.1",
         "customface": ""
     },
     "菲尔盖娜": {
-        "id": "CharID_121",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "feiergaina,head_3013013_2",
+        "head": "3013013,feiergaina",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2684,14 +2561,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "feiergaina"
         },
-        "charface": "CharID_121/feiergaina/feiergaina.14",
+        "charface": "3013013/3013013.1,feiergaina/feiergaina.14",
         "customface": ""
     },
     "菲莉希亚": {
-        "id": "CharID_122",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3013007_2",
+        "head": "3013007,feilixiya",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2700,14 +2576,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "feilixiya"
         },
-        "charface": "",
+        "charface": "3013007/3013007.1",
         "customface": ""
     },
     "萨拉": {
-        "id": "CharID_123",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3015007_2,sala",
+        "head": "3015007,sala",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2716,14 +2591,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "sala"
         },
-        "charface": "CharID_123/sala/sala.8",
+        "charface": "3015007/3015007.1,sala/sala.8",
         "customface": ""
     },
     "诗娅": {
-        "id": "CharID_124",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014018_2",
+        "head": "3014018",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2732,14 +2606,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "shiya"
         },
-        "charface": "",
+        "charface": "3014018/3014018.1",
         "customface": ""
     },
     "诺姆": {
-        "id": "CharID_186",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3011001_2",
+        "head": "3011001",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2748,14 +2621,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "nuomu"
         },
-        "charface": "",
+        "charface": "3011001/3011001.1",
         "customface": ""
     },
     "诺维雅": {
-        "id": "CharID_125",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3015001_2,nuoweiya",
+        "head": "3015001,nuoweiya",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2764,14 +2636,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "nuoweiya"
         },
-        "charface": "CharID_125/nuoweiya/nuoweiya.15",
+        "charface": "3015001/3015001.1,nuoweiya/nuoweiya.15",
         "customface": ""
     },
     "贝儿": {
-        "id": "CharID_126",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "beier,head_3014029_2",
+        "head": "3014029,beier",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2780,14 +2651,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "beier"
         },
-        "charface": "CharID_126/beier/beier.6",
+        "charface": "3014029/3014029.1,beier/beier.6",
         "customface": ""
     },
     "贝卡丝": {
-        "id": "CharID_127",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "beikasi,head_3016068_2,xiaobeikasi",
+        "head": "3016068,301606801,beikasi,xiaobeikasi",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2796,14 +2666,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "beikasi"
         },
-        "charface": "CharID_127/beikasi/beikasi.15,CharID_127/xiaobeikasi/xiaobeikasi.15",
+        "charface": "3016068/3016068.1,301606801/301606801.1,beikasi/beikasi.15,xiaobeikasi/xiaobeikasi.15",
         "customface": ""
     },
     "贝拉": {
-        "id": "CharID_128",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "beila,head_3014027_2",
+        "head": "3014027,beila",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2812,14 +2681,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "beila"
         },
-        "charface": "CharID_128/beila/beila.9",
+        "charface": "3014027/3014027.1,beila/beila.9",
         "customface": ""
     },
     "阿波菲斯": {
-        "id": "CharID_129",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "abofeisi,head_3014020_2",
+        "head": "3014020,abofeisi",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2828,14 +2696,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "abofeisi"
         },
-        "charface": "CharID_129/abofeisi/abofeisi.9",
+        "charface": "3014020/3014020.1,abofeisi/abofeisi.9",
         "customface": ""
     },
     "阿涅克丝": {
-        "id": "CharID_130",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "aniekesi,head_3013003_2",
+        "head": "3013003,aniekesi",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2844,14 +2711,43 @@ var mt_characters = {
             "kr": "",
             "pinyin": "aniekesi"
         },
-        "charface": "CharID_130/aniekesi/aniekesi.9",
+        "charface": "3013003/3013003.1,aniekesi/aniekesi.9",
+        "customface": ""
+    },
+    "雪不归": {
+        "school": "你的后宫",
+        "club": "星痕",
+        "head": "3017002,301700201,xuebugui",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "xuebugui"
+        },
+        "charface": "3017002/3017002.1,301700201/301700201.1,xuebugui/xuebugui.7",
+        "customface": ""
+    },
+    "雪泉": {
+        "school": "你的后宫",
+        "club": "星痕",
+        "head": "3017001,301700101,xuequan",
+        "name": {
+            "zh_cn": "",
+            "zh_tw": "",
+            "jp": "",
+            "en": "",
+            "kr": "",
+            "pinyin": "xuequan"
+        },
+        "charface": "3017001/3017001.1,301700101/301700101.1,xuequan/xuequan.7",
         "customface": ""
     },
     "雷雷": {
-        "id": "CharID_131",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3014024_2,leilei",
+        "head": "3014024,301402401,leilei",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2860,14 +2756,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "leilei"
         },
-        "charface": "CharID_131/leilei/leilei.10",
+        "charface": "3014024/3014024.1,301402401/301402401.1,leilei/leilei.10",
         "customface": ""
     },
     "露易丝": {
-        "id": "CharID_132",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "head_3016016_2,luyisi",
+        "head": "3016016,luyisi",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2876,14 +2771,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "luyisi"
         },
-        "charface": "CharID_132/luyisi/luyisi.14",
+        "charface": "3016016/3016016.1,luyisi/luyisi.14",
         "customface": ""
     },
     "黛比": {
-        "id": "CharID_133",
         "school": "你的后宫",
         "club": "星痕",
-        "head": "daibi,head_3014002_2",
+        "head": "3014002,daibi",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2892,14 +2786,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "daibi"
         },
-        "charface": "CharID_133/daibi/daibi.19",
+        "charface": "3014002/3014002.1,daibi/daibi.19",
         "customface": ""
     },
     "克萝萝": {
-        "id": "CharID_134",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
-        "head": "head_3000002_2,keluoluo",
+        "head": "3000002,keluoluo",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2908,11 +2801,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "keluoluo"
         },
-        "charface": "CharID_134/keluoluo/keluoluo.15",
+        "charface": "3000002/3000002.1,keluoluo/keluoluo.15",
         "customface": ""
     },
     "克蕾儿": {
-        "id": "CharID_187",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "keleier",
@@ -2924,11 +2816,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "keleier"
         },
-        "charface": "CharID_187/keleier/keleier.6",
+        "charface": "keleier/keleier.6",
         "customface": ""
     },
     "凯尔丝": {
-        "id": "CharID_188",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "kaiersi",
@@ -2940,11 +2831,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "kaiersi"
         },
-        "charface": "CharID_188/kaiersi/kaiersi.3",
+        "charface": "kaiersi/kaiersi.3",
         "customface": ""
     },
     "土地神": {
-        "id": "CharID_189",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "tudishen",
@@ -2956,14 +2846,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "tudishen"
         },
-        "charface": "CharID_189/tudishen/tudishen.1",
+        "charface": "tudishen/tudishen.1",
         "customface": ""
     },
     "安洁": {
-        "id": "CharID_135",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
-        "head": "anjie,head_3000004_2,xiaoanjie",
+        "head": "3000004,anjie,xiaoanjie",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -2972,11 +2861,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "anjie"
         },
-        "charface": "CharID_135/anjie/anjie.15,CharID_135/xiaoanjie/xiaoanjie.3",
+        "charface": "3000004/3000004.1,anjie/anjie.15,xiaoanjie/xiaoanjie.3",
         "customface": ""
     },
     "廿穗": {
-        "id": "CharID_190",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "nianshoudeshanmian",
@@ -2988,14 +2876,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "niansui"
         },
-        "charface": "CharID_190/nianshoudeshanmian/nianshoudeshanmian.1",
+        "charface": "nianshoudeshanmian/nianshoudeshanmian.1",
         "customface": ""
     },
     "律": {
-        "id": "CharID_136",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
-        "head": "head_3000001_2,lv",
+        "head": "3000001,effect_recruit_choukacg,lv",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -3004,11 +2891,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "lv"
         },
-        "charface": "CharID_136/lv/lv.32",
+        "charface": "3000001/3000001.1,effect_recruit_choukacg/effect_recruit_choukacg.2,lv/lv.32",
         "customface": ""
     },
     "杰西斯": {
-        "id": "CharID_191",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "jiexisi",
@@ -3020,11 +2906,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "jiexisi"
         },
-        "charface": "CharID_191/jiexisi/jiexisi.5",
+        "charface": "jiexisi/jiexisi.5",
         "customface": ""
     },
     "灵昭": {
-        "id": "CharID_192",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "xiaolingzhao",
@@ -3036,14 +2921,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "lingzhao"
         },
-        "charface": "CharID_192/xiaolingzhao/xiaolingzhao.1",
+        "charface": "xiaolingzhao/xiaolingzhao.1",
         "customface": ""
     },
     "玛莎": {
-        "id": "CharID_193",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
-        "head": "masha",
+        "head": "3000006,masha,masha2",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -3052,14 +2936,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "masha"
         },
-        "charface": "CharID_193/masha/masha.13",
+        "charface": "3000006/3000006.1,masha/masha.23,masha2/masha2.18",
         "customface": ""
     },
     "米娅": {
-        "id": "CharID_137",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
-        "head": "head_3000005_2,miya,tanlan,xiaomiya",
+        "head": "3000005,miya,tanlan,xiaomiya",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -3068,14 +2951,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "miya"
         },
-        "charface": "CharID_137/miya/miya.14,CharID_137/tanlan/tanlan.25,CharID_137/xiaomiya/xiaomiya.3",
+        "charface": "3000005/3000005.1,miya/miya.11,tanlan/tanlan.25,xiaomiya/xiaomiya.3",
         "customface": ""
     },
     "莉莉娅": {
-        "id": "CharID_194",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
-        "head": "liliya,liliya2",
+        "head": "3000000,liliya,liliya2",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -3084,11 +2966,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "liliya"
         },
-        "charface": "CharID_194/liliya/liliya.4,CharID_194/liliya2/liliya2.23",
+        "charface": "3000000/3000000.1,liliya/liliya.4,liliya2/liliya2.23",
         "customface": ""
     },
     "阿洛瑞斯": {
-        "id": "CharID_195",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "aluoruisi",
@@ -3100,11 +2981,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "aluoruisi"
         },
-        "charface": "CharID_195/aluoruisi/aluoruisi.3",
+        "charface": "aluoruisi/aluoruisi.3",
         "customface": ""
     },
     "阿莎": {
-        "id": "CharID_196",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "asha",
@@ -3116,11 +2996,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "asha"
         },
-        "charface": "CharID_196/asha/asha.1",
+        "charface": "asha/asha.1",
         "customface": ""
     },
     "露西": {
-        "id": "CharID_197",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "luxi",
@@ -3132,11 +3011,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "luxi"
         },
-        "charface": "CharID_197/luxi/luxi.4",
+        "charface": "luxi/luxi.18",
         "customface": ""
     },
     "飞玉": {
-        "id": "CharID_198",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "feiyu",
@@ -3148,11 +3026,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "feiyu"
         },
-        "charface": "CharID_198/feiyu/feiyu.8",
+        "charface": "feiyu/feiyu.8",
         "customface": ""
     },
     "马恩": {
-        "id": "CharID_199",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "maen",
@@ -3164,11 +3041,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "maen"
         },
-        "charface": "CharID_199/maen/maen.1",
+        "charface": "maen/maen.1",
         "customface": ""
     },
     "黑神伊娜": {
-        "id": "CharID_200",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "heishenyina",
@@ -3180,14 +3056,13 @@ var mt_characters = {
             "kr": "",
             "pinyin": "heishenyina"
         },
-        "charface": "CharID_200/heishenyina/heishenyina.5",
+        "charface": "heishenyina/heishenyina.5",
         "customface": ""
     },
     "黑神月咏": {
-        "id": "CharID_138",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
-        "head": "head_3000003_2,heishenhefu,heishenjuexing,heishenyueyong,heishen_xiaonvwu,xiaoheishen",
+        "head": "3000003,heishenhefu,heishenjuexing,heishenyueyong,heishen_xiaonvwu,xiaoheishen",
         "name": {
             "zh_cn": "",
             "zh_tw": "",
@@ -3196,11 +3071,10 @@ var mt_characters = {
             "kr": "",
             "pinyin": "heishenyueyong"
         },
-        "charface": "CharID_138/heishenhefu/heishenhefu.10,CharID_138/heishenjuexing/heishenjuexing.3,CharID_138/heishenyueyong/heishenyueyong.17,CharID_138/heishen_xiaonvwu/heishen_xiaonvwu.13,CharID_138/xiaoheishen/xiaoheishen.1",
+        "charface": "3000003/3000003.1,heishenhefu/heishenhefu.10,heishenjuexing/heishenjuexing.3,heishenyueyong/heishenyueyong.17,heishen_xiaonvwu/heishen_xiaonvwu.13,xiaoheishen/xiaoheishen.1",
         "customface": ""
     },
     "黑神紫音": {
-        "id": "CharID_201",
         "school": "你的后宫",
         "club": "魔女及剧情角色",
         "head": "heishenziyin",
@@ -3212,7 +3086,7 @@ var mt_characters = {
             "kr": "",
             "pinyin": "heishenziyin"
         },
-        "charface": "CharID_201/heishenziyin/heishenziyin.1",
+        "charface": "heishenziyin/heishenziyin.1",
         "customface": ""
     }
 }

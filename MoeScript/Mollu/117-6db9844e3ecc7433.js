@@ -115,8 +115,8 @@
 						{
 							var e;
 							null == u || null === (e = u.current) || void 0 === e || e.resetAfterIndex(t)
-						}, 0), r === t ? 2 * a : a
-					}))
+						}, 0), r === t ? a+$$('.gskNYI:eq(0)').outerHeight() : a
+					}))//#单行改为多行头像
 				}, [r, t, u, a, h]);
 				var p = function(e)
 				{
@@ -847,7 +847,7 @@
 				{
 					displayName: "talk__TextBox",
 					componentId: "sc-eq7cqw-4"
-				})(["user-select:text;position:relative;color:white;width:fit-content;border-radius:10px;background:", ";border:1px solid ", ";white-space:pre-wrap;overflow-wrap:break-word;word-break:break-all;word-wrap:break-all;line-break:loose;padding:0.6rem;line-height:1.42;::after{content:'';position:absolute;left:-0.5rem;top:0.6rem;border-top:0.3rem solid transparent;border-right:0.5rem solid ", ";border-bottom:0.3rem solid transparent;}"], function(e)
+				})(["user-select:text;position:relative;color:white;width:fit-content;border-radius:10px;background:", ";border:1px solid ", ";white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word;word-wrap:break-word;line-break:loose;padding:0.6rem;line-height:1.42;::after{content:'';position:absolute;left:-0.5rem;top:0.6rem;border-top:0.3rem solid transparent;border-right:0.5rem solid ", ";border-bottom:0.3rem solid transparent;}"], function(e)
 				{//#文字样式
 					return e.theme.color.rgb76_91_111
 				}, function(e)
@@ -885,7 +885,7 @@
 				{
 					displayName: "talk__InfoBox",
 					componentId: "sc-eq7cqw-8"
-				})(["user-select:text;position:relative;color:", ";width:100%;border-radius:10px;background:", ";text-align:center;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-all;word-wrap:break-all;line-break:loose;padding:0.2rem 1rem;line-height:1.42;"], function(e)
+				})(["user-select:text;position:relative;color:", ";width:100%;border-radius:10px;background:", ";text-align:center;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word;word-wrap:break-word;line-break:loose;padding:0.2rem 1rem;line-height:1.42;"], function(e)
 				{//#
 					return e.theme.color.rgb69_78_89
 				}, function(e)

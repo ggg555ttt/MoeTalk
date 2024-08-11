@@ -8,7 +8,7 @@
 }
 #ccus
 {
-	word-break:break-all;
+	word-break:break-word;
 }
 #cusname
 {
@@ -426,7 +426,7 @@ align-self: stretch;
 }
 .名称 {
 	line-height: 1.8rem; 
-	word-break: break-all;
+	word-break: break-word;
 }
 .文本 {
     user-select: text;
@@ -438,7 +438,7 @@ align-self: stretch;
     border: 1px solid rgb(76, 91, 111);
     white-space: pre-wrap;
     overflow-wrap: break-word;
-    word-break: break-all;
+    word-break: break-word;
     line-break: loose;
     padding: 0.6rem;
     line-height: 1.42;
@@ -522,7 +522,7 @@ align-self: stretch;
     width: 100%;
     line-height: 141%;
     cursor: pointer;
-    word-break: break-all;
+    word-break: break-word;
 }
 .回复
 {
@@ -569,7 +569,7 @@ align-self: stretch;
     background-color: white;
     cursor: pointer;
     overflow: hidden;
-    word-break: break-all;
+    word-break: break-word;
     overflow-wrap: break-word;
     white-space: pre-wrap;
     line-break: loose;
@@ -597,7 +597,7 @@ align-self: stretch;
     text-align: center;
     white-space: pre-wrap;
     overflow-wrap: break-word;
-    word-break: break-all;
+    word-break: break-word;
     line-break: loose;
     padding: 0.2rem 1rem;
     line-height: 1.42;
@@ -605,7 +605,6 @@ align-self: stretch;
 }
 #mt_watermark
 {
-	background-color:rgb(139, 187, 233);
 	display:flex;
 	width:100%;
 	font-size:1rem;

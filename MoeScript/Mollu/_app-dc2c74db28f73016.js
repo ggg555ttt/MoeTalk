@@ -10048,7 +10048,7 @@
 						})
 					}, function(e)
 					{
-						return e.theme.color.rgb139_187_233
+						return mt_settings['标题颜色'] ? mt_settings['标题颜色'] : e.theme.color.rgb139_187_233
 					}),
 					P = h.ZP.div.withConfig(
 					{

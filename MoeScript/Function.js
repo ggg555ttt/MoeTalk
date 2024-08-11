@@ -1,9 +1,3 @@
-var href = window.location.href.split(window.location.host)[1].split('?')[0]//文件目录地址
-if(window.location.href.indexOf('file:///') === 0)
-{
-	href = window.location.href.replace('index.html','')
-	if(window.navigator.userAgent.match('Html5Plus'))Html5Plus = 'mmt.MoeTalk.WumberBee'
-}
 //解决低版本浏览器不支持replaceAll
 (function()
 {
@@ -118,7 +112,7 @@ if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选
 	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
 
 }
-
+mt_settings['右侧发言'] = mt_settings['右侧发言'] ? mt_settings['右侧发言'] : {}
 if(browser.isFirefox)mt_settings['禁止字体'] = true
 var mtlang = mt_settings['语言选项'];
 var langarr = ['zh_cn','zh_tw','jp','en','kr'];
@@ -164,7 +158,7 @@ function loadhead(id,img)
 	if(mt_characters[id])
 	{
 		mt_characters[id].head.split(',').indexOf(img) < 0 ? img = mt_characters[id].head.split(',')[0] : ''
-		return `${href}Images/${mt_settings['选择游戏']}/Char/${mt_characters[id].id}/${img}.webp`;
+		return `${href}Images/${mt_settings['选择游戏']}/Char/${img}.webp`;
 	}
 	//自定义头像
 	if(mt_head[img])
@@ -761,7 +755,7 @@ function MoeToClosure()//Moe转Closure
 		let img = v['sCharacter']['index'];
 		let data = 'MT-';
 		if(id_map[0][id])data = "ba-"
-		if(!mt_char[id] && !mt_schar[id] && id != 0)//正常角色
+		if(!mt_char[id] && !mt_schar[id] && id != 0 && mt_characters[id])//正常角色
 		{
 			ct[k]['char_id'] = data+id;
 			ct[k]['img'] = img;
@@ -772,7 +766,7 @@ function MoeToClosure()//Moe转Closure
 				ct[k]['img'] = 'uploaded';
 
 				custom_chars[ct[k]['char_id']] = {}
-				custom_chars[ct[k]['char_id']]['img'] = `${moeurl}Images/Char/${mt_settings['选择游戏']}/${mt_characters[id].id}/${img}.webp`
+				custom_chars[ct[k]['char_id']]['img'] = `${moeurl}Images/${mt_settings['选择游戏']}/Char/${img}.webp`
 				custom_chars[ct[k]['char_id']]['name'] = loadname(id);
 			}
 		}
@@ -840,7 +834,7 @@ function MoeToClosure()//Moe转Closure
 				closuretalk['chars'][k]['img'] = 'uploaded';
 
 				custom_chars[closuretalk['chars'][k]['char_id']] = {}
-				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${moeurl}Images/Char/${mt_settings['选择游戏']}/${mt_characters[id].id}/${img}.webp`
+				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${moeurl}Images/${mt_settings['选择游戏']}/Char/${img}.webp`
 				custom_chars[closuretalk['chars'][k]['char_id']]['name'] = loadname(id);
 			}
 		}
@@ -1008,14 +1002,7 @@ function mt_emojis(S,mode)
 
 			if(差分书签[id].type === 'charface')
 			{//原版差分
-				if(表情类型 === mt_characters[id].id)
-				{
-					表情类型 = `${name}(${maxNum}补充)`
-				}
-				else
-				{
-					表情类型 = `${name}(${maxNum})`
-				}
+				表情类型 = `${name}(${maxNum})`
 			}
 			else
 			{//拓展差分
@@ -1080,7 +1067,7 @@ function mt_emojis(S,mode)
 		if(pageIdnex == 0)maxNum = 40;
 		if(pageIdnex == 1)maxNum = 40;
 		if(pageIdnex == 2)maxNum = 64;
-		if(pageIdnex == 3)maxNum = 27;
+		if(pageIdnex == 3)maxNum = 43;
 		let str = mtlang === 'zh_cn' ? 'zh_tw' : mtlang
 		if(pageIdnex === 3)str = ''
 		Array(maxNum).fill(str).map(function(v,k)
@@ -1161,6 +1148,7 @@ function custom_char(info)
 	club(true)
 	char_info = {...info,names: {}}
 	let names = mt_settings.人物改名;
+	$('#custom-char .rightSend').prop('checked',false).prop('checked',mt_settings['右侧发言'][char_info.no])
 	$('#custom-char .typeTitle').text('修改角色')
 	$('#custom-char .confirm').removeAttr('disabled')
 	$('#custom-char h1').text(`${mt_text.school[mtlang]}：${char_info.make ? '自定义' : char_info.school[mtlang]}\nID：${char_info.no}`)
@@ -1256,6 +1244,7 @@ function edit_char()
 			if(!mt_settings.人物改名[index])delete mt_settings.人物改名[index]
 		}
 	})
+	$('#custom-char .rightSend').prop('checked') ? mt_settings['右侧发言'][id] = true : delete mt_settings['右侧发言'][id]
 	saveStorage('mt-char',mt_char,'local')
 	saveStorage('mt-head',mt_head,'local')
 	saveStorage('设置选项',mt_settings,'local')
@@ -1611,12 +1600,11 @@ function repairCF(data)
 	data.sCharacter.no = id_map[0][data.sCharacter.no] || data.sCharacter.no
 	data.sCharacter.index = toString(id_map[1][data.sCharacter.index] || data.sCharacter.index)
 	data.sCharacter.index = data.sCharacter.index.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
-	let no = data.sCharacter.no
-	if(!mt_characters[no] || data.type !== 'image' || data.file)return;
-	let school = mt_characters[no].school
-	let club = mt_characters[no].club
-	let id = mt_characters[no].id
-	data.content = data.content.replace(`${school}/${club}/${no}`,id).replace('Images/CharFace/',`Images/${mt_settings['选择游戏']}/CharFace/`).replace('Images/Emoji/','Images/BLDA/Emoji/')
+	data.content = data.content.replace('Images/Emoji/','Images/BLDA/Emoji/')
+	if(data.content.indexOf('CharFace') > -1)
+	{
+		data.content = `Images/${mt_settings['选择游戏']}/CharFace/`+data.content.split('/').slice(-2).join('/').replaceAll('sp_','')	
+	}
 }
 var baseArr = []
 function urlToBase64(img,length)
@@ -1902,4 +1890,45 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)
 			}
 		})
 	})
+}
+if(document.location.protocol === 'http:')
+{
+	if(location.host.indexOf('.') < 0 && location.host !== 'localhost')
+	{
+		let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
+		if(!mt_settings['存储模式'])
+		{
+			moetalkStorage.getItem('mt-char', function(err, char)
+			{
+				moetalkStorage.getItem('mt-head', function(err, head)
+				{
+					moetalkStorage.getItem('chats', function(err, chats)
+					{
+						moetalkStorage.getItem('moeLog', function(err, moeLog)
+						{
+							if(!char)char = {};
+							if(!head)head = {};
+							if(!chats)chats = [];
+							if(!moeLog)moeLog = [];
+							let arr = {}
+							arr['mt-char'] = char
+							arr['mt-head'] = head
+							arr['chats'] = chats
+							arr['moeLog'] = moeLog
+							if(window.navigator.userAgent.match('Html5Plus'))
+							{
+								saveServerDatatoFile('MoeTalk_localStorage存档'+time, JSON.stringify({...localStorage,...arr},null,4) ,'TXT');
+							}
+							else
+							{
+								download_txt('MoeTalk_localStorage存档'+time+'.TXT',JSON.stringify({...localStorage,...arr},null,4));//生成专用存档
+								location.host = 'localhost'
+							}
+						})
+					})
+				})
+			})
+		}
+		else download_txt('MoeTalk_localStorage存档'+time+'.JSON',JSON.stringify(localStorage,null,4));//生成专用存档
+	}
 }

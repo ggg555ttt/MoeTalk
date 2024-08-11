@@ -43,7 +43,13 @@ const os = (u = window.navigator.userAgent) => {
 	};
 };
 var browser = os();//获取浏览器信息
+var href = window.location.href.split(window.location.host)[1].split('?')[0]//文件目录地址
 var Html5Plus = window.navigator.userAgent.match('Html5Plus') ? 'plus.H59EC0058' : false
+if(window.location.href.indexOf('file:///') === 0)
+{
+	href = window.location.href.replace('index.html','')
+	if(window.navigator.userAgent.match('Html5Plus'))Html5Plus = 'mmt.MoeTalk.WumberBee'
+}
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 </script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -62,38 +68,46 @@ var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置
 	<h1>设置选项：</h1>
 	<button class="button-container" id='selectgame'><b style='color:red;'>切换游戏</b></button>
 	<button class="button-container" ><a href='https://wj.qq.com/s2/14292312/3ade/' target='_blank'><b style='color:red;'>问题反馈</a></b></button>
-	<button class="button-container" ><a href='https://mirror.ghproxy.com/https://github.com/ggg555ttt/MoeTalk/archive/refs/heads/main.zip'><b style='color:black;'>下载最新版压缩包</a></b></button>
-	
-	<h2><a>编辑界面相关：</a></h2>
-	<button class="button-container" id='hnum'><b style='color:blue;'>设置自定义头像质量</b></button>
-	<button class="button-container" id='mt-size'><b style='color:blue;'>设置整体图片宽高百分比</b></button>
-	<button class="button-container" id='mt-cfsize'><b style='color:blue;'>设置差分表情宽高百分比</b></button>
-	<button class="button-container" id='mt-fontSize'><b style='color:blue;'>设置移动端元素尺寸</b></button>
+	<button class="button-container" ><a href='https://gitlab.com/ggg555ttt/MoeTalk/-/archive/main/MoeTalk-main.zip'><b style='color:black;'>下载最新版压缩包</a></b></button>
 	<h2><a>存档相关：</a></h2>
 	<button class="button-container" id='loadcus'><b style='color:white;'>恢复自定义角色存档</b></button>
 	<button class="button-container" id='savedata'><b style='color:white'>下载localStorage存档</b></button>
 	<button class="button-container" id='loaddata'><b style='color:white;'>读取localStorage存档</b></button>
-	<button class="button-container" id='savemode'><b style='color:white;'>存储模式（测试）</b></button>
-	<button class="button-container" id='backsave'><b style='color:white;'>后台保存模式（测试）</b></button>
+	<button class="button-container" id='savemode'><b style='color:white;'>存储模式（慎用）</b></button>
+	<button class="button-container" id='backsave'><b style='color:white;'>后台保存模式（慎用）</b></button>
+	<h2><a>截图相关：</a></h2>
+	<button class="button-container" id='mt-image'><b style='color:blue;'>更改截图格式</b></button>
+	<button class="button-container" id='mt-maxheight'><b style='color:blue;'>限制截图长度</b></button>
+	<button class="button-container" id='mt-maxwidth'><b style='color:blue;'>限制截图宽度</b></button>
+	<button class="button-container" id='mt-zipdownimg'><b style='color:blue;'>打包下载图片</b></button>
 	<h2><a>图片相关：</a></h2>
 	<button class="button-container" id='hnum'><b style='color:blue;'>设置自定义头像质量</b></button>
 	<button class="button-container" id='mt-size'><b style='color:blue;'>设置整体图片宽高百分比</b></button>
 	<button class="button-container" id='mt-cfsize'><b style='color:blue;'>设置差分表情宽高百分比</b></button>
-	<button class="button-container" id='mt-image'><b style='color:blue;'>更改生成图片格式</b></button>
-	<button class="button-container" id='mt-maxheight'><b style='color:blue;'>限制生成图片的长度</b></button>
-	<button class="button-container" id='mt-maxwidth'><b style='color:blue;'>限制生成图片的宽度</b></button>
-	<button class="button-container" id='mt-zipdownimg'><b style='color:blue;'>打包下载图片</b></button>
-	<h2><a>文字相关：</a></h2>
-	<button class="button-container" id='mt-title'><b style='color:green;'>设置标题</b></button>
+	<h2><a>编辑界面相关：</a></h2>
+	<button class="button-container" id='mt-fontSize'><b style='color:green;'>设置移动端元素尺寸</b></button>
 	<button class="button-container" id='language'><b style='color:green;'>更改语言</b></button>
 	<button class="button-container" id='send'><b style='color:green;'>文字发送方式</b></button>
 	<button class="button-container" id='font'><b style='color:green;'>字体加载选项</b></button>
+	<button class="button-container" id='mt-title'><b style='color:green;'>设置标题文字</b></button>
 	<div style="border:1px solid var(--m-3-sys-light-outline, #79747E)">
-		<b style='color:green;'>字体大小</b>
+		<h3 style='color:green;'>标题颜色选择</h3>
+		<br><b style='color:green;'>推荐颜色：</b>
+		<button class="button-container selectColor" style="background-color: #8BBBE9;"></button>
+		<button class="button-container selectColor" style="background-color: #FFDC42;"></button>
+		<button class="button-container selectColor" style="background-color: #E599FF;"></button>
+		<button class="button-container selectColor" style="background-color: #8FFFCD;"></button>
+		<button class="button-container selectColor" style="background-color: #FF8FBF;"></button>
+		<b style='color:green;'>自定义颜色：</b>
+		<input type="color" id="titleColor"  value="{{i.4|date:'c'}}">
+		<br><button class="button-container" id='mt-titleColor'><b style='color:green;'>提交颜色</b></button>
+	</div>
+	<div style="border:1px solid var(--m-3-sys-light-outline, #79747E)">
+		<h3 style='color:green;'>聊天字体大小</h3>
 		<br><b style='color:green;'>文字：</b><input type="text" title='chat' placeholder="1.2rem">
-		<br><b style='color:green;'>回复：</b><input type="text" title='reply' placeholder="1.1rem">
-		<br><b style='color:green;'>羁绊：</b><input type="text" title='heart' placeholder="1.1rem">
-		<br><b style='color:green;'>旁白：</b><input type="text" title='info' placeholder="1.1rem">
+		<b style='color:green;'>回复：</b><input type="text" title='reply' placeholder="1.1rem">
+		<b style='color:green;'>羁绊：</b><input type="text" title='heart' placeholder="1.1rem">
+		<b style='color:green;'>旁白：</b><input type="text" title='info' placeholder="1.1rem">
 		<br><button class="button-container" id='mt-fontszie'><b style='color:green;'>提交参数</b></button>
 	</div>
 	<h2><a>数据相关：</a></h2>

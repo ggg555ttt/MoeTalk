@@ -609,8 +609,14 @@
 						};
 					return (0, m.jsx)(HList.Z,
 					{
+
 						children: (0, m.jsx)(k,
 						{
+							style:
+							{
+								display:'block',
+								marginLeft: '0.2rem'
+							},
 							children: n.profile.map(function(e)
 							{
 								return (0, m.jsx)(c.t_,
@@ -619,6 +625,7 @@
 									height: 252,
 									alt: e,
 									src: loadhead(n.no,e),//#左方人物皮肤选择分支
+									style:{margin:'0.2rem'},
 									onError: function(e)
 									{
 										e.currentTarget.src = href+'Images/Ui/error.webp';
@@ -851,7 +858,7 @@
 				{
 					displayName: "Character__ProfileWrapper",
 					componentId: "sc-9wktk6-5"
-				})(["padding:0rem 1rem;width:100%;box-sizing:border-box;"]),
+				})(["width:100%;box-sizing:border-box;"]),//#padding:0rem 1rem;
 				R = o.ZP.div.withConfig(
 				{
 					displayName: "Character__HR",
@@ -1561,7 +1568,11 @@
 							{
 								style:{whiteSpace: 'pre'},
 								children: `学校：########\nID：########`
-							}), (0, m.jsxs)(ea.$0,
+							}), (0, m.jsx)('input',
+							{
+								type: 'checkbox',
+								className: 'rightSend'
+							}), '默认右侧发言',(0, m.jsxs)(ea.$0,
 							{
 								children: [(0, m.jsx)('div',
 								{
@@ -3066,10 +3077,21 @@
 												}
 												$$('.切换表情').click()
 											}
-										}), (0, m.jsx)(ea.Dx,
+										}), (0, m.jsx)(c.Bx,
 										{
 											className: "bold",
-											style: 差分映射 && cf === 'CharFace' ? {'color': 'red'} : {},
+											style: 
+											{
+												padding: "revert",
+												width: "auto",
+												fontSize: '1.5rem',
+												border: '3px solid rgb(63, 81, 181)',
+												color: 差分映射 && cf === 'CharFace' ? "red" : "rgb(63, 81, 181)"
+											},
+											onClick: function()
+											{
+												$$('.CFInfo:visible').length ? $$('.CFInfo').hide() : $$('.CFInfo').show()
+											},
 											children: 表情类型//#加入差分表情
 										}), (0, m.jsx)(ea.ec,
 										{
@@ -3195,11 +3217,18 @@
 										{
 											children: [表情.map(function(v, k)
 											{
-												return (0, m.jsx)(ez,
+												return (0, m.jsx)('div',
 												{
-													alt: cf,
-													height: 310,
-													width: 310,
+													style: 
+													{
+														width: '32%',
+														border: '2px solid rgb(230, 233, 235)',
+														backgroundColor: 'rgb(255, 255, 255)',
+														borderRadius: '10px',
+														marginBottom: '0.5rem',
+														cursor: 'pointer',
+														position: 'relative'
+													},
 													onClick: function()
 													{
 														if($$('.editMessage.visible').length)
@@ -3214,7 +3243,34 @@
 															sendMessage({content: v},'image'), s()
 														}
 													},
-													src: href+v//#表情链接
+													children: [(0, m.jsx)('img',
+													{
+														alt: cf,
+														height: 310,
+														width: 310,
+														style:
+														{
+															color: 'transparent',
+															width: '100%',
+															height: 'auto'
+														},
+														src: href+v//#表情链接
+													}), (0, m.jsx)('span',
+													{
+														className: 'CFInfo',
+														style:
+														{
+															width: '100%',
+															whiteSpace: 'pre-wrap',
+															wordWrap: 'break-word',
+															position: 'absolute',
+															top: 0,
+															left: 0,
+															display: 'none',
+															color: 'red'
+														},
+														children: CFInfo[v.replace(`Images/${mt_settings['选择游戏']}/CharFace/`,'').replace(`Images/${mt_settings['选择游戏']}/CustomFace/`,'').replace('.webp','')]
+													})]
 												}, n)
 											})]
 										})
@@ -3420,7 +3476,8 @@
 										children: (0, m.jsx)(c.xL,
 										{
 											icon: ei.pkM
-										})
+										}),
+										hidden: mt_settings['选择游戏'] === 'QNZL'
 									}),
 									//*加入差分
 									, (0, m.jsx)(eU,
@@ -4624,7 +4681,8 @@
 									id:"mt_watermark",
 									style:
 									{
-										display:"none"
+										display: "none",
+										backgroundColor: mt_settings['标题颜色'] ? mt_settings['标题颜色'] : '#8BBBE9',
 									},
 									children: [(0, m.jsx)('div',
 									{
@@ -4654,7 +4712,7 @@
 											flexDirection:"column",
 											alignItems:"flex-end",
 											justifyContent:"center",
-											wordBreak: 'break-all'
+											wordBreak: 'break-word'
 										},
 										children: [(0, m.jsx)('span',
 										{
@@ -4748,7 +4806,7 @@
 				{
 					displayName: "Talk__Span",
 					componentId: "sc-1uzn66i-4"
-				})(["margin:auto 1rem;overflow:hidden;word-break:break-all;white-space:pre-wrap;line-break:loose;"]),
+				})(["margin:auto 1rem;overflow:hidden;word-break:break-word;white-space:pre-wrap;line-break:loose;"]),
 				na = function()
 				{
 					var e = (0, i.C)(function(e)
@@ -5168,7 +5226,7 @@
 				{
 					displayName: "talk__TextBox",
 					componentId: "sc-eq7cqw-4"
-				})(["user-select:text;position:relative;color:white;width:fit-content;border-radius:10px;background:", ";border:1px solid ", ";white-space:pre-wrap;overflow-wrap:break-word;word-break:break-all;word-wrap:break-all;line-break:loose;font-size:1.2rem;padding:0.6rem;line-height:1.7rem;::after{content:'';position:absolute;left:-0.5rem;top:0.6rem;border-top:0.3rem solid transparent;border-right:0.5rem solid ", ";border-bottom:0.3rem solid transparent;}"], function(e)
+				})(["user-select:text;position:relative;color:white;width:fit-content;border-radius:10px;background:", ";border:1px solid ", ";white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word;word-wrap:break-word;line-break:loose;font-size:1.2rem;padding:0.6rem;line-height:1.7rem;::after{content:'';position:absolute;left:-0.5rem;top:0.6rem;border-top:0.3rem solid transparent;border-right:0.5rem solid ", ";border-bottom:0.3rem solid transparent;}"], function(e)
 				{
 					return e.theme.color.rgb76_91_111
 				}, function(e)
@@ -5206,7 +5264,7 @@
 				{
 					displayName: "talk__InfoBox",
 					componentId: "sc-eq7cqw-8"
-				})(["user-select:text;position:relative;color:", ";width:100%;border-radius:10px;background:", ";text-align:center;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-all;word-wrap:break-all;line-break:loose;font-size:1rem;padding:0.2rem 1rem;line-height:1.5rem;"], function(e)
+				})(["user-select:text;position:relative;color:", ";width:100%;border-radius:10px;background:", ";text-align:center;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word;word-wrap:break-word;line-break:loose;font-size:1rem;padding:0.2rem 1rem;line-height:1.5rem;"], function(e)
 				{
 					return e.theme.color.rgb69_78_89
 				}, function(e)
