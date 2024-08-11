@@ -9968,7 +9968,7 @@
 								{
 									children: [(0, O.jsx)(I,{id:"readme",children:MikuTalk ? 'MikuTalk' : mt_settings['顶部标题']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
-										href: "https://github.com/ggg555ttt/MoeTalk/",
+										href: "https://gitlab.com/ggg555ttt/MoeTalk",
 										style:
 										{
 											fontSize: "20px",
