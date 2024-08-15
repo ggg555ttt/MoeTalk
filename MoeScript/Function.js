@@ -23,14 +23,13 @@ var $$ = $;//jquery转义
 var height;//聊天记录长度
 var 表情,表情类型,表情页码,自设差分,差分书签 = sessionStorage['差分书签'] ? JSON.parse(sessionStorage['差分书签']) : {};//表情功能
 var player = href+'player'//播放器地址
-var version = '';if(localStorage['mt-version'])version = localStorage['mt-version']//MoeTalk版本号
 const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});//数据库
 var moeurl = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/'
 if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';
 if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
 var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色数据
 var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时头像数据
-if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选项'] === '{}' || !mt_settings['设备信息'])
+if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorage['0'])
 {
 	let lang = window.navigator.language.toLowerCase()
 	if(['zh-cn','zh-sg'].indexOf(lang) > -1)lang = 'zh_cn'
@@ -88,8 +87,6 @@ if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选
 	delete localStorage['CharFaceIndex']
 	delete localStorage['mt-club']
 	delete localStorage['mt-date']
-	delete localStorage['Hm_lvt_3f7abc5752af46ddac2e985bb10dbb30']
-	delete localStorage['sc_medium_source']
 	delete localStorage['lang']
 	delete localStorage['first']
 	delete localStorage['mt-edit']
@@ -108,6 +105,8 @@ if(localStorage['0'] || !localStorage['设置选项'] || localStorage['设置选
 	delete localStorage['启动次数']
 	delete localStorage['启动网址']
 	delete localStorage['启动设备']
+	delete localStorage['mt-version']
+	delete localStorage['mt-rand']
 	//if(!mt_settings['后台保存'])delete mt_settings['后台保存']
 	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
 
@@ -893,7 +892,7 @@ function saveStorage(key,val,mode)
 {
 	if(window.location.href.indexOf('file:///') === 0 && !Html5Plus)
 	{
-		alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请先运行目录下的【EasyWebSvr.exe】然后打开浏览器访问【localhost】或【127.0.0.1】')
+		alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请运行MoeTalk.exe或查看player目录下的info.txt文件')
 	}
 	if(!mt_settings['存储模式'] && mode === 'local' && ['chats','mt-char','mt-head'].indexOf(key) > -1)
 	{
@@ -1570,7 +1569,7 @@ function saveServerDatatoFile(filename, jsonData ,ext)
 						{
 							//console.log("写入数据成功");
 							$('.dDBXxQ').hide()//开始加载
-							alert(`下载完成！\n可以在“Android/data/${Html5Plus}/documents/MoeTalk_Data”中找到您下载的存档！`)
+							alert(`下载完成！\n可以在“Android/data/${Html5Plus}/documents/MoeTalk_Data”中找到您下载的存档！\n卸载MoeTalk时会删除Android/data/${Html5Plus}目录，请注意备份！！！\n如果没有访问data目录的权限请进入设置页面点击最下面的链接查看解决方案`)
 						}
 						writer.write(jsonData);
 					},
@@ -1893,7 +1892,7 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)
 }
 if(document.location.protocol === 'http:')
 {
-	if(location.host.indexOf('.') < 0 && location.host !== 'localhost')
+	if(location.host.indexOf('.') < 0 && location.hostname !== 'localhost')
 	{
 		let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 		if(!mt_settings['存储模式'])
@@ -1922,7 +1921,7 @@ if(document.location.protocol === 'http:')
 							else
 							{
 								download_txt('MoeTalk_localStorage存档'+time+'.TXT',JSON.stringify({...localStorage,...arr},null,4));//生成专用存档
-								location.host = 'localhost'
+								location.hostname = 'localhost'
 							}
 						})
 					})

@@ -166,40 +166,21 @@ $(".bIcduz").wait(function()
 //加载工具
 $(".frVjsk").wait(function()
 {
-	if(Html5Plus)
-	{
-		$(".frVjsk").append(`<button class='${class0}' onclick='location.reload(true)'><b style='color:blue;'>刷</b></button><span class='tool'>刷新页面</span><br>`);
-	}
-	else
-	{
-		$(".frVjsk").append(`<a href='https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda' target='_blank'><button class='${class0}'><b style='color:blue;'>A</b></button></a><span class='tool'>下载客户端APP</span><br>`);	
-	}
-	
+	$(".frVjsk").append(`<a href='https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda' target='_blank'><button class='${class0}'><b style='color:blue;'>A</b></button></a><span class='tool'>客户端下载地址</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='https://tieba.baidu.com/p/8551808608'}.html'><button class='${class0}'><b style='color:black;'>教</b></button></a><span class='tool'>使用教程</span><br>`);
-	$(".frVjsk").append(`<a href='${href}Setting.html?${localStorage['mt-rand']}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
+	$(".frVjsk").append(`<a href='${href}Setting.html?${localStorage['应用版本']}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
 //使用说明
 $('body').on('click',"#readme",function()
 {
-	let str = '点击【确定】尝试更新版本并刷新页面'
 	if(MikuTalk)
 	{
 		alert('from：https://github.com/HFIProgramming/mikutap/\n特殊节日下可以在设置页面将标题改为“klaTeoM”即可关闭\n通常日期下将标题改为“MikuTalk”即可开启')
 	}
-	if(Html5Plus)
+	if(confirm('MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n点击【确定】尝试清除缓存并刷新页面'))
 	{
-		str = localStorage['最新版本'] ? '安卓客户端版本已更新，确定跳转到下载链接吗？' : '点击【确定】可以访问安卓客户端下载链接'
-	}
-	
-	if(confirm('MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\nPC客户端使用请进入设置页面点击“下载最新版压缩包”\n'+str))
-	{
-		if(Html5Plus)
-		{
-			plus.runtime.openURL("https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda");
-			return;
-		}
 		window.caches && caches.keys && caches.keys().then(function(keys)
 		{
 			let length = 0;
@@ -210,7 +191,6 @@ $('body').on('click',"#readme",function()
 			});
 			if(keys.length === length)
 			{
-				localStorage['mt-rand'] = Math.random()
 				location.reload(true)
 			}
 		});

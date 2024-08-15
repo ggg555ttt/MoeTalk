@@ -487,7 +487,7 @@ $('body').on('click',"#selectgame",function()
 	{
 		mt_settings['选择游戏'] = str;
 		saveStorage('设置选项',mt_settings,'local')
-		alert('更改完成，请返回页面!');
+		alert('更改完成，请返回页面\n如果角色未更新请再刷新一遍MoeTalk页面');
 	}
 })
 $('body').on('click',".selectColor",function()

@@ -1,0 +1,11 @@
+开发者QQ号：1102141020
+MoeTalk手动启动方法：
+将EasyWebSvr.exe和EasyWebSvr.ini复制到MoeTalk根目录中后运行
+在EasyWebServer的设置中设置好一个未被占用的端口号（1-65535）
+如果可以正常启动服务器就说明端口号未被占用
+之后浏览器访问http://localhost:端口号
+例：http://localhost:8080
+每次打开网页前要确定MoeTalk根目录下的EasyWebSvr.exe处于运行中
+
+Title=MoeTalk安装程序
+Shortcut=D, MoeTalk\MoeTalk.exe, , , 启动MoeTalk, 

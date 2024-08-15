@@ -53,64 +53,32 @@ if(window.location.href.indexOf('file:///') === 0)//离线端
 	href = window.location.href.replace('index.html','')
 	if(window.navigator.userAgent.match('Html5Plus'))Html5Plus = 'mmt.MoeTalk.WumberBee'
 }
+
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
-function checkVer()
+/*@是为了替换用的占位符*/
+function checkVer(本地版本 = 18)//@
 {
-	if(document.location.protocol !== 'https:')
-	{//离线客户端检查更新
-		$.ajax({
-			async: true,
-			url: './manifest.json',
-			type: 'GET',
-			dataType:"text",
-			cache: false, // 禁用缓存
-			success: function(text)
-			{
-				mt_settings['应用版本'] = JSON.parse(text.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '')).version.code
-				$.ajax({
-					async: true,
-					url: 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/manifest.json',
-					type: 'GET',
-					dataType:"text",
-					cache: false, // 禁用缓存
-					success: function(text)
-					{
-						let json = JSON.parse(text.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, ''));
-						if(!localStorage['最新版本'] && mt_settings['应用版本'] < json.version.code)
-						{
-							localStorage['最新版本'] = json.version.code
-							if(confirm('客户端版本已更新，确定跳转到下载链接吗？\n安装新版本前注意备份存档'))
-							{
-								if(Html5Plus)
-								{
-									plus.runtime.openURL("https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda");
-								}
-								else
-								{
-									window.location.href = "https://gitlab.com/ggg555ttt/MoeTalk/-/archive/main/MoeTalk-main.zip"
-								}
-							}	
-						}
-						if(mt_settings['应用版本'] === json.version.code)localStorage['最新版本'] = ''
-					}
-				});
-			}
-		});
-		if(Html5Plus === 'mmt.MoeTalk.WumberBee')return;
-	}
-	$.ajax({//网页端自动更新
-		async: true,
-		url: './version.json',
-		type: 'GET',
-		dataType:"text",
-		cache: false, // 禁用缓存
-		success: function(text)
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function ()
+	{
+		if(xhr.status === 200 && xhr.readyState === 4)
 		{
-			version = text.split(',')[0]
-			let rand = text.split(',')[1]
-			if(!localStorage['mt-version'] || localStorage['mt-version'] !== version || !localStorage['mt-rand'] || localStorage['mt-rand'] !== rand)
+			let json = JSON.parse(xhr.responseText.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, ''));
+
+			if(本地版本 != json.version.code && !localStorage['最新版本'])
 			{
-				localStorage['mt-version'] = version
+				localStorage['应用版本'] = 本地版本
+				localStorage['最新版本'] = json.version.code
+				if(confirm('客户端版本已更新，确定跳转到下载链接吗？\n提取码：blda\n安装新版本前注意备份存档'))
+				{//本地端
+					let url = "https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda"
+					if(Html5Plus)plus.runtime.openURL(url);
+					else window.location.href = url
+				}
+			}
+			if(localStorage['应用版本'] != json.version.code)
+			{
+				if(Html5Plus === 'mmt.MoeTalk.WumberBee')return;
 				window.caches && caches.keys && caches.keys().then(function(keys)
 				{
 					let length = 0;
@@ -120,9 +88,7 @@ function checkVer()
 						length=length+1
 						if(keys.length === length)
 						{
-							delete localStorage['启动网址']
-							localStorage['mt-version'] = version
-							localStorage['mt-rand'] = rand
+							localStorage['应用版本'] = json.version.code
 							location.reload(true)
 						}
 					});
@@ -130,10 +96,21 @@ function checkVer()
 				});
 			}
 		}
-	});
+	}
+	let url = "https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/manifest.json";
+	xhr.open("GET",url+"?timestamp="+new Date().getTime());
+	xhr.send();
+}
+var date = new Date();
+var month = date.getMonth() + 1; // 月
+var day = date.getDate(); // 日
+if(localStorage['每日提醒'] != day)
+{
+	localStorage['每日提醒'] = day
+	delete localStorage['通知文档']
+	delete localStorage['最新版本']
 }
 checkVer()
-if(!localStorage['mt-rand'])localStorage['mt-rand'] = Math.random()
 
 if(browser.isIos === true || browser.isiPhone === true || mt_settings['打包下载'])
 {
@@ -147,12 +124,10 @@ if(document.location.protocol !== 'https:')
 }
 function loadjs(url)
 {
-	let ver = localStorage['mt-rand']
+	let ver = localStorage['应用版本']
 	document.write("<scr"+`ipt src='${url}?${ver}' defer></scr`+"ipt>");
 }
-var date = new Date();
-var month = date.getMonth() + 1; // 月
-var day = date.getDate(); // 日
+
 var MikuTalk = false;
 if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) && mt_settings['顶部标题'] !== 'klaTeoM')
 {
