@@ -3267,7 +3267,8 @@
 															top: 0,
 															left: 0,
 															display: 'none',
-															color: 'red'
+															color: 'red',
+															backgroundColor:'white'
 														},
 														children: CFInfo[v.replace(`Images/${mt_settings['选择游戏']}/CharFace/`,'').replace(`Images/${mt_settings['选择游戏']}/CustomFace/`,'').replace('.webp','')]
 													})]
@@ -4408,7 +4409,7 @@
 					return e.theme.common.flexBox(
 					{
 						justify: "flex-end",
-						align: "flex-start"
+						align: "flex-end"//#
 					})
 				}),
 				ne = (0, o.ZP)(c.hU).withConfig(
@@ -5052,7 +5053,7 @@
 						{
 							children: [(0, m.jsx)("title",
 							{
-								children: mt_settings['顶部标题']
+								children: MikuTalk ? 'MikuTalk' : 'MoeTalk'
 							}), (0, m.jsx)("meta",
 							{
 								name: "description",

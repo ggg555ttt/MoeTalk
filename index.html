@@ -56,7 +56,7 @@ if(window.location.href.indexOf('file:///') === 0)//离线端
 
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 /*@是为了替换用的占位符*/
-function checkVer(本地版本 = 18)//@
+function checkVer(本地版本 = 19)//@
 {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function ()
@@ -69,7 +69,7 @@ function checkVer(本地版本 = 18)//@
 			{
 				localStorage['应用版本'] = 本地版本
 				localStorage['最新版本'] = json.version.code
-				if(confirm('客户端版本已更新，确定跳转到下载链接吗？\n提取码：blda\n安装新版本前注意备份存档'))
+				if(confirm(`当前版本：${本地版本}\n最新版本：${json.version.code}\n客户端版本已更新，确定跳转到下载链接吗？\n提取码：blda\n安装新版本前注意备份存档`))
 				{//本地端
 					let url = "https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda"
 					if(Html5Plus)plus.runtime.openURL(url);
@@ -92,7 +92,6 @@ function checkVer(本地版本 = 18)//@
 							location.reload(true)
 						}
 					});
-					
 				});
 			}
 		}

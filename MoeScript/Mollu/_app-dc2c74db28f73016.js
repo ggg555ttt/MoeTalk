@@ -11900,7 +11900,7 @@
 								{
 									style:{lineHeight:'141%'},//@
 									className: "bold",//@
-									children: MikuTalk ? 'MikuTalk' : mt_settings['顶部标题']
+									children: MikuTalk ? 'MikuTalk' : 'MoeTalk'
 								})
 							})]
 						})

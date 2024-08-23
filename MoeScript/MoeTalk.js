@@ -131,7 +131,7 @@ $(function()
 		$("#view").click()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
-	let notice = '设置页面点击“切换游戏”可以更改为其他游戏\n目前支持的游戏有：\nBLDA-碧蓝档案\nCBJQ-尘白禁区\nQNZL-千年之旅\n所有的游戏都带有表情差分图片'
+	let notice = '点击“选择游戏”可以更改为其他游戏\n目前支持的游戏有：\nBLDA-碧蓝档案\nCBJQ-尘白禁区\nQNZL-千年之旅\n所有的游戏都带有表情差分图片'
 	if(!localStorage['通知文档'] || localStorage['通知文档'] !== notice)
 	{
 		alert(notice)
@@ -166,10 +166,10 @@ $(".bIcduz").wait(function()
 //加载工具
 $(".frVjsk").wait(function()
 {
-	$(".frVjsk").append(`<a href='https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda' target='_blank'><button class='${class0}'><b style='color:blue;'>A</b></button></a><span class='tool'>客户端下载地址</span><br>`);
+	$(".frVjsk").append(`<a href='https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda' target='_blank' onclick='alert("提取码：BLDA")'><button class='${class0}'><b style='color:blue;'>A</b></button></a><span class='tool' align='center'>客户端\n下载地址</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='selectgame'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
-	$(".frVjsk").append(`<a href='https://tieba.baidu.com/p/8551808608'}.html'><button class='${class0}'><b style='color:black;'>教</b></button></a><span class='tool'>使用教程</span><br>`);
 	$(".frVjsk").append(`<a href='${href}Setting.html?${localStorage['应用版本']}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
 //使用说明
@@ -403,7 +403,7 @@ $("body").on('click',"#cutdata",function()
 		let arr = [];
 		let json = [];
 		let length = 0;
-		let time = new Date(); 
+		let time = new Date();
 		let year = time.getFullYear(); // 年
 		let month = time.getMonth() + 1; // 月
 		let date = time.getDate(); // 日
@@ -806,7 +806,7 @@ $("body").on('click',".编辑",function()
 			}
 			else if(chat.content)
 			{
-				$('.图片文件').attr('src',chat.content)
+				$('.图片文件').attr('src',href+chat.content)
 				$('.图片信息').text('链接图片').attr('title','链接')
 			}
 			else
@@ -1037,3 +1037,16 @@ $("body").on('click',".截图选项",function()
 	}
 	saveStorage('设置选项',mt_settings,'local')
 });
+$('body').on('click',"#selectgame",function()
+{
+	let str = '请输入英文首字母来选择游戏\n'
+	str += 'BLDA = 碧蓝档案\nCBJQ = 尘白禁区\nQNZL = 千年之旅\n'
+	str += '点击【确定】将会刷新页面'
+	str = prompt(str, mt_settings['选择游戏']);
+	if (str != null)
+	{
+		mt_settings['选择游戏'] = str;
+		saveStorage('设置选项',mt_settings,'local')
+		location.reload(true)
+	}
+})

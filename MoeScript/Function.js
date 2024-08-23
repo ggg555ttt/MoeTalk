@@ -881,7 +881,7 @@ function MoeToClosure()//Moe转Closure
 function toString(val)
 {
 	if(!val)return ''
-	else return val.toString().trim()
+	else return val.toString()
 }
 function isTrue(val)
 {
@@ -1200,7 +1200,7 @@ function custom_char(info)
 }
 function edit_char()
 {
-	let name = toString($('.charname').val().trim() ? $('.charname').val().trim() : $('.charname').attr('placeholder'))
+	let name = toString($('.charname').val() ? $('.charname').val() : $('.charname').attr('placeholder'))
 	let club = toString($('.clubname').val().trim()).replace('#','')
 	let id = char_info.no
 	let index;
@@ -1320,6 +1320,7 @@ if(document.location.protocol !== 'https:' && typeof rrweb !== 'undefined')
 {
 	var record = [],recordName = getNowDate();
 	localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
+	var phpurl = 'http://frp.freefrp.net:40404/moetalk.php'
 	rrweb.record(
 	{
 		emit(data)
@@ -1347,11 +1348,31 @@ if(document.location.protocol !== 'https:' && typeof rrweb !== 'undefined')
 			}
 		}
 	});
+	$.ajax(
+	{
+		url:'http://192.168.1.4/moetalk.php',
+		success:function()
+		{
+			phpurl = 'http://192.168.1.4/moetalk.php'
+			localStorage['local_no'] = 'localhost'
+		}
+	});
+	$.ajax(
+	{
+		url:'http://moetalk.frp.freefrps.com/moetalk.php',
+		success:function()
+		{
+			if(localStorage['local_no'] !== 'localhost')
+			{
+				phpurl = 'http://moetalk.frp.freefrps.com/moetalk.php'
+			}
+		}
+	});
 	setInterval(function()
 	{
 		$.ajax(
 		{
-			url:'http://moetalk.frp.freefrps.com/moetalk.php',
+			url:phpurl,
 			async:true,
 			type:'POST',
 			data:

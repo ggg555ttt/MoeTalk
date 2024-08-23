@@ -8,9 +8,15 @@
 	font-family:moetalk;
 	src: url('../../Data/Font/Blueaka.woff2') format("woff");
 }
+@font-face
+{
+	font-family: 'CyrillicFont';/*匹配西里尔字母*/
+	src: local("Arial");
+	unicode-range: U+0400-04FF;
+}
 body,textarea,button
 {
-	font-family:moetalk;
+	font-family:CyrillicFont,moetalk;
 }
 .bold
 {
