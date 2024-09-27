@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 const os = (u = window.navigator.userAgent) => {
 	return {
@@ -60,11 +61,12 @@ var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置
 	<title>相关设置页面</title>
 	<script src="./MoeScript/Script/Jquery.min.js"></script>
 	<script src="./MoeScript/Script/localforage.min.js"></script>
-	<script src="./MoeScript/Tools.js" defer=""></script>
-	<script src="./MoeScript/Function.js" defer=""></script>
+	<script src="./MoeScript/INIT.js" defer=""></script>
+	<script src="./MoeScript/DATA.js" defer=""></script>
+	<script src="./MoeScript/SETTING.js" defer=""></script>
 </head>
 <body style="height:100%;overflow:auto;background-image:linear-gradient( rgba(255,255,255,0.5),rgba(255,255,255,0.5) ),url(Images/Ui/hexa_back_01.webp);background-repeat :no-repeat;background-size :cover;user-select:none;">
-	<a href='#' onclick="window.history.back();"><b>返回MoeTalk</a></b>
+	<a href='#' onclick="window.location.href = window.location.href.replace('Setting.html',Html5Plus ? 'index.html' : '');test(window.location.href)"><b>返回MoeTalk</a></b>
 	<h1>设置选项：</h1>
 	<button class="button-container" id='selectgame'><b style='color:red;'>选择游戏</b></button>
 	<button class="button-container" ><a href='https://wj.qq.com/s2/14292312/3ade/' target='_blank'><b style='color:red;'>问题反馈</a></b></button>
@@ -74,8 +76,9 @@ var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置
 	<button class="button-container" id='loadcus'><b style='color:white;'>恢复自定义角色存档</b></button>
 	<button class="button-container" id='savedata'><b style='color:white'>下载localStorage存档</b></button>
 	<button class="button-container" id='loaddata'><b style='color:white;'>读取localStorage存档</b></button>
-	<button class="button-container" id='savemode'><b style='color:white;'>存储模式（慎用）</b></button>
+	<button class="button-container" id='savemode'><b style='color:white;'>存储模式（不推荐）</b></button>
 	<button class="button-container" id='backsave'><b style='color:white;'>后台保存模式（慎用）</b></button>
+	<button class="button-container" id='SETTING_图片存档'><b style='color:white;'>下载图片存档</b></button>
 	<h2><a>截图相关：</a></h2>
 	<button class="button-container" id='mt-image'><b style='color:blue;'>更改截图格式</b></button>
 	<button class="button-container" id='mt-maxheight'><b style='color:blue;'>限制截图长度</b></button>
@@ -91,6 +94,7 @@ var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置
 	<button class="button-container" id='send'><b style='color:green;'>文字发送方式</b></button>
 	<button class="button-container" id='font'><b style='color:green;'>字体加载选项</b></button>
 	<button class="button-container" id='mt-title'><b style='color:green;'>设置标题文字</b></button>
+	<button class="button-container" id='SETTING_差分按钮'><b style='color:green;'>表情差分按钮显示</b></button>
 	<div style="border:1px solid var(--m-3-sys-light-outline, #79747E)">
 		<h3 style='color:green;'>标题颜色选择</h3>
 		<br><b style='color:green;'>推荐颜色：</b>
@@ -123,6 +127,5 @@ var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置
 	<p><a href="https://github.com/ggg555ttt/MoeTalk">项目地址（github）</a></p>
 	<h1 class="bold">设置信息：</h1>
 	<p class="mt_settings bold" style="white-space: pre-wrap;"></p>
-	<p><a href="https://www.bilibili.com/video/BV1Rx421D78C">高本版安卓无法访问data目录的解决方案</a></p>
 </body>
 </html>

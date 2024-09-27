@@ -3,10 +3,10 @@
     "id" : "H5F191BF0", /*应用的标识*/
     "name" : "【MoeTalk】", /*应用名称，程序桌面图标名称*/
     "version" : {
-        "name" : "3.6", /*应用版本名称*/
-        "code" : 19
+        "name" : "3.6.2", /*应用版本名称*/
+        "code" : 21
     },
-    "description" : "MMT离线编辑器", /*应用描述信息*/
+    "description" : "MomoTalk编辑工具", /*应用描述信息*/
     "icons" : {
         "72" : "icon.png"
     },

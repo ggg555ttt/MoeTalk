@@ -97,6 +97,7 @@ h1 {
 a {
 	color: #3f51b5;
 	text-decoration: none;
+	cursor: pointer;
 }
 .button-container {
 	padding: 8px 24px;
@@ -400,7 +401,7 @@ align-self: stretch;
 .聊天 {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: flex-start;
     -webkit-box-pack: end;
     justify-content: flex-end;
     width: 100%;
@@ -425,6 +426,7 @@ align-self: stretch;
     white-space: pre;
 }
 .名称 {
+	min-height: 1.2rem;
 	line-height: 1.8rem; 
 	word-break: break-word;
 }
