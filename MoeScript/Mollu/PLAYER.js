@@ -495,7 +495,7 @@
 									{
 										display: "none"
 									},
-									accept: ".png,.json",
+									accept: mt_settings['图片存档'] ? 'image/png' : 'application/json',
 									onChange: function(e)
 									{
 										let json = {
@@ -819,10 +819,7 @@
 								{
 									//if(isNaN(nextindex))return;
 									INIT_loading()
-									fetch(`${href}${LibraryURL}/${nowChapter[1].authorid}/${nowChapter[1].bookid}/${chapterlist[nextindex]}.json`).then(function(response)
-									{
-										return response.json();
-									}).then(function(data)
+									XHR(`${href}${LibraryURL}/${nowChapter[1].authorid}/${nowChapter[1].bookid}/${chapterlist[nextindex]}.json`,function(data)
 									{
 										data = loaddata(data,'palyer')
 										nowChapter[0] = nextindex
@@ -840,7 +837,7 @@
 										e((0, i.Fe)(playChat))
 										e((0, u.Cz)(!0))
 										$$('.nowChapter').text(`${nowChapter[1].name}_${nextindex}：${nowChapter[1].chapter[nextindex]}`)
-									});
+									})
 								}
 								else
 								{
@@ -920,38 +917,38 @@
 							else
 							{
 								for(var o = -1, a = e + 1; a < c.chats.length; a++)
+								{
 									if(c.chats[a].replyDepth === c.replyDepth)
 									{
 										o = a;
 										break
-									} if(-1 === o)
-								{
-									var s = c.chats.filter(function(e)
-									{
-										return e.replyNo === t.replyDepth && "reply" === e.type
-									});
-									if(s.length > 0)
-									{
-										var d = (0, l.G_)(c.chats, s[0]);
-										if(null !== d && "{end}" !== d.content.trim())
-										{
-											n((0, i.e$)(
-											{
-												chat: d,
-												depth: d.replyDepth
-											}));
-											return
-										}
 									}
-									n((0, i.e$)(
+									if(-1 === o)
 									{
-										chat: h.Nl
-									}))
+										var s = c.chats.filter(function(e)
+										{
+											return e.replyNo === t.replyDepth && "reply" === e.type
+										});
+										if(s.length > 0)
+										{
+											var d = (0, l.G_)(c.chats, s[0]);
+											if(null !== d && "{end}" !== d.content.trim())
+											{
+												n((0, i.e$)(
+												{
+													chat: d,
+													depth: d.replyDepth
+												}));
+												return
+											}
+										}
+										n((0, i.e$)(
+										{
+											chat: h.Nl
+										}))
+									}
+									else "{end}" !== c.chats[o].content.trim() && n((0, i.e$)({chat: c.chats[o]}))
 								}
-								else "{end}" !== c.chats[o].content.trim() && n((0, i.e$)(
-								{
-									chat: c.chats[o]
-								}))
 							}
 						};
 					return (0, m.jsxs)(_,
@@ -1156,83 +1153,128 @@
 						};
 					let isFirst = isfirst(n.chats.indexOf(t),n.chats,'play')
 					let style = mt_settings['文字样式'][t.type] ? mt_settings['文字样式'][t.type] : {}
+					delete style.textAlign
+					style = {...style,...{}}//防止连带修改设置属性
 					return [(0, m.jsxs)(m.Fragment,
 					{
 						children: d ? (0, m.jsxs)(m.Fragment,
 						{
-							children: (0, m.jsxs)(e8,
-							{
-								children: [!t.isRight ? (0, m.jsx)('div',
+							children: (0, m.jsxs)('div',
+							{//整体图文消息
+								className: '聊天',
+								children: [!t.isCenter && !t.isRight ? (0, m.jsx)('div',
 								{//左侧头像框
 									className: '头像框',
 									style: t.sCharacter.no != 0 ? 
 									{
-										cursor: "pointer",
-										height: "100%"
+										pointerEvents: 'none',
+										minWidth: t.heads && isFirst ? "auto" : "5rem",
+										paddingRight: t.heads && isFirst ? "1rem" : "auto",
+										flexDirection: t.heads ? t.heads.direction : ""
 									} : {marginRight: '1.5rem'},
-									children: isFirst && t.sCharacter.no != 0 ? (0, m.jsx)(s.NZ,
-									{
-										//左侧头像
-										height: 252,
-										width: 252,
+									children: isFirst && t.sCharacter.no != 0 ? [(0, m.jsx)('img',
+									{//左侧头像
+										className: '头像',
+										style: {zIndex: t.heads ? t.heads.list.length : ''},
 										src: loadhead(t.sCharacter.no,t.sCharacter.index),
 										onError: function(e)
 										{
 											e.currentTarget.src = href+'Images/Ui/error.webp';
 										},
 										alt: t.sCharacter.index
-									}) : ''
-								}) : '', (0, m.jsxs)(t.sCharacter.no == 0 ? "div" : s.Xp,
-								{//文字消息
+									}), t.heads ? t.heads.list.map(function(index,k)
+									{
+										return (0, m.jsx)('img',
+										{//左侧头像
+											className: '头像',
+											src: loadhead('LIST',index),
+											style: 
+											{
+												zIndex: t.heads.list.length-k-1,
+												marginTop: t.heads.direction === 'column' ? t.heads.margin ? t.heads.margin : "-1.5rem" : '',
+												marginLeft: t.heads.direction === 'row' ? t.heads.margin ? t.heads.margin : "-1.5rem" : ''
+											},
+											onError: function(e)
+											{
+												e.currentTarget.src = href+'Images/Ui/error.webp';
+											}
+										})
+									}) : ''] : ''
+								}) : '', (0, m.jsxs)("div",
+								{//图文消息
 									className: "对话",
 									style: 
 									{
-										alignItems: t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
+										alignItems: t.isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
+										height: t.heads && t.heads.fullHeight ? '100%' : ''
 									},
-									children: [isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
+									children: [!t.isCenter && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 									{//人物名称
 										className: "名称 bold",
 										children: t.name || loadname(t.sCharacter.no,t.sCharacter.index)
 									}) : '' , (0, m.jsxs)("div",
 									{//消息内容
-										style: {display:"flex"},
-										children: [t.time ? (0, m.jsx)(s.i9,
+										style:
+										{
+											display: "flex",
+											height: "100%",
+											justifyContent: t.isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : '',
+										},
+										children: [t.time ? (0, m.jsx)(eN.i9,
 										{//左侧时间戳
+											className: '时间戳',
 											hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
-											style:{marginRight:0,textAlign:'right'},
-											children: t.time//左侧时间戳
-										}) : '', [(0, m.jsx)(t.sCharacter.no == 0 ? s.LP : !t.isRight && isFirst ? s.zC : s.Dt,
+											children: t.time
+										}) : '', [(0, m.jsx)('span',
 										{//文本消息
-											style: t.isRight ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
-											children: f//
+											className: (t.sCharacter.no == 0 ? '文本' : !t.isRight && isFirst ? '文本 左角' : '文本'),
+											style: t.isRight || t.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
+											children: f
 										}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)(s.CJ,{}) : '' ], t.time ? (0, m.jsx)(s.i9,
 										{//右侧时间戳
+											className: '时间戳',
 											hidden: !t.time || t.sCharacter.no == 0 || t.isRight,
-											style:{marginLeft:0},
 											children: t.time
 										}) : '']
 									})]
-								}), t.isRight && t.sCharacter.no != 0 ? (0, m.jsx)('div',
+								}), !t.isCenter && t.isRight && t.sCharacter.no != 0 ? (0, m.jsx)('div',
 								{//右侧头像框
 									className: '头像框',
 									style:
 									{
+										pointerEvents: 'none',
 										justifyContent:'flex-end',
-										cursor: "pointer",
-										height: "100%"
+										minWidth: t.heads && isFirst ? "auto" : "5rem",
+										paddingLeft: t.heads && isFirst ? "1rem" : "auto",
+										flexDirection: t.heads ? t.heads.direction : ""
 									},
-									hidden: t.sCharacter.no == 0,
-									children: isFirst && t.sCharacter.no != 0 ? (0, m.jsx)(s.NZ,
+									children: isFirst && t.sCharacter.no != 0 ? [(0, m.jsx)('img',
 									{
-										height: 252,
-										width: 252,
-										src: loadhead(t.sCharacter.no,t.sCharacter.index),//#聊天记录头像
+										className: '头像',
+										src: loadhead(t.sCharacter.no,t.sCharacter.index),
 										onError: function(e)
 										{
 											e.currentTarget.src = href+'Images/Ui/error.webp';
 										},
 										alt: t.sCharacter.index
-									}) : ''
+									}), t.heads ? t.heads.list.map(function(index,k)
+									{
+										return (0, m.jsx)('img',
+										{//右侧头像
+											className: '头像',
+											src: loadhead('LIST',index),
+											style: 
+											{
+												zIndex: t.heads.list.length-k-1,
+												marginTop: t.heads.direction === 'column' ? "-1.5rem" : '',
+												marginLeft: t.heads.direction === 'row' ? "-1.5rem" : ''
+											},
+											onError: function(e)
+											{
+												e.currentTarget.src = href+'Images/Ui/error.webp';
+											}
+										})
+									}) : ''] : ''
 								}) : '']
 							})
 						}) : (0, m.jsxs)(P,
@@ -1330,7 +1372,7 @@
 							var n = e.chats.indexOf(t),
 								o = e.chats[n + 1];
 							if("end" === t.type || "reply" === t.type || "heart" === t.type) r((0, i.eS)((0, l.zP)()));
-							else if(o && o.replyDepth === e.replyDepth) "{end}" === o.content.trim() && o.replyDepth === t.replyDepth ? (r((0, i.eS)((0, l.zP)())), r((0, i.e$)(
+							else if(o && o.replyDepth === e.replyDepth) "{end}" === toString(o.content).trim() && o.replyDepth === t.replyDepth ? (r((0, i.eS)((0, l.zP)())), r((0, i.e$)(
 							{
 								chat: h.Nl
 							}))) : r((0, i.e$)(
@@ -1348,7 +1390,7 @@
 								{
 									var s = e.chats.filter(function(e)
 									{
-										return e.content.split('\n').indexOf(t.replyDepth) > -1 && "reply" === e.type//
+										return "reply" === e.type && e.content.split('\n').indexOf(t.replyDepth) > -1//
 									});
 									if(s.length > 0)
 									{
@@ -1380,6 +1422,8 @@
 						}, [r]);
 					let isFirst = isfirst(c.chats.indexOf(t),c.chats,'play')
 					let style = mt_settings['文字样式'][t.type] ? mt_settings['文字样式'][t.type] : {}
+					delete style.textAlign
+					style = {...style,...{}}//防止连带修改设置属性
 					if(t.type === 'info')
 					{
 						t.isFirst && !t.isRight ? style.textAlign = 'left' : ''
@@ -1416,69 +1460,95 @@
 						{
 							children: "chat" === t.type || "image" === t.type ? (0, m.jsxs)(m.Fragment,
 							{
-								children: (0, m.jsxs)(e8,
-								{
+								children: (0, m.jsxs)('div',
+								{//整体图文消息
+									className: '聊天',
 									children: [!t.isCenter && !t.isRight ? (0, m.jsx)('div',
 									{//左侧头像框
 										className: '头像框',
 										style: t.sCharacter.no != 0 ? 
 										{
-											height: "100%"
+											pointerEvents: 'none',
+											minWidth: t.heads && isFirst ? "auto" : "5rem",
+											paddingRight: t.heads && isFirst ? "1rem" : "auto",
+											flexDirection: t.heads ? t.heads.direction : ""
 										} : {marginRight: '1.5rem'},
-										children: isFirst && t.sCharacter.no != 0 ? (0, m.jsx)(s.NZ,
+										children: isFirst && t.sCharacter.no != 0 ? [(0, m.jsx)('img',
 										{//左侧头像
-											height: 252,
-											width: 252,
+											className: '头像',
+											style: {zIndex: t.heads ? t.heads.list.length : ''},
 											src: loadhead(t.sCharacter.no,t.sCharacter.index),
 											onError: function(e)
 											{
 												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: t.sCharacter.index
-										}) : ''
-									}) : '', (0, m.jsxs)(t.sCharacter.no == 0 ? "div" : s.Xp,
+										}), t.heads ? t.heads.list.map(function(index,k)
+										{
+											return (0, m.jsx)('img',
+											{//左侧头像
+												className: '头像',
+												src: loadhead('LIST',index),
+												style: 
+												{
+													zIndex: t.heads.list.length-k-1,
+													marginTop: t.heads.direction === 'column' ? t.heads.margin ? t.heads.margin : "-1.5rem" : '',
+													marginLeft: t.heads.direction === 'row' ? t.heads.margin ? t.heads.margin : "-1.5rem" : ''
+												},
+												onError: function(e)
+												{
+													e.currentTarget.src = href+'Images/Ui/error.webp';
+												}
+											})
+										}) : ''] : ''
+									}) : '', (0, m.jsxs)("div",
 									{//图文消息
 										className: "对话",
 										style: 
 										{
 											alignItems: t.isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
+											height: t.heads && t.heads.fullHeight ? '100%' : ''
 										},
 										children: [!t.isCenter && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{//人物名称
 											className: "名称 bold",
-											children: t.name || loadname(t.sCharacter.no,t.sCharacter.index)//#新增临时名称
-										}) : '', (0, m.jsxs)("div",
+											children: t.name || loadname(t.sCharacter.no,t.sCharacter.index)
+										}) : '' , (0, m.jsxs)("div",
 										{//消息内容
 											style:
 											{
-												display:"flex",
+												display: "flex",
+												height: "100%",
 												justifyContent: t.isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : '',
 											},
 											children: [t.time ? (0, m.jsx)(s.i9,
 											{//左侧时间戳
+												className: '时间戳',
 												hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
-												style: {textAlign: 'right'},
 												children: t.time
-											}) : '', "chat" === t.type ? [(0, m.jsx)(t.sCharacter.no == 0 ? s.LP : !t.isRight && isFirst ? s.zC : s.Dt,
+											}) : '', "chat" === t.type ? [(0, m.jsx)('span',
 											{//文本消息
-												style: t.isRight ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
+												className: (t.sCharacter.no == 0 ? '文本' : !t.isRight && isFirst ? '文本 左角' : '文本'),
+												style: t.isRight || t.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
 												children: x ? (0, m.jsx)(I,{}) : t.content
-											}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)(s.CJ,{}) : '' ] : (0, m.jsx)(s.tG,
+											}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)(s.CJ,{}) : '' ] : (0, m.jsx)('img',
 											{//图片消息
+												className: '图片',
 												style:
 												{
-													"width":t.content.indexOf("Face") > -1 && !t.file ? '400px' : "",
-													"max-width":t.content.indexOf("Face") > -1 && !t.file ? mt_settings['差分比例'] : mt_settings['图片比例']
+													maxHeight: (t.content || t.file).indexOf("Face") > -1 ? '360px' : "",
+													maxWidth: (t.content || t.file).indexOf("Face") > -1 ? mt_settings['差分比例'] : mt_settings['图片比例']
 												},//@差分表情宽高百分比
-												src: t.file.indexOf(":") > -1 ? t.file : href+t.file,
+												src: t.file.indexOf(":image") > -1 ? t.file : href+t.file,
+												title: t.file.indexOf(":image") > -1 ? '' : t.file,
 												onError: function(e)
 												{
 													e.currentTarget.src = href+'Images/Ui/error.webp';
 												},
 											}), t.time ? (0, m.jsx)(s.i9,
 											{//右侧时间戳
-												hidden: !t.time || t.sCharacter.no == 0 || t.isRight,
-												style:{marginLeft:0},
+												className: '时间戳',
+												hidden: !t.time || t.sCharacter.no == 0 || t.isRight || t.isCenter,
 												children: t.time
 											}) : '']
 										})]
@@ -1487,20 +1557,39 @@
 										className: '头像框',
 										style:
 										{
+											pointerEvents: 'none',
 											justifyContent:'flex-end',
-											height: "100%"
+											minWidth: t.heads && isFirst ? "auto" : "5rem",
+											paddingLeft: t.heads && isFirst ? "1rem" : "auto",
+											flexDirection: t.heads ? t.heads.direction : ""
 										},
-										children: isFirst && t.sCharacter.no != 0 ? (0, m.jsx)(s.NZ,
-										{//右侧头像
-											height: 252,
-											width: 252,
+										children: isFirst && t.sCharacter.no != 0 ? [(0, m.jsx)('img',
+										{
+											className: '头像',
 											src: loadhead(t.sCharacter.no,t.sCharacter.index),
 											onError: function(e)
 											{
 												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: t.sCharacter.index
-										}) : ''
+										}), t.heads ? t.heads.list.map(function(index,k)
+										{
+											return (0, m.jsx)('img',
+											{//右侧头像
+												className: '头像',
+												src: loadhead('LIST',index),
+												style: 
+												{
+													zIndex: t.heads.list.length-k-1,
+													marginTop: t.heads.direction === 'column' ? "-1.5rem" : '',
+													marginLeft: t.heads.direction === 'row' ? "-1.5rem" : ''
+												},
+												onError: function(e)
+												{
+													e.currentTarget.src = href+'Images/Ui/error.webp';
+												}
+											})
+										}) : ''] : ''
 									}) : '']
 								})
 							}) : "reply" === t.type ? [(0, m.jsx)('div',

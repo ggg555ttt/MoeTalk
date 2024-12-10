@@ -306,7 +306,6 @@
 				}
 			});
 			var o = n(6835),
-				r = n(721),
 				i = n(4701),
 				a = n(3380),
 				c = n(6150),
@@ -1346,10 +1345,7 @@
 											{
 												if(isNaN(e.index+1))return;
 												INIT_loading()
-												fetch(`${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index]}.json`).then(function(response)
-												{
-													return response.json();
-												}).then(function(data)
+												XHR(`${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index]}.json`,function(data)
 												{
 													u(!1)
 													data = loaddata(data,'palyer')
@@ -1368,7 +1364,7 @@
 													m((0, ee.Fe)(playChat))
 													m((0, S.Cz)(!0))
 													$$('.nowChapter').text(`${h.name}_${e.index+1}：${h.chapter[e.index]}`)
-												});
+												})
 											},
 											children: (0, b.jsx)(x.xL,
 											{
@@ -1743,7 +1739,7 @@
 					{
 						2 === g.C_TYPE && setTimeout(function()
 						{
-							S(r.Z), I(6 * parseInt(document.documentElement.style.fontSize.replace("px", "")) || 0)
+							S(CHAR_CharList), I(6 * parseInt(document.documentElement.style.fontSize.replace("px", "")) || 0)
 						}, 500)
 					}, [g.C_TYPE, l]);
 					var A = (0, a.sk)(g.M_TYPE).replace(/^[a-z]/, function(e)
@@ -1790,7 +1786,7 @@
 						}), (0, b.jsx)(F,
 						{
 							option: g,
-							characterList: r.Z,
+							characterList: CHAR_CharList,
 							handleSelectList: function(e)
 							{
 								S(e)
@@ -1889,7 +1885,7 @@
 										whiteSpace: 'break-spaces',
 										textAlign: 'center'
 									},
-									children: '（支持ClosureTalk存档）\n作品收录条件：无明显违规或争议内容\n您可以在交流群或反馈页面向我提交您的作品\n推荐带上您的主页和昵称'
+									children: '（支持ClosureTalk存档）\n作品收录条件：无明显违规或争议内容\n您可以在交流群或反馈页面向我提交您的作品\n推荐带上您的主页和昵称\n※上传图片存档需在设置页面开启“旧版图片存档”选项'
 								})]//#
 							}, "noSearch"), 2 === g.C_TYPE && !g.CONTENT || (0, b.jsx)(k.Z,
 							{

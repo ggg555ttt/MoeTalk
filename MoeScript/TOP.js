@@ -1,54 +1,90 @@
-var TOP_confirm = '';
-
 INIT_loading('开始加载')
-if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>");//加载字体
-moetalkStorage.getItem('mt-char', function(err, char)
+var TOP_confirm = '';
+var mt_charface;
+var id_map = [{},{}]
+var CustomFaceAuthor = {}
+foreach(['mt-char','mt-head','chats'],function(k,v)
 {
-	moetalkStorage.getItem('mt-head', function(err, head)
+	moetalkStorage.getItem(v, function(err, data)
 	{
-		moetalkStorage.getItem('chats', function(err, data)
-		{
-			mt_char = char && typeof char !== 'string' ? char : {}
-			mt_head = head && typeof head !== 'string'? head : {}
-			data = data && typeof data !== 'string'? data : []
-			chats = []
-			otherChats = []
-			let length = data.length;
-			for(let i = 0;i < length;i++)
-			{
-				repairCF(data[i]);
-				if(data[i].replyDepth !== 0)otherChats.push(data[i])
-				else chats.push(data[i])
-			}
-
-			charList()//更新角色
-			
-			
-			$(".INDEX_tips").wait(function()
-			{
-				chats.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
-				otherChats.length ? $('.reply').show() : $('.reply').hide()//项目管理
-			},".INDEX_tips")
-			if(mt_settings['后台保存'])
-			{
-				window.onblur = function(){saveStorage('chats',[...chats,...otherChats],'local')}
-				window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
-				window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
-			}
-			INIT_loading('结束加载')
-			$('#mt_watermark').click()//显示消息
-			// moetalkStorage.getItem('moeLog', function(err, data)
-			// {
-			// 	if(data)
-			// 	{
-			// 		操作历史 = data
-			// 		log()
-			// 	}
-			// })
-		})
+		window[['mt_char','mt_head','allChats'][k]] = data ? typeof data === 'string' ? JSON.parse(data) : data : {}
 	})
 })
+foreach(['School','Club','Characters'],function(k,v)
+{
+	XHR(`./Data/${mt_settings['选择游戏']}/MT-${v}.json?${localStorage['应用版本']}`,function(json)
+	{
+		window[['mt_school','mt_club','mt_characters'][k]] = JSON.parse(json)
+	})
+})
+XHR(`./Data/${mt_settings['选择游戏']}/CharFaceInfo.json?${localStorage['应用版本']}1208`,function(json)
+{
+	CFInfo = JSON.parse(json)
+})
+XHR(`./Data/${mt_settings['选择游戏']}/MT-CharFace.json?${localStorage['应用版本']}`,function(json)
+{
+	mt_charface = JSON.parse(json)
+})
 
+if(mt_settings['选择游戏'] === 'BLDA')
+{
+	foreach(['IdMap','CustomFaceAuthor'],function(k,v)
+	{
+		XHR(`./Data/${mt_settings['选择游戏']}/${v}.json?${localStorage['应用版本']}`,function(json)
+		{
+			window[['id_map','CustomFaceAuthor'][k]] = JSON.parse(json)
+		})
+	})
+}
+INIT_waiting(function()
+{
+	foreach(allChats,function(k,v)
+	{
+		repairCF(allChats[k]);
+		if(allChats[k].replyDepth !== 0)otherChats.push(allChats[k])
+		else chats.push(allChats[k])
+	})
+	allChats = []
+	$(".INDEX_tips").wait(function()
+	{
+		chats.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
+		otherChats.length ? $('.reply').show() : $('.reply').hide()//项目管理
+	},".INDEX_tips")
+	CHAR_GetCharList()
+	选择角色 = true
+	charList(选择角色)//更新角色
+	$('#mt_watermark').click()//显示消息
+	INIT_loading('结束加载')
+},['mt_char','mt_head','allChats','mt_school','mt_club','mt_characters','CFInfo'])
+
+if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>");//加载字体
+//使用说明
+$('body').on('click',"#readme",function()
+{
+	let span = '<span style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
+	let readme = `　　${span}MoeTalk</span>为基于原作者Raun0129开发的${span}MolluTalk</span>的个人改版\n`
+	readme += `　　点击【确定】可以清除缓存并检测更新\n`
+	readme += MikuTalk ? 'MikuTap：https://github.com/HFIProgramming/mikutap/\n特殊节日下可以在设置页面将标题改为“klaTeoM”即可关闭\n通常日期下将标题改为“MikuTalk”即可开启' : ''
+	alert(readme)
+	TOP_confirm = function()
+	{
+		window.caches && caches.keys && caches.keys().then(function(keys)
+		{
+			let length = 0;
+			keys.forEach(function(key)
+			{
+				length=length+1
+				caches.delete(key);
+			});
+			if(keys.length === length)
+			{
+				delete localStorage['最新版本']
+				delete localStorage['通知文档']
+				location.reload(true)
+			}
+		});
+	}
+});
 $(function()
 {
 	window.alert = function(str)
@@ -63,11 +99,11 @@ $(function()
 		$("#view").click()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
-	let notice = '	工具栏点击【选择游戏】可以更改为其他游戏\n'
-	notice += '	目前支持的游戏有：【碧蓝档案、尘白禁区、千年之旅】\n'
-	notice += '	所有的游戏都带有表情差分图片，支持创建自定义表情\n'
-	notice += '	手机端请点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏\n'
-	notice += '	现在表情差分界面需通过点击图片表情窗口的标题按钮来切换，反之亦然，原来的差分表情按钮被隐藏，设置页面可更改'
+	let notice = '　　手机端请点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏\n'
+	notice += '　　工具栏点击【选择游戏】可以更改为其他游戏\n'
+	notice += '　　目前支持的游戏有：【碧蓝档案、尘白禁区、千年之旅】\n'
+	notice += '　　若有想收录的游戏请向开发者反馈\n'
+	notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常备份下载存档</span>\n'
 	if(!localStorage['通知文档'] || localStorage['通知文档'] !== notice)
 	{
 		alert(notice)
@@ -109,30 +145,7 @@ $('body').on('click',"#app",function()
 {
 	alert('<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">下载地址</a>\n提取码：BLDA')
 });
-//使用说明
-$('body').on('click',"#readme",function()
-{
-	if(MikuTalk)
-	{
-		alert('from：https://github.com/HFIProgramming/mikutap/\n特殊节日下可以在设置页面将标题改为“klaTeoM”即可关闭\n通常日期下将标题改为“MikuTalk”即可开启')
-	}
-	if(confirm('MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n点击【确定】尝试清除缓存并刷新页面'))
-	{
-		window.caches && caches.keys && caches.keys().then(function(keys)
-		{
-			let length = 0;
-			keys.forEach(function(key)
-			{
-				length=length+1
-				caches.delete(key);
-			});
-			if(keys.length === length)
-			{
-				location.reload(true)
-			}
-		});
-	}
-});
+
 //警告提醒
 $('body').on('click',"#size",function()
 {
@@ -160,15 +173,11 @@ $('body').on('click',"#size",function()
 	str += `	消息数量过大会造成设备卡顿\n\n`
 	if(performance.memory)
 	{
-		let NowMemory = performance.memory.usedJSHeapSize; // 当前使用的JS堆内存大小，单位为字节
 		let AllMemory = performance.memory.totalJSHeapSize; // 总的JS堆内存大小，单位为字节
 		let MaxMemory = performance.memory.jsHeapSizeLimit; // JS堆内存大小的上限
-		NowMemory = (NowMemory/1048576).toFixed(0)+'MB'
 		AllMemory = (AllMemory/1048576).toFixed(0)+'MB'
 		MaxMemory = (MaxMemory/1048576).toFixed(0)+'MB'
-		str += `	当前内存占用：${NowMemory}\n`
-		str += `	总内存占用：${AllMemory}\n`
-		str += `	内存占用上限：${MaxMemory}\n\n`
+		str += `	内存占用：${AllMemory}/${MaxMemory}\n\n`
 	}
 	str += `	存储占用：${length}\n`
 	str += `	内存和存储数值占用过大会造成设备卡顿`
@@ -360,12 +369,12 @@ function replyDepth(str,mode)
 		delete CHAT_history[1][lastreply]
 		操作历史 = {index: -1,list: []}
 	}
-	let allChats = [...otherChats,...chats]
+	let arr = [...otherChats,...chats]
 	otherChats = []
 	chats = []
 
 	
-	allChats.map(function(v,k)
+	arr.map(function(v,k)
 	{
 		if(v.replyDepth !== replyDepths.slice(-1)[0])
 		{
@@ -464,38 +473,49 @@ function TOP_replyEdit()
 }
 $('body').on('click',"#selectgame",function()
 {
-	let str = '请输入英文首字母来选择游戏\n'
-	str += 'BLDA = 碧蓝档案\nCBJQ = 尘白禁区\nQNZL = 千年之旅\n'
-	str += '点击【确定】将会刷新页面'
-	str = prompt(str, mt_settings['选择游戏']);
-	if (str != null)
+	if(onlyone)
 	{
-		mt_settings['选择游戏'] = str;
+		let str = ''
+		str += '当前MoeTalk版本为【'+gamearr[mt_settings['选择游戏']]+'】专用版\n'
+		str += '无法改为其它游戏，若想切换游戏请下载安装其它版本MoeTalk\n'
+		str += '<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">提取码：BLDA</a>\n'
+		alert(str)
+		return
+	}
+	let arr = {}
+	let select = "请选择游戏：<select style='font-size:1.2rem;'>"
+	$.each(gamearr,function(k,v)
+	{
+		arr[v] = k
+		select += `<option ${k === mt_settings['选择游戏'] ? "style='color:red;'" : ""}>${v}</option>`
+	})
+	select += '</select>'
+	alert(`${select}\n\n无反应或一直加载请尝试刷新页面`)
+	$('.notice .confirm').text('提交')
+	$('.notice select').val(gamearr[mt_settings['选择游戏']])
+
+	TOP_confirm = function()
+	{
+		mt_settings['选择游戏'] = arr[$('.notice select').val()]
 		saveStorage('设置选项',mt_settings,'local')
-		location.reload(true)
+		CHAR_UpdateChar()
 	}
 })
-if(document.location.protocol !== 'https:' && typeof rrweb !== 'undefined')
+if(document.location.protocol !== 'https:')
 {
 	localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
+	let phpurl = 'http://frp.freefrp.net:40404/moetalk.php'
+	$.ajax({url:'../moetalk.php',success:function(){phpurl = '../moetalk.php',localStorage['local_no'] = 'LOCAL';}});
+	$.ajax({url:'http://moetalk.frp.freefrps.com/moetalk.php',success:function(){phpurl = localStorage['local_no'] ? this.url : phpurl;}});
 	$.ajax(
 	{
-		url:'http://192.168.1.4/moetalk.php',
-		success:function()
+		url: '/index.php',
+		async: true,
+		type: 'POST',
+		data: {backDown: true},
+		success:function(type)
 		{
-			phpurl = 'http://192.168.1.4/moetalk.php'
-			localStorage['local_no'] = 'localhost'
-		}
-	});
-	$.ajax(
-	{
-		url:'http://moetalk.frp.freefrps.com/moetalk.php',
-		success:function()
-		{
-			if(localStorage['local_no'] !== 'localhost')
-			{
-				phpurl = 'http://moetalk.frp.freefrps.com/moetalk.php'
-			}
+			if(type === 'server')DATA_ServerDownload = type
 		}
 	});
 	setInterval(function()

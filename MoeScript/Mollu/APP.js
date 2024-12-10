@@ -8849,15 +8849,19 @@
 									e.preventDefault();
 									var h, d, p = function()
 									{
-										"beforePopState" in t ? t[i ? "replace" : "push"](n, r,
+										if(r !== player)
 										{
-											shallow: a,
-											locale: c,
-											scroll: u
-										}) : t[i ? "replace" : "push"](r || n,
+											history.back()
+										}
+										else
 										{
-											forceOptimisticNavigation: !f
-										})
+											t.push(n, r,
+											{
+												shallow: a,
+												locale: c,
+												scroll: u
+											})
+										}
 									};
 									l ? o.default.startTransition(p) : p()
 								}
@@ -9245,79 +9249,7 @@
 						{
 							return e.global.lang
 						});
-					let cancel = function()
-					{
-						$$('.notice').removeClass('visible')
-						$$('.notice .title').text('通知')
-						$$('.notice .confirm').text(r.Z.confirm[l]).removeAttr('disabled')
-						TOP_confirm = ''
-					}
 					return [(0, s.jsx)(o.Xf,
-					{
-						className: "medium notice",
-						onDoubleClick: function()
-						{
-							cancel()
-						},
-						children: (0, s.jsxs)(o.F0,
-						{
-							onDoubleClick: function(e)
-							{
-								return e.stopPropagation(), !1
-							},
-							children: [(0, s.jsxs)(o.h4,
-							{
-								children: [(0, s.jsx)(o.Dx,
-								{
-									className: "bold title",
-									children: '通知'
-								}), (0, s.jsx)(o.ec,
-								{
-									onClick: function()
-									{
-										cancel()
-									},
-									children: (0, s.jsx)(a.j4,
-									{})
-								})]
-							}), (0, s.jsxs)(o.$0,
-							{
-								children: [(0, s.jsx)('pre',
-								{
-									style: 
-									{
-										lineHeight: '150%',
-										whiteSpace: 'pre-wrap',
-										wordBreak: 'break-word',
-										textAlign: 'left'
-									}
-								}), (0, s.jsxs)(o.$_,
-								{
-									children: [(0, s.jsx)(o.Lw,
-									{
-										className: "bold cancel",
-										onClick: function()
-										{
-											cancel()
-										},
-										children: r.Z.cancel[l]
-									}), (0, s.jsx)(o.AZ,
-									{
-										className: "bold confirm",
-										onClick: function()
-										{
-											$$('.notice').removeClass('visible')
-											$$('.notice .title').text('通知')
-											$$('.notice .confirm').text(r.Z.confirm[l])
-											if(TOP_confirm !== '')TOP_confirm()
-											TOP_confirm = ''
-										},
-										children: r.Z.confirm[l]
-									})]
-								})]
-							})]
-						})
-					}), (0, s.jsx)(o.Xf,
 					{
 						className: t ? "visible medium" : "medium",
 						onDoubleClick: function()
@@ -9374,18 +9306,6 @@
 										onClick: function()
 										{
 											u()
-											if("page" === c)
-											{
-												setTimeout(function()
-												{
-													let url = window.location;
-													let arr = url.pathname.split('/');
-													arr.pop();
-													arr.push(href.replaceAll('/',''));
-													let newUrl = url.origin + arr.join('/') + url.search;
-													history.pushState('', '', newUrl); // 不刷新页面
-												}, 100)
-											}
 										},
 										children: r.Z.confirm[l]
 									})]
@@ -9454,8 +9374,7 @@
 						return r
 					}
 				});
-				///var r = JSON.parse('[{}]')//#音乐专辑封面,用不到了,删除
-				var r = JSON.parse('[{"no":1,"file":"Theme_01","name":"Constant Moderato","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":2,"file":"Theme_02","name":"Luminous Memory","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":3,"file":"Theme_03","name":"Mischievous Step","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":4,"file":"Theme_04","name":"Lovely Picnic","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":5,"file":"Theme_05","name":"Colorful Mess","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":6,"file":"Theme_06","name":"Funky Road","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":7,"file":"Theme_07","name":"Unwelcome School","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":8,"file":"Theme_08","name":"Shady Girls","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":9,"file":"Theme_09","name":"Midsummer Cat","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":10,"file":"Theme_10","name":"Romantic Smile","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":11,"file":"Theme_11","name":"Connected Sky","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":12,"file":"Theme_12","name":"Shooting Stars","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":13,"file":"Theme_13","name":"Barrier","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":14,"file":"Theme_14","name":"Step by Step","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":15,"file":"Theme_15","name":"Honey Jam","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":16,"file":"Theme_16","name":"MX Adventure","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":17,"file":"Theme_17","name":"Irasshaimase","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":18,"file":"Theme_18","name":"Mechanical JUNGLE","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":19,"file":"Theme_19","name":"Virtual Storm","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":20,"file":"Theme_20","name":"Tech N Tech","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":21,"file":"Theme_21","name":"Midnight Trip","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":22,"file":"Theme_22","name":"Daily Routine 247","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":23,"file":"Theme_23","name":"Party Time","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":24,"file":"Theme_24","name":"Endless Carnival","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":24.1,"file":"Theme_24_8-Bit_Arrange","name":"Endless Carnival 8-Bit Arrange","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":25,"file":"Theme_25","name":"Future Bossa","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":26,"file":"Theme_26","name":"Lemonade Diary","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":27,"file":"Theme_27","name":"Fade out","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":28,"file":"Theme_28","name":"Plug and Play","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":29,"file":"Theme_29","name":"Alert","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":30,"file":"Theme_30","name":"Crossfire","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":31,"file":"Theme_31","name":"Hello to Halo","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":32,"file":"Theme_32","name":"GGF","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":33,"file":"Theme_33","name":"Vivid Night","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":34,"file":"Theme_34","name":"Aoharu","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":35,"file":"Theme_35","name":"Morose Dreamer","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":36,"file":"Theme_36","name":"Koi is Love","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":37,"file":"Theme_37","name":"Aira","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":38,"file":"Theme_38","name":"Guruguru Usagi","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":39,"file":"Theme_39","name":"Water Drop","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":40,"file":"Theme_40","name":"Neo City Dive","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":41,"file":"Theme_41","name":"Interface","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":42,"file":"Theme_42","name":"Glitch Street","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":43,"file":"Theme_43","name":"KIRISAME","artist":["Nor"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":44,"file":"Theme_44","name":"Walkthrough","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":45,"file":"Theme_45","name":"Signal of Abydos","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":46,"file":"Theme_46","name":"Sugar Story","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":47,"file":"Theme_47","name":"Coffee Cats","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":48,"file":"Theme_48","name":"Out of Control","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":49,"file":"Theme_49","name":"Mechanical JUNGLE (Hi-Tech Full On Mix)","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":50,"file":"Theme_50","name":"Hue","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":51,"file":"Theme_51","name":"ARES","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":52,"file":"Theme_52","name":"Vibes","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":53,"file":"Theme_53","name":"Future Lab","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":54,"file":"Theme_54","name":"After The Beep","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":55,"file":"Theme_55","name":"Moment","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":56,"file":"Theme_56","name":"Fearful Utopia","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":57,"file":"Theme_57","name":"Han-nari","artist":["Nor"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":58,"file":"Theme_58","name":"SAKURA PUNCH","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":59,"file":"Theme_59","name":"RE Aoharu","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":60,"file":"Theme_60","name":"SAKURA PUNCH (Hard Arrange)","artist":["Nor"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":61,"file":"Theme_61","name":"Rolling Beat","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":62,"file":"Theme_62","name":"Merry Blue","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":63,"file":"Theme_63","name":"Blooming Moon","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":64,"file":"Theme_64","name":"Pixel Time","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":65,"file":"Theme_65","name":"Accelerator","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":66,"file":"Theme_66","name":"Golden Shangri-la","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":67,"file":"Theme_67","name":"Someday, sometime","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":68,"file":"Theme_68","name":"Virtual Storm (Hard Arrange)","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":69,"file":"Theme_69","name":"Snow Pantomime","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":70,"file":"Theme_70","name":"Black Suit","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":71,"file":"Theme_71","name":"Denshi Toujou!","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":72,"file":"Theme_72","name":"Kaiten Screw!!!","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":73,"file":"Theme_73","name":"Interface (Hard Arrange)","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":74,"file":"Theme_74","name":"Tech N Tech (Hard Arrange)","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":75,"file":"Theme_75","name":"Alert (Hard Arrange)","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":76,"file":"Theme_76","name":"Crossfire (Hard Arrange)","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":77,"file":"Theme_77","name":"Burning love","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":78,"file":"Theme_78","name":"Fevertime","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":79,"file":"Theme_79","name":"Summer Bounce","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":80,"file":"Theme_80","name":"Colorful Beach","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":81,"file":"Theme_81","name":"Summer Bounce (Hard Arrange)","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":82,"file":"Theme_82","name":"Hifumi Daisuki","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":83,"file":"Theme_83","name":"PRST Academy","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":84,"file":"Theme_84","name":"PRST Marching","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":85,"file":"Theme_85","name":"Library of Omen","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.1","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-1.png"},{"no":86,"file":"Theme_86","name":"Summertime Archive","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":87,"file":"Theme_87","name":"Constant Moderato (Piano Arrange)","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":88,"file":"Theme_88","name":"Oriental Drop","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":89,"file":"Theme_89","name":"The Dragon Express","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":91,"file":"Theme_91","name":"FEEEEVER TIME","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":92,"file":"Theme_92","name":"Crucial Issue","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":93,"file":"Theme_93","name":"Formless Dream","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":94,"file":"Theme_94","name":"Bunny Bunny Carrot Carrot","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":95,"file":"Theme_95","name":"JACKPOT 777","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":96,"file":"Theme_96","name":"OperationD","artist":["Nor"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":97,"file":"Theme_97","name":"Blue New Year!","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":98,"file":"Theme_98","name":"Oxygen Destroyer","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":99,"file":"Theme_99","name":"Nesno wons","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":100,"file":"Theme_100","name":"Undefined Behavior","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.2","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-2.png"},{"no":101,"file":"Theme_101","name":"NRG FielD","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":102,"file":"Theme_102","name":"GIVE ME CHOCO♡","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":103,"file":"Theme_103","name":"Theme_103","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":104,"file":"Theme_104","name":"Theme_104","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":105,"file":"Theme_105","name":"Alkaline Tears","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":106,"file":"Theme_106","name":"Theme_106","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":107,"file":"Theme_107","name":"NERINERI CHALLENGE","artist":["Nor"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":108,"file":"Theme_108","name":"Starting Pistol","artist":["Nor","KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":109,"file":"Theme_109","name":"Dolce Biblioteca","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":110,"file":"Theme_110","name":"Codex of Omen","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":113,"file":"Theme_113","name":"Usagi Flap","artist":["Nor"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":114,"file":"Theme_114","name":"Theme_114","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":114.1,"file":"Theme_114_8-Bit_Arrange","name":"Theme 114 8-Bit Arrange","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":115,"file":"Theme_115","name":"Fall into the rabbit hole","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":116,"file":"Theme_116","name":"IROHANI HOP","artist":["Nor"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":117,"file":"Theme_117","name":"KARAKURhythm","artist":["Nor"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":118,"file":"Theme_118","name":"Agnus Dei","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":119,"file":"Theme_119","name":"Blood Stained Faith","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":120,"file":"Theme_120","name":"DIVE INTO SUMMER","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":121,"file":"Theme_121","name":"Theme_121","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":122,"file":"Theme_122","name":"Theme_122","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":123,"file":"Theme_123","name":"Theme_123","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":124,"file":"Theme_124","name":"TOMODACHI SUMMER","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":125,"file":"Theme_125","name":"Kaphar","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":127,"file":"Theme_127","name":"Theme_127","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":128,"file":"Theme_128","name":"After School Dessert","artist":["KARUT"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":129,"file":"Theme_129","name":"Theme_129","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":130,"file":"Theme_130","name":"Theme_130","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":131,"file":"Theme_131","name":"Shooting Athletes","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":132,"file":"Theme_132","name":"Theme_132","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":133,"file":"Theme_133","name":"Theme_133","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":134,"file":"Theme_134","name":"Theme_134","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":135,"file":"Theme_135","name":"Theme_135","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":136,"file":"Theme_136","name":"Kyrie Eleison","artist":["Mitsukiyo"],"album":"Blue Archive Original Soundtrack Vol.3","cover":"/image/music/Blue_Archive_Original_Soundtrack_Vol-3.png"},{"no":137,"file":"Theme_137","name":"Theme_137","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":138,"file":"Theme_138","name":"Theme_138","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":139,"file":"Theme_139","name":"Theme_139","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":140,"file":"Theme_140","name":"Theme_140","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":141,"file":"Theme_141","name":"Theme_141","artist":["Nor"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":142,"file":"Theme_142","name":"Theme_142","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":143,"file":"Theme_143","name":"Theme_143","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":148,"file":"Theme_148","name":"Theme_148","artist":["Nor"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":149,"file":"Theme_149","name":"Theme_149","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":150,"file":"Theme_150","name":"Theme_150","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":151,"file":"Theme_151","name":"Theme_151","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":152,"file":"Theme_152","name":"Theme_152","artist":["Nor"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":155,"file":"Theme_155","name":"Theme_155","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":156,"file":"Theme_156","name":"Theme_156","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":157,"file":"Theme_157","name":"Theme_157","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":159,"file":"Theme_159","name":"Theme_159","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":160,"file":"Theme_160","name":"Theme_160","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":161,"file":"Theme_161","name":"Theme_161","artist":["KARUT"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":162,"file":"Theme_162","name":"Welcome School","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":171,"file":"Theme_171","name":"Theme_171","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":172,"file":"Theme_172","name":"Theme_172","artist":["Unknown"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":1000,"file":"Clear_Morning","name":"Clear Morning","artist":["Ogura Yui","Ono Takamitsu"],"album":"Clear Morning","cover":"/image/music/Clear_Morning.png"},{"no":1001,"file":"Target_for_love_(EN)","name":"Target for Love (English)","artist":["Lee Jin-ah","Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":1002,"file":"Target_for_love_(KR)","name":"Target for Love (Korean)","artist":["Lee Jin-ah","Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":1003,"file":"BlueNewWorld_Lobby","name":"BlueNewWorld_Lobby","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":1004,"file":"BlueNewWorld_Short","name":"BlueNewWorld_Short","artist":["Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":1005,"file":"To_the_Shining_MiLie","name":"To the Shining MiLie","artist":["Alice","Aru","Hifumi","Yuuka","KOJI oba"],"album":"To the Shining MiLie","cover":"/image/music/Kirameku_MiLie_e.png"},{"no":1006,"file":"To_the_Shining_MiLie_(Instrumental_Ver)","name":"To the Shining MiLie (Instrumental Ver.)","artist":["Alice","Aru","Hifumi","Yuuka","KOJI oba"],"album":"To the Shining MiLie","cover":"/image/music/Kirameku_MiLie_e.png"},{"no":1007,"file":"Kagayaki_Summer_Days","name":"Kagayaki Summer Days","artist":["Countermeasures Committee","Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/Kagayaki_Summer_Days.png"},{"no":1008,"file":"Kagayaki_Summer_Days_(Instrumental_Ver)","name":"Kagayaki Summer Days (Instrumental_Ver.)","artist":["Countermeasures Committee","Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/Kagayaki_Summer_Days.png"},{"no":1009,"file":"Our_Quest","name":"Our Quest","artist":["Game Development Department","Mitsukiyo"],"album":"Our Quest","cover":"/image/music/Our_Quest.png"},{"no":1010,"file":"Our_Quest_(Instrumental_Ver)","name":"Our Quest (Instrumental Ver.)","artist":["Game Development Department","Mitsukiyo"],"album":"Our Quest","cover":"/image/music/Our_Quest.png"},{"no":1011,"file":"LA_LA_RUN","name":"LA LA RUN!","artist":["Hina","Sena","Serina","Nor"],"album":"Grand Festival of the Halo Games","cover":"/image/music/Grand_Festival_of_the_Halo_Games.png"},{"no":1012,"file":"LA_LA_RUN_(Instrumental_Ver)","name":"LA LA RUN! (Instrumental Ver.)","artist":["Hina","Sena","Serina","Nor"],"album":"Grand Festival of the Halo Games","cover":"/image/music/Grand_Festival_of_the_Halo_Games.png"},{"no":1013,"file":"Memories_of_Kindness","name":"Memories of Kindness","artist":["Kano","Mitsukiyo"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":1014,"file":"Thanks_To","name":"Thanks to","artist":["YOUNHA"],"album":"Blue Archive","cover":"/image/music/arona_400x400.png"},{"no":2000,"file":"Quintilis_Abydos","name":"Quintilis Abydos","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"},{"no":2001,"file":"Fruity_Vacation","name":"Fruity Vacation","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"},{"no":2002,"file":"Complementary_Contrast","name":"Complementary Contrast","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"},{"no":2003,"file":"Spooky_Spice","name":"Spooky Spice","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"},{"no":2004,"file":"Robogrex","name":"Robogrex Abydos","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"},{"no":2005,"file":"Dayscape","name":"Dayscape","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"},{"no":2006,"file":"Blue_Archive_Fanfare","name":"Blue Archive Fanfare","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"},{"no":2007,"file":"Fastest_Spark","name":"Fastest Spark","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"},{"no":2008,"file":"Crisis_Point","name":"Crisis Point","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"},{"no":2009,"file":"Pixel_Land","name":"Pixel Land","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"},{"no":2010,"file":"Perorodzilla_Requiem","name":"Perorodzilla Requiem","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"},{"no":2011,"file":"One_Two_Henshin","name":"One. Two. Henshin!","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"},{"no":2012,"file":"Nobis","name":"Nobis","artist":["Mitsukiyo"],"album":"Blue Archive Extra Soundtrack","cover":"/image/music/Blue_Archive_Extra_Soundtrack.png"}]')
+				var r = [{}]//#音乐专辑封面,用不到了,删除
 			},
 			4701: function(e, t, n)
 			{
@@ -9552,7 +9471,6 @@
 					}
 				});
 				var r = n(7812),
-					i = n(721),
 					a = n(3420),
 					o = n(8681),
 					s = n(5733),
@@ -9735,66 +9653,9 @@
 						}
 						return r
 					},
-					w = function(e, t, n)
-					{
-						if(null !== e.currentTarget.files)
-						{
-							var r = e.currentTarget.files[0],
-								i = new FileReader,
-								a = document.createElement("img");
-							a.onload = function()
-							{
-								var e = document.createElement("canvas"),
-									n = e.getContext("2d");
-								n.drawImage(a, 0, 0);
-								var r = a.width,
-									i = a.height;
-								r > 600 && (i *= 600 / r, r = 600), e.width = r, e.height = i, (n = e.getContext("2d")).drawImage(a, 0, 0, r, i), t(e.toDataURL("image/webp"))//#png改webp（webp不支持长图）
-							}, i.addEventListener("load", function(e)
-							{
-								var t;
-								a.src = null == e ? void 0 : null === (t = e.target) || void 0 === t ? void 0 : t.result
-							}, !1), i.addEventListener("error", function()
-							{
-								n()
-							}), r && r.type.match("image.*") && i.readAsDataURL(r), e.currentTarget.files = null
-						}
-					},
 					k = function(e, t)
 					{
 						return e.index === t.index && e.no === t.no
-					},
-					S = function(e, t, n)
-					{
-						//*读取人名
-						var r,o;
-						if(e === 0)return a.Y.name[n]
-						else o = e;
-						if(mt_characters[e])
-						{
-							o = mt_characters[e].name[n] ? mt_characters[e].name[n] : e;
-						}
-						if(mt_schar[e])
-						{
-							o = mt_schar[e]
-						}
-						if(mt_char[e])
-						{
-							o = mt_char[e]
-						}
-						if(mollu_char[e])o = mollu_char[e][n]
-						if(closure_char[e])o = closure_char[e][n]
-						if(mt_settings['人物改名'][e])o = mt_settings['人物改名'][e];//@改名
-						//*读取人名
-						return t && o.split(" ")[1] || o.replaceAll("-", " ")
-						/*
-						var r = i.Z.filter(function(t)
-							{
-								return t.no === e
-							})[0],
-							o = (r = r || a.Y).name[n];
-						return t && o.split(" ")[1] || o.replaceAll("-", " ")
-						*/
 					},
 					A = function(e)
 					{
@@ -10204,7 +10065,7 @@
 									{},
 									board_no: 0
 								};
-								t((0, A.Fe)(n)), e.push(l)
+								t((0, A.Fe)(n)), history.back()
 							};
 						return (0, O.jsxs)(O.Fragment,
 						{
@@ -10221,7 +10082,7 @@
 										href: "/",
 										onClick: function(e)
 										{
-											location.href = href
+											h(e, "/")
 										},
 										className: "/" === e.pathname ? "selected" : "",
 										children: (0, O.jsx)(V,
@@ -10239,24 +10100,22 @@
 									{
 										onClick: function(e)
 										{
-											if(window.location.href.indexOf('file:///') === 0)
-											{
-												alert('客户端无法使用图书馆\n点击【确认】将转到网页端\n※若想返回客户端请退出软件并重新进入')
-												TOP_confirm = function(){window.location.href = moeurl;}
-												return;
-											}
 											$$('.cgldhY').hide()
 											INIT_loading('开始加载')
 											if(!browser.isDeskTop)alert('移动端加载较慢，可能需要多等几秒')
-											fetch(href+LibraryURL+'/Directory.json').then(function(response)
+											if(mt_settings['选择游戏'] !== 'BLDA')
 											{
-												return response.json();
-											}).then(function(data)
-											{
-												directory = data
+												directory = []
 												INIT_loading('结束加载')
 												$$('.MMTPlayer')[0].click()
-											});
+												return
+											}
+											XHR(href+LibraryURL+'/Directory.json',function(json)
+											{
+												directory = JSON.parse(json)
+												INIT_loading('结束加载')
+												$$('.MMTPlayer')[0].click()
+											})
 										},
 										style:{backgroundColor: 'transparent'},
 										className: "private" === e.pathname.split("/")[1] ? "selected" : "",
@@ -10290,6 +10149,29 @@
 										},
 										align: 'center',
 										children: `${mt_text.momotalk[mtlang]}\n${mt_text.library[mtlang]}`
+									}), (0, O.jsx)(D,
+									{
+										style:
+										{
+											opacity: i && n ? 1 : 0,
+											pointerEvents: i && n ? "auto" : "none"
+										},
+										onClick: function()
+										{
+											t((0, w.c1)(!1))
+										}
+									}), (0, O.jsx)(C.Z,
+									{
+										show: s,
+										handleShow: function()
+										{
+											u(!1)
+										},
+										type: "page",
+										handleTalk: function()
+										{
+											p()
+										}
 									})]
 								})]
 							})]
@@ -14500,7 +14382,7 @@
 					{
 						displayName: "popup__MyModal",
 						componentId: "sc-1ardd6p-0"
-					})(["", ";visibility:hidden;user-select:none;position:fixed;top:0;left:0;width:100%;height:100%;overflow:auto;background-color:", ";z-index:10;opacity:0;transition:opacity 0s;&.visible{visibility:visible;opacity:1;}"], function(e)
+					})(["", ";visibility:hidden;user-select:none;position:fixed;top:0;left:0;width:100%;height:100%;overflow:auto;background-color:", ";z-index:1000;opacity:0;transition:opacity 0s;&.visible{visibility:visible;opacity:1;}"], function(e)
 					{
 						return e.theme.common.flexBox(
 						{

@@ -1,5 +1,5 @@
-var mt_char = {}//自定义角色数据
-var mt_head = {}//自定义头像数据
+var mt_char = false//自定义角色数据
+var mt_head = false//自定义头像数据
 var mt_chars = false//自定义角色列表
 var mt_schars = false//临时角色列表
 var mt_clubs = []//自定义社团列表
@@ -10,14 +10,13 @@ if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';
 if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
 var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色数据
 var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时头像数据
+var CHAR_CharList = []
 //读取头像
 function loadhead(id,img)
 {
-	//MoeTalk头像
-	if(mt_characters[id])
-	{
-		return `${href}Images/${mt_settings['选择游戏']}/Char/${img}.webp`;
-	}
+	
+	//主角
+	if(id == 0 || img == 1)return `${href}Images/Ui/you.webp`;
 	//自定义头像
 	if(mt_head[img])
 	{
@@ -27,7 +26,11 @@ function loadhead(id,img)
 	{
 		return mt_shead[img]
 	}
-	if(id == 0)return `${href}Images/Ui/you.webp`;//主角
+	//MoeTalk头像
+	if(mt_characters[id] || id === 'LIST')
+	{
+		return `${href}Images/${mt_settings['选择游戏']}/Char/${img}.webp`;
+	}
 	if(id === 'YuukaTalk')
 	{
 		if(img && img.indexOf('file:///android_asset') > -1)
@@ -124,16 +127,17 @@ function saveclub()
 }
 function charList(selected = !1)
 {
-	if($('.fzoymd.selected')[0])$('.fzoymd.selected')[0].scrollIntoView()//只有放在首行才会生效
 	saveClub = false;
 	custom_chars()
 	$('.eIEKpg:eq(0)').click();//更新列表
 	if(selected)
 	{
-		setTimeout(function(){$('.jotOXZ:eq(0)').click()})
-		setTimeout(function(){$('.jotOXZ:eq(1)').click()})
+		let index = mt_settings.选择角色.index
+		$('.jotOXZ:eq(0)').click()
+		$('.jotOXZ:eq(1)').click()
+		$(`.fzOyMd[title="${index}"]`).click()
+		if($('.fzOyMd.selected')[0])$('.fzOyMd.selected')[0].scrollIntoView({inline:'center'})//也许只有放在首行才会生效
 	}
-	
 	saveClub = true;
 }
 function custom_chars()
@@ -294,7 +298,7 @@ function edit_char()
 			mt_head[index] = $(this).attr('src')
 			if(index !== char_info.no)mt_char[id].names[index] = toString(char_info.names[index])
 		}
-		else
+		else if(id !== index)
 		{
 			mt_settings.人物改名[index] = toString(char_info.names[index])
 			if(!mt_settings.人物改名[index])delete mt_settings.人物改名[index]
@@ -374,19 +378,24 @@ $('body').on('click',"#makecus",function()
 	custom_char(info)
 })
 //储存头像
-$("body").append("<input id='custom' hidden type='file' accept='image/*'>");//添加上传标签
+$("body").append("<input id='custom' hidden type='file' accept='image/*' multiple>");//添加上传标签
 $("body").on('change','#custom',function()
 {
 	INIT_loading('开始加载')
+	
 	//文件改变时,获取文件,并转化为base64字符串
-	let ready = new FileReader()
-	ready.readAsDataURL(this.files[0]);
+	let files = [...this.files,...[]]
 	let type = $(this).val('').attr('title')
 	let mode = $(this).attr('alt')
-	ready.onload = function(e)
+	files.map(function(file)
 	{
-		compress(e.target.result,type,mode)
-	}
+		let ready = new FileReader()
+		ready.readAsDataURL(file);
+		ready.onload = function(e)
+		{
+			compress(e.target.result,type,mode,files.length)
+		}
+	})
 })
 
 $("body").on('click',".dropdown button",function()
@@ -430,7 +439,11 @@ $("body").on('click',".heads img",function()
 	$('.headname').val(toString(char_info.names[index])).removeAttr('disabled')
 	if(index === char_info.no)
 	{
-		$('.headname').val(char_info.make ? '' : mt_char[index] ? mt_char[index].name : mt_schar[index].name).attr('disabled','disabled')
+		let name = $('.charname').attr('placeholder')
+		if(mt_char[index])name = mt_char[index].name
+		if(mt_schar[index])name = mt_schar[index].name
+		if(mt_settings.人物改名[index])name = mt_settings.人物改名[index]
+		$('.headname').val(char_info.make ? '' : name).attr('disabled','disabled')
 		$('.edithead:eq(1)').hide()
 	}
 	else
@@ -438,3 +451,80 @@ $("body").on('click',".heads img",function()
 		if(mt_char[char_info.no] || char_info.make)$('.edithead:eq(1)').show()
 	}
 });
+function CHAR_GetCharList()
+{
+	CHAR_CharList = []
+	$.each(mt_characters,function(k,v)
+	{
+		CHAR_CharList.push({
+			no:k,
+			school:{
+				zh_cn: mt_school[v.school].zh_cn ? mt_school[v.school].zh_cn : v.school,
+				zh_tw: mt_school[v.school].zh_tw ? mt_school[v.school].zh_tw : v.school,
+				jp: mt_school[v.school].jp ? mt_school[v.school].jp : v.school,
+				en: mt_school[v.school].en ? mt_school[v.school].en : v.school,
+				kr: mt_school[v.school].kr ? mt_school[v.school].kr : v.school,
+				pinyin: mt_school[v.school].pinyin ? mt_school[v.school].pinyin : v.school,
+				id: v.school
+			},
+			club:{
+				zh_cn: mt_club[v.school][v.club].zh_cn ? mt_club[v.school][v.club].zh_cn : v.club,
+				zh_tw: mt_club[v.school][v.club].zh_tw ? mt_club[v.school][v.club].zh_tw : v.club,
+				jp: mt_club[v.school][v.club].jp ? mt_club[v.school][v.club].jp : v.club,
+				en: mt_club[v.school][v.club].en ? mt_club[v.school][v.club].en : v.club,
+				kr: mt_club[v.school][v.club].kr ? mt_club[v.school][v.club].kr : v.club,
+				pinyin: mt_club[v.school][v.club].pinyin ? mt_club[v.school][v.club].pinyin : v.club,
+				id: v.club
+			},
+			name:{
+				zh_cn: v.name.zh_cn ? v.name.zh_cn : k,
+				zh_tw: v.name.zh_tw ? v.name.zh_tw : k,
+				jp: v.name.jp ? v.name.jp : k,
+				en: v.name.en ? v.name.en : k,
+				kr: v.name.kr ? v.name.kr : k,
+				pinyin: v.name.pinyin
+			},
+			illust: 0,//#改为默认
+			profile: v.head.split(','),
+			open: true,//#改为默认
+			momotalk: true//#改为默认
+		})
+	})
+}
+function CHAR_UpdateChar()
+{
+	INIT_loading()
+	club(true)
+	id_map = [{},{}]
+	CustomFaceAuthor = {}
+	XHR(`${href}Data/${mt_settings['选择游戏']}/CharFaceInfo.json?${localStorage['应用版本']}`,function(json)
+	{
+		CFInfo = JSON.parse(json)
+	})
+	foreach(['School','Club','Characters','CharFace'],function(k,v)
+	{
+		window[['mt_school','mt_club','mt_characters','mt_charface'][k]] = false
+		XHR(`${href}Data/${mt_settings['选择游戏']}/MT-${v}.json?${localStorage['应用版本']}`,function(json)
+		{
+			window[['mt_school','mt_club','mt_characters','mt_charface'][k]] = JSON.parse(json)
+		})
+	})
+	if(mt_settings['选择游戏'] === 'BLDA')
+	{
+		foreach(['IdMap','CustomFaceAuthor'],function(k,v)
+		{
+			XHR(`${href}Data/${mt_settings['选择游戏']}/${v}.json?${localStorage['应用版本']}`,function(json)
+			{
+				window[['id_map','CustomFaceAuthor'][k]] = JSON.parse(json)
+			})
+		})
+	}
+	INIT_waiting(function()
+	{
+		CHAR_GetCharList()
+		选择角色 = true
+		charList(选择角色)
+		refreshMessage(chats)
+		INIT_loading()
+	},['mt_school','mt_club','mt_characters','id_map','CustomFaceAuthor','mt_charface'])
+}

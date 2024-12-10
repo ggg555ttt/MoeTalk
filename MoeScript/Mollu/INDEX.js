@@ -274,7 +274,7 @@
 						{
 							var e;
 							null == u || null === (e = u.current) || void 0 === e || e.resetAfterIndex(n)
-						}, 0), r === n ? 2 * l : l
+						}, 0), r === n ? l+$$('.gskNYI:eq(0)').outerHeight() : l//#单行改为多行头像分支
 					}))
 				}, [r, n, u, l, m]);
 				var f = function(e)
@@ -448,7 +448,7 @@
 							},
 							children: (0, m.jsx)(x,
 							{
-								children: (0, m.jsx)(HList.Z,
+								children: mt_characters && mt_char ? (0, m.jsx)(HList.Z,
 								{
 									children: (0, m.jsx)(g,
 									{
@@ -469,7 +469,6 @@
 												onClick: function()
 												{
 													_(e)
-													
 												},
 												onError: function(e)
 												{
@@ -479,7 +478,7 @@
 											}, n)
 										})
 									})
-								})
+								}) : ''
 							})
 						}) : (0, m.jsx)("span",
 						{
@@ -585,7 +584,6 @@
 					componentId: "sc-1rjbi2j-5"
 				})(["width:3rem;height:3rem;"]),
 				w = t(9499),
-				_ = t(721),
 				C = t(8024),
 				v = function(e)
 				{
@@ -649,7 +647,7 @@
 											mt_settings['选择角色'].index = e
 											setTimeout(function()
 											{
-												$$('.fzoymd.selected')[0].scrollIntoView({block:'center',behavior:"smooth"})
+												$$('.fzoymd.selected')[0].scrollIntoView()
 											}, 1)
 										}
 										saveStorage('设置选项',mt_settings,'local')
@@ -764,7 +762,7 @@
 								{
 									width: 252,
 									height: 252,
-									src: href+"Images/Ui/School/"+(!mt_schoolname[n.school.id] ? n.club['zh_cn'] === '临时角色' ? 'RECYCLE' : 'CUSTOM' : mt_schoolname[n.school.id].en || 'none')+'.webp',//#学校图标
+									src: href+"Images/Ui/School/"+(!mt_school[n.school.id] ? n.club['zh_cn'] === '临时角色' ? 'RECYCLE' : 'CUSTOM' : mt_school[n.school.id].en || 'none')+'.webp',//#学校图标
 									onError: function(e)
 									{
 										e.currentTarget.src = href+'Images/Ui/error.webp';
@@ -1009,7 +1007,7 @@
 										})]
 									})]
 								}),
-								mt_school.map(function(v, k)
+								mt_club ? Object.keys(mt_school).map(function(v, k)
 								{
 									return (0, m.jsx)('dl',
 									{
@@ -1023,12 +1021,12 @@
 											}), (0, m.jsx)('span',
 											{
 												className: "hida",
-												children: mt_schoolname[v][mtlang] ? mt_schoolname[v][mtlang] : v
+												children: mt_school[v][mtlang] ? mt_school[v][mtlang] : v
 											})]
 										}), (0, m.jsx)('ul',
 										{
 											className: "mutliSelect",
-											children: mt_club[v].map(function(value, index)
+											children: Object.keys(mt_club[v]).map(function(value, index)
 											{
 												return (0, m.jsx)('li',
 												{
@@ -1038,12 +1036,12 @@
 														className: "club",
 														school: v,
 														value: value
-													}),mt_clubname[value][mtlang] ? mt_clubname[value][mtlang] : value]
+													}),mt_club[v][value][mtlang] ? mt_club[v][value][mtlang] : value]
 												})
 											})
 										})]
 									})
-								})]
+								}) : '']
 								//*新增社团分类
 							}), (0, m.jsx)(A,
 							{
@@ -1360,11 +1358,11 @@
 						{//@新版角色列表读取
 							if(!mt_chars)return [];
 							let chars = []
-							chars = [...mt_schars,...mt_chars,..._.Z].filter(function(char)
+							chars = [...mt_schars,...mt_chars,...CHAR_CharList].filter(function(char)
 							{
 								return mt_settings['社团列表'][char.club.id]
 							})
-							return (chars.length < 1 ? [...mt_schars,...mt_chars,..._.Z] : chars).filter(function(e)
+							return (chars.length < 1 ? [...mt_schars,...mt_chars,...CHAR_CharList] : chars).filter(function(e)
 							{
 								return null !== (0, u.oG)(e, c.text)
 							}).sort(function(e, n)
@@ -1470,7 +1468,78 @@
 						{
 							t(!1), s("")
 						};
+					let cancel = function(enter = false)
+					{
+						if(enter && TOP_confirm !== '')TOP_confirm()
+						$$('.notice pre').html('')
+						$$('.notice').removeClass('visible')
+						$$('.notice .title').text('通知')
+						$$('.notice .confirm').text(L.Z.confirm[l]).removeAttr('disabled')
+						TOP_confirm = ''
+					}
 					return [(0, m.jsx)(ea.Xf,
+					{
+						className: "medium notice",
+						style: {zIndex: 2000},
+						onDoubleClick: function()
+						{
+							cancel()
+						},
+						children: (0, m.jsxs)(ea.F0,
+						{
+							onDoubleClick: function(e)
+							{
+								return e.stopPropagation(), !1
+							},
+							children: [(0, m.jsxs)(ea.h4,
+							{
+								children: [(0, m.jsx)(ea.Dx,
+								{
+									className: "bold title",
+									children: '通知'
+								}), (0, m.jsx)(ea.ec,
+								{
+									onClick: function()
+									{
+										cancel()
+									},
+									children: (0, m.jsx)(c.j4,
+									{})
+								})]
+							}), (0, m.jsxs)(ea.$0,
+							{
+								children: [(0, m.jsx)('pre',
+								{
+									style: 
+									{
+										lineHeight: '150%',
+										whiteSpace: 'pre-wrap',
+										wordBreak: 'break-word',
+										textAlign: 'left'
+									}
+								}), (0, m.jsxs)(ea.$_,
+								{
+									children: [(0, m.jsx)(ea.Lw,
+									{
+										className: "bold cancel",
+										onClick: function()
+										{
+											cancel()
+										},
+										children: L.Z.cancel[u]
+									}), (0, m.jsx)(ea.AZ,
+									{
+										className: "bold confirm",
+										onClick: function()
+										{
+											cancel(true)
+										},
+										children: L.Z.confirm[u]
+									})]
+								})]
+							})]
+						})
+					}), (0, m.jsx)(ea.Xf,
 					{
 						className: n ? "visible medium" : "medium",
 						onDoubleClick: function()
@@ -2228,6 +2297,7 @@
 											onClick: function()
 											{
 												O()
+												DATA_NowTime = new Date().toLocaleString().replaceAll('/','').replaceAll(' ','-').replaceAll(':','');
 											},
 											children: L.Z.confirm[g]
 										})]
@@ -2405,15 +2475,22 @@
 							}
 							if($$('.INDEX_LoadEmoji:checked').length)
 							{
-								EMOJI_CustomEmoji.id = {...EMOJI_CustomEmoji.id,...j.EMOJI.id}
-								EMOJI_CustomEmoji.image = {...EMOJI_CustomEmoji.image,...j.EMOJI.image}
+								if(j.EMOJI.id)
+								{
+									j.EMOJI.Emoji = j.EMOJI.id
+									delete j.EMOJI.id
+								}
+								$$.each(j.EMOJI,function(id,obj)
+								{
+									if(!EMOJI_CustomEmoji[id])EMOJI_CustomEmoji[id] = obj
+									else EMOJI_CustomEmoji[id] = {...EMOJI_CustomEmoji[id],...obj}
+								})
 								saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
 							}
-							charList(true)//更新角色列表
-							refreshMessage(chats)//更新消息列表
+							mt_settings = j.SETTING
+							CHAR_UpdateChar()
 							log(true)//清除历史记录
 							replyDepth(0,'home')//清除跳转记录
-							mt_settings = j.SETTING
 							saveStorage('设置选项',mt_settings,'local')
 							saveStorage('chats',[...chats,...otherChats],'local')
 							N()
@@ -2471,7 +2548,7 @@
 										{
 											display: "none"
 										},
-										accept: "image/png, application/json",
+										accept: mt_settings['图片存档'] ? 'image/png' : 'application/json',
 										onChange: function(e)
 										{
 											P(e)
@@ -2500,7 +2577,7 @@
 												margin: "1rem",
 												fontSize: "1rem"
 											},
-											children: L.Z.edit_comment[d]
+											children: L.Z.edit_comment[d]+'支持ClosureTalk存档'
 										}), (0, m.jsx)("span",
 										{
 											style:
@@ -2508,7 +2585,7 @@
 												margin: "1rem",
 												fontSize: "1rem"
 											},
-											children: '支持ClosureTalk存档'
+											children: '上传图片存档需在设置页面开启“旧版图片存档”选项'
 										})]
 									}), (0, m.jsx)(eN.HR,
 									{
@@ -2631,9 +2708,7 @@
 													json.CHAR = {}//自定义角色
 													json.CHAR.id = mt_char
 													json.CHAR.image = mt_head
-													json.EMOJI = {}//自定义表情
-													json.EMOJI.id = EMOJI_CustomEmoji.id
-													json.EMOJI.image = EMOJI_CustomEmoji.image
+													json.EMOJI = EMOJI_CustomEmoji//自定义表情
 													json.SETTING = mt_settings//设置信息
 													json.CHAT = [...chats,...otherChats]//MMT数据
 													download(`MoeTalk_${f}_${time}.json`,json)
@@ -2670,7 +2745,7 @@
 												height: '1rem'
 											},
 											type: 'checkbox'
-										}),`和自定义表情${Object.keys(j.EMOJI.id).length}张`]
+										}),`和自定义表情${Object.keys(j.EMOJI.image).length}张`]
 									}), (0, m.jsxs)("div",
 									{
 										style:
@@ -2709,8 +2784,6 @@
 											className: "bold",
 											onClick: function()
 											{
-												选择角色 = true
-												charList(!0)
 												I()
 											},
 											children: L.Z.confirm[d]
@@ -2995,34 +3068,13 @@
 												color: 'rgb(63, 81, 181)'
 											},
 											className: "bold",
-											hidden: !EMOJI.custom.io,
-											children: '添加表情',
+											hidden: EMOJI.type === 'CharFace',
+											children: '切换表情',
 											onClick:function()
 											{
-												$$('.notice .title').text('添加表情')
-												$$('.notice .confirm').text('提交')
-												let str = '<input type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">添加到新的分页</span>\n'
-												str += '<button onclick=\'$("#custom").attr("title","image").attr("alt","emoji").click()\'>点击上传图片\n<img style=\'width:100%;\'></button>\n'
-												alert(str)
-												TOP_confirm = function()
+												if(EMOJI.type === 'Emoji')
 												{
-													let src = $$('.notice img').attr('src')
-													if(src)
-													{
-														let id = 'emoji-'+getNowDate()
-														if($$('.notice input:checked').length)
-														{//添加到新的分页
-															EMOJI.pages.Emoji.custom = parseInt(EMOJI.pageindex.split(' / ')[1])
-															EMOJI_CustomEmoji.id[id] = EMOJI.pages.Emoji.custom
-														}
-														else
-														{
-															EMOJI_CustomEmoji.id[id] = parseInt(EMOJI.pageindex.split(' / ')[0]-1)
-														}
-														EMOJI_CustomEmoji.image[id] = src
-														$$('.INDEX_Emoji').click()
-														saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
-													}
+													alert('点击表情窗口的顶部标题可以快速切换表情或差分\n设置页面可以设置隐藏差分按钮')
 												}
 											}
 										}), (0, m.jsx)(c.Bx,
@@ -3063,13 +3115,13 @@
 											{
 												"width": "auto",
 												height: '100%',
-												color: '#3f51b5',
+												color: EMOJI.custom.title ? '#3f51b5' : '',
 												position: 'absolute',
 												left: 0
 											},
 											className: "bold",
-											hidden: !EMOJI.custom.title,
-											children: EMOJI.custom.title,
+											disabled: !EMOJI.custom.title,
+											children: EMOJI.custom.title ? EMOJI.custom.title : '切换内置',
 											onClick:function()
 											{
 												let type = ''
@@ -3104,7 +3156,8 @@
 											className: "bold",
 											style:
 											{
-												textAlign:"center"
+												textAlign:"center",
+												color: EMOJI.custom.io ? 'rgb(63, 81, 181)' : EMOJI.custom.from ? 'red' : mt_charface[EMOJI.id] && mt_charface[EMOJI.id].filter(function(item){return item[0][0].indexOf('CFID') > -1}).length ? 'green' : ''
 											},
 											children: EMOJI.pageindex
 										}), (0, m.jsx)(c.Bx,
@@ -3133,13 +3186,10 @@
 												position: 'absolute',
 												right: 0
 											},
-											children: EMOJI.type === 'Emoji' ? EMOJI.custom.io ? '编辑' : '提示' : '信息',
-											onClick:function()
+											hidden: EMOJI.type === 'Emoji' && !EMOJI.custom.io,
+											children: EMOJI.type === 'Emoji' ? EMOJI.custom.io ? '编辑' : '管理' : '信息',
+											onClick: function()
 											{
-												if(EMOJI.type === 'Emoji' && !EMOJI.custom.io)
-												{
-													confirm('点击表情窗口的顶部标题可以切换表情或差分\n设置界面可以改回被隐藏的表情差分按钮')
-												}
 												$$('.INDEX_EmojiIfno:visible').length ? $$('.INDEX_EmojiIfno').hide() : $$('.INDEX_EmojiIfno').show()
 											}
 										})]
@@ -3152,14 +3202,14 @@
 											children: (0, m.jsx)(k,
 											{
 												style: {padding:0},
-												children: mt_settings['选择角色'].list.map(function(e, n)
+												children: mt_settings['选择角色'].list.concat({no:'0',index:'1'}).map(function(e, n)
 												{
 													return (0, m.jsx)(c.t_,
 													{
 														alt: String(e.no),
 														title: String(e.index),
 														src: loadhead(e.no,e.index),
-														className: '差分映射 '+ (e.no === 差分映射.id && e.index === 差分映射.index ? 'selected' : '')
+														className: '差分映射 '+ (e.no == 差分映射.id && e.index == 差分映射.index ? 'selected' : '')
 													}, n)
 												})
 											})
@@ -3172,9 +3222,9 @@
 											{
 												let link = EMOJI.path+v+'.webp'
 												let 前缀 = href+''
-												let EmojiInfo = mt_settings['表情信息'][CFInfo[v]] ? mt_settings['表情信息'][CFInfo[v]] : CFInfo[v]
+												let EmojiInfo = mt_settings['表情信息'][v] ? mt_settings['表情信息'][v] : CFInfo[v] ? CFInfo[v] : v
 												EmojiInfo = EmojiInfo === undefined ? '' : EmojiInfo
-												if(EMOJI.custom.io && EMOJI.type === 'Emoji')
+												if(EMOJI.custom.io)
 												{
 													前缀 = ''
 													link = EMOJI_CustomEmoji.image[v]
@@ -3202,17 +3252,45 @@
 															width: '100%',
 															height: 'auto'
 														},
-														src: 前缀+link,//#表情链接
+														src: v === 'ADD' ? href+'Images/Ui/School/RECYCLE.webp' : 前缀+link,//#表情链接
+														onError: function(e)
+														{
+															e.target.parentNode.style.display = 'none'
+														},
 														onClick: function()
 														{
+															if(v === 'ADD')
+															{
+																$$('.notice .title').text('添加表情')
+																$$('.notice .confirm').text('提交')
+																let str = '<input type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">添加到新的分页</span>\n'
+																str += '<button onclick=\'$("#custom").attr("title","image").attr("alt","emoji").click()\'>点击上传图片（支持批量添加，点击图片可删除）</button>\n'
+																str += `<div class="Emojis" title="${v}"></div>\n`
+																alert(str)
+																TOP_confirm = function()
+																{
+																	if($$('.notice input:checked').length)EMOJI.pages[EMOJI.id].custom = parseInt(EMOJI.pageindex.split(' / ')[1])//添加到新的分页
+																	else EMOJI.pages[EMOJI.id].custom = parseInt(EMOJI.pageindex.split(' / ')[0]-1)
+																	$$('.Emojis img').each(function(k,v)
+																	{
+																		let id = `${EMOJI.type}-${getNowDate()}_${k}`
+																		if(!EMOJI_CustomEmoji[EMOJI.id])EMOJI_CustomEmoji[EMOJI.id] = {}
+																		EMOJI_CustomEmoji[EMOJI.id][id] = EMOJI.pages[EMOJI.id].custom
+																		EMOJI_CustomEmoji.image[id] = v.src
+																	})
+																	$$('.INDEX_Emoji').click()
+																	saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
+																}
+																return
+															}
 															if($$('.INDEX_EmojiIfno:visible').length && EmojiInfo !== '')
 															{
 																$$('.notice .title').text('编辑表情')
-																let str = EMOJI.custom.from ? `<a class="INIT_href" title="${EMOJI.custom.from}">来源地址</a>` : ''
-																let img = `<img src='${前缀+link}' style='width:100%;'>`
+																let str = EMOJI.custom.from ? `<a class="INIT_href" title="${EMOJI.custom.from.link}">来源：${EMOJI.custom.from.name}</a>` : ''
+																let img = `<img class="Emojis" src='${前缀+link}' style='width:100%;'>`
 																let now = parseInt(EMOJI.pageindex.split(' / ')[0])//当前页
 																let end = parseInt(EMOJI.pageindex.split(' / ')[1])//终点页
-																if(EMOJI.type === 'Emoji' && EMOJI.custom.io)
+																if(EMOJI.custom.io)
 																{
 																	let select = ''
 																	
@@ -3226,20 +3304,21 @@
 																	img = `<button onclick='$("#custom").attr("title","image").attr("alt","emoji").click()'>点击更改图片\n${img}</button>`
 																}
 																str += '\n'
-																let info = `<input style='font-size:1.2rem;' class='text' value='${mt_settings['表情信息'][CFInfo[v]] || ''}'>`
+																let info = `<input style='font-size:1.2rem;' class='text' placeholder='${toString(CFInfo[v])}' value='${mt_settings['表情信息'][v] || ''}'>`
 
-																alert(`${str}ID：${CFInfo[v]}\n信息：${info}\n\n${img}`)
+																alert(`${str}ID：${v}\n信息：${info}\n\n${img}`)
 																$$('.notice select').val(now)
 																TOP_confirm = function()
 																{
-																	if(EMOJI.type === 'Emoji' && EMOJI.custom.io)
+																	if(EMOJI.custom.io)
 																	{//编辑自定义表情
-																		EMOJI_CustomEmoji.id[CFInfo[v]] = parseInt($$('.notice select').val()-1)
-																		EMOJI_CustomEmoji.image[CFInfo[v]] = $$('.notice img').attr('src')
+																		EMOJI_CustomEmoji[EMOJI.id][v] = parseInt($$('.notice select').val()-1)
+																		EMOJI_CustomEmoji.image[v] = $$('.Emojis').attr('src')
 																		if($$('.notice input:checked').length)
 																		{//只删除表情
-																			delete EMOJI_CustomEmoji.id[CFInfo[v]]
-																			delete EMOJI_CustomEmoji.image[CFInfo[v]]
+																			delete EMOJI_CustomEmoji[EMOJI.id][v]
+																			delete EMOJI_CustomEmoji.image[v]
+																			if(!Object.keys(EMOJI_CustomEmoji[EMOJI.id]).length)delete EMOJI_CustomEmoji[EMOJI.id]
 																			$$('.notice .text').val('')
 																		}
 																		//存入数据库
@@ -3247,11 +3326,11 @@
 																	}
 																	if($$('.notice .text').val())
 																	{
-																		mt_settings['表情信息'][CFInfo[v]] = $$('.notice .text').val()
+																		mt_settings['表情信息'][v] = $$('.notice .text').val()
 																	}
 																	else
 																	{
-																		delete mt_settings['表情信息'][CFInfo[v]]
+																		delete mt_settings['表情信息'][v]
 																	}
 																	saveStorage('设置选项',mt_settings,'local')
 																	$$('.INDEX_Emoji').click()
@@ -3260,12 +3339,12 @@
 															}
 															if($$('.editMessage.visible').length)
 															{
-																$$('.图片文件').show().attr('src',link)
+																$$('.图片文件').show().attr('src',link).attr('title',EMOJI.type)
 																s()
 															}
 															else
 															{
-																sendMessage({file: link},'image'), s()
+																sendMessage({file: link,content: EMOJI.type},'image'), s()
 															}
 														},
 													}), (0, m.jsx)('span',
@@ -3285,7 +3364,6 @@
 															overflow: 'hidden',
 															maxHeight: '100%'
 														},
-														title: CFInfo[v],
 														children: [(0, m.jsx)('span',
 														{
 															className: "bold",
@@ -3294,8 +3372,8 @@
 																"width": "auto",
 																"color": "rgb(63, 81, 181)"
 															},
-															children: '点击编辑表情\n',
-															hidden: !CFInfo[v]
+															children: (EMOJI.custom.from ? EMOJI.custom.from.name : '点击编辑表情')+'\n',
+															hidden: !link
 														}),EmojiInfo]
 													})]
 												}, n)
@@ -3503,14 +3581,11 @@
 										className: "INDEX_EmojiButton",
 										onClick: function()
 										{
-											if(mt_settings['差分按钮'])
-											{
-												EMOJI.type = 'Emoji'
-											}
-											else
+											if(mt_settings['隐藏差分'])
 											{
 												if(EMOJI.type === 'NO')EMOJI.type = 'Emoji'
 											}
+											else EMOJI.type = 'Emoji'
 											EMOJI.io = EMOJI.type;
 											mt_emojis(S,EMOJI.type)
 										},
@@ -3518,7 +3593,7 @@
 										{
 											icon: ei.pkM
 										})
-									}), mt_settings['差分按钮'] ? (0, m.jsx)(eU,
+									}), !mt_settings['隐藏差分'] ? (0, m.jsx)(eU,
 									{
 										style:
 										{
@@ -3766,7 +3841,8 @@
 						style:{position:'absolute'},
 						onDoubleClick: function()
 						{
-							$$('.editMessage').removeClass('visible')//S()
+							$$('.editMessage').removeClass('visible').find('input:checkbox').prop('checked',false)//S()
+							CHAT_HeadList = false
 						},
 						children: (0, m.jsxs)(ea.F0,
 						{
@@ -3783,7 +3859,8 @@
 								{
 									onClick: function()
 									{
-										$$('.editMessage').removeClass('visible')//S()
+										$$('.editMessage').removeClass('visible').find('input:checkbox').prop('checked',false)//S()
+										CHAT_HeadList = false
 									},
 									children: (0, m.jsx)(c.j4,{})
 								})]
@@ -3799,56 +3876,71 @@
 										{
 											style:{textAlign: 'left'},
 											className:"edit_2_1_1 bold",
-											children:[(0, m.jsx)('input',
+											children:[(0, m.jsx)('label',
 											{
-												type:'checkbox',
-												className:'editType'
-											}),(0, m.jsx)('span',{children:'修改类型'}),
-											(0, m.jsx)('input',
-											{
-												type:'checkbox',
-												className:'editTalk'
-											}),(0, m.jsx)('span',{children:'修改显示'}),
-											(0, m.jsx)('input',
-											{
-												type:'checkbox',
-												className:'addChat'
-											}),(0, m.jsx)('span',{children:L.Z.add[f]}),
-											(0, m.jsx)('input',
-											{
-												type:'checkbox',
-												className:'isFirst',
-												onClick: function()
+												children:[(0, m.jsx)('input',
 												{
-													$$('.isCenter').prop('checked',false)
-													.next().next().prop('checked',false)
-												}
-											}),(0, m.jsx)('span',{children:'显示头像',style:{color:'blue'}}),
-											(0, m.jsx)('input',
+													type:'checkbox',
+													className:'editType'
+												}),'修改类型']
+											}),(0, m.jsx)('label',
 											{
-												type:'checkbox',
-												className:'isRight',
-												onClick: function()
+												children:[(0, m.jsx)('input',
 												{
-													$$('.isCenter').prop('checked',false)
-													.next().next().prop('checked',false)
-												}
-											}),(0, m.jsx)('span',{children:'右侧发言'}),
-											(0, m.jsx)('input',
+													type:'checkbox',
+													className:'editTalk'
+												}),'修改显示']
+											}),(0, m.jsx)('label',
 											{
-												type:'checkbox',
-												className:'is_breaking'
-											}),(0, m.jsx)('span',{children:'截图时在此处分割',style:{color:'red'}}),
-											(0, m.jsx)('input',
-											{
-												type:'checkbox',
-												className:'isCenter',
-												onClick: function()
+												children:[(0, m.jsx)('input',
 												{
-													$$('.isFirst').prop('checked',false)
-													.next().next().prop('checked',false)
-												}
-											}),(0, m.jsx)('span',{children:'图片中央显示'})]
+													type:'checkbox',
+													className:'addChat'
+												}),L.Z.add[f]]
+											}),(0, m.jsx)('label',
+											{
+												style:{color:'blue'},
+												children:[(0, m.jsx)('input',
+												{
+													type:'checkbox',
+													className:'isFirst',
+													onClick: function()
+													{
+														$$('.isCenter').prop('checked',false)
+													}
+												}),(0, m.jsx)('span',{children:'显示头像'})],
+											}),(0, m.jsx)('label',
+											{
+												children:[(0, m.jsx)('input',
+												{
+													type:'checkbox',
+													className:'isRight',
+													onClick: function()
+													{
+														$$('.isCenter').prop('checked',false)
+													}
+												}),(0, m.jsx)('span',{children:'右侧发言'})],
+											}),(0, m.jsx)('label',
+											{
+												children:[(0, m.jsx)('input',
+												{
+													type:'checkbox',
+													className:'is_breaking'
+												}),'截图时在此处分割'],
+												style:{color:'red'}
+											}),(0, m.jsx)('label',
+											{
+												children:[(0, m.jsx)('input',
+												{
+													type:'checkbox',
+													className:'isCenter',
+													onClick: function()
+													{
+														$$('.isFirst').prop('checked',false)
+														$$('.isRight').prop('checked',false)
+													}
+												}),'图片中央显示']
+											})]
 										})
 									}),(0, m.jsx)('div',
 									{
@@ -3942,7 +4034,7 @@
 										{
 											$$('.INDEX_EmojiButton').click()
 										}
-									}), mt_settings['差分按钮'] ? (0, m.jsx)(eN.g4,
+									}), !mt_settings['隐藏差分'] ? (0, m.jsx)(eN.g4,
 									{
 										children: '选择差分',
 										style: 
@@ -3994,7 +4086,10 @@
 											justifyItems: 'center',
 											cursor: 'pointer'
 										},
-										children:['角色',(0, m.jsx)('img',
+										children:[(0,m.jsx)('span',
+										{
+											children: '角色'
+										}), (0, m.jsx)('img',
 										{
 											className:'头像',
 											style:
@@ -4002,12 +4097,64 @@
 												width: '40px',
 												height: '40px',
 											},
+											onClick: function(e)
+											{
+												$$('.title').text('头像列表')
+												let HeadList = {direction:'row',list:[]}
+												if(CHAT_HeadList)
+												{
+													HeadList = CHAT_HeadList
+												}
+												let str = ''
+												str += '<label>头像排列：<input class="radio row" type="radio" name="direction" value="row">横向（注意排版）</label>\n'
+												str += `<label>　　　　　<input class="radio column" type="radio" name="direction" value="column">竖向</label><input type="checkbox" class="fullHeight" ${HeadList.fullHeight ? 'checked' : ''}>文字消息自动铺满\n`
+												str += `头像间距：<input style="font-size:1.2rem;" class="margin text" placeholder="默认值为 -1.5rem" value="${toString(HeadList.margin)}">\n\n`
+
+												str += '发言角色：<label><input class="radio" type="radio" name="mode" value="change">通过【待选列表】切换角色</label>\n'
+												str += `<img class="头像 N_char" src="${e.target.title ? loadhead(e.target.alt,e.target.title) : href+'Images/Ui/setting.webp'}" alt="${e.target.alt}" title="${e.target.title}">`
+												str += `名称：<input style="font-size:1.2rem;color:red;" class="text" placeholder="${$$('.name').attr('placeholder')}" value="${$$('.name').val()}">\n`
+												str += `\n头像列表：（点击删除指定头像）\n<div class="N_list">`
+												HeadList.list.map(function(index,k)
+												{
+													str += `<img class="头像" src="${loadhead('LIST',index)}" title="${index}" style="cursor:pointer;" onclick="this.remove()">`
+												})
+												str += '</div>\n\n待选列表：<label><input class="radio" type="radio" name="mode" value="add" checked>为【头像列表】添加新头像</label>\n'
+												let str1 = '$(".N_char").attr("src",loadhead(this.alt,this.title)).attr("alt",this.alt).attr("title",this.title).next().attr("placeholder",loadname(this.alt,this.title))'
+												let str2 = '$(".N_list").append(`<img class="头像" src="${loadhead("LIST",this.title)}" title="${this.title}" style="cursor:pointer;" onclick="this.remove()">`)'
+												mt_settings['选择角色'].list.concat({no:'0',index:'1'}).map(function(v,k)
+												{
+													str += `<img class='头像' src='${loadhead(v.no,v.index)}' alt='${v.no}' title='${v.index}' style='cursor:pointer;' onclick='$(".radio:checked")[1].value === "change" ? ${str1} : ${str2}'>`
+												})
+												str += '\n'
+												
+												alert(str)
+												$$(`.${HeadList.direction}`).click()
+												TOP_confirm = function()
+												{
+													HeadList.direction = $$('.radio:checked')[0].value
+													HeadList.margin = $$('.margin').val()
+													HeadList.fullHeight = $$('.fullHeight:checked').length ? true : false
+													HeadList.list = []
+													$$('.fullHeight:checked').length ? HeadList.fullHeight = true : ''
+
+													$$('.N_list img[title]').map(function(k,v)
+													{
+														HeadList.list[k] = v.title
+													})
+													CHAT_HeadList = HeadList
+													let img = $$('.N_char')
+													let name = img.next()[0]
+													$$('.name').attr('placeholder',name.placeholder).val(name.value)
+													if(img[0].title)
+													{
+														e.target.src = img[0].src
+														e.target.alt = img[0].alt
+														e.target.title = img[0].title
+													}
+												}
+											},
 											src:href+'Images/Ui/setting.webp'
-										})],
-										onClick:function()
-										{
-											alert('↓点击底部角色头像可以更改发言人↓')
-										}
+										})]
 									}), (0, m.jsx)('div',
 									{
 										className:"edit_3_box1",
@@ -4092,7 +4239,8 @@
 										className: "bold",
 										onClick: function()
 										{
-											$$('.editMessage').removeClass('visible')//S()
+											$$('.editMessage').removeClass('visible').find('input:checkbox').prop('checked',false)//S()
+											CHAT_HeadList = false
 										},
 										children: L.Z.cancel[f]
 									}), (0, m.jsx)(ea.AZ,
@@ -4104,6 +4252,7 @@
 											if($$('.dels:checked').length > 1)
 											{
 												let data = {}
+												data.heads = CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
 												if($$('.edit_button .selected').attr('title'))
 												{
 													type = $$('.edit_button .selected').attr('title')
@@ -4116,7 +4265,11 @@
 												if($$('.content').val() && $$('.content').val() !== ' ')data.content = $$('.content').val()
 												if($$('.content').val() === ' ')data.content = ''
 
-												if(type === 'image' && $$('.图片文件').attr('src') !== '')data.file = $$('.图片文件').attr('src')
+												if(type === 'image' && $$('.图片文件').attr('src') !== '')
+												{
+													data.content = $$('.图片文件').attr('title')
+													data.file = $$('.图片文件').attr('src')
+												}
 
 												if($$('.editTalk').prop('checked'))
 												{
@@ -4147,18 +4300,21 @@
 												let data = 
 												{
 													type: type,
-													name : $$('.name').val(),
-													time : $$('.time').val(),
-													content: $$('.content').val(),
+													name: $$('.name').val(),
+													time: $$('.time').val(),
+													content: type === 'image' ? $$('.图片文件').attr('title') : $$('.content').val(),
 													isFirst: $$('.isFirst').prop('checked'),
 													isCenter: type === 'image' && $$('.isCenter').prop('checked'),
-													isRight : $$('.isRight').prop('checked'),
-													is_breaking : $$('.is_breaking').prop('checked'),
-													file: type === 'image' && $$('.图片文件').attr('src') !== '' ? $$('.图片文件').attr('src') : '',
-													sCharacter: {no: $$('.editMessage .头像').attr('alt'),index: $$('.editMessage .头像').attr('title')}
+													isRight: $$('.isRight').prop('checked'),
+													is_breaking: $$('.is_breaking').prop('checked'),
+													file: type === 'image' ? $$('.图片文件').attr('src') : '',
+													sCharacter: {no: $$('.editMessage .头像').attr('alt'),index: $$('.editMessage .头像').attr('title')},
+													heads: CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
 												}
 												sendMessage(data,type,$$('.addChat').prop('checked') ? 'add' : 'edit',[chatIndex])
 											}
+											CHAT_HeadList = false
+											$$('.editMessage :checkbox').prop('checked',false)
 										},
 										children: L.Z.confirm[f]
 									})]
@@ -4251,7 +4407,7 @@
 				//*这是消息界面
 				e6 = function(e)
 				{
-					var n = e.chat,
+					var n = e.chat,//{...e.chat,...{}},
 						t = e.index,
 						o = e.handleShow,
 						a = (0, i.T)(),
@@ -4277,6 +4433,7 @@
 						n.isFirst && !n.isRight ? style.textAlign = 'left' : ''
 						n.isRight && !n.isFirst ? style.textAlign = 'right' : ''
 					}
+					
 					return (0, m.jsx)('div',
 					{
 						className: '消息',
@@ -4287,32 +4444,54 @@
 						{
 							children: "chat" === n.type || "image" === n.type ? (0, m.jsxs)(m.Fragment,
 							{//整体图文消息
-								children: (0, m.jsxs)(e8,
+								children: (0, m.jsxs)('div',
 								{//整体图文消息
+									className: '聊天',
 									children: [!n.isCenter && !n.isRight ? (0, m.jsx)('div',
 									{//左侧头像框
 										className: '头像框',
 										style: n.sCharacter.no != 0 ? 
 										{
-											height: "100%"
+											cursor: "pointer",
+											minWidth: n.heads && isFirst ? "auto" : "5rem",
+											paddingRight: n.heads && isFirst ? "1rem" : "auto",
+											flexDirection: n.heads ? n.heads.direction : ""
 										} : {marginRight: '1.5rem'},
-										children: isFirst && n.sCharacter.no != 0 ? (0, m.jsx)(eN.NZ,
+										children: isFirst && n.sCharacter.no != 0 ? [(0, m.jsx)('img',
 										{//左侧头像
-											height: 252,
-											width: 252,
+											className: '头像',
+											style: {zIndex: n.heads ? n.heads.list.length : ''},
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
 											onError: function(e)
 											{
 												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: n.sCharacter.index
-										}) : ''
-									}) : '', (0, m.jsxs)(n.sCharacter.no == 0 ? "div" : eN.Xp,
+										}), n.heads ? n.heads.list.map(function(index,k)
+										{
+											return (0, m.jsx)('img',
+											{//左侧头像
+												className: '头像',
+												src: loadhead('LIST',index),
+												style: 
+												{
+													zIndex: n.heads.list.length-k-1,
+													marginTop: n.heads.direction === 'column' ? n.heads.margin ? n.heads.margin : "-1.5rem" : '',
+													marginLeft: n.heads.direction === 'row' ? n.heads.margin ? n.heads.margin : "-1.5rem" : ''
+												},
+												onError: function(e)
+												{
+													e.currentTarget.src = href+'Images/Ui/error.webp';
+												}
+											})
+										}) : ''] : ''
+									}) : '', (0, m.jsxs)("div",
 									{//图文消息
 										className: "对话",
 										style: 
 										{
 											alignItems: n.isCenter ? 'center' : n.isRight || n.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
+											height: n.heads && n.heads.fullHeight ? '100%' : ''
 										},
 										children: [!n.isCenter && isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{//人物名称
@@ -4322,37 +4501,38 @@
 										{//消息内容
 											style:
 											{
-												display:"flex",
+												display: "flex",
+												height: "100%",
 												justifyContent: n.isCenter ? 'center' : n.isRight || n.sCharacter.no == 0 ? 'flex-end' : '',
 											},
-											children: [n.time ? (0, m.jsx)(eN.i9,
+											children: [n.time ? (0, m.jsx)('div',
 											{//左侧时间戳
+												className: '时间戳',
 												hidden: (!n.time || n.sCharacter.no != 0) && !n.isRight,
-												style: {textAlign: 'right'},
 												children: n.time
-											}) : '', "chat" === n.type ? [(0, m.jsx)(n.sCharacter.no == 0 ? eN.LP : !n.isRight && isFirst ? eN.zC : eN.Dt,
+											}) : '', "chat" === n.type ? [(0, m.jsx)('span',
 											{//文本消息
-												className: '编辑',
-												style: n.isRight ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
+												className: (n.sCharacter.no == 0 ? '文本' : !n.isRight && isFirst ? '文本 左角' : '文本')+' 编辑',
+												style: n.isRight || n.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
 												children: n.content
-											}), (n.isRight && isFirst) || n.sCharacter.no == 0 ? (0, m.jsx)(eN.CJ,{}) : '' ] : (0, m.jsx)(eN.tG,
+											}), (n.isRight && isFirst) || n.sCharacter.no == 0 ? (0, m.jsx)(eN.CJ,{}) : '' ] : (0, m.jsx)('img',
 											{//图片消息
-												className: '编辑',
+												className: '图片 编辑',
 												style:
 												{
-													maxHeight: n.file.indexOf("Face") > -1 ? '360px' : "",
-													maxWidth: n.file.indexOf("Face") > -1 ? mt_settings['差分比例'] : mt_settings['图片比例']
+													maxHeight: (n.content || n.file).indexOf("Face") > -1 ? '360px' : "",
+													maxWidth: (n.content || n.file).indexOf("Face") > -1 ? mt_settings['差分比例'] : mt_settings['图片比例']
 												},//@差分表情宽高百分比
 												src: n.file.indexOf(":image") > -1 ? n.file : href+n.file,
 												title: n.file.indexOf(":image") > -1 ? '' : n.file,
 												onError: function(e)
 												{
 													e.currentTarget.src = href+'Images/Ui/error.webp';
-												},
-											}), n.time ? (0, m.jsx)(eN.i9,
+												}
+											}) ,n.time ? (0, m.jsx)('div',
 											{//右侧时间戳
-												hidden: !n.time || n.sCharacter.no == 0 || n.isRight,
-												style:{marginLeft:0},
+												className: '时间戳',
+												hidden: !n.time || n.sCharacter.no == 0 || n.isRight || n.isCenter,
 												children: n.time
 											}) : '']
 										})]
@@ -4363,23 +4543,43 @@
 										{
 											justifyContent:'flex-end',
 											cursor: "pointer",
-											height: "100%"
+											minWidth: n.heads && isFirst ? "auto" : "5rem",
+											paddingLeft: n.heads && isFirst ? "1rem" : "auto",
+											flexDirection: n.heads ? n.heads.direction : ""
 										},
-										children: isFirst && n.sCharacter.no != 0 ? (0, m.jsx)(eN.NZ,
+										children: isFirst && n.sCharacter.no != 0 ? [(0, m.jsx)('img',
 										{//右侧头像
-											height: 252,
-											width: 252,
+											className: '头像',
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
+											style: {zIndex: n.heads ? n.heads.list.length : ''},
 											onError: function(e)
 											{
 												e.currentTarget.src = href+'Images/Ui/error.webp';
 											},
 											alt: n.sCharacter.index
-										}) : ''
+										}), n.heads ? n.heads.list.map(function(index,k)
+										{
+											return (0, m.jsx)('img',
+											{//右侧头像
+												className: '头像',
+												src: loadhead('LIST',index),
+												style: 
+												{
+													zIndex: n.heads.list.length-k-1,
+													marginTop: n.heads.direction === 'column' ? "-1.5rem" : '',
+													marginLeft: n.heads.direction === 'row' ? "-1.5rem" : ''
+												},
+												onError: function(e)
+												{
+													e.currentTarget.src = href+'Images/Ui/error.webp';
+												}
+											})
+										}) : ''] : ''
 									}) : '']
 								})
-							}) : "reply" === n.type ? [(0, m.jsx)(eN.xu,
+							}) : "reply" === n.type ? [(0, m.jsx)("div",
 							{//回复
+								className: '头像框',
 								children: (0, m.jsx)(ne,
 								{
 									className: '编辑',
@@ -4411,8 +4611,8 @@
 										children: v
 									})
 								})]
-							})] : "heart" === n.type ? [(0, m.jsx)(eN.xu,
-							{}),(0, m.jsx)(eW,
+							})] : "heart" === n.type ? [(0, m.jsx)("div",
+							{className: '头像框'}),(0, m.jsx)(eW,
 							{//羁绊
 								className: '编辑',
 								style: style,

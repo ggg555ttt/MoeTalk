@@ -1,3 +1,5 @@
+var DATA_ServerDownload = false//后台服务器下载
+var DATA_NowTime = 0
 function loaddata(json,mode)//识别存档
 {
 	if(typeof json === 'string')json = JSON.parse(json)
@@ -55,6 +57,14 @@ function loaddata(json,mode)//识别存档
 		})
 		json.CHAT = arr['']
 	}
+	else
+	{
+		foreach(json.CHAT,function(k,v)
+		{
+			repairCF(json.CHAT[k])
+		})
+	}
+	
 	return json
 }
 function MoeToClosure()//Moe转Closure
@@ -218,13 +228,6 @@ function UPDATE_OldData(json)//识别存档
 	let custom_char = {};
 	let custom_head = {};
 	if(typeof json === 'string')json = JSON.parse(json)
-	if(json[0] && json[0].title)
-	{
-		json[1].map(function(v,k)
-		{
-			repairCF(json[1][k])
-		})
-	}
 	if(!json[0] || (json[0] && !json[0].title))//错误数据
 	{
 		json[0] = {};
@@ -354,7 +357,6 @@ function UPDATE_OldData(json)//识别存档
 			if(v.yuzutalk.nameOverride)json[1][k]['name'] = v.yuzutalk.nameOverride;
 			if(v.yuzutalk.avatarState === 'SHOW')json[1][k]['isFirst'] = true;
 			if(v.is_breaking === true)json[1][k]['is_breaking'] = true;
-			repairCF(json[1][k])
 		})
 	}
 	if(json['talkHistory'])
@@ -425,29 +427,38 @@ function repairCF(data)
 {
 	data.sCharacter.no = id_map[0][data.sCharacter.no] || data.sCharacter.no
 	data.sCharacter.index = toString(id_map[1][data.sCharacter.index] || data.sCharacter.index)
-	data.sCharacter.index = data.sCharacter.index.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG').replace('sp_','')
+	if(mt_settings['选择游戏'] === 'CBJQ')data.sCharacter.index = data.sCharacter.index.replace('sp_','').replace('_L2D','_01')
+	else data.sCharacter.index = data.sCharacter.index.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
+	
 	if(data.type === 'image')
 	{
-		if(!data.file)data.file = data.content
-		data.content = ''
-		data.file = data.file.replace('Images/Emoji/','Images/BLDA/Emoji/').replace('https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/','')
-		if(data.file.indexOf('CharFace') > -1)
+		if(!data.file)
 		{
-			data.file = `Images/${mt_settings['选择游戏']}/CharFace/`+data.file.split('/').slice(-2).join('/').replaceAll('sp_','')
+			data.file = data.content
+			data.content = ''
+		}
+		data.file = data.file.replace('CustomFace','CharFace').replace('Images/Emoji/','Images/BLDA/Emoji/').replace('https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/','')
+		
+		if(data.file.indexOf('Images/CharFace/') > -1)
+		{
+			data.file = 'Images/BLDA/CharFace/'+data.file.split('/').slice(-1)[0].replace('.','/')
+		}
+		if(data.file.indexOf('Face/') > -1)
+		{
+			let arr = data.file.split('/')
+			let str = arr.slice(-1)[0].replace('.webp','')
+			if(CFInfo[str])data.file = data.file.replace(str,CFInfo[str])
+			arr = str.split('.')
+			if(data.file.indexOf('CharID') > -1 && arr.length > 1)
+			{
+				arr = arr[1]-1
+				data.file = data.file.replace(str,arr)
+			}
 		}
 	}
 }
 //文件下载
-function download_txt(filename,content,contentType)
-{
-	if (!contentType) contentType = 'application/octet-stream';
-	var a = document.createElement('a');
-	var blob = new Blob([content],{ 'type': contentType });
-	a.href = window.URL.createObjectURL(blob);
-	a.download = filename;
-	a.click();
-	$('#downImg').text(`文件${filename}已下载\n如果下载失败请尝试在设置页面中开启“下载图片存档”功能\n仍然失败请向开发者反馈`)
-}
+
 function saveImg(fileName, base64, quality)
 {
 	quality = quality || 10
@@ -461,15 +472,13 @@ function saveImg(fileName, base64, quality)
 		}, 
 		function(i) 
 		{
-			// callback(i);
-			// mui.alert("保存图片成功：" + JSON.stringify(i))
 			plus.gallery.save(i.target, function()
 			{// 保存到相册
 				plus.io.resolveLocalFileSystemURL(i.target, function(fileEntry)
 				{
 					fileEntry.remove()
 				})
-				bitmap.clear()
+				//bitmap.clear()
 			}, 
 			function(e)
 			{
@@ -525,12 +534,6 @@ function saveServerDatatoFile(filename, jsonData)
 						writer.onwrite = function(e)
 						{
 							//console.log("写入数据成功");
-							let link = '<a title="https://www.bilibili.com/video/BV1Rx421D78C" class="INIT_href">链接</a>'
-							let str = '	下载完成！\n'
-							str += `	可以在【Android/data/${Html5Plus}/documents/MoeTalk_Data】中找到您下载的存档！\n`
-							str += '	卸载MoeTalk时会自动删除此目录，请注意备份文件！！！\n'
-							str += `	如果没有访问data目录的权限请访问此${link}查看解决方案`
-							$('#downImg').html(str)
 						}
 						writer.write(jsonData);
 					},
@@ -555,81 +558,110 @@ function saveServerDatatoFile(filename, jsonData)
 		alert("访问_DOC目录失败" + error.message);
 	});
 }
-//图片隐写
-function base64ToBlob(base64)
+
+function download(filename,data,base64,type = 'json')
 {
-	let binary = atob(base64);
-	let array = [];
-	for (let i = 0; i < binary.length; i++) {
-		array.push(binary.charCodeAt(i));
+	let str = '';
+	if(performance.memory)
+	{
+		let AllMemory = performance.memory.totalJSHeapSize; // 总的JS堆内存大小，单位为字节
+		let MaxMemory = performance.memory.jsHeapSizeLimit; // JS堆内存大小的上限
+		AllMemory = (AllMemory/1048576).toFixed(0)+'MB'
+		MaxMemory = (MaxMemory/1048576).toFixed(0)+'MB'
+		str += `内存占用：${AllMemory}/${MaxMemory}\n`
 	}
-	return new Blob([new Uint8Array(array)], { type: mt_settings['图片格式'] });
-}
-function blobToArrayBuffer(file) {
-	return new Promise((resolve, reject) => {
-		const reader = new FileReader();
-		reader.onload = function(e) {
-			resolve(e.target.result);
-		}
-		reader.readAsArrayBuffer(file);
-	});
-}
-function blobToBase64(blob, callback) { 
-	var reader = new FileReader(); 
-	reader.onload = function() { 
-		var dataUrl = reader.result; 
-		var base64 = dataUrl.split(',')[1]; 
-		callback(base64); 
-	}; 
-	reader.readAsDataURL(blob); 
-} 
-function combineFiles(mainFile, hideFile, fileName, Index) {
-	const sep = '-sep-';
-	const maxExtLength = 4;
-	mainFile = base64ToBlob(mainFile);
-	hideFile = new Blob([hideFile],{type: "application/json",});
-	Promise.all([
-		blobToArrayBuffer(mainFile),//图片
-		blobToArrayBuffer(hideFile),//暗件
-	]).then(([mainBuffer, hideBuffer]) => {
-		const mainData = new Uint8Array(mainBuffer);//图片
-		const hideData = new Uint8Array(hideBuffer);//暗件
-		const mainFileExt = mt_settings['图片格式'].split('/')[1];//图片后缀
-		const hideFileExt = 'json';//暗件后缀
-		const dataView = new DataView(mainBuffer);
-		const sepData = new TextEncoder().encode(sep + hideFileExt.padEnd(maxExtLength, ' '));
-		const targetData = new Uint8Array(mainData.length + sepData.length + hideData.length);
-		targetData.set(mainData, 0);
-		targetData.set(sepData, mainData.length);
-		targetData.set(hideData, mainData.length + sepData.length);
-		const blob = new Blob([targetData], { type: mt_settings['图片格式'] });
-		//downloadBlob(blob, fileName+'.'+mainFileExt);
-		//blobToBase64(blob,function(e){$("[alt='download']").attr('src',`data:${localStorage['mt-image']};base64,${e}`)})//替换手动保存的图片
-		blobToBase64(blob,function(e)
-		{
-			$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${Index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${e}'></div>`)
-			$('.截图数量').text(imageArr.length)
-		})
-		const url = URL.createObjectURL(blob);
-		const a = document.createElement('a');
-		a.download = fileName+'.'+mainFileExt;
-		a.href = url;
-		a.click();
-	});
-}
-function download(filename,json,type = 'json',image = '')
-{
+	if(DATA_ServerDownload && !mt_settings['打包下载'])
+	{
+		DATA_ServerDownload = type
+		type = 'server'
+	}
+
 	if(type === 'json')
 	{
-		json = JSON.stringify(json,null,4)
+		data = JSON.stringify(data,null,4)
 		if(Html5Plus)
 		{
-			saveServerDatatoFile(filename,json);
+			str = `下载已开始！\n可以在【Android/data/${Html5Plus}/documents/MoeTalk_Data】中找到您下载的存档！\n`
+			str += '卸载MoeTalk时会自动删除此目录，请注意备份文件！！！\n如果没有访问data目录的权限请访问此'
+			str += '<a title="https://www.bilibili.com/video/BV1Rx421D78C" class="INIT_href">链接</a>查看解决方案'
 		}
 		else
 		{
-			download_txt(filename,json)
+			str = `文件${filename}已开始下载！\n下载失败请尝试在设置页面中开启“旧版图片存档”选项\n仍然失败请向开发者反馈`
+			data = new Blob([data],{'type': 'application/octet-stream'});
+			let a = document.createElement('a');
+			a.href = window.URL.createObjectURL(data);
+			a.download = filename;
+			a.click();
 		}
+		$('#downImg').html(str)
 	}
-	
+	if(type === 'image')
+	{
+		if(Html5Plus)
+		{
+			saveImg(filename, base64)//base64下载
+			str += '图片正在下载，也可以手动长按保存下方的图片到图库\n'
+		}
+		else//blob下载
+		{
+			if(imageZip)
+			{
+				imageZip.file(filename,data);
+				if(imageArr.length === 0)
+				{
+					imageZip.generateAsync({type:'blob'}).then(function(data)
+					{
+						filename = `MoeTalk_${mt_settings['截图选项'].titleStr && mt_settings['截图选项'].titleStr.split(' : ')[1] ? mt_settings['截图选项'].titleStr.split(' : ')[1] : mt_text.noTitle[mtlang]}_${getNowDate()}`
+						let a = document.createElement('a');
+						a.href = window.URL.createObjectURL(data);
+						a.download = `${filename}.${mt_settings['截图选项'].archive ? 'ZIP' : 'zip'}`;
+						a.click();
+						imageZip = null
+					});
+				}
+			}
+			else
+			{
+				let a = document.createElement('a');
+				a.href = window.URL.createObjectURL(data);
+				a.download = filename;
+				a.click();
+			}
+			str += mt_text.image_download[mtlang]+'\n'
+		}
+		str += '图片无法手动保存请取消勾选“存档”选框，并将图片格式改为“webp”格式\n'
+		$('.INDEX_CaptureTips').text(str)
+	}
+	if(type === 'server')
+	{
+		let className = '#downImg'
+		$.ajax(
+		{
+			url: '/index.php',
+			async: true,
+			type: 'POST',
+			data: 
+			{
+				backDown: true,
+				filename: filename,
+				data: DATA_ServerDownload === 'json' ? data : base64,
+				type: DATA_ServerDownload,
+				time: DATA_NowTime
+			},
+			dataType:'text'
+		});
+		if(DATA_ServerDownload === 'json')
+		{
+			str = `文件${filename}已开始下载！\n可以在<span class='red'>【文件/我的iPhone/phpwin/JSON】</span>中找到您下载的文件！\n`
+			str += '下载失败请尝试在设置页面中开启“旧版图片存档”选项\n'
+		}
+		else
+		{
+			str += `${mt_text.image_download[mtlang]}\n可以在<span class='red'>【文件/我的iPhone/phpwin/IMAGE/${DATA_NowTime}】</span>中找到您下载的文件！\n`
+			className = '.INDEX_CaptureTips'
+		}
+		str += `卸载phpwin前请注意备份！\n如果出现错误请向开发者反馈！`
+		$(className).html(str)
+	}
 }

@@ -305,7 +305,7 @@ $('body').on('click',"#cleancache",function()
 })
 $('body').on('click',"#mt-maxheight",function()
 {
-	let maxheight = prompt("请输入生成图片的最大长度：（小于16384）", mt_settings['高度限制'] ? mt_settings['高度限制'] : 16384);
+	let maxheight = prompt("请输入生成图片的最大长度：\n默认为16384\n理论上限需测试", mt_settings['高度限制'] ? mt_settings['高度限制'] : 16384);
 	if(maxheight != null)
 	{
 		alert('更改完成，请返回moetalk');
@@ -365,6 +365,8 @@ $('body').on('click',"#backsave",function()
 $('body').on('click',"#mt-zipdownimg",function()
 {
 	let str = '如果开启此选项，生成多张图片时会以压缩文件的格式进行下载\n'
+	str += '目前移动客户端下此选项无效，后期考虑支持\n'
+	str += `当前状态：【${mt_settings['打包下载'] ? '开启' : '关闭'}】\n`
 	str += '点击“确认”开启\n点击“取消”关闭'
 	if(confirm(str))
 	{
@@ -446,7 +448,6 @@ $('body').on('click',"#savemode",function()
 			})
 			saveStorage('设置选项',mt_settings,'local')
 			return
-			
 		}
 	}
 	
@@ -487,57 +488,23 @@ $('body').on('click',"#mt-titleColor",function()
 })
 $('body').on('click',"#SETTING_图片存档",function()
 {
-	if(!mt_settings['图片存档'])
-	{
-		if(confirm('图片存档下载模式已关闭\n请问是否开启？'))
-		{
-			mt_settings['图片存档'] = true
-		}
-		else
-		{
-			delete mt_settings['图片存档']
-		}
-	}
-	else
-	{
-		if(confirm('图片存档下载模式已开启\n请问是否关闭？'))
-		{
-			delete mt_settings['图片存档']
-		}
-		else
-		{
-			mt_settings['图片存档'] = true
-		}
-	}
+	let str = ''
+	str += '新版MoeTalk已取消上传和下载旧版图片存档\n此选项用于切换对旧版图片存档的上传和下载\n'
+	str += `当前为${mt_settings['图片存档'] ? '开启' : '关闭'}状态\n点击【确定】开启\n点击【取消】关闭`
+	if(confirm(str))mt_settings['图片存档'] = true
+	else delete mt_settings['图片存档']
 	saveStorage('设置选项',mt_settings,'local')
-	alert(`图片存档下载模式已${mt_settings['图片存档'] ? '开启' : '关闭'}`)
+	alert(`旧版图片存档的上传和下载模式已${mt_settings['图片存档'] ? '开启' : '关闭'}`)
 })
-$('body').on('click',"#SETTING_差分按钮",function()
+$('body').on('click',"#SETTING_隐藏差分",function()
 {
-	if(!mt_settings['差分按钮'])
-	{
-		if(confirm('表情差分按钮已隐藏\n请问是否显示？'))
-		{
-			mt_settings['差分按钮'] = true
-		}
-		else
-		{
-			delete mt_settings['差分按钮']
-		}
-	}
-	else
-	{
-		if(confirm('表情差分按钮已显示\n请问是否隐藏？'))
-		{
-			delete mt_settings['差分按钮']
-		}
-		else
-		{
-			mt_settings['差分按钮'] = true
-		}
-	}
+	let str = ''
+	str += '此选项可以设置显示或隐藏差分按钮\n'
+	str += `当前为${mt_settings['隐藏差分'] ? '隐藏' : '显示'}状态\n点击【确定】则隐藏\n点击【取消】则显示`
+	if(confirm(str))mt_settings['隐藏差分'] = true
+	else delete mt_settings['隐藏差分']
 	saveStorage('设置选项',mt_settings,'local')
-	alert(`表情差分按钮已${mt_settings['差分按钮'] ? '显示' : '隐藏'}`)
+	alert(`差分按钮已${mt_settings['隐藏差分'] ? '隐藏' : '显示'}`)
 })
 $('#titleColor').val(mt_settings['标题颜色'] ? mt_settings['标题颜色'] : '#8BBBE9')
 // document.write("<scr"+`ipt src='https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/MoeScript/Script/localforage.min.js'></scr`+"ipt>");

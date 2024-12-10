@@ -29,7 +29,7 @@ if(mt_settings['存储模式'])
 var LibraryURL = 'Data/Library'//图书馆地址
 var directory = []//目录
 var nowChapter = ['',{chapter:[]}]//当前章节
-var player = href+'player'//播放器地址
+var player = (Html5Plus === 'mmt.MoeTalk.WumberBee' ? '/' : href)+'player'//播放器地址
 
 var test = console.log
 var $$ = $;//jquery转义
@@ -281,4 +281,25 @@ function INIT_loading(loading = '加载')
 			else $(className).show()
 		},className)
 	}
+}
+function INIT_waiting(callback,arr)//等待变量加载
+{
+	let boolen = true;
+	foreach(arr,function(k,v){boolen = window[v] ? boolen : false})
+	if(boolen)callback()
+	else
+	{
+		setTimeout(function(){INIT_waiting(callback,arr)}, 1000)
+		return
+	}
+}
+function foreach(arr,callback)//循环索引数组
+{
+	for(let i=0,len=arr.length;i<len;i++)callback(i,arr[i])
+}
+if(mt_settings['后台保存'])
+{
+	window.onblur = function(){saveStorage('chats',[...chats,...otherChats],'local')}
+	window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
+	window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 }

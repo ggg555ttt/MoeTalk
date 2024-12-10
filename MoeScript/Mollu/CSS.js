@@ -115,8 +115,8 @@
 						{
 							var e;
 							null == u || null === (e = u.current) || void 0 === e || e.resetAfterIndex(t)
-						}, 0), r === t ? a+$$('.gskNYI:eq(0)').outerHeight() : a
-					}))//#单行改为多行头像
+						}, 0), r === t ? a+$$('.gskNYI:eq(0)').outerHeight() : a//#单行改为多行头像分支
+					}))
 				}, [r, t, u, a, h]);
 				var p = function(e)
 				{

@@ -23,6 +23,6 @@ for /f "tokens=1" %%a in ('tasklist /nh /fi "PID eq %PID%"') do (
 
 :exit
 start player/EasyWebSvr.exe
-start http://localhost:%PORT%/
+start "" http://localhost:%PORT%/
 
 endlocal

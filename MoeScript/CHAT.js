@@ -1,12 +1,10 @@
-
-
 var chatIndex = -1//消息索引
 
 var 粘贴板;
 
-
 var replyDepths = [0];//选择肢总集
 
+var allChats = false
 var otherChats = []//其他分支内容
 var chats = []//当前分支内容
 var 差分映射 = false
@@ -14,35 +12,37 @@ var 差分映射 = false
 var 操作历史 = {index: -1,list: []}
 var CHAT_history = [操作历史,{}]
 var EMOJI = {io:'NO',type:'NO',pages:localStorage['差分书签'] ? JSON.parse(localStorage['差分书签']) : {}}
-var EMOJI_CustomEmoji = {id:{},image:{}}
+var EMOJI_CustomEmoji = {image:{}}
 mt_settings['表情信息'] = mt_settings['表情信息'] ? mt_settings['表情信息'] : {}
 moetalkStorage.getItem('DB_EMOJI', function(err, DB_EMOJI)
 {
 	EMOJI_CustomEmoji = DB_EMOJI ? DB_EMOJI : EMOJI_CustomEmoji
+	if(EMOJI_CustomEmoji.id)
+	{
+		EMOJI_CustomEmoji.Emoji = EMOJI_CustomEmoji.id
+		delete EMOJI_CustomEmoji.id
+	}
 })
 if(EMOJI.pages.type)EMOJI.type = EMOJI.pages.type
 $('body').on('click',".INDEX_Emoji",function()
 {
-	if(mt_settings['差分按钮'])
+	if(!mt_settings['隐藏差分'])
 	{
 		setTimeout(function()
 		{
 			EMOJI.type === 'Emoji' ? $('.INDEX_EmojiButton').click() : $('.INDEX_CharFaceButton').click()
 		})
 	}
-	else
-	{
-		setTimeout(function(){$('.INDEX_EmojiButton').click()})
-	}
+	else setTimeout(function(){$('.INDEX_EmojiButton').click()})
 })
 function mt_emojis(S,mode)
 {
 	EMOJI.images = []//表情列表
 	EMOJI.pageindex = ''//表情书签
+	EMOJI.title = '图片表情'//
 	EMOJI.custom = {}//自设表情
-	EMOJI.custom.io = !1//自设开关
-	EMOJI.custom.title = ''//按钮标题
-	EMOJI.custom.from = ''//差分来源
+	EMOJI.custom.io = false//自设开关
+	EMOJI.custom.title = '切换自定义'//按钮标题
 	EMOJI.path = `Images/${mt_settings['选择游戏']}/${mode}/`//表情路径
 	EMOJI.pages.type = mode
 	let id = 'Emoji';
@@ -59,7 +59,7 @@ function mt_emojis(S,mode)
 		EMOJI.pages[id].origin = 0
 		EMOJI.pages[id].custom = 0
 	}
-	
+	EMOJI.id = id
 	if(S === '+')
 	{//下一页
 		EMOJI.pages[id][EMOJI.pages[id].type]++
@@ -76,155 +76,127 @@ function mt_emojis(S,mode)
 		return;
 	}
 	if(!S)return;
+
 	let type = EMOJI.pages[id].type
-	let EmojiList = []
-	EmojiList[0] = []
-	if(mode === 'CharFace')
+	let PageIndex = parseInt(EMOJI.pages[id][type])
+	let PageCount = 0
+	if(type === 'origin')
 	{
-		if(mt_characters[id])
+		if(mode === 'CharFace' && mt_charface[id])
 		{
-			let EmojiType = 'charface'
-			if(type === 'origin')
+			PageCount = mt_charface[id].length//
+			if(PageIndex < 0)PageIndex = EMOJI.pages[id][type] = PageCount-1
+			if(isNaN(PageIndex) || PageIndex >= PageCount)PageIndex = EMOJI.pages[id][type] = 0
+
+			let Index = mt_charface.index
+			let CharFace = mt_charface[id][PageIndex]//
+			let cfid = toString(CharFace[0][0])
+			if(cfid.indexOf('/') > -1)EMOJI.custom.from = CustomFaceAuthor[cfid.split('/')[0]]
+			foreach(CharFace,function(k,v)
 			{
-				EmojiType = 'charface'
-				EMOJI.custom.io = false
-				EMOJI.custom.title = '拓展差分'
-			}
-			if(type === 'custom')
-			{
-				EmojiType = 'customface'
-				EMOJI.custom.io = true
-				EMOJI.custom.title = '内置差分'
-				EMOJI.path = `Images/${mt_settings['选择游戏']}/CustomFace/`
-			}
-			if(!mt_characters[id]['charface'] || !mt_characters[id]['customface'])
-			{//只存在一种类型差分
-				EMOJI.custom.title = ''
-				if(mt_characters[id]['customface'])
+				foreach(v[1],function(k,index)
 				{
-					EmojiType = 'customface'
-					EMOJI.pages[id].type = type === 'custom'
-					EMOJI.custom.io = true
-					EMOJI.path = `Images/${mt_settings['选择游戏']}/CustomFace/`
+					if(typeof index === 'number')EMOJI.images.push(`${v[0]}/${Index[index]}`)
+					else if(typeof index === 'object')
+					{
+						if(typeof index[1] === 'number')EMOJI.images.push(`${v[0]}/${Index[index[0]]}_${Index[index[1]]}`)
+						else for(let i=0;i<index[1];i++)EMOJI.images.push(`${v[0]}/${Index[index[0]]}_${i}`)
+					}
+					else for(let i=0;i<index;i++)EMOJI.images.push(`${v[0]}/${i}`)
+				})
+			})
+		}
+		if(mode === 'Emoji')
+		{
+			PageCount = 0
+			if(mt_settings['选择游戏'] === 'BLDA')
+			{
+				PageCount = 4//
+				if(PageIndex < 0)PageIndex = EMOJI.pages[id][type] = 3
+				if(isNaN(PageIndex) || PageIndex >= PageCount)PageIndex = EMOJI.pages[id][type] = 0
+
+				let lang = mtlang === 'zh_cn' ? 'zh_tw' : mtlang
+				let path = PageIndex === 3 ? 4 : PageIndex+1+lang
+				for(let i = 1;i <= [40,40,64,43][PageIndex];i++)
+				{
+					EMOJI.images.push(`${path}${i}`)
 				}
 			}
-			if(mt_characters[id][EmojiType])
-			{//获取差分文件列表
-				EmojiList = mt_characters[id][EmojiType].split(',')
-				EmojiList.map(function(v,k)
+			else if(mt_settings['选择游戏'] === 'CBJQ')
+			{
+				PageIndex = 0
+				PageCount = 1
+				for(i=1;i<=143;i++)
 				{
-					v = v.split('.')
-					EmojiList[k] = []
-					for(i=1;i<=v[1];i++)
-					{
-						EmojiList[k].push(`${v[0]}.${i}`)
-					}
-				})
-				let arr1 = [];
-				let arr2 = [];
-				EmojiList.map(function(v,k)
-				{//整合零散差分
-					if(v.length > 5)arr1.push(v)
-					else arr2 = [...arr2,...v]
-				})
-				EmojiList = arr1
-				if(arr2.length)EmojiList.push(arr2)
+					EMOJI.images.push(i+'')
+				}
+			}
+			else
+			{
+				PageIndex = 0
+				PageCount = 0
 			}
 		}
 	}
-	else
+	if(PageCount === 0)type = 'custom'
+	if(type === 'custom')
 	{
-		EMOJI.title = '图片表情'
-		EMOJI.custom.title = '内置表情'
-		if(type === 'origin')
+		EMOJI.pages[id].type = type
+		EMOJI.custom.io = true
+		EMOJI.custom.title = '切换内置'
+		//重新排列分页
+		let arr = [[]]
+		if(EMOJI_CustomEmoji[EMOJI.id])
 		{
-			EMOJI.custom.title = '自定义表情'
-			EMOJI.custom.io = false
-			if(mt_settings['选择游戏'] === 'BLDA')
+			$.each(EMOJI_CustomEmoji[EMOJI.id],function(k,v)
 			{
-				EmojiList = [40,40,64,43]
-				let lang = mtlang === 'zh_cn' ? 'zh_tw' : mtlang
-				EmojiList.map(function(v,k)
-				{
-					EmojiList[k] = []
-					lang = k === 3 ? '' : lang
-					for(i=1;i<=v;i++)
-					{
-						EmojiList[k].push(`${k+1}${lang}${i}`)
-					}
-				})
-			}
-			if(mt_settings['选择游戏'] === 'CBJQ')
-			{
-				for(i=1;i<=143;i++)
-				{
-					EmojiList[0].push(i)
-				}
-			}
-		}
-		if(mt_settings['选择游戏'] === 'QNZL')
-		{//只显示自定义表情
-			type = EMOJI.pages[id].type = 'custom'
-			EMOJI.custom.io = !0
-			EMOJI.custom.title = ''
-		}
-		if(EMOJI.pages[id].type === 'custom')
-		{
-			EMOJI.custom.io = true
-			EMOJI.path = ''
-			EMOJI.title = '自定义表情'
-			//重新排列分页
-			let arr = {}
-			let i = 0
-			$.each(EMOJI_CustomEmoji.id,function(k,v)
-			{
-				CFInfo[k] = k
 				if(!arr[v])arr[v] = []
 				arr[v].push(k)
 			})
-			$.each(arr,function(k,v)
+			let length = arr.length
+			arr = arr.filter(function(item){return item && item.length});//排查空元素
+			if(length !== arr.length)
 			{
-				EmojiList[i] = v
-				v.map(function(n)
+				foreach(arr,function(k,v)
 				{
-					EMOJI_CustomEmoji.id[n] = parseInt(i)
+					foreach(v,function(kk,vv)
+					{
+						EMOJI_CustomEmoji[EMOJI.id][vv] = k
+					})
 				})
-				i++
-			})
+			}
+			PageCount = arr.length//
+			if(PageIndex < 0)PageIndex = EMOJI.pages[id][type] = PageCount-1
+			if(isNaN(PageIndex) || PageIndex >= PageCount)PageIndex = EMOJI.pages[id][type] = 0
+			EMOJI.images = EMOJI.images.concat(arr[PageIndex])
 		}
 	}
-	let PageIndex = parseInt(EMOJI.pages[id][type])
-	if(PageIndex === -1)PageIndex = EMOJI.pages[id][type] = EmojiList.length-1
-	if(isNaN(PageIndex) || !EmojiList[PageIndex])PageIndex = EMOJI.pages[id][type] = 0
-
-	EMOJI.images = EmojiList[PageIndex]
-	if(mode === 'CharFace' && EMOJI.custom.io)
+	if(mode === 'CharFace')
 	{
-		EMOJI.custom.from = CustomFaceAuthor[EMOJI.images[0].split('/')[0]]
-	}
-	let str = toString(EMOJI.images[0] ? EMOJI.images[0] : '')
-	if(str.indexOf('_REPAIR') > -1)
-	{
-		EMOJI.title = EMOJI.title+`(${EmojiList[PageIndex].length}修复)`
-	}
-	else if(str.indexOf('_OLD') > -1)
-	{
-		EMOJI.title = EMOJI.title+`(${EmojiList[PageIndex].length}旧设)`
-	}
-	else if(str.indexOf('CharID_') > -1)
-	{
-		EMOJI.title = EMOJI.title+`(${EmojiList[PageIndex].length}拓展)`
+		if(!mt_charface[id])EMOJI.custom.title = ''
 	}
 	else
 	{
-		EMOJI.title = EMOJI.title+`(${EmojiList[PageIndex].length})`
+		if(['QNZL','YGST'].indexOf(mt_settings['选择游戏']) > -1)EMOJI.custom.title = ''
 	}
-	EMOJI.pageindex = `${PageIndex+1} / ${EmojiList.length}`
+
+	let str = toString(EMOJI.images[0])
+	if(str.indexOf('_REPAIR') > -1)EMOJI.title += `(${EMOJI.images.length}修复)`
+	else if(str.indexOf('_OLD') > -1)EMOJI.title += `(${EMOJI.images.length}旧设)`
+	else if(str.indexOf('CharID_') > -1)EMOJI.title += `(${EMOJI.images.length}拓展)`
+	else if(EMOJI.custom.io)EMOJI.title += `(${EMOJI.images.length}自定义)`
+	else
+	{
+		EMOJI.title += `(${EMOJI.images.length})`
+	}
+	EMOJI.pageindex = `${PageIndex+1} / ${PageCount || 1}`
 	setTimeout(function()
 	{
-		if($(`.差分映射.selected`).length)$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',block: 'nearest',behavior:"smooth"})
+		if($(`.差分映射.selected`).length)$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',block: 'nearest'})
 	}, 100)
 	saveStorage('差分书签',EMOJI.pages,'local')
+	if(EMOJI.custom.io)EMOJI.images.unshift('ADD')
+
 	S(!0)
 }
 function moeLog(arr,mode = false)
@@ -342,6 +314,7 @@ function isfirst(chatIndex,chats,mode)
 
 		if(chatIndex-1 < 0)return true//首条消息
 		if(chats[chatIndex].isCenter || chats[chatIndex-1].isCenter)return true//isCenter
+		if((chats[chatIndex].heads && chats[chatIndex].heads.list.length) || (chats[chatIndex-1].heads && chats[chatIndex-1].heads.list.length))return true//头像列表
 		if(typeArr.indexOf(chats[chatIndex].type) > -1)return true//判断类型
 		if(typeArr.indexOf(chats[chatIndex-1].type) > -1)return true//类型不符
 
@@ -359,7 +332,7 @@ function isfirst(chatIndex,chats,mode)
 }
 function makeMessage(type,data,chatIndex,mode)
 {
-	let 聊天,头像框,对话,名称,文本,图片;
+	let 聊天,头像,头像框,对话,名称,文本,图片;
 	let no = data.sCharacter.no
 	let index = data.sCharacter.index
 	let alt = ''
@@ -381,7 +354,7 @@ function makeMessage(type,data,chatIndex,mode)
 
 	if(data.isFirst === true)color = 'blue';
 	if(data.is_breaking === true)color = 'red';
-	data.time = data.time ? data.time : ''
+	//data.time = data.time ? data.time : ''
 
 	let style = '';
 	if(mt_settings['文字样式'][type])
@@ -390,11 +363,26 @@ function makeMessage(type,data,chatIndex,mode)
 	}
 	if(type === 'chat' || type === 'image')
 	{
+		let headstyle = data.heads ? `style="z-index:${data.heads.list.length};"` : ''
+		头像 = head ? `<img src="${loadhead(no,index)}" alt="${index}" class="头像"${headstyle}>` : ''
+		headstyle = ''
+		if(data.heads && head)
+		{
+			headstyle = `margin-${data.heads.direction === 'column' ? 'top' : 'left'}:${data.heads.margin ? data.heads.margin : '-1.5rem'};`
+			data.heads.list.map(function(index,k)
+			{
+				头像 += `<img src="${loadhead('LIST',index)}" class="头像"style="${headstyle};z-index:${data.heads.list.length-k-1};">`
+			})
+			headstyle = 'min-width:auto;'
+			headstyle += `padding-${no != 0 && !data.isRight ? 'right' : 'left'}:1rem;`
+			headstyle += `flex-direction:${data.heads.direction};`
+			
+		}
 		if(type === 'image')
 		{
 			let width = ''
 			let maxwidth = mt_settings['图片比例'] || '90%'
-			if(data.file.indexOf("Face") > -1)
+			if((data.content || data.file).indexOf("Face") > -1)
 			{//如果是差分表情
 				width = 'max-height:360px;'
 				maxwidth = mt_settings['差分比例'] || '90%'
@@ -404,14 +392,14 @@ function makeMessage(type,data,chatIndex,mode)
 		}
 		if(no != 0 && !data.isRight)
 		{//左侧对话
-			头像框 = `<div class="头像框" style="cursor: pointer; height: 100%;">${head ? `<img height="252" width="252" src="${loadhead(no,index)}" alt="${index}" class="头像">` : ''}</div>`
+			头像框 = `<div class="头像框" style="cursor: pointer;${headstyle}">${头像}</div>`
 			名称 = `${head ? `<span class="名称 bold">${data.name || loadname(no,index)}</span>` : ''}`
 			文本 = `<span class="${head ? '文本 左角' : '文本'} 编辑" style='${style}'>${data.content}</span>`
 			对话 = 
 			`${头像框}
-			<div class="对话" style="align-items: flex-start;">
+			<div class="对话" style="align-items: flex-start;height: ${data.heads && data.heads.fullHeight ? '100%' : ''}">
 				${名称}
-				<div style="display: flex;">
+				<div style="display: flex; height: 100%;">
 					${type === 'chat' ? 文本 : 图片}
 					${data.time ? `<span class="时间戳">${data.time}</span>` : ''}
 				</div>
@@ -419,14 +407,14 @@ function makeMessage(type,data,chatIndex,mode)
 		}
 		else
 		{//右侧对话或主角发言
-			头像框 = `${no == 0 ? '' : `<div class="头像框" style="justify-content: flex-end; cursor: pointer; height: 100%;">${head ? `<img height="252" width="252" src="${loadhead(no,index)}" alt="${index}" class="头像">` : ''}</div>`}`
+			头像框 = `${no == 0 ? '' : `<div class="头像框" style="justify-content: flex-end; cursor: pointer;${headstyle}">${头像}</div>`}`
 			名称 = `${head && no != 0 ? `<span class="名称 bold">${data.name || loadname(no,index)}</span>` : ''}`
 			文本 = `<span style="background: rgb(74, 138, 202); border: 1px solid rgb(74, 138, 202);${style}" class="文本 编辑">${data.content}</span>${head || no == 0 ? '<div class="右角"></div>' : ''}`
 			对话 = 
 			`${no == 0 ? '<div class="头像框" style="margin-right: 1.5rem;"></div>' : ''}
-			<div class="对话" style="align-items: flex-end;">
+			<div class="对话" style="align-items: flex-end;height: ${data.heads && data.heads.fullHeight ? '100%' : ''}">
 				${名称}
-				<div style="display: flex;justify-content: flex-end;">
+				<div style="display: flex;justify-content: flex-end; height: 100%;">
 					${data.time ? `<span class="时间戳" style="text-align: right;">${data.time}</span>` : ''}
 					${type === 'chat' ? 文本 : 图片}
 				</div>
@@ -439,7 +427,6 @@ function makeMessage(type,data,chatIndex,mode)
 			`<div class="对话" style="align-items: center;">
 				<div style="display: flex;justify-content: center;">
 					${type === 'chat' ? 文本 : 图片}
-					${data.time ? `<span class="时间戳">${data.time}</span>` : ''}
 				</div>
 			</div>`
 		}
@@ -523,7 +510,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		if(mode === 'edit')
 		{
 			arr.chats.push(chats[chatIndex])//编辑前的消息
-			chats[chatIndex] = {...chats[chatIndex],...data[k] ? data[k] : data}
+			chats[chatIndex] = 撤销 ? data[k] ? data[k] : data : {...chats[chatIndex],...data[k] ? data[k] : data}
 			if(type)
 			{
 				if(chats[chatIndex].type === 'image' && type !== 'image')
@@ -543,9 +530,10 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 			}
 			else
 			{
-				data.isFirst = !1
-				data.isRight = ['chat','image'].indexOf(type) > -1 && mt_settings['右侧发言'][mt_settings['选择角色'].no]
-				data.is_breaking = !1
+				//data.isFirst = !1
+				if(mt_settings['右侧发言'][mt_settings['选择角色'].no] && ['chat','image'].indexOf(type) > -1)data.isRight = true
+				//data.isRight = ['chat','image'].indexOf(type) > -1 && mt_settings['右侧发言'][mt_settings['选择角色'].no]
+				//data.is_breaking = !1
 				data.sCharacter = {no:mt_settings['选择角色'].no,index:mt_settings['选择角色'].index}
 				if(checked.length)chatIndex = dels.index(checked)//向前追加
 				else chatIndex = chats.length//末尾追加
@@ -633,17 +621,17 @@ $("body").on('click',".编辑",function()
 {
 	chatIndex = $('.消息').index($(this).parents('.消息'))
 	let chat = chats[chatIndex]
-
+	CHAT_HeadList = $('.dels:checked').length < 2 && chats[chatIndex] && chats[chatIndex].heads ? {...chats[chatIndex].heads,...{}} : false
 	$('.editMessage').addClass('visible')//显示编辑界面
 	$('.edit_2_1_1 input').hide().prop('checked',false)
-	$('.edit_2_1_1 span').hide()
+	$('.edit_2_1_1 label').hide()
 
 	$('.edit_button button').hide().removeClass('selected')
 	if($('.dels:checked').length < 2)$(`.edit_button .${chat.type}`).addClass('selected') 
 
 	$('.edit_3').show()
 	$('.图片选项').hide()
-	$('.图片文件').attr('src','')
+	$('.图片文件').attr('src','').attr('title',chat.content)
 	
 	$('.content').innerHeight(27)
 	$('.time').innerHeight(27)
@@ -651,10 +639,10 @@ $("body").on('click',".编辑",function()
 	{
 		$('.typeTitle').text('批量编辑')
 
-		$('.editMessage .头像').removeAttr('alt').removeAttr('title').attr('src',href+'Images/Ui/setting.webp')
+		$('.editMessage .头像').removeAttr('alt').removeAttr('title').attr('src',href+'Images/Ui/setting.webp')//.prev().text(CHAT_HeadList ? '列表' : '角色')
 
-		$('.editType').show().next().show()
-		$('.editTalk').show().next().show()
+		$('.editType').show().parent().show()
+		$('.editTalk').show().parent().show()
 
 		$('.name').val('').attr('placeholder','默认')
 		$('.time').val('').attr('placeholder','默认')
@@ -667,20 +655,20 @@ $("body").on('click',".编辑",function()
 
 		$('.edit_button button').show()
 		
-		$('.addChat').show().next().show()
-		$('.isRight').show().prop('checked',chat.isRight).next().show()
-		$('.isFirst').show().prop('checked',chat.isFirst).next().show()
-		$('.is_breaking').show().prop('checked',chat.is_breaking).next().show()
+		$('.addChat').show().parent().show()
+		$('.isRight').show().prop('checked',chat.isRight).parent().show()
+		$('.isFirst').show().prop('checked',chat.isFirst).parent().show()
+		$('.is_breaking').show().prop('checked',chat.is_breaking).parent().show()
 
 		$('.name').val(chat.name).attr('placeholder',loadname(chat.sCharacter.no,chat.sCharacter.index))
 		$('.time').val(chat.time).attr('placeholder','支持换行').innerHeight($('.time')[0].scrollHeight)
-		$('.content').val(chat.content).attr('placeholder','').innerHeight($('.content')[0].scrollHeight)
+		$('.content').val(chat.type === 'image' ? '' : chat.content).attr('placeholder',chat.content || '').innerHeight($('.content')[0].scrollHeight)
 
-		$('.editMessage .头像').attr('alt',chat.sCharacter.no).attr('title',chat.sCharacter.index).attr('src',loadhead(chat.sCharacter.no,chat.sCharacter.index))
+		$('.editMessage .头像').attr('alt',chat.sCharacter.no).attr('title',chat.sCharacter.index).attr('src',loadhead(chat.sCharacter.no,chat.sCharacter.index))//.prev().text(CHAT_HeadList || (chats[chatIndex] && chats[chatIndex].heads) ? '列表' : '角色')
 
 		if(chat.type === 'image')
 		{
-			$('.isCenter').show().prop('checked',chat.isCenter).next().show()
+			$('.isCenter').show().prop('checked',chat.isCenter).parent().show()
 			$('.图片选项').show()
 			$('.edit_3').hide()
 			if(chat.file)
@@ -694,11 +682,13 @@ $("body").on('click',".编辑",function()
 		}
 		if(chat.type === 'info')
 		{
-			$('.isFirst').next().text('左侧对齐').next().next().text('右侧对齐')
+			$('.isFirst').next().text('左侧对齐')
+			$('.isRight').next().text('右侧对齐')
 		}
 		else
 		{
-			$('.isFirst').next().text('显示头像').next().next().text('右侧发言')
+			$('.isFirst').next().text('显示头像')
+			$('.isRight').next().text('右侧发言')
 		}
 	}
 	
@@ -726,15 +716,15 @@ $("body").on('click',".editTalk",function()
 {
 	if($(this).prop('checked'))
 	{
-		$('.isRight').show().next().show()
-		$('.isFirst').show().next().show()
-		$('.edit_button .selected').attr('title') === 'image' ? $('.isCenter').show().next().show() : ''
+		$('.isRight').show().parent().show()
+		$('.isFirst').show().parent().show()
+		$('.edit_button .selected').attr('title') === 'image' ? $('.isCenter').show().parent().show() : ''
 	}
 	else
 	{
-		$('.isRight').hide().next().hide()
-		$('.isFirst').hide().next().hide()
-		$('.isCenter').hide().next().hide()
+		$('.isRight').hide().parent().hide()
+		$('.isFirst').hide().parent().hide()
+		$('.isCenter').hide().parent().hide()
 	}
 });
 $("body").on('click',".edit_button button",function()
@@ -746,7 +736,7 @@ $("body").on('click',".edit_button button",function()
 	if(type === 'image')
 	{
 		$('.edit_3').hide()
-		$('.dels:checked').length < 2 || $('.editTalk').prop('checked') ? $('.isCenter').show().next().show() : ''
+		$('.dels:checked').length < 2 || $('.editTalk').prop('checked') ? $('.isCenter').show().parent().show() : ''
 		$('.图片选项').show()
 		if(file)
 		{
@@ -760,17 +750,19 @@ $("body").on('click',".edit_button button",function()
 	}
 	else
 	{
-		$('.isCenter').hide().next().hide()
+		$('.isCenter').hide().parent().hide()
 		$('.图片选项').hide()
 		$('.edit_3').show()
 	}
 	if(type === 'info')
 	{
-		$('.isFirst').next().text('左侧对齐').next().next().text('右侧对齐')
+		$('.isFirst').next().text('左侧对齐')
+		$('.isRight').next().text('右侧对齐')
 	}
 	else
 	{
-		$('.isFirst').next().text('显示头像').next().next().text('右侧发言')
+		$('.isFirst').next().text('显示头像')
+		$('.isRight').next().text('右侧发言')
 	}
 });
 $("body").on('click',".fzOyMd",function()
@@ -802,7 +794,7 @@ $("body").on('click',".INDEX_delete",function()
 			indexs.push($('.dels').index(v))
 		})
 		title = '批量删除'
-		str += `您一共选中了${$(".dels:checked").length}条消息\n\n点击【${mt_text.confirm[mtlang]}】将全部删除\n\n操作可撤回`
+		str += `您一共选中了${$(".dels:checked").length}条消息\n\n点击【${mt_text.confirm[mtlang]}】将删除\n\n操作可撤销`
 	}
 	else
 	{
@@ -817,14 +809,14 @@ $("body").on('click',".INDEX_delete",function()
 			
 			clear = true
 			title = '全部删除'
-			str += '请注意此操作会将存在的所有项目内容全部删除，且无法撤回\n\n'
-			str += '如果只想单独删除此分支请使用批量删除\n\n'
-			str += `点击【${mt_text.confirm[mtlang]}】将全部删除`
+			str += `点击【${mt_text.confirm[mtlang]}】将删除全部项目分支\n\n`
+			str += '只删除此分支消息请使用批量删除\n\n'
+			str += '<span class="red">操作不可撤销</span>'
 		}
 		else
 		{
 			title = '删除消息'
-			str += `点击【${mt_text.confirm[mtlang]}】将此项目全部内容清空\n\n操作可撤回`
+			str += `点击【${mt_text.confirm[mtlang]}】将此项目全部内容清空\n\n操作可撤销`
 		}
 	}
 	$('.notice .title').text(title)
@@ -851,3 +843,4 @@ $("body").on('click',".INDEX_EmojiIfno",function()
 //自定义表情
 //设置
 //差分信息
+var CHAT_HeadList = false
