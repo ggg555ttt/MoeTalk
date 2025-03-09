@@ -13,6 +13,7 @@ function os(u = window.navigator.userAgent)
 }
 
 //变量
+var 更新时间 = 1741532102//!
 var gamearr = {}//游戏列表
 gamearr['BLDA'] = '碧蓝档案'
 gamearr['CBJQ'] = '尘白禁区'
@@ -20,11 +21,11 @@ gamearr['QNZL'] = '千年之旅'
 gamearr['YGST'] = '犹格索托斯的庭院'
 
 var gamever = {}//游戏版本
-gamever['BLDA'] = '2024_10_23'
-gamever['CBJQ'] = '2024_11_07'
+gamever['BLDA'] = '2025_02_26'
+gamever['CBJQ'] = '25-03-08'
 gamever['QNZL'] = '2024_10_24'
 
-var 本地版本 = 23//@
+var 本地版本 = 25//@
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 var browser = os();//获取浏览器信息
 var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index.html','')//文件目录地址
@@ -48,7 +49,7 @@ if(localStorage['每日提醒'] != day)
 function XHR(url,callback)
 {
 	let xhr = new XMLHttpRequest();
-	xhr.open("GET",url);
+	xhr.open("GET",url+'?'+更新时间);
 	xhr.send();
 	xhr.onload = function()//xhr.onreadystatechange
 	{
@@ -68,7 +69,7 @@ XHR("https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.git
 		let str = `应用版本：\n　　当前：${本地版本}\n　　最新：${json.version.code}\n`
 		if(gamever[mt_settings['选择游戏']])
 		{
-			str += `数据版本：\n　　当前：${gamever[mt_settings['选择游戏']]}\n　　最新：${json.version.game[mt_settings['选择游戏']]}\n`
+			str += `更新时间：\n　　当前：${gamever[mt_settings['选择游戏']]}\n　　最新：${json.version.game[mt_settings['选择游戏']]}\n`
 		}
 		str += '客户端已更新，确定跳转到下载链接吗？\n'
 		str += '提取码：BLDA\n安装新版本前注意备份存档'
@@ -121,6 +122,9 @@ let gameid = window.location.href.split('?')[1]
 mt_settings['选择游戏'] = mt_settings['选择游戏'] || 'BLDA'
 mt_settings['选择游戏'] = gamearr[mt_settings['选择游戏']] ? mt_settings['选择游戏'] : 'BLDA'
 mt_settings['选择游戏'] = gamearr[gameid] ? gameid : mt_settings['选择游戏']//#
+var mtlang = mt_settings['语言选项'] || 'zh_cn';
+var langarr = ['zh_cn','zh_tw','jp','en','kr'];
+if(langarr.indexOf(gameid) > -1)mt_settings['语言选项'] = mtlang = gameid
 
 var mt_characters,mt_school,mt_club,CFInfo//表情差分信息
 		</script>
@@ -147,15 +151,15 @@ var mt_characters,mt_school,mt_club,CFInfo//表情差分信息
 		<meta name="application-name" content="MoeTalk">
 
 		<link rel="shortcut icon" href="./Images/Ui/Favor_Schedule_Deco.webp">
-		<link rel='stylesheet' href="./MoeScript/Style/style.css?filesize=21702" data-n-g=''><!-- @@样式 -->
+		<link rel='stylesheet' href="./MoeScript/Style/style.css?filesize=21706" data-n-g=''><!-- @@样式 -->
 		<script src="./Data/MT-Img.js"></script><!-- 存档图片 -->
 		<script src="./Data/MT-Text.js"></script><!-- 提示文本 -->
-		<script src="./MoeScript/INIT.js?filesize=10151" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/INIT.js?filesize=9951" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/IMAGE.js?filesize=13280" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/DATA.js?filesize=20135" defer></script><!-- @@存档 -->
-		<script src="./MoeScript/CHAT.js?filesize=28033" defer></script><!-- @@消息 -->
-		<script src="./MoeScript/CHAR.js?filesize=16522" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/TOP.js?filesize=17651" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/DATA.js?filesize=20219" defer></script><!-- @@存档 -->
+		<script src="./MoeScript/CHAT.js?filesize=28101" defer></script><!-- @@消息 -->
+		<script src="./MoeScript/CHAR.js?filesize=16426" defer></script><!-- @@角色 -->
+		<script src="./MoeScript/TOP.js?filesize=17451" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/Other/webpack-0a2a587924e1d405.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/framework-2c79e2a64abdb08b.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/main-dfffdc208236edda.js" defer></script>
@@ -163,7 +167,7 @@ var mt_characters,mt_school,mt_club,CFInfo//表情差分信息
 		<script src="./MoeScript/Mollu/Other/ad7f724d-94baee9a2d394f8b.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/288-68932622dcf1348d.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/876-d056d91d7a6271a4.js" defer></script>
-		<script src="./MoeScript/Mollu/INDEX.js?filesize=157749" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/Mollu/INDEX.js?filesize=157915" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/Other/_buildManifest.js" defer></script>
 
 		<style data-styled="active" data-styled-version="5.3.8"></style>
@@ -175,7 +179,7 @@ var mt_characters,mt_school,mt_club,CFInfo//表情差分信息
 		<script src="./MoeScript/Mollu/Other/2cca2479-252e554161ba1891.js"></script>
 		<script src="./MoeScript/Mollu/Other/648-34d807018fc4299c.js"></script>
 		<script src="./MoeScript/Mollu/LIBRARY.js?filesize=51336"></script><!-- @@图书馆 -->
-		<script src="./MoeScript/Mollu/PLAYER.js?filesize=63064"></script><!-- @@播放器 -->
+		<script src="./MoeScript/Mollu/PLAYER.js?filesize=63078"></script><!-- @@播放器 -->
 		<script src="./MoeScript/Mollu/Other/[pageNum]-64f8b3ceb0a4c91c.js"></script>
 		<script src="./MoeScript/Mollu/CSS.js?filesize=25567"></script><!-- @@样式 -->
 	</body>

@@ -100,9 +100,9 @@ function mt_emojis(S,mode)
 					else if(typeof index === 'object')
 					{
 						if(typeof index[1] === 'number')EMOJI.images.push(`${v[0]}/${Index[index[0]]}_${Index[index[1]]}`)
-						else for(let i=0;i<index[1];i++)EMOJI.images.push(`${v[0]}/${Index[index[0]]}_${i}`)
+						else for(let i=0;i<=index[1];i++)EMOJI.images.push(`${v[0]}/${Index[index[0]]}_${i}`)
 					}
-					else for(let i=0;i<index;i++)EMOJI.images.push(`${v[0]}/${i}`)
+					else for(let i=0;i<=index;i++)EMOJI.images.push(`${v[0]}/${i}`)
 				})
 			})
 		}
@@ -168,7 +168,7 @@ function mt_emojis(S,mode)
 			PageCount = arr.length//
 			if(PageIndex < 0)PageIndex = EMOJI.pages[id][type] = PageCount-1
 			if(isNaN(PageIndex) || PageIndex >= PageCount)PageIndex = EMOJI.pages[id][type] = 0
-			EMOJI.images = EMOJI.images.concat(arr[PageIndex])
+			if(arr[PageIndex])EMOJI.images = EMOJI.images.concat(arr[PageIndex])
 		}
 	}
 	if(mode === 'CharFace')
@@ -361,6 +361,7 @@ function makeMessage(type,data,chatIndex,mode)
 	{
 		style = `font-size:${mt_settings['文字样式'][type]['font-size']};`
 	}
+	if(data.heads && (!data.heads.list || data.heads.list.length < 1))delete data.heads
 	if(type === 'chat' || type === 'image')
 	{
 		let headstyle = data.heads ? `style="z-index:${data.heads.list.length};"` : ''
@@ -373,7 +374,7 @@ function makeMessage(type,data,chatIndex,mode)
 			{
 				头像 += `<img src="${loadhead('LIST',index)}" class="头像"style="${headstyle};z-index:${data.heads.list.length-k-1};">`
 			})
-			headstyle = 'min-width:auto;'
+			headstyle = 'min-width:max-content;'
 			headstyle += `padding-${no != 0 && !data.isRight ? 'right' : 'left'}:1rem;`
 			headstyle += `flex-direction:${data.heads.direction};`
 			
@@ -782,11 +783,12 @@ $("body").on('click',".差分映射",function()
 });
 $("body").on('click',".INDEX_delete",function()
 {
-	if(!chats.length && replyDepths.slice(-1)[0] !== 0)return;
+	if(!chats.length && (replyDepths.slice(-1)[0] !== 0 || !otherChats.length))return;
 	let indexs = []
 	let str = ''
 	let title = ''
 	let clear = false
+
 	if($(".dels:checked").length)
 	{
 		$('.dels:checked').each(function(k,v)
@@ -794,44 +796,39 @@ $("body").on('click',".INDEX_delete",function()
 			indexs.push($('.dels').index(v))
 		})
 		title = '批量删除'
-		str += `您一共选中了${$(".dels:checked").length}条消息\n\n点击【${mt_text.confirm[mtlang]}】将删除\n\n操作可撤销`
+		str += `您一共选中了${$(".dels:checked").length}条消息\n\n点击【${mt_text.confirm[mtlang]}】将删除`
 	}
 	else
 	{
-		indexs =  Object.keys(chats)
+		if(otherChats.length)str += '<input type="checkbox"><span class="bold red">删除全部项目</span>\n\n'
+		indexs = Object.keys(chats)
 		let length = indexs.length
 		for (let i = 0; i < length; i++)
 		{
 			indexs[i] = i
 		}
-		if(replyDepths.slice(-1)[0] === 0)
-		{
-			
-			clear = true
-			title = '全部删除'
-			str += `点击【${mt_text.confirm[mtlang]}】将删除全部项目分支\n\n`
-			str += '只删除此分支消息请使用批量删除\n\n'
-			str += '<span class="red">操作不可撤销</span>'
-		}
-		else
-		{
-			title = '删除消息'
-			str += `点击【${mt_text.confirm[mtlang]}】将此项目全部内容清空\n\n操作可撤销`
-		}
+		title = '删除消息'
+		str += `点击【${mt_text.confirm[mtlang]}】将此项目全部内容清空`
 	}
+	str += '\n\n操作可撤销'
 	$('.notice .title').text(title)
+	$('.notice .confirm').text(mt_text.confirm[mtlang])
 	alert(str)
 	TOP_confirm = function()
 	{
-		if(!$(".dels:checked").length && replyDepths.slice(-1)[0] === 0)
+		if($('.notice input:checked').length)
 		{
-			otherChats = []
-		}
+			if(confirm('您勾选了“删除全部项目”\n此操作无法撤销，确定要继续吗？'))
+			{
+				$('.reply').hide()
+				otherChats = []
+				clear = true
+			}
+			else return
+		}else if(!chats.length)return
 		sendMessage({},'','delete',indexs)
 		log(clear)
-		if(!otherChats.length && replyDepths.slice(-1)[0] === 0)$('.reply').hide()
 	}
-	
 });
 
 $("body").on('click',".INDEX_EmojiIfno",function()

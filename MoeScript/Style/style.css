@@ -450,8 +450,8 @@ align-self: stretch;
 	padding: 0.6rem;
 	line-height: 1.42;
 	cursor: pointer;
-	display: flex;
-	align-items: center;
+/*	display: flex;
+	align-items: center;*/
 }
 .头像 {
 	box-sizing: border-box;

@@ -12,16 +12,16 @@ foreach(['mt-char','mt-head','chats'],function(k,v)
 })
 foreach(['School','Club','Characters'],function(k,v)
 {
-	XHR(`./Data/${mt_settings['选择游戏']}/MT-${v}.json?${localStorage['应用版本']}`,function(json)
+	XHR(`./Data/${mt_settings['选择游戏']}/MT-${v}.json`,function(json)
 	{
 		window[['mt_school','mt_club','mt_characters'][k]] = JSON.parse(json)
 	})
 })
-XHR(`./Data/${mt_settings['选择游戏']}/CharFaceInfo.json?${localStorage['应用版本']}1208`,function(json)
+XHR(`./Data/${mt_settings['选择游戏']}/CharFaceInfo.json`,function(json)
 {
 	CFInfo = JSON.parse(json)
 })
-XHR(`./Data/${mt_settings['选择游戏']}/MT-CharFace.json?${localStorage['应用版本']}`,function(json)
+XHR(`./Data/${mt_settings['选择游戏']}/MT-CharFace.json`,function(json)
 {
 	mt_charface = JSON.parse(json)
 })
@@ -30,7 +30,7 @@ if(mt_settings['选择游戏'] === 'BLDA')
 {
 	foreach(['IdMap','CustomFaceAuthor'],function(k,v)
 	{
-		XHR(`./Data/${mt_settings['选择游戏']}/${v}.json?${localStorage['应用版本']}`,function(json)
+		XHR(`./Data/${mt_settings['选择游戏']}/${v}.json`,function(json)
 		{
 			window[['id_map','CustomFaceAuthor'][k]] = JSON.parse(json)
 		})
@@ -99,10 +99,9 @@ $(function()
 		$("#view").click()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
-	let notice = '　　手机端请点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏\n'
+	let notice = '　　手机端点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>可查看工具栏\n'
 	notice += '　　工具栏点击【选择游戏】可以更改为其他游戏\n'
-	notice += '　　目前支持的游戏有：【碧蓝档案、尘白禁区、千年之旅】\n'
-	notice += '　　若有想收录的游戏请向开发者反馈\n'
+	notice += '　　拓展差分可以点击【信息】访问作者主页\n'
 	notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常备份下载存档</span>\n'
 	if(!localStorage['通知文档'] || localStorage['通知文档'] !== notice)
 	{
@@ -138,7 +137,7 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append(`<button class='${class0}' id='selectgame'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
-	$(".frVjsk").append(`<a href='${href}Setting.html?${localStorage['应用版本']}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
+	$(".frVjsk").append(`<a href='${href}Setting.html?${本地版本+gamever[mt_settings['选择游戏']]}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
 //APP
 $('body').on('click',"#app",function()

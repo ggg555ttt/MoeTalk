@@ -1007,7 +1007,7 @@
 										})]
 									})]
 								}),
-								mt_club ? Object.keys(mt_school).map(function(v, k)
+								mt_club && mt_school ? Object.keys(mt_school).map(function(v, k)
 								{
 									return (0, m.jsx)('dl',
 									{
@@ -3241,7 +3241,7 @@
 														cursor: 'pointer',
 														position: 'relative'
 													},
-													children: [(0, m.jsx)('img',
+													children: [mt_settings['表情信息'][v] || v.substring(v.lastIndexOf('/')+1),(0, m.jsx)('img',
 													{
 														alt: EMOJI.type,
 														height: 310,
@@ -4433,7 +4433,7 @@
 						n.isFirst && !n.isRight ? style.textAlign = 'left' : ''
 						n.isRight && !n.isFirst ? style.textAlign = 'right' : ''
 					}
-					
+					if(n.heads && (!n.heads.list || n.heads.list.length < 1))delete n.heads
 					return (0, m.jsx)('div',
 					{
 						className: '消息',
@@ -4453,7 +4453,7 @@
 										style: n.sCharacter.no != 0 ? 
 										{
 											cursor: "pointer",
-											minWidth: n.heads && isFirst ? "auto" : "5rem",
+											minWidth: n.heads && isFirst ? "max-content" : "5rem",
 											paddingRight: n.heads && isFirst ? "1rem" : "auto",
 											flexDirection: n.heads ? n.heads.direction : ""
 										} : {marginRight: '1.5rem'},
@@ -4543,7 +4543,7 @@
 										{
 											justifyContent:'flex-end',
 											cursor: "pointer",
-											minWidth: n.heads && isFirst ? "auto" : "5rem",
+											minWidth: n.heads && isFirst ? "max-content" : "5rem",
 											paddingLeft: n.heads && isFirst ? "1rem" : "auto",
 											flexDirection: n.heads ? n.heads.direction : ""
 										},

@@ -582,8 +582,9 @@ function download(filename,data,base64,type = 'json')
 		if(Html5Plus)
 		{
 			str = `下载已开始！\n可以在【Android/data/${Html5Plus}/documents/MoeTalk_Data】中找到您下载的存档！\n`
-			str += '卸载MoeTalk时会自动删除此目录，请注意备份文件！！！\n如果没有访问data目录的权限请访问此'
-			str += '<a title="https://www.bilibili.com/video/BV1Rx421D78C" class="INIT_href">链接</a>查看解决方案'
+			str += '卸载MoeTalk时会自动删除此目录，请注意备份文件！！！\n如果没有访问<span class="red bold">Android/data</span>目录的权限请点击此'
+			str += '<a title="https://www.bilibili.com/video/BV1Rx421D78C" class="INIT_href bold">链接</a>查看解决方案'
+			saveServerDatatoFile(filename, data)
 		}
 		else
 		{

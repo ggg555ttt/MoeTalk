@@ -1168,7 +1168,7 @@
 									style: t.sCharacter.no != 0 ? 
 									{
 										pointerEvents: 'none',
-										minWidth: t.heads && isFirst ? "auto" : "5rem",
+										minWidth: t.heads && isFirst ? "max-content" : "5rem",
 										paddingRight: t.heads && isFirst ? "1rem" : "auto",
 										flexDirection: t.heads ? t.heads.direction : ""
 									} : {marginRight: '1.5rem'},
@@ -1559,7 +1559,7 @@
 										{
 											pointerEvents: 'none',
 											justifyContent:'flex-end',
-											minWidth: t.heads && isFirst ? "auto" : "5rem",
+											minWidth: t.heads && isFirst ? "max-content" : "5rem",
 											paddingLeft: t.heads && isFirst ? "1rem" : "auto",
 											flexDirection: t.heads ? t.heads.direction : ""
 										},

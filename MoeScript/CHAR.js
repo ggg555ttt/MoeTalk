@@ -497,14 +497,14 @@ function CHAR_UpdateChar()
 	club(true)
 	id_map = [{},{}]
 	CustomFaceAuthor = {}
-	XHR(`${href}Data/${mt_settings['选择游戏']}/CharFaceInfo.json?${localStorage['应用版本']}`,function(json)
+	XHR(`${href}Data/${mt_settings['选择游戏']}/CharFaceInfo.json`,function(json)
 	{
 		CFInfo = JSON.parse(json)
 	})
 	foreach(['School','Club','Characters','CharFace'],function(k,v)
 	{
 		window[['mt_school','mt_club','mt_characters','mt_charface'][k]] = false
-		XHR(`${href}Data/${mt_settings['选择游戏']}/MT-${v}.json?${localStorage['应用版本']}`,function(json)
+		XHR(`${href}Data/${mt_settings['选择游戏']}/MT-${v}.json`,function(json)
 		{
 			window[['mt_school','mt_club','mt_characters','mt_charface'][k]] = JSON.parse(json)
 		})
@@ -513,7 +513,7 @@ function CHAR_UpdateChar()
 	{
 		foreach(['IdMap','CustomFaceAuthor'],function(k,v)
 		{
-			XHR(`${href}Data/${mt_settings['选择游戏']}/${v}.json?${localStorage['应用版本']}`,function(json)
+			XHR(`${href}Data/${mt_settings['选择游戏']}/${v}.json`,function(json)
 			{
 				window[['id_map','CustomFaceAuthor'][k]] = JSON.parse(json)
 			})
