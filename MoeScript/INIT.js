@@ -36,7 +36,6 @@ var $$ = $;//jquery转义
 var winHeight = window.innerHeight
 var 元素尺寸;
 
-var moeurl = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/'
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
 
 if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorage['0'])

@@ -39,7 +39,7 @@ function loadhead(id,img)
 		}
 		else
 		{
-			if(img && img.indexOf('moetalk') > -1)return img.replace('https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io',href)
+			if(img && img.indexOf('moetalk') > -1)return img.replace(MoeTalkURL,href)
 			return `${href}Images/Ui/you.webp`;
 		}
 	}

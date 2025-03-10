@@ -103,6 +103,29 @@ $(function()
 	notice += '　　工具栏点击【选择游戏】可以更改为其他游戏\n'
 	notice += '　　拓展差分可以点击【信息】访问作者主页\n'
 	notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常备份下载存档</span>\n'
+	if(window.location.href == 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/')
+	{
+		notice = '<span class="red">此网址不再更新，并且于5月7日停止服务\n'
+		notice += '请及时将您的存档导入客户端或新网址\n'
+		notice += '客户端地址：<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">【百度网盘】</a>提取码：BLDA\n'
+		notice += '新网址①：<a title="https://moetalk.netlify.app/" class="INIT_href">点击跳转</a>\n'
+		notice += '新网址②：<a title="https://moetalk.pages.dev/" class="INIT_href">点击跳转</a></span>\n'
+		delete localStorage['通知文档']
+	}
+	if(window.location.href == 'https://moetalk.netlify.app/')
+	{
+		notice = '此网站每月有100G流量限制\n如果后续每月流量不会超限那么MoeTalk会将在此网站持续更新\n'
+		notice += '否则MoeTalk将在<a title="https://moetalk.pages.dev/" class="INIT_href">新网址②</a>进行后续更新\n届时会做出提醒\n'
+		notice += '推荐您使用<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">【离线客户端】</a>提取码：BLDA\n'
+		delete localStorage['通知文档']
+	}
+	if(window.location.href == 'https://moetalk.pages.dev/')
+	{
+		notice = '此网站由于技术原因暂无法更新至最新版\n'
+		notice += '目前仅为<a title="https://moetalk.pages.dev/" class="INIT_href">新网址①</a>的备用方案\n'
+		notice += '推荐您使用<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">【离线客户端】</a>提取码：BLDA\n'
+		delete localStorage['通知文档']
+	}
 	if(!localStorage['通知文档'] || localStorage['通知文档'] !== notice)
 	{
 		alert(notice)

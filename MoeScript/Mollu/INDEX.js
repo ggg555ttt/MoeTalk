@@ -5302,7 +5302,7 @@
 							}), (0, m.jsx)("meta",
 							{
 								property: "og:image",
-								content: "https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/Images/Ui/Favor_Schedule_Deco.webp"
+								content: MoeTalkURL+"Images/Ui/Favor_Schedule_Deco.webp"
 							}), (0, m.jsx)("meta",
 							{
 								property: "og:site_name",
@@ -5322,7 +5322,7 @@
 							}), (0, m.jsx)("meta",
 							{
 								name: "twitter:image",
-								content: "https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/Images/Ui/Favor_Schedule_Deco.webp"
+								content: MoeTalkURL+"Images/Ui/Favor_Schedule_Deco.webp"
 							}), (0, m.jsx)("meta",
 							{
 								name: "twitter:card",

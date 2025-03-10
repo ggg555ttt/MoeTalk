@@ -89,7 +89,7 @@ function MoeToClosure()//Moe转Closure
 				ct[k]['img'] = 'uploaded';
 
 				custom_chars[ct[k]['char_id']] = {}
-				custom_chars[ct[k]['char_id']]['img'] = `${moeurl}Images/${mt_settings['选择游戏']}/Char/${img}.webp`
+				custom_chars[ct[k]['char_id']]['img'] = `${MoeTalkURL}Images/${mt_settings['选择游戏']}/Char/${img}.webp`
 				custom_chars[ct[k]['char_id']]['name'] = loadname(id);
 			}
 		}
@@ -126,7 +126,7 @@ function MoeToClosure()//Moe转Closure
 				}
 				else
 				{
-					v['file'] = moeurl+v['file'];
+					v['file'] = MoeTalkURL+v['file'];
 				}
 			}
 			ct[k]['content'] = v['file'];
@@ -157,7 +157,7 @@ function MoeToClosure()//Moe转Closure
 				closuretalk['chars'][k]['img'] = 'uploaded';
 
 				custom_chars[closuretalk['chars'][k]['char_id']] = {}
-				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${moeurl}Images/${mt_settings['选择游戏']}/Char/${img}.webp`
+				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${MoeTalkURL}Images/${mt_settings['选择游戏']}/Char/${img}.webp`
 				custom_chars[closuretalk['chars'][k]['char_id']]['name'] = loadname(id);
 			}
 		}
@@ -351,7 +351,7 @@ function UPDATE_OldData(json)//识别存档
 			{
 				json[1][k]['type'] = 'image'
 				json[1][k]['content'] = ''
-				json[1][k]['file'] = v['content'].replace('resources/ba','Images/BLDA/Emoji').replace(moeurl,'');
+				json[1][k]['file'] = v['content'].replace('resources/ba','Images/BLDA/Emoji').replace(MoeTalkURL,'');
 			}
 
 			if(v.yuzutalk.nameOverride)json[1][k]['name'] = v.yuzutalk.nameOverride;
@@ -437,7 +437,7 @@ function repairCF(data)
 			data.file = data.content
 			data.content = ''
 		}
-		data.file = data.file.replace('CustomFace','CharFace').replace('Images/Emoji/','Images/BLDA/Emoji/').replace('https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/','')
+		data.file = data.file.replace('CustomFace','CharFace').replace('Images/Emoji/','Images/BLDA/Emoji/').replace(MoeTalkURL,'')
 		
 		if(data.file.indexOf('Images/CharFace/') > -1)
 		{
