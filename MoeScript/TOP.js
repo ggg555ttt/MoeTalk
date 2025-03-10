@@ -115,8 +115,8 @@ $(function()
 	if(window.location.href == 'https://moetalk.netlify.app/')
 	{
 		notice = '此网站每月有100G流量限制\n如果后续每月流量不会超限那么MoeTalk会将在此网站持续更新\n'
-		notice += '否则MoeTalk将在<a title="https://moetalk.pages.dev/" class="INIT_href">新网址②</a>进行后续更新\n届时会做出提醒\n'
-		notice += '目前新网址②因技术原因暂时无法更新至最新版本，仅为新网址①的备用方案'
+		notice += '否则MoeTalk将在<a title="https://moetalk.pages.dev/" class="INIT_href">【新网址②】</a>进行后续更新\n届时会做出提醒\n'
+		notice += '目前【新网址②】因技术原因暂时无法更新至最新版本，仅为【新网址①】的备用方案\n'
 		notice += '推荐您使用<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">【离线客户端】</a>提取码：BLDA\n'
 		delete localStorage['通知文档']
 	}
