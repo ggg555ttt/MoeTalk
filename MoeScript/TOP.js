@@ -109,7 +109,7 @@ $(function()
 		notice += '请及时将您的存档导入客户端或新网址\n'
 		notice += '客户端地址：<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">【百度网盘】</a>提取码：BLDA\n'
 		notice += '新网址①：<a title="https://moetalk.netlify.app/" class="INIT_href">点击跳转</a>\n'
-		notice += '新网址②：<a title="https://moetalk.pages.dev/" class="INIT_href">点击跳转</a></span>\n'
+		notice += '新网址②（暂时无法更新至最新版）：<a title="https://moetalk.pages.dev/" class="INIT_href">点击跳转</a></span>\n'
 		delete localStorage['通知文档']
 	}
 	if(window.location.href == 'https://moetalk.netlify.app/')
