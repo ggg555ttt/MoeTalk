@@ -561,7 +561,7 @@ function saveServerDatatoFile(filename, jsonData)
 
 function download(filename,data,base64,type = 'json')
 {
-	let str = '';
+	let str = '',dir = '';
 	if(performance.memory)
 	{
 		let AllMemory = performance.memory.totalJSHeapSize; // 总的JS堆内存大小，单位为字节
@@ -583,18 +583,21 @@ function download(filename,data,base64,type = 'json')
 		{
 			str = `下载已开始！\n可以在【Android/data/${Html5Plus}/documents/MoeTalk_Data】中找到您下载的存档！\n`
 			str += '卸载MoeTalk时会自动删除此目录，请注意备份文件！！！\n如果没有访问<span class="red bold">Android/data</span>目录的权限请点击此'
-			str += '<a title="https://www.bilibili.com/video/BV1Rx421D78C" class="INIT_href bold">链接</a>查看解决方案'
+			str += '<a title="https://www.bilibili.com/video/BV1Rx421D78C" class="INIT_href bold">链接</a>查看解决方案\n'
 			saveServerDatatoFile(filename, data)
 		}
 		else
 		{
-			str = `文件${filename}已开始下载！\n下载失败请尝试在设置页面中开启“旧版图片存档”选项\n仍然失败请向开发者反馈`
+			dir = 'MoeTalk存档'
 			data = new Blob([data],{'type': 'application/octet-stream'});
-			let a = document.createElement('a');
-			a.href = window.URL.createObjectURL(data);
-			a.download = filename;
-			a.click();
+
+			str = `文件${filename}已开始下载！\n`
+			if(cordova)str += `可以在【内部存储/Download/${dir}】中找到\n`
+			else str += '下载失败请尝试在设置页面中开启“旧版图片存档”选项\n仍然失败请向开发者反馈\n'
+
+			savefile(dir,filename,data,type)
 		}
+		
 		$('#downImg').html(str)
 	}
 	if(type === 'image')
@@ -606,6 +609,7 @@ function download(filename,data,base64,type = 'json')
 		}
 		else//blob下载
 		{
+			dir = 'MoeTalk图片'
 			if(imageZip)
 			{
 				imageZip.file(filename,data);
@@ -613,25 +617,21 @@ function download(filename,data,base64,type = 'json')
 				{
 					imageZip.generateAsync({type:'blob'}).then(function(data)
 					{
+						type = 'zip'
 						filename = `MoeTalk_${mt_settings['截图选项'].titleStr && mt_settings['截图选项'].titleStr.split(' : ')[1] ? mt_settings['截图选项'].titleStr.split(' : ')[1] : mt_text.noTitle[mtlang]}_${getNowDate()}`
-						let a = document.createElement('a');
-						a.href = window.URL.createObjectURL(data);
-						a.download = `${filename}.${mt_settings['截图选项'].archive ? 'ZIP' : 'zip'}`;
-						a.click();
+						savefile(dir,`${filename}.${mt_settings['截图选项'].archive ? 'ZIP' : 'zip'}`,data,type)
 						imageZip = null
 					});
 				}
 			}
 			else
 			{
-				let a = document.createElement('a');
-				a.href = window.URL.createObjectURL(data);
-				a.download = filename;
-				a.click();
+				savefile(dir,filename,data,type)
 			}
 			str += mt_text.image_download[mtlang]+'\n'
 		}
-		str += '图片无法手动保存请取消勾选“存档”选框，并将图片格式改为“webp”格式\n'
+		if(cordova)str += `图片可以在【内部存储/Download/${dir}${type === 'image' ? `/${DATA_NowTime}` : ''}】中找到\n`
+		str += '无法手动保存请取消勾选“存档”选框，并将图片格式改为“webp”格式\n'
 		$('.INDEX_CaptureTips').text(str)
 	}
 	if(type === 'server')
@@ -665,4 +665,40 @@ function download(filename,data,base64,type = 'json')
 		str += `卸载phpwin前请注意备份！\n如果出现错误请向开发者反馈！`
 		$(className).html(str)
 	}
+}
+function savefile(dirname,filename,data,type = 'save')
+{
+	if(!cordova)
+	{
+		let a = document.createElement('a');
+		a.href = window.URL.createObjectURL(data);
+		a.download = filename;
+		a.click();
+		return
+	}
+	window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory+'Download',function(root)
+	{
+		root.getDirectory(dirname,{create:true},function()
+		{
+			if(type == 'image')
+			{
+				root.getDirectory(`${dirname}/${DATA_NowTime}`,{create:true},function()
+				{
+					root.getFile(`${dirname}/${DATA_NowTime}/${filename}`,{create:true},function(fileEntry)
+					{
+						//写入文件
+						fileEntry.createWriter(function(fileWriter){fileWriter.write(data);});
+					});
+				});
+			}
+			else
+			{
+				root.getFile(`${dirname}/${filename}`,{create:true},function(fileEntry)
+				{
+					//写入文件
+					fileEntry.createWriter(function(fileWriter){fileWriter.write(data);});
+				});
+			}
+		});
+	},function(err){alert('文件夹无法打开！请尝试在内部存储根目录创建一个【Download】文件夹！');});
 }

@@ -13,7 +13,7 @@ function os(u = window.navigator.userAgent)
 }
 
 //变量
-var 更新时间 = 1741786139//!
+var 更新时间 = 1741886912//!
 var gamearr = {}//游戏列表
 gamearr['BLDA'] = '碧蓝档案'
 gamearr['CBJQ'] = '尘白禁区'
@@ -60,6 +60,8 @@ function XHR(url,callback)
 	}
 }
 var MoeTalkURL = "https://moetalk.netlify.app/"//MoeTalk网址
+var GitlabURL = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/'
+if(window.location.href == GitlabURL)MoeTalkURL = GitlabURL
 XHR(MoeTalkURL+"manifest.json"+"?timestamp="+new Date().getTime(),function(json)
 {
 	json = JSON.parse(json.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, ''))
@@ -118,6 +120,7 @@ if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) &&
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/mikutap.js'></scr`+"ipt>");
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/common-2.min.js'></scr`+"ipt>");
 }
+var cordova = false
 var onlyone = false//单一游戏版本
 let gameid = window.location.href.split('?')[1]
 mt_settings['选择游戏'] = mt_settings['选择游戏'] || 'BLDA'
@@ -126,7 +129,11 @@ mt_settings['选择游戏'] = gamearr[gameid] ? gameid : mt_settings['选择游�
 var mtlang = mt_settings['语言选项'] || 'zh_cn';
 var langarr = ['zh_cn','zh_tw','jp','en','kr'];
 if(langarr.indexOf(gameid) > -1)mt_settings['语言选项'] = mtlang = gameid
-
+if(gameid === 'cordova')sessionStorage['cordova'] = 'cordova'
+if(sessionStorage['cordova'] === 'cordova')
+{
+	document.write("<scr"+`ipt src='./cordova.js'></scr`+"ipt>");
+}
 var mt_characters,mt_school,mt_club,CFInfo//表情差分信息
 		</script>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -157,10 +164,10 @@ var mt_characters,mt_school,mt_club,CFInfo//表情差分信息
 		<script src="./Data/MT-Text.js"></script><!-- 提示文本 -->
 		<script src="./MoeScript/INIT.js?filesize=9852" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/IMAGE.js?filesize=13280" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/DATA.js?filesize=20161" defer></script><!-- @@存档 -->
+		<script src="./MoeScript/DATA.js?filesize=21253" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAT.js?filesize=28101" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?filesize=16353" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/TOP.js?filesize=18873" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/TOP.js?filesize=18522" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/Other/webpack-0a2a587924e1d405.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/framework-2c79e2a64abdb08b.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/main-dfffdc208236edda.js" defer></script>
