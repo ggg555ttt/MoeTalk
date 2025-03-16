@@ -700,5 +700,5 @@ function savefile(dirname,filename,data,type = 'save')
 				});
 			}
 		});
-	},function(err){alert('文件夹无法打开！请尝试在内部存储根目录创建一个【Download】文件夹！');});
+	},function(err){alert('Download文件夹不存在！\n请尝试在内部存储根目录创建一个Download文件夹！');});
 }

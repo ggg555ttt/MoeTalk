@@ -58,6 +58,7 @@ function mt_emojis(S,mode)
 		EMOJI.pages[id].type = 'origin'
 		EMOJI.pages[id].origin = 0
 		EMOJI.pages[id].custom = 0
+		EMOJI.pages[id].scrollTop = 0
 	}
 	EMOJI.id = id
 	if(S === '+')
@@ -198,6 +199,11 @@ function mt_emojis(S,mode)
 	if(EMOJI.custom.io)EMOJI.images.unshift('ADD')
 
 	S(!0)
+
+	setTimeout(function()
+	{
+		$('.PopupEmoticonChat__Section2-sc-vzjcea-0').scrollTop(EMOJI.pages[id].scrollTop)
+	}, 100)
 }
 function moeLog(arr,mode = false)
 {

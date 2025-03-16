@@ -3004,6 +3004,7 @@
 						}),
 						s = function()
 						{
+							EMOJI.pages[EMOJI.id].scrollTop = $$('.PopupEmoticonChat__Section2-sc-vzjcea-0').scrollTop()
 							t(!1)
 						};
 					//*定义差分文件链接
@@ -3133,6 +3134,7 @@
 												{
 													type = 'custom'
 												}
+												EMOJI.pages[EMOJI.id].scrollTop = 0
 												mt_emojis(type,EMOJI.type)
 												$$('.INDEX_Emoji').click()
 											}
@@ -3148,6 +3150,7 @@
 											hidden: EMOJI.pageindex == '0 / 0' || EMOJI.pageindex == '1 / 1',
 											onClick:function()
 											{
+												EMOJI.pages[EMOJI.id].scrollTop = 0
 												mt_emojis('-',EMOJI.type)
 												$$('.INDEX_Emoji').click()
 											}
@@ -3172,6 +3175,7 @@
 											hidden: EMOJI.pageindex == '0 / 0' || EMOJI.pageindex == '1 / 1',
 											onClick:function()
 											{
+												EMOJI.pages[EMOJI.id].scrollTop = 0
 												mt_emojis('+',EMOJI.type)
 												$$('.INDEX_Emoji').click()
 											}

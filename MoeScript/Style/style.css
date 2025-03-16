@@ -625,3 +625,21 @@ align-self: stretch;
 	padding:0.5rem 1rem;
 	margin-bottom:1rem
 }
+.PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar {
+	display: block;
+    width: 0.5rem; /* 滚动条宽度 */
+}
+ 
+.PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 滚动条轨道颜色 */
+}
+ 
+.PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar-thumb {
+    height: 10%;
+    background-color: #888;/* 滚动条滑块颜色 */
+    border-radius: 0.5rem;
+}
+ 
+.PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar-thumb:hover {
+    background: #555; /* 鼠标悬停时滑块颜色 */
+}
