@@ -3134,9 +3134,9 @@
 												{
 													type = 'custom'
 												}
-												EMOJI.pages[EMOJI.id].scrollTop = 0
 												mt_emojis(type,EMOJI.type)
 												$$('.INDEX_Emoji').click()
+												EMOJI.pages[EMOJI.id].scrollTop = 0
 											}
 										}), (0, m.jsx)(c.Bx,
 										{
@@ -3150,9 +3150,9 @@
 											hidden: EMOJI.pageindex == '0 / 0' || EMOJI.pageindex == '1 / 1',
 											onClick:function()
 											{
-												EMOJI.pages[EMOJI.id].scrollTop = 0
 												mt_emojis('-',EMOJI.type)
 												$$('.INDEX_Emoji').click()
+												EMOJI.pages[EMOJI.id].scrollTop = 0
 											}
 										}), (0, m.jsx)(ea.Dx,
 										{
@@ -3175,9 +3175,9 @@
 											hidden: EMOJI.pageindex == '0 / 0' || EMOJI.pageindex == '1 / 1',
 											onClick:function()
 											{
-												EMOJI.pages[EMOJI.id].scrollTop = 0
 												mt_emojis('+',EMOJI.type)
 												$$('.INDEX_Emoji').click()
+												EMOJI.pages[EMOJI.id].scrollTop = 0
 											}
 										}), (0, m.jsx)(c.Bx,
 										{
