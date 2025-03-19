@@ -8,60 +8,60 @@ function rgbToHex(rgb) {
   return `#${hex.toUpperCase()}`; // 返回完整的HEX颜色代码（需将字母转换为大写）
 }
 //读取人物
-$('body').on('click',"input",function()
-{
-	$("input[type='file']").val('')
-})
-$("body").append("<input id='loadcusfile' hidden type='file' accept='application/json'>");
-$('body').on('click',"#loadcus",function()
-{
-	if(confirm('此功能只能读取专用的自定义角色存档文件，不要乱上传'))
-	{
-		$("#loadcusfile").click();
-	}
-})
-$('body').on('change',"#loadcusfile",function()
-{
-	let file = this.files[0];
-	let reader=new FileReader();
-	reader.readAsText(file);
-	reader.onload = function(e)
-	{
-		let mt_char = {};
-		let mt_head = {};
-		let json = JSON.parse(this.result);
-		if(json[0] === 'Custom')
-		{
-			localStorage['mt-char'] = json[1];
-			localStorage['mt-head'] = json[2];
-		}
-		else
-		{
-			if(json[0] && JSON.parse(json[0])[0].club[0].characters)
-			{
-				mt_char = {}
-				mt_head = {}
-				let i;
-				$.each(JSON.parse(json[0])[0].club[0].characters,function(k,v)
-				{
-					mt_char[v.no] = v.zh_cn
-				})
-				$.each(JSON.parse(json[1])[0],function(k,v)
-				{
-					if(k.split('.').length > 1)i = k.split('.')[0];
-					if(k.split('/').length > 1)i = k.split('.')[0];
-					mt_head[i] = v;
-				})
-				localStorage['mt-char'] = JSON.stringify(mt_char);
-				localStorage['mt-head'] = JSON.stringify(mt_head);
-			}
+// $('body').on('click',"input",function()
+// {
+// 	$("input[type='file']").val('')
+// })
+// $("body").append("<input id='loadcusfile' hidden type='file' accept='application/json'>");
+// $('body').on('click',"#loadcus",function()
+// {
+// 	if(confirm('此功能只能读取专用的自定义角色存档文件，不要乱上传'))
+// 	{
+// 		$("#loadcusfile").click();
+// 	}
+// })
+// $('body').on('change',"#loadcusfile",function()
+// {
+// 	let file = this.files[0];
+// 	let reader=new FileReader();
+// 	reader.readAsText(file);
+// 	reader.onload = function(e)
+// 	{
+// 		let mt_char = {};
+// 		let mt_head = {};
+// 		let json = JSON.parse(this.result);
+// 		if(json[0] === 'Custom')
+// 		{
+// 			localStorage['mt-char'] = json[1];
+// 			localStorage['mt-head'] = json[2];
+// 		}
+// 		else
+// 		{
+// 			if(json[0] && JSON.parse(json[0])[0].club[0].characters)
+// 			{
+// 				mt_char = {}
+// 				mt_head = {}
+// 				let i;
+// 				$.each(JSON.parse(json[0])[0].club[0].characters,function(k,v)
+// 				{
+// 					mt_char[v.no] = v.zh_cn
+// 				})
+// 				$.each(JSON.parse(json[1])[0],function(k,v)
+// 				{
+// 					if(k.split('.').length > 1)i = k.split('.')[0];
+// 					if(k.split('/').length > 1)i = k.split('.')[0];
+// 					mt_head[i] = v;
+// 				})
+// 				localStorage['mt-char'] = JSON.stringify(mt_char);
+// 				localStorage['mt-head'] = JSON.stringify(mt_head);
+// 			}
 			
-		}
-	}
-});
+// 		}
+// 	}
+// });
 $('body').on('click',"#savedata",function()
 {
-	alert('生成的文件只能用“读取localStorage存档”读取\n建议您在MoeTalk出现错误时向开发者提交此文件')
+	alert('MoeTalk出现错误时可以向开发者提交此文件\n另外请不要将此文件作为存档上传至MoeTalk！')
 	moetalkStorage.keys(function(err, DataBase)
 	{
 		if(DataBase.length)
@@ -82,35 +82,35 @@ $('body').on('click',"#savedata",function()
 		}
 	})
 });
-$("body").append("<input id='loaddatafile' accept='text/plain' hidden type='file'>");
-$('body').on('click',"#loaddata",function()
-{
-	alert('此选项只能读取“下载localStorage存档”生成的文件\n请不要上传其他的文件')
-	$("#loaddatafile").click();
-})
-$('body').on('change',"#loaddatafile",function()
-{
-	let file = this.files[0];
-	let reader=new FileReader();
-	reader.readAsText(file);
-	reader.onload = function(e)
-	{
-		localStorage.clear()
-		let json = JSON.parse(this.result)
-		mt_settings = json['设置选项'] ? JSON.parse(json['设置选项']) : {}
-		if(!mt_settings['存储模式'])moetalkStorage.clear()
-		$.each(json,function(k,v)
-		{
-			if(['chats','mt-char','mt-head','moeLog','DB_EMOJI'].indexOf(k) > -1)
-			{
-				if(!mt_settings['存储模式'])moetalkStorage.setItem(k,v)
-				else localStorage[k] = v;
-			}
-			else localStorage[k] = v;
-		})
-		alert('需返回页面确认读取成功')
-	}
-});
+// $("body").append("<input id='loaddatafile' accept='text/plain' hidden type='file'>");
+// $('body').on('click',"#loaddata",function()
+// {
+// 	alert('此选项只能读取“下载localStorage存档”生成的文件\n请不要上传其他的文件')
+// 	$("#loaddatafile").click();
+// })
+// $('body').on('change',"#loaddatafile",function()
+// {
+// 	let file = this.files[0];
+// 	let reader=new FileReader();
+// 	reader.readAsText(file);
+// 	reader.onload = function(e)
+// 	{
+// 		localStorage.clear()
+// 		let json = JSON.parse(this.result)
+// 		mt_settings = json['设置选项'] ? JSON.parse(json['设置选项']) : {}
+// 		if(!mt_settings['存储模式'])moetalkStorage.clear()
+// 		$.each(json,function(k,v)
+// 		{
+// 			if(['chats','mt-char','mt-head','moeLog','DB_EMOJI'].indexOf(k) > -1)
+// 			{
+// 				if(!mt_settings['存储模式'])moetalkStorage.setItem(k,v)
+// 				else localStorage[k] = v;
+// 			}
+// 			else localStorage[k] = v;
+// 		})
+// 		alert('需返回页面确认读取成功')
+// 	}
+// });
 //更改语言
 $('body').on('click',"#language",function()
 {
@@ -464,18 +464,6 @@ if(mt_settings['文字样式'])
 		$('#mt-fontszie').parent().find(`input[title="${k}"]`)[0].value = v['font-size']
 	})
 }
-$('body').on('click',"#selectgame",function()
-{
-	let str = '请选择游戏（英文首字母）\n'
-	str += 'BLDA = 碧蓝档案\nCBJQ = 尘白禁区\nQNZL = 千年之旅'
-	str = prompt(str, mt_settings['选择游戏']);
-	if (str != null)
-	{
-		mt_settings['选择游戏'] = str;
-		saveStorage('设置选项',mt_settings,'local')
-		alert('更改完成，请返回页面');
-	}
-})
 $('body').on('click',".selectColor",function()
 {
 	$('#titleColor').val(rgbToHex($(this).css('background-color')))

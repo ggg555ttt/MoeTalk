@@ -123,8 +123,12 @@ if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorag
 mt_settings['右侧发言'] = mt_settings['右侧发言'] ? mt_settings['右侧发言'] : {}
 if(browser.isFirefox)mt_settings['禁止字体'] = true
 saveStorage('设置选项',mt_settings,'local')
-if(window.location.href.split('?').length > 1)window.location.replace(window.location.href.split('?')[0])
-if(window.location.href.split('#').length > 1)window.location.replace(window.location.href.split('#')[0])
+if(!cordova)
+{
+	if(window.location.href.split('?').length > 1)window.location.replace(window.location.href.split('?')[0])
+	if(window.location.href.split('#').length > 1)window.location.replace(window.location.href.split('#')[0])
+}
+
 
 //元素出现后执行代码
 jQuery.fn.wait = function (func,cls,times,interval) {

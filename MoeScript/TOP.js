@@ -105,18 +105,11 @@ $(function()
 	notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常备份下载存档</span>\n'
 	if(window.location.href == GitlabURL)
 	{
-		let link1 = "https://moetalk.atomgit.net/MoeTalk/"
-		let link2 = "https://moetalk.netlify.app/"
-		let link3 = "https://moetalk.pages.dev/"
-		let link4 = "https://moetalk.vercel.app/"
-		notice = '<span class="red">Gitlab在5月7日不再为中国用户服务，届时此网站也会关闭访问\n'
+		notice = '<span class="red">Gitlab在5月7日不再为中国用户服务，届时此网站也会随之关闭访问\n'
 		notice += '请及时将您的存档导入客户端或新网址\n'
-		notice += `新网址①：<a class="INIT_href" title="${link1}">${link1}</a>（推荐）\n`
-		notice += `新网址②：<a class="INIT_href" title="${link2}">${link2}</a>\n`
-		// notice += `新网址③：<a class="INIT_href" title="${link3}">${link3}</a>（备用）\n`
-		// notice += `新网址④：<a class="INIT_href" title="${link4}">${link4}</a>（需魔法）\n`
+		notice += '新网址：<a class="INIT_href" title="https://moetalk.netlify.app/">https://moetalk.netlify.app/</a>\n'
 		notice += '客户端：<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">【百度网盘】</a>提取码：BLDA</span>\n'
-		notice += `更多网站请查看网盘内的【访问网址.txt】\n`
+		notice += `更多链接请查看网盘内的【访问网址.txt】\n`
 		delete localStorage['通知文档']
 	}
 	if(!localStorage['通知文档'] || localStorage['通知文档'] !== notice)
@@ -516,7 +509,7 @@ $('body').on('click',"#selectgame",function()
 		CHAR_UpdateChar()
 	}
 })
-if(document.location.protocol !== 'https:')
+if(document.location.protocol !== 'https:' || cordova)
 {
 	localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
 	let phpurl = 'http://frp.freefrp.net:40404/moetalk.php'
@@ -535,22 +528,38 @@ if(document.location.protocol !== 'https:')
 	});
 	setInterval(function()
 	{
-		$.ajax(
+		let json = {}
+		json.MoeTalk = 本地版本
+		json.INFO = {}//存档信息
+		json.INFO.title = '自动备份'
+		json.INFO.nickname = 'MoeTalk客户端'
+		json.INFO.date = '最近'
+		json.CHAR = {}//自定义角色
+		json.CHAR.id = mt_char
+		json.CHAR.image = mt_head
+		json.EMOJI = EMOJI_CustomEmoji//自定义表情
+		json.SETTING = mt_settings//设置信息
+		json.CHAT = [...chats,...otherChats]//MMT数据
+		json = JSON.stringify(json)
+		if(document.location.protocol !== 'https:')
 		{
-			url:phpurl,
-			async:true,
-			type:'POST',
-			data:
+			$.ajax(
 			{
-				'chats': JSON.stringify([...chats,...otherChats]),
-				'EMOJI': JSON.stringify(EMOJI_CustomEmoji),
-				'mt_char': JSON.stringify(mt_char),
-				'mt_head': JSON.stringify(mt_head),
-				'local_no':localStorage['local_no'],
-				'mt_settings': localStorage['设置选项']
-			},
-			dataType:'text'
-		});
+				url:phpurl,
+				async:true,
+				type:'POST',
+				data:
+				{
+					'json': json,
+					'local_no':localStorage['local_no']
+				},
+				dataType:'text'
+			});
+		}
+		else
+		{
+			savefile('MoeTalk备份',`${document.location.host}.json`,json,'back')
+		}
 	}, 60 * 1000);
 }
 if(document.location.protocol === 'http:' && location.host.indexOf('.') < 0 && location.hostname !== 'localhost')

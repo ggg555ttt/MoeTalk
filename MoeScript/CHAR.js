@@ -54,7 +54,7 @@ function loadname(id,index)
 		name = mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id
 	}
 	if(name.split(" ")[1])name = name.split(" ")[1]
-	name = name.replaceAll("-", " ")
+	name = name.replaceAll("-", " ").split("·")[0]
 
 	if(mt_settings['人物改名'][id])name = mt_settings['人物改名'][id];//@改名
 	if(mt_settings['人物改名'][index])name = mt_settings['人物改名'][index];//@改名
