@@ -52,6 +52,7 @@ function loadname(id,index)
 	if(mt_characters[id])
 	{
 		name = mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id
+		name = mt_characters[id].name.别名 ? mt_characters[id].name.别名 : name
 	}
 	if(name.split(" ")[1])name = name.split(" ")[1]
 	name = name.replaceAll("-", " ").split("·")[0]

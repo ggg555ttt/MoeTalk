@@ -9326,42 +9326,7 @@
 					}
 				});
 				//*新版角色文件读取
-				var r, i = (r = [], $$.each(mt_characters,function(k,v)
-					{
-						r.push({
-							no:k,
-							school:{
-								zh_cn: mt_schoolname[v.school].zh_cn ? mt_schoolname[v.school].zh_cn : v.school,
-								zh_tw: mt_schoolname[v.school].zh_tw ? mt_schoolname[v.school].zh_tw : v.school,
-								jp: mt_schoolname[v.school].jp ? mt_schoolname[v.school].jp : v.school,
-								en: mt_schoolname[v.school].en ? mt_schoolname[v.school].en : v.school,
-								kr: mt_schoolname[v.school].kr ? mt_schoolname[v.school].kr : v.school,
-								pinyin: mt_schoolname[v.school].pinyin ? mt_schoolname[v.school].pinyin : v.school,
-								id: v.school
-							},
-							club:{
-								zh_cn: mt_clubname[v.club].zh_cn ? mt_clubname[v.club].zh_cn : v.club,
-								zh_tw: mt_clubname[v.club].zh_tw ? mt_clubname[v.club].zh_tw : v.club,
-								jp: mt_clubname[v.club].jp ? mt_clubname[v.club].jp : v.club,
-								en: mt_clubname[v.club].en ? mt_clubname[v.club].en : v.club,
-								kr: mt_clubname[v.club].kr ? mt_clubname[v.club].kr : v.club,
-								pinyin: mt_clubname[v.club].pinyin ? mt_clubname[v.club].pinyin : v.club,
-								id: v.club
-							},
-							name:{
-								zh_cn: v.name.zh_cn ? v.name.zh_cn : k,
-								zh_tw: v.name.zh_tw ? v.name.zh_tw : k,
-								jp: v.name.jp ? v.name.jp : k,
-								en: v.name.en ? v.name.en : k,
-								kr: v.name.kr ? v.name.kr : k,
-								pinyin: v.name.pinyin
-							},
-							illust: 0,//#改为默认
-							profile: v.head.split(','),
-							open: true,//#改为默认
-							momotalk: true//#改为默认
-						})
-					}), r)
+				var r, i = []
 				//*新版角色文件读取
 			},
 			7579: function(e, t, n)
