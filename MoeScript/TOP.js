@@ -12,16 +12,16 @@ foreach(['mt-char','mt-head','chats'],function(k,v)
 })
 foreach(['School','Club','Characters'],function(k,v)
 {
-	XHR(`./Data/${mt_settings['选择游戏']}/MT-${v}.json`,function(json)
+	XHR(`${href}Data/${mt_settings['选择游戏']}/MT-${v}.json`,function(json)
 	{
 		window[['mt_school','mt_club','mt_characters'][k]] = JSON.parse(json)
 	})
 })
-XHR(`./Data/${mt_settings['选择游戏']}/CharFaceInfo.json`,function(json)
+XHR(`${href}Data/${mt_settings['选择游戏']}/CharFaceInfo.json`,function(json)
 {
 	CFInfo = JSON.parse(json)
 })
-XHR(`./Data/${mt_settings['选择游戏']}/MT-CharFace.json`,function(json)
+XHR(`${href}Data/${mt_settings['选择游戏']}/MT-CharFace.json`,function(json)
 {
 	mt_charface = JSON.parse(json)
 })
@@ -30,7 +30,7 @@ if(mt_settings['选择游戏'] === 'BLDA')
 {
 	foreach(['IdMap','CustomFaceAuthor'],function(k,v)
 	{
-		XHR(`./Data/${mt_settings['选择游戏']}/${v}.json`,function(json)
+		XHR(`${href}Data/${mt_settings['选择游戏']}/${v}.json`,function(json)
 		{
 			window[['id_map','CustomFaceAuthor'][k]] = JSON.parse(json)
 		})
@@ -55,7 +55,7 @@ INIT_waiting(function()
 	charList(选择角色)//更新角色
 	$('#mt_watermark').click()//显示消息
 	INIT_loading('结束加载')
-},['mt_char','mt_head','allChats','mt_school','mt_club','mt_characters','CFInfo'])
+},['mt_char','mt_head','allChats','mt_school','mt_club','mt_characters'])
 
 if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>");//加载字体
 //使用说明
@@ -102,7 +102,9 @@ $(function()
 	let notice = '　　手机端点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>可查看工具栏\n'
 	notice += '　　工具栏点击【选择游戏】可以更改为其他游戏\n'
 	notice += '　　拓展差分可以点击【信息】访问作者主页\n'
-	notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常备份下载存档</span>\n'
+	if(cordova)notice += '<span class="red">※此客户端目前处于测试阶段\n使用前请先确认文件下载功能是否正常\n出现错误请向开发者反馈</span>\n'
+	else notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常备份下载存档</span>\n'
+	
 	if(window.location.href == GitlabURL)
 	{
 		notice = '<span class="red">Gitlab在5月7日不再为中国用户服务，届时此网站也会随之关闭访问\n'
@@ -110,6 +112,7 @@ $(function()
 		notice += '新网址：<a class="INIT_href" title="https://moetalk.netlify.app/">https://moetalk.netlify.app/</a>\n'
 		notice += '客户端：<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">【百度网盘】</a>提取码：BLDA</span>\n'
 		notice += `更多链接请查看网盘内的【访问网址.txt】\n`
+		if(Html5Plus)notice += `<span class="red">新版网络客户端已更新至百度网盘，请及时下载安装并转移存档</span>\n`
 		delete localStorage['通知文档']
 	}
 	if(!localStorage['通知文档'] || localStorage['通知文档'] !== notice)
@@ -158,38 +161,33 @@ $('body').on('click',"#app",function()
 $('body').on('click',"#size",function()
 {
 	INIT_state()
-	let length
-	if(mt_settings['存储模式'])
-	{
-		length = JSON.stringify(localStorage).length/1024
-	}
-	else
-	{
-		length = (
-			JSON.stringify(mt_settings)+
-			JSON.stringify(EMOJI_CustomEmoji)+
-			JSON.stringify(操作历史)+
-			JSON.stringify(chats)+
-			JSON.stringify(otherChats)+
-			JSON.stringify(mt_char)+
-			JSON.stringify(mt_head)
-		).length/1024
-	}
-	length = parseInt(length.toFixed(0))+'KB'
-
 	let str = `	长度数值每超过【${mt_settings['高度限制']}】截图时就会自动分割一次，建议手动设置分割点防止自动分割\n`
 	str += `	消息数量过大会造成设备卡顿\n\n`
 	if(performance.memory)
 	{
 		let AllMemory = performance.memory.totalJSHeapSize; // 总的JS堆内存大小，单位为字节
 		let MaxMemory = performance.memory.jsHeapSizeLimit; // JS堆内存大小的上限
-		AllMemory = (AllMemory/1048576).toFixed(0)+'MB'
-		MaxMemory = (MaxMemory/1048576).toFixed(0)+'MB'
-		str += `	内存占用：${AllMemory}/${MaxMemory}\n\n`
+		AllMemory = (AllMemory/1048576).toFixed(0)
+		MaxMemory = (MaxMemory/1048576).toFixed(0)
+		str += `	内存占用估算(MB)：${AllMemory}/${MaxMemory}\n`
 	}
-	str += `	存储占用：${length}\n`
-	str += `	内存和存储数值占用过大会造成设备卡顿`
-	str += mt_settings['存储模式'] ? `，存储数值超过5120KB会造成MoeTalk出错或崩溃` : ''
+	let arr = Object.keys(EMOJI_CustomEmoji.image)
+	let length = 0;
+	foreach(arr,function(k,v)
+	{
+		length += EMOJI_CustomEmoji.image[v].length
+	})
+	arr = Object.keys(mt_head)
+	foreach(arr,function(k,v)
+	{
+		length += mt_head[v].length
+	})
+	let length2 = JSON.stringify([...chats,...otherChats]).length;
+	length = parseInt(length/1048576).toFixed(0)
+	length2 = parseInt(length2/1048576).toFixed(0)
+
+	str += `	存储数值估算(MB)：${length}+${length2}\n`
+	str += `	<span class="red">内存占用和存储数值过大会造成设备卡顿或崩溃，请合理分配</span>`
 	alert(str)
 	
 });
@@ -556,11 +554,11 @@ if(document.location.protocol !== 'https:' || cordova)
 				dataType:'text'
 			});
 		}
-		else
+		if(cordova)
 		{
-			savefile('MoeTalk备份',`${document.location.host}.json`,json,'back')
+			savefile('MoeTalk备份',`${document.location.host}.JSON`,json,'back')
 		}
-	}, 60 * 1000);
+	}, 600 * 1000);
 }
 if(document.location.protocol === 'http:' && location.host.indexOf('.') < 0 && location.hostname !== 'localhost')
 {

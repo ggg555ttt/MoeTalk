@@ -2711,7 +2711,7 @@
 													json.EMOJI = EMOJI_CustomEmoji//自定义表情
 													json.SETTING = mt_settings//设置信息
 													json.CHAT = [...chats,...otherChats]//MMT数据
-													download(`MoeTalk_${f}_${time}.json`,json)
+													download(`MoeTalk_${f}_${time}.JSON`,json)
 												}
 											},
 											children: L.Z.download[d]

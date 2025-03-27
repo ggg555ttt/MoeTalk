@@ -52,6 +52,11 @@ if(window.location.href.indexOf('file:///') === 0)
 	if(window.navigator.userAgent.match('Html5Plus'))Html5Plus = 'mmt.MoeTalk.WumberBee'
 }
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
+var cordova = false
+if(sessionStorage['cordova'] === 'cordova')
+{
+	document.write("<scr"+`ipt src='./cordova.js'></scr`+"ipt>");
+}
 </script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -75,7 +80,7 @@ var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置
 <!-- 	<button class="button-container" id='loadcus'><b style='color:white;'>恢复自定义角色存档</b></button>
 	<button class="button-container" id='loaddata'><b style='color:white;'>读取localStorage存档</b></button> -->
 	<button class="button-container" id='savedata'><b style='color:white'>下载localStorage存档</b></button>
-	<button class="button-container" id='savemode'><b style='color:white;'>存储模式（不推荐）</b></button>
+	<!-- <button class="button-container" id='savemode'><b style='color:white;'>存储模式（不推荐）</b></button> -->
 	<button class="button-container" id='backsave'><b style='color:white;'>后台保存模式（慎用）</b></button>
 	<button class="button-container" id='SETTING_图片存档'><b style='color:white;'>旧版图片存档</b></button>
 	<h2><a>截图相关：</a></h2>

@@ -192,7 +192,7 @@ function MoeToClosure()//Moe转Closure
 	})
 	let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
 	$('#downImg').html('')
-	download('ClosureTalk转换存档'+time+'.json',closuretalk)
+	download('ClosureTalk转换存档'+time+'.JSON',closuretalk)
 }
 $("body").on('click',"#cutdata",function()
 {
@@ -214,7 +214,7 @@ $("body").on('click',"#cutdata",function()
 			json[0]['title'] = title;
 			json[0]['nickname'] = name;
 			json[0]['date'] = time
-			download(`MoeTalk截取存档_${title}_${time}.json`,json)
+			download(`MoeTalk截取存档_${title}_${time}.JSON`,json)
 		}
 	}
 	else
@@ -447,7 +447,7 @@ function repairCF(data)
 		{
 			let arr = data.file.split('/')
 			let str = arr.slice(-1)[0].replace('.webp','')
-			if(CFInfo[str])data.file = data.file.replace(str,CFInfo[str])
+			//if(CFInfo[str])data.file = data.file.replace(str,CFInfo[str])
 			arr = str.split('.')
 			if(data.file.indexOf('CharID') > -1 && arr.length > 1)
 			{
@@ -591,7 +591,7 @@ function download(filename,data,base64,type = 'json')
 			dir = 'MoeTalk存档'
 			data = new Blob([data],{'type': 'application/octet-stream'});
 
-			str = `文件${filename}已开始下载！\n`
+			str = `文件【${filename}】已开始下载！\n`
 			if(cordova)str += `可以在【内部存储/Download/${dir}】中找到\n`
 			else str += '下载失败请尝试在设置页面中开启“旧版图片存档”选项\n仍然失败请向开发者反馈\n'
 
@@ -599,6 +599,7 @@ function download(filename,data,base64,type = 'json')
 		}
 		
 		$('#downImg').html(str)
+		if(!$('#downImg').length)alert(str)
 	}
 	if(type === 'image')
 	{

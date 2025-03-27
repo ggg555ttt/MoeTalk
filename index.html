@@ -13,7 +13,7 @@ function os(u = window.navigator.userAgent)
 }
 
 //变量
-var 更新时间 = 1742453438//!
+var 更新时间 = 1743099805//!
 var gamearr = {}//游戏列表
 gamearr['BLDA'] = '碧蓝档案'
 gamearr['CBJQ'] = '尘白禁区'
@@ -22,12 +22,13 @@ gamearr['YGST'] = '犹格索托斯的庭院'
 gamearr['DFPJ'] = '东方Project'
 
 var gamever = {}//游戏版本
-gamever['BLDA'] = '2025_02_26'
-gamever['CBJQ'] = '25-03-08'
-gamever['QNZL'] = '2024_10_24'
-gamever['DFPJ'] = '2025_03_19'
+gamever['BLDA'] = '250326'
+gamever['CBJQ'] = '250308'
+gamever['QNZL'] = '241024'
+gamever['YGST'] = '000000'
+gamever['DFPJ'] = '250319'
 
-var 本地版本 = 26//@
+var 本地版本 = 27//@
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 var browser = os();//获取浏览器信息
 var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index.html','')//文件目录地址
@@ -136,7 +137,10 @@ if(sessionStorage['cordova'] === 'cordova')
 {
 	document.write("<scr"+`ipt src='./cordova.js'></scr`+"ipt>");
 }
-var mt_characters,mt_school,mt_club,CFInfo//表情差分信息
+var mt_characters,
+	mt_school,
+	mt_club,
+	CFInfo = {}//表情差分信息
 		</script>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 		<meta http-equiv="Pragma" content="no-cache">
@@ -166,10 +170,10 @@ var mt_characters,mt_school,mt_club,CFInfo//表情差分信息
 		<script src="./Data/MT-Text.js"></script><!-- 提示文本 -->
 		<script src="./MoeScript/INIT.js?filesize=9876" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/IMAGE.js?filesize=13280" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/DATA.js?filesize=21254" defer></script><!-- @@存档 -->
+		<script src="./MoeScript/DATA.js?filesize=21301" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAT.js?filesize=28260" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?filesize=16447" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/TOP.js?filesize=18492" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/TOP.js?filesize=18794" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/Other/webpack-0a2a587924e1d405.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/framework-2c79e2a64abdb08b.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/main-dfffdc208236edda.js" defer></script>
@@ -199,7 +203,7 @@ var mt_characters,mt_school,mt_club,CFInfo//表情差分信息
 <p>如果以上方法仍无效请进入设置页面并点击<b class="red">问题反馈</b>提交您的问题</p>
 <p>最好带上localStorage存档，这使我可以更好的排查错误</p>
 <p>另外相关使用建议也可以向我提交，感谢您的使用</p>
-<button><a href="./Setting.html?filesize=7786" target='_blank' style='color: white;'>点击进入设置页面</a></button><!-- @@ -->
+<button><a href="./Setting.html?filesize=7931" target='_blank' style='color: white;'>点击进入设置页面</a></button><!-- @@ -->
 <p></p>
 <img style="width: 100%;height: auto;" id="help" src="./Images/Ui/help.webp" onclick="document.documentElement.style.position = '';" />
 <!-- Default Statcounter code for MoeTalk http://*.* -->
