@@ -64,7 +64,6 @@ $('body').on('click',"#readme",function()
 	let span = '<span style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
 	let readme = `　　${span}MoeTalk</span>为基于原作者Raun0129开发的${span}MolluTalk</span>的个人改版\n`
 	readme += `　　点击【确定】可以清除缓存并检测更新\n`
-	readme += MikuTalk ? 'MikuTap：https://github.com/HFIProgramming/mikutap/\n特殊节日下可以在设置页面将标题改为“klaTeoM”即可关闭\n通常日期下将标题改为“MikuTalk”即可开启' : ''
 	alert(readme)
 	TOP_confirm = function()
 	{
@@ -104,7 +103,16 @@ $(function()
 	notice += '　　拓展差分可以点击【信息】访问作者主页\n'
 	if(cordova)notice += '<span class="red">※此客户端目前处于测试阶段\n使用前请先确认文件下载功能是否正常\n出现错误请向开发者反馈</span>\n'
 	else notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常备份下载存档</span>\n'
-	if(MikuTalk)notice =  'MikuTap：https://github.com/HFIProgramming/mikutap/\n特殊节日下可以在设置页面将标题改为“klaTeoM”即可关闭\n通常日期下将标题改为“MikuTalk”即可开启\n'
+	if(MikuTalk)
+	{
+		notice = '愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n<span class="red">点击“确定”可以关闭</span>\n'
+		delete localStorage['通知文档']
+		TOP_confirm = function()
+		{
+			sessionStorage['MikuTalk'] = 'no'
+			location.reload(true);
+		}
+	}
 	
 	if(window.location.href == GitlabURL)
 	{

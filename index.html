@@ -13,7 +13,7 @@ function os(u = window.navigator.userAgent)
 }
 
 //变量
-var 更新时间 = 1743432659//!
+var 更新时间 = 1743443921//!
 var gamearr = {}//游戏列表
 gamearr['BLDA'] = '碧蓝档案'
 gamearr['CBJQ'] = '尘白禁区'
@@ -115,7 +115,7 @@ if(browser.isIos === true || browser.isiPhone === true || mt_settings['打包下
 	document.write("<scr"+`ipt src='./MoeScript/Script/jszip.min.js'></scr`+"ipt>");
 }
 var MikuTalk = false;
-if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) && mt_settings['顶部标题'] !== 'klaTeoM')
+if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) && sessionStorage['MikuTalk'] !== 'no')
 {
 	MikuTalk = '#88CCCC';
 	document.write("<scr"+`ipt src='./MoeScript/MikuTap/pixi.min.js'></scr`+"ipt>");
@@ -173,7 +173,7 @@ var mt_characters,
 		<script src="./MoeScript/DATA.js?filesize=21301" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAT.js?filesize=28260" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?filesize=16475" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/TOP.js?filesize=19011" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/TOP.js?filesize=19197" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/Other/webpack-0a2a587924e1d405.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/framework-2c79e2a64abdb08b.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/main-dfffdc208236edda.js" defer></script>
