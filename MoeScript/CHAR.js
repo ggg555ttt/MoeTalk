@@ -47,6 +47,7 @@ function loadhead(id,img)
 }
 function loadname(id,index)
 {
+	if(!mt_characters)return;
 	let you = {kr: "주인공",en: "Lead",jp: "主役",zh_cn: "主角",zh_tw: "主角"}
 	let name = toString(id)
 	if(mt_characters[id])

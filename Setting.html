@@ -57,6 +57,16 @@ if(sessionStorage['cordova'] === 'cordova')
 {
 	document.write("<scr"+`ipt src='./cordova.js'></scr`+"ipt>");
 }
+function back()
+{
+	if(mt_settings && mt_settings.当前网址)
+	{
+		let link;
+		if(Html5Plus)link = mt_settings.当前网址.replace('Setting.html','index.html')
+		else link = mt_settings.当前网址.replace('Setting.html','').replace('setting','')
+		window.location.href = link
+	}
+}
 </script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -71,14 +81,12 @@ if(sessionStorage['cordova'] === 'cordova')
 	<script src="./MoeScript/SETTING.js" defer=""></script>
 </head>
 <body style="height:100%;overflow:auto;background-image:linear-gradient( rgba(255,255,255,0.5),rgba(255,255,255,0.5) ),url(Images/Ui/hexa_back_01.webp);background-repeat :no-repeat;background-size :cover;user-select:none;">
-	<a href='#' onclick="window.location.href = window.location.href.replace('Setting.html',Html5Plus ? 'index.html' : '');test(window.location.href)"><b>返回MoeTalk</a></b>
+	<a href='#' onclick="back()"><b>返回MoeTalk</a></b>
 	<h1>设置选项：</h1>
 	<button class="button-container" ><a href='https://wj.qq.com/s2/14292312/3ade/' target='_blank'><b style='color:red;'>问题反馈</a></b></button>
 	<button class="button-container" ><a href='https://tieba.baidu.com/p/8551808608'><b style='color:black;'>使用教程</a></b></button>
 	<button class="button-container" ><a href='https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda'><b style='color:black;'>客户端下载地址，提取码:blda</a></b></button>
 	<h2><a>存档相关：</a></h2>
-<!-- 	<button class="button-container" id='loadcus'><b style='color:white;'>恢复自定义角色存档</b></button>
-	<button class="button-container" id='loaddata'><b style='color:white;'>读取localStorage存档</b></button> -->
 	<button class="button-container" id='savedata'><b style='color:white'>下载localStorage存档</b></button>
 	<!-- <button class="button-container" id='savemode'><b style='color:white;'>存储模式（不推荐）</b></button> -->
 	<button class="button-container" id='backsave'><b style='color:white;'>后台保存模式（慎用）</b></button>
@@ -131,5 +139,7 @@ if(sessionStorage['cordova'] === 'cordova')
 	<p><a href="https://github.com/ggg555ttt/MoeTalk">项目地址（github）</a></p>
 	<h1 class="bold">设置信息：</h1>
 	<p class="mt_settings bold" style="white-space: pre-wrap;"></p>
+	<button class="button-container" id='loadcus'><b style='color:white;'>开发者测试用按钮</b></button>
+	<button class="button-container" id='loaddata'><b style='color:white;'>用户请不要点击</b></button>
 </body>
 </html>

@@ -104,6 +104,7 @@ $(function()
 	notice += '　　拓展差分可以点击【信息】访问作者主页\n'
 	if(cordova)notice += '<span class="red">※此客户端目前处于测试阶段\n使用前请先确认文件下载功能是否正常\n出现错误请向开发者反馈</span>\n'
 	else notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常备份下载存档</span>\n'
+	if(MikuTalk)notice =  'MikuTap：https://github.com/HFIProgramming/mikutap/\n特殊节日下可以在设置页面将标题改为“klaTeoM”即可关闭\n通常日期下将标题改为“MikuTalk”即可开启\n'
 	
 	if(window.location.href == GitlabURL)
 	{
