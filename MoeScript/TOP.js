@@ -100,7 +100,7 @@ $(function()
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
 	let notice = '　　手机端点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>可查看工具栏\n'
 	notice += '　　工具栏点击【选择游戏】可以更改为其他游戏\n'
-	notice += '　　拓展差分可以点击【信息】访问作者主页\n'
+	if(mt_settings['选择游戏'] === 'BLDA')notice += '<span class="red">　　致敬传奇自制差分大师：<a class="INIT_href" title="https://tieba.baidu.com/home/main?id=tb.1.e1722e7f.VelJpgXHEAqfWlZaF0596A">朽神氵人名</a>，当前产能已反超官方</span>\n'
 	if(cordova)notice += '<span class="red">※此客户端目前处于测试阶段\n使用前请先确认文件下载功能是否正常\n出现错误请向开发者反馈</span>\n'
 	else notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常备份下载存档</span>\n'
 	if(MikuTalk)
