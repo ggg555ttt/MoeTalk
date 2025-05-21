@@ -8849,7 +8849,7 @@
 									e.preventDefault();
 									var h, d, p = function()
 									{
-										if(r !== player)
+										if(r == "/")
 										{
 											history.back()
 										}
@@ -9339,7 +9339,7 @@
 						return r
 					}
 				});
-				var r = [{}]//#音乐专辑封面,用不到了,删除
+				var r = [{"no":1,"file":"1","name":"1"}]//#音乐专辑封面,用不到了
 			},
 			4701: function(e, t, n)
 			{
@@ -10061,7 +10061,28 @@
 												priority: !0
 											})
 										})
-									}), (0, O.jsx)('button',
+									}), /*(0, O.jsx)(F,
+									{
+										href: "/music",
+										onClick: function(e)
+										{
+											h(e, "/music")
+										},
+										className: "music" === e.pathname.split("/")[1] ? "selected" : "",
+										children: (0, O.jsx)(V,
+										{
+											hidden:window.location.href.indexOf('localhost') > -1 ? false : true,
+											children: (0, O.jsx)(d.xL,
+											{
+												style:
+												{
+													color: "white",
+													width: "2.5rem"
+												},
+												icon: v.Xig
+											})
+										})
+									}), */(0, O.jsx)('button',
 									{
 										onClick: function(e)
 										{
@@ -11522,18 +11543,7 @@
 							}))))
 						}, [e]), (0, g.useEffect)(function()
 						{
-							a(new Audio), navigator.mediaSession && (navigator.mediaSession.metadata = new MediaMetadata(
-							{
-								title: "No Music",
-								artist: "-",
-								album: "BlueArchive",
-								artwork: [
-								{
-									src: "/image/music/arona_400x400.png",
-									sizes: "400x400",
-									type: "image/png"
-								}]
-							}))
+							a(new Audio)
 						}, []), (0, g.useEffect)(function()
 						{
 							i && n.moveTime && (i.currentTime = n.moveTime)
@@ -11545,18 +11555,8 @@
 									n = navigator.userAgent.toLowerCase();
 								(n.indexOf("iphone") > -1 || n.indexOf("ipad") > -1 || n.indexOf("ipod") > -1) && (e = "mp3");
 								var r = (0, z.dZ)(t.musicNo);
-								i.src = "https://server.raun0129.com/asset/" + "music/".concat(e, "/").concat(r.file, ".").concat(e), i.load(), i.play(), navigator.mediaSession && (navigator.mediaSession.metadata = new MediaMetadata(
-								{
-									title: (t.musicNo < 1e3 ? t.musicNo + " - " : "") + (0, z.dZ)(t.musicNo).name,
-									artist: (0, z.dZ)(t.musicNo).artist.toString(),
-									album: (0, z.dZ)(t.musicNo).album,
-									artwork: [
-									{
-										src: (0, z.dZ)(t.musicNo).cover,
-										sizes: "400x400",
-										type: "image/png"
-									}]
-								}), navigator.mediaSession.playbackState = "playing")
+								i.src = r.file+".ogg" 
+								i.load(), i.play()
 							}
 						}, [i, t.musicNo]), (0, g.useEffect)(function()
 						{

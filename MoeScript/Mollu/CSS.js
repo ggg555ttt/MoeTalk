@@ -474,35 +474,11 @@
 								{
 									marginBottom: "1rem"
 								},
-								children: [(0, d.jsx)(a.NZ,
-								{
-									style:
-									{
-										borderRadius: "0.5rem",
-										width: "7.5rem",
-										height: "7.5rem",
-										marginRight: "1rem"
-									},
-									width: 400,
-									height: 400,
-									src: (0, i.dZ)(e.musicNo).cover || "/image/music/arona_400x400.png",
-									onError: function(e)
-									{
-										var t = e.currentTarget;
-										(0, i.Mp)(t, "albumCover")
-									},
-									alt: "albumCover"
-								}), (0, d.jsxs)(Z,
+								children: [(0, d.jsxs)(Z,
 								{
 									children: [(0, d.jsx)(S,
 									{
 										children: e.musicNo < 1 ? "No Music" : (e.musicNo < 1e3 ? e.musicNo + " - " : "") + (0, i.dZ)(e.musicNo).name
-									}), (0, d.jsx)(q,
-									{
-										children: (0, i.dZ)(e.musicNo).artist.toString() || "-"
-									}), (0, d.jsx)(q,
-									{
-										children: (0, i.dZ)(e.musicNo).album
 									})]
 								})]
 							}), (0, d.jsxs)(k,
