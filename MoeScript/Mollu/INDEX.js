@@ -3218,7 +3218,25 @@
 												})
 											})
 										})
-									}), (0, m.jsx)(eE,
+									}),EMOJI.custom.from ? (0, m.jsxs)(ea.h4,
+									{
+										children: (0, m.jsx)(c.Bx,
+										{
+											className: "bold",
+											style: 
+											{
+												padding: "revert",
+												width: "auto",
+												fontSize: '1.5rem',
+												color: "red"
+											},
+											children: '❗版权声明',
+											onClick: function()
+											{
+												alert('请尊重作者的劳动成果，严禁用本套立绘差分进行牟利和商业用途，违者将追究法律责任')
+											}
+										})
+									}) : '', (0, m.jsx)(eE,
 									{
 										children: (0, m.jsxs)(eM,
 										{
