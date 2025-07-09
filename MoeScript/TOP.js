@@ -547,21 +547,18 @@ if(document.location.protocol !== 'https:' || cordova)
 		json.SETTING = mt_settings//设置信息
 		json.CHAT = [...chats,...otherChats]//MMT数据
 		json = JSON.stringify(json)
-		if(document.location.protocol !== 'https:')
+		$.ajax(
 		{
-			$.ajax(
+			url:phpurl,
+			async:true,
+			type:'POST',
+			data:
 			{
-				url:phpurl,
-				async:true,
-				type:'POST',
-				data:
-				{
-					'json': json,
-					'local_no':localStorage['local_no']
-				},
-				dataType:'text'
-			});
-		}
+				'json': json,
+				'local_no':localStorage['local_no']
+			},
+			dataType:'text'
+		});
 		if(cordova)
 		{
 			savefile('MoeTalk备份',`${document.location.host}.JSON`,json,'back')
