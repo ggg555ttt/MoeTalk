@@ -13,7 +13,7 @@ function os(u = window.navigator.userAgent)
 }
 
 //变量
-var 更新时间 = 1752041473//!
+var 更新时间 = 1752135339//!
 var gamearr = {}//游戏列表
 gamearr['BLDA'] = '碧蓝档案'
 gamearr['CBJQ'] = '尘白禁区'
@@ -141,8 +141,14 @@ var mt_characters,
 	mt_school,
 	mt_club,
 	CFInfo = {}//表情差分信息
+if(window.location.protocol === 'https:')
+{
+	var meta = document.createElement('meta');
+	meta.httpEquiv = "Content-Security-Policy";
+	meta.content = "upgrade-insecure-requests";
+	document.head.appendChild(meta);	
+}
 		</script>
-		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 		<meta http-equiv="Pragma" content="no-cache">
 		<meta http-equiv="Expires" content="0">
@@ -174,7 +180,7 @@ var mt_characters,
 		<script src="./MoeScript/DATA.js?filesize=21301" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAT.js?filesize=28260" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?filesize=16475" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/TOP.js?filesize=18845" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/TOP.js?filesize=18737" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/Other/webpack-0a2a587924e1d405.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/framework-2c79e2a64abdb08b.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/main-dfffdc208236edda.js" defer></script>

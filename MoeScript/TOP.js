@@ -515,56 +515,53 @@ $('body').on('click',"#selectgame",function()
 		CHAR_UpdateChar()
 	}
 })
-if(document.location.protocol !== 'https:' || cordova)
+localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
+var phpurl = 'https://frp.freefrp.net:40404/moetalk.php'
+$.ajax({url:'../moetalk.php',success:function(){phpurl = '../moetalk.php',localStorage['local_no'] = 'LOCAL';}});
+$.ajax({url:'http://moetalk.frp.freefrps.com/moetalk.php',success:function(){phpurl = localStorage['local_no'] ? this.url : phpurl;}});
+$.ajax(
 {
-	localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
-	let phpurl = 'http://frp.freefrp.net:40404/moetalk.php'
-	$.ajax({url:'../moetalk.php',success:function(){phpurl = '../moetalk.php',localStorage['local_no'] = 'LOCAL';}});
-	$.ajax({url:'http://moetalk.frp.freefrps.com/moetalk.php',success:function(){phpurl = localStorage['local_no'] ? this.url : phpurl;}});
+	url: '/index.php',
+	async: true,
+	type: 'POST',
+	data: {backDown: true},
+	success:function(type)
+	{
+		if(type === 'server')DATA_ServerDownload = type
+	}
+});
+setInterval(function()
+{
+	let json = {}
+	json.MoeTalk = 本地版本
+	json.INFO = {}//存档信息
+	json.INFO.title = '自动备份'
+	json.INFO.nickname = 'MoeTalk客户端'
+	json.INFO.date = '最近'
+	json.CHAR = {}//自定义角色
+	json.CHAR.id = mt_char
+	json.CHAR.image = mt_head
+	json.EMOJI = EMOJI_CustomEmoji//自定义表情
+	json.SETTING = mt_settings//设置信息
+	json.CHAT = [...chats,...otherChats]//MMT数据
+	json = JSON.stringify(json)
 	$.ajax(
 	{
-		url: '/index.php',
-		async: true,
-		type: 'POST',
-		data: {backDown: true},
-		success:function(type)
+		url:phpurl,
+		async:true,
+		type:'POST',
+		data:
 		{
-			if(type === 'server')DATA_ServerDownload = type
-		}
+			'json': json,
+			'local_no':localStorage['local_no']
+		},
+		dataType:'text'
 	});
-	setInterval(function()
+	if(cordova)
 	{
-		let json = {}
-		json.MoeTalk = 本地版本
-		json.INFO = {}//存档信息
-		json.INFO.title = '自动备份'
-		json.INFO.nickname = 'MoeTalk客户端'
-		json.INFO.date = '最近'
-		json.CHAR = {}//自定义角色
-		json.CHAR.id = mt_char
-		json.CHAR.image = mt_head
-		json.EMOJI = EMOJI_CustomEmoji//自定义表情
-		json.SETTING = mt_settings//设置信息
-		json.CHAT = [...chats,...otherChats]//MMT数据
-		json = JSON.stringify(json)
-		$.ajax(
-		{
-			url:phpurl,
-			async:true,
-			type:'POST',
-			data:
-			{
-				'json': json,
-				'local_no':localStorage['local_no']
-			},
-			dataType:'text'
-		});
-		if(cordova)
-		{
-			savefile('MoeTalk备份',`${document.location.host}.JSON`,json,'back')
-		}
-	}, 600 * 1000);
-}
+		savefile('MoeTalk备份',`${document.location.host}.JSON`,json,'back')
+	}
+}, 600 * 1000);
 if(document.location.protocol === 'http:' && location.host.indexOf('.') < 0 && location.hostname !== 'localhost')
 {
 	moetalkStorage.keys(function(err, DataBase)
