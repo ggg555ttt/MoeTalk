@@ -516,7 +516,7 @@ $('body').on('click',"#selectgame",function()
 	}
 })
 localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
-var phpurl = document.location.phpurl == 'https:' ? '/api/moetalk.php' : 'http://frp.freefrp.net:40404/moetalk.php'
+var phpurl = document.location.protocol == 'https:' ? '/api/moetalk.php' : 'http://frp.freefrp.net:40404/moetalk.php'
 $.ajax({url:'../moetalk.php',success:function(){phpurl = '../moetalk.php',localStorage['local_no'] = 'LOCAL';}});
 $.ajax({url:'http://moetalk.frp.freefrps.com/moetalk.php',success:function(){phpurl = localStorage['local_no'] ? this.url : phpurl;}});
 $.ajax(
