@@ -513,6 +513,7 @@
 										nowChapter[1].chapter = []
 										$$('.nowChapter').text('')
 										O(e)
+										$$('.PLAYER_paly').click()
 									}
 								}), (0, k.jsx)(T,
 								{
@@ -615,6 +616,167 @@
 										icon: w.Oi0
 									})
 								}),*/ (0, k.jsx)(T,
+								{
+									style: o && !a ?
+									{
+										display: "none"
+									} :
+									{
+										marginRight: "1rem"
+									},
+									title: "PLAYER_last",
+									disabled: _.length < 1,
+									onClick: function()
+									{
+										let nextindex = nowChapter[0]-1
+										let chapterlist = nowChapter[1].chapter
+										if(chapterlist[nextindex])
+										{
+											//if(isNaN(nextindex))return;
+											INIT_loading()
+											XHR(`${href}${LibraryURL}/${nowChapter[1].authorid}/${nowChapter[1].bookid}/${chapterlist[nextindex]}.json`,function(data)
+											{
+												data = loaddata(data,'palyer')
+												nowChapter[0] = nextindex
+												let json = {
+													nowChats: [],
+													replyDepth: 0,
+													chats: [],
+													chatSpeed: 1,
+													header:{},
+													board_no: 0
+												};
+												L((0, p.Fe)(json)), setTimeout(function()
+												{
+													json = {
+														nowChats: [],
+														replyDepth: 0,
+														chats: data.CHAT,
+														chatSpeed: (0, g.zP)(),
+														header: data.INFO,
+														board_no: 0
+													}, L((0, p.Fe)(json)), q(!1), L((0, x.Cz)(!0))
+												}, 1e3)
+												INIT_loading()
+												$$('.nowChapter').text(`${nowChapter[1].name}_${nextindex}：${nowChapter[1].chapter[nextindex]}`)
+												$$('.PLAYER_paly').click()
+											})
+										}
+									},
+									children: (0, k.jsx)(I,
+									{
+										style:
+										{
+											marginLeft: "0.7rem"
+										},
+										icon: y.J0P
+									})
+								}), (0, k.jsx)(T,
+								{
+									style: o && !a || pause ?
+									{
+										display: "none"
+									} :
+									{
+										marginRight: "1rem"
+									},
+									className: "PLAYER_paly",
+									onClick: function()
+									{
+										$$('.PLAYER_paly').hide().next().show().css('marginRight','1rem')
+										pause = false
+										_.length < 1 || 100 === N || L((0, p.eS)(100))
+										L((0, p.eS)(1))
+									},
+									children: (0, k.jsx)(I,
+									{
+										style:
+										{
+											marginLeft: "0.7rem"
+										},
+										icon: y.zc
+									})
+								}), (0, k.jsx)(T,
+								{
+									style: o && !a || !pause ?
+									{
+										display: "none"
+									} :
+									{
+										marginRight: "1rem"
+									},
+									className: "PLAYER_pause",
+									onClick: function(e)
+									{
+										$$('.PLAYER_pause').hide().prev().show().css('marginRight','1rem')
+										pause = true
+										
+									},
+									children: (0, k.jsx)(I,
+									{
+										style:
+										{
+											marginLeft: "0.7rem"
+										},
+										icon: y.XQY
+									})
+								}), (0, k.jsx)(T,
+								{
+									style: o && !a ?
+									{
+										display: "none"
+									} :
+									{
+										marginRight: "1rem"
+									},
+									title: "PLAYER_next",
+									disabled: _.length < 1,
+									onClick: function()
+									{
+										let nextindex = nowChapter[0]+1
+										let chapterlist = nowChapter[1].chapter
+										if(chapterlist[nextindex])
+										{
+											//if(isNaN(nextindex))return;
+											INIT_loading()
+											XHR(`${href}${LibraryURL}/${nowChapter[1].authorid}/${nowChapter[1].bookid}/${chapterlist[nextindex]}.json`,function(data)
+											{
+												data = loaddata(data,'palyer')
+												nowChapter[0] = nextindex
+												let json = {
+													nowChats: [],
+													replyDepth: 0,
+													chats: [],
+													chatSpeed: 1,
+													header:{},
+													board_no: 0
+												};
+												L((0, p.Fe)(json)), setTimeout(function()
+												{
+													json = {
+														nowChats: [],
+														replyDepth: 0,
+														chats: data.CHAT,
+														chatSpeed: (0, g.zP)(),
+														header: data.INFO,
+														board_no: 0
+													}, L((0, p.Fe)(json)), q(!1), L((0, x.Cz)(!0))
+												}, 1e3)
+												$$('.nowChapter').text(`${nowChapter[1].name}_${nextindex}：${nowChapter[1].chapter[nextindex]}`)
+												$$('.PLAYER_paly').click()
+												INIT_loading()
+											})
+										}
+									},
+									children: (0, k.jsx)(I,
+									{
+										style:
+										{
+											marginLeft: "0.7rem"
+										},
+										icon: y.Jwg
+									})
+								}), (0, k.jsx)(T,
 								{
 									style: o && !a ?
 									{
@@ -837,11 +999,8 @@
 										e((0, i.Fe)(playChat))
 										e((0, u.Cz)(!0))
 										$$('.nowChapter').text(`${nowChapter[1].name}_${nextindex}：${nowChapter[1].chapter[nextindex]}`)
+										$$('.PLAYER_paly').click()
 									})
-								}
-								else
-								{
-									$$('.nowChapter').text('')
 								}
 							},
 							children: nowChapter[1].chapter[nowChapter[0]+1] ? '点击前往下一章' : r.Z.end[t]
@@ -1431,27 +1590,31 @@
 					}
 					return (0, a.useEffect)(function()
 					{
-						if(n(), x && !(c.chats.length < 1))
+						if(!pause)
 						{
-							var e = 100;
-							"chat" === t.type && t.sCharacter.no !== d.I.no ? e = 50 * t.content.length > 4e3 ? 4e3 : 50 * t.content.length + 500 : ("image" === t.type || "chat" === t.type && t.sCharacter.no === d.I.no) && (e = 300);
-							var r = setTimeout(function()
+							if(n(), x && !(c.chats.length < 1))
 							{
-								_(!1);
-								var e = setTimeout(function()
+								var e = 100;
+								"chat" === t.type && t.sCharacter.no !== d.I.no ? e = 50 * t.content.length > 4e3 ? 4e3 : 50 * t.content.length + 500 : ("image" === t.type || "chat" === t.type && t.sCharacter.no === d.I.no) && (e = 300);
+								var r = setTimeout(function()
 								{
-									y(c, t)
-								}, 800 / c.chatSpeed);
-								if(!(c.chats.length < 1)) return function()
+									_(!1);
+									var e = setTimeout(function()
+									{
+										y(c, t)
+									}, 800 / c.chatSpeed);
+									if(!(c.chats.length < 1)) return function()
+									{
+										return clearTimeout(e)
+									}
+								}, e / c.chatSpeed);
+								return function()
 								{
-									return clearTimeout(e)
+									return clearTimeout(r)
 								}
-							}, e / c.chatSpeed);
-							return function()
-							{
-								return clearTimeout(r)
 							}
 						}
+						
 					}, [c, x, t, n, y]), (0, m.jsx)('div',
 					{
 						className: '消息',

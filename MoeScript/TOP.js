@@ -1,3 +1,4 @@
+pause = false
 INIT_loading('开始加载')
 var TOP_confirm = '';
 var mt_charface;

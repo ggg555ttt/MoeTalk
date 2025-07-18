@@ -1364,6 +1364,7 @@
 													m((0, ee.Fe)(playChat))
 													m((0, S.Cz)(!0))
 													$$('.nowChapter').text(`${h.name}_${e.index+1}：${h.chapter[e.index]}`)
+													$$('.PLAYER_paly').click()
 												})
 											},
 											children: (0, b.jsx)(x.xL,
