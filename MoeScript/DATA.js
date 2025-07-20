@@ -89,7 +89,7 @@ function MoeToClosure()//Moe转Closure
 				ct[k]['img'] = 'uploaded';
 
 				custom_chars[ct[k]['char_id']] = {}
-				custom_chars[ct[k]['char_id']]['img'] = `${MoeTalkURL}Images/${mt_settings['选择游戏']}/Char/${img}.webp`
+				custom_chars[ct[k]['char_id']]['img'] = `${MoeTalkURL}GameData/${mt_settings['选择游戏']}/Char/${img}.webp`
 				custom_chars[ct[k]['char_id']]['name'] = loadname(id);
 			}
 		}
@@ -120,9 +120,9 @@ function MoeToClosure()//Moe转Closure
 			ct[k]['yuzutalk']['type'] = 'IMAGE';
 			if(v['file'].indexOf(':image') < 0)//本地链接
 			{
-				if(v['file'].indexOf('Images/BLDA/Emoji/stamps') > -1)
+				if(v['file'].indexOf('/BLDA/Emoji/stamps') > -1)
 				{
-					v['file'] = v['file'].replace('Images/BLDA/Emoji','resources/ba')
+					v['file'] = v['file'].replace('/BLDA/Emoji','resources/ba')
 				}
 				else
 				{
@@ -157,7 +157,7 @@ function MoeToClosure()//Moe转Closure
 				closuretalk['chars'][k]['img'] = 'uploaded';
 
 				custom_chars[closuretalk['chars'][k]['char_id']] = {}
-				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${MoeTalkURL}Images/${mt_settings['选择游戏']}/Char/${img}.webp`
+				custom_chars[closuretalk['chars'][k]['char_id']]['img'] = `${MoeTalkURL}GameData/${mt_settings['选择游戏']}/Char/${img}.webp`
 				custom_chars[closuretalk['chars'][k]['char_id']]['name'] = loadname(id);
 			}
 		}
@@ -351,7 +351,7 @@ function UPDATE_OldData(json)//识别存档
 			{
 				json[1][k]['type'] = 'image'
 				json[1][k]['content'] = ''
-				json[1][k]['file'] = v['content'].replace('resources/ba','Images/BLDA/Emoji').replace(MoeTalkURL,'');
+				json[1][k]['file'] = v['content'].replace('resources/ba','GameData/BLDA/Emoji').replace(MoeTalkURL,'');
 			}
 
 			if(v.yuzutalk.nameOverride)json[1][k]['name'] = v.yuzutalk.nameOverride;
@@ -412,7 +412,7 @@ function UPDATE_OldData(json)//识别存档
 				}
 				else
 				{
-					json[1][k].content = `Images/Ui/error.webp`;
+					json[1][k].content = `MoeData/Ui/error.webp`;
 				}
 				json[1][k].type = 'image'
 			}
@@ -437,11 +437,11 @@ function repairCF(data)
 			data.file = data.content
 			data.content = ''
 		}
-		data.file = data.file.replace('CustomFace','CharFace').replace('Images/Emoji/','Images/BLDA/Emoji/').replace(MoeTalkURL,'')
+		data.file = data.file.replace('CustomFace','CharFace').replace('Images/Emoji/','GameData/BLDA/Emoji/').replace(MoeTalkURL,'').replace('Images/','GameData/')
 		
-		if(data.file.indexOf('Images/CharFace/') > -1)
+		if(data.file.indexOf('GameData/CharFace/') > -1)
 		{
-			data.file = 'Images/BLDA/CharFace/'+data.file.split('/').slice(-1)[0].replace('.','/')
+			data.file = 'GameData/BLDA/CharFace/'+data.file.split('/').slice(-1)[0].replace('.','/')
 		}
 		if(data.file.indexOf('Face/') > -1)
 		{

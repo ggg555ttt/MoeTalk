@@ -1,4 +1,4 @@
-**Read this in other languages: [English](player/README_en.md), [中文](README.md).**  
+**Read this in other languages: [English](Data/README_en.md), [中文](README.md).**  
 # MoeTalk说明：  
 MoeTalk是手游Blue Archive中MomoTalk的非官方编辑器，MoeTalk代码改自原作者Raun0129开发的MolluTalk  
 ## 离线启动方法（Windows）  

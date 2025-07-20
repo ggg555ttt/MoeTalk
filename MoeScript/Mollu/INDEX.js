@@ -472,7 +472,7 @@
 												},
 												onError: function(e)
 												{
-													e.currentTarget.src = href+'Images/Ui/error.webp';
+													e.currentTarget.src = href+'MoeData/Ui/error.webp';
 												},
 												className: (0, u.Y)(w.selected, e) ? "selected" : ""
 											}, n)
@@ -626,7 +626,7 @@
 									style:{margin:'0.2rem'},
 									onError: function(e)
 									{
-										e.currentTarget.src = href+'Images/Ui/error.webp';
+										e.currentTarget.src = href+'MoeData/Ui/error.webp';
 									},
 									onClick: function()
 									{
@@ -714,7 +714,7 @@
 										src: loadhead(n.no,n.profile[0]),//#左方选择框
 										onError: function(e)
 										{
-											e.currentTarget.src = href+'Images/Ui/error.webp';
+											e.currentTarget.src = href+'MoeData/Ui/error.webp';
 										},
 										alt: n.profile[0]
 									}), 
@@ -762,10 +762,10 @@
 								{
 									width: 252,
 									height: 252,
-									src: href+"Images/Ui/School/"+(!mt_school[n.school.id] ? n.club['zh_cn'] === '临时角色' ? 'RECYCLE' : 'CUSTOM' : mt_school[n.school.id].en || 'none')+'.webp',//#学校图标
+									src: href+"MoeData/Ui/School/"+(!mt_school[n.school.id] ? n.club['zh_cn'] === '临时角色' ? 'RECYCLE' : 'CUSTOM' : mt_school[n.school.id].en || 'none')+'.webp',//#学校图标
 									onError: function(e)
 									{
-										e.currentTarget.src = href+'Images/Ui/error.webp';
+										e.currentTarget.src = href+'MoeData/Ui/error.webp';
 									},
 									onClick: function()
 									{
@@ -1201,7 +1201,7 @@
 											width: 110,
 											height: 60,
 											alt: "order",
-											src: href+"Images/Ui/".concat(n.order ? "down" : "up", ".webp")//#排序图标
+											src: href+"MoeData/Ui/".concat(n.order ? "down" : "up", ".webp")//#排序图标
 										})
 									})
 								})]
@@ -1233,7 +1233,7 @@
 										text: ""
 									})
 								},
-								src: href+"Images/Ui/pen.webp",//#铅笔图标
+								src: href+"MoeData/Ui/pen.webp",//#铅笔图标
 								alt: "pen"
 							})]
 						}), (0, m.jsx)(M,
@@ -1731,7 +1731,7 @@
 													width: '40px',
 													height: '40px'
 												},
-												src:href+'Images/Ui/School/RECYCLE.webp'
+												src:href+'MoeData/Ui/School/RECYCLE.webp'
 											})],
 											onClick:function()
 											{
@@ -1812,7 +1812,7 @@
 													width: '40px',
 													height: '40px'
 												},
-												src:href+'Images/Ui/School/CUSTOM.webp'
+												src:href+'MoeData/Ui/School/CUSTOM.webp'
 											})],
 											onClick:function()
 											{
@@ -1837,7 +1837,7 @@
 													width: '40px',
 													height: '40px'
 												},
-												src:href+'Images/Ui/edit.png'
+												src:href+'MoeData/Ui/edit.png'
 											})],
 											onClick:function()
 											{
@@ -3274,7 +3274,7 @@
 															width: '100%',
 															height: 'auto'
 														},
-														src: v === 'ADD' ? href+'Images/Ui/School/RECYCLE.webp' : 前缀+link,//#表情链接
+														src: v === 'ADD' ? href+'MoeData/Ui/School/RECYCLE.webp' : 前缀+link,//#表情链接
 														onError: function(e)
 														{
 															e.target.parentNode.style.display = 'none'
@@ -4133,7 +4133,7 @@
 												str += `头像间距：<input style="font-size:1.2rem;" class="margin text" placeholder="默认值为 -1.5rem" value="${toString(HeadList.margin)}">\n\n`
 
 												str += '发言角色：<label><input class="radio" type="radio" name="mode" value="change">通过【待选列表】切换角色</label>\n'
-												str += `<img class="头像 N_char" src="${e.target.title ? loadhead(e.target.alt,e.target.title) : href+'Images/Ui/setting.webp'}" alt="${e.target.alt}" title="${e.target.title}">`
+												str += `<img class="头像 N_char" src="${e.target.title ? loadhead(e.target.alt,e.target.title) : href+'MoeData/Ui/setting.webp'}" alt="${e.target.alt}" title="${e.target.title}">`
 												str += `名称：<input style="font-size:1.2rem;color:red;" class="text" placeholder="${$$('.name').attr('placeholder')}" value="${$$('.name').val()}">\n`
 												str += `\n头像列表：（点击删除指定头像）\n<div class="N_list">`
 												HeadList.list.map(function(index,k)
@@ -4175,7 +4175,7 @@
 													}
 												}
 											},
-											src:href+'Images/Ui/setting.webp'
+											src:href+'MoeData/Ui/setting.webp'
 										})]
 									}), (0, m.jsx)('div',
 									{
@@ -4389,7 +4389,7 @@
 				{
 					displayName: "HeartBox__Container",
 					componentId: "sc-cwriov-0"
-				})(["", ";padding:0.5rem;font-size:1.1rem;height:auto;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}Images/Ui/Favor_Schedule_Deco.webp');background-repeat:no-repeat;background-position:right;background-size:auto 100%;line-height:1.5rem;`], function(e)
+				})(["", ";padding:0.5rem;font-size:1.1rem;height:auto;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeData/Ui/Favor_Schedule_Deco.webp');background-repeat:no-repeat;background-position:right;background-size:auto 100%;line-height:1.5rem;`], function(e)
 				//#心形背景
 				{
 					return e.theme.common.flexBox(
@@ -4486,7 +4486,7 @@
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
 											onError: function(e)
 											{
-												e.currentTarget.src = href+'Images/Ui/error.webp';
+												e.currentTarget.src = href+'MoeData/Ui/error.webp';
 											},
 											alt: n.sCharacter.index
 										}), n.heads ? n.heads.list.map(function(index,k)
@@ -4503,7 +4503,7 @@
 												},
 												onError: function(e)
 												{
-													e.currentTarget.src = href+'Images/Ui/error.webp';
+													e.currentTarget.src = href+'MoeData/Ui/error.webp';
 												}
 											})
 										}) : ''] : ''
@@ -4549,7 +4549,7 @@
 												title: n.file.indexOf(":image") > -1 ? '' : n.file,
 												onError: function(e)
 												{
-													e.currentTarget.src = href+'Images/Ui/error.webp';
+													e.currentTarget.src = href+'MoeData/Ui/error.webp';
 												}
 											}) ,n.time ? (0, m.jsx)('div',
 											{//右侧时间戳
@@ -4576,7 +4576,7 @@
 											style: {zIndex: n.heads ? n.heads.list.length : ''},
 											onError: function(e)
 											{
-												e.currentTarget.src = href+'Images/Ui/error.webp';
+												e.currentTarget.src = href+'MoeData/Ui/error.webp';
 											},
 											alt: n.sCharacter.index
 										}), n.heads ? n.heads.list.map(function(index,k)
@@ -4593,7 +4593,7 @@
 												},
 												onError: function(e)
 												{
-													e.currentTarget.src = href+'Images/Ui/error.webp';
+													e.currentTarget.src = href+'MoeData/Ui/error.webp';
 												}
 											})
 										}) : ''] : ''
@@ -4611,7 +4611,7 @@
 							}),(0, m.jsx)('div',
 							{
 								className: '回复',
-								style:{backgroundImage:`url(${href}Images/Ui/Popup_Img_Deco_2.webp)`},
+								style:{backgroundImage:`url(${href}MoeData/Ui/Popup_Img_Deco_2.webp)`},
 								children: [(0, m.jsx)('div',
 								{
 									className: '消息标题',
@@ -5324,7 +5324,7 @@
 							}), (0, m.jsx)("meta",
 							{
 								property: "og:image",
-								content: MoeTalkURL+"Images/Ui/Favor_Schedule_Deco.webp"
+								content: MoeTalkURL+"MoeData/Ui/Favor_Schedule_Deco.webp"
 							}), (0, m.jsx)("meta",
 							{
 								property: "og:site_name",
@@ -5344,7 +5344,7 @@
 							}), (0, m.jsx)("meta",
 							{
 								name: "twitter:image",
-								content: MoeTalkURL+"Images/Ui/Favor_Schedule_Deco.webp"
+								content: MoeTalkURL+"MoeData/Ui/Favor_Schedule_Deco.webp"
 							}), (0, m.jsx)("meta",
 							{
 								name: "twitter:card",

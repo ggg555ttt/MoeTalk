@@ -43,7 +43,7 @@ function mt_emojis(S,mode)
 	EMOJI.custom = {}//自设表情
 	EMOJI.custom.io = false//自设开关
 	EMOJI.custom.title = '切换自定义'//按钮标题
-	EMOJI.path = `Images/${mt_settings['选择游戏']}/${mode}/`//表情路径
+	EMOJI.path = `GameData/${mt_settings['选择游戏']}/${mode}/`//表情路径
 	EMOJI.pages.type = mode
 	let id = 'Emoji';
 	if(mode === 'CharFace')
@@ -443,7 +443,7 @@ function makeMessage(type,data,chatIndex,mode)
 	{
 		聊天 = 
 		`<div class="头像框"></div>
-		<div class="羁绊" style='background-image: url(${href}Images/Ui/Favor_Schedule_Deco.webp);'>
+		<div class="羁绊" style='background-image: url(${href}MoeData/Ui/Favor_Schedule_Deco.webp);'>
 			<div class="消息标题">
 				<div class="竖线" style='border-left: 2px solid rgb(255, 142, 155);'></div>
 				<span class="bold">${mt_text['relationship_event'][mtlang]}</span>
@@ -469,7 +469,7 @@ function makeMessage(type,data,chatIndex,mode)
 		})
 		聊天 = 
 		`<div class="头像框"><button data-html2canvas-ignore="true" class="编辑按钮 编辑">${编辑图标}</button></div>
-		<div class="回复" style='background-image: url(${href}Images/Ui/Popup_Img_Deco_2.webp);'>
+		<div class="回复" style='background-image: url(${href}MoeData/Ui/Popup_Img_Deco_2.webp);'>
 			<div class="消息标题">
 				<div class="竖线" style='border-left: 2px solid rgb(39, 153, 228)'></div>
 				<span class="bold">${mt_text['reply'][mtlang]}</span>
@@ -646,7 +646,7 @@ $("body").on('click',".编辑",function()
 	{
 		$('.typeTitle').text('批量编辑')
 
-		$('.editMessage .头像').removeAttr('alt').removeAttr('title').attr('src',href+'Images/Ui/setting.webp')//.prev().text(CHAT_HeadList ? '列表' : '角色')
+		$('.editMessage .头像').removeAttr('alt').removeAttr('title').attr('src',href+'MoeData/Ui/setting.webp')//.prev().text(CHAT_HeadList ? '列表' : '角色')
 
 		$('.editType').show().parent().show()
 		$('.editTalk').show().parent().show()

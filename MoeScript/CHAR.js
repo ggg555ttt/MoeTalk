@@ -16,7 +16,7 @@ function loadhead(id,img)
 {
 	
 	//主角
-	if(id == 0 || img == 1)return `${href}Images/Ui/you.webp`;
+	if(id == 0 || img == 1)return `${href}MoeData/Ui/you.webp`;
 	//自定义头像
 	if(mt_head[img])
 	{
@@ -29,7 +29,7 @@ function loadhead(id,img)
 	//MoeTalk头像
 	if(mt_characters[id] || id === 'LIST')
 	{
-		return `${href}Images/${mt_settings['选择游戏']}/Char/${img}.webp`;
+		return `${href}GameData/${mt_settings['选择游戏']}/Char/${img}.webp`;
 	}
 	if(id === 'YuukaTalk')
 	{
@@ -40,10 +40,10 @@ function loadhead(id,img)
 		else
 		{
 			if(img && img.indexOf('moetalk') > -1)return img.replace(MoeTalkURL,href)
-			return `${href}Images/Ui/you.webp`;
+			return `${href}MoeData/Ui/you.webp`;
 		}
 	}
-	return `${href}Images/Ui/error.webp`;//默认头像
+	return `${href}MoeData/Ui/error.webp`;//默认头像
 }
 function loadname(id,index)
 {
@@ -499,14 +499,14 @@ function CHAR_UpdateChar()
 	club(true)
 	id_map = [{},{}]
 	CustomFaceAuthor = {}
-	XHR(`${href}Data/${mt_settings['选择游戏']}/CharFaceInfo.json`,function(json)
+	XHR(`${href}GameData/${mt_settings['选择游戏']}/CharFaceInfo.json`,function(json)
 	{
 		CFInfo = JSON.parse(json)
 	})
 	foreach(['School','Club','Characters','CharFace'],function(k,v)
 	{
 		window[['mt_school','mt_club','mt_characters','mt_charface'][k]] = false
-		XHR(`${href}Data/${mt_settings['选择游戏']}/MT-${v}.json`,function(json)
+		XHR(`${href}GameData/${mt_settings['选择游戏']}/MT-${v}.json`,function(json)
 		{
 			window[['mt_school','mt_club','mt_characters','mt_charface'][k]] = JSON.parse(json)
 		})
@@ -515,7 +515,7 @@ function CHAR_UpdateChar()
 	{
 		foreach(['IdMap','CustomFaceAuthor'],function(k,v)
 		{
-			XHR(`${href}Data/${mt_settings['选择游戏']}/${v}.json`,function(json)
+			XHR(`${href}GameData/${mt_settings['选择游戏']}/${v}.json`,function(json)
 			{
 				window[['id_map','CustomFaceAuthor'][k]] = JSON.parse(json)
 			})

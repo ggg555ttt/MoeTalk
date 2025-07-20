@@ -14,16 +14,16 @@ foreach(['mt-char','mt-head','chats'],function(k,v)
 })
 foreach(['School','Club','Characters'],function(k,v)
 {
-	XHR(`${href}Data/${mt_settings['选择游戏']}/MT-${v}.json`,function(json)
+	XHR(`${href}GameData/${mt_settings['选择游戏']}/MT-${v}.json`,function(json)
 	{
 		window[['mt_school','mt_club','mt_characters'][k]] = JSON.parse(json)
 	})
 })
-XHR(`${href}Data/${mt_settings['选择游戏']}/CharFaceInfo.json`,function(json)
+XHR(`${href}GameData/${mt_settings['选择游戏']}/CharFaceInfo.json`,function(json)
 {
 	CFInfo = JSON.parse(json)
 })
-XHR(`${href}Data/${mt_settings['选择游戏']}/MT-CharFace.json`,function(json)
+XHR(`${href}GameData/${mt_settings['选择游戏']}/MT-CharFace.json`,function(json)
 {
 	mt_charface = JSON.parse(json)
 })
@@ -32,7 +32,7 @@ if(mt_settings['选择游戏'] === 'BLDA')
 {
 	foreach(['IdMap','CustomFaceAuthor'],function(k,v)
 	{
-		XHR(`${href}Data/${mt_settings['选择游戏']}/${v}.json`,function(json)
+		XHR(`${href}GameData/${mt_settings['选择游戏']}/${v}.json`,function(json)
 		{
 			window[['id_map','CustomFaceAuthor'][k]] = JSON.parse(json)
 		})

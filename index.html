@@ -13,7 +13,7 @@ function os(u = window.navigator.userAgent)
 }
 
 //变量
-var 更新时间 = 1753006289//!
+var 更新时间 = 1753021581//!
 var gamearr = {}//游戏列表
 gamearr['BLDA'] = '碧蓝档案'
 gamearr['CBJQ'] = '尘白禁区'
@@ -137,6 +137,11 @@ if(sessionStorage['cordova'] === 'cordova')
 {
 	document.write("<scr"+`ipt src='./cordova.js'></scr`+"ipt>");
 }
+if(gameid === 'cordova2')sessionStorage['cordova2'] = 'cordova2'
+if(sessionStorage['cordova2'] === 'cordova2')
+{
+	document.write("<scr"+`ipt src='./MoeScript/Cordova/cordova.js'></scr`+"ipt>");
+}
 var mt_characters,
 	mt_school,
 	mt_club,
@@ -152,36 +157,36 @@ var mt_characters,
 		<meta name="description" content="MoeTalk is a Blue Archive Fandom Site. (몰루톡/モルトーク)">
 		<meta name="keywords" content="蔚藍檔案, 碧蓝档案, MolluTalk, 몰루톡, MoeTalk, MomoTalk, モルトーク, Blue Archive,YuzuTalk, YuukaTalk, ClosureTalk">
 		<meta property="og:title" content="MoeTalk">
-		<meta property="og:image" content="https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/Images/Ui/Favor_Schedule_Deco.webp">
+		<meta property="og:image" content="https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/MoeData/Ui/Favor_Schedule_Deco.webp">
 		<meta property="og:site_name" content="Make">
 		<meta property="og:description" content="MoeTalk is a Blue Archive Fandom Site. (몰루톡/モルトーク)">
 		<meta name="twitter:title" content="MoeTalk">
 		<meta name="twitter:description" content="MoeTalk is a Blue Archive Fandom Site. (몰루톡/モルトーク)">
-		<meta name="twitter:image" content="https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/Images/Ui/Favor_Schedule_Deco.webp">
+		<meta name="twitter:image" content="https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/MoeData/Ui/Favor_Schedule_Deco.webp">
 		<meta name="twitter:card" content="summary_large_image">
 		<meta name="theme-color" content="#95bae5">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="application-name" content="MoeTalk">
 
-		<link rel="shortcut icon" href="./Images/Ui/Favor_Schedule_Deco.webp">
-		<link rel='stylesheet' href="./MoeScript/Style/style.css?filesize=22276" data-n-g=''><!-- @@样式 -->
-		<script src="./Data/MT-Img.js"></script><!-- 存档图片 -->
-		<script src="./Data/MT-Text.js"></script><!-- 提示文本 -->
-		<script src="./MoeScript/INIT.js?filesize=9876" defer></script><!-- @@预定义 -->
+		<link rel="shortcut icon" href="./MoeData/Ui/Favor_Schedule_Deco.webp">
+		<link rel='stylesheet' href="./MoeScript/Style/style.css?filesize=22295" data-n-g=''><!-- @@样式 -->
+		<script src="./MoeData/MT-Img.js"></script><!-- 存档图片 -->
+		<script src="./MoeData/MT-Text.js"></script><!-- 提示文本 -->
+		<script src="./MoeScript/INIT.js?filesize=9886" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/IMAGE.js?filesize=13280" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/DATA.js?filesize=21328" defer></script><!-- @@存档 -->
-		<script src="./MoeScript/CHAT.js?filesize=28262" defer></script><!-- @@消息 -->
-		<script src="./MoeScript/CHAR.js?filesize=16475" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/TOP.js?filesize=18826" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/DATA.js?filesize=21360" defer></script><!-- @@存档 -->
+		<script src="./MoeScript/CHAT.js?filesize=28267" defer></script><!-- @@消息 -->
+		<script src="./MoeScript/CHAR.js?filesize=16492" defer></script><!-- @@角色 -->
+		<script src="./MoeScript/TOP.js?filesize=18842" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/Other/webpack-0a2a587924e1d405.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/framework-2c79e2a64abdb08b.js" defer></script>
-		<script src="./MoeScript/Mollu/Other/main-dfffdc208236edda.js" defer></script>
-		<script src="./MoeScript/Mollu/APP.js?filesize=768416" defer></script><!-- @@框架 -->
+		<script src="./MoeScript/Mollu/Other/MAIN.js" defer></script>
+		<script src="./MoeScript/Mollu/APP.js?filesize=768422" defer></script><!-- @@框架 -->
 		<script src="./MoeScript/Mollu/Other/ad7f724d-94baee9a2d394f8b.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/288-68932622dcf1348d.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/876-d056d91d7a6271a4.js" defer></script>
-		<script src="./MoeScript/Mollu/INDEX.js?filesize=158595" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/Mollu/INDEX.js?filesize=158617" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/Other/_buildManifest.js" defer></script>
 
 		<style data-styled="active" data-styled-version="5.3.8"></style>
@@ -192,8 +197,8 @@ var mt_characters,
 		<script id="__NEXT_DATA__" type="application/json">{"props": {},"page": "/"}</script>
 		<script src="./MoeScript/Mollu/Other/2cca2479-252e554161ba1891.js"></script>
 		<script src="./MoeScript/Mollu/Other/648-34d807018fc4299c.js"></script>
-		<script src="./MoeScript/Mollu/LIBRARY.js?filesize=51625"></script><!-- @@图书馆 -->
-		<script src="./MoeScript/Mollu/PLAYER.js?filesize=69932"></script><!-- @@播放器 -->
+		<script src="./MoeScript/Mollu/LIBRARY.js?filesize=51630"></script><!-- @@图书馆 -->
+		<script src="./MoeScript/Mollu/PLAYER.js?filesize=69945"></script><!-- @@播放器 -->
 		<script src="./MoeScript/Mollu/Other/[pageNum]-64f8b3ceb0a4c91c.js"></script>
 		<script src="./MoeScript/Mollu/CSS.js?filesize=24884"></script><!-- @@样式 -->
 		<!-- <script src="./MoeScript/Mollu/Other/music-328e8f3388aab8f7.js"></script> -->
@@ -206,7 +211,7 @@ var mt_characters,
 <p>另外相关使用建议也可以向我提交，感谢您的使用</p>
 <button><a href="./Setting.html?filesize=8093" target='_blank' style='color: white;'>点击进入设置页面</a></button><!-- @@ -->
 <p></p>
-<img style="width: 100%;height: auto;" id="help" src="./Images/Ui/help.webp" onclick="document.documentElement.style.position = '';" />
+<img style="width: 100%;height: auto;" id="help" src="./MoeData/Ui/help.webp" onclick="document.documentElement.style.position = '';" />
 <!-- Default Statcounter code for MoeTalk http://*.* -->
 <script>
 var _hmt = _hmt || [];

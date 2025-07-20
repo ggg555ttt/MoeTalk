@@ -26,10 +26,10 @@ if(mt_settings['存储模式'])
 
 }
 
-var LibraryURL = 'Data/Library'//图书馆地址
+var player = (Html5Plus === 'mmt.MoeTalk.WumberBee' ? '/' : href)+'Moedata'//播放器地址
+var LibraryURL = 'GameData/BLDA/Library'//图书馆地址
 var directory = []//目录
 var nowChapter = ['',{chapter:[]}]//当前章节
-var player = (Html5Plus === 'mmt.MoeTalk.WumberBee' ? '/' : href)+'player'//播放器地址
 
 var test = console.log
 var $$ = $;//jquery转义

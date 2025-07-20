@@ -490,7 +490,7 @@
 								{
 									width: 252,
 									height: 252,
-									src: href+"Images/Ui/School/"+(t.school[mtlang] === '自定义' ? '自定义' : mt_characters[t.no].school)+'.webp',//#学校图标
+									src: href+"MoeData/Ui/School/"+(t.school[mtlang] === '自定义' ? '自定义' : mt_characters[t.no].school)+'.webp',//#学校图标
 									onError: function(e)
 									{
 										var t = e.currentTarget;
@@ -908,7 +908,7 @@
 												width: 110,
 												height: 60,
 												alt: "order",
-												src: href+"Images/Ui/".concat(n.order ? "down" : "up", ".webp")//#排序图标
+												src: href+"MoeData/Ui/".concat(n.order ? "down" : "up", ".webp")//#排序图标
 											})
 										})
 									})]
@@ -1003,7 +1003,7 @@
 									{
 										g(""), y("", null)
 									},
-									src: href+"Images/Ui/pen.webp",//#铅笔图标
+									src: href+"MoeData/Ui/pen.webp",//#铅笔图标
 									alt: "pen"
 								})]
 							}), (0, b.jsx)(W,
@@ -1776,7 +1776,7 @@
 							}), (0, b.jsx)("meta",
 							{
 								property: "og:image",
-								content: MoeTalkURL+"Images/Ui/Favor_Schedule_Deco.webp"
+								content: MoeTalkURL+"MoeData/Ui/Favor_Schedule_Deco.webp"
 							}), (0, b.jsx)("meta",
 							{
 								property: "og:description",
@@ -1792,7 +1792,7 @@
 							}), (0, b.jsx)("meta",
 							{
 								name: "twitter:image",
-								content: MoeTalkURL+"Images/Ui/Favor_Schedule_Deco.webp"
+								content: MoeTalkURL+"MoeData/Ui/Favor_Schedule_Deco.webp"
 							})]
 						}), (0, b.jsx)(F,
 						{
