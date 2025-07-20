@@ -9305,6 +9305,8 @@
 										className: "bold",
 										onClick: function()
 										{
+											skip = false
+											$$('.PLAYER_play').click()
 											u()
 										},
 										children: r.Z.confirm[l]

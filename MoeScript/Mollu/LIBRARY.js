@@ -868,7 +868,7 @@
 											icon: 0 === n.B_TYPE ? B.xVw : Z.xVw
 										})
 									})
-								}),*/(0, b.jsxs)(K,
+								}), (0, b.jsxs)(K,
 								{
 									style:
 									{
@@ -912,10 +912,16 @@
 											})
 										})
 									})]
-								})]
+								})*/]
 							})]
 						}), (0, b.jsxs)(H,
 						{
+							style: 
+							{
+								userSelect: 'text',
+								lineHeight: '3rem',
+								color: 'red'
+							},
 							children: 'QQ反馈交流群：922392676'
 						}), (0, b.jsxs)(K,
 						{
@@ -1310,6 +1316,7 @@
 						onDoubleClick: function()
 						{
 							u(!1)
+							delete nowChapter[2]
 						},
 						children: (0, b.jsxs)(I.F0,
 						{
@@ -1322,18 +1329,26 @@
 								children: [(0, b.jsx)(I.Dx,
 								{
 									className: "bold",
-									children: `${h.name} ${e.index+1}`
+									children: nowChapter[2] ? nowChapter[2] : '播放章节'
 									//children: i.Z.setting[p]
 								}), (0, b.jsx)(I.ec,
 								{
 									onClick: function()
 									{
 										u(!1)
+										delete nowChapter[2]
 									},
 									children: (0, b.jsx)(x.j4,
 									{})
 								})]
-							}), (0, b.jsx)(I.$0,
+							}), (0, b.jsx)(H,
+								{
+									style:
+									{
+										marginTop: "0.5rem"
+									},
+									children: `${h.name} ${e.index+1}`
+								}), (0, b.jsx)(I.$0,
 							{
 								children: [(0, b.jsxs)(er,
 								{
@@ -1343,15 +1358,28 @@
 										{
 											onClick: function()
 											{
+												delete nowChapter[2]
 												if(isNaN(e.index+1))return;
 												INIT_loading()
+												skip = false
+												$$('.nowChapter').text('')
+												let playChat = 
+												{
+													nowChats: [],
+													replyDepth: 0,
+													chats: [],
+													chatSpeed: (0, a.zP)(),
+													header: {},
+													board_no: 0
+												}
+												m((0, ee.Fe)(playChat))
 												XHR(`${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index]}.json`,function(data)
 												{
 													u(!1)
-													data = loaddata(data,'palyer')
+													data = loaddata(data,'player')
 													nowChapter[0] = e.index
 													nowChapter[1] = h
-													let playChat = 
+													playChat = 
 													{
 														nowChats: [],
 														replyDepth: 0,
@@ -1361,11 +1389,16 @@
 														board_no: 0
 													}
 													INIT_loading()
-													m((0, ee.Fe)(playChat))
+													setTimeout(function(){m((0, ee.Fe)(playChat))}, 1e3)
 													m((0, S.Cz)(!0))
 													$$('.nowChapter').text(`${h.name}_${e.index+1}：${h.chapter[e.index]}`)
-													$$('.PLAYER_paly').click()
+													$$('.PLAYER_play').click()
 												})
+												if(h.chapter[e.index+1])
+												{
+													XHR(`${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index+1]}.json`)
+												}
+												
 											},
 											children: (0, b.jsx)(x.xL,
 											{
@@ -1460,21 +1493,10 @@
 								{
 									children: [(0, b.jsx)(ep,
 									{
+										className: `${l.authorid}_${l.bookid}_${k}`,
 										onClick: function()
 										{
-											$$('.nowChapter').text('')
 											L([!0,k])
-											let playChat = 
-											{
-												nowChats: [],
-												replyDepth: 0,
-												chats: [],
-												chatSpeed: (0, a.zP)(),
-												header: {},
-												board_no: 0
-											}
-											p((0, ee.Fe)(playChat))
-											p((0, S.Cz)(!0))
 										},
 										style: 
 										{
@@ -1600,19 +1622,7 @@
 							{
 								onClick: function()
 								{
-									$$('.nowChapter').text('')
-									w([!0,0])
-									let playChat = 
-									{
-										nowChats: [],
-										replyDepth: 0,
-										chats: [],
-										chatSpeed: (0, a.zP)(),
-										header: {},
-										board_no: 0
-									}
-									f((0, ee.Fe)(playChat))
-									f((0, S.Cz)(!0))
+									$$(`.${r.authorid}_${r.bookid}_0`).click()
 								},
 								children: (0, b.jsx)(x.xL,
 								{

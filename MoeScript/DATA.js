@@ -22,7 +22,7 @@ function loaddata(json,mode)//识别存档
 	mt_shead = {...mt_shead,...json.CHAR.image}
 	saveStorage('mt-char',mt_schar,'session')
 	saveStorage('mt-head',mt_shead,'session')
-	if(mode === 'play')
+	if(mode === 'player')
 	{
 		let otherChats = []
 		let chats = []
@@ -46,10 +46,10 @@ function loaddata(json,mode)//识别存档
 			{
 				let json = arr[''].filter(function(e)
 				{
-					return e.content.split('\n').filter(function(e)
+					return e.type === 'reply' && e.content.split('\n').filter(function(e)
 					{
 						return e === k
-					}) === k
+					})[0] === k
 				})[0]
 				let index = arr[''].indexOf(json)+1
 				arr[''].splice(index,0,...arr[k]);

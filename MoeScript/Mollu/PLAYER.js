@@ -357,7 +357,7 @@
 									n = e.currentTarget.files[0];
 								t.onloadend = function()
 								{
-									"string" == typeof t.result && ("[" === t.result[0] || "{" === t.result[0]) ? (G(loaddata(t.result,'play')), q(!0)) : L((0, m.Y2)(//#编译存档
+									"string" == typeof t.result && ("[" === t.result[0] || "{" === t.result[0]) ? (G(loaddata(t.result,'player')), q(!0)) : L((0, m.Y2)(//#编译存档
 									{
 										isAlert: !0,
 										title: f.Z.error[b],
@@ -498,6 +498,7 @@
 									accept: mt_settings['图片存档'] ? 'image/png' : 'application/json',
 									onChange: function(e)
 									{
+										skip = false
 										let json = {
 											nowChats: [],
 											replyDepth: 0,
@@ -508,12 +509,12 @@
 										}
 										L((0, p.Fe)(json))
 										L((0, x.Cz)(!0))
-										nowChapter[0] = ''
+										nowChapter[0] = 0
 										nowChapter[1] = {}
-										nowChapter[1].chapter = []
+										nowChapter[1].chapter = ['']
 										$$('.nowChapter').text('')
 										O(e)
-										$$('.PLAYER_paly').click()
+										$$('.PLAYER_play').click()
 									}
 								}), (0, k.jsx)(T,
 								{
@@ -522,7 +523,7 @@
 										display: "none"
 									} :
 									{},
-									title: "MakingFile Upload",
+									title: "上传存档",
 									onClick: function()
 									{
 										var e;
@@ -542,6 +543,7 @@
 									onClick: function()
 									{
 										L((0, x.Cz)(!1))
+										$$('.PLAYER_play').hide().next().hide()
 									},
 									children: (0, k.jsx)(I,
 									{
@@ -551,7 +553,12 @@
 								//*速度设置按钮
 								(0, k.jsx)(T,
 								{
-									title: "速度设置按钮",
+									style: o && a ?
+									{
+										display: "none"
+									} :
+									{},
+									title: "设置速度",
 									onClick: function()
 									{
 										if(!localStorage['chatSpeed'])localStorage['chatSpeed'] = 1;
@@ -569,10 +576,11 @@
 								]
 							}), (0, k.jsx)('span',
 							{
-								style:
+								style: o && a ?
 								{
-									//fontSize: '1.5rem'
-								},
+									display: "none"
+								} :
+								{},
 								className: 'nowChapter',
 								children: ''
 							}), (0, k.jsxs)(E,
@@ -624,44 +632,48 @@
 									{
 										marginRight: "1rem"
 									},
-									title: "PLAYER_last",
+									title: "跳过",
 									disabled: _.length < 1,
 									onClick: function()
 									{
-										let nextindex = nowChapter[0]-1
-										let chapterlist = nowChapter[1].chapter
-										if(chapterlist[nextindex])
-										{
-											//if(isNaN(nextindex))return;
-											INIT_loading()
-											XHR(`${href}${LibraryURL}/${nowChapter[1].authorid}/${nowChapter[1].bookid}/${chapterlist[nextindex]}.json`,function(data)
-											{
-												data = loaddata(data,'palyer')
-												nowChapter[0] = nextindex
-												let json = {
-													nowChats: [],
-													replyDepth: 0,
-													chats: [],
-													chatSpeed: 1,
-													header:{},
-													board_no: 0
-												};
-												L((0, p.Fe)(json)), setTimeout(function()
-												{
-													json = {
-														nowChats: [],
-														replyDepth: 0,
-														chats: data.CHAT,
-														chatSpeed: (0, g.zP)(),
-														header: data.INFO,
-														board_no: 0
-													}, L((0, p.Fe)(json)), q(!1), L((0, x.Cz)(!0))
-												}, 1e3)
-												INIT_loading()
-												$$('.nowChapter').text(`${nowChapter[1].name}_${nextindex}：${nowChapter[1].chapter[nextindex]}`)
-												$$('.PLAYER_paly').click()
-											})
+										$$('.PLAYER_play').click()
+										skip = true
+										let chat = [..._,...[{content:"끝",isFirst:true,replyDepth:0,sCharacter:{no:0,index:1},type:"end"}]]
+										let json = {
+											nowChats: chat,
+											replyDepth: 0,
+											chats: chat,
+											chatSpeed: (0, g.zP)(),
+											header: {},
+											board_no: 0
 										}
+										L((0, p.Fe)(json))
+									},
+									children: (0, k.jsx)(I,
+									{
+										style:
+										{
+											marginLeft: "0.7rem"
+										},
+										icon: y.irl
+									})
+								}), (0, k.jsx)(T,
+								{
+									style: o && !a ?
+									{
+										display: "none"
+									} :
+									{
+										marginRight: "1rem"
+									},
+									title: "上一章",
+									disabled: _.length < 1,
+									onClick: function()
+									{
+										let index = nowChapter[0]-1
+										if(!nowChapter[1].chapter[index])return;
+										nowChapter[2] = '上一章节'
+										$$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
 									},
 									children: (0, k.jsx)(I,
 									{
@@ -673,20 +685,26 @@
 									})
 								}), (0, k.jsx)(T,
 								{
-									style: o && !a || pause ?
+									style: o && !a || !pause ?
 									{
 										display: "none"
 									} :
 									{
 										marginRight: "1rem"
 									},
-									className: "PLAYER_paly",
+									title: '播放',
+									className: "PLAYER_play",
 									onClick: function()
 									{
-										$$('.PLAYER_paly').hide().next().show().css('marginRight','1rem')
+										$$('.PLAYER_play').hide().next().show().css('marginRight','1rem')
 										pause = false
-										_.length < 1 || 100 === N || L((0, p.eS)(100))
-										L((0, p.eS)(1))
+										if(!skip)
+										{
+											_.length < 1 || 100 === N || L((0, p.eS)(100))
+											L((0, p.eS)(1))
+											L((0, p.eS)((0, g.zP)()))
+										}
+										
 									},
 									children: (0, k.jsx)(I,
 									{
@@ -698,13 +716,14 @@
 									})
 								}), (0, k.jsx)(T,
 								{
-									style: o && !a || !pause ?
+									style: o && !a || pause ?
 									{
 										display: "none"
 									} :
 									{
 										marginRight: "1rem"
 									},
+									title: '暂停',
 									className: "PLAYER_pause",
 									onClick: function(e)
 									{
@@ -729,44 +748,14 @@
 									{
 										marginRight: "1rem"
 									},
-									title: "PLAYER_next",
+									title: "下一章",
 									disabled: _.length < 1,
 									onClick: function()
 									{
-										let nextindex = nowChapter[0]+1
-										let chapterlist = nowChapter[1].chapter
-										if(chapterlist[nextindex])
-										{
-											//if(isNaN(nextindex))return;
-											INIT_loading()
-											XHR(`${href}${LibraryURL}/${nowChapter[1].authorid}/${nowChapter[1].bookid}/${chapterlist[nextindex]}.json`,function(data)
-											{
-												data = loaddata(data,'palyer')
-												nowChapter[0] = nextindex
-												let json = {
-													nowChats: [],
-													replyDepth: 0,
-													chats: [],
-													chatSpeed: 1,
-													header:{},
-													board_no: 0
-												};
-												L((0, p.Fe)(json)), setTimeout(function()
-												{
-													json = {
-														nowChats: [],
-														replyDepth: 0,
-														chats: data.CHAT,
-														chatSpeed: (0, g.zP)(),
-														header: data.INFO,
-														board_no: 0
-													}, L((0, p.Fe)(json)), q(!1), L((0, x.Cz)(!0))
-												}, 1e3)
-												$$('.nowChapter').text(`${nowChapter[1].name}_${nextindex}：${nowChapter[1].chapter[nextindex]}`)
-												$$('.PLAYER_paly').click()
-												INIT_loading()
-											})
-										}
+										let index = nowChapter[0]+1
+										if(!nowChapter[1].chapter[index])return;
+										nowChapter[2] = '下一章节'
+										$$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
 									},
 									children: (0, k.jsx)(I,
 									{
@@ -782,31 +771,8 @@
 									{
 										display: "none"
 									} :
-									{
-										marginRight: "1rem"
-									},
-									title: "skip",
-									disabled: _.length < 1,
-									onClick: function()
-									{
-										_.length < 1 || 100 === N || L((0, p.eS)(100))
-									},
-									children: (0, k.jsx)(I,
-									{
-										style:
-										{
-											marginLeft: "0.7rem"
-										},
-										icon: y.irl
-									})
-								}), (0, k.jsx)(T,
-								{
-									style: o && !a ?
-									{
-										display: "none"
-									} :
 									{},
-									title: "reset",
+									title: "重新加载",
 									disabled: _.length < 1,
 									onClick: function()
 									{
@@ -848,7 +814,7 @@
 									nowChats: [],
 									replyDepth: 0,
 									chats: [],
-									chatSpeed: 1,
+									chatSpeed: (0, g.zP)(),
 									header:
 									{},
 									board_no: 0
@@ -974,34 +940,10 @@
 							className: "medium",
 							onClick: function()
 							{
-								n()
-								let nextindex = nowChapter[0]+1
-								let chapterlist = nowChapter[1].chapter
-								if(chapterlist[nextindex])
-								{
-									//if(isNaN(nextindex))return;
-									INIT_loading()
-									XHR(`${href}${LibraryURL}/${nowChapter[1].authorid}/${nowChapter[1].bookid}/${chapterlist[nextindex]}.json`,function(data)
-									{
-										data = loaddata(data,'palyer')
-										nowChapter[0] = nextindex
-										let playChat = 
-										{
-											nowChats: [],
-											replyDepth: 0,
-											chats: data.CHAT,
-											chatSpeed: (0, l.zP)(),
-											header: data.INFO,
-											board_no: 0
-										}
-										// m((0, S.Cz)(!0))
-										INIT_loading()
-										e((0, i.Fe)(playChat))
-										e((0, u.Cz)(!0))
-										$$('.nowChapter').text(`${nowChapter[1].name}_${nextindex}：${nowChapter[1].chapter[nextindex]}`)
-										$$('.PLAYER_paly').click()
-									})
-								}
+								let index = nowChapter[0]+1
+								if(!nowChapter[1].chapter[index])return;
+								nowChapter[2] = '下一章节'
+								$$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
 							},
 							children: nowChapter[1].chapter[nowChapter[0]+1] ? '点击前往下一章' : r.Z.end[t]
 						})]
@@ -1310,7 +1252,7 @@
 								depth: v
 							}))
 						};
-					let isFirst = isfirst(n.chats.indexOf(t),n.chats,'play')
+					let isFirst = isfirst(n.chats.indexOf(t),n.chats,'player')
 					let style = mt_settings['文字样式'][t.type] ? mt_settings['文字样式'][t.type] : {}
 					delete style.textAlign
 					style = {...style,...{}}//防止连带修改设置属性
@@ -1530,7 +1472,8 @@
 						{
 							var n = e.chats.indexOf(t),
 								o = e.chats[n + 1];
-							if("end" === t.type || "reply" === t.type || "heart" === t.type) r((0, i.eS)((0, l.zP)()));
+							$$("#size").text(`章节:${nowChapter[0]+1}/${nowChapter[1].chapter.length}\n进度:${(n+1) ? (n+1) : e.chats.length}/${e.chats.length}`)
+							if("end" === t.type || "reply" === t.type || "heart" === t.type)r((0, i.eS)((0, l.zP)()));
 							else if(o && o.replyDepth === e.replyDepth) "{end}" === toString(o.content).trim() && o.replyDepth === t.replyDepth ? (r((0, i.eS)((0, l.zP)())), r((0, i.e$)(
 							{
 								chat: h.Nl
@@ -1579,7 +1522,7 @@
 								}))
 							}
 						}, [r]);
-					let isFirst = isfirst(c.chats.indexOf(t),c.chats,'play')
+					let isFirst = isfirst(c.chats.indexOf(t),c.chats,'player')
 					let style = mt_settings['文字样式'][t.type] ? mt_settings['文字样式'][t.type] : {}
 					delete style.textAlign
 					style = {...style,...{}}//防止连带修改设置属性
@@ -1595,19 +1538,20 @@
 							if(n(), x && !(c.chats.length < 1))
 							{
 								var e = 100;
-								"chat" === t.type && t.sCharacter.no !== d.I.no ? e = 50 * t.content.length > 4e3 ? 4e3 : 50 * t.content.length + 500 : ("image" === t.type || "chat" === t.type && t.sCharacter.no === d.I.no) && (e = 300);
+								// "chat" === t.type && t.sCharacter.no !== d.I.no ? e = 50 * t.content.length > 4e3 ? 4e3 : 50 * t.content.length + 500 : ("image" === t.type || "chat" === t.type && t.sCharacter.no === d.I.no) && (e = 300);
+								"chat" === t.type || "info" === t.type ? e = 50 * t.content.length > 4e3 ? 4e3 : 50 * t.content.length + 500 : ("image" === t.type || "chat" === t.type) && (e = 300);
 								var r = setTimeout(function()
 								{
 									_(!1);
 									var e = setTimeout(function()
 									{
-										y(c, t)
-									}, 800 / c.chatSpeed);
+										if(!skip)y(c, t)
+									}, !skip ? (800 / c.chatSpeed) : 0);
 									if(!(c.chats.length < 1)) return function()
 									{
 										return clearTimeout(e)
 									}
-								}, e / c.chatSpeed);
+								}, !skip ? (e / c.chatSpeed) : 0);
 								return function()
 								{
 									return clearTimeout(r)

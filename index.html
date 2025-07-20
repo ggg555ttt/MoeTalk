@@ -13,7 +13,7 @@ function os(u = window.navigator.userAgent)
 }
 
 //变量
-var 更新时间 = 1752840589//!
+var 更新时间 = 1753000553//!
 var gamearr = {}//游戏列表
 gamearr['BLDA'] = '碧蓝档案'
 gamearr['CBJQ'] = '尘白禁区'
@@ -49,14 +49,14 @@ if(localStorage['每日提醒'] != day)
 	delete localStorage['差分书签']
 }
 //检测版本
-function XHR(url,callback)
+function XHR(url,callback = false)
 {
 	let xhr = new XMLHttpRequest();
 	xhr.open("GET",url+'?'+更新时间);
 	xhr.send();
 	xhr.onload = function()//xhr.onreadystatechange
 	{
-		if(this.status === 200)//&& xhr.readyState === 4
+		if(this.status === 200 && callback)//&& xhr.readyState === 4
 		{
 			callback(this.responseText)
 		}
@@ -170,14 +170,14 @@ var mt_characters,
 		<script src="./Data/MT-Text.js"></script><!-- 提示文本 -->
 		<script src="./MoeScript/INIT.js?filesize=9876" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/IMAGE.js?filesize=13280" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/DATA.js?filesize=21301" defer></script><!-- @@存档 -->
-		<script src="./MoeScript/CHAT.js?filesize=28260" defer></script><!-- @@消息 -->
+		<script src="./MoeScript/DATA.js?filesize=21328" defer></script><!-- @@存档 -->
+		<script src="./MoeScript/CHAT.js?filesize=28262" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?filesize=16475" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/TOP.js?filesize=18813" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/TOP.js?filesize=18826" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/Other/webpack-0a2a587924e1d405.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/framework-2c79e2a64abdb08b.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/main-dfffdc208236edda.js" defer></script>
-		<script src="./MoeScript/Mollu/APP.js?filesize=768352" defer></script><!-- @@框架 -->
+		<script src="./MoeScript/Mollu/APP.js?filesize=768416" defer></script><!-- @@框架 -->
 		<script src="./MoeScript/Mollu/Other/ad7f724d-94baee9a2d394f8b.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/288-68932622dcf1348d.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/876-d056d91d7a6271a4.js" defer></script>
@@ -192,8 +192,8 @@ var mt_characters,
 		<script id="__NEXT_DATA__" type="application/json">{"props": {},"page": "/"}</script>
 		<script src="./MoeScript/Mollu/Other/2cca2479-252e554161ba1891.js"></script>
 		<script src="./MoeScript/Mollu/Other/648-34d807018fc4299c.js"></script>
-		<script src="./MoeScript/Mollu/LIBRARY.js?filesize=51235"></script><!-- @@图书馆 -->
-		<script src="./MoeScript/Mollu/PLAYER.js?filesize=67675"></script><!-- @@播放器 -->
+		<script src="./MoeScript/Mollu/LIBRARY.js?filesize=51625"></script><!-- @@图书馆 -->
+		<script src="./MoeScript/Mollu/PLAYER.js?filesize=65974"></script><!-- @@播放器 -->
 		<script src="./MoeScript/Mollu/Other/[pageNum]-64f8b3ceb0a4c91c.js"></script>
 		<script src="./MoeScript/Mollu/CSS.js?filesize=24884"></script><!-- @@样式 -->
 		<!-- <script src="./MoeScript/Mollu/Other/music-328e8f3388aab8f7.js"></script> -->

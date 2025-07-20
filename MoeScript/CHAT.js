@@ -316,7 +316,7 @@ function isfirst(chatIndex,chats,mode)
 	if(chats[chatIndex])
 	{
 		let typeArr = ['heart','info','reply']
-		if(mode === 'play')typeArr.pop()
+		if(mode === 'player')typeArr.pop()
 
 		if(chatIndex-1 < 0)return true//首条消息
 		if(chats[chatIndex].isCenter || chats[chatIndex-1].isCenter)return true//isCenter
