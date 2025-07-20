@@ -672,8 +672,46 @@
 									{
 										let index = nowChapter[0]-1
 										if(!nowChapter[1].chapter[index])return;
-										nowChapter[2] = '上一章节'
-										$$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
+										// nowChapter[2] = '上一章节'
+										// $$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
+										let authorid = nowChapter[1].authorid
+										let bookid = nowChapter[1].bookid
+										let chapter = nowChapter[1].chapter[index]
+										let name = nowChapter[1].name
+										INIT_loading()
+										$$('.nowChapter').text('')
+										let playChat = 
+										{
+											nowChats: [],
+											replyDepth: 0,
+											chats: [],
+											chatSpeed: (0, g.zP)(),
+											header: {},
+											board_no: 0
+										}
+										L((0, p.Fe)(playChat))
+										XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`,function(data)
+										{
+											$$('.PLAYER_play').click()
+											skip = true
+											data = loaddata(data,'player')
+											nowChapter[0] = index
+											data.CHAT = [...data.CHAT,...[{content:"끝",isFirst:true,replyDepth:0,sCharacter:{no:0,index:1},type:"end"}]]
+											playChat = 
+											{
+												nowChats: data.CHAT,
+												replyDepth: 0,
+												chats: data.CHAT,
+												chatSpeed: (0, g.zP)(),
+												header: data.INFO,
+												board_no: 0
+											}
+											INIT_loading()
+											L((0, p.Fe)(playChat))
+											L((0, x.Cz)(!0))
+											$$('.nowChapter').text(`${name}_${index}：${chapter}`)
+											$$('.PLAYER_play').click()
+										})
 									},
 									children: (0, k.jsx)(I,
 									{
@@ -754,8 +792,48 @@
 									{
 										let index = nowChapter[0]+1
 										if(!nowChapter[1].chapter[index])return;
-										nowChapter[2] = '下一章节'
-										$$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
+										// nowChapter[2] = '下一章节'
+										// $$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
+										let authorid = nowChapter[1].authorid
+										let bookid = nowChapter[1].bookid
+										let chapter = nowChapter[1].chapter[index]
+										let name = nowChapter[1].name
+										INIT_loading()
+										skip = false
+										$$('.nowChapter').text('')
+										let playChat = 
+										{
+											nowChats: [],
+											replyDepth: 0,
+											chats: [],
+											chatSpeed: (0, g.zP)(),
+											header: {},
+											board_no: 0
+										}
+										L((0, p.Fe)(playChat))
+										XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`,function(data)
+										{
+											data = loaddata(data,'player')
+											nowChapter[0] = index
+											playChat = 
+											{
+												nowChats: [],
+												replyDepth: 0,
+												chats: data.CHAT,
+												chatSpeed: (0, g.zP)(),
+												header: data.INFO,
+												board_no: 0
+											}
+											INIT_loading()
+											setTimeout(function(){L((0, p.Fe)(playChat))}, 1e3)
+											L((0, x.Cz)(!0))
+											$$('.nowChapter').text(`${name}_${index}：${chapter}`)
+											$$('.PLAYER_play').click()
+										})
+										if(nowChapter[1].chapter[index+1])
+										{
+											XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${nowChapter[1].chapter[index+1]}.json`)
+										}
 									},
 									children: (0, k.jsx)(I,
 									{
@@ -942,8 +1020,48 @@
 							{
 								let index = nowChapter[0]+1
 								if(!nowChapter[1].chapter[index])return;
-								nowChapter[2] = '下一章节'
-								$$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
+								// nowChapter[2] = '下一章节'
+								// $$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
+								let authorid = nowChapter[1].authorid
+								let bookid = nowChapter[1].bookid
+								let chapter = nowChapter[1].chapter[index]
+								let name = nowChapter[1].name
+								INIT_loading()
+								skip = false
+								$$('.nowChapter').text('')
+								let playChat = 
+								{
+									nowChats: [],
+									replyDepth: 0,
+									chats: [],
+									chatSpeed: (0, l.zP)(),
+									header: {},
+									board_no: 0
+								}
+								e((0, i.Fe)(playChat))
+								XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`,function(data)
+								{
+									data = loaddata(data,'player')
+									nowChapter[0] = index
+									playChat = 
+									{
+										nowChats: [],
+										replyDepth: 0,
+										chats: data.CHAT,
+										chatSpeed: (0, l.zP)(),
+										header: data.INFO,
+										board_no: 0
+									}
+									INIT_loading()
+									setTimeout(function(){e((0, i.Fe)(playChat))}, 1e3)
+									e((0, u.Cz)(!0))
+									$$('.nowChapter').text(`${name}_${index}：${chapter}`)
+									$$('.PLAYER_play').click()
+								})
+								if(nowChapter[1].chapter[index+1])
+								{
+									XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${nowChapter[1].chapter[index+1]}.json`)
+								}
 							},
 							children: nowChapter[1].chapter[nowChapter[0]+1] ? '点击前往下一章' : r.Z.end[t]
 						})]
