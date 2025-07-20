@@ -13,7 +13,7 @@ function os(u = window.navigator.userAgent)
 }
 
 //变量
-var 更新时间 = 1753021581//!
+var 更新时间 = 1753024934//!
 var gamearr = {}//游戏列表
 gamearr['BLDA'] = '碧蓝档案'
 gamearr['CBJQ'] = '尘白禁区'
@@ -134,11 +134,6 @@ var langarr = ['zh_cn','zh_tw','jp','en','kr'];
 if(langarr.indexOf(gameid) > -1)mt_settings['语言选项'] = mtlang = gameid
 if(gameid === 'cordova')sessionStorage['cordova'] = 'cordova'
 if(sessionStorage['cordova'] === 'cordova')
-{
-	document.write("<scr"+`ipt src='./cordova.js'></scr`+"ipt>");
-}
-if(gameid === 'cordova2')sessionStorage['cordova2'] = 'cordova2'
-if(sessionStorage['cordova2'] === 'cordova2')
 {
 	document.write("<scr"+`ipt src='./MoeScript/Cordova/cordova.js'></scr`+"ipt>");
 }
