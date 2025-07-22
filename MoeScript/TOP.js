@@ -487,21 +487,20 @@ function TOP_replyEdit()
 		}
 	}
 }
+$.each(gamearr,function(k,v)
+{
+	XHR(`${href}GameData/${k}/MT-School.json`,function()
+	{
+		if(gamelist.indexOf(k) < 0)gamelist.push(k)
+	})
+})
 $('body').on('click',"#selectgame",function()
 {
-	if(onlyone)
-	{
-		let str = ''
-		str += '当前MoeTalk版本为【'+gamearr[mt_settings['选择游戏']]+'】专用版\n'
-		str += '无法改为其它游戏，若想切换游戏请下载安装其它版本MoeTalk\n'
-		str += '<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">提取码：BLDA</a>\n'
-		alert(str)
-		return
-	}
 	let arr = {}
 	let select = "请选择游戏：<select style='font-size:1.2rem;'>"
-	$.each(gamearr,function(k,v)
+	$.each(gamelist,function(k,v)
 	{
+		k = v,v = gamearr[v]
 		arr[v] = k
 		select += `<option ${k === mt_settings['选择游戏'] ? "style='color:red;'" : ""}>${v}</option>`
 	})

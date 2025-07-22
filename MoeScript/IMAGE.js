@@ -402,7 +402,15 @@ function combineFiles(mainFile, hideFile, fileName, Index) {
 		const blob = new Blob([targetData], { type: mt_settings['图片格式'] });
 		blobToBase64(blob,function(base64)
 		{
-			$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${Index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${base64}'></div>`)
+			if(!mt_settings['图片预览'])
+			{
+				$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").html(`<div class='imageSave'><h1>已下载<span class='red'>${Index}</span>/${imageArrL}张图片：</h1></div>`)
+			}
+			else
+			{
+				$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${Index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${base64}'></div>`)
+			}
+			
 			$('.截图数量').text(imageArr.length)
 			download(fileName,blob,base64,'image')
 		})
