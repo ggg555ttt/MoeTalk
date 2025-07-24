@@ -59,13 +59,10 @@ if(sessionStorage['cordova'] === 'cordova')
 }
 function back()
 {
-	if(mt_settings && mt_settings.当前网址)
-	{
-		let link;
-		if(Html5Plus)link = mt_settings.当前网址.replace('Setting.html','index.html')
-		else link = mt_settings.当前网址.replace('Setting.html','').replace('setting','')
-		window.location.href = link
-	}
+	let link;
+	if(Html5Plus)link = window.location.href.replace('Setting.html','index.html')
+	else link = window.location.href.replace('Setting.html','').replace('setting','')
+	window.location.href = link
 }
 </script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
