@@ -3,9 +3,14 @@
 <html lang="zh" style="--vh:9.47px; font-size: 16px;position:fixed;">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<script src="./MoeScript/Script/Jquery.min.js"></script>
+		<script src="./MoeScript/Script/jquery.min.js"></script>
 		<script src="./MoeScript/Script/localforage.min.js"></script>
 		<script>
+function loadjs(link,mode = '')
+{
+	document.write("<scr"+`ipt src='${link}' ${mode}></scr`+"ipt>");
+}
+if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 //函数
 function os(u = window.navigator.userAgent)
 {
@@ -13,7 +18,7 @@ function os(u = window.navigator.userAgent)
 }
 
 //变量
-var 更新时间 = 1753203217//!
+var 更新时间 = 1753343259//!
 var gamearr = {}//游戏列表
 gamearr['BLDA'] = '碧蓝档案'
 gamearr['CBJQ'] = '尘白禁区'
@@ -22,11 +27,7 @@ gamearr['YGST'] = '犹格索托斯的庭院'
 gamearr['DFPJ'] = '东方Project'
 
 var gamever = {}//游戏版本
-gamever['BLDA'] = '250625'//碧蓝档案
-gamever['CBJQ'] = '250710'//尘白禁区
-gamever['QNZL'] = '241024'//千年之旅
-gamever['YGST'] = '000000'//犹格索托斯的庭院
-gamever['DFPJ'] = '250617'//东方Project
+var gamever = {"BLDA":"250625","CBJQ":"250710","QNZL":"241024","YGST":"000000","DFPJ":"250617"}//$
 
 var 本地版本 = 27//@
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
@@ -112,16 +113,16 @@ var zipDownImg = false;
 if(browser.isIos === true || browser.isiPhone === true || mt_settings['打包下载'])
 {
 	zipDownImg = true;
-	document.write("<scr"+`ipt src='./MoeScript/Script/jszip.min.js'></scr`+"ipt>");
+	loadjs('./MoeScript/Script/jszip.min.js')
 }
 var MikuTalk = false;
 if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) && sessionStorage['MikuTalk'] !== 'no')
 {
 	MikuTalk = '#88CCCC';
-	document.write("<scr"+`ipt src='./MoeScript/MikuTap/pixi.min.js'></scr`+"ipt>");
-	document.write("<scr"+`ipt src='./MoeScript/MikuTap/gsap.min.js'></scr`+"ipt>");
-	document.write("<scr"+`ipt src='./MoeScript/MikuTap/mikutap.js'></scr`+"ipt>");
-	document.write("<scr"+`ipt src='./MoeScript/MikuTap/common-2.min.js'></scr`+"ipt>");
+	loadjs('./MoeScript/MikuTap/pixi.min.js')
+	loadjs('./MoeScript/MikuTap/gsap.min.js')
+	loadjs('./MoeScript/MikuTap/mikutap.js')
+	loadjs('./MoeScript/MikuTap/common-2.min.js')
 }
 var cordova = false
 var game = 'BLDA'//#
@@ -132,15 +133,9 @@ var mtlang = mt_settings['语言选项'] || 'zh_cn';
 var langarr = ['zh_cn','zh_tw','jp','en','kr'];
 if(langarr.indexOf(gameid) > -1)mt_settings['语言选项'] = mtlang = gameid
 if(gameid === 'cordova')sessionStorage['cordova'] = 'cordova'
-if(sessionStorage['cordova'] === 'cordova')
-{
-	document.write("<scr"+`ipt src='./cordova.js'></scr`+"ipt>");
-}
+if(sessionStorage['cordova'] === 'cordova')loadjs('./cordova.js')
 if(gameid === 'cordova2')sessionStorage['cordova2'] = 'cordova2'
-if(sessionStorage['cordova2'] === 'cordova2')
-{
-	document.write("<scr"+`ipt src='./MoeScript/Cordova/cordova.js'></scr`+"ipt>");
-}
+if(sessionStorage['cordova2'] === 'cordova2')loadjs('./MoeScript/Cordova/cordova.js')
 var mt_characters,
 	mt_school,
 	mt_club,
@@ -174,10 +169,10 @@ var mt_characters,
 		<script src="./MoeData/MT-Text.js"></script><!-- 提示文本 -->
 		<script src="./MoeScript/INIT.js?filesize=9886" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/IMAGE.js?filesize=13524" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/DATA.js?filesize=21351" defer></script><!-- @@存档 -->
+		<script src="./MoeScript/DATA.js?filesize=21390" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAT.js?filesize=28267" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?filesize=16492" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/TOP.js?filesize=18646" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/TOP.js?filesize=19078" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/Other/webpack-0a2a587924e1d405.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/framework-2c79e2a64abdb08b.js" defer></script>
 		<script src="./MoeScript/Mollu/Other/MAIN.js" defer></script>

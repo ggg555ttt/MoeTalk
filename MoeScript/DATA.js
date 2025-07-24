@@ -672,31 +672,34 @@ function savefile(dirname,filename,data,type = 'save')
 		a.href = window.URL.createObjectURL(data);
 		a.download = filename;
 		a.click();
-		return
 	}
-	window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory+'Download',function(root)
+	try
 	{
-		root.getDirectory(dirname,{create:true},function()
+		window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory+'Download',function(root)
 		{
-			if(type == 'image')
+			root.getDirectory(dirname,{create:true},function()
 			{
-				root.getDirectory(`${dirname}/${DATA_NowTime}`,{create:true},function()
+				if(type == 'image')
 				{
-					root.getFile(`${dirname}/${DATA_NowTime}/${filename}`,{create:true},function(fileEntry)
+					root.getDirectory(`${dirname}/${DATA_NowTime}`,{create:true},function()
+					{
+						root.getFile(`${dirname}/${DATA_NowTime}/${filename}`,{create:true},function(fileEntry)
+						{
+							//写入文件
+							fileEntry.createWriter(function(fileWriter){fileWriter.write(data);});
+						});
+					});
+				}
+				else
+				{
+					root.getFile(`${dirname}/${filename}`,{create:true},function(fileEntry)
 					{
 						//写入文件
 						fileEntry.createWriter(function(fileWriter){fileWriter.write(data);});
 					});
-				});
-			}
-			else
-			{
-				root.getFile(`${dirname}/${filename}`,{create:true},function(fileEntry)
-				{
-					//写入文件
-					fileEntry.createWriter(function(fileWriter){fileWriter.write(data);});
-				});
-			}
-		});
-	},function(err){alert('Download文件夹不存在！\n请尝试在内部存储根目录创建一个Download文件夹！');});
+				}
+			});
+		},function(err){alert('Download文件夹不存在！\n请尝试在内部存储根目录创建一个Download文件夹！');});
+	}
+	catch{}
 }

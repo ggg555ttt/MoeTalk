@@ -1,5 +1,6 @@
 pause = true
 skip = false
+if(localStorage['调试模式'])var vConsole = new window.VConsole();
 INIT_loading('开始加载')
 var TOP_confirm = '';
 var mt_charface;
@@ -63,7 +64,7 @@ if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='.
 //使用说明
 $('body').on('click',"#readme",function()
 {
-	let span = '<span style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
+	let span = '<span onclick="moedev()" style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
 	let readme = `　　${span}MoeTalk</span>为基于原作者Raun0129开发的${span}MolluTalk</span>的个人改版\n`
 	readme += `　　点击【确定】可以清除缓存并检测更新\n`
 	alert(readme)
@@ -86,6 +87,16 @@ $('body').on('click',"#readme",function()
 		});
 	}
 });
+function moedev()
+{
+	alert('开启调试模式：<input type="checkbox"/>\n代码注入：<textarea></textarea>')
+	TOP_confirm = function()
+	{
+		delete localStorage['调试模式']
+		if($$('.notice input').prop('checked'))localStorage['调试模式'] = true
+		if($$('.notice textarea').val())eval($$('.notice textarea').val())
+	}
+}
 $(function()
 {
 	window.alert = function(str)
