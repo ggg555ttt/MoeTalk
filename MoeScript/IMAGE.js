@@ -36,7 +36,7 @@ function compress(base64Img,type = 'head',mode = 'add',length = 0)
 
 		if(type === 'image')
 		{
-			if(mode === 'edit')$('.图片文件').show().attr('src',newBase64).attr('title','')//编辑图片
+			if(mode === 'edit')$('.图片内容 img').attr('src',newBase64)//编辑图片
 			else if(mode === 'add')sendMessage({type: 'image',file: newBase64},'image',mode)//发送图片
 			else//上传表情
 			{
@@ -61,6 +61,8 @@ function compress(base64Img,type = 'head',mode = 'add',length = 0)
 				else index = char_info.no
 				$('.heads').append(`<img src="${newBase64}" title="${index}" ${attr}>`)
 				$('#custom-char .confirm').removeAttr('disabled')
+				$('.headinfo').show()
+				$('.heads img:eq(-1)').click()
 			}
 		}
 		INIT_loading(false)
@@ -249,6 +251,19 @@ function 截屏预览(S)
 	}
 }
 //截屏功能
+function 内容预览(截屏)
+{
+	截屏()($(".预览内容")[0],
+	{
+		logging: !1,
+		allowTaint: !0,
+		useCORS: !0,
+		scale: 1.1
+	}).then(function(img)
+	{
+		$('.预览内容').html(`<img width='500px' src='${img.toDataURL()}'>`)
+	})
+}
 function mt_capture(清晰度,截屏,生成图片,时间,标题)
 {
 	let json = []

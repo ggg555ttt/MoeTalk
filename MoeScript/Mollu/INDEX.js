@@ -461,6 +461,7 @@
 										{
 											return (0, m.jsx)(j,
 											{
+												style: {zIndex: '200'},
 												alt: String(e.no),
 												title: String(e.index),
 												width: 252,
@@ -495,7 +496,8 @@
 								style:
 								{
 									display: !f || c ? "block" : "none",
-									margin: "0"
+									margin: "0rem",
+									zIndex: '200'
 								},
 								width: 252,
 								height: 252,
@@ -546,7 +548,7 @@
 				{
 					displayName: "Footer__Flex",
 					componentId: "sc-1rjbi2j-1"
-				})(["", ";position:relative;width:auto;margin:0 1rem;"], function(e)
+				})(["", ";position:relative;width:auto;margin:0.5rem;"], function(e)
 				{
 					return e.theme.common.flexBox(
 					{})
@@ -1515,7 +1517,8 @@
 										lineHeight: '150%',
 										whiteSpace: 'pre-wrap',
 										wordBreak: 'break-word',
-										textAlign: 'left'
+										textAlign: 'left',
+										width: '100%'
 									}
 								}), (0, m.jsxs)(ea.$_,
 								{
@@ -1608,6 +1611,7 @@
 					}), (0, m.jsx)(ea.Xf,
 					{
 						id: 'custom-char',
+						style: {zIndex: 300},
 						onDoubleClick: function()
 						{
 							char_info = []
@@ -1645,205 +1649,141 @@
 							{
 								children: [(0, m.jsx)('div',
 								{
-									className: "edit_2",
 									children: [(0, m.jsx)('div',
 									{
-										className:"edit_4",
-										children:[(0, m.jsx)('div',
+										children: mt_text.name[mtlang]
+									}), (0, m.jsx)('input',
+									{
+										className:"charname bold",
+										onChange: function(e)
 										{
-											className:"edit_3_box1",
-											style:{border: 0},
-											children:(0, m.jsx)('div',
-											{
-												className:"edit_3_box2",
-												children:(0, m.jsx)('div',
-												{
-													className:"edit_3_box3",
-													children:[(0, m.jsx)('div',
-													{
-														className:"edit_3_box3_1",
-														children: (0, m.jsx)('input',
-														{
-															className:"edit_3_box3_1_1 charname bold",
-															onChange: function(e)
-															{
-																$$('.charname').val(e.currentTarget.value)
-															}
-														})
-													}),(0, m.jsx)('div',
-													{
-														className:"edit_3_box3_2",
-														children: (0, m.jsx)('div',
-														{
-															className:"edit_3_box3_2_1",
-															children: mt_text.name[mtlang]
-														})
-													})]
-												})
-											})
-										}), (0, m.jsx)('div',
+											$$('.charname').val(e.currentTarget.value)
+										}
+									}), (0, m.jsx)('div',
+									{
+										children: (0, m.jsx)('div',
 										{
-											className:"edit_3_box1",
-											style:{border: 0},
-											children:(0, m.jsx)('div',
-											{
-												className:"edit_3_box2",
-												children:(0, m.jsx)('div',
-												{
-													className:"edit_3_box3",
-													children:[(0, m.jsx)('div',
-													{
-														className:"edit_3_box3_1",
-														children: (0, m.jsx)('input',
-														{
-															className:"edit_3_box3_1_1 clubname bold",
-															onChange: function(e)
-															{
-																$$('.clubname').val(e.currentTarget.value)
-															}
-														})
-													}),(0, m.jsx)('div',
-													{
-														className:"edit_3_box3_2",
-														children: (0, m.jsx)('div',
-														{
-															className:"edit_3_box3_2_1",
-															children: mt_text.club[mtlang]
-														})
-													})]
-												})
-											})
-										}), (0, m.jsx)('div',
+											children: mt_text.club[mtlang]
+										})
+									}), (0, m.jsx)('input',
+									{
+										className:"clubname bold",
+										onChange: function(e)
 										{
-											className: 'edithead',
+											$$('.clubname').val(e.currentTarget.value)
+										}
+									}), (0, m.jsx)('div',
+									{
+										className: 'edithead',
+										style:
+										{
+											fontSize:'12px',
+											display: 'inline-grid',
+											whiteSpace: "nowrap",
+											justifyItems: 'center',
+											cursor: 'pointer'
+										},
+										children:['添加头像',(0, m.jsx)('img',
+										{
 											style:
 											{
-												fontSize:'12px',
-												display: 'inline-grid',
-												whiteSpace: "nowrap",
-												justifyItems: 'center',
-												cursor: 'pointer'
+												width: '40px',
+												height: '40px'
 											},
-											children:['添加头像',(0, m.jsx)('img',
-											{
-												style:
-												{
-													width: '40px',
-													height: '40px'
-												},
-												src:href+'MoeData/Ui/School/RECYCLE.webp'
-											})],
-											onClick:function()
-											{
-												$$("#custom").attr('title','head').attr('alt','add').click()
-											}
-										})]
-									}), (0, m.jsx)('div',{
-										className:"edit_3_box3_2_1",
-										children: '分支头像：'
-									}),(0, m.jsx)(HList.Z,
-									{
-										children: (0, m.jsx)(k,
+											src:href+'MoeData/Ui/School/RECYCLE.webp'
+										})],
+										onClick:function()
 										{
-											style:{padding:0},
-											className: 'heads'
-										})
+											$$("#custom").attr('title','head').attr('alt','add').click()
+										}
 									})]
 								}), (0, m.jsx)('span',
 								{
-									style: {whiteSpace: 'pre-wrap'},
-									className: 'edit_3_box3_2_1',
-									children: '名称显示优先级：发言人名字 > 分支头像名字 > 角色名字'
+									style:
+									{
+										whiteSpace: 'pre-wrap',
+										fontSize: '1rem'
+									},
+									children: '名称显示优先级：发言者名称 > 皮肤名称 > 角色名称'
 								}), (0, m.jsx)('div',
 								{
-									className: "edit_2",
+									className: 'headinfo',
+									style: {width: '100%'},
 									children: [(0, m.jsx)('div',
 									{
-										className:"edit_4 headinfo",
-										children:[(0, m.jsx)('div',
+										children: '皮肤分支：'
+									}), (0, m.jsx)(HList.Z,
+									{
+										children: (0, m.jsx)(k,
 										{
-											className:"edit_3_box1",
-											style:{border: 0},
-											children:(0, m.jsx)('div',
-											{
-												className:"edit_3_box2",
-												children:(0, m.jsx)('div',
-												{
-													className:"edit_3_box3",
-													children:[(0, m.jsx)('div',
-													{
-														className:"edit_3_box3_1",
-														children: (0, m.jsx)('input',
-														{
-															className:"edit_3_box3_1_1 bold headname",
-															placeholder: '默认',
-															onChange: function(e)
-															{
-																char_info.names[$$(".heads .selected").attr('title')] = e.currentTarget.value
-																$$('.headname').val(e.currentTarget.value)
-															}
-														})
-													}), (0, m.jsx)('div',
-													{
-														className:"edit_3_box3_2",
-														children: (0, m.jsx)('div',
-														{
-															className:"edit_3_box3_2_1",
-															children: '分支头像名称：'
-														})
-													})]
-												})
-											})
-										}), (0, m.jsx)('div',
+											style: {padding: 0},
+											className: 'heads',
+										})
+									}), (0, m.jsx)('div',
+									{
+										className:"bold",
+										children: '皮肤名称：'
+									}), (0, m.jsx)('input',
+									{
+										className:"bold headname",
+										placeholder: '默认',
+										onChange: function(e)
 										{
-											className: 'edithead',
+											char_info.names[$$(".heads .selected").attr('title')] = e.currentTarget.value
+											$$('.headname').val(e.currentTarget.value)
+										}
+									}), (0, m.jsx)('div',
+									{
+										className: 'edithead',
+										style:
+										{
+											fontSize:'12px',
+											display: 'inline-grid',
+											whiteSpace: "nowrap",
+											justifyItems: 'center',
+											cursor: 'pointer'
+										},
+										children:['删除头像',(0, m.jsx)('img',
+										{
 											style:
 											{
-												fontSize:'12px',
-												display: 'inline-grid',
-												whiteSpace: "nowrap",
-												justifyItems: 'center',
-												cursor: 'pointer'
+												width: '40px',
+												height: '40px'
 											},
-											children:['删除头像',(0, m.jsx)('img',
-											{
-												style:
-												{
-													width: '40px',
-													height: '40px'
-												},
-												src:href+'MoeData/Ui/School/CUSTOM.webp'
-											})],
-											onClick:function()
-											{
-												delete char_info.names[$$(".heads .selected").remove().attr('title')]
-												$$('.headinfo').hide()
-											}
-										}), (0, m.jsx)('div',
+											src:href+'MoeData/Ui/School/CUSTOM.webp'
+										})],
+										onClick:function()
 										{
-											className: 'edithead',
+											let index = $$(".heads .selected").index()
+											let length = $$(".heads img").length
+											if(length === index+1)index--
+											delete char_info.names[$$(".heads .selected").remove().attr('title')]
+											$$(`.heads img:eq(${index})`).click()
+										}
+									}), (0, m.jsx)('div',
+									{
+										className: 'edithead',
+										style:
+										{
+											fontSize:'12px',
+											display: 'inline-grid',
+											whiteSpace: "nowrap",
+											justifyItems: 'center',
+											cursor: 'pointer'
+										},
+										children:['更改头像',(0, m.jsx)('img',
+										{
 											style:
 											{
-												fontSize:'12px',
-												display: 'inline-grid',
-												whiteSpace: "nowrap",
-												justifyItems: 'center',
-												cursor: 'pointer'
+												width: '40px',
+												height: '40px'
 											},
-											children:['更改头像',(0, m.jsx)('img',
-											{
-												style:
-												{
-													width: '40px',
-													height: '40px'
-												},
-												src:href+'MoeData/Ui/edit.png'
-											})],
-											onClick:function()
-											{
-												$$("#custom").attr('title','head').attr('alt','edit').click()
-											}
-										})]
+											src:href+'MoeData/Ui/edit.png'
+										})],
+										onClick:function()
+										{
+											$$("#custom").attr('title','head').attr('alt','edit').click()
+										}
 									})]
 								}), (0, m.jsxs)(ea.$_,
 								{
@@ -2090,6 +2030,10 @@
 									{
 										mt_capture(S,eg,j,(0, u._3)(!0, !0),$$('#mt_title').text().split(':').pop().trim())//新版截图
 									}
+								}), (0, m.jsx)('预览',{
+									hidden: true,
+									className: '内容预览',
+									onClick: function(){内容预览(eg)}
 								})]
 							}), (0, m.jsx)("pre",
 							{
@@ -3017,6 +2961,7 @@
 							children: (0, m.jsx)(ea.Xf,
 							{
 								id:'emoji',//@
+								style: {zIndex: 300},
 								className: n ? "visible medium" : "medium",
 								onDoubleClick: function()
 								{
@@ -3359,9 +3304,9 @@
 																}
 																return
 															}
-															if($$('.editMessage.visible').length)
+															if($$('.编辑界面').hasClass('visible'))
 															{
-																$$('.图片文件').show().attr('src',link).attr('title',EMOJI.type)
+																$$('.图片内容 img').attr('src',link)
 																s()
 															}
 															else
@@ -3638,8 +3583,6 @@
 								})
 							}), (0, m.jsx)(eU,
 							{
-								style:
-								{},
 								title: "send",
 								//disabled: w.length < 1,
 								onClick: function()
@@ -3859,12 +3802,10 @@
 					//*编辑界面
 					return (0, m.jsx)(ea.Xf,
 					{
-						className: n ? "editMessage medium visible" : "editMessage medium",
-						style:{position:'absolute'},
+						className: n ? "编辑界面 visible" : "编辑界面",
 						onDoubleClick: function()
 						{
-							$$('.editMessage').removeClass('visible').find('input:checkbox').prop('checked',false)//S()
-							CHAT_HeadList = false
+							$$(".编辑界面 .取消").click()//S()
 						},
 						children: (0, m.jsxs)(ea.F0,
 						{
@@ -3874,470 +3815,344 @@
 							},
 							children: [(0, m.jsxs)(ea.h4,
 							{
-								children: [(0, m.jsx)(ea.Dx,
+								className: "批量编辑 bold",
+								style: {height: 'auto'},
+								children: [(0, m.jsx)(c.Bx,
 								{
-									className: "typeTitle bold"
+									style:
+									{
+										"width": "auto",
+										color: 'rgb(45, 70, 100)',
+										position: 'absolute',
+										left: 0
+									},
+									className: "bold",
+									children: '提示',
+									onClick:function()
+									{
+										alert('文本输入框内只输入一个空格会视为清空该内容\n若想清空样式和头像列表只需进入对应编辑界面\n然后什么都不做并点击确定即可')
+									}
+								}), (0, m.jsx)(ea.Dx,
+								{
+									children: '批量编辑'
 								}), (0, m.jsx)(ea.ec,
 								{
 									onClick: function()
 									{
-										$$('.editMessage').removeClass('visible').find('input:checkbox').prop('checked',false)//S()
-										CHAT_HeadList = false
+										$$(".编辑界面 .取消").click()//S()
 									},
 									children: (0, m.jsx)(c.j4,{})
 								})]
-							}), (0, m.jsxs)(ea.$0,
+							}), (0, m.jsxs)('div',
 							{
-								children: [(0, m.jsx)('div',
+								className: "编辑标题 duPzcp bold",
+								style:
 								{
-									className: "edit_2",
-									children: [(0, m.jsx)('div',
+									height: 'auto',
+									display: 'flex',
+									justifyContent: 'space-between'
+								},
+								children: [(0, m.jsx)(c.Bx,
+								{
+									style:
 									{
-										className:"edit_2_1",
-										children:(0, m.jsx)('div',
-										{
-											style:{textAlign: 'left'},
-											className:"edit_2_1_1 bold",
-											children:[(0, m.jsx)('label',
-											{
-												children:[(0, m.jsx)('input',
-												{
-													type:'checkbox',
-													className:'editType'
-												}),'修改类型']
-											}),(0, m.jsx)('label',
-											{
-												children:[(0, m.jsx)('input',
-												{
-													type:'checkbox',
-													className:'editTalk'
-												}),'修改显示']
-											}),(0, m.jsx)('label',
-											{
-												children:[(0, m.jsx)('input',
-												{
-													type:'checkbox',
-													className:'addChat'
-												}),L.Z.add[f]]
-											}),(0, m.jsx)('label',
-											{
-												style:{color:'blue'},
-												children:[(0, m.jsx)('input',
-												{
-													type:'checkbox',
-													className:'isFirst',
-													onClick: function()
-													{
-														$$('.isCenter').prop('checked',false)
-													}
-												}),(0, m.jsx)('span',{children:'显示头像'})],
-											}),(0, m.jsx)('label',
-											{
-												children:[(0, m.jsx)('input',
-												{
-													type:'checkbox',
-													className:'isRight',
-													onClick: function()
-													{
-														$$('.isCenter').prop('checked',false)
-													}
-												}),(0, m.jsx)('span',{children:'右侧发言'})],
-											}),(0, m.jsx)('label',
-											{
-												children:[(0, m.jsx)('input',
-												{
-													type:'checkbox',
-													className:'is_breaking'
-												}),'截图时在此处分割'],
-												style:{color:'red'}
-											}),(0, m.jsx)('label',
-											{
-												children:[(0, m.jsx)('input',
-												{
-													type:'checkbox',
-													className:'isCenter',
-													onClick: function()
-													{
-														$$('.isFirst').prop('checked',false)
-														$$('.isRight').prop('checked',false)
-													}
-												}),'图片中央显示']
-											})]
-										})
-									}),(0, m.jsx)('div',
+										width: "auto",
+										height: 'auto',
+										color: 'red',
+										fontSize: '1.5rem',
+										marginInline: '0.5rem'
+									},
+									className: "操作模式 bold",
+									children: '追加'
+								}), (0, m.jsx)(c.Bx,
+								{
+									style: 
 									{
-										className:"edit_button",
-										children: E.PN.map(function(e, n)
-										{
-											return (0, m.jsx)(c.Bx,
-											{
-												hidden: $$('.dels:checked').length > 1 && !$$('.editType').prop('checked'),
-												style:
-												{
-													margin: "0 auto",//@改为居中
-													width: "23%",
-													height: 'auto',
-													whiteSpace: 'nowrap',
-													overflow: 'hidden'
-												},
-												className: a === e ? `${e} bold medium selected` : `${e} bold medium`,
-												title :e,
-												children: L.Z[e][f]
-											}, n)
-										})
-									})]
+										width: "auto",
+										height: 'auto',
+										color: 'red',
+										fontSize: '1.5rem'
+									},
+									className: "操作模式 bold",
+									children: '编辑'
 								}), (0, m.jsx)('div',
 								{
-									className:"edit_3",
-									children:(0, m.jsx)('div',
+									style:
 									{
-										className:"edit_3_box1",
-										children:(0, m.jsx)('div',
-										{
-											className:"edit_3_box2",
-											children:(0, m.jsx)('div',
-											{
-												className:"edit_3_box3",
-												children:[(0, m.jsx)('div',
-												{
-													className:"edit_3_box3_1",
-													children: (0, m.jsx)(c.Kx,
-													{
-														maxRows: 10,
-														className:"edit_3_box3_1_1 content medium",
-														onChange: function(e)
-														{
-															$$('.content').val(e.currentTarget.value)
-														}
-													})
-												}),(0, m.jsx)('div',
-												{
-													className:"edit_3_box3_2",
-													children: (0, m.jsx)('div',
-													{
-														className:"edit_3_box3_2_1",
-														children: L.Z.input_comment[f]
-													})
-												})]
-											})
-										})
-									})
-								}), (0, m.jsx)("div",
-								{
-									className:"图片选项 edit_4",
-									style:{justifyContent: 'center'},
-									children: [(0, m.jsx)(eN.g4,
+										width: "auto",
+										display: 'flex'
+									},
+									children: [(0, m.jsx)(c.Bx,
 									{
-										children: '上传图片',
 										style: 
 										{
-											"overflow": "hidden",
-											"text-overflow": "ellipsis",
-											"white-space": "nowrap",
-											"width": "30%",
-											"padding": "0"
+											width: "auto",
+											height: 'auto',
+											color: 'red',
+											fontSize: '1.5rem'
 										},
-										onClick: function(e)
-										{
-											_.current.click()
-										}
-									}), (0, m.jsx)(eN.g4,
-									{
-										children: '选择表情',
-										style: 
-										{
-											"overflow": "hidden",
-											"text-overflow": "ellipsis",
-											"white-space": "nowrap",
-											"width": "30%",
-											"padding": "0"
-										},
-										onClick: function(e)
-										{
-											$$('.INDEX_EmojiButton').click()
-										}
-									}), !mt_settings['隐藏差分'] ? (0, m.jsx)(eN.g4,
-									{
-										children: '选择差分',
-										style: 
-										{
-											"overflow": "hidden",
-											"text-overflow": "ellipsis",
-											"white-space": "nowrap",
-											"width": "30%",
-											"padding": "0"
-										},
-										onClick: function(e)
-										{
-											$$('.INDEX_CharFaceButton').click()
-										}
-									}) : '']
-								}), (0, m.jsx)("input",
-								{
-									className: "上传图片",
-									type: "file",
-									ref: _,
-									hidden: 1,
-									accept: "image/*",
-									onChange: function(e)
-									{
-										var file = e.target.files[0]
-										var ready = new FileReader()
-										ready.readAsDataURL(file);
-										ready.onload = function(e)
-										{
-											var base64Img = e.target.result;
-											compress(base64Img,'image','edit')
-										}
-									}
-								}), (0,m.jsx)('img',
-								{
-									className: "图片选项 图片文件",
-									width:"auto",
-									height:"128px"
-								}), (0, m.jsx)('div',
-								{
-									className:"edit_4",
-									children:[(0, m.jsx)('div',
+										className: "预览模式 bold",
+										children: '预览'
+									}), (0, m.jsx)(ea.ec,
 									{
 										style:
 										{
-											fontSize:'12px',
-											display: 'inline-grid',
-											whiteSpace: "nowrap",
-											justifyItems: 'center',
-											cursor: 'pointer'
+											position: 'unset',
+											marginInline: '0.5rem'
 										},
-										children:[(0,m.jsx)('span',
+										onClick: function()
 										{
-											children: '角色'
-										}), (0, m.jsx)('img',
+											$$(".编辑界面 .取消").click()//S()
+										},
+										children: (0, m.jsx)(c.j4,{})
+									})]
+								})]
+							}), (0, m.jsx)(ea.$0,
+							{
+								style: 
+								{
+									maxHeight: '80%',
+									padding: '0rem',
+									gap: '0rem'
+								},
+								children: [(0, m.jsxs)('div',
+								{
+									className: '预览界面 PopupEmoticonChat__Section2-sc-vzjcea-0',
+									style:
+									{
+										width: '100%',
+										fontSize: '1rem',
+										textAlign: 'start',
+										overflow: 'scroll',
+										display: 'none'
+									},
+									children: (0, m.jsx)('div',
+									{
+										style: { pointerEvents: 'none'},
+										className: "预览内容"
+									})
+								}), (0, m.jsxs)('div',
+								{
+									className: '内容界面 PopupEmoticonChat__Section2-sc-vzjcea-0',
+									style:
+									{
+										width: '100%',
+										fontSize: '1rem',
+										textAlign: 'start',
+										overflow: 'scroll'
+									},
+									children:[(0, m.jsxs)('div',
+									{
+										style:
 										{
-											className:'头像',
+											display: 'flex',
+											justifyContent: 'space-between'
+										},
+										children:[(0, m.jsxs)('span',
+										{
+											className: '角色ID'
+										}),(0, m.jsxs)('span',
+										{
+											className: '内容索引'
+										})]
+									}), (0, m.jsxs)('div',
+									{
+										style:
+										{
+											display: 'flex',
+											width: '100%',
+											height: '3rem'
+										},
+										children:[(0, m.jsxs)('img',
+										{
+											className: '头像 角色头像',
 											style:
 											{
-												width: '40px',
-												height: '40px',
-											},
-											onClick: function(e)
+												width: '3rem',
+												height: '3rem'
+											}
+										}), (0, m.jsxs)('div',
+										{
+											style:
 											{
-												$$('.title').text('头像列表')
-												let HeadList = {direction:'row',list:[]}
-												if(CHAT_HeadList)
+												display: 'flex',
+												flexDirection: 'column',
+												width: '100%'
+											},
+											children:[(0, m.jsxs)('input',
+											{
+												className: 'bold 角色名称',
+												style:
 												{
-													HeadList = CHAT_HeadList
-												}
-												let str = ''
-												str += '<label>头像排列：<input class="radio row" type="radio" name="direction" value="row">横向（注意排版）</label>\n'
-												str += `<label>　　　　　<input class="radio column" type="radio" name="direction" value="column">竖向</label><input type="checkbox" class="fullHeight" ${HeadList.fullHeight ? 'checked' : ''}>文字消息自动铺满\n`
-												str += `头像间距：<input style="font-size:1.2rem;" class="margin text" placeholder="默认值为 -1.5rem" value="${toString(HeadList.margin)}">\n\n`
-
-												str += '发言角色：<label><input class="radio" type="radio" name="mode" value="change">通过【待选列表】切换角色</label>\n'
-												str += `<img class="头像 N_char" src="${e.target.title ? loadhead(e.target.alt,e.target.title) : href+'MoeData/Ui/setting.webp'}" alt="${e.target.alt}" title="${e.target.title}">`
-												str += `名称：<input style="font-size:1.2rem;color:red;" class="text" placeholder="${$$('.name').attr('placeholder')}" value="${$$('.name').val()}">\n`
-												str += `\n头像列表：（点击删除指定头像）\n<div class="N_list">`
-												HeadList.list.map(function(index,k)
+													color: 'red',
+													fontSize: '1.5rem',
+													padding: '0rem',
+													border: '0rem',
+													width: 'inherit',
+													background: 'transparent'
+												},
+												type: 'text'
+											}), (0, m.jsxs)('span',
+											{
+												className: '头像数量'
+											})]
+										})]	
+									}), '内容：', (0, m.jsxs)('div',
+									{
+										className: '图片内容',
+										style:
+										{
+											display: 'flex',
+											justifyContent: 'space-around'
+										},
+										children: [(0, m.jsxs)('img',
+										{
+											style:
+											{
+												maxWidth: '50%',
+												maxHeight: '10rem'
+											},
+											src: '/MoeTalk/GameData/BLDA/Char/Akane_L2D.webp'
+										}), (0, m.jsxs)('div',
+										{
+											children: [(0, m.jsx)(eN.g4,
+											{
+												children: '选择表情',
+												className: "选择表情",
+												style: {height: 'auto'},
+												onClick: function(e){$$('.INDEX_EmojiButton').click()}
+											}), (0, m.jsx)(eN.g4,
+											{
+												children: '选择差分',
+												className: "选择差分",
+												style: {height: 'auto'},
+												onClick: function(e){$$('.INDEX_CharFaceButton').click()}
+											}), (0, m.jsx)(eN.g4,
+											{
+												style: {height: 'auto'},
+												children: ['上传图片', (0, m.jsx)("input",
 												{
-													str += `<img class="头像" src="${loadhead('LIST',index)}" title="${index}" style="cursor:pointer;" onclick="this.remove()">`
-												})
-												str += '</div>\n\n待选列表：<label><input class="radio" type="radio" name="mode" value="add" checked>为【头像列表】添加新头像</label>\n'
-												let str1 = '$(".N_char").attr("src",loadhead(this.alt,this.title)).attr("alt",this.alt).attr("title",this.title).next().attr("placeholder",loadname(this.alt,this.title))'
-												let str2 = '$(".N_list").append(`<img class="头像" src="${loadhead("LIST",this.title)}" title="${this.title}" style="cursor:pointer;" onclick="this.remove()">`)'
-												mt_settings['选择角色'].list.concat({no:'0',index:'1'}).map(function(v,k)
-												{
-													str += `<img class='头像' src='${loadhead(v.no,v.index)}' alt='${v.no}' title='${v.index}' style='cursor:pointer;' onclick='$(".radio:checked")[1].value === "change" ? ${str1} : ${str2}'>`
-												})
-												str += '\n'
-												
-												alert(str)
-												$$(`.${HeadList.direction}`).click()
-												TOP_confirm = function()
-												{
-													HeadList.direction = $$('.radio:checked')[0].value
-													HeadList.margin = $$('.margin').val()
-													HeadList.fullHeight = $$('.fullHeight:checked').length ? true : false
-													HeadList.list = []
-													$$('.fullHeight:checked').length ? HeadList.fullHeight = true : ''
-
-													$$('.N_list img[title]').map(function(k,v)
+													className: "上传图片",
+													type: "file",
+													hidden: true,
+													accept: "image/*",
+													onChange: function(e)
 													{
-														HeadList.list[k] = v.title
-													})
-													CHAT_HeadList = HeadList
-													let img = $$('.N_char')
-													let name = img.next()[0]
-													$$('.name').attr('placeholder',name.placeholder).val(name.value)
-													if(img[0].title)
-													{
-														e.target.src = img[0].src
-														e.target.alt = img[0].alt
-														e.target.title = img[0].title
+														var file = e.target.files[0]
+														var ready = new FileReader()
+														ready.readAsDataURL(file);
+														ready.onload = function(e)
+														{
+															var base64Img = e.target.result;
+															compress(base64Img,'image','edit')
+														}
 													}
-												}
-											},
-											src:href+'MoeData/Ui/setting.webp'
+												})],
+												onClick: function(e){$$('.上传图片').click()}
+											})]
 										})]
-									}), (0, m.jsx)('div',
+									}), (0, m.jsx)(c.Kx,
 									{
-										className:"edit_3_box1",
-										style:{border: 0},
-										children:(0, m.jsx)('div',
+										maxRows: 10,
+										style: 
 										{
-											className:"edit_3_box2",
-											children:(0, m.jsx)('div',
-											{
-												className:"edit_3_box3",
-												children:[(0, m.jsx)('div',
-												{
-													className:"edit_3_box3_1",
-													children: (0, m.jsx)('input',
-													{
-														className:"edit_3_box3_1_1 name bold",
-														onChange: function(e)
-														{
-															$$('.name').val(e.currentTarget.value)
-														}
-													})
-												}),(0, m.jsx)('div',
-												{
-													className:"edit_3_box3_2",
-													children: (0, m.jsx)('div',
-													{
-														className:"edit_3_box3_2_1",
-														children: L.Z.name[f]
-													})
-												})]
-											})
-										})
-									}),(0, m.jsx)('div',
+											border:'2px solid rgb(139, 187, 233)',
+											color: 'red'
+										},
+										className:"content PopupEmoticonChat__Section2-sc-vzjcea-0"
+									}), '高级定义', (0, m.jsx)('div',
 									{
-										className:"edit_3_box1",
-										children:(0, m.jsx)('div',
+										style:
 										{
-											className:"edit_3_box2",
-											children:(0, m.jsx)('div',
+											display: 'flex',
+											flexWrap: 'wrap',
+											justifyContent: 'space-between',
+											alignItems: 'center'
+										},
+										children: [(0, m.jsx)('select',
+										{
+											className: '显示类型 内容类型 cVRiXh kwhiZC bold',
+											style:
 											{
-												className:"edit_3_box3",
-												children:[(0, m.jsx)('div',
-												{
-													className:"edit_3_box3_1",
-													children: (0, m.jsx)(c.Kx,
-													{
-														className:"edit_3_box3_1_1 time medium",
-														style:{color:'blue'},
-														maxRows: 5,
-														onChange: function(e)
-														{
-															$$('.time').val(e.currentTarget.value)
-														}
-													})
-												}),(0, m.jsx)('div',
-												{
-													className:"edit_3_box3_2",
-													children: (0, m.jsx)('div',
-													{
-														className:"edit_3_box3_2_1",
-														children: L.Z.time[f]
-													})
-												})]
-											})
-										})
+												width: 'auto',
+												height: 'auto',
+												fontSize: '1.5rem',
+												padding: '0.5rem'
+											}
+										}), (0, m.jsx)('select',
+										{
+											className: '显示类型 截图切割 cVRiXh eIEKpg evqKja kwhiZC bold selected',
+											style:
+											{
+												width: 'auto',
+												height: 'auto',
+												fontSize: '1.5rem',
+												padding: '0.5rem'
+											}
+										}), (0, m.jsx)('select',
+										{
+											className: '显示类型 显示头像 cVRiXh eIEKpg evqKja kwhiZC bold selected',
+											style:
+											{
+												width: 'auto',
+												height: 'auto',
+												fontSize: '1.5rem',
+												padding: '0.5rem'
+											}
+										}), (0, m.jsx)('select',
+										{
+											className: '显示类型 显示位置 cVRiXh eIEKpg evqKja kwhiZC bold selected',
+											style:
+											{
+												width: 'auto',
+												height: 'auto',
+												fontSize: '1.5rem',
+												padding: '0.5rem'
+											}
+										}), (0, m.jsx)('div',
+										{
+											style:
+											{
+												width: 'auto',
+												height: 'auto',
+												fontSize: '1.5rem',
+												color: 'black'
+											},
+											className: '添加头像 cVRiXh eIEKpg evqKja kwhiZC',
+											children: '添加头像'
+										}), (0, m.jsx)('div',
+										{
+											style:
+											{
+												width: 'auto',
+												height: 'auto',
+												fontSize: '1.5rem',
+												color: 'black'
+											},
+											className: '定义样式 cVRiXh eIEKpg evqKja kwhiZC',
+											children: '定义样式'
+										})]
+									}), '时间信息', (0, m.jsx)(c.Kx,
+									{
+										maxRows: 5,
+										style: { border:'2px solid'},
+										className:"时间信息 PopupEmoticonChat__Section2-sc-vzjcea-0"
 									})]
 								}), (0, m.jsxs)(ea.$_,
 								{
+									style: {justifyContent: 'space-around'},
 									children: [(0, m.jsx)(eO,
 									{
-										title: "删除消息",
-										onClick: function()
-										{
-											$$('.dels:checked').length > 1 ? $$('.INDEX_delete').click() : sendMessage({},'','delete',[chatIndex])
-										},
-										children: (0, m.jsx)(c.xL,
-										{
-											icon: ico.Vui
-										})
+										title: "删除",
+										className: '删除',
+										children: (0, m.jsx)(c.xL,{icon:ico.Vui})
 									}), (0, m.jsx)(ea.Lw,
 									{
-										className: "bold",
-										onClick: function()
-										{
-											$$('.editMessage').removeClass('visible').find('input:checkbox').prop('checked',false)//S()
-											CHAT_HeadList = false
-										},
+										className: "取消 bold",
 										children: L.Z.cancel[f]
 									}), (0, m.jsx)(ea.AZ,
 									{
-										className: "bold",
-										onClick: function()
-										{
-											let type = ''
-											if($$('.dels:checked').length > 1)
-											{
-												let data = {}
-												data.heads = CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
-												if($$('.edit_button .selected').attr('title'))
-												{
-													type = $$('.edit_button .selected').attr('title')
-												}
-
-												if($$('.name').val() && $$('.name').val() !== ' ')data.name = $$('.name').val()
-												if($$('.name').val() === ' ')data.name = ''
-												if($$('.time').val() && $$('.time').val() !== ' ')data.time = $$('.time').val()
-												if($$('.time').val() === ' ')data.time = ''
-												if($$('.content').val() && $$('.content').val() !== ' ')data.content = $$('.content').val()
-												if($$('.content').val() === ' ')data.content = ''
-
-												if(type === 'image' && $$('.图片文件').attr('src') !== '')
-												{
-													data.content = $$('.图片文件').attr('title')
-													data.file = $$('.图片文件').attr('src')
-												}
-
-												if($$('.editTalk').prop('checked'))
-												{
-													data.isFirst = $$('.isFirst').prop('checked')
-													data.isRight = $$('.isRight').prop('checked')
-													data.isCenter = $$('.isCenter').prop('checked')
-												}
-												
-												if($$('.editMessage .头像').attr('alt'))
-												{
-													data.sCharacter = {no: $$('.editMessage .头像').attr('alt'),index: $$('.editMessage .头像').attr('title')}
-												}
-												
-												let indexs = []
-												$$('.dels:checked').each(function(k,v)
-												{
-													indexs.push($$('.dels').index(v))
-												})
-												alert(`※注意!!!\n只输入一个空格会判断为清空该内容\n图片转为其它类型时会清除文件\n发言人为空时则不修改发言人\n点击【${mt_text.confirm[mtlang]}】开始批量修改`)
-												TOP_confirm = function()
-												{
-													sendMessage(data,type,'edit',indexs)
-												}
-											}
-											else
-											{
-												type = $$('.edit_button .selected').attr('title')
-												let data = 
-												{
-													type: type,
-													name: $$('.name').val(),
-													time: $$('.time').val(),
-													content: type === 'image' ? $$('.图片文件').attr('title') : $$('.content').val(),
-													isFirst: $$('.isFirst').prop('checked'),
-													isCenter: type === 'image' && $$('.isCenter').prop('checked'),
-													isRight: $$('.isRight').prop('checked'),
-													is_breaking: $$('.is_breaking').prop('checked'),
-													file: type === 'image' ? $$('.图片文件').attr('src') : '',
-													sCharacter: {no: $$('.editMessage .头像').attr('alt'),index: $$('.editMessage .头像').attr('title')},
-													heads: CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
-												}
-												sendMessage(data,type,$$('.addChat').prop('checked') ? 'add' : 'edit',[chatIndex])
-											}
-											CHAT_HeadList = false
-											$$('.editMessage :checkbox').prop('checked',false)
-										},
+										className: "确认 bold",
 										children: L.Z.confirm[f]
 									})]
 								})]
@@ -4446,16 +4261,34 @@
 							return e.global.isScreenshot
 						}),
 						f = (0, r.useRef)(null);
+					// let html = makeMessage(n.type,n,t,'index')
+					// return (0, m.jsx)('div',
+					// {
+					// 	className: '消息',
+					// 	title: n.is_breaking === true ? 'red' : n.isFirst === true ? 'blue' : 'transparent',
+					// 	style: {padding: html[1] ? "" : "0.5rem 1rem 0 1rem"},
+					// 	dangerouslySetInnerHTML: {__html: html[0]}
+					// })
 					let isFirst = isfirst(t,l)
+					let isCenter = n.isCenter && n.type === 'image'
 					let style = mt_settings['文字样式'][n.type] ? mt_settings['文字样式'][n.type] : {}
 					delete style.textAlign
 					style = {...style,...{}}//防止连带修改设置属性
+					if(n.style && n.style.length)
+					{
+						foreach(n.style,function(k,v)
+						{
+							style[v[0]] = v[1]
+						})	
+					}
 					if(n.type === 'info')
 					{
-						n.isFirst && !n.isRight ? style.textAlign = 'left' : ''
-						n.isRight && !n.isFirst ? style.textAlign = 'right' : ''
+						n.isLeft ? style.textAlign = 'left' : ''
+						n.isRight ? style.textAlign = 'right' : ''
 					}
 					if(n.heads && (!n.heads.list || n.heads.list.length < 1))delete n.heads
+					if(!n.content)n.content = ''
+					if(!n.file)n.file = ''
 					return (0, m.jsx)('div',
 					{
 						className: '消息',
@@ -4469,7 +4302,7 @@
 								children: (0, m.jsxs)('div',
 								{//整体图文消息
 									className: '聊天',
-									children: [!n.isCenter && !n.isRight ? (0, m.jsx)('div',
+									children: [!isCenter && !n.isRight ? (0, m.jsx)('div',
 									{//左侧头像框
 										className: '头像框',
 										style: n.sCharacter.no != 0 ? 
@@ -4512,10 +4345,10 @@
 										className: "对话",
 										style: 
 										{
-											alignItems: n.isCenter ? 'center' : n.isRight || n.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
+											alignItems: isCenter ? 'center' : n.isRight || n.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
 											height: n.heads && n.heads.fullHeight ? '100%' : ''
 										},
-										children: [!n.isCenter && isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
+										children: [!isCenter && isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{//人物名称
 											className: "名称 bold",
 											children: n.name || loadname(n.sCharacter.no,n.sCharacter.index)
@@ -4525,26 +4358,28 @@
 											{
 												display: "flex",
 												height: "100%",
-												justifyContent: n.isCenter ? 'center' : n.isRight || n.sCharacter.no == 0 ? 'flex-end' : '',
+												justifyContent: isCenter ? 'center' : n.isRight || n.sCharacter.no == 0 ? 'flex-end' : '',
 											},
 											children: [n.time ? (0, m.jsx)('div',
 											{//左侧时间戳
 												className: '时间戳',
 												hidden: (!n.time || n.sCharacter.no != 0) && !n.isRight,
-												children: n.time
+												dangerouslySetInnerHTML:{__html:n.time}
+												// children: n.time
 											}) : '', "chat" === n.type ? [(0, m.jsx)('span',
 											{//文本消息
 												className: (n.sCharacter.no == 0 ? '文本' : !n.isRight && isFirst ? '文本 左角' : '文本')+' 编辑',
 												style: n.isRight || n.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
-												children: n.content
+												dangerouslySetInnerHTML:{__html:n.content}
+												// children: n.content
 											}), (n.isRight && isFirst) || n.sCharacter.no == 0 ? (0, m.jsx)(eN.CJ,{}) : '' ] : (0, m.jsx)('img',
 											{//图片消息
 												className: '图片 编辑',
 												style:
-												{
-													maxHeight: (n.content || n.file).indexOf("Face") > -1 ? '360px' : "",
-													maxWidth: (n.content || n.file).indexOf("Face") > -1 ? mt_settings['差分比例'] : mt_settings['图片比例']
-												},//@差分表情宽高百分比
+												{...{
+													maxHeight: n.content.indexOf("Face")>=0 || n.file.indexOf("Face")>=0 ? '360px' : "",
+													maxWidth: n.content.indexOf("Face")>=0 || n.file.indexOf("Face")>=0 ? mt_settings['差分比例'] : mt_settings['图片比例']
+												},...style},//@差分表情宽高百分比
 												src: n.file.indexOf(":image") > -1 ? n.file : href+n.file,
 												title: n.file.indexOf(":image") > -1 ? '' : n.file,
 												onError: function(e)
@@ -4554,11 +4389,12 @@
 											}) ,n.time ? (0, m.jsx)('div',
 											{//右侧时间戳
 												className: '时间戳',
-												hidden: !n.time || n.sCharacter.no == 0 || n.isRight || n.isCenter,
-												children: n.time
+												hidden: !n.time || n.sCharacter.no == 0 || n.isRight || isCenter,
+												dangerouslySetInnerHTML:{__html:n.time}
+												// children: n.time
 											}) : '']
 										})]
-									}), !n.isCenter && n.isRight && n.sCharacter.no != 0 ? (0, m.jsx)('div',
+									}), !isCenter && n.isRight && n.sCharacter.no != 0 ? (0, m.jsx)('div',
 									{//右侧头像框
 										className: '头像框',
 										style:
@@ -4630,7 +4466,8 @@
 									{
 										className: '选择肢 跳转',
 										style: style,
-										children: v
+										dangerouslySetInnerHTML:{__html:v}
+										// children: v
 									})
 								})]
 							})] : "heart" === n.type ? [(0, m.jsx)("div",
@@ -4638,12 +4475,14 @@
 							{//羁绊
 								className: '编辑',
 								style: style,
-								character: n.content || ((n.name || loadname(n.sCharacter.no,n.sCharacter.index))+mt_text.go_relationship_event[mtlang])
+								dangerouslySetInnerHTML:{__html:n.content || ((n.name || loadname(n.sCharacter.no,n.sCharacter.index))+mt_text.go_relationship_event[mtlang])}
+								// character: n.content || ((n.name || loadname(n.sCharacter.no,n.sCharacter.index))+mt_text.go_relationship_event[mtlang])
 							})] : "info" === n.type ? (0, m.jsx)(eN.vD,
 							{//旁白
 								className: '编辑',
 								style: style,
-								children: n.content
+								dangerouslySetInnerHTML:{__html:n.content}
+								// children: n.content
 							}) : (0, m.jsx)(m.Fragment,{})
 						}), h || (0, m.jsx)("input",
 						{//复选框

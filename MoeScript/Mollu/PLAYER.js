@@ -1194,7 +1194,8 @@
 							{
 								g(), p(!0)
 							},
-							children: t.content || ((t.name || loadname(t.sCharacter.no,t.sCharacter.index))+r.Z.go_relationship_event[d])
+							// children: t.content || ((t.name || loadname(t.sCharacter.no,t.sCharacter.index))+r.Z.go_relationship_event[d])
+							dangerouslySetInnerHTML: {__html: t.content || ((t.name || loadname(t.sCharacter.no,t.sCharacter.index))+r.Z.go_relationship_event[d])}
 						})]
 					})
 				},
@@ -1299,7 +1300,8 @@
 							children: (0, m.jsx)(j,
 							{
 								className: "bold",
-								children: t.content.replaceAll("{name}", c).split('\n')[index]//
+								// children: t.content.replaceAll("{name}", c).split('\n')[index]//
+								dangerouslySetInnerHTML: {__html: t.content.replaceAll("{name}", c).split('\n')[index]}
 							})
 						})
 					})
@@ -1371,9 +1373,17 @@
 							}))
 						};
 					let isFirst = isfirst(n.chats.indexOf(t),n.chats,'player')
+					let isCenter = t.isCenter && t.type === 'image'
 					let style = mt_settings['文字样式'][t.type] ? mt_settings['文字样式'][t.type] : {}
 					delete style.textAlign
 					style = {...style,...{}}//防止连带修改设置属性
+					if(t.style && t.style.length)
+					{
+						foreach(t.style,function(k,v)
+						{
+							style[v[0]] = v[1]
+						})	
+					}
 					return [(0, m.jsxs)(m.Fragment,
 					{
 						children: d ? (0, m.jsxs)(m.Fragment,
@@ -1381,7 +1391,7 @@
 							children: (0, m.jsxs)('div',
 							{//整体图文消息
 								className: '聊天',
-								children: [!t.isCenter && !t.isRight ? (0, m.jsx)('div',
+								children: [!isCenter && !t.isRight ? (0, m.jsx)('div',
 								{//左侧头像框
 									className: '头像框',
 									style: t.sCharacter.no != 0 ? 
@@ -1424,10 +1434,10 @@
 									className: "对话",
 									style: 
 									{
-										alignItems: t.isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
+										alignItems: isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
 										height: t.heads && t.heads.fullHeight ? '100%' : ''
 									},
-									children: [!t.isCenter && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
+									children: [!isCenter && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 									{//人物名称
 										className: "名称 bold",
 										children: t.name || loadname(t.sCharacter.no,t.sCharacter.index)
@@ -1437,26 +1447,29 @@
 										{
 											display: "flex",
 											height: "100%",
-											justifyContent: t.isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : '',
+											justifyContent: isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : '',
 										},
 										children: [t.time ? (0, m.jsx)(eN.i9,
 										{//左侧时间戳
 											className: '时间戳',
 											hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
-											children: t.time
+											// children: t.time
+											dangerouslySetInnerHTML: {__html: t.time}
 										}) : '', [(0, m.jsx)('span',
 										{//文本消息
 											className: (t.sCharacter.no == 0 ? '文本' : !t.isRight && isFirst ? '文本 左角' : '文本'),
 											style: t.isRight || t.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
-											children: f
+											// children: f
+											dangerouslySetInnerHTML: {__html: f}
 										}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)(s.CJ,{}) : '' ], t.time ? (0, m.jsx)(s.i9,
 										{//右侧时间戳
 											className: '时间戳',
 											hidden: !t.time || t.sCharacter.no == 0 || t.isRight,
-											children: t.time
+											// children: t.time
+											dangerouslySetInnerHTML: {__html: t.time}
 										}) : '']
 									})]
-								}), !t.isCenter && t.isRight && t.sCharacter.no != 0 ? (0, m.jsx)('div',
+								}), !isCenter && t.isRight && t.sCharacter.no != 0 ? (0, m.jsx)('div',
 								{//右侧头像框
 									className: '头像框',
 									style:
@@ -1517,7 +1530,8 @@
 								{
 									className: '选择肢 跳转',
 									style: style,
-									children: v,
+									// children: v,
+									dangerouslySetInnerHTML: {__html: v},
 									onClick: function()
 									{
 										dd(v), p(v), h(!0)
@@ -1641,14 +1655,24 @@
 							}
 						}, [r]);
 					let isFirst = isfirst(c.chats.indexOf(t),c.chats,'player')
+					let isCenter = t.isCenter && t.type === 'image'
 					let style = mt_settings['文字样式'][t.type] ? mt_settings['文字样式'][t.type] : {}
 					delete style.textAlign
 					style = {...style,...{}}//防止连带修改设置属性
 					if(t.type === 'info')
 					{
-						t.isFirst && !t.isRight ? style.textAlign = 'left' : ''
-						t.isRight && !t.isFirst ? style.textAlign = 'right' : ''
+						t.isLeft ? style.textAlign = 'left' : ''
+						t.isRight ? style.textAlign = 'right' : ''
 					}
+					if(t.style && t.style.length)
+					{
+						foreach(t.style,function(k,v)
+						{
+							style[v[0]] = v[1]
+						})	
+					}
+					if(!t.content)t.content = ''
+					if(!t.file)t.file = ''
 					return (0, a.useEffect)(function()
 					{
 						if(!pause)
@@ -1688,7 +1712,7 @@
 								children: (0, m.jsxs)('div',
 								{//整体图文消息
 									className: '聊天',
-									children: [!t.isCenter && !t.isRight ? (0, m.jsx)('div',
+									children: [!isCenter && !t.isRight ? (0, m.jsx)('div',
 									{//左侧头像框
 										className: '头像框',
 										style: t.sCharacter.no != 0 ? 
@@ -1731,10 +1755,10 @@
 										className: "对话",
 										style: 
 										{
-											alignItems: t.isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
+											alignItems: isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
 											height: t.heads && t.heads.fullHeight ? '100%' : ''
 										},
-										children: [!t.isCenter && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
+										children: [!isCenter && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{//人物名称
 											className: "名称 bold",
 											children: t.name || loadname(t.sCharacter.no,t.sCharacter.index)
@@ -1744,25 +1768,27 @@
 											{
 												display: "flex",
 												height: "100%",
-												justifyContent: t.isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : '',
+												justifyContent: isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : '',
 											},
 											children: [t.time ? (0, m.jsx)(s.i9,
 											{//左侧时间戳
 												className: '时间戳',
 												hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
-												children: t.time
+												// children: t.time
+												dangerouslySetInnerHTML: {__html: t.time}
 											}) : '', "chat" === t.type ? [(0, m.jsx)('span',
 											{//文本消息
 												className: (t.sCharacter.no == 0 ? '文本' : !t.isRight && isFirst ? '文本 左角' : '文本'),
 												style: t.isRight || t.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
-												children: x ? (0, m.jsx)(I,{}) : t.content
+												// children: x ? (0, m.jsx)(I,{}) : t.content
+												dangerouslySetInnerHTML: {__html: x ? '<div class="PLAYER_Loading"></div>' : t.content}
 											}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)(s.CJ,{}) : '' ] : (0, m.jsx)('img',
 											{//图片消息
 												className: '图片',
 												style:
 												{
-													maxHeight: (t.content || t.file).indexOf("Face") > -1 ? '360px' : "",
-													maxWidth: (t.content || t.file).indexOf("Face") > -1 ? mt_settings['差分比例'] : mt_settings['图片比例']
+													maxHeight: t.content.indexOf("Face")>=0 || t.file.indexOf("Face")>=0 ? '360px' : "",
+													maxWidth: t.content.indexOf("Face")>=0 || t.file.indexOf("Face")>=0 ? mt_settings['差分比例'] : mt_settings['图片比例']
 												},//@差分表情宽高百分比
 												src: t.file.indexOf(":image") > -1 ? t.file : href+t.file,
 												title: t.file.indexOf(":image") > -1 ? '' : t.file,
@@ -1773,11 +1799,12 @@
 											}), t.time ? (0, m.jsx)(s.i9,
 											{//右侧时间戳
 												className: '时间戳',
-												hidden: !t.time || t.sCharacter.no == 0 || t.isRight || t.isCenter,
-												children: t.time
+												hidden: !t.time || t.sCharacter.no == 0 || t.isRight || isCenter,
+												// children: t.time
+												dangerouslySetInnerHTML: {__html: t.time}
 											}) : '']
 										})]
-									}), !t.isCenter && t.isRight && t.sCharacter.no != 0 ? (0, m.jsx)('div',
+									}), !isCenter && t.isRight && t.sCharacter.no != 0 ? (0, m.jsx)('div',
 									{//右侧头像框
 										className: '头像框',
 										style:
@@ -1833,7 +1860,8 @@
 							})] : "info" === t.type ? (0, m.jsx)(s.vD,
 							{
 								style: style,
-								children: t.content
+								// children: t.content
+								dangerouslySetInnerHTML: {__html: t.content}
 							}) : "end" === t.type ? (0, m.jsx)(f,
 							{}) : (0, m.jsx)(m.Fragment,{})
 						})]

@@ -319,7 +319,7 @@ function isfirst(chatIndex,chats,mode)
 		if(mode === 'player')typeArr.pop()
 
 		if(chatIndex-1 < 0)return true//首条消息
-		if(chats[chatIndex].isCenter || chats[chatIndex-1].isCenter)return true//isCenter
+		if((chats[chatIndex].isCenter && chats[chatIndex].type === 'image') || (chats[chatIndex-1].isCenter && chats[chatIndex-1].type === 'image'))return true//isCenter
 		if((chats[chatIndex].heads && chats[chatIndex].heads.list.length) || (chats[chatIndex-1].heads && chats[chatIndex-1].heads.list.length))return true//头像列表
 		if(typeArr.indexOf(chats[chatIndex].type) > -1)return true//判断类型
 		if(typeArr.indexOf(chats[chatIndex-1].type) > -1)return true//类型不符
@@ -351,6 +351,13 @@ function makeMessage(type,data,chatIndex,mode)
 		head = true
 		selected = mode === 'area' ? true : false
 	}
+	else if(mode === '预览')
+	{
+		let chat = []
+		if(chatIndex)chat.push(chats[chatIndex-1])
+		chat.push(data)
+		head = isfirst(chat.length-1,chat)
+	}
 	else
 	{
 		alt = ''
@@ -366,6 +373,13 @@ function makeMessage(type,data,chatIndex,mode)
 	if(mt_settings['文字样式'][type])
 	{
 		style = `font-size:${mt_settings['文字样式'][type]['font-size']};`
+	}
+	if(data.style && data.style.length)
+	{
+		foreach(data.style,function(k,v)
+		{
+			style += `${v[0]}:${v[1]};`
+		})
 	}
 	if(data.heads && (!data.heads.list || data.heads.list.length < 1))delete data.heads
 	if(type === 'chat' || type === 'image')
@@ -389,13 +403,13 @@ function makeMessage(type,data,chatIndex,mode)
 		{
 			let width = ''
 			let maxwidth = mt_settings['图片比例'] || '90%'
-			if((data.content || data.file).indexOf("Face") > -1)
+			if(data.content.indexOf("Face")>=0 || data.file.indexOf("Face")>=0)
 			{//如果是差分表情
 				width = 'max-height:360px;'
 				maxwidth = mt_settings['差分比例'] || '90%'
 			}
 			maxwidth = `max-width:${maxwidth};`
-			图片 = `<img style="${width}${maxwidth};" class="图片 编辑" src='${data.file.indexOf(":image") > -1 ? data.file : href+data.file}'>`
+			图片 = `<img style="${width}${maxwidth};${style}" class="图片 编辑" src='${data.file.indexOf(":image") > -1 ? data.file : href+data.file}' onerror="this.onerror=null;this.src='${href}MoeData/Ui/error.webp'">`
 		}
 		if(no != 0 && !data.isRight)
 		{//左侧对话
@@ -454,8 +468,8 @@ function makeMessage(type,data,chatIndex,mode)
 	}
 	if(type === 'info')
 	{
-		data.isFirst && !data.isRight ? style += 'text-align: left;' : ''
-		data.isRight && !data.isFirst ? style += 'text-align: right;' : ''
+		data.isLeft ? style += 'text-align: left;' : ''
+		data.isRight ? style += 'text-align: right;' : ''
 		聊天 = `<span class="旁白 编辑" style='${style}background: ${mt_settings['风格样式'][2]};'>${data.content}</span>`
 	}
 	if(type === 'reply')
@@ -483,6 +497,7 @@ function makeMessage(type,data,chatIndex,mode)
 	{
 		复选框 = `<input type="checkbox" ${selected ? 'checked' : ''} class="dels" style="background-color: ${color};" data-html2canvas-ignore="true">`
 	}
+	if(mode === '预览')复选框 = ''
 	return `<div class="消息" title='${color}' style="${head ? '' : 'padding: 0.5rem 1rem 0px;'}${selected && mode !== 'area' ? 'background-color: rgb(202, 215, 221);' : ''}" ${alt}>
 		${聊天}
 		${复选框}
@@ -490,15 +505,15 @@ function makeMessage(type,data,chatIndex,mode)
 }
 function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 {
-	$('.editMessage').removeClass('visible')
-	$('.chatText').val('').innerHeight(27)
+	$(".编辑界面 .取消").click()
+	$('.chatText').val('').click()
 
 	let dels = $('.dels')
 	let checked = $(".dels:checked")
 	if(indexs.length === 0)indexs[0] = dels.index(checked)
 	let replyDepth = replyDepths.slice(-1)[0]
 	let nextindex;
-	let addChat = $('.addChat').prop('checked')
+	let addChat = $(".操作模式:eq(0)").css('color') == 'rgb(255, 0, 0)'
 	let arr = {chats: [],mode: mode};//操作记录
 	if(!data[0])data.replyDepth = replyDepth//单条消息发送专用
 	$.each(indexs,function(k,chatIndex)
@@ -533,13 +548,13 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 			if(addChat)
 			{
 				indexs[k] = chatIndex = chatIndex+1//向后追加
-				data.sCharacter = {no: $('.editMessage .头像').attr('alt'),index: $('.editMessage .头像').attr('title')}
+				data.sCharacter = {no: $('.角色头像').attr('alt'),index: $('.角色头像').attr('title')}
 			}
 			else
 			{
 				//data.isFirst = !1
-				if(mt_settings['右侧发言'][mt_settings['选择角色'].no] && ['chat','image'].indexOf(type) > -1)data.isRight = true
-				//data.isRight = ['chat','image'].indexOf(type) > -1 && mt_settings['右侧发言'][mt_settings['选择角色'].no]
+				if(mt_settings['右侧显示'] && mt_settings['右侧显示'][mt_settings['选择角色'].no] && ['chat','image'].indexOf(type) > -1)data.isRight = true
+				//data.isRight = ['chat','image'].indexOf(type) > -1 && mt_settings['右侧显示'][mt_settings['选择角色'].no]
 				//data.is_breaking = !1
 				data.sCharacter = {no:mt_settings['选择角色'].no,index:mt_settings['选择角色'].index}
 				if(checked.length)chatIndex = dels.index(checked)//向前追加
@@ -624,81 +639,360 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 	chats.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
 	INIT_state()
 }
+$("body").on('change',".显示类型",function()
+{
+	let type = $(this).val()
+	let arr = ['隐藏头像','不作切割','不作修改','默认位置']
+	if(arr.indexOf(type) >= 0)
+	{
+		$(this).css('color','rgb(75, 105, 137)');
+		return
+	}
+	$(this).css('color','red');
+});
+$("body").on('change',".内容类型",function()
+{
+	let arr = ['隐藏头像','不作切割','不作修改','默认位置']
+	let type = $(this).val()
+	$(this).css('color',arr.indexOf(type) >= 0 ? 'rgb(75, 105, 137)' : 'red');
+
+	$('.图片内容').hide()
+	$('.content').show()
+	$显示位置 = $('.显示位置');
+	$显示头像 = $('.显示头像');
+	$显示位置.removeAttr('disabled').addClass('selected').css('color',arr.indexOf($显示位置.val()) >= 0 ? 'rgb(75, 105, 137)' : 'red')
+	$显示头像.removeAttr('disabled').addClass('selected').css('color',arr.indexOf($显示头像.val()) >= 0 ? 'rgb(75, 105, 137)' : 'red')
+	if(type === '回复类型')
+	{
+		$显示位置.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
+		$显示头像.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
+	}
+	if(type === '羁绊类型')
+	{
+		$显示位置.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
+		$显示头像.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
+	}
+	if(type === '旁白类型')
+	{
+		$显示头像.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
+	}
+	if(type !== '图片类型')$('.content').show().prev().hide()
+	else $('.content').hide().prev().show()
+});
+
+$("body").on('click',".编辑界面 .确认",function()
+{
+	let checked = $('.dels:checked').length
+	let $显示位置 = $('.显示位置').val()
+	let $内容类型 = $('.内容类型').val()
+	let $截图切割 = $('.截图切割').val()
+	let $显示头像 = $('.显示头像').val()
+	let $角色名称 = $('.角色名称').val()
+	let $内容信息 = $('.content').val()
+	let $时间信息 = $('.时间信息').val()
+	let $角色头像 = $('.角色头像')
+	let $图片内容 = $('.图片内容 img').attr('src')
+	let types = {文字类型:'chat',回复类型:'reply',羁绊类型:'heart',旁白类型:'info',图片类型:'image'}
+	let type = types[$内容类型]
+	let data = {}
+	if(checked > 1)
+	{
+		
+		if($显示位置 !== '不作修改')
+		{
+			if($显示位置 === '左侧旁白')data.isLeft = true
+			else if($显示位置 === '居中图片')data.isCenter = true
+			else if($显示位置 === '右侧显示')data.isRight = true
+			else data.isCenter = data.isLeft = data.isCenter = false
+		}
+		if($截图切割 !== '不作修改')data.is_breaking = $截图切割 === '截图切割' ? true : false
+		if($显示头像 !== '不作修改')data.isFirst = $显示头像 === '显示头像' ? true : false
+		if($角色名称 !== '')data.name = $角色名称 === ' ' ? '' : $角色名称
+		if($内容信息 !== '')data.content = $内容信息 === ' ' ? '' : $内容信息
+		if($时间信息 !== '')data.time = $时间信息 === ' ' ? '' : $时间信息
+		if($角色头像.attr('alt'))
+		{
+			data.sCharacter = {}
+			data.sCharacter.no = $角色头像.attr('alt')
+			data.sCharacter.index = $角色头像.attr('title')
+		}
+		if(type === 'image' && $图片内容)data.file = $图片内容
+		if(CHAT_HeadList)data.heads = CHAT_HeadList
+		if(CHAT_Style)data.style = CHAT_Style
+		let indexs = []
+		$('.dels:checked').each(function(k,v)
+		{
+			indexs.push($('.dels').index(v))
+		})
+		sendMessage(data,type,'edit',indexs)
+		return
+	}
+
+	data.sCharacter = {}
+	data.sCharacter.no = $角色头像.attr('alt')
+	data.sCharacter.index = $角色头像.attr('title')
+	data.content = $内容信息
+	data.file = type === 'image' ? $图片内容 : ''
+	data.name = $角色名称
+	data.time = $时间信息
+	data.is_breaking = $截图切割 === '截图切割'
+	data.isFirst = $显示头像 === '显示头像'
+	data.isLeft = $显示位置 === '左侧旁白'
+	data.isCenter = $显示位置 === '居中图片'
+	data.isRight = $显示位置 === '右侧显示'
+	data.heads = CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
+	data.style = CHAT_Style
+
+	sendMessage(data,type,$(".操作模式:eq(0)").css('color') == 'rgb(255, 0, 0)' ? 'add' : 'edit',[chatIndex])
+});
+$("body").on('click',".编辑界面 .取消",function()
+{
+	$('.编辑界面').removeClass('visible')
+	$('.内容界面').show()
+	$('.预览界面').hide()
+	$('.预览内容').html('')
+	CHAT_HeadList = false
+	CHAT_Style = false
+});
+$("body").on('click',".编辑界面 .删除",function()
+{
+	$('.dels:checked').length > 1 ? $('.INDEX_delete').click() : sendMessage({},'','delete',[chatIndex])
+});
+$("body").on('click',".添加头像",function()
+{
+	let no = $('.角色头像').attr('alt')
+	let index = $('.角色头像').attr('title')
+	let src = $('.角色头像').attr('src')
+	$('.title').text('头像列表')
+	let HeadList = {direction:'row',list:[]}
+	let checked = $('.dels:checked').length
+	if(CHAT_HeadList)
+	{
+		HeadList = CHAT_HeadList
+	}
+	let str = ''
+	str += '<label>头像排列：<input class="radio row" type="radio" name="direction" value="row">横向（注意排版）</label>\n'
+	str += `<label>　　　　　<input class="radio column" type="radio" name="direction" value="column">竖向</label><input type="checkbox" class="fullHeight" ${HeadList.fullHeight ? 'checked' : ''}>文字消息自动铺满\n`
+	str += `头像间距：<input style="font-size:1.2rem;" class="margin text" placeholder="默认值为 -1.5rem" value="${toString(HeadList.margin)}">\n\n`
+
+	str += '发言角色：<label><input class="radio" type="radio" name="mode" value="change">通过【待选列表】切换角色</label>\n'
+	str += `<img class="头像 N_char" src="${index ? loadhead(no,index) : href+'MoeData/Ui/error.webp'}" ${no ? `alt="${no}"` : ''}" ${index ? `title="${index}"` : ''}">`
+	str += `名称：<input style="font-size:1.2rem;color:red;" class="text" placeholder="${$('.角色名称').attr('placeholder')}" value="${$('.角色名称').val()}">\n`
+	str += `\n头像列表：（点击删除指定头像）\n<div class="N_list">`
+	HeadList.list.map(function(index,k)
+	{
+		str += `<img class="头像" src="${loadhead('LIST',index)}" title="${index}" style="cursor:pointer;" onclick="this.remove()">`
+	})
+	str += '</div>\n\n待选列表：<label><input class="radio" type="radio" name="mode" value="add" checked>为【头像列表】添加新头像</label>\n'
+	let str1 = '$(".N_char").attr("src",loadhead(this.alt,this.title)).attr("alt",this.alt).attr("title",this.title).next().attr("placeholder",loadname(this.alt,this.title))'
+	let str2 = '$(".N_list").append(`<img class="头像" src="${loadhead("LIST",this.title)}" title="${this.title}" style="cursor:pointer;" onclick="this.remove()">`)'
+	mt_settings['选择角色'].list.concat({no:'0',index:'1'}).map(function(v,k)
+	{
+		str += `<img class='头像' src='${loadhead(v.no,v.index)}' alt='${v.no}' title='${v.index}' style='cursor:pointer;' onclick='$(".radio:checked")[1].value === "change" ? ${str1} : ${str2}'>`
+	})
+	str += '\n'
+	
+	alert(str)
+	$(`.${HeadList.direction}`).click()
+	
+	TOP_confirm = function()
+	{
+		HeadList.direction = $('.radio:checked')[0].value
+		HeadList.margin = $('.margin').val()
+		HeadList.fullHeight = $('.fullHeight:checked').length ? true : false
+		HeadList.list = []
+		$('.fullHeight:checked').length ? HeadList.fullHeight = true : ''
+
+		$('.N_list img[title]').map(function(k,v)
+		{
+			HeadList.list[k] = v.title
+		})
+		CHAT_HeadList = HeadList
+		let img = $('.N_char')
+		let name = img.next()[0]
+		$('.角色名称').attr('placeholder',name.placeholder).val(name.value)
+		$('.头像数量').text('+'+CHAT_HeadList.list.length)
+		$('.角色ID').text(img[0].alt ? 'ID：'+img[0].alt : '不更改角色')
+		$('.添加头像').css('color',CHAT_HeadList.list.length || checked > 1 ? 'red' : 'rgb(75, 105, 137)')
+		if(img[0].title)
+		{
+			$('.角色头像').attr({alt:img[0].alt,title:img[0].title,src:img[0].src})
+		}
+
+	}
+});
+$("body").on('click',".定义样式",function()
+{
+	let checked = $('.dels:checked').length
+	$('.title').text('内容样式')
+	alert(`<textarea class="bold css PopupEmoticonChat__Section2-sc-vzjcea-0" style="font-size:1rem;width:100%;height:${$('body').height()*0.7};"></textarea>`)
+	if(CHAT_Style.length)
+	{
+		let str = ''
+		foreach(CHAT_Style,function(k,v)
+		{
+			if(v.length === 2)str += `${v[0]}: ${v[1]}\n`
+		})
+		$('.css').val(str).attr('placeholder',str)
+	}
+	TOP_confirm = function()
+	{
+		CHAT_Style = []
+		let css = $('.css').val().split("\n");
+		foreach(css,function(k,v)
+		{
+			v = v.replace(';','').replace('；','').replace('：',':')
+			v = v.split(':')
+			if(v.length === 2 && v[0].trim() !== '')
+			{
+				v[0] = v[0].trim()
+				v[1] = v[1].trim()
+				CHAT_Style.push(v)
+			}
+		})
+		$('.定义样式').css('color',CHAT_Style.length || checked > 1 ? 'red' : 'rgb(75, 105, 137)')
+	}
+});
+$("body").on('click',".操作模式",function()
+{
+	$('.内容界面').show()
+	$('.预览界面').hide()
+	$(".预览模式").css('color','')
+	$(".操作模式").css('color','')
+	let mode = $(this).css('color','red').text()
+});
+$("body").on('click',".预览模式",function()
+{
+	let color = $(this).css('color')
+	if(color === 'rgb(255, 0, 0)')
+	{
+		$('.内容界面').show()
+		$('.预览界面').hide()
+		$(this).css('color','rgb(185, 191, 197)')
+		return
+	}
+	$(this).css('color','rgb(255, 0, 0)')
+	let checked = $('.dels:checked').length
+	let $显示位置 = $('.显示位置').val()
+	let $内容类型 = $('.内容类型').val()
+	let $截图切割 = $('.截图切割').val()
+	let $显示头像 = $('.显示头像').val()
+	let $角色名称 = $('.角色名称').val()
+	let $内容信息 = $('.content').val()
+	let $时间信息 = $('.时间信息').val()
+	let $角色头像 = $('.角色头像')
+	let $图片内容 = $('.图片内容 img').attr('src')
+	let types = {文字类型:'chat',回复类型:'reply',羁绊类型:'heart',旁白类型:'info',图片类型:'image'}
+	let type = types[$内容类型]
+	let data = {}
+	data.sCharacter = {}
+	data.sCharacter.no = $角色头像.attr('alt')
+	data.sCharacter.index = $角色头像.attr('title')
+	data.content = $内容信息
+	data.file = type === 'image' ? $图片内容 : ''
+	data.name = $角色名称
+	data.time = $时间信息
+	data.is_breaking = $截图切割 === '截图切割'
+	data.isFirst = $显示头像 === '显示头像'
+	data.isLeft = $显示位置 === '左侧旁白'
+	data.isCenter = $显示位置 === '居中图片'
+	data.isRight = $显示位置 === '右侧显示'
+	data.heads = CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
+	data.style = CHAT_Style
+	$('.内容界面').hide()
+	$('.预览界面').show()
+	$('.预览内容').html(makeMessage(type,data,chatIndex,'预览')).outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings['风格样式'][1])
+	$('.内容预览').click()
+});
 $("body").on('click',".编辑",function()
 {
+	$('.编辑界面').addClass('visible')//显示编辑界面
+	$(".预览模式").css('color','')
+	$(".操作模式:eq(0)").css('color','')
+	$(".操作模式:eq(1)").css('color','red')
+	let $显示头像 = $('.显示头像');
+	let $显示位置 = $('.显示位置');
+
+	let option = `<option style="color:rgb(75, 105, 137);"class="bold">`
+	let 显示位置 = `${option}左侧旁白</option>${option}居中图片</option>${option}右侧显示</option>${option}默认位置</option>`
+	let isfirst = `${option}显示头像</option>${option}隐藏头像</option>`
+	let isbreak = `${option}截图切割</option>${option}不作切割</option>`
+	let noedit = `${option}不作修改</option>`
+	let checked = $('.dels:checked').length
+	if(checked > 1)
+	{
+		$('.批量编辑').show()
+		$('.编辑标题').hide()
+		$('.显示开关').removeClass('selected').css('color','')
+		$('.角色ID').text('不更改角色')
+		$('.内容索引').text(`选中了${checked}条消息`)
+		$('.角色头像').attr('src',href+'MoeData/Ui/error.webp').removeAttr('alt title')
+		$('.角色名称').attr('placeholder','不修改名称').val('')
+		$('.头像数量').text('+0')
+		$('.添加头像').css('color','black')
+		$('.定义样式').css('color','black')
+
+		$('.截图切割').html(isbreak+noedit).val('不作修改').css('color','rgb(75, 105, 137)')
+		$显示头像.html(isfirst+noedit).val('不作修改').css('color','rgb(75, 105, 137)').removeAttr('disabled').addClass('selected')
+		$显示位置.html(显示位置+noedit).val('不作修改').css('color','rgb(75, 105, 137)').removeAttr('disabled').addClass('selected')
+
+		$('.图片内容').hide().find('img').attr('src','')
+		$('.content').val('').attr('placeholder','不修改内容').show().click();
+		$('.时间信息').val('').attr('placeholder','不修改信息').click();
+
+		let select = `${option}文字类型</option>${option}回复类型</option>${option}羁绊类型</option>${option}旁白类型</option>${option}图片类型</option>${option}不作修改</option>`
+		$('.内容类型').html(select).val('不作修改').css('color','rgb(75, 105, 137)')
+		return
+	}
+	$('.批量编辑').hide()
+	$('.编辑标题').show()
 	chatIndex = $('.消息').index($(this).parents('.消息'))
 	let chat = chats[chatIndex]
-	CHAT_HeadList = $('.dels:checked').length < 2 && chats[chatIndex] && chats[chatIndex].heads ? {...chats[chatIndex].heads,...{}} : false
-	$('.editMessage').addClass('visible')//显示编辑界面
-	$('.edit_2_1_1 input').hide().prop('checked',false)
-	$('.edit_2_1_1 label').hide()
+	let selected = '默认位置'
+	if(chat.isLeft)selected = '左侧旁白'
+	if(chat.isCenter)selected = '居中图片'
+	if(chat.isRight)selected = '右侧显示'
+	$('.显示开关').removeClass('selected').css('color','')
+	$('.角色ID').text('ID：'+chat.sCharacter.no)
+	$('.内容索引').text(`(${chatIndex+1}/${chats.length})`)
+	$('.角色头像').attr({alt:chat.sCharacter.no,title:chat.sCharacter.index,src:loadhead(chat.sCharacter.no,chat.sCharacter.index)})
+	$('.角色名称').attr('placeholder',loadname(chat.sCharacter.no,chat.sCharacter.index)).val(toString(chat.name))
+	$('.头像数量').text('+'+(chat.heads && chat.heads.list ? chat.heads.list.length : 0))
+	$('.添加头像').css('color',chat.heads && chat.heads.list && chat.heads.list.length ? 'red' : 'black')
+	$('.定义样式').css('color',chat.style && chat.style.length ? 'red' : 'black')
 
-	$('.edit_button button').hide().removeClass('selected')
-	if($('.dels:checked').length < 2)$(`.edit_button .${chat.type}`).addClass('selected') 
+	$('.截图切割').html(isbreak).val(chat.is_breaking ? '截图切割' : '不作切割').css('color',chat.is_breaking ? 'red' : 'rgb(75, 105, 137)')
 
-	$('.edit_3').show()
-	$('.图片选项').hide()
-	$('.图片文件').attr('src','').attr('title',chat.content)
-	
-	$('.content').innerHeight(27)
-	$('.time').innerHeight(27)
-	if($('.dels:checked').length > 1)
+	$显示头像.html(isfirst).val(chat.isFirst ? '显示头像' : '隐藏头像').css('color',chat.isFirst ? 'red' : 'rgb(75, 105, 137)').removeAttr('disabled').addClass('selected')
+	$显示位置.html(显示位置).val(selected).css('color',selected === '默认位置' ? 'rgb(75, 105, 137)' : 'red').removeAttr('disabled').addClass('selected')
+
+	if(chat.type === 'repl')
 	{
-		$('.typeTitle').text('批量编辑')
-
-		$('.editMessage .头像').removeAttr('alt').removeAttr('title').attr('src',href+'MoeData/Ui/setting.webp')//.prev().text(CHAT_HeadList ? '列表' : '角色')
-
-		$('.editType').show().parent().show()
-		$('.editTalk').show().parent().show()
-
-		$('.name').val('').attr('placeholder','默认')
-		$('.time').val('').attr('placeholder','默认')
-		$('.content').val('').attr('placeholder','默认')
-
+		$显示头像.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
+		$显示位置.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
 	}
-	else
+	if(chat.type === 'heart')
 	{
-		$('.typeTitle').text(mt_text[chat.type][mtlang])
-
-		$('.edit_button button').show()
-		
-		$('.addChat').show().parent().show()
-		$('.isRight').show().prop('checked',chat.isRight).parent().show()
-		$('.isFirst').show().prop('checked',chat.isFirst).parent().show()
-		$('.is_breaking').show().prop('checked',chat.is_breaking).parent().show()
-
-		$('.name').val(chat.name).attr('placeholder',loadname(chat.sCharacter.no,chat.sCharacter.index))
-		$('.time').val(chat.time).attr('placeholder','支持换行').innerHeight($('.time')[0].scrollHeight)
-		$('.content').val(chat.type === 'image' ? '' : chat.content).attr('placeholder',chat.content || '').innerHeight($('.content')[0].scrollHeight)
-
-		$('.editMessage .头像').attr('alt',chat.sCharacter.no).attr('title',chat.sCharacter.index).attr('src',loadhead(chat.sCharacter.no,chat.sCharacter.index))//.prev().text(CHAT_HeadList || (chats[chatIndex] && chats[chatIndex].heads) ? '列表' : '角色')
-
-		if(chat.type === 'image')
-		{
-			$('.isCenter').show().prop('checked',chat.isCenter).parent().show()
-			$('.图片选项').show()
-			$('.edit_3').hide()
-			if(chat.file)
-			{
-				$('.图片文件').attr('src',chat.file)
-			}
-			else
-			{
-				$('.图片文件').hide()
-			}
-		}
-		if(chat.type === 'info')
-		{
-			$('.isFirst').next().text('左侧对齐')
-			$('.isRight').next().text('右侧对齐')
-		}
-		else
-		{
-			$('.isFirst').next().text('显示头像')
-			$('.isRight').next().text('右侧发言')
-		}
+		$显示头像.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
+		$显示位置.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
 	}
+	if(chat.type === 'info')
+	{
+		$显示头像.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
+	}
+
+	if(chat.type !== 'image')$('.content').show().prev().hide().find('img').attr('src','')
+	else $('.content').hide().prev().show().find('img').attr('src',chat.file)
+
+	$('.content').val(chat.content).attr('placeholder',chat.content || '').click();
+	$('.时间信息').val(toString(chat.time)).attr('placeholder',chat.time || '').click();
+	let types = {chat:'文字类型',reply:'回复类型',heart:'羁绊类型',info:'旁白类型',image:'图片类型'}
 	
+	let select = `${option}文字类型</option>${option}回复类型</option>${option}羁绊类型</option>${option}旁白类型</option>${option}图片类型</option>`
+	$('.内容类型').html(select).val(types[chat.type]).css('color','red')
+
+	if(chat.heads)CHAT_HeadList = {...chat.heads,...{}}	
+	if(chat.style)CHAT_Style = [...chat.style,...[]]
 });
 $("body").on('click',".头像框",function()
 {
@@ -708,76 +1002,18 @@ $("body").on('click',".头像框",function()
 		sendMessage({...chats[chatIndex],...{isFirst:!chats[chatIndex].isFirst}},chats[chatIndex].type,'edit',[chatIndex],null)
 	}
 });
-$("body").on('click',".editType",function()
-{
-	if($(this).prop('checked'))
-	{
-		$('.edit_button button').show()
-	}
-	else
-	{
-		$('.edit_button button').hide()
-	}
-});
-$("body").on('click',".editTalk",function()
-{
-	if($(this).prop('checked'))
-	{
-		$('.isRight').show().parent().show()
-		$('.isFirst').show().parent().show()
-		$('.edit_button .selected').attr('title') === 'image' ? $('.isCenter').show().parent().show() : ''
-	}
-	else
-	{
-		$('.isRight').hide().parent().hide()
-		$('.isFirst').hide().parent().hide()
-		$('.isCenter').hide().parent().hide()
-	}
-});
-$("body").on('click',".edit_button button",function()
-{
-	let file = $('.图片文件').attr('src')
-	let type = $(this).attr('title')
-	$('.edit_button button').removeClass('selected')
-	$(`.edit_button .${type}`).addClass('selected')
-	if(type === 'image')
-	{
-		$('.edit_3').hide()
-		$('.dels:checked').length < 2 || $('.editTalk').prop('checked') ? $('.isCenter').show().parent().show() : ''
-		$('.图片选项').show()
-		if(file)
-		{
-			$('.图片文件').attr('src',file)
-		}
-		else
-		{
-			$('.图片文件').hide().attr('src','')
-			$('.图片信息').text($('.dels:checked').length < 2 ? '无图片' : '默认')
-		}
-	}
-	else
-	{
-		$('.isCenter').hide().parent().hide()
-		$('.图片选项').hide()
-		$('.edit_3').show()
-	}
-	if(type === 'info')
-	{
-		$('.isFirst').next().text('左侧对齐')
-		$('.isRight').next().text('右侧对齐')
-	}
-	else
-	{
-		$('.isFirst').next().text('显示头像')
-		$('.isRight').next().text('右侧发言')
-	}
-});
 $("body").on('click',".fzOyMd",function()
 {
-	let no = $(this).attr('alt')
-	let index = $(this).attr('title')
-	$('.editMessage .头像').attr('alt',no).attr('title',index).attr('src',loadhead(no,index))
-	$('.name').attr('placeholder',loadname(no,index))
+	if($('.编辑界面').hasClass('visible'))
+	{
+		let no = $(this).attr('alt')
+		let index = $(this).attr('title')
+		$('.角色头像').attr({alt:no,title:index,src:loadhead(no,index)})
+		$('.角色名称').attr('placeholder',loadname(no,index))
+		$('.角色ID').text('ID：'+no)
+	}
+	$('.chatText').click()
+	
 	saveStorage('设置选项',mt_settings,'local')
 });
 $("body").on('click',".差分映射",function()
@@ -847,3 +1083,4 @@ $("body").on('click',".INDEX_EmojiIfno",function()
 //设置
 //差分信息
 var CHAT_HeadList = false
+var CHAT_Style = false

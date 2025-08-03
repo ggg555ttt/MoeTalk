@@ -247,7 +247,7 @@ function custom_char(info)
 		if(names[char_info.profile[i]])char_info.names[char_info.profile[i]] = names[char_info.profile[i]]
 		$('.heads').append(`<img src="${loadhead(char_info.no,char_info.profile[i])}" title="${char_info.profile[i]}" ${attr}>`)
 	}
-
+	$('.heads img:eq(0)').click()
 	if(char_info.selected || char_info.selected === 0)
 	{
 		let name = char_info.names[char_info.profile[char_info.selected]]
@@ -257,7 +257,7 @@ function custom_char(info)
 	}
 	else
 	{
-		$('.headinfo').hide()
+		// $('.headinfo').hide()
 	}
 	$('#custom-char').addClass('visible')
 }
@@ -378,6 +378,7 @@ $('body').on('click',"#makecus",function()
 		make: !0
 	}
 	custom_char(info)
+	$('.headinfo').hide()
 })
 //储存头像
 $("body").append("<input id='custom' hidden type='file' accept='image/*' multiple>");//添加上传标签
@@ -452,6 +453,7 @@ $("body").on('click',".heads img",function()
 	{
 		if(mt_char[char_info.no] || char_info.make)$('.edithead:eq(1)').show()
 	}
+	$(this)[0].scrollIntoView()
 });
 function CHAR_GetCharList()
 {

@@ -14106,6 +14106,10 @@
 							{
 								f || g(), s(e)
 							},
+							onClick: function(e)
+							{
+								f || g(), s(e)
+							},
 							ref: d
 						}))
 					}),
@@ -14167,7 +14171,7 @@
 					{
 						displayName: "common__ProfileClick",
 						componentId: "sc-1ojome3-7"
-					})(["filter:brightness(60%);cursor:pointer;margin-right:1rem;&:hover{filter:brightness(100%);}&:active{border:2px solid ", ";}&.selected{filter:brightness(100%);border:2px solid ", ";}"], function(e)
+					})(["filter:brightness(60%);cursor:pointer;margin-right:0.5rem;&:hover{filter:brightness(100%);}&:active{border:2px solid ", ";}&.selected{filter:brightness(100%);border:2px solid ", ";}"], function(e)
 					{
 						return e.theme.color.rgb252_199_41
 					}, function(e)
@@ -14349,7 +14353,7 @@
 					{
 						displayName: "popup__MyModal",
 						componentId: "sc-1ardd6p-0"
-					})(["", ";visibility:hidden;user-select:none;position:fixed;top:0;left:0;width:100%;height:100%;overflow:auto;background-color:", ";z-index:1000;opacity:0;transition:opacity 0s;&.visible{visibility:visible;opacity:1;}"], function(e)
+					})(["", ";visibility:hidden;user-select:none;position:fixed;top:0;left:0;width:100%;height:100%;overflow:auto;background-color:", ";z-index:100;opacity:0;transition:opacity 0s;&.visible{visibility:visible;opacity:1;}"], function(e)
 					{
 						return e.theme.common.flexBox(
 						{
