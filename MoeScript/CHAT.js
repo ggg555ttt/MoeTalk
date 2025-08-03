@@ -505,15 +505,15 @@ function makeMessage(type,data,chatIndex,mode)
 }
 function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 {
+	let addChat = $(".操作模式:eq(0)").css('color') == 'rgb(255, 0, 0)'
 	$(".编辑界面 .取消").click()
 	$('.chatText').val('').click()
-
 	let dels = $('.dels')
 	let checked = $(".dels:checked")
 	if(indexs.length === 0)indexs[0] = dels.index(checked)
 	let replyDepth = replyDepths.slice(-1)[0]
 	let nextindex;
-	let addChat = $(".操作模式:eq(0)").css('color') == 'rgb(255, 0, 0)'
+	
 	let arr = {chats: [],mode: mode};//操作记录
 	if(!data[0])data.replyDepth = replyDepth//单条消息发送专用
 	$.each(indexs,function(k,chatIndex)
@@ -751,6 +751,7 @@ $("body").on('click',".编辑界面 .取消",function()
 	$('.内容界面').show()
 	$('.预览界面').hide()
 	$('.预览内容').html('')
+	$(".操作模式").css('color','')
 	CHAT_HeadList = false
 	CHAT_Style = false
 });

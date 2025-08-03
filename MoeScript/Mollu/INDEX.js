@@ -3858,7 +3858,6 @@
 									{
 										width: "auto",
 										height: 'auto',
-										color: 'red',
 										fontSize: '1.5rem',
 										marginInline: '0.5rem'
 									},
@@ -3870,7 +3869,6 @@
 									{
 										width: "auto",
 										height: 'auto',
-										color: 'red',
 										fontSize: '1.5rem'
 									},
 									className: "操作模式 bold",
