@@ -553,8 +553,8 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 			else
 			{
 				//data.isFirst = !1
-				if(mt_settings['右侧显示'] && mt_settings['右侧显示'][mt_settings['选择角色'].no] && ['chat','image'].indexOf(type) > -1)data.isRight = true
-				//data.isRight = ['chat','image'].indexOf(type) > -1 && mt_settings['右侧显示'][mt_settings['选择角色'].no]
+				if(mt_settings['右侧发言'] && mt_settings['右侧发言'][mt_settings['选择角色'].no] && ['chat','image'].indexOf(type) > -1)data.isRight = true
+				//data.isRight = ['chat','image'].indexOf(type) > -1 && mt_settings['右侧发言'][mt_settings['选择角色'].no]
 				//data.is_breaking = !1
 				data.sCharacter = {no:mt_settings['选择角色'].no,index:mt_settings['选择角色'].index}
 				if(checked.length)chatIndex = dels.index(checked)//向前追加
