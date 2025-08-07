@@ -10111,7 +10111,7 @@
 										{
 											children: (0, O.jsx)(W,
 											{
-												className: 'swing-animation',
+												className: toString(localStorage['swing-animation']),
 												style:
 												{
 													width: '100%',
@@ -10121,6 +10121,7 @@
 												alt: "private",
 												onClick: function(e)
 												{
+													delete localStorage['swing-animation']
 													$$('.swing-animation').removeClass('swing-animation')
 												}
 											})
