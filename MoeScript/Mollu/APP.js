@@ -10111,12 +10111,13 @@
 										{
 											children: (0, O.jsx)(W,
 											{
+												className: 'swing-animation',
 												style:
 												{
 													width: '100%',
 													height: '100%'
 												},
-												src: href+"MoeData/Ui/private.webp",//#播放器界面
+												src: href+"MoeData/Ui/zhengwen.webp",//#播放器界面
 												alt: "private"
 											})
 										})]

@@ -1,114 +1,6 @@
 (self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
 	[405],
 	{
-		3162: function(e, n, t)
-		{
-			var r, o;
-			void 0 !== (r = "function" == typeof(o = function()
-			{
-				"use strict";
-
-				function n(e, n, t)
-				{
-					var r = new XMLHttpRequest;
-					r.open("GET", e), r.responseType = "blob", r.onload = function()
-					{
-						a(r.response, n, t)
-					}, r.onerror = function()
-					{
-						console.error("could not download file")
-					}, r.send()
-				}
-
-				function r(e)
-				{
-					var n = new XMLHttpRequest;
-					n.open("HEAD", e, !1);
-					try
-					{
-						n.send()
-					}
-					catch (e)
-					{}
-					return 200 <= n.status && 299 >= n.status
-				}
-
-				function o(e)
-				{
-					try
-					{
-						e.dispatchEvent(new MouseEvent("click"))
-					}
-					catch (t)
-					{
-						var n = document.createEvent("MouseEvents");
-						n.initMouseEvent("click", !0, !0, window, 0, 0, 0, 80, 20, !1, !1, !1, !1, 0, null), e.dispatchEvent(n)
-					}
-				}
-				var i = "object" == typeof window && window.window === window ? window : "object" == typeof self && self.self === self ? self : "object" == typeof t.g && t.g.global === t.g ? t.g : void 0,
-					c = i.navigator && /Macintosh/.test(navigator.userAgent) && /AppleWebKit/.test(navigator.userAgent) && !/Safari/.test(navigator.userAgent),
-					a = i.saveAs || ("object" != typeof window || window !== i ? function() {} : "download" in HTMLAnchorElement.prototype && !c ? function(e, t, c)
-					{
-						var a = i.URL || i.webkitURL,
-							l = document.createElement("a");
-						t = t || e.name || "download", l.download = t, l.rel = "noopener", "string" == typeof e ? (l.href = e, l.origin === location.origin ? o(l) : r(l.href) ? n(e, t, c) : o(l, l.target = "_blank")) : (l.href = a.createObjectURL(e), setTimeout(function()
-						{
-							a.revokeObjectURL(l.href)
-						}, 4e4), setTimeout(function()
-						{
-							o(l)
-						}, 0))
-					} : "msSaveOrOpenBlob" in navigator ? function(e, t, i)
-					{
-						if(t = t || e.name || "download", "string" != typeof e)
-						{
-							var c;
-							navigator.msSaveOrOpenBlob((void 0 === (c = i) ? c = {
-								autoBom: !1
-							} : "object" != typeof c && (console.warn("Deprecated: Expected third argument to be a object"), c = {
-								autoBom: !c
-							}), c.autoBom && /^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(e.type) ? new Blob(["\uFEFF", e],
-							{
-								type: e.type
-							}) : e), t)
-						}
-						else if(r(e)) n(e, t, i);
-						else
-						{
-							var a = document.createElement("a");
-							a.href = e, a.target = "_blank", setTimeout(function()
-							{
-								o(a)
-							})
-						}
-					} : function(e, t, r, o)
-					{
-						if((o = o || open("", "_blank")) && (o.document.title = o.document.body.innerText = "downloading..."), "string" == typeof e) return n(e, t, r);
-						var a = "application/octet-stream" === e.type,
-							l = /constructor/i.test(i.HTMLElement) || i.safari,
-							s = /CriOS\/[\d]+/.test(navigator.userAgent);
-						if((s || a && l || c) && "undefined" != typeof FileReader)
-						{
-							var u = new FileReader;
-							u.onloadend = function()
-							{
-								var e = u.result;
-								e = s ? e : e.replace(/^data:[^;]*;/, "data:attachment/file;"), o ? o.location.href = e : location = e, o = null
-							}, u.readAsDataURL(e)
-						}
-						else
-						{
-							var d = i.URL || i.webkitURL,
-								h = d.createObjectURL(e);
-							o ? o.location = h : location.href = h, o = null, setTimeout(function()
-							{
-								d.revokeObjectURL(h)
-							}, 4e4)
-						}
-					});
-				i.saveAs = a.saveAs = a, e.exports = a
-			}) ? o.apply(n, []) : o) && (e.exports = r)
-		},
 		8727: function(e, n, t)
 		{
 			"use strict";
@@ -156,163 +48,6 @@
 					onMouseUp: s,
 					onMouseLeave: s,
 					children: c
-				})
-			}
-		},
-		5615: function(e, n, t)
-		{
-			"use strict";
-			var r = t(6150),
-				o = t(7294),
-				i = t(9521),
-				c = t(5893);
-			n.Z = function(e)
-			{
-				var n = e.childrens,
-					t = (0, o.useState)(0),
-					i = t[0],
-					u = t[1],
-					d = (0, r.C)(function(e)
-					{
-						return e.global.isRight
-					}),
-					h = (0, r.C)(function(e)
-					{
-						return e.global.isMobile
-					});
-				return (0, o.useEffect)(function()
-				{
-					u(d ? 1 : 0)
-				}, [d]), (0, c.jsx)(a,
-				{
-					children: (0, c.jsx)(l,
-					{
-						children: n.map(function(e, n)
-						{
-							return (0, c.jsx)(s,
-							{
-								style:
-								{
-									width: h && i !== n ? "0" : "100%"
-								},
-								children: e
-							}, n)
-						})
-					})
-				})
-			};
-			var a = i.ZP.div.withConfig(
-				{
-					displayName: "MainSlider__Container",
-					componentId: "sc-x1wvnd-0"
-				})(["width:100%;height:100%;overflow:hidden;position:relative;"]),
-				l = i.ZP.div.withConfig(
-				{
-					displayName: "MainSlider__Slider",
-					componentId: "sc-x1wvnd-1"
-				})(["display:flex;width:100%;height:100%;"]),
-				s = i.ZP.div.withConfig(
-				{
-					displayName: "MainSlider__Slide",
-					componentId: "sc-x1wvnd-2"
-				})(["transition:width 300ms ease-in-out;width:100%;height:100%;overflow:hidden;"])
-		},
-		8024: function(e, n, t)
-		{
-			"use strict";
-			var r = t(9499),
-				o = t(7294),
-				i = t(5280),
-				c = t(1728),
-				a = t(5893);
-
-			function l(e, n)
-			{
-				var t = Object.keys(e);
-				if(Object.getOwnPropertySymbols)
-				{
-					var r = Object.getOwnPropertySymbols(e);
-					n && (r = r.filter(function(n)
-					{
-						return Object.getOwnPropertyDescriptor(e, n).enumerable
-					})), t.push.apply(t, r)
-				}
-				return t
-			}
-
-			function s(e)
-			{
-				for(var n = 1; n < arguments.length; n++)
-				{
-					var t = null != arguments[n] ? arguments[n] :
-					{};
-					n % 2 ? l(Object(t), !0).forEach(function(n)
-					{
-						(0, r.Z)(e, n, t[n])
-					}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : l(Object(t)).forEach(function(n)
-					{
-						Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
-					})
-				}
-				return e
-			}
-			n.Z = function(e)
-			{
-				var n = e.listArr,
-					t = e.clientHeight,
-					r = e.selected,
-					l = e.rowHeight,
-					u = (0, o.useRef)(null),
-					d = (0, o.useState)([]),
-					h = d[0],
-					m = d[1];
-				(0, o.useEffect)(function()
-				{
-					u.current && n.length > 0 && m(n.map(function(e, n)
-					{
-						return setTimeout(function()
-						{
-							var e;
-							null == u || null === (e = u.current) || void 0 === e || e.resetAfterIndex(n)
-						}, 0), r === n ? l+$$('.gskNYI:eq(0)').outerHeight() : l//#单行改为多行头像分支
-					}))
-				}, [r, n, u, l, m]);
-				var f = function(e)
-				{
-					var t = e.index,
-						r = e.style;
-					return (0, a.jsx)("div",
-					{
-						style: s(s(
-						{}, r),
-						{},
-						{
-							transition: "all 300ms ease-in-out"
-						}),
-						children: n[t]
-					})
-				};
-				return (0, a.jsx)(c.Z,
-				{
-					defaultHeight: t,
-					children: function(e)
-					{
-						var t = e.width,
-							r = e.height;
-						return (0, a.jsx)(i.S_,
-						{
-							ref: u,
-							height: r,
-							width: t,
-							itemCount: n.length,
-							itemSize: function(e)
-							{
-								return h[e] || 0
-							},
-							overscanCount: 1,
-							children: f
-						})
-					}
 				})
 			}
 		},
@@ -1473,7 +1208,7 @@
 					let cancel = function(enter = false)
 					{
 						if(enter && TOP_confirm !== '')TOP_confirm()
-						$$('.notice pre').html('')
+						$$('.notice pre').css('text-align','left').html('')
 						$$('.notice').removeClass('visible')
 						$$('.notice .title').text('通知')
 						$$('.notice .confirm').text(L.Z.confirm[l]).removeAttr('disabled')
@@ -1905,8 +1640,6 @@
 				eh = t(7794),
 				em = t.n(eh),
 				ef = t(3162),
-				ep = t(1120),
-				eg = t.n(ep),
 				ex = t(4306),
 				ey = function()
 				{
@@ -2028,22 +1761,45 @@
 									className: 'mt_capture',
 									onClick: function()
 									{
-										mt_capture(S,eg,j,(0, u._3)(!0, !0),$$('#mt_title').text().split(':').pop().trim())//新版截图
+										mt_capture(S,j,DATA_NowTime,$$('#mt_title').text().split(':').pop().trim())//新版截图
 									}
 								}), (0, m.jsx)('预览',{
 									hidden: true,
 									className: '内容预览',
-									onClick: function(){内容预览(eg)}
+									onClick: function(){内容预览()}
 								})]
-							}), (0, m.jsx)("pre",
+							}), (0, m.jsx)("div",
 							{
-								style:
+								style: {display: b ? "block" : "none"},
+								children: [(0, m.jsx)("pre",
 								{
-									display: b ? "block" : "none",
-									whiteSpace: 'pre-wrap'
-								},
-								className: 'INDEX_CaptureTips'
-							}),(0, m.jsxs)(ea.$0,
+									style: {whiteSpace: 'pre-wrap'},
+									className: 'INDEX_CaptureTips'
+								}), (0, m.jsx)('div',
+								{
+									className: '图片预览',
+									style: 
+									{
+										overflow: 'scroll',
+									}
+								}), (0, m.jsx)('iframe',
+								{
+									src: `${href}MoeData/Capture_Font.html`,
+									style: 
+									{
+										// height: '0px'
+										width: '100%',
+										display: "none"
+									},
+									onLoad: function(e)
+									{
+										截图区域 = e.target.contentDocument || e.target.contentWindow.document;
+										截图区域.documentElement.style.fontSize = '16px'
+										截图区域 = $$(截图区域).find('.截图区域')
+										截图区域.outerWidth(mt_settings['宽度限制'])
+									}
+								})]
+							}), (0, m.jsxs)(ea.$0,
 							{
 								style:
 								{
@@ -2078,8 +1834,7 @@
 													$$('#mt_title').text(mt_text.title[mtlang]+" : "+(e.currentTarget.value ? e.currentTarget.value : mt_text.noTitle[mtlang]))
 													mt_settings['截图选项'].titleStr = $$('#mt_title').text()
 													$$('.INDEX_imageLength').text(INIT_state(S))
-												},
-												onKeyDown: function(e) {}
+												}
 											})
 										}), L.Z.writer[g], (0, m.jsx)(c.OP,
 										{
@@ -2240,21 +1995,12 @@
 											disabled: chats.length < 1,
 											onClick: function()
 											{
+												DATA_NowTime = getNowDate();
 												O()
-												DATA_NowTime = new Date().toLocaleString().replaceAll('/','').replaceAll(' ','-').replaceAll(':','');
 											},
 											children: L.Z.confirm[g]
 										})]
 									})]
-								}), (0, m.jsx)(e_,
-								{
-									children: (0, m.jsxs)(eC,
-									{
-										style:
-										{
-											display: b ? "block" : "none"
-										}
-									})
 								})]
 							})]
 						})
@@ -4010,7 +3756,7 @@
 												maxWidth: '50%',
 												maxHeight: '10rem'
 											},
-											src: '/MoeTalk/GameData/BLDA/Char/Akane_L2D.webp'
+											src: ''
 										}), (0, m.jsxs)('div',
 										{
 											children: [(0, m.jsx)(eN.g4,
@@ -4194,7 +3940,8 @@
 						{
 							style:e.style,
 							className: "medium 编辑",
-							children: n
+							dangerouslySetInnerHTML:{__html:n}
+							// children: n
 						})]
 					})
 				},
@@ -4270,8 +4017,7 @@
 					let isFirst = isfirst(t,l)
 					let isCenter = n.isCenter && n.type === 'image'
 					let style = mt_settings['文字样式'][n.type] ? mt_settings['文字样式'][n.type] : {}
-					delete style.textAlign
-					style = {...style,...{}}//防止连带修改设置属性
+					delete style.textAlign,style = {...style,...{}}//防止连带修改设置属性
 					if(n.style && n.style.length)
 					{
 						foreach(n.style,function(k,v)
@@ -4281,6 +4027,7 @@
 					}
 					if(n.type === 'info')
 					{
+						style.background = mt_settings['风格样式'][2]
 						n.isLeft ? style.textAlign = 'left' : ''
 						n.isRight ? style.textAlign = 'right' : ''
 					}
@@ -4473,11 +4220,10 @@
 							{//羁绊
 								className: '编辑',
 								style: style,
-								dangerouslySetInnerHTML:{__html:n.content || ((n.name || loadname(n.sCharacter.no,n.sCharacter.index))+mt_text.go_relationship_event[mtlang])}
-								// character: n.content || ((n.name || loadname(n.sCharacter.no,n.sCharacter.index))+mt_text.go_relationship_event[mtlang])
-							})] : "info" === n.type ? (0, m.jsx)(eN.vD,
+								character: n.content || ((n.name || loadname(n.sCharacter.no,n.sCharacter.index))+mt_text.go_relationship_event[mtlang])
+							})] : "info" === n.type ? (0, m.jsx)('span',//eN.vD,
 							{//旁白
-								className: '编辑',
+								className: '旁白 编辑',
 								style: style,
 								dangerouslySetInnerHTML:{__html:n.content}
 								// children: n.content
@@ -5208,18 +4954,4221 @@
 					})
 				})
 		},
-		83: function(e, n, t)
+		8312: function(e, n, t)
+		{
+			(window.__NEXT_P = window.__NEXT_P || []).push(["/", function()
+			{
+				return t(1097)
+			}])
+		}
+	},
+	function(e)
+	{
+		e.O(0, [288, 876, 774, 888, 179], function()
+		{
+			return e(e.s = 8312)
+		}), _N_E = e.O()
+	}
+]);
+// "use strict";
+(self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+	[563],
+	{
+		2985: function(e, t, n)
+		{
+			var o = n(4701),
+				r = n(6150),
+				i = n(7294);
+			n(210);
+			var a = n(5893);
+			t.Z = function(e)
+			{
+				var t = (0, r.C)(function(e)
+				{
+					return e.global.lang
+				});
+				return (0, i.useEffect)(function()
+				{
+					try
+					{
+						(window.adsbygoogle = window.adsbygoogle || []).push(
+						{})
+					}
+					catch (e)
+					{}
+				}, []), (0, a.jsxs)(a.Fragment,
+				{
+					children: (0, a.jsx)("ins",
+					{
+						className: "adsbygoogle",
+						style:
+						{
+							width: e.width,
+							height: e.height,
+							position: "absolute",
+							overflowX: "auto",
+							overflowY: "hidden",
+							display: "block",
+							zIndex: "1",
+							textAlign: "center"
+						},
+						"data-ad-client": e.client,
+						"data-ad-slot": e.slot,
+						"data-ad-format": e.format,
+						"data-full-width-responsive": e.responsive,
+						"data-ad-layout-key": e.layoutKey
+					})
+				})
+			}
+		},
+		5654: function(e, t, n)
+		{
+			var o = n(4701),
+				r = n(6150),
+				i = n(1563),
+				a = n(9417),
+				c = n(7294),
+				l = n(9521),
+				s = n(5893);
+			t.Z = function(e)
+			{
+				var t = e.items,
+					n = e.selected,
+					l = e.setSelected,
+					p = (0, c.useState)(!1),
+					f = p[0],
+					_ = p[1],
+					g = (0, c.useState)(""),
+					x = g[0],
+					y = g[1],
+					b = (0, r.C)(function(e)
+					{
+						return e.global.lang
+					}),
+					E = t.length > 0 ? t.filter(function(e)
+					{
+						return e.title.toLowerCase().match(x.toLowerCase())
+					}) : [];
+				return (0, c.useEffect)(function()
+				{
+					f ? y("") : y(n.title)
+				}, [f, n, y]), (0, s.jsx)(d,
+				{
+					children: (0, s.jsxs)("div",
+					{
+						style:
+						{
+							position: "relative",
+							width: "100%"
+						},
+						children: [(0, s.jsxs)(i.OP,
+						{
+							style:
+							{
+								padding: "0 0.5rem",
+								zIndex: "2",
+								position: "relative",
+								height: "2rem"
+							},
+							onClick: function()
+							{
+								_(!0)
+							},
+							children: [(0, s.jsx)(i.Kx,
+							{
+								className: "medium",
+								style:
+								{
+									padding: "0",
+									overflow: "hidden"
+								},
+								placeholder: o.Z.filter_selectBox[b],
+								maxRows: 1,
+								value: x,
+								maxLength: 20,
+								onChange: function(e)
+								{
+									!f || e.currentTarget.value.match("\n") || y(e.currentTarget.value)
+								}
+							}), (0, s.jsx)(i.xL,
+							{
+								style:
+								{
+									width: "0.7rem",
+									margin: "0 0 0 0.2rem"
+								},
+								icon: f ? a.l1h : a.eW2
+							})]
+						}), (0, s.jsx)(u,
+						{
+							style:
+							{
+								display: f ? "block" : "none"
+							},
+							children: E.map(function(e, t)
+							{
+								return (0, s.jsx)("li",
+								{
+									children: (0, s.jsx)(h,
+									{
+										className: e.no === n.no ? "medium selected" : "medium",
+										onClick: function()
+										{
+											l(e), _(!1)
+										},
+										children: e.title || "-"
+									})
+								}, t)
+							})
+						}), (0, s.jsx)(m,
+						{
+							style:
+							{
+								display: f ? "block" : "none"
+							},
+							onClick: function()
+							{
+								_(!1)
+							}
+						})]
+					})
+				})
+			};
+			var d = l.ZP.div.withConfig(
+				{
+					displayName: "SelectBox__Container",
+					componentId: "sc-1p70i56-0"
+				})(["width :100%;"]),
+				u = l.ZP.ul.withConfig(
+				{
+					displayName: "SelectBox__UL",
+					componentId: "sc-1p70i56-1"
+				})(["position:absolute;width:100%;max-height:15rem;z-index:2;border:2px solid ", ";border-radius:0.5rem;background-color:", ";overflow-y:auto;overflow-y:overlay;overflow-x:hidden;&::-webkit-scrollbar{display:inline-block;width:0.4rem;}&::-webkit-scrollbar-thumb{height:17%;background-color:", ";border-radius:1rem;}"], function(e)
+				{
+					return e.theme.color.rgb139_187_233
+				}, function(e)
+				{
+					return e.theme.color.rgb255_255_255
+				}, function(e)
+				{
+					return e.theme.color.rgb210_210_210
+				}),
+				h = (0, l.ZP)(i.zx).withConfig(
+				{
+					displayName: "SelectBox__ItemButton",
+					componentId: "sc-1p70i56-2"
+				})(["width :100%;padding:auto 0.5rem;text-align:left;border-radius:0;&.selected{color:", ";background-color:", ";pointer-events:none;}"], function(e)
+				{
+					return e.theme.color.rgb255_255_255
+				}, function(e)
+				{
+					return e.theme.color.rgb139_187_233
+				}),
+				m = l.ZP.div.withConfig(
+				{
+					displayName: "SelectBox__BG",
+					componentId: "sc-1p70i56-3"
+				})(["position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;"])
+		},
+		8024: function(e, t, n)
+		{
+			var o = n(9499),
+				r = n(7294),
+				i = n(5280),
+				a = n(1728),
+				c = n(5893);
+
+			function l(e, t)
+			{
+				var n = Object.keys(e);
+				if(Object.getOwnPropertySymbols)
+				{
+					var o = Object.getOwnPropertySymbols(e);
+					t && (o = o.filter(function(t)
+					{
+						return Object.getOwnPropertyDescriptor(e, t).enumerable
+					})), n.push.apply(n, o)
+				}
+				return n
+			}
+
+			function s(e)
+			{
+				for(var t = 1; t < arguments.length; t++)
+				{
+					var n = null != arguments[t] ? arguments[t] :
+					{};
+					t % 2 ? l(Object(n), !0).forEach(function(t)
+					{
+						(0, o.Z)(e, t, n[t])
+					}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n)) : l(Object(n)).forEach(function(t)
+					{
+						Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(n, t))
+					})
+				}
+				return e
+			}
+			t.Z = function(e)
+			{
+				var t = e.listArr,
+					n = e.clientHeight,
+					o = e.selected,
+					l = e.rowHeight,
+					d = (0, r.useRef)(null),
+					u = (0, r.useState)([]),
+					h = u[0],
+					m = u[1];
+				(0, r.useEffect)(function()
+				{
+					d.current && t.length > 0 && m(t.map(function(e, t)
+					{
+						return setTimeout(function()
+						{
+							var e;
+							null == d || null === (e = d.current) || void 0 === e || e.resetAfterIndex(t)
+						}, 0), o === t ? l+$$('.gskNYI:eq(0)').outerHeight() : l//#单行改为多行头像分支
+					}))
+				}, [o, t, d, l, m]);
+				var p = function(e)
+				{
+					var n = e.index,
+						o = e.style;
+					return (0, c.jsx)("div",
+					{
+						style: s(s(
+						{}, o),
+						{},
+						{
+							transition: "all 300ms ease-in-out"
+						}),
+						children: t[n]
+					})
+				};
+				return (0, c.jsx)(a.Z,
+				{
+					defaultHeight: n,
+					children: function(e)
+					{
+						var n = e.width,
+							o = e.height;
+						return (0, c.jsx)(i.S_,
+						{
+							ref: d,
+							height: o,
+							width: n,
+							itemCount: t.length,
+							itemSize: function(e)
+							{
+								return h[e] || 0
+							},
+							overscanCount: 1,
+							children: p
+						})
+					}
+				})
+			}
+		},
+		5563: function(e, t, n)
+		{
+			n.d(t,
+			{
+				Z: function()
+				{
+					return eT
+				}
+			});
+			var o = n(6835),
+				i = n(4701),
+				a = n(3380),
+				c = n(6150),
+				l = n(1208),
+				s = n(4306),
+				d = n(1163),
+				u = n(7294),
+				h = function(e)
+				{
+					var t, n, r, i = e.ssrBoard,
+						c = (0, d.useRouter)(),
+						h = (0, s.vC)(
+						{
+							fixedCacheKey: "account"
+						}),
+						m = (0, o.Z)(h, 2),
+						p = (m[0], m[1]),
+						f = (0, u.useState)(i),
+						_ = f[0],
+						g = f[1],
+						x = (0, u.useState)(
+						{
+							PAGE: 1,
+							M_TYPE: (0, a.MY)(c.pathname.split("/")[1]),
+							O_TYPE: 0,
+							B_TYPE: 0,
+							C_TYPE: 0,
+							CONTENT: "",
+							LANG: "jp",
+							MEMBER_NO: (null === (t = p.data) || void 0 === t ? void 0 : t.MEMBER_NO) || 0
+						}),
+						y = x[0],
+						b = x[1],
+						E = (0, s.ND)(y,
+						{
+							skip: null !== _
+						}),
+						w = E.data,
+						j = E.isSuccess;
+					return (0, u.useEffect)(function()
+					{
+						var e;
+						b(
+						{
+							PAGE: "string" == typeof c.query.pageNum ? parseInt(c.query.pageNum) : 1,
+							LANG: "string" == typeof c.query.lang ? c.query.lang : "en",
+							M_TYPE: (0, a.MY)(c.pathname.split("/")[1]),
+							O_TYPE: "string" == typeof c.query.o_type ? parseInt(c.query.o_type) : 0,
+							B_TYPE: "string" == typeof c.query.b_type ? parseInt(c.query.b_type) : 0,
+							C_TYPE: "string" == typeof c.query.c_type ? parseInt(c.query.c_type) : 0,
+							CONTENT: "string" == typeof c.query.content ? c.query.content : "",
+							MEMBER_NO: (null === (e = p.data) || void 0 === e ? void 0 : e.MEMBER_NO) || 0
+						})
+					}, [null === (n = p.data) || void 0 === n ? void 0 : n.MEMBER_NO, c.query, c.pathname]), (0, u.useEffect)(function()
+					{
+						var e = function()
+						{
+							var e, t = location.pathname.split("/"),
+								n = decodeURIComponent(location.search),
+								o = {
+									PAGE: parseInt(t[3]) || 1,
+									LANG: t[2] || "en",
+									M_TYPE: (0, a.MY)(t[1]),
+									O_TYPE: 0,
+									B_TYPE: 0,
+									C_TYPE: 0,
+									CONTENT: "",
+									MEMBER_NO: (null === (e = p.data) || void 0 === e ? void 0 : e.MEMBER_NO) || 0
+								};
+							n.split("&").forEach(function(e)
+							{
+								e.match("o_type") ? o.O_TYPE = Number.parseInt(e.split("=")[1]) || 0 : e.match("b_type") ? o.B_TYPE = Number.parseInt(e.split("=")[1]) || 0 : e.match("c_type") ? o.C_TYPE = Number.parseInt(e.split("=")[1]) || 0 : e.match("content") && (o.CONTENT = e.split("=")[1] || "")
+							}), b(o)
+						};
+						return null === l.m || void 0 === l.m ? void 0 : l.m.listen(function(t)
+						{
+							"POP" === t.action && e()
+						})
+					}, [null === (r = p.data) || void 0 === r ? void 0 : r.MEMBER_NO]), [w || i || [], j, y, function(e)
+					{
+						var t = player;//#播放器
+						(e.O_TYPE || e.B_TYPE || e.C_TYPE || e.CONTENT) && (t += "?" + (0 !== e.O_TYPE ? "o_type=" + e.O_TYPE + "&" : "") + (0 !== e.B_TYPE ? "b_type=" + e.B_TYPE + "&" : "") + (0 !== e.C_TYPE ? "c_type=" + e.C_TYPE + "&" : "") + ("" !== e.CONTENT ? "content=" + e.CONTENT : "")), window.history.pushState(null, (0, a.sk)(e.M_TYPE), t), null !== _ && g(null), b(e)
+					}]
+				},
+				m = n(9008),
+				p = n.n(m),
+				f = n(5675),
+				_ = n.n(f),
+				g = n(9521),
+				x = n(1563),
+				y = n(2985),
+				b = n(5893),
+				E = function(e)
+				{
+					var t = e.show,
+						n = (0, u.useState)(!0),
+						o = n[0],
+						r = n[1];
+					return (0, b.jsx)(b.Fragment,
+					{
+						children: t && o && (0, b.jsxs)(x.bI,
+						{
+							children: [(0, b.jsx)(x.dh,
+							{
+								onClick: function()
+								{
+									return r(!1)
+								},
+								children: "x"
+							}), (0, b.jsx)(y.Z,
+							{
+								client: "ca-pub-3260842116764000",
+								slot: "7838710652",
+								format: "fluid",
+								responsive: "true",
+								layoutKey: "",
+								height: "100%",
+								width: "100%"
+							})]
+						})
+					})
+				},
+				w = n(8024),
+				j = function(e)
+				{
+					var t = e.character,
+						n = e.option,
+						o = e.changeOption,
+						r = (0, c.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						i = function()
+						{
+							o(
+							{
+								PAGE: 1,
+								M_TYPE: n.M_TYPE,
+								O_TYPE: n.O_TYPE,
+								B_TYPE: n.B_TYPE,
+								C_TYPE: n.C_TYPE,
+								CONTENT: t.no.toString(),
+								LANG: n.LANG,
+								MEMBER_NO: (null == n ? void 0 : n.MEMBER_NO) || 0
+							})
+						};
+					return (0, b.jsx)(T,
+					{
+						children: (0, b.jsx)(v,
+						{
+							children: (0, b.jsxs)(N,
+							{
+								onClick: function()
+								{
+									i()
+								},
+								children: [(0, b.jsxs)(v,
+								{
+									children: [(0, b.jsx)(x.NZ,
+									{
+										width: 252,
+										height: 252,
+										alt: "profile",
+										src: loadhead(t.no,t.profile[0]),//#左方选择框
+										onError: function(e)
+										{
+											var t = e.currentTarget;
+											(0, a.Mp)(t, "character")
+										}
+									}), (0, b.jsxs)(C,
+									{
+										children: [(0, b.jsx)("h2",
+										{
+											className: "bold",
+											children: t.name[r].replaceAll("-", " ")
+										}), (0, b.jsx)(O,
+										{
+											children: t.club[r]
+										})]
+									})]
+								}), (0, b.jsx)(P,
+								{
+									width: 252,
+									height: 252,
+									src: href+"MoeData/Ui/School/"+(t.school[mtlang] === '自定义' ? '自定义' : mt_characters[t.no].school)+'.webp',//#学校图标
+									onError: function(e)
+									{
+										var t = e.currentTarget;
+										(0, a.Mp)(t, "school")
+									},
+									alt: "school"
+								})]
+							})
+						})
+					})
+				},
+				T = g.ZP.div.withConfig(
+				{
+					displayName: "Character__Container",
+					componentId: "sc-1nibxky-0"
+				})(["", " word-break:keep-all;height:auto;background-color:", ";"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						direction: "column"
+					})
+				}, function(e)
+				{
+					return e.theme.color.rgb243_247_248
+				}),
+				v = g.ZP.div.withConfig(
+				{
+					displayName: "Character__Wrapper",
+					componentId: "sc-1nibxky-1"
+				})(["", " &.selected{background-color:", ";}"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						align: "space-around",
+						justify: "flex-start"
+					})
+				}, function(e)
+				{
+					return e.theme.color.rgb202_215_221
+				}),
+				N = g.ZP.div.withConfig(
+				{
+					displayName: "Character__CContainer",
+					componentId: "sc-1nibxky-2"
+				})(["", " height:auto;padding:1rem;cursor:pointer;box-sizing:border-box;&:hover{background-color:", ";}&:active{background-color:", ";}"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						justify: "space-between"
+					})
+				}, function(e)
+				{
+					return e.theme.color.rgb218_228_233
+				}, function(e)
+				{
+					return e.theme.color.rgb202_215_221
+				}),
+				C = g.ZP.div.withConfig(
+				{
+					displayName: "Character__ProfileText",
+					componentId: "sc-1nibxky-3"
+				})(["", " height:auto;width:auto;margin:0 0 0 1rem;font-size:1.1rem;max-height:4rem;color:", ";"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						direction: "column",
+						justify: "space-around",
+						align: "flex-start"
+					})
+				}, function(e)
+				{
+					return e.theme.color.rgb68_72_78
+				}),
+				O = g.ZP.span.withConfig(
+				{
+					displayName: "Character__FontSpan",
+					componentId: "sc-1nibxky-4"
+				})(["font-size:1rem;color:", ";"], function(e)
+				{
+					return e.theme.color.rgb111_119_127
+				}),
+				P = (0, g.ZP)(x.Yo).withConfig(
+				{
+					displayName: "Character__School",
+					componentId: "sc-1nibxky-5"
+				})(["height:4rem;width:4rem;padding:0;"]),
+				k = n(6696),
+				M = n(5654),
+				S = n(8586),
+				B = n(4288),
+				Z = n(9417),
+				I = n(4685),
+				R = function(e)
+				{
+					var t = e.show,
+						n = e.option,
+						o = e.handleModalShow,
+						r = e.changeOption,
+						l = (0, c.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						s = (0, u.useState)((0, a.FQ)(n.O_TYPE)),
+						d = s[0],
+						h = s[1];
+					(0, u.useEffect)(function()
+					{
+						h((0, a.FQ)(n.O_TYPE))
+					}, [t, n, h]);
+					var m = function()
+					{
+						var e = {
+							PAGE: 1,
+							M_TYPE: n.M_TYPE,
+							O_TYPE: n.O_TYPE,
+							B_TYPE: n.B_TYPE,
+							C_TYPE: n.C_TYPE,
+							CONTENT: "",
+							LANG: n.LANG,
+							MEMBER_NO: n.MEMBER_NO
+						};
+						switch (d)
+						{
+							case "recent":
+								e.O_TYPE = 0;
+								break;
+							case "best":
+								e.O_TYPE = 2;
+								break;
+							case "view":
+								e.O_TYPE = 4
+						}
+						r(e)
+					};
+					return (0, b.jsx)("div",
+					{
+						style:
+						{
+							width: "100%",
+							position: "relative"
+						},
+						children: (0, b.jsxs)(Y,
+						{
+							style: t ?
+							{
+								maxHeight: "12rem"
+							} :
+							{
+								maxHeight: "0"
+							},
+							children: [(0, b.jsxs)(A,
+							{
+								children: [(0, b.jsx)(D,
+								{
+									className: "bold",
+									children: i.Z.sort[l]
+								}), (0, b.jsx)(I.ec,
+								{
+									onClick: function()
+									{
+										o(!1)
+									},
+									children: (0, b.jsx)(z,
+									{})
+								})]
+							}), (0, b.jsx)(L,
+							{
+								children: ["recent", "best", "view"].map(function(e, t)
+								{
+									return (0, b.jsx)(x.Bx,
+									{
+										onClick: function()
+										{
+											h(e)
+										},
+										className: d === e ? "selected medium" : "medium",
+										children: i.Z[e][l]
+									}, t)
+								})
+							}), (0, b.jsx)(A,
+							{
+								children: (0, b.jsx)(x.Mm,
+								{
+									className: "medium",
+									onClick: function()
+									{
+										m(), o(!1)
+									},
+									children: i.Z.confirm[l]
+								})
+							})]
+						})
+					})
+				},
+				Y = g.ZP.div.withConfig(
+				{
+					displayName: "GroupModal__Container",
+					componentId: "sc-1czdr7s-0"
+				})(["", ";background-color:", ";border:1px solid ", ";border-radius:10px;position:absolute;transition:max-height 0.3s ease-in-out;height:auto;z-index:1;overflow:hidden;box-sizing:border-box;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						direction: "column"
+					})
+				}, function(e)
+				{
+					return e.theme.color.rgb255_255_255
+				}, function(e)
+				{
+					return e.theme.color.rgb224_226_228
+				}),
+				A = g.ZP.div.withConfig(
+				{
+					displayName: "GroupModal__Header",
+					componentId: "sc-1czdr7s-1"
+				})(["", ";padding:0.6rem;box-sizing:border-box;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						justify: "space-between"
+					})
+				}),
+				L = g.ZP.div.withConfig(
+				{
+					displayName: "GroupModal__Body",
+					componentId: "sc-1czdr7s-2"
+				})(["", ";border-top:1px solid ", ";border-bottom:1px solid ", ";padding:0.6rem;box-sizing:border-box;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						justify: "space-between"
+					})
+				}, function(e)
+				{
+					return e.theme.color.rgb239_240_241
+				}, function(e)
+				{
+					return e.theme.color.rgb239_240_241
+				}),
+				D = g.ZP.span.withConfig(
+				{
+					displayName: "GroupModal__FontSpan",
+					componentId: "sc-1czdr7s-3"
+				})(["font-size:1.2rem;color:", ";"], function(e)
+				{
+					return e.theme.color.rgb63_68_74
+				}),
+				z = (0, g.ZP)(x.j4).withConfig(
+				{
+					displayName: "GroupModal__ExitI",
+					componentId: "sc-1czdr7s-4"
+				})(["width:1.5rem;height:1.5rem;&:before,&:after{content:'';width:1.5rem;height:2px;left:40%;background:", ";}"], function(e)
+				{
+					return e.theme.color.rgb15_33_64
+				}),
+				F = function(e)
+				{
+					var t = e.characterList,
+						n = e.option,
+						o = e.handleSelectList,
+						r = e.rowCount,
+						l = e.changeOption,
+						s = (0, c.T)(),
+						d = (0, c.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						h = (0, u.useState)(!1),
+						m = h[0],
+						p = h[1],
+						f = (0, u.useState)(""),
+						_ = f[0],
+						g = f[1],
+						y = function(e, r)
+						{
+							var i = {
+								PAGE: 1,
+								M_TYPE: n.M_TYPE,
+								O_TYPE: n.O_TYPE,
+								B_TYPE: n.B_TYPE,
+								C_TYPE: n.C_TYPE,
+								CONTENT: "",
+								LANG: n.LANG,
+								MEMBER_NO: n.MEMBER_NO
+							};
+							switch (e)
+							{
+								case "content":
+									i.CONTENT = 2 === n.C_TYPE ? "" : _;
+									break;
+								case "o_type":
+									i.CONTENT = n.CONTENT, i.O_TYPE = i.O_TYPE % 2 == 0 ? i.O_TYPE + 1 : i.O_TYPE - 1;
+									break;
+								case "c_type":
+									2 === r && o(t.filter(function(e)
+									{
+										return e.open
+									})), i.C_TYPE = r || 0;
+									break;
+								case "b_type":
+									i.MEMBER_NO ? i.B_TYPE = 1 === i.B_TYPE ? 0 : 1 : s((0, S.Aj)(!0))
+							}
+							l(i)
+						},
+						E = function()
+						{
+							var e = "title";
+							switch (n.C_TYPE)
+							{
+								case 0:
+									e = "title";
+									break;
+								case 1:
+									e = "writer";
+									break;
+								case 2:
+									e = "student";
+									break;
+								case 3:
+									e = "series"
+							}
+							return e
+						},
+						w = function(e)
+						{
+							g(e), 2 === n.C_TYPE && o(t.filter(function(t)
+							{
+								return t.open && null !== (0, a.oG)(t, e)
+							}))
+						};
+					return (0, b.jsxs)(q,
+					{
+						children: [(0, b.jsxs)(G,
+						{
+							children: [(0, b.jsx)(H,
+							{
+								className: "bold",
+								style:
+								{
+									lineHeight: "2rem"
+								},
+								children: (0, b.jsxs)("h1",
+								{
+									children: [`${i.Z.momotalk[d]} ${i.Z.library[d]}`, (0, b.jsxs)("span",
+									{
+										style:
+										{
+											fontSize: "1.2rem"
+										},
+										children: ["(", r, ")"]
+									})]
+								})
+							}), (0, b.jsxs)(K,
+							{
+								style:
+								{
+									flexWrap: "wrap",
+									justifyContent: "flex-end"
+								},
+								children: [/*(0, b.jsx)(K,
+								{
+									style:
+									{
+										justifyContent: "flex-end",
+										marginBottom: "0.5rem"
+									},
+									children: (0, b.jsx)(x.jl,
+									{
+										onClick: function()
+										{
+											y("b_type", null)
+										},
+										children: (0, b.jsx)(X,
+										{
+											icon: 0 === n.B_TYPE ? B.xVw : Z.xVw
+										})
+									})
+								}), (0, b.jsxs)(K,
+								{
+									style:
+									{
+										marginBottom: "0.5rem"
+									},
+									children: [(0, b.jsx)(U,
+									{
+										className: "medium",
+										onClick: function()
+										{
+											p(!m)
+										},
+										children: (0, b.jsx)(H,
+										{
+											style:
+											{
+												fontSize: "1.1rem"
+											},
+											children: i.Z[(0, a.FQ)(n.O_TYPE)][d]
+										})
+									}), (0, b.jsx)(x.jl,
+									{
+										onClick: function()
+										{
+											y("o_type", null)
+										},
+										children: (0, b.jsx)(K,
+										{
+											children: (0, b.jsx)(x.Yo,
+											{
+												style:
+												{
+													width: "2rem",
+													height: "1rem",
+													marginLeft: "0.4rem"
+												},
+												width: 110,
+												height: 60,
+												alt: "order",
+												src: href+"MoeData/Ui/".concat(n.order ? "down" : "up", ".webp")//#排序图标
+											})
+										})
+									})]
+								})*/]
+							})]
+						}), (0, b.jsxs)(H,
+						{
+							style: 
+							{
+								userSelect: 'text',
+								lineHeight: '3rem',
+								color: 'red'
+							},
+							children: 'QQ反馈交流群：922392676'
+						}), (0, b.jsxs)(H,
+						{
+							style: 
+							{
+								userSelect: 'text',
+								lineHeight: '3rem',
+								whiteSpace: 'pre',
+    							textAlign: 'center'
+							},
+							dangerouslySetInnerHTML:{__html:'【征文活动】秘密岛屿探索计划正在进行中\n详情请见：<a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>'}
+						}), (0, b.jsxs)(K,
+						{
+							style:
+							{
+								display: 'none',
+								width: "100%"
+							},
+							children: [(0, b.jsx)("div",
+							{
+								style:
+								{
+									width: "9rem",
+									marginRight: "0.5rem"
+								},
+								children: (0, b.jsx)(M.Z,
+								{
+									items: ["title", "writer", "student", "series"].map(function(e, t)
+									{
+										return {
+											title: i.Z[e][d],
+											no: t
+										}
+									}),
+									selected:
+									{
+										title: i.Z[E()][d],
+										no: function(e)
+										{
+											var t = 0;
+											switch (e)
+											{
+												case "title":
+													t = 0;
+													break;
+												case "writer":
+													t = 1;
+													break;
+												case "student":
+													t = 2;
+													break;
+												case "series":
+													t = 3
+											}
+											return t
+										}(E())
+									},
+									setSelected: function(e)
+									{
+										g(""), y("c_type", e.no)
+									}
+								})
+							}), (0, b.jsxs)(K,
+							{
+								style:
+								{
+									width: "100%"
+								},
+								children: [(0, b.jsx)(x.II,
+								{
+									type: "text",
+									value: _,
+									maxLength: 30,
+									className: "medium",
+									placeholder: i.Z.input_comment[d],
+									onChange: function(e)
+									{
+										w(e.currentTarget.value)
+									}
+								}), (0, b.jsx)(x.lR,
+								{
+									width: 40,
+									height: 40,
+									style:
+									{
+										right: "0.5rem"
+									},
+									onClick: function()
+									{
+										g(""), y("", null)
+									},
+									src: href+"MoeData/Ui/pen.webp",//#铅笔图标
+									alt: "pen"
+								})]
+							}), (0, b.jsx)(W,
+							{
+								className: "medium",
+								onClick: function()
+								{
+									y("content", null)
+								},
+								children: i.Z.search[d]
+							})]
+						}), (0, b.jsx)(R,
+						{
+							show: m,
+							option: n,
+							changeOption: l,
+							handleModalShow: function(e)
+							{
+								p(e)
+							}
+						})]
+					})
+				},
+				q = g.ZP.div.withConfig(
+				{
+					displayName: "SearchBar__Container",
+					componentId: "sc-uf78kh-0"
+				})(["", " height:auto;padding:1rem 1rem 0rem 1rem;box-sizing:border-box;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						direction: "column"
+					})
+				}),
+				G = g.ZP.div.withConfig(
+				{
+					displayName: "SearchBar__Sort",
+					componentId: "sc-uf78kh-1"
+				})(["", " text-align:center;height:auto;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						justify: "space-between"
+					})
+				}),
+				H = g.ZP.span.withConfig(
+				{
+					displayName: "SearchBar__FontSpan",
+					componentId: "sc-uf78kh-2"
+				})(["font-size:1.5rem;color:", ";"], function(e)
+				{
+					return e.theme.color.rgb63_68_74
+				}),
+				K = g.ZP.div.withConfig(
+				{
+					displayName: "SearchBar__Flex",
+					componentId: "sc-uf78kh-3"
+				})(["", " height:auto;width:auto;position:relative;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{})
+				}),
+				U = (0, g.ZP)(x.jl).withConfig(
+				{
+					displayName: "SearchBar__Parallelogram1",
+					componentId: "sc-uf78kh-4"
+				})(["width:7.5rem;height:2.5rem;&:after{content:'';right:0.5rem;position:absolute;transform:skew(-10deg);border-bottom:0.45rem solid transparent;border-left:0.45rem solid transparent;border-top:0.45rem solid ", ";border-right:0.45rem solid ", ";}&:active:before{width:7.46rem;height:2.46rem;}"], function(e)
+				{
+					return e.theme.color.rgb73_111_143
+				}, function(e)
+				{
+					return e.theme.color.rgb73_111_143
+				}),
+				W = (0, g.ZP)(x.zx).withConfig(
+				{
+					displayName: "SearchBar__SearchButton",
+					componentId: "sc-uf78kh-5"
+				})(["height:2rem;width:5rem;margin:auto;margin-left:0.5rem;font-size:1rem;padding:0;border:2px solid ", ";color:", ";"], function(e)
+				{
+					return e.theme.color.rgb230_233_235
+				}, function(e)
+				{
+					return e.theme.color.rgb63_68_74
+				}),
+				X = (0, g.ZP)(x.xL).withConfig(
+				{
+					displayName: "SearchBar__BookMarkIcon",
+					componentId: "sc-uf78kh-6"
+				})(["width:1rem;color:", ";"], function(e)
+				{
+					return e.theme.color.rgb45_70_100
+				}),
+				V = n(29),
+				$ = n(7794),
+				Q = n.n($),
+				J = n(7451),
+				ee = n(4212),
+				/*et = function(e)
+				{
+					var t = e.show,
+						n = e.handleShow,
+						o = e.handleSend,
+						r = (0, c.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						a = (0, u.useState)(""),
+						l = a[0],
+						s = a[1],
+						d = function()
+						{
+							s(""), n(!1)
+						};
+					return (0, b.jsx)(I.Xf,
+					{
+						className: t ? "visible medium" : "medium",
+						onDoubleClick: function()
+						{
+							d()
+						},
+						children: (0, b.jsxs)(I.F0,
+						{
+							onDoubleClick: function(e)
+							{
+								return e.stopPropagation(), !1
+							},
+							children: [(0, b.jsxs)(I.h4,
+							{
+								children: [(0, b.jsx)(I.Dx,
+								{
+									className: "bold",
+									children: i.Z.report[r]
+								}), (0, b.jsx)(I.ec,
+								{
+									onClick: function()
+									{
+										d()
+									},
+									children: (0, b.jsx)(x.j4,
+									{})
+								})]
+							}), (0, b.jsxs)(I.$0,
+							{
+								children: [(0, b.jsx)(x.OP,
+								{
+									children: (0, b.jsx)(x.Kx,
+									{
+										className: "medium",
+										placeholder: i.Z.report_comment1[r],
+										maxRows: 1,
+										value: l,
+										maxLength: 20,
+										onChange: function(e)
+										{
+											e.currentTarget.value.match("\n") || s(e.currentTarget.value)
+										}
+									})
+								}), (0, b.jsxs)("span",
+								{
+									style:
+									{
+										fontSize: "0.9rem",
+										marginTop: "1rem",
+										textAlign: "center"
+									},
+									children: ["※", i.Z.report_comment2[r]]
+								}), (0, b.jsxs)(I.$_,
+								{
+									children: [(0, b.jsx)(I.Lw,
+									{
+										className: "bold",
+										onClick: function()
+										{
+											d()
+										},
+										children: i.Z.cancel[r]
+									}), (0, b.jsx)(I.AZ,
+									{
+										className: "bold",
+										disabled: l.length < 1,
+										onClick: function()
+										{
+											o("M_REPORT", l), d()
+										},
+										children: i.Z.confirm[r]
+									})]
+								})]
+							})]
+						})
+					})
+				},*/
+				en = n(3162),
+				eo = function(e)
+				{
+					var t, n, r, l = e.show,
+						u = e.handleShow,
+						h = e.board,
+						m = (0, c.T)(),
+						p = (0, c.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						f = (0, s.vC)(
+						{
+							fixedCacheKey: "account"
+						}),
+						_ = (0, o.Z)(f, 2),
+						g = (_[0], _[1]),
+						y = (0, s.ej)(),
+						E = (0, o.Z)(y, 1)[0],
+						w = (0, s.TR)(),
+						j = (0, o.Z)(w, 1)[0],
+						T = (0, d.useRouter)(),
+						v = (t = (0, V.Z)(Q().mark(function e()
+						{
+							var t, n, o, r;
+							return Q().wrap(function(e)
+							{
+								for(;;) switch (e.prev = e.next)
+								{
+									case 0:
+										return e.next = 2, E(h.M_PATH);
+									case 2:
+										if("data" in (t = e.sent))
+										{
+											e.next = 5;
+											break
+										}
+										return e.abrupt("return");
+									case 5:
+										return o = [JSON.stringify(n = t.data)], e.next = 9, (0, a.rU)(o);
+									case 9:
+										r = e.sent, (0, en.saveAs)(r, "MoeTalk_".concat(n[0].title, ".png"));
+									case 11:
+									case "end":
+										return e.stop()
+								}
+							}, e)
+						})), function()
+						{
+							return t.apply(this, arguments)
+						}),
+						N = (n = (0, V.Z)(Q().mark(function e()
+						{
+							var t, n;
+							return Q().wrap(function(e)
+							{
+								for(;;) switch (e.prev = e.next)
+								{
+									case 0:
+										if(!((null === (t = g.data) || void 0 === t ? void 0 : t.MEMBER_NO) !== h.MEMBER_NO))
+										{
+											e.next = 2;
+											break
+										}
+										return e.abrupt("return");
+									case 2:
+										return m((0, S.jh)(!0)), e.next = 5, j(
+										{
+											BOARD_NO: h.BOARD_NO,
+											MEMBER_NO: (null === (n = g.data) || void 0 === n ? void 0 : n.MEMBER_NO) || 0,
+											STATUS: 2
+										});
+									case 5:
+										m((0, S.jh)(!1)), u(!1);
+									case 7:
+									case "end":
+										return e.stop()
+								}
+							}, e)
+						})), function()
+						{
+							return n.apply(this, arguments)
+						}),
+						C = (r = (0, V.Z)(Q().mark(function e(t)
+						{
+							var n, o;
+							return Q().wrap(function(e)
+							{
+								for(;;) switch (e.prev = e.next)
+								{
+									case 0:
+										if(!((null === (n = g.data) || void 0 === n ? void 0 : n.MEMBER_NO) !== h.MEMBER_NO))
+										{
+											e.next = 2;
+											break
+										}
+										return e.abrupt("return");
+									case 2:
+										return m((0, S.jh)(!0)), e.next = 5, j(
+										{
+											BOARD_NO: h.BOARD_NO,
+											MEMBER_NO: (null === (o = g.data) || void 0 === o ? void 0 : o.MEMBER_NO) || 0,
+											M_TYPE: t
+										});
+									case 5:
+										m((0, S.jh)(!1)), u(!1), T.push(player);
+									case 8:
+									case "end":
+										return e.stop()
+								}
+							}, e)
+						})), function(e)
+						{
+							return r.apply(this, arguments)
+						});
+					return (0, b.jsx)(I.Xf,
+					{
+						className: l ? "visible medium" : "medium",
+						onDoubleClick: function()
+						{
+							u(!1)
+							delete nowChapter[2]
+						},
+						children: (0, b.jsxs)(I.F0,
+						{
+							onDoubleClick: function(e)
+							{
+								return e.stopPropagation(), !1
+							},
+							children: [(0, b.jsxs)(I.h4,
+							{
+								children: [(0, b.jsx)(I.Dx,
+								{
+									className: "bold",
+									children: nowChapter[2] ? nowChapter[2] : '播放章节'
+									//children: i.Z.setting[p]
+								}), (0, b.jsx)(I.ec,
+								{
+									onClick: function()
+									{
+										u(!1)
+										delete nowChapter[2]
+									},
+									children: (0, b.jsx)(x.j4,
+									{})
+								})]
+							}), (0, b.jsx)(H,
+								{
+									style:
+									{
+										marginTop: "0.5rem"
+									},
+									children: `${h.name} ${e.index+1}`
+								}), (0, b.jsx)(I.$0,
+							{
+								children: [(0, b.jsxs)(er,
+								{
+									children: [(0, b.jsxs)(ei,
+									{
+										children: [(0, b.jsx)(ec,
+										{
+											onClick: function()
+											{
+												delete nowChapter[2]
+												if(isNaN(e.index+1))return;
+												INIT_loading()
+												skip = false
+												$$('.nowChapter').text('')
+												let playChat = 
+												{
+													nowChats: [],
+													replyDepth: 0,
+													chats: [],
+													chatSpeed: (0, a.zP)(),
+													header: {},
+													board_no: 0
+												}
+												m((0, ee.Fe)(playChat))
+												XHR(`${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index]}.json`,function(data)
+												{
+													u(!1)
+													data = loaddata(data,'player')
+													nowChapter[0] = e.index
+													nowChapter[1] = h
+													playChat = 
+													{
+														nowChats: [],
+														replyDepth: 0,
+														chats: data.CHAT,
+														chatSpeed: (0, a.zP)(),
+														header: data.INFO,
+														board_no: 0
+													}
+													INIT_loading()
+													setTimeout(function(){m((0, ee.Fe)(playChat))}, 1e3)
+													m((0, S.Cz)(!0))
+													$$('.nowChapter').text(`${h.name}_${e.index+1}：${h.chapter[e.index]}`)
+													$$('.PLAYER_play').click()
+												})
+												if(h.chapter[e.index+1])
+												{
+													XHR(`${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index+1]}.json`)
+												}
+												
+											},
+											children: (0, b.jsx)(x.xL,
+											{
+												icon: B.iiS
+											})
+										}), (0, b.jsx)(ea,
+										{
+											style:
+											{
+												marginTop: "0.5rem"
+											},
+											children: i.Z.play[p]
+										})]
+									})]
+								}), (0, b.jsx)(H,
+								{
+									style:
+									{
+										marginTop: "0.5rem"
+									},
+									children: '转载已获作者授权'
+								})]
+							})]
+						})
+					})
+				},
+				er = g.ZP.div.withConfig(
+				{
+					displayName: "PopupTalkSetting__Body",
+					componentId: "sc-1aqo1uc-0"
+				})(["display:flex;justify-content:space-around;"]),
+				ei = g.ZP.div.withConfig(
+				{
+					displayName: "PopupTalkSetting__Ibox",
+					componentId: "sc-1aqo1uc-1"
+				})(["display:flex;flex-direction:column;align-items:center;text-align:center;margin:0.8rem 0rem;width:6.5rem;"]),
+				ea = g.ZP.span.withConfig(
+				{
+					displayName: "PopupTalkSetting__FontSpan",
+					componentId: "sc-1aqo1uc-2"
+				})(["display:table-cell;display:block;font-size:1rem;line-height:2rem;color:rgb(111,119,127);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"]),
+				ec = (0, g.ZP)(x.hU).withConfig(
+				{
+					displayName: "PopupTalkSetting__SettingButton",
+					componentId: "sc-1aqo1uc-3"
+				})(["width:2.5rem;height:2.5rem;color:", ";"], function(e)
+				{
+					return e.theme.color.rgb45_70_100
+				}),
+				el = function(e)
+				{
+					var t, n, r, l = e.board,
+						h = e.show,
+						m = e.changeOption,
+						p = (0, c.T)(),
+						f = (0, c.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						Y = (0, u.useState)(!1),
+						A = Y[0],
+						L = Y[1];
+					return (0, b.jsxs)(ed,
+					{
+						style: h ?
+						{
+							maxHeight: "11rem",
+							overflow: 'scroll',
+							flexDirection: 'row'
+						} :
+						{
+							maxHeight: "0"
+						},
+						children: [(0, b.jsxs)(eu,
+						{
+							children: [(0, b.jsxs)(eh,
+							{
+								children: (0, b.jsxs)("a",
+								{
+									style:
+									{
+										color: "rgb(48, 150, 245)",
+										cursor: "pointer"
+									},
+									children: '【作者主页】',
+									href: l.home,
+									target: '_blank'
+								})
+							}), l.chapter.map(function(v,k)
+							{
+								return (0, b.jsxs)(eh,
+								{
+									children: [(0, b.jsx)(ep,
+									{
+										className: `${l.authorid}_${l.bookid}_${k}`,
+										onClick: function()
+										{
+											L([!0,k])
+										},
+										style: 
+										{
+											width: '1rem',
+											height: '1rem',
+											marginRight: '1rem'
+										},
+										children: (0, b.jsx)(x.xL,
+										{
+											icon: B.iiS
+										})
+									}),`${k+1}. ${v}`]
+								})
+							})]
+						}), (0, b.jsx)(eo,
+						{
+							show: A[0],
+							index: A[1],
+							board: l,
+							handleShow: function(e)
+							{
+								L(e)
+							}
+						})]
+					})
+				},
+				es = g.ZP.div.withConfig(
+				{
+					displayName: "TalkInfo__Flex",
+					componentId: "sc-t2x262-0"
+				})(["display:flex;"]),
+				ed = (0, g.ZP)(es).withConfig(
+				{
+					displayName: "TalkInfo__ProfileText",
+					componentId: "sc-t2x262-1"
+				})(["flex-direction:column;justify-content:space-around;width:100%;margin:0;font-size:1.1rem;color:rgb(68,72,78);transition:max-height 0.5s ease-in-out;overflow:hidden;"]),
+				eu = g.ZP.div.withConfig(
+				{
+					displayName: "TalkInfo__FontDiv",
+					componentId: "sc-t2x262-2"
+				})(["display:table;width:100%;table-layout:fixed;white-space:nowrap;"]),
+				eh = g.ZP.span.withConfig(
+				{
+					displayName: "TalkInfo__FontSpan",
+					componentId: "sc-t2x262-3"
+				})(["display:table-cell;display:block;font-size:1rem;color:rgb(111,119,127);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.5rem;"]),
+				em = (0, g.ZP)(es).withConfig(
+				{
+					displayName: "TalkInfo__Ibox",
+					componentId: "sc-t2x262-4"
+				})(["flex-direction:column;align-items:center;text-align:center;margin:0.8rem 0rem;width:6.5rem;"]),
+				ep = (0, g.ZP)(x.hU).withConfig(
+				{
+					displayName: "TalkInfo__ActionButton",
+					componentId: "sc-t2x262-5"
+				})(["width:2.5rem;height:2.5rem;color:", ";"], function(e)
+				{
+					return e.theme.color.rgb45_70_100
+				}),
+				ef = function(e)
+				{
+					var t, n, r = e.board,
+						l = e.selected,
+						d = e.setSelected,
+						h = e.isTalk,
+						m = e.setIsTalk,
+						p = e.changeOption,
+						f = (0, c.T)(),
+						_ = (0, c.C)(function(e)
+						{
+							return e.playChat
+						}),
+						g = (0, c.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						y = (0, u.useState)(!1),
+						E = y[0],
+						w = y[1],
+						j = (0, s.ej)(),
+						T = (0, o.Z)(j, 1)[0],
+						v = (0, s.$X)(),
+						N = (0, o.Z)(v, 1)[0];
+					return (0, b.jsxs)(b.Fragment,
+					{
+						children: [(0, b.jsxs)(e_,
+						{
+							children: [(0, b.jsx)(eg,
+							{
+								onClick: function()
+								{
+									d(l === r ? null : r)
+								},
+								children: (0, b.jsxs)("div",
+								{
+									style:
+									{
+										display: "flex",
+										width: "100%"
+									},
+									children: [(0, b.jsxs)(ex,
+									{
+										children: [(0, b.jsx)("h2",
+										{
+											children: (0, b.jsx)(ew,
+											{
+												className: "bold",
+												children: (0, b.jsxs)(ey,
+												{
+													children: r.name
+												})
+											})
+										}), (0, b.jsx)(ew,
+										{
+											children: (0, b.jsxs)(eb,
+											{
+												children: [i.Z.writer[g], " : ", (0, b.jsx)("span",{children: r.author})]
+											})
+										})]
+									})]
+								})
+							}), (0, b.jsx)(ej,
+							{
+								onClick: function()
+								{
+									$$(`.${r.authorid}_${r.bookid}_0`).click()
+								},
+								children: (0, b.jsx)(x.xL,
+								{
+									icon: B.iiS
+								})
+							})]
+						}), (0, b.jsxs)("div",
+						{
+							style:
+							{
+								padding: "0rem 1rem"
+							},
+							children: [(0, b.jsx)(el,
+							{
+								board: r,
+								show: l === r,
+								changeOption: p
+							}), (0, b.jsx)(eE,
+							{})]
+						}), (0, b.jsx)(eo,
+						{
+							show: E[0],
+							index: E[1],
+							board: r,
+							handleShow: function()
+							{
+								w(!1)
+							}
+						})]
+					})
+				},
+				e_ = g.ZP.div.withConfig(
+				{
+					displayName: "Talk__Wrapper",
+					componentId: "sc-1340qk3-0"
+				})(["display:flex;height:auto;width:100%;position:relative;"]),
+				eg = g.ZP.div.withConfig(
+				{
+					displayName: "Talk__CContainer",
+					componentId: "sc-1340qk3-1"
+				})(["display:flex;padding:1rem;justify-content:space-between;width:100%;cursor:pointer;&:hover{background-color:", ";}&:active{background-color:", ";}"], function(e)
+				{
+					return e.theme.color.rgb218_228_233
+				}, function(e)
+				{
+					return e.theme.color.rgb202_215_221
+				}),
+				ex = g.ZP.div.withConfig(
+				{
+					displayName: "Talk__ProfileText",
+					componentId: "sc-1340qk3-2"
+				})(["display:flex;flex-direction:column;justify-content:space-around;width:100%;margin:0 0 0 1rem;padding-right:3rem;font-size:1.1rem;color:", ";"], function(e)
+				{
+					return e.theme.color.rgb68_72_78
+				}),
+				ey = g.ZP.span.withConfig(
+				{
+					displayName: "Talk__FontSpan",
+					componentId: "sc-1340qk3-3"
+				})(["display:table-cell;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:2rem;"]),
+				eb = (0, g.ZP)(ey).withConfig(
+				{
+					displayName: "Talk__FontSpan2",
+					componentId: "sc-1340qk3-4"
+				})(["font-size:1rem;color:", ";"], function(e)
+				{
+					return e.theme.color.rgb111_119_127
+				}),
+				eE = g.ZP.hr.withConfig(
+				{
+					displayName: "Talk__HR",
+					componentId: "sc-1340qk3-5"
+				})(["border:0;height:1px;background:", ";width:100%;margin:0px;"], function(e)
+				{
+					return e.theme.color.rgb218_225_229
+				}),
+				ew = g.ZP.div.withConfig(
+				{
+					displayName: "Talk__FontDiv",
+					componentId: "sc-1340qk3-6"
+				})(["display:table;width:90%;table-layout:fixed;white-space:nowrap;"]),
+				ej = (0, g.ZP)(x.hU).withConfig(
+				{
+					displayName: "Talk__PlayButton",
+					componentId: "sc-1340qk3-7"
+				})(["position:absolute;right:1rem;top:1.8rem;width:2.5rem;height:2.5rem;color:", ";"], function(e)
+				{
+					return e.theme.color.rgb45_70_100
+				}),
+				eT = function(e)
+				{
+					var t, n = e.ssrBoard,
+						l = (0, c.C)(function(e)
+						{
+							return e.global.isMobile
+						}),
+						s = (0, c.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						d = h(
+						{
+							ssrBoard: n
+						}),
+						m = (0, o.Z)(d, 4),
+						f = m[0],
+						_ = m[1],
+						g = m[2],
+						xx = m[3],
+						y = (0, u.useState)(!1),
+						T = y[0],
+						v = y[1],
+						N = (0, u.useState)(null),
+						C = N[0],
+						O = N[1],
+						P = (0, u.useState)([]),
+						M = P[0],
+						S = P[1],
+						B = (0, u.useState)(0),
+						ZZ = B[0],
+						I = B[1],
+						R = (0, u.useRef)(null),
+						Y = (null == R ? void 0 : null === (t = R.current) || void 0 === t ? void 0 : t.clientHeight) || 0;
+					(0, u.useEffect)(function()
+					{
+						2 === g.C_TYPE && setTimeout(function()
+						{
+							S(CHAR_CharList), I(6 * parseInt(document.documentElement.style.fontSize.replace("px", "")) || 0)
+						}, 500)
+					}, [g.C_TYPE, l]);
+					var A = (0, a.sk)(g.M_TYPE).replace(/^[a-z]/, function(e)
+					{
+						return e.toUpperCase()
+					});
+
+					return (0, b.jsxs)(ev,
+					{
+						children: [_ && (0, b.jsxs)(p(),
+						{
+							children: [(0, b.jsx)("title",
+							{
+								children: A
+							}), (0, b.jsx)("meta",
+							{
+								name: "description",
+								content: "This is the MoeTalk ".concat(A, " Page. (몰루톡/モルトーク)")
+							}), (0, b.jsx)("meta",
+							{
+								property: "og:title",
+								content: A
+							}), (0, b.jsx)("meta",
+							{
+								property: "og:image",
+								content: MoeTalkURL+"MoeData/Ui/Favor_Schedule_Deco.webp"
+							}), (0, b.jsx)("meta",
+							{
+								property: "og:description",
+								content: "This is the MoeTalk ".concat(A, " Page. (몰루톡/モルトーク)")
+							}), (0, b.jsx)("meta",
+							{
+								name: "twitter:title",
+								content: A
+							}), (0, b.jsx)("meta",
+							{
+								name: "twitter:description",
+								content: "This is the MoeTalk ".concat(A, " Page. (몰루톡/モルトーク)")
+							}), (0, b.jsx)("meta",
+							{
+								name: "twitter:image",
+								content: MoeTalkURL+"MoeData/Ui/Favor_Schedule_Deco.webp"
+							})]
+						}), (0, b.jsx)(F,
+						{
+							option: g,
+							characterList: CHAR_CharList,
+							handleSelectList: function(e)
+							{
+								S(e)
+							},
+							rowCount: f && f[0] ? f[0].COUNT : 0,
+							changeOption: xx
+						}), (0, b.jsxs)(eN,
+						{
+							children: [(0, b.jsx)("div",
+							{
+								ref: R,
+								style:
+								{
+									display: 2 !== g.C_TYPE || g.CONTENT ? "none" : "block",
+									width: "100%",
+									height: "100%"
+								},
+								children: (0, b.jsx)(w.Z,
+								{
+									rowHeight: ZZ,
+									clientHeight: Y,
+									selected: void 0,
+									listArr: M.filter(function(e)
+									{
+										return 0 !== g.M_TYPE || e.momotalk
+									}).map(function(e, t)
+									{
+										return (0, b.jsx)(j,
+										{
+											character: e,
+											option: g,
+											changeOption: xx
+										}, t)
+									})
+								})
+							}), (0, b.jsx)("div",
+							{
+								style:
+								{
+									//display: f && f.length > 0 && !(2 === g.C_TYPE && !g.CONTENT) ? "block" : "none",
+									display: "block",
+									width: "100%",
+									height: "auto"
+								},
+								//children: null == f ? void 0 : f.map(function(e, t)
+								
+								children: directory.map(function(e, t)
+								{
+									return (0, b.jsx)(ef,
+									{
+										board: e,
+										selected: C,
+										setSelected: function(e)
+										{
+											O(e)
+										},
+										isTalk: T,
+										changeOption: xx,
+										setIsTalk: function(e)
+										{
+											v(e)
+										}
+									}, t)
+								})
+							}), (0, b.jsxs)("div",
+							{
+								style:
+								{
+									display: "flex",
+									margin: "auto",
+									flexDirection: "column",
+									alignItems: "center"
+								},
+								children: [ (0, b.jsx)("span",
+								{
+									children: ['点击',(0, b.jsx)(ep,
+									{
+										style: 
+										{
+											width: '1rem',
+											height: '1rem',
+										},
+										children: (0, b.jsx)(x.xL,
+										{
+											icon: Z.cf$
+										}),
+										onClick: function()
+										{
+											$$('[title="MakingFile Upload"]').click()
+										}
+									}),'上传存档']//#
+								}), (0, b.jsx)("span",
+								{
+									style:
+									{
+										whiteSpace: 'break-spaces',
+										textAlign: 'center'
+									},
+									children: '（支持ClosureTalk存档）\n作品收录条件：无明显违规或争议内容\n您可以在交流群或反馈页面向我提交您的作品\n推荐带上您的主页和昵称\n※上传图片存档需在设置页面开启“旧版图片存档”选项'
+								})]//#
+							}, "noSearch"), 2 === g.C_TYPE && !g.CONTENT || (0, b.jsx)(k.Z,
+							{
+								rowCount: f && f[0] ? f[0].COUNT : 0,
+								option: g,
+								changeOption: xx
+							}), (0, b.jsx)(E,
+							{
+								show: !0
+							})]
+						})]
+					})
+				},
+				ev = g.ZP.div.withConfig(
+				{
+					displayName: "LeftScreen__Container",
+					componentId: "sc-1whfk05-0"
+				})(["display:flex;flex-direction:column;width:100%;min-height:100%;height:100%;background-color:", ";border-right:2px solid ", ";min-width:340px;@media screen and (max-width:768px){min-width:100vw;}"], function(e)
+				{
+					return e.theme.color.rgb243_247_248
+				}, function(e)
+				{
+					return e.theme.color.rgb230_233_235
+				}),
+				eN = g.ZP.div.withConfig(
+				{
+					displayName: "LeftScreen__CContainer",
+					componentId: "sc-1whfk05-1"
+				})(["width:100%;height:100%;display:flex;flex-direction:column;overflow-y:scroll !important;"]),
+				eC = (0, g.ZP)(_()).withConfig(
+				{
+					displayName: "LeftScreen__Img",
+					componentId: "sc-1whfk05-2"
+				})(["width:80%;height:auto;max-width:250px;margin:5rem 1rem 1rem 0;"])
+		},
+		8453: function(e, t, n)
+		{
+			Object.defineProperty(t, "__esModule",
+			{
+				value: !0
+			}), t.default = void 0;
+			var o = function(e)
+			{
+				if(e && e.__esModule) return e;
+				if(null === e || "object" != typeof e && "function" != typeof e) return {
+					default: e
+				};
+				var t = r();
+				if(t && t.has(e)) return t.get(e);
+				var n = {},
+					o = Object.defineProperty && Object.getOwnPropertyDescriptor;
+				for(var i in e)
+					if(Object.prototype.hasOwnProperty.call(e, i))
+					{
+						var a = o ? Object.getOwnPropertyDescriptor(e, i) : null;
+						a && (a.get || a.set) ? Object.defineProperty(n, i, a) : n[i] = e[i]
+					} return n.default = e, t && t.set(e, n), n
+			}(n(7294));
+
+			function r()
+			{
+				if("function" != typeof WeakMap) return null;
+				var e = new WeakMap;
+				return r = function()
+				{
+					return e
+				}, e
+			}
+			let i = e => ((0, o.useEffect)(() =>
+			{
+				window && (window.adsbygoogle = window.adsbygoogle || []).push(
+				{})
+			}), o.default.createElement("ins",
+			{
+				className: `adsbygoogle ${e.className}`,
+				style: e.style,
+				"data-ad-client": e.adClient,
+				"data-ad-slot": e.adSlot,
+				"data-ad-layout": e.adLayout,
+				"data-ad-layout-key": e.adLayoutKey,
+				"data-ad-format": e.adFormat,
+				"data-full-width-responsive": e.fullWidthResponsive
+			}));
+			i.defaultProps = {
+				className: "",
+				style:
+				{
+					display: "block"
+				},
+				adLayout: "",
+				adLayoutKey: "",
+				adFormat: "auto",
+				fullWidthResponsive: "false"
+			}, t.default = i
+		},
+		210: function(e, t, n)
+		{
+			var o;
+			((o = n(8453)) && o.__esModule ? o :
+			{
+				default: o
+			}).default
+		}
+	}
+]);
+(self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+	[333],
+	{
+		3162: function(e, t, n)
+		{
+			var r, o;
+			void 0 !== (r = "function" == typeof(o = function()
+			{
+				"use strict";
+
+				function t(e, t, n)
+				{
+					var r = new XMLHttpRequest;
+					r.open("GET", e), r.responseType = "blob", r.onload = function()
+					{
+						c(r.response, t, n)
+					}, r.onerror = function()
+					{
+						console.error("could not download file")
+					}, r.send()
+				}
+
+				function r(e)
+				{
+					var t = new XMLHttpRequest;
+					t.open("HEAD", e, !1);
+					try
+					{
+						t.send()
+					}
+					catch (e)
+					{}
+					return 200 <= t.status && 299 >= t.status
+				}
+
+				function o(e)
+				{
+					try
+					{
+						e.dispatchEvent(new MouseEvent("click"))
+					}
+					catch (n)
+					{
+						var t = document.createEvent("MouseEvents");
+						t.initMouseEvent("click", !0, !0, window, 0, 0, 0, 80, 20, !1, !1, !1, !1, 0, null), e.dispatchEvent(t)
+					}
+				}
+				var i = "object" == typeof window && window.window === window ? window : "object" == typeof self && self.self === self ? self : "object" == typeof n.g && n.g.global === n.g ? n.g : void 0,
+					a = i.navigator && /Macintosh/.test(navigator.userAgent) && /AppleWebKit/.test(navigator.userAgent) && !/Safari/.test(navigator.userAgent),
+					c = i.saveAs || ("object" != typeof window || window !== i ? function() {} : "download" in HTMLAnchorElement.prototype && !a ? function(e, n, a)
+					{
+						var c = i.URL || i.webkitURL,
+							l = document.createElement("a");
+						n = n || e.name || "download", l.download = n, l.rel = "noopener", "string" == typeof e ? (l.href = e, l.origin === location.origin ? o(l) : r(l.href) ? t(e, n, a) : o(l, l.target = "_blank")) : (l.href = c.createObjectURL(e), setTimeout(function()
+						{
+							c.revokeObjectURL(l.href)
+						}, 4e4), setTimeout(function()
+						{
+							o(l)
+						}, 0))
+					} : "msSaveOrOpenBlob" in navigator ? function(e, n, i)
+					{
+						if(n = n || e.name || "download", "string" != typeof e)
+						{
+							var a;
+							navigator.msSaveOrOpenBlob((void 0 === (a = i) ? a = {
+								autoBom: !1
+							} : "object" != typeof a && (console.warn("Deprecated: Expected third argument to be a object"), a = {
+								autoBom: !a
+							}), a.autoBom && /^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(e.type) ? new Blob(["\uFEFF", e],
+							{
+								type: e.type
+							}) : e), n)
+						}
+						else if(r(e)) t(e, n, i);
+						else
+						{
+							var c = document.createElement("a");
+							c.href = e, c.target = "_blank", setTimeout(function()
+							{
+								o(c)
+							})
+						}
+					} : function(e, n, r, o)
+					{
+						if((o = o || open("", "_blank")) && (o.document.title = o.document.body.innerText = "downloading..."), "string" == typeof e) return t(e, n, r);
+						var c = "application/octet-stream" === e.type,
+							l = /constructor/i.test(i.HTMLElement) || i.safari,
+							s = /CriOS\/[\d]+/.test(navigator.userAgent);
+						if((s || c && l || a) && "undefined" != typeof FileReader)
+						{
+							var d = new FileReader;
+							d.onloadend = function()
+							{
+								var e = d.result;
+								e = s ? e : e.replace(/^data:[^;]*;/, "data:attachment/file;"), o ? o.location.href = e : location = e, o = null
+							}, d.readAsDataURL(e)
+						}
+						else
+						{
+							var h = i.URL || i.webkitURL,
+								u = h.createObjectURL(e);
+							o ? o.location = u : location.href = u, o = null, setTimeout(function()
+							{
+								h.revokeObjectURL(u)
+							}, 4e4)
+						}
+					});
+				i.saveAs = c.saveAs = c, e.exports = c
+			}) ? o.apply(t, []) : o) && (e.exports = r)
+		},
+		5615: function(e, t, n)
 		{
 			"use strict";
-			t.d(n,
+			var r = n(6150),
+				o = n(7294),
+				i = n(9521),
+				a = n(5893);
+			t.Z = function(e)
 			{
-				CJ: function()
+				var t = e.childrens,
+					n = (0, o.useState)(0),
+					i = n[0],
+					d = n[1],
+					h = (0, r.C)(function(e)
+					{
+						return e.global.isRight
+					}),
+					u = (0, r.C)(function(e)
+					{
+						return e.global.isMobile
+					});
+				return (0, o.useEffect)(function()
+				{
+					d(h ? 1 : 0)
+				}, [h]), (0, a.jsx)(c,
+				{
+					children: (0, a.jsx)(l,
+					{
+						children: t.map(function(e, t)
+						{
+							return (0, a.jsx)(s,
+							{
+								style:
+								{
+									width: u && i !== t ? "0" : "100%"
+								},
+								children: e
+							}, t)
+						})
+					})
+				})
+			};
+			var c = i.ZP.div.withConfig(
+				{
+					displayName: "MainSlider__Container",
+					componentId: "sc-x1wvnd-0"
+				})(["width:100%;height:100%;overflow:hidden;position:relative;"]),
+				l = i.ZP.div.withConfig(
+				{
+					displayName: "MainSlider__Slider",
+					componentId: "sc-x1wvnd-1"
+				})(["display:flex;width:100%;height:100%;"]),
+				s = i.ZP.div.withConfig(
+				{
+					displayName: "MainSlider__Slide",
+					componentId: "sc-x1wvnd-2"
+				})(["transition:width 300ms ease-in-out;width:100%;height:100%;overflow:hidden;"])
+		},
+		330: function(e, t, n)
+		{
+			"use strict";
+			n.d(t,
+			{
+				Z: function()
+				{
+					return N
+				}
+			});
+			var r = n(29),
+				o = n(7794),
+				i = n.n(o),
+				a = n(5733),
+				c = n.n(a),
+				l = n(7294),
+				s = n(3162),
+				u = n(6150),
+				m = n(5781),
+				f = n(4701),
+				p = n(4212),
+				g = n(3380),
+				x = n(8586),
+				b = n(9521),
+				_ = n(1563),
+				y = n(9417),
+				w = n(4288),
+				C = n(7451),
+				v = n(4685),
+				j = n(6453),
+				k = n(5893),
+				eo = n(5740),
+				P = function(e)
+				{
+					var t = e.show,
+						n = e.header,
+						r = e.handleShow,
+						o = e.handleFileUpload,
+						i = (0, u.C)(function(e)
+						{
+							return e.global.lang
+						});
+					return (0, k.jsx)(v.Xf,
+					{
+						className: t ? "visible medium" : "medium",
+						onDoubleClick: function()
+						{
+							r()
+						},
+						children: (0, k.jsxs)(v.F0,
+						{
+							onDoubleClick: function(e)
+							{
+								return e.stopPropagation(), !1
+							},
+							children: [(0, k.jsxs)(v.h4,
+							{
+								children: [(0, k.jsx)(v.Dx,
+								{
+									className: "bold",
+									children: f.Z.sharedFile[i]
+								}), (0, k.jsx)(v.ec,
+								{
+									onClick: function()
+									{
+										r()
+									},
+									children: (0, k.jsx)(_.j4,
+									{})
+								})]
+							}), (0, k.jsxs)(v.$0,
+							{
+								style:
+								{
+									lineHeight: "1.5rem"
+								},
+								children: [(0, k.jsx)("span",
+								{
+									children: f.Z.up_comment1[i]
+								}), (0, k.jsxs)("div",
+								{
+									style:
+									{
+										display: "flex",
+										flexDirection: "column",
+										margin: "1rem 0"
+									},
+									children: [(0, k.jsxs)(j.Dr,
+									{
+										children: [f.Z.title[i], " : ", n.title]
+									}), (0, k.jsxs)(j.Dr,
+									{
+										children: [f.Z.writer[i], " : ", n.nickname]
+									}), (0, k.jsxs)(j.Dr,
+									{
+										children: [f.Z.date[i], " : ", n.date]
+									})]
+								}), (0, k.jsxs)(j.Dr,
+								{
+									children: ["※", f.Z.up_comment2[i]]
+								}), (0, k.jsxs)(j.Dr,
+								{
+									children: ["※", f.Z.deleteTalk_comment[i]]
+								}), (0, k.jsxs)(v.$_,
+								{
+									children: [(0, k.jsx)(v.Lw,
+									{
+										className: "bold",
+										onClick: function()
+										{
+											r()
+										},
+										children: f.Z.cancel[i]
+									}), (0, k.jsx)(v.AZ,
+									{
+										className: "bold",
+										onClick: function()
+										{
+											o()
+										},
+										children: f.Z.confirm[i]
+									})]
+								})]
+							})]
+						})
+					})
+				},
+				N = function(e)
+				{
+					var t, n = e.scrollRef,
+						o = (0, u.C)(function(e)
+						{
+							return e.global.isMobile
+						}),
+						a = (0, u.C)(function(e)
+						{
+							return e.global.isRight
+						}),
+						d = (0, u.C)(function(e)
+						{
+							return e.global.isLoading
+						}),
+						b = (0, u.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						_ = (0, u.C)(function(e)
+						{
+							return e.playChat.chats
+						}),
+						v = (0, u.C)(function(e)
+						{
+							return e.playChat.header
+						}),
+						j = (0, u.C)(function(e)
+						{
+							return e.playChat.board_no
+						}),
+						N = (0, u.C)(function(e)
+						{
+							return e.playChat.chatSpeed
+						}),
+						S = (0, l.useRef)(null),
+						B = (0, l.useState)(!1),
+						A = B[0],
+						D = B[1],
+						M = (0, l.useState)(!1),
+						R = M[0],
+						q = M[1],
+						F = (0, l.useState)({
+							INFO: {
+								title: "",
+								nickname: "",
+								date: "",
+							},
+							CHAT: []
+						}),
+						z = F[0],
+						G = F[1],
+						L = (0, u.T)(),
+						O = function(e)
+						{
+							if(null !== e.currentTarget.files)
+							{
+								var t = new FileReader,
+									n = e.currentTarget.files[0];
+								t.onloadend = function()
+								{
+									"string" == typeof t.result && ("[" === t.result[0] || "{" === t.result[0]) ? (G(loaddata(t.result,'player')), q(!0)) : L((0, m.Y2)(//#编译存档
+									{
+										isAlert: !0,
+										title: f.Z.error[b],
+										ment: f.Z.no_support[b]
+									}))
+								}, c().loadAsync(e.currentTarget.files[0]).then(function(e)
+								{
+									e.forEach(function(e, n)
+									{
+										n.dir || n.async("blob").then(function(e)
+										{
+											t.readAsText(e)
+										})
+									})
+								}, function(e)
+								{
+									n ? t.readAsText(n) : L((0, m.Y2)(
+									{
+										isAlert: !0,
+										title: f.Z.error[b],
+										ment: f.Z.no_support[b]
+									}))
+								})
+							}
+						},
+						Y = function()
+						{
+							var e = {
+								nowChats: [],
+								replyDepth: 0,
+								chats: [],
+								chatSpeed: (0, g.zP)(),
+								header:
+								{},
+								board_no: j
+							};
+							L((0, p.Fe)(e)), D(!1), setTimeout(function()
+							{
+								var e = {
+									nowChats: [],
+									replyDepth: 0,
+									chats: _,
+									chatSpeed: (0, g.zP)(),
+									header: v,
+									board_no: j
+								};
+								L((0, p.Fe)(e))
+							}, 1e3)
+						};
+						L((0, eo.U_)(chats))
+					return (0, k.jsxs)(Z,
+					{
+						children: [(0, k.jsxs)(E,
+						{
+							style:
+							{
+								justifyContent: "space-between",
+								width: "100%",
+								position: "relative"
+							},
+							children: [(0, k.jsxs)(E,
+							{
+								style:
+								{
+									margin: "auto 1rem"
+								},
+								children: [(0, k.jsx)("input",
+								{
+									type: "file",
+									ref: S,
+									style:
+									{
+										display: "none"
+									},
+									accept: mt_settings['图片存档'] ? 'image/png' : 'application/json',
+									onChange: function(e)
+									{
+										skip = false
+										let json = {
+											nowChats: [],
+											replyDepth: 0,
+											chats: [],
+											chatSpeed: (0, g.zP)(),
+											header: {},
+											board_no: 0
+										}
+										L((0, p.Fe)(json))
+										L((0, x.Cz)(!0))
+										nowChapter[0] = 0
+										nowChapter[1] = {}
+										nowChapter[1].chapter = ['']
+										$$('.nowChapter').text('')
+										O(e)
+										$$('.PLAYER_play').click()
+									}
+								}), (0, k.jsx)(T,
+								{
+									style: o && a ?
+									{
+										display: "none"
+									} :
+									{},
+									title: "上传存档",
+									onClick: function()
+									{
+										var e;
+										null === (e = S.current) || void 0 === e || e.click()
+									},
+									children: (0, k.jsx)(I,
+									{
+										icon: y.cf$
+									})
+								}), (0, k.jsx)(T,
+								{
+									style: o && a ?
+									{} :
+									{
+										display: "none"
+									},
+									onClick: function()
+									{
+										L((0, x.Cz)(!1))
+										$$('.PLAYER_play').hide().next().hide()
+									},
+									children: (0, k.jsx)(I,
+									{
+										icon: y.EyR
+									})
+								}),
+								//*速度设置按钮
+								(0, k.jsx)(T,
+								{
+									style: o && a ?
+									{
+										display: "none"
+									} :
+									{},
+									title: "设置速度",
+									onClick: function()
+									{
+										if(!localStorage['chatSpeed'])localStorage['chatSpeed'] = 1;
+										let chatSpeed = prompt("请输入消息播放速度（纯数字）：",localStorage['chatSpeed']);
+										if(chatSpeed)localStorage['chatSpeed'] = chatSpeed
+									},
+									children: (0, k.jsx)('img',
+									{
+										className: "SideBar__Img-sc-v5z5y3-2 hWDtZg",
+										style:{width: "75%",height: "75%"},
+										src: href+"MoeData/Ui/setting.webp"
+									})
+								})
+								//*速度设置按钮
+								]
+							}), (0, k.jsx)('span',
+							{
+								style: o && a ?
+								{
+									display: "none"
+								} :
+								{},
+								className: 'nowChapter',
+								children: ''
+							}), (0, k.jsxs)(E,
+							{
+								style:
+								{
+									margin: "auto 1rem"
+								},
+								children: [(0, k.jsx)(T,
+								{
+									style: o && !a ?
+									{} :
+									{
+										display: "none"
+									},
+									onClick: function()
+									{
+										L((0, x.Cz)(!0))
+									},
+									children: (0, k.jsx)(I,
+									{
+										icon: y.yOZ
+									})
+								}), (0, k.jsx)(T,
+								{
+									style: o && !a ?
+									{
+										display: "none"
+									} :
+									{
+										marginRight: "1rem"
+									},
+									title: "跳过",
+									disabled: _.length < 1,
+									onClick: function()
+									{
+										$$('.PLAYER_play').click()
+										skip = true
+										let chat = [..._,...[{content:"끝",isFirst:true,replyDepth:0,sCharacter:{no:0,index:1},type:"end"}]]
+										let json = {
+											nowChats: chat,
+											replyDepth: 0,
+											chats: chat,
+											chatSpeed: (0, g.zP)(),
+											header: {},
+											board_no: 0
+										}
+										L((0, p.Fe)(json))
+									},
+									children: (0, k.jsx)(I,
+									{
+										style:
+										{
+											marginLeft: "0.7rem"
+										},
+										icon: y.irl
+									})
+								}), (0, k.jsx)(T,
+								{
+									style: o && !a ?
+									{
+										display: "none"
+									} :
+									{
+										marginRight: "1rem"
+									},
+									title: "上一章",
+									disabled: _.length < 1,
+									onClick: function()
+									{
+										let index = nowChapter[0]-1
+										if(!nowChapter[1].chapter[index])return;
+										// nowChapter[2] = '上一章节'
+										// $$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
+										let authorid = nowChapter[1].authorid
+										let bookid = nowChapter[1].bookid
+										let chapter = nowChapter[1].chapter[index]
+										let name = nowChapter[1].name
+										INIT_loading()
+										$$('.nowChapter').text('')
+										let playChat = 
+										{
+											nowChats: [],
+											replyDepth: 0,
+											chats: [],
+											chatSpeed: (0, g.zP)(),
+											header: {},
+											board_no: 0
+										}
+										L((0, p.Fe)(playChat))
+										XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`,function(data)
+										{
+											$$('.PLAYER_play').click()
+											skip = true
+											data = loaddata(data,'player')
+											nowChapter[0] = index
+											data.CHAT = [...data.CHAT,...[{content:"끝",isFirst:true,replyDepth:0,sCharacter:{no:0,index:1},type:"end"}]]
+											playChat = 
+											{
+												nowChats: data.CHAT,
+												replyDepth: 0,
+												chats: data.CHAT,
+												chatSpeed: (0, g.zP)(),
+												header: data.INFO,
+												board_no: 0
+											}
+											INIT_loading()
+											L((0, p.Fe)(playChat))
+											L((0, x.Cz)(!0))
+											$$('.nowChapter').text(`${name}_${index}：${chapter}`)
+											$$('.PLAYER_play').click()
+										})
+									},
+									children: (0, k.jsx)(I,
+									{
+										style:
+										{
+											marginLeft: "0.7rem"
+										},
+										icon: y.J0P
+									})
+								}), (0, k.jsx)(T,
+								{
+									style: o && !a || !pause ?
+									{
+										display: "none"
+									} :
+									{
+										marginRight: "1rem"
+									},
+									title: '播放',
+									className: "PLAYER_play",
+									onClick: function()
+									{
+										$$('.PLAYER_play').hide().next().show().css('marginRight','1rem')
+										pause = false
+										if(!skip)
+										{
+											_.length < 1 || 100 === N || L((0, p.eS)(100))
+											L((0, p.eS)(1))
+											L((0, p.eS)((0, g.zP)()))
+										}
+										
+									},
+									children: (0, k.jsx)(I,
+									{
+										style:
+										{
+											marginLeft: "0.7rem"
+										},
+										icon: y.zc
+									})
+								}), (0, k.jsx)(T,
+								{
+									style: o && !a || pause ?
+									{
+										display: "none"
+									} :
+									{
+										marginRight: "1rem"
+									},
+									title: '暂停',
+									className: "PLAYER_pause",
+									onClick: function(e)
+									{
+										$$('.PLAYER_pause').hide().prev().show().css('marginRight','1rem')
+										pause = true
+										
+									},
+									children: (0, k.jsx)(I,
+									{
+										style:
+										{
+											marginLeft: "0.7rem"
+										},
+										icon: y.XQY
+									})
+								}), (0, k.jsx)(T,
+								{
+									style: o && !a ?
+									{
+										display: "none"
+									} :
+									{
+										marginRight: "1rem"
+									},
+									title: "下一章",
+									disabled: _.length < 1,
+									onClick: function()
+									{
+										let index = nowChapter[0]+1
+										if(!nowChapter[1].chapter[index])return;
+										// nowChapter[2] = '下一章节'
+										// $$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
+										let authorid = nowChapter[1].authorid
+										let bookid = nowChapter[1].bookid
+										let chapter = nowChapter[1].chapter[index]
+										let name = nowChapter[1].name
+										INIT_loading()
+										skip = false
+										$$('.nowChapter').text('')
+										let playChat = 
+										{
+											nowChats: [],
+											replyDepth: 0,
+											chats: [],
+											chatSpeed: (0, g.zP)(),
+											header: {},
+											board_no: 0
+										}
+										L((0, p.Fe)(playChat))
+										XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`,function(data)
+										{
+											data = loaddata(data,'player')
+											nowChapter[0] = index
+											playChat = 
+											{
+												nowChats: [],
+												replyDepth: 0,
+												chats: data.CHAT,
+												chatSpeed: (0, g.zP)(),
+												header: data.INFO,
+												board_no: 0
+											}
+											INIT_loading()
+											setTimeout(function(){L((0, p.Fe)(playChat))}, 1e3)
+											L((0, x.Cz)(!0))
+											$$('.nowChapter').text(`${name}_${index}：${chapter}`)
+											$$('.PLAYER_play').click()
+										})
+										if(nowChapter[1].chapter[index+1])
+										{
+											XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${nowChapter[1].chapter[index+1]}.json`)
+										}
+									},
+									children: (0, k.jsx)(I,
+									{
+										style:
+										{
+											marginLeft: "0.7rem"
+										},
+										icon: y.Jwg
+									})
+								}), (0, k.jsx)(T,
+								{
+									style: o && !a ?
+									{
+										display: "none"
+									} :
+									{},
+									title: "重新加载",
+									disabled: _.length < 1,
+									onClick: function()
+									{
+										D(!0)
+									},
+									children: (0, k.jsx)(I,
+									{
+										style:
+										{
+											marginLeft: "0.7rem"
+										},
+										icon: y.T80
+									})
+								})]
+							})]
+						}), (0, k.jsx)(C.Z,
+						{
+							show: A,
+							handleShow: function()
+							{
+								D(!1)
+							},
+							type: "reset",
+							handleTalk: function()
+							{
+								Y()
+							}
+						}), (0, k.jsx)(P,
+						{
+							show: R,
+							handleShow: function()
+							{
+								q(!1)
+							},
+							header: z.INFO,
+							handleFileUpload: function()
+							{
+								var e = {
+									nowChats: [],
+									replyDepth: 0,
+									chats: [],
+									chatSpeed: (0, g.zP)(),
+									header:
+									{},
+									board_no: 0
+								};
+								L((0, p.Fe)(e)), setTimeout(function()
+								{
+									e = {
+										nowChats: [],
+										replyDepth: 0,
+										chats: z.CHAT,
+										chatSpeed: (0, g.zP)(),
+										header: z.INFO,
+										board_no: 0
+									}, L((0, p.Fe)(e)), q(!1), L((0, x.Cz)(!0))
+								}, 1e3)
+							}
+						})]
+					})
+				},
+				Z = b.ZP.div.withConfig(
+				{
+					displayName: "Footer__Container",
+					componentId: "sc-188q0i6-0"
+				})(["", " flex-shrink:0;height:3.5rem;color:", ";background-color:", ";@media screen and (max-width:768px){height:4rem;}"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						justify: "space-between"
+					})
+				}, function(e)
+				{
+					return e.theme.color.rgb255_255_255
+				}, function(e)
+				{
+					return e.theme.color.rgb76_91_111
+				}),
+				E = b.ZP.div.withConfig(
+				{
+					displayName: "Footer__Flex",
+					componentId: "sc-188q0i6-1"
+				})(["", ";position:relative;width:auto;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{})
+				}),
+				T = (0, b.ZP)(_.hU).withConfig(
+				{
+					displayName: "Footer__Circlebutton",
+					componentId: "sc-188q0i6-2"
+				})(["border:2px solid white;border-radius:50%;height:3rem;width:3rem;display:flex;align-items:center;justify-content:center;&:hover{background-color:", ";}"], function(e)
+				{
+					return e.theme.color.rgb61_75_92
+				}),
+				I = (0, b.ZP)(_.xL).withConfig(
+				{
+					displayName: "Footer__StyledIcon2",
+					componentId: "sc-188q0i6-3"
+				})(["height:1.5rem;width :1.5rem;color:", ";"], function(e)
+				{
+					return e.theme.color.rgb255_255_255
+				})
+		},
+		939: function(e, t, n)
+		{
+			"use strict";
+			n.d(t,
+			{
+				Z: function()
+				{
+					return S
+				}
+			});
+			var r = n(4701),
+				o = n(6150),
+				i = n(4212),
+				a = n(7294),
+				c = n(9521),
+				l = n(3380),
+				s = n(83),
+				d = n(3420),
+				h = n(8681),
+				u = n(8586),
+				m = n(5893),
+				f = function()
+				{
+					var e = (0, o.T)(),
+						t = (0, o.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						n = function()
+						{
+							var t = {
+								nowChats: [],
+								replyDepth: 0,
+								chats: [],
+								chatSpeed: (0, l.zP)(),
+								header:
+								{},
+								board_no: 0
+							};
+							e((0, i.Fe)(t)), e((0, u.Cz)(!1))
+						};
+					return (0, m.jsxs)(p,
+					{
+						className: "image-ignore",
+						"data-html2canvas-ignore": "true",
+						children: [(0, m.jsxs)(g,
+						{
+							style:
+							{
+								alignItems: "center"
+							},
+							children: [(0, m.jsx)(x,
+							{}), (0, m.jsx)("span",
+							{
+								className: "bold",
+								children: r.Z.msg_end[t]
+							})]
+						}), (0, m.jsx)(s.HR,
+						{}), (0, m.jsx)(s.g4,
+						{
+							className: "medium",
+							onClick: function()
+							{
+								let index = nowChapter[0]+1
+								if(!nowChapter[1].chapter[index])return;
+								// nowChapter[2] = '下一章节'
+								// $$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
+								let authorid = nowChapter[1].authorid
+								let bookid = nowChapter[1].bookid
+								let chapter = nowChapter[1].chapter[index]
+								let name = nowChapter[1].name
+								INIT_loading()
+								skip = false
+								$$('.nowChapter').text('')
+								let playChat = 
+								{
+									nowChats: [],
+									replyDepth: 0,
+									chats: [],
+									chatSpeed: (0, l.zP)(),
+									header: {},
+									board_no: 0
+								}
+								e((0, i.Fe)(playChat))
+								XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`,function(data)
+								{
+									data = loaddata(data,'player')
+									nowChapter[0] = index
+									playChat = 
+									{
+										nowChats: [],
+										replyDepth: 0,
+										chats: data.CHAT,
+										chatSpeed: (0, l.zP)(),
+										header: data.INFO,
+										board_no: 0
+									}
+									INIT_loading()
+									setTimeout(function(){e((0, i.Fe)(playChat))}, 1e3)
+									e((0, u.Cz)(!0))
+									$$('.nowChapter').text(`${name}_${index}：${chapter}`)
+									$$('.PLAYER_play').click()
+								})
+								if(nowChapter[1].chapter[index+1])
+								{
+									XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${nowChapter[1].chapter[index+1]}.json`)
+								}
+							},
+							children: nowChapter[1].chapter[nowChapter[0]+1] ? '点击前往下一章' : r.Z.end[t]
+						})]
+					})
+				},
+				p = c.ZP.div.withConfig(
+				{
+					displayName: "EndBox__Container",
+					componentId: "sc-1bnhokl-0"
+				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeData/Ui/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						direction: "column"
+					})
+				}, function(e)
+				{
+					return e.theme.color.rgb221_210_216
+				}, function(e)
+				{
+					return e.theme.color.rgb76_91_111
+				}, function(e)
+				{
+					return e.theme.color.rgb225_237_240
+				}),
+				g = c.ZP.div.withConfig(
+				{
+					displayName: "EndBox__Flex",
+					componentId: "sc-1bnhokl-1"
+				})(["", ";height:auto;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						justify: "flex-start"
+					})
+				}),
+				x = c.ZP.div.withConfig(
+				{
+					displayName: "EndBox__Line",
+					componentId: "sc-1bnhokl-2"
+				})(["border-left:2px solid ", ";height:1.1rem;margin-right:0.3rem;"], function(e)
+				{
+					return e.theme.color.rgb39_153_228
+				}),
+				b = function(e)
+				{
+					var t = e.chat,
+						style = e.style,
+						n = (0, o.T)(),
+						c = (0, o.C)(function(e)
+						{
+							return e.playChat
+						}),
+						d = (0, o.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						u = (0, a.useState)(!1),
+						f = u[0],
+						p = u[1],
+						g = function()
+						{
+							var e = c.chats.indexOf(t),
+								r = c.chats[e + 1];
+							if(r && r.replyDepth === c.replyDepth) "{end}" === r.content.trim() && r.replyDepth === t.replyDepth ? n((0, i.e$)(
+							{
+								chat: h.Nl
+							})) : n((0, i.e$)(
+							{
+								chat: r
+							}));
+							else
+							{
+								for(var o = -1, a = e + 1; a < c.chats.length; a++)
+								{
+									if(c.chats[a].replyDepth === c.replyDepth)
+									{
+										o = a;
+										break
+									}
+									if(-1 === o)
+									{
+										var s = c.chats.filter(function(e)
+										{
+											return e.replyNo === t.replyDepth && "reply" === e.type
+										});
+										if(s.length > 0)
+										{
+											var d = (0, l.G_)(c.chats, s[0]);
+											if(null !== d && "{end}" !== d.content.trim())
+											{
+												n((0, i.e$)(
+												{
+													chat: d,
+													depth: d.replyDepth
+												}));
+												return
+											}
+										}
+										n((0, i.e$)(
+										{
+											chat: h.Nl
+										}))
+									}
+									else "{end}" !== c.chats[o].content.trim() && n((0, i.e$)({chat: c.chats[o]}))
+								}
+							}
+						};
+					return (0, m.jsxs)(_,
+					{
+						children: [(0, m.jsxs)(y,
+						{
+							style:
+							{
+								alignItems: "center"
+							},
+							children: [(0, m.jsx)(w,
+							{}), (0, m.jsx)("span",
+							{
+								className: "bold",
+								children: r.Z.relationship_event[d]
+							})]
+						}), (0, m.jsx)(s.HR,
+						{}), (0, m.jsx)(s._x,
+						{
+							className: "medium",
+							style:style,//@
+							disabled: f,
+							onClick: function()
+							{
+								g(), p(!0)
+							},
+							// children: t.content || ((t.name || loadname(t.sCharacter.no,t.sCharacter.index))+r.Z.go_relationship_event[d])
+							dangerouslySetInnerHTML: {__html: t.content || ((t.name || loadname(t.sCharacter.no,t.sCharacter.index))+r.Z.go_relationship_event[d])}
+						})]
+					})
+				},
+				_ = c.ZP.div.withConfig(
+				{
+					displayName: "HeartBox__Container",
+					componentId: "sc-1gwqj71-0"
+				})(["", ";padding:0.5rem;font-size:1.1rem;height:auto;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeData/Ui/Favor_Schedule_Deco.webp');background-repeat:no-repeat;background-position:right;background-size:auto 100%;line-height:1.5rem;`], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						direction: "column",
+						align: "flex-start"
+					})
+				}, function(e)
+				{
+					return e.theme.color.rgb221_210_216
+				}, function(e)
+				{
+					return e.theme.color.rgb76_91_111
+				}, function(e)
+				{
+					return e.theme.color.rgb252_238_240
+				}),
+				y = c.ZP.div.withConfig(
+				{
+					displayName: "HeartBox__Flex",
+					componentId: "sc-1gwqj71-1"
+				})(["", ";height:auto;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						justify: "flex-start"
+					})
+				}),
+				w = c.ZP.div.withConfig(
+				{
+					displayName: "HeartBox__Border",
+					componentId: "sc-1gwqj71-2"
+				})(["border-left:2px solid ", ";height:1.1rem;margin-right:0.3rem;"], function(e)
+				{
+					return e.theme.color.rgb252_142_155
+				}),
+				C = function(e)
+				{
+					var t = e.chat,
+						index = e.index,//@
+						n = e.handleContent,
+						r = (0, o.T)(),
+						a = (0, o.C)(function(e)
+						{
+							return e.playChat.chats
+						}),
+						c = (0, o.C)(function(e)
+						{
+							return e.global.gameName
+						}),
+						d = function()
+						{
+							//console.log(h)
+							//console.log(a)
+							var e = a.filter(function(e)
+							{
+								return e.replyDepth === t.content.split('\n')[index]//
+							});
+							//console.log(e)
+							if(0 === e.length)
+							{
+								var n = (0, l.G_)(a, t);
+								//console.log(n)
+								if(null !== n && "{end}" !== n.content.trim())
+								{
+									r((0, i.e$)(
+									{
+										chat: n,
+										depth: n.replyDepth
+									}));
+									return
+								}
+								r((0, i.e$)(
+								{
+									chat: h.Nl
+								}))
+							}
+							else "{end}" === e[0].content.trim() ? r((0, i.e$)(
+							{
+								chat: h.Nl
+							})) : r((0, i.e$)(
+							{
+								chat: e[0],
+								depth: t.content.split('\n')[index]//
+							}))
+						};
+					return (0, m.jsx)(v,
+					{
+						children: (0, m.jsx)(s.g4,
+						{
+							onClick: function()
+							{
+								d(), n(t.content.split('\n')[index])//
+							},
+							children: (0, m.jsx)(j,
+							{
+								className: "bold",
+								// children: t.content.replaceAll("{name}", c).split('\n')[index]//
+								dangerouslySetInnerHTML: {__html: t.content.replaceAll("{name}", c).split('\n')[index]}
+							})
+						})
+					})
+				},
+				v = c.ZP.div.withConfig(
+				{
+					displayName: "ReplyButtonBox__Container",
+					componentId: "sc-17coljc-0"
+				})(["", ";margin-bottom:0.5rem;height:auto;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{})
+				}),
+				j = c.ZP.span.withConfig(
+				{
+					displayName: "ReplyButtonBox__Span",
+					componentId: "sc-17coljc-1"
+				})(["overflow:hidden;word-break:break-word;word-wrap:break-word;white-space:pre-wrap;line-break:loose;"]),
+				k = function(e)
+				{
+					var t = e.chat,
+						n = (0, o.C)(function(e)
+						{
+							return e.playChat
+						}),
+						c = (0, o.C)(function(e)
+						{
+							return e.global.gameName
+						}),
+						l2 = (0, a.useState)(!1),//
+						d = l2[0],
+						h = l2[1],
+						u = (0, a.useState)(""),
+						f = u[0],
+						p = u[1],
+						rr = (0, o.T)(),
+						aa = n.chats,
+						dd = function(v)
+						{
+							let end = {content:"끝",isFirst:true,replyDepth:0,sCharacter:{no:0,index:1},type:"end"}
+							var e = aa.filter(function(e)
+							{
+								return e.replyDepth === v
+							});
+							if(0 === e.length)
+							{
+								var n = (0, l.G_)(aa, t);
+								if(null !== n && "{end}" !== n.content.trim())
+								{
+									rr((0, i.e$)(
+									{
+										chat: n,
+										depth: n.replyDepth
+									}));
+									return
+								}
+								rr((0, i.e$)(
+								{
+									chat: end
+								}))
+							}
+							else "{end}" === e[0].content.trim() ? rr((0, i.e$)(
+							{
+								chat: end
+							})) : rr((0, i.e$)(
+							{
+								chat: e[0],
+								depth: v
+							}))
+						};
+					let isFirst = isfirst(n.chats.indexOf(t),n.chats,'player')
+					let isCenter = t.isCenter && t.type === 'image'
+					let style = mt_settings['文字样式'][t.type] ? mt_settings['文字样式'][t.type] : {}
+					delete style.textAlign
+					style = {...style,...{}}//防止连带修改设置属性
+					if(t.style && t.style.length)
+					{
+						foreach(t.style,function(k,v)
+						{
+							style[v[0]] = v[1]
+						})	
+					}
+					return [(0, m.jsxs)(m.Fragment,
+					{
+						children: d ? (0, m.jsxs)(m.Fragment,
+						{
+							children: (0, m.jsxs)('div',
+							{//整体图文消息
+								className: '聊天',
+								children: [!isCenter && !t.isRight ? (0, m.jsx)('div',
+								{//左侧头像框
+									className: '头像框',
+									style: t.sCharacter.no != 0 ? 
+									{
+										pointerEvents: 'none',
+										minWidth: t.heads && isFirst ? "max-content" : "5rem",
+										paddingRight: t.heads && isFirst ? "1rem" : "auto",
+										flexDirection: t.heads ? t.heads.direction : ""
+									} : {marginRight: '1.5rem'},
+									children: isFirst && t.sCharacter.no != 0 ? [(0, m.jsx)('img',
+									{//左侧头像
+										className: '头像',
+										style: {zIndex: t.heads ? t.heads.list.length : ''},
+										src: loadhead(t.sCharacter.no,t.sCharacter.index),
+										onError: function(e)
+										{
+											e.currentTarget.src = href+'MoeData/Ui/error.webp';
+										},
+										alt: t.sCharacter.index
+									}), t.heads ? t.heads.list.map(function(index,k)
+									{
+										return (0, m.jsx)('img',
+										{//左侧头像
+											className: '头像',
+											src: loadhead('LIST',index),
+											style: 
+											{
+												zIndex: t.heads.list.length-k-1,
+												marginTop: t.heads.direction === 'column' ? t.heads.margin ? t.heads.margin : "-1.5rem" : '',
+												marginLeft: t.heads.direction === 'row' ? t.heads.margin ? t.heads.margin : "-1.5rem" : ''
+											},
+											onError: function(e)
+											{
+												e.currentTarget.src = href+'MoeData/Ui/error.webp';
+											}
+										})
+									}) : ''] : ''
+								}) : '', (0, m.jsxs)("div",
+								{//图文消息
+									className: "对话",
+									style: 
+									{
+										alignItems: isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
+										height: t.heads && t.heads.fullHeight ? '100%' : ''
+									},
+									children: [!isCenter && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
+									{//人物名称
+										className: "名称 bold",
+										children: t.name || loadname(t.sCharacter.no,t.sCharacter.index)
+									}) : '' , (0, m.jsxs)("div",
+									{//消息内容
+										style:
+										{
+											display: "flex",
+											height: "100%",
+											justifyContent: isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : '',
+										},
+										children: [t.time ? (0, m.jsx)(eN.i9,
+										{//左侧时间戳
+											className: '时间戳',
+											hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
+											// children: t.time
+											dangerouslySetInnerHTML: {__html: t.time}
+										}) : '', [(0, m.jsx)('span',
+										{//文本消息
+											className: (t.sCharacter.no == 0 ? '文本' : !t.isRight && isFirst ? '文本 左角' : '文本'),
+											style: t.isRight || t.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
+											// children: f
+											dangerouslySetInnerHTML: {__html: f}
+										}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)(s.CJ,{}) : '' ], t.time ? (0, m.jsx)(s.i9,
+										{//右侧时间戳
+											className: '时间戳',
+											hidden: !t.time || t.sCharacter.no == 0 || t.isRight,
+											// children: t.time
+											dangerouslySetInnerHTML: {__html: t.time}
+										}) : '']
+									})]
+								}), !isCenter && t.isRight && t.sCharacter.no != 0 ? (0, m.jsx)('div',
+								{//右侧头像框
+									className: '头像框',
+									style:
+									{
+										pointerEvents: 'none',
+										justifyContent:'flex-end',
+										minWidth: t.heads && isFirst ? "auto" : "5rem",
+										paddingLeft: t.heads && isFirst ? "1rem" : "auto",
+										flexDirection: t.heads ? t.heads.direction : ""
+									},
+									children: isFirst && t.sCharacter.no != 0 ? [(0, m.jsx)('img',
+									{
+										className: '头像',
+										src: loadhead(t.sCharacter.no,t.sCharacter.index),
+										onError: function(e)
+										{
+											e.currentTarget.src = href+'MoeData/Ui/error.webp';
+										},
+										alt: t.sCharacter.index
+									}), t.heads ? t.heads.list.map(function(index,k)
+									{
+										return (0, m.jsx)('img',
+										{//右侧头像
+											className: '头像',
+											src: loadhead('LIST',index),
+											style: 
+											{
+												zIndex: t.heads.list.length-k-1,
+												marginTop: t.heads.direction === 'column' ? "-1.5rem" : '',
+												marginLeft: t.heads.direction === 'row' ? "-1.5rem" : ''
+											},
+											onError: function(e)
+											{
+												e.currentTarget.src = href+'MoeData/Ui/error.webp';
+											}
+										})
+									}) : ''] : ''
+								}) : '']
+							})
+						}) : (0, m.jsxs)(P,
+						{//选择肢
+							children: [(0, m.jsxs)(N,
+							{
+								style:
+								{
+									alignItems: "center"
+								},
+								children: [(0, m.jsx)(Z,
+								{}), (0, m.jsx)("span",
+								{
+									className: "bold",
+									children: r.Z.go_reply[mtlang]
+								})]
+							}), (0, m.jsx)(s.HR,
+							{}), t.content.split('\n').map(function(v,k)
+							{
+								return (0, m.jsx)('div',
+								{
+									className: '选择肢 跳转',
+									style: style,
+									// children: v,
+									dangerouslySetInnerHTML: {__html: v},
+									onClick: function()
+									{
+										dd(v), p(v), h(!0)
+									}
+								})
+							})]
+						})
+					})]
+				},
+				P = c.ZP.div.withConfig(
+				{
+					displayName: "ReplyBox__Container",
+					componentId: "sc-14pasys-0"
+				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeData/Ui/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						direction: "column"
+					})
+				}, function(e)
+				{
+					return e.theme.color.rgb221_210_216
+				}, function(e)
+				{
+					return e.theme.color.rgb76_91_111
+				}, function(e)
+				{
+					return e.theme.color.rgb225_237_240
+				}),
+				N = c.ZP.div.withConfig(
+				{
+					displayName: "ReplyBox__Flex",
+					componentId: "sc-14pasys-1"
+				})(["", ";height:auto;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						justify: "flex-start"
+					})
+				}),
+				Z = c.ZP.div.withConfig(
+				{
+					displayName: "ReplyBox__Line",
+					componentId: "sc-14pasys-2"
+				})(["border-left:2px solid ", ";height:1.1rem;margin-right:0.3rem;"], function(e)
+				{
+					return e.theme.color.rgb39_153_228
+				}),
+				E = function(e)
+				{
+					var t = e.chat,
+						n = e.handleScroll,
+						r = (0, o.T)(),
+						c = (0, o.C)(function(e)
+						{
+							return e.playChat
+						}),
+						u = (0, o.C)(function(e)
+						{
+							return e.global.gameName
+						}),
+						p = (0, o.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						g = (0, a.useState)(!0),
+						x = g[0],
+						_ = g[1],
+						y = (0, a.useCallback)(function(e, t)
+						{
+							var n = e.chats.indexOf(t),
+								o = e.chats[n + 1];
+							$$("#size").text(`章节:${nowChapter[0]+1}/${nowChapter[1].chapter.length}\n进度:${(n+1) ? (n+1) : e.chats.length}/${e.chats.length}`)
+							if("end" === t.type || "reply" === t.type || "heart" === t.type)r((0, i.eS)((0, l.zP)()));
+							else if(o && o.replyDepth === e.replyDepth) "{end}" === toString(o.content).trim() && o.replyDepth === t.replyDepth ? (r((0, i.eS)((0, l.zP)())), r((0, i.e$)(
+							{
+								chat: h.Nl
+							}))) : r((0, i.e$)(
+							{
+								chat: o
+							}));
+							else
+							{
+								for(var a = -1, c = n + 1; c < e.chats.length; c++)
+									if(e.replyDepth === e.chats[c].replyDepth)
+									{
+										a = c;
+										break
+									} if(-1 === a)
+								{
+									var s = e.chats.filter(function(e)
+									{
+										return "reply" === e.type && e.content.split('\n').indexOf(t.replyDepth) > -1//
+									});
+									if(s.length > 0)
+									{
+										var d = (0, l.G_)(e.chats, s[0]);
+										if(null !== d && "{end}" !== d.content.trim())
+										{
+											r((0, i.e$)(
+											{
+												chat: d,
+												depth: d.replyDepth
+											}));
+											return
+										}
+									}
+								}
+								else if("{end}" !== e.chats[a].content.trim())
+								{
+									r((0, i.e$)(
+									{
+										chat: e.chats[a]
+									}));
+									return
+								}
+								r((0, i.eS)((0, l.zP)())), r((0, i.e$)(
+								{
+									chat: h.Nl
+								}))
+							}
+						}, [r]);
+					let isFirst = isfirst(c.chats.indexOf(t),c.chats,'player')
+					let isCenter = t.isCenter && t.type === 'image'
+					let style = mt_settings['文字样式'][t.type] ? mt_settings['文字样式'][t.type] : {}
+					delete style.textAlign,style = {...style,...{}}//防止连带修改设置属性
+					if(t.type === 'info')
+					{
+						style.background = mt_settings['风格样式'][2]
+						t.isLeft ? style.textAlign = 'left' : ''
+						t.isRight ? style.textAlign = 'right' : ''
+					}
+					if(t.style && t.style.length)
+					{
+						foreach(t.style,function(k,v)
+						{
+							style[v[0]] = v[1]
+						})	
+					}
+					if(!t.content)t.content = ''
+					if(!t.file)t.file = ''
+					return (0, a.useEffect)(function()
+					{
+						if(!pause)
+						{
+							if(n(), x && !(c.chats.length < 1))
+							{
+								var e = 100;
+								// "chat" === t.type && t.sCharacter.no !== d.I.no ? e = 50 * t.content.length > 4e3 ? 4e3 : 50 * t.content.length + 500 : ("image" === t.type || "chat" === t.type && t.sCharacter.no === d.I.no) && (e = 300);
+								"chat" === t.type || "info" === t.type ? e = 50 * t.content.length > 4e3 ? 4e3 : 50 * t.content.length + 500 : ("image" === t.type || "chat" === t.type) && (e = 300);
+								var r = setTimeout(function()
+								{
+									_(!1);
+									var e = setTimeout(function()
+									{
+										if(!skip)y(c, t)
+									}, !skip ? (800 / c.chatSpeed) : 0);
+									if(!(c.chats.length < 1)) return function()
+									{
+										return clearTimeout(e)
+									}
+								}, !skip ? (e / c.chatSpeed) : 0);
+								return function()
+								{
+									return clearTimeout(r)
+								}
+							}
+						}
+						
+					}, [c, x, t, n, y]), (0, m.jsx)('div',
+					{
+						className: '消息',
+						style: {padding: isFirst ? "" : "0.5rem 1rem 0 1rem"},
+						children: [(0, m.jsxs)(m.Fragment,
+						{
+							children: "chat" === t.type || "image" === t.type ? (0, m.jsxs)(m.Fragment,
+							{
+								children: (0, m.jsxs)('div',
+								{//整体图文消息
+									className: '聊天',
+									children: [!isCenter && !t.isRight ? (0, m.jsx)('div',
+									{//左侧头像框
+										className: '头像框',
+										style: t.sCharacter.no != 0 ? 
+										{
+											pointerEvents: 'none',
+											minWidth: t.heads && isFirst ? "auto" : "5rem",
+											paddingRight: t.heads && isFirst ? "1rem" : "auto",
+											flexDirection: t.heads ? t.heads.direction : ""
+										} : {marginRight: '1.5rem'},
+										children: isFirst && t.sCharacter.no != 0 ? [(0, m.jsx)('img',
+										{//左侧头像
+											className: '头像',
+											style: {zIndex: t.heads ? t.heads.list.length : ''},
+											src: loadhead(t.sCharacter.no,t.sCharacter.index),
+											onError: function(e)
+											{
+												e.currentTarget.src = href+'MoeData/Ui/error.webp';
+											},
+											alt: t.sCharacter.index
+										}), t.heads ? t.heads.list.map(function(index,k)
+										{
+											return (0, m.jsx)('img',
+											{//左侧头像
+												className: '头像',
+												src: loadhead('LIST',index),
+												style: 
+												{
+													zIndex: t.heads.list.length-k-1,
+													marginTop: t.heads.direction === 'column' ? t.heads.margin ? t.heads.margin : "-1.5rem" : '',
+													marginLeft: t.heads.direction === 'row' ? t.heads.margin ? t.heads.margin : "-1.5rem" : ''
+												},
+												onError: function(e)
+												{
+													e.currentTarget.src = href+'MoeData/Ui/error.webp';
+												}
+											})
+										}) : ''] : ''
+									}) : '', (0, m.jsxs)("div",
+									{//图文消息
+										className: "对话",
+										style: 
+										{
+											alignItems: isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
+											height: t.heads && t.heads.fullHeight ? '100%' : ''
+										},
+										children: [!isCenter && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
+										{//人物名称
+											className: "名称 bold",
+											children: t.name || loadname(t.sCharacter.no,t.sCharacter.index)
+										}) : '' , (0, m.jsxs)("div",
+										{//消息内容
+											style:
+											{
+												display: "flex",
+												height: "100%",
+												justifyContent: isCenter ? 'center' : t.isRight || t.sCharacter.no == 0 ? 'flex-end' : '',
+											},
+											children: [t.time ? (0, m.jsx)(s.i9,
+											{//左侧时间戳
+												className: '时间戳',
+												hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
+												// children: t.time
+												dangerouslySetInnerHTML: {__html: t.time}
+											}) : '', "chat" === t.type ? [(0, m.jsx)('span',
+											{//文本消息
+												className: (t.sCharacter.no == 0 ? '文本' : !t.isRight && isFirst ? '文本 左角' : '文本'),
+												style: t.isRight || t.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
+												// children: x ? (0, m.jsx)(I,{}) : t.content
+												dangerouslySetInnerHTML: {__html: x ? '<div class="PLAYER_Loading"></div>' : t.content}
+											}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)(s.CJ,{}) : '' ] : (0, m.jsx)('img',
+											{//图片消息
+												className: '图片',
+												style:
+												{
+													maxHeight: t.content.indexOf("Face")>=0 || t.file.indexOf("Face")>=0 ? '360px' : "",
+													maxWidth: t.content.indexOf("Face")>=0 || t.file.indexOf("Face")>=0 ? mt_settings['差分比例'] : mt_settings['图片比例']
+												},//@差分表情宽高百分比
+												src: t.file.indexOf(":image") > -1 ? t.file : href+t.file,
+												title: t.file.indexOf(":image") > -1 ? '' : t.file,
+												onError: function(e)
+												{
+													e.currentTarget.src = href+'MoeData/Ui/error.webp';
+												},
+											}), t.time ? (0, m.jsx)(s.i9,
+											{//右侧时间戳
+												className: '时间戳',
+												hidden: !t.time || t.sCharacter.no == 0 || t.isRight || isCenter,
+												// children: t.time
+												dangerouslySetInnerHTML: {__html: t.time}
+											}) : '']
+										})]
+									}), !isCenter && t.isRight && t.sCharacter.no != 0 ? (0, m.jsx)('div',
+									{//右侧头像框
+										className: '头像框',
+										style:
+										{
+											pointerEvents: 'none',
+											justifyContent:'flex-end',
+											minWidth: t.heads && isFirst ? "max-content" : "5rem",
+											paddingLeft: t.heads && isFirst ? "1rem" : "auto",
+											flexDirection: t.heads ? t.heads.direction : ""
+										},
+										children: isFirst && t.sCharacter.no != 0 ? [(0, m.jsx)('img',
+										{
+											className: '头像',
+											src: loadhead(t.sCharacter.no,t.sCharacter.index),
+											onError: function(e)
+											{
+												e.currentTarget.src = href+'MoeData/Ui/error.webp';
+											},
+											alt: t.sCharacter.index
+										}), t.heads ? t.heads.list.map(function(index,k)
+										{
+											return (0, m.jsx)('img',
+											{//右侧头像
+												className: '头像',
+												src: loadhead('LIST',index),
+												style: 
+												{
+													zIndex: t.heads.list.length-k-1,
+													marginTop: t.heads.direction === 'column' ? "-1.5rem" : '',
+													marginLeft: t.heads.direction === 'row' ? "-1.5rem" : ''
+												},
+												onError: function(e)
+												{
+													e.currentTarget.src = href+'MoeData/Ui/error.webp';
+												}
+											})
+										}) : ''] : ''
+									}) : '']
+								})
+							}) : "reply" === t.type ? [(0, m.jsx)('div',
+							{
+								style: {width: "100%"},
+								children: (0, m.jsx)(k,
+								{
+									style: style,
+									chat: t
+								})
+							})] : "heart" === t.type ? [(0, m.jsx)(s.xu,
+							{}),(0, m.jsx)(b,
+							{
+								style: style,
+								chat: t
+							})] : "info" === t.type ? (0, m.jsx)(s.vD,
+							{
+								style: style,
+								// children: t.content
+								dangerouslySetInnerHTML: {__html: t.content}
+							}) : "end" === t.type ? (0, m.jsx)(f,
+							{}) : (0, m.jsx)(m.Fragment,{})
+						})]
+					})
+				},
+				e8 = c.ZP.div.withConfig(
+				{
+					displayName: "Chat__Flex",
+					componentId: "sc-5hhx0-0"
+				})(["", ";height:auto;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						justify: "flex-end",
+						align: "flex-start"
+					})
+				}),//
+				T = c.ZP.div.withConfig(
+				{
+					displayName: "Chat__Flex",
+					componentId: "sc-1k7dquv-0"
+				})(["", ";height:auto;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						justify: "flex-end",
+						align: "flex-start"
+					})
+				}),
+				I = c.ZP.div.withConfig(
+				{
+					displayName: "Chat__LoadingDiv",
+					componentId: "sc-1k7dquv-1"
+				})(["&,&:before,&:after{color:#ffffff;top:-2.7rem;border-radius:50%;width:0.5rem;height:0.5rem;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation:load7 3s infinite ease-in-out;animation:load7 3s infinite ease-in-out;}&{margin:1.2rem 2rem 0rem 2rem;position:relative;text-indent:-9999rem;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation-delay:-0.2s;animation-delay:-0.2s;}&:before,&:after{content:'';position:absolute;top:0;}&:before{left:-1.2rem;-webkit-animation-delay:-0.4s;animation-delay:-0.4s;}&:after{left:1.2rem;}@-webkit-keyframes load7{0%,80%,100%{box-shadow:0 2rem 0 -1rem;}40%{box-shadow:0 2rem 0 0;}}@keyframes load7{0%,80%,100%{box-shadow:0 2rem 0 -1rem;}40%{box-shadow:0 2rem 0 0;}}"]),
+				S = function(e)
+				{
+					var t = e.scrollRef,
+						n = (0, o.T)(),
+						c = (0, o.C)(function(e)
+						{
+							return e.global.lang
+						}),
+						l = (0, o.C)(function(e)
+						{
+							return e.playChat.nowChats
+						}),
+						s = (0, o.C)(function(e)
+						{
+							return e.playChat.chats
+						}),
+						d = (0, a.useCallback)(function()
+						{
+							var e;
+							null === (e = t.current) || void 0 === e || e.scrollIntoView(!1)
+						}, [t]);
+					return (0, a.useEffect)(function()
+					{
+						0 === l.length && s.length > 0 && n((0, i.e$)(
+						{
+							chat: s[0]
+						}))
+					}, [n, l, s]), (0, m.jsx)(B,
+					{
+						children: (0, m.jsx)(A,
+						{
+							children: s.length < 1 ? (0, m.jsx)(M,
+							{
+								children: (0, m.jsx)("span",
+								{
+									style:
+									{
+										fontSize: "1.1rem"
+									},
+									children: r.Z.select_msg[c]
+								})
+							}) : (0, m.jsx)(D,
+							{
+								ref: t,
+								children: l.map(function(e, t)
+								{
+									return (0, m.jsx)(E,
+									{
+										chat: e,
+										handleScroll: d
+									}, t)
+								})
+							})
+						})
+					})
+				},
+				B = c.ZP.div.withConfig(
+				{
+					displayName: "RightScreen__Box",
+					componentId: "sc-14j003s-0"
+				})(["display:flex;height:100%;width:100%;flex-direction:column;background-color:", ";min-width:340px;@media screen and (max-width:768px){min-width:100vw;}"], function(e)
+				{
+					return ''//#自定义样式
+				}),
+				A = c.ZP.div.withConfig(
+				{
+					displayName: "RightScreen__Container",
+					componentId: "sc-14j003s-1"
+				})(["display:inline-block;height:100%;background-color:", ";overflow-y:auto;overflow-y:overlay;overflow-x:hidden;&::-webkit-scrollbar{display:inline-block;width:0.4rem;}&::-webkit-scrollbar-thumb{height:17%;background-color:", ";border-radius:1rem;}"], function(e)
+				{
+					return ''//#
+				}, function(e)
+				{
+					return e.theme.color.rgb210_210_210
+				}),
+				D = c.ZP.div.withConfig(
+				{
+					displayName: "RightScreen__CContainer",
+					componentId: "sc-14j003s-2"
+				})(["display:flex;flex-direction:column;width:100%;height:max-content;padding-bottom:1rem;background-color:", ";"], function(e)
+				{
+					return ''//#自定义样式
+				}),
+				M = c.ZP.div.withConfig(
+				{
+					displayName: "RightScreen__Span",
+					componentId: "sc-14j003s-3"
+				})(["", ";background-color:", ";color:", ";"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{})
+				}, function(e)
+				{
+					return ''//#
+				}, function(e)
+				{
+					return e.theme.color.rgb111_119_127
+				})
+		},
+		6696: function(e, t, n)
+		{
+			"use strict";
+			var r = n(3380),
+				o = n(1664),
+				i = n.n(o),
+				a = n(7294),
+				c = n(9521),
+				l = n(5893);
+			t.Z = function(e)
+			{
+				var t = e.rowCount,
+					n = e.option,
+					o = e.changeOption,
+					i = (0, a.useState)([]),
+					c = i[0],
+					h = i[1],
+					u = (0, a.useState)(0),
+					m = u[0],
+					f = u[1];
+				(0, a.useEffect)(function()
+				{
+					for(var e = [], r = 0 === Math.floor(n.PAGE / 5) ? 1 : n.PAGE % 5 == 0 ? n.PAGE - 4 : 5 * Math.floor(n.PAGE / 5) + 1, o = Math.floor(t % 10 == 0 ? t / 10 : t / 10 + 1), i = r; i <= o && i <= r + 4; i++) e.push(i);
+					f(o), h(e)
+				}, [n, t, f, h]);
+				var p = function(e)
+					{
+						return {
+							PAGE: e,
+							M_TYPE: n.M_TYPE,
+							O_TYPE: n.O_TYPE,
+							B_TYPE: n.B_TYPE,
+							C_TYPE: n.C_TYPE,
+							CONTENT: n.CONTENT,
+							LANG: n.LANG,
+							MEMBER_NO: n.MEMBER_NO
+						}
+					},
+					g = function(e)
+					{
+						var t = "/" + (0, r.sk)(e.M_TYPE) + "/" + e.LANG + "/" + e.PAGE.toString();
+						return (e.O_TYPE || e.B_TYPE || e.C_TYPE || e.CONTENT) && (t += "?" + (0 !== e.O_TYPE ? "o_type=" + e.O_TYPE : "") + (0 !== e.B_TYPE ? "&b_type=" + e.B_TYPE : "") + (0 !== e.C_TYPE ? "&c_type=" + e.C_TYPE : "") + (0 !== e.C_TYPE ? "&content=" + e.CONTENT : "")), t
+					};
+				return (0, l.jsx)("div",
+				{
+					style:
+					{
+						display: "flex",
+						justifyContent: "center",
+						marginTop: "auto"
+					},
+					children: (0, l.jsx)(s,
+					{
+						children: (0, l.jsxs)("ul",
+						{
+							children: [n.PAGE > 5 && (0, l.jsxs)(l.Fragment,
+							{
+								children: [(0, l.jsxs)("li",
+								{
+									onClick: function(e)
+									{
+										o(p(1))
+									},
+									children: ["<<", (0, l.jsx)(d,
+									{
+										href: g(p(1)),
+										children: "<<"
+									})]
+								}), (0, l.jsxs)("li",
+								{
+									onClick: function(e)
+									{
+										o(p(0 === Math.floor(n.PAGE % 5) ? 5 * Math.floor(n.PAGE / 5) - 5 : 5 * Math.floor(n.PAGE / 5)))
+									},
+									children: ["<", (0, l.jsx)(d,
+									{
+										href: g(p(0 === Math.floor(n.PAGE % 5) ? 5 * Math.floor(n.PAGE / 5) - 5 : 5 * Math.floor(n.PAGE / 5))),
+										children: "<"
+									})]
+								})]
+							}), c.map(function(e)
+							{
+								return (0, l.jsxs)("li",
+								{
+									onClick: function()
+									{
+										o(p(e))
+									},
+									className: e === n.PAGE ? "active" : "",
+									children: [e, (0, l.jsx)(d,
+									{
+										href: g(p(e)),
+										children: e
+									})]
+								}, e)
+							}), n.PAGE < 5 * Math.floor((m - 1) / 5) + 1 && (0, l.jsxs)(l.Fragment,
+							{
+								children: [(0, l.jsxs)("li",
+								{
+									onClick: function()
+									{
+										o(p(0 === Math.floor(n.PAGE % 5) ? 5 * Math.floor(n.PAGE / 5) + 1 : 5 * Math.floor(n.PAGE / 5) + 6))
+									},
+									children: [">", (0, l.jsx)(d,
+									{
+										href: g(p(0 === Math.floor(n.PAGE % 5) ? 5 * Math.floor(n.PAGE / 5) + 1 : 5 * Math.floor(n.PAGE / 5) + 6)),
+										children: ">"
+									})]
+								}), (0, l.jsxs)("li",
+								{
+									onClick: function()
+									{
+										o(p(m))
+									},
+									children: [">>", (0, l.jsx)(d,
+									{
+										href: g(p(m)),
+										children: ">>"
+									})]
+								})]
+							})]
+						})
+					})
+				})
+			};
+			var s = c.ZP.div.withConfig(
+				{
+					displayName: "Paging__Pagination",
+					componentId: "sc-1r5t0xh-0"
+				})(["text-align:center;padding :2rem 0;height :auto;width :100%;ul{width:auto;padding:0;margin:0;display:flex;justify-content:center;align-items:center;}li{display:flex;justify-content:center;align-items:center;cursor:pointer;padding:0 5px;color:", ";border-radius:50%;-webkit-transition:background-color 0.3s;transition:background-color 0.3s;width:2.5rem;height:2.5rem;margin:0 0.2rem;border:2px solid ", ";}li.active{background-color:", ";color:#fff;pointer-events:none;}li:hover:not(.active){background-color:", ";}"], function(e)
+				{
+					return e.theme.color.rgb0_0_0
+				}, function(e)
+				{
+					return e.theme.color.rgb223_226_228
+				}, function(e)
+				{
+					return e.theme.color.rgb149_186_229
+				}, function(e)
+				{
+					return e.theme.color.rgb202_215_221
+				}),
+				d = (0, c.ZP)(i()).withConfig(
+				{
+					displayName: "Paging__HideLink",
+					componentId: "sc-1r5t0xh-1"
+				})(["overflow:hidden;width :0;height :0;"])
+		},
+		1208: function(e, t, n)
+		{
+			"use strict";
+			n.d(t,
+			{
+				m: function()
+				{
+					return r
+				}
+			});
+			var r = (0, n(5648).lX)() || void 0
+		},
+		6453: function(e, t, n)
+		{
+			"use strict";
+			n.d(t,
+			{
+				AZ: function()
+				{
+					return d
+				},
+				Dr: function()
+				{
+					return s
+				},
+				HR: function()
+				{
+					return l
+				},
+				OP: function()
+				{
+					return c
+				},
+				Qj: function()
 				{
 					return h
 				},
-				Dt: function()
+				W2: function()
+				{
+					return a
+				}
+			});
+			var r = n(9521),
+				o = n(1563),
+				i = n(4685),
+				a = r.ZP.div.withConfig(
+				{
+					displayName: "setting__Container",
+					componentId: "sc-o80z4-0"
+				})(["", ";height:fit-content;user-select:text;"], function(e)
+				{
+					return e.theme.common.flexBox(
+					{
+						direction: "column"
+					})
+				}),
+				c = r.ZP.div.withConfig(
+				{
+					displayName: "setting__TextWrapper",
+					componentId: "sc-o80z4-1"
+				})(["display:flex;flex-direction:column;background-color:white;padding:1rem 0.5rem;margin-bottom:0.5rem;width:100%;line-height:1.5rem;flex-wrap:wrap;"]),
+				l = r.ZP.div.withConfig(
+				{
+					displayName: "setting__HR",
+					componentId: "sc-o80z4-2"
+				})(["border-top:0.15rem dashed ", ";margin:1rem 0;"], function(e)
+				{
+					return e.theme.color.rgb207_212_215
+				}),
+				s = r.ZP.span.withConfig(
+				{
+					displayName: "setting__Span",
+					componentId: "sc-o80z4-3"
+				})(["white-space:pre-wrap;word-break:keep-all;font-size:1rem;&.bold{font-size:1.3rem;}color:", ";"], function(e)
+				{
+					return e.theme.color.rgb34_37_41
+				}),
+				d = (0, r.ZP)(i.Lw).withConfig(
+				{
+					displayName: "setting__CommitButton",
+					componentId: "sc-o80z4-4"
+				})(["width:auto;min-width:6em;height:3rem;line-height:2rem;margin:auto 1rem;color:", ";font-size:1.2rem;&:before{background-color:", ";border:none;box-shadow:0.05rem 0.2rem 0.2rem ", ";width:100%;}&:hover:before{background-color:", ";}&:active:before{box-shadow:0.04rem 0.15rem 0.2rem ", ";width:100%;height:2.9rem;}@media screen and (max-width:768px){margin :auto 0 auto auto;}"], function(e)
+				{
+					return e.theme.color.rgb45_80_100
+				}, function(e)
+				{
+					return e.theme.color.rgb118_220_255
+				}, function(e)
+				{
+					return e.theme.color.rgb171_193_204
+				}, function(e)
+				{
+					return e.theme.color.rgb77_197_237
+				}, function(e)
+				{
+					return e.theme.color.rgb171_193_204
+				}),
+				h = (0, r.ZP)(o.zx).withConfig(
+				{
+					displayName: "setting__LinkButton",
+					componentId: "sc-o80z4-5"
+				})(["color:", ";font-size:1rem;line-height:1rem;height :auto;margin :0 1rem;border:2px solid ", ";a{text-decoration:none;color:", ";}"], function(e)
+				{
+					return e.theme.color.rgb48_150_245
+				}, function(e)
+				{
+					return e.theme.color.rgb48_150_245
+				}, function(e)
+				{
+					return e.theme.color.rgb48_150_245
+				})
+		},
+		83: function(e, t, n)
+		{
+			"use strict";
+			n.d(t,
+			{
+				CJ: function()
 				{
 					return u
+				},
+				Dt: function()
+				{
+					return d
 				},
 				HR: function()
 				{
@@ -5227,19 +9176,19 @@
 				},
 				LP: function()
 				{
-					return d
+					return h
 				},
 				NZ: function()
 				{
-					return b
+					return _
 				},
 				Xp: function()
 				{
-					return a
+					return c
 				},
 				YJ: function()
 				{
-					return y
+					return b
 				},
 				_x: function()
 				{
@@ -5267,15 +9216,15 @@
 				},
 				xu: function()
 				{
-					return c
+					return a
 				},
 				zC: function()
 				{
 					return s
 				}
 			});
-			var r = t(9521),
-				o = t(1563),
+			var r = n(9521),
+				o = n(1563),
 				i = r.ZP.div.withConfig(
 				{
 					displayName: "talk__ChatContainer",
@@ -5287,12 +9236,12 @@
 						align: "stretch"
 					})
 				}),
-				c = r.ZP.div.withConfig(
+				a = r.ZP.div.withConfig(
 				{
 					displayName: "talk__Box",
 					componentId: "sc-eq7cqw-1"
 				})(["display:flex;width:6rem;"]),
-				a = r.ZP.div.withConfig(
+				c = r.ZP.div.withConfig(
 				{
 					displayName: "talk__ChatWrapper",
 					componentId: "sc-eq7cqw-2"
@@ -5311,7 +9260,7 @@
 				{
 					displayName: "talk__ImgBox",
 					componentId: "sc-eq7cqw-3"
-				})([`max-width:${mt_settings['图片比例']};border:2px solid `, ";background-color:rgb(255,255,255);padding:0.5rem;border-radius:10px;"], function(e)
+				})([`max-width:${mt_settings['图片比例']};border:2px solid ", ";background-color:rgb(255,255,255);padding:0.5rem;border-radius:10px;`], function(e)
 				{
 					return e.theme.color.rgb255_255_255
 				}),
@@ -5329,12 +9278,12 @@
 				{
 					return e.theme.color.rgb76_91_111
 				}),
-				u = (0, r.ZP)(s).withConfig(
+				d = (0, r.ZP)(s).withConfig(
 				{
 					displayName: "talk__NTextBox",
 					componentId: "sc-eq7cqw-5"
 				})(["::after{content:none;}"]),
-				d = (0, r.ZP)(s).withConfig(
+				h = (0, r.ZP)(s).withConfig(
 				{
 					displayName: "talk__STextBox",
 					componentId: "sc-eq7cqw-6"
@@ -5345,7 +9294,7 @@
 				{
 					return e.theme.color.rgb74_138_202
 				}),
-				h = r.ZP.div.withConfig(
+				u = r.ZP.div.withConfig(
 				{
 					displayName: "talk__Triangle",
 					componentId: "sc-eq7cqw-7"
@@ -5408,30 +9357,129 @@
 				{
 					return e.theme.color.rgb69_78_89
 				}),
-				y = (0, r.ZP)(o.xL).withConfig(
+				b = (0, r.ZP)(o.xL).withConfig(
 				{
 					displayName: "talk__CheckedIcon",
 					componentId: "sc-eq7cqw-13"
 				})(["width:1.1rem;height:1.1rem;margin-right:0.5rem;"]),
-				b = r.ZP.img.withConfig(
+				_ = r.ZP.img.withConfig(
 				{
 					displayName: "talk__Profile",
 					componentId: "sc-eq7cqw-14"
 				})(["box-sizing:border-box;margin:0rem;width:4rem;height:4rem;object-fit:contain;border-radius:50%;"])
-		},
-		8312: function(e, n, t)
+		}
+	}
+]);
+(self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+	[435],
+	{
+		3836: function(t, e, n)
 		{
-			(window.__NEXT_P = window.__NEXT_P || []).push(["/", function()
+			"use strict";
+			n.r(e);
+			var a = n(5615),
+				i = n(330),
+				o = n(5563),
+				r = n(939),
+				s = n(9008),
+				l = n.n(s),
+				c = n(7294),
+				m = n(9521),
+				u = n(5893);
+			e.default = function()
 			{
-				return t(1097)
+				var t = (0, c.useRef)(null);
+				return (0, u.jsxs)(u.Fragment,
+				{
+					children: [(0, u.jsxs)(l(),
+					{
+						children: [(0, u.jsx)("title",
+						{
+							children: "MomoTalk Player"
+						}), (0, u.jsx)("meta",
+						{
+							name: "description",
+							content: "This is the MoeTalk MomoTalk Player Page. (몰루톡/モルトーク)"
+						}), (0, u.jsx)("meta",
+						{
+							name: "keywords",
+							content: "몰루톡, MoeTalk, モルトーク, MomoTalk Player, 비공개톡"
+						}), (0, u.jsx)("meta",
+						{
+							property: "og:title",
+							content: "MomoTalk Player"
+						}), (0, u.jsx)("meta",
+						{
+							property: "og:image",
+							content: MoeTalkURL + "Images/Ui/Favor_Schedule_Deco.webp"
+						}), (0, u.jsx)("meta",
+						{
+							property: "og:site_name",
+							content: "MomoTalk Player"
+						}), (0, u.jsx)("meta",
+						{
+							property: "og:description",
+							content: "This is the MoeTalk MomoTalk Player Page. (몰루톡/モルトーク)"
+						}), (0, u.jsx)("meta",
+						{
+							name: "twitter:title",
+							content: "MomoTalk Player"
+						}), (0, u.jsx)("meta",
+						{
+							name: "twitter:description",
+							content: "This is the MoeTalk MomoTalk Player Page. (몰루톡/モルトーク)"
+						}), (0, u.jsx)("meta",
+						{
+							name: "twitter:image",
+							content: MoeTalkURL + "Images/Ui/Favor_Schedule_Deco.webp"
+						}), (0, u.jsx)("meta",
+						{
+							name: "twitter:card",
+							content: "summary_large_image"
+						})]
+					}), (0, u.jsxs)(p,
+					{
+						children: [(0, u.jsx)(a.Z,
+						{
+							childrens: [(0, u.jsx)(o.Z,
+							{
+								ssrBoard: null
+							}, 0), (0, u.jsx)(r.Z,
+							{
+								scrollRef: t
+							}, 1)]
+						}), (0, u.jsx)(i.Z,
+						{
+							scrollRef: t
+						})]
+					})]
+				})
+			};
+			var p = m.ZP.div.withConfig(
+			{
+				displayName: "pageNum__Container",
+				componentId: "sc-889ogc-0"
+			})(["", ""], function(t)
+			{
+				return t.theme.common.flexBox(
+				{
+					direction: "column"
+				})
+			})
+		},
+		8334: function(t, e, n)
+		{
+			(window.__NEXT_P = window.__NEXT_P || []).push([player, function()
+			{
+				return n(3836)
 			}])
 		}
 	},
-	function(e)
+	function(t)
 	{
-		e.O(0, [443, 288, 876, 774, 888, 179], function()
+		t.O(0, [288, 876, 648, 333, 563, 774, 888, 179], function()
 		{
-			return e(e.s = 8312)
-		}), _N_E = e.O()
+			return t(t.s = 8334)
+		}), _N_E = t.O()
 	}
 ]);

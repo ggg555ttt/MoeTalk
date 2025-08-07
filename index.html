@@ -5,6 +5,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<script src="./MoeScript/Script/jquery.min.js"></script>
 		<script src="./MoeScript/Script/localforage.min.js"></script>
+		<script src="./MoeScript/Script/html2canvas.min.js"></script>
+		<!-- <script src="https://unpkg.com/@zumer/snapdom@latest/dist/snapdom.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/simplebar/6.3.2/simplebar.min.js"></script>
+		<link href="https://cdn.bootcdn.net/ajax/libs/simplebar/6.3.2/simplebar.min.css" rel="stylesheet"> -->
 		<script>
 function loadjs(link,mode = '')
 {
@@ -18,7 +22,7 @@ function os(u = window.navigator.userAgent)
 }
 
 //变量
-var 更新时间 = 1754246317//!
+var 更新时间 = 1754570053//!
 var gamearr = {}//游戏列表
 gamearr['BLDA'] = '碧蓝档案'
 gamearr['CBJQ'] = '尘白禁区'
@@ -27,8 +31,8 @@ gamearr['YGST'] = '犹格索托斯的庭院'
 gamearr['DFPJ'] = '东方Project'
 
 var gamever = {}//游戏版本
-var gamever = {"BLDA":"250625","CBJQ":"250710","QNZL":"241024","YGST":"000000","DFPJ":"250617"}//$
-
+var gamever = {"BLDA":"250722","CBJQ":"250710","QNZL":"241024","YGST":"000000","DFPJ":"250617"}//$
+gamever.BLDA = "250625"
 var 本地版本 = 27//@
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 var browser = os();//获取浏览器信息
@@ -164,38 +168,24 @@ var mt_characters,
 		<meta name="application-name" content="MoeTalk">
 
 		<link rel="shortcut icon" href="./MoeData/Ui/Favor_Schedule_Deco.webp">
-		<link rel='stylesheet' href="./MoeScript/Style/style.css?filesize=19497" data-n-g=''><!-- @@样式 -->
+		<link rel='stylesheet' href="./MoeScript/Style/style.css?filesize=19816" data-n-g=''><!-- @@样式 -->
 		<script src="./MoeData/MT-Img.js"></script><!-- 存档图片 -->
 		<script src="./MoeData/MT-Text.js"></script><!-- 提示文本 -->
-		<script src="./MoeScript/INIT.js?filesize=9886" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/IMAGE.js?filesize=13815" defer></script><!-- @@截图 -->
+		<script src="./MoeScript/INIT.js?filesize=9892" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/IMAGE.js?filesize=15474" defer></script><!-- @@截图 -->
 		<script src="./MoeScript/DATA.js?filesize=21351" defer></script><!-- @@存档 -->
-		<script src="./MoeScript/CHAT.js?filesize=40861" defer></script><!-- @@消息 -->
+		<script src="./MoeScript/CHAT.js?filesize=40857" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?filesize=16579" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/TOP.js?filesize=19078" defer></script><!-- @@首页 -->
-		<script src="./MoeScript/Mollu/Other/webpack-0a2a587924e1d405.js" defer></script>
-		<script src="./MoeScript/Mollu/Other/framework-2c79e2a64abdb08b.js" defer></script>
-		<script src="./MoeScript/Mollu/Other/MAIN.js" defer></script>
-		<script src="./MoeScript/Mollu/APP.js?filesize=768497" defer></script><!-- @@框架 -->
-		<script src="./MoeScript/Mollu/Other/ad7f724d-94baee9a2d394f8b.js" defer></script>
-		<script src="./MoeScript/Mollu/Other/288-68932622dcf1348d.js" defer></script>
-		<script src="./MoeScript/Mollu/Other/876-d056d91d7a6271a4.js" defer></script>
-		<script src="./MoeScript/Mollu/INDEX.js?filesize=150510" defer></script><!-- @@首页 -->
-		<script src="./MoeScript/Mollu/Other/_buildManifest.js" defer></script>
-
+		<script src="./MoeScript/TOP.js?filesize=19395" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/Mollu/MAIN.js?filesize=292785" defer></script><!-- @@ -->
+		<script src="./MoeScript/Mollu/APP.js?filesize=743927" defer></script><!-- @@框架 -->
+		<script src="./MoeScript/Mollu/INDEX.js?filesize=261321"></script><!-- @@首页 -->
 		<style data-styled="active" data-styled-version="5.3.8"></style>
 	</head>
 	<body style="touch-action: none;-webkit-tap-highlight-color: transparent;tap-highlight-color: transparent;"><!-- MikuTap style -->
 		<div id="__next">
 		</div>
 		<script id="__NEXT_DATA__" type="application/json">{"props": {},"page": "/"}</script>
-		<script src="./MoeScript/Mollu/Other/2cca2479-252e554161ba1891.js"></script>
-		<script src="./MoeScript/Mollu/Other/648-34d807018fc4299c.js"></script>
-		<script src="./MoeScript/Mollu/LIBRARY.js?filesize=51630"></script><!-- @@图书馆 -->
-		<script src="./MoeScript/Mollu/PLAYER.js?filesize=71109"></script><!-- @@播放器 -->
-		<script src="./MoeScript/Mollu/Other/[pageNum]-64f8b3ceb0a4c91c.js"></script>
-		<script src="./MoeScript/Mollu/CSS.js?filesize=24884"></script><!-- @@样式 -->
-		<!-- <script src="./MoeScript/Mollu/Other/music-328e8f3388aab8f7.js"></script> -->
 	</body>
 </html>
 <p>如果长时间卡在此页面建议您清除浏览器缓存后再重新访问</p>

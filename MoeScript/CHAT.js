@@ -353,10 +353,7 @@ function makeMessage(type,data,chatIndex,mode)
 	}
 	else if(mode === '预览')
 	{
-		let chat = []
-		if(chatIndex)chat.push(chats[chatIndex-1])
-		chat.push(data)
-		head = isfirst(chat.length-1,chat)
+		head = data.isFirst
 	}
 	else
 	{
@@ -553,7 +550,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 			else
 			{
 				//data.isFirst = !1
-				if(mt_settings['右侧发言'] && mt_settings['右侧发言'][mt_settings['选择角色'].no] && ['chat','image'].indexOf(type) > -1)data.isRight = true
+				if(mt_settings['右侧发言'][mt_settings['选择角色'].no] && ['chat','image'].indexOf(type) > -1)data.isRight = true
 				//data.isRight = ['chat','image'].indexOf(type) > -1 && mt_settings['右侧发言'][mt_settings['选择角色'].no]
 				//data.is_breaking = !1
 				data.sCharacter = {no:mt_settings['选择角色'].no,index:mt_settings['选择角色'].index}
@@ -902,6 +899,10 @@ $("body").on('click',".预览模式",function()
 	data.style = CHAT_Style
 	$('.内容界面').hide()
 	$('.预览界面').show()
+	let chat = []
+	if(chatIndex)chat.push(chats[chatIndex-1])
+	chat.push(data)
+	data.isFirst = isfirst(chat.length-1,chat)
 	$('.预览内容').html(makeMessage(type,data,chatIndex,'预览')).outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings['风格样式'][1])
 	$('.内容预览').click()
 });

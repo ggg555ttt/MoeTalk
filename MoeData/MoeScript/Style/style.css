@@ -83,7 +83,7 @@ button:hover {
 }
 button:disabled {
 	cursor: auto;
-	transform: translateY(0px);
+    transform: translateY(0px);
 }
 input[type="text"],
 input[type="file"] {
@@ -399,47 +399,35 @@ a {
 }
 .PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar {
 	display: block;
-	width: 0.5rem; /* 滚动条宽度 */
+    width: 0.5rem; /* 滚动条宽度 */
 }
  
 .PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar-track {
-	background: #f1f1f1; /* 滚动条轨道颜色 */
+    background: #f1f1f1; /* 滚动条轨道颜色 */
 }
  
 .PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar-thumb {
-	height: 10%;
-	background-color: #888;/* 滚动条滑块颜色 */
-	border-radius: 0.5rem;
+    height: 10%;
+    background-color: #888;/* 滚动条滑块颜色 */
+    border-radius: 0.5rem;
 }
  
 .PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar-thumb:hover {
-	background: #555; /* 鼠标悬停时滑块颜色 */
+    background: #555; /* 鼠标悬停时滑块颜色 */
 }
 .角色名称::-webkit-input-placeholder { /* WebKit browsers */
-	color: black;
+    color: black;
 }
 .角色名称::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-	color: black;
+    color: black;
 }
 .角色名称::-moz-placeholder { /* Mozilla Firefox 19+ */
-	color: black;
+    color: black;
 }
 .角色名称::-ms-input-placeholder { /* Internet Explorer 10-11 */
-	color: black;
+    color: black;
 }
 .角色名称::placeholder { /* Standard syntax */
-	color: black;
+    color: black;
 }
 .PLAYER_Loading,.PLAYER_Loading:before,.PLAYER_Loading:after{color:#ffffff;top:-2.7rem;border-radius:50%;width:0.5rem;height:0.5rem;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation:load7 3s infinite ease-in-out;animation:load7 3s infinite ease-in-out;}.PLAYER_Loading{margin:1.2rem 2rem 0rem 2rem;position:relative;text-indent:-9999rem;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation-delay:-0.2s;animation-delay:-0.2s;}.PLAYER_Loading:before,.PLAYER_Loading:after{content:'';position:absolute;top:0;}.PLAYER_Loading:before{left:-1.2rem;-webkit-animation-delay:-0.4s;animation-delay:-0.4s;}.PLAYER_Loading:after{left:1.2rem;}@-webkit-keyframes load7{0%,80%,100%{box-shadow:0 2rem 0 -1rem;}40%{box-shadow:0 2rem 0 0;}}@keyframes load7{0%,80%,100%{box-shadow:0 2rem 0 -1rem;}40%{box-shadow:0 2rem 0 0;}}
-.swing-animation {
-	display: block;
-	width: 200px; /* 根据需要调整 */
-	height: auto;
-	animation: swing 0.3s infinite; /* 动画名称、持续时间、无限循环 */
-}
-@keyframes swing {
-	0%, 100% { transform: rotate(0deg); }
-	25% { transform: rotate(15deg); }
-	50% { transform: rotate(0deg); }
-	75% { transform: rotate(-15deg); }
-}

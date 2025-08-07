@@ -164,7 +164,7 @@ function click(name)
 const getNowDate = () => {
 	var date = new Date();
 	var sign2 = ":";
-	var year = date.getFullYear() // 年
+	var year = date.getFullYear() % 100 // 年
 	var month = date.getMonth() + 1; // 月
 	var day = date.getDate(); // 日
 	var hour = date.getHours(); // 时
