@@ -10118,7 +10118,11 @@
 													height: '100%'
 												},
 												src: href+"MoeData/Ui/zhengwen.webp",//#播放器界面
-												alt: "private"
+												alt: "private",
+												onClick: function(e)
+												{
+													$$('.swing-animation').removeClass('swing-animation')
+												}
 											})
 										})]
 									}), (0, O.jsx)(F,

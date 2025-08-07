@@ -118,7 +118,7 @@ $(function()
 	// if(cordova)notice += '<span class="red">※此客户端目前处于测试阶段\n使用前请先确认文件下载功能是否正常\n出现错误请向开发者反馈</span>\n'
 	// else notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常下载并备份存档</span>\n'
 	$('.notice pre').css('text-align','center')
-	alert(notice)
+
 	if(MikuTalk)
 	{
 		notice = '愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n<span class="red">点击“确定”可以关闭</span>\n'
@@ -140,10 +140,11 @@ $(function()
 		if(Html5Plus)notice += `<span class="red">新版网络客户端已更新至百度网盘，请及时下载安装并转移存档</span>\n`
 		delete localStorage['通知文档']
 	}
-	if(!localStorage['通知文档'] || localStorage['通知文档'] !== notice)
+	if(localStorage['通知文档'] !== notice || sessionStorage['通知文档'] !== notice)
 	{
 		alert(notice)
 		localStorage['通知文档'] = notice
+		sessionStorage['通知文档'] = notice
 	}
 })
 $("body").on('click', function()
