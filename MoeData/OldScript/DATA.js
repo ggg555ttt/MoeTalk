@@ -603,14 +603,18 @@ function download(filename,data,base64,type = 'json')
 	}
 	if(type === 'image')
 	{
-		if(Html5Plus)saveImg(filename, base64)//base64下载
+		if(Html5Plus)
+		{
+			saveImg(filename, base64)//base64下载
+			str += '图片正在下载，也可以手动长按保存下方的图片到图库\n'
+		}
 		else//blob下载
 		{
 			dir = 'MoeTalk图片'
 			if(imageZip)
 			{
 				imageZip.file(filename,data);
-				if(imageArrL === Object.keys(imageZip.files).length)
+				if(imageArr.length === 0)
 				{
 					imageZip.generateAsync({type:'blob'}).then(function(data)
 					{
@@ -621,10 +625,13 @@ function download(filename,data,base64,type = 'json')
 					});
 				}
 			}
-			else savefile(dir,filename,data,type)
+			else
+			{
+				savefile(dir,filename,data,type)
+			}
+			str += mt_text.image_download[mtlang]+'\n'
 		}
 		if(cordova)str += `图片可以在【内部存储/Download/${dir}${type === 'image' ? `/${DATA_NowTime}` : ''}】中找到\n`
-		str += mt_text.image_download[mtlang]+'\n'
 		str += '无法手动保存请取消勾选“存档”选框，并将图片格式改为“webp”格式\n'
 		$('.INDEX_CaptureTips').text(str)
 	}

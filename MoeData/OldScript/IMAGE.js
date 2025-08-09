@@ -1,11 +1,7 @@
 var imageArr = [];//截图分段列表
 var imageArrL = 0//截图分段数量
-var imgArea = {}
 var imageZip = null;//压缩文件
 var baseArr = []
-var 截图区域
-var 正在截图 = false
-var 上次截图 = []
 //图片压缩
 function compress(base64Img,type = 'head',mode = 'add',length = 0)
 {
@@ -40,8 +36,8 @@ function compress(base64Img,type = 'head',mode = 'add',length = 0)
 
 		if(type === 'image')
 		{
-			if(mode === 'edit')$('.图片内容 img').attr('src',newBase64)//编辑图片
-			else if(mode === 'add')sendMessage({content:'',type: 'image',file: newBase64},'image',mode)//发送图片
+			if(mode === 'edit')$('.图片文件').show().attr('src',newBase64).attr('title','')//编辑图片
+			else if(mode === 'add')sendMessage({type: 'image',file: newBase64},'image',mode)//发送图片
 			else//上传表情
 			{
 				let Emojis = $('.Emojis')
@@ -65,8 +61,6 @@ function compress(base64Img,type = 'head',mode = 'add',length = 0)
 				else index = char_info.no
 				$('.heads').append(`<img src="${newBase64}" title="${index}" ${attr}>`)
 				$('#custom-char .confirm').removeAttr('disabled')
-				$('.headinfo').show()
-				$('.heads img:eq(-1)').click()
 			}
 		}
 		INIT_loading(false)
@@ -159,6 +153,7 @@ function mt_title()
 	$("#size").hide()
 	if(!元素尺寸)元素尺寸 = document.documentElement.style.fontSize
 	document.documentElement.style.fontSize = '16px'
+	setTimeout(function(){click('#tool-image')},1)
 }
 function srceenMode()//取消截图
 {
@@ -212,10 +207,6 @@ function 截屏预览(S)
 		if($(".dels:checked").length)消息 = $(`.消息 :checked:eq(${end})`).parent()//区域截图
 		else 消息 = $(`.消息:eq(${end})`)
 		length = length+(消息.outerHeight()*S)
-		// if(json[end].checked && ['chat','image'].indexOf(json[end].type) > -1 && json[end].sCharacter.no != 0 && isfirst(end,json))
-		// {
-		// 	消息[0].outerHTML = makeMessage(json[end].type,json[end],end,'area')
-		// }
 		if(length > mt_settings['高度限制'] || 消息.attr('title') === 'red' || 平均)//
 		{
 			if(['chat','image'].indexOf(json[end].type) > -1 && json[end].sCharacter.no != 0 && !isfirst(end,json))
@@ -227,17 +218,17 @@ function 截屏预览(S)
 			{
 				length = leng+(消息.outerHeight()*S)
 			}
-			imageArr.push({start: start,end: end,index: imageArr.length+1,chats: json.slice(start,end)})
+			imageArr.push({start:start,end:end,index:imageArr.length+1})
 			start = end
 			平均 = false
 		}
 		//if(length > 平均长度)平均 = true
 		if(end === json.length-1)
 		{
-			imageArr.push({start: start,end: json.length,index: imageArr.length+1,chats: json.slice(start,json.length)})
+			imageArr.push({start: start,end: json.length,index: imageArr.length+1})
 		}
 	}
-	if(zipDownImg && imageArrL > 1)
+	if(zipDownImg && imageArr.length > 1)
 	{
 		imageZip = new JSZip();
 	}
@@ -258,103 +249,38 @@ function 截屏预览(S)
 	}
 }
 //截屏功能
-function 内容预览(截屏)
+function mt_capture(清晰度,截屏,生成图片,时间,标题)
 {
-	html2canvas($(".预览内容")[0],
-	{
-		logging: !1,
-		allowTaint: !0,
-		useCORS: !0,
-		scale: 1.1
-	}).then(function(img)
-	{
-		$('.预览内容').html(`<img width='500px' src='${img.toDataURL()}'>`)
-	})
-}
-function mt_capture(清晰度,生成图片,标题)
-{
-	let html = 正在截图 || imageArr[0].index != 1 ? '' : $('#mt_watermark')[0].outerHTML
 	let json = []
 	let filename = ''
 	let title = 标题 ? 标题 : mt_text.noTitle[mtlang]
+	let imgArea = imageArr[0]
+	if(imgArea.start !== 0)$('#mt_watermark').hide()
+
 	if(!mt_settings['截图选项'].archive)json = ''
 	else
 	{
 		json[0] = {};
 		json[0]['title'] = '备份存档';
 		json[0]['nickname'] = 'MoeTalk';
-		json[0]['date'] = DATA_NowTime;
+		json[0]['date'] = 时间;
 		json[0]['选择角色'] = mt_settings['选择角色']//@
 		json[0]['mt_char'] = mt_char;//@自创角色
 		json[0]['mt_head'] = mt_head;//@自创头像
 		json[1] = [...chats,...otherChats];
 		json = JSON.stringify(json)
 	}
-	imgArea = imageArr.shift()
-	if(imgArea.chats.length === 0)
-	{
-		foreach(imageArr,function(k,v){imageArr[k].index -= 1})
-		imgArea = imageArr.shift()
-		imageArrL--
-	}
-	let l1 = imageArrL.toString().length
-	let index = imgArea.index.toString().length
-	if(index < l1)index = '0'.repeat(l1-index)+imgArea.index
-	else index = imgArea.index
-	$(".图片预览").html(`<div class='imageSave'><h1>已下载<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1></div>`)
-	正在截图 = true
-
-	if(!mt_settings['图片预览'] && !Html5Plus)
-	{
-		截图区域.outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings['风格样式'][1])
-		foreach(imgArea.chats,function(k,v)
-		{
-			v.isFirst = isfirst(k,imgArea.chats)
-			html += makeMessage(v.type,v,k,'预览')
-		})
-		生成图片(imgArea.index)
-		截图区域.html(html)
-		html2canvas(截图区域[0],
-		{
-			logging: !1,
-			allowTaint: !0,
-			useCORS: !0,
-			scale: 清晰度
-		}).then(function(img)
-		{
-			img.toBlob(function(blob)
-			{
-				INIT_loading(false)
-				if(imageArr.length > 0)
-				{
-					filename = `MoeTalk_${title}_${index}.`
-					mt_capture(清晰度,生成图片,标题)//$('.mt_capture').click()
-				}
-				else
-				{
-					filename = `MoeTalk_${title}_${imgArea.index === 1 ? '0' : index}.`
-					正在截图 = false
-				}
-				filename += mt_settings['截图选项'].archive ? mt_settings['图片格式'].split('/')[1].toUpperCase() : mt_settings['图片格式'].split('/')[1];
-
-				combineFiles(blob,json,filename,imgArea.index);
-			})
-		})
-		return
-	}
-
-	if(imgArea.start !== 0)$('#mt_watermark').hide()
 	let 消息 = $('.消息');
 	if($(".dels:checked").length)消息 = $(`.消息 :checked`).parent()//区域截图
 	消息.show()
 	消息.slice(0,imgArea.start).hide()
 	消息.slice(imgArea.end,消息.length).hide()
-	if(MikuTalk && 截图区域.css('background-color') === 'rgba(0, 0, 0, 0)')
+	if(MikuTalk && $(".Talk__CContainer-sc-1uzn66i-1").css('background-color') === 'rgba(0, 0, 0, 0)')
 	{
-		截图区域.css('background-color',MikuTalk)
+		$(".Talk__CContainer-sc-1uzn66i-1").css('background-color',MikuTalk)
 	}
 	INIT_loading('开始加载')
-	html2canvas(截图区域[0],
+	截屏()($(".Talk__CContainer-sc-1uzn66i-1")[0],
 	{
 		logging: !1,
 		allowTaint: !0,
@@ -362,23 +288,20 @@ function mt_capture(清晰度,生成图片,标题)
 		scale: 清晰度
 	}).then(function(img)
 	{
-		if(['rgb(255, 255, 255)','rgb(255, 247, 225)'].indexOf(截图区域.css('background-color')) < 0)
+		if(['rgb(255, 255, 255)','rgb(255, 247, 225)'].indexOf($(".Talk__CContainer-sc-1uzn66i-1").css('background-color')) < 0)
 		{
-			截图区域.css('background-color','transparent')
+			$(".Talk__CContainer-sc-1uzn66i-1").css('background-color','transparent')
 		}
-		生成图片(imgArea.index)
+		if(imageArr.length === imageArrL)生成图片(imgArea.index)
+		imageArr.shift()
 		img.toBlob(function(blob)
 		{
 			if(imageArr.length > 0)
 			{
-				filename = `MoeTalk_${title}_${index}.`
+				filename = `MoeTalk_${title}_${imgArea.index}_${img.height}.`
 				$('.mt_capture').click()//mt_capture(清晰度,截屏,生成图片,时间,标题)
 			}
-			else
-			{
-				filename = `MoeTalk_${title}_${imgArea.index === 1 ? '0' : index}.`
-				正在截图 = false
-			}
+			else filename = `MoeTalk_${title}${imgArea.index === 1 ? '' : '_'+imgArea.index}_${img.height}.`
 			filename += mt_settings['截图选项'].archive ? mt_settings['图片格式'].split('/')[1].toUpperCase() : mt_settings['图片格式'].split('/')[1];
 
 			combineFiles(blob,json,filename,imgArea.index);
@@ -479,11 +402,7 @@ function combineFiles(mainFile, hideFile, fileName, Index) {
 		const blob = new Blob([targetData], { type: mt_settings['图片格式'] });
 		blobToBase64(blob,function(base64)
 		{
-			if(!正在截图)
-			{
-				if(!mt_settings['图片预览'] && !Html5Plus)截图区域.html(`<img src='data:${mt_settings['图片格式']};base64,${base64}' style='width:${mt_settings['宽度限制']}px;'>`)
-				else $('.图片预览').append(`<img src='data:${mt_settings['图片格式']};base64,${base64}' style='width:${mt_settings['宽度限制']}px;'>`)
-			}
+			$(".PopupImageDownload__ImgWrapper-sc-uicakl-2").append(`<div class='imageSave'><h1>第<span class='red'>${Index}</span>/${imageArrL}张图片：</h1><img src='data:${mt_settings['图片格式']};base64,${base64}'></div>`)
 			$('.截图数量').text(imageArr.length)
 			download(fileName,blob,base64,'image')
 		})

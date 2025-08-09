@@ -1,6 +1,5 @@
 pause = true
 skip = false
-if(localStorage['调试模式'])var vConsole = new window.VConsole();
 INIT_loading('开始加载')
 var TOP_confirm = '';
 var mt_charface;
@@ -64,7 +63,7 @@ if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='.
 //使用说明
 $('body').on('click',"#readme",function()
 {
-	let span = '<span onclick="moedev()" style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
+	let span = '<span style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
 	let readme = `　　${span}MoeTalk</span>为基于原作者Raun0129开发的${span}MolluTalk</span>的个人改版\n`
 	readme += `　　点击【确定】可以清除缓存并检测更新\n`
 	alert(readme)
@@ -80,22 +79,13 @@ $('body').on('click',"#readme",function()
 			});
 			if(keys.length === length)
 			{
-				delete localStorage['每日提醒']
+				delete localStorage['最新版本']
+				delete localStorage['通知文档']
 				location.reload(true)
 			}
 		});
 	}
 });
-function moedev()
-{
-	alert('开启调试模式：<input type="checkbox"/>\n代码注入：<textarea></textarea>')
-	TOP_confirm = function()
-	{
-		delete localStorage['调试模式']
-		if($$('.notice input').prop('checked'))localStorage['调试模式'] = true
-		if($$('.notice textarea').val())eval($$('.notice textarea').val())
-	}
-}
 $(function()
 {
 	window.alert = function(str)
@@ -110,13 +100,10 @@ $(function()
 		$("#view").click()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
-	let notice = ''
-	notice += '<span>【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>\n'
-	// notice += '　　手机端点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>可查看工具栏\n'
-	// notice += '　　工具栏点击【选择游戏】可以更改为其他游戏\n'
-	// if(cordova)notice += '<span class="red">※此客户端目前处于测试阶段\n使用前请先确认文件下载功能是否正常\n出现错误请向开发者反馈</span>\n'
-	// else notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常下载并备份存档</span>\n'
-
+	let notice = '　　手机端点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>可查看工具栏\n'
+	notice += '　　工具栏点击【选择游戏】可以更改为其他游戏\n'
+	if(cordova)notice += '<span class="red">※此客户端目前处于测试阶段\n使用前请先确认文件下载功能是否正常\n出现错误请向开发者反馈</span>\n'
+	else notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常下载并备份存档</span>\n'
 	if(MikuTalk)
 	{
 		notice = '愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n<span class="red">点击“确定”可以关闭</span>\n'
@@ -138,12 +125,10 @@ $(function()
 		if(Html5Plus)notice += `<span class="red">新版网络客户端已更新至百度网盘，请及时下载安装并转移存档</span>\n`
 		delete localStorage['通知文档']
 	}
-	if(localStorage['通知文档'] !== notice || sessionStorage['通知文档'] !== notice)
+	if(!localStorage['通知文档'] || localStorage['通知文档'] !== notice)
 	{
-		$('.notice pre').css('text-align','center')
 		alert(notice)
 		localStorage['通知文档'] = notice
-		sessionStorage['通知文档'] = notice
 	}
 })
 $("body").on('click', function()
@@ -171,23 +156,11 @@ $('body').on('click',"input",function()
 $(".frVjsk").wait(function()
 {
 	$(".frVjsk").append(`<button class='${class0}' id='app'><b style='color:blue;'>A</b></button><span class='tool' align='center'>客户端\n下载地址</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='oldmoe'><b style='color:green;'>旧</b></button><span class='tool'>访问旧版</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='selectgame'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='${href}Setting.html?${本地版本+gamever[mt_settings['选择游戏']]}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
-$('body').on('click',"#oldmoe",function()
-{
-	if(Html5Plus)
-	{
-		plus.runtime.openURL(`${href}index_old.html`);
-	}
-	else
-	{
-		window.open(`${href}index_old.html`)
-	}
-});
 //APP
 $('body').on('click',"#app",function()
 {
@@ -514,20 +487,21 @@ function TOP_replyEdit()
 		}
 	}
 }
-$.each(gamearr,function(k,v)
-{
-	XHR(`${href}GameData/${k}/MT-School.json`,function()
-	{
-		if(gamelist.indexOf(k) < 0)gamelist.push(k)
-	})
-})
 $('body').on('click',"#selectgame",function()
 {
+	if(onlyone)
+	{
+		let str = ''
+		str += '当前MoeTalk版本为【'+gamearr[mt_settings['选择游戏']]+'】专用版\n'
+		str += '无法改为其它游戏，若想切换游戏请下载安装其它版本MoeTalk\n'
+		str += '<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">提取码：BLDA</a>\n'
+		alert(str)
+		return
+	}
 	let arr = {}
 	let select = "请选择游戏：<select style='font-size:1.2rem;'>"
-	$.each(gamelist,function(k,v)
+	$.each(gamearr,function(k,v)
 	{
-		k = v,v = gamearr[v]
 		arr[v] = k
 		select += `<option ${k === mt_settings['选择游戏'] ? "style='color:red;'" : ""}>${v}</option>`
 	})
