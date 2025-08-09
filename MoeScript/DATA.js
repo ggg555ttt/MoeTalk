@@ -432,11 +432,8 @@ function repairCF(data)
 	
 	if(data.type === 'image')
 	{
-		if(!data.file)
-		{
-			data.file = data.content
-			data.content = ''
-		}
+		data.content = data.content || ''
+		data.file = data.file || data.content
 		data.file = data.file.replace('CustomFace','CharFace').replace('Images/Emoji/','GameData/BLDA/Emoji/').replace(MoeTalkURL,'').replace('Images/','GameData/')
 		
 		if(data.file.indexOf('GameData/CharFace/') > -1)
