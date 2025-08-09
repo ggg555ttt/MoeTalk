@@ -497,12 +497,12 @@ $('body').on('click',"#SETTING_隐藏差分",function()
 $('body').on('click',"#SETTING_图片预览",function()
 {
 	let str = ''
-	str += '开启后，截图截面会显示生成的图片\n'
+	str += '开启后，恢复原来的截图模式\n'
 	str += `当前为${mt_settings['图片预览'] ? '开启' : '关闭'}状态\n点击【确定】则开启\n点击【取消】则关闭`
 	if(confirm(str))mt_settings['图片预览'] = true
 	else delete mt_settings['图片预览']
 	saveStorage('设置选项',mt_settings,'local')
-	alert(`图片预览已${mt_settings['图片预览'] ? '开启' : '关闭'}`)
+	alert(`旧版截图模式已${mt_settings['图片预览'] ? '开启' : '关闭'}`)
 })
 $('#titleColor').val(mt_settings['标题颜色'] ? mt_settings['标题颜色'] : '#8BBBE9')
 // document.write("<scr"+`ipt src='https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/MoeScript/Script/localforage.min.js'></scr`+"ipt>");

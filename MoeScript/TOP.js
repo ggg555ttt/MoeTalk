@@ -80,8 +80,7 @@ $('body').on('click',"#readme",function()
 			});
 			if(keys.length === length)
 			{
-				delete localStorage['最新版本']
-				delete localStorage['通知文档']
+				delete localStorage['每日提醒']
 				location.reload(true)
 			}
 		});
@@ -117,7 +116,6 @@ $(function()
 	// notice += '　　工具栏点击【选择游戏】可以更改为其他游戏\n'
 	// if(cordova)notice += '<span class="red">※此客户端目前处于测试阶段\n使用前请先确认文件下载功能是否正常\n出现错误请向开发者反馈</span>\n'
 	// else notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常下载并备份存档</span>\n'
-	$('.notice pre').css('text-align','center')
 
 	if(MikuTalk)
 	{
@@ -142,6 +140,7 @@ $(function()
 	}
 	if(localStorage['通知文档'] !== notice || sessionStorage['通知文档'] !== notice)
 	{
+		$('.notice pre').css('text-align','center')
 		alert(notice)
 		localStorage['通知文档'] = notice
 		sessionStorage['通知文档'] = notice

@@ -77,10 +77,6 @@ button {
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
-button:hover {
-	box-shadow: 0 3px 6px transparent, 0 3px 6px transparent;
-	transform: translateY(-2px);
-}
 button:disabled {
 	cursor: auto;
 	transform: translateY(0px);

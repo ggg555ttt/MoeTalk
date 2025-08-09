@@ -624,12 +624,8 @@ function download(filename,data,base64,type = 'json')
 			else savefile(dir,filename,data,type)
 		}
 		if(cordova)str += `图片可以在【内部存储/Download/${dir}${type === 'image' ? `/${DATA_NowTime}` : ''}】中找到\n`
-		if(!mt_settings['图片预览'])str += '图片预览已关闭，设置页面可开启\n'
-		else
-		{
-			str += mt_text.image_download[mtlang]+'\n'
-			str += '无法手动保存请取消勾选“存档”选框，并将图片格式改为“webp”格式\n'
-		}
+		str += mt_text.image_download[mtlang]+'\n'
+		str += '无法手动保存请取消勾选“存档”选框，并将图片格式改为“webp”格式\n'
 		$('.INDEX_CaptureTips').text(str)
 	}
 	if(type === 'server')

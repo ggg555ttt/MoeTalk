@@ -207,7 +207,7 @@ function saveStorage(key,val,mode)
 	{
 		alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请运行MoeTalk.exe或查看player目录下的info.txt文件')
 	}
-	if(mode === 'local' && ['chats','mt-char','mt-head','DB_EMOJI'].indexOf(key) > -1)
+	if(mode === 'local' && ['chats','mt-char','mt-head','DB_EMOJI','imageArr'].indexOf(key) > -1)
 	{
 		moetalkStorage.setItem(key,val).catch(function(error)
 		{

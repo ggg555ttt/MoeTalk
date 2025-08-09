@@ -1232,7 +1232,8 @@
 							{
 								children: [(0, m.jsx)(ea.Dx,
 								{
-									className: "bold title",
+									style: {color: 'green'},
+									className: "title",
 									children: '通知'
 								}), (0, m.jsx)(ea.ec,
 								{
@@ -1259,7 +1260,8 @@
 								{
 									children: [(0, m.jsx)(ea.Lw,
 									{
-										className: "bold cancel",
+										className: "cancel",
+										style: {color: 'green'},
 										onClick: function()
 										{
 											cancel()
@@ -1267,7 +1269,8 @@
 										children: L.Z.cancel[u]
 									}), (0, m.jsx)(ea.AZ,
 									{
-										className: "bold confirm",
+										className: "confirm",
+										style: {color: 'green'},
 										onClick: function()
 										{
 											cancel(true)
@@ -1304,42 +1307,6 @@
 									},
 									children: (0, m.jsx)(c.j4,
 									{})
-								})]
-							}), (0, m.jsxs)(ea.$0,
-							{
-								children: [(0, m.jsx)(c.OP,
-								{
-									children: (0, m.jsx)(c.Kx,
-									{
-										className: "medium chatText",
-										placeholder: L.Z.input_comment[u],
-										maxRows: 3,
-										value: l,
-										onChange: function(e)
-										{
-											s(e.currentTarget.value)
-										}
-									})
-								}), (0, m.jsxs)(ea.$_,
-								{
-									children: [(0, m.jsx)(ea.Lw,
-									{
-										className: "bold",
-										onClick: function()
-										{
-											d()
-										},
-										children: L.Z.cancel[u]
-									}), (0, m.jsx)(ea.AZ,
-									{
-										className: "bold",
-										disabled: l.length < 1,
-										onClick: function()
-										{
-											sendMessage({content: l},'info'), d()
-										},
-										children: L.Z.confirm[u]
-									})]
 								})]
 							})]
 						})
@@ -1586,7 +1553,7 @@
 								children: [(0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
-									children: a ? L.Z.go_reply[g] : L.Z.add_reply[g]
+									children: '请选择类型'
 								}), (0, m.jsx)(ea.ec,
 								{
 									onClick: function()
@@ -1596,15 +1563,79 @@
 									children: (0, m.jsx)(c.j4,
 									{})
 								})]
-							}), (0, m.jsxs)(ea.$0,
+							}), '选择肢可以换行分割', (0, m.jsxs)(ea.$0,
 							{
-								children: [(0, m.jsx)(c.OP,
+								children: [(0, m.jsx)('div',
+								{
+									style:
+									{
+										width: '100%',
+										display: 'flex',
+										justifyContent: 'space-between'
+									},
+									children: [(0, m.jsx)('button',
+									{
+										className: '开关 cVRiXh eIEKpg evqKja kwhiZC bold',
+										style:
+										{
+											width: 'auto',
+											height: 'auto',
+											fontSize: '1.5rem',
+											padding: '0.5rem'
+										},
+										children: '回复',
+										value: 'reply',
+										onClick: function(e)
+										{
+											$$('.开关').css('color','').removeClass('selected')
+											e.target.style.color = 'red'
+											e.target.classList.add('selected');
+										}
+									}), (0, m.jsx)('button',
+									{
+										className: '开关 cVRiXh eIEKpg evqKja kwhiZC bold selected',
+										style:
+										{
+											width: 'auto',
+											height: 'auto',
+											fontSize: '1.5rem',
+											padding: '0.5rem',
+											color: 'red'
+										},
+										children: '旁白',
+										value: 'info',
+										onClick: function(e)
+										{
+											$$('.开关').css('color','').removeClass('selected')
+											e.target.style.color = 'red'
+											e.target.classList.add('selected');  
+										}
+									}), (0, m.jsx)('button',
+									{
+										className: '开关 cVRiXh eIEKpg evqKja kwhiZC bold',
+										style:
+										{
+											width: 'auto',
+											height: 'auto',
+											fontSize: '1.5rem',
+											padding: '0.5rem'
+										},
+										children: '羁绊',
+										value: 'heart',
+										onClick: function(e)
+										{
+											$$('.开关').css('color','').removeClass('selected')
+											e.target.style.color = 'red'
+											e.target.classList.add('selected');  
+										}
+									})]
+								}), (0, m.jsx)(c.OP,
 								{
 									children: (0, m.jsx)(c.Kx,
 									{
 										className: "medium chatText",
 										placeholder: L.Z.input_comment[g],
-										maxRows: 3,
+										maxRows: 5,
 										value: h,
 										onChange: function(e)
 										{
@@ -1624,10 +1655,9 @@
 									}), (0, m.jsx)(ea.AZ,
 									{
 										className: "bold",
-										disabled: h.length < 1,
 										onClick: function()
 										{
-											sendMessage({content: h},'reply'), y()
+											sendMessage({content: h},$$('.开关.selected').val()), y()
 										},
 										children: L.Z.confirm[g]
 									})]
@@ -1694,7 +1724,14 @@
 						F = T[1],
 						D = function()
 						{
-							C(""), b && (URL.revokeObjectURL(b), j("")), h(!1)
+							if(正在截图)
+							{
+								$$('#download_to_image').css('z-index','-100')
+							}
+							else
+							{
+								C(""), b && (URL.revokeObjectURL(b), j("")), h(!1)
+							}
 						},
 						O = (l = (0, ed.Z)(em().mark(function e()
 						{
@@ -1711,6 +1748,8 @@
 										}
 										return e.abrupt("return");
 									case 4:
+										saveStorage('imageArr',[...imageArr,...[]],'local')
+										localStorage['imageArrL'] = imageArrL
 										$$('.imageSave').remove()
 										$$('.mt_capture').click()
 									case 6:
@@ -1722,14 +1761,14 @@
 						{
 							return l.apply(this, arguments)
 						});
+						let arr = []
 					return (0, m.jsx)(ea.Xf,
 					{
-						id:"download_to_image",
-						className: d ? "visible medium" : "medium",
+						id: "download_to_image",
+						className: d ? "visible" : "",
 						onDoubleClick: function()
 						{
-							srceenMode()
-							D()
+							$$('.关闭截图').click()
 						},
 						children: (0, m.jsxs)(ea.F0,
 						{
@@ -1751,8 +1790,7 @@
 								{
 									onClick: function()
 									{
-										srceenMode()
-										D()
+										$$('.关闭截图').click()
 									},
 									children: (0, m.jsx)(c.j4,
 									{})
@@ -1761,35 +1799,92 @@
 									className: 'mt_capture',
 									onClick: function()
 									{
-										mt_capture(S,j,DATA_NowTime,$$('#mt_title').text().split(':').pop().trim())//新版截图
+										DATA_NowTime = getNowDate();
+										mt_capture(S,j,$$('#mt_title').text().split(':').pop().trim())//新版截图
 									}
 								}), (0, m.jsx)('预览',{
 									hidden: true,
 									className: '内容预览',
 									onClick: function(){内容预览()}
+								}), (0, m.jsx)('预览',{
+									hidden: true,
+									className: '生成图片',
+									onClick: function(){j(1)}
+								}), (0, m.jsx)('取消',{
+									hidden: true,
+									className: '关闭截图',
+									onClick: function(){srceenMode(),D(),$$('.截图区域').hide()}
 								})]
 							}), (0, m.jsx)("div",
 							{
 								style: {display: b ? "block" : "none"},
-								children: [(0, m.jsx)("pre",
+								children: [(0, m.jsx)('div',
+								{
+									className: '截图区域',
+									style:
+									{
+										width: '100%',
+										display: 'flex',
+										justifyContent: 'space-around'
+									},
+									children: [(0, m.jsx)("button",
+									{
+										style:
+										{
+											width: 'auto',
+											height: 'auto',
+											fontSize: '1rem',
+											color: 'black',
+											padding: '0.5rem',
+										},
+										className: 'cVRiXh eIEKpg evqKja kwhiZC',
+										children: '此处截取单图',
+										onClick: function(e)
+										{
+											if(mt_settings['图片预览'] || Html5Plus)截图区域 = $$('.Talk__CContainer-sc-1uzn66i-1')
+											imageArr = [上次截图[$$('.上次截图').val()]]
+											imageArrL = localStorage['imageArrL'] || imageArr.length
+											$$('.mt_capture').click()
+										}
+									}), (0, m.jsx)("select",
+									{
+										style: {fontSize: '2rem'},
+										className: '上次截图'
+									}), (0, m.jsx)("button",
+									{
+										style:
+										{
+											width: 'auto',
+											height: 'auto',
+											fontSize: '1rem',
+											color: 'black',
+											padding: '0.5rem',
+										},
+										className: 'cVRiXh eIEKpg evqKja kwhiZC',
+										children: '此处连续截图',
+										onClick: function(e)
+										{
+											if(mt_settings['图片预览'] || Html5Plus)截图区域 = $$('.Talk__CContainer-sc-1uzn66i-1')
+											imageArr = 上次截图.slice($$('.上次截图').val(),上次截图.length)
+											imageArrL = localStorage['imageArrL'] || imageArr.length
+											$$('.mt_capture').click()
+										}
+									})]
+								}), (0, m.jsx)("pre",
 								{
 									style: {whiteSpace: 'pre-wrap'},
 									className: 'INDEX_CaptureTips'
 								}), (0, m.jsx)('div',
 								{
 									className: '图片预览',
-									style: 
-									{
-										overflow: 'scroll',
-									}
+									style: {overflow: 'scroll'}
 								}), (0, m.jsx)('iframe',
 								{
-									src: `${href}MoeData/Capture_Font.html`,
+									src: `${href}MoeData/Capture_`+(mt_settings['禁止字体'] ?'NoFont' : 'Font')+`.html`,
 									style: 
 									{
 										// height: '0px'
-										width: '100%',
-										display: "none"
+										width: '100%'
 									},
 									onLoad: function(e)
 									{
@@ -1804,7 +1899,9 @@
 								style:
 								{
 									maxHeight: `${($$('body').height())*0.75}px`,
-									overflow: "scroll"
+									overflow: "scroll",
+									padding: '0.5rem',
+									gap: '0rem'
 								},
 								children: [0 === b.length && (0, m.jsxs)(m.Fragment,
 								{
@@ -1813,15 +1910,10 @@
 										style:
 										{
 											flexDirection: "column",
-											alignItems: "flex-start",
-											lineHeight: "2rem"
+											alignItems: "flex-start"
 										},
 										children: [L.Z.title[g], (0, m.jsx)(c.OP,
 										{
-											style:
-											{
-												marginBottom: "1rem"
-											},
 											children: (0, m.jsx)(c.Kx,
 											{
 												className: "medium mt_title",
@@ -1868,16 +1960,12 @@
 											{
 												display: "flex",
 												fontSize: "0.9rem",
-												marginLeft: "1rem"
+												whiteSpace: 'pre'
 											},
 											children: [1.1, 2, 3].map(function(e)
 											{
 												return (0, m.jsxs)(c.Jg,
 												{
-													style:
-													{
-														marginRight: "1rem"
-													},
 													htmlFor: "iq_".concat(e),
 													children: [(0, m.jsx)("input",
 													{
@@ -1897,15 +1985,15 @@
 										})]
 									}), (0, m.jsx)(ew,
 									{
+										style:
+										{
+											fontSize: "1rem",
+											whiteSpace: 'pre'
+										},
 										children: ej.map(function(e, n)
 										{
 											return (0, m.jsxs)(c.Jg,
 											{
-												style:
-												{
-													fontSize: "1rem",
-													margin: "0 1rem"
-												},
 												htmlFor: e,
 												children: [(0, m.jsx)("input",
 												{
@@ -1957,27 +2045,83 @@
 											style: {fontSize:'1.1rem'},
 											children:mt_settings['图片格式'].split('/')[1]
 										}), '图片']
-									}), (0, m.jsx)("button",
+									}), (0, m.jsx)("div",
 									{
 										style:
 										{
-											textAlign: "center",
-											fontSize: "0.9rem",
-											marginBottom: "0.5rem"
+											width: '100%',
+											display: 'flex',
+											justifyContent: 'space-evenly'
 										},
-										className: "bold",
-										children: '点击更改生成图片的格式',//L.Z.thanks[g]
-										onClick: function()
+										children: [(0, m.jsx)("button",
 										{
-											let image = prompt("请输入生成图片的格式：（不要乱输入）\npng（默认，质量最好体积最大）\njpeg（体积小，注意不是jpg）\nwebp（体积更小，不推荐火狐）", mt_settings['图片格式'].split('/')[1]);
-											if(image != null)
+											style:
 											{
-												alert('更改完成，如果图片生成错误请尝试改为其它参数');
-												mt_settings['图片格式'] = 'image/'+image;
-												saveStorage('设置选项',mt_settings,'local')
-												$$('#mt-image').text(image)
+												width: 'auto',
+												height: 'auto',
+												fontSize: '1rem',
+												color: 'black',
+												padding: '0.5rem',
+												marginBottom: '0.5rem'
+											},
+											className: 'cVRiXh eIEKpg evqKja kwhiZC',
+											children: '修改图片设置',
+											onClick: function()
+											{
+												let option = ''
+												option += `<option value="image/png" ${mt_settings['图片格式'] == 'image/png' ? 'selected' : ''}>png</option>`
+												option += `<option value="image/jpeg" ${mt_settings['图片格式'] == 'image/jpeg' ? 'selected' : ''}>jpeg</option>`
+												option += `<option value="image/webp" ${mt_settings['图片格式'] == 'image/webp'? 'selected' : ''}>webp</option>`
+												option += `<option value="image/bmp" ${mt_settings['图片格式'] == 'image/bmp' ? 'selected' : ''}>bmp</option>`
+												option += `<option value="image/gif" ${mt_settings['图片格式'] == 'image/gif' ? 'selected' : ''}">gif</option>`
+												let str = ''
+												str += `图片宽度：（默认500，上限需测试）\n<input type="number" value="${mt_settings['宽度限制']}">\n`
+												str += `图片最大高度：（默认16384，上限需测试）\n<input type="number" value="${mt_settings['高度限制']}">\n`
+												str += `图片格式：（默认png，其它格式需测试）\n`
+												str += `<select style='font-size: 1.5rem;'>${option}</select>\n`
+												alert(str)
+												TOP_confirm = function()
+												{
+													mt_settings['宽度限制'] = $$('.notice input:eq(0)').val() || 500
+													mt_settings['高度限制'] = $$('.notice input:eq(1)').val() || 16384
+													mt_settings['图片格式'] = $$('.notice select').val()
+													saveStorage('设置选项',mt_settings,'local')
+												}
 											}
-										}
+										})
+										, (0, m.jsx)("button",
+										{
+											style:
+											{
+												width: 'auto',
+												height: 'auto',
+												fontSize: '1rem',
+												color: 'black',
+												padding: '0.5rem',
+												marginBottom: '0.5rem',
+												display: !localStorage['imageArrL'] ? 'none' : ''
+											},
+											className: 'cVRiXh eIEKpg evqKja kwhiZC',
+											children: '返回上次截图',
+											onClick: function(e)
+											{
+												let option = ''
+												if(!mt_settings['图片预览'] && !Html5Plus)截图区域.html('')
+												$$('.图片预览').html('')
+												$$('.截图区域').show()
+												moetalkStorage.getItem('imageArr',function(err, data)
+												{	
+													上次截图 = data
+													foreach(data,function(k,v)
+													{
+														option += `<option value="${k}">第${v.index}段</option>`
+													})
+													$$('.截图区域 select').html(`<select class="上次截图" style='font-size:2rem;'>${option}</select>`)
+												})
+												j("1")
+											}
+										})
+										]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -1985,8 +2129,7 @@
 											className: "bold",
 											onClick: function()
 											{
-												srceenMode()
-												D()
+												$$('.关闭截图').click()
 											},
 											children: L.Z.cancel[g]
 										}), (0, m.jsx)(ea.AZ,
@@ -1995,7 +2138,7 @@
 											disabled: chats.length < 1,
 											onClick: function()
 											{
-												DATA_NowTime = getNowDate();
+												截屏预览(S)
 												O()
 											},
 											children: L.Z.confirm[g]
@@ -2593,9 +2736,17 @@
 								title: "Image Download",
 								onClick: function()
 								{
-									imageArrL = 0
-									截屏预览()
-									y(!0)
+									$$('#download_to_image').css('z-index','100')
+									if(mt_settings['图片预览'] || Html5Plus)截图区域 = $$('.Talk__CContainer-sc-1uzn66i-1')
+									if(正在截图)y(!0)
+									else
+									{
+										$$('.关闭截图').click()
+										imageArrL = 0
+										mt_title()
+										setTimeout(function(){截屏预览(),y(!0)},1)
+									}
+									
 								}
 							}), (0, m.jsx)(eO,
 							{
@@ -3222,43 +3373,6 @@
 								{
 									icon: ico.QY_
 								})
-							}), (0, m.jsx)("input",
-							{
-								type: "file",
-								ref: N,
-								style:
-								{
-									display: "none"
-								},
-								accept: "image/*",
-								onChange: function(e)
-								{
-									var file = e.target.files[0]
-									var ready = new FileReader()
-									ready.readAsDataURL(file);
-									ready.onload = function(e)
-									{
-										var base64Img = e.target.result;
-										compress(base64Img,'image')
-									}
-								}
-							}), (0, m.jsx)(eU,
-							{
-								style:
-								{
-									paddingLeft: "0",
-									width: "3rem"
-								},
-								title: "Image",
-								onClick: function()
-								{
-									var e;
-									null === (e = N.current) || void 0 === e || e.click()
-								},
-								children: (0, m.jsx)(c.xL,
-								{
-									icon: ei.VmB
-								})
 							}), (0, m.jsx)("div",
 							{
 								style:
@@ -3283,49 +3397,7 @@
 												}
 											})
 										},
-									}), (0, m.jsx)(eU,
-									{
-										style:
-										{
-											padding: "0.2rem",
-											width: "2.2rem",
-											height: "2.2rem"
-										},
-										className: "INDEX_EmojiButton",
-										onClick: function()
-										{
-											if(mt_settings['隐藏差分'])
-											{
-												if(EMOJI.type === 'NO')EMOJI.type = 'Emoji'
-											}
-											else EMOJI.type = 'Emoji'
-											EMOJI.io = EMOJI.type;
-											mt_emojis(S,EMOJI.type)
-										},
-										children: (0, m.jsx)(c.xL,
-										{
-											icon: ei.pkM
-										})
-									}), !mt_settings['隐藏差分'] ? (0, m.jsx)(eU,
-									{
-										style:
-										{
-											padding: "0.2rem",
-											width: "2.2rem",
-											height: "2.2rem"
-										},
-										className: "INDEX_CharFaceButton",
-										onClick: function()
-										{
-											EMOJI.io = EMOJI.type = 'CharFace';
-											mt_emojis(S,EMOJI.type)
-										},
-										children: (0, m.jsx)(c.xL,
-										{
-											style: {color: 'rgb(139, 187, 233)'},
-											icon: ico.FKd
-										})
-									}) : '']
+									})]
 								})
 							}), (0, m.jsx)(eU,
 							{
@@ -3352,109 +3424,142 @@
 						{
 							show: y,
 							handleShow: S
-						})
-						//**
-						, (0, m.jsxs)(eD,
+						}), (0, m.jsxs)(eD,
 						{
 							className: "tools",
 							style:
 							{
 								padding: "5px 0",
 							},
-							children: [
-								(0, m.jsx)(eU,
+							children: [(0, m.jsx)(eU,
+							{
+								style:
 								{
-									style:
-									{
-										padding: "0.2rem",
-										width: "2.2rem",
-										height: "2.2rem"
-									},
-									title: "选项",
-									onClick: function()
-									{
-										click('#tool-reply')
-									},
-									children: (0, m.jsx)(c.xL,
-									{
-										icon: ico.Lh7
-									})
-								}),
-								(0, m.jsx)(eU,
+									padding: "0.2rem",
+									width: "2.2rem",
+									height: "2.2rem"
+								},
+								title: "Image",
+								onClick: function()
 								{
-									style:
-									{
-										padding: "0.2rem",
-										width: "2.2rem",
-										height: "2.2rem"
-									},
-									title: "旁白",
-									onClick: function()
-									{
-										click('#tool-info')
-									},
-									children: (0, m.jsx)(c.xL,
-									{
-										icon: ico.DBf
-									})
-								}),
-								(0, m.jsx)(eU,
+									var e;
+									null === (e = N.current) || void 0 === e || e.click()
+								},
+								children: [(0, m.jsx)(c.xL,
 								{
-									style:
-									{
-										padding: "0.2rem",
-										width: "2.2rem",
-										height: "2.2rem"
-									},
-									title: "羁绊",
-									onClick: function()
-									{
-										sendMessage({content: ''},'heart')
-									},
-									children: (0, m.jsx)(c.xL,
-									{
-										icon: ico.m6i
-									})
-								}),
-								(0, m.jsx)(eU,
+									icon: ei.VmB
+								}), (0, m.jsx)("input",
 								{
-									style:
+									type: "file",
+									ref: N,
+									style: {display: "none"},
+									accept: "image/*",
+									onChange: function(e)
 									{
-										padding: "0.2rem",
-										width: "2.2rem",
-										height: "2.2rem"
-									},
-									title: "存档",
-									onClick: function()
-									{
-										click('#tool-save')
-									},
-									children: (0, m.jsx)(c.xL,
-									{
-										icon: ico.EdJ
-									})
-								}),
-								(0, m.jsx)(eU,
+										var file = e.target.files[0]
+										var ready = new FileReader()
+										ready.readAsDataURL(file);
+										ready.onload = function(e)
+										{
+											var base64Img = e.target.result;
+											compress(base64Img,'image')
+										}
+									}
+								})]
+							}), (0, m.jsx)(eU,
+							{
+								style:
 								{
-									style:
-									{
-										padding: "0.2rem",
-										width: "2.2rem",
-										height: "2.2rem"
-									},
-									onClick: function()
-									{
-										mt_title()
-									},
-									children: (0, m.jsx)(c.xL,
-									{
-										icon: ico.wf8
-									})
+									padding: "0.2rem",
+									width: "2.2rem",
+									height: "2.2rem"
+								},
+								title: "选项",
+								onClick: function()
+								{
+									click('#tool-reply')
+								},
+								children: (0, m.jsx)(c.xL,
+								{
+									icon: ico.DBf
 								})
-								]
-						})
-						//**
-						]
+							}), (0, m.jsx)(eU,
+							{
+								style:
+								{
+									padding: "0.2rem",
+									width: "2.2rem",
+									height: "2.2rem"
+								},
+								title: "存档",
+								onClick: function()
+								{
+									click('#tool-save')
+								},
+								children: (0, m.jsx)(c.xL,
+								{
+									icon: ico.EdJ
+								})
+							}), (0, m.jsx)(eU,
+							{
+								style:
+								{
+									padding: "0.2rem",
+									width: "2.2rem",
+									height: "2.2rem"
+								},
+								onClick: function()
+								{
+									click('#tool-image')
+								},
+								children: (0, m.jsx)(c.xL,
+								{
+									icon: ico.wf8
+								})
+							}), (0, m.jsx)(eU,
+							{
+								style:
+								{
+									padding: "0.2rem",
+									width: "2.2rem",
+									height: "2.2rem"
+								},
+								className: "INDEX_EmojiButton",
+								onClick: function()
+								{
+									if(mt_settings['隐藏差分'])
+									{
+										if(EMOJI.type === 'NO')EMOJI.type = 'Emoji'
+									}
+									else EMOJI.type = 'Emoji'
+									EMOJI.io = EMOJI.type;
+									mt_emojis(S,EMOJI.type)
+								},
+								children: (0, m.jsx)(c.xL,
+								{
+									icon: ei.pkM
+								})
+							}), !mt_settings['隐藏差分'] ? (0, m.jsx)(eU,
+							{
+								style:
+								{
+									padding: "0.2rem",
+									width: "2.2rem",
+									height: "2.2rem"
+								},
+								className: "INDEX_CharFaceButton",
+								onClick: function()
+								{
+									EMOJI.io = EMOJI.type = 'CharFace';
+									mt_emojis(S,EMOJI.type)
+								},
+								children: (0, m.jsx)(c.xL,
+								{
+									style: {color: 'rgb(139, 187, 233)'},
+									icon: ico.FKd
+								})
+							}) : '']
+						})]
 					})
 				},
 				eq = o.ZP.div.withConfig(
@@ -4531,6 +4636,7 @@
 									style:
 									{
 										display: "none",
+										color: 'white',
 										backgroundColor: mt_settings['标题颜色'] ? mt_settings['标题颜色'] : '#8BBBE9',
 									},
 									children: [(0, m.jsx)('div',
