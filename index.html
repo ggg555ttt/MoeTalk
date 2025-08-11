@@ -10,6 +10,7 @@
 		<script src="https://cdn.bootcdn.net/ajax/libs/simplebar/6.3.2/simplebar.min.js"></script>
 		<link href="https://cdn.bootcdn.net/ajax/libs/simplebar/6.3.2/simplebar.min.css" rel="stylesheet"> -->
 		<script>
+var test = console.log
 function loadjs(link,mode = '')
 {
 	document.write("<scr"+`ipt src='${link}' ${mode}></scr`+"ipt>");
@@ -22,7 +23,7 @@ function os(u = window.navigator.userAgent)
 }
 
 //变量
-var 更新时间 = 1754758061//!
+var 更新时间 = 1754927987//!
 var gamearr = {}//游戏列表
 gamearr['BLDA'] = '碧蓝档案'
 gamearr['CBJQ'] = '尘白禁区'
@@ -32,28 +33,33 @@ gamearr['DFPJ'] = '东方Project'
 
 var gamever = {}//游戏版本
 var gamever = {"BLDA":"250722","CBJQ":"250710","QNZL":"241024","YGST":"000000","DFPJ":"250617"}//$
-gamever.BLDA = "250625"
-var 本地版本 = 27//@
+
+var 本地版本 = 28//@
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 var browser = os();//获取浏览器信息
 var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index.html','')//文件目录地址
-var Html5Plus = window.navigator.userAgent.match('Html5Plus') ? 'plus.H59EC0058' : false//网络端
+var Html5Plus = window.navigator.userAgent.match('Html5Plus') ? 'mmt.MoeTalkHW.WumberBee' : false//网络端
 if(window.location.href.indexOf('file:///') === 0)//离线端
 {
 	href = window.location.href.replace('index.html','')
-	if(Html5Plus)Html5Plus = 'mmt.MoeTalk.WumberBee'
+	if(Html5Plus)Html5Plus = 'mmt.MoeTalkH.WumberBee'
 }
 var date = new Date();
+var year = date.getFullYear() % 100; // 年
 var month = date.getMonth() + 1; // 月
 var day = date.getDate(); // 日
+year = year.toString()
+month = (month < 10 ? '0'+month : month).toString()
+day = (day < 10 ? '0'+day : day).toString()
 if(localStorage['每日提醒'] != day)
 {
-	localStorage['swing-animation'] = 'swing-animation'
+	localStorage['zhengwen'] = 'zhengwen'
 	localStorage['每日提醒'] = day
 	delete localStorage['通知文档']
 	delete localStorage['最新版本']
 	delete localStorage['差分书签']
 }
+if(year+month+day > '250907')delete localStorage['zhengwen']
 //检测版本
 function XHR(url,callback = false)
 {
@@ -94,7 +100,7 @@ XHR(MoeTalkURL+"manifest.json"+"?timestamp="+new Date().getTime(),function(json)
 	}
 	if(localStorage['应用版本'] !== undefined && localStorage['应用版本'] != json.version.code)
 	{
-		if(Html5Plus === 'mmt.MoeTalk.WumberBee')return;
+		if(Html5Plus === 'mmt.MoeTalkH.WumberBee')return;
 		window.caches && caches.keys && caches.keys().then(function(keys)
 		{
 			let length = 0;
@@ -121,7 +127,7 @@ if(browser.isIos === true || browser.isiPhone === true || mt_settings['打包下
 	loadjs('./MoeScript/Script/jszip.min.js')
 }
 var MikuTalk = false;
-if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) && sessionStorage['MikuTalk'] !== 'no')
+if((mt_settings['顶部标题'] === 'MikuTalk' || (month == '04' && day == '01')) && sessionStorage['MikuTalk'] !== 'no')
 {
 	MikuTalk = '#88CCCC';
 	loadjs('./MoeScript/MikuTap/pixi.min.js')
@@ -129,10 +135,9 @@ if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) &&
 	loadjs('./MoeScript/MikuTap/mikutap.js')
 	loadjs('./MoeScript/MikuTap/common-2.min.js')
 }
-loadjs('./MoeData/Old/common-2.min.js')
 var cordova = false
 var game = 'BLDA'//#
-var gamelist = [game]
+var gamelist = []
 let gameid = window.location.href.split('?')[1]
 mt_settings['选择游戏'] = mt_settings['选择游戏'] || game
 var mtlang = mt_settings['语言选项'] || 'zh_cn';
@@ -170,18 +175,18 @@ var mt_characters,
 		<meta name="application-name" content="MoeTalk">
 
 		<link rel="shortcut icon" href="./MoeData/Ui/Favor_Schedule_Deco.webp">
-		<link rel='stylesheet' href="./MoeScript/Style/style.css?filesize=19706" data-n-g=''><!-- @@样式 -->
+		<link rel='stylesheet' href="./MoeScript/Style/style.css?filesize=19705" data-n-g=''><!-- @@样式 -->
 		<script src="./MoeData/MT-Img.js"></script><!-- 存档图片 -->
 		<script src="./MoeData/MT-Text.js"></script><!-- 提示文本 -->
-		<script src="./MoeScript/INIT.js?filesize=9903" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/IMAGE.js?filesize=15540" defer></script><!-- @@截图 -->
+		<script src="./MoeScript/INIT.js?filesize=9321" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/DATA.js?filesize=21265" defer></script><!-- @@存档 -->
-		<script src="./MoeScript/CHAT.js?filesize=40857" defer></script><!-- @@消息 -->
+		<script src="./MoeScript/CHAT.js?filesize=41109" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?filesize=16579" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/TOP.js?filesize=19723" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/IMAGE.js?filesize=14969" defer></script><!-- @@截图 -->
+		<script src="./MoeScript/TOP.js?filesize=20066" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/MAIN.js?filesize=292785" defer></script><!-- @@ -->
-		<script src="./MoeScript/Mollu/APP.js?filesize=744132" defer></script><!-- @@框架 -->
-		<script src="./MoeScript/Mollu/INDEX.js?filesize=266318"></script><!-- @@首页 -->
+		<script src="./MoeScript/Mollu/APP.js?filesize=744220" defer></script><!-- @@框架 -->
+		<script src="./MoeScript/Mollu/INDEX.js?filesize=266060"></script><!-- @@首页 -->
 		<style data-styled="active" data-styled-version="5.3.8"></style>
 	</head>
 	<body style="touch-action: none;-webkit-tap-highlight-color: transparent;tap-highlight-color: transparent;"><!-- MikuTap style -->
@@ -195,7 +200,7 @@ var mt_characters,
 <p>如果以上方法仍无效请进入设置页面并点击<b class="red">问题反馈</b>提交您的问题</p>
 <p>最好带上localStorage存档，这使我可以更好的排查错误</p>
 <p>另外相关使用建议也可以向我提交，感谢您的使用</p>
-<button><a href="./Setting.html?filesize=8143" target='_blank' style='color: white;'>点击进入设置页面</a></button><!-- @@ -->
+<button><a href="./Setting.html?filesize=8027" target='_blank' style='color: white;'>点击进入设置页面</a></button><!-- @@ -->
 <p></p>
 <img style="width: 100%;height: auto;" id="help" src="./MoeData/Ui/help.webp" onclick="document.documentElement.style.position = '';" />
 <!-- Default Statcounter code for MoeTalk http://*.* -->

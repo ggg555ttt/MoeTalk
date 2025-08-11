@@ -14,6 +14,10 @@ var CHAT_history = [操作历史,{}]
 var EMOJI = {io:'NO',type:'NO',pages:localStorage['差分书签'] ? JSON.parse(localStorage['差分书签']) : {}}
 var EMOJI_CustomEmoji = {image:{}}
 mt_settings['表情信息'] = mt_settings['表情信息'] ? mt_settings['表情信息'] : {}
+var 羁绊背景 = href+'MoeData/Ui/Favor_Schedule_Deco.webp'
+var 回复背景 = href+'MoeData/Ui/Popup_Img_Deco_2.webp'
+var 错误图片 = href+'MoeData/Ui/error.webp'
+
 moetalkStorage.getItem('DB_EMOJI', function(err, DB_EMOJI)
 {
 	EMOJI_CustomEmoji = DB_EMOJI ? DB_EMOJI : EMOJI_CustomEmoji
@@ -454,7 +458,7 @@ function makeMessage(type,data,chatIndex,mode)
 	{
 		聊天 = 
 		`<div class="头像框"></div>
-		<div class="羁绊" style='background-image: url(${href}MoeData/Ui/Favor_Schedule_Deco.webp);'>
+		<div class="羁绊" style='background-image: url(${羁绊背景});'>
 			<div class="消息标题">
 				<div class="竖线" style='border-left: 2px solid rgb(255, 142, 155);'></div>
 				<span class="bold">${mt_text['relationship_event'][mtlang]}</span>
@@ -480,7 +484,7 @@ function makeMessage(type,data,chatIndex,mode)
 		})
 		聊天 = 
 		`<div class="头像框"><button data-html2canvas-ignore="true" class="编辑按钮 编辑">${编辑图标}</button></div>
-		<div class="回复" style='background-image: url(${href}MoeData/Ui/Popup_Img_Deco_2.webp);'>
+		<div class="回复" style='background-image: url(${回复背景});'>
 			<div class="消息标题">
 				<div class="竖线" style='border-left: 2px solid rgb(39, 153, 228)'></div>
 				<span class="bold">${mt_text['reply'][mtlang]}</span>
@@ -1086,3 +1090,10 @@ $("body").on('click',".INDEX_EmojiIfno",function()
 //差分信息
 var CHAT_HeadList = false
 var CHAT_Style = false
+
+// 编辑界面 100
+// 角色列表 200
+// 表情界面 300
+// 角色编辑 300
+// 截图界面 300
+// 通知界面 1000

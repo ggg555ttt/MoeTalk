@@ -196,7 +196,7 @@
 										{
 											return (0, m.jsx)(j,
 											{
-												style: {zIndex: '200'},
+												style: {zIndex: 200},
 												alt: String(e.no),
 												title: String(e.index),
 												width: 252,
@@ -232,7 +232,7 @@
 								{
 									display: !f || c ? "block" : "none",
 									margin: "0rem",
-									zIndex: '200'
+									zIndex: 200
 								},
 								width: 252,
 								height: 252,
@@ -1217,7 +1217,7 @@
 					return [(0, m.jsx)(ea.Xf,
 					{
 						className: "medium notice",
-						style: {zIndex: 2000},
+						style: {zIndex: 1000},
 						onDoubleClick: function()
 						{
 							cancel()
@@ -1246,6 +1246,7 @@
 								})]
 							}), (0, m.jsxs)(ea.$0,
 							{
+								style: {maxHeight: '90%'},
 								children: [(0, m.jsx)('pre',
 								{
 									style: 
@@ -1254,7 +1255,8 @@
 										whiteSpace: 'pre-wrap',
 										wordBreak: 'break-word',
 										textAlign: 'left',
-										width: '100%'
+										width: '100%',
+										overflow: 'scroll'
 									}
 								}), (0, m.jsxs)(ea.$_,
 								{
@@ -1726,7 +1728,7 @@
 						{
 							if(正在截图)
 							{
-								$$('#download_to_image').css('z-index','-100')
+								$$('#download_to_image').css({zIndex:'',opacity:0,visibility:'hidden'})
 							}
 							else
 							{
@@ -1841,7 +1843,6 @@
 										children: '此处截取单图',
 										onClick: function(e)
 										{
-											if(mt_settings['图片预览'] || Html5Plus)截图区域 = $$('.Talk__CContainer-sc-1uzn66i-1')
 											imageArr = [上次截图[$$('.上次截图').val()]]
 											imageArrL = localStorage['imageArrL'] || imageArr.length
 											$$('.mt_capture').click()
@@ -1864,7 +1865,6 @@
 										children: '此处连续截图',
 										onClick: function(e)
 										{
-											if(mt_settings['图片预览'] || Html5Plus)截图区域 = $$('.Talk__CContainer-sc-1uzn66i-1')
 											imageArr = 上次截图.slice($$('.上次截图').val(),上次截图.length)
 											imageArrL = localStorage['imageArrL'] || imageArr.length
 											$$('.mt_capture').click()
@@ -2106,7 +2106,7 @@
 											onClick: function(e)
 											{
 												let option = ''
-												if(!mt_settings['图片预览'] && !Html5Plus)截图区域.html('')
+												截图区域.html('')
 												$$('.图片预览').html('')
 												$$('.截图区域').show()
 												moetalkStorage.getItem('imageArr',function(err, data)
@@ -2736,8 +2736,7 @@
 								title: "Image Download",
 								onClick: function()
 								{
-									$$('#download_to_image').css('z-index','100')
-									if(mt_settings['图片预览'] || Html5Plus)截图区域 = $$('.Talk__CContainer-sc-1uzn66i-1')
+									$$('#download_to_image').css({zIndex:300,opacity:'',visibility:''})
 									if(正在截图)y(!0)
 									else
 									{

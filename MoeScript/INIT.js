@@ -26,12 +26,11 @@ if(mt_settings['存储模式'])
 
 }
 
-var player = (Html5Plus === 'mmt.MoeTalk.WumberBee' ? '/' : href)+'Moedata'//播放器地址
+var player = (Html5Plus === 'mmt.MoeTalkH.WumberBee' ? '/' : href)+'Moedata'//播放器地址
 var LibraryURL = 'GameData/BLDA/Library'//图书馆地址
 var directory = []//目录
 var nowChapter = ['',{chapter:[]}]//当前章节
 
-var test = console.log
 var $$ = $;//jquery转义
 var winHeight = window.innerHeight
 var 元素尺寸;
@@ -131,22 +130,29 @@ if(!cordova)
 
 
 //元素出现后执行代码
-jQuery.fn.wait = function (func,cls,times,interval) {
+jQuery.fn.wait = function (func,cls,times,interval)
+{
 	var _times = times || -1, //100次
 		_interval = interval || 10, //20毫秒每次
 		_self = this,
 		_selector = this.selector, //选择器
 		_iIntervalID; //定时器id
-	if( $(cls).length ){ //如果已经获取到了，就直接执行函数
+	if($(cls).length) //如果已经获取到了，就直接执行函数
+	{
 		func && func.call($(cls));
-	} else {
-		_iIntervalID = setInterval(function() {
-			if(!_times) { //是0就退出
+	}
+	else
+	{
+		_iIntervalID = setInterval(function()
+		{
+			if(!_times) //是0就退出
+			{
 				clearInterval(_iIntervalID);
 			}
 			_times <= 0 || _times--; //如果是正数就 --
 			_self = $(cls); //再次选择
-			if( $(cls).length ) { //判断是否取到
+			if($(cls).length) //判断是否取到
+			{
 				func && func.call($(cls));
 				clearInterval(_iIntervalID);
 			}
@@ -161,35 +167,17 @@ function click(name)
 	$(name).click();
 }
 // 格式化日对象
-const getNowDate = () => {
+function getNowDate()
+{
 	var date = new Date();
-	var sign2 = ":";
-	var year = date.getFullYear() % 100 // 年
-	var month = date.getMonth() + 1; // 月
-	var day = date.getDate(); // 日
 	var hour = date.getHours(); // 时
 	var minutes = date.getMinutes(); // 分
 	var seconds = date.getSeconds() //秒
-	var weekArr = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
-	var week = weekArr[date.getDay()];
 	// 给一位数的数据前面加 “0”
-	if (month >= 1 && month <= 9) {
-		month = "0" + month;
-	}
-	if (day >= 0 && day <= 9) {
-		day = "0" + day;
-	}
-	if (hour >= 0 && hour <= 9) {
-		hour = "0" + hour;
-	}
-	if (minutes >= 0 && minutes <= 9) {
-		minutes = "0" + minutes;
-	}
-	if (seconds >= 0 && seconds <= 9) {
-		seconds = "0" + seconds;
-	}
-	//return year + "-" + month + "-" + day + " " + hour + sign2 + minutes + sign2 + seconds;
-	return `${year}${month}${day}${hour}${minutes}${seconds}`;
+	if(hour < 10)hour = "0" + hour;
+	if(minutes < 10)minutes = "0" + minutes;
+	if(seconds < 10)seconds = "0" + seconds;
+	return `${year}${month}${day}-${hour}${minutes}${seconds}`;
 }
 function toString(val)
 {

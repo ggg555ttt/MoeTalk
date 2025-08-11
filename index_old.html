@@ -35,7 +35,7 @@ var href = window.location.href.split(window.location.host)[1].split('?')[0].rep
 var Html5Plus = window.navigator.userAgent.match('Html5Plus') ? 'plus.H59EC0058' : false//网络端
 if(window.location.href.indexOf('file:///') === 0)//离线端
 {
-	href = window.location.href.replace('index.html','')
+	href = window.location.href.replace('index_old.html','')
 	if(Html5Plus)Html5Plus = 'mmt.MoeTalk.WumberBee'
 }
 var date = new Date();
@@ -79,12 +79,12 @@ XHR(MoeTalkURL+"manifest.json"+"?timestamp="+new Date().getTime(),function(json)
 		}
 		str += '客户端已更新，确定跳转到下载链接吗？\n'
 		str += '提取码：BLDA\n安装新版本前注意备份存档'
-		if(confirm(str))
-		{//本地端　
-			let url = "https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda"
-			if(Html5Plus)plus.runtime.openURL(url);
-			else window.open(url)
-		}
+		// if(confirm(str))
+		// {//本地端　
+		// 	let url = "https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda"
+		// 	if(Html5Plus)plus.runtime.openURL(url);
+		// 	else window.open(url)
+		// }
 	}
 	if(localStorage['应用版本'] !== undefined && localStorage['应用版本'] != json.version.code)
 	{

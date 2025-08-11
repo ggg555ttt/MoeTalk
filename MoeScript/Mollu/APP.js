@@ -9866,7 +9866,12 @@
 									})
 								}), (0, O.jsx)(I,
 								{
-									children: [(0, O.jsx)(I,{id:"readme",children:MikuTalk ? 'MikuTalk' : mt_settings['顶部标题']}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
+									children: [(0, O.jsx)(I,
+									{
+										style: {cursor: 'pointer'},
+										id: "readme",
+										children: MikuTalk ? 'MikuTalk' : mt_settings['顶部标题']
+									}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
 										className: "INIT_href",
 										title: "https://wj.qq.com/s2/14292312/3ade/",
@@ -10111,18 +10116,18 @@
 										{
 											children: (0, O.jsx)(W,
 											{
-												className: toString(localStorage['swing-animation']),
+												className: toString(localStorage['zhengwen']),
 												style:
 												{
 													width: '100%',
 													height: '100%'
 												},
-												src: href+"MoeData/Ui/zhengwen.webp",//#播放器界面
+												src: `${href}MoeData/Ui/${localStorage['zhengwen'] || 'private'}.webp`,//#播放器界面
 												alt: "private",
 												onClick: function(e)
 												{
-													delete localStorage['swing-animation']
-													$$('.swing-animation').removeClass('swing-animation')
+													delete localStorage['zhengwen']
+													$$('.zhengwen').removeClass('zhengwen')
 												}
 											})
 										})]
