@@ -206,10 +206,7 @@
 												{
 													_(e)
 												},
-												onError: function(e)
-												{
-													e.currentTarget.src = href+'MoeData/Ui/error.webp';
-												},
+												onError: function(e){IMAGE_error(e)},
 												className: (0, u.Y)(w.selected, e) ? "selected" : ""
 											}, n)
 										})
@@ -361,10 +358,7 @@
 									alt: e,
 									src: loadhead(n.no,e),//#左方人物皮肤选择分支
 									style:{margin:'0.2rem'},
-									onError: function(e)
-									{
-										e.currentTarget.src = href+'MoeData/Ui/error.webp';
-									},
+									onError: function(e){IMAGE_error(e)},
 									onClick: function()
 									{
 										l(e)
@@ -449,10 +443,7 @@
 										width: 252,
 										height: 252,
 										src: loadhead(n.no,n.profile[0]),//#左方选择框
-										onError: function(e)
-										{
-											e.currentTarget.src = href+'MoeData/Ui/error.webp';
-										},
+										onError: function(e){IMAGE_error(e)},
 										alt: n.profile[0]
 									}), 
 									//*添加ID和社团信息
@@ -500,10 +491,7 @@
 									width: 252,
 									height: 252,
 									src: href+"MoeData/Ui/School/"+(!mt_school[n.school.id] ? n.club['zh_cn'] === '临时角色' ? 'RECYCLE' : 'CUSTOM' : mt_school[n.school.id].en || 'none')+'.webp',//#学校图标
-									onError: function(e)
-									{
-										e.currentTarget.src = href+'MoeData/Ui/error.webp';
-									},
+									onError: function(e){IMAGE_error(e)},
 									onClick: function()
 									{
 										if(n.school['zh_cn'] === '自定义' || n.club['zh_cn'] === '临时角色')removeChar(n);
@@ -4166,10 +4154,7 @@
 											className: '头像',
 											style: {zIndex: n.heads ? n.heads.list.length : ''},
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
-											onError: function(e)
-											{
-												e.currentTarget.src = href+'MoeData/Ui/error.webp';
-											},
+											onError: function(e){IMAGE_error(e)},
 											alt: n.sCharacter.index
 										}), n.heads ? n.heads.list.map(function(index,k)
 										{
@@ -4183,10 +4168,7 @@
 													marginTop: n.heads.direction === 'column' ? n.heads.margin ? n.heads.margin : "-1.5rem" : '',
 													marginLeft: n.heads.direction === 'row' ? n.heads.margin ? n.heads.margin : "-1.5rem" : ''
 												},
-												onError: function(e)
-												{
-													e.currentTarget.src = href+'MoeData/Ui/error.webp';
-												}
+												onError: function(e){IMAGE_error(e)}
 											})
 										}) : ''] : ''
 									}) : '', (0, m.jsxs)("div",
@@ -4200,7 +4182,7 @@
 										children: [!isCenter && isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{//人物名称
 											className: "名称 bold",
-											children: n.name || loadname(n.sCharacter.no,n.sCharacter.index)
+											dangerouslySetInnerHTML: {__html: n.name || loadname(n.sCharacter.no,n.sCharacter.index)}
 										}) : '' , (0, m.jsxs)("div",
 										{//消息内容
 											style:
@@ -4213,15 +4195,16 @@
 											{//左侧时间戳
 												className: '时间戳',
 												hidden: (!n.time || n.sCharacter.no != 0) && !n.isRight,
-												dangerouslySetInnerHTML:{__html:n.time}
-												// children: n.time
-											}) : '', "chat" === n.type ? [(0, m.jsx)('span',
+												dangerouslySetInnerHTML:{__html:n.time}// children: n.time
+											}) : '', "chat" === n.type ? [!n.isRight && isFirst && n.sCharacter.no != 0 ? (0, m.jsx)('div',
+											{className: '左角'}) : '', (0, m.jsx)('span',
 											{//文本消息
-												className: (n.sCharacter.no == 0 ? '文本' : !n.isRight && isFirst ? '文本 左角' : '文本')+' 编辑',
+												className: '文本 编辑',
 												style: n.isRight || n.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
 												dangerouslySetInnerHTML:{__html:n.content}
 												// children: n.content
-											}), (n.isRight && isFirst) || n.sCharacter.no == 0 ? (0, m.jsx)(eN.CJ,{}) : '' ] : (0, m.jsx)('img',
+											}), (n.isRight && isFirst) || n.sCharacter.no == 0 ? (0, m.jsx)('div',
+											{className: '右角'}) : ''] : (0, m.jsx)('img',
 											{//图片消息
 												className: '图片 编辑',
 												style:
@@ -4231,16 +4214,12 @@
 												},...style},//@差分表情宽高百分比
 												src: n.file.indexOf(":image") > -1 ? n.file : href+n.file,
 												title: n.file.indexOf(":image") > -1 ? '' : n.file,
-												onError: function(e)
-												{
-													e.currentTarget.src = href+'MoeData/Ui/error.webp';
-												}
+												onError: function(e){IMAGE_error(e)}
 											}) ,n.time ? (0, m.jsx)('div',
 											{//右侧时间戳
 												className: '时间戳',
 												hidden: !n.time || n.sCharacter.no == 0 || n.isRight || isCenter,
-												dangerouslySetInnerHTML:{__html:n.time}
-												// children: n.time
+												dangerouslySetInnerHTML:{__html:n.time}// children: n.time
 											}) : '']
 										})]
 									}), !isCenter && n.isRight && n.sCharacter.no != 0 ? (0, m.jsx)('div',
@@ -4259,10 +4238,7 @@
 											className: '头像',
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
 											style: {zIndex: n.heads ? n.heads.list.length : ''},
-											onError: function(e)
-											{
-												e.currentTarget.src = href+'MoeData/Ui/error.webp';
-											},
+											onError: function(e){IMAGE_error(e)},
 											alt: n.sCharacter.index
 										}), n.heads ? n.heads.list.map(function(index,k)
 										{
@@ -4276,10 +4252,7 @@
 													marginTop: n.heads.direction === 'column' ? "-1.5rem" : '',
 													marginLeft: n.heads.direction === 'row' ? "-1.5rem" : ''
 												},
-												onError: function(e)
-												{
-													e.currentTarget.src = href+'MoeData/Ui/error.webp';
-												}
+												onError: function(e){IMAGE_error(e)}
 											})
 										}) : ''] : ''
 									}) : '']
@@ -5547,11 +5520,7 @@
 										height: 252,
 										alt: "profile",
 										src: loadhead(t.no,t.profile[0]),//#左方选择框
-										onError: function(e)
-										{
-											var t = e.currentTarget;
-											(0, a.Mp)(t, "character")
-										}
+										onError: function(e){IMAGE_error(e)}
 									}), (0, b.jsxs)(C,
 									{
 										children: [(0, b.jsx)("h2",
@@ -5568,11 +5537,7 @@
 									width: 252,
 									height: 252,
 									src: href+"MoeData/Ui/School/"+(t.school[mtlang] === '自定义' ? '自定义' : mt_characters[t.no].school)+'.webp',//#学校图标
-									onError: function(e)
-									{
-										var t = e.currentTarget;
-										(0, a.Mp)(t, "school")
-									},
+									onError: function(e){IMAGE_error(e)},
 									alt: "school"
 								})]
 							})
@@ -8413,10 +8378,7 @@
 										className: '头像',
 										style: {zIndex: t.heads ? t.heads.list.length : ''},
 										src: loadhead(t.sCharacter.no,t.sCharacter.index),
-										onError: function(e)
-										{
-											e.currentTarget.src = href+'MoeData/Ui/error.webp';
-										},
+										onError: function(e){IMAGE_error(e)},
 										alt: t.sCharacter.index
 									}), t.heads ? t.heads.list.map(function(index,k)
 									{
@@ -8430,10 +8392,7 @@
 												marginTop: t.heads.direction === 'column' ? t.heads.margin ? t.heads.margin : "-1.5rem" : '',
 												marginLeft: t.heads.direction === 'row' ? t.heads.margin ? t.heads.margin : "-1.5rem" : ''
 											},
-											onError: function(e)
-											{
-												e.currentTarget.src = href+'MoeData/Ui/error.webp';
-											}
+											onError: function(e){IMAGE_error(e)}
 										})
 									}) : ''] : ''
 								}) : '', (0, m.jsxs)("div",
@@ -8447,7 +8406,7 @@
 									children: [!isCenter && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 									{//人物名称
 										className: "名称 bold",
-										children: t.name || loadname(t.sCharacter.no,t.sCharacter.index)
+										dangerouslySetInnerHTML: {__html: t.name || loadname(t.sCharacter.no,t.sCharacter.index)}
 									}) : '' , (0, m.jsxs)("div",
 									{//消息内容
 										style:
@@ -8460,20 +8419,20 @@
 										{//左侧时间戳
 											className: '时间戳',
 											hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
-											// children: t.time
-											dangerouslySetInnerHTML: {__html: t.time}
-										}) : '', [(0, m.jsx)('span',
+											dangerouslySetInnerHTML: {__html: t.time}// children: t.time
+										}) : '', [!t.isRight && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)('div',
+										{className: '左角'}) : '',(0, m.jsx)('span',
 										{//文本消息
-											className: (t.sCharacter.no == 0 ? '文本' : !t.isRight && isFirst ? '文本 左角' : '文本'),
+											className: '文本',
 											style: t.isRight || t.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
 											// children: f
 											dangerouslySetInnerHTML: {__html: f}
-										}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)(s.CJ,{}) : '' ], t.time ? (0, m.jsx)(s.i9,
+										}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)('div',
+										{className: '右角'}) : '' ], t.time ? (0, m.jsx)(s.i9,
 										{//右侧时间戳
 											className: '时间戳',
 											hidden: !t.time || t.sCharacter.no == 0 || t.isRight,
-											// children: t.time
-											dangerouslySetInnerHTML: {__html: t.time}
+											dangerouslySetInnerHTML: {__html: t.time}// children: t.time
 										}) : '']
 									})]
 								}), !isCenter && t.isRight && t.sCharacter.no != 0 ? (0, m.jsx)('div',
@@ -8491,10 +8450,7 @@
 									{
 										className: '头像',
 										src: loadhead(t.sCharacter.no,t.sCharacter.index),
-										onError: function(e)
-										{
-											e.currentTarget.src = href+'MoeData/Ui/error.webp';
-										},
+										onError: function(e){IMAGE_error(e)},
 										alt: t.sCharacter.index
 									}), t.heads ? t.heads.list.map(function(index,k)
 									{
@@ -8508,10 +8464,7 @@
 												marginTop: t.heads.direction === 'column' ? "-1.5rem" : '',
 												marginLeft: t.heads.direction === 'row' ? "-1.5rem" : ''
 											},
-											onError: function(e)
-											{
-												e.currentTarget.src = href+'MoeData/Ui/error.webp';
-											}
+											onError: function(e){IMAGE_error(e)}
 										})
 									}) : ''] : ''
 								}) : '']
@@ -8734,10 +8687,7 @@
 											className: '头像',
 											style: {zIndex: t.heads ? t.heads.list.length : ''},
 											src: loadhead(t.sCharacter.no,t.sCharacter.index),
-											onError: function(e)
-											{
-												e.currentTarget.src = href+'MoeData/Ui/error.webp';
-											},
+											onError: function(e){IMAGE_error(e)},
 											alt: t.sCharacter.index
 										}), t.heads ? t.heads.list.map(function(index,k)
 										{
@@ -8751,10 +8701,7 @@
 													marginTop: t.heads.direction === 'column' ? t.heads.margin ? t.heads.margin : "-1.5rem" : '',
 													marginLeft: t.heads.direction === 'row' ? t.heads.margin ? t.heads.margin : "-1.5rem" : ''
 												},
-												onError: function(e)
-												{
-													e.currentTarget.src = href+'MoeData/Ui/error.webp';
-												}
+												onError: function(e){IMAGE_error(e)}
 											})
 										}) : ''] : ''
 									}) : '', (0, m.jsxs)("div",
@@ -8768,7 +8715,7 @@
 										children: [!isCenter && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{//人物名称
 											className: "名称 bold",
-											children: t.name || loadname(t.sCharacter.no,t.sCharacter.index)
+											dangerouslySetInnerHTML: {__html: t.name || loadname(t.sCharacter.no,t.sCharacter.index)}
 										}) : '' , (0, m.jsxs)("div",
 										{//消息内容
 											style:
@@ -8781,15 +8728,16 @@
 											{//左侧时间戳
 												className: '时间戳',
 												hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
-												// children: t.time
-												dangerouslySetInnerHTML: {__html: t.time}
-											}) : '', "chat" === t.type ? [(0, m.jsx)('span',
+												dangerouslySetInnerHTML: {__html: t.time}// children: t.time
+											}) : '', "chat" === t.type ? [!t.isRight && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)('div',
+											{className: '左角'}) : '', (0, m.jsx)('span',
 											{//文本消息
-												className: (t.sCharacter.no == 0 ? '文本' : !t.isRight && isFirst ? '文本 左角' : '文本'),
+												className: '文本',
 												style: t.isRight || t.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
 												// children: x ? (0, m.jsx)(I,{}) : t.content
 												dangerouslySetInnerHTML: {__html: x ? '<div class="PLAYER_Loading"></div>' : t.content}
-											}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)(s.CJ,{}) : '' ] : (0, m.jsx)('img',
+											}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)('div',
+											{className: '右角'}) : '' ] : (0, m.jsx)('img',
 											{//图片消息
 												className: '图片',
 												style:
@@ -8799,16 +8747,12 @@
 												},//@差分表情宽高百分比
 												src: t.file.indexOf(":image") > -1 ? t.file : href+t.file,
 												title: t.file.indexOf(":image") > -1 ? '' : t.file,
-												onError: function(e)
-												{
-													e.currentTarget.src = href+'MoeData/Ui/error.webp';
-												},
+												onError: function(e){IMAGE_error(e)},
 											}), t.time ? (0, m.jsx)(s.i9,
 											{//右侧时间戳
 												className: '时间戳',
 												hidden: !t.time || t.sCharacter.no == 0 || t.isRight || isCenter,
-												// children: t.time
-												dangerouslySetInnerHTML: {__html: t.time}
+												dangerouslySetInnerHTML: {__html: t.time}// children: t.time
 											}) : '']
 										})]
 									}), !isCenter && t.isRight && t.sCharacter.no != 0 ? (0, m.jsx)('div',
@@ -8826,10 +8770,7 @@
 										{
 											className: '头像',
 											src: loadhead(t.sCharacter.no,t.sCharacter.index),
-											onError: function(e)
-											{
-												e.currentTarget.src = href+'MoeData/Ui/error.webp';
-											},
+											onError: function(e){IMAGE_error(e)},
 											alt: t.sCharacter.index
 										}), t.heads ? t.heads.list.map(function(index,k)
 										{
@@ -8843,10 +8784,7 @@
 													marginTop: t.heads.direction === 'column' ? "-1.5rem" : '',
 													marginLeft: t.heads.direction === 'row' ? "-1.5rem" : ''
 												},
-												onError: function(e)
-												{
-													e.currentTarget.src = href+'MoeData/Ui/error.webp';
-												}
+												onError: function(e){IMAGE_error(e)}
 											})
 										}) : ''] : ''
 									}) : '']

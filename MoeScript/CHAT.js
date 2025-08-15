@@ -410,13 +410,13 @@ function makeMessage(type,data,chatIndex,mode)
 				maxwidth = mt_settings['差分比例'] || '90%'
 			}
 			maxwidth = `max-width:${maxwidth};`
-			图片 = `<img style="${width}${maxwidth};${style}" class="图片 编辑" src='${data.file.indexOf(":image") > -1 ? data.file : href+data.file}' onerror="this.onerror=null;this.src='${href}MoeData/Ui/error.webp'">`
+			图片 = `<img style="${width}${maxwidth};${style}" class="图片 编辑" src='${data.file.indexOf(":image") > -1 ? data.file : href+data.file}' onerror="IMAGE_error(this,${chatIndex})">`
 		}
 		if(no != 0 && !data.isRight)
 		{//左侧对话
 			头像框 = `<div class="头像框" style="cursor: pointer;${headstyle}">${头像}</div>`
 			名称 = `${head ? `<span class="名称 bold">${data.name || loadname(no,index)}</span>` : ''}`
-			文本 = `<span class="${head ? '文本 左角' : '文本'} 编辑" style='${style}'>${data.content}</span>`
+			文本 = `${head ? '<div class="左角"></div>' : ''}<span class="文本 编辑" style='${style}'>${data.content}</span>`
 			对话 = 
 			`${头像框}
 			<div class="对话" style="align-items: flex-start;height: ${data.heads && data.heads.fullHeight ? '100%' : ''}">
@@ -483,7 +483,7 @@ function makeMessage(type,data,chatIndex,mode)
 			选择肢 += `<button class="选择肢 跳转" style='${style}'>${v}</button>`
 		})
 		聊天 = 
-		`<div class="头像框"><button data-html2canvas-ignore="true" class="编辑按钮 编辑">${编辑图标}</button></div>
+		`<div class="头像框"><button data-html2canvas-ignore="true" data-capture="exclude" class="编辑按钮 编辑">${编辑图标}</button></div>
 		<div class="回复" style='background-image: url(${回复背景});'>
 			<div class="消息标题">
 				<div class="竖线" style='border-left: 2px solid rgb(39, 153, 228)'></div>

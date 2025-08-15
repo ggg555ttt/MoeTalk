@@ -6,6 +6,27 @@ var baseArr = []
 var 截图区域
 var 正在截图 = false
 var 上次截图 = []
+function IMAGE_error(image,index)
+{
+	let src = ''
+	if(image.currentTarget)
+	{
+		src = image.target.src.split(mt_settings['选择游戏'])[1]
+		image = image.currentTarget
+	}
+	else src = image.src.split(mt_settings['选择游戏'])[1]
+	if(image.from == 'Gitlab')
+	{
+		if(index > -1)chats[index] = image.src
+		image.src = href+'MoeData/Ui/error.webp'
+		return
+	}
+	src = `${GitlabURL}/Images/${mt_settings['选择游戏']}/${src}`
+	if(index > -1)urlToBase64(src,1,function(img){chats[index].file = img,baseArr = []})
+	image.src = src
+	image.from = 'Gitlab'
+	
+}
 //图片压缩
 function compress(base64Img,type = 'head',mode = 'add',length = 0)
 {
@@ -216,8 +237,10 @@ function 截屏预览(S)
 		})
 	}
 	let 消息;
+	let style = false
 	for(let end = 0;end < json.length;end++)
 	{
+		if(json[end].style && json[end].style.length){style = true}
 		if($(".dels:checked").length)消息 = $(`.消息 :checked:eq(${end})`).parent()//区域截图
 		else 消息 = $(`.消息:eq(${end})`)
 		length = length+(消息.outerHeight()*S)
@@ -236,14 +259,15 @@ function 截屏预览(S)
 			{
 				length = leng+(消息.outerHeight()*S)
 			}
-			imageArr.push({start: start,end: end,index: imageArr.length+1,chats: json.slice(start,end)})
+			imageArr.push({start: start,end: end,index: imageArr.length+1,chats: json.slice(start,end),style})
 			start = end
-			平均 = false
+			style = 平均 = false
 		}
 		//if(length > 平均长度)平均 = true
 		if(end === json.length-1)
 		{
-			imageArr.push({start: start,end: json.length,index: imageArr.length+1,chats: json.slice(start,json.length)})
+			imageArr.push({start: start,end: json.length,index: imageArr.length+1,chats: json.slice(start,json.length),style})
+			style = false
 		}
 	}
 	if(zipDownImg && imageArrL > 1)
@@ -255,17 +279,22 @@ function 截屏预览(S)
 	INIT_loading('结束加载')
 }
 //截屏功能
-function 内容预览(截屏)
+function 内容预览()
 {
-	html2canvas($(".预览内容")[0],
+	let 截屏工具 = 'html2canvas'
+	// if($('.定义样式').css('color') === 'rgb(255, 0, 0)')截屏工具 = 'snapdom'
+	window[截屏工具]($(".预览内容")[0],
 	{
 		logging: !1,
 		allowTaint: !0,
 		useCORS: !0,
-		scale: 1.1
+		scale: 1.1,
+		compress: true,
+		embedFonts: true//snapdom
 	}).then(function(img)
 	{
-		$('.预览内容').html(`<img width='500px' src='${img.toDataURL()}'>`)
+		if(截屏工具 === 'html2canvas')$('.预览内容').html(`<img width='500px' src='${img.toDataURL()}'>`)
+		else img.toPng().then(function(img){$('.预览内容').html(`<img width='500px' src='${img.src}'>`)})
 	})
 }
 function mt_capture(清晰度,生成图片,标题)
@@ -274,11 +303,12 @@ function mt_capture(清晰度,生成图片,标题)
 	let json = []
 	let filename = ''
 	let title = 标题 ? 标题 : mt_text.noTitle[mtlang]
-	if(!mt_settings['截图选项'].archive)json = ''
+	imgArea = imageArr.shift()
+	if(imgArea.index !== 1 || !mt_settings['截图选项'].archive)json = ''
 	else
 	{
 		json[0] = {};
-		json[0]['title'] = '备份存档';
+		json[0]['title'] = title+'_备份';
 		json[0]['nickname'] = 'MoeTalk';
 		json[0]['date'] = DATA_NowTime;
 		json[0]['选择角色'] = mt_settings['选择角色']//@
@@ -287,7 +317,7 @@ function mt_capture(清晰度,生成图片,标题)
 		json[1] = [...chats,...otherChats];
 		json = JSON.stringify(json)
 	}
-	imgArea = imageArr.shift()
+	
 	if(imgArea.chats.length === 0)
 	{
 		foreach(imageArr,function(k,v){imageArr[k].index -= 1})
@@ -312,19 +342,24 @@ function mt_capture(清晰度,生成图片,标题)
 	let callback = function()
 	{
 		// if(MikuTalk && 截图区域.css('background-color') === 'rgba(0, 0, 0, 0)')截图区域.css('background-color',MikuTalk)
-		html2canvas(截图区域[0],
+		let 截屏工具 = 'html2canvas'
+		// if(imgArea.style)截屏工具 = 'snapdom'
+		window[截屏工具](截图区域[0],
 		{
 			logging: !1,
 			allowTaint: !0,
 			useCORS: !0,
-			scale: 清晰度
+			scale: 清晰度,
+			compress: true,
+			embedFonts: true//snapdom
 		}).then(function(img)
 		{
 			// if(['rgb(255, 255, 255)','rgb(255, 247, 225)'].indexOf(截图区域.css('background-color')) < 0)截图区域.css('background-color','transparent')
 			try
 			{
-				img.toBlob(function(blob)
+				let func = function(blob)
 				{
+					
 					INIT_loading(false)
 					if(imageArr.length > 0)
 					{
@@ -339,7 +374,10 @@ function mt_capture(清晰度,生成图片,标题)
 					filename += mt_settings['截图选项'].archive ? mt_settings['图片格式'].split('/')[1].toUpperCase() : mt_settings['图片格式'].split('/')[1];
 
 					combineFiles(blob,json,filename,imgArea.index);
-				})
+				}
+				if(截屏工具 == 'html2canvas')img.toBlob(function(blob){func(blob)})
+				else img.toCanvas().then(function(img){img.toBlob(function(blob){func(blob)})})
+				
 			}
 			catch
 			{
@@ -367,20 +405,20 @@ if(Html5Plus)
 	urlToBase64(羁绊背景,1,function(img){羁绊背景 = img,baseArr = []})
 	urlToBase64(回复背景,1,function(img){回复背景 = img,baseArr = []})
 	urlToBase64(错误图片,1,function(img){错误图片 = img,baseArr = []})
-	var time = 0;//初始化起始时间  
+	var time = 0;//初始化起始时间
 	$("body").on('touchstart', 'img', function(e)
 	{
 		let src = $(this).attr('src')
-		e.stopPropagation();  
+		e.stopPropagation();
 		time = setTimeout(function()
 		{
-			showCloseImg(src);  
-		}, 2000);//这里设置长按响应时间  
+			showCloseImg(src);
+		}, 2000);//这里设置长按响应时间
 	});
 	$("body").on('touchend', 'img', function(e)
 	{
-		e.stopPropagation();  
-		clearTimeout(time);    
+		e.stopPropagation();
+		clearTimeout(time);
 	});
 	function showCloseImg(src)
 	{

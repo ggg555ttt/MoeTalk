@@ -230,27 +230,6 @@ a {
 	border-radius: 50%;
 	position: relative;
 }
-.左角::after {
-	content: "";
-	position: absolute;
-	left: -0.5rem;
-	top: 0.6rem;
-	border-top: 0.3rem solid transparent;
-	border-right: 0.5rem solid rgb(76, 91, 111);
-	border-bottom: 0.3rem solid transparent;
-}
-.右角{position: relative;}
-.右角::after {
-	content: "";
-	position: absolute;
-	left: 0px;
-	top: 0.6rem;
-	height: 0px;
-	border-top: 0.3rem solid transparent;
-	border-bottom: 0.3rem solid transparent;
-	border-left: 0.5rem solid rgb(74, 138, 202);
-}
-
 .羁绊
 {
 	display: flex;
@@ -427,15 +406,32 @@ a {
 	color: black;
 }
 .PLAYER_Loading,.PLAYER_Loading:before,.PLAYER_Loading:after{color:#ffffff;top:-2.7rem;border-radius:50%;width:0.5rem;height:0.5rem;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation:load7 3s infinite ease-in-out;animation:load7 3s infinite ease-in-out;}.PLAYER_Loading{margin:1.2rem 2rem 0rem 2rem;position:relative;text-indent:-9999rem;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation-delay:-0.2s;animation-delay:-0.2s;}.PLAYER_Loading:before,.PLAYER_Loading:after{content:'';position:absolute;top:0;}.PLAYER_Loading:before{left:-1.2rem;-webkit-animation-delay:-0.4s;animation-delay:-0.4s;}.PLAYER_Loading:after{left:1.2rem;}@-webkit-keyframes load7{0%,80%,100%{box-shadow:0 2rem 0 -1rem;}40%{box-shadow:0 2rem 0 0;}}@keyframes load7{0%,80%,100%{box-shadow:0 2rem 0 -1rem;}40%{box-shadow:0 2rem 0 0;}}
-.zhengwen {
+.swing-animation {
 	display: block;
 	width: 200px; /* 根据需要调整 */
 	height: auto;
-	animation: zhengwen 0.3s infinite; /* 动画名称、持续时间、无限循环 */
+	animation: swing 0.3s infinite; /* 动画名称、持续时间、无限循环 */
 }
-@keyframes zhengwen {
+@keyframes swing {
 	0%, 100% { transform: rotate(0deg); }
 	25% { transform: rotate(15deg); }
 	50% { transform: rotate(0deg); }
 	75% { transform: rotate(-15deg); }
+}
+
+.左角 {
+	height: 0px;
+	margin-top: 0.6rem;
+	margin-left: -0.5rem;
+	border-top: 0.3rem solid transparent;
+	border-bottom: 0.3rem solid transparent;
+	border-right: 0.5rem solid rgb(76, 91, 111);
+}
+.右角 {
+	height: 0px;
+	margin-top: 0.6rem;
+	margin-right: -0.5rem;
+	border-top: 0.3rem solid transparent;
+	border-bottom: 0.3rem solid transparent;
+	border-left: 0.5rem solid rgb(74, 138, 202);
 }

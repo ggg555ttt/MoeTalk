@@ -230,27 +230,6 @@ a {
 	border-radius: 50%;
 	position: relative;
 }
-.左角::after {
-	content: "";
-	position: absolute;
-	left: -0.5rem;
-	top: 0.6rem;
-	border-top: 0.3rem solid transparent;
-	border-right: 0.5rem solid rgb(76, 91, 111);
-	border-bottom: 0.3rem solid transparent;
-}
-.右角{position: relative;}
-.右角::after {
-	content: "";
-	position: absolute;
-	left: 0px;
-	top: 0.6rem;
-	height: 0px;
-	border-top: 0.3rem solid transparent;
-	border-bottom: 0.3rem solid transparent;
-	border-left: 0.5rem solid rgb(74, 138, 202);
-}
-
 .羁绊
 {
 	display: flex;
@@ -438,4 +417,21 @@ a {
 	25% { transform: rotate(15deg); }
 	50% { transform: rotate(0deg); }
 	75% { transform: rotate(-15deg); }
+}
+
+.左角 {
+	height: 0px;
+	margin-top: 0.6rem;
+	margin-left: -0.5rem;
+	border-top: 0.3rem solid transparent;
+	border-bottom: 0.3rem solid transparent;
+	border-right: 0.5rem solid rgb(76, 91, 111);
+}
+.右角 {
+	height: 0px;
+	margin-top: 0.6rem;
+	margin-right: -0.5rem;
+	border-top: 0.3rem solid transparent;
+	border-bottom: 0.3rem solid transparent;
+	border-left: 0.5rem solid rgb(74, 138, 202);
 }
