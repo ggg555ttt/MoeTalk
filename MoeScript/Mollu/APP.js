@@ -10122,7 +10122,7 @@
 													width: '100%',
 													height: '100%'
 												},
-												src: `${href}MoeData/Ui/${localStorage['zhengwen'] || 'private'}.webp`,//#播放器界面
+												src: `${href}MoeData/Ui/${year+month+day > '250907' ? 'private' : 'zhengwen'}.webp`,//#播放器界面
 												alt: "private",
 												onClick: function(e)
 												{
