@@ -67,7 +67,7 @@ $('body').on('click',"#readme",function()
 	let link = '<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda" style="text-decoration:underline;">点击跳转</a>'
 	let span = '<span onclick="moedev()" style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
 	let readme = `　　${span}MoeTalk</span>为基于原作者Raun0129开发的${span}MolluTalk</span>的个人改版\n`
-	readme += `　　点击【确定】可以清除缓存并检测更新\n`
+	readme += `　　点击【确认】可以清除缓存并检测更新\n`
 	readme += `客户端下载地址：<button class="cVRiXh eIEKpg evqKja kwhiZC" style="width: auto;height: auto;font-size: 1.5rem;">${link}</button>提取码：BLDA`
 	alert(readme)
 	TOP_confirm = function()
@@ -113,22 +113,16 @@ $(function()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
 	let notice = ''
+	notice += '<span class="red">请时常注意备份您的存档</span>\n'
+	notice += '　　移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏\n'
 	if(year+month+day < '250907')
 	{
 		$('.notice pre').css('text-align','center')
-		notice += '<span>【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>\n'
+		notice += '\n<span class="red">【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>\n'
 	}
-	else
-	{
-		notice += '　　手机端点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>可查看工具栏\n'
-		notice += '　　工具栏点击【选择游戏】可以更改为其他游戏\n'
-		if(cordova)notice += '<span class="red">※此客户端目前处于测试阶段\n使用前请先确认文件下载功能是否正常\n出现错误请向开发者反馈</span>\n'
-		else notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常下载并备份存档</span>\n'
-	}
-
 	if(MikuTalk)
 	{
-		notice = '愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n<span class="red">点击“确定”可以关闭</span>\n'
+		notice += '\n愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n<span class="red">点击“确认”可以关闭</span>\n'
 		delete localStorage['通知文档']
 		TOP_confirm = function()
 		{
@@ -136,21 +130,10 @@ $(function()
 			location.reload(true);
 		}
 	}
-	
-	if(window.location.href == GitlabURL)
-	{
-		notice = '<span class="red">Gitlab在5月7日不再为中国用户服务，届时此网站也会随之关闭访问\n'
-		notice += '请及时将您的存档导入客户端或新网址\n'
-		notice += '新网址：<a class="INIT_href" title="https://moetalk.netlify.app/">https://moetalk.netlify.app/</a>\n'
-		notice += '客户端：<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">【百度网盘】</a>提取码：BLDA</span>\n'
-		notice += `更多链接请查看网盘内的【访问网址.txt】\n`
-		if(Html5Plus)notice += `<span class="red">新版网络客户端已更新至百度网盘，请及时下载安装并转移存档</span>\n`
-		delete localStorage['通知文档']
-	}
+
 	if(gamelist.indexOf(mt_settings['选择游戏']) < 0)
 	{
-		notice += `\n如果您发现游戏数据未加载，请点击左上按钮隐藏加载界面\n`
-		notice += '并重新选择<span class="blue">遊</span>戏\n'
+		notice += '\n如果您发现游戏数据未加载\n请点击左上按钮隐藏加载界面\n并重新选择<span class="blue">遊</span>戏\n'
 		delete localStorage['通知文档']
 	}
 	if(localStorage['通知文档'] !== notice || sessionStorage['通知文档'] !== notice)
@@ -184,7 +167,7 @@ $('body').on('click',"input",function()
 //工具
 $(".frVjsk").wait(function()
 {
-	$(".frVjsk").append(`<button class='${class0}' onclick='$("#readme").click()'><b style='color:blue;'>端</b></button><span class='tool' align='center'>客户端\n下载地址</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' onclick='$("#readme").click()'><b style='color:blue;'>新</b></button><span class='tool' align='center'>获取更新</span><br>`);
 	$(".frVjsk").append(`<a href='${href}index_old.html?${本地版本}'><button class='${class0}'><b style='color:green;'>舊</b></button></a><span class='tool'>访问旧版</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='selectgame'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);

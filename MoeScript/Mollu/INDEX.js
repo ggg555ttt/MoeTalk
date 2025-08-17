@@ -1234,12 +1234,16 @@
 								})]
 							}), (0, m.jsxs)(ea.$0,
 							{
-								style: {maxHeight: '90%'},
+								style:
+								{
+									maxHeight: '90%',
+									padding: '0.5rem'
+								},
 								children: [(0, m.jsx)('pre',
 								{
 									style: 
 									{
-										lineHeight: '150%',
+										lineHeight: '125%',
 										whiteSpace: 'pre-wrap',
 										wordBreak: 'break-word',
 										textAlign: 'left',
