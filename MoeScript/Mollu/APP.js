@@ -9895,7 +9895,9 @@
 								style:
 								{
 									whiteSpace: 'pre',
-									color: 'green'
+									color: 'green',
+									width: 'auto',
+									cursor: 'pointer'
 								}
 							}), (0, O.jsxs)("div",
 							{
@@ -10138,6 +10140,7 @@
 										hidden:true,
 										onClick: function(e)
 										{
+											$$('.replyHome').click()
 											h(e, player)//#播放器
 										}
 									}), (0, O.jsx)('span',

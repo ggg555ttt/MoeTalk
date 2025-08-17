@@ -465,17 +465,24 @@ $("body").on('click',".replyHome",function()
 });
 function TOP_replyEdit()
 {
+	if(chats.length)$('.INDEX_tips').hide()
 	let str = ''
 	if(replyDepths.length === 1)
 	{
 		let reply = {}
 		let length = otherChats.length;
+		if(!otherChats.length)
+		{
+			$('.reply').hide()
+			return
+		}
 		for(let i = 0;i < length;i++)
 		{
 			reply[otherChats[i].replyDepth] = ''
 		}
 		reply = Object.keys(reply)
 		length = reply.length;
+
 		for(let i = 0;i < length;i++)
 		{
 			str += `<span onclick="$('.notice .confirm').removeAttr('disabled')"><input type="radio" id="${reply[i]}" name="replys" class="replys"><label for="${reply[i]}">${reply[i]}</label></span>\n`

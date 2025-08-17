@@ -207,7 +207,7 @@ a {
 	user-select: text;
 	position: relative;
 	color: white;
-	width: fit-content;
+	width: 100%;
 	border-radius: 10px;
 	background: rgb(76, 91, 111);
 	border: 1px solid rgb(76, 91, 111);
