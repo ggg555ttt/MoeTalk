@@ -149,8 +149,8 @@ $(function()
 	}
 	if(gamelist.indexOf(mt_settings['选择游戏']) < 0)
 	{
-		notice += `\n未发现属于<span class='red'>${gamearr[mt_settings['选择游戏']]}</span>的数据\n`
-		notice += '请点击左上按钮隐藏加载界面并重新选择<span class="blue">遊</span>戏\n'
+		notice += `\n如果您发现游戏数据未加载，请点击左上按钮隐藏加载界面\n`
+		notice += '并重新选择<span class="blue">遊</span>戏\n'
 		delete localStorage['通知文档']
 	}
 	if(localStorage['通知文档'] !== notice || sessionStorage['通知文档'] !== notice)
