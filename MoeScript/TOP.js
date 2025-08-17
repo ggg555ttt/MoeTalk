@@ -113,7 +113,7 @@ $(function()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
 	let notice = ''
-	if(year+month+day > '250907')
+	if(year+month+day < '250907')
 	{
 		$('.notice pre').css('text-align','center')
 		notice += '<span>【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>\n'
