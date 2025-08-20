@@ -657,8 +657,17 @@ function download(filename,data,base64,type = 'json')
 		$(className).html(str)
 	}
 }
-function savefile(dirname,filename,data,type = 'save')
+async function savefile(dirname,filename,data,type = 'save')
 {
+	if(nwjs)
+	{
+		if(type == 'image')dirname = `${dirname}/${DATA_NowTime}`
+		let buffer = Buffer.from(await data.arrayBuffer());//将 Blob 转为 Buffer
+		if(!fs.existsSync(dirname))fs.mkdirSync(dirname,{recursive: true});//自动创建多级目录
+		// 写入文件
+		fs.writeFileSync(`${dirname}/${filename}`, buffer);
+		return
+	}
 	if(!cordova)
 	{
 		let a = document.createElement('a');

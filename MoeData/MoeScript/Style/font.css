@@ -1,12 +1,12 @@
 @font-face
 {
 	font-family:title;
-	src: url('../../Font/Jalnan.TTF')
+	src: url('../../MoeData/Font/Jalnan.TTF')
 }
 @font-face
 {
 	font-family:moetalk;
-	src: url('../../Font/Blueaka.woff2') format("woff");
+	src: url('../../MoeData/Font/Blueaka.woff2') format("woff");
 }
 @font-face
 {

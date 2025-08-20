@@ -416,11 +416,6 @@
 						{
 							return mtlang//#e.global.lang
 						});
-					let headsize;
-					if(n.school[a] === '自定义')
-					{
-						headsize = mt_head[n.no] ? (mt_head[n.no].length/1024).toFixed(0)+'KB' : '-1KB'
-					}
 					return (0, m.jsxs)(N,
 					{
 						children: [(0, m.jsx)(S,
@@ -449,39 +444,27 @@
 									//*添加ID和社团信息
 									(0, m.jsxs)(I,
 									{
-										children: [(0, m.jsx)("h2",
+										children: [(0, m.jsx)(D,
 										{
-											children: (0, m.jsx)(F,
-											{
-												children: (0, m.jsx)(D,
-												{
-													className: "bold",
-													style:{color:'rgb(68, 72, 78)'},
-													children: mt_settings['人物改名'][n.no] || n.name[a].replaceAll("-", " ")
-												})
-											})
-										}), (0, m.jsx)(F,
+											className: "bold",
+											style:{color:'rgb(68, 72, 78)'},
+											children: mt_settings['人物改名'][n.no] || n.name[a].replaceAll("-", " ")
+										}), (0, m.jsx)('span',
 										{
-											children: [(0, m.jsx)(O,
+											style: {color:'rgb(111, 119, 127)'},
+											children:[n.club[a],(0, m.jsx)(c.xL,
 											{
-												children: [(0, m.jsx)('span',
+												style:
 												{
-													children:[n.club[a],(0, m.jsx)(c.xL,
-													{
-														style:
-														{
-															width: "1rem",
-															height: "1rem",
-															color:'rgb(68, 72, 78)'
-														},
-														icon: ei.Yai,
-														onClick: function()
-														{
-															custom_char(n);
-														}
-													}), headsize]
-												})]
-											})]//@显示社团
+													width: "1rem",
+													height: "1rem"
+												},
+												icon: ei.Yai,
+												onClick: function()
+												{
+													custom_char(n);
+												}
+											})]
 										})]
 									})
 									//*添加ID和社团信息
@@ -1248,6 +1231,7 @@
 										wordBreak: 'break-word',
 										textAlign: 'left',
 										width: '100%',
+										fontFamily: 'inherit',
 										overflow: 'scroll'
 									}
 								}), (0, m.jsxs)(ea.$_,
@@ -2523,7 +2507,7 @@
 													}
 													f = f ? f : "无题"
 													k = k ? k : "佚名"
-													let time = new Date().toLocaleString().replaceAll('/','').replaceAll(' ','-').replaceAll(':','');
+													let time = getNowDate();
 													let json = {}
 													json.MoeTalk = 本地版本
 													json.INFO = {}//存档信息
@@ -5874,21 +5858,8 @@
 							children: [(0, b.jsx)(H,
 							{
 								className: "bold",
-								style:
-								{
-									lineHeight: "2rem"
-								},
-								children: (0, b.jsxs)("h1",
-								{
-									children: [`${i.Z.momotalk[d]} ${i.Z.library[d]}`, (0, b.jsxs)("span",
-									{
-										style:
-										{
-											fontSize: "1.2rem"
-										},
-										children: ["(", r, ")"]
-									})]
-								})
+								style: {lineHeight: "2rem"},
+								children: `${i.Z.momotalk[d]} ${i.Z.library[d]}`
 							}), (0, b.jsxs)(K,
 							{
 								style:
@@ -5974,7 +5945,7 @@
 							style: 
 							{
 								userSelect: 'text',
-								lineHeight: '3rem',
+								lineHeight: '125%',
 								whiteSpace: 'pre',
     							textAlign: 'center'
 							},
