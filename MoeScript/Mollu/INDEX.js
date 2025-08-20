@@ -5305,6 +5305,7 @@
 						{}, o),
 						{},
 						{
+							display: 'flex',
 							transition: "all 300ms ease-in-out"
 						}),
 						children: t[n]
