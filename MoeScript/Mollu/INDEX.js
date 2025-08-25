@@ -1182,7 +1182,7 @@
 						$$('.notice pre').css('text-align','left').html('')
 						$$('.notice').removeClass('visible')
 						$$('.notice .title').text('通知')
-						$$('.notice .confirm').text(L.Z.confirm[l]).removeAttr('disabled')
+						$$('.notice .confirm').text(L.Z.confirm[u]).removeAttr('disabled')
 						TOP_confirm = ''
 					}
 					return [(0, m.jsx)(ea.Xf,
@@ -1201,9 +1201,10 @@
 							},
 							children: [(0, m.jsxs)(ea.h4,
 							{
+								style: {height: 'auto'},
 								children: [(0, m.jsx)(ea.Dx,
 								{
-									style: {color: 'green'},
+									style: {borderBottom: '4px solid'},
 									className: "title",
 									children: '通知'
 								}), (0, m.jsx)(ea.ec,
@@ -1239,7 +1240,6 @@
 									children: [(0, m.jsx)(ea.Lw,
 									{
 										className: "cancel",
-										style: {color: 'green'},
 										onClick: function()
 										{
 											cancel()
@@ -1248,7 +1248,6 @@
 									}), (0, m.jsx)(ea.AZ,
 									{
 										className: "confirm",
-										style: {color: 'green'},
 										onClick: function()
 										{
 											cancel(true)
@@ -4098,16 +4097,12 @@
 					let isCenter = n.isCenter && n.type === 'image'
 					let style = mt_settings['文字样式'][n.type] ? mt_settings['文字样式'][n.type] : {}
 					delete style.textAlign,style = {...style,...{}}//防止连带修改设置属性
-					if(n.style && n.style.length)
+					foreach([...mt_settings.风格样式[n.type] || [],...n.style || []],function(k,v)
 					{
-						foreach(n.style,function(k,v)
-						{
-							style[v[0]] = v[1]
-						})	
-					}
+						style[v[0]] = v[1]
+					})
 					if(n.type === 'info')
 					{
-						style.background = mt_settings['风格样式'][2]
 						n.isLeft ? style.textAlign = 'left' : ''
 						n.isRight ? style.textAlign = 'right' : ''
 					}
@@ -4185,14 +4180,14 @@
 												hidden: (!n.time || n.sCharacter.no != 0) && !n.isRight,
 												dangerouslySetInnerHTML:{__html:n.time}// children: n.time
 											}) : '', "chat" === n.type ? [!n.isRight && isFirst && n.sCharacter.no != 0 ? (0, m.jsx)('div',
-											{className: '左角'}) : '', (0, m.jsx)('span',
+											{className: '左角',style:{borderRightColor:style['background-color']}}) : '', (0, m.jsx)('span',
 											{//文本消息
 												className: '文本 编辑',
-												style: n.isRight || n.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
+												style: n.isRight || n.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)'},...style} : style,
 												dangerouslySetInnerHTML:{__html:n.content}
 												// children: n.content
 											}), (n.isRight && isFirst) || n.sCharacter.no == 0 ? (0, m.jsx)('div',
-											{className: '右角'}) : ''] : (0, m.jsx)('img',
+											{className: '右角',style:{borderLeftColor:style['background-color']}}) : ''] : (0, m.jsx)('img',
 											{//图片消息
 												className: '图片 编辑',
 												style:
@@ -4687,7 +4682,7 @@
 					})
 				}, function(e)
 				{
-					return MikuTalk ? '' : mt_settings['风格样式'][1]//#自定义样式
+					return MikuTalk ? '' : mt_settings.风格样式.bgColor//#自定义样式
 				}, function(e)
 				{
 					return e.theme.color.rgb255_255_255
@@ -4748,6 +4743,11 @@
 						}), (0, m.jsx)(ns,
 						{
 							className: "INDEX_tips",
+							style:
+							{
+								justifyContent: 'space-around',
+								height: '50%'
+							},
 							children: [(0, m.jsx)("span",
 							{
 								style:
@@ -4772,32 +4772,7 @@
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ei.VmB
-								}),'上传图片']
-							}), (0, m.jsx)("span",
-							{
-								style:
-								{
-									fontSize: "1.1rem"
-								},
-								children: [(0, m.jsx)(c.xL,
-								{
-									style:
-									{
-										width: "1.1rem",
-										height: "1.1rem",
-										color:'rgb(45, 70, 100)'
-									},
-									icon: ei.pkM
-								}),'表情图片',(0, m.jsx)(c.xL,
-								{
-									style:
-									{
-										width: "1.1rem",
-										height: "1.1rem",
-										color:'rgb(139, 187, 233)'
-									},
-									icon: ico.FKd
-								}),'表情差分',(0, m.jsx)(c.xL,
+								}),'发送图片',(0, m.jsx)(c.xL,
 								{
 									style:
 									{
@@ -4821,26 +4796,8 @@
 										height: "1.1rem",
 										color:'rgb(45, 70, 100)'
 									},
-									icon: ico.Lh7
-								}),'选择肢',(0, m.jsx)(c.xL,
-								{
-									style:
-									{
-										width: "1.1rem",
-										height: "1.1rem",
-										color:'rgb(45, 70, 100)'
-									},
 									icon: ico.DBf
-								}),'旁白',(0, m.jsx)(c.xL,
-								{
-									style:
-									{
-										width: "1.1rem",
-										height: "1.1rem",
-										color:'rgb(45, 70, 100)'
-									},
-									icon: ico.m6i
-								}),'羁绊事件']
+								}),'选择肢、旁白、羁绊事件']
 							}), (0, m.jsx)("span",
 							{
 								style:
@@ -4865,7 +4822,32 @@
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ico.wf8
-								}),'生成图片']
+								}),'生成截图']
+							}), (0, m.jsx)("span",
+							{
+								style:
+								{
+									fontSize: "1.1rem"
+								},
+								children: [(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										height: "1.1rem",
+										color:'rgb(45, 70, 100)'
+									},
+									icon: ei.pkM
+								}),'表情图片',(0, m.jsx)(c.xL,
+								{
+									style:
+									{
+										width: "1.1rem",
+										height: "1.1rem",
+										color:'rgb(139, 187, 233)'
+									},
+									icon: ico.FKd
+								}),'表情差分']
 							}), (0, m.jsx)("span",
 							{
 								style:
@@ -8325,13 +8307,13 @@
 					let style = mt_settings['文字样式'][t.type] ? mt_settings['文字样式'][t.type] : {}
 					delete style.textAlign
 					style = {...style,...{}}//防止连带修改设置属性
-					if(t.style && t.style.length)
+					foreach([...mt_settings.风格样式[t.type] || [],...t.style || []],function(k,v)
 					{
-						foreach(t.style,function(k,v)
-						{
-							style[v[0]] = v[1]
-						})	
-					}
+						style[v[0]] = v[1]
+					})
+					if(t.heads && (!t.heads.list || t.heads.list.length < 1))delete t.heads
+					if(!t.content)t.content = ''
+					if(!t.file)t.file = ''
 					return [(0, m.jsxs)(m.Fragment,
 					{
 						children: d ? (0, m.jsxs)(m.Fragment,
@@ -8397,14 +8379,14 @@
 											hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
 											dangerouslySetInnerHTML: {__html: t.time}// children: t.time
 										}) : '', [!t.isRight && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)('div',
-										{className: '左角'}) : '',(0, m.jsx)('span',
+										{className: '左角',style:{borderRightColor:style['background-color']}}) : '',(0, m.jsx)('span',
 										{//文本消息
 											className: '文本',
-											style: t.isRight || t.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
+											style: t.isRight || t.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)'},...style} : style,
 											// children: f
 											dangerouslySetInnerHTML: {__html: f}
 										}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)('div',
-										{className: '右角'}) : '' ], t.time ? (0, m.jsx)(s.i9,
+										{className: '右角',style:{borderLeftColor:style['background-color']}}) : '' ], t.time ? (0, m.jsx)(s.i9,
 										{//右侧时间戳
 											className: '时间戳',
 											hidden: !t.time || t.sCharacter.no == 0 || t.isRight,
@@ -8594,19 +8576,16 @@
 					let isCenter = t.isCenter && t.type === 'image'
 					let style = mt_settings['文字样式'][t.type] ? mt_settings['文字样式'][t.type] : {}
 					delete style.textAlign,style = {...style,...{}}//防止连带修改设置属性
+					foreach([...mt_settings.风格样式[t.type] || [],...t.style || []],function(k,v)
+					{
+						style[v[0]] = v[1]
+					})
 					if(t.type === 'info')
 					{
-						style.background = mt_settings['风格样式'][2]
 						t.isLeft ? style.textAlign = 'left' : ''
 						t.isRight ? style.textAlign = 'right' : ''
 					}
-					if(t.style && t.style.length)
-					{
-						foreach(t.style,function(k,v)
-						{
-							style[v[0]] = v[1]
-						})	
-					}
+					if(t.heads && (!t.heads.list || t.heads.list.length < 1))delete t.heads
 					if(!t.content)t.content = ''
 					if(!t.file)t.file = ''
 					return (0, a.useEffect)(function()
@@ -8706,14 +8685,14 @@
 												hidden: (!t.time || t.sCharacter.no != 0) && !t.isRight,
 												dangerouslySetInnerHTML: {__html: t.time}// children: t.time
 											}) : '', "chat" === t.type ? [!t.isRight && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)('div',
-											{className: '左角'}) : '', (0, m.jsx)('span',
+											{className: '左角',style:{borderRightColor:style['background-color']}}) : '', (0, m.jsx)('span',
 											{//文本消息
 												className: '文本',
-												style: t.isRight || t.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)',border: '1px solid rgb(74, 138, 202)'},...style} : style,
+												style: t.isRight || t.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)'},...style} : style,
 												// children: x ? (0, m.jsx)(I,{}) : t.content
 												dangerouslySetInnerHTML: {__html: x ? '<div class="PLAYER_Loading"></div>' : t.content}
 											}), (t.isRight && isFirst) || t.sCharacter.no == 0 ? (0, m.jsx)('div',
-											{className: '右角'}) : '' ] : (0, m.jsx)('img',
+											{className: '右角',style:{borderLeftColor:style['background-color']}}) : '' ] : (0, m.jsx)('img',
 											{//图片消息
 												className: '图片',
 												style:
@@ -9330,7 +9309,7 @@
 					return e.theme.color.rgb69_78_89
 				}, function(e)
 				{
-					return mt_settings['风格样式'][2]//#自定义样式
+					return e.theme.color.rgb220_229_232
 				}),
 				f = (0, r.ZP)(o.Mm).withConfig(
 				{

@@ -62,31 +62,34 @@ INIT_waiting(function()
 
 if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>");//加载字体
 //使用说明
-$('body').on('click',"#readme",function()
+function clearCache()
 {
-	let link = '<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda" style="text-decoration:underline;">点击跳转</a>'
-	let span = '<span onclick="moedev()" style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
-	let readme = `　　${span}MoeTalk</span>为基于原作者Raun0129开发的${span}MolluTalk</span>的个人改版\n`
-	readme += `　　点击【确认】可以清除缓存并检测更新\n`
-	readme += `客户端下载地址：<button class="cVRiXh eIEKpg evqKja kwhiZC" style="width: auto;height: auto;font-size: 1.5rem;">${link}</button>提取码：BLDA`
-	alert(readme)
-	TOP_confirm = function()
+	window.caches && caches.keys && caches.keys().then(function(keys)
 	{
-		window.caches && caches.keys && caches.keys().then(function(keys)
+		let length = 0;
+		keys.forEach(function(key)
 		{
-			let length = 0;
-			keys.forEach(function(key)
-			{
-				length=length+1
-				caches.delete(key);
-			});
-			if(keys.length === length)
-			{
-				delete localStorage['每日提醒']
-				location.reload(true)
-			}
+			length=length+1
+			caches.delete(key);
 		});
-	}
+		if(keys.length === length)
+		{
+			delete localStorage['每日提醒']
+			$('.notice pre').html('缓存清除完毕，请立即刷新页面')
+		}
+	});
+}
+$('body').on('click',"#update",function()
+{
+	$('.notice .title').text('获取更新')
+	$('.notice .confirm').html('刷新')
+	let link = '<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda" style="text-decoration:underline;">百度网盘</a>'
+	let button = '<button class="cVRiXh eIEKpg evqKja kwhiZC" style="width: auto;height: auto;font-size: 1.5rem;">'
+	let readme = '若要获取更新\n'
+	readme += `请点击${button}<span class="red" onclick="clearCache()">清除缓存</span></button>后刷新页面\n`
+	readme += `客户端下载地址：${button}${link}</button>提取码：BLDA`
+	alert(readme)
+	TOP_confirm = function(){location.reload(true)}
 });
 function moedev()
 {
@@ -112,14 +115,12 @@ $(function()
 		$("#view").click()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
+	let span = '<span onclick="moedev()" style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
 	let notice = ''
-	notice += '<span class="red">请时常注意备份您的存档</span>\n'
-	notice += '　　移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏\n'
-	if(year+month+day < '250907')
-	{
-		$('.notice pre').css('text-align','center')
-		notice += '\n<span class="red">【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>\n'
-	}
+	notice += `欢迎使用${span}MoeTalk</span>！\n此版本为基于原作者Raun0129开发的MolluTalk的个人改版\n`
+	notice += '移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏\n'
+	notice += '<span style="color:white;background-color:red;">※数据无价，请注意时常备份您的存档！</span>\n'
+	if(year+month+day < '250907')notice += '\n<span style="color:green;">【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>\n'
 	if(MikuTalk)
 	{
 		notice += '\n愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n<span class="red">点击“确认”可以关闭</span>\n'
@@ -130,7 +131,6 @@ $(function()
 			location.reload(true);
 		}
 	}
-
 	if(gamelist.indexOf(mt_settings['选择游戏']) < 0)
 	{
 		notice += '\n如果您发现游戏数据未加载\n请点击左上按钮隐藏加载界面\n并重新选择<span class="blue">遊</span>戏\n'
@@ -138,9 +138,10 @@ $(function()
 	}
 	if(localStorage['通知文档'] !== notice || sessionStorage['通知文档'] !== notice)
 	{
-		alert(notice)
 		localStorage['通知文档'] = notice
 		sessionStorage['通知文档'] = notice
+		$('.notice pre').css('text-align','center')
+		alert(localStorage['通知文档'])
 	}
 })
 $("body").on('click', function()
@@ -167,11 +168,11 @@ $('body').on('click',"input",function()
 //工具
 $(".frVjsk").wait(function()
 {
-	$(".frVjsk").append(`<button class='${class0}' onclick='$("#readme").click()'><b style='color:blue;'>新</b></button><span class='tool' align='center'>获取更新</span><br>`);
-	$(".frVjsk").append(`<a href='${href}index_old.html?${本地版本}'><button class='${class0}'><b style='color:green;'>舊</b></button></a><span class='tool'>访问旧版</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='update'><b style='color:blue;'>新</b></button><span class='tool' align='center'>获取更新</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='selectgame'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:red;'>換</b></button><span class='tool'>切换风格</span><br>`);
+	$(".frVjsk").append(`<a href='${href}index_old.html?${本地版本}'><button class='${class0}'><b style='color:black;'>舊</b></button></a><span class='tool'>访问旧版</span><br>`);
 	$(".frVjsk").append(`<a href='${href}Setting.html?${本地版本}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
 
@@ -319,26 +320,60 @@ $('body').on('click',".chatText",function()
 //切换风格
 $('body').on('click',"#mt-style",function()
 {
-	if(mt_settings['风格样式'][0] === 'MomoTalk')
+	$('.notice .title').text('风格样式')
+	let onclick = "onclick='"
+	onclick += '$(".mt-style").css("color","black"),this.style.color="red",'
+	onclick += '$(".bgcolor").val(this.innerText=="MomoTalk"?"#FFFFFF":"#FFF7E1"),'
+	onclick += '$(".typecss").val("").eq(3).val(""+(this.innerText=="MomoTalk"?"background-color:rgb(220,229,232)":""))'
+	onclick += "'"
+	let style = 'style="width: auto;height: auto;font-size: 1rem;color: black;padding: 0.5rem;margin-bottom: 0.5rem;"'
+	let button = `<button class="cVRiXh eIEKpg evqKja kwhiZC mt-style" ${style} ${onclick}>`
+	let html = ''
+	html += `预设方案：${button}MomoTalk</button> ${button}YuzuTalk</button>\n`
+	html += '聊天背景颜色：<input type="color" class="bgcolor">\n'
+	html += '各类型样式定义：（高级）\n'
+	html += '文字：<textarea title="chat" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
+	html += '回复：<textarea title="reply" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
+	html += '羁绊：<textarea title="heart" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
+	html += '旁白：<textarea title="info" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
+	html += '图片：<textarea title="image" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
+	alert(html)
+	$('.bgcolor').val(mt_settings.风格样式.bgColor)
+	$('.typecss').each(function()
 	{
-		mt_settings['风格样式'] = []
-		mt_settings['风格样式'][0] = 'YuzuTalk'
-		mt_settings['风格样式'][1] = '#FFF7E1'//背景
-		mt_settings['风格样式'][2] = 'transparent'//旁白
-	}
-	else
+		let style = ''
+		foreach(mt_settings.风格样式[this.title] || [],function(k,v)
+		{
+			style += `${v[0]}: ${v[1]}\n`
+		})
+		this.value = style
+	})
+	TOP_confirm = function()
 	{
-		mt_settings['风格样式'] = []
-		mt_settings['风格样式'][0] = 'MomoTalk'
-		mt_settings['风格样式'][1] = '#FFFFFF'//背景
-		mt_settings['风格样式'][2] = '#DCE5E8'//旁白
+		mt_settings.风格样式.bgColor = $('.bgcolor').val()
+		$('.typecss').each(function()
+		{
+			let css = []
+			foreach(this.value.split("\n"),function(k,v)
+			{
+				v = v.replace(';','').replace('；','').replace('：',':')
+				v = v.split(':')
+				if(v.length === 2 && v[0].trim() !== '')
+				{
+					v[0] = v[0].trim()
+					v[1] = v[1].trim()
+					css.push(v)
+				}
+			})
+			if(css.length)mt_settings.风格样式[this.title] = css
+			else delete mt_settings.风格样式[this.title]
+		})
+		saveStorage('设置选项',mt_settings,'local')
+		if(!MikuTalk)$('._app__Wrapper-sc-xuvrnm-1').css('background-color',mt_settings.风格样式.bgColor);
+		$('.RightScreen__CContainer-sc-14j003s-2').css('background-color',mt_settings.风格样式.bgColor);
+		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color',mt_settings.风格样式.bgColor);
+		refreshMessage(chats)
 	}
-	if(!MikuTalk)$('._app__Wrapper-sc-xuvrnm-1').css('background-color',mt_settings['风格样式'][1]);
-	$('.RightScreen__CContainer-sc-14j003s-2').css('background-color',mt_settings['风格样式'][1]);
-	$('.Talk__CContainer-sc-1uzn66i-1').css('background-color',mt_settings['风格样式'][1]);
-	$('.talk__InfoBox-sc-eq7cqw-8').css('background-color',mt_settings['风格样式'][2]);
-	$('.旁白').css('background',mt_settings['风格样式'][2]);
-	saveStorage('设置选项',mt_settings,'local')
 })
 function refreshMessage(json)
 {
@@ -511,6 +546,7 @@ $.each(gamearr,function(k,v)
 })
 $('body').on('click',"#selectgame",function()
 {
+	$('.notice .title').text('选择游戏')
 	let arr = {}
 	let select = "请选择游戏：<select style='font-size:1.2rem;'>"
 	$.each(gamelist,function(k,v)

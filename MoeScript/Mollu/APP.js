@@ -9870,19 +9870,14 @@
 									{
 										style: {cursor: 'pointer'},
 										id: "readme",
-										children: MikuTalk ? 'MikuTalk' : mt_settings['顶部标题']
+										children: MikuTalk ? 'MikuTalk' : mt_settings['顶部标题'],
+										onClick: function(){$$('.notice pre').css('text-align','center'),alert(localStorage['通知文档'])}
 									}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
-										className: "INIT_href",
+										className: "INIT_href bold",
 										title: "https://wj.qq.com/s2/14292312/3ade/",
 										id: 'help',
-										style:
-										{
-											fontSize: "20px",
-											fontFamily: "moetalk",
-											position: "relative",
-											top: "-2.5px"
-										},
+										style: {fontSize: "20px",position: "relative"},
 										children: '反馈',
 										target: '_blank'
 									})]
@@ -11918,7 +11913,7 @@
 					{
 						displayName: "_app__Wrapper",
 						componentId: "sc-xuvrnm-1"
-					})(["", `background-color:${mt_settings['风格样式'][1]}; border-radius:0 0 1rem 1rem;overflow:auto;max-width:1500px;margin:auto;@media screen and (max-width:1500px){border-radius:0;}`], function(e)
+					})(["", `background-color:${mt_settings.风格样式.bgColor}; border-radius:0 0 1rem 1rem;overflow:auto;max-width:1500px;margin:auto;@media screen and (max-width:1500px){border-radius:0;}`], function(e)
 					{
 						return e.theme.common.flexBox(
 						{

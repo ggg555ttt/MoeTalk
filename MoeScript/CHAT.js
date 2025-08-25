@@ -371,17 +371,16 @@ function makeMessage(type,data,chatIndex,mode)
 	//data.time = data.time ? data.time : ''
 
 	let style = '';
+	let 对话角颜色 = '';
 	if(mt_settings['文字样式'][type])
 	{
 		style = `font-size:${mt_settings['文字样式'][type]['font-size']};`
 	}
-	if(data.style && data.style.length)
+	foreach([...data.style || [],...mt_settings.风格样式[type] || []],function(k,v)
 	{
-		foreach(data.style,function(k,v)
-		{
-			style += `${v[0]}:${v[1]};`
-		})
-	}
+		style += `${v[0]}:${v[1]};`
+		if(v[0] == 'background-color')对话角颜色 = v[1]
+	})
 	if(data.heads && (!data.heads.list || data.heads.list.length < 1))delete data.heads
 	if(type === 'chat' || type === 'image')
 	{
@@ -416,7 +415,7 @@ function makeMessage(type,data,chatIndex,mode)
 		{//左侧对话
 			头像框 = `<div class="头像框" style="cursor: pointer;${headstyle}">${头像}</div>`
 			名称 = `${head ? `<span class="名称 bold">${data.name || loadname(no,index)}</span>` : ''}`
-			文本 = `${head ? '<div class="左角"></div>' : ''}<span class="文本 编辑" style='${style}'>${data.content}</span>`
+			文本 = `${head ? `<div class="左角" style="border-right-color:${对话角颜色};"></div>` : ''}<span class="文本 编辑" style='${style}'>${data.content}</span>`
 			对话 = 
 			`${头像框}
 			<div class="对话" style="align-items: flex-start;height: ${data.heads && data.heads.fullHeight ? '100%' : ''}">
@@ -431,7 +430,7 @@ function makeMessage(type,data,chatIndex,mode)
 		{//右侧对话或主角发言
 			头像框 = `${no == 0 ? '' : `<div class="头像框" style="justify-content: flex-end; cursor: pointer;${headstyle}">${头像}</div>`}`
 			名称 = `${head && no != 0 ? `<span class="名称 bold">${data.name || loadname(no,index)}</span>` : ''}`
-			文本 = `<span style="background: rgb(74, 138, 202); border: 1px solid rgb(74, 138, 202);${style}" class="文本 编辑">${data.content}</span>${head || no == 0 ? '<div class="右角"></div>' : ''}`
+			文本 = `<span style="background: rgb(74, 138, 202);${style}" class="文本 编辑">${data.content}</span>${head || no == 0 ? `<div class="右角" style="border-left-color:${对话角颜色};"></div>` : ''}`
 			对话 = 
 			`${no == 0 ? '<div class="头像框" style="margin-right: 1.5rem;"></div>' : ''}
 			<div class="对话" style="align-items: flex-end;height: ${data.heads && data.heads.fullHeight ? '100%' : ''}">
@@ -471,7 +470,7 @@ function makeMessage(type,data,chatIndex,mode)
 	{
 		data.isLeft ? style += 'text-align: left;' : ''
 		data.isRight ? style += 'text-align: right;' : ''
-		聊天 = `<span class="旁白 编辑" style='${style}background: ${mt_settings['风格样式'][2]};'>${data.content}</span>`
+		聊天 = `<span class="旁白 编辑" style='${style}'>${data.content}</span>`
 	}
 	if(type === 'reply')
 	{
@@ -907,7 +906,7 @@ $("body").on('click',".预览模式",function()
 	if(chatIndex)chat.push(chats[chatIndex-1])
 	chat.push(data)
 	data.isFirst = isfirst(chat.length-1,chat)
-	$('.预览内容').html(makeMessage(type,data,chatIndex,'预览')).outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings['风格样式'][1])
+	$('.预览内容').html(makeMessage(type,data,chatIndex,'预览')).outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings.风格样式.bgColor)
 	$('.内容预览').click()
 });
 $("body").on('click',".编辑",function()

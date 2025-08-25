@@ -70,13 +70,6 @@ if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorag
 		mt_settings['选择角色'].index = 1
 		mt_settings['选择角色'].list = []
 	}
-	if(!mt_settings['风格样式'])
-	{
-		mt_settings['风格样式'] = []
-		mt_settings['风格样式'][0] = 'MomoTalk'
-		mt_settings['风格样式'][1] = '#FFFFFF'
-		mt_settings['风格样式'][2] = '#DCE5E8'
-	}
 	mt_settings['当前网址'] = window.location.href
 	mt_settings['设备信息'] = window.navigator.userAgent
 	delete localStorage['0']
@@ -118,6 +111,12 @@ if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorag
 	//if(!mt_settings['后台保存'])delete mt_settings['后台保存']
 	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
 
+}
+if(!mt_settings.风格样式 || mt_settings.风格样式[0])
+{
+	mt_settings.风格样式 = {}
+	mt_settings.风格样式.bgColor = 'transparent'
+	mt_settings.风格样式.info = [['background-color','rgb(220, 229, 232)']]
 }
 mt_settings['右侧发言'] = mt_settings['右侧发言'] ? mt_settings['右侧发言'] : {}
 if(browser.isFirefox)mt_settings['禁止字体'] = true
@@ -236,13 +235,13 @@ function INIT_state(num)
 {
 	if(!num)num = 1.1
 	let height = parseInt($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num)
-	if(height > mt_settings['高度限制'])//检测聊天框宽度
+	if(chats.length > 300)//if(height > mt_settings['高度限制'])//检测聊天框宽度
 	{
-		$("#size").text(`长度:${height}\n消息:${chats.length}`).css('color','red');//显示警告
+		$("#size").text(`长度: ${height}\n消息: ${chats.length}`).css('color','red').css('background-color','white');//显示警告
 	}
 	else
 	{
-		$("#size").text(`长度:${height}\n消息:${chats.length}`).css('color','green');//隐藏警告
+		$("#size").text(`长度: ${height}\n消息: ${chats.length}`).css('color','green').css('background-color','');//隐藏警告
 	}
 	return height
 }

@@ -330,7 +330,7 @@ function mt_capture(清晰度,生成图片,标题)
 	else index = imgArea.index
 	$(".图片预览").html(`<div class='imageSave'><h1>已下载<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1></div>`)
 	正在截图 = true
-	截图区域.outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings['风格样式'][1])
+	截图区域.outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings.风格样式.bgColor)
 	foreach(imgArea.chats,function(k,v)
 	{
 		v.isFirst = isfirst(k,imgArea.chats)
