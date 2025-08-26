@@ -9887,13 +9887,7 @@
 							{
 								id: 'size',
 								className: '文本',
-								style:
-								{
-									whiteSpace: 'pre',
-									color: 'green',
-									width: 'auto',
-									cursor: 'pointer'
-								}
+								style: {cursor: 'pointer'}
 							}), (0, O.jsxs)("div",
 							{
 								children: [(0, O.jsx)(B,

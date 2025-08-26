@@ -117,13 +117,11 @@ $(function()
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
 	let span = '<span onclick="moedev()" style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
 	let notice = ''
-	notice += `欢迎使用${span}MoeTalk</span>！\n此版本为基于原作者Raun0129开发的MolluTalk的个人改版\n`
-	notice += '移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏\n'
-	notice += '<span style="color:white;background-color:red;">※数据无价，请注意时常备份您的存档！</span>\n'
-	if(year+month+day < '250907')notice += '\n<span style="color:green;">【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>\n'
+	notice += `<span class="bold">欢迎使用${span}MoeTalk</span>！\n此版本为基于原作者Raun0129开发的MolluTalk的个人改版</span>\n`
+	if(year+month+day < '250907')notice += '\n<span style="color:green;">【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>'
 	if(MikuTalk)
 	{
-		notice += '\n愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n<span class="red">点击“确认”可以关闭</span>\n'
+		notice += '\n愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n点击“确认”可以关闭'
 		delete localStorage['通知文档']
 		TOP_confirm = function()
 		{
@@ -133,11 +131,13 @@ $(function()
 	}
 	if(gamelist.indexOf(mt_settings['选择游戏']) < 0)
 	{
-		notice += '\n如果您发现游戏数据未加载\n请点击左上按钮隐藏加载界面\n并重新选择<span class="blue">遊</span>戏\n'
+		notice += '\n<span style="color:red;">如果您发现游戏数据未加载\n请点击左上按钮隐藏加载界面\n并重新选择<span class="blue">遊</span>戏</span>'
 		delete localStorage['通知文档']
 	}
 	if(localStorage['通知文档'] !== notice || sessionStorage['通知文档'] !== notice)
 	{
+		notice += '\n※移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏'
+		notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
 		localStorage['通知文档'] = notice
 		sessionStorage['通知文档'] = notice
 		$('.notice pre').css('text-align','center')
