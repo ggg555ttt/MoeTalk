@@ -74,8 +74,7 @@ $('body').on('click',"#savedata",function()
 					arr[v] = data
 					if(k === DataBase.length-1)
 					{
-						let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-						download('MoeTalk_localStorage存档'+time+'.TXT',{...localStorage,...arr})
+						download('MoeTalk本地数据存档_'+getNowDate()+'.TXT',{...localStorage,...arr})
 					}
 				})
 			})
@@ -85,7 +84,7 @@ $('body').on('click',"#savedata",function()
 $("body").append("<input id='loaddatafile' accept='text/plain' hidden type='file'>");
 $('body').on('click',"#loaddata",function()
 {
-	alert('此选项只能读取“下载localStorage存档”生成的文件\n请不要上传其他的文件')
+	alert('请上传MoeTalk本地数据存档\n此选项多为开发者测试用\n不建议用户使用！')
 	$("#loaddatafile").click();
 })
 $('body').on('change',"#loaddatafile",function()

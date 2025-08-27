@@ -9871,7 +9871,7 @@
 										style: {cursor: 'pointer'},
 										id: "readme",
 										children: MikuTalk ? 'MikuTalk' : mt_settings['顶部标题'],
-										onClick: function(){$$('.notice pre').css('text-align','center'),alert(localStorage['通知文档'])}
+										onClick: function(){$$('.notice pre').css('text-align','center'),alert(sessionStorage['通知文档'])}
 									}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
 										className: "INIT_href bold",

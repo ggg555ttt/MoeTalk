@@ -11,7 +11,7 @@
 		<script>
 //版本信息
 var 本地版本 = 28//@
-var 更新时间 = 1756306523//!
+var 更新时间 = 1756316085//!
 var 游戏版本 = {"BLDA":"250820_修复BUG","CBJQ":"250821_修复BUG","QNZL":"241024","YGST":"000000","DFPJ":"250617"}//$
 var gamearr = {"BLDA":"碧蓝档案","CBJQ":"尘白禁区","QNZL":"千年之旅","YGST":"犹格索托斯的庭院","DFPJ":"东方Project"}
 
@@ -150,9 +150,9 @@ if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<script src="./MoeScript/CHAT.js?md5=7e4958ca707282d1ca7650801a728565" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?md5=4bf36e5777600e4b15b08076db41a55c" defer></script><!-- @@角色 -->
 		<script src="./MoeScript/IMAGE.js?md5=a46d884f08c89dca38d9309d2a18a793" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/TOP.js?md5=c9ce7f0a97e7b18a96639bca5a3cca8c" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/TOP.js?md5=0a1d04d75ede1d40f564c91a6ac19c51" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/MAIN.js?md5=ba066d0cfac123b37ff173428260a9d3" defer></script><!-- @@ -->
-		<script src="./MoeScript/Mollu/APP.js?md5=d758f83adbfbad6afee36b42bc437999" defer></script><!-- @@框架 -->
+		<script src="./MoeScript/Mollu/APP.js?md5=6a50a92e9eae04e5b57acc1afb1eb510" defer></script><!-- @@框架 -->
 		<script src="./MoeScript/Mollu/INDEX.js?md5=0c84b54b624ef37cfae841a450f0114e"></script><!-- @@首页 -->
 		<style data-styled="active" data-styled-version="5.3.8"></style>
 	</head>
@@ -162,14 +162,15 @@ if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<script id="__NEXT_DATA__" type="application/json">{"props": {},"page": "/"}</script>
 	</body>
 </html>
-<p>如果长时间卡在此页面建议您清除浏览器缓存后再重新访问</p>
-<p>清除缓存前请注意备份存档</p>
-<p>如果以上方法仍无效请进入设置页面并点击<b class="red">问题反馈</b>提交您的问题</p>
-<p>最好带上localStorage存档，这使我可以更好的排查错误</p>
-<p>另外相关使用建议也可以向我提交，感谢您的使用</p>
-<button><a href="./Setting.html?md5=ea9a88505f5c3aac79963b8e35999f3b" target='_blank' style='color: white;'>点击进入设置页面</a></button><!-- @@ -->
-<p></p>
-<img style="width: 100%;height: auto;" id="help" src="./MoeData/Ui/help.webp" onclick="document.documentElement.style.position = '';" />
+<pre style='white-space: pre-wrap; font-family: "Microsoft YaHei", Arial, sans-serif;font-weight: bold;background-color: #FF8FBF;font-size: 1.25rem;'>
+如果长时间卡在此页面，建议您按照以下方案操作：
+    1。先进入<i><a href="./Setting.html" target='_blank' style='text-decoration: underline;'>设置页面</a></i>，<span style='color:white;'>下载MoeTalk本地数据存档</span>
+    2。<span style='color:green;'>清除ServiceWorker缓存和浏览器缓存</span>后重新访问MoeTalk
+    3。以上无效方法请进入<span style='color:white;'>反馈页面</span>提交您的<span style='color:white;'>MoeTalk本地数据存档</span>并反馈您的问题
+※提交存档和图片可以帮助开发者更顺利的排查错误
+※过程中发现数据丢失可以通过<span style='color:white;'>上传MoeTalk本地数据存档</span>恢复
+※另外相关使用建议也可以向我提交，感谢您的使用
+</pre>
 <!-- Default Statcounter code for MoeTalk http://*.* -->
 <script>
 var _hmt = _hmt || [];
