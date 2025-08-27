@@ -1227,6 +1227,7 @@
 								{
 									style: 
 									{
+										userSelect: 'text',
 										lineHeight: '125%',
 										whiteSpace: 'pre-wrap',
 										wordBreak: 'break-word',

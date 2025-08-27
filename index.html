@@ -9,64 +9,19 @@
 		<script src="./MoeScript/Script/snapdom.min.js?"></script>
 		<!-- <script src="https://unpkg.com/@zumer/snapdom@latest/dist/snapdom.min.js"></script> -->
 		<script>
+//版本信息
+var 本地版本 = 28//@
+var 更新时间 = 1756282220//!
+var 游戏版本 = {"BLDA":"250820_修复BUG","CBJQ":"250821_修复BUG","QNZL":"241024","YGST":"000000","DFPJ":"250617"}//$
+var gamearr = {"BLDA":"碧蓝档案","CBJQ":"尘白禁区","QNZL":"千年之旅","YGST":"犹格索托斯的庭院","DFPJ":"东方Project"}
+
+//函数和变量
 var test = console.log
-function loadjs(link,mode = '')
-{
-	document.write("<scr"+`ipt src='${link}' ${mode}></scr`+"ipt>");
-}
-if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
-//函数
+function loadjs(link,mode = ''){document.write("<scr"+`ipt src='${link}' ${mode}></scr`+"ipt>")}
 function os(u = window.navigator.userAgent)
 {
 	return {isMobile:!!u.match(/AppleWebKit.*Mobile/i)||!!u.match(/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/),isWechat:!!u.match(/MicroMessenger/i),isQQ:!!u.match(/QQ/i),isIos:!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),isAndroid:!!u.match(/(Android);?[\s/]+([\d.]+)?/),isiPhone:!!u.match(/(iPhone\sOS)\s([\d_]+)/),isSafari:!!u.match(/Safari/),isFirefox:!!u.match(/Firefox/),isOpera:!!u.match(/Opera/),isChrome:u.match(/Chrome/i)!==null&&u.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i)===null?true:false,isDeskTop:(()=>{const Agents=['Android','iPhone','SymbianOS','Windows Phone','iPad','iPod','okhttp/3.9.1'];let flag=true;for(let i=0,LEN=Agents.length;i<LEN;i++){if(u.indexOf(Agents[i])!==-1){flag=false;break}}return flag})()};
 }
-
-//变量
-var 更新时间 = 1756216752//!
-var gamearr = {}//游戏列表
-gamearr['BLDA'] = '碧蓝档案'
-gamearr['CBJQ'] = '尘白禁区'
-gamearr['QNZL'] = '千年之旅'
-gamearr['YGST'] = '犹格索托斯的庭院'
-gamearr['DFPJ'] = '东方Project'
-
-var gamever = {}//游戏版本
-var gamever = {"BLDA":"250820","CBJQ":"250821","QNZL":"241024","YGST":"000000","DFPJ":"250617"}//$
-
-var 本地版本 = 28//@
-var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
-var browser = os();//获取浏览器信息
-var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index.html','')//文件目录地址
-var Html5Plus = window.navigator.userAgent.match('Html5Plus') ? 'mmt.MoeTalkHW.WumberBee' : false//网络端
-var fs = nwjs = false;
-if(window.location.href.indexOf('file:///') === 0)//离线端
-{
-	href = window.location.href.replace('index.html','')
-	if(Html5Plus)Html5Plus = 'mmt.MoeTalkH.WumberBee'
-}
-if(window.location.protocol == 'chrome-extension:')
-{
-	nwjs = true
-	fs = require('fs');
-    path = require('path');
-}
-var date = new Date();
-var year = date.getFullYear() % 100; // 年
-var month = date.getMonth() + 1; // 月
-var day = date.getDate(); // 日
-year = year.toString()
-month = (month < 10 ? '0'+month : month).toString()
-day = (day < 10 ? '0'+day : day).toString()
-if(localStorage['每日提醒'] != day)
-{
-	localStorage['zhengwen'] = 'zhengwen'
-	localStorage['每日提醒'] = day
-	delete localStorage['通知文档']
-	delete localStorage['最新版本']
-	delete localStorage['差分书签']
-}
-if(year+month+day > '250907')delete localStorage['zhengwen']
-//检测版本
 function XHR(url,callback = false)
 {
 	let xhr = new XMLHttpRequest();
@@ -74,54 +29,73 @@ function XHR(url,callback = false)
 	xhr.send();
 	xhr.onload = function()//xhr.onreadystatechange
 	{
-		if(this.status === 200 && callback)//&& xhr.readyState === 4
-		{
-			callback(this.responseText)
-		}
+		if(this.status === 200 && callback)callback(this.responseText)//&& xhr.readyState === 4
 	}
 }
+var mt_characters,mt_school,mt_club,CFInfo = {}//表情差分信息
+var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
+var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index.html','')//文件目录地址
+var browser = os();//获取浏览器信息
+var date = new Date();
+var year = date.getFullYear() % 100; // 年
+var month = date.getMonth() + 1; // 月
+var day = date.getDate(); // 日
+year = year.toString()
+month = (month < 10 ? '0'+month : month).toString()
+day = (day < 10 ? '0'+day : day).toString()
 var MoeTalkURL = "https://moetalk.netlify.app/"//MoeTalk网址
 var GitlabURL = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/'
 if(window.location.href == GitlabURL)MoeTalkURL = GitlabURL
+
+//缺省游戏和语言
+var game = 'BLDA'//#
+var gamelist = []
+let gameid = window.location.href.split('?')[1]
+mt_settings['选择游戏'] = mt_settings['选择游戏'] || game
+var mtlang = mt_settings['语言选项'] || 'zh_cn';
+var langarr = ['zh_cn','zh_tw','jp','en','kr'];
+if(langarr.indexOf(gameid) > -1)mt_settings['语言选项'] = mtlang = gameid
+
+//设备信息
+var cordova = false//cordova客户端
+if(gameid === 'cordova')sessionStorage['cordova'] = 'cordova'
+if(gameid === 'cordova2')sessionStorage['cordova2'] = 'cordova2'
+var Html5Plus = window.navigator.userAgent.match('Html5Plus') ? 'mmt.MoeTalkHW.WumberBee' : false//H5网络端
+if(window.location.href.indexOf('file:///') === 0)//H5离线端
+{
+	href = window.location.href.replace('index.html','')
+	if(Html5Plus)Html5Plus = 'mmt.MoeTalkH.WumberBee'
+}
+var fs,nwjs = false;//PC离线端
+if(window.location.protocol == 'chrome-extension:')nwjs = true,fs = require('fs');
+
+//检测版本
 XHR(MoeTalkURL+"manifest.json"+"?timestamp="+new Date().getTime(),function(json)
 {
 	json = JSON.parse(json.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, ''))
-	if((本地版本 != json.version.code || gamever[mt_settings['选择游戏']] != json.version.game[mt_settings['选择游戏']]) && !localStorage['最新版本'])
+	let str = ''
+	if(本地版本 != json.version.code)
 	{
-		localStorage['应用版本'] = 本地版本
-		localStorage['最新版本'] = json.version.code
-		let str = `应用版本：\n　　当前：${本地版本}\n　　最新：${json.version.code}\n`
-		if(gamever[mt_settings['选择游戏']])
-		{
-			str += `更新时间：\n　　当前：${gamever[mt_settings['选择游戏']]}\n　　最新：${json.version.game[mt_settings['选择游戏']]}\n`
-		}
-		str += '客户端已更新，确定跳转到下载链接吗？\n'
-		str += '提取码：BLDA\n安装新版本前注意备份存档'
+		str += `当前【客户端】版本：${本地版本}\n`
+		str += `最新【客户端】版本：${json.version.code}\n`
+	}
+	if(游戏版本[mt_settings['选择游戏']] != json.version.game[mt_settings['选择游戏']])
+	{
+		str += `当前【数据包】版本：${游戏版本[mt_settings['选择游戏']]}\n`
+		str += `最新【数据包】版本：${json.version.game[mt_settings['选择游戏']]}\n`		
+	}
+	if(!sessionStorage['最新版本'] && str)
+	{
+		sessionStorage['最新版本'] = json.version.code
+		str += '\nMoeTalk发现更新！点击确定将跳转到下载链接\n'
+		str += '或点击【获取更新】下载新版MoeTalk\n'
+		str += '提取码【BLDA】※请注意备份存档'
 		if(confirm(str))
-		{//本地端　
+		{//本地端
 			let url = "https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda"
 			if(Html5Plus)plus.runtime.openURL(url);
 			else window.open(url)
 		}
-	}
-	if(localStorage['应用版本'] !== undefined && localStorage['应用版本'] != json.version.code)
-	{
-		if(Html5Plus === 'mmt.MoeTalkH.WumberBee')return;
-		window.caches && caches.keys && caches.keys().then(function(keys)
-		{
-			let length = 0;
-			keys.forEach(function(key)
-			{
-				caches.delete(key);
-				length=length+1
-				if(keys.length === length)
-				{
-					localStorage['应用版本'] = json.version.code
-					delete localStorage['通知文档']
-					location.reload(true)
-				}
-			});
-		});
 	}
 })
 
@@ -141,22 +115,9 @@ if((mt_settings['顶部标题'] === 'MikuTalk' || (month == '04' && day == '01')
 	loadjs('./MoeScript/MikuTap/mikutap.js')
 	loadjs('./MoeScript/MikuTap/common-2.min.js')
 }
-var cordova = false
-var game = 'BLDA'//#
-var gamelist = []
-let gameid = window.location.href.split('?')[1]
-mt_settings['选择游戏'] = mt_settings['选择游戏'] || game
-var mtlang = mt_settings['语言选项'] || 'zh_cn';
-var langarr = ['zh_cn','zh_tw','jp','en','kr'];
-if(langarr.indexOf(gameid) > -1)mt_settings['语言选项'] = mtlang = gameid
-if(gameid === 'cordova')sessionStorage['cordova'] = 'cordova'
 if(sessionStorage['cordova'] === 'cordova')loadjs('./cordova.js')
-if(gameid === 'cordova2')sessionStorage['cordova2'] = 'cordova2'
 if(sessionStorage['cordova2'] === 'cordova2')loadjs('./MoeScript/Cordova/cordova.js')
-var mt_characters,
-	mt_school,
-	mt_club,
-	CFInfo = {}//表情差分信息
+if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		</script>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 		<meta http-equiv="Pragma" content="no-cache">
@@ -184,15 +145,15 @@ var mt_characters,
 		<link rel='stylesheet' href="./MoeScript/Style/style.css?md5=778899e2a2c48caf7b6f02ae16aad56a" data-n-g=''><!-- @@样式 -->
 		<script src="./MoeData/MT-Img.js"></script><!-- 存档图片 -->
 		<script src="./MoeData/MT-Text.js"></script><!-- 提示文本 -->
-		<script src="./MoeScript/INIT.js?md5=db07a966f087594f51bd762d21d22df7" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/INIT.js?md5=c8f88a136119e1a922bf1fcb96727084" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/DATA.js?md5=8f6823987fceb408499bbc000d7a8c49" defer></script><!-- @@存档 -->
-		<script src="./MoeScript/CHAT.js?md5=cf385b3cda1548566e3ec7ae20ba1148" defer></script><!-- @@消息 -->
+		<script src="./MoeScript/CHAT.js?md5=7e4958ca707282d1ca7650801a728565" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?md5=4bf36e5777600e4b15b08076db41a55c" defer></script><!-- @@角色 -->
 		<script src="./MoeScript/IMAGE.js?md5=a46d884f08c89dca38d9309d2a18a793" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/TOP.js?md5=26fda9c01229750d2b129edc8c2cf13b" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/TOP.js?md5=c9ce7f0a97e7b18a96639bca5a3cca8c" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/MAIN.js?md5=ba066d0cfac123b37ff173428260a9d3" defer></script><!-- @@ -->
-		<script src="./MoeScript/Mollu/APP.js?md5=dcd1f162ce85297ad7ea1001b18da494" defer></script><!-- @@框架 -->
-		<script src="./MoeScript/Mollu/INDEX.js?md5=f49ec7a44441a1b4fc81d2f00ff357c7"></script><!-- @@首页 -->
+		<script src="./MoeScript/Mollu/APP.js?md5=d758f83adbfbad6afee36b42bc437999" defer></script><!-- @@框架 -->
+		<script src="./MoeScript/Mollu/INDEX.js?md5=0c84b54b624ef37cfae841a450f0114e"></script><!-- @@首页 -->
 		<style data-styled="active" data-styled-version="5.3.8"></style>
 	</head>
 	<body style="touch-action: none;-webkit-tap-highlight-color: transparent;tap-highlight-color: transparent;"><!-- MikuTap style -->

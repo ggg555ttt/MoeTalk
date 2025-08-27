@@ -11,7 +11,7 @@ var 差分映射 = false
 
 var 操作历史 = {index: -1,list: []}
 var CHAT_history = [操作历史,{}]
-var EMOJI = {io:'NO',type:'NO',pages:localStorage['差分书签'] ? JSON.parse(localStorage['差分书签']) : {}}
+var EMOJI = {io:'NO',type:'NO',pages:sessionStorage['差分书签'] ? JSON.parse(sessionStorage['差分书签']) : {}}
 var EMOJI_CustomEmoji = {image:{}}
 mt_settings['表情信息'] = mt_settings['表情信息'] ? mt_settings['表情信息'] : {}
 var 羁绊背景 = href+'MoeData/Ui/Favor_Schedule_Deco.webp'
@@ -199,7 +199,7 @@ function mt_emojis(S,mode)
 	{
 		if($(`.差分映射.selected`).length)$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',block: 'nearest'})
 	}, 100)
-	saveStorage('差分书签',EMOJI.pages,'local')
+	saveStorage('差分书签',EMOJI.pages,'session')
 	if(EMOJI.custom.io)EMOJI.images.unshift('ADD')
 
 	S(!0)

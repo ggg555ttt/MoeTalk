@@ -74,7 +74,8 @@ function clearCache()
 		});
 		if(keys.length === length)
 		{
-			delete localStorage['每日提醒']
+			delete sessionStorage['通知文档']
+			delete sessionStorage['最新版本']
 			$('.notice pre').html('缓存清除完毕，请立即刷新页面')
 		}
 	});
@@ -87,7 +88,8 @@ $('body').on('click',"#update",function()
 	let button = '<button class="cVRiXh eIEKpg evqKja kwhiZC" style="width: auto;height: auto;font-size: 1.5rem;">'
 	let readme = '若要获取更新\n'
 	readme += `请点击${button}<span class="red" onclick="clearCache()">清除缓存</span></button>后刷新页面\n`
-	readme += `客户端下载地址：${button}${link}</button>提取码：BLDA`
+	readme += `客户端下载地址：${button}${link}</button>提取码：BLDA\n`
+	readme += 'https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda'
 	alert(readme)
 	TOP_confirm = function(){location.reload(true)}
 });
@@ -122,7 +124,6 @@ $(function()
 	if(MikuTalk)
 	{
 		notice += '\n愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n点击“确认”可以关闭'
-		delete localStorage['通知文档']
 		TOP_confirm = function()
 		{
 			sessionStorage['MikuTalk'] = 'no'
@@ -132,16 +133,14 @@ $(function()
 	if(gamelist.indexOf(mt_settings['选择游戏']) < 0)
 	{
 		notice += '\n<span style="color:red;">如果您发现游戏数据未加载\n请点击左上按钮隐藏加载界面\n并重新选择<span class="blue">遊</span>戏</span>'
-		delete localStorage['通知文档']
 	}
-	if(localStorage['通知文档'] !== notice || sessionStorage['通知文档'] !== notice)
+	notice += '\n※移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏'
+	notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
+	if(sessionStorage['通知文档'] !== notice)
 	{
-		notice += '\n※移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏'
-		notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
-		localStorage['通知文档'] = notice
+		alert(notice)
 		sessionStorage['通知文档'] = notice
 		$('.notice pre').css('text-align','center')
-		alert(localStorage['通知文档'])
 	}
 })
 $("body").on('click', function()

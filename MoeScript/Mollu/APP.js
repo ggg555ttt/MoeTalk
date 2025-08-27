@@ -10034,19 +10034,13 @@
 						{
 							children: [(0, O.jsxs)(M,
 							{
-								style:
-								{
-									display: i && n || !i ? "flex" : "none"
-								},
+								style: {display: i && n || !i ? "flex" : "none"},
 								children: [(0, O.jsxs)(L,
 								{
 									children: [(0, O.jsx)(F,
 									{
 										href: "/",
-										onClick: function(e)
-										{
-											h(e, "/")
-										},
+										onClick: function(e){h(e, "/")},
 										className: "/" === e.pathname ? "selected" : "",
 										children: (0, O.jsx)(V,
 										{
@@ -10059,28 +10053,7 @@
 												priority: !0
 											})
 										})
-									}), /*(0, O.jsx)(F,
-									{
-										href: "/music",
-										onClick: function(e)
-										{
-											h(e, "/music")
-										},
-										className: "music" === e.pathname.split("/")[1] ? "selected" : "",
-										children: (0, O.jsx)(V,
-										{
-											hidden:window.location.href.indexOf('localhost') > -1 ? false : true,
-											children: (0, O.jsx)(d.xL,
-											{
-												style:
-												{
-													color: "white",
-													width: "2.5rem"
-												},
-												icon: v.Xig
-											})
-										})
-									}), */(0, O.jsx)('button',
+									}), (0, O.jsx)('button',
 									{
 										onClick: function(e)
 										{
@@ -10107,7 +10080,7 @@
 										{
 											children: (0, O.jsx)(W,
 											{
-												className: toString(localStorage['zhengwen']),
+												className: year+month+day < '250907' && !localStorage['征文'] ? 'zhengwen' : '',
 												style:
 												{
 													width: '100%',
@@ -10117,7 +10090,7 @@
 												alt: "private",
 												onClick: function(e)
 												{
-													delete localStorage['zhengwen']
+													localStorage['征文'] = '250907'
 													$$('.zhengwen').removeClass('zhengwen')
 												}
 											})

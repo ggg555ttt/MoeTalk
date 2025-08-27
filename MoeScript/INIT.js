@@ -19,7 +19,7 @@ if(mt_settings['存储模式'])
 		{
 			sessionStorage[key] = localStorage[key]
 			delete localStorage[key]
-			 localStorage['moetalkStorage/'+key] = sessionStorage[key]
+			localStorage['moetalkStorage/'+key] = sessionStorage[key]
 			delete sessionStorage[key]
 		}
 	})
