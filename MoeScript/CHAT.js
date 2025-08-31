@@ -639,111 +639,157 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 	chats.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
 	INIT_state()
 }
-$("body").on('change',".显示类型",function()
+$("body").on('click',".内容类型",function()
 {
-	let type = $(this).val()
-	let arr = ['隐藏头像','不作切割','不作修改','默认位置']
-	if(arr.indexOf(type) >= 0)
-	{
-		$(this).css('color','rgb(75, 105, 137)');
-		return
-	}
-	$(this).css('color','red');
+	if($('.内容类型_列表:visible').length)$('.内容类型_列表').hide()
+	else $('.内容类型_列表').show()
 });
-$("body").on('change',".内容类型",function()
+$("body").on('click',".内容类型_列表",function()
 {
-	let arr = ['隐藏头像','不作切割','不作修改','默认位置']
-	let type = $(this).val()
-	$(this).css('color',arr.indexOf(type) >= 0 ? 'rgb(75, 105, 137)' : 'red');
+	let type = this.title
+	$('.内容类型').html('类型：'+this.innerHTML).attr('title',type)
+	$('.内容类型_说明').text(mt_text[type][mtlang])
+	if(type == 'image')$('.图片信息').show().next().hide()
+	else $('.内容信息').show().prev().hide()
 
-	$('.图片内容').hide()
-	$('.content').show()
-	$显示位置 = $('.显示位置');
-	$显示头像 = $('.显示头像');
-	$显示位置.removeAttr('disabled').addClass('selected').css('color',arr.indexOf($显示位置.val()) >= 0 ? 'rgb(75, 105, 137)' : 'red')
-	$显示头像.removeAttr('disabled').addClass('selected').css('color',arr.indexOf($显示头像.val()) >= 0 ? 'rgb(75, 105, 137)' : 'red')
-	if(type === '回复类型')
-	{
-		$显示位置.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
-		$显示头像.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
-	}
-	if(type === '羁绊类型')
-	{
-		$显示位置.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
-		$显示头像.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
-	}
-	if(type === '旁白类型')
-	{
-		$显示头像.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
-	}
-	if(type !== '图片类型')$('.content').show().prev().hide()
-	else $('.content').hide().prev().show()
+	显示位置_说明(type,$('.显示位置').attr('title'))
 });
 
-$("body").on('click',".编辑界面 .确认",function()
+$("body").on('click',".显示位置",function()
 {
-	let checked = $('.dels:checked').length
-	let $显示位置 = $('.显示位置').val()
-	let $内容类型 = $('.内容类型').val()
-	let $截图切割 = $('.截图切割').val()
-	let $显示头像 = $('.显示头像').val()
-	let $角色名称 = $('.角色名称').val()
-	let $内容信息 = $('.content').val()
-	let $时间信息 = $('.时间信息').val()
-	let $角色头像 = $('.角色头像')
-	let $图片内容 = $('.图片内容 img').attr('src')
-	let types = {文字类型:'chat',回复类型:'reply',羁绊类型:'heart',旁白类型:'info',图片类型:'image'}
-	let type = types[$内容类型]
+	let 位置 = this.title
+	let arr = {}
+	if($(".dels:checked").length > 1)
+	{
+		arr = {isLeft:'<<',isCenter:'><',isRight:'>>',isDefault:'<>'}
+		if(位置 == 'isLeft')位置 = 'isCenter'
+		else if(位置 == 'isCenter')位置 = 'isRight'
+		else if(位置 == 'isRight')位置 = 'isDefault'
+		else 位置 = 'isLeft'
+	}
+	else
+	{
+		arr = {isLeft:'<<',isCenter:'><',isRight:'>>'}
+		if(位置 == 'isLeft')位置 = 'isCenter'
+		else if(位置 == 'isCenter')位置 = 'isRight'
+		else 位置 = 'isLeft'
+	}
+
+	$('.显示位置').html('位置：'+`<span class='bold' style='color: rgb(45, 70, 100);'>${arr[位置]}</span>`).attr('title',位置)
+	显示位置_说明($('.内容类型').attr('title'),位置)
+});
+function 显示位置_说明(类型,说明)
+{
+	let 角色头像 = $('.角色头像')[0]
+	let arr =  {isLeft:'靠左',isCenter:'居中',isRight:'靠右'}
+	if($(".dels:checked").length < 2)
+	{
+		if(类型 == 'chat')arr = {isLeft:'默认靠左',isCenter:'默认靠左',isRight:'靠右'}
+		if(类型 == 'reply' || 类型 == 'heart' || 角色头像.alt == 0)arr = {isLeft:'默认靠右',isCenter:'默认靠右',isRight:'默认靠右'}
+		if(类型 == 'info')arr = {isLeft:'靠左',isCenter:'默认居中',isRight:'靠右'}
+		if(类型 == 'image')
+		{
+			arr = {isLeft:'默认靠左',isCenter:'居中',isRight:'靠右'}
+			if(角色头像.alt == 0)arr = {isLeft:'默认靠右',isCenter:'居中',isRight:'默认靠右'}
+		}
+	}
+	arr.isDefault = '默认位置'
+	$('.显示位置_说明').text(arr[说明])
+}
+
+$("body").on('click',".截图切割",function()
+{
+	截图切割_说明(!this.title)
+});
+function 截图切割_说明(截图切割)
+{
+	if(截图切割)
+	{
+		$('.截图切割').attr('title','截图切割').html('切割：<span class="bold" style="color: rgb(45, 70, 100);">√</span>')
+		$('.截图切割_说明').html('<span style="color:red;">截图时在此处切割</span>')
+	}
+	else
+	{
+		$('.截图切割').removeAttr('title').html('切割：<span class="bold" style="color: rgb(45, 70, 100);">×</span>')
+		$('.截图切割_说明').text('')
+	}
+}
+
+$("body").on('click',".角色头像",function()
+{
+	角色头像_说明(!$('.角色头像_说明').attr('title'))
+});
+function 角色头像_说明(isFirst)
+{
+	if(isFirst)$('.角色头像_说明').html('<span style="color:blue;">显示头像</span>').attr('title','显示头像')
+	else $('.角色头像_说明').text('').removeAttr('title')
+}
+function 生成消息(内容类型,length)
+{
+	//角色
+	let 角色头像 = $('.角色头像')[0]
+	let 角色名称 = $('.角色名称').val()
+	let 显示头像 = $('.角色头像_说明').attr('title')
+	//属性
+	let 显示位置 = $('.显示位置').attr('title')
+	let 截图切割 = $('.截图切割').attr('title')
+	//数据
+	let 内容信息 = $('.内容信息').val()
+	let 图片信息 = $('.图片信息 img').attr('src')
+	let 时间信息 = $('.时间信息').val()
+
 	let data = {}
-	if(checked > 1)
+	if(length > 1)
 	{
+		if(角色头像.alt)data.sCharacter = {no: 角色头像.alt,index: 角色头像.title}
+		if(显示头像 != 'noEdit')data.isFirst = 显示头像 == '显示头像'
+		if(角色名称 !== '')data.name = 角色名称 === ' ' ? '' : 角色名称
 		
-		if($显示位置 !== '不作修改')
+		if(显示位置 == 'isDefault')data.isLeft = data.isCenter = data.isRight = false
+		else if(显示位置 != 'noEdit')
 		{
-			if($显示位置 === '左侧旁白')data.isLeft = true
-			else if($显示位置 === '居中图片')data.isCenter = true
-			else if($显示位置 === '右侧显示')data.isRight = true
-			else data.isCenter = data.isLeft = data.isCenter = false
+			data.isLeft = 显示位置 === 'isLeft'
+			data.isCenter = 显示位置 === 'isCenter'
+			data.isRight =  显示位置 === 'isRight'
 		}
-		if($截图切割 !== '不作修改')data.is_breaking = $截图切割 === '截图切割' ? true : false
-		if($显示头像 !== '不作修改')data.isFirst = $显示头像 === '显示头像' ? true : false
-		if($角色名称 !== '')data.name = $角色名称 === ' ' ? '' : $角色名称
-		if($内容信息 !== '')data.content = $内容信息 === ' ' ? '' : $内容信息
-		if($时间信息 !== '')data.time = $时间信息 === ' ' ? '' : $时间信息
-		if($角色头像.attr('alt'))
-		{
-			data.sCharacter = {}
-			data.sCharacter.no = $角色头像.attr('alt')
-			data.sCharacter.index = $角色头像.attr('title')
-		}
-		if(type === 'image' && $图片内容)data.file = $图片内容
+		if(截图切割 != 'noEdit')data.is_breaking = 截图切割 === '截图切割'
+
+		if(内容信息 !== '')data.content = 内容信息 === ' ' ? '' : 内容信息
+		if(内容类型 === 'image' && 图片信息)data.file = 图片信息
+		if(时间信息 !== '')data.content = 时间信息 === ' ' ? '' : 时间信息
+
 		if(CHAT_HeadList)data.heads = CHAT_HeadList
 		if(CHAT_Style)data.style = CHAT_Style
-		let indexs = []
-		$('.dels:checked').each(function(k,v)
-		{
-			indexs.push($('.dels').index(v))
-		})
-		sendMessage(data,type,'edit',indexs)
-		return
-	}
 
-	data.sCharacter = {}
-	data.sCharacter.no = $角色头像.attr('alt')
-	data.sCharacter.index = $角色头像.attr('title')
-	data.content = $内容信息
-	data.file = type === 'image' ? $图片内容 : ''
-	data.name = $角色名称
-	data.time = $时间信息
-	data.is_breaking = $截图切割 === '截图切割'
-	data.isFirst = $显示头像 === '显示头像'
-	data.isLeft = $显示位置 === '左侧旁白'
-	data.isCenter = $显示位置 === '居中图片'
-	data.isRight = $显示位置 === '右侧显示'
+		return data
+	}
+	data.sCharacter = {no: 角色头像.alt,index: 角色头像.title}
+	data.isFirst = 显示头像 == '显示头像'
+	data.name = 角色名称
+
+	data.isLeft = 显示位置 === 'isLeft'
+	data.isCenter = 显示位置 === 'isCenter'
+	data.isRight =  显示位置 === 'isRight'
+	data.is_breaking = 截图切割 === '截图切割'
+
+	data.content = 内容信息
+	data.file = 内容类型 === 'image' ? 图片信息 : ''
+	data.time = 时间信息
+
 	data.heads = CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
 	data.style = CHAT_Style
 
-	sendMessage(data,type,$(".操作模式:eq(0)").css('color') == 'rgb(255, 0, 0)' ? 'add' : 'edit',[chatIndex])
+	return data
+}
+$("body").on('click',".编辑界面 .确认",function()
+{
+	let indexs = []
+	$('.dels:checked').each(function(k,v){indexs.push($('.dels').index(v))})
+	let 操作模式 = $(".操作模式:eq(0)").css('color') == 'rgb(255, 0, 0)' ? 'add' : 'edit'
+	let 内容类型 = $('.内容类型').attr('title')
+	if(['chat','reply','heart','info','image'].indexOf(内容类型) < 0)内容类型 = ''
+	if(indexs.length < 2)indexs = [chatIndex]
+	sendMessage(生成消息(内容类型,indexs.length),内容类型,操作模式,indexs)
 });
 $("body").on('click',".编辑界面 .取消",function()
 {
@@ -752,6 +798,7 @@ $("body").on('click',".编辑界面 .取消",function()
 	$('.预览界面').hide()
 	$('.预览内容').html('')
 	$(".操作模式").css('color','')
+	$('.内容类型_列表').hide()
 	CHAT_HeadList = false
 	CHAT_Style = false
 });
@@ -812,7 +859,7 @@ $("body").on('click',".添加头像",function()
 		let img = $('.N_char')
 		let name = img.next()[0]
 		$('.角色名称').attr('placeholder',name.placeholder).val(name.value)
-		$('.头像数量').text('+'+CHAT_HeadList.list.length)
+		$('.角色头像_列表').text('+'+CHAT_HeadList.list.length)
 		$('.角色ID').text(img[0].alt ? 'ID：'+img[0].alt : '不更改角色')
 		$('.添加头像').css('color',CHAT_HeadList.list.length || checked > 1 ? 'red' : 'rgb(75, 105, 137)')
 		if(img[0].title)
@@ -865,6 +912,8 @@ $("body").on('click',".操作模式",function()
 $("body").on('click',".预览模式",function()
 {
 	let color = $(this).css('color')
+	let 内容类型 = $('.内容类型').attr('title')
+	let data = 生成消息(内容类型)
 	if(color === 'rgb(255, 0, 0)')
 	{
 		$('.内容界面').show()
@@ -873,40 +922,15 @@ $("body").on('click',".预览模式",function()
 		return
 	}
 	$(this).css('color','rgb(255, 0, 0)')
-	let checked = $('.dels:checked').length
-	let $显示位置 = $('.显示位置').val()
-	let $内容类型 = $('.内容类型').val()
-	let $截图切割 = $('.截图切割').val()
-	let $显示头像 = $('.显示头像').val()
-	let $角色名称 = $('.角色名称').val()
-	let $内容信息 = $('.content').val()
-	let $时间信息 = $('.时间信息').val()
-	let $角色头像 = $('.角色头像')
-	let $图片内容 = $('.图片内容 img').attr('src')
-	let types = {文字类型:'chat',回复类型:'reply',羁绊类型:'heart',旁白类型:'info',图片类型:'image'}
-	let type = types[$内容类型]
-	let data = {}
-	data.sCharacter = {}
-	data.sCharacter.no = $角色头像.attr('alt')
-	data.sCharacter.index = $角色头像.attr('title')
-	data.content = $内容信息
-	data.file = type === 'image' ? $图片内容 : ''
-	data.name = $角色名称
-	data.time = $时间信息
-	data.is_breaking = $截图切割 === '截图切割'
-	data.isFirst = $显示头像 === '显示头像'
-	data.isLeft = $显示位置 === '左侧旁白'
-	data.isCenter = $显示位置 === '居中图片'
-	data.isRight = $显示位置 === '右侧显示'
-	data.heads = CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
-	data.style = CHAT_Style
 	$('.内容界面').hide()
 	$('.预览界面').show()
+
 	let chat = []
 	if(chatIndex)chat.push(chats[chatIndex-1])
+
 	chat.push(data)
 	data.isFirst = isfirst(chat.length-1,chat)
-	$('.预览内容').html(makeMessage(type,data,chatIndex,'预览')).outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings.风格样式.bgColor)
+	$('.预览内容').html(makeMessage(内容类型,data,chatIndex,'预览')).outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings.风格样式.bgColor)
 	$('.内容预览').click()
 });
 $("body").on('click',".编辑",function()
@@ -915,14 +939,7 @@ $("body").on('click',".编辑",function()
 	$(".预览模式").css('color','')
 	$(".操作模式:eq(0)").css('color','')
 	$(".操作模式:eq(1)").css('color','red')
-	let $显示头像 = $('.显示头像');
-	let $显示位置 = $('.显示位置');
 
-	let option = `<option style="color:rgb(75, 105, 137);"class="bold">`
-	let 显示位置 = `${option}左侧旁白</option>${option}居中图片</option>${option}右侧显示</option>${option}默认位置</option>`
-	let isfirst = `${option}显示头像</option>${option}隐藏头像</option>`
-	let isbreak = `${option}截图切割</option>${option}不作切割</option>`
-	let noedit = `${option}不作修改</option>`
 	let checked = $('.dels:checked').length
 	if(checked > 1)
 	{
@@ -931,70 +948,57 @@ $("body").on('click',".编辑",function()
 		$('.显示开关').removeClass('selected').css('color','')
 		$('.角色ID').text('不更改角色')
 		$('.内容索引').text(`选中了${checked}条消息`)
-		$('.角色头像').attr('src',href+'MoeData/Ui/error.webp').removeAttr('alt title')
+		$('.角色头像_列表').text('+0')
 		$('.角色名称').attr('placeholder','不修改名称').val('')
-		$('.头像数量').text('+0')
 		$('.添加头像').css('color','black')
 		$('.定义样式').css('color','black')
 
-		$('.截图切割').html(isbreak+noedit).val('不作修改').css('color','rgb(75, 105, 137)')
-		$显示头像.html(isfirst+noedit).val('不作修改').css('color','rgb(75, 105, 137)').removeAttr('disabled').addClass('selected')
-		$显示位置.html(显示位置+noedit).val('不作修改').css('color','rgb(75, 105, 137)').removeAttr('disabled').addClass('selected')
+		$('.角色头像_说明').text('不修改头像').attr('title','noEdit')
+		$('.内容类型_说明').text('不修改类型')
+		$('.显示位置_说明').text('不修改位置')
+		$('.截图切割_说明').text('不修改切割')
 
-		$('.图片内容').hide().find('img').attr('src','')
-		$('.content').val('').attr('placeholder','不修改内容').show().click();
+		$('.角色头像').attr('src',href+'MoeData/Ui/error.webp').removeAttr('alt title')
+		$('.内容类型').text('类型').attr('title','noEdit')
+		$('.显示位置').text('位置').attr('title','noEdit')
+		$('.截图切割').text('切割').attr('title','noEdit')
+
+		$('.图片信息').hide().find('img').attr('src','')
+		$('.内容信息').val('').attr('placeholder','不修改内容').show().click();
 		$('.时间信息').val('').attr('placeholder','不修改信息').click();
 
-		let select = `${option}文字类型</option>${option}回复类型</option>${option}羁绊类型</option>${option}旁白类型</option>${option}图片类型</option>${option}不作修改</option>`
-		$('.内容类型').html(select).val('不作修改').css('color','rgb(75, 105, 137)')
 		return
 	}
 	$('.批量编辑').hide()
 	$('.编辑标题').show()
 	chatIndex = $('.消息').index($(this).parents('.消息'))
 	let chat = chats[chatIndex]
-	let selected = '默认位置'
-	if(chat.isLeft)selected = '左侧旁白'
-	if(chat.isCenter)selected = '居中图片'
-	if(chat.isRight)selected = '右侧显示'
-	$('.显示开关').removeClass('selected').css('color','')
+
 	$('.角色ID').text('ID：'+chat.sCharacter.no)
 	$('.内容索引').text(`(${chatIndex+1}/${chats.length})`)
-	$('.角色头像').attr({alt:chat.sCharacter.no,title:chat.sCharacter.index,src:loadhead(chat.sCharacter.no,chat.sCharacter.index)})
-	$('.角色名称').attr('placeholder',loadname(chat.sCharacter.no,chat.sCharacter.index)).val(toString(chat.name))
-	$('.头像数量').text('+'+(chat.heads && chat.heads.list ? chat.heads.list.length : 0))
 	$('.添加头像').css('color',chat.heads && chat.heads.list && chat.heads.list.length ? 'red' : 'black')
 	$('.定义样式').css('color',chat.style && chat.style.length ? 'red' : 'black')
 
-	$('.截图切割').html(isbreak).val(chat.is_breaking ? '截图切割' : '不作切割').css('color',chat.is_breaking ? 'red' : 'rgb(75, 105, 137)')
-
-	$显示头像.html(isfirst).val(chat.isFirst ? '显示头像' : '隐藏头像').css('color',chat.isFirst ? 'red' : 'rgb(75, 105, 137)').removeAttr('disabled').addClass('selected')
-	$显示位置.html(显示位置).val(selected).css('color',selected === '默认位置' ? 'rgb(75, 105, 137)' : 'red').removeAttr('disabled').addClass('selected')
-
-	if(chat.type === 'repl')
+	$('.角色头像').attr({alt:chat.sCharacter.no,title:chat.sCharacter.index,src:loadhead(chat.sCharacter.no,chat.sCharacter.index)})
+	$('.角色名称').attr('placeholder',loadname(chat.sCharacter.no,chat.sCharacter.index)).val(toString(chat.name)).click()
+	$('.角色头像_列表').text('+'+(chat.heads && chat.heads.list ? chat.heads.list.length : 0))
+	let arr = {isLeft:'<<',isCenter:'><',isRight:'>>'}
+	let 位置 = chat.isRight ? 'isRight' : chat.isCenter ? 'isCenter' : 'isLeft'
+	if(!chat.isLeft && !chat.isCenter && !chat.isRight)
 	{
-		$显示头像.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
-		$显示位置.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
+		if(chat.type == 'chat' || chat.type == 'image')位置 = 'isLeft'
+		if(chat.type == 'reply' || chat.type == 'heart')位置 = 'isRight'
+		if(chat.type == 'info')位置 = 'isCenter'
 	}
-	if(chat.type === 'heart')
-	{
-		$显示头像.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
-		$显示位置.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
-	}
-	if(chat.type === 'info')
-	{
-		$显示头像.attr('disabled','disabled').removeClass('selected').css('color','rgb(185, 191, 197)')
-	}
+	$('.显示位置').html('位置：'+`<span class='bold' style='color: rgb(45, 70, 100);'>${arr[位置]}</span>`).attr('title',位置)
+	显示位置_说明(chat.type,位置)
+	截图切割_说明(chat.is_breaking)
+	角色头像_说明(chat.isFirst)
+	$(`.内容类型_列表[title="${chat.type}"]`).click()
 
-	if(chat.type !== 'image')$('.content').show().prev().hide().find('img').attr('src','')
-	else $('.content').hide().prev().show().find('img').attr('src',chat.file)
-
-	$('.content').val(chat.content).attr('placeholder',chat.content || '').click();
+	$('.内容信息').val(chat.content).attr('placeholder',chat.content || '').click();
+	$('.图片信息 img').attr('src',chat.file)
 	$('.时间信息').val(toString(chat.time)).attr('placeholder',chat.time || '').click();
-	let types = {chat:'文字类型',reply:'回复类型',heart:'羁绊类型',info:'旁白类型',image:'图片类型'}
-	
-	let select = `${option}文字类型</option>${option}回复类型</option>${option}羁绊类型</option>${option}旁白类型</option>${option}图片类型</option>`
-	$('.内容类型').html(select).val(types[chat.type]).css('color','red')
 
 	if(chat.heads)CHAT_HeadList = {...chat.heads,...{}}	
 	if(chat.style)CHAT_Style = [...chat.style,...[]]
@@ -1007,20 +1011,7 @@ $("body").on('click',".头像框",function()
 		sendMessage({...chats[chatIndex],...{isFirst:!chats[chatIndex].isFirst}},chats[chatIndex].type,'edit',[chatIndex],null)
 	}
 });
-$("body").on('click',".fzOyMd",function()
-{
-	if($('.编辑界面').hasClass('visible'))
-	{
-		let no = $(this).attr('alt')
-		let index = $(this).attr('title')
-		$('.角色头像').attr({alt:no,title:index,src:loadhead(no,index)})
-		$('.角色名称').attr('placeholder',loadname(no,index))
-		$('.角色ID').text('ID：'+no)
-	}
-	$('.chatText').click()
-	
-	saveStorage('设置选项',mt_settings,'local')
-});
+
 $("body").on('click',".差分映射",function()
 {
 	差分映射 = []

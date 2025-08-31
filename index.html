@@ -11,7 +11,7 @@
 		<script>
 //版本信息
 var 本地版本 = 28//@
-var 更新时间 = 1756316085//!
+var 更新时间 = 1756663255//!
 var 游戏版本 = {"BLDA":"250820_修复BUG","CBJQ":"250821_修复BUG","QNZL":"241024","YGST":"000000","DFPJ":"250617"}//$
 var gamearr = {"BLDA":"碧蓝档案","CBJQ":"尘白禁区","QNZL":"千年之旅","YGST":"犹格索托斯的庭院","DFPJ":"东方Project"}
 
@@ -70,32 +70,27 @@ var fs,nwjs = false;//PC离线端
 if(window.location.protocol == 'chrome-extension:')nwjs = true,fs = require('fs');
 
 //检测版本
+var manifest = {};
 XHR(MoeTalkURL+"manifest.json"+"?timestamp="+new Date().getTime(),function(json)
 {
 	json = JSON.parse(json.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, ''))
+	manifest = json.version
 	let str = ''
 	if(本地版本 != json.version.code)
 	{
-		str += `当前【客户端】版本：${本地版本}\n`
-		str += `最新【客户端】版本：${json.version.code}\n`
+		str += `【客户端】当前版本：${本地版本}\n`
+		str += `【客户端】最新版本：${json.version.code}\n`
 	}
 	if(游戏版本[mt_settings['选择游戏']] != json.version.game[mt_settings['选择游戏']])
 	{
-		str += `当前【数据包】版本：${游戏版本[mt_settings['选择游戏']]}\n`
-		str += `最新【数据包】版本：${json.version.game[mt_settings['选择游戏']]}\n`		
+		str += `【数据包】当前版本：${游戏版本[mt_settings['选择游戏']]}\n`
+		str += `【数据包】最新版本：${json.version.game[mt_settings['选择游戏']]}\n`
 	}
 	if(!sessionStorage['最新版本'] && str)
 	{
 		sessionStorage['最新版本'] = json.version.code
-		str += '\nMoeTalk发现更新！点击确定将跳转到下载链接\n'
-		str += '或点击【获取更新】下载新版MoeTalk\n'
-		str += '提取码【BLDA】※请注意备份存档'
-		if(confirm(str))
-		{//本地端
-			let url = "https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda"
-			if(Html5Plus)plus.runtime.openURL(url);
-			else window.open(url)
-		}
+		str += '\nMoeTalk发现更新！\n点击【获取更新】可下载最新版客户端\n'
+		alert(str)
 	}
 })
 
@@ -142,18 +137,18 @@ if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<meta name="application-name" content="MoeTalk">
 
 		<link rel="shortcut icon" href="./MoeData/Ui/Favor_Schedule_Deco.webp">
-		<link rel='stylesheet' href="./MoeScript/Style/style.css?md5=778899e2a2c48caf7b6f02ae16aad56a" data-n-g=''><!-- @@样式 -->
+		<link rel='stylesheet' href="./MoeScript/Style/style.css?md5=374a7bd1c40c80a7de62bee056b9d9a6" data-n-g=''><!-- @@样式 -->
 		<script src="./MoeData/MT-Img.js"></script><!-- 存档图片 -->
 		<script src="./MoeData/MT-Text.js"></script><!-- 提示文本 -->
 		<script src="./MoeScript/INIT.js?md5=c8f88a136119e1a922bf1fcb96727084" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/DATA.js?md5=8f6823987fceb408499bbc000d7a8c49" defer></script><!-- @@存档 -->
-		<script src="./MoeScript/CHAT.js?md5=7e4958ca707282d1ca7650801a728565" defer></script><!-- @@消息 -->
+		<script src="./MoeScript/CHAT.js?md5=f66ae6a335b15f960e220be9baf0033f" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?md5=4bf36e5777600e4b15b08076db41a55c" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/IMAGE.js?md5=a46d884f08c89dca38d9309d2a18a793" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/TOP.js?md5=0a1d04d75ede1d40f564c91a6ac19c51" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/IMAGE.js?md5=d5010a0dcdf6caccf85c0c140c9b176a" defer></script><!-- @@截图 -->
+		<script src="./MoeScript/TOP.js?md5=7c7dec1ab05605855d8efd3bb3003b0e" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/MAIN.js?md5=ba066d0cfac123b37ff173428260a9d3" defer></script><!-- @@ -->
-		<script src="./MoeScript/Mollu/APP.js?md5=6a50a92e9eae04e5b57acc1afb1eb510" defer></script><!-- @@框架 -->
-		<script src="./MoeScript/Mollu/INDEX.js?md5=0c84b54b624ef37cfae841a450f0114e"></script><!-- @@首页 -->
+		<script src="./MoeScript/Mollu/APP.js?md5=a4082873a906b6fb6271758b55949a46" defer></script><!-- @@框架 -->
+		<script src="./MoeScript/Mollu/INDEX.js?md5=396a8cd7070d5e60c47c05c1e18a8dea"></script><!-- @@首页 -->
 		<style data-styled="active" data-styled-version="5.3.8"></style>
 	</head>
 	<body style="touch-action: none;-webkit-tap-highlight-color: transparent;tap-highlight-color: transparent;"><!-- MikuTap style -->
@@ -163,7 +158,7 @@ if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 	</body>
 </html>
 <pre style='white-space: pre-wrap; font-family: "Microsoft YaHei", Arial, sans-serif;font-weight: bold;background-color: #FF8FBF;font-size: 1.25rem;'>
-如果长时间卡在此页面，建议您按照以下方案操作：
+如果您卡在了此页面，建议您按照以下方案操作：
     1。先进入<i><a href="./Setting.html" target='_blank' style='text-decoration: underline;'>设置页面</a></i>，<span style='color:white;'>下载MoeTalk本地数据存档</span>
     2。<span style='color:green;'>清除ServiceWorker缓存和浏览器缓存</span>后重新访问MoeTalk
     3。以上无效方法请进入<span style='color:white;'>反馈页面</span>提交您的<span style='color:white;'>MoeTalk本地数据存档</span>并反馈您的问题

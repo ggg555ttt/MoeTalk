@@ -202,9 +202,26 @@
 												width: 252,
 												height: 252,
 												src: loadhead(e.no,e.index),//#下方快捷角色选择框
-												onClick: function()
+												onClick: function(img)
 												{
+													if($$('.编辑界面').hasClass('visible'))
+													{
+														let no = img.target.alt
+														let index = img.target.title
+														$$('.角色头像').attr(
+														{
+															alt: no,
+															title: index,
+															src: loadhead(no, index)
+														})
+														$$('.角色ID').text('ID：'+no)
+														$$('.角色名称').attr('placeholder',loadname(no, index))
+														显示位置_说明($$('.内容类型').attr('title'),$$('.显示位置').attr('title'))
+														return
+													}
 													_(e)
+													$$('.chatText').click()
+													saveStorage('设置选项',mt_settings,'local')
 												},
 												onError: function(e){IMAGE_error(e)},
 												className: (0, u.Y)(w.selected, e) ? "selected" : ""
@@ -236,9 +253,26 @@
 								alt: String(d.I.no),
 								title: String(d.I.index),
 								src: loadhead(d.I.no,d.I.index),//#右侧老师本人
-								onClick: function()
+								onClick: function(img)
 								{
+									if($$('.编辑界面').hasClass('visible'))
+									{
+										let no = img.target.alt
+										let index = img.target.title
+										$$('.角色头像').attr(
+										{
+											alt: no,
+											title: index,
+											src: loadhead(no, index)
+										})
+										$$('.角色ID').text('ID：'+no)
+										$$('.角色名称').attr('placeholder',loadname(no, index))
+										显示位置_说明($$('.内容类型').attr('title'),$$('.显示位置').attr('title'))
+										return
+									}
 									e((0, h.Ks)(d.I))
+									$$('.chatText').click()
+									saveStorage('设置选项',mt_settings,'local')
 								},
 								priority: !0
 							}), (0, m.jsx)(y,
@@ -1176,23 +1210,11 @@
 						{
 							t(!1), s("")
 						};
-					let cancel = function(enter = false)
-					{
-						if(enter && TOP_confirm !== '')TOP_confirm()
-						$$('.notice pre').css('text-align','left').html('')
-						$$('.notice').removeClass('visible')
-						$$('.notice .title').text('通知')
-						$$('.notice .confirm').text(L.Z.confirm[u]).removeAttr('disabled')
-						TOP_confirm = ''
-					}
 					return [(0, m.jsx)(ea.Xf,
 					{
-						className: "medium notice",
+						className: "notice",
 						style: {zIndex: 1000},
-						onDoubleClick: function()
-						{
-							cancel()
-						},
+						onDoubleClick: function(){$$('.notice .cancel').click()},
 						children: (0, m.jsxs)(ea.F0,
 						{
 							onDoubleClick: function(e)
@@ -1209,10 +1231,7 @@
 									children: '通知'
 								}), (0, m.jsx)(ea.ec,
 								{
-									onClick: function()
-									{
-										cancel()
-									},
+									className: "cancel",
 									children: (0, m.jsx)(c.j4,
 									{})
 								})]
@@ -1241,18 +1260,10 @@
 									children: [(0, m.jsx)(ea.Lw,
 									{
 										className: "cancel",
-										onClick: function()
-										{
-											cancel()
-										},
 										children: L.Z.cancel[u]
 									}), (0, m.jsx)(ea.AZ,
 									{
 										className: "confirm",
-										onClick: function()
-										{
-											cancel(true)
-										},
 										children: L.Z.confirm[u]
 									})]
 								})]
@@ -3178,7 +3189,7 @@
 															}
 															if($$('.编辑界面').hasClass('visible'))
 															{
-																$$('.图片内容 img').attr('src',link)
+																$$('.图片信息 img').attr('src',link)
 																s()
 															}
 															else
@@ -3774,18 +3785,17 @@
 										},
 										children:[(0, m.jsxs)('span',
 										{
-											className: '角色ID'
-										}),(0, m.jsxs)('span',
-										{
 											className: '内容索引'
+										}), (0, m.jsxs)('span',
+										{
+											className: '角色ID'
 										})]
 									}), (0, m.jsxs)('div',
 									{
 										style:
 										{
 											display: 'flex',
-											width: '100%',
-											height: '3rem'
+											width: '100%'
 										},
 										children:[(0, m.jsxs)('img',
 										{
@@ -3793,7 +3803,9 @@
 											style:
 											{
 												width: '3rem',
-												height: '3rem'
+												height: '3rem',
+												cursor: 'pointer',
+												border: '1px solid rgb(252, 199, 41)'
 											}
 										}), (0, m.jsxs)('div',
 										{
@@ -3803,31 +3815,131 @@
 												flexDirection: 'column',
 												width: '100%'
 											},
-											children:[(0, m.jsxs)('input',
+											children:[(0, m.jsx)(c.Kx,
 											{
-												className: 'bold 角色名称',
+												maxRows: 5,
 												style:
 												{
-													color: 'red',
+													color: 'rgb(34, 37, 41)',
 													fontSize: '1.5rem',
 													padding: '0rem',
 													border: '0rem',
 													width: 'inherit',
 													background: 'transparent'
 												},
-												type: 'text'
-											}), (0, m.jsxs)('span',
+												className:"bold 角色名称 PopupEmoticonChat__Section2-sc-vzjcea-0"
+											}), (0, m.jsxs)('div',
 											{
-												className: '头像数量'
+												style:
+												{
+													display: 'flex',
+													justifyContent: 'space-between'
+												},
+												children: [(0, m.jsxs)('span',
+												{
+													className: '角色头像_列表'
+												}), (0, m.jsxs)('span',
+												{
+													className: '角色头像_说明'
+												})]
 											})]
 										})]	
-									}), '内容：', (0, m.jsxs)('div',
+									}), (0, m.jsx)('div',
 									{
-										className: '图片内容',
 										style:
 										{
 											display: 'flex',
-											justifyContent: 'space-around'
+											justifyContent: 'space-between',
+											alignItems: 'center'
+										},
+										children: [['内容类型','显示位置','截图切割'].map(function(v,k)
+										{
+											return (0, m.jsx)('div',
+											{
+												style:
+												{
+													display: 'flex',
+													width: '33%',
+													justifyContent: k == 1 ? 'space-around' : k == 2 ? 'flex-end' : ''
+												},
+												className: v+'_说明'
+											})
+										})]
+									}), (0, m.jsx)('div',
+									{
+										style:
+										{
+											display: 'flex',
+											justifyContent: 'space-between',
+											alignItems: 'center'
+										},
+										children: ['内容类型','显示位置','截图切割'].map(function(v,k)
+										{
+											return (0, m.jsx)('div',
+											{
+												style:
+												{
+													display: 'flex',
+													width: '33%',
+													justifyContent: k == 1 ? 'space-around' : k == 2 ? 'flex-end' : ''
+												},
+												children: (0, m.jsx)('div',
+												{
+													style:
+													{
+														display: k == 0 ? 'flex' : '',
+														width: 'auto',
+														height: 'auto',
+														fontSize: '1.5rem',
+														color: 'black'
+													},
+													className: v+' cVRiXh eIEKpg evqKja kwhiZC'
+												})
+											})
+										})
+									}), (0, m.jsx)('div',
+									{
+										style:
+										{
+											display: 'flex',
+											justifyContent: 'space-between',
+											alignItems: 'center'
+										},
+										children: ['FQ0','Lh7','m6i','DBf',4].map(function(v,k)
+										{//文字 回复 羁绊 旁白 图片
+											return (0, m.jsx)('div',
+											{
+												style:
+												{
+													width: 'auto',
+													display: 'none'
+												},
+												className: '内容类型_列表 cVRiXh eIEKpg evqKja kwhiZC',
+												title: ['chat','reply','heart','info','image'][k],
+												children: (0, m.jsx)(eU,
+												{
+													style:
+													{
+														padding: '0rem',
+														width: '1.5rem',
+														height: '1.5rem'
+													},
+													children: (0, m.jsx)(c.xL,
+													{
+														icon: k === v ? ei.VmB : ico[v]
+													})
+												})
+											})
+										})
+									}), '内容：', (0, m.jsxs)('div',
+									{
+										className: '图片信息',
+										style:
+										{
+											display: 'flex',
+											justifyContent: 'space-around',
+											border:'2px solid rgb(139, 187, 233)',
+											borderRadius: '0.5rem'
 										},
 										children: [(0, m.jsxs)('img',
 										{
@@ -3883,7 +3995,7 @@
 											border:'2px solid rgb(139, 187, 233)',
 											color: 'red'
 										},
-										className:"content PopupEmoticonChat__Section2-sc-vzjcea-0"
+										className:"内容信息 PopupEmoticonChat__Section2-sc-vzjcea-0"
 									}), '高级定义', (0, m.jsx)('div',
 									{
 										style:
@@ -3893,47 +4005,7 @@
 											justifyContent: 'space-between',
 											alignItems: 'center'
 										},
-										children: [(0, m.jsx)('select',
-										{
-											className: '显示类型 内容类型 cVRiXh kwhiZC bold',
-											style:
-											{
-												width: 'auto',
-												height: 'auto',
-												fontSize: '1.5rem',
-												padding: '0.5rem'
-											}
-										}), (0, m.jsx)('select',
-										{
-											className: '显示类型 截图切割 cVRiXh eIEKpg evqKja kwhiZC bold selected',
-											style:
-											{
-												width: 'auto',
-												height: 'auto',
-												fontSize: '1.5rem',
-												padding: '0.5rem'
-											}
-										}), (0, m.jsx)('select',
-										{
-											className: '显示类型 显示头像 cVRiXh eIEKpg evqKja kwhiZC bold selected',
-											style:
-											{
-												width: 'auto',
-												height: 'auto',
-												fontSize: '1.5rem',
-												padding: '0.5rem'
-											}
-										}), (0, m.jsx)('select',
-										{
-											className: '显示类型 显示位置 cVRiXh eIEKpg evqKja kwhiZC bold selected',
-											style:
-											{
-												width: 'auto',
-												height: 'auto',
-												fontSize: '1.5rem',
-												padding: '0.5rem'
-											}
-										}), (0, m.jsx)('div',
+										children: [(0, m.jsx)('div',
 										{
 											style:
 											{
@@ -3959,7 +4031,7 @@
 									}), '时间信息', (0, m.jsx)(c.Kx,
 									{
 										maxRows: 5,
-										style: { border:'2px solid'},
+										style: {border: '2px solid'},
 										className:"时间信息 PopupEmoticonChat__Section2-sc-vzjcea-0"
 									})]
 								}), (0, m.jsxs)(ea.$_,

@@ -3,9 +3,30 @@ skip = false
 if(localStorage['调试模式'])var vConsole = new window.VConsole();
 INIT_loading('开始加载')
 var TOP_confirm = '';
+var TOP_notcie = [];
 var mt_charface;
 var id_map = [{},{}]
 var CustomFaceAuthor = {}
+$('body').on('click',".notice .cancel",function()
+{
+	$('.notice pre').css('text-align','left').html('')
+	$('.notice').removeClass('visible')
+	$('.notice .title').text('通知')
+	$('.notice .confirm').text(mt_text.confirm[mtlang]).removeAttr('disabled')
+	TOP_confirm = ''
+	if(TOP_notcie.length)
+	{
+		let notcie = TOP_notcie.pop()
+		$('.notice').addClass('visible')
+		$('.notice').html(notcie.html)
+		TOP_confirm = notcie.confirm
+	}
+});
+$('body').on('click',".notice .confirm",function()
+{
+	if(TOP_confirm !== '')TOP_confirm()
+	$('.notice .cancel').click()
+});
 foreach(['mt-char','mt-head','chats'],function(k,v)
 {
 	moetalkStorage.getItem(v, function(err, data)
@@ -76,26 +97,30 @@ function clearCache()
 		{
 			delete sessionStorage['通知文档']
 			delete sessionStorage['最新版本']
-			$('.notice pre').html('缓存清除完毕，请立即刷新页面')
+			alert('缓存清除完毕，请立即刷新页面')
+			$('.notice .confirm').html('刷新')
+			TOP_confirm = function(){location.reload(true)}
 		}
 	});
 }
 $('body').on('click',"#update",function()
 {
 	$('.notice .title').text('获取更新')
-	$('.notice .confirm').html('刷新')
-	let link = '<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda" style="text-decoration:underline;">百度网盘</a>'
-	let button = '<button class="cVRiXh eIEKpg evqKja kwhiZC" style="width: auto;height: auto;font-size: 1.5rem;">'
-	let readme = '若要获取更新\n'
-	readme += `请点击${button}<span class="red" onclick="clearCache()">清除缓存</span></button>后刷新页面\n`
-	readme += `客户端下载地址：${button}${link}</button>提取码：BLDA\n`
-	readme += 'https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda'
+	let bdwp = 'https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda'
+	let link = `<a class="INIT_href bold" title="${bdwp}" style="text-decoration:underline;">${bdwp}</a>`
+	let readme = `更新时间：${new Date(更新时间 * 1000).toLocaleString()}\n`
+	readme += `【客户端】当前版本：${本地版本}\n`
+	readme += `【客户端】最新版本：${manifest.code}\n`
+	readme += `【数据包】当前版本：${游戏版本[mt_settings['选择游戏']]}\n`
+	readme += `【数据包】最新版本：${manifest.game[mt_settings['选择游戏']]}\n`
+	readme += `\n客户端下载地址：\n${link}\n提取码：BLDA\n`
 	alert(readme)
-	TOP_confirm = function(){location.reload(true)}
 });
 function moedev()
 {
-	alert('开启调试模式：<input type="checkbox"/>\n代码注入：<textarea></textarea>')
+	alert('开启调试模式：<input type="checkbox"/>\n代码注入：<textarea></textarea>\n<button class="red" onclick="clearCache()">清除缓存</button>')
+	$('.notice .confirm').text(mt_text.confirm[mtlang])
+	$('.notice pre').css('text-align','left')
 	TOP_confirm = function()
 	{
 		delete localStorage['调试模式']
@@ -107,6 +132,7 @@ $(function()
 {
 	window.alert = function(str)
 	{
+		if($('.notice').hasClass('visible'))TOP_notcie.push({html:$('.notice').html(),confirm:TOP_confirm})
 		$('.notice pre').html(str)
 		$('.notice').addClass('visible')
 	};

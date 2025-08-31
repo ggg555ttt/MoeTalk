@@ -61,7 +61,7 @@ function compress(base64Img,type = 'head',mode = 'add',length = 0)
 
 		if(type === 'image')
 		{
-			if(mode === 'edit')$('.图片内容 img').attr('src',newBase64)//编辑图片
+			if(mode === 'edit')$('.图片信息 img').attr('src',newBase64)//编辑图片
 			else if(mode === 'add')sendMessage({content:'',type: 'image',file: newBase64},'image',mode)//发送图片
 			else//上传表情
 			{
@@ -201,7 +201,7 @@ function srceenMode()//取消截图
 	if($('.消息[alt="capture"]').length)
 	{
 		$('.消息[alt="capture"] .名称,.消息[alt="capture"] .头像框 img').remove()
-		$('.消息[alt="capture"]').removeAttr('alt').css('padding','0.5rem 1rem 0px').find('.文本').removeClass('左角').removeClass('右角')
+		$('.消息[alt="capture"]').removeAttr('alt').css('padding','0.5rem 1rem 0px').find('.文本').siblings().remove();
 	}
 	if($(".dels:checked").length)
 	{
@@ -213,7 +213,7 @@ function 截屏预览(S)
 	if($('.消息[alt="capture"]').length)
 	{
 		$('.消息[alt="capture"] .名称,.消息[alt="capture"] .头像框 img').remove()
-		$('.消息[alt="capture"]').removeAttr('alt').css('padding','0.5rem 1rem 0px').find('.文本').removeClass('左角').removeClass('右角')
+		$('.消息[alt="capture"]').removeAttr('alt').css('padding','0.5rem 1rem 0px').find('.文本').siblings().remove();
 	}
 
 	INIT_loading('开始加载')
@@ -225,7 +225,11 @@ function 截屏预览(S)
 	let end = 0 
 	let leng = (16+(localStorage['watermark'] === 'false' ? 0 : $('#mt_watermark').outerHeight()))*S
 	let length = leng
-	let json = chats
+	let json = []
+	foreach(chats,function(k,v)
+	{
+		json.push({...v,...{}})
+	})
 	let 平均 = false//,平均数 = 截图数量(S),总长度 = INIT_state(S)+((平均数-1)*16*S),平均长度 = Math.ceil(总长度/平均数)
 	if($(".dels:checked").length)//区域截图
 	{

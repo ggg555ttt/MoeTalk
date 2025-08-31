@@ -9871,7 +9871,13 @@
 										style: {cursor: 'pointer'},
 										id: "readme",
 										children: MikuTalk ? 'MikuTalk' : mt_settings['顶部标题'],
-										onClick: function(){$$('.notice pre').css('text-align','center'),alert(sessionStorage['通知文档'])}
+										onClick: function()
+										{
+											alert(sessionStorage['通知文档'])
+											$$('.notice .confirm').html('刷新')
+											$$('.notice pre').css('text-align','center')
+											TOP_confirm = function(){location.reload(true)}
+										}
 									}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
 									{
 										className: "INIT_href bold",
@@ -10053,7 +10059,7 @@
 												priority: !0
 											})
 										})
-									}), (0, O.jsx)('button',
+									}), (0, O.jsx)(V,
 									{
 										onClick: function(e)
 										{
@@ -10076,25 +10082,22 @@
 										},
 										style:{backgroundColor: 'transparent'},
 										className: "private" === e.pathname.split("/")[1] ? "selected" : "",
-										children: [(0, O.jsx)(V,
+										children: (0, O.jsx)(W,
 										{
-											children: (0, O.jsx)(W,
+											className: year+month+day < '250907' && !localStorage['征文'] ? 'zhengwen' : '',
+											style:
 											{
-												className: year+month+day < '250907' && !localStorage['征文'] ? 'zhengwen' : '',
-												style:
-												{
-													width: '100%',
-													height: '100%'
-												},
-												src: `${href}MoeData/Ui/${year+month+day > '250907' ? 'private' : 'zhengwen'}.webp`,//#播放器界面
-												alt: "private",
-												onClick: function(e)
-												{
-													localStorage['征文'] = '250907'
-													$$('.zhengwen').removeClass('zhengwen')
-												}
-											})
-										})]
+												width: '100%',
+												height: '100%'
+											},
+											src: `${href}MoeData/Ui/${year+month+day > '250907' ? 'private' : 'zhengwen'}.webp`,//#播放器界面
+											alt: "private",
+											onClick: function(e)
+											{
+												localStorage['征文'] = '250907'
+												$$('.zhengwen').removeClass('zhengwen')
+											}
+										})
 									}), (0, O.jsx)(F,
 									{
 										href: player,//#播放器
