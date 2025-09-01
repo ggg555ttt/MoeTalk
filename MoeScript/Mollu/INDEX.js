@@ -1867,7 +1867,7 @@
 									style: {overflow: 'scroll'}
 								}), (0, m.jsx)('iframe',
 								{
-									src: `${href}MoeData/Capture_`+(mt_settings['禁止字体'] ?'NoFont' : 'Font')+`.html`,
+									src: `${href}Capture_`+(mt_settings['禁止字体'] ?'NoFont' : 'Font')+`.html`,
 									style: 
 									{
 										// height: '0px'

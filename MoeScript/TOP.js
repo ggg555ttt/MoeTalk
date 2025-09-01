@@ -81,7 +81,7 @@ INIT_waiting(function()
 	INIT_loading('结束加载')
 },['mt_char','mt_head','allChats','mt_school','mt_club','mt_characters'])
 
-if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeScript/Style/font.css' data-n-g='' id='mt-font'>");//加载字体
+if(!mt_settings['禁止字体'])$("head").append(`<link rel='stylesheet' href='./MoeData/font.css?${更新时间}' data-n-g='' id='mt-font'>`);//加载字体
 //使用说明
 function clearCache()
 {
@@ -132,7 +132,11 @@ $(function()
 {
 	window.alert = function(str)
 	{
-		if($('.notice').hasClass('visible'))TOP_notcie.push({html:$('.notice').html(),confirm:TOP_confirm})
+		if($('.notice').hasClass('visible'))
+		{
+			TOP_notcie.push({html:$('.notice').html(),confirm:TOP_confirm})
+			TOP_confirm = ''
+		}
 		$('.notice pre').html(str)
 		$('.notice').addClass('visible')
 	};
@@ -146,28 +150,25 @@ $(function()
 	let span = '<span onclick="moedev()" style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
 	let notice = ''
 	notice += `<span class="bold">欢迎使用${span}MoeTalk</span>！\n此版本为基于原作者Raun0129开发的MolluTalk的个人改版</span>\n`
-	if(year+month+day < '250907')notice += '\n<span style="color:green;">【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>'
+	notice += '\n※移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏'
+	notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
+	if(sessionStorage['通知文档'] == notice)return
+
+	localStorage['通知文档'] = notice
+	sessionStorage['通知文档'] = notice
+	$('.notice pre').css('text-align','center')
 	if(MikuTalk)
 	{
-		notice += '\n愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n点击“确认”可以关闭'
+		alert('愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n点击“确认”可以关闭')
 		TOP_confirm = function()
 		{
 			sessionStorage['MikuTalk'] = 'no'
 			location.reload(true);
 		}
 	}
-	if(gamelist.indexOf(mt_settings['选择游戏']) < 0)
-	{
-		notice += '\n<span style="color:red;">如果您发现游戏数据未加载\n请点击左上按钮隐藏加载界面\n并重新选择<span class="blue">遊</span>戏</span>'
-	}
-	notice += '\n※移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏'
-	notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
-	if(sessionStorage['通知文档'] !== notice)
-	{
-		alert(notice)
-		sessionStorage['通知文档'] = notice
-		$('.notice pre').css('text-align','center')
-	}
+	if(year+month+day < '250907')alert('<span style="color:green;">【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>')
+	alert(notice)
+	if(gamelist.indexOf(mt_settings['选择游戏']) < 0)alert('<span style="color:red;">如果您发现游戏数据未加载\n请点击左上按钮隐藏加载界面\n并重新选择<span class="blue">遊</span>戏</span>')
 })
 $("body").on('click', function()
 {

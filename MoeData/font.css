@@ -1,0 +1,37 @@
+@font-face
+{
+	font-family:title;
+	src: url('Font/Jalnan.TTF')
+}
+@font-face
+{
+	font-family:moetalk;
+	src: url('Font/Blueaka.woff2') format("woff2");
+}
+@font-face
+{
+	font-family: 'CyrillicFont';/*匹配西里尔字母*/
+	src: local("Arial");
+	unicode-range: U+0400-04FF;
+}
+@font-face
+{
+	font-family: '楷体';
+	src: local('KaiTi'),
+		local('KaiTi SC'),
+		local('STKaiti'),
+		local('楷体'),
+		url('Font/KaiTi.woff2') format('woff2'),
+		url('Font/KaiTi.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+body,textarea,button
+{
+	font-family:CyrillicFont,moetalk;
+}
+.bold
+{
+	font-family: "Microsoft YaHei", Arial, sans-serif; /* 指定字体 */
+}

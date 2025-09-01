@@ -9873,7 +9873,7 @@
 										children: MikuTalk ? 'MikuTalk' : mt_settings['顶部标题'],
 										onClick: function()
 										{
-											alert(sessionStorage['通知文档'])
+											alert(localStorage['通知文档'])
 											$$('.notice .confirm').html('刷新')
 											$$('.notice pre').css('text-align','center')
 											TOP_confirm = function(){location.reload(true)}
