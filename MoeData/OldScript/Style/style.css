@@ -337,9 +337,11 @@ align-items: flex-start;
 gap: 4px;
 align-self: stretch;
 }
-.bold
+@font-face{font-family:'bold';src:local('Microsoft YaHei'),local('Arial'),local('sans-serif')}/*粗体*/
+.bold/* 加粗 */
 {
-	font-weight: bold; /* 加粗 */
+	font-family: 'bold';
+	font-weight: bold;
 }
 .editTools.dot::after {
 	content: "";
