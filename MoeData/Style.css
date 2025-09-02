@@ -5,34 +5,26 @@
 	word-wrap: break-word;/* 允许单词内断行 */
 	white-space: normal;/* 处理空白符，自动换行 */
 }
-#ccus
-{
-	word-break:break-word;
-}
-#cusname
-{
-	color:blue;
-}
+#ccus{word-break:break-word;}
+#cusname{color:blue;}
 .blue{color:blue;}
 .red{color:red;}
 .black{color:black;}
+.bold{font-family: 'bold';font-weight: bold;}/* 加粗 */
 
-.dels[type="checkbox"] {
-border: 0.1rem solid #000000;	/* 边框 */
-width: 1rem;	/* 宽度 */
-height: 1rem;	/* 高度 */
-border-radius: 0.1rem;	/* 圆角 */
-cursor: pointer;	/* 鼠标形状 */
--webkit-appearance: none;	/*清除默认样式*/
+.dels[type="checkbox"]
+{
+	border: 0.1rem solid #000000;	/* 边框 */
+	width: 1rem;	/* 宽度 */
+	height: 1rem;	/* 高度 */
+	border-radius: 0.1rem;	/* 圆角 */
+	cursor: pointer;	/* 鼠标形状 */
+	-webkit-appearance: none;	/*清除默认样式*/
 }
+.dels[type="checkbox"]:checked{background: url("data:image/webp;base64,UklGRq4BAABXRUJQVlA4WAoAAAAwAAAADgAAEgAAVlA4TJABAAAvDoAEEOfiOrZtpdlPv3Bpgi5pkzqc5HIiTTiIJEmRaub4HjS9fzuMXYwiSZJSPcPpAA+YxCQW+PLesx01kuTI0Y2qXm9+R+MSWARmHhOv8XJbrp/2+Ss+lzXl2M5V/p9SquN/SGlimnPfxXT2j8R0tkTsF8mJvOzCvHK2x0zeyZOe9PgxEVdRaNeYQpSnY1zNcdFfraBPIU6jTYgTgjhNpXgIRSUR5tWnNhAJh4BRVIrDRVAuRtXmNBDKgwqwggsKslL8HIxggACAAfyBAgAAAAUEAACHsW2bzolt27b9Eef/Hzvv9d9H3EJE/xW2bdsoO909AwAgj1UTcgD4MFVi8VgmVV+mjo4JpZO45sOUkRmhlJJ59J0qgsx9v6O7I+HDSsi8zGXVnFK+L944v9w3eAjpUO/RCJUlMgyM7mJJ5+neaxZrff1gD5uiA57OrWqGu7IlQt0GeNq3igmw1/cpJwB3+1o2AXBmtHjTupaM77XGjx9wNS9FA96f9U1B/5tz/h+5f2R0vzk9D/xD9sMB") no-repeat center center;}
+.PLAYER_Loading,.PLAYER_Loading:before,.PLAYER_Loading:after{color:#ffffff;top:-2.7rem;border-radius:50%;width:0.5rem;height:0.5rem;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation:load7 3s infinite ease-in-out;animation:load7 3s infinite ease-in-out;}.PLAYER_Loading{margin:1.2rem 2rem 0rem 2rem;position:relative;text-indent:-9999rem;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation-delay:-0.2s;animation-delay:-0.2s;}.PLAYER_Loading:before,.PLAYER_Loading:after{content:'';position:absolute;top:0;}.PLAYER_Loading:before{left:-1.2rem;-webkit-animation-delay:-0.4s;animation-delay:-0.4s;}.PLAYER_Loading:after{left:1.2rem;}@-webkit-keyframes load7{0%,80%,100%{box-shadow:0 2rem 0 -1rem;}40%{box-shadow:0 2rem 0 0;}}@keyframes load7{0%,80%,100%{box-shadow:0 2rem 0 -1rem;}40%{box-shadow:0 2rem 0 0;}}
 
-.dels[type="checkbox"]:checked {
-	 background: url("data:image/webp;base64,UklGRq4BAABXRUJQVlA4WAoAAAAwAAAADgAAEgAAVlA4TJABAAAvDoAEEOfiOrZtpdlPv3Bpgi5pkzqc5HIiTTiIJEmRaub4HjS9fzuMXYwiSZJSPcPpAA+YxCQW+PLesx01kuTI0Y2qXm9+R+MSWARmHhOv8XJbrp/2+Ss+lzXl2M5V/p9SquN/SGlimnPfxXT2j8R0tkTsF8mJvOzCvHK2x0zeyZOe9PgxEVdRaNeYQpSnY1zNcdFfraBPIU6jTYgTgjhNpXgIRSUR5tWnNhAJh4BRVIrDRVAuRtXmNBDKgwqwggsKslL8HIxggACAAfyBAgAAAAUEAACHsW2bzolt27b9Eef/Hzvv9d9H3EJE/xW2bdsoO909AwAgj1UTcgD4MFVi8VgmVV+mjo4JpZO45sOUkRmhlJJ59J0qgsx9v6O7I+HDSsi8zGXVnFK+L944v9w3eAjpUO/RCJUlMgyM7mJJ5+neaxZrff1gD5uiA57OrWqGu7IlQt0GeNq3igmw1/cpJwB3+1o2AXBmtHjTupaM77XGjx9wNS9FA96f9U1B/5tz/h+5f2R0vzk9D/xD9sMB") no-repeat center center;
-}
-
-.dropdown,
-.dropdown button,
-.dropdown .mutliSelect
+.dropdown,.dropdown button,.dropdown .mutliSelect
 {
 	width: auto;
 	margin: 0px;
@@ -49,63 +41,46 @@ cursor: pointer;	/* 鼠标形状 */
 	width: auto;
 	min-width: 32%;
 }
-.dropdown p
-{
-	color: white;
-}
-.dropdown ul
-{
-	display: none;
-}
-.dropdown .title
-{
-	padding: 5px 5px 5px 5px;
-}
-/*.dropdown li
-{
-	display: inline;
-}*/
+.dropdown p{color: white;}
+.dropdown ul{display: none;}
+.dropdown .title{padding: 5px 5px 5px 5px;}
 
-button {
+button
+{
 	font-size: 1.2rem;
 	background-color: rgb(139, 187, 233);
 	border-radius: 0.5rem;
 	cursor: pointer;
 }
 
-button:disabled {
-	cursor: auto;
-	transform: translateY(0px);
-}
+button:disabled{cursor: auto;transform: translateY(0px);}
 input[type="text"],
-input[type="file"] {
+input[type="file"]
+{
 	padding: 12px; 
 	border: 1px solid #ccc;
 	border-radius: 2px;
 }
-
-h1 {
+h1
+{
 	font-size: 32px;
 	font-weight: 300;
 	margin: 32px 0 16px;
 }
-
-a {
+a
+{
 	color: #3f51b5;
 	text-decoration: none;
 	cursor: pointer;
 }
-.button-container {
+.button-container
+{
 	padding: 8px 24px;
 	margin: 15px 15px;
 	text-align:center;
 }
-.bold/* 加粗 */
+.editTools.dot::after
 {
-	font-family: bold;
-	font-weight: bold;
-}
-.editTools.dot::after {
 	content: "";
 	display: block;
 	background-color: red;
@@ -121,19 +96,15 @@ a {
 	font-size: 2rem;
 	background-color: rgb(76, 91, 111);
 }
-.imageSave>img
+.imageSave>img{width: 100%;}
+
+.编辑{cursor: pointer;}
+.头像框
 {
-	width: 100%;
-}
-.头像框 {
 	display: flex;
 	height: auto;
 	min-height: 100%;
 	min-width: 5rem;
-}
-.编辑
-{
-	cursor: pointer;
 }
 .编辑按钮
 {
@@ -149,7 +120,8 @@ a {
 	align-content: center;
 	cursor: pointer;
 }
-.消息{
+.消息
+{
 	display: flex;
 	flex-direction: row;
 	-webkit-box-align: stretch;
@@ -172,7 +144,8 @@ a {
 	width: 100%;
 	height: auto;
 }
-.聊天 {
+.聊天
+{
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
@@ -181,7 +154,8 @@ a {
 	width: 100%;
 	height: auto;
 }
-.对话 {
+.对话
+{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -192,19 +166,22 @@ a {
 	font-size: 1.2rem;
 	color: rgb(34, 37, 41);
 }
-.时间戳 {
+.时间戳
+{
 	color: rgb(69, 78, 89);
 	font-size: 0.9rem;
 	margin: auto 0.5rem 0px;
 	flex-shrink: 0;
 	white-space: pre;
 }
-.名称 {
+.名称
+{
 /*	min-height: 1.2rem;*/
 	line-height: 1.8rem; 
 	word-break: break-word;
 }
-.文本 {
+.文本
+{
 	user-select: text;
 	position: relative;
 	color: white;
@@ -218,7 +195,8 @@ a {
 	line-height: 1.42;
 	cursor: pointer;
 }
-.头像 {
+.头像
+{
 	box-sizing: border-box;
 	margin: 0rem;
 	width: 4rem;
@@ -299,7 +277,6 @@ a {
 	background-size: auto 10rem;
 	line-height: 1.5rem;
 }
-
 .选择肢
 {
 	display: flex;
@@ -331,7 +308,6 @@ a {
 	line-height: 1.42;
 	width: 100%;
 }
-
 .图片
 {
 	max-width: 90%;
@@ -355,6 +331,24 @@ a {
 	padding: 0.2rem 1rem;
 	line-height: 1.42;
 }
+.左角
+{
+	height: 0px;
+	margin-top: 0.6rem;
+	margin-left: -0.5rem;
+	border-top: 0.3rem solid transparent;
+	border-bottom: 0.3rem solid transparent;
+	border-right: 0.5rem solid rgb(76, 91, 111);
+}
+.右角
+{
+	height: 0px;
+	margin-top: 0.6rem;
+	margin-right: -0.5rem;
+	border-top: 0.3rem solid transparent;
+	border-bottom: 0.3rem solid transparent;
+	border-left: 0.5rem solid rgb(74, 138, 202);
+}
 #mt_watermark
 {
 	display:flex;
@@ -367,51 +361,39 @@ a {
 	padding:0.5rem 1rem;
 	margin-bottom:1rem
 }
-.PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar {
+
+.PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar
+{
 	display: block;
 	width: 0.5rem; /* 滚动条宽度 */
 }
- 
-.PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar-track {
+.PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar-track
+{
 	background: #f1f1f1; /* 滚动条轨道颜色 */
 }
  
-.PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar-thumb {
+.PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar-thumb
+{
 	height: 10%;
 	background-color: #888;/* 滚动条滑块颜色 */
 	border-radius: 0.5rem;
 }
- 
-.PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar-thumb:hover {
+.PopupEmoticonChat__Section2-sc-vzjcea-0::-webkit-scrollbar-thumb:hover
+{
 	background: #555; /* 鼠标悬停时滑块颜色 */
 }
-.PLAYER_Loading,.PLAYER_Loading:before,.PLAYER_Loading:after{color:#ffffff;top:-2.7rem;border-radius:50%;width:0.5rem;height:0.5rem;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation:load7 3s infinite ease-in-out;animation:load7 3s infinite ease-in-out;}.PLAYER_Loading{margin:1.2rem 2rem 0rem 2rem;position:relative;text-indent:-9999rem;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation-delay:-0.2s;animation-delay:-0.2s;}.PLAYER_Loading:before,.PLAYER_Loading:after{content:'';position:absolute;top:0;}.PLAYER_Loading:before{left:-1.2rem;-webkit-animation-delay:-0.4s;animation-delay:-0.4s;}.PLAYER_Loading:after{left:1.2rem;}@-webkit-keyframes load7{0%,80%,100%{box-shadow:0 2rem 0 -1rem;}40%{box-shadow:0 2rem 0 0;}}@keyframes load7{0%,80%,100%{box-shadow:0 2rem 0 -1rem;}40%{box-shadow:0 2rem 0 0;}}
-.zhengwen {
+
+.zhengwen
+{
 	display: block;
 	width: 200px; /* 根据需要调整 */
 	height: auto;
 	animation: zhengwen 0.3s infinite; /* 动画名称、持续时间、无限循环 */
 }
-@keyframes zhengwen {
-	0%, 100% { transform: rotate(0deg); }
-	25% { transform: rotate(15deg); }
-	50% { transform: rotate(0deg); }
-	75% { transform: rotate(-15deg); }
-}
-
-.左角 {
-	height: 0px;
-	margin-top: 0.6rem;
-	margin-left: -0.5rem;
-	border-top: 0.3rem solid transparent;
-	border-bottom: 0.3rem solid transparent;
-	border-right: 0.5rem solid rgb(76, 91, 111);
-}
-.右角 {
-	height: 0px;
-	margin-top: 0.6rem;
-	margin-right: -0.5rem;
-	border-top: 0.3rem solid transparent;
-	border-bottom: 0.3rem solid transparent;
-	border-left: 0.5rem solid rgb(74, 138, 202);
+@keyframes zhengwen
+{
+	0%, 100%{transform: rotate(0deg);}
+	25%{transform: rotate(15deg);}
+	50%{transform: rotate(0deg);}
+	75%{transform: rotate(-15deg);}
 }

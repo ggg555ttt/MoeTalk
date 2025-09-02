@@ -1,0 +1,6 @@
+@font-face{font-family:title;src:url(Jalnan.TTF)}/*标题字体*/
+@font-face{font-family:CyrillicFont;src:local(Arial);unicode-range:U+0400-04FF}/*匹配西里尔字母*/
+@font-face{font-family:moetalk;src:url(Blueaka.woff2)}/*默认字体*/
+@font-face{font-family:楷体;src:local(KaiTi),local(KaiTi SC),local(STKaiti),local(楷体),url(KaiTi.woff2),url(KaiTi.ttf)}/*楷体*/
+@font-face{font-family:bold;src:local(Microsoft YaHei),local(Arial),local(sans-serif)}/*粗体*/
+body,textarea,button{font-family:CyrillicFont,moetalk}
