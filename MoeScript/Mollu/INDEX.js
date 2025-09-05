@@ -2052,7 +2052,7 @@
 												marginBottom: '0.5rem'
 											},
 											className: 'cVRiXh eIEKpg evqKja kwhiZC',
-											children: '修改图片设置',
+											children: '修改截图设置',
 											onClick: function()
 											{
 												let option = ''
@@ -2065,13 +2065,18 @@
 												str += `图片宽度：（默认500，上限需测试）\n<input type="number" value="${mt_settings['宽度限制']}">\n`
 												str += `图片最大高度：（默认16384，上限需测试）\n<input type="number" value="${mt_settings['高度限制']}">\n`
 												str += `图片格式：（默认png，其它格式需测试）\n`
-												str += `<select style='font-size: 1.5rem;'>${option}</select>\n`
+												str += `<select class='select1' style='font-size: 1.5rem;'>${option}</select>\n`
+												option = `<option value="html2canvas" ${mt_settings['截图工具'] != 'snapdom' ? 'selected' : ''}>html2canvas（默认）</option>`
+												option += `<option value="snapdom" ${mt_settings['截图工具'] == 'snapdom' ? 'selected' : ''}>snapdom（测试）</option>`
+												str += `截图工具：\n`
+												str += `<select class='select2' style='font-size: 1.5rem;'>${option}</select>\n`
 												alert(str)
 												TOP_confirm = function()
 												{
 													mt_settings['宽度限制'] = $$('.notice input:eq(0)').val() || 500
 													mt_settings['高度限制'] = $$('.notice input:eq(1)').val() || 16384
-													mt_settings['图片格式'] = $$('.notice select').val()
+													mt_settings['图片格式'] = $$('.notice .select1').val()
+													mt_settings['截图工具'] = $$('.notice .select2').val()
 													saveStorage('设置选项',mt_settings,'local')
 												}
 											}

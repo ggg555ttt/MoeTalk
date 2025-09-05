@@ -286,6 +286,7 @@ function 截屏预览(S)
 function 内容预览()
 {
 	let 截屏工具 = 'html2canvas'
+	截屏工具 = mt_settings['截图工具'] ? mt_settings['截图工具'] : 'html2canvas'
 	// if($('.定义样式').css('color') === 'rgb(255, 0, 0)')截屏工具 = 'snapdom'
 	window[截屏工具]($(".预览内容")[0],
 	{
@@ -298,7 +299,16 @@ function 内容预览()
 	}).then(function(img)
 	{
 		if(截屏工具 === 'html2canvas')$('.预览内容').html(`<img width='500px' src='${img.toDataURL()}'>`)
-		else img.toPng().then(function(img){$('.预览内容').html(`<img width='500px' src='${img.src}'>`)})
+		else
+		{
+			img.toPng().then(function(img2)
+			{
+				img.toPng().then(function(img2)
+				{
+					$('.预览内容').html(`<img width='500px' src='${img2.src}'>`)
+				})
+			})
+		}
 	})
 }
 function mt_capture(清晰度,生成图片,标题)
@@ -347,6 +357,7 @@ function mt_capture(清晰度,生成图片,标题)
 	{
 		// if(MikuTalk && 截图区域.css('background-color') === 'rgba(0, 0, 0, 0)')截图区域.css('background-color',MikuTalk)
 		let 截屏工具 = 'html2canvas'
+		截屏工具 = mt_settings['截图工具'] ? mt_settings['截图工具'] : 'html2canvas'
 		// if(imgArea.style)截屏工具 = 'snapdom'
 		window[截屏工具](截图区域[0],
 		{
@@ -380,7 +391,22 @@ function mt_capture(清晰度,生成图片,标题)
 					combineFiles(blob,json,filename,imgArea.index);
 				}
 				if(截屏工具 == 'html2canvas')img.toBlob(function(blob){func(blob)})
-				else img.toCanvas().then(function(img){img.toBlob(function(blob){func(blob)})})
+				else
+				{
+					img.toCanvas().then(function(img2)
+					{
+						img2.toBlob(function(blob)
+						{
+							img.toCanvas().then(function(img2)
+							{
+								img2.toBlob(function(blob)
+								{
+									func(blob)
+								})
+							})
+						})
+					})
+				}
 				
 			}
 			catch

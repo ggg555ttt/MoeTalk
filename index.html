@@ -11,7 +11,7 @@
 		<script>
 //版本信息
 var 本地版本 = 28//@
-var 更新时间 = 1756824022//!
+var 更新时间 = 1757082682//!
 var 游戏版本 = {"BLDA":"250820_修复BUG","CBJQ":"250821_修复BUG","QNZL":"241024","YGST":"000000","DFPJ":"250617"}//$
 var gamearr = {"BLDA":"碧蓝档案","CBJQ":"尘白禁区","QNZL":"千年之旅","YGST":"犹格索托斯的庭院","DFPJ":"东方Project"}
 
@@ -22,14 +22,25 @@ function os(u = window.navigator.userAgent)
 {
 	return {isMobile:!!u.match(/AppleWebKit.*Mobile/i)||!!u.match(/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/),isWechat:!!u.match(/MicroMessenger/i),isQQ:!!u.match(/QQ/i),isIos:!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),isAndroid:!!u.match(/(Android);?[\s/]+([\d.]+)?/),isiPhone:!!u.match(/(iPhone\sOS)\s([\d_]+)/),isSafari:!!u.match(/Safari/),isFirefox:!!u.match(/Firefox/),isOpera:!!u.match(/Opera/),isChrome:u.match(/Chrome/i)!==null&&u.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i)===null?true:false,isDeskTop:(()=>{const Agents=['Android','iPhone','SymbianOS','Windows Phone','iPad','iPod','okhttp/3.9.1'];let flag=true;for(let i=0,LEN=Agents.length;i<LEN;i++){if(u.indexOf(Agents[i])!==-1){flag=false;break}}return flag})()};
 }
-function XHR(url,callback = false)
+function XHR(url,onload = false,onerror = false)
 {
 	let xhr = new XMLHttpRequest();
 	xhr.open("GET",url+'?'+更新时间);
 	xhr.send();
+	url = url.split('?')[0]
+	if(url.split('.').slice(-1)[0] != 'json')xhr.responseType = 'blob';
 	xhr.onload = function()//xhr.onreadystatechange
 	{
-		if(this.status === 200 && callback)callback(this.responseText)//&& xhr.readyState === 4
+		if (this.status >= 200 && this.status < 300)
+		{
+			if(onload)onload(this.response);
+		}
+		else
+		{
+			// 这是 HTTP 错误（如 404, 500），但 onerror 不会触发
+			if(onerror)onerror(this);
+		}
+		// if(this.status === 200 && onload)onload(this.response)//&& xhr.readyState === 4
 	}
 }
 var mt_characters,mt_school,mt_club,CFInfo = {}//表情差分信息
@@ -141,14 +152,14 @@ if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<script src="./MoeData/MT-Img.js"></script><!-- 存档图片 -->
 		<script src="./MoeData/MT-Text.js"></script><!-- 提示文本 -->
 		<script src="./MoeScript/INIT.js?md5=c8f88a136119e1a922bf1fcb96727084" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/DATA.js?md5=8f6823987fceb408499bbc000d7a8c49" defer></script><!-- @@存档 -->
+		<script src="./MoeScript/DATA.js?md5=797bc397eada3c146e749ae65c2b96b3" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAT.js?md5=f66ae6a335b15f960e220be9baf0033f" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?md5=4bf36e5777600e4b15b08076db41a55c" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/IMAGE.js?md5=d5010a0dcdf6caccf85c0c140c9b176a" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/TOP.js?md5=82a38bd11299babf55e691adc7cf03e2" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/IMAGE.js?md5=00aca30e645ee8049813f1511c6bc281" defer></script><!-- @@截图 -->
+		<script src="./MoeScript/TOP.js?md5=fcba96ab13353290135f2c554d79216d" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/MAIN.js?md5=ba066d0cfac123b37ff173428260a9d3" defer></script><!-- @@ -->
 		<script src="./MoeScript/Mollu/APP.js?md5=a7c4c8d540c2e3f2a81cf9c4b0bb768c" defer></script><!-- @@框架 -->
-		<script src="./MoeScript/Mollu/INDEX.js?md5=de7b4f6cc08aecc64983f68cb2d063c6"></script><!-- @@首页 -->
+		<script src="./MoeScript/Mollu/INDEX.js?md5=ae99eb4dbd6954dac246991d95865002"></script><!-- @@首页 -->
 		<style data-styled="active" data-styled-version="5.3.8"></style>
 	</head>
 	<body style="touch-action: none;-webkit-tap-highlight-color: transparent;tap-highlight-color: transparent;"><!-- MikuTap style -->

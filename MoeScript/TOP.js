@@ -1,3 +1,10 @@
+$.each(gamearr,function(k,v)
+{
+	XHR(`${href}GameData/${k}/MT-School.json`,function()
+	{
+		if(gamelist.indexOf(k) < 0)gamelist.push(k)
+	})
+})
 pause = true
 skip = false
 if(localStorage['调试模式'])var vConsole = new window.VConsole();
@@ -563,13 +570,7 @@ function TOP_replyEdit()
 		}
 	}
 }
-$.each(gamearr,function(k,v)
-{
-	XHR(`${href}GameData/${k}/MT-School.json`,function()
-	{
-		if(gamelist.indexOf(k) < 0)gamelist.push(k)
-	})
-})
+
 $('body').on('click',"#selectgame",function()
 {
 	$('.notice .title').text('选择游戏')
@@ -662,3 +663,83 @@ if(document.location.protocol === 'http:' && location.host.indexOf('.') < 0 && l
 		}
 	})
 }
+/*
+function getVisibleParagraphs() {
+  const $container = $('.gGreRb');
+  const containerRect = $container[0].getBoundingClientRect();
+  const visible = [];
+
+  $('.hGxlOh .消息').each(function() {
+    const pRect = this.getBoundingClientRect();
+
+    // 判断是否在可视区域内
+    if (pRect.bottom > containerRect.top && pRect.top < containerRect.bottom) {
+      visible.push($(this));
+    }
+  });
+
+  return visible;
+}
+
+// 使用示例：滚动时检测
+$('.gGreRb').on('scroll', function() {
+  const visiblePs = getVisibleParagraphs();
+  console.log('Currently visible <p>:', visiblePs);
+});
+*/
+// function t()
+// {
+// 	let Index = mt_charface.index
+// 	let arr = []
+// 	$.each(mt_characters,function(id,v)
+// 	{
+// 		if(mt_charface[id])
+// 		{
+// 			foreach(mt_charface[id],function(k,CharFace)
+// 			{
+// 				foreach(CharFace,function(k,v)
+// 				{
+// 					foreach(v[1],function(k,index)
+// 					{
+// 						let link = `GameData/${mt_settings['选择游戏']}/CharFace/${v[0]}`
+// 						if(typeof index === 'number')arr.push(`${link}/${Index[index]}.webp`)
+// 						else if(typeof index === 'object')
+// 						{
+// 							if(typeof index[1] === 'number')arr.push(`${link}/${Index[index[0]]}_${Index[index[1]]}.webp`)
+// 							else for(let i=0;i<=index[1];i++)arr.push(`${link}/${Index[index[0]]}_${i}.webp`)
+// 						}
+// 						else for(let i=0;i<=index;i++)arr.push(`${link}/${i}.webp`)
+// 					})
+// 				})
+// 			})
+// 		}
+// 	})
+// 	return arr
+// }
+// NUM = 0
+// ARR = []
+// function tt()
+// {
+// 	XHR(`http://192.168.1.2/${ARR[NUM]}`,function(json)
+// 	{
+// 		NUM++
+// 		if(ARR[NUM])
+// 		{
+// 			var imgUrl = URL.createObjectURL(blob);
+// 			download(ARR[NUM],json,'','image')
+// 			tt()
+			
+// 		}
+// 	},function(json)
+// 	{
+// 		NUM++
+// 		if(ARR[NUM])
+// 		{
+// 			tt()
+// 		}
+// 	})
+// }
+// XHR(`${MoeTalkURL}/GameData/BLDA/Char/CH0058_L2D.webp`,function(json)
+// {
+// 	savefile('',`GameData/BLDA/Char/CH0058_L2D.webp`,json,'image')
+// })

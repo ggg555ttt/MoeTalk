@@ -661,7 +661,16 @@ async function savefile(dirname,filename,data,type = 'save')
 {
 	if(nwjs)
 	{
-		if(type == 'image')dirname = `${dirname}/${DATA_NowTime}`
+		if(type == 'image')
+		{
+			if(dirname)dirname = `${dirname}/${DATA_NowTime}`
+			else
+			{
+				dirname = filename.split('/')
+				filename = dirname.pop()
+				dirname = dirname.join('/')
+			}
+		}
 		let buffer = Buffer.from(await data.arrayBuffer());//将 Blob 转为 Buffer
 		if(!fs.existsSync(dirname))fs.mkdirSync(dirname,{recursive: true});//自动创建多级目录
 		// 写入文件
