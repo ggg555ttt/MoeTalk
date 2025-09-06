@@ -279,7 +279,13 @@ function 截屏预览(S)
 		imageZip = new JSZip();
 	}
 	imageArrL = imageArr.length
-	
+	if(!imageArr[0].chats.length)
+	{
+		foreach(imageArr,function(k,v){imageArr[k].index -= 1})
+		imageArr.shift()
+		imageArrL--
+	}
+		
 	INIT_loading('结束加载')
 }
 //截屏功能
@@ -331,13 +337,7 @@ function mt_capture(清晰度,生成图片,标题)
 		json[1] = [...chats,...otherChats];
 		json = JSON.stringify(json)
 	}
-	
-	if(imgArea.chats.length === 0)
-	{
-		foreach(imageArr,function(k,v){imageArr[k].index -= 1})
-		imgArea = imageArr.shift()
-		imageArrL--
-	}
+
 	let l1 = imageArrL.toString().length
 	let index = imgArea.index.toString().length
 	if(index < l1)index = '0'.repeat(l1-index)+imgArea.index
@@ -345,6 +345,7 @@ function mt_capture(清晰度,生成图片,标题)
 	$(".图片预览").html(`<div class='imageSave'><h1>已下载<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1></div>`)
 	正在截图 = true
 	截图区域.outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings.风格样式.bgColor)
+	$('.上次截图').val(imgArea.index-1)
 	foreach(imgArea.chats,function(k,v)
 	{
 		v.isFirst = isfirst(k,imgArea.chats)
@@ -374,16 +375,17 @@ function mt_capture(清晰度,生成图片,标题)
 			{
 				let func = function(blob)
 				{
-					
+					filename = 'MoeTalk'
+					if($(".dels:checked").length)filename += `区域截图${DATA_NowTime}`
 					INIT_loading(false)
 					if(imageArr.length > 0)
 					{
-						filename = `MoeTalk_${title}_${index}.`
+						filename += `_${title}_${index}.`
 						mt_capture(清晰度,生成图片,标题)//$('.mt_capture').click()
 					}
 					else
 					{
-						filename = `MoeTalk_${title}_${imgArea.index === 1 ? '0' : index}.`
+						filename += `_${title}_${imgArea.index === 1 ? '0' : index}.`
 						正在截图 = false
 					}
 					filename += mt_settings['截图选项'].archive ? mt_settings['图片格式'].split('/')[1].toUpperCase() : mt_settings['图片格式'].split('/')[1];

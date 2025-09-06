@@ -11883,7 +11883,7 @@
 					{
 						displayName: "_app__Wrapper",
 						componentId: "sc-xuvrnm-1"
-					})(["", `background-color:${mt_settings.风格样式.bgColor}; border-radius:0 0 1rem 1rem;overflow:auto;max-width:1500px;margin:auto;@media screen and (max-width:1500px){border-radius:0;}`], function(e)
+					})(["", `background-color:${mt_settings.风格样式.bgColor}; border-radius:0 0 1rem 1rem;max-width:1500px;margin:auto;@media screen and (max-width:1500px){border-radius:0;}`], function(e)
 					{
 						return e.theme.common.flexBox(
 						{
@@ -14150,7 +14150,7 @@
 					{
 						displayName: "common__ProfileClick",
 						componentId: "sc-1ojome3-7"
-					})(["filter:brightness(60%);cursor:pointer;margin-right:0.5rem;&:hover{filter:brightness(100%);}&:active{border:2px solid ", ";}&.selected{filter:brightness(100%);border:2px solid ", ";}"], function(e)
+					})(["filter:brightness(40%);cursor:pointer;margin-right:0.5rem;&:hover{filter:brightness(100%);}&:active{border:2px solid ", ";}&.selected{filter:brightness(100%);border:2px solid ", ";}"], function(e)
 					{
 						return e.theme.color.rgb252_199_41
 					}, function(e)

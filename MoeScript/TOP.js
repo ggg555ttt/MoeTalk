@@ -1,8 +1,15 @@
+var nogame = ''
 $.each(gamearr,function(k,v)
 {
 	XHR(`${href}GameData/${k}/MT-School.json`,function()
 	{
 		if(gamelist.indexOf(k) < 0)gamelist.push(k)
+	},function()
+	{
+		if(mt_settings['选择游戏'] != k)return
+		nogame += `未发现游戏：<span style="background-color:red;color:white;">${v}</span>\n`
+		nogame += `请通过<button onclick='update.click()'>获取更<span class="blue">新</span></button>下载该游戏数据包\n`
+		nogame += `或重新`
 	})
 })
 pause = true
@@ -159,6 +166,12 @@ $(function()
 	notice += `<span class="bold">欢迎使用${span}MoeTalk</span>！\n此版本为基于原作者Raun0129开发的MolluTalk的个人改版</span>\n`
 	notice += '\n※移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏'
 	notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
+	if(nogame)
+	{
+		$('.notice pre').css('text-align','center')
+		selectgame(nogame)
+		INIT_loading(false)
+	}
 	if(sessionStorage['通知文档'] == notice)return
 
 	localStorage['通知文档'] = notice
@@ -175,7 +188,6 @@ $(function()
 	}
 	if(year+month+day < '250907')alert('<span style="color:green;">【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>')
 	alert(notice)
-	if(gamelist.indexOf(mt_settings['选择游戏']) < 0)alert('<span style="color:red;">如果您发现游戏数据未加载\n请点击左上按钮隐藏加载界面\n并重新选择<span class="blue">遊</span>戏</span>')
 })
 $("body").on('click', function()
 {
@@ -202,7 +214,7 @@ $('body').on('click',"input",function()
 $(".frVjsk").wait(function()
 {
 	$(".frVjsk").append(`<button class='${class0}' id='update'><b style='color:blue;'>新</b></button><span class='tool' align='center'>获取更新</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='selectgame'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' onclick='selectgame()'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:red;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='${href}index_old.html'><button class='${class0}'><b style='color:black;'>舊</b></button></a><span class='tool'>访问旧版</span><br>`);
@@ -570,12 +582,11 @@ function TOP_replyEdit()
 		}
 	}
 }
-
-$('body').on('click',"#selectgame",function()
+function selectgame(str = '')
 {
 	$('.notice .title').text('选择游戏')
 	let arr = {}
-	let select = "请选择游戏：<select style='font-size:1.2rem;'>"
+	let select = str+"选择游戏：<select style='font-size:1.2rem;'>"
 	$.each(gamelist,function(k,v)
 	{
 		k = v,v = gamearr[v]
@@ -593,7 +604,7 @@ $('body').on('click',"#selectgame",function()
 		saveStorage('设置选项',mt_settings,'local')
 		CHAR_UpdateChar()
 	}
-})
+}
 localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
 var phpurl = document.location.protocol == 'https:' ? '/api/moetalk.php' : 'http://frp.freefrp.net:40404/moetalk.php'
 $.ajax({url:'../moetalk.php',success:function(){phpurl = '../moetalk.php',localStorage['local_no'] = 'LOCAL';}});
@@ -687,59 +698,47 @@ $('.gGreRb').on('scroll', function() {
   console.log('Currently visible <p>:', visiblePs);
 });
 */
-// function t()
-// {
-// 	let Index = mt_charface.index
-// 	let arr = []
-// 	$.each(mt_characters,function(id,v)
-// 	{
-// 		if(mt_charface[id])
-// 		{
-// 			foreach(mt_charface[id],function(k,CharFace)
-// 			{
-// 				foreach(CharFace,function(k,v)
-// 				{
-// 					foreach(v[1],function(k,index)
-// 					{
-// 						let link = `GameData/${mt_settings['选择游戏']}/CharFace/${v[0]}`
-// 						if(typeof index === 'number')arr.push(`${link}/${Index[index]}.webp`)
-// 						else if(typeof index === 'object')
-// 						{
-// 							if(typeof index[1] === 'number')arr.push(`${link}/${Index[index[0]]}_${Index[index[1]]}.webp`)
-// 							else for(let i=0;i<=index[1];i++)arr.push(`${link}/${Index[index[0]]}_${i}.webp`)
-// 						}
-// 						else for(let i=0;i<=index;i++)arr.push(`${link}/${i}.webp`)
-// 					})
-// 				})
-// 			})
-// 		}
-// 	})
-// 	return arr
-// }
-// NUM = 0
-// ARR = []
-// function tt()
-// {
-// 	XHR(`http://192.168.1.2/${ARR[NUM]}`,function(json)
-// 	{
-// 		NUM++
-// 		if(ARR[NUM])
-// 		{
-// 			var imgUrl = URL.createObjectURL(blob);
-// 			download(ARR[NUM],json,'','image')
-// 			tt()
-			
-// 		}
-// 	},function(json)
-// 	{
-// 		NUM++
-// 		if(ARR[NUM])
-// 		{
-// 			tt()
-// 		}
-// 	})
-// }
-// XHR(`${MoeTalkURL}/GameData/BLDA/Char/CH0058_L2D.webp`,function(json)
-// {
-// 	savefile('',`GameData/BLDA/Char/CH0058_L2D.webp`,json,'image')
-// })
+
+function t()
+{
+	let Index = mt_charface.index
+	let arr = []
+	$.each(mt_characters,function(id,v)
+	{
+		if(mt_charface[id])
+		{
+			foreach(mt_charface[id],function(k,CharFace)
+			{
+				foreach(CharFace,function(k,v)
+				{
+					foreach(v[1],function(k,index)
+					{
+						let link = `GameData/${mt_settings['选择游戏']}/CharFace/${v[0]}`
+						if(typeof index === 'number')arr.push(`${link}/${Index[index]}.webp`)
+						else if(typeof index === 'object')
+						{
+							if(typeof index[1] === 'number')arr.push(`${link}/${Index[index[0]]}_${Index[index[1]]}.webp`)
+							else for(let i=0;i<=index[1];i++)arr.push(`${link}/${Index[index[0]]}_${i}.webp`)
+						}
+						else for(let i=0;i<=index;i++)arr.push(`${link}/${i}.webp`)
+					})
+				})
+			})
+		}
+	})
+	return arr
+}
+function tt(arr,type)
+{
+	if(!arr.length)return
+	let filename = arr.shift()
+	XHR(filename,function(){tt(arr,type)},function()
+	{
+		XHR('http://192.168.1.2/MoeTalk/'+filename,function(data)
+		{
+			savefile('',filename,data,type)
+			tt(arr,type)
+		},function(){tt(arr,type)})
+	})
+}
+// tt(t(),'image')

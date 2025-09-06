@@ -7,7 +7,7 @@
 			var r = t(7294),
 				o = t(5893),
 				i = {
-					overflow: "hidden",
+					overflowX: "scroll",
 					fontSize: "0",
 					width: "100%",
 					height: "auto"
@@ -27,6 +27,7 @@
 					};
 				return (0, o.jsx)("div",
 				{
+					className: 'scrollbar',
 					style: i,
 					ref: a,
 					onTouchStart: function(e)
@@ -44,6 +45,10 @@
 					onMouseMove: function(e)
 					{
 						l && (e.preventDefault(), u(t - (e.pageX - a.current.offsetLeft - n) * 1))
+					},
+					onWheel: function(e)
+					{
+						u(a.current.scrollLeft + e.deltaY * 0.5);
 					},
 					onMouseUp: s,
 					onMouseLeave: s,
@@ -183,6 +188,7 @@
 							},
 							children: (0, m.jsx)(x,
 							{
+								style: {overflow: "hidden"},
 								children: mt_characters && mt_char ? (0, m.jsx)(HList.Z,
 								{
 									children: (0, m.jsx)(g,
@@ -1182,7 +1188,7 @@
 				{
 					displayName: "LeftScreen__CharContainer",
 					componentId: "sc-jf2v8s-1"
-				})(["width:100%;height:100%;overflow-y:scroll !important;"]);
+				})(["width:100%;height:100%;"]);
 			o.ZP.div.withConfig(
 			{
 				displayName: "LeftScreen__AruDiv",
@@ -1837,7 +1843,19 @@
 									}), (0, m.jsx)("select",
 									{
 										style: {fontSize: '2rem'},
-										className: '上次截图'
+										className: '上次截图',
+										onChange: function(ea)
+										{
+											let arr = 上次截图[$$('.上次截图').val()]
+											let html = ''
+											截图区域.outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings.风格样式.bgColor)
+											foreach(arr.chats,function(k,v)
+											{
+												v.isFirst = isfirst(k,arr.chats)
+												html += makeMessage(v.type,v,k,'预览')
+											})
+											截图区域.html(html)
+										}
 									}), (0, m.jsx)("button",
 									{
 										style:
@@ -2108,7 +2126,16 @@
 													{
 														option += `<option value="${k}">第${v.index}段</option>`
 													})
-													$$('.截图区域 select').html(`<select class="上次截图" style='font-size:2rem;'>${option}</select>`)
+													$$('.截图区域 select').html(option)
+													let arr = 上次截图[0]
+													let html = ''
+													截图区域.outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings.风格样式.bgColor)
+													foreach(arr.chats,function(k,v)
+													{
+														v.isFirst = isfirst(k,arr.chats)
+														html += makeMessage(v.type,v,k,'预览')
+													})
+													截图区域.html(html)
 												})
 												j("1")
 											}
@@ -3032,7 +3059,7 @@
 										})]
 									}), (0, m.jsxs)(ea.h4,
 									{
-										style: {height: '4rem'},
+										style: {height: '3.5rem'},
 										hidden: !差分映射 || EMOJI.type === 'Emoji',
 										children: !差分映射 || EMOJI.type === 'Emoji' ? '' : (0, m.jsx)(HList.Z,
 										{
@@ -3046,6 +3073,7 @@
 														alt: String(e.no),
 														title: String(e.index),
 														src: loadhead(e.no,e.index),
+														style: {width: '3rem',height: '3rem'},
 														className: '差分映射 '+ (e.no == 差分映射.id && e.index == 差分映射.index ? 'selected' : '')
 													}, n)
 												})
@@ -3071,6 +3099,7 @@
 										})
 									}) : '', (0, m.jsx)(eE,
 									{
+										className: 'scrollbar',
 										children: (0, m.jsxs)(eM,
 										{
 											children: [EMOJI.images.map(function(v,k)
@@ -3757,7 +3786,7 @@
 								},
 								children: [(0, m.jsxs)('div',
 								{
-									className: '预览界面 PopupEmoticonChat__Section2-sc-vzjcea-0',
+									className: '预览界面 scrollbar',
 									style:
 									{
 										width: '100%',
@@ -3773,7 +3802,7 @@
 									})
 								}), (0, m.jsxs)('div',
 								{
-									className: '内容界面 PopupEmoticonChat__Section2-sc-vzjcea-0',
+									className: '内容界面 scrollbar',
 									style:
 									{
 										width: '100%',
@@ -3832,7 +3861,7 @@
 													width: 'inherit',
 													background: 'transparent'
 												},
-												className:"bold 角色名称 PopupEmoticonChat__Section2-sc-vzjcea-0"
+												className:"bold 角色名称 scrollbar"
 											}), (0, m.jsxs)('div',
 											{
 												style:
@@ -4000,7 +4029,7 @@
 											border:'2px solid rgb(139, 187, 233)',
 											color: 'red'
 										},
-										className:"内容信息 PopupEmoticonChat__Section2-sc-vzjcea-0"
+										className:"内容信息 scrollbar"
 									}), '高级定义', (0, m.jsx)('div',
 									{
 										style:
@@ -4037,7 +4066,7 @@
 									{
 										maxRows: 5,
 										style: {border: '2px solid'},
-										className:"时间信息 PopupEmoticonChat__Section2-sc-vzjcea-0"
+										className:"时间信息 scrollbar"
 									})]
 								}), (0, m.jsxs)(ea.$_,
 								{
@@ -5380,6 +5409,7 @@
 							o = e.height;
 						return (0, c.jsx)(i.S_,
 						{
+							className: 'scrollbar',
 							ref: d,
 							height: o,
 							width: n,

@@ -873,7 +873,7 @@ $("body").on('click',".定义样式",function()
 {
 	let checked = $('.dels:checked').length
 	$('.title').text('内容样式')
-	alert(`<textarea class="bold css PopupEmoticonChat__Section2-sc-vzjcea-0" style="font-size:1rem;width:100%;height:${$('body').height()*0.7};"></textarea>`)
+	alert(`<textarea class="bold css scrollbar" style="font-size:1rem;width:100%;height:${$('body').height()*0.7};"></textarea>`)
 	if(CHAT_Style.length)
 	{
 		let str = ''
