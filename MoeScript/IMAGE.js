@@ -279,7 +279,7 @@ function 截屏预览(S)
 		imageZip = new JSZip();
 	}
 	imageArrL = imageArr.length
-	if(!imageArr[0].chats.length)
+	if(imageArr.length && !imageArr[0].chats.length)
 	{
 		foreach(imageArr,function(k,v){imageArr[k].index -= 1})
 		imageArr.shift()
