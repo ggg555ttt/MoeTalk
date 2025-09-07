@@ -186,7 +186,7 @@ $(function()
 			location.reload(true);
 		}
 	}
-	if(year+month+day < '250907')alert('<span style="color:green;">【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>')
+	if(year+month+day < '250921')alert('<span style="color:green;">（9/21日截止）【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>')
 	alert(notice)
 })
 $("body").on('click', function()
@@ -742,3 +742,8 @@ function tt(arr,type)
 	})
 }
 // tt(t(),'image')
+XHR('http://192.168.1.2/MoeTalk/GameData/CBJQ/CharFace/girl018_01/chitai.webp',function(data)
+{
+	test(data)
+	fs.writeFileSync('1.webp', data);
+})

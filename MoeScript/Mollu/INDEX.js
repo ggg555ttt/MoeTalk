@@ -6031,17 +6031,17 @@
 								color: 'red'
 							},
 							children: 'QQ反馈交流群：922392676'
-						}), (0, b.jsxs)(H,
+						}), year+month+day < '250921' ? (0, b.jsxs)(H,
 						{
 							style: 
 							{
 								userSelect: 'text',
 								lineHeight: '125%',
-								whiteSpace: 'pre',
+								whiteSpace: 'pre-wrap',
     							textAlign: 'center'
 							},
-							dangerouslySetInnerHTML:{__html:'【征文活动】秘密岛屿探索计划正在进行中\n详情请见：<a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>'}
-						}), (0, b.jsxs)(K,
+							dangerouslySetInnerHTML:{__html:'（9/21日截止）【征文活动】秘密岛屿探索计划正在进行中\n详情请见：<a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>'}
+						}) : '', (0, b.jsxs)(K,
 						{
 							style:
 							{

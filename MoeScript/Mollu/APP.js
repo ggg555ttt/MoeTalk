@@ -10084,17 +10084,17 @@
 										className: "private" === e.pathname.split("/")[1] ? "selected" : "",
 										children: (0, O.jsx)(W,
 										{
-											className: year+month+day < '250907' && !localStorage['征文'] ? 'zhengwen' : '',
+											className: year+month+day < '250921' && !localStorage['征文'] ? 'zhengwen' : '',
 											style:
 											{
 												width: '100%',
 												height: '100%'
 											},
-											src: `${href}MoeData/Ui/${year+month+day > '250907' ? 'private' : 'zhengwen'}.webp`,//#播放器界面
+											src: `${href}MoeData/Ui/${year+month+day < '250921' ? 'zhengwen' : 'private'}.webp`,//#播放器界面
 											alt: "private",
 											onClick: function(e)
 											{
-												localStorage['征文'] = '250907'
+												localStorage['征文'] = '250921'
 												$$('.zhengwen').removeClass('zhengwen')
 											}
 										})
