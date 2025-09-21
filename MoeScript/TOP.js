@@ -35,7 +35,7 @@ async function t()
 	if(game != 'NONE')md5 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/${game}.json?time=${Date.now()}`));
 	if(!md5 || !mt_settings['选择游戏'])
 	{
-		if(!mt_settings['选择游戏'])selectgame('')
+		if(!mt_settings['选择游戏'])selectgame()
 		else selectgame('<span style="color:red;">数据缺失！请重新选择游戏</span>')
 		md5 = {}
 	}
@@ -72,7 +72,18 @@ async function t()
 	INIT_loading(false)
 }
 
-
+function moedev()
+{
+	alert('开启调试模式：<input type="checkbox"/>\n代码注入：<textarea></textarea>\n<button class="red" onclick="clearCache()">清除缓存</button>')
+	$('.notice .confirm').text(mt_text.confirm[mtlang])
+	$('.notice pre').css('text-align','left')
+	TOP_confirm = function()
+	{
+		delete localStorage['调试模式']
+		if($$('.notice input').prop('checked'))localStorage['调试模式'] = true
+		if($$('.notice textarea').val())eval($$('.notice textarea').val())
+	}
+}
 
 if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeData/Fonts/Fonts.css' data-n-g='' id='mt-font'>");//加载字体
 //使用说明
@@ -101,49 +112,30 @@ async function update(str = '')
 	if(!mt_settings.自动更新)mt_settings.自动更新 = {应用:false,数据:false}
 	let game = mt_settings['选择游戏'] || 'NONE'
 	let time = Date.now()//year+month+day
-	本地应用版本 = JSON.parse(await $ajax(`${href}MoeData/Version/Version.json?time=${time}`))
-	网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}MoeData/Version/Version.json?time=${time}`))
-	if(game !== 'NONE')
-	{
-		本地数据版本 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/Version.json?time=${time}`))
-		网络数据版本 = JSON.parse(await $ajax(`${MoeTalkURL}GameData/${game}/Version/Version.json?time=${time}`))
-	}
-
 	$('.notice .title').text('检查更新')
+
 	let readme = str
-	readme += `MoeTalk：<span style='color:red;' class='版本 bold'>读取中。。。</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
-	if(game !== 'NONE')
-	{
-		readme += `${gamearr[game]}：<span style='color:red;' class='版本 bold'>读取中。。。</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
-	}
 	if(nwjs || Html5Plus == 'mmt.MoeTalkH.WumberBee')
 	{
+		readme += `MoeTalk：<span style='color:red;' class='版本 bold'>${本地应用版本}</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
+		if(game !== 'NONE')
+		{
+			readme += `${gamearr[game]}：<span style='color:red;' class='版本 bold'>读取中。。。</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
+		}
 		readme += `应用：<span class='更新应用'></span>`
 		readme += `<input type='checkbox' ${mt_settings.自动更新.应用 ? 'checked' : ''}>自动更新`
-		if(!mt_settings.自动更新.应用 && 网络应用版本 && 本地应用版本[0] < 网络应用版本[0])
-		{
-			readme += `<button style='line-height:112%;' onclick='更新应用(${time}),this.disabled=1'>点击更新</button>`
-		}
 		readme += '\n'
 		readme += `数据：<span class='更新数据'></span>`
 		readme += `<input type='checkbox' ${mt_settings.自动更新.数据 ? 'checked' : ''}>自动更新`
-		if(!mt_settings.自动更新.数据 && 网络数据版本 && 本地数据版本[0] < 网络数据版本[0])
-		{
-			readme += `<button style='line-height:112%;' onclick='更新数据(${time}),this.disabled=1'>点击更新</button>`
-		}
 		readme += '\n'
 	}
 
 	let bdwp = 'https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda'
 	let link = `<a class="INIT_href bold" title="${bdwp}" style="text-decoration:underline;">${bdwp}</a>`
-	readme += `下载地址：（可复制）\n${link}\n提取码：BLDA\n`
+	readme += `离线客户端下载地址：（可复制）\n${link}\n提取码：BLDA\n`
 	
 	alert(readme)
-	$('.版本:eq(0)').text(本地应用版本)
-	$('.版本:eq(1)').text(网络应用版本)
-	$('.版本:eq(2)').text(本地数据版本)
-	$('.版本:eq(3)').text(网络数据版本)
-	
+
 	TOP_confirm = function()
 	{
 		mt_settings.自动更新.应用 = $('.notice input:eq(0)').prop('checked')
@@ -151,17 +143,21 @@ async function update(str = '')
 		saveStorage('设置选项',mt_settings,'local')
 	}
 	
-}
-function moedev()
-{
-	alert('开启调试模式：<input type="checkbox"/>\n代码注入：<textarea></textarea>\n<button class="red" onclick="clearCache()">清除缓存</button>')
-	$('.notice .confirm').text(mt_text.confirm[mtlang])
-	$('.notice pre').css('text-align','left')
-	TOP_confirm = function()
+	if(nwjs || Html5Plus == 'mmt.MoeTalkH.WumberBee')
 	{
-		delete localStorage['调试模式']
-		if($$('.notice input').prop('checked'))localStorage['调试模式'] = true
-		if($$('.notice textarea').val())eval($$('.notice textarea').val())
+		网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}MoeData/Version/Version.json?time=${time}`))
+		if(game !== 'NONE')
+		{
+			本地数据版本 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/Version.json?time=${time}`))
+			网络数据版本 = JSON.parse(await $ajax(`${MoeTalkURL}GameData/${game}/Version/Version.json?time=${time}`))
+		}
+		let str1 = `<button style='line-height:112%;' onclick='更新应用(${time}),this.disabled=1'>点击更新</button>`
+		let str2 = `<button style='line-height:112%;' onclick='更新数据(${time}),this.disabled=1'>点击更新</button>`
+		if(!mt_settings.自动更新.应用 && 网络应用版本 && 本地应用版本[0] < 网络应用版本[0])$('.notice input:eq(0)').after(str1)
+		if(!mt_settings.自动更新.数据 && 网络数据版本 && 本地数据版本[0] < 网络数据版本[0])$('.notice input:eq(1)').after(str2)
+		$('.版本:eq(1)').text(网络应用版本)
+		$('.版本:eq(2)').text(本地数据版本)
+		$('.版本:eq(3)').text(网络数据版本)
 	}
 }
 $(function()

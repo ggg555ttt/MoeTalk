@@ -230,12 +230,10 @@ async function 更新应用(time = Date.now())
 		}
 		return
 	}
-	本地应用版本 = JSON.parse(await $ajax(`${href}MoeData/Version/Version.json?time=${localStorage['本地应用版本']}`))
 	localStorage['本地应用版本'] = 本地应用版本
 	if(!nwjs && Html5Plus != 'mmt.MoeTalkH.WumberBee')return
 
 	网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}MoeData/Version/Version.json?time=${time}`))
-	if(!本地应用版本)本地应用版本 = [0]
 	if(网络应用版本 && 本地应用版本[0] < 网络应用版本[0])
 	{
 		if($('.版本:visible').length == 0)update()

@@ -46,10 +46,6 @@ var nowChapter = ['',{chapter:[]}]//当前章节
 var $$ = $;//jquery转义
 var winHeight = window.innerHeight
 var 元素尺寸;
-var 本地应用版本
-var 网络应用版本
-var 本地数据版本
-var 网络数据版本
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
 
 if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorage['0'])
