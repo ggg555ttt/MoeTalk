@@ -10,7 +10,7 @@
 .blue{color:blue;}
 .red{color:red;}
 .black{color:black;}
-.bold{font-family: 'bold';font-weight: bold;}/* 加粗 */
+.bold{font-family: bold;font-weight: bold;}/* 加粗 */
 
 .dels[type="checkbox"]
 {

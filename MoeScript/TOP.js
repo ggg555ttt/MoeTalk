@@ -1,22 +1,8 @@
-var nogame = ''
-$.each(gamearr,function(k,v)
-{
-	XHR(`${href}GameData/${k}/MT-School.json`,function()
-	{
-		if(gamelist.indexOf(k) < 0)gamelist.push(k)
-	},function()
-	{
-		if(mt_settings['选择游戏'] != k)return
-		nogame += `未发现游戏：<span style="background-color:red;color:white;">${v}</span>\n`
-		nogame += `请通过<button onclick='update.click()'>获取更<span class="blue">新</span></button>下载该游戏数据包\n`
-		nogame += `或重新`
-	})
-})
 pause = true
 skip = false
 if(localStorage['调试模式'])var vConsole = new window.VConsole();
 INIT_loading('开始加载')
-var TOP_confirm = '';
+
 var TOP_notcie = [];
 var mt_charface;
 var id_map = [{},{}]
@@ -41,41 +27,32 @@ $('body').on('click',".notice .confirm",function()
 	if(TOP_confirm !== '')TOP_confirm()
 	$('.notice .cancel').click()
 });
-foreach(['mt-char','mt-head','chats'],function(k,v)
-{
-	moetalkStorage.getItem(v, function(err, data)
-	{
-		window[['mt_char','mt_head','allChats'][k]] = data ? typeof data === 'string' ? JSON.parse(data) : data : {}
-	})
-})
-foreach(['School','Club','Characters'],function(k,v)
-{
-	XHR(`${href}GameData/${mt_settings['选择游戏']}/MT-${v}.json`,function(json)
-	{
-		window[['mt_school','mt_club','mt_characters'][k]] = JSON.parse(json)
-	})
-})
-XHR(`${href}GameData/${mt_settings['选择游戏']}/CharFaceInfo.json`,function(json)
-{
-	CFInfo = JSON.parse(json)
-})
-XHR(`${href}GameData/${mt_settings['选择游戏']}/MT-CharFace.json`,function(json)
-{
-	mt_charface = JSON.parse(json)
-})
 
-if(mt_settings['选择游戏'] === 'BLDA')
+async function t()
 {
-	foreach(['IdMap','CustomFaceAuthor'],function(k,v)
+	let game = mt_settings['选择游戏'] || 'NONE';
+	let md5 = {}
+	if(game != 'NONE')md5 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/${game}.json?time=${Date.now()}`));
+	if(!md5 || !mt_settings['选择游戏'])
 	{
-		XHR(`${href}GameData/${mt_settings['选择游戏']}/${v}.json`,function(json)
-		{
-			window[['id_map','CustomFaceAuthor'][k]] = JSON.parse(json)
-		})
-	})
-}
-INIT_waiting(function()
-{
+		if(!mt_settings['选择游戏'])selectgame('')
+		else selectgame('<span style="color:red;">数据缺失！请重新选择游戏</span>')
+		md5 = {}
+	}
+	[mt_school,mt_club,mt_characters,id_map,CustomFaceAuthor,mt_char,mt_head,allChats] = await Promise.all(
+	[
+		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-School.json?md5=${md5['MT-School']}`).then(json => JSON.parse(json)) : {},
+		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-Club.json?md5=${md5['MT-Club']}`).then(json => JSON.parse(json)) : {},
+		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-Characters.json?md5=${md5['MT-Characters']}`).then(json => JSON.parse(json)) : {},
+		game == 'BLDA' ? $ajax(`${href}GameData/${game}/IdMap.json?md5=${md5['IdMap']}`).then(json => JSON.parse(json)) : [{},{}],
+		game == 'BLDA' ? $ajax(`${href}GameData/${game}/CustomFaceAuthor.json?md5=${md5['CustomFaceAuthor']}`).then(json => JSON.parse(json)) : {},
+		moetalkStorage.getItem('mt-char'),
+		moetalkStorage.getItem('mt-head'),
+		moetalkStorage.getItem('chats')
+	]);
+	mt_char = mt_char || {}
+	mt_head = mt_head || {}
+	allChats = allChats || []
 	foreach(allChats,function(k,v)
 	{
 		repairCF(allChats[k]);
@@ -92,10 +69,12 @@ INIT_waiting(function()
 	选择角色 = true
 	charList(选择角色)//更新角色
 	$('#mt_watermark').click()//显示消息
-	INIT_loading('结束加载')
-},['mt_char','mt_head','allChats','mt_school','mt_club','mt_characters'])
+	INIT_loading(false)
+}
 
-if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeData/Font/Font.css' data-n-g='' id='mt-font'>");//加载字体
+
+
+if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeData/Fonts/Fonts.css' data-n-g='' id='mt-font'>");//加载字体
 //使用说明
 function clearCache()
 {
@@ -117,19 +96,62 @@ function clearCache()
 		}
 	});
 }
-$('body').on('click',"#update",function()
+async function update(str = '')
 {
-	$('.notice .title').text('获取更新')
+	if(!mt_settings.自动更新)mt_settings.自动更新 = {应用:false,数据:false}
+	let game = mt_settings['选择游戏'] || 'NONE'
+	let time = Date.now()//year+month+day
+	本地应用版本 = JSON.parse(await $ajax(`${href}MoeData/Version/Version.json?time=${time}`))
+	网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}MoeData/Version/Version.json?time=${time}`))
+	if(game !== 'NONE')
+	{
+		本地数据版本 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/Version.json?time=${time}`))
+		网络数据版本 = JSON.parse(await $ajax(`${MoeTalkURL}GameData/${game}/Version/Version.json?time=${time}`))
+	}
+
+	$('.notice .title').text('检查更新')
+	let readme = str
+	readme += `MoeTalk：<span style='color:red;' class='版本 bold'>读取中。。。</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
+	if(game !== 'NONE')
+	{
+		readme += `${gamearr[game]}：<span style='color:red;' class='版本 bold'>读取中。。。</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
+	}
+	if(nwjs || Html5Plus == 'mmt.MoeTalkH.WumberBee')
+	{
+		readme += `应用：<span class='更新应用'></span>`
+		readme += `<input type='checkbox' ${mt_settings.自动更新.应用 ? 'checked' : ''}>自动更新`
+		if(!mt_settings.自动更新.应用 && 网络应用版本 && 本地应用版本[0] < 网络应用版本[0])
+		{
+			readme += `<button style='line-height:112%;' onclick='更新应用(${time}),this.disabled=1'>点击更新</button>`
+		}
+		readme += '\n'
+		readme += `数据：<span class='更新数据'></span>`
+		readme += `<input type='checkbox' ${mt_settings.自动更新.数据 ? 'checked' : ''}>自动更新`
+		if(!mt_settings.自动更新.数据 && 网络数据版本 && 本地数据版本[0] < 网络数据版本[0])
+		{
+			readme += `<button style='line-height:112%;' onclick='更新数据(${time}),this.disabled=1'>点击更新</button>`
+		}
+		readme += '\n'
+	}
+
 	let bdwp = 'https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda'
 	let link = `<a class="INIT_href bold" title="${bdwp}" style="text-decoration:underline;">${bdwp}</a>`
-	let readme = `更新时间：${new Date(更新时间 * 1000).toLocaleString()}\n`
-	readme += `【客户端】当前版本：${本地版本}\n`
-	readme += `【客户端】最新版本：${manifest.code}\n`
-	readme += `【数据包】当前版本：${游戏版本[mt_settings['选择游戏']]}\n`
-	readme += `【数据包】最新版本：${manifest.game[mt_settings['选择游戏']]}\n`
-	readme += `\n客户端下载地址：\n${link}\n提取码：BLDA\n`
+	readme += `下载地址：（可复制）\n${link}\n提取码：BLDA\n`
+	
 	alert(readme)
-});
+	$('.版本:eq(0)').text(本地应用版本)
+	$('.版本:eq(1)').text(网络应用版本)
+	$('.版本:eq(2)').text(本地数据版本)
+	$('.版本:eq(3)').text(网络数据版本)
+	
+	TOP_confirm = function()
+	{
+		mt_settings.自动更新.应用 = $('.notice input:eq(0)').prop('checked')
+		mt_settings.自动更新.数据 = $('.notice input:eq(1)').prop('checked')
+		saveStorage('设置选项',mt_settings,'local')
+	}
+	
+}
 function moedev()
 {
 	alert('开启调试模式：<input type="checkbox"/>\n代码注入：<textarea></textarea>\n<button class="red" onclick="clearCache()">清除缓存</button>')
@@ -144,16 +166,7 @@ function moedev()
 }
 $(function()
 {
-	window.alert = function(str)
-	{
-		if($('.notice').hasClass('visible'))
-		{
-			TOP_notcie.push({html:$('.notice').html(),confirm:TOP_confirm})
-			TOP_confirm = ''
-		}
-		$('.notice pre').html(str)
-		$('.notice').addClass('visible')
-	};
+	t()
 	if(MikuTalk)
 	{
 		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
@@ -166,13 +179,29 @@ $(function()
 	notice += `<span class="bold">欢迎使用${span}MoeTalk</span>！\n此版本为基于原作者Raun0129开发的MolluTalk的个人改版</span>\n`
 	notice += '\n※移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏'
 	notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
-	if(nogame)
+	if(Html5Plus == 'mmt.MoeTalkH.WumberBee')
 	{
-		$('.notice pre').css('text-align','center')
-		selectgame(nogame)
-		INIT_loading(false)
+		document.addEventListener('plusready', function()
+		{
+			if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
+			else
+			{
+				if(mt_settings.自动更新.应用)更新应用()
+				if(mt_settings.自动更新.数据)更新数据()
+			}
+		}, false);
 	}
-	if(sessionStorage['通知文档'] == notice)return
+	if(nwjs)
+	{
+		if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
+		else
+		{
+			if(mt_settings.自动更新.应用)更新应用()
+			if(mt_settings.自动更新.数据)更新数据()
+		}
+	}
+	
+	if(sessionStorage['通知文档'] == notice)return//
 
 	localStorage['通知文档'] = notice
 	sessionStorage['通知文档'] = notice
@@ -213,7 +242,7 @@ $('body').on('click',"input",function()
 //工具
 $(".frVjsk").wait(function()
 {
-	$(".frVjsk").append(`<button class='${class0}' id='update'><b style='color:blue;'>新</b></button><span class='tool' align='center'>获取更新</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:blue;'>檢</b></button><span class='tool' align='center'>检查更新</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' onclick='selectgame()'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:red;'>換</b></button><span class='tool'>切换风格</span><br>`);
@@ -582,26 +611,30 @@ function TOP_replyEdit()
 		}
 	}
 }
-function selectgame(str = '')
+function selectgame(str = '请选择游戏')
 {
 	$('.notice .title').text('选择游戏')
-	let arr = {}
-	let select = str+"选择游戏：<select style='font-size:1.2rem;'>"
-	$.each(gamelist,function(k,v)
+	let select = `${str}\n<select style='font-size:1.2rem;'>`
+	let game = mt_settings['选择游戏'] || 'NONE'
+	$.each({...{'NONE':'无'},...gamearr},function(k,v)
 	{
-		k = v,v = gamearr[v]
-		arr[v] = k
-		select += `<option ${k === mt_settings['选择游戏'] ? "style='color:red;'" : ""}>${v}</option>`
+		select += `<option value='${k}'${k === game ? "style='color:red;'" : ""}>${v}</option>`
 	})
-	select += '</select>'
-	alert(`${select}\n\n无反应或一直加载请尝试刷新页面`)
-	$('.notice .confirm').text('提交')
-	$('.notice select').val(gamearr[mt_settings['选择游戏']])
-
-	TOP_confirm = function()
+	select += '</select>\n'
+	if(nwjs || Html5Plus == 'mmt.MoeTalkH.WumberBee')
 	{
-		mt_settings['选择游戏'] = arr[$('.notice select').val()]
+		str = `<span style='background-color:red;color:white;'>提交后会自动下载对应游戏的数据</span>\n`
+		str += `如果无法正常下载\n请通过<span class="blue bold">檢</span>查更新下载离线数据包\n也可用于查看文件下载进度\n`
+	}
+	alert(`${select}\n无反应或一直加载请尝试刷新页面\n${str}`)
+	$('.notice .confirm').text('提交')
+	$('.notice select').val(game)
+
+	TOP_confirm = async function()
+	{
+		mt_settings['选择游戏'] = $('.notice select').val()
 		saveStorage('设置选项',mt_settings,'local')
+		await 更新数据()
 		CHAR_UpdateChar()
 	}
 }
@@ -623,7 +656,7 @@ $.ajax(
 setInterval(function()
 {
 	let json = {}
-	json.MoeTalk = 本地版本
+	json.MoeTalk = 本地应用版本
 	json.INFO = {}//存档信息
 	json.INFO.title = '自动备份'
 	json.INFO.nickname = 'MoeTalk客户端'
@@ -691,59 +724,9 @@ function getVisibleParagraphs() {
 
   return visible;
 }
-
 // 使用示例：滚动时检测
 $('.gGreRb').on('scroll', function() {
   const visiblePs = getVisibleParagraphs();
   console.log('Currently visible <p>:', visiblePs);
 });
-*/
-
-function t()
-{
-	let Index = mt_charface.index
-	let arr = []
-	$.each(mt_characters,function(id,v)
-	{
-		if(mt_charface[id])
-		{
-			foreach(mt_charface[id],function(k,CharFace)
-			{
-				foreach(CharFace,function(k,v)
-				{
-					foreach(v[1],function(k,index)
-					{
-						let link = `GameData/${mt_settings['选择游戏']}/CharFace/${v[0]}`
-						if(typeof index === 'number')arr.push(`${link}/${Index[index]}.webp`)
-						else if(typeof index === 'object')
-						{
-							if(typeof index[1] === 'number')arr.push(`${link}/${Index[index[0]]}_${Index[index[1]]}.webp`)
-							else for(let i=0;i<=index[1];i++)arr.push(`${link}/${Index[index[0]]}_${i}.webp`)
-						}
-						else for(let i=0;i<=index;i++)arr.push(`${link}/${i}.webp`)
-					})
-				})
-			})
-		}
-	})
-	return arr
-}
-function tt(arr,type)
-{
-	if(!arr.length)return
-	let filename = arr.shift()
-	XHR(filename,function(){tt(arr,type)},function()
-	{
-		XHR('http://192.168.1.2/MoeTalk/'+filename,function(data)
-		{
-			savefile('',filename,data,type)
-			tt(arr,type)
-		},function(){tt(arr,type)})
-	})
-}
-// tt(t(),'image')
-XHR('http://192.168.1.2/MoeTalk/GameData/CBJQ/CharFace/girl018_01/chitai.webp',function(data)
-{
-	test(data)
-	fs.writeFileSync('1.webp', data);
-})
+*///

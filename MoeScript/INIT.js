@@ -8,7 +8,19 @@
 		};
 	}
 })();
-
+var TOP_confirm = '';
+window.alert = function(str)
+{
+	if($('.notice').hasClass('visible'))
+	{
+		TOP_notcie.push({html:$('.notice').html(),confirm:TOP_confirm})
+		$('.notice .title').text('通知')
+		$('.notice .confirm').text(mt_text.confirm[mtlang])
+		TOP_confirm = ''
+	}
+	$('.notice pre').html(str)
+	$('.notice').addClass('visible')
+};
 const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});//数据库
 if(mt_settings['存储模式'])
 {
@@ -34,7 +46,10 @@ var nowChapter = ['',{chapter:[]}]//当前章节
 var $$ = $;//jquery转义
 var winHeight = window.innerHeight
 var 元素尺寸;
-
+var 本地应用版本
+var 网络应用版本
+var 本地数据版本
+var 网络数据版本
 var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
 
 if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorage['0'])
@@ -293,4 +308,26 @@ if(mt_settings['后台保存'])
 	window.onblur = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 	window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 	window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
+}
+function $ajax(url,更新 = false)
+{
+	return new Promise(function(callback)
+	{
+		let xhr = new XMLHttpRequest();
+		xhr.open("GET",url);
+		xhr.send();
+		url = url.split('?')[0]
+		let ext = url.split('.').slice(-1)[0]
+		if(ext != 'json')xhr.responseType = 'blob';
+		xhr.onload = function()
+		{
+			if(this.status === 200 && this.responseURL.indexOf(url) > -1)
+			{
+				if(!this.responseType || this.response.type === 'image/webp' || 更新)callback(this.response)//成功
+				else callback(false)
+			}
+			else callback(false)
+		}
+		xhr.onerror = function(){callback(false)}
+	})
 }

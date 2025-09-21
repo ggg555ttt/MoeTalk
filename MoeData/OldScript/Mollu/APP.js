@@ -9954,7 +9954,7 @@
 					{
 						displayName: "Header__Title",
 						componentId: "sc-17b1not-2"
-					})(["font-size:2rem;color:", ";font-family:'title';"], function(e)
+					})(["font-size:2rem;color:", ";font-family:'Jalnan';"], function(e)
 					{
 						return e.theme.color.rgb255_255_255
 					}),
@@ -11782,7 +11782,7 @@
 					{
 						displayName: "AppWrapper__MainLoading",
 						componentId: "sc-ha7ldy-2"
-					})(["position:fixed;top:0;display:flex;width:100vw;height:100vh;font-family:'title';background-color:", ";transition:opacity 0.3s ease-in;margin:auto;justify-content:center;align-items:center;span{line-height:2.5rem;font-size:4rem;color:", ';font-family:"title";}'], function(e)
+					})(["position:fixed;top:0;display:flex;width:100vw;height:100vh;font-family:'Jalnan';background-color:", ";transition:opacity 0.3s ease-in;margin:auto;justify-content:center;align-items:center;span{line-height:2.5rem;font-size:4rem;color:", ';font-family:"Jalnan";}'], function(e)
 					{
 						return MikuTalk || e.theme.color.rgb139_187_233
 					}, function(e)

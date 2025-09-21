@@ -497,38 +497,6 @@ function CHAR_GetCharList()
 }
 function CHAR_UpdateChar()
 {
-	INIT_loading()
 	club(true)
-	id_map = [{},{}]
-	CustomFaceAuthor = {}
-	XHR(`${href}GameData/${mt_settings['选择游戏']}/CharFaceInfo.json`,function(json)
-	{
-		CFInfo = JSON.parse(json)
-	})
-	foreach(['School','Club','Characters','CharFace'],function(k,v)
-	{
-		window[['mt_school','mt_club','mt_characters','mt_charface'][k]] = false
-		XHR(`${href}GameData/${mt_settings['选择游戏']}/MT-${v}.json`,function(json)
-		{
-			window[['mt_school','mt_club','mt_characters','mt_charface'][k]] = JSON.parse(json)
-		})
-	})
-	if(mt_settings['选择游戏'] === 'BLDA')
-	{
-		foreach(['IdMap','CustomFaceAuthor'],function(k,v)
-		{
-			XHR(`${href}GameData/${mt_settings['选择游戏']}/${v}.json`,function(json)
-			{
-				window[['id_map','CustomFaceAuthor'][k]] = JSON.parse(json)
-			})
-		})
-	}
-	INIT_waiting(function()
-	{
-		CHAR_GetCharList()
-		选择角色 = true
-		charList(选择角色)
-		refreshMessage(chats)
-		INIT_loading()
-	},['mt_school','mt_club','mt_characters','id_map','CustomFaceAuthor','mt_charface'])
+	t()
 }

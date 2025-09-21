@@ -3,8 +3,8 @@
 <html lang="zh" style="--vh:9.47px; font-size: 16px;position:fixed;">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<script src="./MoeData/OldScript/Script/Jquery.min.js"></script>
-		<script src="./MoeData/OldScript/Script/localforage.min.js"></script>
+		<script src="./MoeData/OldScript/Script/Jquery.min.js"></script><!-- @@首页 -->
+		<script src="./MoeData/OldScript/Script/localforage.min.js"></script><!-- @@首页 -->
 		<script>
 //函数
 function os(u = window.navigator.userAgent)
@@ -115,14 +115,6 @@ if(browser.isIos === true || browser.isiPhone === true || mt_settings['打包下
 	document.write("<scr"+`ipt src='./MoeData/OldScript/Script/jszip.min.js'></scr`+"ipt>");
 }
 var MikuTalk = false;
-if((mt_settings['顶部标题'] === 'MikuTalk' || (month === 4 && day === 1)) && sessionStorage['MikuTalk'] !== 'no')
-{
-	MikuTalk = '#88CCCC';
-	document.write("<scr"+`ipt src='./MoeData/OldScript/MikuTap/pixi.min.js'></scr`+"ipt>");
-	document.write("<scr"+`ipt src='./MoeData/OldScript/MikuTap/gsap.min.js'></scr`+"ipt>");
-	document.write("<scr"+`ipt src='./MoeData/OldScript/MikuTap/mikutap.js'></scr`+"ipt>");
-	document.write("<scr"+`ipt src='./MoeData/OldScript/MikuTap/common-2.min.js'></scr`+"ipt>");
-}
 var cordova = false
 var onlyone = false//单一游戏版本
 let gameid = window.location.href.split('?')[1]
@@ -171,8 +163,7 @@ var mt_characters,
 
 		<link rel="shortcut icon" href="./MoeData/Ui/Favor_Schedule_Deco.webp">
 		<link rel='stylesheet' href="./MoeData/OldScript/Style/style.css?filesize=font" data-n-g=''><!-- @@样式 -->
-		<script src="./MoeData/MT-Img.js"></script><!-- 存档图片 -->
-		<script src="./MoeData/MT-Text.js"></script><!-- 提示文本 -->
+		<script src="./MoeData/MoeData.js"></script><!-- 提示文本 -->
 		<script src="./MoeData/OldScript/INIT.js?filesize=9886" defer></script><!-- @@预定义 -->
 		<script src="./MoeData/OldScript/IMAGE.js?filesize=13280" defer></script><!-- @@截图 -->
 		<script src="./MoeData/OldScript/DATA.js?filesize=21360" defer></script><!-- @@存档 -->

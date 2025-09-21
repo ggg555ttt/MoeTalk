@@ -1220,7 +1220,6 @@
 					{
 						className: "notice",
 						style: {zIndex: 1000},
-						onDoubleClick: function(){$$('.notice .cancel').click()},
 						children: (0, m.jsxs)(ea.F0,
 						{
 							onDoubleClick: function(e)
@@ -1844,7 +1843,7 @@
 									{
 										style: {fontSize: '2rem'},
 										className: '上次截图',
-										onChange: function(ea)
+										onChange: function()
 										{
 											let arr = 上次截图[$$('.上次截图').val()]
 											let html = ''
@@ -1885,7 +1884,7 @@
 									style: {overflow: 'scroll'}
 								}), (0, m.jsx)('iframe',
 								{
-									src: `${href}Capture_`+(mt_settings['禁止字体'] ?'NoFont' : 'Font')+`.html?`+更新时间,
+									src: `${href}Capture_`+(mt_settings['禁止字体'] ?'NoFont' : 'Font')+`.html?ver=`+localStorage['本地应用版本'],
 									style: 
 									{
 										// height: '0px'
@@ -2124,7 +2123,7 @@
 													上次截图 = data
 													foreach(data,function(k,v)
 													{
-														option += `<option value="${k}">第${v.index}段</option>`
+														option += `<option value="${k}">第${v.index}/${上次截图.length}段</option>`
 													})
 													$$('.截图区域 select').html(option)
 													let arr = 上次截图[0]
@@ -2552,7 +2551,7 @@
 													k = k ? k : "佚名"
 													let time = getNowDate();
 													let json = {}
-													json.MoeTalk = 本地版本
+													json.MoeTalk = 本地应用版本
 													json.INFO = {}//存档信息
 													json.INFO.title = f
 													json.INFO.nickname = k

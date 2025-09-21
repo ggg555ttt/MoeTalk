@@ -1,0 +1,5 @@
+@import url(Blueaka/Blueaka.css);/*默认*/
+@import url(Jalnan/Jalnan.css);/*标题*/
+@import url(KaiTi/KaiTi.css);/*楷体*/
+@font-face{font-family:Cyrillic;src:local(Arial);unicode-range:U+0400-04FF;}/*匹配西里尔字母*/
+body,textarea,button{font-family:Cyrillic,Blueaka;}
