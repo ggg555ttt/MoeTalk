@@ -193,45 +193,22 @@ async function 下载文件(url,filename,更新 = false)
 	}
 	
 }
-async function 并发下载_限流(文件列表,并发数 = 5)
+async function 安装应用(url)
 {
-	let i = 1
-	let l = 文件列表.length
-	async function 执行任务()
+	let 本地列表 = JSON.parse(await $ajax(`${href}MoeData/Version/MoeTalk.json?time=${time}`))
+	本地列表['MoeData/Version/MoeTalk.json'] = 1
+	本地列表['MoeData/Version/Version.json'] = 1
+	本地列表 = Object.keys(本地列表)
+	for(let i=0,l=本地列表.length;i<l;i++)
 	{
-		while(文件列表.length > 0)
-		{
-			let file = 文件列表.shift();
-			await 下载文件("http://localhost:13131/_www/"+file,file);
-			i++
-			$('.更新应用').text(`进度：${parseInt(100/(l/i))}%`)
-		}
+		await 下载文件(url+本地列表[i],本地列表[i]);
 	}
-	let 工人列表 = Array.from({length:并发数},执行任务);// 启动 N 个并发“工人”
-	await Promise.all(工人列表);
-	return;
+	localStorage['Html5Plus'] = Html5Plus
+	location.reload(true)
 }
 async function 更新应用(time = Date.now())
 {
-	if(Html5Plus == 'mmt.MoeTalkH.WumberBee' && !localStorage['Html5Plus'])
-	{
-		let str = ''
-		str += '首次运行需复制文件，请耐心等待\n<span class="更新应用"></span>\n复制完成后将刷新页面\n'
-		str += '如果您的www目录下有游戏数据包，请手动移动到doc目录下\ndoc目录为MoeTalk以后主要的运行目录'
-		alert(str)
-		let 本地列表 = JSON.parse(await $ajax(`${href}MoeData/Version/MoeTalk.json?time=${time}`))
-		本地列表['MoeData/Version/MoeTalk.json'] = 1
-		本地列表['MoeData/Version/Version.json'] = 1
-		if(本地列表)
-		{
-			await 并发下载_限流(Object.keys(本地列表),5)
-			localStorage['Html5Plus'] = 'mmt.MoeTalkH.WumberBee'
-			location.reload(true)
-		}
-		return
-	}
-	localStorage['本地应用版本'] = 本地应用版本
-	if(!nwjs && Html5Plus != 'mmt.MoeTalkH.WumberBee')return
+	if(H5P.indexOf(localStorage['Html5Plus']) < 0 || !nwjs)return
 
 	网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}MoeData/Version/Version.json?time=${time}`))
 	if(网络应用版本 && 本地应用版本[0] < 网络应用版本[0])
@@ -276,15 +253,11 @@ async function 更新应用(time = Date.now())
 }
 async function 更新数据(time = Date.now())
 {
-	if(Html5Plus == 'mmt.MoeTalkH.WumberBee' && !localStorage['Html5Plus'])return
 	let game = mt_settings['选择游戏'] || 'NONE'
-	if(game == 'NONE')return
-	本地数据版本 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/Version.json?time=${time}`))
-	localStorage['本地数据版本'] = 本地数据版本
-	if(!nwjs && Html5Plus != 'mmt.MoeTalkH.WumberBee')return
+	if(H5P.indexOf(localStorage['Html5Plus']) < 0 || !nwjs || game == 'NONE')return
 
+	本地数据版本 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/Version.json?time=${time}`)) || [-1]
 	网络数据版本 = JSON.parse(await $ajax(`${MoeTalkURL}GameData/${game}/Version/Version.json?time=${time}`))
-	if(!本地数据版本)本地数据版本 = [-1]
 	if(网络数据版本 && 本地数据版本[0] < 网络数据版本[0])
 	{
 		if($('.版本:visible').length == 0)update()
@@ -333,7 +306,7 @@ var 网址列表 = []
 async function 检查数据()
 {
 	文件列表 = []
-	let data = JSON.parse(await $ajax(`${href}GameData/${mt_settings['选择游戏']}/List.json?ver=${localStorage['本地数据版本']}`))
+	let data = JSON.parse(await $ajax(`${href}GameData/${mt_settings['选择游戏']}/List.json?ver=${本地数据版本}`))
 	let link = `GameData/${mt_settings['选择游戏']}`,arr = []
 	for(let key1 in data)
 	{

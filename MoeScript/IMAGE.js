@@ -417,7 +417,7 @@ function mt_capture(清晰度,生成图片,标题)
 			}
 		})
 	}
-	if(Html5Plus == 'mmt.MoeTalkH.WumberBee')
+	if(H5P.indexOf(localStorage['Html5Plus']) > -1)
 	{
 		baseArr = [];
 		let length = 截图区域.find('img').length

@@ -54,6 +54,8 @@ async function t()
 	mt_char = mt_char || {}
 	mt_head = mt_head || {}
 	allChats = allChats || []
+	otherChats = []
+	chats = []
 	foreach(allChats,function(k,v)
 	{
 		repairCF(allChats[k]);
@@ -69,7 +71,7 @@ async function t()
 	CHAR_GetCharList()
 	选择角色 = true
 	charList(选择角色)//更新角色
-	$('#mt_watermark').click()//显示消息
+	refreshMessage(chats)//$('#mt_watermark').click()//显示消息
 	INIT_loading(false)
 }
 
@@ -116,7 +118,7 @@ async function update(str = '')
 	$('.notice .title').text('检查更新')
 
 	let readme = str
-	if(nwjs || Html5Plus == 'mmt.MoeTalkH.WumberBee')
+	if(nwjs || H5P.indexOf(localStorage['Html5Plus']) > -1)
 	{
 		readme += `MoeTalk：<span style='color:red;' class='版本 bold'>${本地应用版本}</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
 		if(game !== 'NONE')
@@ -144,7 +146,7 @@ async function update(str = '')
 		saveStorage('设置选项',mt_settings,'local')
 	}
 	
-	if(nwjs || Html5Plus == 'mmt.MoeTalkH.WumberBee')
+	if(nwjs || H5P.indexOf(localStorage['Html5Plus']) > -1)
 	{
 		网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}MoeData/Version/Version.json?time=${time}`))
 		if(game !== 'NONE')
@@ -176,16 +178,24 @@ $(function()
 	notice += `<span class="bold">欢迎使用${span}MoeTalk</span>！\n此版本为基于原作者Raun0129开发的MolluTalk的个人改版</span>\n`
 	notice += '\n※移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏'
 	notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
-	if(Html5Plus == 'mmt.MoeTalkH.WumberBee')
+	if(Html5Plus)
 	{
 		document.addEventListener('plusready', function()
 		{
-			if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
+			if(H5P.indexOf(localStorage['Html5Plus']) < 0)
+			{
+				//alert()
+			}
 			else
 			{
-				if(mt_settings.自动更新.应用)更新应用()
-				if(mt_settings.自动更新.数据)更新数据()
+				if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
+				else
+				{
+					if(mt_settings.自动更新.应用)更新应用()
+					if(mt_settings.自动更新.数据)更新数据()
+				}
 			}
+			
 		}, false);
 	}
 	if(nwjs)
@@ -618,7 +628,7 @@ function selectgame(str = '请选择游戏')
 		select += `<option value='${k}'${k === game ? "style='color:red;'" : ""}>${v}</option>`
 	})
 	select += '</select>\n'
-	if(nwjs || Html5Plus == 'mmt.MoeTalkH.WumberBee')
+	if(nwjs || H5P.indexOf(localStorage['Html5Plus']) > -1)
 	{
 		str = `<span style='background-color:red;color:white;'>提交后会自动下载对应游戏的数据</span>\n`
 		str += `如果无法正常下载\n请通过<span class="blue bold">檢</span>查更新下载离线数据包\n也可用于查看文件下载进度\n`

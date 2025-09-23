@@ -38,7 +38,7 @@ if(mt_settings['存储模式'])
 
 }
 
-var player = (Html5Plus === 'mmt.MoeTalkH.WumberBee' ? '/' : href)+'Moedata'//播放器地址
+var player = (H5P.indexOf(localStorage['Html5Plus']) > -1 ? '/' : href)+'Moedata'//播放器地址
 var LibraryURL = 'GameData/BLDA/Library'//图书馆地址
 var directory = []//目录
 var nowChapter = ['',{chapter:[]}]//当前章节
@@ -203,7 +203,7 @@ function saveStorage(key,val,mode)
 {
 	if(window.location.href.indexOf('file:///') === 0 && !Html5Plus)
 	{
-		alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请运行MoeTalk.exe或查看player目录下的info.txt文件')
+		alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请启动MoeTalk.exe！')
 	}
 	if(mode === 'local' && ['chats','mt-char','mt-head','DB_EMOJI','imageArr'].indexOf(key) > -1)
 	{
