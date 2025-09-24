@@ -72,7 +72,7 @@ async function 保存文件(filename, data)
 		let dirname = filename.split('/')
 		filename = dirname.pop()
 		dirname = dirname.join('/')
-		if(typeof data === 'string')data = new Blob([data],{'type':'application/json'});
+		if(typeof data === 'string')data = new Blob([data],{'type':'application/octet-stream'});
 		let buffer = Buffer.from(await data.arrayBuffer());//将 Blob 转为 Buffer
 		if(!fs.existsSync(dirname))fs.mkdirSync(dirname,{recursive: true});//自动创建多级目录
 		fs.writeFileSync(`${dirname}/${filename}`, buffer);// 写入文件
@@ -172,7 +172,7 @@ async function 下载文件(url,filename,更新 = false)
 		let dirname = filename.split('/')
 		filename = dirname.pop()
 		dirname = dirname.join('/')
-		if(typeof data === 'string')data = new Blob([data],{'type':'application/json'});
+		if(typeof data === 'string')data = new Blob([data],{'type':'application/octet-stream'});
 		let buffer = Buffer.from(await data.arrayBuffer());//将 Blob 转为 Buffer
 		if(!fs.existsSync(dirname))fs.mkdirSync(dirname,{recursive: true});//自动创建多级目录
 		fs.writeFileSync(`${dirname}/${filename}`, buffer);// 写入文件

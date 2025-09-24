@@ -1884,7 +1884,7 @@
 									style: {overflow: 'scroll'}
 								}), (0, m.jsx)('iframe',
 								{
-									src: `${href}Capture_`+(mt_settings['禁止字体'] ?'NoFont' : 'Font')+`.html?ver=`+localStorage['本地应用版本'],
+									src: `${href}capture_`+(mt_settings['禁止字体'] ?'nofont' : 'font')+`.html?ver=`+localStorage['本地应用版本'],
 									style: 
 									{
 										// height: '0px'
