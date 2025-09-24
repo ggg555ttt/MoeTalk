@@ -22,7 +22,7 @@ function XHR(url,callback = false)
 }
 var mt_characters,mt_school,mt_club,CFInfo = {}//表情差分信息
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
-var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index.html','').replace('setting.html','')//文件目录地址
+var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('setting.html','').replace('setting','')//文件目录地址
 var browser = os();//获取浏览器信息
 var date = new Date();
 var year = date.getFullYear() % 100; // 年
@@ -45,7 +45,7 @@ if(window.location.href.includes('http'))
 }
 if(window.navigator.userAgent.includes('Html5Plus'))
 {
-	href = window.location.href.replace('index.html','').replace('setting.html','')
+	href = window.location.href.replace('setting.html','').replace('setting','')
 	客户端 = 'HTML5+'
 }
 if(window.location.protocol == 'chrome-extension:')
