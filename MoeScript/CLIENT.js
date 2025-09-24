@@ -34,7 +34,7 @@
 }*/
 async function file_exists(filePath)
 {
-	if(nwjs)
+	if(客户端 === 'NW.js')
 	{
 		try{return await fs.pathExists(filePath)}
 		catch{return false}
@@ -49,7 +49,7 @@ async function file_exists(filePath)
 				{
 					file.file(function(entry)
 					{
-						if(entry.size)resolve(true);//是文件
+						if(entry.size)resolve(entry.fullPath);//是文件
 						else resolve(false)
 					})
 				}
@@ -67,7 +67,7 @@ async function ZipToJson(file)
 }
 async function 保存文件(filename, data)
 {
-	if(nwjs)
+	if(客户端 === 'NW.js')
 	{
 		let dirname = filename.split('/')
 		filename = dirname.pop()
@@ -146,7 +146,7 @@ async function 复制文件(srcPath, dstPath)
 }
 async function 复制目录(src,dst,files = [])
 {
-	if(nwjs)
+	if(客户端 === 'NW.js')
 	{
 		dst = dst || process.cwd()
 		await fs.copy(src,dst,
@@ -166,7 +166,7 @@ async function 复制目录(src,dst,files = [])
 }
 async function 下载文件(url,filename,更新 = false)
 {
-	if(nwjs)
+	if(客户端 === 'NW.js')
 	{
 		let data = await $ajax(url,更新)
 		let dirname = filename.split('/')
@@ -191,24 +191,36 @@ async function 下载文件(url,filename,更新 = false)
 			}).start()
 		});
 	}
-	
 }
 async function 安装应用(url)
 {
+	alert("")
+	$('.title').text('安装应用').next().hide()
+	$('.confirm').parent().hide()
+	$('.notice pre').html("请不要退出或刷新\n<span class='更新应用'>请稍等。。。</span>").css('text-align','center')
 	let 本地列表 = JSON.parse(await $ajax(`${href}MoeData/Version/MoeTalk.json?time=${time}`))
 	本地列表['MoeData/Version/MoeTalk.json'] = 1
 	本地列表['MoeData/Version/Version.json'] = 1
-	本地列表 = Object.keys(本地列表)
-	for(let i=0,l=本地列表.length;i<l;i++)
+	let 文件列表 = Object.keys(本地列表)
+	async function 下载线程()
 	{
-		await 下载文件(url+本地列表[i],本地列表[i]);
+		while(文件列表.length > 0)
+		{
+			let file = 文件列表.shift();
+			let ext = file.split('.').slice(-1)[0]
+			let md5 = ['html','js','css','json'].includes(ext) ? `?md5=${本地列表[file]}` : ''
+			await 下载文件(`${url}${file}${md5}`,file);
+			$('.notice pre').text('安装应用中，请不要退出或刷新\n剩余文件：'+文件列表.length)
+		}
 	}
-	localStorage['Html5Plus'] = Html5Plus
+	await Promise.all(Array.from({length:5},下载线程));
+	$('.notice pre').text('应用安装完成！\n即将刷新页面！')
+	localStorage['HTML5+'] = 'file://'+await file_exists('index.html')
 	location.reload(true)
 }
 async function 更新应用(time = Date.now())
 {
-	if(H5P.indexOf(localStorage['Html5Plus']) < 0 || !nwjs)return
+	if(!本地)return
 
 	网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}MoeData/Version/Version.json?time=${time}`))
 	if(网络应用版本 && 本地应用版本[0] < 网络应用版本[0])
@@ -254,7 +266,7 @@ async function 更新应用(time = Date.now())
 async function 更新数据(time = Date.now())
 {
 	let game = mt_settings['选择游戏'] || 'NONE'
-	if(H5P.indexOf(localStorage['Html5Plus']) < 0 || !nwjs || game == 'NONE')return
+	if(!本地 || game == 'NONE')return
 
 	本地数据版本 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/Version.json?time=${time}`)) || [-1]
 	网络数据版本 = JSON.parse(await $ajax(`${MoeTalkURL}GameData/${game}/Version/Version.json?time=${time}`))
@@ -301,11 +313,11 @@ async function 更新数据(time = Date.now())
 	检查数据()
 }
 var 文件总数 = '0'
-var 文件列表 = []
+var 数据列表 = []
 var 网址列表 = []
 async function 检查数据()
 {
-	文件列表 = []
+	数据列表 = []
 	let data = JSON.parse(await $ajax(`${href}GameData/${mt_settings['选择游戏']}/List.json?ver=${本地数据版本}`))
 	let link = `GameData/${mt_settings['选择游戏']}`,arr = []
 	for(let key1 in data)
@@ -346,20 +358,20 @@ async function 检查数据()
 			{
 				网址列表.push(v.url+'/https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
 			})
-			文件列表 = arr
-			文件总数 = 文件列表.length-1
+			数据列表 = arr
+			文件总数 = 数据列表.length-1
 			foreach(网址列表,function(k,v){下载数据(v)})
 		}
 	});
 }
 async function 下载数据(url)
 {
-	if(!文件列表.length)
+	if(!数据列表.length)
 	{
 		文件总数 = 0
 		return
 	}
-	let filename = 文件列表.shift()//获取下载路径
+	let filename = 数据列表.shift()//获取下载路径
 	if(await file_exists(filename))//本地存在就跳过
 	{
 		$('.更新数据').text('剩余下载文件：'+文件总数--)
@@ -376,7 +388,7 @@ async function 下载数据(url)
 		}
 		else
 		{
-			文件列表.unshift(filename)//失败换源
+			数据列表.unshift(filename)//失败换源
 			下载数据(网址列表[Math.floor(Math.random()*网址列表.length)])
 		}
 	}

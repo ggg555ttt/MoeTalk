@@ -118,7 +118,7 @@ async function update(str = '')
 	$('.notice .title').text('检查更新')
 
 	let readme = str
-	if(nwjs || H5P.indexOf(localStorage['Html5Plus']) > -1)
+	if(本地 && 客户端)
 	{
 		readme += `MoeTalk：<span style='color:red;' class='版本 bold'>${本地应用版本}</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
 		if(game !== 'NONE')
@@ -126,13 +126,29 @@ async function update(str = '')
 			readme += `${gamearr[game]}：<span style='color:red;' class='版本 bold'>读取中。。。</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
 		}
 		readme += `应用：<span class='更新应用'></span>`
-		readme += `<input type='checkbox' ${mt_settings.自动更新.应用 ? 'checked' : ''}>自动更新`
+		readme += `<span><input type='checkbox' ${mt_settings.自动更新.应用 ? 'checked' : ''}>自动更新</span>`
 		readme += '\n'
 		readme += `数据：<span class='更新数据'></span>`
-		readme += `<input type='checkbox' ${mt_settings.自动更新.数据 ? 'checked' : ''}>自动更新`
+		readme += `<span><input type='checkbox' ${mt_settings.自动更新.数据 ? 'checked' : ''}>自动更新</span>`
 		readme += '\n'
 	}
-
+	if(客户端 === 'HTML5+')
+	{
+		if(!本地 && localStorage['HTML5+'] == 'NO')readme += `<button onclick="安装应用(MoeTalkURL)">安装离线应用</button>\n`
+		if(!本地 && localStorage['HTML5+'] && localStorage['HTML5+'].includes('WEB://'))
+		{
+			let cmd1 = "localStorage['HTML5+']=localStorage['HTML5+'].replace('WEB://','file://')"
+			let cmd2 = "plus.webview.currentWebview().loadURL(localStorage['HTML5+'])"
+			readme += `<button onclick="${cmd1},${cmd2}">访问离线端</button>\n`
+		}
+		if(本地 && !localStorage['HTML5+'])
+		{
+			let code = 'WEB://'+await file_exists('index.html')
+			code = `localStorage['HTML5+']='${code}'`
+			code = btoa(code)
+			readme += `<button onclick="plus.webview.currentWebview().loadURL('${MoeTalkURL}?eval=${code}')">访问网络端</button>\n`
+		}
+	}
 	let bdwp = 'https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda'
 	let link = `<a class="INIT_href bold" title="${bdwp}" style="text-decoration:underline;">${bdwp}</a>`
 	readme += `离线客户端下载地址：（可复制）\n${link}\n提取码：BLDA\n`
@@ -146,7 +162,7 @@ async function update(str = '')
 		saveStorage('设置选项',mt_settings,'local')
 	}
 	
-	if(nwjs || H5P.indexOf(localStorage['Html5Plus']) > -1)
+	if(本地 && 客户端)
 	{
 		网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}MoeData/Version/Version.json?time=${time}`))
 		if(game !== 'NONE')
@@ -156,8 +172,8 @@ async function update(str = '')
 		}
 		let str1 = `<button style='line-height:112%;' onclick='更新应用(${time}),this.disabled=1'>点击更新</button>`
 		let str2 = `<button style='line-height:112%;' onclick='更新数据(${time}),this.disabled=1'>点击更新</button>`
-		if(!mt_settings.自动更新.应用 && 网络应用版本 && 本地应用版本[0] < 网络应用版本[0])$('.notice input:eq(0)').after(str1)
-		if(!mt_settings.自动更新.数据 && 网络数据版本 && 本地数据版本[0] < 网络数据版本[0])$('.notice input:eq(1)').after(str2)
+		if(!mt_settings.自动更新.应用 && 网络应用版本 && 本地应用版本[0] < 网络应用版本[0])$('.notice input:eq(0)').parent().after(str1)
+		if(!mt_settings.自动更新.数据 && 网络数据版本 && 本地数据版本[0] < 网络数据版本[0])$('.notice input:eq(1)').parent().after(str2)
 		$('.版本:eq(1)').text(网络应用版本)
 		$('.版本:eq(2)').text(本地数据版本)
 		$('.版本:eq(3)').text(网络数据版本)
@@ -178,15 +194,12 @@ $(function()
 	notice += `<span class="bold">欢迎使用${span}MoeTalk</span>！\n此版本为基于原作者Raun0129开发的MolluTalk的个人改版</span>\n`
 	notice += '\n※移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏'
 	notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
-	if(Html5Plus)
+	if(客户端 === 'HTML5+')
 	{
 		document.addEventListener('plusready', function()
 		{
-			if(H5P.indexOf(localStorage['Html5Plus']) < 0)
-			{
-				//alert()
-			}
-			else
+			if(location.href.indexOf('/www/') > -1 && !localStorage['HTML5+'])安装应用('http://localhost:13131/_www/')
+			else if(本地)
 			{
 				if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
 				else
@@ -195,10 +208,17 @@ $(function()
 					if(mt_settings.自动更新.数据)更新数据()
 				}
 			}
-			
+			if(!本地 && !localStorage['HTML5+'])
+			{
+				localStorage['HTML5+'] = 'NO'
+				let str = 'MoeTalk现在可使用离线端，是否安装？\n之后可从<span class="blue bold">檢</span>查更新切换\n'
+				str += `<button onclick="安装应用(${MoeTalkURL})">安装离线应用</button>\n`
+				$('.notice pre').css('text-align','center')
+				alert(str)
+			}
 		}, false);
 	}
-	if(nwjs)
+	if(客户端 === 'NW.js')
 	{
 		if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
 		else
@@ -209,10 +229,9 @@ $(function()
 	}
 	
 	if(sessionStorage['通知文档'] == notice)return//
-
+	$('.notice pre').css('text-align','center')
 	localStorage['通知文档'] = notice
 	sessionStorage['通知文档'] = notice
-	$('.notice pre').css('text-align','center')
 	if(MikuTalk)
 	{
 		alert('愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n点击“确认”可以关闭')
@@ -628,7 +647,7 @@ function selectgame(str = '请选择游戏')
 		select += `<option value='${k}'${k === game ? "style='color:red;'" : ""}>${v}</option>`
 	})
 	select += '</select>\n'
-	if(nwjs || H5P.indexOf(localStorage['Html5Plus']) > -1)
+	if(本地 && 客户端)
 	{
 		str = `<span style='background-color:red;color:white;'>提交后会自动下载对应游戏的数据</span>\n`
 		str += `如果无法正常下载\n请通过<span class="blue bold">檢</span>查更新下载离线数据包\n也可用于查看文件下载进度\n`
@@ -736,4 +755,4 @@ $('.gGreRb').on('scroll', function() {
   const visiblePs = getVisibleParagraphs();
   console.log('Currently visible <p>:', visiblePs);
 });
-*///
+*/

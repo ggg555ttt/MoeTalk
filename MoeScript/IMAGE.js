@@ -417,7 +417,7 @@ function mt_capture(清晰度,生成图片,标题)
 			}
 		})
 	}
-	if(H5P.indexOf(localStorage['Html5Plus']) > -1)
+	if(!本地 && 客户端 === 'HTML5+')
 	{
 		baseArr = [];
 		let length = 截图区域.find('img').length
@@ -432,7 +432,7 @@ function mt_capture(清晰度,生成图片,标题)
 		callback()
 	}
 }
-if(Html5Plus)
+if(客户端 === 'HTML5+')
 {
 	urlToBase64(羁绊背景,1,function(img){羁绊背景 = img,baseArr = []})
 	urlToBase64(回复背景,1,function(img){回复背景 = img,baseArr = []})
@@ -537,7 +537,7 @@ function combineFiles(mainFile, hideFile, fileName, Index) {
 			if(!正在截图)
 			{
 				let img = `<img src='data:${mt_settings['图片格式']};base64,${base64}' style='width:100%;'>`
-				if(Html5Plus)$('.图片预览').append(img),截图区域.html('')
+				if(客户端 === 'HTML5+')$('.图片预览').append(img),截图区域.html('')
 				else 截图区域.html(img)
 			}
 			$('.截图数量').text(imageArr.length)

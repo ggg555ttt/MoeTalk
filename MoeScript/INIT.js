@@ -38,7 +38,7 @@ if(mt_settings['存储模式'])
 
 }
 
-var player = (H5P.indexOf(localStorage['Html5Plus']) > -1 ? '/' : href)+'Moedata'//播放器地址
+var player = (本地 ? '/' : href)+'Moedata'//播放器地址
 var LibraryURL = 'GameData/BLDA/Library'//图书馆地址
 var directory = []//目录
 var nowChapter = ['',{chapter:[]}]//当前章节
@@ -81,7 +81,6 @@ if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorag
 		mt_settings['选择角色'].index = 1
 		mt_settings['选择角色'].list = []
 	}
-	mt_settings['当前网址'] = window.location.href
 	mt_settings['设备信息'] = window.navigator.userAgent
 	delete localStorage['0']
 	delete localStorage['1']	
@@ -123,6 +122,7 @@ if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorag
 	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
 
 }
+mt_settings['当前网址'] = window.location.href
 if(!mt_settings.风格样式 || mt_settings.风格样式[0])
 {
 	mt_settings.风格样式 = {}
@@ -201,7 +201,7 @@ function isTrue(val)
 }
 function saveStorage(key,val,mode)
 {
-	if(window.location.href.indexOf('file:///') === 0 && !Html5Plus)
+	if(本地 && !客户端)
 	{
 		alert('资源管理器下打开的MoeTalk无法生成图片和使用MomoTalk播放器\n请启动MoeTalk.exe！')
 	}
@@ -258,7 +258,7 @@ function INIT_state(num)
 }
 $('body').on('click',".INIT_href",function()
 {
-	if(Html5Plus)
+	if(客户端 === 'HTML5+')
 	{
 		plus.runtime.openURL($(this).attr('title'));
 	}

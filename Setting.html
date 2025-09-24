@@ -22,7 +22,7 @@ function XHR(url,callback = false)
 }
 var mt_characters,mt_school,mt_club,CFInfo = {}//表情差分信息
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
-var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index.html','')//文件目录地址
+var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index.html','').replace('Setting.html','')//文件目录地址
 var browser = os();//获取浏览器信息
 var date = new Date();
 var year = date.getFullYear() % 100; // 年
@@ -36,27 +36,34 @@ var GitlabURL = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d076
 if(window.location.href == GitlabURL)MoeTalkURL = GitlabURL
 
 //设备信息
-var cordova = false//cordova客户端
-// if(gameid === 'cordova')sessionStorage['cordova'] = 'cordova'
-// if(gameid === 'cordova2')sessionStorage['cordova2'] = 'cordova2'
-var Html5Plus = window.navigator.userAgent.match('Html5Plus') ? 'mmt.MoeTalkHW.WumberBee' : false//H5网络端
-if(window.location.href.indexOf('file:///') === 0)//H5离线端
+var fs,客户端 = false
+var 本地 = false
+if(window.location.href.includes('http'))
 {
-	href = window.location.href.replace('index.html','')
-	if(Html5Plus)Html5Plus = 'mmt.MoeTalkH.WumberBee'
+	本地 = true
+	loadjs('./MoeScript/Script/jszip.min.js')
 }
-var fs,nwjs = false;//PC离线端
-if(window.location.protocol == 'chrome-extension:')nwjs = true,fs = require('fs');
+if(window.navigator.userAgent.includes('Html5Plus'))
+{
+	href = window.location.href.replace('index.html','').replace('Setting.html','')
+	客户端 = 'HTML5+'
+}
+if(window.location.protocol == 'chrome-extension:')
+{
+	href = ''
+	fs = require('fs-extra')
+	客户端 = 'NW.js'
+}
 
+var cordova = false//cordova客户端
 if(sessionStorage['cordova'] === 'cordova')loadjs('./cordova.js')
 if(sessionStorage['cordova2'] === 'cordova2')loadjs('./MoeScript/Cordova/cordova.js')
 if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 function back()
 {
-	let link;
-	if(Html5Plus || nwjs)link = window.location.href.replace('Setting.html','index.html')
-	else link = window.location.href.replace('Setting.html','').replace('setting','')
-	window.location.href = link
+	let link = window.location.href.split('/')
+	link[link.length-1] = 'index.html'
+	window.location.href = link.join('/')
 }
 </script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -67,8 +74,8 @@ function back()
 	<link rel='stylesheet' href="./MoeData/Style.css?md5=7d8dd779a899ab7786c98d8516d59461" data-n-g=""><!-- @@ -->
 	<script src="./MoeScript/Script/jquery.min.js?md5=954f70f07f05742168adceba796dda72"></script><!-- @@ -->
 	<script src="./MoeScript/Script/localforage.min.js?md5=3789d1d948e1eb4b5f3122fb339e8f26"></script><!-- @@ -->
-	<script src="./MoeScript/INIT.js?md5=12e7d6da86949441ecc8d436be52726f" defer=""></script><!-- @@ -->
-	<script src="./MoeScript/DATA.js?md5=8a022efe9a5249a4912fbe34968ea8c7" defer=""></script><!-- @@ -->
+	<script src="./MoeScript/INIT.js?md5=37b1b8dafcf1c368ba4b64210665954f" defer=""></script><!-- @@ -->
+	<script src="./MoeScript/DATA.js?md5=0c3952611339b14ed725d806981970c1" defer=""></script><!-- @@ -->
 	<script src="./MoeScript/SETTING.js?md5=a11219d55f9629aa96705b469b5947ac" defer=""></script><!-- @@ -->
 </head>
 <body style="height:100%;overflow:auto;background-image:linear-gradient( rgba(255,255,255,0.5),rgba(255,255,255,0.5) ),url(MoeData/Ui/hexa_back_01.webp);background-repeat :no-repeat;background-size :cover;user-select:none;">

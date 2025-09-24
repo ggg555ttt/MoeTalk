@@ -2253,7 +2253,7 @@
 											'选择角色': mt_settings['选择角色']//@
 										}, [...chats,...otherChats]],null,4)], e.next = 6, (0, u.rU)(r);
 									case 6:
-										if(Html5Plus)
+										if(客户端 === 'HTML5+')
 										{
 											saveServerDatatoFile(`MoeTalk${L.Z.sharedFile[d]}_${t.title}_${(0, u._3)(!0, !0)}_${INIT_state()}`, r[0] ,'json');
 										}

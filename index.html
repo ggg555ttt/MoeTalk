@@ -9,27 +9,52 @@
 		<script src="./MoeScript/Script/snapdom.min.js?md5=9e4bce4af468d4e534657dc3f32da330"></script><!-- @@首页 -->
 		<!-- <script src="https://unpkg.com/@zumer/snapdom@latest/dist/snapdom.min.js"></script> -->
 		<script>
-// delete localStorage['Html5Plus']
-var H5P = ['mmt.MoeTalkH.WumberBee','mmt.MoeTalkHW.WumberBee']
-if(H5P.indexOf(localStorage['Html5Plus']) > -1)
+//'?eval='+encodeURIComponent("localStorage['HTML5+']='WEB'")
+// delete localStorage['HTML5+']
+var eval_code = new URLSearchParams(window.location.search).get('eval')
+if(eval_code)eval(atob(eval_code))
+var test = console.log
+//设备信息
+var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index.html','')//文件目录地址
+var fs,客户端 = false
+var 本地 = false
+if(!window.location.href.includes('http'))
 {
-	if(location.href.indexOf('/www/') > 0)
+	本地 = true
+	loadjs('./MoeScript/Script/jszip.min.js')
+}
+if(window.navigator.userAgent.includes('Html5Plus'))
+{
+	if(本地)href = window.location.href.replace('index.html','')
+	客户端 = 'HTML5+'
+}
+if(window.location.protocol == 'chrome-extension:')
+{
+	href = ''
+	fs = require('fs-extra')
+	客户端 = 'NW.js'
+}
+
+if(客户端 === 'HTML5+')
+{
+	document.addEventListener('plusready', function()
 	{
-		location.replace(location.href.replace('/www/','/doc/'));//本地端
-	}
-	if(location.href.indexOf('www') > 0)
-	{
-		location.replace(location.href.replace('/www/','/doc/'));//网络端
-	}
+		if(localStorage['HTML5+'] && localStorage['HTML5+'].includes('file'))
+		{
+			if(href.includes('/www/') || href.includes('http'))plus.webview.currentWebview().loadURL(localStorage['HTML5+'])
+		}
+	}, false);
 }
 //版本信息
-var 本地应用版本 = [250923.124543]//@
+var 本地应用版本 = [250924.22403]//@
 var 网络应用版本
 var 本地数据版本
 var 网络数据版本
 var gamearr = {"BLDA":"碧蓝档案","CBJQ":"尘白禁区","QNZL":"千年之旅","YGST":"犹格索托斯的庭院","DFPJ":"东方Project","NONE":"无"}
 //函数和变量
-var test = console.log
+var MoeTalkURL = 'https://moetalk.netlify.app/'//MoeTalk网址
+var GitlabURL = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/'
+
 function loadjs(link,mode = ''){document.write("<scr"+`ipt src='${link}' ${mode}></scr`+"ipt>")}
 function os(u = window.navigator.userAgent)
 {
@@ -55,7 +80,7 @@ function XHR(url,onload = false,onerror = false)
 }
 var mt_characters,mt_school,mt_club,CFInfo = {}//表情差分信息
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
-var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index.html','')//文件目录地址
+
 var browser = os();//获取浏览器信息
 var date = new Date();
 var year = date.getFullYear() % 100; // 年
@@ -64,10 +89,7 @@ var day = date.getDate(); // 日
 year = year.toString()
 month = (month < 10 ? '0'+month : month).toString()
 day = (day < 10 ? '0'+day : day).toString()
-var MoeTalkURL = "https://moetalk.netlify.app/"//MoeTalk网址
-var GitlabURL = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/'
-if(window.location.href == GitlabURL)MoeTalkURL = GitlabURL
-// MoeTalkURL = 'http://192.168.1.2/MoeTalk/'
+
 //缺省游戏和语言
 let gameid = window.location.href.split('?')[1]
 mt_settings['选择游戏'] = mt_settings['选择游戏'] || ''
@@ -75,26 +97,11 @@ var mtlang = mt_settings['语言选项'] || 'zh_cn';
 var langarr = ['zh_cn','zh_tw','jp','en','kr'];
 if(langarr.indexOf(gameid) > -1)mt_settings['语言选项'] = mtlang = gameid
 
-//设备信息
+
+
 var cordova = false//cordova客户端
 if(gameid === 'cordova')sessionStorage['cordova'] = 'cordova'
 if(gameid === 'cordova2')sessionStorage['cordova2'] = 'cordova2'
-
-var Html5Plus = window.navigator.userAgent.match('Html5Plus') ? H5P[1] : false//H5网络端
-if(window.location.href.indexOf('file:///') === 0)//H5离线端
-{
-	href = window.location.href.replace('index.html','')
-	if(Html5Plus)Html5Plus = H5P[0]
-	loadjs('./MoeScript/Script/jszip.min.js')
-}
-var fs,nwjs = false;//PC离线端
-if(window.location.protocol == 'chrome-extension:')
-{
-	nwjs = true
-	fs = require('fs-extra');
-	href = ''
-	loadjs('./MoeScript/Script/jszip.min.js')
-}
 
 //加载文件
 var zipDownImg = false;
@@ -141,16 +148,16 @@ if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<link rel="shortcut icon" href="./MoeData/Ui/Favor_Schedule_Deco.webp">
 		<link rel='stylesheet' href="./MoeData/Style.css?md5=7d8dd779a899ab7786c98d8516d59461" data-n-g=''><!-- @@样式 -->
 		<script src="./MoeData/MoeData.js"></script><!-- 提示文本 -->
-		<script src="./MoeScript/INIT.js?md5=12e7d6da86949441ecc8d436be52726f" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/CLIENT.js?md5=5f6833df1e51bfeff0ccdef0be422876" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/DATA.js?md5=8a022efe9a5249a4912fbe34968ea8c7" defer></script><!-- @@存档 -->
+		<script src="./MoeScript/INIT.js?md5=37b1b8dafcf1c368ba4b64210665954f" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/CLIENT.js?md5=a16081beec14c1d25820065f28d2430d" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/DATA.js?md5=0c3952611339b14ed725d806981970c1" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAT.js?md5=325224ff4841b1681ef6993c5de7f836" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?md5=92c180609f05eb0615441a9b47250dbf" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/IMAGE.js?md5=f37f3a5453b01781dbbd90412a3bfabd" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/TOP.js?md5=fd75e9af6d8fca0b88e86f4f97027a6d" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/IMAGE.js?md5=f72c4b9125c4eeeac2d58a832c7fdb06" defer></script><!-- @@截图 -->
+		<script src="./MoeScript/TOP.js?md5=c7879cc3a6f06059d205b26fc81c9862" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/MAIN.js?md5=a89261c4ca4cca5491d87d248d0d8186" defer></script><!-- @@ -->
 		<script src="./MoeScript/Mollu/APP.js?md5=5cb5d726e3c8029f29416b76d0e8e79e" defer></script><!-- @@框架 -->
-		<script src="./MoeScript/Mollu/INDEX.js?md5=d23a5261b48f1a0a59d27e3304f8e051"></script><!-- @@首页 -->
+		<script src="./MoeScript/Mollu/INDEX.js?md5=d3f8996b6509d7fc4288338409ae791f"></script><!-- @@首页 -->
 		<style data-styled="active" data-styled-version="5.3.8"></style>
 	</head>
 	<body style="touch-action: none;-webkit-tap-highlight-color: transparent;tap-highlight-color: transparent;"><!-- MikuTap style -->

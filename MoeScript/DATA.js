@@ -576,9 +576,9 @@ function download(filename,data,base64,type = 'json')
 	if(type === 'json')
 	{
 		data = JSON.stringify(data,null,4)
-		if(Html5Plus)
+		if(客户端 === 'HTML5+')
 		{
-			str = `下载已开始！\n可以在【Android/data/${Html5Plus}/documents/MoeTalk_Data】中找到您下载的存档！\n`
+			str = `下载已开始！\n可以在【Android/data/mmt.MoeTalkH(W).WumberBee/documents/MoeTalk_Data】中找到您下载的存档！\n`
 			str += '卸载MoeTalk时会自动删除此目录，请注意备份文件！！！\n如果没有访问<span class="red bold">Android/data</span>目录的权限请点击此'
 			str += '<a title="https://www.bilibili.com/video/BV1Rx421D78C" class="INIT_href bold">链接</a>查看解决方案\n'
 			saveServerDatatoFile(filename, data)
@@ -600,7 +600,7 @@ function download(filename,data,base64,type = 'json')
 	}
 	if(type === 'image')
 	{
-		if(Html5Plus)saveImg(filename, base64)//base64下载
+		if(客户端 === 'HTML5+')saveImg(filename, base64)//base64下载
 		else//blob下载
 		{
 			dir = 'MoeTalk图片'
@@ -660,7 +660,7 @@ function download(filename,data,base64,type = 'json')
 
 async function savefile(dirname,filename,data,type = 'save')
 {
-	if(nwjs)
+	if(客户端 === 'NW.js')
 	{
 		dirname = `${dirname}/${DATA_NowTime}`
 		if(typeof data === 'string')data = new Blob([data],{'type': 'application/octet-stream'});
