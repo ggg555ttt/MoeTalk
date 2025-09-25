@@ -134,7 +134,6 @@ async function update(str = '')
 	}
 	if(客户端 === 'HTML5+')
 	{
-		if(!本地 && localStorage['HTML5+'] == 'NO')readme += `<button onclick="安装应用(MoeTalkURL)">安装离线应用</button>\n`
 		if(!本地 && localStorage['HTML5+'] && localStorage['HTML5+'].includes('WEB://'))
 		{
 			let cmd1 = "localStorage['HTML5+']=localStorage['HTML5+'].replace('WEB://','file://')"
@@ -198,7 +197,7 @@ $(function()
 	{
 		document.addEventListener('plusready', function()
 		{
-			if(location.href.indexOf('/www/') > -1 && !localStorage['HTML5+'])安装应用('http://localhost:13131/_www/')
+			if(location.href.indexOf('/www/') > -1 && !localStorage['HTML5+'])安装应用()
 			else if(本地)
 			{
 				if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
@@ -207,14 +206,6 @@ $(function()
 					if(mt_settings.自动更新.应用)更新应用()
 					if(mt_settings.自动更新.数据)更新数据()
 				}
-			}
-			if(!本地 && !localStorage['HTML5+'])
-			{
-				localStorage['HTML5+'] = 'NO'
-				let str = 'MoeTalk现在可使用离线端，是否安装？\n之后可从<span class="blue bold">檢</span>查更新切换\n'
-				str += `<button onclick="安装应用(${MoeTalkURL})">安装离线应用</button>\n`
-				$('.notice pre').css('text-align','center')
-				alert(str)
 			}
 		}, false);
 	}

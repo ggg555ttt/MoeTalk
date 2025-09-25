@@ -209,7 +209,7 @@ async function 安装应用(url)
 			let file = 文件列表.shift();
 			let ext = file.split('.').slice(-1)[0]
 			let md5 = ['html','js','css','json'].includes(ext) ? `?md5=${本地列表[file]}` : ''
-			await 下载文件(`${url}${file}${md5}`,file);
+			await 下载文件(`${MoeTalkURL}${file}${md5}`,file);
 			$('.notice pre').text('安装应用中，请不要退出或刷新\n剩余文件：'+文件列表.length)
 		}
 	}
