@@ -221,7 +221,7 @@ async function 安装应用(url)
 async function 更新应用(time = Date.now())
 {
 	if(!本地)return
-
+	$('.更新应用').html('<span style="color:red;">MoeTalk更新中！请不要刷新或退出</span>')
 	网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}MoeData/Version/Version.json?time=${time}`))
 	if(网络应用版本 && 本地应用版本[0] < 网络应用版本[0])
 	{
@@ -255,19 +255,19 @@ async function 更新应用(time = Date.now())
 		}
 		if(num[0] === num[1])
 		{
-			$('.更新应用').html('<span style="color:red;">MoeTalk更新中！请不要刷新或退出</span>')
+			
 			files.push(await 保存文件(`${Update}/MoeData/Version/Version.json`,JSON.stringify(网络应用版本)))
 			files.push(await 保存文件(`${Update}/MoeData/Version/MoeTalk.json`,JSON.stringify(网络列表)))
 			await 复制目录(Update,'',files)
-			$('.更新应用').html('<span style="color:red;">MoeTalk更新完毕！</span>')
 		}
 	}
+	$('.更新应用').html('<span style="color:red;">MoeTalk更新完毕！</span>')
 }
 async function 更新数据(time = Date.now())
 {
 	let game = mt_settings['选择游戏'] || 'NONE'
 	if(!本地 || game == 'NONE')return
-
+	$('.更新数据').html('<span style="color:red;">更新数据中，请不要退出或刷新！</span>')
 	本地数据版本 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/Version.json?time=${time}`)) || [-1]
 	网络数据版本 = JSON.parse(await $ajax(`${MoeTalkURL}GameData/${game}/Version/Version.json?time=${time}`))
 	if(网络数据版本 && 本地数据版本[0] < 网络数据版本[0])
@@ -303,12 +303,10 @@ async function 更新数据(time = Date.now())
 		}
 		if(num[0] === num[1])
 		{
-			$('.更新数据').html('<span style="color:red;">更新数据中，请不要退出或刷新！</span>')
 			files.push(await 保存文件(`${Update}/Version/Version.json`,JSON.stringify(网络数据版本)))
 			files.push(await 保存文件(`${Update}/Version/${game}.json`,JSON.stringify(网络列表)))
 			await 复制目录(Update,'GameData/'+game,files)
 		}
-		
 	}
 	检查数据()
 }

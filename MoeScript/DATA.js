@@ -662,7 +662,7 @@ async function savefile(dirname,filename,data,type = 'save')
 {
 	if(客户端 === 'NW.js')
 	{
-		dirname = `${dirname}/${DATA_NowTime}`
+		if(type == 'image')dirname = `${dirname}/${DATA_NowTime}`
 		if(typeof data === 'string')data = new Blob([data],{'type': 'application/octet-stream'});
 		let buffer = Buffer.from(await data.arrayBuffer());//将 Blob 转为 Buffer
 		if(!fs.existsSync(dirname))fs.mkdirSync(dirname,{recursive: true});//自动创建多级目录
@@ -675,7 +675,7 @@ async function savefile(dirname,filename,data,type = 'save')
 		a.href = window.URL.createObjectURL(data);
 		a.download = filename;
 		a.click();
-		return
+		return filename
 	}
 	window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory+'Download',function(root)
 	{

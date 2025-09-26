@@ -698,7 +698,7 @@ setInterval(function()
 		},
 		dataType:'text'
 	});
-	if(cordova)
+	if(客户端 || cordova || DATA_ServerDownload)
 	{
 		savefile('MoeTalk备份',`${document.location.host}.JSON`,json,'back')
 	}
