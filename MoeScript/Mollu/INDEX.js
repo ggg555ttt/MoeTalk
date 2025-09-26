@@ -1772,7 +1772,34 @@
 							},
 							children: [(0, m.jsxs)(ea.h4,
 							{
-								children: [(0, m.jsx)(ea.Dx,
+								style:
+								{
+									justifyContent: 'space-between',
+									alignItems: 'center',
+									height:'auto'
+								},
+								children: [(0, m.jsx)(c.Bx,
+								{
+									style:
+									{
+										width: "auto",
+										height: 'auto',
+										fontSize: '1.5rem',
+										marginInline: '0.5rem',
+										padding: '0',
+										color: 'rgb(45, 70, 100)'
+									},
+									className: "bold",
+									children: '提示',
+									onClick:function()
+									{
+										let str = ''
+										str += 'MoeTalk的默认截图工具对特殊样式的支持有限\n'
+										str += '如果你的文档中含有较复杂的特殊样式\n'
+										str += '建议在修改截图设置中更换截图工具\n'
+										alert(str)
+									}
+								}), (0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
 									children: [`${$$('.dels:checked').length ? '区域截图' : L.Z.download_to_image[g]}`,'(',(0, m.jsx)('span',
@@ -1782,12 +1809,16 @@
 									}),')']
 								}), (0, m.jsx)(ea.ec,
 								{
+									style:
+									{
+										position: 'unset',
+										marginInline: '0.5rem'
+									},
 									onClick: function()
 									{
 										$$('.关闭截图').click()
 									},
-									children: (0, m.jsx)(c.j4,
-									{})
+									children: (0, m.jsx)(c.j4,{})
 								}), (0, m.jsx)('截图',{
 									hidden: true,
 									className: 'mt_capture',
@@ -3045,15 +3076,27 @@
 											{
 												"width": "auto",
 												height: '100%',
-												color: '#3f51b5',
+												color: EMOJI.custom.from ? 'red' : '#3f51b5',
 												position: 'absolute',
 												right: 0
 											},
 											hidden: EMOJI.type === 'Emoji' && !EMOJI.custom.io,
-											children: EMOJI.type === 'Emoji' ? EMOJI.custom.io ? '编辑' : '管理' : '信息',
+											children: EMOJI.type === 'Emoji' ? EMOJI.custom.io ? '编辑' : '管理' : EMOJI.custom.from ? '❗声明' : '信息',
 											onClick: function()
 											{
 												$$('.INDEX_EmojiIfno:visible').length ? $$('.INDEX_EmojiIfno').hide() : $$('.INDEX_EmojiIfno').show()
+												if(EMOJI.custom.from)
+												{
+													$$('.notice pre').css('text-align','center')
+													let str = ''
+													str += `作者：${EMOJI.custom.from.name}\n`
+													str += `<a href='${EMOJI.custom.from.link}'><u>${EMOJI.custom.from.link}</u></a>\n`
+													str += '<span style="color:red;">请尊重作者的劳动成果\n严禁用本套立绘差分进行牟利和商业用途\n违者将追究法律责任！\n</span>'
+													if($$('.INDEX_EmojiIfno:visible').length > 0)str += '现在点击表情将编辑信息\n'
+													else str += '现在点击表情将发送表情\n'
+													alert(str)
+												}
+												
 											}
 										})]
 									}), (0, m.jsxs)(ea.h4,
@@ -3078,25 +3121,7 @@
 												})
 											})
 										})
-									}),EMOJI.custom.from ? (0, m.jsxs)(ea.h4,
-									{
-										children: (0, m.jsx)(c.Bx,
-										{
-											className: "bold",
-											style: 
-											{
-												padding: "revert",
-												width: "auto",
-												fontSize: '1.5rem',
-												color: "red"
-											},
-											children: '❗版权声明',
-											onClick: function()
-											{
-												alert('请尊重作者的劳动成果，严禁用本套立绘差分进行牟利和商业用途，违者将追究法律责任')
-											}
-										})
-									}) : '', (0, m.jsx)(eE,
+									}), (0, m.jsx)(eE,
 									{
 										className: 'scrollbar',
 										children: (0, m.jsxs)(eM,
@@ -3169,7 +3194,7 @@
 															if($$('.INDEX_EmojiIfno:visible').length && EmojiInfo !== '')
 															{
 																$$('.notice .title').text('编辑表情')
-																let str = EMOJI.custom.from ? `<a class="INIT_href" title="${EMOJI.custom.from.link}">来源：${EMOJI.custom.from.name}</a>` : ''
+																let str = ''
 																let img = `<img class="Emojis" src='${前缀+link}' style='width:100%;'>`
 																let now = parseInt(EMOJI.pageindex.split(' / ')[0])//当前页
 																let end = parseInt(EMOJI.pageindex.split(' / ')[1])//终点页
@@ -3255,7 +3280,7 @@
 																"width": "auto",
 																"color": "rgb(63, 81, 181)"
 															},
-															children: (EMOJI.custom.from ? EMOJI.custom.from.name : '点击编辑表情')+'\n',
+															children: '点击编辑\n',
 															hidden: !link
 														}),EmojiInfo]
 													})]
@@ -3686,15 +3711,22 @@
 							children: [(0, m.jsxs)(ea.h4,
 							{
 								className: "批量编辑 bold",
-								style: {height: 'auto'},
+								style:
+								{
+									justifyContent: 'space-between',
+									alignItems: 'center',
+									height:'auto'
+								},
 								children: [(0, m.jsx)(c.Bx,
 								{
 									style:
 									{
-										"width": "auto",
-										color: 'rgb(45, 70, 100)',
-										position: 'absolute',
-										left: 0
+										width: "auto",
+										height: 'auto',
+										fontSize: '1.5rem',
+										marginInline: '0.5rem',
+										padding: '0',
+										color: 'rgb(45, 70, 100)'
 									},
 									className: "bold",
 									children: '提示',
@@ -3707,6 +3739,11 @@
 									children: '批量编辑'
 								}), (0, m.jsx)(ea.ec,
 								{
+									style:
+									{
+										position: 'unset',
+										marginInline: '0.5rem'
+									},
 									onClick: function()
 									{
 										$$(".编辑界面 .取消").click()//S()
@@ -3729,17 +3766,30 @@
 										width: "auto",
 										height: 'auto',
 										fontSize: '1.5rem',
-										marginInline: '0.5rem'
+										marginInline: '0.5rem',
+										padding: '0rem',
+										color: 'rgb(45, 70, 100)'
 									},
-									className: "操作模式 bold",
-									children: '追加'
+									className: "bold",
+									children: '提示',
+									onClick:function()
+									{
+										let str = ''
+										str += '（定义样式）MoeTalk可用字体：\n'
+										str += 'font-family:Blueaka;/*默认*/\n'
+										str += 'font-family:Jalnan;/*标题*/\n'
+										str += 'font-family:KaiTi;/*楷体*/\n'
+										alert(str)
+									}
 								}), (0, m.jsx)(c.Bx,
 								{
 									style: 
 									{
 										width: "auto",
 										height: 'auto',
-										fontSize: '1.5rem'
+										fontSize: '1.5rem',
+										color: 'red',
+										padding: '0rem'
 									},
 									className: "操作模式 bold",
 									children: '编辑'
@@ -3757,7 +3807,8 @@
 											width: "auto",
 											height: 'auto',
 											color: 'red',
-											fontSize: '1.5rem'
+											fontSize: '1.5rem',
+											padding: '0rem'
 										},
 										className: "预览模式 bold",
 										children: '预览'
@@ -4511,7 +4562,7 @@
 									className: "bold",
 									children: (0, m.jsx)(X,
 									{
-										style:{fontSize: "1.1rem",color: "rgb(139, 187, 233)"},
+										style:{color: "rgb(139, 187, 233)"},
 										children: '操作'
 									})
 								})
@@ -4524,7 +4575,6 @@
 									className: "bold",
 									children: (0, m.jsx)(X,
 									{
-										style:{fontSize: "1.1rem"},
 										children: '全选'
 									})
 								})
@@ -4537,7 +4587,6 @@
 									className: "bold",
 									children: (0, m.jsx)(X,
 									{
-										style:{fontSize: "1.1rem"},
 										children: '反选'
 									})
 								})
@@ -4550,7 +4599,6 @@
 									className: "bold",
 									children: (0, m.jsx)(X,
 									{
-										style:{fontSize: "1.1rem"},
 										children: '区间选择'
 									})
 								})
@@ -4559,7 +4607,6 @@
 								className: "bold INDEX_delete",
 								children: (0, m.jsx)(X,
 								{
-									style:{fontSize: "1.1rem"},
 									children: L.Z['delete'][mtlang]
 								})
 							})]
@@ -4583,7 +4630,6 @@
 									className: "bold",
 									children: (0, m.jsx)(X,
 									{
-										style:{fontSize: "1.1rem"},
 										children: '撤销'
 									})
 								}),
@@ -4598,7 +4644,6 @@
 									className: "bold",
 									children: (0, m.jsx)(X,
 									{
-										style:{fontSize: "1.1rem"},
 										children: '前进'
 									})
 								}),onClick: function(){撤销('前进')}
@@ -4611,7 +4656,6 @@
 									className: "bold",
 									children: (0, m.jsx)(X,
 									{
-										style:{fontSize: "1.1rem"},
 										children: '复制'
 									})
 								}),
@@ -4626,7 +4670,6 @@
 									className: "bold",
 									children: (0, m.jsx)(X,
 									{
-										style:{fontSize: "1.1rem"},
 										children: '粘贴'
 									})
 								}),
@@ -4640,7 +4683,6 @@
 									className: "bold",
 									children: (0, m.jsx)(X,
 									{
-										style:{fontSize: "1.1rem"},
 										children: '截取存档'
 									})
 								})

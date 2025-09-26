@@ -188,11 +188,12 @@ $(function()
 		$("#view").click()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
-	let span = '<span onclick="moedev()" style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
+	let span = '<span onclick="moedev()" style="font-family:Jalnan;background-color:rgb(139,187,233);color:white;padding:4px;">'
 	let notice = ''
 	notice += `<span class="bold">欢迎使用${span}MoeTalk</span>！\n此版本为基于原作者Raun0129开发的MolluTalk的个人改版</span>\n`
 	notice += '\n※移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏'
 	notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
+	notice += '\n反馈网址（可复制）：<u><a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/<a/></u>'
 	if(客户端 === 'HTML5+')
 	{
 		document.addEventListener('plusready', function()

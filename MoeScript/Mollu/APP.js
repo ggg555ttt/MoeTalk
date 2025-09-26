@@ -9878,14 +9878,6 @@
 											$$('.notice pre').css('text-align','center')
 											TOP_confirm = function(){location.reload(true)}
 										}
-									}),(0, O.jsx)(I,{children:' '}),(0, O.jsx)('a',
-									{
-										className: "INIT_href bold",
-										title: "https://wj.qq.com/s2/14292312/3ade/",
-										id: 'help',
-										style: {fontSize: "20px",position: "relative"},
-										children: '反馈',
-										target: '_blank'
 									})]
 								}), a || (0, O.jsx)(T,{hidden: "hidden"})]//@隐藏帮助按钮
 								//*反馈通道和自定义标题

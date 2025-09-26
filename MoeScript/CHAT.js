@@ -505,7 +505,7 @@ function makeMessage(type,data,chatIndex,mode)
 }
 function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 {
-	let addChat = $(".操作模式:eq(0)").css('color') == 'rgb(255, 0, 0)'
+	let addChat = $(".操作模式").text() == '追加'
 	$(".编辑界面 .取消").click()
 	$('.chatText').val('').click()
 	let dels = $('.dels')
@@ -785,7 +785,7 @@ $("body").on('click',".编辑界面 .确认",function()
 {
 	let indexs = []
 	$('.dels:checked').each(function(k,v){indexs.push($('.dels').index(v))})
-	let 操作模式 = $(".操作模式:eq(0)").css('color') == 'rgb(255, 0, 0)' ? 'add' : 'edit'
+	let 操作模式 = $(".操作模式").text() == '追加' ? 'add' : 'edit'
 	let 内容类型 = $('.内容类型').attr('title')
 	if(['chat','reply','heart','info','image'].indexOf(内容类型) < 0)内容类型 = ''
 	if(indexs.length < 2)indexs = [chatIndex]
@@ -797,7 +797,7 @@ $("body").on('click',".编辑界面 .取消",function()
 	$('.内容界面').show()
 	$('.预览界面').hide()
 	$('.预览内容').html('')
-	$(".操作模式").css('color','')
+	$(".操作模式").text('编辑')
 	$('.内容类型_列表').hide()
 	CHAT_HeadList = false
 	CHAT_Style = false
@@ -903,11 +903,8 @@ $("body").on('click',".定义样式",function()
 });
 $("body").on('click',".操作模式",function()
 {
-	$('.内容界面').show()
-	$('.预览界面').hide()
-	$(".预览模式").css('color','')
-	$(".操作模式").css('color','')
-	let mode = $(this).css('color','red').text()
+	if($(".操作模式").text() == '追加')$(".操作模式").text('编辑')
+	else $(".操作模式").text('追加')
 });
 $("body").on('click',".预览模式",function()
 {
@@ -937,8 +934,7 @@ $("body").on('click',".编辑",function()
 {
 	$('.编辑界面').addClass('visible')//显示编辑界面
 	$(".预览模式").css('color','')
-	$(".操作模式:eq(0)").css('color','')
-	$(".操作模式:eq(1)").css('color','red')
+	$(".操作模式").text('编辑')
 
 	let checked = $('.dels:checked').length
 	if(checked > 1)
