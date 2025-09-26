@@ -59,7 +59,7 @@ INIT_waiting(function()
 	INIT_loading('结束加载')
 },['mt_char','mt_head','allChats','mt_school','mt_club','mt_characters'])
 
-if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeData/Fonts/Fonts.css' data-n-g='' id='mt-font'>");//加载字体
+if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeData/Fonts/FontList.css' data-n-g='' id='mt-font'>");//加载字体
 //使用说明
 $('body').on('click',"#readme",function()
 {

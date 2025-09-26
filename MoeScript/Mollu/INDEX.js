@@ -1915,7 +1915,7 @@
 									style: {overflow: 'scroll'}
 								}), (0, m.jsx)('iframe',
 								{
-									src: `${href}capture_`+(mt_settings['禁止字体'] ?'nofont' : 'font')+`.html?ver=`+localStorage['本地应用版本'],
+									src: `${href}capture_`+(mt_settings['禁止字体'] ?'nofont' : 'font')+`.html?ver=`+本地应用版本,
 									style: 
 									{
 										// height: '0px'
@@ -3847,7 +3847,7 @@
 									},
 									children: (0, m.jsx)('div',
 									{
-										style: { pointerEvents: 'none'},
+										style: {pointerEvents: 'none'},
 										className: "预览内容"
 									})
 								}), (0, m.jsxs)('div',

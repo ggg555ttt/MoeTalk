@@ -1,0 +1,5 @@
+@font-face{font-family:Blueaka;src:url(Blueaka.woff2)}/*默认*/
+@font-face{font-family:Jalnan;src:url(Jalnan.ttf)}/*标题*/
+@font-face{font-family:KaiTi;src:url(KaiTi.ttf)}/*楷体*/
+@font-face{font-family:Cyrillic;src:local(Arial);unicode-range:U+0400-04FF;}/*匹配西里尔字母*/
+body,textarea,button{font-family:Cyrillic,Blueaka;}
