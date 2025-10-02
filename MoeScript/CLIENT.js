@@ -67,12 +67,12 @@ async function ZipToJson(file)
 }
 async function 保存文件(filename, data)
 {
+	if(typeof data === 'string')data = new Blob([data],{'type':'application/octet-stream'});
 	if(客户端 === 'NW.js')
 	{
 		let dirname = filename.split('/')
 		filename = dirname.pop()
 		dirname = dirname.join('/')
-		if(typeof data === 'string')data = new Blob([data],{'type':'application/octet-stream'});
 		let buffer = Buffer.from(await data.arrayBuffer());//将 Blob 转为 Buffer
 		if(!fs.existsSync(dirname))fs.mkdirSync(dirname,{recursive: true});//自动创建多级目录
 		fs.writeFileSync(`${dirname}/${filename}`, buffer);// 写入文件
@@ -80,40 +80,20 @@ async function 保存文件(filename, data)
 	}
 	return new Promise(function(resolve)
 	{
-		let ext = filename.split('.').slice(-1)[0]
-		if(ext == 'json' || data == '')
+		plus.io.requestFileSystem(plus.io.PRIVATE_DOC,function(fs)
 		{
-			plus.io.requestFileSystem(plus.io.PRIVATE_DOC,function(fs)
+			fs.root.getFile(filename,{create: true,exclusive: false},function(fileEntry)
 			{
-				fs.root.getFile(filename,{create: true,exclusive: false},function(fileEntry)
+				fileEntry.file(function(file)
 				{
-					fileEntry.file(function(file)
+					fileEntry.createWriter(function(writer)//写入文件
 					{
-						fileEntry.createWriter(function(writer)//写入文件
-						{
-							writer.onwrite = function(e){resolve(filename)}
-							writer.write(data);
-						});
+						writer.onwrite = function(e){resolve(filename)}
+						blobToBase64(data,function(base){writer.writeAsBinary(base)})
 					});
 				});
 			});
-		}
-		else
-		{
-			let reader = new FileReader();
-			reader.onloadend = function()
-			{
-				let bitmap = new plus.nativeObj.Bitmap()
-				bitmap.loadBase64Data(reader.result, function()// 从本地加载Bitmap图片
-				{
-					bitmap.save("_doc/"+filename,{overwrite: true},function(i)
-					{
-						resolve(filename);
-					})
-				})
-			};
-			reader.readAsDataURL(data);
-		}
+		});
 	});
 }
 async function 删除文件(filename)
@@ -128,7 +108,7 @@ async function 删除文件(filename)
 }
 async function 复制文件(srcPath, dstPath)
 {
-	await 保存文件(dstPath,'')
+	await 保存文件(dstPath,'[]')
 	await 删除文件(dstPath)
 	return new Promise(function(resolve)
 	{
@@ -164,40 +144,12 @@ async function 复制目录(src,dst,files = [])
 		await 复制文件(oldfile,newfile)
 	}
 }
-async function 下载文件(url,filename,更新 = false)
-{
-	if(客户端 === 'NW.js')
-	{
-		let data = await $ajax(url,更新)
-		let dirname = filename.split('/')
-		filename = dirname.pop()
-		dirname = dirname.join('/')
-		if(typeof data === 'string')data = new Blob([data],{'type':'application/octet-stream'});
-		let buffer = Buffer.from(await data.arrayBuffer());//将 Blob 转为 Buffer
-		if(!fs.existsSync(dirname))fs.mkdirSync(dirname,{recursive: true});//自动创建多级目录
-		fs.writeFileSync(`${dirname}/${filename}`, buffer);// 写入文件
-		return filename
-	}
-	else
-	{
-		await 删除文件('_doc/'+filename)
-		return new Promise(function(resolve)
-		{
-			filename = '_doc/'+filename
-			plus.downloader.createDownload(url,{filename:filename},function(d, status)
-			{
-				if(status === 200)resolve(filename)
-				else resolve(false)
-			}).start()
-		});
-	}
-}
-async function 安装应用(url)
+async function 安装应用()
 {
 	alert("")
 	$('.title').text('安装应用').next().hide()
 	$('.confirm').parent().hide()
-	$('.notice pre').html("请不要退出或刷新\n<span class='更新应用'>请稍等。。。</span>").css('text-align','center')
+	$('.notice pre').html("请不要退出或刷新\n<span class='更新应用'>请稍等。。。</span>\n").css('text-align','center')
 	let 本地列表 = JSON.parse(await $ajax(`${href}MoeData/Version/MoeTalk.json?time=${time}`))
 	本地列表['MoeData/Version/MoeTalk.json'] = 1
 	本地列表['MoeData/Version/Version.json'] = 1
@@ -207,14 +159,12 @@ async function 安装应用(url)
 		while(文件列表.length > 0)
 		{
 			let file = 文件列表.shift();
-			let ext = file.split('.').slice(-1)[0]
-			let md5 = ['html','js','css','json'].includes(ext) ? `?md5=${本地列表[file]}` : ''
-			await 下载文件(`${MoeTalkURL}${file}${md5}`,file);
-			$('.notice pre').text('安装应用中，请不要退出或刷新\n剩余文件：'+文件列表.length)
+			await 保存文件(file,await $ajax(`${href}${file}`,'安装'))
+			$('.更新应用').text(`安装应用中，请不要退出或刷新\n剩余文件：${文件列表.length}`)
 		}
 	}
 	await Promise.all(Array.from({length:5},下载线程));
-	$('.notice pre').text('应用安装完成！\n即将刷新页面！')
+	$('.更新应用').text('应用安装完成！\n即将刷新页面！')
 	localStorage['HTML5+'] = 'file://'+await file_exists('index.html')
 	location.reload(true)
 }
@@ -240,8 +190,10 @@ async function 更新应用(time = Date.now())
 				num[0]++
 				if(!await file_exists(`${Update}/${file}`))//检测更新文件
 				{
-					if(await 下载文件(`${MoeTalkURL}${file}?md5=${md5}`,`${Update}/${file}`,'更新'))
+					let data = await 下载文件(`${MoeTalkURL}${file}?md5=${md5}`,'更新')
+					if(data)
 					{
+						await 保存文件(`${Update}/${file}`,data)
 						num[1]++
 						files.push(`${Update}/${file}`)
 					}
