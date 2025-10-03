@@ -67,7 +67,7 @@ async function ZipToJson(file)
 }
 async function 保存文件(filename, data)
 {
-	if(typeof data === 'string')data = new Blob([data],{'type':'application/octet-stream'});
+	if(typeof data === 'string')data = new Blob([data],{type:'application/octet-stream'});
 	if(客户端 === 'NW.js')
 	{
 		let dirname = filename.split('/')
@@ -277,19 +277,31 @@ async function 检查数据()
 		for(let key2 in val1)
 		{
 			let val2 = val1[key2]
-			if(typeof val2 === 'string')arr.push(`${link}/${key1}/${val2}.${ext}`)
+			if(typeof val2 === 'string')
+			{
+				val2 = `${link}/${key1}/${val2}.${ext}`
+				if(!await file_exists(val2))arr.push(val2)
+			}
 			else
 			{
 				for(let key3 in val2)
 				{
 					let val3 = val2[key3]
-					if(typeof val3 === 'string')arr.push(`${link}/${key1}/${key2}/${val3}.${ext}`)
+					if(typeof val3 === 'string')
+					{
+						val3 = `${link}/${key1}/${key2}/${val3}.${ext}`
+						if(!await file_exists(val3))arr.push(val3)
+					}
 					else
 					{
 						for(let key4 in val3)
 						{
 							let val4 = val3[key4]
-							if(typeof val4 === 'string')arr.push(`${link}/${key1}/${key2}/${key3}/${val4}.${ext}`)
+							if(typeof val4 === 'string')
+							{
+								val4 = `${link}/${key1}/${key2}/${key3}/${val4}.${ext}`
+								if(!await file_exists(val4))arr.push(val4)
+							}
 						}
 					}
 				}
