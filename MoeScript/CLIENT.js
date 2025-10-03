@@ -190,7 +190,7 @@ async function 更新应用(time = Date.now())
 				num[0]++
 				if(!await file_exists(`${Update}/${file}`))//检测更新文件
 				{
-					let data = await 下载文件(`${MoeTalkURL}${file}?md5=${md5}`,'更新')
+					let data = await $ajax(`${MoeTalkURL}${file}?md5=${md5}`,'更新')
 					if(data)
 					{
 						await 保存文件(`${Update}/${file}`,data)
