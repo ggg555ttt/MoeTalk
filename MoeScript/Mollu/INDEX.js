@@ -3163,6 +3163,7 @@
 														src: v === 'ADD' ? href+'MoeData/Ui/School/RECYCLE.webp' : 前缀+link,//#表情链接
 														onError: function(e)
 														{
+															IMAGE_error(e)
 															e.target.parentNode.style.display = 'none'
 														},
 														onClick: function()

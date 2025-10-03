@@ -219,7 +219,7 @@ $(function()
 			if(mt_settings.自动更新.数据)更新数据()
 		}
 	}
-	
+	if(本地)检查数据()
 	if(sessionStorage['通知文档'] == notice)return//
 	$('.notice pre').css('text-align','center')
 	localStorage['通知文档'] = notice
@@ -650,10 +650,14 @@ function selectgame(str = '请选择游戏')
 
 	TOP_confirm = async function()
 	{
+		INIT_loading('开始加载')
 		mt_settings['选择游戏'] = $('.notice select').val()
 		saveStorage('设置选项',mt_settings,'local')
+		数据列表 = []
 		await 更新数据()
+		检查数据()
 		CHAR_UpdateChar()
+		INIT_loading(false)
 	}
 }
 localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()

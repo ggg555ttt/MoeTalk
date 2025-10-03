@@ -212,14 +212,16 @@ async function 更新应用(time = Date.now())
 			files.push(await 保存文件(`${Update}/MoeData/Version/MoeTalk.json`,JSON.stringify(网络列表)))
 			await 复制目录(Update,'',files)
 		}
+		$('.更新应用').html('<span style="color:red;">MoeTalk更新完毕！刷新页面即可查看更新</span>')
 	}
-	$('.更新应用').html('<span style="color:red;">MoeTalk更新完毕！</span>')
+	else $('.更新应用').html('<span style="color:red;">暂未发现更新</span>')
+	
 }
 async function 更新数据(time = Date.now())
 {
 	let game = mt_settings['选择游戏'] || 'NONE'
 	if(!本地 || game == 'NONE')return
-	$('.更新数据').html('<span style="color:red;">更新数据中，请不要退出或刷新！</span>')
+	$('.更新数据').html('<span style="color:red;">数据更新中！请不要刷新或退出</span>')
 	本地数据版本 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/Version.json?time=${time}`)) || [-1]
 	网络数据版本 = JSON.parse(await $ajax(`${MoeTalkURL}GameData/${game}/Version/Version.json?time=${time}`))
 	if(网络数据版本 && 本地数据版本[0] < 网络数据版本[0])
@@ -259,17 +261,21 @@ async function 更新数据(time = Date.now())
 			files.push(await 保存文件(`${Update}/Version/${game}.json`,JSON.stringify(网络列表)))
 			await 复制目录(Update,'GameData/'+game,files)
 		}
+		$('.更新数据').html('<span style="color:red;">数据更新完毕！文件请通过选择游戏或刷新页面来下载</span>')
 	}
-	检查数据()
+	else $('.更新数据').html('<span style="color:red;">暂未发现更新</span>')
+	
 }
 var 文件总数 = '0'
 var 数据列表 = []
 var 网址列表 = []
 async function 检查数据()
 {
+	let game = mt_settings['选择游戏'] || 'NONE'
+	if(game == 'NONE')return
 	数据列表 = []
 	let data = JSON.parse(await $ajax(`${href}GameData/${mt_settings['选择游戏']}/List.json?ver=${本地数据版本}`))
-	let link = `GameData/${mt_settings['选择游戏']}`,arr = []
+	let link = `GameData/${mt_settings['选择游戏']}`
 	for(let key1 in data)
 	{
 		let val1 = data[key1]
@@ -280,7 +286,7 @@ async function 检查数据()
 			if(typeof val2 === 'string')
 			{
 				val2 = `${link}/${key1}/${val2}.${ext}`
-				if(!await file_exists(val2))arr.push(val2)
+				if(!await file_exists(val2))数据列表.push(val2)
 			}
 			else
 			{
@@ -290,7 +296,7 @@ async function 检查数据()
 					if(typeof val3 === 'string')
 					{
 						val3 = `${link}/${key1}/${key2}/${val3}.${ext}`
-						if(!await file_exists(val3))arr.push(val3)
+						if(!await file_exists(val3))数据列表.push(val3)
 					}
 					else
 					{
@@ -300,7 +306,7 @@ async function 检查数据()
 							if(typeof val4 === 'string')
 							{
 								val4 = `${link}/${key1}/${key2}/${key3}/${val4}.${ext}`
-								if(!await file_exists(val4))arr.push(val4)
+								if(!await file_exists(val4))数据列表.push(val4)
 							}
 						}
 					}
@@ -308,23 +314,25 @@ async function 检查数据()
 			}
 		}
 	}
-	$.ajax(
+	if(数据列表.length)
 	{
-		url: "https://api.akams.cn/github",
-		success: function(data)
+		$.ajax(
 		{
-			网址列表 = []
-			网址列表.push('https://moetalk.netlify.app')
-			网址列表.push('https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
-			foreach(data.data,function(k,v)
+			url: "https://api.akams.cn/github",
+			success: function(data)
 			{
-				网址列表.push(v.url+'/https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
-			})
-			数据列表 = arr
-			文件总数 = 数据列表.length-1
-			foreach(网址列表,function(k,v){下载数据(v)})
-		}
-	});
+				网址列表 = []
+				网址列表.push('https://moetalk.netlify.app')
+				网址列表.push('https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
+				foreach(data.data,function(k,v)
+				{
+					网址列表.push(v.url+'/https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
+				})
+				文件总数 = 数据列表.length-1
+				foreach(网址列表,function(k,v){下载数据(v)})
+			}
+		});
+	}
 }
 async function 下载数据(url)
 {

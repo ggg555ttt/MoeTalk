@@ -6,26 +6,52 @@ var baseArr = []
 var 截图区域
 var 正在截图 = false
 var 上次截图 = []
-function IMAGE_error(image,index)
+async function IMAGE_error(image,index='')
 {
-	let src = ''
-	if(image.currentTarget)
+	if(本地)
 	{
-		src = image.target.src.split(mt_settings['选择游戏'])[1]
-		image = image.currentTarget
+		let filename = ''
+		if(image.currentTarget)
+		{
+			filename = image.target.src.replace(location.href.replace('index.html',''),'')
+			image = image.currentTarget
+		}
+		else filename = image.src.replace(location.href.replace('index.html',''),'')
+		if(数据列表.includes(filename) && 网址列表.length > 0)
+		{
+			let url = 网址列表[Math.floor(Math.random()*网址列表.length)]
+			if(!await file_exists(`${url}/${filename}`))
+			{
+				let data = await $ajax(`${url}/${filename}`)
+				if(data)//下载成功
+				{
+					image.src = filename
+					await 保存文件(filename, data)
+				}
+				else IMAGE_error(image)
+			}
+		}
 	}
-	else src = image.src.split(mt_settings['选择游戏'])[1]
-	if(image.from == 'Gitlab')
+	else
 	{
-		if(index > -1)chats[index] = image.src
-		image.src = href+'MoeData/Ui/error.webp'
-		return
+		let src = ''
+		if(image.currentTarget)
+		{
+			src = image.target.src.split(mt_settings['选择游戏'])[1]
+			image = image.currentTarget
+		}
+		else src = image.src.split(mt_settings['选择游戏'])[1]
+		if(image.from == 'Gitlab')
+		{
+			if(index > -1)chats[index] = image.src
+			image.src = href+'MoeData/Ui/error.webp'
+			return
+		}
+		src = `${GitlabURL}/Images/${mt_settings['选择游戏']}/${src}`
+		if(index > -1)urlToBase64(src,1,function(img){chats[index].file = img,baseArr = []})
+		image.src = src
+		image.from = 'Gitlab'
 	}
-	src = `${GitlabURL}/Images/${mt_settings['选择游戏']}/${src}`
-	if(index > -1)urlToBase64(src,1,function(img){chats[index].file = img,baseArr = []})
-	image.src = src
-	image.from = 'Gitlab'
-	
 }
 //图片压缩
 function compress(base64Img,type = 'head',mode = 'add',length = 0)
