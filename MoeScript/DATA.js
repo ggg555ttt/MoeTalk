@@ -454,107 +454,6 @@ function repairCF(data)
 		}
 	}
 }
-//文件下载
-
-function saveImg(fileName, base64, quality)
-{
-	quality = quality || 10
-	const bitmap = new plus.nativeObj.Bitmap()
-	// 从本地加载Bitmap图片
-	bitmap.loadBase64Data(base64, function()
-	{
-		bitmap.save("_doc/" + fileName,
-		{
-			overwrite: true
-		}, 
-		function(i) 
-		{
-			plus.gallery.save(i.target, function()
-			{// 保存到相册
-				plus.io.resolveLocalFileSystemURL(i.target, function(fileEntry)
-				{
-					fileEntry.remove()
-				})
-				//bitmap.clear()
-			}, 
-			function(e)
-			{
-				if(e.code === -3310 || e.code === 8)
-				{
-					bitmap.clear()
-					alert("您已禁止访问相册,请设置开启权限")
-				}
-				else
-				{
-					bitmap.clear()
-					alert("图片保存失败:" + JSON.stringify(e))
-				}
-			})
-		}, 
-		function(e)
-		{
-			bitmap.clear()
-			alert("保存图片失败：" + JSON.stringify(e))
-		})
-	}, 
-	function(e) 
-	{
-		bitmap.clear()
-		alert("加载图片失败：" + JSON.stringify(e))
-	})
-}
-
-function saveServerDatatoFile(filename, jsonData)
-{ //jsonData要求是String格式
-	plus.io.requestFileSystem(plus.io.PUBLIC_DOCUMENTS,function(fs)
-	{
-		//fs.root 是根目录操作对象
-		fs.root.getDirectory("MoeTalk_Data",
-		{//创建一个文件夹名为MoeTalk_Data
-			create: true,
-			exclusive: false
-		},
-		function(dir)
-		{
-			//console.log("Directory Entry Name: " + dir.name);
-			dir.getFile(filename,
-			{ //在MoeTalk_Data文件夹中创建一个json文件
-				create: true
-			},
-			function(fileEntry)
-			{
-				fileEntry.file(function(file)
-				{
-					//写入文件
-					fileEntry.createWriter(function(writer)
-					{
-						writer.onwrite = function(e)
-						{
-							//console.log("写入数据成功");
-						}
-						writer.write(jsonData);
-					},
-					function(error)
-					{
-						alert("创建Writer失败" + error.message);
-					});
-				});
-			},
-			function(err)
-			{
-				alert("访问File失败" + err.message);
-			})
-		},
-		function()
-		{
-			alert("创建MoeTalk_Data目录失败" + err.message);
-		});
-	},
-	function(error)
-	{
-		alert("访问_DOC目录失败" + error.message);
-	});
-}
 
 function download(filename,data,base64,type = 'json')
 {
@@ -576,13 +475,7 @@ function download(filename,data,base64,type = 'json')
 	if(type === 'json')
 	{
 		data = JSON.stringify(data,null,4)
-		if(客户端 === 'HTML5+')
-		{
-			str = `下载已开始！\n可以在【Android/data/mmt.MoeTalkH(W).WumberBee/documents/MoeTalk_Data】中找到您下载的存档！\n`
-			str += '卸载MoeTalk时会自动删除此目录，请注意备份文件！！！\n如果没有访问<span class="red bold">Android/data</span>目录的权限请点击此'
-			str += '<a title="https://www.bilibili.com/video/BV1Rx421D78C" class="INIT_href bold">链接</a>查看解决方案\n'
-			saveServerDatatoFile(filename, data)
-		}
+		if(客户端 === 'HTML5+')保存文件(filename, data,type)
 		else
 		{
 			dir = 'MoeTalk存档'
@@ -600,7 +493,7 @@ function download(filename,data,base64,type = 'json')
 	}
 	if(type === 'image')
 	{
-		if(客户端 === 'HTML5+')saveImg(filename, base64)//base64下载
+		if(客户端 === 'HTML5+')保存文件(filename,data,type)
 		else//blob下载
 		{
 			dir = 'MoeTalk图片'

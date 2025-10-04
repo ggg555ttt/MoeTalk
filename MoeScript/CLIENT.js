@@ -65,7 +65,7 @@ async function ZipToJson(file)
 	json = await new JSZip().loadAsync(json);
 	return await json.files[Object.keys(json.files)[0]].async('string')
 }
-async function 保存文件(filename, data)
+async function 保存文件(filename, data, type = 2)
 {
 	if(typeof data === 'string')data = new Blob([data],{type:'application/octet-stream'});
 	if(客户端 === 'NW.js')
@@ -80,7 +80,43 @@ async function 保存文件(filename, data)
 	}
 	return new Promise(function(resolve)
 	{
-		plus.io.requestFileSystem(plus.io.PRIVATE_DOC,function(fs)
+		if(type === 'image')type = 3
+		if(type === 'json')
+		{
+			plus.android.requestPermissions(['android.permission.WRITE_EXTERNAL_STORAGE'],function(e)
+			{
+				if(e.deniedAlways.length>0 || e.deniedPresent.length>0)
+				{
+					保存文件(filename, data, 4)
+					resolve(false)
+				}
+				if(e.granted.length>0)
+				{
+					plus.runtime.downloadFile({url:data,fileName:filename},function(e)
+					{
+						保存文件(filename, data, 4)
+						resolve(false)
+					},function(e)
+					{
+						if(e.code > -1)
+						{
+							alert('文件已下载至'+e.message)
+							resolve(filename)
+						}
+						else
+						{
+							保存文件(filename, data, 4)
+							resolve(false)
+						}
+					})
+				}
+			},function(e)
+			{
+				console.log('Request Permissions error:'+JSON.stringify(e));
+			});
+			return
+		}
+		plus.io.requestFileSystem(type,function(fs)
 		{
 			fs.root.getFile(filename,{create: true,exclusive: false},function(fileEntry)
 			{
@@ -88,8 +124,25 @@ async function 保存文件(filename, data)
 				{
 					fileEntry.createWriter(function(writer)//写入文件
 					{
-						writer.onwrite = function(e){resolve(filename)}
-						blobToBase64(data,function(base){writer.writeAsBinary(base)})
+						writer.onwrite = function(e)
+						{
+							if(type === 3)
+							{
+								plus.gallery.save(e.target.fileName,function()
+								{
+									plus.io.resolveLocalFileSystemURL(e.target.fileName,function(fileEntry)
+									{
+										fileEntry.remove()
+									})
+								})//保存到相册
+							}
+							if(type == 4)alert('文件已下载至'+e.target.fileName)
+							resolve(filename)
+						}
+						blobToBase64(data,function(base)
+						{
+							writer.writeAsBinary(base)
+						})
 					});
 				});
 			});

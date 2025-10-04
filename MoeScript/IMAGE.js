@@ -443,7 +443,7 @@ function mt_capture(清晰度,生成图片,标题)
 			}
 		})
 	}
-	if(!本地 && 客户端 === 'HTML5+')
+	if(本地 && 客户端 === 'HTML5+')
 	{
 		baseArr = [];
 		let length = 截图区域.find('img').length
