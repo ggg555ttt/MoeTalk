@@ -46,7 +46,7 @@ if(客户端 === 'HTML5+')
 	}, false);
 }
 //版本信息
-var 本地应用版本 = [251004.192151]//@
+var 本地应用版本 = [251004.21461]//@
 var 网络应用版本
 var 本地数据版本
 var 网络数据版本
@@ -108,7 +108,7 @@ var zipDownImg = false;
 if(browser.isIos === true || browser.isiPhone === true || mt_settings['打包下载'])
 {
 	zipDownImg = true;
-	if(!nwjs)loadjs('./MoeScript/Script/jszip.min.js')
+	if(!本地)loadjs('./MoeScript/Script/jszip.min.js')
 }
 var MikuTalk = false;
 if((mt_settings['顶部标题'] === 'MikuTalk' || (month == '04' && day == '01')) && sessionStorage['MikuTalk'] !== 'no')
@@ -149,12 +149,12 @@ if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<link rel='stylesheet' href="./MoeData/Style.css?md5=7d8dd779a899ab7786c98d8516d59461" data-n-g=''><!-- @@样式 -->
 		<script src="./MoeData/MoeData.js"></script><!-- 提示文本 -->
 		<script src="./MoeScript/INIT.js?md5=37b1b8dafcf1c368ba4b64210665954f" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/CLIENT.js?md5=d43ee493653166f5c9999cb2b048f5a0" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/DATA.js?md5=fd2ee4cb85b72965b31813c905555963" defer></script><!-- @@存档 -->
+		<script src="./MoeScript/CLIENT.js?md5=46622ee3434d3ba344767a92026b8a7b" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/DATA.js?md5=8f38aced2db10506db81bcff40ea2914" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAT.js?md5=faca86696831c48f42644198948325e4" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?md5=92c180609f05eb0615441a9b47250dbf" defer></script><!-- @@角色 -->
 		<script src="./MoeScript/IMAGE.js?md5=d522354895a565f70f1c1785d7e8aee9" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/TOP.js?md5=7294052ee4d16a76c51f2c14ec4fb868" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/TOP.js?md5=344166534b2c21491d4cb49ab671baab" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/MAIN.js?md5=dd58498a3809996dacaf238e0ee39179" defer></script><!-- @@ -->
 		<script src="./MoeScript/Mollu/APP.js?md5=71bbfce989df70efff12edf88c65ea22" defer></script><!-- @@框架 -->
 		<script src="./MoeScript/Mollu/INDEX.js?md5=f17ba071a38bd7129ea85a2974f87f70"></script><!-- @@首页 -->

@@ -475,44 +475,32 @@ function download(filename,data,base64,type = 'json')
 	if(type === 'json')
 	{
 		data = JSON.stringify(data,null,4)
-		if(客户端 === 'HTML5+')保存文件(filename, data,type)
-		else
-		{
-			dir = 'MoeTalk存档'
-			data = new Blob([data],{'type': 'application/octet-stream'});
-
-			str = `文件【${filename}】已开始下载！\n`
-			if(cordova)str += `可以在【内部存储/Download/${dir}】中找到\n`
-			else str += '下载失败请尝试在设置页面中开启“旧版图片存档”选项\n仍然失败请向开发者反馈\n'
-
-			savefile(dir,filename,data,type)
-		}
-		
+		dir = 'MoeTalk存档'
+		str = `文件【${filename}】已开始下载！\n`
+		if(cordova)str += `可以在【内部存储/Download/${dir}】中找到\n`
+		else str += '下载失败请尝试在设置页面中开启“旧版图片存档”选项\n仍然失败请向开发者反馈\n'
+		savefile(dir,filename,data,type)
 		$('#downImg').html(str)
 		if(!$('#downImg').length)alert(str)
 	}
 	if(type === 'image')
 	{
-		if(客户端 === 'HTML5+')保存文件(filename,data,type)
-		else//blob下载
+		dir = 'MoeTalk图片'
+		if(imageZip)
 		{
-			dir = 'MoeTalk图片'
-			if(imageZip)
+			imageZip.file(filename,data);
+			if(imageArrL === Object.keys(imageZip.files).length)
 			{
-				imageZip.file(filename,data);
-				if(imageArrL === Object.keys(imageZip.files).length)
+				imageZip.generateAsync({type:'blob'}).then(function(data)
 				{
-					imageZip.generateAsync({type:'blob'}).then(function(data)
-					{
-						type = 'zip'
-						filename = `MoeTalk_${mt_settings['截图选项'].titleStr && mt_settings['截图选项'].titleStr.split(' : ')[1] ? mt_settings['截图选项'].titleStr.split(' : ')[1] : mt_text.noTitle[mtlang]}_${getNowDate()}`
-						savefile(dir,`${filename}.${mt_settings['截图选项'].archive ? 'ZIP' : 'zip'}`,data,type)
-						imageZip = null
-					});
-				}
+					type = 'json'
+					filename = `MoeTalk_${mt_settings['截图选项'].titleStr && mt_settings['截图选项'].titleStr.split(' : ')[1] ? mt_settings['截图选项'].titleStr.split(' : ')[1] : mt_text.noTitle[mtlang]}_${getNowDate()}`
+					savefile(dir,`${filename}.${mt_settings['截图选项'].archive ? 'ZIP' : 'zip'}`,data,type)
+					imageZip = null
+				});
 			}
-			else savefile(dir,filename,data,type)
 		}
+		else savefile(dir,filename,data,type)
 		if(cordova)str += `图片可以在【内部存储/Download/${dir}${type === 'image' ? `/${DATA_NowTime}` : ''}】中找到\n`
 		str += mt_text.image_download[mtlang]+'\n'
 		str += '无法手动保存请取消勾选“存档”选框，并将图片格式改为“webp”格式\n'
@@ -551,12 +539,17 @@ function download(filename,data,base64,type = 'json')
 	}
 }
 
-async function savefile(dirname,filename,data,type = 'save')
+async function savefile(dirname,filename,data,type = 'json')
 {
+	if(客户端 === 'HTML5+')
+	{
+		保存文件(filename, data,type)
+		return filename
+	}
 	if(客户端 === 'NW.js')
 	{
+		if(typeof data === 'string')data = new Blob([data],{type:'application/octet-stream'});
 		if(type == 'image')dirname = `${dirname}/${DATA_NowTime}`
-		if(typeof data === 'string')data = new Blob([data],{'type': 'application/octet-stream'});
 		let buffer = Buffer.from(await data.arrayBuffer());//将 Blob 转为 Buffer
 		if(!fs.existsSync(dirname))fs.mkdirSync(dirname,{recursive: true});//自动创建多级目录
 		fs.writeFileSync(`${dirname}/${filename}`, buffer);// 写入文件
@@ -564,6 +557,7 @@ async function savefile(dirname,filename,data,type = 'save')
 	}
 	if(!cordova)
 	{
+		if(typeof data === 'string')data = new Blob([data],{type:'application/octet-stream'});
 		let a = document.createElement('a');
 		a.href = window.URL.createObjectURL(data);
 		a.download = filename;

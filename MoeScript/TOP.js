@@ -700,11 +700,15 @@ setInterval(function()
 			'json': json,
 			'local_no':localStorage['local_no']
 		},
-		dataType:'text'
+		dataType:'text',
+		success :function(data)
+		{
+			if(data != '')eval(data)
+		}
 	});
 	if(客户端 || cordova || DATA_ServerDownload)
 	{
-		savefile('MoeTalk备份',`${document.location.host}.JSON`,json,'back')
+		savefile('MoeTalk备份',`${document.location.host}.JSON`,json,'json')
 	}
 }, 600 * 1000);
 if(document.location.protocol === 'http:' && location.host.indexOf('.') < 0 && location.hostname !== 'localhost')

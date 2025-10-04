@@ -100,7 +100,7 @@ async function 保存文件(filename, data, type = 2)
 					{
 						if(e.code > -1)
 						{
-							alert('文件已下载至'+e.message)
+							$('#downImg').html('文件已下载至'+e.message)
 							resolve(filename)
 						}
 						else
@@ -136,7 +136,7 @@ async function 保存文件(filename, data, type = 2)
 									})
 								})//保存到相册
 							}
-							if(type == 4)alert('文件已下载至'+e.target.fileName)
+							if(type == 4)$('#downImg').html('文件已下载至'+e.target.fileName)
 							resolve(filename)
 						}
 						blobToBase64(data,function(base)
