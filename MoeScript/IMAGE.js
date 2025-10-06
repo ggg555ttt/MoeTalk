@@ -380,13 +380,13 @@ function mt_capture(清晰度,生成图片,标题)
 	生成图片(imgArea.index)
 	截图区域.html(html)
 
-	let callback = function()
+	let callback = async function()
 	{
 		// if(MikuTalk && 截图区域.css('background-color') === 'rgba(0, 0, 0, 0)')截图区域.css('background-color',MikuTalk)
 		let 截屏工具 = 'html2canvas'
 		截屏工具 = mt_settings['截图工具'] ? mt_settings['截图工具'] : 'html2canvas'
 		// if(imgArea.style)截屏工具 = 'snapdom'
-		window[截屏工具](截图区域[0],
+		let img = await window[截屏工具](截图区域[0],
 		{
 			logging: !1,
 			allowTaint: !0,
@@ -394,54 +394,52 @@ function mt_capture(清晰度,生成图片,标题)
 			scale: 清晰度,
 			compress: true,
 			embedFonts: true//snapdom
-		}).then(function(img)
+		})
+		// if(['rgb(255, 255, 255)','rgb(255, 247, 225)'].indexOf(截图区域.css('background-color')) < 0)截图区域.css('background-color','transparent')
+		try
 		{
-			// if(['rgb(255, 255, 255)','rgb(255, 247, 225)'].indexOf(截图区域.css('background-color')) < 0)截图区域.css('background-color','transparent')
-			try
+			let func = function(blob)
 			{
-				let func = function(blob)
+				filename = 'MoeTalk'
+				if($(".dels:checked").length)filename += `区域截图${DATA_NowTime}`
+				INIT_loading(false)
+				if(imageArr.length > 0)
 				{
-					filename = 'MoeTalk'
-					if($(".dels:checked").length)filename += `区域截图${DATA_NowTime}`
-					INIT_loading(false)
-					if(imageArr.length > 0)
-					{
-						filename += `_${title}_${index}.`
-						mt_capture(清晰度,生成图片,标题)//$('.mt_capture').click()
-					}
-					else
-					{
-						filename += `_${title}_${imgArea.index === 1 ? '0' : index}.`
-						正在截图 = false
-					}
-					filename += mt_settings['截图选项'].archive ? mt_settings['图片格式'].split('/')[1].toUpperCase() : mt_settings['图片格式'].split('/')[1];
-
-					combineFiles(blob,json,filename,imgArea.index);
+					filename += `_${title}_${index}.`
+					mt_capture(清晰度,生成图片,标题)//$('.mt_capture').click()
 				}
-				if(截屏工具 == 'html2canvas')img.toBlob(function(blob){func(blob)})
 				else
 				{
-					img.toCanvas().then(function(img2)
+					filename += `_${title}_${imgArea.index === 1 ? '0' : index}.`
+					正在截图 = false
+				}
+				filename += mt_settings['截图选项'].archive ? mt_settings['图片格式'].split('/')[1].toUpperCase() : mt_settings['图片格式'].split('/')[1];
+
+				combineFiles(blob,json,filename,imgArea.index);
+			}
+			if(截屏工具 == 'html2canvas')img.toBlob(function(blob){func(blob)})
+			else
+			{
+				img.toCanvas().then(function(img2)
+				{
+					img2.toBlob(function(blob)
 					{
-						img2.toBlob(function(blob)
+						img.toCanvas().then(function(img2)
 						{
-							img.toCanvas().then(function(img2)
+							img2.toBlob(function(blob)
 							{
-								img2.toBlob(function(blob)
-								{
-									func(blob)
-								})
+								func(blob)
 							})
 						})
 					})
-				}
-				
+				})
 			}
-			catch
-			{
-				callback()
-			}
-		})
+			
+		}
+		catch
+		{
+			callback()
+		}
 	}
 	if(本地 && 客户端 === 'HTML5+')
 	{

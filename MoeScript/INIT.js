@@ -305,7 +305,7 @@ if(mt_settings['后台保存'])
 	window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 	window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 }
-function $ajax(url,更新 = false)
+function $ajax(url)
 {
 	return new Promise(function(callback)
 	{
@@ -314,12 +314,12 @@ function $ajax(url,更新 = false)
 		xhr.send();
 		url = url.split('?')[0]
 		let ext = url.split('.').slice(-1)[0]
-		if(ext != 'json')xhr.responseType = 'blob';
+		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
 		xhr.onload = function()
 		{
 			if(this.status === 200 && this.responseURL.indexOf(url) > -1)
 			{
-				if(!this.responseType || this.response.type === 'image/webp' || 更新)callback(this.response)//成功
+				if(!this.responseType || !this.response.type.includes('text'))callback(this.response)//成功
 				else callback(false)
 			}
 			else callback(false)

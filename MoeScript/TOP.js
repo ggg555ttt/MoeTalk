@@ -39,12 +39,13 @@ async function t()
 		else selectgame('<span style="color:red;">数据缺失！请重新选择游戏</span>')
 		md5 = {}
 	}
-	[mt_school,mt_club,mt_characters,mt_charface,id_map,CustomFaceAuthor,mt_char,mt_head,allChats] = await Promise.all(
+	[mt_school,mt_club,mt_characters,mt_charface,CFInfo,id_map,CustomFaceAuthor,mt_char,mt_head,allChats] = await Promise.all(
 	[
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-School.json?md5=${md5['MT-School']}`).then(json => JSON.parse(json)) : {},
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-Club.json?md5=${md5['MT-Club']}`).then(json => JSON.parse(json)) : {},
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-Characters.json?md5=${md5['MT-Characters']}`).then(json => JSON.parse(json)) : {},
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-CharFace.json?md5=${md5['MT-CharFace']}`).then(json => JSON.parse(json)) : {},
+		game != 'NONE' ? $ajax(`${href}GameData/${game}/CharFaceInfo.json?md5=${md5['MT-CharFace']}`).then(json => JSON.parse(json)) : {},
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/IdMap.json?md5=${md5['IdMap']}`).then(json => JSON.parse(json)) : [{},{}],
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/CustomFaceAuthor.json?md5=${md5['CustomFaceAuthor']}`).then(json => JSON.parse(json)) : {},
 		moetalkStorage.getItem('mt-char'),
