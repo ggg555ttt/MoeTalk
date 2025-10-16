@@ -60,7 +60,7 @@ async function file_exists(filePath)
 }
 async function ZipToJson(file)
 {
-	let json = await $ajax(file,'更新')
+	let json = await $ajax(file)
 	json = await json.arrayBuffer()
 	json = await JSZip.loadAsync(json);
 	return await json.files[Object.keys(json.files)[0]].async('string')
@@ -281,7 +281,7 @@ async function 更新应用(time = Date.now())
 				num[0]++
 				if(!await file_exists(`${Update}/${file}`))//检测更新文件
 				{
-					let data = await $ajax(`${MoeTalkURL}${file}?md5=${md5}`,'更新')
+					let data = await $ajax(`${MoeTalkURL}${file}?md5=${md5}`)
 					if(data)
 					{
 						await 保存文件(`${Update}/${file}`,data)
