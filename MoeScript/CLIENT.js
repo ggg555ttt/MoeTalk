@@ -62,60 +62,32 @@ async function ZipToJson(file)
 {
 	let json = await $ajax(file,'更新')
 	json = await json.arrayBuffer()
-	json = await new JSZip().loadAsync(json);
+	json = await JSZip.loadAsync(json);
 	return await json.files[Object.keys(json.files)[0]].async('string')
 }
-async function 保存文件(filename, data, type = 2)
-{
-	if(typeof data === 'string')data = new Blob([data],{type:'application/octet-stream'});
-	if(客户端 === 'NW.js')
-	{
-		let dirname = filename.split('/')
-		filename = dirname.pop()
-		dirname = dirname.join('/')
-		let buffer = Buffer.from(await data.arrayBuffer());//将 Blob 转为 Buffer
-		if(!fs.existsSync(dirname))fs.mkdirSync(dirname,{recursive: true});//自动创建多级目录
-		fs.writeFileSync(`${dirname}/${filename}`, buffer);// 写入文件
-		return filename
-	}
+function 外部下载(filename, data)
+{//HTML5+，用于下载存档和zip
 	return new Promise(function(resolve)
 	{
-		if(type === 'image')type = 3
-		if(type === 'json')
+		plus.android.requestPermissions(['android.permission.WRITE_EXTERNAL_STORAGE'],function(e)
 		{
-			plus.android.requestPermissions(['android.permission.WRITE_EXTERNAL_STORAGE'],function(e)
+			if(e.deniedAlways.length>0 || e.deniedPresent.length>0)resolve(false)
+			if(e.granted.length>0)
 			{
-				if(e.deniedAlways.length>0 || e.deniedPresent.length>0)
+				plus.runtime.downloadFile({url:data,fileName:filename},
+				function(e){resolve(false)},function(e)
 				{
-					保存文件(filename, data, 4)
-					resolve(false)
-				}
-				if(e.granted.length>0)
-				{
-					plus.runtime.downloadFile({url:data,fileName:filename},function(e)
-					{
-						保存文件(filename, data, 4)
-						resolve(false)
-					},function(e)
-					{
-						if(e.code > -1)
-						{
-							$('#downImg').html('文件已下载至'+e.message)
-							resolve(filename)
-						}
-						else
-						{
-							保存文件(filename, data, 4)
-							resolve(false)
-						}
-					})
-				}
-			},function(e)
-			{
-				console.log('Request Permissions error:'+JSON.stringify(e));
-			});
-			return
-		}
+					if(e.code > -1)resolve(e.message)//下载成功
+					else resolve(false)
+				})
+			}
+		},function(e){resolve(false)});
+	});
+}
+function 内部下载(filename, data, type)
+{//HTML5+，用于截图和更新应用
+	return new Promise(function(resolve)
+	{
 		plus.io.requestFileSystem(type,function(fs)
 		{
 			fs.root.getFile(filename,{create: true,exclusive: false},function(fileEntry)
@@ -136,8 +108,7 @@ async function 保存文件(filename, data, type = 2)
 									})
 								})//保存到相册
 							}
-							if(type == 4)$('#downImg').html('文件已下载至'+e.target.fileName)
-							resolve(filename)
+							resolve(e.target.fileName)
 						}
 						blobToBase64(data,function(base)
 						{
@@ -148,6 +119,73 @@ async function 保存文件(filename, data, type = 2)
 			});
 		});
 	});
+}
+async function 保存文件(filename, data, type = 2)
+{
+	if(typeof data === 'string')data = new Blob([data],{type:'application/octet-stream'});
+	if(!客户端)
+	{
+		saveAs(data, filename);
+		return filename
+	}
+	if(客户端 === 'NW.js')
+	{
+		if(type === 'json')filename = '存档/'+filename
+		if(type === 'image' || type === 'zip')filename = '截图/'+filename
+		data = Buffer.from(await data.arrayBuffer());//将 Blob 转为 Buffer
+		await fs.outputFile(filename, data);
+		return `客户端路径/${filename}`
+	}
+	if(客户端 === 'HTML5+')
+	{
+		let fname = filename
+		if(type === 2)fname = await 内部下载(filename, data, type)
+		if(type === 'image')fname = await 内部下载(filename, data, 3)
+		if(type === 'json' || type === 'zip')
+		{
+			fname = await 外部下载(filename, data)
+			if(!fname)fname = await 内部下载(filename, data, 4)
+		}
+		return fname
+	}
+	if(客户端 === 'Cordova')
+	{
+		let dirname = ''
+		if(type === 'json')dirname = 'MoeTalk存档'
+		if(type === 'image' || type === 'zip')dirname = 'MoeTalk截图'
+		window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory+'Download',function(root)
+		{
+			root.getDirectory(dirname,{create:true},function()
+			{
+				root.getFile(`${dirname}/${filename}`,{create:true},function(fileEntry)
+				{
+					fileEntry.createWriter(function(fileWriter){fileWriter.write(data);});
+				});
+			});
+		},function(err){alert('Download文件夹不存在！\n请尝试在内部存储根目录创建一个Download文件夹！');});
+		return `内部存储/Download/${dirname}/${filename}`
+	}
+	if(客户端 === 'PHPWin')
+	{
+		if(type === 'zip')type = 'image'
+		if(type === 'image')data = await blobToBase64(data)
+		$.ajax(
+		{
+			url: '/index.php',
+			async: true,
+			type: 'POST',
+			data: 
+			{
+				backDown: true,
+				filename: filename,
+				data: data,
+				type: type,
+				time: ''
+			},
+			dataType:'text'
+		});
+		return `文件/我的iPhone/phpwin/${type}/${filename}`
+	}
 }
 async function 删除文件(filename)
 {
@@ -212,7 +250,7 @@ async function 安装应用()
 		while(文件列表.length > 0)
 		{
 			let file = 文件列表.shift();
-			await 保存文件(file,await $ajax(`${href}${file}`,'安装'))
+			await 保存文件(file,await $ajax(`${href}${file}`))
 			$('.更新应用').text(`安装应用中，请不要退出或刷新\n剩余文件：${文件列表.length}`)
 		}
 	}
@@ -369,22 +407,17 @@ async function 检查数据()
 	}
 	if(数据列表.length)
 	{
-		$.ajax(
+		let data = await $ajax('https://api.akams.cn/github','json')
+		data = data ? JSON.parse(data).data : []
+		网址列表 = []
+		网址列表.push('https://moetalk.netlify.app')
+		网址列表.push('https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
+		foreach(data,function(k,v)
 		{
-			url: "https://api.akams.cn/github",
-			success: function(data)
-			{
-				网址列表 = []
-				网址列表.push('https://moetalk.netlify.app')
-				网址列表.push('https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
-				foreach(data.data,function(k,v)
-				{
-					网址列表.push(v.url+'/https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
-				})
-				文件总数 = 数据列表.length-1
-				foreach(网址列表,function(k,v){下载数据(v)})
-			}
-		});
+			网址列表.push(v.url+'/https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
+		})
+		文件总数 = 数据列表.length-1
+		foreach(网址列表,function(k,v){下载数据(v)})
 	}
 }
 async function 下载数据(url)
@@ -414,5 +447,76 @@ async function 下载数据(url)
 			数据列表.unshift(filename)//失败换源
 			下载数据(网址列表[Math.floor(Math.random()*网址列表.length)])
 		}
+	}
+}
+async function 导出存档(filename,json)
+{
+	if(typeof json !== 'string')json = JSON.stringify(json)
+	json = new Blob([json],{type: 'application/json'})
+	if($('.存档格式').val() === 'json')
+	{
+		filename = await 保存文件(filename+'.JSON',json,'json')
+		alert(`<span style="color:red;">${filename}</span>已下载\n`)
+		return
+	}
+	let png = await html2canvas($('.ckdZao')[0],
+	{
+		logging: !1,
+		allowTaint: !0,
+		useCORS: !0,
+		scale: 1.1,
+		compress: true,
+		embedFonts: true//snapdom
+	})
+	png = atob(png.toDataURL('image/png').split(',')[1])
+	for(var zip=Array(png.length),i=0,l=zip.length;i<l;i++)zip[i] = png.charCodeAt(i);
+
+	let file = new FileReader;
+	file.onload = async function()
+	{
+		png = new Blob([new Uint8Array(zip)],{type: 'image/png'})
+		zip = new DataView(file.result)
+		let a = png.size,
+			b = zip.byteLength-22,
+			c = zip.getUint32(b+16, !0);
+		for(zip.setUint32(b+16, c+a, !0); c<b;)
+		{
+			let d = zip.getUint16(c+28, !0),
+				e = zip.getUint16(c+30, !0),
+				f = zip.getUint32(c+42, !0);
+			zip.setUint32(c+42, f+a, !0)
+			c += 46+d+e
+		}
+		png = new Blob([png, zip],{type: 'image/png'})
+		filename = await 保存文件(filename+'.PNG',png,'json')
+		blobToBase64(png,function(png)
+		{
+			let str = `<span style="color:red;">${filename}</span>已下载\n`
+			str += '如果下载失败，请尝试手动保存下方的图片\n'
+			str += `<img src='data:image/png;base64,${png}'style='border: 2px solid red;width: 100%;'>\n`
+			str += '可将图片后缀名改为"zip"后解压'
+			alert(str)
+		})
+	}
+	file.readAsArrayBuffer(await new JSZip().file('json.txt',json).generateAsync({type: 'blob'}))
+}
+async function 导出截图(filename,data)
+{
+	let ext = mt_settings['图片格式'].split('/')[1]
+	if(imageZip)
+	{
+		imageZip.file(`${filename}.${ext}`,data);
+		if(imageArrL === Object.keys(imageZip.files).length)
+		{
+			imageZip = await imageZip.generateAsync({type:'blob'})
+			imageZip = await 保存文件(filename+'.zip',imageZip,'zip')
+			$('.INDEX_CaptureTips').html(`<span style="color:red;">${imageZip}</span>`)
+			imageZip = null
+		}
+	}
+	else
+	{
+		filename = await 保存文件(`${filename}.${ext}`,data,'image')
+		$('.INDEX_CaptureTips').html(`<span style="color:red;">${filename}</span>`)
 	}
 }

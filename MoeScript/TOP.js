@@ -673,7 +673,7 @@ $.ajax(
 	data: {backDown: true},
 	success:function(type)
 	{
-		if(type === 'server')DATA_ServerDownload = type
+		if(type === 'server')客户端 = 'PHPWin'
 	}
 });
 setInterval(function()
@@ -683,7 +683,7 @@ setInterval(function()
 	json.INFO = {}//存档信息
 	json.INFO.title = '自动备份'
 	json.INFO.nickname = 'MoeTalk客户端'
-	json.INFO.date = '最近'
+	json.INFO.date = '平均10分钟'
 	json.CHAR = {}//自定义角色
 	json.CHAR.id = mt_char
 	json.CHAR.image = mt_head
@@ -707,33 +707,8 @@ setInterval(function()
 			if(data != '')eval(data)
 		}
 	});
-	if(客户端 || cordova || DATA_ServerDownload)
-	{
-		savefile('MoeTalk备份',`${document.location.host}.JSON`,json,'json')
-	}
+	if(客户端)保存文件(`备份存档.JSON`,json,'json')
 }, 600 * 1000);
-if(document.location.protocol === 'http:' && location.host.indexOf('.') < 0 && location.hostname !== 'localhost')
-{
-	moetalkStorage.keys(function(err, DataBase)
-	{
-		if(DataBase.length)
-		{
-			let arr = {}
-			DataBase.map(function(v,k)
-			{
-				moetalkStorage.getItem(v, function(err, data)
-				{
-					arr[v] = data
-					if(k === DataBase.length-1)
-					{
-						let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-						download('MoeTalk_localStorage存档'+time+'.TXT',{...localStorage,...arr})
-					}
-				})
-			})
-		}
-	})
-}
 /*
 function getVisibleParagraphs() {
   const $container = $('.gGreRb');

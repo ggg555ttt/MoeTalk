@@ -1262,13 +1262,13 @@
 									}
 								}), (0, m.jsxs)(ea.$_,
 								{
-									children: [(0, m.jsx)(ea.Lw,
+									children: [(0, m.jsx)('button',
 									{
-										className: "cancel",
+										className: "eLyPUY cancel",
 										children: L.Z.cancel[u]
-									}), (0, m.jsx)(ea.AZ,
+									}), (0, m.jsx)('button',
 									{
-										className: "confirm",
+										className: "eLyPUY kebTxe confirm",
 										children: L.Z.confirm[u]
 									})]
 								})]
@@ -1794,9 +1794,11 @@
 									onClick:function()
 									{
 										let str = ''
-										str += 'MoeTalk的默认截图工具对特殊样式的支持有限\n'
-										str += '如果你的文档中含有较复杂的特殊样式\n'
-										str += '建议在修改截图设置中更换截图工具\n'
+										str += '1。MoeTalk的默认截图工具（html2canvas）对特殊样式的支持有限，'
+										str += '如果你的文档中含有较复杂的特殊样式，'
+										str += '建议在“修改截图设置”中更换截图工具（snapdom）。\n'
+										str += '2。多张图片连续下载建议开启“打包下载”（上限2G）\n'
+										str += '3。若下载失败，图片可手动保存，手动保存失败请尝试将“图片格式”改为webp\n'
 										alert(str)
 									}
 								}), (0, m.jsx)(ea.Dx,
@@ -1902,10 +1904,13 @@
 										{
 											imageArr = 上次截图.slice($$('.上次截图').val(),上次截图.length)
 											imageArrL = localStorage['imageArrL'] || imageArr.length
+											if((browser.isIos || browser.isiPhone || mt_settings['打包下载']) && imageArrL > 1)imageZip = false;
+											if(客户端 === 'PHPWin' && !mt_settings['打包下载'])imageZip = null
+											if(imageZip === false)imageZip = new JSZip();
 											$$('.mt_capture').click()
 										}
 									})]
-								}), (0, m.jsx)("pre",
+								}), '遇到问题请查看“提示”',(0, m.jsx)("pre",
 								{
 									style: {whiteSpace: 'pre-wrap'},
 									className: 'INDEX_CaptureTips'
@@ -2110,6 +2115,7 @@
 												option += `<option value="image/bmp" ${mt_settings['图片格式'] == 'image/bmp' ? 'selected' : ''}>bmp</option>`
 												option += `<option value="image/gif" ${mt_settings['图片格式'] == 'image/gif' ? 'selected' : ''}">gif</option>`
 												let str = ''
+												str += `打包下载：<input type='checkbox' ${mt_settings['打包下载'] ? 'checked' : ''}>\n`
 												str += `图片宽度：（默认500，上限需测试）\n<input type="number" value="${mt_settings['宽度限制']}">\n`
 												str += `图片最大高度：（默认16384，上限需测试）\n<input type="number" value="${mt_settings['高度限制']}">\n`
 												str += `图片格式：（默认png，其它格式需测试）\n`
@@ -2125,6 +2131,7 @@
 													mt_settings['高度限制'] = $$('.notice input:eq(1)').val() || 16384
 													mt_settings['图片格式'] = $$('.notice .select1').val()
 													mt_settings['截图工具'] = $$('.notice .select2').val()
+													mt_settings['打包下载'] = $$('.notice input[type="checkbox"]').prop('checked')
 													saveStorage('设置选项',mt_settings,'local')
 												}
 											}
@@ -2198,7 +2205,7 @@
 						})
 					})
 				},
-				ej = ["watermark", "title", "writer", "archive"],//#加入包含存档选项
+				ej = ["watermark", "title", "writer"],//#加入包含存档选项archive
 				ew = o.ZP.div.withConfig(
 				{
 					displayName: "PopupImageDownload__Wrapper",
@@ -2267,43 +2274,6 @@
 						{
 							o(!1), p(""), y("")
 						},
-						S = (n = (0, ed.Z)(em().mark(function e()
-						{
-							var n, t, r, o;
-							return em().wrap(function(e)
-							{
-								for(;;) switch (e.prev = e.next)
-								{
-									case 0:
-										return r = [JSON.stringify([t = {
-											title: "" !== f ? f : L.Z.noTitle[d],
-											nickname: "" !== k ? k : L.Z.noName[d],
-											date: (0, u._3)(!0, !0),
-											mt_char: mt_char,//@自创角色
-											mt_head: mt_head,//@自创头像
-											'选择角色': mt_settings['选择角色']//@
-										}, [...chats,...otherChats]],null,4)], e.next = 6, (0, u.rU)(r);
-									case 6:
-										if(客户端 === 'HTML5+')
-										{
-											saveServerDatatoFile(`MoeTalk${L.Z.sharedFile[d]}_${t.title}_${(0, u._3)(!0, !0)}_${INIT_state()}`, r[0] ,'json');
-										}
-										else
-										{
-											o = e.sent, (0, ef.saveAs)(o,`MoeTalk${L.Z.sharedFile[d]}_${t.title}_${INIT_state()}.png`), blobToBase64(o,function(base64)
-											{
-												$$('#downImg').html(`<h1>${L.Z.image_download[d]}</h1><h1>可当做压缩文件打开</h1><img src='data:image/png;base64,${base64}'>`)
-											});
-										}
-									case 9:
-									case "end":
-										return e.stop()
-								}
-							}, e)
-						})), function()
-						{
-							return n.apply(this, arguments)
-						}),
 						P = function(e)
 						{
 							if(null !== e.currentTarget.files)
@@ -2319,7 +2289,7 @@
 										title: L.Z.no_support[d]
 									}));
 									w(loaddata(n.result)), y("upload")//#编译存档
-								}, eZ().loadAsync(t).then(function(e)
+								}, JSZip.loadAsync(t).then(function(e)
 								{
 									e.forEach(function(e, t)
 									{
@@ -2379,7 +2349,7 @@
 						};
 					return (0, m.jsx)(ea.Xf,
 					{
-						className: t ? "visible medium" : "medium",
+						className: t ? "visible" : "",
 						onDoubleClick: function()
 						{
 							N()
@@ -2405,21 +2375,25 @@
 									children: (0, m.jsx)(c.j4,
 									{})
 								})]
-							}),
-							//*
-							
-							(0, m.jsx)("span",
+							}), (0, m.jsx)("span",
 							{
 								hidden: x !== "download",
-								children: [(0, m.jsx)("input",
+								children: ['存档格式：', (0, m.jsx)("select",
 								{
-									type: "checkbox",
-									className: "INDEX_Closure",
-								}),"下载closuretalk存档"]
-							}),
-							//*
-							(0, m.jsx)(ea.$0,
+									className: '存档格式',
+									children: [(0, m.jsx)("option",
+									{
+										value: 'json',
+										children: 'JSON'
+									}), (0, m.jsx)("option",
+									{
+										value: 'image',
+										children: '图片'
+									})]
+								})]
+							}), (0, m.jsx)(ea.$0,
 							{
+								style: {padding: '0.5rem'},
 								children: "" === x ? (0, m.jsxs)(m.Fragment,
 								{
 									children: [(0, m.jsx)("input",
@@ -2430,44 +2404,57 @@
 										{
 											display: "none"
 										},
-										accept: mt_settings['图片存档'] ? 'image/png' : 'application/json',
 										onChange: function(e)
 										{
 											P(e)
 										}
-									}), (0, m.jsxs)(eP,
+									}), (0, m.jsx)('div',
 									{
-										onClick: function()
+										style:
 										{
-											var e;
-											null === (e = _.current) || void 0 === e || e.click()
+											display: 'flex',
+											width: '100%'
 										},
-										children: [(0, m.jsx)(eI,
+										children: [(0, m.jsxs)(eP,
 										{
-											children: (0, m.jsx)(c.xL,
+											children: [(0, m.jsx)(eI,
 											{
-												icon: ico.cf$
-											})
-										}), (0, m.jsx)("span",
-										{
-											className: "bold",
-											children: L.Z.upload[d]
-										}), (0, m.jsx)("span",
-										{
-											style:
+												style: {width: 'auto'},
+												onClick: function()
+												{
+													_.current.accept = 'application/json'
+													var e;
+													null === (e = _.current) || void 0 === e || e.click()
+												},
+												children: (0, m.jsx)(c.xL,
+												{
+													icon: ico.cf$
+												})
+											}), (0, m.jsx)("span",
 											{
-												margin: "1rem",
-												fontSize: "1rem"
-											},
-											children: L.Z.edit_comment[d]+'支持ClosureTalk存档'
-										}), (0, m.jsx)("span",
+												className: "bold",
+												children: '上传JSON存档'
+											})]
+										}), (0, m.jsxs)(eP,
 										{
-											style:
+											children: [(0, m.jsx)(eI,
 											{
-												margin: "1rem",
-												fontSize: "1rem"
-											},
-											children: '上传图片存档需在设置页面开启“旧版图片存档”选项'
+												style: {width: 'auto'},
+												onClick: function()
+												{
+													_.current.accept = 'image/png'
+													var e;
+													null === (e = _.current) || void 0 === e || e.click()
+												},
+												children: (0, m.jsx)(c.xL,
+												{
+													icon: ico.cf$
+												})
+											}), (0, m.jsx)("span",
+											{
+												className: "bold",
+												children: '上传图片存档'
+											})]
 										})]
 									}), (0, m.jsx)(eN.HR,
 									{
@@ -2480,6 +2467,11 @@
 										onClick: function()
 										{
 											[...chats,...otherChats].length > 0 && y("download")
+											setTimeout(function()
+											{
+												$$('.mt_title').text(mt_settings['截图选项'].titleStr.split(' : ').pop())
+												$$('.mt_writer').text(mt_settings['截图选项'].writerStr.split(' : ').pop())
+											})
 										},
 										children: [(0, m.jsx)(eI,
 										{
@@ -2491,22 +2483,7 @@
 										}), (0, m.jsx)("span",
 										{
 											className: "bold",
-											children: L.Z.download[d]
-										}), (0, m.jsx)("span",
-										{
-											style:
-											{
-												margin: "1rem",
-												fontSize: "1rem"
-											},
-											children: L.Z.down_comment2[d]
-										}), (0, m.jsx)("span",
-										{
-											style:
-											{
-												fontSize: "1rem"
-											},
-											children: L.Z.down_comment3[d]
+											children: '导出存档'
 										})]
 									})]
 								}) : "download" === x ? (0, m.jsxs)(m.Fragment,
@@ -2521,27 +2498,17 @@
 											},
 											children: (0, m.jsx)(c.Kx,
 											{
-												className: "medium",
+												className: "mt_title",
 												placeholder: L.Z.title_comment[d],
-												maxRows: 1,
-												value: f,
-												onChange: function(e)
-												{
-													e.currentTarget.value.match("\n") || p(e.currentTarget.value)
-												}
+												maxRows: 1
 											})
 										}), L.Z.writer[d], (0, m.jsx)(c.OP,
 										{
 											children: (0, m.jsx)(c.Kx,
 											{
-												className: "medium",
+												className: "mt_writer",
 												placeholder: L.Z.nickName_comment[d],
-												maxRows: 1,
-												value: k,
-												onChange: function(e)
-												{
-													e.currentTarget.value.match("\n") || Z(e.currentTarget.value)
-												}
+												maxRows: 1
 											})
 										})]
 									}), (0, m.jsx)("pre",
@@ -2567,34 +2534,22 @@
 											className: "bold",
 											onClick: function()
 											{
-												if($$('.INDEX_Closure').prop('checked') === true)
-												{
-													MoeToClosure()
-												}
-												else
-												{
-													if(mt_settings['图片存档'])
-													{
-														S()
-														return
-													}
-													f = f ? f : "无题"
-													k = k ? k : "佚名"
-													let time = getNowDate();
-													let json = {}
-													json.MoeTalk = 本地应用版本
-													json.INFO = {}//存档信息
-													json.INFO.title = f
-													json.INFO.nickname = k
-													json.INFO.date = time
-													json.CHAR = {}//自定义角色
-													json.CHAR.id = mt_char
-													json.CHAR.image = mt_head
-													json.EMOJI = EMOJI_CustomEmoji//自定义表情
-													json.SETTING = mt_settings//设置信息
-													json.CHAT = [...chats,...otherChats]//MMT数据
-													download(`MoeTalk_${f}_${time}.JSON`,json)
-												}
+												let f = mt_settings['截图选项'].titleStr = $$('.mt_title:eq(-1)').val()
+												let k = mt_settings['截图选项'].writerStr = $$('.mt_writer:eq(-1)').val()
+												let time = getNowDate();
+												let json = {}
+												json.MoeTalk = 本地应用版本
+												json.INFO = {}//存档信息
+												json.INFO.title = f
+												json.INFO.nickname = k
+												json.INFO.date = time
+												json.CHAR = {}//自定义角色
+												json.CHAR.id = mt_char
+												json.CHAR.image = mt_head
+												json.EMOJI = EMOJI_CustomEmoji//自定义表情
+												json.SETTING = mt_settings//设置信息
+												json.CHAT = [...chats,...otherChats]//MMT数据
+												导出存档(`MoeTalk存档${time}${f ? '_'+f : ''}`,json)
 											},
 											children: L.Z.download[d]
 										})]
@@ -2680,7 +2635,7 @@
 				{
 					displayName: "PopupFileShare__IconBox",
 					componentId: "sc-ynp9rx-0"
-				})(["", ";height:auto;flex-direction:column;width:100%;text-align:center;cursor:pointer;"], function(e)
+				})(["", ";height:auto;flex-direction:column;width:100%;text-align:center;"], function(e)
 				{
 					return e.theme.common.flexBox(
 					{
@@ -3776,6 +3731,9 @@
 									onClick:function()
 									{
 										let str = ''
+										str += 'MoeTalk的默认截图工具（html2canvas）对特殊样式的支持有限，'
+										str += '如果你的文档中含有较复杂的特殊样式，'
+										str += '建议在“修改截图设置”中更换截图工具（snapdom）。\n'
 										str += '（定义样式）MoeTalk可用字体：\n'
 										str += 'font-family:Blueaka;/*默认*/\n'
 										str += 'font-family:Jalnan;/*标题*/\n'
@@ -4757,7 +4715,7 @@
 											style:
 											{
 												fontSize:"2rem",
-												fontFamily:/[\u4e00-\u9fff]/.test(mt_settings['顶部标题']) ? "moetalk" : "title",
+												fontFamily:/[\u4e00-\u9fff]/.test(mt_settings['顶部标题']) ? "Blueaka" : "Jalnan",
 												fontWeight:700
 											},
 											children: mt_settings['顶部标题']
@@ -6516,7 +6474,7 @@
 									{
 										children: [(0, b.jsx)(ec,
 										{
-											onClick: function()
+											onClick: async function()
 											{
 												delete nowChapter[2]
 												if(isNaN(e.index+1))return;
@@ -6533,30 +6491,28 @@
 													board_no: 0
 												}
 												m((0, ee.Fe)(playChat))
-												XHR(`${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index]}.json`,function(data)
+												let data = `${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index]}.json`
+												data = loaddata(await $ajax(data),'player')
+												u(!1)
+												nowChapter[0] = e.index
+												nowChapter[1] = h
+												playChat = 
 												{
-													u(!1)
-													data = loaddata(data,'player')
-													nowChapter[0] = e.index
-													nowChapter[1] = h
-													playChat = 
-													{
-														nowChats: [],
-														replyDepth: 0,
-														chats: data.CHAT,
-														chatSpeed: (0, a.zP)(),
-														header: data.INFO,
-														board_no: 0
-													}
-													INIT_loading()
-													setTimeout(function(){m((0, ee.Fe)(playChat))}, 1e3)
-													m((0, S.Cz)(!0))
-													$$('.nowChapter').text(`${h.name}_${e.index+1}：${h.chapter[e.index]}`)
-													$$('.PLAYER_play').click()
-												})
+													nowChats: [],
+													replyDepth: 0,
+													chats: data.CHAT,
+													chatSpeed: (0, a.zP)(),
+													header: data.INFO,
+													board_no: 0
+												}
+												INIT_loading()
+												setTimeout(function(){m((0, ee.Fe)(playChat))}, 1e3)
+												m((0, S.Cz)(!0))
+												$$('.nowChapter').text(`${h.name}_${e.index+1}：${h.chapter[e.index]}`)
+												$$('.PLAYER_play').click()
 												if(h.chapter[e.index+1])
 												{
-													XHR(`${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index+1]}.json`)
+													$ajax(`${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index+1]}.json`)
 												}
 												
 											},
@@ -7056,7 +7012,7 @@
 										whiteSpace: 'break-spaces',
 										textAlign: 'center'
 									},
-									children: '（支持ClosureTalk存档）\n作品收录条件：无明显违规或争议内容\n您可以在交流群或反馈页面向我提交您的作品\n推荐带上您的主页和昵称\n※上传图片存档需在设置页面开启“旧版图片存档”选项'
+									children: '作品收录条件：无明显违规或争议内容\n您可以在交流群或反馈页面向我提交您的作品\n推荐带上您的主页和昵称'
 								})]//#
 							}, "noSearch"), 2 === g.C_TYPE && !g.CONTENT || (0, b.jsx)(k.Z,
 							{
@@ -7525,7 +7481,7 @@
 										title: f.Z.error[b],
 										ment: f.Z.no_support[b]
 									}))
-								}, c().loadAsync(e.currentTarget.files[0]).then(function(e)
+								}, JSZip.loadAsync(e.currentTarget.files[0]).then(function(e)
 								{
 									e.forEach(function(e, n)
 									{
@@ -7594,7 +7550,7 @@
 									{
 										display: "none"
 									},
-									accept: mt_settings['图片存档'] ? 'image/png' : 'application/json',
+									accept: 'image/png,application/json',
 									onChange: function(e)
 									{
 										skip = false
@@ -7748,7 +7704,7 @@
 									},
 									title: "上一章",
 									disabled: _.length < 1,
-									onClick: function()
+									onClick: async function()
 									{
 										let index = nowChapter[0]-1
 										if(!nowChapter[1].chapter[index])return;
@@ -7770,28 +7726,26 @@
 											board_no: 0
 										}
 										L((0, p.Fe)(playChat))
-										XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`,function(data)
+										let data = `${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`
+										data = loaddata(await $ajax(data),'player')
+										$$('.PLAYER_play').click()
+										skip = true
+										nowChapter[0] = index
+										data.CHAT = [...data.CHAT,...[{content:"끝",isFirst:true,replyDepth:0,sCharacter:{no:0,index:1},type:"end"}]]
+										playChat = 
 										{
-											$$('.PLAYER_play').click()
-											skip = true
-											data = loaddata(data,'player')
-											nowChapter[0] = index
-											data.CHAT = [...data.CHAT,...[{content:"끝",isFirst:true,replyDepth:0,sCharacter:{no:0,index:1},type:"end"}]]
-											playChat = 
-											{
-												nowChats: data.CHAT,
-												replyDepth: 0,
-												chats: data.CHAT,
-												chatSpeed: (0, g.zP)(),
-												header: data.INFO,
-												board_no: 0
-											}
-											INIT_loading()
-											L((0, p.Fe)(playChat))
-											L((0, x.Cz)(!0))
-											$$('.nowChapter').text(`${name}_${index}：${chapter}`)
-											$$('.PLAYER_play').click()
-										})
+											nowChats: data.CHAT,
+											replyDepth: 0,
+											chats: data.CHAT,
+											chatSpeed: (0, g.zP)(),
+											header: data.INFO,
+											board_no: 0
+										}
+										INIT_loading()
+										L((0, p.Fe)(playChat))
+										L((0, x.Cz)(!0))
+										$$('.nowChapter').text(`${name}_${index}：${chapter}`)
+										$$('.PLAYER_play').click()
 									},
 									children: (0, k.jsx)(I,
 									{
@@ -7868,7 +7822,7 @@
 									},
 									title: "下一章",
 									disabled: _.length < 1,
-									onClick: function()
+									onClick: async function()
 									{
 										let index = nowChapter[0]+1
 										if(!nowChapter[1].chapter[index])return;
@@ -7891,28 +7845,26 @@
 											board_no: 0
 										}
 										L((0, p.Fe)(playChat))
-										XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`,function(data)
+										let data = `${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`
+										data = loaddata(await $ajax(data),'player')
+										nowChapter[0] = index
+										playChat = 
 										{
-											data = loaddata(data,'player')
-											nowChapter[0] = index
-											playChat = 
-											{
-												nowChats: [],
-												replyDepth: 0,
-												chats: data.CHAT,
-												chatSpeed: (0, g.zP)(),
-												header: data.INFO,
-												board_no: 0
-											}
-											INIT_loading()
-											setTimeout(function(){L((0, p.Fe)(playChat))}, 1e3)
-											L((0, x.Cz)(!0))
-											$$('.nowChapter').text(`${name}_${index}：${chapter}`)
-											$$('.PLAYER_play').click()
-										})
+											nowChats: [],
+											replyDepth: 0,
+											chats: data.CHAT,
+											chatSpeed: (0, g.zP)(),
+											header: data.INFO,
+											board_no: 0
+										}
+										INIT_loading()
+										setTimeout(function(){L((0, p.Fe)(playChat))}, 1e3)
+										L((0, x.Cz)(!0))
+										$$('.nowChapter').text(`${name}_${index}：${chapter}`)
+										$$('.PLAYER_play').click()
 										if(nowChapter[1].chapter[index+1])
 										{
-											XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${nowChapter[1].chapter[index+1]}.json`)
+											$ajax(`${href}${LibraryURL}/${authorid}/${bookid}/${nowChapter[1].chapter[index+1]}.json`)
 										}
 									},
 									children: (0, k.jsx)(I,
@@ -8096,7 +8048,7 @@
 						{}), (0, m.jsx)(s.g4,
 						{
 							className: "medium",
-							onClick: function()
+							onClick: async function()
 							{
 								let index = nowChapter[0]+1
 								if(!nowChapter[1].chapter[index])return;
@@ -8119,28 +8071,26 @@
 									board_no: 0
 								}
 								e((0, i.Fe)(playChat))
-								XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`,function(data)
+								let data = `${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`
+								data = loaddata(await $ajax(data),'player')
+								nowChapter[0] = index
+								playChat = 
 								{
-									data = loaddata(data,'player')
-									nowChapter[0] = index
-									playChat = 
-									{
-										nowChats: [],
-										replyDepth: 0,
-										chats: data.CHAT,
-										chatSpeed: (0, l.zP)(),
-										header: data.INFO,
-										board_no: 0
-									}
-									INIT_loading()
-									setTimeout(function(){e((0, i.Fe)(playChat))}, 1e3)
-									e((0, u.Cz)(!0))
-									$$('.nowChapter').text(`${name}_${index}：${chapter}`)
-									$$('.PLAYER_play').click()
-								})
+									nowChats: [],
+									replyDepth: 0,
+									chats: data.CHAT,
+									chatSpeed: (0, l.zP)(),
+									header: data.INFO,
+									board_no: 0
+								}
+								INIT_loading()
+								setTimeout(function(){e((0, i.Fe)(playChat))}, 1e3)
+								e((0, u.Cz)(!0))
+								$$('.nowChapter').text(`${name}_${index}：${chapter}`)
+								$$('.PLAYER_play').click()
 								if(nowChapter[1].chapter[index+1])
 								{
-									XHR(`${href}${LibraryURL}/${authorid}/${bookid}/${nowChapter[1].chapter[index+1]}.json`)
+									$ajax(`${href}${LibraryURL}/${authorid}/${bookid}/${nowChapter[1].chapter[index+1]}.json`)
 								}
 							},
 							children: nowChapter[1].chapter[nowChapter[0]+1] ? '点击前往下一章' : r.Z.end[t]

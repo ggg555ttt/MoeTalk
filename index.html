@@ -7,22 +7,19 @@
 		<script src="./MoeScript/Script/localforage.min.js?md5=3789d1d948e1eb4b5f3122fb339e8f26"></script><!-- @@首页 -->
 		<script src="./MoeScript/Script/html2canvas.min.js?md5=c51c8040e9ecd71464f2a649ad39548a"></script><!-- @@首页 -->
 		<script src="./MoeScript/Script/snapdom.min.js?md5=9e4bce4af468d4e534657dc3f32da330"></script><!-- @@首页 -->
+		<script src="./MoeScript/Script/jszip.min.js?md5=7e66f61e0fb4ce9bb5d58f6dccdb7a11"></script><!-- @@首页 -->
+		<script src="./MoeScript/Script/filesaver.min.js?md5=bd9105ba51dccb7403a47ccaa3a5ce2e"></script><!-- @@首页 -->
 		<!-- <script src="https://unpkg.com/@zumer/snapdom@latest/dist/snapdom.min.js"></script> -->
 		<script>
 //'?eval='+encodeURIComponent("localStorage['HTML5+']='WEB'")
 // delete localStorage['HTML5+']
-var eval_code = new URLSearchParams(window.location.search).get('eval')
-if(eval_code)eval(atob(eval_code))
-var test = console.log
 //设备信息
+var URLParams = new URLSearchParams(window.location.search)
+if(URLParams.get('eval'))eval(atob(URLParams.get('eval')))
 var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index.html','')//文件目录地址
 var fs,客户端 = false
 var 本地 = false
-if(!window.location.href.includes('http'))
-{
-	本地 = true
-	loadjs('./MoeScript/Script/jszip.min.js')
-}
+if(!window.location.href.includes('http'))本地 = true
 if(window.navigator.userAgent.includes('Html5Plus'))
 {
 	if(本地)href = window.location.href.replace('index.html','')
@@ -34,7 +31,11 @@ if(window.location.protocol == 'chrome-extension:')
 	fs = require('fs-extra')
 	客户端 = 'NW.js'
 }
-
+if(URLParams.get('cordova') === '' || sessionStorage['cordova'])
+{
+	客户端 = 'Cordova'//var cordova = false
+	loadjs('./cordova.js')
+}
 if(客户端 === 'HTML5+')
 {
 	document.addEventListener('plusready', function()
@@ -46,42 +47,19 @@ if(客户端 === 'HTML5+')
 	}, false);
 }
 //版本信息
-var 本地应用版本 = [251006.230513]//@
-var 网络应用版本
-var 本地数据版本
-var 网络数据版本
+var 本地应用版本 = [251017.031751]//@
+var 网络应用版本,本地数据版本,网络数据版本
 var gamearr = {"BLDA":"碧蓝档案","CBJQ":"尘白禁区","QNZL":"千年之旅","YGST":"犹格索托斯的庭院","DFPJ":"东方Project","NONE":"无"}
 //函数和变量
+function loadjs(link,mode = ''){document.write("<scr"+`ipt src='${link}' ${mode}></scr`+"ipt>")}
+var test = console.log
 var MoeTalkURL = 'https://moetalk.netlify.app/'//MoeTalk网址
 var GitlabURL = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/'
 
-function loadjs(link,mode = ''){document.write("<scr"+`ipt src='${link}' ${mode}></scr`+"ipt>")}
-function os(u = window.navigator.userAgent)
-{
-	return {isMobile:!!u.match(/AppleWebKit.*Mobile/i)||!!u.match(/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/),isWechat:!!u.match(/MicroMessenger/i),isQQ:!!u.match(/QQ/i),isIos:!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),isAndroid:!!u.match(/(Android);?[\s/]+([\d.]+)?/),isiPhone:!!u.match(/(iPhone\sOS)\s([\d_]+)/),isSafari:!!u.match(/Safari/),isFirefox:!!u.match(/Firefox/),isOpera:!!u.match(/Opera/),isChrome:u.match(/Chrome/i)!==null&&u.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i)===null?true:false,isDeskTop:(()=>{const Agents=['Android','iPhone','SymbianOS','Windows Phone','iPad','iPod','okhttp/3.9.1'];let flag=true;for(let i=0,LEN=Agents.length;i<LEN;i++){if(u.indexOf(Agents[i])!==-1){flag=false;break}}return flag})()};
-}
-function XHR(url,onload = false,onerror = false)
-{
-	let xhr = new XMLHttpRequest();
-	xhr.open("GET",url);
-	xhr.send();
-	url = url.split('?')[0]
-	if(url.split('.').slice(-1)[0] != 'json')xhr.responseType = 'blob';
-	xhr.onload = function()
-	{
-		if(this.status === 200 && this.responseURL.indexOf(url) > -1)
-		{
-			if(onload && (!this.responseType || this.response.type === 'image/webp'))onload(this.response)
-			else onerror(this)
-		}
-		else if(onerror)onerror(this)
-	}
-	xhr.onerror = function(){if(onerror)onerror(this)}
-}
 var mt_characters,mt_school,mt_club,CFInfo = {}//表情差分信息
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 
-var browser = os();//获取浏览器信息
+//日期和时间
 var date = new Date();
 var year = date.getFullYear() % 100; // 年
 var month = date.getMonth() + 1; // 月
@@ -97,19 +75,7 @@ var mtlang = mt_settings['语言选项'] || 'zh_cn';
 var langarr = ['zh_cn','zh_tw','jp','en','kr'];
 if(langarr.indexOf(gameid) > -1)mt_settings['语言选项'] = mtlang = gameid
 
-
-
-var cordova = false//cordova客户端
-if(gameid === 'cordova')sessionStorage['cordova'] = 'cordova'
-if(gameid === 'cordova2')sessionStorage['cordova2'] = 'cordova2'
-
 //加载文件
-var zipDownImg = false;
-if(browser.isIos === true || browser.isiPhone === true || mt_settings['打包下载'])
-{
-	zipDownImg = true;
-	if(!本地)loadjs('./MoeScript/Script/jszip.min.js')
-}
 var MikuTalk = false;
 if((mt_settings['顶部标题'] === 'MikuTalk' || (month == '04' && day == '01')) && sessionStorage['MikuTalk'] !== 'no')
 {
@@ -119,8 +85,6 @@ if((mt_settings['顶部标题'] === 'MikuTalk' || (month == '04' && day == '01')
 	loadjs('./MoeScript/MikuTap/mikutap.js')
 	loadjs('./MoeScript/MikuTap/common-2.min.js')
 }
-if(sessionStorage['cordova'] === 'cordova')loadjs('./cordova.js')
-if(sessionStorage['cordova2'] === 'cordova2')loadjs('./MoeScript/Cordova/cordova.js')
 if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		</script>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -148,26 +112,25 @@ if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<link rel="shortcut icon" href="./MoeData/Ui/Favor_Schedule_Deco.webp">
 		<link rel='stylesheet' href="./MoeData/Style.css?md5=7d8dd779a899ab7786c98d8516d59461" data-n-g=''><!-- @@样式 -->
 		<script src="./MoeData/MoeData.js"></script><!-- 提示文本 -->
-		<script src="./MoeScript/INIT.js?md5=ec941035e907c7f5f95d2c852c0900dc" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/CLIENT.js?md5=46622ee3434d3ba344767a92026b8a7b" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/DATA.js?md5=8f38aced2db10506db81bcff40ea2914" defer></script><!-- @@存档 -->
+		<script src="./MoeScript/INIT.js?md5=936e8c686ced70409ea778b99c1ef1b6" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/CLIENT.js?md5=99cb3df6eb7595c6e2839ee6036d24b1" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/DATA.js?md5=92ab0fe64de0e58e651e44fee01f7959" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAT.js?md5=faca86696831c48f42644198948325e4" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?md5=92c180609f05eb0615441a9b47250dbf" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/IMAGE.js?md5=99f540c35c8a72274bac01a77e9212a3" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/TOP.js?md5=02c553b5708972a41a31fe6724a845b2" defer></script><!-- @@首页 -->
-		<script src="./MoeScript/Mollu/MAIN.js?md5=dd58498a3809996dacaf238e0ee39179" defer></script><!-- @@ -->
-		<script src="./MoeScript/Mollu/APP.js?md5=71bbfce989df70efff12edf88c65ea22" defer></script><!-- @@框架 -->
-		<script src="./MoeScript/Mollu/INDEX.js?md5=f17ba071a38bd7129ea85a2974f87f70"></script><!-- @@首页 -->
+		<script src="./MoeScript/IMAGE.js?md5=9a525376c8792d99f907e84c5ae86fb2" defer></script><!-- @@截图 -->
+		<script src="./MoeScript/TOP.js?md5=7261ea4085b2703dc2d0f73fe646dedd" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/Mollu/MAIN.js?md5=5a5f01d32d858856de02aef80a335f58" defer></script><!-- @@ -->
+		<script src="./MoeScript/Mollu/APP.js?md5=dee862308ec90efe4bb0090e4cc1d811" defer></script><!-- @@框架 -->
+		<script src="./MoeScript/Mollu/INDEX.js?md5=41c3f3ac554dfeaeca4986c1c903badd"></script><!-- @@首页 -->
 		<style data-styled="active" data-styled-version="5.3.8"></style>
 	</head>
 	<body style="touch-action: none;-webkit-tap-highlight-color: transparent;tap-highlight-color: transparent;"><!-- MikuTap style -->
-		<div id="__next">
-		</div>
+		<div id="__next"></div>
 		<script id="__NEXT_DATA__" type="application/json">{"props": {},"page": "/"}</script>
 	</body>
 </html>
 <pre style='white-space: pre-wrap; font-family: "Microsoft YaHei", Arial, sans-serif;font-weight: bold;background-color: #FF8FBF;font-size: 1.25rem;'>
-如果您卡在了此页面，建议您按照以下方案操作：
+如果您<span style='color:red;'>长时间</span>卡在了此页面，建议您按照以下方案操作：
     1。先进入<i><a href="./Setting.html" target='_blank' style='text-decoration: underline;'>设置页面</a></i>，<span style='color:white;'>下载MoeTalk本地数据存档</span>
     2。<span style='color:green;'>清除ServiceWorker缓存和浏览器缓存</span>后重新访问MoeTalk
     3。以上无效方法请进入<span style='color:white;'>反馈页面</span>提交您的<span style='color:white;'>MoeTalk本地数据存档</span>并反馈您的问题

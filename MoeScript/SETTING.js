@@ -74,7 +74,7 @@ $('body').on('click',"#savedata",function()
 					arr[v] = data
 					if(k === DataBase.length-1)
 					{
-						download('MoeTalk本地数据存档_'+getNowDate()+'.TXT',{...localStorage,...arr})
+						保存文件('MoeTalk本地数据存档_'+getNowDate()+'.TXT', {...localStorage,...arr})
 					}
 				})
 			})
@@ -172,7 +172,6 @@ $('body').on('click',"#hnum",function()
 $("body").on('click','#clean',function()
 {
 	let cl = '';
-	if(localStorage['last-viewed-version'])cl = "※检测到ClosureTalk存档数据，如果确认的话你的ClosureTalk存档数据也会一并清除";
 	let msg = prompt("此操作会将你的所有存档数据一个不留的全部清除，如果你知道自己在干什么，请输入“确认清除”后点击确定\n"+cl);
 	if(msg == '确认清除')
 	{

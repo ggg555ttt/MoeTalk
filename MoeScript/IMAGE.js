@@ -300,10 +300,11 @@ function 截屏预览(S)
 			style = false
 		}
 	}
-	if(zipDownImg && imageArrL > 1)
-	{
-		imageZip = new JSZip();
-	}
+
+	if((browser.isIos || browser.isiPhone || mt_settings['打包下载']) && imageArrL > 1)imageZip = false;
+	if(客户端 === 'PHPWin' && !mt_settings['打包下载'])imageZip = null
+	if(imageZip === false)imageZip = new JSZip();
+
 	imageArrL = imageArr.length
 	if(imageArr.length && !imageArr[0].chats.length)
 	{
@@ -346,23 +347,9 @@ function 内容预览()
 function mt_capture(清晰度,生成图片,标题)
 {
 	let html = 正在截图 || imageArr[0].index != 1 ? '' : $('#mt_watermark')[0].outerHTML
-	let json = []
 	let filename = ''
-	let title = 标题 ? 标题 : mt_text.noTitle[mtlang]
+	let title = 标题 ? '_'+标题 : ''
 	imgArea = imageArr.shift()
-	if(imgArea.index !== 1 || !mt_settings['截图选项'].archive)json = ''
-	else
-	{
-		json[0] = {};
-		json[0]['title'] = title+'_备份';
-		json[0]['nickname'] = 'MoeTalk';
-		json[0]['date'] = DATA_NowTime;
-		json[0]['选择角色'] = mt_settings['选择角色']//@
-		json[0]['mt_char'] = mt_char;//@自创角色
-		json[0]['mt_head'] = mt_head;//@自创头像
-		json[1] = [...chats,...otherChats];
-		json = JSON.stringify(json)
-	}
 
 	let l1 = imageArrL.toString().length
 	let index = imgArea.index.toString().length
@@ -400,22 +387,14 @@ function mt_capture(清晰度,生成图片,标题)
 		{
 			let func = function(blob)
 			{
-				filename = 'MoeTalk'
-				if($(".dels:checked").length)filename += `区域截图${DATA_NowTime}`
+				filename = $(".dels:checked").length ? 'MoeTalk区域截图' : 'MoeTalk截图'
+				filename += `${DATA_NowTime}${title}_${index}`
 				INIT_loading(false)
-				if(imageArr.length > 0)
-				{
-					filename += `_${title}_${index}.`
-					mt_capture(清晰度,生成图片,标题)//$('.mt_capture').click()
-				}
-				else
-				{
-					filename += `_${title}_${imgArea.index === 1 ? '0' : index}.`
-					正在截图 = false
-				}
-				filename += mt_settings['截图选项'].archive ? mt_settings['图片格式'].split('/')[1].toUpperCase() : mt_settings['图片格式'].split('/')[1];
+				
+				if(imageArr.length > 0)mt_capture(清晰度,生成图片,标题)//$('.mt_capture').click()
+				else 正在截图 = false
 
-				combineFiles(blob,json,filename,imgArea.index);
+				导出截图(filename,blob)
 			}
 			if(截屏工具 == 'html2canvas')img.toBlob(function(blob){func(blob)})
 			else
@@ -519,53 +498,20 @@ $("body").on('click',".截图选项",function()
 	saveStorage('设置选项',mt_settings,'local')
 });
 //图片隐写
-function blobToArrayBuffer(file) {
-	return new Promise((resolve, reject) => {
-		const reader = new FileReader();
-		reader.onload = function(e) {
-			resolve(e.target.result);
-		}
-		reader.readAsArrayBuffer(file);
-	});
-}
-function blobToBase64(blob, callback) { 
-	var reader = new FileReader(); 
-	reader.onload = function() { 
-		var dataUrl = reader.result; 
-		var base64 = dataUrl.split(',')[1]; 
-		callback(base64); 
-	}; 
-	reader.readAsDataURL(blob); 
-} 
-function combineFiles(mainFile, hideFile, fileName, Index) {
-	const sep = '-sep-';
-	const maxExtLength = 4;
-	hideFile = new Blob([hideFile],{type: "application/json",});
-	Promise.all([
-		blobToArrayBuffer(mainFile),//图片
-		blobToArrayBuffer(hideFile),//暗件
-	]).then(([mainBuffer, hideBuffer]) => {
-		const mainData = new Uint8Array(mainBuffer);//图片
-		const hideData = new Uint8Array(hideBuffer);//暗件
-		const mainFileExt = mt_settings['图片格式'].split('/')[1];//图片后缀
-		const hideFileExt = 'json';//暗件后缀
-		const dataView = new DataView(mainBuffer);
-		const sepData = new TextEncoder().encode(sep + hideFileExt.padEnd(maxExtLength, ' '));
-		const targetData = new Uint8Array(mainData.length + sepData.length + hideData.length);
-		targetData.set(mainData, 0);
-		targetData.set(sepData, mainData.length);
-		targetData.set(hideData, mainData.length + sepData.length);
-		const blob = new Blob([targetData], { type: mt_settings['图片格式'] });
-		blobToBase64(blob,function(base64)
+function blobToBase64(blob, callback)
+{
+	return new Promise(resolve =>
+	{
+		var reader = new FileReader();
+		reader.onload = function()
 		{
-			if(!正在截图)
-			{
-				let img = `<img src='data:${mt_settings['图片格式']};base64,${base64}' style='width:100%;'>`
-				if(客户端 === 'HTML5+')$('.图片预览').append(img),截图区域.html('')
-				else 截图区域.html(img)
-			}
-			$('.截图数量').text(imageArr.length)
-			download(fileName,blob,base64,'image')
-		})
-	});
+			var dataUrl = reader.result;
+			var base64 = dataUrl.split(',')[1];
+			resolve(base64)
+			if(callback)callback(base64)
+
+		};
+		reader.onerror = function(){resolve(false)};
+		reader.readAsDataURL(blob);
+	})
 }

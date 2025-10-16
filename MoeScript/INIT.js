@@ -37,7 +37,11 @@ if(mt_settings['存储模式'])
 	})
 
 }
-
+function os(u = window.navigator.userAgent)
+{
+	return {isMobile:!!u.match(/AppleWebKit.*Mobile/i)||!!u.match(/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/),isWechat:!!u.match(/MicroMessenger/i),isQQ:!!u.match(/QQ/i),isIos:!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),isAndroid:!!u.match(/(Android);?[\s/]+([\d.]+)?/),isiPhone:!!u.match(/(iPhone\sOS)\s([\d_]+)/),isSafari:!!u.match(/Safari/),isFirefox:!!u.match(/Firefox/),isOpera:!!u.match(/Opera/),isChrome:u.match(/Chrome/i)!==null&&u.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i)===null?true:false,isDeskTop:(()=>{const Agents=['Android','iPhone','SymbianOS','Windows Phone','iPad','iPod','okhttp/3.9.1'];let flag=true;for(let i=0,LEN=Agents.length;i<LEN;i++){if(u.indexOf(Agents[i])!==-1){flag=false;break}}return flag})()};
+}
+var browser = os();//获取浏览器信息
 var player = (本地 ? '/' : href)+'Moedata'//播放器地址
 var LibraryURL = 'GameData/BLDA/Library'//图书馆地址
 var directory = []//目录
@@ -132,12 +136,6 @@ if(!mt_settings.风格样式 || mt_settings.风格样式[0])
 mt_settings['右侧发言'] = mt_settings['右侧发言'] ? mt_settings['右侧发言'] : {}
 if(browser.isFirefox)mt_settings['禁止字体'] = true
 saveStorage('设置选项',mt_settings,'local')
-if(!cordova)
-{
-	if(window.location.href.split('?').length > 1)window.location.replace(window.location.href.split('?')[0])
-	if(window.location.href.split('#').length > 1)window.location.replace(window.location.href.split('#')[0])
-}
-
 
 //元素出现后执行代码
 jQuery.fn.wait = function (func,cls,times,interval)
@@ -187,7 +185,7 @@ function getNowDate()
 	if(hour < 10)hour = "0" + hour;
 	if(minutes < 10)minutes = "0" + minutes;
 	if(seconds < 10)seconds = "0" + seconds;
-	return `${year}${month}${day}-${hour}${minutes}${seconds}`;
+	return `${year}${month}${day}${hour}${minutes}${seconds}`;
 }
 function toString(val)
 {
@@ -305,7 +303,7 @@ if(mt_settings['后台保存'])
 	window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 	window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 }
-function $ajax(url)
+function $ajax(url,type = '')
 {
 	return new Promise(function(callback)
 	{
@@ -313,7 +311,7 @@ function $ajax(url)
 		xhr.open("GET",url);
 		xhr.send();
 		url = url.split('?')[0]
-		let ext = url.split('.').slice(-1)[0]
+		let ext = type || url.split('.').slice(-1)[0]
 		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
 		xhr.onload = function()
 		{
