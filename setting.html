@@ -3,49 +3,18 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
-//函数和变量
-var test = console.log
-function loadjs(link,mode = ''){document.write("<scr"+`ipt src='${link}' ${mode}></scr`+"ipt>")}
-function os(u = window.navigator.userAgent)
-{
-	return {isMobile:!!u.match(/AppleWebKit.*Mobile/i)||!!u.match(/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/),isWechat:!!u.match(/MicroMessenger/i),isQQ:!!u.match(/QQ/i),isIos:!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),isAndroid:!!u.match(/(Android);?[\s/]+([\d.]+)?/),isiPhone:!!u.match(/(iPhone\sOS)\s([\d_]+)/),isSafari:!!u.match(/Safari/),isFirefox:!!u.match(/Firefox/),isOpera:!!u.match(/Opera/),isChrome:u.match(/Chrome/i)!==null&&u.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i)===null?true:false,isDeskTop:(()=>{const Agents=['Android','iPhone','SymbianOS','Windows Phone','iPad','iPod','okhttp/3.9.1'];let flag=true;for(let i=0,LEN=Agents.length;i<LEN;i++){if(u.indexOf(Agents[i])!==-1){flag=false;break}}return flag})()};
-}
-function XHR(url,callback = false)
-{
-	let xhr = new XMLHttpRequest();
-	xhr.open("GET",url+'?'+更新时间);
-	xhr.send();
-	xhr.onload = function()//xhr.onreadystatechange
-	{
-		if(this.status === 200 && callback)callback(this.responseText)//&& xhr.readyState === 4
-	}
-}
-var mt_characters,mt_school,mt_club,CFInfo = {}//表情差分信息
-var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
-var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('setting.html','').replace('setting','')//文件目录地址
-var browser = os();//获取浏览器信息
-var date = new Date();
-var year = date.getFullYear() % 100; // 年
-var month = date.getMonth() + 1; // 月
-var day = date.getDate(); // 日
-year = year.toString()
-month = (month < 10 ? '0'+month : month).toString()
-day = (day < 10 ? '0'+day : day).toString()
-var MoeTalkURL = "https://moetalk.netlify.app/"//MoeTalk网址
-var GitlabURL = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/'
-if(window.location.href == GitlabURL)MoeTalkURL = GitlabURL
-
+//'?eval='+encodeURIComponent("localStorage['HTML5+']='WEB'")
+// delete localStorage['HTML5+']
 //设备信息
+var URLParams = new URLSearchParams(window.location.search)
+if(URLParams.get('eval'))eval(atob(URLParams.get('eval')))
+var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('setting.html','').replace('setting','')//文件目录地址
 var fs,客户端 = false
 var 本地 = false
-if(window.location.href.includes('http'))
-{
-	本地 = true
-	loadjs('./MoeScript/Script/jszip.min.js')
-}
+if(!window.location.href.includes('http'))本地 = true
 if(window.navigator.userAgent.includes('Html5Plus'))
 {
-	href = window.location.href.replace('setting.html','').replace('setting','')
+	if(本地)href = window.location.href.replace('setting.html','').replace('setting','')
 	客户端 = 'HTML5+'
 }
 if(window.location.protocol == 'chrome-extension:')
@@ -54,10 +23,30 @@ if(window.location.protocol == 'chrome-extension:')
 	fs = require('fs-extra')
 	客户端 = 'NW.js'
 }
+if(URLParams.get('cordova') === '' || sessionStorage['cordova'])
+{
+	客户端 = 'Cordova'//var cordova = false
+	loadjs('./cordova.js')
+}
+//函数和变量
+function loadjs(link,mode = ''){document.write("<scr"+`ipt src='${link}' ${mode}></scr`+"ipt>")}
+var test = console.log
+var MoeTalkURL = 'https://moetalk.netlify.app/'//MoeTalk网址
+var GitlabURL = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/'
 
-var cordova = false//cordova客户端
-if(sessionStorage['cordova'] === 'cordova')loadjs('./cordova.js')
-if(sessionStorage['cordova2'] === 'cordova2')loadjs('./MoeScript/Cordova/cordova.js')
+var mt_characters,mt_school,mt_club,CFInfo = {}//表情差分信息
+var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
+
+//日期和时间
+var date = new Date();
+var year = date.getFullYear() % 100; // 年
+var month = date.getMonth() + 1; // 月
+var day = date.getDate(); // 日
+year = year.toString()
+month = (month < 10 ? '0'+month : month).toString()
+day = (day < 10 ? '0'+day : day).toString()
+
+//加载文件
 if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 function back()
 {
