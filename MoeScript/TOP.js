@@ -7,6 +7,19 @@ var TOP_notcie = [];
 var mt_charface;
 var id_map = [{},{}]
 var CustomFaceAuthor = {}
+var TOP_confirm = '';
+window.alert = function(str)
+{
+	if($('.notice').hasClass('visible'))
+	{
+		TOP_notcie.push({html:$('.notice').html(),confirm:TOP_confirm})
+		$('.notice .title').text('通知')
+		$('.notice .confirm').text(mt_text.confirm[mtlang])
+		TOP_confirm = ''
+	}
+	$('.notice pre').html(str)
+	$('.notice').addClass('visible')
+};
 $('body').on('click',".notice .cancel",function()
 {
 	$('.notice pre').css('text-align','left').html('')

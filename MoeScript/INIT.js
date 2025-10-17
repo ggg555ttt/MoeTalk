@@ -8,19 +8,6 @@
 		};
 	}
 })();
-var TOP_confirm = '';
-window.alert = function(str)
-{
-	if($('.notice').hasClass('visible'))
-	{
-		TOP_notcie.push({html:$('.notice').html(),confirm:TOP_confirm})
-		$('.notice .title').text('通知')
-		$('.notice .confirm').text(mt_text.confirm[mtlang])
-		TOP_confirm = ''
-	}
-	$('.notice pre').html(str)
-	$('.notice').addClass('visible')
-};
 const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});//数据库
 if(mt_settings['存储模式'])
 {

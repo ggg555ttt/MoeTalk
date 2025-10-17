@@ -69,12 +69,13 @@ $('body').on('click',"#savedata",function()
 			let arr = {}
 			DataBase.map(function(v,k)
 			{
-				moetalkStorage.getItem(v, function(err, data)
+				moetalkStorage.getItem(v, async function(err, data)
 				{
 					arr[v] = data
 					if(k === DataBase.length-1)
 					{
-						保存文件('MoeTalk本地数据存档_'+getNowDate()+'.TXT', {...localStorage,...arr})
+						filename = await 保存文件('MoeTalk本地数据存档_'+getNowDate()+'.TXT', {...localStorage,...arr},'json')
+						alert(filename+'\n已下载！')
 					}
 				})
 			})
