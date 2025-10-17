@@ -119,6 +119,7 @@ function 内部下载(filename, data, type)
 }
 async function 保存文件(filename, data, type = 2)
 {
+	if(typeof data === 'object' && !data.size)data = JSON.stringify(data)
 	if(typeof data === 'string')data = new Blob([data],{type:'application/octet-stream'});
 	if(!客户端)
 	{
@@ -199,9 +200,7 @@ async function 复制目录(src,dst,files = [])
 	}
 	for(let i=0,len=files.length;i<len;i++)
 	{
-		dst = files[i].replace(src+'/','')
-		src = await $ajax(`${href}${files[i]}`)
-		await 保存文件(dst,src)
+		await 保存文件(files[i].replace(src+'/',''),await $ajax(`${href}${files[i]}`))
 	}
 }
 async function 安装应用()
@@ -272,7 +271,8 @@ async function 更新应用(time = Date.now())
 			files.push(await 保存文件(`${Update}/MoeData/Version/MoeTalk.json`,JSON.stringify(网络列表)))
 			await 复制目录(Update,'',files)
 		}
-		$('.更新应用').html('<span style="color:red;">MoeTalk更新完毕！刷新页面即可查看更新</span>')
+		$('.更新应用').html('MoeTalk更新完毕！刷新页面即可查看更新')
+		本地应用版本[0] = 网络应用版本[0]
 	}
 	else $('.更新应用').html('<span style="color:red;">暂未发现更新</span>')
 	
@@ -321,7 +321,7 @@ async function 更新数据(time = Date.now())
 			files.push(await 保存文件(`${Update}/Version/${game}.json`,JSON.stringify(网络列表)))
 			await 复制目录(Update,'GameData/'+game,files)
 		}
-		$('.更新数据').html('<span style="color:red;">数据更新完毕！文件请通过选择游戏或刷新页面来下载</span>')
+		$('.更新数据').html('数据更新完毕！文件请通过选择游戏或刷新页面来下载')
 	}
 	else $('.更新数据').html('<span style="color:red;">暂未发现更新</span>')
 	
