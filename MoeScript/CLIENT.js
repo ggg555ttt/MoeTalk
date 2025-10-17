@@ -202,6 +202,7 @@ async function 复制目录(src,dst,files = [])
 	{
 		await 保存文件(files[i].replace(src+'/',''),await $ajax(`${href}${files[i]}`))
 	}
+	return
 }
 async function 安装应用()
 {

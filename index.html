@@ -47,7 +47,7 @@ if(客户端 === 'HTML5+')
 	}, false);
 }
 //版本信息
-var 本地应用版本 = [251017.235906]//@
+var 本地应用版本 = [251018.020432]//@
 var 网络应用版本,本地数据版本,网络数据版本
 var gamearr = {"BLDA":"碧蓝档案","CBJQ":"尘白禁区","QNZL":"千年之旅","YGST":"犹格索托斯的庭院","DFPJ":"东方Project","NONE":"无"}
 //函数和变量
@@ -55,7 +55,6 @@ function loadjs(link,mode = ''){document.write("<scr"+`ipt src='${link}' ${mode}
 var test = console.log
 var MoeTalkURL = 'https://moetalk.netlify.app/'//MoeTalk网址
 var GitlabURL = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/'
-
 var mt_characters,mt_school,mt_club,CFInfo = {}//表情差分信息
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 
@@ -111,9 +110,9 @@ if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 
 		<link rel="shortcut icon" href="./MoeData/Ui/Favor_Schedule_Deco.webp">
 		<link rel='stylesheet' href="./MoeData/Style.css?md5=7d8dd779a899ab7786c98d8516d59461" data-n-g=''><!-- @@样式 -->
-		<script src="./MoeData/MoeData.js"></script><!-- 提示文本 -->
+		<script src="./MoeScript/Mollu/TEXT.js?md5=aaa0db9688917b6e3cf1cfa1d533cbbf"></script><!-- @@提示文本 -->
 		<script src="./MoeScript/INIT.js?md5=58ff136821f2573f03d1fe0b80864dca" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/CLIENT.js?md5=12da772e8ea17117ba6cd3a538e3ff77" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/CLIENT.js?md5=eccb84cba565cef9e9e34ab3beab2756" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/DATA.js?md5=92ab0fe64de0e58e651e44fee01f7959" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAT.js?md5=faca86696831c48f42644198948325e4" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?md5=92c180609f05eb0615441a9b47250dbf" defer></script><!-- @@角色 -->
@@ -131,7 +130,7 @@ if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 </html>
 <pre style='white-space: pre-wrap; font-family: "Microsoft YaHei", Arial, sans-serif;font-weight: bold;background-color: #FF8FBF;font-size: 1.25rem;'>
 如果您<span style='color:red;'>长时间</span>卡在了此页面，建议您按照以下方案操作：
-    1。先进入<i><a href="./Setting.html" target='_blank' style='text-decoration: underline;'>设置页面</a></i>，<span style='color:white;'>下载MoeTalk本地数据存档</span>
+    1。先进入<i><a href="./setting.html" target='_blank' style='text-decoration: underline;'>设置页面</a></i>，<span style='color:white;'>下载MoeTalk本地数据存档</span>
     2。<span style='color:green;'>清除ServiceWorker缓存和浏览器缓存</span>后重新访问MoeTalk
     3。以上无效方法请进入<span style='color:white;'>反馈页面</span>提交您的<span style='color:white;'>MoeTalk本地数据存档</span>并反馈您的问题
 ※提交存档和图片可以帮助开发者更顺利的排查错误

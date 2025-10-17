@@ -3,8 +3,8 @@
 <html lang="zh" style="--vh:9.47px; font-size: 16px;position:fixed;">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<script src="./MoeData/OldScript/Script/Jquery.min.js"></script><!-- @@首页 -->
-		<script src="./MoeData/OldScript/Script/localforage.min.js"></script><!-- @@首页 -->
+		<script src="./MoeScript/Script/jquery.min.js?md5=954f70f07f05742168adceba796dda72"></script><!-- @@首页 -->
+		<script src="./MoeScript/Script/localforage.min.js?md5=3789d1d948e1eb4b5f3122fb339e8f26"></script><!-- @@首页 -->
 		<script>
 //函数
 function os(u = window.navigator.userAgent)
@@ -13,7 +13,7 @@ function os(u = window.navigator.userAgent)
 }
 
 //变量
-var 更新时间 = 1753025178//!
+var 更新时间 = 0
 var gamearr = {}//游戏列表
 gamearr['BLDA'] = '碧蓝档案'
 gamearr['CBJQ'] = '尘白禁区'
@@ -28,7 +28,7 @@ gamever['QNZL'] = '241024'//千年之旅
 gamever['YGST'] = '000000'//犹格索托斯的庭院
 gamever['DFPJ'] = '250617'//东方Project
 
-var 本地版本 = 27//@
+var 本地版本 = 30
 var mt_settings = localStorage['设置选项'] ? JSON.parse(localStorage['设置选项']) : {}
 var browser = os();//获取浏览器信息
 var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index_old.html','')//文件目录地址
@@ -65,54 +65,13 @@ function XHR(url,callback = false)
 var MoeTalkURL = "https://moetalk.netlify.app/"//MoeTalk网址
 var GitlabURL = 'https://moetalk-ggg555ttt-57a86c1abdf06b5ebe191f38161beddd1d0768c27e1a2.gitlab.io/'
 if(window.location.href == GitlabURL)MoeTalkURL = GitlabURL
-XHR(MoeTalkURL+"manifest.json"+"?timestamp="+new Date().getTime(),function(json)
-{
-	json = JSON.parse(json.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, ''))
-	if((本地版本 != json.version.code || gamever[mt_settings['选择游戏']] != json.version.game[mt_settings['选择游戏']]) && !localStorage['最新版本'])
-	{
-		localStorage['应用版本'] = 本地版本
-		localStorage['最新版本'] = json.version.code
-		let str = `应用版本：\n　　当前：${本地版本}\n　　最新：${json.version.code}\n`
-		if(gamever[mt_settings['选择游戏']])
-		{
-			str += `更新时间：\n　　当前：${gamever[mt_settings['选择游戏']]}\n　　最新：${json.version.game[mt_settings['选择游戏']]}\n`
-		}
-		str += '客户端已更新，确定跳转到下载链接吗？\n'
-		str += '提取码：BLDA\n安装新版本前注意备份存档'
-		// if(confirm(str))
-		// {//本地端　
-		// 	let url = "https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda"
-		// 	if(Html5Plus)plus.runtime.openURL(url);
-		// 	else window.open(url)
-		// }
-	}
-	if(localStorage['应用版本'] !== undefined && localStorage['应用版本'] != json.version.code)
-	{
-		if(Html5Plus === 'mmt.MoeTalk.WumberBee')return;
-		window.caches && caches.keys && caches.keys().then(function(keys)
-		{
-			let length = 0;
-			keys.forEach(function(key)
-			{
-				caches.delete(key);
-				length=length+1
-				if(keys.length === length)
-				{
-					localStorage['应用版本'] = json.version.code
-					delete localStorage['通知文档']
-					location.reload(true)
-				}
-			});
-		});
-	}
-})
 
 //加载文件
 var zipDownImg = false;
 if(browser.isIos === true || browser.isiPhone === true || mt_settings['打包下载'])
 {
 	zipDownImg = true;
-	document.write("<scr"+`ipt src='./MoeData/OldScript/Script/jszip.min.js'></scr`+"ipt>");
+	document.write("<scr"+`ipt src='./MoeScript/Script/jszip.min.js'></scr`+"ipt>");
 }
 var MikuTalk = false;
 var cordova = false
@@ -120,7 +79,7 @@ var onlyone = false//单一游戏版本
 let gameid = window.location.href.split('?')[1]
 mt_settings['选择游戏'] = mt_settings['选择游戏'] || 'BLDA'
 mt_settings['选择游戏'] = gamearr[mt_settings['选择游戏']] ? mt_settings['选择游戏'] : 'BLDA'
-mt_settings['选择游戏'] = gamearr[gameid] ? gameid : mt_settings['选择游戏']//#
+mt_settings['选择游戏'] = gamearr[gameid] ? gameid : mt_settings['选择游戏']
 var mtlang = mt_settings['语言选项'] || 'zh_cn';
 var langarr = ['zh_cn','zh_tw','jp','en','kr'];
 if(langarr.indexOf(gameid) > -1)mt_settings['语言选项'] = mtlang = gameid
@@ -138,6 +97,7 @@ var mt_characters,
 	mt_school,
 	mt_club,
 	CFInfo = {}//表情差分信息
+if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		</script>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 		<meta http-equiv="Pragma" content="no-cache">
@@ -162,23 +122,23 @@ var mt_characters,
 		<meta name="application-name" content="MoeTalk">
 
 		<link rel="shortcut icon" href="./MoeData/Ui/Favor_Schedule_Deco.webp">
-		<link rel='stylesheet' href="./MoeData/OldScript/Style/style.css?filesize=font" data-n-g=''><!-- @@样式 -->
-		<script src="./MoeData/MoeData.js"></script><!-- 提示文本 -->
-		<script src="./MoeData/OldScript/INIT.js?filesize=9886" defer></script><!-- @@预定义 -->
-		<script src="./MoeData/OldScript/IMAGE.js?filesize=13280" defer></script><!-- @@截图 -->
-		<script src="./MoeData/OldScript/DATA.js?filesize=21360" defer></script><!-- @@存档 -->
-		<script src="./MoeData/OldScript/CHAT.js?filesize=28267" defer></script><!-- @@消息 -->
-		<script src="./MoeData/OldScript/CHAR.js?filesize=16492" defer></script><!-- @@角色 -->
-		<script src="./MoeData/OldScript/TOP.js?filesize=FontList" defer></script><!-- @@首页 -->
-		<script src="./MoeData/OldScript/Mollu/Other/webpack-0a2a587924e1d405.js" defer></script>
-		<script src="./MoeData/OldScript/Mollu/Other/framework-2c79e2a64abdb08b.js" defer></script>
-		<script src="./MoeData/OldScript/Mollu/Other/MAIN.js" defer></script>
-		<script src="./MoeData/OldScript/Mollu/APP.js?filesize=768422" defer></script><!-- @@框架 -->
-		<script src="./MoeData/OldScript/Mollu/Other/ad7f724d-94baee9a2d394f8b.js" defer></script>
-		<script src="./MoeData/OldScript/Mollu/Other/288-68932622dcf1348d.js" defer></script>
-		<script src="./MoeData/OldScript/Mollu/Other/876-d056d91d7a6271a4.js" defer></script>
-		<script src="./MoeData/OldScript/Mollu/INDEX.js?filesize=158617" defer></script><!-- @@首页 -->
-		<script src="./MoeData/OldScript/Mollu/Other/_buildManifest.js" defer></script>
+		<link rel='stylesheet' href="./MoeData/OldScript/Style/style.css?md5=5deed17ca384a172e9bd3fc0219a65e5" data-n-g=''><!-- @@样式 -->
+		<script src="./MoeData/OldScript/TEXT.js?md5=e0b6318087e2d9c1f4c5efb243d54746"></script><!-- @@提示文本 -->
+		<script src="./MoeData/OldScript/INIT.js?md5=27bf5ddae377d26cd6ddc1357ba62e72" defer></script><!-- @@预定义 -->
+		<script src="./MoeData/OldScript/IMAGE.js?md5=0483726dd10e381fa3af9f4df7a2a9f1" defer></script><!-- @@截图 -->
+		<script src="./MoeData/OldScript/DATA.js?md5=1643114eaaac146c3b50280b572353bd" defer></script><!-- @@存档 -->
+		<script src="./MoeData/OldScript/CHAT.js?md5=a64fcebc25659a6064c96cdeb2c47576" defer></script><!-- @@消息 -->
+		<script src="./MoeData/OldScript/CHAR.js?md5=f0e477cc01a24fdbff44d9f72b7e4392" defer></script><!-- @@角色 -->
+		<script src="./MoeData/OldScript/TOP.js?md5=7f2ad06b098efa8ec15566952fc3722e" defer></script><!-- @@首页 -->
+		<script src="./MoeData/OldScript/Mollu/Other/webpack-0a2a587924e1d405.js?md5=76aa6f3900fb0d938e1be8b74cdb1d15" defer></script><!-- @@样式 -->
+		<script src="./MoeData/OldScript/Mollu/Other/framework-2c79e2a64abdb08b.js?md5=c68038b9fa47d6f82ee92062dac77dba" defer></script><!-- @@样式 -->
+		<script src="./MoeData/OldScript/Mollu/Other/MAIN.js?md5=81dc9b32a40ca800e550ced5e2ed6c62" defer></script><!-- @@样式 -->
+		<script src="./MoeData/OldScript/Mollu/APP.js?md5=79964f761cb23a6430708e0f2c14b0ff" defer></script><!-- @@框架 -->
+		<script src="./MoeData/OldScript/Mollu/Other/ad7f724d-94baee9a2d394f8b.js?md5=526e354678c06ead39b2235b507495ac" defer></script><!-- @@样式 -->
+		<script src="./MoeData/OldScript/Mollu/Other/288-68932622dcf1348d.js?md5=2c02a969fee5c29e9ac7fefe333faf35" defer></script><!-- @@样式 -->
+		<script src="./MoeData/OldScript/Mollu/Other/876-d056d91d7a6271a4.js?md5=6dde9414fe0b401c730fb8ee39501cd1" defer></script><!-- @@样式 -->
+		<script src="./MoeData/OldScript/Mollu/INDEX.js?md5=f30442ea8709733949ca5fe78af8aa1f" defer></script><!-- @@首页 -->
+		<script src="./MoeData/OldScript/Mollu/Other/_buildManifest.js?md5=172246a6d1f26445bd45a8de0d23c7ba" defer></script><!-- @@样式 -->
 
 		<style data-styled="active" data-styled-version="5.3.8"></style>
 	</head>
@@ -186,12 +146,12 @@ var mt_characters,
 		<div id="__next">
 		</div>
 		<script id="__NEXT_DATA__" type="application/json">{"props": {},"page": "/"}</script>
-		<script src="./MoeData/OldScript/Mollu/Other/2cca2479-252e554161ba1891.js"></script>
-		<script src="./MoeData/OldScript/Mollu/Other/648-34d807018fc4299c.js"></script>
-		<script src="./MoeData/OldScript/Mollu/LIBRARY.js?filesize=51630"></script><!-- @@图书馆 -->
-		<script src="./MoeData/OldScript/Mollu/PLAYER.js?filesize=69945"></script><!-- @@播放器 -->
-		<script src="./MoeData/OldScript/Mollu/Other/[pageNum]-64f8b3ceb0a4c91c.js"></script>
-		<script src="./MoeData/OldScript/Mollu/CSS.js?filesize=24884"></script><!-- @@样式 -->
+		<script src="./MoeData/OldScript/Mollu/Other/2cca2479-252e554161ba1891.js?md5=c0c9106b6070e2c998997a9ed2cbceda"></script><!-- @@样式 -->
+		<script src="./MoeData/OldScript/Mollu/Other/648-34d807018fc4299c.js?md5=91aa898f6c9ab4e1b66f8ecdba4b1e1c"></script><!-- @@样式 -->
+		<script src="./MoeData/OldScript/Mollu/LIBRARY.js?md5=a577868063ee707ea46b6b6798ab8d12"></script><!-- @@图书馆 -->
+		<script src="./MoeData/OldScript/Mollu/PLAYER.js?md5=4a71eda401a7c5ea3993bc1e3bcd3a6f"></script><!-- @@播放器 -->
+		<script src="./MoeData/OldScript/Mollu/Other/[pageNum]-64f8b3ceb0a4c91c.js?md5=365dec3cd4cc23ac2b9dc84c4c47c6ad"></script><!-- @@样式 -->
+		<script src="./MoeData/OldScript/Mollu/CSS.js?md5=1d916d26b54a169681604b05104ea6f1"></script><!-- @@样式 -->
 		<!-- <script src="./MoeData/OldScript/Mollu/Other/music-328e8f3388aab8f7.js"></script> -->
 	</body>
 </html>
@@ -200,7 +160,7 @@ var mt_characters,
 <p>如果以上方法仍无效请进入设置页面并点击<b class="red">问题反馈</b>提交您的问题</p>
 <p>最好带上localStorage存档，这使我可以更好的排查错误</p>
 <p>另外相关使用建议也可以向我提交，感谢您的使用</p>
-<button><a href="./Setting.html?filesize=8093" target='_blank' style='color: white;'>点击进入设置页面</a></button><!-- @@ -->
+<button><a href="./setting.html?md5=3f4642273419c40352a7ad2290e3a5e7" target='_blank' style='color: white;'>点击进入设置页面</a></button><!-- @@ -->
 <p></p>
 <img style="width: 100%;height: auto;" id="help" src="./MoeData/Ui/help.webp" onclick="document.documentElement.style.position = '';" />
 <!-- Default Statcounter code for MoeTalk http://*.* -->

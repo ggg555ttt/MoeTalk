@@ -59,7 +59,7 @@ INIT_waiting(function()
 	INIT_loading('结束加载')
 },['mt_char','mt_head','allChats','mt_school','mt_club','mt_characters'])
 
-if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeData/Fonts/FontList.css' data-n-g='' id='mt-font'>");//加载字体
+if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeData/OldScript/Style/font.css?ver=4' data-n-g='' id='mt-font'>");//加载字体
 //使用说明
 $('body').on('click',"#readme",function()
 {
@@ -159,7 +159,7 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append(`<button class='${class0}' id='selectgame'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
-	$(".frVjsk").append(`<a href='${href}Setting.html?${本地版本+gamever[mt_settings['选择游戏']]}'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
+	$(".frVjsk").append(`<a href='${href}setting.html'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
 //APP
 $('body').on('click',"#app",function()
