@@ -110,10 +110,7 @@ function 内部下载(filename, data, type)
 							}
 							resolve(e.target.fileName)
 						}
-						blobToBase64(data,function(base)
-						{
-							writer.writeAsBinary(base)
-						})
+						blobToBase64(data).then((base)=>{writer.writeAsBinary(base)})
 					});
 				});
 			});
@@ -146,7 +143,7 @@ async function 保存文件(filename, data, type = 2)
 			fname = await 外部下载(filename, data)
 			if(!fname)fname = await 内部下载(filename, data, 4)
 		}
-		return fname
+		return type === 2 ? filename : fname
 	}
 	if(客户端 === 'Cordova')
 	{
@@ -187,34 +184,6 @@ async function 保存文件(filename, data, type = 2)
 		return `文件/我的iPhone/phpwin/${type}/${filename}`
 	}
 }
-async function 删除文件(filename)
-{
-	return new Promise(function(resolve)
-	{
-		plus.io.resolveLocalFileSystemURL(filename,function(fileEntry)
-		{
-			fileEntry.remove(function(){resolve(filename)})
-		},function(){resolve(false)})
-	});
-}
-async function 复制文件(srcPath, dstPath)
-{
-	await 保存文件(dstPath,'[]')
-	await 删除文件(dstPath)
-	return new Promise(function(resolve)
-	{
-		plus.io.resolveLocalFileSystemURL(srcPath, function(srcEntry)
-		{
-			// 直接解析目标目录（不是文件）
-			var dstDir = dstPath.substring(0, dstPath.lastIndexOf('/') + 1);
-			var dstFileName = dstPath.substring(dstPath.lastIndexOf('/') + 1);
-			plus.io.resolveLocalFileSystemURL(dstDir, function(parentEntry)
-			{
-				srcEntry.copyTo(parentEntry,dstFileName,function(){resolve(dstPath)});
-			});
-		});
-	});
-}
 async function 复制目录(src,dst,files = [])
 {
 	if(客户端 === 'NW.js')
@@ -230,9 +199,9 @@ async function 复制目录(src,dst,files = [])
 	}
 	for(let i=0,len=files.length;i<len;i++)
 	{
-		let oldfile = '_doc/'+files[i]
-		let newfile = '_doc/'+files[i].replace(src,dst)
-		await 复制文件(oldfile,newfile)
+		dst = files[i].replace(src+'/','')
+		src = await $ajax(`${href}${files[i]}`)
+		await 保存文件(dst,src)
 	}
 }
 async function 安装应用()
@@ -430,7 +399,7 @@ async function 下载数据(url)
 	let filename = 数据列表.shift()//获取下载路径
 	if(await file_exists(filename))//本地存在就跳过
 	{
-		$('.更新数据').text('剩余下载文件：'+文件总数--)
+		$('.更新数据').text('剩余文件：'+文件总数--)
 		下载数据(url)
 	}
 	else
@@ -439,7 +408,7 @@ async function 下载数据(url)
 		if(data)//下载成功
 		{
 			await 保存文件(filename, data)
-			$('.更新数据').text('剩余下载文件：'+文件总数--)
+			$('.更新数据').text('剩余文件：'+文件总数--)
 			下载数据(url)
 		}
 		else
@@ -489,14 +458,12 @@ async function 导出存档(filename,json)
 		}
 		png = new Blob([png, zip],{type: 'image/png'})
 		filename = await 保存文件(filename+'.PNG',png,'json')
-		blobToBase64(png,function(png)
-		{
-			let str = `<span style="color:red;">${filename}</span>已下载\n`
-			str += '如果下载失败，请尝试手动保存下方的图片\n'
-			str += `<img src='data:image/png;base64,${png}'style='border: 2px solid red;width: 100%;'>\n`
-			str += '可将图片后缀名改为"zip"后解压'
-			alert(str)
-		})
+		png = await blobToBase64(png)
+		let str = `<span style="color:red;">${filename}</span>已下载\n`
+		str += '如果下载失败，请尝试手动保存下方的图片\n'
+		str += `<img src='data:image/png;base64,${png}'style='border: 2px solid red;width: 100%;'>\n`
+		str += '可将图片后缀名改为"zip"后解压'
+		alert(str)
 	}
 	file.readAsArrayBuffer(await new JSZip().file('json.txt',json).generateAsync({type: 'blob'}))
 }

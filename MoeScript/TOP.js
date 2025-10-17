@@ -78,7 +78,12 @@ async function t()
 
 function moedev()
 {
-	alert('开启调试模式：<input type="checkbox"/>\n代码注入：<textarea></textarea>\n<button class="red" onclick="clearCache()">清除缓存</button>')
+	let str = ''
+	str += '开启调试模式：<input type="checkbox"/>\n'
+	str += '代码注入：<textarea></textarea>\n'
+	str += 'Android客户端无法更新应用版本请尝试清除缓存\n'
+	str += '<button class="red" onclick="clearCache()">清除缓存</button>\n'
+	alert(str)
 	$('.notice .confirm').text(mt_text.confirm[mtlang])
 	$('.notice pre').css('text-align','left')
 	TOP_confirm = function()
@@ -105,6 +110,7 @@ function clearCache()
 		{
 			delete sessionStorage['通知文档']
 			delete sessionStorage['最新版本']
+			if(客户端 === 'HTML5+' && 本地)delete localStorage['HTML5+']
 			alert('缓存清除完毕，请立即刷新页面')
 			$('.notice .confirm').html('刷新')
 			TOP_confirm = function(){location.reload(true)}

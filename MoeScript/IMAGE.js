@@ -497,21 +497,3 @@ $("body").on('click',".截图选项",function()
 	}
 	saveStorage('设置选项',mt_settings,'local')
 });
-//图片隐写
-function blobToBase64(blob, callback)
-{
-	return new Promise(resolve =>
-	{
-		var reader = new FileReader();
-		reader.onload = function()
-		{
-			var dataUrl = reader.result;
-			var base64 = dataUrl.split(',')[1];
-			resolve(base64)
-			if(callback)callback(base64)
-
-		};
-		reader.onerror = function(){resolve(false)};
-		reader.readAsDataURL(blob);
-	})
-}

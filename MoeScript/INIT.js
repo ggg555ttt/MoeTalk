@@ -303,25 +303,41 @@ if(mt_settings['后台保存'])
 	window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 	window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 }
-function $ajax(url,type = '')
+function $ajax(url,type = null)
 {
-	return new Promise(function(callback)
+	return new Promise(function(resolve)
 	{
 		let xhr = new XMLHttpRequest();
 		xhr.open("GET",url);
 		xhr.send();
 		url = url.split('?')[0]
-		let ext = type || url.split('.').slice(-1)[0]
+		let ext = url.split('.').pop()
+		if(typeof type === 'string')ext = type
 		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
 		xhr.onload = function()
 		{
-			if(this.status === 200 && this.responseURL.indexOf(url) > -1)
+			if(this.status === 200 && decodeURIComponent(this.responseURL).includes(url))
 			{
-				if(!this.responseType || !this.response.type.includes('text'))callback(this.response)//成功
-				else callback(false)
+				if(!this.responseType || !this.response.type.includes('text'))resolve(this.response)//成功
+				else resolve(false)
 			}
-			else callback(false)
+			else resolve(false)
 		}
-		xhr.onerror = function(){callback(false)}
+		xhr.onerror = function(){resolve(false)}
+	})
+}
+function blobToBase64(blob)
+{
+	return new Promise(function(resolve)
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var dataUrl = reader.result;
+			var base64 = dataUrl.split(',')[1];
+			resolve(base64)
+		};
+		reader.onerror = function(){resolve(false)};
+		reader.readAsDataURL(blob);
 	})
 }
