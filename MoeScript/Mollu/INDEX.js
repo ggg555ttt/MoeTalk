@@ -3391,9 +3391,12 @@
 										{
 											P(e, function()
 											{
-												if($$('.chatText').val() !== '')
+												let text = $$('.chatText')[0]
+												if(text.value !== '')
 												{
-													sendMessage({content: $$('.chatText').val()},'chat')//#回车发送
+													sendMessage({content: text.value},'chat')//#单击发送
+													text.value = ''
+													text.click()
 												}
 											})
 										},
@@ -3405,9 +3408,12 @@
 								//disabled: w.length < 1,
 								onClick: function()
 								{
-									if($$('.chatText').val() !== '')
+									let text = $$('.chatText')[0]
+									if(text.value !== '')
 									{
-										sendMessage({content: $$('.chatText').val()},'chat')//#单击发送
+										sendMessage({content: text.value},'chat')//#单击发送
+										text.value = ''
+										text.click()
 									}
 								},
 								children: (0, m.jsx)(c.xL,

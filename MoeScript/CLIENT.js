@@ -319,6 +319,7 @@ async function 检查数据()
 {
 	let game = mt_settings['选择游戏'] || 'NONE'
 	if(game == 'NONE')return
+	$('.更新数据').text('读取数据列表。。。')
 	数据列表 = []
 	let data = JSON.parse(await $ajax(`${href}GameData/${mt_settings['选择游戏']}/List.json?ver=${本地数据版本}`))
 	let link = `GameData/${mt_settings['选择游戏']}`
@@ -375,6 +376,7 @@ async function 检查数据()
 		文件总数 = 数据列表.length-1
 		foreach(网址列表,function(k,v){下载数据(v)})
 	}
+	else $('.更新数据').text('数据完整')
 }
 async function 下载数据(url)
 {

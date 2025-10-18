@@ -507,7 +507,6 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 {
 	let addChat = $(".操作模式").text() == '追加'
 	$(".编辑界面 .取消").click()
-	$('.chatText').val('').click()
 	let dels = $('.dels')
 	let checked = $(".dels:checked")
 	if(indexs.length === 0)indexs[0] = dels.index(checked)
