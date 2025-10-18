@@ -1,7 +1,7 @@
 var DATA_NowTime = 0
 function loaddata(json,mode)//识别存档
 {
-	if(typeof json === 'string')json = JSON.parse(json)
+	while(typeof json === 'string')json = JSON.parse(json)
 	if(!json.MoeTalk)
 	{
 		alert('存档无法识别！\n如果是旧版存档请通过“访问旧版”读取！')
@@ -60,30 +60,35 @@ $("body").on('click',"#cutdata",function()
 {
 	if($(".dels:checked").length > 0)
 	{
-		let json = [{},[]];
-		$(".dels:checked").each(function(k,v)
-		{
-			json[1].push(chats[$(".dels").index($(this))]);
-		})
 		$('.notice .title').text('截取存档')
 		alert(`你一共选中了${$(".dels:checked").length}条数据\n请输入标题和作者名：\n标题：<input style='font-size:1.2rem;'>\n作者：<input style='font-size:1.2rem;'>`)
 		TOP_confirm = function()
 		{
+			let json = {};
 			let filename = 'MoeTalk截取存档'
-			let title = $('.notice input').eq(0).val() || '无题'
-			let name = $('.notice input').eq(1).val() || '佚名'
-			let time = new Date().toLocaleString().replaceAll('/','').replaceAll(' ','-').replaceAll(':','');
-			json[0]['title'] = title;
-			json[0]['nickname'] = name;
-			json[0]['date'] = time
+			let title = $('.notice input').eq(0).val()
+			let nickname = $('.notice input').eq(1).val()
+			let time = getNowDate()
+			json.MoeTalk = 本地应用版本[0]
+			json.INFO = {}//存档信息
+			json.INFO.title = title
+			json.INFO.nickname = nickname
+			json.INFO.date = time
+			json.CHAR = {}//自定义角色
+			json.CHAR.id = mt_char
+			json.CHAR.image = mt_head
+			json.EMOJI = EMOJI_CustomEmoji//自定义表情
+			json.SETTING = mt_settings//设置信息
+			json.CHAT = []//MMT数据
+			$(".dels:checked").each(function(k,v)
+			{
+				json.CHAT.push(chats[$(".dels").index($(this))]);
+			})
 			$('.存档格式').val('json')
-			导出存档(`MoeTalk截取存档${getNowDate()}${title ? '_'+title : ''}`,json,'json')
+			导出存档(`${filename}${time}${title ? '_'+title : ''}`,json,'json')
 		}
 	}
-	else
-	{
-		alert('你没有选中数据！')
-	}
+	else alert('你没有选中数据！')
 });
 function repairCF(data)
 {

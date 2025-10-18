@@ -684,17 +684,6 @@ localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] :
 var phpurl = document.location.protocol == 'https:' ? '/api/moetalk.php' : 'http://frp.freefrp.net:40404/moetalk.php'
 $.ajax({url:'../moetalk.php',success:function(){phpurl = '../moetalk.php',localStorage['local_no'] = 'LOCAL';}});
 $.ajax({url:'http://moetalk.frp.freefrps.com/moetalk.php',success:function(){phpurl = localStorage['local_no'] ? this.url : phpurl;}});
-$.ajax(
-{
-	url: '/index.php',
-	async: true,
-	type: 'POST',
-	data: {backDown: true},
-	success:function(type)
-	{
-		if(type === 'server')客户端 = 'PHPWin'
-	}
-});
 setInterval(function()
 {
 	let json = {}

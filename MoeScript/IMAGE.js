@@ -302,7 +302,7 @@ function 截屏预览(S)
 	}
 
 	if((browser.isIos || browser.isiPhone || mt_settings['打包下载']) && imageArrL > 1)imageZip = false;
-	if(客户端 === 'PHPWin' && !mt_settings['打包下载'])imageZip = null
+	if((客户端 || '').toLowerCase() === 'phpwin' && !mt_settings['打包下载'])imageZip = null
 	if(imageZip === false)imageZip = new JSZip();
 
 	imageArrL = imageArr.length
@@ -396,7 +396,13 @@ function mt_capture(清晰度,生成图片,标题)
 
 				导出截图(filename,blob)
 			}
-			if(截屏工具 == 'html2canvas')img.toBlob(function(blob){func(blob)})
+			if(截屏工具 == 'html2canvas')
+			{
+				img.toBlob(function(blob)
+				{
+					blob ? func(blob) : callback()
+				})
+			}
 			else
 			{
 				img.toCanvas().then(function(img2)

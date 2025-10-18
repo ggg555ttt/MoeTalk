@@ -1905,7 +1905,7 @@
 											imageArr = 上次截图.slice($$('.上次截图').val(),上次截图.length)
 											imageArrL = localStorage['imageArrL'] || imageArr.length
 											if((browser.isIos || browser.isiPhone || mt_settings['打包下载']) && imageArrL > 1)imageZip = false;
-											if(客户端 === 'PHPWin' && !mt_settings['打包下载'])imageZip = null
+											if((客户端 || '').toLowerCase() === 'phpwin' && !mt_settings['打包下载'])imageZip = null
 											if(imageZip === false)imageZip = new JSZip();
 											$$('.mt_capture').click()
 										}
@@ -1920,7 +1920,7 @@
 									style: {overflow: 'scroll'}
 								}), (0, m.jsx)('iframe',
 								{
-									src: `${href}capture_`+(mt_settings['禁止字体'] ?'nofont' : 'font')+`.html?ver=`+本地应用版本,
+									src: `${href}capture_`+(mt_settings['禁止字体'] ?'nofont' : 'font')+`.html?ver=`+本地应用版本[0],
 									style: 
 									{
 										// height: '0px'
@@ -2538,7 +2538,7 @@
 												let k = mt_settings['截图选项'].writerStr = $$('.mt_writer:eq(-1)').val()
 												let time = getNowDate();
 												let json = {}
-												json.MoeTalk = 本地应用版本
+												json.MoeTalk = 本地应用版本[0]
 												json.INFO = {}//存档信息
 												json.INFO.title = f
 												json.INFO.nickname = k

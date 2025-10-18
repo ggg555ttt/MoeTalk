@@ -1,37 +1,14 @@
-/*function flattenObjectToPaths(obj, currentPath = "")
+$.ajax(
 {
-	let result = [];
-	for(let key in obj)
+	url: '/index.php',
+	type: 'POST',
+	data: {backDown: true},
+	success: function(type)
 	{
-		if(!obj.hasOwnProperty(key))continue;
-		let value = obj[key];
-		if(typeof value === "string")// 如果值是字符串（文件），直接拼接到 currentPath，忽略 key 是否为数字
-		{
-			// 如果 key 是数字，我们不把它加进路径，直接用 currentPath + value
-			// 否则，拼接 key
-			let finalPath = isNaN(key) ? (currentPath ? `${currentPath}/${key}` : key) : (currentPath || "");
-			finalPath = finalPath ? `${finalPath}/${value}` : value;
-		 	result.push(finalPath);
-		}
-		else if(Array.isArray(value))// 如果是数组，遍历每个元素（应为字符串）
-		{
-			for(let i=0,len=value.length;i<len;i++)
-			{
-				if(typeof value[i] !== "string")continue;
-				let newPath = isNaN(key) ? (currentPath ? `${currentPath}/${key}` : key) : currentPath;
-				newPath = newPath ? `${newPath}/${value[i]}` : value[i];
-				result.push(newPath);
-			}
-		}
-		else if(typeof value === "object" && value !== null)// 如果是对象，递归
-		{
-			// 如果 key 是数字，不拼接到路径中，保持 currentPath 不变
-			let newPath = isNaN(key) ? (currentPath ? `${currentPath}/${key}` : key) : currentPath;
-			result = result.concat(flattenObjectToPaths(value, newPath));
-		}
+		if(type === 'PHPWin')客户端 = 'PHPWin'
+		if(type === 'server')客户端 = 'phpwin'
 	}
-	return result;
-}*/
+})
 async function file_exists(filePath)
 {
 	if(客户端 === 'NW.js')
@@ -163,26 +140,33 @@ async function 保存文件(filename, data, type = 2)
 		},function(err){alert('Download文件夹不存在！\n请尝试在内部存储根目录创建一个Download文件夹！');});
 		return `内部存储/Download/${dirname}/${filename}`
 	}
-	if(客户端 === 'PHPWin')
+	if((客户端 || '').toLowerCase() === 'phpwin')
 	{
-		if(type === 'zip')type = 'image'
-		if(type === 'image')data = await blobToBase64(data)
-		$.ajax(
+		if(客户端 === 'phpwin')
 		{
-			url: '/index.php',
-			async: true,
-			type: 'POST',
-			data: 
+			data = await blobToBase64(data)
+			if(type === 'zip' || filename.split('.').pop() === 'PNG')type = 'image'
+			if(type === 'json')data = decodeURIComponent(escape(atob(data)))
+			await $.ajax(
 			{
-				backDown: true,
-				filename: filename,
-				data: data,
-				type: type,
-				time: ''
-			},
-			dataType:'text'
-		});
-		return `文件/我的iPhone/phpwin/${type}/${filename}`
+				url: '/index.php',
+				async: true,
+				type: 'POST',
+				data: 
+				{
+					backDown: true,
+					filename: filename,
+					data: data,
+					type: type,
+					time: ''
+				},
+				dataType:'text'
+			});
+			data = "文件/我的iPhone/phpwin/<span style='color:blue;'>"
+			filename = `${data}${type.toUpperCase()}</span>/${filename}`
+		}
+		// if(客户端 === 'PHPWin')
+		return filename
 	}
 }
 async function 复制目录(src,dst,files = [])
@@ -198,9 +182,10 @@ async function 复制目录(src,dst,files = [])
 		});
 		return
 	}
+	if(!dst)src += '/'
 	for(let i=0,len=files.length;i<len;i++)
 	{
-		await 保存文件(files[i].replace(src+'/',''),await $ajax(`${href}${files[i]}`))
+		await 保存文件(files[i].replace(src,dst),await $ajax(`${href}${files[i]}`))
 	}
 	return
 }
@@ -487,4 +472,10 @@ async function 导出截图(filename,data)
 		filename = await 保存文件(`${filename}.${ext}`,data,'image')
 		$('.INDEX_CaptureTips').html(`<span style="color:red;">${filename}</span>`)
 	}
+	if(!正在截图)
+	{
+		data = await blobToBase64(data)
+		截图区域.html(`<img src='data:${mt_settings['图片格式']};base64,${data}' style='width:100%;'>`)
+	}
+	$('.截图数量').text(imageArr.length)
 }
