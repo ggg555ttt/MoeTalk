@@ -362,6 +362,7 @@ async function 检查数据()
 	}
 	if(数据列表.length)
 	{
+		$('.更新数据').text('剩余文件：'+数据列表.length)
 		let data = await $ajax('https://api.akams.cn/github','json')
 		data = data ? JSON.parse(data).data : []
 		网址列表 = []
