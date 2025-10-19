@@ -1,14 +1,38 @@
-$.ajax(
+async function isIos()
 {
-	url: '/index.php',
-	type: 'POST',
-	data: {backDown: true},
-	success: function(type)
+	let type = await $.ajax(
 	{
-		if(type === 'PHPWin')客户端 = 'PHPWin'
-		if(type === 'server')客户端 = 'phpwin'
+		url: '/index.php',
+		type: 'POST',
+		data: {backDown: true}
+	})
+	if(type === 'server')
+	{
+		let data = await $ajax(`${href}MoeData/phpwin.html?time=${本地应用版本[0]}`)
+		data = await blobToBase64(new Blob([data],{type:'application/octet-stream'}))
+		await $.ajax(
+		{
+			url: '/index.php',
+			type: 'POST',
+			data: 
+			{
+				backDown: true,
+				filename: '../root/index.php',
+				data: data,
+				type: 'image',
+				time: ''
+			},
+			dataType:'text'
+		});
+		type = 'phpwin'
 	}
-})
+	if(type === 'phpwin')
+	{
+		客户端 = 'phpwin'
+		本地 = true
+	}
+}
+isIos()
 async function file_exists(filePath)
 {
 	if(客户端 === 'NW.js')
@@ -16,7 +40,7 @@ async function file_exists(filePath)
 		try{return await fs.pathExists(filePath)}
 		catch{return false}
 	}
-	else
+	if(客户端 === 'HTML5+')
 	{
 		return new Promise(function(resolve)
 		{
@@ -32,6 +56,16 @@ async function file_exists(filePath)
 				}
 				else resolve(false);//不是文件
 			},function(error){resolve(false)});//不存在
+		});
+	}
+	if(客户端 === 'phpwin')
+	{
+		return await $.ajax(
+		{
+			url: '/index.php',
+			type: 'POST',
+			data: {file_exists: filePath},
+			dataType:'text'
 		});
 	}
 }
@@ -140,33 +174,24 @@ async function 保存文件(filename, data, type = 2)
 		},function(err){alert('Download文件夹不存在！\n请尝试在内部存储根目录创建一个Download文件夹！');});
 		return `内部存储/Download/${dirname}/${filename}`
 	}
-	if((客户端 || '').toLowerCase() === 'phpwin')
+	if(客户端 === 'phpwin')
 	{
-		if(客户端 === 'phpwin')
+		if(type === 'json' || type === 'zip')filename = '../存档/'+filename
+		if(type === 'image')filename = '../截图/'+filename
+		data = new File([data], filename, {type: data.type});
+		let formData = new FormData();
+		formData.append('file', data);
+		formData.append('filename', filename);
+		filename = await $.ajax(
 		{
-			data = await blobToBase64(data)
-			if(type === 'zip' || filename.split('.').pop() === 'PNG')type = 'image'
-			if(type === 'json')data = decodeURIComponent(escape(atob(data)))
-			await $.ajax(
-			{
-				url: '/index.php',
-				async: true,
-				type: 'POST',
-				data: 
-				{
-					backDown: true,
-					filename: filename,
-					data: data,
-					type: type,
-					time: ''
-				},
-				dataType:'text'
-			});
-			data = "文件/我的iPhone/phpwin/<span style='color:blue;'>"
-			filename = `${data}${type.toUpperCase()}</span>/${filename}`
-		}
-		// if(客户端 === 'PHPWin')
-		return filename
+			url: '/index.php',
+			type: 'POST',
+			data: formData,
+			processData: false,
+			contentType: false
+		});
+		if(type != 2)filename = `文件/我的iPhone/phpwin/${filename.replace('../','')}`
+		return filename;
 	}
 }
 async function 复制目录(src,dst,files = [])

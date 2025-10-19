@@ -1905,7 +1905,7 @@
 											imageArr = 上次截图.slice($$('.上次截图').val(),上次截图.length)
 											imageArrL = localStorage['imageArrL'] || imageArr.length
 											if((browser.isIos || browser.isiPhone || mt_settings['打包下载']) && imageArrL > 1)imageZip = false;
-											if((客户端 || '').toLowerCase() === 'phpwin' && !mt_settings['打包下载'])imageZip = null
+											if(客户端 === 'phpwin' && !mt_settings['打包下载'])imageZip = null
 											if(imageZip === false)imageZip = new JSZip();
 											$$('.mt_capture').click()
 										}

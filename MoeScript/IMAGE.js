@@ -302,7 +302,7 @@ function 截屏预览(S)
 	}
 
 	if((browser.isIos || browser.isiPhone || mt_settings['打包下载']) && imageArrL > 1)imageZip = false;
-	if((客户端 || '').toLowerCase() === 'phpwin' && !mt_settings['打包下载'])imageZip = null
+	if(客户端 === 'phpwin' && !mt_settings['打包下载'])imageZip = null
 	if(imageZip === false)imageZip = new JSZip();
 
 	imageArrL = imageArr.length
