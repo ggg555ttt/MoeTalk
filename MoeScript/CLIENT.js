@@ -143,8 +143,8 @@ async function 保存文件(filename, data, type = 2)
 	}
 	if(客户端 === 'NW.js')
 	{
-		if(type === 'json')filename = '存档/'+filename
-		if(type === 'image' || type === 'zip')filename = '截图/'+filename
+		if(type === 'json')filename = 'MoeTalk存档/'+filename
+		if(type === 'image' || type === 'zip')filename = 'MoeTalk截图/'+filename
 		data = Buffer.from(await data.arrayBuffer());//将 Blob 转为 Buffer
 		await fs.outputFile(filename, data);
 		return `客户端路径/${filename}`
@@ -180,8 +180,8 @@ async function 保存文件(filename, data, type = 2)
 	}
 	if(客户端 === 'phpwin')
 	{
-		if(type === 'json' || type === 'zip')filename = '../存档/'+filename
-		if(type === 'image')filename = '../截图/'+filename
+		if(type === 'json' || type === 'zip')filename = '../MoeTalk存档/'+filename
+		if(type === 'image')filename = '../MoeTalk截图/'+filename
 		data = new File([data], filename, {type: data.type});
 		let formData = new FormData();
 		formData.append('file', data);

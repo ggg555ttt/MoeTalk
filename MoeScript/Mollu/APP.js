@@ -5901,7 +5901,11 @@
 									{
 										style: {cursor: 'pointer'},
 										id: "readme",
-										children: MikuTalk ? 'MikuTalk' : mt_settings['顶部标题'],
+										children: [MikuTalk ? 'MikuTalk' : mt_settings['顶部标题'],客户端 ? (0, O.jsx)('span',
+										{
+											style: {color: 'blue'},
+											children: 客户端[0].toUpperCase()
+										}) : ''],
 										onClick: function()
 										{
 											alert(localStorage['通知文档'])

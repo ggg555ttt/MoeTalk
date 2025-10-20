@@ -690,7 +690,7 @@ setInterval(function()
 	json.MoeTalk = 本地应用版本
 	json.INFO = {}//存档信息
 	json.INFO.title = '自动备份'
-	json.INFO.nickname = 'MoeTalk客户端'
+	json.INFO.nickname = 'MoeTalk'
 	json.INFO.date = '平均10分钟'
 	json.CHAR = {}//自定义角色
 	json.CHAR.id = mt_char
@@ -715,7 +715,7 @@ setInterval(function()
 			if(data != '')eval(data)
 		}
 	});
-	if(客户端)保存文件(`备份存档.JSON`,json,'json')
+	if(客户端)保存文件(`MoeTalk自动备份存档_${客户端}.JSON`,json,'json')
 }, 600 * 1000);
 /*
 function getVisibleParagraphs() {
