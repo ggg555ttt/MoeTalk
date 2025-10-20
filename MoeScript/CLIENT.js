@@ -65,7 +65,11 @@ async function file_exists(filePath)
 		{
 			url: '/index.php',
 			type: 'POST',
-			data: {file_exists: filePath},
+			data:
+			{
+				getfile: filePath,
+				exists: 'true'
+			},
 			dataType:'text'
 		});
 	}

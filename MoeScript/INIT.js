@@ -294,6 +294,8 @@ async function $ajax(url,type = null)
 {
 	if(客户端 === 'phpwin' && url[0] === '/')
 	{
+		url = url.split('?')[0]
+		let ext = url.split('.').pop()
 		let data = await $.ajax(
 		{
 			url: '/index.php',

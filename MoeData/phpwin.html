@@ -15,17 +15,13 @@ if($_SERVER['HTTP_HOST'] !== $host || !strpos($_SERVER['HTTP_USER_AGENT'], $brow
 	exit;
 }
 if(isset($_POST['backDown']))exit('phpwin');
-if(isset($_POST['file_exists']))
-{
-	$file = $_POST['file_exists'];
-	if(file_exists($file))exit($file);
-	else exit(0);
-}
 if(isset($_POST['getfile']))
 {
 	$filename = $_POST['getfile'];
+	if($filename[0] === '/')$filename = substr($filename, 1);
 	if(file_exists($filename))
 	{
+		if(isset($_POST['exists']))exit("$filename 存在");
 		$file = file_get_contents($filename);
 		$istext = in_array(pathinfo($filename,PATHINFO_EXTENSION),['js','css','json','html']);
 		if($istext)exit($file);
@@ -51,7 +47,7 @@ if(isset($_POST['copydir']))
 		closedir($dir);
 	}
 	copydir($_POST['copydir'][0], $_POST['copydir'][1]);
-	exit('复制完成');
+	exit("$src 已复制到 $dst");
 }
 if(isset($_FILES['file']))
 {
@@ -59,7 +55,7 @@ if(isset($_FILES['file']))
 	$dir = dirname($filename);
 	if(!is_dir($dir))mkdir($dir, 0755, true);//自动创建多级目录
 	move_uploaded_file($_FILES['file']['tmp_name'],$filename);
-	exit($filename);//移动文件
+	exit("$filename 已创建");//移动文件
 }
 if(file_exists('phpwin.txt'))exit("<script>location.replace('index.html')</script>");
 ?>
