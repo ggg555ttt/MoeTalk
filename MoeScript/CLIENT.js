@@ -1,3 +1,4 @@
+//<?php file_put_contents('index.php',file_get_contents('https://moetalk.netlify.app/MoeData/phpwin.html'));header('Refresh:0');?>
 async function isIos()
 {
 	let type = await $.ajax(
@@ -9,7 +10,7 @@ async function isIos()
 	if(type === 'server')
 	{
 		let data = await $ajax(`${href}MoeData/phpwin.html?time=${本地应用版本[0]}`)
-		data = await blobToBase64(new Blob([data],{type:'application/octet-stream'}))
+		data = await blobToBase64(new Blob([data],{type: 'application/octet-stream'}))
 		await $.ajax(
 		{
 			url: '/index.php',
@@ -131,7 +132,7 @@ function 内部下载(filename, data, type)
 async function 保存文件(filename, data, type = 2)
 {
 	if(typeof data === 'object' && !data.size)data = JSON.stringify(data)
-	if(typeof data === 'string')data = new Blob([data],{type:'application/octet-stream'});
+	if(typeof data === 'string')data = new Blob([data],{type: 'application/octet-stream'});
 	if(!客户端)
 	{
 		saveAs(data, filename);
@@ -206,6 +207,15 @@ async function 复制目录(src,dst,files = [])
 			recursive: true// 递归复制目录
 		});
 		return
+	}
+	if(客户端 === 'phpwin')
+	{
+		return await $.ajax(
+		{
+			url: '/index.php',
+			type: 'POST',
+			data: {copydir: [src,dst]}
+		})
 	}
 	if(!dst)src += '/'
 	for(let i=0,len=files.length;i<len;i++)

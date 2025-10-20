@@ -21,6 +21,38 @@ if(isset($_POST['file_exists']))
 	if(file_exists($file))exit($file);
 	else exit(0);
 }
+if(isset($_POST['getfile']))
+{
+	$filename = $_POST['getfile'];
+	if(file_exists($filename))
+	{
+		$file = file_get_contents($filename);
+		$istext = in_array(pathinfo($filename,PATHINFO_EXTENSION),['js','css','json','html']);
+		if($istext)exit($file);
+		else exit(base64_encode($file));
+	}
+	else exit('');
+}
+if(isset($_POST['copydir']))
+{
+	function copydir($src, $dst)
+	{
+		if($dst === '')$dst = $_SERVER['DOCUMENT_ROOT'];
+		if(!is_dir($dst))mkdir($dst, 0755, true);
+		$dir = opendir($src);
+		while(($file = readdir($dir)) !== false)
+		{
+			if($file == '.' || $file == '..')continue;
+			$srcPath = $src . DIRECTORY_SEPARATOR . $file;
+			$dstPath = $dst . DIRECTORY_SEPARATOR . $file;
+			if (is_dir($srcPath))copydir($srcPath, $dstPath);
+			else copy($srcPath, $dstPath);
+		}
+		closedir($dir);
+	}
+	copydir($_POST['copydir'][0], $_POST['copydir'][1]);
+	exit('复制完成');
+}
 if(isset($_FILES['file']))
 {
 	$filename = $_POST['filename'];//直接使用前端传的文件名（含路径）
@@ -29,11 +61,7 @@ if(isset($_FILES['file']))
 	move_uploaded_file($_FILES['file']['tmp_name'],$filename);
 	exit($filename);//移动文件
 }
-if(file_exists('phpwin.txt'))
-{
-	header("index.html");
-	exit;
-}
+if(file_exists('phpwin.txt'))exit("<script>location.replace('index.html')</script>");
 ?>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <h1 class='更新应用'></h1>
@@ -62,8 +90,6 @@ function $ajax(url,type = null)
 			if(this.status === 200 && decodeURIComponent(this.responseURL).includes(url))
 			{
 				resolve(this.response)//成功
-				// if(!this.responseType || !this.response.type.includes('text'))resolve(this.response)//成功
-				// else resolve(false)
 			}
 			else resolve(false)
 		}
@@ -71,7 +97,6 @@ function $ajax(url,type = null)
 		xhr.send();
 	})
 }
-
 function 保存文件(file, data, type = 2)
 {
 	if(typeof data === 'string')data = new Blob([data],{type:'application/octet-stream'});
@@ -102,7 +127,6 @@ function 保存文件(file, data, type = 2)
 	})
 	
 }
-
 async function 安装应用()
 {
 	let href = 'https://moetalk.netlify.app/'

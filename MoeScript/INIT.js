@@ -290,8 +290,31 @@ if(mt_settings['后台保存'])
 	window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 	window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 }
-function $ajax(url,type = null)
+async function $ajax(url,type = null)
 {
+	if(客户端 === 'phpwin' && url[0] === '/')
+	{
+		let data = await $.ajax(
+		{
+			url: '/index.php',
+			type: 'POST',
+			data: {getfile: url}
+		})
+		if(!data)return false;
+		if(!['js','css','json','html'].includes(ext))//base64转blob
+		{
+			data = atob(data.split(',').pop())
+			let len = data.length;
+			let bytes = new Uint8Array(len);
+			for(let i = 0; i < len; i++)
+			{
+				bytes[i] = data.charCodeAt(i);
+			}
+			data = 'application/octet-stream'
+			return new Blob([bytes],{type: data});
+		}
+		else return data;
+	}
 	return new Promise(function(resolve)
 	{
 		let xhr = new XMLHttpRequest();
