@@ -33,14 +33,14 @@ if(isset($_POST['copydir']))
 {
 	function copydir($src, $dst)
 	{
-		if($dst === '')$dst = $_SERVER['DOCUMENT_ROOT'];
-		if(!is_dir($dst))mkdir($dst, 0755, true);
+		if(!is_dir($dst) && $dst !== '')mkdir($dst, 0755, true);
 		$dir = opendir($src);
 		while(($file = readdir($dir)) !== false)
 		{
 			if($file == '.' || $file == '..')continue;
-			$srcPath = $src . DIRECTORY_SEPARATOR . $file;
-			$dstPath = $dst . DIRECTORY_SEPARATOR . $file;
+			$srcPath = "$src/$file";
+			if($dst === '')$dstPath = $file;
+			else $dstPath = "$dst/$file";
 			if (is_dir($srcPath))copydir($srcPath, $dstPath);
 			else copy($srcPath, $dstPath);
 		}
@@ -66,10 +66,11 @@ function $ajax(url,type = null)
 {
 	return new Promise(function(resolve)
 	{
+		let ext = url.split('?')[0].split('.').pop()
+		if(ext === 'html')url = url.toLowerCase()
 		let xhr = new XMLHttpRequest();
 		xhr.open("GET",url);
 		url = url.split('?')[0]
-		let ext = url.split('.').pop()
 		if(typeof type === 'string')ext = type
 		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
 		xhr.addEventListener('progress', function(event)

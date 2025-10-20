@@ -292,10 +292,10 @@ if(mt_settings['后台保存'])
 }
 async function $ajax(url,type = null)
 {
+	let ext = url.split('?')[0].split('.').pop()
 	if(客户端 === 'phpwin' && url[0] === '/')
 	{
 		url = url.split('?')[0]
-		let ext = url.split('.').pop()
 		let data = await $.ajax(
 		{
 			url: '/index.php',
@@ -320,10 +320,9 @@ async function $ajax(url,type = null)
 	return new Promise(function(resolve)
 	{
 		let xhr = new XMLHttpRequest();
+		if(ext === 'html')url = url.toLowerCase()
 		xhr.open("GET",url);
-		xhr.send();
 		url = url.split('?')[0]
-		let ext = url.split('.').pop()
 		if(typeof type === 'string')ext = type
 		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
 		xhr.onload = function()
@@ -336,6 +335,7 @@ async function $ajax(url,type = null)
 			else resolve(false)
 		}
 		xhr.onerror = function(){resolve(false)}
+		xhr.send();
 	})
 }
 function blobToBase64(blob)
