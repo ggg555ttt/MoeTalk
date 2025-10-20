@@ -47,7 +47,7 @@ if(isset($_POST['copydir']))
 		closedir($dir);
 	}
 	copydir($_POST['copydir'][0], $_POST['copydir'][1]);
-	exit("$src 已复制到 $dst");
+	exit($_POST['copydir'][0].' 已复制到 '.$_POST['copydir'][1]);
 }
 if(isset($_FILES['file']))
 {
