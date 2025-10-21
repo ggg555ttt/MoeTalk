@@ -4725,8 +4725,7 @@
 											style:
 											{
 												fontSize:"2rem",
-												fontFamily:/[\u4e00-\u9fff]/.test(mt_settings['顶部标题']) ? "Blueaka" : "Jalnan",
-												fontWeight:700
+												fontFamily:/[\u4e00-\u9fff]/.test(mt_settings['顶部标题']) ? "Blueaka" : "Jalnan"
 											},
 											children: mt_settings['顶部标题']
 										})

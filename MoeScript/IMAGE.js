@@ -316,12 +316,12 @@ function 截屏预览(S)
 	INIT_loading('结束加载')
 }
 //截屏功能
-function 内容预览()
+async function 内容预览()
 {
 	let 截屏工具 = 'html2canvas'
 	截屏工具 = mt_settings['截图工具'] ? mt_settings['截图工具'] : 'html2canvas'
 	// if($('.定义样式').css('color') === 'rgb(255, 0, 0)')截屏工具 = 'snapdom'
-	window[截屏工具]($(".预览内容")[0],
+	let img = await window[截屏工具]($(".预览内容")[0],
 	{
 		logging: !1,
 		allowTaint: !0,
@@ -329,20 +329,10 @@ function 内容预览()
 		scale: 1.1,
 		compress: true,
 		embedFonts: true//snapdom
-	}).then(function(img)
-	{
-		if(截屏工具 === 'html2canvas')$('.预览内容').html(`<img width='500px' src='${img.toDataURL()}'>`)
-		else
-		{
-			img.toPng().then(function(img2)
-			{
-				img.toPng().then(function(img2)
-				{
-					$('.预览内容').html(`<img width='500px' src='${img2.src}'>`)
-				})
-			})
-		}
 	})
+	if(截屏工具 === 'html2canvas')img = img.toDataURL()
+	else img = (await img.toPng()).src
+	$('.预览内容').html(`<img width='500px' src='${img}'>`)
 }
 function mt_capture(清晰度,生成图片,标题)
 {
@@ -373,6 +363,7 @@ function mt_capture(清晰度,生成图片,标题)
 		let 截屏工具 = 'html2canvas'
 		截屏工具 = mt_settings['截图工具'] ? mt_settings['截图工具'] : 'html2canvas'
 		// if(imgArea.style)截屏工具 = 'snapdom'
+		await 等待图片(截图区域)
 		let img = await window[截屏工具](截图区域[0],
 		{
 			logging: !1,

@@ -905,7 +905,43 @@ $("body").on('click',".操作模式",function()
 	if($(".操作模式").text() == '追加')$(".操作模式").text('编辑')
 	else $(".操作模式").text('追加')
 });
-$("body").on('click',".预览模式",function()
+function 等待图片($container)
+{
+	const container = $container[0];
+	if(!container)return Promise.resolve();//无元素，直接完成
+
+	const images = container.querySelectorAll('img');//获取所有图片
+	const total = images.length;//图片总数
+	if(total === 0)return Promise.resolve();//无图片，直接完成
+	const seenSrcs = new Set();//链接列表
+	const pendingImages = [];//监听列表
+	let pendingCount = 0;
+
+	for(let i = 0; i < total; i++)
+	{
+		const img = images[i];
+		const src = img.src;
+		if(img.complete && img.naturalWidth !== 0)continue;//缓存命中
+		if(src.startsWith('data:image/'))continue;//跳过Base64图片
+		if(seenSrcs.has(src))continue;//去重
+		seenSrcs.add(src);//记录链接
+		pendingImages.push(img);//加入监听列表
+		pendingCount++;
+	}
+	if(pendingCount === 0) return Promise.resolve();//无图片，直接完成
+
+	return new Promise(resolve =>
+	{
+		let resolved = 0;
+		const onReady = ()=>{if(++resolved === pendingCount)resolve()};
+		for(const img of pendingImages)
+		{//使用原生 addEventListener，避免 jQuery 开销
+			img.addEventListener('load', onReady, {once: true});
+			img.addEventListener('error', onReady, {once: true});
+		}
+	});
+}
+$("body").on('click',".预览模式",async function()
 {
 	let color = $(this).css('color')
 	let 内容类型 = $('.内容类型').attr('title')
@@ -927,6 +963,8 @@ $("body").on('click',".预览模式",function()
 	chat.push(data)
 	data.isFirst = isfirst(chat.length-1,chat)
 	$('.预览内容').html(makeMessage(内容类型,data,chatIndex,'预览')).outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings.风格样式.bgColor)
+	await 等待图片($('.预览内容'))
+	// await Promise.all([等待图片($('.预览内容')),document.fonts?.ready || Promise.resolve()]);
 	$('.内容预览').click()
 });
 $("body").on('click',".编辑",function()
