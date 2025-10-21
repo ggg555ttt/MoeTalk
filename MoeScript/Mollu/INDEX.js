@@ -1794,11 +1794,11 @@
 									onClick:function()
 									{
 										let str = ''
-										str += '1。MoeTalk的默认截图工具（html2canvas）对特殊样式的支持有限，'
+										str += '	1。MoeTalk的默认截图工具（html2canvas）对特殊样式的支持有限\n'
 										str += '如果你的文档中含有较复杂的特殊样式，'
 										str += '建议在“修改截图设置”中更换截图工具（snapdom）。\n'
-										str += '2。多张图片连续下载建议开启“打包下载”（上限2G）\n'
-										str += '3。若下载失败，图片可手动保存，手动保存失败请尝试将“图片格式”改为webp\n'
+										str += '	2。多张图片连续下载建议开启“打包下载”（上限2G）\n'
+										str += '	3。若下载失败，图片可手动保存，手动保存失败请尝试将“图片格式”改为webp\n'
 										alert(str)
 									}
 								}), (0, m.jsx)(ea.Dx,
@@ -3737,7 +3737,7 @@
 									onClick:function()
 									{
 										let str = ''
-										str += 'MoeTalk的默认截图工具（html2canvas）对特殊样式的支持有限，'
+										str += '	MoeTalk的默认截图工具（html2canvas）对特殊样式的支持有限，'
 										str += '如果你的文档中含有较复杂的特殊样式，'
 										str += '建议在“修改截图设置”中更换截图工具（snapdom）。\n'
 										str += '（定义样式）MoeTalk可用字体：\n'
@@ -4745,10 +4745,9 @@
 											id:"mt_title",
 											style:{textShadow:"1px 1px 0px rgb(34, 37, 41)"},
 											children: ''
-										}),(0, m.jsx)('span',
+										}), (0, m.jsx)('div',
 										{
-											id:"mt_writer",
-											style:{textShadow:"1px 1px 0px rgb(34, 37, 41)"},
+											style: {height: '1rem'},
 											children: ''
 										})]
 									})]
@@ -4760,6 +4759,11 @@
 										handleShow: _,
 										chat: e
 									}, n)
+								}), (0, m.jsx)('div',
+								{
+									className: '消息底座',
+									style: {height: '1rem'},
+									children: ''
 								})]
 							})
 						}), (0, m.jsx)(eK,
@@ -4790,7 +4794,7 @@
 				{
 					displayName: "Talk__CContainer",
 					componentId: "sc-1uzn66i-1"
-				})(["", ";position:absolute;flex-direction:column;height:max-content;padding-bottom:1rem;background-color:", ";color:", ";"], function(e)
+				})(["", ";position:absolute;flex-direction:column;height:max-content;background-color:", ";color:", ";"], function(e)
 				{
 					return e.theme.common.flexBox(
 					{

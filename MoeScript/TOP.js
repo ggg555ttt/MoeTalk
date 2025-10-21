@@ -490,10 +490,12 @@ $('body').on('click',"#mt-style",function()
 function refreshMessage(json)
 {
 	$('.消息').remove()
+	let html = ''
 	json.map(function(v,k)
 	{
-		$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
+		html += makeMessage(v.type,v,k,'add')
 	})
+	$('.消息底座').before(html)
 	json.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
 }
 function replyDepth(str,mode)

@@ -6,6 +6,7 @@ var baseArr = []
 var 截图区域
 var 正在截图 = false
 var 上次截图 = []
+var 首次截图 = false
 async function IMAGE_error(image,index='')
 {
 	if(本地)
@@ -381,11 +382,13 @@ function mt_capture(清晰度,生成图片,标题)
 				filename = $(".dels:checked").length ? 'MoeTalk区域截图' : 'MoeTalk截图'
 				filename += `${DATA_NowTime}${title}_${index}`
 				INIT_loading(false)
-				
+				if(!首次截图 && 截屏工具 === 'snapdom')imageArr.unshift(imgArea)
+				else 首次截图 = true
 				if(imageArr.length > 0)mt_capture(清晰度,生成图片,标题)//$('.mt_capture').click()
 				else 正在截图 = false
 
-				导出截图(filename,blob)
+				if(首次截图)导出截图(filename,blob)
+				首次截图 = true
 			}
 			if(截屏工具 == 'html2canvas')
 			{
@@ -396,21 +399,11 @@ function mt_capture(清晰度,生成图片,标题)
 			}
 			else
 			{
-				img.toCanvas().then(function(img2)
+				(await img.toCanvas()).toBlob(function(blob)
 				{
-					img2.toBlob(function(blob)
-					{
-						img.toCanvas().then(function(img2)
-						{
-							img2.toBlob(function(blob)
-							{
-								func(blob)
-							})
-						})
-					})
+					func(blob)
 				})
 			}
-			
 		}
 		catch
 		{

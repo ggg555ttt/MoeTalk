@@ -592,7 +592,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		}
 		if(mode === 'add')
 		{
-			if(chats.length === 1)$(".Talk__CContainer-sc-1uzn66i-1").append(message)
+			if(chats.length === 1)$('.消息底座').before(message)
 			else
 			{
 				if(checked.length && !addChat)
@@ -607,7 +607,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		}
 		if(mode === '追加')
 		{
-			if(dels.length <= chatIndex)$(".Talk__CContainer-sc-1uzn66i-1").append(message)
+			if(dels.length <= chatIndex)$('.消息底座').before(message)
 			else
 			{
 				$(`.消息:eq(${chatIndex})`).before(message)
