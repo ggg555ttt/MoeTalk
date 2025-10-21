@@ -2127,8 +2127,8 @@
 												alert(str)
 												TOP_confirm = function()
 												{
-													mt_settings['宽度限制'] = $$('.notice input:eq(0)').val() || 500
-													mt_settings['高度限制'] = $$('.notice input:eq(1)').val() || 16384
+													mt_settings['宽度限制'] = $$('.notice input:eq(1)').val() || 500
+													mt_settings['高度限制'] = $$('.notice input:eq(2)').val() || 16384
 													mt_settings['图片格式'] = $$('.notice .select1').val()
 													mt_settings['截图工具'] = $$('.notice .select2').val()
 													mt_settings['打包下载'] = $$('.notice input[type="checkbox"]').prop('checked')
@@ -3812,7 +3812,11 @@
 									},
 									children: (0, m.jsx)('div',
 									{
-										style: {pointerEvents: 'none'},
+										style:
+										{
+											pointerEvents: 'none',
+											fontFamily:'Blueaka'
+										},
 										className: "预览内容"
 									})
 								}), (0, m.jsxs)('div',
