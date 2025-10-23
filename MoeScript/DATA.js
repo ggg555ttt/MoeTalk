@@ -7,12 +7,11 @@ function loaddata(json,mode)//识别存档
 		alert('存档无法识别！\n如果是旧版存档请通过“访问旧版”读取！')
 		throw "错误存档";
 	}
-	mt_schar = {...mt_schar,...json.CHAR.id}
-	mt_shead = {...mt_shead,...json.CHAR.image}
-	saveStorage('mt-char',mt_schar,'session')
-	saveStorage('mt-head',mt_shead,'session')
+
 	if(mode === 'player')
 	{
+		mt_schar = json.CHAR.id
+		mt_shead = json.CHAR.image
 		let otherChats = []
 		let chats = []
 		let arr = {}
@@ -48,6 +47,10 @@ function loaddata(json,mode)//识别存档
 	}
 	else
 	{
+		mt_schar = {...mt_schar,...json.CHAR.id}
+		mt_shead = {...mt_shead,...json.CHAR.image}
+		saveStorage('mt-char',mt_schar,'session')
+		saveStorage('mt-head',mt_shead,'session')
 		foreach(json.CHAT,function(k,v)
 		{
 			repairCF(json.CHAT[k])

@@ -8364,7 +8364,7 @@
 					componentId: "sc-17coljc-1"
 				})(["overflow:hidden;word-break:break-word;word-wrap:break-word;white-space:pre-wrap;line-break:loose;"]),
 				k = function(e)
-				{
+				{//播放器页面
 					var t = e.chat,
 						n = (0, o.C)(function(e)
 						{

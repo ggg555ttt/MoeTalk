@@ -356,7 +356,7 @@ var 网址列表 = []
 async function 检查数据()
 {
 	let game = mt_settings['选择游戏'] || 'NONE'
-	if(game == 'NONE')return
+	if(game == 'NONE' || !本地)return
 	$('.更新数据').text('读取数据列表。。。')
 	数据列表 = []
 	let data = JSON.parse(await $ajax(`${href}GameData/${mt_settings['选择游戏']}/List.json?ver=${本地数据版本}`))
