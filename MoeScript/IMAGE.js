@@ -9,6 +9,12 @@ var 上次截图 = []
 var 首次截图 = false
 async function IMAGE_error(image,index='')
 {
+	let src = image.src ? image.getAttribute('src') : image.target.getAttribute('src')
+	if(EMOJI_CustomEmoji.image[src])
+	{
+		image.src = EMOJI_CustomEmoji.image[src]
+		return
+	}
 	if(本地)
 	{
 		let filename = ''
@@ -35,7 +41,6 @@ async function IMAGE_error(image,index='')
 	}
 	else
 	{
-		let src = ''
 		if(image.currentTarget)
 		{
 			src = image.target.src.split(mt_settings['选择游戏'])[1]
@@ -44,7 +49,7 @@ async function IMAGE_error(image,index='')
 		else src = image.src.split(mt_settings['选择游戏'])[1]
 		if(image.from == 'Gitlab')
 		{
-			if(index > -1)chats[index] = image.src
+			if(index > -1)chats[index].file = image.src
 			image.src = href+'MoeData/Ui/error.webp'
 			return
 		}
@@ -399,9 +404,12 @@ function mt_capture(清晰度,生成图片,标题)
 			}
 			else
 			{
-				(await img.toCanvas()).toBlob(function(blob)
+				(await img.toCanvas()).toBlob(async function()
 				{
-					func(blob)
+					(await img.toCanvas()).toBlob(function(blob)
+					{
+						func(blob)
+					})
 				})
 			}
 		}

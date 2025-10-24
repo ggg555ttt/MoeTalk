@@ -1794,7 +1794,7 @@
 									onClick:function()
 									{
 										let str = ''
-										str += '	1。MoeTalk的默认截图工具（html2canvas）对特殊样式的支持有限\n'
+										str += '	1。MoeTalk的默认截图工具对特殊样式的支持有限，'
 										str += '如果你的文档中含有较复杂的特殊样式，'
 										str += '建议在“修改截图设置”中更换截图工具（snapdom）。\n'
 										str += '	2。多张图片连续下载建议开启“打包下载”（上限2G）\n'
@@ -2469,8 +2469,10 @@
 											[...chats,...otherChats].length > 0 && y("download")
 											setTimeout(function()
 											{
-												$$('.mt_title').text(mt_settings['截图选项'].titleStr.split(' : ').pop())
-												$$('.mt_writer').text(mt_settings['截图选项'].writerStr.split(' : ').pop())
+												let title = mt_settings['截图选项'].titleStr || ''
+												let writer = mt_settings['截图选项'].writerStr || ''
+												$$('.mt_title').text(title.split(' : ').pop())
+												$$('.mt_writer').text(writer.split(' : ').pop())
 											})
 										},
 										children: [(0, m.jsx)(eI,
@@ -3737,13 +3739,14 @@
 									onClick:function()
 									{
 										let str = ''
-										str += '	MoeTalk的默认截图工具（html2canvas）对特殊样式的支持有限，'
+										str += '	1。MoeTalk的默认截图工具对特殊样式的支持有限，'
 										str += '如果你的文档中含有较复杂的特殊样式，'
 										str += '建议在“修改截图设置”中更换截图工具（snapdom）。\n'
-										str += '（定义样式）MoeTalk可用字体：\n'
-										str += 'font-family:Blueaka;/*默认*/\n'
-										str += 'font-family:Jalnan;/*标题*/\n'
-										str += 'font-family:KaiTi;/*楷体*/\n'
+										str += '	2。自定义表情和差分的ID可以通过img标签来引用，'
+										str += '但标签内一定要加入onerror="IMAGE_error(this)"，'
+										str += '图片尺寸可能会偏大，请设置好宽高属性"。\n'
+										str += '	3。font-family属性可引用的自带字体：'
+										str += 'Blueaka(默认)Jalnan(标题)KaiTi(楷体)。\n'
 										alert(str)
 									}
 								}), (0, m.jsx)(c.Bx,
@@ -4191,9 +4194,8 @@
 				{
 					return e.theme.color.rgb252_142_155
 				}),
-				//*这是消息界面
 				e6 = function(e)
-				{
+				{//消息界面
 					var n = e.chat,//{...e.chat,...{}},
 						t = e.index,
 						o = e.handleShow,
@@ -4423,7 +4425,6 @@
 						})]
 					})
 				},
-				//*这是消息界面
 				e8 = o.ZP.div.withConfig(
 				{
 					displayName: "Chat__Flex",

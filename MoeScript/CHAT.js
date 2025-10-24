@@ -96,7 +96,7 @@ function mt_emojis(S,mode)
 			let Index = mt_charface.index
 			let CharFace = mt_charface[id][PageIndex]//
 			let cfid = toString(CharFace[0][0])
-			if(cfid.indexOf('/') > -1)EMOJI.custom.from = CustomFaceAuthor[cfid.split('/')[0]]
+			if(cfid.includes('/'))EMOJI.custom.from = CustomFaceAuthor[cfid.split('/')[0]]
 			foreach(CharFace,function(k,v)
 			{
 				foreach(v[1],function(k,index)
@@ -182,13 +182,13 @@ function mt_emojis(S,mode)
 	}
 	else
 	{
-		if(['QNZL','YGST'].indexOf(mt_settings['选择游戏']) > -1)EMOJI.custom.title = ''
+		if(['QNZL','YGST'].includes(mt_settings['选择游戏']))EMOJI.custom.title = ''
 	}
 
 	let str = toString(EMOJI.images[0])
-	if(str.indexOf('_REPAIR') > -1)EMOJI.title += `(${EMOJI.images.length}修复)`
-	else if(str.indexOf('_OLD') > -1)EMOJI.title += `(${EMOJI.images.length}旧设)`
-	else if(str.indexOf('CharID_') > -1)EMOJI.title += `(${EMOJI.images.length}拓展)`
+	if(str.includes('_REPAIR'))EMOJI.title += `(${EMOJI.images.length}修复)`
+	else if(str.includes('_OLD'))EMOJI.title += `(${EMOJI.images.length}旧设)`
+	else if(str.includes('CharID_'))EMOJI.title += `(${EMOJI.images.length}拓展)`
 	else if(EMOJI.custom.io)EMOJI.title += `(${EMOJI.images.length}自定义)`
 	else
 	{
@@ -325,13 +325,13 @@ function isfirst(chatIndex,chats,mode)
 		if(chatIndex-1 < 0)return true//首条消息
 		if((chats[chatIndex].isCenter && chats[chatIndex].type === 'image') || (chats[chatIndex-1].isCenter && chats[chatIndex-1].type === 'image'))return true//isCenter
 		if((chats[chatIndex].heads && chats[chatIndex].heads.list.length) || (chats[chatIndex-1].heads && chats[chatIndex-1].heads.list.length))return true//头像列表
-		if(typeArr.indexOf(chats[chatIndex].type) > -1)return true//判断类型
-		if(typeArr.indexOf(chats[chatIndex-1].type) > -1)return true//类型不符
+		if(typeArr.includes(chats[chatIndex].type))return true//判断类型
+		if(typeArr.includes(chats[chatIndex-1].type))return true//类型不符
 
 		if(chats[chatIndex].sCharacter.index != chats[chatIndex-1].sCharacter.index)return true//头像不符
 		if(chats[chatIndex].sCharacter.no != chats[chatIndex-1].sCharacter.no)return true//ID不符
 
-		if(chats[chatIndex].sCharacter.no == 0 && typeArr.indexOf(chats[chatIndex].type) < 0)return false//判断主角
+		if(chats[chatIndex].sCharacter.no == 0 && !typeArr.includes(chats[chatIndex].type))return false//判断主角
 
 		if(chats[chatIndex].isFirst)return true//强制显示
 		if(chats[chatIndex].is_breaking)return true//截图分割
@@ -403,13 +403,13 @@ function makeMessage(type,data,chatIndex,mode)
 		{
 			let width = ''
 			let maxwidth = mt_settings['图片比例'] || '90%'
-			if(data.content.indexOf("Face")>=0 || data.file.indexOf("Face")>=0)
+			if(data.content.includes("Face") || data.file.includes("Face"))
 			{//如果是差分表情
 				width = 'max-height:360px;'
 				maxwidth = mt_settings['差分比例'] || '90%'
 			}
 			maxwidth = `max-width:${maxwidth};`
-			图片 = `<img src='${data.file.indexOf(":image") > -1 ? data.file : href+data.file}' style="${width}${maxwidth};${style}" class="图片 编辑" onerror="IMAGE_error(this,${chatIndex})">`
+			图片 = `<img src='${!data.file ? data.content : data.file}' style="${width}${maxwidth};${style}" class="图片 编辑" onerror="IMAGE_error(this,${chatIndex})">`
 		}
 		if(no != 0 && !data.isRight)
 		{//左侧对话
@@ -552,7 +552,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 			else
 			{
 				//data.isFirst = !1
-				if(mt_settings['右侧发言'][mt_settings['选择角色'].no] && ['chat','image'].indexOf(type) > -1)data.isRight = true
+				if(mt_settings['右侧发言'][mt_settings['选择角色'].no] && ['chat','image'].includes(type))data.isRight = true
 				//data.isRight = ['chat','image'].indexOf(type) > -1 && mt_settings['右侧发言'][mt_settings['选择角色'].no]
 				//data.is_breaking = !1
 				data.sCharacter = {no:mt_settings['选择角色'].no,index:mt_settings['选择角色'].index}
@@ -626,7 +626,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 	setTimeout(function()
 	{//编辑位置跳转
 		let behavior = "smooth"
-		if(['heart','info','reply'].indexOf(type) > -1 && !browser.isDeskTop)
+		if(['heart','info','reply'].includes(type) && !browser.isDeskTop)
 		{
 			behavior = "auto"
 			if(winHeight === window.innerHeight)behavior = "smooth"
@@ -786,7 +786,7 @@ $("body").on('click',".编辑界面 .确认",function()
 	$('.dels:checked').each(function(k,v){indexs.push($('.dels').index(v))})
 	let 操作模式 = $(".操作模式").text() == '追加' ? 'add' : 'edit'
 	let 内容类型 = $('.内容类型').attr('title')
-	if(['chat','reply','heart','info','image'].indexOf(内容类型) < 0)内容类型 = ''
+	if(!['chat','reply','heart','info','image'].includes(内容类型))内容类型 = ''
 	if(indexs.length < 2)indexs = [chatIndex]
 	sendMessage(生成消息(内容类型,indexs.length),内容类型,操作模式,indexs)
 });
@@ -908,34 +908,47 @@ $("body").on('click',".操作模式",function()
 function 等待图片($container)
 {
 	const container = $container[0];
-	if(!container)return Promise.resolve();//无元素，直接完成
+	if(!container)return Promise.resolve();
 
-	const images = container.querySelectorAll('img');//获取所有图片
-	const total = images.length;//图片总数
-	if(total === 0)return Promise.resolve();//无图片，直接完成
-	const seenSrcs = new Set();//链接列表
-	const pendingImages = [];//监听列表
+	const images = container.querySelectorAll('img');
+	if(images.length === 0)return Promise.resolve();
+
+	const seenSrcs = new Set();
+	const pendingImages = [];
 	let pendingCount = 0;
 
-	for(let i = 0; i < total; i++)
+	for(let i = 0; i < images.length; i++)
 	{
 		const img = images[i];
-		const src = img.src;
-		if(img.complete && img.naturalWidth !== 0)continue;//缓存命中
-		if(src.startsWith('data:image/'))continue;//跳过Base64图片
-		if(seenSrcs.has(src))continue;//去重
-		seenSrcs.add(src);//记录链接
-		pendingImages.push(img);//加入监听列表
+		let src = img.getAttribute('src') || '';
+
+		// 替换自定义 emoji
+		if(src && EMOJI_CustomEmoji.image[src])
+		{
+			const base64 = EMOJI_CustomEmoji.image[src];
+			img.src = base64;
+			src = base64;
+		} 
+		else src = img.src;// 使用解析后的完整 URL
+
+
+		// 跳过已加载、Base64、重复
+		if(img.complete && img.naturalWidth > 0)continue;
+		if(src.startsWith('image/'))continue;
+		if(seenSrcs.has(src))continue;
+		seenSrcs.add(src);
+		pendingImages.push(img);
 		pendingCount++;
 	}
-	if(pendingCount === 0) return Promise.resolve();//无图片，直接完成
 
-	return new Promise(resolve =>
+	if(pendingCount === 0)return Promise.resolve();
+
+	return new Promise(resolve=>
 	{
 		let resolved = 0;
-		const onReady = ()=>{if(++resolved === pendingCount)resolve()};
+		const onReady = ()=>{if(++resolved === pendingCount)resolve();};
 		for(const img of pendingImages)
-		{//使用原生 addEventListener，避免 jQuery 开销
+		{
 			img.addEventListener('load', onReady, {once: true});
 			img.addEventListener('error', onReady, {once: true});
 		}
