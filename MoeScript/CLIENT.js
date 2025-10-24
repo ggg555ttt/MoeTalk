@@ -8,7 +8,7 @@ async function isIos()
 	})
 	if(type === 'server')
 	{
-		let data = await $ajax(`${href}MoeData/phpwin.html?time=${本地应用版本[0]}`)
+		let data = await $ajax(`${href}MoeData/phpwin.js?time=${本地应用版本[0]}`)
 		data = await blobToBase64(new Blob([data],{type: 'application/octet-stream'}))
 		await $.ajax(
 		{
