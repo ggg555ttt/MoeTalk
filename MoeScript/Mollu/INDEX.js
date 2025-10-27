@@ -6639,6 +6639,10 @@
 											playChat.chats = data.CHAT
 											playChat.header = data.INFO
 											playChat.chatSpeed = data.CHAT.length < 2 ? 1000 : (0, a.zP)()
+											if(l.名称.includes('等奖）') && k == 0)
+											{
+												data.CHAT.unshift({"content":"本文为《秘密岛屿探索计划》征文获奖作品\n作品合集：<a style='color: rgb(113 163 237);text-decoration:underline;' href='https://www.bilibili.com/read/readlist/rl976588' target='_blank'>https://www.bilibili.com/read/readlist/rl976588</a>","replyDepth":0,"type":"info","sCharacter":{"no":"0","index":"1"},"isFirst":false,"name":"","isLeft":true,"isCenter":false,"isRight":false,"is_breaking":false,"file":"","time":"","style":false})
+											}
 											let 章节 = `${MMT目录.当前[1]+1}/${MMT目录.作品[MMT目录.当前[0]].章节+1}`
 											$$('#size').text(`章节:${章节}\n进度:1/${data.CHAT.length}`)
 											setTimeout(function(){p((0, ee.Fe)(playChat))}, 1e3)
@@ -6751,10 +6755,13 @@
 											})
 										}), (0, b.jsx)(ew,
 										{
-											children: (0, b.jsxs)(eb,
+											children: [r.名称.includes('等奖）') ? (0, b.jsxs)(eb,
+											{
+												children: '2025夏季征文'
+											}) : '', (0, b.jsxs)(eb,
 											{
 												children: [i.Z.writer[g], " : ", (0, b.jsx)("span",{children: r.作者})]
-											})
+											})]
 										})]
 									})]
 								})
