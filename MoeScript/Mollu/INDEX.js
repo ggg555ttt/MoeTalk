@@ -6497,7 +6497,7 @@
 									children: '▶️点击播放'
 								}), (0, b.jsx)(eb,
 								{
-									children: ['转载已获作者',(0, b.jsx)(MMT目录.作者[h.作者] ? 'a' : 'span',
+									children: ['转载已获作者',MMT目录.作者[h.作者] ?(0, b.jsx)('a',
 									{
 										style:
 										{
@@ -6507,7 +6507,7 @@
 										children: `${h.作者}`,
 										href: MMT目录.作者[h.作者],
 										target: '_blank'
-									}),'授权']
+									}) : '','授权']
 								})]
 							})]
 						})
@@ -6562,9 +6562,9 @@
 						},
 						children: [(0, b.jsxs)(eu,
 						{
-							children: [(0, b.jsxs)(eh,
+							children: [MMT目录.作者[l.作者] ? (0, b.jsxs)(eh,
 							{
-								children: (0, b.jsxs)(MMT目录.作者[l.作者] ? 'a' : 'span',
+								children: (0, b.jsxs)('a',
 								{
 									style:
 									{
@@ -6575,7 +6575,7 @@
 									children: '【作者主页】',
 									target: '_blank'
 								})
-							}), Array(l.章节+1).fill(0).map(function(v,k)
+							}) : '', Array(l.章节+1).fill(0).map(function(v,k)
 							{
 								return (0, b.jsxs)(eh,
 								{
