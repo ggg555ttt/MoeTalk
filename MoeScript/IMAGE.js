@@ -298,6 +298,7 @@ function 截屏预览(S)
 			imageArr.push({start: start,end: end,index: imageArr.length+1,chats: json.slice(start,end),style})
 			start = end
 			style = 平均 = false
+			// chats[end-1].is_breaking = true
 		}
 		//if(length > 平均长度)平均 = true
 		if(end === json.length-1)

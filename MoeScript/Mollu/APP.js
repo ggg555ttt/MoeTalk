@@ -6090,19 +6090,43 @@
 									{
 										onClick: async function(e)
 										{
-											$$('.cgldhY').hide()
 											INIT_loading('开始加载')
-											if(!browser.isDeskTop)alert('移动端加载较慢，可能需要多等几秒')
-											if(mt_settings['选择游戏'] !== 'BLDA')
+											$$('.cgldhY').hide()
+											let num = `?num=${Math.random()}`
+											let filename = `GameData/${mt_settings['选择游戏']}/Library.json`
+											MMT目录 = JSON.parse(await $ajax(`${href}${filename}${num}`))
+											if(本地 && 客户端 && MMT目录)
 											{
-												directory = []
-												INIT_loading('结束加载')
-												$$('.MMTPlayer')[0].click()
-												return
+												let data = JSON.parse(await $ajax(`${MoeTalkURL}${filename}${num}`))
+												for(let i=0,l=data.作品.length;i<l;i++)
+												{
+													let gengxin = false;
+													if(!MMT目录.作品[i])//作品不存在
+													{
+														MMT目录.作品[i].MD5 = 'NO'
+														gengxin = true
+													}
+													if(MMT目录.作品[i].MD5 !== data.作品[i].MD5)//作品更新
+													{
+														gengxin = true
+													}
+													if(gengxin)
+													{
+														filename = `GameData/${mt_settings['选择游戏']}/Library/${i}`
+														let zip = await $ajax(`${MoeTalkURL}${filename}.zip${num}`)
+														保存文件(`${filename}.zip`,zip)
+														for(let n=0;n<=data.作品[i].章节;n++)
+														{
+															zip = await $ajax(`${MoeTalkURL}${filename}-${n}.zip${num}`)
+															保存文件(`${filename}-${n}.zip`,zip)
+														}
+													}
+												}
 											}
-											directory = JSON.parse(await $ajax(href+LibraryURL+'/Directory.json?ver='+localStorage['本地数据版本']))
+											if(!MMT目录)MMT目录 = {作者:{},作品:[]}
 											INIT_loading('结束加载')
 											$$('.MMTPlayer')[0].click()
+											return
 										},
 										style:{backgroundColor: 'transparent'},
 										className: "private" === e.pathname.split("/")[1] ? "selected" : "",

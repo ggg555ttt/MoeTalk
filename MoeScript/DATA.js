@@ -10,8 +10,15 @@ function loaddata(json,mode)//识别存档
 
 	if(mode === 'player')
 	{
-		mt_schar = json.CHAR.id
-		mt_shead = json.CHAR.image
+		if(json.CHAR)
+		{
+			mt_schar = json.CHAR.id
+			mt_shead = json.CHAR.image
+		}
+		if(json.SETTING)
+		{
+			MMT目录.设置 = json.SETTING
+		}
 		let otherChats = []
 		let chats = []
 		let arr = {}
@@ -19,6 +26,10 @@ function loaddata(json,mode)//识别存档
 		json.CHAT.map(function(v,k)
 		{
 			repairCF(v);
+			if(MMT目录.数据 && MMT目录.数据.EMOJI.image[v.file])
+			{
+				v.file = MMT目录.数据.EMOJI.image[v.file]
+			}
 			if(v.replyDepth !== 0)otherChats.push(v)
 			else chats.push(v)
 
@@ -43,10 +54,13 @@ function loaddata(json,mode)//识别存档
 				arr[''].splice(index,0,...arr[k]);
 			}
 		})
-		json.CHAT = arr['']
+		json.CHAT = arr[''] || []
 	}
 	else
 	{
+		if(!json.INFO)json.INFO = {title:"",nickname:"",date:""}
+		if(!json.CHAR)json.CHAR = {id:{},image:{}}
+		if(!json.EMOJI)json.EMOJI = {image:{}}
 		mt_schar = {...mt_schar,...json.CHAR.id}
 		mt_shead = {...mt_shead,...json.CHAR.image}
 		saveStorage('mt-char',mt_schar,'session')

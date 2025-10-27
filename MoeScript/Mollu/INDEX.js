@@ -2339,7 +2339,7 @@
 								})
 								saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
 							}
-							mt_settings = j.SETTING
+							if(j.SETTING)mt_settings = j.SETTING
 							CHAR_UpdateChar()
 							log(true)//清除历史记录
 							replyDepth(0,'home')//清除跳转记录
@@ -6448,7 +6448,6 @@
 						onDoubleClick: function()
 						{
 							u(!1)
-							delete nowChapter[2]
 						},
 						children: (0, b.jsxs)(I.F0,
 						{
@@ -6461,95 +6460,54 @@
 								children: [(0, b.jsx)(I.Dx,
 								{
 									className: "bold",
-									children: nowChapter[2] ? nowChapter[2] : '播放章节'
-									//children: i.Z.setting[p]
+									children: '播放章节'
 								}), (0, b.jsx)(I.ec,
 								{
 									onClick: function()
 									{
 										u(!1)
-										delete nowChapter[2]
 									},
 									children: (0, b.jsx)(x.j4,
 									{})
 								})]
-							}), (0, b.jsx)(H,
-								{
-									style:
-									{
-										marginTop: "0.5rem"
-									},
-									children: `${h.name} ${e.index+1}`
-								}), (0, b.jsx)(I.$0,
+							}), (0, b.jsx)(I.$0,
 							{
-								children: [(0, b.jsxs)(er,
+								children: [(0, b.jsx)(H,
 								{
-									children: [(0, b.jsxs)(ei,
-									{
-										children: [(0, b.jsx)(ec,
-										{
-											onClick: async function()
-											{
-												delete nowChapter[2]
-												if(isNaN(e.index+1))return;
-												INIT_loading()
-												skip = false
-												$$('.nowChapter').text('')
-												let playChat = 
-												{
-													nowChats: [],
-													replyDepth: 0,
-													chats: [],
-													chatSpeed: (0, a.zP)(),
-													header: {},
-													board_no: 0
-												}
-												m((0, ee.Fe)(playChat))
-												let data = `${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index]}.json`
-												data = loaddata(await $ajax(data),'player')
-												u(!1)
-												nowChapter[0] = e.index
-												nowChapter[1] = h
-												playChat = 
-												{
-													nowChats: [],
-													replyDepth: 0,
-													chats: data.CHAT,
-													chatSpeed: (0, a.zP)(),
-													header: data.INFO,
-													board_no: 0
-												}
-												INIT_loading()
-												setTimeout(function(){m((0, ee.Fe)(playChat))}, 1e3)
-												m((0, S.Cz)(!0))
-												$$('.nowChapter').text(`${h.name}_${e.index+1}：${h.chapter[e.index]}`)
-												$$('.PLAYER_play').click()
-												if(h.chapter[e.index+1])
-												{
-													$ajax(`${href}${LibraryURL}/${h.authorid}/${h.bookid}/${h.chapter[e.index+1]}.json`)
-												}
-												
-											},
-											children: (0, b.jsx)(x.xL,
-											{
-												icon: B.iiS
-											})
-										}), (0, b.jsx)(ea,
-										{
-											style:
-											{
-												marginTop: "0.5rem"
-											},
-											children: i.Z.play[p]
-										})]
-									})]
-								}), (0, b.jsx)(H,
+									children: `${h.名称}`
+								}), (0, b.jsx)("select",
 								{
-									style:
+									style: {fontSize: '1.5rem'},
+									children: Array(h.章节+1).fill(0).map(function(v,k)
 									{
-										marginTop: "0.5rem"
+										return (0, b.jsx)("option",
+										{
+											value: k,
+											selected: k == e.index,
+											children: `第${k+1}/${h.章节+1}章`
+										})
+									})
+								}), (0, b.jsx)('button',
+								{
+									onClick: function(e)
+									{
+										$$(`.播放${h.ID}-${e.target.previousSibling.value}`).click()
+										u(!1)
 									},
-									children: '转载已获作者授权'
+									children: '▶️点击播放'
+								}), (0, b.jsx)(eb,
+								{
+									children: ['转载已获作者',(0, b.jsx)(MMT目录.作者[h.作者] ? 'a' : 'span',
+									{
+										style:
+										{
+											color: 'rgb(48, 150, 245)',
+											cursor: 'pointer'
+										},
+										children: `${h.作者}`,
+										href: MMT目录.作者[h.作者],
+										target: '_blank'
+									}),'授权']
 								})]
 							})]
 						})
@@ -6606,24 +6564,24 @@
 						{
 							children: [(0, b.jsxs)(eh,
 							{
-								children: (0, b.jsxs)("a",
+								children: (0, b.jsxs)(MMT目录.作者[l.作者] ? 'a' : 'span',
 								{
 									style:
 									{
 										color: "rgb(48, 150, 245)",
 										cursor: "pointer"
 									},
+									href: MMT目录.作者[l.作者],
 									children: '【作者主页】',
-									href: l.home,
 									target: '_blank'
 								})
-							}), l.chapter.map(function(v,k)
+							}), Array(l.章节+1).fill(0).map(function(v,k)
 							{
 								return (0, b.jsxs)(eh,
 								{
 									children: [(0, b.jsx)(ep,
 									{
-										className: `${l.authorid}_${l.bookid}_${k}`,
+										className: `${l.ID}-${k}`,//弹窗
 										onClick: function()
 										{
 											L([!0,k])
@@ -6638,7 +6596,59 @@
 										{
 											icon: B.iiS
 										})
-									}),`${k+1}. ${v}`]
+									}), `第${k+1}/${l.章节+1}章`, (0, b.jsx)('span',
+									{
+										hidden: true,
+										className: `播放${l.ID}-${k}`,//播放
+										onClick: async function()
+										{
+											INIT_loading()
+											skip = false
+											$$('.nowChapter').text('读取中。。')
+											let playChat = 
+											{
+												nowChats: [],
+												replyDepth: 0,
+												chats: [],
+												chatSpeed: (0, a.zP)(),
+												header: {},
+												board_no: 0
+											}
+											p((0, ee.Fe)(playChat))
+
+											let filename = `GameData/${mt_settings['选择游戏']}/Library/${l.ID}`
+											if(本地 && 客户端 && !await file_exists(`${filename}.zip`))
+											{
+												let zip = await $ajax(`${MoeTalkURL}${filename}.zip?md5=${l.MD5}`)
+												await 保存文件(`${filename}.zip`,zip)
+											}
+											if(本地 && 客户端 && !await file_exists(`${filename}-${k}.zip`))
+											{
+												let zip = await $ajax(`${MoeTalkURL}${filename}-${k}.zip?md5=${l.MD5}`)
+												await 保存文件(`${filename}-${k}.zip`,zip)
+											}
+
+											if(!MMT目录.当前 || MMT目录.当前[0] !== l.ID)
+											{
+												MMT目录.数据 = loaddata(await ZipToJson(`${href}${filename}.zip`),'player')
+												delete MMT目录.数据.SETTING
+												delete MMT目录.数据.CHAR
+											}
+											MMT目录.当前 = [l.ID,k]
+											let data = loaddata(await ZipToJson(`${href}${filename}-${k}.zip?md5=${l.MD5}`),'player')
+											playChat.chats = data.CHAT
+											playChat.header = data.INFO
+											playChat.chatSpeed = data.CHAT.length < 2 ? 1000 : (0, a.zP)()
+											let 章节 = `${MMT目录.当前[1]+1}/${MMT目录.作品[MMT目录.当前[0]].章节+1}`
+											$$('#size').text(`章节:${章节}\n进度:1/${data.CHAT.length}`)
+											setTimeout(function(){p((0, ee.Fe)(playChat))}, 1e3)
+											p((0, S.Cz)(!0))
+											$$('.nowChapter').text(`${l.名称}：第${k+1}/${l.章节+1}章`)
+											$$('.PLAYER_play').click()
+											INIT_loading(false)
+										},
+										children: '播放'
+									})]
 								})
 							})]
 						}), (0, b.jsx)(eo,
@@ -6736,14 +6746,14 @@
 												className: "bold",
 												children: (0, b.jsxs)(ey,
 												{
-													children: r.name
+													children: r.名称
 												})
 											})
 										}), (0, b.jsx)(ew,
 										{
 											children: (0, b.jsxs)(eb,
 											{
-												children: [i.Z.writer[g], " : ", (0, b.jsx)("span",{children: r.author})]
+												children: [i.Z.writer[g], " : ", (0, b.jsx)("span",{children: r.作者})]
 											})
 										})]
 									})]
@@ -6752,7 +6762,7 @@
 							{
 								onClick: function()
 								{
-									$$(`.${r.authorid}_${r.bookid}_0`).click()
+									$$(`.${r.ID}-0`).click()
 								},
 								children: (0, b.jsx)(x.xL,
 								{
@@ -6974,7 +6984,7 @@
 								},
 								//children: null == f ? void 0 : f.map(function(e, t)
 								
-								children: directory.map(function(e, t)
+								children: MMT目录.作品.map(function(e, t)
 								{
 									return (0, b.jsx)(ef,
 									{
@@ -7538,6 +7548,9 @@
 								};
 								L((0, p.Fe)(e))
 							}, 1e3)
+							let 章节 = '1/1'
+							if(MMT目录.当前)章节 = `${MMT目录.当前[1]+1}/${MMT目录.作品[MMT目录.当前[0]].章节+1}`
+							$$('#size').text(`章节:${章节}\n进度:1/${_.length}`)
 						};
 						L((0, eo.U_)(chats))
 					return (0, k.jsxs)(Z,
@@ -7578,9 +7591,7 @@
 										}
 										L((0, p.Fe)(json))
 										L((0, x.Cz)(!0))
-										nowChapter[0] = 0
-										nowChapter[1] = {}
-										nowChapter[1].chapter = ['']
+										MMT目录.数据 = MMT目录.当前 = null
 										$$('.nowChapter').text('')
 										O(e)
 										$$('.PLAYER_play').click()
@@ -7698,6 +7709,9 @@
 											board_no: 0
 										}
 										L((0, p.Fe)(json))
+										let 章节 = '1/1'
+										if(MMT目录.当前)章节 = `${MMT目录.当前[1]+1}/${MMT目录.作品[MMT目录.当前[0]].章节+1}`
+										$$('#size').text(`章节:${章节}\n进度:${chat.length}/${chat.length}`)
 									},
 									children: (0, k.jsx)(I,
 									{
@@ -7718,48 +7732,13 @@
 									},
 									title: "上一章",
 									disabled: _.length < 1,
-									onClick: async function()
+									onClick: function()
 									{
-										let index = nowChapter[0]-1
-										if(!nowChapter[1].chapter[index])return;
-										// nowChapter[2] = '上一章节'
-										// $$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
-										let authorid = nowChapter[1].authorid
-										let bookid = nowChapter[1].bookid
-										let chapter = nowChapter[1].chapter[index]
-										let name = nowChapter[1].name
-										INIT_loading()
-										$$('.nowChapter').text('')
-										let playChat = 
-										{
-											nowChats: [],
-											replyDepth: 0,
-											chats: [],
-											chatSpeed: (0, g.zP)(),
-											header: {},
-											board_no: 0
-										}
-										L((0, p.Fe)(playChat))
-										let data = `${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`
-										data = loaddata(await $ajax(data),'player')
-										$$('.PLAYER_play').click()
-										skip = true
-										nowChapter[0] = index
-										data.CHAT = [...data.CHAT,...[{content:"끝",isFirst:true,replyDepth:0,sCharacter:{no:0,index:1},type:"end"}]]
-										playChat = 
-										{
-											nowChats: data.CHAT,
-											replyDepth: 0,
-											chats: data.CHAT,
-											chatSpeed: (0, g.zP)(),
-											header: data.INFO,
-											board_no: 0
-										}
-										INIT_loading()
-										L((0, p.Fe)(playChat))
-										L((0, x.Cz)(!0))
-										$$('.nowChapter').text(`${name}_${index}：${chapter}`)
-										$$('.PLAYER_play').click()
+										if(!MMT目录.当前)return;
+										let 当前作品 = MMT目录.作品[MMT目录.当前[0]]
+										if(MMT目录.当前[1]-1 < 0)return;
+										else MMT目录.当前[1]--
+										$$(`.播放${MMT目录.当前[0]}-${MMT目录.当前[1]}`).click()
 									},
 									children: (0, k.jsx)(I,
 									{
@@ -7836,50 +7815,13 @@
 									},
 									title: "下一章",
 									disabled: _.length < 1,
-									onClick: async function()
+									onClick: function()
 									{
-										let index = nowChapter[0]+1
-										if(!nowChapter[1].chapter[index])return;
-										// nowChapter[2] = '下一章节'
-										// $$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
-										let authorid = nowChapter[1].authorid
-										let bookid = nowChapter[1].bookid
-										let chapter = nowChapter[1].chapter[index]
-										let name = nowChapter[1].name
-										INIT_loading()
-										skip = false
-										$$('.nowChapter').text('')
-										let playChat = 
-										{
-											nowChats: [],
-											replyDepth: 0,
-											chats: [],
-											chatSpeed: (0, g.zP)(),
-											header: {},
-											board_no: 0
-										}
-										L((0, p.Fe)(playChat))
-										let data = `${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`
-										data = loaddata(await $ajax(data),'player')
-										nowChapter[0] = index
-										playChat = 
-										{
-											nowChats: [],
-											replyDepth: 0,
-											chats: data.CHAT,
-											chatSpeed: (0, g.zP)(),
-											header: data.INFO,
-											board_no: 0
-										}
-										INIT_loading()
-										setTimeout(function(){L((0, p.Fe)(playChat))}, 1e3)
-										L((0, x.Cz)(!0))
-										$$('.nowChapter').text(`${name}_${index}：${chapter}`)
-										$$('.PLAYER_play').click()
-										if(nowChapter[1].chapter[index+1])
-										{
-											$ajax(`${href}${LibraryURL}/${authorid}/${bookid}/${nowChapter[1].chapter[index+1]}.json`)
-										}
+										if(!MMT目录.当前)return;
+										let 当前作品 = MMT目录.作品[MMT目录.当前[0]]
+										if(MMT目录.当前[1]+1 > 当前作品.章节)return;
+										else MMT目录.当前[1]++
+										$$(`.播放${MMT目录.当前[0]}-${MMT目录.当前[1]}`).click()
 									},
 									children: (0, k.jsx)(I,
 									{
@@ -8062,52 +8004,19 @@
 						{}), (0, m.jsx)(s.g4,
 						{
 							className: "medium",
-							onClick: async function()
+							onClick: function()
 							{
-								let index = nowChapter[0]+1
-								if(!nowChapter[1].chapter[index])return;
-								// nowChapter[2] = '下一章节'
-								// $$(`.${nowChapter[1].authorid}_${nowChapter[1].bookid}_${index}`).click()
-								let authorid = nowChapter[1].authorid
-								let bookid = nowChapter[1].bookid
-								let chapter = nowChapter[1].chapter[index]
-								let name = nowChapter[1].name
-								INIT_loading()
-								skip = false
-								$$('.nowChapter').text('')
-								let playChat = 
+								if(!MMT目录.当前 || MMT目录.当前[1]+1 > MMT目录.作品[MMT目录.当前[0]].章节)
 								{
-									nowChats: [],
-									replyDepth: 0,
-									chats: [],
-									chatSpeed: (0, l.zP)(),
-									header: {},
-									board_no: 0
+									n()
+									MMT目录.当前 = null
+									$$('.nowChapter').text('')
+									return;
 								}
-								e((0, i.Fe)(playChat))
-								let data = `${href}${LibraryURL}/${authorid}/${bookid}/${chapter}.json`
-								data = loaddata(await $ajax(data),'player')
-								nowChapter[0] = index
-								playChat = 
-								{
-									nowChats: [],
-									replyDepth: 0,
-									chats: data.CHAT,
-									chatSpeed: (0, l.zP)(),
-									header: data.INFO,
-									board_no: 0
-								}
-								INIT_loading()
-								setTimeout(function(){e((0, i.Fe)(playChat))}, 1e3)
-								e((0, u.Cz)(!0))
-								$$('.nowChapter').text(`${name}_${index}：${chapter}`)
-								$$('.PLAYER_play').click()
-								if(nowChapter[1].chapter[index+1])
-								{
-									$ajax(`${href}${LibraryURL}/${authorid}/${bookid}/${nowChapter[1].chapter[index+1]}.json`)
-								}
+								MMT目录.当前[1]++
+								$$(`.播放${MMT目录.当前[0]}-${MMT目录.当前[1]}`).click()
 							},
-							children: nowChapter[1].chapter[nowChapter[0]+1] ? '点击前往下一章' : r.Z.end[t]
+							children: MMT目录.当前 && MMT目录.当前[1] < MMT目录.作品[MMT目录.当前[0]].章节 ? '点击前往下一章' : r.Z.end[t]
 						})]
 					})
 				},
@@ -8418,10 +8327,10 @@
 						};
 					let isFirst = isfirst(n.chats.indexOf(t),n.chats,'player')
 					let isCenter = t.isCenter && t.type === 'image'
-					let style = mt_settings['文字样式'][t.type] ? mt_settings['文字样式'][t.type] : {}
+					let style = MMT目录.设置['文字样式'][t.type] ? MMT目录.设置['文字样式'][t.type] : {}
 					delete style.textAlign
 					style = {...style,...{}}//防止连带修改设置属性
-					foreach([...mt_settings.风格样式[t.type] || [],...t.style || []],function(k,v)
+					foreach([...MMT目录.设置.风格样式[t.type] || [],...t.style || []],function(k,v)
 					{
 						style[v[0]] = v[1]
 					})
@@ -8636,7 +8545,9 @@
 						{
 							var n = e.chats.indexOf(t),
 								o = e.chats[n + 1];
-							$$("#size").text(`章节:${nowChapter[0]+1}/${nowChapter[1].chapter.length}\n进度:${(n+1) ? (n+1) : e.chats.length}/${e.chats.length}`)
+							let 章节 = '1/1'
+							if(MMT目录.当前)章节 = `${MMT目录.当前[1]+1}/${MMT目录.作品[MMT目录.当前[0]].章节+1}`
+							$$('#size').text(`章节:${章节}\n进度:${(n+1) ? (n+1) : e.chats.length}/${e.chats.length}`)
 							if("end" === t.type || "reply" === t.type || "heart" === t.type)r((0, i.eS)((0, l.zP)()));
 							else if(o && o.replyDepth === e.replyDepth) "{end}" === toString(o.content).trim() && o.replyDepth === t.replyDepth ? (r((0, i.eS)((0, l.zP)())), r((0, i.e$)(
 							{
@@ -8688,9 +8599,9 @@
 						}, [r]);
 					let isFirst = isfirst(c.chats.indexOf(t),c.chats,'player')
 					let isCenter = t.isCenter && t.type === 'image'
-					let style = mt_settings['文字样式'][t.type] ? mt_settings['文字样式'][t.type] : {}
+					let style = MMT目录.设置['文字样式'][t.type] ? MMT目录.设置['文字样式'][t.type] : {}
 					delete style.textAlign,style = {...style,...{}}//防止连带修改设置属性
-					foreach([...mt_settings.风格样式[t.type] || [],...t.style || []],function(k,v)
+					foreach([...MMT目录.设置.风格样式[t.type] || [],...t.style || []],function(k,v)
 					{
 						style[v[0]] = v[1]
 					})
@@ -8812,7 +8723,7 @@
 												style:
 												{
 													maxHeight: t.content.indexOf("Face")>=0 || t.file.indexOf("Face")>=0 ? '360px' : "",
-													maxWidth: t.content.indexOf("Face")>=0 || t.file.indexOf("Face")>=0 ? mt_settings['差分比例'] : mt_settings['图片比例']
+													maxWidth: t.content.indexOf("Face")>=0 || t.file.indexOf("Face")>=0 ? MMT目录.设置['差分比例'] : MMT目录.设置['图片比例']
 												},//@差分表情宽高百分比
 												src: t.file.indexOf(":image") > -1 ? t.file : href+t.file,
 												title: t.file.indexOf(":image") > -1 ? '' : t.file,

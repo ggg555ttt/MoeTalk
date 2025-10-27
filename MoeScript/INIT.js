@@ -30,9 +30,8 @@ function os(u = window.navigator.userAgent)
 }
 var browser = os();//获取浏览器信息
 var player = (本地 ? '/' : href)+'Moedata'//播放器地址
-var LibraryURL = 'GameData/BLDA/Library'//图书馆地址
 var directory = []//目录
-var nowChapter = ['',{chapter:[]}]//当前章节
+var MMT目录 = {}//目录
 
 var $$ = $;//jquery转义
 var winHeight = window.innerHeight
@@ -229,6 +228,7 @@ function blink(element)
 //警告
 function INIT_state(num)
 {
+	if($('.nowChapter').length)return
 	if(!num)num = 1.1
 	let height = parseInt($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num)
 	if(chats.length > 300)//if(height > mt_settings['高度限制'])//检测聊天框宽度
