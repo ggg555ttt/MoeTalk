@@ -156,7 +156,7 @@ async function update(str = '')
 		readme += `应用：<span><input type='checkbox' ${mt_settings.自动更新.应用 ? 'checked' : ''}>自动更新</span>`
 		readme += "<span class='更新应用'></span>\n"
 		readme += `数据：<span><input type='checkbox' ${mt_settings.自动更新.数据 ? 'checked' : ''}>自动更新</span>`
-		readme += "<span class='检查数据'></span><span class='更新数据'></span>\n"
+		readme += "<span class='更新数据'></span>\n"
 	}
 	if(客户端 === 'HTML5+')
 	{

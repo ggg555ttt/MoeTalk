@@ -380,6 +380,7 @@ async function 检查数据()
 	if(!本地)return
 	let game = mt_settings['选择游戏'] || 'NONE'
 	if(game == 'NONE' || !本地)return
+	$('.更新数据').text('获取文件列表……')
 	await waitPlus()
 	数据列表 = []
 	let data = JSON.parse(await $ajax(`${href}GameData/${mt_settings['选择游戏']}/List.json?ver=${本地数据版本}`))
@@ -393,8 +394,8 @@ async function 检查数据()
 			let val2 = val1[key2]
 			if(typeof val2 === 'string')
 			{
+				$('.更新数据').text(`检查：${val2}`)
 				val2 = `${link}/${key1}/${val2}.${ext}`
-				$('.检查数据').text(`检查数据中：${val2}\n`)
 				if(!await file_exists(val2))数据列表.push(val2)
 			}
 			else
@@ -404,8 +405,8 @@ async function 检查数据()
 					let val3 = val2[key3]
 					if(typeof val3 === 'string')
 					{
+						$('.更新数据').text(`检查：${val3}`)
 						val3 = `${link}/${key1}/${key2}/${val3}.${ext}`
-						$('.检查数据').text(`检查数据中：${val3}\n`)
 						if(!await file_exists(val3))数据列表.push(val3)
 					}
 					else
@@ -415,8 +416,8 @@ async function 检查数据()
 							let val4 = val3[key4]
 							if(typeof val4 === 'string')
 							{
+								$('.更新数据').text(`检查：${val4}`)
 								val4 = `${link}/${key1}/${key2}/${key3}/${val4}.${ext}`
-								$('.检查数据').text(`检查数据中：${val4}\n`)
 								if(!await file_exists(val4))数据列表.push(val4)
 							}
 						}
@@ -425,10 +426,9 @@ async function 检查数据()
 			}
 		}
 	}
-	$('.检查数据').text('数据检查完毕，下载缺失文件……\n')
 	if(数据列表.length)
 	{
-		if(!$('.检查数据').length)update()
+		if(!$('.更新数据').length)update()
 		$('.更新数据').text('数据文件下载中……')
 		let data = await $ajax('https://api.akams.cn/github#.json')
 		data = data ? JSON.parse(data).data : []
