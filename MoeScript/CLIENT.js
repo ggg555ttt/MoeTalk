@@ -1,11 +1,12 @@
 async function isIos()
 {
+	if(本地 || sessionStorage['phpwin'])return
 	let type = await $.ajax(
 	{
 		url: '/index.php',
 		type: 'POST',
 		data: {backDown: true}
-	})
+	}).catch(function(){return null})
 	if(type === 'server')
 	{
 		let data = await $ajax(`${href}MoeData/phpwin.js?time=${本地应用版本[0]}`)
@@ -30,11 +31,24 @@ async function isIos()
 	{
 		客户端 = 'phpwin'
 		本地 = true
-		检查数据()
+		sessionStorage['phpwin'] = 'phpwin'
 	}
+	else sessionStorage['phpwin'] = 'none'
 }
 isIos()
-if(客户端 && 客户端 !== 'phpwin')检查数据()
+function waitPlus()
+{
+	return new Promise(resolve =>
+	{
+		if(window.plus || 客户端 !== 'HTML5+')return resolve();
+		const onPlusReady = () =>
+		{
+			document.removeEventListener('plusready', onPlusReady);
+			resolve();
+		};
+		document.addEventListener('plusready', onPlusReady, false);
+	});
+}
 async function file_exists(filePath)
 {
 	if(客户端 === 'NW.js')
@@ -232,6 +246,7 @@ async function 复制目录(src,dst,files = [])
 }
 async function 安装应用()
 {
+	await waitPlus()
 	let config = {}
 	config.title = '安装应用'
 	config.style = 'text-align:center;'
@@ -259,6 +274,7 @@ async function 安装应用()
 async function 更新应用(time = Date.now())
 {
 	if(!本地)return
+	await waitPlus()
 	$('.更新应用').html('<span style="color:red;">MoeTalk更新中！请不要刷新或退出</span>')
 	网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}MoeData/Version/Version.json?time=${time}`),'检测版本……',$('.更新应用'))
 	if(网络应用版本 && 本地应用版本[0] < 网络应用版本[0])
@@ -310,6 +326,7 @@ async function 更新数据(time = Date.now())
 {
 	let game = mt_settings['选择游戏'] || 'NONE'
 	if(!本地 || game == 'NONE')return
+	await waitPlus()
 	$('.更新数据').html('<span style="color:red;">数据更新中！请不要刷新或退出</span>')
 	本地数据版本 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/Version.json?time=${time}`)) || [-1]
 	网络数据版本 = JSON.parse(await $ajax(`${MoeTalkURL}GameData/${game}/Version/Version.json?time=${time}`),'检测版本……',$('.更新数据'))
@@ -363,6 +380,7 @@ async function 检查数据()
 	if(!本地)return
 	let game = mt_settings['选择游戏'] || 'NONE'
 	if(game == 'NONE' || !本地)return
+	await waitPlus()
 	数据列表 = []
 	let data = JSON.parse(await $ajax(`${href}GameData/${mt_settings['选择游戏']}/List.json?ver=${本地数据版本}`))
 	let link = `GameData/${mt_settings['选择游戏']}`
@@ -376,6 +394,7 @@ async function 检查数据()
 			if(typeof val2 === 'string')
 			{
 				val2 = `${link}/${key1}/${val2}.${ext}`
+				$('.检查数据').text(`检查数据中：${val2}\n`)
 				if(!await file_exists(val2))数据列表.push(val2)
 			}
 			else
@@ -386,6 +405,7 @@ async function 检查数据()
 					if(typeof val3 === 'string')
 					{
 						val3 = `${link}/${key1}/${key2}/${val3}.${ext}`
+						$('.检查数据').text(`检查数据中：${val3}\n`)
 						if(!await file_exists(val3))数据列表.push(val3)
 					}
 					else
@@ -396,6 +416,7 @@ async function 检查数据()
 							if(typeof val4 === 'string')
 							{
 								val4 = `${link}/${key1}/${key2}/${key3}/${val4}.${ext}`
+								$('.检查数据').text(`检查数据中：${val4}\n`)
 								if(!await file_exists(val4))数据列表.push(val4)
 							}
 						}
@@ -404,9 +425,10 @@ async function 检查数据()
 			}
 		}
 	}
+	$('.检查数据').text('数据检查完毕，下载缺失文件……\n')
 	if(数据列表.length)
 	{
-		update()
+		if(!$('.检查数据').length)update()
 		$('.更新数据').text('数据文件下载中……')
 		let data = await $ajax('https://api.akams.cn/github#.json')
 		data = data ? JSON.parse(data).data : []
@@ -432,16 +454,16 @@ async function 下载数据(url)
 	let filename = 数据列表.shift()//获取下载路径
 	if(await file_exists(filename))//本地存在就跳过
 	{
-		文件总数--
+		$('.更新数据').text('剩余：'+文件总数--)
 		下载数据(url)
 	}
 	else
 	{
-		let data = await $ajax(`${url}/${filename}`,'剩余：'+文件总数,$('.更新数据'))
+		let data = await $ajax(`${url}/${filename}`)
 		if(data)//下载成功
 		{
 			await 保存文件(filename, data)
-			文件总数--
+			$('.更新数据').text('剩余：'+文件总数--)
 			下载数据(url)
 		}
 		else

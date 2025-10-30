@@ -28,6 +28,7 @@ if(URLParams.get('cordova') === '' || sessionStorage['cordova'])
 	客户端 = 'Cordova'//var cordova = false
 	loadjs('./cordova.js')
 }
+if(sessionStorage['phpwin'] === 'phpwin'){客户端 = 'phpwin',本地 = true;}
 //函数和变量
 function loadjs(link,mode = ''){document.write("<scr"+`ipt src='${link}' ${mode}></scr`+"ipt>")}
 var test = console.log
@@ -68,7 +69,7 @@ function back()
 	<script src="./MoeScript/INIT.js?md5=3cb474ef51c99ad4a74c353727d455fe" defer=""></script><!-- @@ -->
 	<script src="./MoeScript/DATA.js?md5=4b64d7492531acefaa1dc91962f74826" defer=""></script><!-- @@ -->
 	<script src="./MoeScript/SETTING.js?md5=f432fd7487aaeb75fd41417c11aba034" defer=""></script><!-- @@ -->
-	<script src="./MoeScript/CLIENT.js?md5=f2690c2dcdaeb27078487287cd299c8b" defer=""></script><!-- @@ -->
+	<script src="./MoeScript/CLIENT.js?md5=9b74886c9f19921f2719cf1041e2b73d" defer=""></script><!-- @@ -->
 </head>
 <body style="height:100%;overflow:auto;background-image:linear-gradient( rgba(255,255,255,0.5),rgba(255,255,255,0.5) ),url(MoeData/Ui/hexa_back_01.webp);background-repeat :no-repeat;background-size :cover;user-select:none;">
 	

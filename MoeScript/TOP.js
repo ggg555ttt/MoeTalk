@@ -153,12 +153,10 @@ async function update(str = '')
 		{
 			readme += `${gamearr[game]}：<span style='color:red;' class='版本 bold'>读取中。。。</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
 		}
-		readme += `应用：<span class='更新应用'></span>`
-		readme += `<span><input type='checkbox' ${mt_settings.自动更新.应用 ? 'checked' : ''}>自动更新</span>`
-		readme += '\n'
-		readme += `数据：<span class='更新数据'></span>`
-		readme += `<span><input type='checkbox' ${mt_settings.自动更新.数据 ? 'checked' : ''}>自动更新</span>`
-		readme += '\n'
+		readme += `应用：<span><input type='checkbox' ${mt_settings.自动更新.应用 ? 'checked' : ''}>自动更新</span>`
+		readme += "<span class='更新应用'></span>\n"
+		readme += `数据：<span><input type='checkbox' ${mt_settings.自动更新.数据 ? 'checked' : ''}>自动更新</span>`
+		readme += "<span class='检查数据'></span><span class='更新数据'></span>\n"
 	}
 	if(客户端 === 'HTML5+')
 	{
@@ -207,7 +205,7 @@ async function update(str = '')
 		$('.版本:eq(3)').text(网络数据版本)
 	}
 }
-$(function()
+$(async function()
 {
 	t()
 	if(MikuTalk)
@@ -222,24 +220,13 @@ $(function()
 	notice += '※移动端可点击左侧<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);" onclick="moedev()"> 三 </i>查看工具栏'
 	notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
 	notice += '\n反馈网址：<u><a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/</a></u>'
-	if(客户端 === 'HTML5+')
+	if(本地)
 	{
-		document.addEventListener('plusready', function()
+		if(客户端 === 'HTML5+' && location.href.includes('/www/') && !localStorage['HTML5+'])
 		{
-			if(location.href.indexOf('/www/') > -1 && !localStorage['HTML5+'])安装应用()
-			else if(本地)
-			{
-				if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
-				else
-				{
-					if(mt_settings.自动更新.应用)更新应用()
-					if(mt_settings.自动更新.数据)更新数据()
-				}
-			}
-		}, false);
-	}
-	if(客户端 === 'NW.js')
-	{
+			安装应用()
+			return
+		}
 		if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
 		else
 		{
@@ -247,6 +234,8 @@ $(function()
 			if(mt_settings.自动更新.数据)更新数据()
 		}
 	}
+	await isIos()
+	if(本地 && 客户端)检查数据()
 	if(sessionStorage['通知文档'] == notice)return//
 	localStorage['通知文档'] = notice
 	sessionStorage['通知文档'] = notice
@@ -681,8 +670,8 @@ function selectgame(str = '请选择游戏')
 	select += '</select>\n'
 	if(本地 && 客户端)
 	{
-		str = `<span style='background-color:red;color:white;'>提交后会自动下载对应游戏的数据</span>\n`
-		str += `如果无法正常下载\n请通过<span class="blue bold">檢</span>查更新下载离线数据包\n也可用于查看文件下载进度\n`
+		select += `<span style='background-color:red;color:white;'>提交后会自动下载对应游戏的最新数据</span>\n`
+		select += `如果无法正常下载\n请通过<span class="blue bold">檢</span>查更新下载离线数据包\n也可用于查看文件下载进度\n`
 	}
 	
 	let config = {}
@@ -700,7 +689,7 @@ function selectgame(str = '请选择游戏')
 		CHAR_UpdateChar()
 		INIT_loading(false)
 	}
-	alert(`${select}\n无反应或一直加载请尝试刷新页面\n${str}`,config)
+	alert(`${select}\n无反应或一直加载请尝试刷新页面\n`,config)
 }
 localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
 var phpurl = document.location.protocol == 'https:' ? '/api/moetalk.php' : 'http://frp.freefrp.net:40404/moetalk.php'
