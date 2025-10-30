@@ -838,11 +838,10 @@ $("body").on('click',".添加头像",function()
 		str += `<img class='头像' src='${loadhead(v.no,v.index)}' alt='${v.no}' title='${v.index}' style='cursor:pointer;' onclick='$(".radio:checked")[1].value === "change" ? ${str1} : ${str2}'>`
 	})
 	str += '\n'
-	
-	alert(str)
+
 	$(`.${HeadList.direction}`).click()
-	
-	TOP_confirm = function()
+	let config = {}
+	config.yes = function()
 	{
 		HeadList.direction = $('.radio:checked')[0].value
 		HeadList.margin = $('.margin').val()
@@ -865,24 +864,16 @@ $("body").on('click',".添加头像",function()
 		{
 			$('.角色头像').attr({alt:img[0].alt,title:img[0].title,src:img[0].src})
 		}
-
 	}
+	alert(str,config)
 });
 $("body").on('click',".定义样式",function()
 {
 	let checked = $('.dels:checked').length
-	$('.title').text('内容样式')
-	alert(`<textarea class="bold css scrollbar" style="font-size:1rem;width:100%;height:${$('body').height()*0.7};"></textarea>`)
-	if(CHAT_Style.length)
-	{
-		let str = ''
-		foreach(CHAT_Style,function(k,v)
-		{
-			if(v.length === 2)str += `${v[0]}: ${v[1]}\n`
-		})
-		$('.css').val(str).attr('placeholder',str)
-	}
-	TOP_confirm = function()
+	let text = `<textarea class="bold css scrollbar" style="font-size:1rem;width:100%;height:${$('body').height()*0.7};"></textarea>`
+	let config = {}
+	config.title = '内容样式'
+	config.yes = function()
 	{
 		CHAT_Style = []
 		let css = $('.css').val().split("\n");
@@ -898,6 +889,16 @@ $("body").on('click',".定义样式",function()
 			}
 		})
 		$('.定义样式').css('color',CHAT_Style.length || checked > 1 ? 'red' : 'rgb(75, 105, 137)')
+	}
+	alert(text,config)
+	if(CHAT_Style.length)
+	{
+		let str = ''
+		foreach(CHAT_Style,function(k,v)
+		{
+			if(v.length === 2)str += `${v[0]}: ${v[1]}\n`
+		})
+		$('.css').val(str).attr('placeholder',str)
 	}
 });
 $("body").on('click',".操作模式",function()
@@ -1095,12 +1096,12 @@ $("body").on('click',".INDEX_delete",function()
 		str += `点击【${mt_text.confirm[mtlang]}】将此项目全部内容清空`
 	}
 	str += '\n\n操作可撤销'
-	$('.notice .title').text(title)
-	$('.notice .confirm').text(mt_text.confirm[mtlang])
-	alert(str)
-	TOP_confirm = function()
+	let config = {}
+	config.title = title
+	config.id = Math.random().toString().replace('0.','')
+	config.yes = function()
 	{
-		if($('.notice input:checked').length)
+		if($(`.alert_${config.id} input:checked`).length)
 		{
 			if(confirm('您勾选了“删除全部项目”\n此操作无法撤销，确定要继续吗？'))
 			{
@@ -1113,6 +1114,7 @@ $("body").on('click',".INDEX_delete",function()
 		sendMessage({},'','delete',indexs)
 		log(clear)
 	}
+	alert(str,config)
 });
 
 $("body").on('click',".INDEX_EmojiIfno",function()

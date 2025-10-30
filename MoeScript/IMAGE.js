@@ -456,8 +456,8 @@ if(客户端 === 'HTML5+')
 	});
 	function showCloseImg(src)
 	{
-		alert(`确定要将这张图保存到图库吗？\n<img src='${src}' style='width:100%;'>`)
-		TOP_confirm = function()
+		let config = {}
+		config.yes = function()
 		{
 			urlToBase64(src,1,function(img)
 			{
@@ -467,6 +467,7 @@ if(客户端 === 'HTML5+')
 				baseArr = []
 			})
 		}
+		alert(`确定要将这张图保存到图库吗？\n<img src='${src}' style='width:100%;'>`,config)
 	}
 }
 $("body").on('click',".截图选项",function()

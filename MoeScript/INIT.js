@@ -290,7 +290,7 @@ if(mt_settings['后台保存'])
 	window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 	window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 }
-async function $ajax(url,type = null)
+async function $ajax(url,text = '',html = null)
 {
 	let ext = url.split('?')[0].split('.').pop()
 	if(客户端 === 'phpwin' && url[0] === '/')
@@ -322,9 +322,17 @@ async function $ajax(url,type = null)
 		let xhr = new XMLHttpRequest();
 		if(ext === 'html')url = url.toLowerCase()
 		xhr.open("GET",url);
-		url = url.split('?')[0]
-		if(typeof type === 'string')ext = type
+		url = url.split(url.includes('#') ? '#' : '?')[0]
 		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
+		xhr.addEventListener('progress', function(event)
+		{
+			if(event.lengthComputable && html)
+			{
+				let filename = url.split('/').pop()
+				let percent = ((event.loaded / event.total) * 100).toFixed(1);
+				html.html(`${text}<span style='color:red;'>${filename}</span>${percent}%`)
+			}
+		});
 		xhr.onload = function()
 		{
 			if(this.status === 200 && decodeURIComponent(this.responseURL).includes(url))

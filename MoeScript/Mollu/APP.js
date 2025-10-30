@@ -5908,10 +5908,11 @@
 										}) : ''],
 										onClick: function()
 										{
-											alert(localStorage['通知文档'])
-											$$('.notice .confirm').html('刷新')
-											$$('.notice pre').css('text-align','center')
-											TOP_confirm = function(){location.reload(true)}
+											let config = {}
+											config.confirm = '刷新'
+											config.style = 'text-align:center;'
+											config.yes = function(){location.reload(true)}
+											alert(localStorage['通知文档'],config)
 										}
 									})]
 								}), a || (0, O.jsx)(T,{hidden: "hidden"})]//@隐藏帮助按钮

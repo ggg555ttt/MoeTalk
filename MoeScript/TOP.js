@@ -3,44 +3,52 @@ skip = false
 if(localStorage['调试模式'])var vConsole = new window.VConsole();
 INIT_loading('开始加载')
 
-var TOP_notcie = [];
 var mt_charface;
 var id_map = [{},{}]
 var CustomFaceAuthor = {}
-var TOP_confirm = '';
-window.alert = function(str)
+var ALERT = {}
+window.alert = function(text = '',config = {})
 {
-	if($('.notice').hasClass('visible'))
-	{
-		TOP_notcie.push({html:$('.notice').html(),confirm:TOP_confirm})
-		$('.notice .title').text('通知')
-		$('.notice .confirm').text(mt_text.confirm[mtlang])
-		TOP_confirm = ''
-	}
-	$('.notice pre').html(str)
-	$('.notice').addClass('visible')
-};
-$('body').on('click',".notice .cancel",function()
+	$('.alert').removeClass('visible')
+	config.id = config.title || Math.random().toString().replace('0.','')
+	config.title = config.title || '通知'
+	config.cancel = config.cancel || '取消'
+	config.confirm = config.confirm || '确认'
+	config.style = config.style || ''
+	config.yes = config.yes || null
+let style = `style="user-select: text; line-height: 125%; white-space: pre-wrap; word-break: break-word; text-align: left; width: 100%; font-family: inherit; overflow: scroll;${config.style}"`
+let html = 
+`<div class="btncdx alert ALERT_${config.id} visible" style="z-index: 1000;">
+	<div class="cFtxnG">
+		<div class="duPzcp" style="height: auto;">
+			<span class="GsrFM title" style="border-bottom: 4px solid;">${config.title}</span>
+			<div class="kncnxt cancel" style="top: 12.5%;user-select: none;cursor: pointer;" alt="${config.id}">❌</div>
+		</div>
+		<div class="oFeqA" style="max-height: 90%; padding: 0.5rem;">
+			<pre ${style}>${text}</pre>
+			<div class="ia-dnHO">
+				<button class="eLyPUY cancel" alt="${config.id}">${config.cancel}</button>
+				<button class="eLyPUY kebTxe confirm" alt="${config.id}">${config.confirm}</button>
+			</div>
+		</div>
+	</div>
+</div>`
+	ALERT[config.id] = config.yes
+	$('.弹窗').append(html)
+}
+$('body').on('click','.cancel',function()
 {
-	$('.notice pre').css('text-align','left').html('')
-	$('.notice').removeClass('visible')
-	$('.notice .title').text('通知')
-	$('.notice .confirm').text(mt_text.confirm[mtlang]).removeAttr('disabled')
-	TOP_confirm = ''
-	if(TOP_notcie.length)
-	{
-		let notcie = TOP_notcie.pop()
-		$('.notice').addClass('visible')
-		$('.notice').html(notcie.html)
-		TOP_confirm = notcie.confirm
-	}
+	let id = $(this).attr('alt')
+	delete ALERT[id]
+	$(`.ALERT_${id}`).remove()
+	$('.alert').last().addClass('visible')
 });
-$('body').on('click',".notice .confirm",function()
+$('body').on('click','.confirm',function()
 {
-	if(TOP_confirm !== '')TOP_confirm()
-	$('.notice .cancel').click()
+	let id = $(this).attr('alt')
+	if(ALERT[id])ALERT[id]()
+	$(this).prev().click()
 });
-
 async function t()
 {
 	let game = mt_settings['选择游戏'] || 'NONE';
@@ -96,15 +104,15 @@ function moedev()
 	str += '代码注入：<textarea></textarea>\n'
 	str += 'Android客户端无法更新应用版本请尝试清除缓存\n'
 	str += '<button class="red" onclick="clearCache()">清除缓存</button>\n'
-	alert(str)
-	$('.notice .confirm').text(mt_text.confirm[mtlang])
-	$('.notice pre').css('text-align','left')
-	TOP_confirm = function()
+	let config = {}
+	config.id = Math.random().toString().replace('0.','')
+	config.yes = function()
 	{
 		delete localStorage['调试模式']
-		if($$('.notice input').prop('checked'))localStorage['调试模式'] = true
-		if($$('.notice textarea').val())eval($$('.notice textarea').val())
+		if($(`.alert_${config.id} input`).prop('checked'))localStorage['调试模式'] = true
+		if($(`.alert_${config.id} textarea`).val())eval($(`.alert_${config.id} textarea`).val())
 	}
+	alert(str,config)
 }
 
 if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeData/Fonts/FontList.css' data-n-g='' id='mt-font'>");//加载字体
@@ -124,9 +132,10 @@ function clearCache()
 			delete sessionStorage['通知文档']
 			delete sessionStorage['最新版本']
 			if(客户端 === 'HTML5+' && 本地)delete localStorage['HTML5+']
-			alert('缓存清除完毕，请立即刷新页面')
-			$('.notice .confirm').html('刷新')
-			TOP_confirm = function(){location.reload(true)}
+			let config = {}
+			config.confirm = '刷新'
+			config.yes = function(){location.reload(true)}
+			alert('缓存清除完毕，请立即刷新页面',config)
 		}
 	});
 }
@@ -135,7 +144,6 @@ async function update(str = '')
 	if(!mt_settings.自动更新)mt_settings.自动更新 = {应用:false,数据:false}
 	let game = mt_settings['选择游戏'] || 'NONE'
 	let time = Date.now()//year+month+day
-	$('.notice .title').text('检查更新')
 
 	let readme = str
 	if(本地 && 客户端)
@@ -170,16 +178,17 @@ async function update(str = '')
 	}
 	let bdwp = 'https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda'
 	let link = `<a class="INIT_href bold" title="${bdwp}" style="text-decoration:underline;">${bdwp}</a>`
-	readme += `离线客户端下载地址：（可复制）\n${link}\n提取码：BLDA\n`
-	
-	alert(readme)
-
-	TOP_confirm = function()
+	readme += `客户端下载地址：\n${link}\n提取码：BLDA\n`
+	let config = {}
+	config.title = '检查更新'
+	config.id = Math.random().toString().replace('0.','')
+	config.yes = function()
 	{
-		mt_settings.自动更新.应用 = $('.notice input:eq(0)').prop('checked')
-		mt_settings.自动更新.数据 = $('.notice input:eq(1)').prop('checked')
+		mt_settings.自动更新.应用 = $(`.alert_${config.id} input:eq(0)`).prop('checked')
+		mt_settings.自动更新.数据 = $(`.alert_${config.id} input:eq(1)`).prop('checked')
 		saveStorage('设置选项',mt_settings,'local')
 	}
+	alert(readme,config)
 	
 	if(本地 && 客户端)
 	{
@@ -191,8 +200,8 @@ async function update(str = '')
 		}
 		let str1 = `<button style='line-height:112%;' onclick='更新应用(${time}),this.disabled=1'>点击更新</button>`
 		let str2 = `<button style='line-height:112%;' onclick='更新数据(${time}),this.disabled=1'>点击更新</button>`
-		if(!mt_settings.自动更新.应用 && 网络应用版本 && 本地应用版本[0] < 网络应用版本[0])$('.notice input:eq(0)').parent().after(str1)
-		if(!mt_settings.自动更新.数据 && 网络数据版本 && 本地数据版本[0] < 网络数据版本[0])$('.notice input:eq(1)').parent().after(str2)
+		if(!mt_settings.自动更新.应用 && 网络应用版本 && 本地应用版本[0] < 网络应用版本[0])$(`.alert_${config.id} input:eq(0)`).parent().after(str1)
+		if(!mt_settings.自动更新.数据 && 网络数据版本 && 本地数据版本[0] < 网络数据版本[0])$(`.alert_${config.id} input:eq(1)`).parent().after(str2)
 		$('.版本:eq(1)').text(网络应用版本)
 		$('.版本:eq(2)').text(本地数据版本)
 		$('.版本:eq(3)').text(网络数据版本)
@@ -208,12 +217,11 @@ $(function()
 		$("#view").click()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
-	let span = '<span onclick="moedev()" style="font-family:Jalnan;background-color:rgb(139,187,233);color:white;padding:4px;">'
+	let span = `<span onclick="$('#readme').click()" style="font-family:Jalnan;background-color:rgb(139,187,233);color:white;padding:4px;">`
 	let notice = ''
-	notice += `<span class="bold">欢迎使用${span}MoeTalk</span>！\n此版本为基于原作者Raun0129开发的MolluTalk的个人改版</span>\n`
-	notice += '\n※移动端可点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏'
+	notice += '※移动端可点击左侧<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);" onclick="moedev()"> 三 </i>查看工具栏'
 	notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
-	notice += '\n反馈网址（可复制）：<u><a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/<a/></u>'
+	notice += '\n反馈网址：<u><a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/</a></u>'
 	if(客户端 === 'HTML5+')
 	{
 		document.addEventListener('plusready', function()
@@ -239,22 +247,23 @@ $(function()
 			if(mt_settings.自动更新.数据)更新数据()
 		}
 	}
-	if(本地)检查数据()
 	if(sessionStorage['通知文档'] == notice)return//
-	$('.notice pre').css('text-align','center')
 	localStorage['通知文档'] = notice
 	sessionStorage['通知文档'] = notice
 	if(MikuTalk)
 	{
-		alert('愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n点击“确认”可以关闭')
-		TOP_confirm = function()
+		let text = '愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n点击“确认”可以关闭'
+		let config = {}
+		config.yes = function()
 		{
 			sessionStorage['MikuTalk'] = 'no'
 			location.reload(true);
 		}
+		alert(text,config)
 	}
-	if(year+month+day < '250921')alert('<span style="color:green;">（9/21日截止）【征文活动】秘密岛屿探索计划正在进行中\n详情请见：</span><a style="text-decoration:underline;" title="https://www.bilibili.com/opus/1098333887621234708" class="INIT_href">链接</a>')
-	alert(notice)
+	let text = `<span class="bold">欢迎使用${span}MoeTalk</span>！\n此版本为基于原作者Raun0129开发的MolluTalk的个人改版\n<span style="color:white;background-color:red;">※相关问题请点击上方标题</span></span>`
+	let config = {style:'text-align:center;'}
+	alert(text,config)
 })
 $("body").on('click', function()
 {
@@ -432,7 +441,6 @@ $('body').on('click',".chatText",function()
 //切换风格
 $('body').on('click',"#mt-style",function()
 {
-	$('.notice .title').text('风格样式')
 	let onclick = "onclick='"
 	onclick += '$(".mt-style").css("color","black"),this.style.color="red",'
 	onclick += '$(".bgcolor").val(this.innerText=="MomoTalk"?"#FFFFFF":"#FFF7E1"),'
@@ -449,18 +457,10 @@ $('body').on('click',"#mt-style",function()
 	html += '羁绊：<textarea title="heart" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
 	html += '旁白：<textarea title="info" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
 	html += '图片：<textarea title="image" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
-	alert(html)
-	$('.bgcolor').val(mt_settings.风格样式.bgColor)
-	$('.typecss').each(function()
-	{
-		let style = ''
-		foreach(mt_settings.风格样式[this.title] || [],function(k,v)
-		{
-			style += `${v[0]}: ${v[1]}\n`
-		})
-		this.value = style
-	})
-	TOP_confirm = function()
+	let config = {}
+	config.title = '风格样式'
+	config.confirm = '提交'
+	config.yes = function()
 	{
 		mt_settings.风格样式.bgColor = $('.bgcolor').val()
 		$('.typecss').each(function()
@@ -486,6 +486,17 @@ $('body').on('click',"#mt-style",function()
 		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color',mt_settings.风格样式.bgColor);
 		refreshMessage(chats)
 	}
+	alert(html,config)
+	$('.bgcolor').val(mt_settings.风格样式.bgColor)
+	$('.typecss').each(function()
+	{
+		let style = ''
+		foreach(mt_settings.风格样式[this.title] || [],function(k,v)
+		{
+			style += `${v[0]}: ${v[1]}\n`
+		})
+		this.value = style
+	})
 })
 function refreshMessage(json)
 {
@@ -617,29 +628,36 @@ function TOP_replyEdit()
 
 		for(let i = 0;i < length;i++)
 		{
-			str += `<span onclick="$('.notice .confirm').removeAttr('disabled')"><input type="radio" id="${reply[i]}" name="replys" class="replys"><label for="${reply[i]}">${reply[i]}</label></span>\n`
+			str += `<span><input type="radio" id="${reply[i]}" name="replys" class="replys"><label for="${reply[i]}">${reply[i]}</label></span>\n`
 		}
-		alert(str)
-		$('.notice .title').text('项目管理')
-		$('.notice .confirm').text('跳转').attr('disabled','disabled')
-		$('.replys:checked')
-		TOP_confirm = function()
+
+		let config = {}
+		config.title = '项目管理'
+		config.confirm = '跳转'
+		config.yes = function()
 		{
-			replyDepth($('.replys:checked').attr('id'),'go')
-			refreshMessage(chats)
+			let id = $('.replys:checked').attr('id')
+			if(id)
+			{
+				replyDepth($('.replys:checked').attr('id'),'go')
+				refreshMessage(chats)
+			}
 		}
+		alert(str,config)
 	}
 	else if(chats.length)
 	{
-		$('.notice .title').text('项目编辑')
 		let nowreply = replyDepths[replyDepths.length-1]
 		str = `请输入新的项目名称：\n<input value="${nowreply}">\n\n`
 		str += '同时不要忘记更改外部的选择肢文字\n重名项目会自动合并\n'
 		str += '操作无法撤销'
-		alert(str)
-		TOP_confirm = function()
+
+		let config = {}
+		config.title = '项目编辑'
+		config.id = Math.random().toString().replace('0.','')
+		config.yes = function()
 		{
-			let val = $('.notice input').val()
+			let val = $(`.alert_${config.id} input`).val()
 			length = chats.length;
 			for(let i = 0;i < length;i++)
 			{
@@ -649,16 +667,16 @@ function TOP_replyEdit()
 			refreshMessage(chats)
 			saveStorage('chats',[...chats,...otherChats],'local')
 		}
+		alert(str,config)
 	}
 }
 function selectgame(str = '请选择游戏')
 {
-	$('.notice .title').text('选择游戏')
 	let select = `${str}\n<select style='font-size:1.2rem;'>`
 	let game = mt_settings['选择游戏'] || 'NONE'
 	$.each({...{'NONE':'无'},...gamearr},function(k,v)
 	{
-		select += `<option value='${k}'${k === game ? "style='color:red;'" : ""}>${v}</option>`
+		select += `<option value='${k}'${k === game ? "selected style='color:red;'" : ""}>${v}</option>`
 	})
 	select += '</select>\n'
 	if(本地 && 客户端)
@@ -666,14 +684,15 @@ function selectgame(str = '请选择游戏')
 		str = `<span style='background-color:red;color:white;'>提交后会自动下载对应游戏的数据</span>\n`
 		str += `如果无法正常下载\n请通过<span class="blue bold">檢</span>查更新下载离线数据包\n也可用于查看文件下载进度\n`
 	}
-	alert(`${select}\n无反应或一直加载请尝试刷新页面\n${str}`)
-	$('.notice .confirm').text('提交')
-	$('.notice select').val(game)
-
-	TOP_confirm = async function()
+	
+	let config = {}
+	config.id = Math.random().toString().replace('0.','')
+	config.title = '选择游戏'
+	config.confirm = '提交'
+	config.yes = async function()
 	{
 		INIT_loading('开始加载')
-		mt_settings['选择游戏'] = $('.notice select').val()
+		mt_settings['选择游戏'] = $(`.alert_${config.id} select`).val()
 		saveStorage('设置选项',mt_settings,'local')
 		数据列表 = []
 		await 更新数据()
@@ -681,6 +700,7 @@ function selectgame(str = '请选择游戏')
 		CHAR_UpdateChar()
 		INIT_loading(false)
 	}
+	alert(`${select}\n无反应或一直加载请尝试刷新页面\n${str}`,config)
 }
 localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
 var phpurl = document.location.protocol == 'https:' ? '/api/moetalk.php' : 'http://frp.freefrp.net:40404/moetalk.php'

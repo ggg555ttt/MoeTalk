@@ -77,14 +77,16 @@ $("body").on('click',"#cutdata",function()
 {
 	if($(".dels:checked").length > 0)
 	{
-		$('.notice .title').text('截取存档')
-		alert(`你一共选中了${$(".dels:checked").length}条数据\n请输入标题和作者名：\n标题：<input style='font-size:1.2rem;'>\n作者：<input style='font-size:1.2rem;'>`)
-		TOP_confirm = function()
+		let text = `你一共选中了${$(".dels:checked").length}条数据\n请输入标题和作者名：\n标题：<input style='font-size:1.2rem;'>\n作者：<input style='font-size:1.2rem;'>`
+		let config = {}
+		config.id = Math.random().toString().replace('0.','')
+		config.title = '截取存档'
+		config.yes = function()
 		{
 			let json = {};
 			let filename = 'MoeTalk截取存档'
-			let title = $('.notice input').eq(0).val()
-			let nickname = $('.notice input').eq(1).val()
+			let title = $(`.alert_${config.id} input`).eq(0).val()
+			let nickname = $(`.alert_${config.id} input`).eq(1).val()
 			let time = getNowDate()
 			json.MoeTalk = 本地应用版本[0]
 			json.INFO = {}//存档信息
@@ -104,6 +106,8 @@ $("body").on('click',"#cutdata",function()
 			$('.存档格式').val('json')
 			导出存档(`${filename}${time}${title ? '_'+title : ''}`,json,'json')
 		}
+		alert(text,config)
+		
 	}
 	else alert('你没有选中数据！')
 });

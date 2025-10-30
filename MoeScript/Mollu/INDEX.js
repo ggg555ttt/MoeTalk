@@ -1218,64 +1218,6 @@
 						};
 					return [(0, m.jsx)(ea.Xf,
 					{
-						className: "notice",
-						style: {zIndex: 1000},
-						children: (0, m.jsxs)(ea.F0,
-						{
-							onDoubleClick: function(e)
-							{
-								return e.stopPropagation(), !1
-							},
-							children: [(0, m.jsxs)(ea.h4,
-							{
-								style: {height: 'auto'},
-								children: [(0, m.jsx)(ea.Dx,
-								{
-									style: {borderBottom: '4px solid'},
-									className: "title",
-									children: '通知'
-								}), (0, m.jsx)(ea.ec,
-								{
-									className: "cancel",
-									children: (0, m.jsx)(c.j4,
-									{})
-								})]
-							}), (0, m.jsxs)(ea.$0,
-							{
-								style:
-								{
-									maxHeight: '90%',
-									padding: '0.5rem'
-								},
-								children: [(0, m.jsx)('pre',
-								{
-									style: 
-									{
-										userSelect: 'text',
-										lineHeight: '125%',
-										whiteSpace: 'pre-wrap',
-										wordBreak: 'break-word',
-										textAlign: 'left',
-										width: '100%',
-										fontFamily: 'inherit',
-										overflow: 'scroll'
-									}
-								}), (0, m.jsxs)(ea.$_,
-								{
-									children: [(0, m.jsx)('button',
-									{
-										className: "eLyPUY cancel",
-										children: L.Z.cancel[u]
-									}), (0, m.jsx)('button',
-									{
-										className: "eLyPUY kebTxe confirm",
-										children: L.Z.confirm[u]
-									})]
-								})]
-							})]
-						})
-					}), (0, m.jsx)(ea.Xf,
-					{
 						className: n ? "visible medium" : "medium",
 						onDoubleClick: function()
 						{
@@ -2124,16 +2066,20 @@
 												option += `<option value="snapdom" ${mt_settings['截图工具'] == 'snapdom' ? 'selected' : ''}>snapdom（测试）</option>`
 												str += `截图工具：\n`
 												str += `<select class='select2' style='font-size: 1.5rem;'>${option}</select>\n`
-												alert(str)
-												TOP_confirm = function()
+												let config = {}
+												config.title = '截图设置'
+												config.confirm = '提交'
+												config.id = Math.random().toString().replace('0.','')
+												config.yes = function()
 												{
-													mt_settings['宽度限制'] = $$('.notice input:eq(1)').val() || 500
-													mt_settings['高度限制'] = $$('.notice input:eq(2)').val() || 16384
-													mt_settings['图片格式'] = $$('.notice .select1').val()
-													mt_settings['截图工具'] = $$('.notice .select2').val()
-													mt_settings['打包下载'] = $$('.notice input[type="checkbox"]').prop('checked')
+													mt_settings['宽度限制'] = $$(`.alert_${config.id} input:eq(1)`).val() || 500
+													mt_settings['高度限制'] = $$(`.alert_${config.id} input:eq(2)`).val() || 16384
+													mt_settings['图片格式'] = $$(`.alert_${config.id} .select1`).val()
+													mt_settings['截图工具'] = $$(`.alert_${config.id} .select2`).val()
+													mt_settings['打包下载'] = $$(`.alert_${config.id} input[type="checkbox"]`).prop('checked')
 													saveStorage('设置选项',mt_settings,'local')
 												}
+												alert(str,config)
 											}
 										})
 										, (0, m.jsx)("button",
@@ -3044,14 +2990,16 @@
 												$$('.INDEX_EmojiIfno:visible').length ? $$('.INDEX_EmojiIfno').hide() : $$('.INDEX_EmojiIfno').show()
 												if(EMOJI.custom.from)
 												{
-													$$('.notice pre').css('text-align','center')
+													let config = {}
+													config.title = '版权声明'
+													config.style = 'text-align:center;'
 													let str = ''
 													str += `作者：${EMOJI.custom.from.name}\n`
 													str += `<a href='${EMOJI.custom.from.link}'><u>${EMOJI.custom.from.link}</u></a>\n`
 													str += '<span style="color:red;">请尊重作者的劳动成果\n严禁用本套立绘差分进行牟利和商业用途\n违者将追究法律责任！\n</span>'
 													if($$('.INDEX_EmojiIfno:visible').length > 0)str += '现在点击表情将编辑信息\n'
 													else str += '现在点击表情将发送表情\n'
-													alert(str)
+													alert(str,config)
 												}
 												
 											}
@@ -3125,17 +3073,18 @@
 														},
 														onClick: function()
 														{
+															let config = {}
+															config.id = Math.random().toString().replace('0.','')
 															if(v === 'ADD')
 															{
-																$$('.notice .title').text('添加表情')
-																$$('.notice .confirm').text('提交')
 																let str = '<input type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">添加到新的分页</span>\n'
 																str += '<button onclick=\'$("#custom").attr("title","image").attr("alt","emoji").click()\'>点击上传图片（支持批量添加，点击图片可删除）</button>\n'
 																str += `<div class="Emojis" title="${v}"></div>\n`
-																alert(str)
-																TOP_confirm = function()
+																config.title = '添加表情'
+																config.confirm = '提交'
+																config.yes = function()
 																{
-																	if($$('.notice input:checked').length)EMOJI.pages[EMOJI.id].custom = parseInt(EMOJI.pageindex.split(' / ')[1])//添加到新的分页
+																	if($$(`.alert_${config.id} input:checked`).length)EMOJI.pages[EMOJI.id].custom = parseInt(EMOJI.pageindex.split(' / ')[1])//添加到新的分页
 																	else EMOJI.pages[EMOJI.id].custom = parseInt(EMOJI.pageindex.split(' / ')[0]-1)
 																	$$('.Emojis img').each(function(k,v)
 																	{
@@ -3147,11 +3096,13 @@
 																	$$('.INDEX_Emoji').click()
 																	saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
 																}
+																alert(str,config)
 																return
 															}
 															if($$('.INDEX_EmojiIfno:visible').length && EmojiInfo !== '')
 															{
-																$$('.notice .title').text('编辑表情')
+																config.title = '编辑表情'
+																config.confirm = '提交'
 																let str = ''
 																let img = `<img class="Emojis" src='${前缀+link}' style='width:100%;'>`
 																let now = parseInt(EMOJI.pageindex.split(' / ')[0])//当前页
@@ -3162,7 +3113,7 @@
 																	
 																	for(n=1;n<=end;n++)
 																	{
-																		select += `<option ${n === now ? "style='color:red;'" : ""}>${n}</option>`
+																		select += `<option ${n === now ? "selected style='color:red;'" : ""}>${n}</option>`
 																	}
 																	select += `<option>${end+1}</option>`
 																	str += '<input type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">只删除表情</span>\n'
@@ -3171,28 +3122,25 @@
 																}
 																str += '\n'
 																let info = `<input style='font-size:1.2rem;' class='text' placeholder='${toString(CFInfo[v])}' value='${mt_settings['表情信息'][v] || ''}'>`
-
-																alert(`${str}ID：${v}\n信息：${info}\n\n${img}`)
-																$$('.notice select').val(now)
-																TOP_confirm = function()
+																config.yes = function()
 																{
 																	if(EMOJI.custom.io)
 																	{//编辑自定义表情
-																		EMOJI_CustomEmoji[EMOJI.id][v] = parseInt($$('.notice select').val()-1)
+																		EMOJI_CustomEmoji[EMOJI.id][v] = parseInt($$(`.alert_${config.id} select`).val()-1)
 																		EMOJI_CustomEmoji.image[v] = $$('.Emojis').attr('src')
-																		if($$('.notice input:checked').length)
+																		if($$(`.alert_${config.id} input:checked`).length)
 																		{//只删除表情
 																			delete EMOJI_CustomEmoji[EMOJI.id][v]
 																			delete EMOJI_CustomEmoji.image[v]
 																			if(!Object.keys(EMOJI_CustomEmoji[EMOJI.id]).length)delete EMOJI_CustomEmoji[EMOJI.id]
-																			$$('.notice .text').val('')
+																			$$(`.alert_${config.id} .text`).val('')
 																		}
 																		//存入数据库
 																		saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
 																	}
-																	if($$('.notice .text').val())
+																	if($$(`.alert_${config.id} .text`).val())
 																	{
-																		mt_settings['表情信息'][v] = $$('.notice .text').val()
+																		mt_settings['表情信息'][v] = $$(`.alert_${config.id} .text`).val()
 																	}
 																	else
 																	{
@@ -3201,6 +3149,7 @@
 																	saveStorage('设置选项',mt_settings,'local')
 																	$$('.INDEX_Emoji').click()
 																}
+																alert(`${str}ID：${v}\n信息：${info}\n\n${img}`)
 																return
 															}
 															if($$('.编辑界面').hasClass('visible'))
@@ -6639,10 +6588,7 @@
 											playChat.chats = data.CHAT
 											playChat.header = data.INFO
 											playChat.chatSpeed = data.CHAT.length < 2 ? 1000 : (0, a.zP)()
-											if(l.名称.includes('等奖）') && k == 0)
-											{
-												data.CHAT.unshift({"content":"本文为《秘密岛屿探索计划》征文获奖作品\n作品合集：<a style='color: rgb(113 163 237);text-decoration:underline;' href='https://www.bilibili.com/read/readlist/rl976588' target='_blank'>https://www.bilibili.com/read/readlist/rl976588</a>","replyDepth":0,"type":"info","sCharacter":{"no":"0","index":"1"},"isFirst":false,"name":"","isLeft":true,"isCenter":false,"isRight":false,"is_breaking":false,"file":"","time":"","style":false})
-											}
+											if(l.备注 && MMT目录.备注[l.备注] && k == 0)data.CHAT.unshift(MMT目录.备注[l.备注])
 											let 章节 = `${MMT目录.当前[1]+1}/${MMT目录.作品[MMT目录.当前[0]].章节+1}`
 											$$('#size').text(`章节:${章节}\n进度:1/${data.CHAT.length}`)
 											setTimeout(function(){p((0, ee.Fe)(playChat))}, 1e3)
@@ -6755,9 +6701,9 @@
 											})
 										}), (0, b.jsx)(ew,
 										{
-											children: [r.名称.includes('等奖）') ? (0, b.jsxs)(eb,
+											children: [r.备注 ? (0, b.jsxs)(eb,
 											{
-												children: '2025夏季征文'
+												children: r.备注
 											}) : '', (0, b.jsxs)(eb,
 											{
 												children: [i.Z.writer[g], " : ", (0, b.jsx)("span",{children: r.作者})]
