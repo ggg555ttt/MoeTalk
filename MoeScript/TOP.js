@@ -153,9 +153,9 @@ async function update(str = '')
 		{
 			readme += `${gamearr[game]}：<span style='color:red;' class='版本 bold'>读取中。。。</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
 		}
-		readme += `应用：<span><input type='checkbox' ${mt_settings.自动更新.应用 ? 'checked' : ''}>自动更新</span>`
+		readme += `应用：<span class='blue'><input type='checkbox' ${mt_settings.自动更新.应用 ? 'checked' : ''}>自动更新</span>`
 		readme += "<span class='更新应用'></span>\n"
-		readme += `数据：<span><input type='checkbox' ${mt_settings.自动更新.数据 ? 'checked' : ''}>自动更新</span>`
+		readme += `数据：<span class='blue'><input type='checkbox' ${mt_settings.自动更新.数据 ? 'checked' : ''}>自动更新</span>`
 		readme += "<span class='更新数据'></span>\n"
 	}
 	if(客户端 === 'HTML5+')

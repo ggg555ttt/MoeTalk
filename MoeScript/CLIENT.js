@@ -394,7 +394,7 @@ async function 检查数据()
 			let val2 = val1[key2]
 			if(typeof val2 === 'string')
 			{
-				$('.更新数据').text(`检查：${val2}`)
+				$('.更新数据').text(`检查：${key1}`)
 				val2 = `${link}/${key1}/${val2}.${ext}`
 				if(!await file_exists(val2))数据列表.push(val2)
 			}
@@ -405,7 +405,7 @@ async function 检查数据()
 					let val3 = val2[key3]
 					if(typeof val3 === 'string')
 					{
-						$('.更新数据').text(`检查：${val3}`)
+						$('.更新数据').text(`检查：${key2}`)
 						val3 = `${link}/${key1}/${key2}/${val3}.${ext}`
 						if(!await file_exists(val3))数据列表.push(val3)
 					}
@@ -416,7 +416,7 @@ async function 检查数据()
 							let val4 = val3[key4]
 							if(typeof val4 === 'string')
 							{
-								$('.更新数据').text(`检查：${val4}`)
+								$('.更新数据').text(`检查：${key3}`)
 								val4 = `${link}/${key1}/${key2}/${key3}/${val4}.${ext}`
 								if(!await file_exists(val4))数据列表.push(val4)
 							}
