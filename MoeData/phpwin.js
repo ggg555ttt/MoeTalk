@@ -15,6 +15,24 @@ if($_SERVER['HTTP_HOST'] !== $host || !strpos($_SERVER['HTTP_USER_AGENT'], $brow
 	exit;
 }
 if(isset($_POST['backDown']))exit('phpwin');
+if(isset($_POST['checkfiles']))
+{
+	$arr = json_decode($_POST['checkfiles'], true);
+	$files = [];
+	foreach($arr as $filename)
+	{
+		if($filename[0] === '/')$filename = substr($filename, 1);
+		$stat = @stat($filename);
+		if($stat === false)$files[] = $filename;//不存在
+		else
+		{
+			$isFile = ($stat['mode'] & 0170000) === 0100000;
+			if(!$isFile || $stat['size'] === 0)$files[] = $filename;//错误文件
+		}
+	}
+	header('Content-Type: application/json; charset=utf-8');
+	exit(json_encode($files));
+}
 if(isset($_POST['getfile']))
 {
 	$filename = $_POST['getfile'];

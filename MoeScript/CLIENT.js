@@ -51,27 +51,39 @@ function waitPlus()
 }
 async function file_exists(filePath)
 {
-	if(客户端 === 'NW.js')
-	{
-		try{return await fs.pathExists(filePath)}
-		catch{return false}
+	 if(客户端 === 'NW.js') {
+		try {
+			const stats = await fs.stat(filePath);
+			if (stats.isFile() && stats.size > 0) {
+				return filePath; // 有效
+			}
+			return false; // 目录或空文件
+		} catch {
+			return false; // 不存在或错误
+		}
 	}
 	if(客户端 === 'HTML5+')
 	{
-		return new Promise(function(resolve)
-		{
-			plus.io.resolveLocalFileSystemURL('_doc/'+filePath, function(file)
-			{
-				if(file.isFile)
-				{
-					file.file(function(entry)
-					{
-						if(entry.size)resolve(entry.fullPath);//是文件
-						else resolve(false)
-					})
+		return new Promise(resolve => {
+			const url = '_doc/' + filePath;
+			plus.io.resolveLocalFileSystemURL(url, entry => {
+				if (entry.isFile) {
+					// 使用 getMetadata 而不是 file()，更轻量
+					entry.getMetadata(meta => {
+						if (meta.size > 0) {
+							resolve(filePath); // 有效
+						} else {
+							resolve(false); // 空文件 → 无效
+						}
+					}, () => {
+						resolve(false); // 元数据读取失败 → 视为无效
+					});
+				} else {
+					resolve(false); // 是目录 → 无效
 				}
-				else resolve(false);//不是文件
-			},function(error){resolve(false)});//不存在
+			}, () => {
+				resolve(false); // 不存在 → 无效
+			});
 		});
 	}
 	if(客户端 === 'phpwin')
@@ -88,6 +100,36 @@ async function file_exists(filePath)
 			dataType:'text'
 		});
 	}
+}
+async function findInvalidFiles(filePaths, concurrency = 30)
+{
+	if(客户端 === 'phpwin')
+	{
+		return await $.ajax(
+		{
+			url: '/index.php',
+			type: 'POST',
+			data: {checkfiles: JSON.stringify(filePaths)},
+			dataType: 'json'
+		})
+	}
+	const invalidList = [];
+	let i = 0;
+	let l = filePaths.length
+
+	const workers = Array(concurrency).fill().map(() =>
+		(async () => {
+			while (i < filePaths.length) {
+				const filePath = filePaths[i++];
+				$('.更新数据').text(`检查：${i}/${l}`)
+				if(!await file_exists(filePath))invalidList.push(filePath);
+				// 每处理 1000 条，让出主线程（防卡顿）
+				if(i % 1000 === 0)await new Promise(r => setTimeout(r, 5));
+			}
+		})()
+	);
+	await Promise.all(workers);
+	return invalidList;
 }
 async function ZipToJson(file,text = '',html = null)
 {
@@ -394,9 +436,8 @@ async function 检查数据()
 			let val2 = val1[key2]
 			if(typeof val2 === 'string')
 			{
-				$('.更新数据').text(`检查：${key1}`)
 				val2 = `${link}/${key1}/${val2}.${ext}`
-				if(!await file_exists(val2))数据列表.push(val2)
+				数据列表.push(val2)
 			}
 			else
 			{
@@ -405,9 +446,8 @@ async function 检查数据()
 					let val3 = val2[key3]
 					if(typeof val3 === 'string')
 					{
-						$('.更新数据').text(`检查：${key2}`)
 						val3 = `${link}/${key1}/${key2}/${val3}.${ext}`
-						if(!await file_exists(val3))数据列表.push(val3)
+						数据列表.push(val3)
 					}
 					else
 					{
@@ -416,9 +456,8 @@ async function 检查数据()
 							let val4 = val3[key4]
 							if(typeof val4 === 'string')
 							{
-								$('.更新数据').text(`检查：${key3}`)
 								val4 = `${link}/${key1}/${key2}/${key3}/${val4}.${ext}`
-								if(!await file_exists(val4))数据列表.push(val4)
+								数据列表.push(val4)
 							}
 						}
 					}
@@ -426,6 +465,7 @@ async function 检查数据()
 			}
 		}
 	}
+	数据列表 = await findInvalidFiles(数据列表)
 	if(数据列表.length)
 	{
 		if(!$('.更新数据').length)update()

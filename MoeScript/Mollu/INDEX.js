@@ -4695,9 +4695,10 @@
 											id:"mt_title",
 											style:{textShadow:"1px 1px 0px rgb(34, 37, 41)"},
 											children: ''
-										}), (0, m.jsx)('div',
+										}), (0, m.jsx)('span',
 										{
-											style: {height: '1rem'},
+											id:"mt_writer",
+											style:{textShadow:"1px 1px 0px rgb(34, 37, 41)"},
 											children: ''
 										})]
 									})]
