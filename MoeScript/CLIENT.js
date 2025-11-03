@@ -71,7 +71,7 @@ async function file_exists(filePath)
 					// 使用 getMetadata 而不是 file()，更轻量
 					entry.getMetadata(meta => {
 						if (meta.size > 0) {
-							resolve(filePath); // 有效
+							resolve(entry.fullPath); // 有效
 						} else {
 							resolve(false); // 空文件 → 无效
 						}
@@ -121,7 +121,7 @@ async function findInvalidFiles(filePaths, concurrency = 30)
 		(async () => {
 			while (i < filePaths.length) {
 				const filePath = filePaths[i++];
-				$('.更新数据').text(`检查：${i}/${l}`)
+				if(i % 100 === 0)$('.更新数据').text(`检查：${i}/${l}`)
 				if(!await file_exists(filePath))invalidList.push(filePath);
 				// 每处理 1000 条，让出主线程（防卡顿）
 				if(i % 1000 === 0)await new Promise(r => setTimeout(r, 5));
