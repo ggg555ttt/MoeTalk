@@ -1,6 +1,6 @@
 pause = true
 skip = false
-if(localStorage['调试模式'])var vConsole = new window.VConsole();
+if(mt_settings['调试模式'])var vConsole = new window.VConsole();
 INIT_loading('开始加载')
 
 var mt_charface;
@@ -99,18 +99,27 @@ async function t()
 
 function moedev()
 {
+	let 调试模式 = mt_settings['调试模式'] ? 'checked' : ''
+	let 桌面模式 = mt_settings['桌面模式'] ? 'checked' : ''
 	let str = ''
-	str += '开启调试模式：<input type="checkbox"/>\n'
-	str += '代码注入：<textarea></textarea>\n'
+	str += `开启调试模式（测试）：<input class="调试模式" ${调试模式} type="checkbox"/>\n`
+	str += `开启桌面模式（测试）：<input class="桌面模式" ${桌面模式} type="checkbox"/>\n`
+	str += '提交后请刷新页面\n'
+	str += '代码注入（测试）：<textarea style="width:100%;height:20rem;line-height:1.42;"></textarea>\n'
 	str += 'Android客户端无法更新应用版本请尝试清除缓存\n'
 	str += '<button class="red" onclick="clearCache()">清除缓存</button>\n'
 	let config = {}
 	config.id = Math.random().toString().replace('0.','')
+	config.title = '实验性选项'
+	config.confirm = '提交设置'
 	config.yes = function()
 	{
-		delete localStorage['调试模式']
-		if($(`.alert_${config.id} input`).prop('checked'))localStorage['调试模式'] = true
+		if($('.调试模式').prop('checked'))mt_settings['调试模式'] = true
+		else delete mt_settings['调试模式']
+		if($('.桌面模式').prop('checked'))mt_settings['桌面模式'] = true
+		else delete mt_settings['桌面模式']
 		if($(`.alert_${config.id} textarea`).val())eval($(`.alert_${config.id} textarea`).val())
+		saveStorage('设置选项',mt_settings,'local')
 	}
 	alert(str,config)
 }
@@ -133,7 +142,7 @@ function clearCache()
 			delete sessionStorage['最新版本']
 			if(客户端 === 'HTML5+' && 本地)delete localStorage['HTML5+']
 			let config = {}
-			config.confirm = '刷新'
+			config.confirm = '刷新页面'
 			config.yes = function(){location.reload(true)}
 			alert('缓存清除完毕，请立即刷新页面',config)
 		}
@@ -217,7 +226,7 @@ $(async function()
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
 	let span = `<span onclick="$('#readme').click()" style="font-family:Jalnan;background-color:rgb(139,187,233);color:white;padding:4px;">`
 	let notice = ''
-	notice += '※移动端可点击左侧<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);" onclick="moedev()"> 三 </i>查看工具栏'
+	notice += '※移动端可点击左上<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);" onclick="moedev()"> 三 </i>查看工具栏'
 	notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
 	notice += '\n反馈网址：<u><a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/</a></u>'
 	if(本地)
@@ -448,7 +457,7 @@ $('body').on('click',"#mt-style",function()
 	html += '图片：<textarea title="image" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
 	let config = {}
 	config.title = '风格样式'
-	config.confirm = '提交'
+	config.confirm = '提交设置'
 	config.yes = function()
 	{
 		mt_settings.风格样式.bgColor = $('.bgcolor').val()
@@ -677,7 +686,7 @@ function selectgame(str = '请选择游戏')
 	let config = {}
 	config.id = Math.random().toString().replace('0.','')
 	config.title = '选择游戏'
-	config.confirm = '提交'
+	config.confirm = '提交设置'
 	config.yes = async function()
 	{
 		INIT_loading('开始加载')
@@ -728,6 +737,24 @@ setInterval(function()
 	});
 	if(客户端)保存文件(`MoeTalk自动备份存档_${客户端}.JSON`,json,'json')
 }, 600 * 1000);
+if(客户端 === 'NW.js' || mt_settings['桌面模式'])
+{
+	// 使用事件委托，监听所有 input/textarea 的 blur
+	document.addEventListener('blur', (event) => {
+	  const el = event.target;
+	  const to = event.relatedTarget;
+
+	  if (!el.matches?.('input, textarea')) return;
+	  if (to?.matches?.('input, textarea')) return;
+
+	  // 防抖 + 微任务优化（非必需，但更流畅）
+	  queueMicrotask(() => {
+	    if (document.activeElement !== el) {
+	      el.focus();
+	    }
+	  });
+	}, true); // 必须用捕获阶段
+	}
 /*
 function getVisibleParagraphs() {
   const $container = $('.gGreRb');
