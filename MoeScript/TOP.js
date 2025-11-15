@@ -187,7 +187,7 @@ async function update(str = '')
 	let link = `<a class="INIT_href bold" title="${bdwp}" style="text-decoration:underline;">${bdwp}</a>`
 	readme += `客户端下载地址：\n${link}\n提取码：BLDA\n`
 	let config = {}
-	config.title = '检查更新'
+	config.title = 本地 ? '检查更新' : '下载客户端'
 	config.id = Math.random().toString().replace('0.','')
 	config.yes = function()
 	{
@@ -224,11 +224,12 @@ $(async function()
 		$("#view").click()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
-	let span = `<span onclick="$('#readme').click()" style="font-family:Jalnan;background-color:rgb(139,187,233);color:white;padding:4px;">`
+	let span = `<span onclick="$('#readme').click()" style="font-family:Jalnan;background-color:rgb(139,187,233);color:white;padding:4px;cursor:pointer;">`
 	let notice = ''
-	notice += '※移动端可点击左上<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);" onclick="moedev()"> 三 </i>查看工具栏'
-	notice += '\n※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>'
-	notice += '\n反馈网址：<u><a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/</a></u>'
+	notice += `MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n`
+	notice += '反馈网址：<u><a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/</a></u>\n\n'
+	notice += '※移动端可点击左上<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);" onclick="moedev()"> 三 </i>查看工具栏\n'
+	
 	if(本地)
 	{
 		if(客户端 === 'HTML5+' && location.href.includes('/www/') && !localStorage['HTML5+'])
@@ -243,6 +244,7 @@ $(async function()
 			if(mt_settings.自动更新.数据)更新数据()
 		}
 	}
+	else notice += '※<span style="color:white;background-color:red;">网页端连接不稳定建议</span><button style="line-height:112%;" onclick="update()">下载客户端</button>\n'
 	await isIos()
 	if(本地 && 客户端)检查数据()
 	if(sessionStorage['通知文档'] == notice)return//
@@ -259,7 +261,9 @@ $(async function()
 		}
 		alert(text,config)
 	}
-	let text = `<span class="bold">欢迎使用${span}MoeTalk</span>！\n此版本为基于原作者Raun0129开发的MolluTalk的个人改版\n<span style="color:white;background-color:red;">※相关问题请点击上方标题</span></span>`
+	let text = `欢迎使用${span}MoeTalk</span>\n有疑问请点击${span}MoeTalk</span>标题\n\n`
+	text += '※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>\n'
+	if(!本地)text += '※<span style="color:white;background-color:red;">网页端连接不稳定建议</span><button style="line-height:112%;" onclick="update()">下载客户端</button>\n'
 	let config = {style:'text-align:center;'}
 	alert(text,config)
 })
@@ -287,7 +291,8 @@ $('body').on('click',"input",function()
 //工具
 $(".frVjsk").wait(function()
 {
-	$(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:blue;'>檢</b></button><span class='tool' align='center'>检查更新</span><br>`);
+	if(本地)$(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:blue;'>檢</b></button><span class='tool' align='center'>检查更新</span><br>`);
+	else $(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:blue;'>端</b></button><span class='tool' style='white-space:pre;' align='center'>下载\n客户端</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' onclick='selectgame()'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:red;'>換</b></button><span class='tool'>切换风格</span><br>`);

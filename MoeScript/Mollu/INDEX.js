@@ -1852,9 +1852,13 @@
 											$$('.mt_capture').click()
 										}
 									})]
-								}), '遇到问题请查看“提示”',(0, m.jsx)("pre",
+								}), '遇到问题或',(0, m.jsx)("span",
 								{
-									style: {whiteSpace: 'pre-wrap'},
+									style: {color: 'blue'},
+									children: '下载失败'
+								}),'请先查看“提示”',(0, m.jsx)("pre",
+								{
+									style: {whiteSpace: 'pre-wrap',fontFamily:'Blueaka'},
 									className: 'INDEX_CaptureTips'
 								}), (0, m.jsx)('div',
 								{
@@ -2336,7 +2340,7 @@
 										value: 'image',
 										children: '图片'
 									})]
-								})]
+								}),'无法下载请将格式改为图片后手动保存']
 							}), (0, m.jsx)(ea.$0,
 							{
 								style: {padding: '0.5rem'},
