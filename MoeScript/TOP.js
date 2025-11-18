@@ -446,14 +446,14 @@ $('body').on('click',"#mt-style",function()
 {
 	let onclick = "onclick='"
 	onclick += '$(".mt-style").css("color","black"),this.style.color="red",'
-	onclick += '$(".bgcolor").val(this.innerText=="MomoTalk"?"#FFFFFF":"#FFF7E1"),'
+	onclick += '$(".bgcolor").val(this.innerText=="MomoTalk"?"#FFFFFF":"#FFF7E1").next().val(this.innerText=="MomoTalk"?"#FFFFFF":"#FFF7E1"),'
 	onclick += '$(".typecss").val("").eq(3).val(""+(this.innerText=="MomoTalk"?"background-color:rgb(220,229,232)":""))'
 	onclick += "'"
 	let style = 'style="width: auto;height: auto;font-size: 1rem;color: black;padding: 0.5rem;margin-bottom: 0.5rem;"'
 	let button = `<button class="cVRiXh eIEKpg evqKja kwhiZC mt-style" ${style} ${onclick}>`
 	let html = ''
 	html += `预设方案：${button}MomoTalk</button> ${button}YuzuTalk</button>\n`
-	html += '聊天背景颜色：<input type="color" class="bgcolor">\n'
+	html += `聊天背景颜色：<input class="bgcolor"><input type="color" onchange="$('.bgcolor').val(this.value)">\n`
 	html += '各类型样式定义：（高级）\n'
 	html += '文字：<textarea title="chat" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
 	html += '回复：<textarea title="reply" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
@@ -490,7 +490,7 @@ $('body').on('click',"#mt-style",function()
 		refreshMessage(chats)
 	}
 	alert(html,config)
-	$('.bgcolor').val(mt_settings.风格样式.bgColor)
+	$('.bgcolor').val(mt_settings.风格样式.bgColor).next().val(mt_settings.风格样式.bgColor)
 	$('.typecss').each(function()
 	{
 		let style = ''
