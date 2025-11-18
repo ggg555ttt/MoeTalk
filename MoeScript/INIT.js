@@ -361,3 +361,24 @@ function blobToBase64(blob)
 		reader.readAsDataURL(blob);
 	})
 }
+function HexToRgb(hex)
+{
+	if(hex[0] !== '#')hex = RgbToHex(hex);
+	hex = hex.replace('#', '')
+	let rgb = []
+	rgb[0] = parseInt(hex.substring(0, 2), 16)
+	rgb[1] = parseInt(hex.substring(2, 4), 16)
+	rgb[2] = parseInt(hex.substring(4, 6), 16)
+	if(!(rgb[0]<256 && rgb[1]<256 && rgb[2]<256))rgb = [0,0,0]
+	return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+}
+function RgbToHex(rgb,bg)
+{
+	if(rgb[0] === '#')rgb = HexToRgb(rgb)
+	let hex = '#'
+	rgb = rgb.match(/\d+/g) || []
+	if(rgb.length !== 3 || !(rgb[0]<256 && rgb[1]<256 && rgb[2]<256))rgb = [0,0,0]
+	for(let i=0,l=rgb.length;i<l;i++)hex += Number(rgb[i]).toString(16).toUpperCase().padStart(2, '0')
+	if(bg)$('.bgcolor').next().val(hex)
+	return hex
+}

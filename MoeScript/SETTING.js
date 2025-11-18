@@ -1,12 +1,3 @@
-function rgbToHex(rgb) {
-  const values = rgb.match(/\d+/g); // 提取RGB值
-  const hex = values.reduce((hexValue, currentValue) => {
-    const hexString = Number(currentValue).toString(16); // 将每个RGB值转换成16进制字符串
-    const paddedHexString = hexString.padStart(2, '0'); // 在不满两位的字符串前补0
-    return hexValue + paddedHexString;  // 拼接每个RGB值对应的16进制字符串
-  }, '');
-  return `#${hex.toUpperCase()}`; // 返回完整的HEX颜色代码（需将字母转换为大写）
-}
 //读取人物
 $('body').on('click',"input",function()
 {
@@ -465,7 +456,7 @@ if(mt_settings['文字样式'])
 }
 $('body').on('click',".selectColor",function()
 {
-	$('#titleColor').val(rgbToHex($(this).css('background-color')))
+	$('#titleColor').val(RgbToHex($(this).css('background-color')))
 })
 $('body').on('click',"#mt-titleColor",function()
 {
