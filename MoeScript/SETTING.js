@@ -385,6 +385,23 @@ $('body').on('click',"#mt-fontSize",function()
 
 	saveStorage('设置选项',mt_settings,'local')
 })
+$('body').on('click',"#mt-fontSizepc",function()
+{
+	let str = '此选项可以设置桌面端的元素尺寸\n'
+	str += '数值越小显示的显示的条目就越多\n'
+	str += '必须是“数字+px”，建议在10px以上，16px以下\n'
+	str += '数值过大过小可能会导致显示异常，请谨慎修改\n'
+	str += '默认值为16px'
+	let fontSize = prompt(str, mt_settings['桌面元素尺寸'] ? mt_settings['桌面元素尺寸'] : '');
+	if(fontSize)
+	{
+		alert('更改完成，请返回moetalk');
+		mt_settings['桌面元素尺寸'] = fontSize;
+		saveStorage('设置选项',mt_settings,'local')
+	}
+
+	saveStorage('设置选项',mt_settings,'local')
+})
 $('body').on('click',"#savemode",function()
 {
 	let str = '（此功能已过时，不再推荐使用）\n'
