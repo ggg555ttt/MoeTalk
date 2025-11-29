@@ -891,20 +891,17 @@
 					{
 						children: [(0, m.jsxs)(K,
 						{
-							children: [(0, m.jsx)("h1",
+							children: [(0, m.jsxs)(X,
 							{
-								children: (0, m.jsxs)(X,
+								className: "bold",
+								children: [L.Z.student[u], " ", (0, m.jsxs)("span",
 								{
-									className: "bold",
-									children: [L.Z.student[u], " ", (0, m.jsxs)("span",
+									style:
 									{
-										style:
-										{
-											fontSize: "1.2rem"
-										},
-										children: ["(", o, ")"]
-									})]
-								})
+										fontSize: "1.2rem"
+									},
+									children: ["(", o, ")"]
+								})]
 							}), (0, m.jsxs)(W,
 							{
 								style:
@@ -1275,10 +1272,9 @@
 									},
 									children: (0, m.jsx)(c.j4,{})
 								})]
-							}), (0, m.jsx)('h1',
+							}), (0, m.jsx)('span',
 							{
-								style:{whiteSpace: 'pre'},
-								children: `学校：########\nID：########`
+								className: "charid"
 							}), (0, m.jsx)('input',
 							{
 								type: 'checkbox',
@@ -3010,7 +3006,6 @@
 										})]
 									}), (0, m.jsxs)(ea.h4,
 									{
-										style: {height: '3.5rem'},
 										hidden: !差分映射 || EMOJI.type === 'Emoji',
 										children: !差分映射 || EMOJI.type === 'Emoji' ? '' : (0, m.jsx)(HList.Z,
 										{
