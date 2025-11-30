@@ -3148,7 +3148,7 @@
 																	saveStorage('设置选项',mt_settings,'local')
 																	$$('.INDEX_Emoji').click()
 																}
-																alert(`${str}ID：${v}\n信息：${info}\n\n${img}`)
+																alert(`${str}ID：${v}\n信息：${info}\n\n${img}`,config)
 																return
 															}
 															if($$('.编辑界面').hasClass('visible'))
