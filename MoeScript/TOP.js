@@ -22,7 +22,7 @@ let html =
 	<div class="cFtxnG">
 		<div class="duPzcp" style="height: auto;">
 			<span class="GsrFM title" style="border-bottom: 4px solid;">${config.title}</span>
-			<div class="kncnxt cancel" style="top: -25%;user-select: none;cursor: pointer;" alt="${config.id}">❌</div>
+			<div class="kncnxt cancel" style="top: 12.5%;user-select: none;cursor: pointer;" alt="${config.id}">❌</div>
 		</div>
 		<div class="oFeqA" style="max-height: 90%; padding: 0.5rem;">
 			<pre ${style}>${text}</pre>

@@ -1,5 +1,6 @@
 @charset "UTF-8";
-*{-webkit-user-select: text;}
+*{-webkit-user-select: text;margin: 0px;line-height: inherit;}
+body{line-height: 1;}
 .tool
 {
 	color:white;
@@ -31,6 +32,7 @@
 	margin: 0px;
 	padding: 0px;
 	position: relative;
+	line-height: 1.42;
 }
 .dropdown button
 {

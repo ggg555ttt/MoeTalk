@@ -498,7 +498,7 @@ function makeMessage(type,data,chatIndex,mode)
 		复选框 = `<input type="checkbox" ${selected ? 'checked' : ''} class="dels" style="background-color: ${color};" data-html2canvas-ignore="true">`
 	}
 	if(mode === '预览')复选框 = ''
-	return `<div class="消息" title='${color}' style="${head ? '' : 'padding: 0.5rem 1rem 0px;'}${selected && mode !== 'area' ? 'background-color: rgb(202, 215, 221);' : ''}" ${alt}>
+	return `<div class="消息" title='${color}' style="${head ? '' : 'padding: 0.5rem 1rem 0px;'}background-color:${selected && mode !== 'area' ? '#CAD7DD;' : mt_settings.风格样式.bgColor};" ${alt}>
 		${聊天}
 		${复选框}
 	</div>`
