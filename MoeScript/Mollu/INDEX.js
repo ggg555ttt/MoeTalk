@@ -3053,7 +3053,52 @@
 														cursor: 'pointer',
 														position: 'relative'
 													},
-													children: [mt_settings['表情信息'][v] || v.substring(v.lastIndexOf('/')+1),(0, m.jsx)('img',
+													children: [(0, m.jsx)('span',
+													{
+														className: 'INDEX_EmojiIfno',
+														style:
+														{
+															width: '100%',
+															whiteSpace: 'pre-wrap',
+															wordWrap: 'break-word',
+															position: 'absolute',
+															top: 0,
+															left: 0,
+															display: 'none',
+															backgroundColor:'white',
+															overflow: 'hidden',
+															maxHeight: '100%'
+														},
+														children: [(0, m.jsx)('span',
+														{
+															className: "bold",
+															style:
+															{
+																"width": "auto",
+																"color": "rgb(63, 81, 181)"
+															},
+															children: '点击编辑\n',
+															hidden: !link
+														}),EmojiInfo],
+														title: v,
+														onClick:function(e)
+														{
+															if(!EMOJI.custom.io)return
+															if(e.target.innerText === '点击编辑\n')
+															{
+																e.target.innerText = '已选中\n'
+																e.target.style.color = "red"
+																e.target.parentElement.classList.add('selected')
+															}
+															else if(e.target.innerText === '已选中\n')
+															{
+																e.target.innerText = '点击编辑\n'
+																e.target.style.color = "rgb(63, 81, 181)"
+																e.target.parentElement.classList.remove('selected')
+															}
+															else e.target.nextElementSibling.click()
+														}
+													}), mt_settings['表情信息'][v] || v.substring(v.lastIndexOf('/')+1),(0, m.jsx)('img',
 													{
 														alt: EMOJI.type,
 														height: 310,
@@ -3074,6 +3119,7 @@
 														{
 															let config = {}
 															config.id = Math.random().toString().replace('0.','')
+															let selectNum = $$('.INDEX_EmojiIfno.selected').length
 															if(v === 'ADD')
 															{
 																let str = '<input type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">添加到新的分页</span>\n'
@@ -3100,6 +3146,29 @@
 															}
 															if($$('.INDEX_EmojiIfno:visible').length && EmojiInfo !== '')
 															{
+																if(selectNum > 1)
+																{
+																	config.title = '批量删除'
+																	config.confirm = '提交'
+																	let str = `已选中${selectNum}个数据\n`
+																	str += '<input type="checkbox" style="width:1rem;height:1rem;">确认删除表情\n'
+																	config.yes = function()
+																	{
+																		if(!$$(`.alert_${config.id} input:checked`).length)return
+																		$$.each($$('.INDEX_EmojiIfno.selected'),function(k,v)
+																		{
+																			v = v.title
+																			delete EMOJI_CustomEmoji[EMOJI.id][v]
+																			delete EMOJI_CustomEmoji.image[v]
+																			delete mt_settings['表情信息'][v]
+																		})
+																		saveStorage('设置选项',mt_settings,'local')
+																		saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
+																		$$('.INDEX_Emoji').click()
+																	}
+																	alert(str,config)
+																	return
+																}
 																config.title = '编辑表情'
 																config.confirm = '提交'
 																let str = ''
@@ -3161,34 +3230,6 @@
 																sendMessage({file: link,content: EMOJI.type},'image'), s()
 															}
 														},
-													}), (0, m.jsx)('span',
-													{
-														className: 'INDEX_EmojiIfno',
-														style:
-														{
-															width: '100%',
-															whiteSpace: 'pre-wrap',
-															wordWrap: 'break-word',
-															position: 'absolute',
-															top: 0,
-															left: 0,
-															display: 'none',
-															color: 'red',
-															backgroundColor:'white',
-															overflow: 'hidden',
-															maxHeight: '100%'
-														},
-														children: [(0, m.jsx)('span',
-														{
-															className: "bold",
-															style:
-															{
-																"width": "auto",
-																"color": "rgb(63, 81, 181)"
-															},
-															children: '点击编辑\n',
-															hidden: !link
-														}),EmojiInfo]
 													})]
 												}, n)
 											})]
