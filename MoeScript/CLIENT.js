@@ -286,7 +286,7 @@ async function 复制目录(src,dst,files = [])
 	}
 	return
 }
-async function 安装应用()
+async function 安装应用(time = Date.now())
 {
 	await waitPlus()
 	let config = {}
@@ -304,7 +304,7 @@ async function 安装应用()
 		while(文件列表.length > 0)
 		{
 			let file = 文件列表.shift();
-			await 保存文件(file,await $ajax(`${href}${file}`))
+			await 保存文件(file,await $ajax(file))
 			$('.更新应用').text(`安装应用中，请不要退出或刷新\n剩余文件：${文件列表.length}`)
 		}
 	}

@@ -140,7 +140,12 @@ function clearCache()
 		{
 			delete sessionStorage['通知文档']
 			delete sessionStorage['最新版本']
-			if(客户端 === 'HTML5+' && 本地)delete localStorage['HTML5+']
+			if(客户端 === 'HTML5+' && 本地)
+			{
+				delete localStorage['HTML5+']
+				plus.runtime.quit();
+				return
+			}
 			let config = {}
 			config.confirm = '刷新页面'
 			config.yes = function(){location.reload(true)}
@@ -232,10 +237,36 @@ $(async function()
 	
 	if(本地)
 	{
-		if(客户端 === 'HTML5+' && location.href.includes('/www/') && !localStorage['HTML5+'])
+		if(客户端 === 'HTML5+')
 		{
-			安装应用()
-			return
+			if(location.href.includes('/www/') && !localStorage['HTML5+'])
+			{
+				安装应用()
+				return
+			}
+			else if(localStorage['HTML5+'] && localStorage['HTML5+'].includes('file'))
+			{
+				if(href.includes('/www/') || href.includes('http'))
+				{
+					await waitPlus()
+					plus.io.resolveLocalFileSystemURL('_doc/MoeData/Version/Version.json',function(entry)
+					{
+						entry.file(function(file)
+						{
+							var reader = new plus.io.FileReader();
+							reader.onload = function(e)
+							{
+								let ver = JSON.parse(e.target.result || '[-1]')[0]
+								if(本地应用版本[0] > ver)安装应用()
+								else plus.webview.currentWebview().loadURL(localStorage['HTML5+'])
+							};
+							reader.onerror = function(e){安装应用()};
+							reader.readAsText(file, 'utf-8');
+						});
+					},function(e){安装应用()});
+					return
+				}
+			}
 		}
 		if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
 		else
@@ -759,7 +790,7 @@ if(客户端 === 'NW.js' || mt_settings['桌面模式'])
 	    }
 	  });
 	}, true); // 必须用捕获阶段
-	}
+}
 /*
 function getVisibleParagraphs() {
   const $container = $('.gGreRb');

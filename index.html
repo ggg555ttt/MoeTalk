@@ -36,19 +36,9 @@ if(URLParams.get('cordova') === '' || sessionStorage['cordova'])
 	客户端 = 'Cordova'//var cordova = false
 	loadjs('./cordova.js')
 }
-if(客户端 === 'HTML5+')
-{
-	document.addEventListener('plusready', function()
-	{
-		if(localStorage['HTML5+'] && localStorage['HTML5+'].includes('file'))
-		{
-			if(href.includes('/www/') || href.includes('http'))plus.webview.currentWebview().loadURL(localStorage['HTML5+'])
-		}
-	}, false);
-}
 if(sessionStorage['phpwin'] === 'phpwin'){客户端 = 'phpwin',本地 = true;}
 //版本信息
-var 本地应用版本 = [251206.232425]//@
+var 本地应用版本 = [251213.005954]//@
 var 网络应用版本,本地数据版本,网络数据版本
 var gamearr = {"BLDA":"碧蓝档案","CBJQ":"尘白禁区","QNZL":"千年之旅","YGST":"犹格索托斯的庭院","DFPJ":"东方Project","NONE":"无"}
 //函数和变量
@@ -113,13 +103,13 @@ if(mt_settings['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<link rel="shortcut icon" href="./MoeData/Ui/Favor_Schedule_Deco.webp">
 		<link rel='stylesheet' href="./MoeData/Style.css?md5=8533ff4dd8ec61db3292c4e485104d2f" data-n-g=''><!-- @@样式 -->
 		<script src="./MoeScript/Mollu/TEXT.js?md5=aaa0db9688917b6e3cf1cfa1d533cbbf"></script><!-- @@提示文本 -->
-		<script src="./MoeScript/INIT.js?md5=1e302ef06856f5a06cda9a27dc2f64c9" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/CLIENT.js?md5=63a7a5dcc0e9bd73a7058b881bfd16a0" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/INIT.js?md5=4e19e52d7aedef7b4b957247084be175" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/CLIENT.js?md5=2db54a73d93ea7d9368b8542b83a141d" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/DATA.js?md5=4b64d7492531acefaa1dc91962f74826" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAT.js?md5=7eeabbbb5949951a756a2a3682f1c1c4" defer></script><!-- @@消息 -->
 		<script src="./MoeScript/CHAR.js?md5=2b3ccee2ca09ac22a3086af138e42a3b" defer></script><!-- @@角色 -->
 		<script src="./MoeScript/IMAGE.js?md5=440c71a686a2fd66bd5f3d8bdeb3280e" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/TOP.js?md5=9251d4e388f3df2b036cb8dfeda665c2" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/TOP.js?md5=e5c18439c4af7da687151f2a8167887d" defer></script><!-- @@首页 -->
 		<script src="./MoeScript/Mollu/MAIN.js?md5=5a5f01d32d858856de02aef80a335f58" defer></script><!-- @@ -->
 		<script src="./MoeScript/Mollu/APP.js?md5=a7d83a7d61c1fc1dd74ba939f1f6eb59" defer></script><!-- @@框架 -->
 		<script src="./MoeScript/Mollu/INDEX.js?md5=0c9505a4d5ed5d4dee683a0b1b76511e"></script><!-- @@首页 -->

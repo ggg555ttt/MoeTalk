@@ -320,7 +320,7 @@ async function $ajax(url,text = '',html = null)
 	return new Promise(function(resolve)
 	{
 		let xhr = new XMLHttpRequest();
-		if(ext === 'html')url = url.toLowerCase()
+		if(ext === 'html' && !本地)url = url.toLowerCase()
 		xhr.open("GET",url);
 		url = url.split(url.includes('#') ? '#' : '?')[0]
 		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
