@@ -85,7 +85,7 @@ $("body").on('click',"#cutdata",function()
 		{
 			let json = {};
 			let filename = 'MoeTalk截取存档'
-			let title = $(`.alert_${config.id} input`).eq(0).val()
+			let title = $(`.alert_${config.id} input`).eq(0).val() || '无题'
 			let nickname = $(`.alert_${config.id} input`).eq(1).val()
 			let time = getNowDate()
 			json.MoeTalk = 本地应用版本[0]
@@ -104,7 +104,9 @@ $("body").on('click',"#cutdata",function()
 				json.CHAT.push(chats[$(".dels").index($(this))]);
 			})
 			$('.存档格式').val('json')
-			导出存档(`${filename}${time}${title ? '_'+title : ''}`,json,'json')
+			filename += time+'_'
+			if(mt_settings['隐藏前缀'])filename = ''
+			导出存档(`${filename}${title}`,json,'json')
 		}
 		alert(text,config)
 		

@@ -345,7 +345,7 @@ function mt_capture(清晰度,生成图片,标题)
 {
 	let html = 正在截图 || imageArr[0].index != 1 ? '' : $('#mt_watermark')[0].outerHTML
 	let filename = ''
-	let title = 标题 ? '_'+标题 : ''
+	let title = 标题 || '无题'
 	imgArea = imageArr.shift()
 
 	let l1 = imageArrL.toString().length
@@ -386,7 +386,9 @@ function mt_capture(清晰度,生成图片,标题)
 			let func = function(blob)
 			{
 				filename = $(".dels:checked").length ? 'MoeTalk区域截图' : 'MoeTalk截图'
-				filename += `${DATA_NowTime}${title}_${index}`
+				filename += DATA_NowTime+'_'
+				if(mt_settings['隐藏前缀'])filename = ''
+				filename += `${title}_${index}`
 				INIT_loading(false)
 				if(!首次截图 && 截屏工具 === 'snapdom')imageArr.unshift(imgArea)
 				else 首次截图 = true

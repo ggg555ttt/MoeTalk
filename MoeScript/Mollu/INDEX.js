@@ -2057,26 +2057,28 @@
 												option += `<option value="image/bmp" ${mt_settings['图片格式'] == 'image/bmp' ? 'selected' : ''}>bmp</option>`
 												option += `<option value="image/gif" ${mt_settings['图片格式'] == 'image/gif' ? 'selected' : ''}">gif</option>`
 												let str = ''
-												str += `打包下载：<input type='checkbox' ${mt_settings['打包下载'] ? 'checked' : ''}>\n`
-												str += `图片宽度：（默认500，上限需测试）\n<input type="number" value="${mt_settings['宽度限制']}">\n`
-												str += `图片最大高度：（默认16384，上限需测试）\n<input type="number" value="${mt_settings['高度限制']}">\n`
+												str += `<input class='打包下载' type='checkbox' ${mt_settings['打包下载'] ? 'checked' : ''}>打包下载\n`
+												str += `<input class='隐藏前缀' type='checkbox' ${mt_settings['隐藏前缀'] ? 'checked' : ''}>隐藏下载文件名前缀\n`
+												str += `图片宽度：（默认500，上限需测试）\n<input class='宽度限制' type="number" value="${mt_settings['宽度限制']}">\n`
+												str += `图片最大高度：（默认16384，上限需测试）\n<input class='高度限制' type="number" value="${mt_settings['高度限制']}">\n`
 												str += `图片格式：（默认png，其它格式需测试）\n`
-												str += `<select class='select1' style='font-size: 1.5rem;'>${option}</select>\n`
+												str += `<select class='图片格式' style='font-size: 1.5rem;'>${option}</select>\n`
 												option = `<option value="html2canvas" ${mt_settings['截图工具'] != 'snapdom' ? 'selected' : ''}>html2canvas（默认）</option>`
 												option += `<option value="snapdom" ${mt_settings['截图工具'] == 'snapdom' ? 'selected' : ''}>snapdom（测试）</option>`
 												str += `截图工具：\n`
-												str += `<select class='select2' style='font-size: 1.5rem;'>${option}</select>\n`
+												str += `<select class='截图工具' style='font-size: 1.5rem;'>${option}</select>\n`
 												let config = {}
 												config.title = '截图设置'
 												config.confirm = '提交'
 												config.id = Math.random().toString().replace('0.','')
 												config.yes = function()
 												{
-													mt_settings['宽度限制'] = $$(`.alert_${config.id} input:eq(1)`).val() || 500
-													mt_settings['高度限制'] = $$(`.alert_${config.id} input:eq(2)`).val() || 16384
-													mt_settings['图片格式'] = $$(`.alert_${config.id} .select1`).val()
-													mt_settings['截图工具'] = $$(`.alert_${config.id} .select2`).val()
-													mt_settings['打包下载'] = $$(`.alert_${config.id} input[type="checkbox"]`).prop('checked')
+													mt_settings['宽度限制'] = $$(`.alert_${config.id} .宽度限制`).val() || 500
+													mt_settings['高度限制'] = $$(`.alert_${config.id} .高度限制`).val() || 16384
+													mt_settings['图片格式'] = $$(`.alert_${config.id} .图片格式`).val()
+													mt_settings['截图工具'] = $$(`.alert_${config.id} .截图工具`).val()
+													mt_settings['打包下载'] = $$(`.alert_${config.id} .打包下载`).prop('checked')
+													mt_settings['隐藏前缀'] = $$(`.alert_${config.id} .隐藏前缀`).prop('checked')
 													saveStorage('设置选项',mt_settings,'local')
 												}
 												alert(str,config)
@@ -2497,7 +2499,9 @@
 												json.EMOJI = EMOJI_CustomEmoji//自定义表情
 												json.SETTING = mt_settings//设置信息
 												json.CHAT = [...chats,...otherChats]//MMT数据
-												导出存档(`MoeTalk存档${time}${f ? '_'+f : ''}`,json)
+												let filename = 'MoeTalk存档'+time+'_'
+												if(mt_settings['隐藏前缀'])filename = ''
+												导出存档(`${filename}${f || '无题'}`,json)
 											},
 											children: L.Z.download[d]
 										})]
