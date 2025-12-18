@@ -39,25 +39,6 @@ async function IMAGE_error(image,index='')
 			}
 		}
 	}
-	else
-	{
-		if(image.currentTarget)
-		{
-			src = image.target.src.split(mt_settings['选择游戏'])[1]
-			image = image.currentTarget
-		}
-		else src = image.src.split(mt_settings['选择游戏'])[1]
-		if(image.from == 'Gitlab')
-		{
-			if(index > -1)chats[index].file = image.src
-			image.src = href+'MoeData/Ui/error.webp'
-			return
-		}
-		src = `${GitlabURL}/Images/${mt_settings['选择游戏']}/${src}`
-		if(index > -1)urlToBase64(src,1,function(img){chats[index].file = img,baseArr = []})
-		image.src = src
-		image.from = 'Gitlab'
-	}
 }
 //图片压缩
 function compress(base64Img,type = 'head',mode = 'add',length = 0)

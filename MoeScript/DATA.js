@@ -115,6 +115,7 @@ $("body").on('click',"#cutdata",function()
 });
 function repairCF(data)
 {
+	if(!data.sCharacter)return
 	data.sCharacter.no = id_map[0][data.sCharacter.no] || data.sCharacter.no
 	data.sCharacter.index = toString(id_map[1][data.sCharacter.index] || data.sCharacter.index)
 	if(mt_settings['选择游戏'] === 'CBJQ')data.sCharacter.index = data.sCharacter.index.replace('sp_','').replace('_L2D','_01')
