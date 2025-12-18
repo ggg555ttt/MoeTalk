@@ -100,36 +100,6 @@ $(function()
 		$("#view").click()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
-	let notice = '　　手机端点击左上角<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>可查看工具栏\n'
-	notice += '　　工具栏点击【选择游戏】可以更改为其他游戏\n'
-	if(cordova)notice += '<span class="red">※此客户端目前处于测试阶段\n使用前请先确认文件下载功能是否正常\n出现错误请向开发者反馈</span>\n'
-	else notice += '<span class="red">※MoeTalk不保证数据丢失可能，请注意时常下载并备份存档</span>\n'
-	if(MikuTalk)
-	{
-		notice = '愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n<span class="red">点击“确定”可以关闭</span>\n'
-		delete localStorage['通知文档']
-		TOP_confirm = function()
-		{
-			sessionStorage['MikuTalk'] = 'no'
-			location.reload(true);
-		}
-	}
-	
-	if(window.location.href == GitlabURL)
-	{
-		notice = '<span class="red">Gitlab在5月7日不再为中国用户服务，届时此网站也会随之关闭访问\n'
-		notice += '请及时将您的存档导入客户端或新网址\n'
-		notice += '新网址：<a class="INIT_href" title="https://moetalk.netlify.app/">https://moetalk.netlify.app/</a>\n'
-		notice += '客户端：<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">【百度网盘】</a>提取码：BLDA</span>\n'
-		notice += `更多链接请查看网盘内的【访问网址.txt】\n`
-		if(Html5Plus)notice += `<span class="red">新版网络客户端已更新至百度网盘，请及时下载安装并转移存档</span>\n`
-		delete localStorage['通知文档']
-	}
-	if(!localStorage['通知文档'] || localStorage['通知文档'] !== notice)
-	{
-		alert(notice)
-		localStorage['通知文档'] = notice
-	}
 })
 $("body").on('click', function()
 {
