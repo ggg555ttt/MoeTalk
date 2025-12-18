@@ -65,26 +65,7 @@ $('body').on('click',"#readme",function()
 {
 	let span = '<span style="font-family: title;background-color:rgb(139,187,233);color:white;padding:4px;">'
 	let readme = `　　${span}MoeTalk</span>为基于原作者Raun0129开发的${span}MolluTalk</span>的个人改版\n`
-	readme += `　　点击【确定】可以清除缓存并检测更新\n`
 	alert(readme)
-	TOP_confirm = function()
-	{
-		window.caches && caches.keys && caches.keys().then(function(keys)
-		{
-			let length = 0;
-			keys.forEach(function(key)
-			{
-				length=length+1
-				caches.delete(key);
-			});
-			if(keys.length === length)
-			{
-				delete localStorage['最新版本']
-				delete localStorage['通知文档']
-				location.reload(true)
-			}
-		});
-	}
 });
 $(function()
 {
