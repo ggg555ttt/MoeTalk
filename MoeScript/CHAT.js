@@ -866,6 +866,8 @@ $("body").on('click',".添加头像",function()
 		}
 	}
 	alert(str,config)
+	if(HeadList.direction === "column")$(".radio.column").click()
+	else $(".radio.row").click()
 });
 $("body").on('click',".定义样式",function()
 {
