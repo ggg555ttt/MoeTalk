@@ -290,6 +290,38 @@ if(mt_settings['后台保存'])
 	window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 	window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 }
+function getfile(url,text = '',html = null)
+{
+	return new Promise(function(resolve)
+	{
+		let ext = url.split('?')[0].split('.').pop()
+		let xhr = new XMLHttpRequest();
+		if(ext === 'html' && !本地)url = url.toLowerCase()
+		xhr.open("GET",url);
+		url = url.split(url.includes('#') ? '#' : '?')[0]
+		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
+		xhr.addEventListener('progress', function(event)
+		{
+			if(event.lengthComputable && html)
+			{
+				let filename = url.split('/').pop()
+				let percent = ((event.loaded / event.total) * 100).toFixed(1);
+				html.html(`${text}<span style='color:red;'>${filename}</span>${percent}%`)
+			}
+		});
+		xhr.onload = function()
+		{
+			if(this.status === 200 && decodeURIComponent(this.responseURL).includes(url))
+			{
+				if(!this.responseType || !this.response.type.includes('text'))resolve(this.response)//成功
+				else resolve(false)
+			}
+			else resolve(false)
+		}
+		xhr.onerror = function(){resolve(false)}
+		xhr.send();
+	})
+}
 async function $ajax(url,text = '',html = null)
 {
 	let ext = url.split('?')[0].split('.').pop()
@@ -317,34 +349,27 @@ async function $ajax(url,text = '',html = null)
 		}
 		else return data;
 	}
-	return new Promise(function(resolve)
+	let data = await getfile(url,text,html)
+	if(data || !url.includes(MoeTalkURL))return data
+	if(网址列表.length === 0)
 	{
-		let xhr = new XMLHttpRequest();
-		if(ext === 'html' && !本地)url = url.toLowerCase()
-		xhr.open("GET",url);
-		url = url.split(url.includes('#') ? '#' : '?')[0]
-		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
-		xhr.addEventListener('progress', function(event)
+		let urls = await getfile('https://api.akams.cn/github#.json')
+		urls = urls ? JSON.parse(urls).data : []
+		网址列表 = []
+		网址列表.push('https://moetalk.netlify.app')
+		网址列表.push('https://ggg555ttt.github.io/MoeTalk')
+		网址列表.push('https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
+		for(let i=0,l=urls.length;i<l;i++)
 		{
-			if(event.lengthComputable && html)
-			{
-				let filename = url.split('/').pop()
-				let percent = ((event.loaded / event.total) * 100).toFixed(1);
-				html.html(`${text}<span style='color:red;'>${filename}</span>${percent}%`)
-			}
-		});
-		xhr.onload = function()
-		{
-			if(this.status === 200 && decodeURIComponent(this.responseURL).includes(url))
-			{
-				if(!this.responseType || !this.response.type.includes('text'))resolve(this.response)//成功
-				else resolve(false)
-			}
-			else resolve(false)
+			网址列表.push(urls[i].url+'/https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
 		}
-		xhr.onerror = function(){resolve(false)}
-		xhr.send();
-	})
+	}
+	while(!data)
+	{
+		let newurl = 网址列表[Math.floor(Math.random()*网址列表.length)]+'/' 
+		data = await getfile(url.replace(MoeTalkURL,newurl),text,html)
+	}
+	return data
 }
 function blobToBase64(blob)
 {

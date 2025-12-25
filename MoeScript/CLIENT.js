@@ -474,6 +474,7 @@ async function 检查数据()
 		data = data ? JSON.parse(data).data : []
 		网址列表 = []
 		网址列表.push('https://moetalk.netlify.app')
+		网址列表.push('https://ggg555ttt.github.io/MoeTalk')
 		网址列表.push('https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
 		foreach(data,function(k,v)
 		{

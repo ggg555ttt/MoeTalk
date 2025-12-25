@@ -31,18 +31,6 @@ function loadhead(id,img)
 	{
 		return `${href}GameData/${mt_settings['选择游戏']}/Char/${img}.webp`;
 	}
-	if(id === 'YuukaTalk')
-	{
-		if(img && img.indexOf('file:///android_asset') > -1)
-		{
-			return img.replace('file:///android_asset','https://mirror.ghproxy.com/https://github.com/Eynnzerr/YuukaTalk/blob/dd45c56e35d64b8d9375de81985541f4f238e170/app/src/main/assets')
-		}
-		else
-		{
-			if(img && img.indexOf('moetalk') > -1)return img.replace(MoeTalkURL,href)
-			return `${href}MoeData/Ui/you.webp`;
-		}
-	}
 	return `${href}MoeData/Ui/error.webp`;//默认头像
 }
 function loadname(id,index)

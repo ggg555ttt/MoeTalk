@@ -116,32 +116,9 @@ $("body").on('click',"#cutdata",function()
 function repairCF(data)
 {
 	if(!data.sCharacter)return
-	data.sCharacter.no = id_map[0][data.sCharacter.no] || data.sCharacter.no
-	data.sCharacter.index = toString(id_map[1][data.sCharacter.index] || data.sCharacter.index)
-	if(mt_settings['选择游戏'] === 'CBJQ')data.sCharacter.index = data.sCharacter.index.replace('sp_','').replace('_L2D','_01')
-	else data.sCharacter.index = data.sCharacter.index.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
-	
 	if(data.type === 'image')
 	{
 		data.content = data.content || ''
 		data.file = data.file || data.content
-		data.file = data.file.replace('CustomFace','CharFace').replace('Images/Emoji/','GameData/BLDA/Emoji/').replace(MoeTalkURL,'').replace('Images/','GameData/')
-		
-		if(data.file.indexOf('GameData/CharFace/') > -1)
-		{
-			data.file = 'GameData/BLDA/CharFace/'+data.file.split('/').slice(-1)[0].replace('.','/')
-		}
-		if(data.file.indexOf('Face/') > -1)
-		{
-			let arr = data.file.split('/')
-			let str = arr.slice(-1)[0].replace('.webp','')
-			//if(CFInfo[str])data.file = data.file.replace(str,CFInfo[str])
-			arr = str.split('.')
-			if(data.file.indexOf('CharID') > -1 && arr.length > 1)
-			{
-				arr = arr[1]-1
-				data.file = data.file.replace(str,arr)
-			}
-		}
 	}
 }
