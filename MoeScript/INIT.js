@@ -298,7 +298,7 @@ function getfile(url,text = '',html = null)
 	{
 		let ext = url.split('?')[0].split('.').pop()
 		let xhr = new XMLHttpRequest();
-		if(ext === 'html' && !本地)url = url.toLowerCase()
+		if(ext === 'html' && window.location.href === MoeTalkURL)url = url.toLowerCase()
 		xhr.open("GET",url);
 		url = url.split(url.includes('#') ? '#' : '?')[0]
 		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
@@ -355,8 +355,8 @@ async function $ajax(url,text = '',html = null)
 	}
 	let data = await getfile(url,text,html)
 	let MD5 = md5 ? CryptoJS.MD5(data).toString() : ''
-	if(md5 !== MD5)data = ''
-	if(data)return data
+	// if(md5 !== MD5)data = ''
+	if(data || !url.includes(MoeTalkURL))return data
 	if(网址列表.length === 0)
 	{
 		let urls = await getfile('https://api.akams.cn/github#.json')
@@ -374,8 +374,8 @@ async function $ajax(url,text = '',html = null)
 	{
 		let newurl = 网址列表[Math.floor(Math.random()*网址列表.length)]+'/' 
 		data = await getfile(url.replace(MoeTalkURL,newurl),text,html)
-		let MD5 = md5 ? CryptoJS.MD5(data).toString() : ''
-		if(md5 !== MD5)data = ''
+		// let MD5 = md5 ? CryptoJS.MD5(data).toString() : ''
+		// if(md5 !== MD5)data = ''
 	}
 	return data
 }
