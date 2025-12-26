@@ -298,7 +298,7 @@ function getfile(url,text = '',html = null)
 	{
 		let ext = url.split('?')[0].split('.').pop()
 		let xhr = new XMLHttpRequest();
-		if(ext === 'html' && window.location.href === MoeTalkURL)url = url.toLowerCase()
+		if(ext === 'html' && url.includes(MoeTalkURL))url = url.toLowerCase()
 		xhr.open("GET",url);
 		url = url.split(url.includes('#') ? '#' : '?')[0]
 		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
