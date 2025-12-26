@@ -66,7 +66,7 @@ async function t()
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-Club.json?md5=${md5['MT-Club']}`).then(json => JSON.parse(json)) : {},
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-Characters.json?md5=${md5['MT-Characters']}`).then(json => JSON.parse(json)) : {},
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-CharFace.json?md5=${md5['MT-CharFace']}`).then(json => JSON.parse(json)) : {},
-		game != 'NONE' ? $ajax(`${href}GameData/${game}/CharFaceInfo.json?md5=${md5['MT-CharFace']}`).then(json => JSON.parse(json)) : {},
+		game != 'NONE' ? $ajax(`${href}GameData/${game}/CharFaceInfo.json?md5=${md5['CharFaceInfo']}`).then(json => JSON.parse(json)) : {},
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/IdMap.json?md5=${md5['IdMap']}`).then(json => JSON.parse(json)) : [{},{}],
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/CustomFaceAuthor.json?md5=${md5['CustomFaceAuthor']}`).then(json => JSON.parse(json)) : {},
 		moetalkStorage.getItem('mt-char'),

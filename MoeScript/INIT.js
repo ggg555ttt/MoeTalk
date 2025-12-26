@@ -292,6 +292,8 @@ if(mt_settings['后台保存'])
 }
 function getfile(url,text = '',html = null)
 {
+	let filename = url.split('/').pop().split('?').shift()
+	if(text && html)html.html(`${text}<span style='color:red;'>${filename}</span>`)
 	return new Promise(function(resolve)
 	{
 		let ext = url.split('?')[0].split('.').pop()
@@ -304,7 +306,6 @@ function getfile(url,text = '',html = null)
 		{
 			if(event.lengthComputable && html)
 			{
-				let filename = url.split('/').pop()
 				let percent = ((event.loaded / event.total) * 100).toFixed(1);
 				html.html(`${text}<span style='color:red;'>${filename}</span>${percent}%`)
 			}
@@ -324,7 +325,10 @@ function getfile(url,text = '',html = null)
 }
 async function $ajax(url,text = '',html = null)
 {
+	let arr = ['js','css','json','html']
 	let ext = url.split('?')[0].split('.').pop()
+	let md5 = url.split('?md5=')
+	md5 = arr.includes(ext) && md5.length > 1 ? md5.pop() : ''
 	if(客户端 === 'phpwin' && url[0] === '/')
 	{
 		url = url.split('?')[0]
@@ -335,7 +339,7 @@ async function $ajax(url,text = '',html = null)
 			data: {getfile: url}
 		})
 		if(!data)return false;
-		if(!['js','css','json','html'].includes(ext))//base64转blob
+		if(!arr.includes(ext))//base64转blob
 		{
 			data = atob(data.split(',').pop())
 			let len = data.length;
@@ -350,7 +354,9 @@ async function $ajax(url,text = '',html = null)
 		else return data;
 	}
 	let data = await getfile(url,text,html)
-	if(data || !url.includes(MoeTalkURL))return data
+	let MD5 = md5 ? CryptoJS.MD5(data).toString() : ''
+	if(md5 !== MD5)data = ''
+	if(data)return data
 	if(网址列表.length === 0)
 	{
 		let urls = await getfile('https://api.akams.cn/github#.json')
