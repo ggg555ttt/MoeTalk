@@ -374,6 +374,8 @@ async function $ajax(url,text = '',html = null)
 	{
 		let newurl = 网址列表[Math.floor(Math.random()*网址列表.length)]+'/' 
 		data = await getfile(url.replace(MoeTalkURL,newurl),text,html)
+		let MD5 = md5 ? CryptoJS.MD5(data).toString() : ''
+		if(md5 !== MD5)data = ''
 	}
 	return data
 }
