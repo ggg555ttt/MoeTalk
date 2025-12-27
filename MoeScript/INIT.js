@@ -421,9 +421,8 @@ function 校验文件(str,url,ext)
 		const code = str.charCodeAt(i);//\n(10)\r(13)\u2028(8232)\u2029(8233)
 		if(code === 10 || code === 13 || code === 8232 || code === 8233)
 		{
-			url = url.toLowerCase()
 			str = str.slice(0, i).toLowerCase().split('@');
-			if(str.length === 3 && url.includes(str[1]))return true;
+			if(str.length === 3 && url.toLowerCase().includes(str[1]))return true;
 			break;
 		}
 	}
