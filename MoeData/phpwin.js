@@ -1,4 +1,4 @@
-<!--@MoeData/phpwin.js@-->
+<?php /*@MoeData/phpwin.js@*/?>
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true");
@@ -79,33 +79,63 @@ if(isset($_FILES['file']))
 if(file_exists('phpwin.txt'))exit("<script>location.replace('index.html')</script>");
 ?>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<h1 class='更新应用'></h1>
+<h1 class='更新应用'>安装应用中，长时间无响应请刷新</h1>
+<h1 class='安装应用'></h1>
 <script>
-function $ajax(url,type = null)
+var 网址列表 = []
+var MoeTalkURL = 'https://ggg555ttt.github.io/MoeTalk'
+async function file_exists(filePath)
 {
+	return await $.ajax(
+	{
+		url: '/index.php',
+		type: 'POST',
+		data:
+		{
+			getfile: filePath,
+			exists: 'true'
+		},
+		dataType:'text'
+	});
+}
+function 校验文件(str,url,ext)
+{
+	if(typeof str !== 'string')return false;
+	if(ext === 'json' && ['[','{'].includes(str[0]))return true;
+	for(let i=0,l=str.length;i<l;i++)
+	{
+		const code = str.charCodeAt(i);//\n(10)\r(13)\u2028(8232)\u2029(8233)
+		if(code === 10 || code === 13 || code === 8232 || code === 8233)
+		{
+			str = str.slice(0, i).toLowerCase().split('@');
+			if(str.length === 3 && url.toLowerCase().includes(str[1]))return true;
+			break;
+		}
+	}
+	return false
+}
+function getfile(url)
+{
+	let filename = url.split('/').pop().split('?').shift()
+	$('.安装应用').html(`下载：<span style='color:red;'>${filename}</span>`)
 	return new Promise(function(resolve)
 	{
 		let ext = url.split('?')[0].split('.').pop()
-		if(ext === 'html')url = url.toLowerCase()
 		let xhr = new XMLHttpRequest();
+		if(ext === 'html' && url.includes('https://moetalk.netlify.app'))url = url.toLowerCase()
 		xhr.open("GET",url);
-		url = url.split('?')[0]
-		if(typeof type === 'string')ext = type
+		url = url.split(url.includes('#') ? '#' : '?')[0]
 		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
-		xhr.addEventListener('progress', function(event)
+		xhr.addEventListener('progress', function(e)
 		{
-			if (event.lengthComputable)
-			{
-				let filename = url.split('/').pop()
-				let percent = ((event.loaded / event.total) * 100).toFixed(1);
-				$(`[title="${filename}"]`).html(`<span style='color:red;'>${filename}</span>下载中：${percent}%`)
-			}
+			$('.安装应用').html(`下载：<span style='color:red;'>${filename}</span>${parseInt(e.loaded/1000)}KB`)
 		});
 		xhr.onload = function()
 		{
 			if(this.status === 200 && decodeURIComponent(this.responseURL).includes(url))
 			{
-				resolve(this.response)//成功
+				if(!this.responseType || !this.response.type.includes('text'))resolve(this.response)//成功
+				else resolve(false)
 			}
 			else resolve(false)
 		}
@@ -113,7 +143,44 @@ function $ajax(url,type = null)
 		xhr.send();
 	})
 }
-function 保存文件(file, data, type = 2)
+async function $ajax(url)
+{
+	let arr = ['js','css','json','html']
+	let ext = url.split('?')[0].split('.').pop()
+
+	let data = await getfile(url)
+	if(arr.includes(ext) && !校验文件(data,url,ext))data = '';
+	if(data)return data//重要
+	if(网址列表.length === 0)
+	{
+		let urls = await getfile('https://api.akams.cn/github#.json')
+		urls = urls ? JSON.parse(urls).data : []
+		网址列表.push('https://moetalk.netlify.app')
+		网址列表.push('https://ggg555ttt.github.io/MoeTalk')
+		网址列表.push('https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
+		for(let i=0,l=urls.length;i<l;i++)
+		{
+			网址列表.push(urls[i].url+'/https://raw.githubusercontent.com/ggg555ttt/MoeTalk/main')
+		}
+	}
+	while(!data)
+	{
+		let newurl = 网址列表[Math.floor(Math.random()*网址列表.length)] 
+		data = await getfile(url.replace(MoeTalkURL,newurl))
+		if(arr.includes(ext) && !校验文件(data,url,ext))data = '';
+	}
+	return data
+}
+async function 复制目录(src,dst)
+{
+	return await $.ajax(
+	{
+		url: '/index.php',
+		type: 'POST',
+		data: {copydir: [src,dst]}
+	})
+}
+function 保存文件(file,data)
 {
 	if(typeof data === 'string')data = new Blob([data],{type:'application/octet-stream'});
 	data = new File([data], file, {type: data.type});
@@ -130,7 +197,7 @@ function 保存文件(file, data, type = 2)
 			{
 				let filename = file.split('/').pop()
 				let percent = Math.round((e.loaded / e.total) * 100)
-				$(`[title="${filename}"]`).html(`<span style='color:red;'>${filename}</span>保存中：${percent}%`)
+				$('.安装应用').html(`<span style='color:red;'>${filename}</span>保存中：${percent}%`)
 			}
 		};
 		xhr.onload = function()
@@ -145,28 +212,28 @@ function 保存文件(file, data, type = 2)
 }
 async function 安装应用()
 {
-	let href = 'https://moetalk.netlify.app/'
-	let time = Math.random()
-	let 本地列表 = JSON.parse(await $ajax(`${href}MoeData/Version/MoeTalk.json?time=${time}`))
-	本地列表['MoeData/Version/MoeTalk.json'] = 1
-	本地列表['MoeData/Version/Version.json'] = 1
+
+	let 应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}/MoeData/Version/Version.json?time=${Math.random()}`))
+	let 本地列表 = JSON.parse(await $ajax(`${MoeTalkURL}/MoeData/Version/MoeTalk.json?ver=${应用版本[0]}`))
+
+	let 更新补丁 = `更新补丁/MoeTalk_${应用版本[0]}`
+	await 保存文件(`${更新补丁}/MoeData/Version/MoeTalk.json`,JSON.stringify(应用版本))
+	await 保存文件(`${更新补丁}/MoeData/Version/Version.json`,JSON.stringify(本地列表))
+	
 	let 文件列表 = Object.keys(本地列表)
-	async function 下载线程()
+	for(let i=0,l=文件列表.length;i<l;i++)
 	{
-		while(文件列表.length > 0)
+		let file = 文件列表[i];
+		if(!await file_exists(`${更新补丁}/${file}`))//检测文件
 		{
-			let file = 文件列表.shift();
-			let filename = file.split('/').pop()
-			$('body').append(`<h1 title='${filename}'></h1>`)
-			let data = await $ajax(`${href}${file}`)
-			
-			await 保存文件(file,data)
-			$(`[title="${filename}"]`).remove()
-			$('.更新应用').text(`安装应用中，请不要退出或刷新\n剩余文件：${文件列表.length}`)
+			let data = await $ajax(`${MoeTalkURL}/${file}`)
+			await 保存文件(`${更新补丁}/${file}`,data)
 		}
+		$('.更新应用').html(`安装应用中，长时间无响应请刷新<br>剩余文件：${l-i-1}`)
+
 	}
-	await Promise.all(Array.from({length:5},下载线程));
-	$('.更新应用').text('应用安装完成！\n即将刷新页面！')
+	$('.更新应用').html('应用安装完成！<br>即将刷新页面！')
+	await 复制目录(更新补丁,'')
 	await 保存文件('phpwin.txt','moetalk')
 	location.replace('index.html')
 }

@@ -319,12 +319,12 @@ async function 更新应用(time = Date.now())
 	if(!本地)return
 	await waitPlus()
 	$('.更新应用').html('<span style="color:red;">MoeTalk更新中！请不要刷新或退出</span>')
-	网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}MoeData/Version/Version.json?time=${time}`),'检测版本……',$('.更新应用'))
+	网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}/MoeData/Version/Version.json?time=${time}`),'检测版本……',$('.更新应用'))
 	if(网络应用版本 && 本地应用版本[0] < 网络应用版本[0])
 	{
 		if($('.版本:visible').length == 0)update()
 		let 本地列表 = JSON.parse(await $ajax(`${href}MoeData/Version/MoeTalk.json?time=${time}`))
-		let 网络列表 = JSON.parse(await ZipToJson(`${MoeTalkURL}MoeData/Version/MoeTalk.zip?ver=${网络应用版本[0]}`),'获取列表……',$('.更新应用'))
+		let 网络列表 = JSON.parse(await ZipToJson(`${MoeTalkURL}/MoeData/Version/MoeTalk.zip?ver=${网络应用版本[0]}`),'获取列表……',$('.更新应用'))
 		let Update = `更新补丁/MoeTalk_${网络应用版本[0]}`
 		let num = [0,0]
 		let md5 = 0
@@ -337,7 +337,7 @@ async function 更新应用(time = Date.now())
 				num[0]++
 				if(!await file_exists(`${Update}/${file}`))//检测更新文件
 				{
-					let data = await $ajax(`${MoeTalkURL}${file}?md5=${md5}`,'下载：',$('.更新应用'))
+					let data = await $ajax(`${MoeTalkURL}/${file}?md5=${md5}`,'下载：',$('.更新应用'))
 					if(data)
 					{
 						await 保存文件(`${Update}/${file}`,data)
@@ -372,12 +372,12 @@ async function 更新数据(time = Date.now())
 	await waitPlus()
 	$('.更新数据').html('<span style="color:red;">数据更新中！请不要刷新或退出</span>')
 	本地数据版本 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/Version.json?time=${time}`)) || [-1]
-	网络数据版本 = JSON.parse(await $ajax(`${MoeTalkURL}GameData/${game}/Version/Version.json?time=${time}`),'检测版本……',$('.更新数据'))
+	网络数据版本 = JSON.parse(await $ajax(`${MoeTalkURL}/GameData/${game}/Version/Version.json?time=${time}`),'检测版本……',$('.更新数据'))
 	if(网络数据版本 && 本地数据版本[0] < 网络数据版本[0])
 	{
 		if($('.版本:visible').length == 0)update()
 		let 本地列表 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/${game}.json?time=${time}`))
-		let 网络列表 = JSON.parse(await $ajax(`${MoeTalkURL}GameData/${game}/Version/${game}.json?ver=${网络数据版本[0]}`),'获取列表……',$('.更新数据'))
+		let 网络列表 = JSON.parse(await $ajax(`${MoeTalkURL}/GameData/${game}/Version/${game}.json?ver=${网络数据版本[0]}`),'获取列表……',$('.更新数据'))
 		let Update = `更新补丁/${game}_${网络数据版本[0]}`
 		let num = [0,0]
 		let md5 = 0
@@ -390,7 +390,7 @@ async function 更新数据(time = Date.now())
 				num[0]++
 				if(!await file_exists(`${Update}/${file}.json`))//检测更新文件
 				{
-					let data = await ZipToJson(`${MoeTalkURL}GameData/${game}/Version/${file}.zip?ver=${网络数据版本[0]}`,'下载：',$('.更新数据'))
+					let data = await ZipToJson(`${MoeTalkURL}/GameData/${game}/Version/${file}.zip?ver=${网络数据版本[0]}`,'下载：',$('.更新数据'))
 					if(await 保存文件(`${Update}/${file}.json`,data))
 					{
 						files.push(`${Update}/${file}.json`)

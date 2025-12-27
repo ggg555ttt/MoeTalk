@@ -205,11 +205,11 @@ async function update(str = '')
 	
 	if(本地 && 客户端)
 	{
-		网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}MoeData/Version/Version.json?time=${time}`))
+		网络应用版本 = JSON.parse(await $ajax(`${MoeTalkURL}/MoeData/Version/Version.json?time=${time}`))
 		if(game !== 'NONE')
 		{
 			本地数据版本 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/Version.json?time=${time}`))
-			网络数据版本 = JSON.parse(await $ajax(`${MoeTalkURL}GameData/${game}/Version/Version.json?time=${time}`))
+			网络数据版本 = JSON.parse(await $ajax(`${MoeTalkURL}/GameData/${game}/Version/Version.json?time=${time}`))
 		}
 		let str1 = `<button style='line-height:112%;' onclick='更新应用(${time}),this.disabled=1'>点击更新</button>`
 		let str2 = `<button style='line-height:112%;' onclick='更新数据(${time}),this.disabled=1'>点击更新</button>`

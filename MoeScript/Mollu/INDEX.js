@@ -5071,7 +5071,7 @@
 							}), (0, m.jsx)("meta",
 							{
 								property: "og:image",
-								content: MoeTalkURL+"MoeData/Ui/Favor_Schedule_Deco.webp"
+								content: `${MoeTalkURL}/MoeData/Ui/Favor_Schedule_Deco.webp`
 							}), (0, m.jsx)("meta",
 							{
 								property: "og:site_name",
@@ -5091,7 +5091,7 @@
 							}), (0, m.jsx)("meta",
 							{
 								name: "twitter:image",
-								content: MoeTalkURL+"MoeData/Ui/Favor_Schedule_Deco.webp"
+								content: `${MoeTalkURL}/MoeData/Ui/Favor_Schedule_Deco.webp`
 							}), (0, m.jsx)("meta",
 							{
 								name: "twitter:card",
@@ -6614,12 +6614,12 @@
 											let filename = `GameData/${mt_settings['选择游戏']}/Library/${l.ID}`
 											if(本地 && 客户端 && !await file_exists(`${filename}.zip`))
 											{
-												let zip = await $ajax(`${MoeTalkURL}${filename}.zip?md5=${l.MD5}`)
+												let zip = await $ajax(`${MoeTalkURL}/${filename}.zip?md5=${l.MD5}`)
 												await 保存文件(`${filename}.zip`,zip)
 											}
 											if(本地 && 客户端 && !await file_exists(`${filename}-${k}.zip`))
 											{
-												let zip = await $ajax(`${MoeTalkURL}${filename}-${k}.zip?md5=${l.MD5}`)
+												let zip = await $ajax(`${MoeTalkURL}/${filename}-${k}.zip?md5=${l.MD5}`)
 												await 保存文件(`${filename}-${k}.zip`,zip)
 											}
 
@@ -6915,7 +6915,7 @@
 							}), (0, b.jsx)("meta",
 							{
 								property: "og:image",
-								content: MoeTalkURL+"MoeData/Ui/Favor_Schedule_Deco.webp"
+								content: `${MoeTalkURL}/MoeData/Ui/Favor_Schedule_Deco.webp`
 							}), (0, b.jsx)("meta",
 							{
 								property: "og:description",
@@ -6931,7 +6931,7 @@
 							}), (0, b.jsx)("meta",
 							{
 								name: "twitter:image",
-								content: MoeTalkURL+"MoeData/Ui/Favor_Schedule_Deco.webp"
+								content: `${MoeTalkURL}/MoeData/Ui/Favor_Schedule_Deco.webp`
 							})]
 						}), (0, b.jsx)(F,
 						{
@@ -9433,7 +9433,7 @@
 						}), (0, u.jsx)("meta",
 						{
 							property: "og:image",
-							content: MoeTalkURL + "Images/Ui/Favor_Schedule_Deco.webp"
+							content: `${MoeTalkURL}/Images/Ui/Favor_Schedule_Deco.webp`
 						}), (0, u.jsx)("meta",
 						{
 							property: "og:site_name",
@@ -9453,7 +9453,7 @@
 						}), (0, u.jsx)("meta",
 						{
 							name: "twitter:image",
-							content: MoeTalkURL + "Images/Ui/Favor_Schedule_Deco.webp"
+							content: `${MoeTalkURL}/Images/Ui/Favor_Schedule_Deco.webp`
 						}), (0, u.jsx)("meta",
 						{
 							name: "twitter:card",

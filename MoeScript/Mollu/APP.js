@@ -6099,7 +6099,7 @@
 											MMT目录 = JSON.parse(await $ajax(`${href}${filename}${num}`))
 											if(本地 && 客户端 && MMT目录)
 											{
-												let data = JSON.parse(await $ajax(`${MoeTalkURL}${filename}${num}`))
+												let data = JSON.parse(await $ajax(`${MoeTalkURL}/${filename}${num}`))
 												for(let i=0,l=data.作品.length;i<l;i++)
 												{
 													let gengxin = false;
@@ -6115,11 +6115,11 @@
 													if(gengxin)
 													{
 														filename = `GameData/${mt_settings['选择游戏']}/Library/${i}`
-														let zip = await $ajax(`${MoeTalkURL}${filename}.zip${num}`)
+														let zip = await $ajax(`${MoeTalkURL}/${filename}.zip${num}`)
 														保存文件(`${filename}.zip`,zip)
 														for(let n=0;n<=data.作品[i].章节;n++)
 														{
-															zip = await $ajax(`${MoeTalkURL}${filename}-${n}.zip${num}`)
+															zip = await $ajax(`${MoeTalkURL}/${filename}-${n}.zip${num}`)
 															保存文件(`${filename}-${n}.zip`,zip)
 														}
 													}

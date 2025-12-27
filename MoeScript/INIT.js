@@ -299,7 +299,7 @@ function getfile(url,text = '',html = null)
 	{
 		let ext = url.split('?')[0].split('.').pop()
 		let xhr = new XMLHttpRequest();
-		if(ext === 'html' && url.includes(MoeTalkURL))url = url.toLowerCase()
+		if(ext === 'html' && url.includes('https://moetalk.netlify.app'))url = url.toLowerCase()
 		xhr.open("GET",url);
 		url = url.split(url.includes('#') ? '#' : '?')[0]
 		if(!['js','css','json','html'].includes(ext))xhr.responseType = 'blob';
@@ -370,7 +370,7 @@ async function $ajax(url,text = '',html = null)
 	}
 	while(!data)
 	{
-		let newurl = 网址列表[Math.floor(Math.random()*网址列表.length)]+'/' 
+		let newurl = 网址列表[Math.floor(Math.random()*网址列表.length)]
 		data = await getfile(url.replace(MoeTalkURL,newurl),text,html)
 		if(arr.includes(ext) && !校验文件(data,url,ext))data = '';
 	}
