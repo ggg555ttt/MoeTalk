@@ -1,3 +1,4 @@
+/*@MoeData/OldScript/DATA.js@*/
 var DATA_ServerDownload = false//后台服务器下载
 var DATA_NowTime = 0
 function loaddata(json,mode)//识别存档

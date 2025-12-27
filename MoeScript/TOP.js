@@ -1,3 +1,4 @@
+/*@MoeScript/TOP.js@*/
 pause = true
 skip = false
 if(mt_settings['调试模式'])var vConsole = new window.VConsole();

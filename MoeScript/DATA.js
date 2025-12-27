@@ -1,3 +1,4 @@
+/*@MoeScript/DATA.js@*/
 var DATA_NowTime = 0
 function loaddata(json,mode)//识别存档
 {

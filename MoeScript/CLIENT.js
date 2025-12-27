@@ -1,3 +1,4 @@
+/*@MoeScript/CLIENT.js@*/
 async function isIos()
 {
 	if(本地 || sessionStorage['phpwin'])return

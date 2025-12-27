@@ -1,3 +1,4 @@
+/*@MoeData/OldScript/Mollu/Other/music-328e8f3388aab8f7.js@*/
 (self.webpackChunk_N_E = self.webpackChunk_N_E || [])
 .push([
 	[621],

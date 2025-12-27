@@ -1,3 +1,4 @@
+/*@MoeData/OldScript/TEXT.js@*/
 var mt_text = {
 	"name": {
 		"kr": "이름",

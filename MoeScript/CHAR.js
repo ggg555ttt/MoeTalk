@@ -1,3 +1,4 @@
+/*@MoeScript/CHAR.js@*/
 var mt_char = false//自定义角色数据
 var mt_head = false//自定义头像数据
 var mt_chars = false//自定义角色列表

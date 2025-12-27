@@ -1,3 +1,4 @@
+/*@MoeScript/Mollu/APP.js@*/
 (self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
 		[888],
 		{

@@ -1,3 +1,4 @@
+/*@MoeScript/INIT.js@*/
 (function()
 {
 	if(!String.prototype.hasOwnProperty("replaceAll"))
@@ -327,8 +328,6 @@ async function $ajax(url,text = '',html = null)
 {
 	let arr = ['js','css','json','html']
 	let ext = url.split('?')[0].split('.').pop()
-	let md5 = url.split('?md5=')
-	md5 = arr.includes(ext) && md5.length > 1 ? md5.pop() : ''
 	if(客户端 === 'phpwin' && url[0] === '/')
 	{
 		url = url.split('?')[0]
@@ -354,9 +353,8 @@ async function $ajax(url,text = '',html = null)
 		else return data;
 	}
 	let data = await getfile(url,text,html)
-	let MD5 = md5 ? CryptoJS.MD5(data).toString() : ''
-	// if(md5 !== MD5)data = ''
-	if(data || !url.includes(MoeTalkURL))return data
+	if(arr.includes(ext) && !校验文件(data,url,ext))data = '';
+	if(data || !url.includes(MoeTalkURL))return data//重要
 	if(网址列表.length === 0)
 	{
 		let urls = await getfile('https://api.akams.cn/github#.json')
@@ -374,8 +372,7 @@ async function $ajax(url,text = '',html = null)
 	{
 		let newurl = 网址列表[Math.floor(Math.random()*网址列表.length)]+'/' 
 		data = await getfile(url.replace(MoeTalkURL,newurl),text,html)
-		// let MD5 = md5 ? CryptoJS.MD5(data).toString() : ''
-		// if(md5 !== MD5)data = ''
+		if(arr.includes(ext) && !校验文件(data,url,ext))data = '';
 	}
 	return data
 }
@@ -414,4 +411,21 @@ function RgbToHex(rgb,bg)
 	for(let i=0,l=rgb.length;i<l;i++)hex += Number(rgb[i]).toString(16).toUpperCase().padStart(2, '0')
 	if(bg)$('.bgcolor').next().val(hex)
 	return hex
+}
+function 校验文件(str,url,ext)
+{
+	if(typeof str !== 'string')return false;
+	if(ext === 'json' && ['[','{'].includes(str[0]))return true;
+	for(let i=0,l=str.length;i<l;i++)
+	{
+		const code = str.charCodeAt(i);//\n(10)\r(13)\u2028(8232)\u2029(8233)
+		if(code === 10 || code === 13 || code === 8232 || code === 8233)
+		{
+			url = url.toLowerCase()
+			str = str.slice(0, i).toLowerCase().split('@');
+			if(str.length === 3 && url.includes(str[1]))return true;
+			break;
+		}
+	}
+	return false
 }

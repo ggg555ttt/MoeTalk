@@ -1,3 +1,4 @@
+/*@MoeData/OldScript/TOP.js@*/
 pause = true
 skip = false
 INIT_loading('开始加载')

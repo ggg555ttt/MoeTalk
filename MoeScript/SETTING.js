@@ -1,3 +1,4 @@
+/*@MoeScript/SETTING.js@*/
 //读取人物
 $('body').on('click',"input",function()
 {

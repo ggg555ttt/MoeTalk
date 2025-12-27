@@ -1,3 +1,4 @@
+/*@MoeData/OldScript/Mollu/Other/_buildManifest.js@*/
 self.__BUILD_MANIFEST = function(a, s, c, e, t, i, u)
 {
 	let arr = {}

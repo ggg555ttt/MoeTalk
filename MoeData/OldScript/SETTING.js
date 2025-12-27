@@ -1,3 +1,4 @@
+/*@MoeData/OldScript/SETTING.js@*/
 function rgbToHex(rgb) {
   const values = rgb.match(/\d+/g); // 提取RGB值
   const hex = values.reduce((hexValue, currentValue) => {

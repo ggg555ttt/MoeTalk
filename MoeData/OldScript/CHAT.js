@@ -1,3 +1,4 @@
+/*@MoeData/OldScript/CHAT.js@*/
 var chatIndex = -1//消息索引
 
 var 粘贴板;

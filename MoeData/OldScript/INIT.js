@@ -1,3 +1,4 @@
+/*@MoeData/OldScript/INIT.js@*/
 (function()
 {
 	if(!String.prototype.hasOwnProperty("replaceAll"))

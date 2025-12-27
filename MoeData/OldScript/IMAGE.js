@@ -1,3 +1,4 @@
+/*@MoeData/OldScript/IMAGE.js@*/
 var imageArr = [];//截图分段列表
 var imageArrL = 0//截图分段数量
 var imageZip = null;//压缩文件
