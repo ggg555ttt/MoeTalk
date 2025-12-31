@@ -1,25 +1,4 @@
 /*@MoeScript/TOP.js@*/
-async function newyear(url)
-{
-	try
-	{
-		// 1. 尝试获取音频文件
-		const response = await fetch(url,{method:'HEAD'});//只请求头部，节省带宽
-		if(!response.ok)throw new Error('File not found');
-		// 2. 如果存在，重新 fetch 获取完整内容（或者直接用 url 创建 Audio）
-		// 这里为了“存入变量”，我们可以用 blob URL
-		const audioBlob = await $ajax(url);
-		const audioUrl = URL.createObjectURL(audioBlob);
-		// 3. 创建 Audio 实例并播放
-		const audio = new Audio(audioUrl);
-		audio.addEventListener('ended',()=>
-		{
-			// 播放结束时释放 blob URL
-			URL.revokeObjectURL(audioUrl);
-		});
-		audio.play().then(()=>{newyear=()=>{}}).catch(()=>{});
-	}catch(err){}
-}
 pause = true
 skip = false
 if(mt_settings['调试模式'])var vConsole = new window.VConsole();
@@ -320,14 +299,35 @@ $(async function()
 	let config = {style:'text-align:center;'}
 	alert(text,config)
 })
-$("body").on('click', function()
+async function newyear(url)
+{
+	const audioUrl = URL.createObjectURL(await $ajax(url));
+	//创建 Audio 实例并播放
+	const audio = new Audio(audioUrl);
+	audio.addEventListener('ended',()=>
+	{
+		// 播放结束时释放 blob URL
+		URL.revokeObjectURL(audioUrl);
+	});
+	audio.play()
+}
+$("body").on('click',function(e)
 {
 	INIT_state()
 	$('.delsNum').text($(".dels:checked").length)
 	let name = loadname(mt_settings['选择角色'].no,mt_settings['选择角色'].index)
 	let str = $(".dels:checked").length ? '在选中的消息上方插入' : mt_text.input_comment[mtlang]
 	$('.chatText').attr('placeholder',name+'：'+str)
-	if(month == '01' && day == '01')newyear('plugins/newyear.mp3')
+	if(e.originalEvent && e.originalEvent.pointerId > 0)//判断是否是真实点击事件
+	{
+		let ymd = parseInt(year+month+day)
+		ymd = ymd >= 250128 && number <= 260204;
+		if(month+day == '0101' || ymd)//新年快乐
+		{
+			newyear(`${MoeTalkURL}/plugins/newyear.mp3`)
+			newyear = ()=>{}
+		}
+	}
 })
 $(window).keydown(function(event)
 {
