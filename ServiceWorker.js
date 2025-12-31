@@ -1,3 +1,4 @@
+/*@ServiceWorker.js@*/
 let cacheName = '缓存';
 
 // 缓存文件列表
