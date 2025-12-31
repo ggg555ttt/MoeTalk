@@ -318,7 +318,7 @@ $("body").on('click',function(e)
 	let name = loadname(mt_settings['选择角色'].no,mt_settings['选择角色'].index)
 	let str = $(".dels:checked").length ? '在选中的消息上方插入' : mt_text.input_comment[mtlang]
 	$('.chatText').attr('placeholder',name+'：'+str)
-	if(e.originalEvent && e.originalEvent.pointerId > 0)//判断是否是真实点击事件
+	if(e.originalEvent && e.originalEvent.isTrusted)//判断是否是真实点击事件
 	{
 		let ymd = parseInt(year+month+day)
 		ymd = ymd >= 250128 && ymd <= 260204;
