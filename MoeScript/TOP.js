@@ -321,7 +321,7 @@ $("body").on('click',function(e)
 	if(e.originalEvent && e.originalEvent.pointerId > 0)//判断是否是真实点击事件
 	{
 		let ymd = parseInt(year+month+day)
-		ymd = ymd >= 250128 && number <= 260204;
+		ymd = ymd >= 250128 && ymd <= 260204;
 		if(month+day == '0101' || ymd)//新年快乐
 		{
 			newyear(`${MoeTalkURL}/plugins/newyear.mp3`)
