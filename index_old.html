@@ -84,16 +84,8 @@ mt_settings['选择游戏'] = gamearr[gameid] ? gameid : mt_settings['选择游�
 var mtlang = mt_settings['语言选项'] || 'zh_cn';
 var langarr = ['zh_cn','zh_tw','jp','en','kr'];
 if(langarr.indexOf(gameid) > -1)mt_settings['语言选项'] = mtlang = gameid
-if(gameid === 'cordova')localStorage['cordova'] = 'cordova'
-if(localStorage['cordova'] === 'cordova')
-{
-	document.write("<scr"+`ipt src='./cordova.js'></scr`+"ipt>");
-}
-if(gameid === 'cordova2')localStorage['cordova2'] = 'cordova2'
-if(localStorage['cordova2'] === 'cordova2')
-{
-	document.write("<scr"+`ipt src='./MoeData/OldScript/Cordova/cordova.js'></scr`+"ipt>");
-}
+if(localStorage['cordova'])document.write("<scr"+`ipt src='./cordova.js'></scr`+"ipt>");
+
 var mt_characters,
 	mt_school,
 	mt_club,
