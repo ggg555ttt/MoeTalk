@@ -1,4 +1,25 @@
 /*@MoeScript/TOP.js@*/
+async function newyear(url)
+{
+	try
+	{
+		// 1. 尝试获取音频文件
+		const response = await fetch(url,{method:'HEAD'});//只请求头部，节省带宽
+		if(!response.ok)throw new Error('File not found');
+		// 2. 如果存在，重新 fetch 获取完整内容（或者直接用 url 创建 Audio）
+		// 这里为了“存入变量”，我们可以用 blob URL
+		const audioBlob = await $ajax(url);
+		const audioUrl = URL.createObjectURL(audioBlob);
+		// 3. 创建 Audio 实例并播放
+		const audio = new Audio(audioUrl);
+		audio.addEventListener('ended',()=>
+		{
+			// 播放结束时释放 blob URL
+			URL.revokeObjectURL(audioUrl);
+		});
+		audio.play().then(()=>{newyear=()=>{}}).catch(()=>{});
+	}catch(err){}
+}
 pause = true
 skip = false
 if(mt_settings['调试模式'])var vConsole = new window.VConsole();
@@ -306,6 +327,7 @@ $("body").on('click', function()
 	let name = loadname(mt_settings['选择角色'].no,mt_settings['选择角色'].index)
 	let str = $(".dels:checked").length ? '在选中的消息上方插入' : mt_text.input_comment[mtlang]
 	$('.chatText').attr('placeholder',name+'：'+str)
+	if(month == '01' && day == '01')newyear('plugins/newyear.mp3')
 })
 $(window).keydown(function(event)
 {
@@ -792,6 +814,8 @@ if(客户端 === 'NW.js' || mt_settings['桌面模式'])
 	  });
 	}, true); // 必须用捕获阶段
 }
+
+
 /*
 function getVisibleParagraphs() {
   const $container = $('.gGreRb');
