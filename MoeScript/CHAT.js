@@ -806,12 +806,11 @@ $("body").on('click',".编辑界面 .删除",function()
 {
 	$('.dels:checked').length > 1 ? $('.INDEX_delete').click() : sendMessage({},'','delete',[chatIndex])
 });
-$("body").on('click',".添加头像",function()
+$("body").on('click',".设置头像",function()
 {
 	let no = $('.角色头像').attr('alt')
 	let index = $('.角色头像').attr('title')
 	let src = $('.角色头像').attr('src')
-	$('.title').text('头像列表')
 	let HeadList = {direction:'row',list:[]}
 	let checked = $('.dels:checked').length
 	if(CHAT_HeadList)
@@ -823,25 +822,27 @@ $("body").on('click',".添加头像",function()
 	str += `<label>　　　　　<input class="radio column" type="radio" name="direction" value="column">竖向</label><input type="checkbox" class="fullHeight" ${HeadList.fullHeight ? 'checked' : ''}>文字消息自动铺满\n`
 	str += `头像间距：<input style="font-size:1.2rem;" class="margin text" placeholder="默认值为 -1.5rem" value="${toString(HeadList.margin)}">\n\n`
 
-	str += '发言角色：<label><input class="radio" type="radio" name="mode" value="change">通过【待选列表】切换角色</label>\n'
+	str += '<label><input class="radio" type="radio" name="mode" value="add">添加头像</label>'
+	str += '<label><input class="radio" type="radio" name="mode" value="change" checked>切换角色</label>\n'
 	str += `<img class="头像 N_char" src="${index ? loadhead(no,index) : href+'MoeData/Ui/error.webp'}" ${no ? `alt="${no}"` : ''}" ${index ? `title="${index}"` : ''}">`
-	str += `名称：<input style="font-size:1.2rem;color:red;" class="text" placeholder="${$('.角色名称').attr('placeholder')}" value="${$('.角色名称').val()}">\n`
-	str += `\n头像列表：（点击删除指定头像）\n<div class="N_list">`
+	str += `<span>ID：${no}</span><div class="N_list">`
 	HeadList.list.map(function(index,k)
 	{
 		str += `<img class="头像" src="${loadhead('LIST',index)}" title="${index}" style="cursor:pointer;" onclick="this.remove()">`
 	})
-	str += '</div>\n\n待选列表：<label><input class="radio" type="radio" name="mode" value="add" checked>为【头像列表】添加新头像</label>\n'
-	let str1 = '$(".N_char").attr("src",loadhead(this.alt,this.title)).attr("alt",this.alt).attr("title",this.title).next().attr("placeholder",loadname(this.alt,this.title))'
+	str += '</div>\n'
+
+	str += '头像列表：（点击选择）\n'
+	let str1 = '$(".N_char").attr("src",loadhead(this.alt,this.title)).attr("alt",this.alt).attr("title",this.title).next().text("ID："+this.alt)'
 	let str2 = '$(".N_list").append(`<img class="头像" src="${loadhead("LIST",this.title)}" title="${this.title}" style="cursor:pointer;" onclick="this.remove()">`)'
 	mt_settings['选择角色'].list.concat({no:'0',index:'1'}).map(function(v,k)
 	{
 		str += `<img class='头像' src='${loadhead(v.no,v.index)}' alt='${v.no}' title='${v.index}' style='cursor:pointer;' onclick='$(".radio:checked")[1].value === "change" ? ${str1} : ${str2}'>`
 	})
-	str += '\n'
 
 	$(`.${HeadList.direction}`).click()
 	let config = {}
+	config.title = '设置头像'
 	config.yes = function()
 	{
 		HeadList.direction = $('.radio:checked')[0].value
@@ -856,11 +857,10 @@ $("body").on('click',".添加头像",function()
 		})
 		CHAT_HeadList = HeadList
 		let img = $('.N_char')
-		let name = img.next()[0]
-		$('.角色名称').attr('placeholder',name.placeholder).val(name.value)
-		$('.角色头像_列表').text('+'+CHAT_HeadList.list.length)
+		let hl = CHAT_HeadList.list.length
+		$('.角色头像_列表').text(hl ? `+${hl}头像` : '')
 		$('.角色ID').text(img[0].alt ? 'ID：'+img[0].alt : '不更改角色')
-		$('.添加头像').css('color',CHAT_HeadList.list.length || checked > 1 ? 'red' : 'rgb(75, 105, 137)')
+		$('.设置头像').css('color',CHAT_HeadList.list.length || checked > 1 ? 'red' : 'rgb(75, 105, 137)')
 		if(img[0].title)
 		{
 			$('.角色头像').attr({alt:img[0].alt,title:img[0].title,src:img[0].src})
@@ -998,9 +998,9 @@ $("body").on('click',".编辑",function()
 		$('.显示开关').removeClass('selected').css('color','')
 		$('.角色ID').text('不更改角色')
 		$('.内容索引').text(`选中了${checked}条消息`)
-		$('.角色头像_列表').text('+0')
+		$('.角色头像_列表').text('')
 		$('.角色名称').attr('placeholder','不修改名称').val('')
-		$('.添加头像').css('color','black')
+		$('.设置头像').css('color','black')
 		$('.定义样式').css('color','black')
 
 		$('.角色头像_说明').text('不修改头像').attr('title','noEdit')
@@ -1026,12 +1026,13 @@ $("body").on('click',".编辑",function()
 
 	$('.角色ID').text('ID：'+chat.sCharacter.no)
 	$('.内容索引').text(`(${chatIndex+1}/${chats.length})`)
-	$('.添加头像').css('color',chat.heads && chat.heads.list && chat.heads.list.length ? 'red' : 'black')
+	$('.设置头像').css('color',chat.heads && chat.heads.list && chat.heads.list.length ? 'red' : 'black')
 	$('.定义样式').css('color',chat.style && chat.style.length ? 'red' : 'black')
 
 	$('.角色头像').attr({alt:chat.sCharacter.no,title:chat.sCharacter.index,src:loadhead(chat.sCharacter.no,chat.sCharacter.index)})
 	$('.角色名称').attr('placeholder',loadname(chat.sCharacter.no,chat.sCharacter.index)).val(toString(chat.name)).click()
-	$('.角色头像_列表').text('+'+(chat.heads && chat.heads.list ? chat.heads.list.length : 0))
+	let hl = chat.heads && chat.heads.list ? chat.heads.list.length : 0
+	$('.角色头像_列表').text(hl ? `+${hl}头像` : '')
 	let arr = {isLeft:'<<',isCenter:'><',isRight:'>>'}
 	let 位置 = chat.isRight ? 'isRight' : chat.isCenter ? 'isCenter' : 'isLeft'
 	if(!chat.isLeft && !chat.isCenter && !chat.isRight)

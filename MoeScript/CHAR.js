@@ -215,7 +215,7 @@ function custom_char(info)
 		if(!char_info.make)$('.clubname').attr('disabled','disabled')
 		else
 		{
-			$('#custom-char .typeTitle').text('创建角色')
+			$('#custom-char .typeTitle').text('添加角色')
 			$('#custom-char .confirm').attr('disabled','disabled')
 		}
 	}

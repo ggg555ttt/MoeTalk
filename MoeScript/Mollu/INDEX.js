@@ -894,15 +894,13 @@
 						{
 							children: [(0, m.jsxs)(X,
 							{
+								style: {fontSize: '1.2rem'},
 								className: "bold",
-								children: [L.Z.student[u], " ", (0, m.jsxs)("span",
-								{
-									style:
-									{
-										fontSize: "1.2rem"
-									},
-									children: ["(", o, ")"]
-								})]
+								children: [L.Z.student[u],`(${o})`]
+							}),(0, m.jsxs)('button',
+							{
+								id: 'makecus',
+								children: '添加角色'
 							}), (0, m.jsxs)(W,
 							{
 								style:
@@ -912,6 +910,7 @@
 								children: [(0, m.jsx)($,
 								{
 									className: "medium",
+									style: {width: "4.5rem"},
 									onClick: function()
 									{
 										s(!l)
@@ -919,10 +918,7 @@
 									},
 									children: (0, m.jsx)(X,
 									{
-										style:
-										{
-											fontSize: "1.1rem"
-										},
+										style: {fontSize: "1.1rem"},
 										children: L.Z[n.sortCharType][u]
 									})
 								}), (0, m.jsx)(c.jl,
@@ -1261,11 +1257,39 @@
 							},
 							children: [(0, m.jsxs)(ea.h4,
 							{
-								children: [(0, m.jsx)(ea.Dx,
+								style:
+								{
+									justifyContent: 'space-between',
+									alignItems: 'center',
+									height:'auto'
+								},
+								children: [(0, m.jsx)(c.Bx,
+								{
+									style:
+									{
+										width: "auto",
+										height: 'auto',
+										fontSize: '1.5rem',
+										marginInline: '0.5rem',
+										padding: '0',
+										color: 'rgb(45, 70, 100)'
+									},
+									className: "bold",
+									children: '提示',
+									onClick:function()
+									{
+										alert('名称显示优先级：发言者名称 > 头像名称 > 角色名称')
+									}
+								}), (0, m.jsx)(ea.Dx,
 								{
 									className: "typeTitle bold"
 								}), (0, m.jsx)(ea.ec,
 								{
+									style:
+									{
+										position: 'unset',
+										marginInline: '0.5rem'
+									},
 									onClick: function()
 									{
 										char_info = []
@@ -1273,39 +1297,24 @@
 									},
 									children: (0, m.jsx)(c.j4,{})
 								})]
-							}), (0, m.jsx)('span',
-							{
-								className: "charid"
 							}), (0, m.jsx)('input',
 							{
 								type: 'checkbox',
 								className: 'rightSend'
-							}), '默认右侧发言',(0, m.jsxs)(ea.$0,
+							}), '默认右侧发言', (0, m.jsx)('span',
 							{
+								className: "charid"
+							}), (0, m.jsxs)(ea.$0,
+							{
+								style:{padding: '0.5rem'},
 								children: [(0, m.jsx)('div',
 								{
-									children: [(0, m.jsx)('div',
-									{
-										children: mt_text.name[mtlang]
-									}), (0, m.jsx)('input',
+									children: [mt_text.student[mtlang], mt_text.name[mtlang], (0, m.jsx)('input',
 									{
 										className:"charname bold",
 										onChange: function(e)
 										{
 											$$('.charname').val(e.currentTarget.value)
-										}
-									}), (0, m.jsx)('div',
-									{
-										children: (0, m.jsx)('div',
-										{
-											children: mt_text.club[mtlang]
-										})
-									}), (0, m.jsx)('input',
-									{
-										className:"clubname bold",
-										onChange: function(e)
-										{
-											$$('.clubname').val(e.currentTarget.value)
 										}
 									}), (0, m.jsx)('div',
 									{
@@ -1331,34 +1340,26 @@
 										{
 											$$("#custom").attr('title','head').attr('alt','add').click()
 										}
-									})]
-								}), (0, m.jsx)('span',
-								{
-									style:
+									}), (0, m.jsx)('br',{}), mt_text.club[mtlang], (0, m.jsx)('input',
 									{
-										whiteSpace: 'pre-wrap',
-										fontSize: '1rem'
-									},
-									children: '名称显示优先级：发言者名称 > 皮肤名称 > 角色名称'
+										className:"clubname bold",
+										onChange: function(e)
+										{
+											$$('.clubname').val(e.currentTarget.value)
+										}
+									})]
 								}), (0, m.jsx)('div',
 								{
 									className: 'headinfo',
 									style: {width: '100%'},
-									children: [(0, m.jsx)('div',
-									{
-										children: '皮肤分支：'
-									}), (0, m.jsx)(HList.Z,
+									children: [(0, m.jsx)(HList.Z,
 									{
 										children: (0, m.jsx)(k,
 										{
 											style: {padding: 0},
 											className: 'heads',
 										})
-									}), (0, m.jsx)('div',
-									{
-										className:"bold",
-										children: '皮肤名称：'
-									}), (0, m.jsx)('input',
+									}), '头像名称', (0, m.jsx)('input',
 									{
 										className:"bold headname",
 										placeholder: '默认',
@@ -3833,12 +3834,19 @@
 											display: 'flex',
 											justifyContent: 'space-between'
 										},
-										children:[(0, m.jsxs)('span',
+										children: [['发言者名称↓','内容索引','角色ID'].map(function(v,k)
 										{
-											className: '内容索引'
-										}), (0, m.jsxs)('span',
-										{
-											className: '角色ID'
+											return (0, m.jsx)('div',
+											{
+												style:
+												{
+													display: 'flex',
+													width: '33%',
+													justifyContent: k == 1 ? 'space-around' : k == 2 ? 'flex-end' : ''
+												},
+												className: v,
+												children: v
+											})
 										})]
 									}), (0, m.jsxs)('div',
 									{
@@ -4064,8 +4072,8 @@
 												fontSize: '1.5rem',
 												color: 'black'
 											},
-											className: '添加头像 cVRiXh eIEKpg evqKja kwhiZC',
-											children: '添加头像'
+											className: '设置头像 cVRiXh eIEKpg evqKja kwhiZC',
+											children: '设置头像'
 										}), (0, m.jsx)('div',
 										{
 											style:

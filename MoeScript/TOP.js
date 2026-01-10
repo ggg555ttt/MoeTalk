@@ -321,8 +321,8 @@ $("body").on('click',function(e)
 	if(e.originalEvent && e.originalEvent.isTrusted)//判断是否是真实点击事件
 	{
 		let ymd = parseInt(year+month+day)
-		ymd = ymd >= 260128 && ymd <= 260204;
-		if(month+day == '0102' || ymd)//新年快乐
+		ymd = ymd >= 260216 && ymd <= 260223;
+		if(month+day == '0101' || ymd)//新年快乐
 		{
 			newyear(`${MoeTalkURL}/plugins/newyear.mp3`)
 			newyear = ()=>{}
@@ -345,11 +345,10 @@ $('body').on('click',"input",function()
 //工具
 $(".frVjsk").wait(function()
 {
-	if(本地)$(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:blue;'>檢</b></button><span class='tool' align='center'>检查更新</span><br>`);
-	else $(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:blue;'>端</b></button><span class='tool' style='white-space:pre;' align='center'>下载\n客户端</span><br>`);
+	if(本地)$(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:red;'>檢</b></button><span class='tool' align='center'>检查更新</span><br>`);
+	else $(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:red;'>端</b></button><span class='tool' style='white-space:pre;' align='center'>下载\n客户端</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' onclick='selectgame()'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:red;'>換</b></button><span class='tool'>切换风格</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:blue;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<a href='${href}index_old.html'><button class='${class0}'><b style='color:black;'>舊</b></button></a><span class='tool'>访问旧版</span><br>`);
 	$(".frVjsk").append(`<a href='${href}setting.html'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
