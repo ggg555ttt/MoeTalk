@@ -825,7 +825,7 @@ $("body").on('click',".设置头像",function()
 	str += '<label><input class="radio" type="radio" name="mode" value="add">添加头像</label>'
 	str += '<label><input class="radio" type="radio" name="mode" value="change" checked>切换角色</label>\n'
 	str += `<img class="头像 N_char" src="${index ? loadhead(no,index) : href+'MoeData/Ui/error.webp'}" ${no ? `alt="${no}"` : ''}" ${index ? `title="${index}"` : ''}">`
-	str += `<span>ID：${no}</span><div class="N_list">`
+	str += `名称：<input style="font-size:1.2rem;color:red;" class="text" placeholder="${$('.角色名称').attr('placeholder')}" value="${$('.角色名称').val()}"><div class="N_list">`
 	HeadList.list.map(function(index,k)
 	{
 		str += `<img class="头像" src="${loadhead('LIST',index)}" title="${index}" style="cursor:pointer;" onclick="this.remove()">`
@@ -833,7 +833,7 @@ $("body").on('click',".设置头像",function()
 	str += '</div>\n'
 
 	str += '头像列表：（点击选择）\n'
-	let str1 = '$(".N_char").attr("src",loadhead(this.alt,this.title)).attr("alt",this.alt).attr("title",this.title).next().text("ID："+this.alt)'
+	let str1 = '$(".N_char").attr("src",loadhead(this.alt,this.title)).attr("alt",this.alt).attr("title",this.title).next().attr("placeholder",loadname(this.alt,this.title))'
 	let str2 = '$(".N_list").append(`<img class="头像" src="${loadhead("LIST",this.title)}" title="${this.title}" style="cursor:pointer;" onclick="this.remove()">`)'
 	mt_settings['选择角色'].list.concat({no:'0',index:'1'}).map(function(v,k)
 	{
@@ -858,6 +858,8 @@ $("body").on('click',".设置头像",function()
 		CHAT_HeadList = HeadList
 		let img = $('.N_char')
 		let hl = CHAT_HeadList.list.length
+		let name = img.next()[0]
+		$('.角色名称').attr('placeholder',name.placeholder).val(name.value)
 		$('.角色头像_列表').text(hl ? `+${hl}头像` : '')
 		$('.角色ID').text(img[0].alt ? 'ID：'+img[0].alt : '不更改角色')
 		$('.设置头像').css('color',CHAT_HeadList.list.length || checked > 1 ? 'red' : 'rgb(75, 105, 137)')
