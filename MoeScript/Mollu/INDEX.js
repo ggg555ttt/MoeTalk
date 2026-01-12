@@ -2055,8 +2055,9 @@
 												let option = ''
 												option += `<option value="image/png" ${mt_settings['图片格式'] == 'image/png' ? 'selected' : ''}>png</option>`
 												option += `<option value="image/jpeg" ${mt_settings['图片格式'] == 'image/jpeg' ? 'selected' : ''}>jpeg</option>`
-												option += `<option value="image/webp" ${mt_settings['图片格式'] == 'image/webp'? 'selected' : ''}>webp</option>`
-												option += `<option value="image/bmp" ${mt_settings['图片格式'] == 'image/bmp' ? 'selected' : ''}>bmp</option>`
+									option += `<option value="image/webp" ${mt_settings['图片格式'] == 'image/webp'? 'selected' : ''}>webp</option>`
+									option += `<option value="image/avif" ${mt_settings['图片格式'] == 'image/avif' ? 'selected' : ''}>avif</option>`
+									option += `<option value="image/bmp" ${mt_settings['图片格式'] == 'image/bmp' ? 'selected' : ''}>bmp</option>`
 												option += `<option value="image/gif" ${mt_settings['图片格式'] == 'image/gif' ? 'selected' : ''}">gif</option>`
 												let str = ''
 												str += `<input class='打包下载' type='checkbox' ${mt_settings['打包下载'] ? 'checked' : ''}>打包下载\n`
