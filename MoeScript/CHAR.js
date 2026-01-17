@@ -1,38 +1,19 @@
 /*@MoeScript/CHAR.js@*/
 var mt_char = false//自定义角色数据
-var mt_head = false//自定义头像数据
 var mt_chars = false//自定义角色列表
 var mt_schars = false//临时角色列表
 var mt_clubs = []//自定义社团列表
 var char_info = {}//角色信息
 var saveClub = true;//社团保存开关
 var 选择角色 = true;//快捷角色开关
-if(!sessionStorage['mt-char'])sessionStorage['mt-char'] = '{}';
-if(!sessionStorage['mt-head'])sessionStorage['mt-head'] = '{}';
-var mt_schar = JSON.parse(sessionStorage['mt-char'])//临时角色数据
-var mt_shead = JSON.parse(sessionStorage['mt-head'])//临时头像数据
+var mt_schar = {}//临时角色数据
 var CHAR_CharList = []
 //读取头像
 function loadhead(id,img)
 {
-	
-	//主角
-	if(id == 0 || img == 1)return `${href}MoeData/Ui/you.webp`;
-	//自定义头像
-	if(mt_head[img])
-	{
-		return mt_head[img]
-	}
-	if(mt_shead[img])
-	{
-		return mt_shead[img]
-	}
-	//MoeTalk头像
-	if(mt_characters[id] || id === 'LIST')
-	{
-		return `${href}GameData/${mt_settings['选择游戏']}/Char/${img}.webp`;
-	}
-	return `${href}MoeData/Ui/error.webp`;//默认头像
+	if(id == 0 || img == 1)return `${href}MoeData/Ui/you.webp`;//主角
+	if(/custom-|CharFace-|Emoji-/.test(img) || img>999)return img
+	return `${href}GameData/${mt_settings['选择游戏']}/Char/${img}.webp`;
 }
 function loadname(id,index)
 {
@@ -201,7 +182,7 @@ function custom_char(info)
 	let names = mt_settings.人物改名;
 	$('#custom-char .rightSend').prop('checked',false).prop('checked',mt_settings['右侧发言'][char_info.no])
 	$('#custom-char .typeTitle').text('修改角色')
-	$('#custom-char .confirm').removeAttr('disabled')
+	$('#custom-char .yes').removeAttr('disabled')
 	$('#custom-char .charid').html(`<span class='red'>ID：${char_info.no}</span>${mt_text.school[mtlang]}：${char_info.make ? '自定义' : char_info.school[mtlang]}<br>`)
 	$('.charname').val(toString(names[char_info.no])).attr('placeholder',`${char_info.make ? '' : char_info.name[mtlang]}`)
 	$('.clubname').val(`${char_info.make ? '自定义角色' : char_info.club[mtlang].replace('#','')}`).removeAttr('disabled')
@@ -216,14 +197,14 @@ function custom_char(info)
 		else
 		{
 			$('#custom-char .typeTitle').text('添加角色')
-			$('#custom-char .confirm').attr('disabled','disabled')
+			$('#custom-char .yes').attr('disabled','disabled')
 		}
 	}
 	if(char_info.club && char_info.club.id === '临时角色')
 	{
 		names = mt_schar[char_info.no].names ? mt_schar[char_info.no].names : {}
 		$('#custom-char .typeTitle').text('临时角色（无法修改）')
-		$('#custom-char .confirm').attr('disabled','disabled')
+		$('#custom-char .yes').attr('disabled','disabled')
 	}
 	if(char_info.school && char_info.school[mtlang] !== '自定义')$('.edithead').hide()
 	else $('.edithead').show()
@@ -234,7 +215,7 @@ function custom_char(info)
 	for(let i = 0; i < length; i++)
 	{
 		if(names[char_info.profile[i]])char_info.names[char_info.profile[i]] = names[char_info.profile[i]]
-		$('.heads').append(`<img src="${loadhead(char_info.no,char_info.profile[i])}" title="${char_info.profile[i]}" ${attr}>`)
+		$('.heads').append(`<img src="${loadhead(char_info.no,char_info.profile[i])}" title="${char_info.profile[i]}" ${attr} onerror="IMAGE_error(this)">`)
 	}
 	$('.heads img:eq(0)').click()
 	if(char_info.selected || char_info.selected === 0)
@@ -250,7 +231,7 @@ function custom_char(info)
 	}
 	$('#custom-char').addClass('visible')
 }
-function edit_char()
+async function edit_char()
 {
 	let name = toString($('.charname').val() ? $('.charname').val() : $('.charname').attr('placeholder'))
 	let club = toString($('.clubname').val().trim()).replace('#','')
@@ -278,7 +259,7 @@ function edit_char()
 	let length = char_info.profile.length
 	for(let i = 0;i < length;i++)
 	{
-		delete mt_head[char_info.profile[i]]
+		await MoeImage.removeItem(char_info.profile[i])
 	}
 	$('.heads img').each(function()
 	{
@@ -286,7 +267,7 @@ function edit_char()
 		if(mt_char[id])
 		{
 			mt_char[id].head.push(index)
-			mt_head[index] = $(this).attr('src')
+			MoeImage.setItem(index,$(this).attr('src'))
 			if(index !== char_info.no)mt_char[id].names[index] = toString(char_info.names[index])
 		}
 		else if(id !== index)
@@ -297,7 +278,6 @@ function edit_char()
 	})
 	$('#custom-char .rightSend').prop('checked') ? mt_settings['右侧发言'][id] = true : delete mt_settings['右侧发言'][id]
 	saveStorage('mt-char',mt_char,'local')
-	saveStorage('mt-head',mt_head,'local')
 	saveStorage('设置选项',mt_settings,'local')
 	char_info = []
 	$('#custom-char').removeClass('visible')//S()
@@ -308,7 +288,7 @@ $.each(mt_char,function(k,v)
 	mt_char[k].club = '自定义角色'
 })
 
-function removeChar(n)
+async function removeChar(n)
 {
 	club(true)
 	if(n.club.zh_cn === '临时角色')
@@ -316,21 +296,30 @@ function removeChar(n)
 		if(confirm(`角色名：${mt_schar[n.no].name.replaceAll("-", " ")}\nID：${n.no}\n确定将这名角色添加进自定义角色列表？`))
 		{
 			mt_char[n.no] = mt_schar[n.no]
-			mt_head[n.no] = mt_shead[n.no]
 			mt_char[n.no].club = n.school.zh_cn
 			mt_char[n.no].school = '自定义'
-			let length = mt_schar[n.no].head ? mt_schar[n.no].head.length : 0
-			for(let i = 0;i < length;i++)
+			let img = await MoeTemp.getItem(n.no)
+			if(img)await Promise.all([MoeTemp.removeItem(n.no),MoeImage.setItem(n.no,img)])
+			let head = mt_schar[n.no].head || []
+			for(let i=0,l=head.length;i<l;i++)
 			{
-				mt_head[mt_schar[n.no].head[i]] = mt_shead[mt_schar[n.no].head[i]]
-				delete mt_shead[mt_schar[n.no].head[i]];
+				img = await MoeTemp.getItem(head[i])
+				if(img)await Promise.all([MoeTemp.removeItem(head[i]),MoeImage.setItem(head[i],img)])
+			}
+			for(let key in mt_schar[n.no].emoji)
+			{
+				img = await MoeTemp.getItem(key)
+				if(img)
+				{
+					await Promise.all([MoeTemp.removeItem(key),MoeImage.setItem(key,img)])
+					if(!EMOJI_CustomEmoji[n.no])EMOJI_CustomEmoji[n.no] = {}
+					EMOJI_CustomEmoji[n.no][key] = mt_schar[n.no].emoji[key]
+				}
 			}
 			delete mt_schar[n.no];
-			delete mt_shead[n.no];
 			saveStorage('mt-char',mt_char,'local')
-			saveStorage('mt-head',mt_head,'local')
-			saveStorage('mt-char',mt_schar,'session')
-			saveStorage('mt-head',mt_shead,'session')
+			saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
+			MoeTemp.setItem('临时角色',mt_schar)
 			charList(!0)//更新列表
 		}
 	}
@@ -339,22 +328,37 @@ function removeChar(n)
 		if(confirm(`角色名：${mt_char[n.no].name.replaceAll("-", " ")}\nID：${n.no}\n确定要删除这名角色吗？\n删除后的角色可以从临时角色列表中找回`))
 		{
 			mt_schar[n.no] = mt_char[n.no]
-			mt_shead[n.no] = mt_head[n.no]
 			mt_schar[n.no].club = '临时角色'
 			mt_schar[n.no].school = n.club.zh_cn.replace('#','')
-			let length = mt_char[n.no].head ? mt_char[n.no].head.length : 0
-			for(let i = 0;i < length;i++)
+			mt_schar[n.no].emoji = EMOJI_CustomEmoji[n.no] || {}
+			let img = await MoeImage.getItem(n.no)
+			if(img)await Promise.all([MoeImage.removeItem(n.no),MoeTemp.setItem(n.no,img)])
+			let head = mt_char[n.no].head || []
+			for(let i=0,l=head.length;i<l;i++)
 			{
-				mt_shead[mt_char[n.no].head[i]] = mt_head[mt_char[n.no].head[i]]
-				delete mt_head[mt_char[n.no].head[i]];
+				img = await MoeImage.getItem(head[i])
+				if(img)await Promise.all([MoeImage.removeItem(head[i]),MoeTemp.setItem(head[i],img)])
+			}
+			let emoji = Object.keys((EMOJI_CustomEmoji[n.no] || {}))
+			for(let i=0,l=emoji.length;i<l;i++)
+			{
+				img = await MoeImage.getItem(emoji[i])
+				if(img)await Promise.all([MoeImage.removeItem(emoji[i]),MoeTemp.setItem(emoji[i],img)])
+			}
+			mt_settings.选择角色.index = 0
+			mt_settings.选择角色.index = 1
+			let list = mt_settings.选择角色.list || []
+			mt_settings.选择角色.list = []
+			for(let i=0,l=list.length;i<l;i++)
+			{
+				if(list[i].no != n.no)mt_settings.选择角色.list.push(list[i])
 			}
 			delete mt_char[n.no];
-			delete mt_head[n.no];
-
+			delete EMOJI_CustomEmoji[n.no]
 			saveStorage('mt-char',mt_char,'local')
-			saveStorage('mt-head',mt_head,'local')
-			saveStorage('mt-char',mt_schar,'session')
-			saveStorage('mt-head',mt_shead,'session')
+			saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
+			MoeTemp.setItem('临时角色',mt_schar)
+			选择角色 = true
 			charList(!0)//更新列表
 		}
 	}
@@ -488,4 +492,13 @@ function CHAR_UpdateChar()
 {
 	club(true)
 	t()
+}
+async function tt()
+{
+	let head = await moetalkStorage.getItem('mt-head')
+	if(head)
+	{
+		for(let key in head)await MoeImage.setItem(key,head[key])
+		moetalkStorage.removeItem('mt-head')
+	}
 }

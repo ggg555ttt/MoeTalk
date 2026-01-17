@@ -197,7 +197,6 @@ function mt_emojis(S,mode)
 		if($(`.差分映射.selected`).length)$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',block: 'nearest'})
 	}, 100)
 	saveStorage('差分书签',EMOJI.pages,'local')
-	if(EMOJI.custom.io)EMOJI.images.unshift('ADD')
 
 	S(!0)
 
@@ -372,14 +371,14 @@ function makeMessage(type,data,chatIndex,mode)
 	if(type === 'chat' || type === 'image')
 	{
 		let headstyle = data.heads ? `style="z-index:${data.heads.list.length};"` : ''
-		头像 = head ? `<img src="${loadhead(no,index)}" alt="${index}" class="头像"${headstyle}>` : ''
+		头像 = head ? `<img src="${loadhead(no,index)}" alt="${index}" class="头像"${headstyle} onerror="IMAGE_error(this)">` : ''
 		headstyle = ''
 		if(data.heads && head)
 		{
 			headstyle = `margin-${data.heads.direction === 'column' ? 'top' : 'left'}:${data.heads.margin ? data.heads.margin : '-1.5rem'};`
 			data.heads.list.map(function(index,k)
 			{
-				头像 += `<img src="${loadhead('LIST',index)}" class="头像"style="${headstyle};z-index:${data.heads.list.length-k-1};">`
+				头像 += `<img src="${loadhead('LIST',index)}" class="头像"style="${headstyle};z-index:${data.heads.list.length-k-1};" onerror="IMAGE_error(this)">`
 			})
 			headstyle = 'min-width:max-content;'
 			headstyle += `padding-${no != 0 && !data.isRight ? 'right' : 'left'}:1rem;`
@@ -396,7 +395,7 @@ function makeMessage(type,data,chatIndex,mode)
 				maxwidth = mt_settings['差分比例'] || '90%'
 			}
 			maxwidth = `max-width:${maxwidth};`
-			图片 = `<img style="${width}${maxwidth};" class="图片 编辑" src='${data.file.indexOf(":image") > -1 ? data.file : href+data.file}'>`
+			图片 = `<img style="${width}${maxwidth};" class="图片 编辑" src='${data.file.indexOf(":image") > -1 ? data.file : href+data.file}' onerror="IMAGE_error(this)">`
 		}
 		if(no != 0 && !data.isRight)
 		{//左侧对话

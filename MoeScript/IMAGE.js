@@ -8,38 +8,70 @@ var 截图区域
 var 正在截图 = false
 var 上次截图 = []
 var 首次截图 = false
-async function IMAGE_error(image,index='')
+async function IMAGE_error(image)
 {
 	let src = image.src ? image.getAttribute('src') : image.target.getAttribute('src')
-	if(EMOJI_CustomEmoji.image[src])
+	let url = src.split('/').pop().replace('.webp','')
+	let img = await MoeImage.getItem(url) || await MoeTemp.getItem(url) || href+'MoeData/Ui/error.webp'
+	if(img[0] === 'G')img = href+img
+	if(image.src)image.src = img
+	else image.target.src = img
+	return
+}
+function 加载图片(images)
+{
+	if(images.length === 0)return Promise.resolve();
+
+	const seenSrcs = new Set();
+	const pendingImages = [];
+	let pendingCount = 0;
+
+	for(let i = 0; i < images.length; i++)
 	{
-		image.src = EMOJI_CustomEmoji.image[src]
-		return
+		const img = images[i];
+		let src = img.getAttribute('src') || '';
+		img.src = src;// 使用解析后的完整 URL
+
+		// 跳过已加载、Base64、重复
+		if(img.complete && img.naturalWidth > 0)continue;
+		if(src.startsWith('data:'))continue;
+		if(seenSrcs.has(src))continue;
+		seenSrcs.add(src);
+		pendingImages.push(img);
+		pendingCount++;
 	}
-	if(本地)
+
+	if(pendingCount === 0)return Promise.resolve();
+
+	return new Promise(resolve=>
 	{
-		let filename = ''
-		if(image.currentTarget)
+		let resolved = 0;
+		const onReady = ()=>{if(++resolved === pendingCount)resolve();};
+		for(const img of pendingImages)
 		{
-			filename = image.target.src.replace(location.href.replace('index.html',''),'')
-			image = image.currentTarget
+			img.addEventListener('load', onReady, {once: true});
+			img.addEventListener('error', onReady, {once: true});
 		}
-		else filename = image.src.replace(location.href.replace('index.html',''),'')
-		if(数据列表.includes(filename) && 网址列表.length > 0)
+	});
+}
+async function 等待图片(imgs)
+{
+	if(!imgs[0])return;
+	imgs = imgs[0].querySelectorAll('img');
+	for(let i=0,l=imgs.length;i<l;i++)
+	{
+		let img = imgs[i];
+		let src = img.getAttribute('src') || href+'MoeData/Ui/error.webp';
+
+		//替换自定义图片
+		if(!src.startsWith('data:') && (/custom-|CharFace-|Emoji-/.test(src) || src>999))
 		{
-			let url = 网址列表[Math.floor(Math.random()*网址列表.length)]
-			if(!await file_exists(`${url}/${filename}`))
-			{
-				let data = await $ajax(`${url}/${filename}`)
-				if(data)//下载成功
-				{
-					image.src = filename
-					await 保存文件(filename, data)
-				}
-				else IMAGE_error(image)
-			}
+			let url = src.split('/').pop().replace('.webp','')
+			src = await MoeImage.getItem(url) || await MoeTemp.getItem(url) || href+'MoeData/Ui/error.webp'
 		}
+		img.src = src;// 使用解析后的完整 URL
 	}
+	await 加载图片(imgs)
 }
 //图片压缩
 function compress(base64Img,type = 'head',mode = 'add',length = 0)
@@ -99,7 +131,7 @@ function compress(base64Img,type = 'head',mode = 'add',length = 0)
 				}
 				else index = char_info.no
 				$('.heads').append(`<img src="${newBase64}" title="${index}" ${attr}>`)
-				$('#custom-char .confirm').removeAttr('disabled')
+				$('#custom-char .yes').removeAttr('disabled')
 				$('.headinfo').show()
 				$('.heads img:eq(-1)').click()
 			}

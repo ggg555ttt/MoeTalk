@@ -10,6 +10,9 @@
 	}
 })();
 const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});//数据库
+const MoeImage = localforage.createInstance({name:'MoeImage'});//数据库
+const MoeTemp = localforage.createInstance({name:'MoeTemp'});//数据库
+const MoeProject = localforage.createInstance({name:'MoeProject'});//数据库
 if(mt_settings['存储模式'])
 {
 	moetalkStorage.setDriver('localStorageWrapper');
@@ -23,7 +26,6 @@ if(mt_settings['存储模式'])
 			delete sessionStorage[key]
 		}
 	})
-
 }
 function os(u = window.navigator.userAgent)
 {

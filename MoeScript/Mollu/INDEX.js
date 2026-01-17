@@ -1434,7 +1434,7 @@
 										children: mt_text.cancel[mtlang]
 									}), (0, m.jsx)(ea.AZ,
 									{
-										className: "bold confirm",
+										className: "bold yes",
 										onClick: function()
 										{
 											edit_char()
@@ -2259,42 +2259,11 @@
 								})
 							}
 						},
-						I = function()
-						{
-							chats = []
-							otherChats = []
-							j.CHAT.map(function(v,k)
-							{
-								if(v.replyDepth !== 0)otherChats.push(v)
-								else chats.push(v)
-							})
-							if($$('.INDEX_LoadChar:checked').length)
-							{
-								mt_char = {...mt_char,...j.CHAR.id}
-								mt_head = {...mt_head,...j.CHAR.image}
-								saveStorage('mt-char',mt_char,'local')
-								saveStorage('mt-head',mt_head,'local')
-							}
-							if($$('.INDEX_LoadEmoji:checked').length)
-							{
-								if(j.EMOJI.id)
-								{
-									j.EMOJI.Emoji = j.EMOJI.id
-									delete j.EMOJI.id
-								}
-								$$.each(j.EMOJI,function(id,obj)
-								{
-									if(!EMOJI_CustomEmoji[id])EMOJI_CustomEmoji[id] = obj
-									else EMOJI_CustomEmoji[id] = {...EMOJI_CustomEmoji[id],...obj}
-								})
-								saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
-							}
-							if(j.SETTING)mt_settings = j.SETTING
-							CHAR_UpdateChar()
-							log(true)//清除历史记录
-							replyDepth(0,'home')//清除跳转记录
-							saveStorage('设置选项',mt_settings,'local')
-							saveStorage('chats',[...chats,...otherChats],'local')
+						I = async function()
+						{//编译过的存档
+							INIT_loading('读档')
+							await 读取存档(j)
+							INIT_loading(0)
 							N()
 						};
 					return (0, m.jsx)(ea.Xf,
@@ -2325,7 +2294,7 @@
 									children: (0, m.jsx)(c.j4,
 									{})
 								})]
-							}), (0, m.jsx)("span",
+							}), (0, m.jsx)("p",
 							{
 								hidden: x !== "download",
 								children: ['存档格式：', (0, m.jsx)("select",
@@ -2341,6 +2310,14 @@
 										children: '图片'
 									})]
 								}),'无法下载请将格式改为图片后手动保存']
+							}), (0, m.jsx)("p",
+							{
+								hidden: x !== "download",
+								children: [(0, m.jsx)("input",
+								{
+									className: '包含自定义数据',
+									type: 'checkbox'
+								}),'包含自定义数据']
 							}), (0, m.jsx)(ea.$0,
 							{
 								style: {padding: '0.5rem'},
@@ -2356,6 +2333,7 @@
 										},
 										onChange: function(e)
 										{
+											INIT_loading('加载')
 											P(e)
 										}
 									}), (0, m.jsx)('div',
@@ -2484,26 +2462,17 @@
 										}), (0, m.jsx)(ea.AZ,
 										{
 											className: "bold",
-											onClick: function()
+											onClick: async function()
 											{
-												let f = mt_settings['截图选项'].titleStr = $$('.mt_title:eq(-1)').val()
-												let k = mt_settings['截图选项'].writerStr = $$('.mt_writer:eq(-1)').val()
-												let time = getNowDate();
-												let json = {}
-												json.MoeTalk = 本地应用版本[0]
-												json.INFO = {}//存档信息
-												json.INFO.title = f
-												json.INFO.nickname = k
-												json.INFO.date = time
-												json.CHAR = {}//自定义角色
-												json.CHAR.id = mt_char
-												json.CHAR.image = mt_head
-												json.EMOJI = EMOJI_CustomEmoji//自定义表情
-												json.SETTING = mt_settings//设置信息
-												json.CHAT = [...chats,...otherChats]//MMT数据
-												let filename = 'MoeTalk存档'+time+'_'
+												let cus = false
+												let info = {}
+												info.title = mt_settings['截图选项'].titleStr = $$('.mt_title:eq(-1)').val()
+												info.nickname = mt_settings['截图选项'].writerStr = $$('.mt_writer:eq(-1)').val()
+												info.date = getNowDate();
+												if($$('.包含自定义数据').prop('checked'))cus = true
+												let filename = 'MoeTalk存档'+info.date+'_'
 												if(mt_settings['隐藏前缀'])filename = ''
-												导出存档(`${filename}${f || '无题'}`,json)
+												导出存档(`${filename}${info.title || '无题'}`,await 生成存档(info,cus))
 											},
 											children: L.Z.download[d]
 										})]
@@ -2513,30 +2482,6 @@
 									children: [(0, m.jsx)("span",
 									{
 										children: L.Z.up_comment1[d]
-									}), (0, m.jsx)("span",
-									{
-										children: [(0, m.jsx)("input",
-										{
-											className: "INDEX_LoadChar",
-											style:
-											{
-												width: '1rem',
-												height: '1rem'
-											},
-											type: 'checkbox',
-										}),`同时并添加存档内的自定义角色${Object.keys(j.CHAR.id).length}名`]
-									}), (0, m.jsx)("span",
-									{
-										children: [(0, m.jsx)("input",
-										{
-											className: "INDEX_LoadEmoji",
-											style:
-											{
-												width: '1rem',
-												height: '1rem'
-											},
-											type: 'checkbox'
-										}),`和自定义表情${Object.keys(j.EMOJI.image).length}张`]
 									}), (0, m.jsxs)("div",
 									{
 										style:
@@ -2552,6 +2497,19 @@
 										}), (0, m.jsxs)(eT,
 										{
 											children: [L.Z.date[d], " : ", j.INFO.date]
+										}), (0, m.jsxs)(eT,
+										{
+											style: {'color': 'red'},
+											children: j.CUSTOM ? ['包含自定义数据', (0, m.jsxs)('button',
+											{
+												children: '统计',
+												onClick: function()
+												{
+													let c = Object.keys(j.CUSTOM.CHAR).length
+													let n = Object.keys(j.CUSTOM.IMAGE).length
+													alert(`角色总数：${c}\n图片总数：${n}`)
+												}
+											})] : ''
 										})]
 									}), (0, m.jsxs)("span",
 									{
@@ -2559,7 +2517,7 @@
 										{
 											fontSize: "1rem"
 										},
-										children: ["※", L.Z.up_comment2[d]]
+										children: '当前项目将自动备份'
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -3025,6 +2983,7 @@
 														alt: String(e.no),
 														title: String(e.index),
 														src: loadhead(e.no,e.index),
+														onError: function(e){IMAGE_error(e)},
 														style: {width: '3rem',height: '3rem'},
 														className: '差分映射 '+ (e.no == 差分映射.id && e.index == 差分映射.index ? 'selected' : '')
 													}, n)
@@ -3045,7 +3004,7 @@
 												if(EMOJI.custom.io)
 												{
 													前缀 = ''
-													link = EMOJI_CustomEmoji.image[v]
+													link = v
 												}
 												return (0, m.jsx)('div',
 												{
@@ -3075,7 +3034,7 @@
 															overflow: 'hidden',
 															maxHeight: '100%'
 														},
-														children: [(0, m.jsx)('span',
+														children: [v != 'ADD' ? (0, m.jsx)('span',
 														{
 															className: "bold",
 															style:
@@ -3085,7 +3044,7 @@
 															},
 															children: '点击编辑\n',
 															hidden: !link
-														}),EmojiInfo],
+														}) : '',EmojiInfo],
 														title: v,
 														onClick:function(e)
 														{
@@ -3116,12 +3075,8 @@
 															height: 'auto'
 														},
 														src: v === 'ADD' ? href+'MoeData/Ui/School/RECYCLE.webp' : 前缀+link,//#表情链接
-														onError: function(e)
-														{
-															IMAGE_error(e)
-															e.target.parentNode.style.display = 'none'
-														},
-														onClick: function()
+														onError: function(e){IMAGE_error(e)},
+														onClick: function(e)
 														{
 															let config = {}
 															config.id = Math.random().toString().replace('0.','')
@@ -3133,17 +3088,18 @@
 																str += `<div class="Emojis" title="${v}"></div>\n`
 																config.title = '添加表情'
 																config.confirm = '提交'
-																config.yes = function()
+																config.yes = async function()
 																{
 																	if($$(`.alert_${config.id} input:checked`).length)EMOJI.pages[EMOJI.id].custom = parseInt(EMOJI.pageindex.split(' / ')[1])//添加到新的分页
 																	else EMOJI.pages[EMOJI.id].custom = parseInt(EMOJI.pageindex.split(' / ')[0]-1)
-																	$$('.Emojis img').each(function(k,v)
+																	let imgs = $$('.Emojis img')
+																	for(let i=0,l=imgs.length;i<l;i++)
 																	{
-																		let id = `${EMOJI.type}-${getNowDate()}_${k}`
+																		let id = `${EMOJI.type}-${getNowDate()}_${i}`
 																		if(!EMOJI_CustomEmoji[EMOJI.id])EMOJI_CustomEmoji[EMOJI.id] = {}
 																		EMOJI_CustomEmoji[EMOJI.id][id] = EMOJI.pages[EMOJI.id].custom
-																		EMOJI_CustomEmoji.image[id] = v.src
-																	})
+																		await MoeImage.setItem(id,imgs[i].src)
+																	}
 																	$$('.INDEX_Emoji').click()
 																	saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
 																}
@@ -3164,8 +3120,8 @@
 																		$$.each($$('.INDEX_EmojiIfno.selected'),function(k,v)
 																		{
 																			v = v.title
+																			MoeImage.removeItem(v)
 																			delete EMOJI_CustomEmoji[EMOJI.id][v]
-																			delete EMOJI_CustomEmoji.image[v]
 																			delete mt_settings['表情信息'][v]
 																		})
 																		saveStorage('设置选项',mt_settings,'local')
@@ -3178,7 +3134,7 @@
 																config.title = '编辑表情'
 																config.confirm = '提交'
 																let str = ''
-																let img = `<img class="Emojis" src='${前缀+link}' style='width:100%;'>`
+																let img = `<img class="Emojis" src='${前缀+link}' style='width:100%;' onerror='IMAGE_error(this)'>`
 																let now = parseInt(EMOJI.pageindex.split(' / ')[0])//当前页
 																let end = parseInt(EMOJI.pageindex.split(' / ')[1])//终点页
 																if(EMOJI.custom.io)
@@ -3201,11 +3157,11 @@
 																	if(EMOJI.custom.io)
 																	{//编辑自定义表情
 																		EMOJI_CustomEmoji[EMOJI.id][v] = parseInt($$(`.alert_${config.id} select`).val()-1)
-																		EMOJI_CustomEmoji.image[v] = $$('.Emojis').attr('src')
+																		MoeImage.setItem(v,$$('.Emojis').attr('src'))
 																		if($$(`.alert_${config.id} input:checked`).length)
 																		{//只删除表情
+																			MoeImage.removeItem(v)
 																			delete EMOJI_CustomEmoji[EMOJI.id][v]
-																			delete EMOJI_CustomEmoji.image[v]
 																			if(!Object.keys(EMOJI_CustomEmoji[EMOJI.id]).length)delete EMOJI_CustomEmoji[EMOJI.id]
 																			$$(`.alert_${config.id} .text`).val('')
 																		}
@@ -3233,6 +3189,7 @@
 															}
 															else
 															{
+																if(e.target.src.startsWith('data:'))link = e.target.src
 																sendMessage({file: link,content: EMOJI.type},'image'), s()
 															}
 														},
@@ -3498,6 +3455,7 @@
 								onClick: function()
 								{
 									click('#tool-save')
+									$$('.包含自定义数据').prop('checked',false)
 								},
 								children: (0, m.jsx)(c.xL,
 								{
@@ -3864,7 +3822,8 @@
 												height: '3rem',
 												cursor: 'pointer',
 												border: '1px solid rgb(252, 199, 41)'
-											}
+											},
+											onError: function(e){IMAGE_error(e)}
 										}), (0, m.jsxs)('div',
 										{
 											style:
@@ -4006,7 +3965,8 @@
 												maxWidth: '50%',
 												maxHeight: '10rem'
 											},
-											src: ''
+											src: '',
+											onError: function(e){IMAGE_error(e)}
 										}), (0, m.jsxs)('div',
 										{
 											children: [(0, m.jsx)(eN.g4,
@@ -4686,7 +4646,7 @@
 								{
 									TOP_replyEdit()
 								},
-								children: "项目管理"
+								children: "选择肢管理"
 							}, n), (0, m.jsx)(ni,
 							{
 								className: 'replyHome',
@@ -6634,8 +6594,17 @@
 											if(!MMT目录.当前 || MMT目录.当前[0] !== l.ID)
 											{
 												MMT目录.数据 = loaddata(await ZipToJson(`${href}${filename}.zip`),'player')
-												delete MMT目录.数据.SETTING
-												delete MMT目录.数据.CHAR
+												if(MMT目录.数据.CHAR)
+												{
+													mt_schar = {...mt_schar,...MMT目录.数据.CHAR.id}
+													for(let id in MMT目录.数据.CHAR.image)
+													{
+														let img = MMT目录.数据.CHAR.image[id]
+														await MoeTemp.setItem(id,img)
+													}
+													MoeTemp.setItem('临时角色',mt_schar)
+												}
+												delete MMT目录.数据
 											}
 											MMT目录.当前 = [l.ID,k]
 											let data = loaddata(await ZipToJson(`${href}${filename}-${k}.zip?md5=${l.MD5}`),'player')

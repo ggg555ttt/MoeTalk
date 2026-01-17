@@ -20,7 +20,7 @@ $('body').on('change',"#loadcusfile",function()
 	reader.onload = function(e)
 	{
 		let mt_char = {};
-		let mt_head = {};
+		let head = {};
 		let json = JSON.parse(this.result);
 		if(json[0] === 'Custom')
 		{
@@ -32,7 +32,7 @@ $('body').on('change',"#loadcusfile",function()
 			if(json[0] && JSON.parse(json[0])[0].club[0].characters)
 			{
 				mt_char = {}
-				mt_head = {}
+				head = {}
 				let i;
 				$.each(JSON.parse(json[0])[0].club[0].characters,function(k,v)
 				{
@@ -42,10 +42,10 @@ $('body').on('change',"#loadcusfile",function()
 				{
 					if(k.split('.').length > 1)i = k.split('.')[0];
 					if(k.split('/').length > 1)i = k.split('.')[0];
-					mt_head[i] = v;
+					head[i] = v;
 				})
 				localStorage['mt-char'] = JSON.stringify(mt_char);
-				localStorage['mt-head'] = JSON.stringify(mt_head);
+				localStorage['mt-head'] = JSON.stringify(head);
 			}
 			
 		}

@@ -10,8 +10,8 @@ var CustomFaceAuthor = {}
 var ALERT = {}
 window.alert = function(text = '',config = {})
 {
-	$('.alert').removeClass('visible')
-	config.id = config.title || Math.random().toString().replace('0.','')
+	if(config.show)$('.alert').removeClass('visible')
+	config.id = config.id || Math.random().toString().replace('0.','')
 	config.title = config.title || '通知'
 	config.cancel = config.cancel || '取消'
 	config.confirm = config.confirm || '确认'
@@ -52,6 +52,7 @@ $('body').on('click','.confirm',function()
 });
 async function t()
 {
+	await tt()
 	let game = mt_settings['选择游戏'] || 'NONE';
 	let md5 = {}
 	if(game != 'NONE')md5 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/${game}.json?time=${Date.now()}`));
@@ -61,7 +62,7 @@ async function t()
 		else selectgame('<span style="color:red;">数据缺失！请重新选择游戏</span>')
 		md5 = {}
 	}
-	[mt_school,mt_club,mt_characters,mt_charface,CFInfo,id_map,CustomFaceAuthor,mt_char,mt_head,allChats] = await Promise.all(
+	[mt_school,mt_club,mt_characters,mt_charface,CFInfo,id_map,CustomFaceAuthor,mt_char,allChats,mt_schar] = await Promise.all(
 	[
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-School.json?md5=${md5['MT-School']}`).then(json => JSON.parse(json)) : {},
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-Club.json?md5=${md5['MT-Club']}`).then(json => JSON.parse(json)) : {},
@@ -71,14 +72,14 @@ async function t()
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/IdMap.json?md5=${md5['IdMap']}`).then(json => JSON.parse(json)) : [{},{}],
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/CustomFaceAuthor.json?md5=${md5['CustomFaceAuthor']}`).then(json => JSON.parse(json)) : {},
 		moetalkStorage.getItem('mt-char'),
-		moetalkStorage.getItem('mt-head'),
-		moetalkStorage.getItem('chats')
+		moetalkStorage.getItem('chats'),
+		MoeTemp.getItem('临时角色')
 	]);
 	mt_char = mt_char || {}
-	mt_head = mt_head || {}
 	allChats = allChats || []
 	otherChats = []
 	chats = []
+	mt_schar = mt_schar || {}
 	foreach(allChats,function(k,v)
 	{
 		repairCF(allChats[k]);
@@ -89,7 +90,7 @@ async function t()
 	$(".INDEX_tips").wait(function()
 	{
 		chats.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
-		otherChats.length ? $('.reply').show() : $('.reply').hide()//项目管理
+		otherChats.length ? $('.reply').show() : $('.reply').hide()//选择肢管理
 	},".INDEX_tips")
 	CHAR_GetCharList()
 	选择角色 = true
@@ -349,10 +350,132 @@ $(".frVjsk").wait(function()
 	else $(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:red;'>端</b></button><span class='tool' style='white-space:pre;' align='center'>下载\n客户端</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' onclick='selectgame()'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:blue;'>換</b></button><span class='tool'>切换风格</span><br>`);
+	$(".frVjsk").append(`<button class='${class0}' id='MoeProject'><b style='color:red;'>項</b></button><span class='tool' align='center'>项目管理</span><br>`);
 	$(".frVjsk").append(`<a href='${href}index_old.html'><button class='${class0}'><b style='color:black;'>舊</b></button></a><span class='tool'>访问旧版</span><br>`);
 	$(".frVjsk").append(`<a href='${href}setting.html'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
-
+$("body").on('click',"#MoeProject",async function()
+{
+	let 项目名称 = await MoeProject.getItem('项目名称') || {}
+	let 自动备份 = await MoeProject.getItem('自动备份') || null
+	let Projects = await MoeProject.keys() || []
+	let 新项目 = '',保存 = ''
+	if(chats.length+otherChats.length)
+	{
+		新项目 = `<button class="MoeProject" title="新项目">添加新项目</button>`
+		保存 = `<button class="MoeProject" title="保存">保存</button>`
+	}
+	let 删除 = `<button class="MoeProject" title="删除">删除</button>`
+	let 编辑 = `<button class="MoeProject" title="编辑">编辑</button>`
+	let 读取 = `<button class="MoeProject" title="读取">读取</button>`
+	let button = ` ${保存} ${删除} ${编辑} ${读取}`
+	let str = ''
+	// if(自动备份)str += `<p>${项目名称[]}</p>`
+	str += 新项目+'\n'
+	if(自动备份)str += `<div class="自动备份">自动备份 ${读取}</div>`
+	for(let i=0,l=Projects.length;i<l;i++)
+	{
+		let key = Projects[i]
+		if(['项目名称','自动备份'].includes(key))continue;
+		str += `<div class="${key}"><span>${项目名称[key] || key}</span>${button}</div>`
+	}
+	let config = {}
+	config.id = 'MoeProject'
+	config.show = true
+	alert(str,config)
+});
+$("body").on('click',".MoeProject",async function()
+{
+	let 项目名称 = await MoeProject.getItem('项目名称') || {}
+	let key = this.parentNode.className
+	let mode = this.title
+	let str = `项目ID：${key}\n项目名：${项目名称[key] || key}\n\n`
+	let config = {}
+	config.id = getNowDate()
+	config.title = mode+'项目'
+	if(mode == '保存')
+	{
+		str += '将当前正在编辑的项目保存到此项目中，并自动备份原项目'
+		config.yes = async function()
+		{
+			let json,newjson
+			[json,newjson] = await Promise.all(
+			[
+				MoeProject.getItem(key),
+				生成存档()
+			])
+			await Promise.all(
+			[
+				MoeProject.setItem('自动备份',json),
+				MoeProject.setItem(key,newjson)
+			])
+		}
+		
+	}
+	if(mode == '删除')
+	{
+		str += '将删除此项目，可在自动备份中恢复'
+		config.yes = async function()
+		{
+			delete 项目名称[key]
+			let json = await MoeProject.getItem(key)
+			await Promise.all(
+			[
+				MoeProject.setItem('自动备份',json),
+				MoeProject.setItem('项目名称',项目名称),
+				MoeProject.removeItem(key)
+			])
+			$(`.${key}`).remove()
+		}
+	}
+	if(mode == '编辑')
+	{
+		str += '新项目名：<input>'
+		config.yes = async function()
+		{
+			let name = $(`.ALERT_${config.id} input`).val()
+			if(name)
+			{
+				项目名称[key] = name
+				await MoeProject.setItem('项目名称',项目名称)
+				$(`.${key} span`).html(项目名称[key])
+			}
+		}
+	}
+	if(mode == '读取')
+	{
+		str += '确定要读取此项目吗?\n当前正在编辑的项目可在自动备份中恢复'
+		config.yes = async function()
+		{
+			读取存档(await MoeProject.getItem(key))
+		}
+	}
+	if(mode == '新项目')
+	{
+		let 保存 = `<button class="MoeProject" title="保存">保存</button>`
+		let 删除 = `<button class="MoeProject" title="删除">删除</button>`
+		let 编辑 = `<button class="MoeProject" title="编辑">编辑</button>`
+		let 读取 = `<button class="MoeProject" title="读取">读取</button>`
+		let button = ` ${保存} ${删除} ${编辑} ${读取}`
+		str = '将当前正在编辑的内容保存为新项目\n'
+		str += '输入项目名：<input>'
+		config.title = mode
+		config.yes = async function()
+		{
+			key = 'Chat-'+getNowDate()
+			let name = $(`.ALERT_${config.id} input`).val()
+			if(name)
+			{
+				项目名称[key] = name
+				await MoeProject.setItem('项目名称',项目名称)
+			}
+			else name = key
+			await MoeProject.setItem(key,await 生成存档())
+			$('.ALERT_MoeProject pre').append(`<div class="${key}"><span>${name}</span>${button}</div>`)
+		}
+	}
+	alert(str,config)
+});
 //警告提醒
 $('body').on('click',"#size",function()
 {
@@ -367,17 +490,7 @@ $('body').on('click',"#size",function()
 		MaxMemory = (MaxMemory/1048576).toFixed(0)
 		str += `	内存占用估算(MB)：${AllMemory}/${MaxMemory}\n`
 	}
-	let arr = Object.keys(EMOJI_CustomEmoji.image)
 	let length = 0;
-	foreach(arr,function(k,v)
-	{
-		length += EMOJI_CustomEmoji.image[v].length
-	})
-	arr = Object.keys(mt_head)
-	foreach(arr,function(k,v)
-	{
-		length += mt_head[v].length
-	})
 	let length2 = JSON.stringify([...chats,...otherChats]).length;
 	length = parseInt(length/1048576).toFixed(0)
 	length2 = parseInt(length2/1048576).toFixed(0)
@@ -632,7 +745,7 @@ function replyDepth(str,mode)
 	}
 	else
 	{
-		$('.replyBack').hide().next().text('项目管理').next().hide()
+		$('.replyBack').hide().next().text('选择肢管理').next().hide()
 	}
 	log()
 	return replyButton
@@ -688,7 +801,7 @@ function TOP_replyEdit()
 		}
 
 		let config = {}
-		config.title = '项目管理'
+		config.title = '选择肢管理'
 		config.confirm = '跳转'
 		config.yes = function()
 		{
@@ -704,12 +817,12 @@ function TOP_replyEdit()
 	else if(chats.length)
 	{
 		let nowreply = replyDepths[replyDepths.length-1]
-		str = `请输入新的项目名称：\n<input value="${nowreply}">\n\n`
-		str += '同时不要忘记更改外部的选择肢文字\n重名项目会自动合并\n'
+		str = `请输入新的选择肢名称：\n<input value="${nowreply}">\n\n`
+		str += '同时不要忘记更改外部的选择肢文字\n重名选择肢会自动合并\n'
 		str += '操作无法撤销'
 
 		let config = {}
-		config.title = '项目编辑'
+		config.title = '选择肢编辑'
 		config.id = Math.random().toString().replace('0.','')
 		config.yes = function()
 		{
@@ -762,20 +875,13 @@ localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] :
 var phpurl = document.location.protocol == 'https:' ? '/api/moetalk.php' : 'http://frp.freefrp.net:40404/moetalk.php'
 $.ajax({url:'../moetalk.php',success:function(){phpurl = '../moetalk.php',localStorage['local_no'] = 'LOCAL';}});
 $.ajax({url:'http://moetalk.frp.freefrps.com/moetalk.php',success:function(){phpurl = localStorage['local_no'] ? this.url : phpurl;}});
-setInterval(function()
+setInterval(async function()
 {
-	let json = {}
-	json.MoeTalk = 本地应用版本
-	json.INFO = {}//存档信息
-	json.INFO.title = '自动备份'
-	json.INFO.nickname = 'MoeTalk'
-	json.INFO.date = '平均10分钟'
-	json.CHAR = {}//自定义角色
-	json.CHAR.id = mt_char
-	json.CHAR.image = mt_head
-	json.EMOJI = EMOJI_CustomEmoji//自定义表情
-	json.SETTING = mt_settings//设置信息
-	json.CHAT = [...chats,...otherChats]//MMT数据
+	let info = {}
+	info.title = '当前项目自动备份'
+	info.nickname = 'MoeTalk'+toString(客户端)
+	info.date = '平均10分钟'+getNowDate()
+	let json = await 生成存档(info)
 	json = JSON.stringify(json)
 	$.ajax(
 	{

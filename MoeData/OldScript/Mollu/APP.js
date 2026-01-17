@@ -10085,60 +10085,7 @@
 												icon: v.Xig
 											})
 										})
-									}), */(0, O.jsx)('button',
-									{
-										onClick: function(e)
-										{
-											$$('.cgldhY').hide()
-											INIT_loading('开始加载')
-											if(!browser.isDeskTop)alert('移动端加载较慢，可能需要多等几秒')
-											if(mt_settings['选择游戏'] !== 'BLDA')
-											{
-												directory = []
-												INIT_loading('结束加载')
-												$$('.MMTPlayer')[0].click()
-												return
-											}
-											XHR(href+LibraryURL+'/Directory.json',function(json)
-											{
-												directory = JSON.parse(json)
-												INIT_loading('结束加载')
-												$$('.MMTPlayer')[0].click()
-											})
-										},
-										style:{backgroundColor: 'transparent'},
-										className: "private" === e.pathname.split("/")[1] ? "selected" : "",
-										children: [(0, O.jsx)(V,
-										{
-											children: (0, O.jsx)(W,
-											{
-												style:
-												{
-													width: '100%',
-													height: '100%'
-												},
-												src: href+"MoeData/Ui/private.webp",//#播放器界面
-												alt: "private"
-											})
-										})]
-									}), (0, O.jsx)(F,
-									{
-										href: player,//#播放器
-										className: "MMTPlayer",
-										hidden:true,
-										onClick: function(e)
-										{
-											h(e, player)//#播放器
-										}
-									}), (0, O.jsx)('span',
-									{
-										style:
-										{
-											color: 'white'
-										},
-										align: 'center',
-										children: `${mt_text.momotalk[mtlang]}\n${mt_text.library[mtlang]}`
-									}), (0, O.jsx)(D,
+									}), */(0, O.jsx)(D,
 									{
 										style:
 										{

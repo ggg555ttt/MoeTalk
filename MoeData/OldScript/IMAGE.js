@@ -4,6 +4,16 @@ var imageArrL = 0//截图分段数量
 var imageZip = null;//压缩文件
 var baseArr = []
 //图片压缩
+async function IMAGE_error(image)
+{
+	let src = image.src ? image.getAttribute('src') : image.target.getAttribute('src')
+	let url = src.split('/').pop().replace('.webp','')
+	let img = await MoeImage.getItem(url) || await MoeTemp.getItem(url) || href+'MoeData/Ui/error.webp'
+	if(img[0] === 'G')img = href+img
+	if(image.src)image.src = img
+	else image.target.src = img
+	return
+}
 function compress(base64Img,type = 'head',mode = 'add',length = 0)
 {
 	var img = new Image();//创建一个空白图片对象
@@ -265,9 +275,6 @@ function mt_capture(清晰度,截屏,生成图片,时间,标题)
 		json[0]['title'] = '备份存档';
 		json[0]['nickname'] = 'MoeTalk';
 		json[0]['date'] = 时间;
-		json[0]['选择角色'] = mt_settings['选择角色']//@
-		json[0]['mt_char'] = mt_char;//@自创角色
-		json[0]['mt_head'] = mt_head;//@自创头像
 		json[1] = [...chats,...otherChats];
 		json = JSON.stringify(json)
 	}

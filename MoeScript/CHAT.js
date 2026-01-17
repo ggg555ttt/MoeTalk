@@ -12,21 +12,42 @@ var 差分映射 = false
 
 var 操作历史 = {index: -1,list: []}
 var CHAT_history = [操作历史,{}]
-var EMOJI = {io:'NO',type:'NO',pages:sessionStorage['差分书签'] ? JSON.parse(sessionStorage['差分书签']) : {}}
-var EMOJI_CustomEmoji = {image:{}}
+var EMOJI = {io:'NO',type:'NO',pages:{}}
+var EMOJI_CustomEmoji = {}
 mt_settings['表情信息'] = mt_settings['表情信息'] ? mt_settings['表情信息'] : {}
 var 羁绊背景 = href+'MoeData/Ui/Favor_Schedule_Deco.webp'
 var 回复背景 = href+'MoeData/Ui/Popup_Img_Deco_2.webp'
 var 错误图片 = href+'MoeData/Ui/error.webp'
-
-moetalkStorage.getItem('DB_EMOJI', function(err, DB_EMOJI)
+MoeTemp.getItem('差分书签').then(json=>{EMOJI.pages = json || {}})
+moetalkStorage.getItem('DB_EMOJI').then(async json=>
 {
-	EMOJI_CustomEmoji = DB_EMOJI ? DB_EMOJI : EMOJI_CustomEmoji
-	if(EMOJI_CustomEmoji.id)
+	json = json || {}
+	if(json.id)
 	{
-		EMOJI_CustomEmoji.Emoji = EMOJI_CustomEmoji.id
-		delete EMOJI_CustomEmoji.id
+		json.Emoji = json.id
+		delete json.id
 	}
+	if(json.image)
+	{
+		let config = {}
+		config.id = Math.random().toString().replace('0.','')
+		alert("处理数据中，请稍等<span class='处理表情'></span>",config)
+		let l = Object.keys(json.image).length
+		for(key in json.image)
+		{
+			$('.处理表情').text(l--)
+			$('.INDEX_EmojiButton').attr('disabled','disabled')
+			$('.INDEX_CharFaceButton').attr('disabled','disabled')
+			await MoeImage.setItem(key,json.image[key])
+			delete json.image[key]
+		}
+		delete json.image
+		moetalkStorage.setItem('DB_EMOJI',json)
+		$('.INDEX_EmojiButton').removeAttr('disabled')
+		$('.INDEX_CharFaceButton').removeAttr('disabled')
+		$(`.alert_${config.id} .confirm`).click()
+	}
+	EMOJI_CustomEmoji = json
 })
 if(EMOJI.pages.type)EMOJI.type = EMOJI.pages.type
 $('body').on('click',".INDEX_Emoji",function()
@@ -200,7 +221,7 @@ function mt_emojis(S,mode)
 	{
 		if($(`.差分映射.selected`).length)$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',block: 'nearest'})
 	}, 100)
-	saveStorage('差分书签',EMOJI.pages,'session')
+	MoeTemp.setItem('差分书签',EMOJI.pages)
 	if(EMOJI.custom.io)EMOJI.images.unshift('ADD')
 
 	S(!0)
@@ -410,7 +431,7 @@ function makeMessage(type,data,chatIndex,mode)
 				maxwidth = mt_settings['差分比例'] || '90%'
 			}
 			maxwidth = `max-width:${maxwidth};`
-			图片 = `<img src='${!data.file ? data.content : data.file}' style="${width}${maxwidth};${style}" class="图片 编辑" onerror="IMAGE_error(this,${chatIndex})">`
+			图片 = `<img src='${!data.file ? data.content : data.file}' style="${width}${maxwidth};${style}" class="图片 编辑" onerror="IMAGE_error(this)">`
 		}
 		if(no != 0 && !data.isRight)
 		{//左侧对话
@@ -824,20 +845,20 @@ $("body").on('click',".设置头像",function()
 
 	str += '<label><input class="radio" type="radio" name="mode" value="add">添加头像</label>'
 	str += '<label><input class="radio" type="radio" name="mode" value="change" checked>切换角色</label>\n'
-	str += `<img class="头像 N_char" src="${index ? loadhead(no,index) : href+'MoeData/Ui/error.webp'}" ${no ? `alt="${no}"` : ''}" ${index ? `title="${index}"` : ''}">`
-	str += `名称：<input style="font-size:1.2rem;color:red;" class="text" placeholder="${$('.角色名称').attr('placeholder')}" value="${$('.角色名称').val()}"><div class="N_list">`
+	str += `<img class="头像 N_char" src="${index ? loadhead(no,index) : href+'MoeData/Ui/error.webp'}" ${no ? `alt="${no}"` : ''}" ${index ? `title="${index}"` : ''}" onerror="IMAGE_error(this)">`
+	str += `发言者名称：<input style="font-size:1.2rem;color:red;" class="text" placeholder="${$('.角色名称').attr('placeholder')}" value="${$('.角色名称').val()}"><div class="N_list">`
 	HeadList.list.map(function(index,k)
 	{
-		str += `<img class="头像" src="${loadhead('LIST',index)}" title="${index}" style="cursor:pointer;" onclick="this.remove()">`
+		str += `<img class="头像" src="${loadhead('LIST',index)}" title="${index}" style="cursor:pointer;" onclick="this.remove()" onerror="IMAGE_error(this)">`
 	})
 	str += '</div>\n'
 
 	str += '头像列表：（点击选择）\n'
 	let str1 = '$(".N_char").attr("src",loadhead(this.alt,this.title)).attr("alt",this.alt).attr("title",this.title).next().attr("placeholder",loadname(this.alt,this.title))'
-	let str2 = '$(".N_list").append(`<img class="头像" src="${loadhead("LIST",this.title)}" title="${this.title}" style="cursor:pointer;" onclick="this.remove()">`)'
+	let str2 = '$(".N_list").append(`<img class="头像" src="${loadhead("LIST",this.title)}" title="${this.title}" style="cursor:pointer;" onclick="this.remove()" onerror="IMAGE_error(this)">`)'
 	mt_settings['选择角色'].list.concat({no:'0',index:'1'}).map(function(v,k)
 	{
-		str += `<img class='头像' src='${loadhead(v.no,v.index)}' alt='${v.no}' title='${v.index}' style='cursor:pointer;' onclick='$(".radio:checked")[1].value === "change" ? ${str1} : ${str2}'>`
+		str += `<img class='头像' src='${loadhead(v.no,v.index)}' alt='${v.no}' title='${v.index}' style='cursor:pointer;' onclick='$(".radio:checked")[1].value === "change" ? ${str1} : ${str2}' onerror="IMAGE_error(this)">`
 	})
 
 	$(`.${HeadList.direction}`).click()
@@ -911,55 +932,6 @@ $("body").on('click',".操作模式",function()
 	if($(".操作模式").text() == '追加')$(".操作模式").text('编辑')
 	else $(".操作模式").text('追加')
 });
-function 等待图片($container)
-{
-	const container = $container[0];
-	if(!container)return Promise.resolve();
-
-	const images = container.querySelectorAll('img');
-	if(images.length === 0)return Promise.resolve();
-
-	const seenSrcs = new Set();
-	const pendingImages = [];
-	let pendingCount = 0;
-
-	for(let i = 0; i < images.length; i++)
-	{
-		const img = images[i];
-		let src = img.getAttribute('src') || '';
-
-		// 替换自定义 emoji
-		if(src && EMOJI_CustomEmoji.image[src])
-		{
-			const base64 = EMOJI_CustomEmoji.image[src];
-			img.src = base64;
-			src = base64;
-		} 
-		else src = img.src;// 使用解析后的完整 URL
-
-
-		// 跳过已加载、Base64、重复
-		if(img.complete && img.naturalWidth > 0)continue;
-		if(src.startsWith('image/'))continue;
-		if(seenSrcs.has(src))continue;
-		seenSrcs.add(src);
-		pendingImages.push(img);
-		pendingCount++;
-	}
-
-	if(pendingCount === 0)return Promise.resolve();
-
-	return new Promise(resolve=>
-	{
-		let resolved = 0;
-		const onReady = ()=>{if(++resolved === pendingCount)resolve();};
-		for(const img of pendingImages)
-		{
-			img.addEventListener('load', onReady, {once: true});
-			img.addEventListener('error', onReady, {once: true});
-		}
-	});
-}
 $("body").on('click',".预览模式",async function()
 {
 	let color = $(this).css('color')
@@ -1087,11 +1059,11 @@ $("body").on('click',".INDEX_delete",function()
 			indexs.push($('.dels').index(v))
 		})
 		title = '批量删除'
-		str += `您一共选中了${$(".dels:checked").length}条消息\n\n点击【${mt_text.confirm[mtlang]}】将删除`
+		str += `您一共选中了${$(".dels:checked").length}条消息\n\n点击【${mt_text.confirm[mtlang]}】将删除\n`
+		str += '操作可撤销'
 	}
 	else
 	{
-		if(otherChats.length)str += '<input type="checkbox"><span class="bold red">删除全部项目</span>\n\n'
 		indexs = Object.keys(chats)
 		let length = indexs.length
 		for (let i = 0; i < length; i++)
@@ -1099,24 +1071,30 @@ $("body").on('click',".INDEX_delete",function()
 			indexs[i] = i
 		}
 		title = '删除消息'
-		str += `点击【${mt_text.confirm[mtlang]}】将此项目全部内容清空`
+		str += `点击【${mt_text.confirm[mtlang]}】将所有内容全部删除\n`
+		str += '包括所有选择分支\n\n'
+		str += '可在项目管理中恢复'
 	}
-	str += '\n\n操作可撤销'
+	
 	let config = {}
 	config.title = title
 	config.id = Math.random().toString().replace('0.','')
-	config.yes = function()
+	config.yes = async function()
 	{
-		if($(`.alert_${config.id} input:checked`).length)
+		if(config.title != '批量删除')
 		{
-			if(confirm('您勾选了“删除全部项目”\n此操作无法撤销，确定要继续吗？'))
-			{
-				$('.reply').hide()
-				otherChats = []
-				clear = true
-			}
-			else return
-		}else if(!chats.length)return
+			let info = {}
+			info.title = '读取或删除前的项目'
+			info.nickname = '自动备份'
+			info.date = getNowDate();
+			await MoeProject.setItem('自动备份',await 生成存档(info))
+			otherChats = []
+			clear = true
+			mt_schar = {}
+			EMOJI.pages = {}
+			charList(!0)//更新列表
+			MoeTemp.clear()
+		}
 		sendMessage({},'','delete',indexs)
 		log(clear)
 	}

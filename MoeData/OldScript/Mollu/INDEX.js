@@ -471,10 +471,7 @@
 												{
 													_(e)
 												},
-												onError: function(e)
-												{
-													e.currentTarget.src = href+'MoeData/Ui/error.webp';
-												},
+												onError: function(e){IMAGE_error(e)},
 												className: (0, u.Y)(w.selected, e) ? "selected" : ""
 											}, n)
 										})
@@ -625,10 +622,7 @@
 									alt: e,
 									src: loadhead(n.no,e),//#左方人物皮肤选择分支
 									style:{margin:'0.2rem'},
-									onError: function(e)
-									{
-										e.currentTarget.src = href+'MoeData/Ui/error.webp';
-									},
+									onError: function(e){IMAGE_error(e)},
 									onClick: function()
 									{
 										l(e)
@@ -713,10 +707,7 @@
 										width: 252,
 										height: 252,
 										src: loadhead(n.no,n.profile[0]),//#左方选择框
-										onError: function(e)
-										{
-											e.currentTarget.src = href+'MoeData/Ui/error.webp';
-										},
+										onError: function(e){IMAGE_error(e)},
 										alt: n.profile[0]
 									}), 
 									//*添加ID和社团信息
@@ -739,40 +730,13 @@
 											{
 												children: [(0, m.jsx)('span',
 												{
-													children:[n.club[a],(0, m.jsx)(c.xL,
-													{
-														style:
-														{
-															width: "1rem",
-															height: "1rem",
-															color:'rgb(68, 72, 78)'
-														},
-														icon: ei.Yai,
-														onClick: function()
-														{
-															custom_char(n);
-														}
-													}), headsize]
+													children:n.club[a]
 												})]
 											})]//@显示社团
 										})]
 									})
 									//*添加ID和社团信息
 									]
-								}), (0, m.jsx)(B,
-								{
-									width: 252,
-									height: 252,
-									src: href+"MoeData/Ui/School/"+(!mt_school[n.school.id] ? n.club['zh_cn'] === '临时角色' ? 'RECYCLE' : 'CUSTOM' : mt_school[n.school.id].en || 'none')+'.webp',//#学校图标
-									onError: function(e)
-									{
-										e.currentTarget.src = href+'MoeData/Ui/error.webp';
-									},
-									onClick: function()
-									{
-										if(n.school['zh_cn'] === '自定义' || n.club['zh_cn'] === '临时角色')removeChar(n);
-									},
-									alt: "school"
 								})]
 							})
 						}), (0, m.jsxs)(T,
@@ -3180,23 +3144,6 @@
 												$$('.INDEX_Emoji').click()
 												EMOJI.pages[EMOJI.id].scrollTop = 0
 											}
-										}), (0, m.jsx)(c.Bx,
-										{
-											className: "bold",
-											style:
-											{
-												"width": "auto",
-												height: '100%',
-												color: '#3f51b5',
-												position: 'absolute',
-												right: 0
-											},
-											hidden: EMOJI.type === 'Emoji' && !EMOJI.custom.io,
-											children: EMOJI.type === 'Emoji' ? EMOJI.custom.io ? '编辑' : '管理' : '信息',
-											onClick: function()
-											{
-												$$('.INDEX_EmojiIfno:visible').length ? $$('.INDEX_EmojiIfno').hide() : $$('.INDEX_EmojiIfno').show()
-											}
 										})]
 									}), (0, m.jsxs)(ea.h4,
 									{
@@ -3214,30 +3161,13 @@
 														alt: String(e.no),
 														title: String(e.index),
 														src: loadhead(e.no,e.index),
+														onError: function(e){IMAGE_error(e)},
 														className: '差分映射 '+ (e.no == 差分映射.id && e.index == 差分映射.index ? 'selected' : '')
 													}, n)
 												})
 											})
 										})
-									}),EMOJI.custom.from ? (0, m.jsxs)(ea.h4,
-									{
-										children: (0, m.jsx)(c.Bx,
-										{
-											className: "bold",
-											style: 
-											{
-												padding: "revert",
-												width: "auto",
-												fontSize: '1.5rem',
-												color: "red"
-											},
-											children: '❗版权声明',
-											onClick: function()
-											{
-												alert('请尊重作者的劳动成果，严禁用本套立绘差分进行牟利和商业用途，违者将追究法律责任')
-											}
-										})
-									}) : '', (0, m.jsx)(eE,
+									}), (0, m.jsx)(eE,
 									{
 										children: (0, m.jsxs)(eM,
 										{
@@ -3250,7 +3180,7 @@
 												if(EMOJI.custom.io)
 												{
 													前缀 = ''
-													link = EMOJI_CustomEmoji.image[v]
+													link = v
 												}
 												return (0, m.jsx)('div',
 												{
@@ -3275,100 +3205,11 @@
 															width: '100%',
 															height: 'auto'
 														},
-														src: v === 'ADD' ? href+'MoeData/Ui/School/RECYCLE.webp' : 前缀+link,//#表情链接
-														onError: function(e)
-														{
-															e.target.parentNode.style.display = 'none'
-														},
+														src: 前缀+link,
+														onError: function(e){IMAGE_error(e)},
 														onClick: function()
 														{
-															if(v === 'ADD')
-															{
-																$$('.notice .title').text('添加表情')
-																$$('.notice .confirm').text('提交')
-																let str = '<input type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">添加到新的分页</span>\n'
-																str += '<button onclick=\'$("#custom").attr("title","image").attr("alt","emoji").click()\'>点击上传图片（支持批量添加，点击图片可删除）</button>\n'
-																str += `<div class="Emojis" title="${v}"></div>\n`
-																alert(str)
-																TOP_confirm = function()
-																{
-																	if($$('.notice input:checked').length)EMOJI.pages[EMOJI.id].custom = parseInt(EMOJI.pageindex.split(' / ')[1])//添加到新的分页
-																	else EMOJI.pages[EMOJI.id].custom = parseInt(EMOJI.pageindex.split(' / ')[0]-1)
-																	$$('.Emojis img').each(function(k,v)
-																	{
-																		let id = `${EMOJI.type}-${getNowDate()}_${k}`
-																		if(!EMOJI_CustomEmoji[EMOJI.id])EMOJI_CustomEmoji[EMOJI.id] = {}
-																		EMOJI_CustomEmoji[EMOJI.id][id] = EMOJI.pages[EMOJI.id].custom
-																		EMOJI_CustomEmoji.image[id] = v.src
-																	})
-																	$$('.INDEX_Emoji').click()
-																	saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
-																}
-																return
-															}
-															if($$('.INDEX_EmojiIfno:visible').length && EmojiInfo !== '')
-															{
-																$$('.notice .title').text('编辑表情')
-																let str = EMOJI.custom.from ? `<a class="INIT_href" title="${EMOJI.custom.from.link}">来源：${EMOJI.custom.from.name}</a>` : ''
-																let img = `<img class="Emojis" src='${前缀+link}' style='width:100%;'>`
-																let now = parseInt(EMOJI.pageindex.split(' / ')[0])//当前页
-																let end = parseInt(EMOJI.pageindex.split(' / ')[1])//终点页
-																if(EMOJI.custom.io)
-																{
-																	let select = ''
-																	
-																	for(n=1;n<=end;n++)
-																	{
-																		select += `<option ${n === now ? "style='color:red;'" : ""}>${n}</option>`
-																	}
-																	select += `<option>${end+1}</option>`
-																	str += '<input type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">只删除表情</span>\n'
-																	str += `移动到：第<select style='font-size:1.2rem;'>${select}</select>页`
-																	img = `<button onclick='$("#custom").attr("title","image").attr("alt","emoji").click()'>点击更改图片\n${img}</button>`
-																}
-																str += '\n'
-																let info = `<input style='font-size:1.2rem;' class='text' placeholder='${toString(CFInfo[v])}' value='${mt_settings['表情信息'][v] || ''}'>`
-
-																alert(`${str}ID：${v}\n信息：${info}\n\n${img}`)
-																$$('.notice select').val(now)
-																TOP_confirm = function()
-																{
-																	if(EMOJI.custom.io)
-																	{//编辑自定义表情
-																		EMOJI_CustomEmoji[EMOJI.id][v] = parseInt($$('.notice select').val()-1)
-																		EMOJI_CustomEmoji.image[v] = $$('.Emojis').attr('src')
-																		if($$('.notice input:checked').length)
-																		{//只删除表情
-																			delete EMOJI_CustomEmoji[EMOJI.id][v]
-																			delete EMOJI_CustomEmoji.image[v]
-																			if(!Object.keys(EMOJI_CustomEmoji[EMOJI.id]).length)delete EMOJI_CustomEmoji[EMOJI.id]
-																			$$('.notice .text').val('')
-																		}
-																		//存入数据库
-																		saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
-																	}
-																	if($$('.notice .text').val())
-																	{
-																		mt_settings['表情信息'][v] = $$('.notice .text').val()
-																	}
-																	else
-																	{
-																		delete mt_settings['表情信息'][v]
-																	}
-																	saveStorage('设置选项',mt_settings,'local')
-																	$$('.INDEX_Emoji').click()
-																}
-																return
-															}
-															if($$('.editMessage.visible').length)
-															{
-																$$('.图片文件').show().attr('src',link).attr('title',EMOJI.type)
-																s()
-															}
-															else
-															{
-																sendMessage({file: link,content: EMOJI.type},'image'), s()
-															}
+															sendMessage({file: link,content: EMOJI.type},'image'), s()
 														},
 													}), (0, m.jsx)('span',
 													{
@@ -3739,7 +3580,8 @@
 									title: "存档",
 									onClick: function()
 									{
-										click('#tool-save')
+										alert('请通过新版MoeTalk上传或下载存档')
+										// click('#tool-save')
 									},
 									children: (0, m.jsx)(c.xL,
 									{
@@ -3756,7 +3598,8 @@
 									},
 									onClick: function()
 									{
-										mt_title()
+										alert('请通过新版MoeTalk生成截图')
+										// mt_title()
 									},
 									children: (0, m.jsx)(c.xL,
 									{
@@ -4095,7 +3938,8 @@
 								{
 									className: "图片选项 图片文件",
 									width:"auto",
-									height:"128px"
+									height:"128px",
+									onError: function(e){IMAGE_error(e)}
 								}), (0, m.jsx)('div',
 								{
 									className:"edit_4",
@@ -4120,6 +3964,7 @@
 												width: '40px',
 												height: '40px',
 											},
+											onError: function(e){IMAGE_error(e)},
 											onClick: function(e)
 											{
 												$$('.title').text('头像列表')
@@ -4134,19 +3979,19 @@
 												str += `头像间距：<input style="font-size:1.2rem;" class="margin text" placeholder="默认值为 -1.5rem" value="${toString(HeadList.margin)}">\n\n`
 
 												str += '发言角色：<label><input class="radio" type="radio" name="mode" value="change">通过【待选列表】切换角色</label>\n'
-												str += `<img class="头像 N_char" src="${e.target.title ? loadhead(e.target.alt,e.target.title) : href+'MoeData/Ui/setting.webp'}" alt="${e.target.alt}" title="${e.target.title}">`
+												str += `<img class="头像 N_char" src="${e.target.title ? loadhead(e.target.alt,e.target.title) : href+'MoeData/Ui/setting.webp'}" alt="${e.target.alt}" title="${e.target.title}" onerror="IMAGE_error(this)">`
 												str += `名称：<input style="font-size:1.2rem;color:red;" class="text" placeholder="${$$('.name').attr('placeholder')}" value="${$$('.name').val()}">\n`
 												str += `\n头像列表：（点击删除指定头像）\n<div class="N_list">`
 												HeadList.list.map(function(index,k)
 												{
-													str += `<img class="头像" src="${loadhead('LIST',index)}" title="${index}" style="cursor:pointer;" onclick="this.remove()">`
+													str += `<img class="头像" src="${loadhead('LIST',index)}" title="${index}" style="cursor:pointer;" onclick="this.remove()" onerror="IMAGE_error(this)">`
 												})
 												str += '</div>\n\n待选列表：<label><input class="radio" type="radio" name="mode" value="add" checked>为【头像列表】添加新头像</label>\n'
 												let str1 = '$(".N_char").attr("src",loadhead(this.alt,this.title)).attr("alt",this.alt).attr("title",this.title).next().attr("placeholder",loadname(this.alt,this.title))'
-												let str2 = '$(".N_list").append(`<img class="头像" src="${loadhead("LIST",this.title)}" title="${this.title}" style="cursor:pointer;" onclick="this.remove()">`)'
+												let str2 = '$(".N_list").append(`<img class="头像" src="${loadhead("LIST",this.title)}" title="${this.title}" style="cursor:pointer;" onclick="this.remove()" onerror="IMAGE_error(this)">`)'
 												mt_settings['选择角色'].list.concat({no:'0',index:'1'}).map(function(v,k)
 												{
-													str += `<img class='头像' src='${loadhead(v.no,v.index)}' alt='${v.no}' title='${v.index}' style='cursor:pointer;' onclick='$(".radio:checked")[1].value === "change" ? ${str1} : ${str2}'>`
+													str += `<img class='头像' src='${loadhead(v.no,v.index)}' alt='${v.no}' title='${v.index}' style='cursor:pointer;' onclick='$(".radio:checked")[1].value === "change" ? ${str1} : ${str2}' onerror='IMAGE_error(this)'>`
 												})
 												str += '\n'
 												
@@ -4485,10 +4330,7 @@
 											className: '头像',
 											style: {zIndex: n.heads ? n.heads.list.length : ''},
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
-											onError: function(e)
-											{
-												e.currentTarget.src = href+'MoeData/Ui/error.webp';
-											},
+											onError: function(e){IMAGE_error(e)},
 											alt: n.sCharacter.index
 										}), n.heads ? n.heads.list.map(function(index,k)
 										{
@@ -4502,10 +4344,7 @@
 													marginTop: n.heads.direction === 'column' ? n.heads.margin ? n.heads.margin : "-1.5rem" : '',
 													marginLeft: n.heads.direction === 'row' ? n.heads.margin ? n.heads.margin : "-1.5rem" : ''
 												},
-												onError: function(e)
-												{
-													e.currentTarget.src = href+'MoeData/Ui/error.webp';
-												}
+												onError: function(e){IMAGE_error(e)}
 											})
 										}) : ''] : ''
 									}) : '', (0, m.jsxs)("div",
@@ -4548,10 +4387,7 @@
 												},//@差分表情宽高百分比
 												src: n.file.indexOf(":image") > -1 ? n.file : href+n.file,
 												title: n.file.indexOf(":image") > -1 ? '' : n.file,
-												onError: function(e)
-												{
-													e.currentTarget.src = href+'MoeData/Ui/error.webp';
-												}
+												onError: function(e){IMAGE_error(e)}
 											}) ,n.time ? (0, m.jsx)('div',
 											{//右侧时间戳
 												className: '时间戳',
@@ -4575,10 +4411,7 @@
 											className: '头像',
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
 											style: {zIndex: n.heads ? n.heads.list.length : ''},
-											onError: function(e)
-											{
-												e.currentTarget.src = href+'MoeData/Ui/error.webp';
-											},
+											onError: function(e){IMAGE_error(e)},
 											alt: n.sCharacter.index
 										}), n.heads ? n.heads.list.map(function(index,k)
 										{
@@ -4592,10 +4425,7 @@
 													marginTop: n.heads.direction === 'column' ? "-1.5rem" : '',
 													marginLeft: n.heads.direction === 'row' ? "-1.5rem" : ''
 												},
-												onError: function(e)
-												{
-													e.currentTarget.src = href+'MoeData/Ui/error.webp';
-												}
+												onError: function(e){IMAGE_error(e)},
 											})
 										}) : ''] : ''
 									}) : '']

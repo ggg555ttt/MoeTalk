@@ -18,15 +18,6 @@ function loadhead(id,img)
 	
 	//主角
 	if(id == 0 || img == 1)return `${href}MoeData/Ui/you.webp`;
-	//自定义头像
-	if(mt_head[img])
-	{
-		return mt_head[img]
-	}
-	if(mt_shead[img])
-	{
-		return mt_shead[img]
-	}
 	//MoeTalk头像
 	if(mt_characters[id] || id === 'LIST')
 	{
@@ -44,7 +35,7 @@ function loadhead(id,img)
 			return `${href}MoeData/Ui/you.webp`;
 		}
 	}
-	return `${href}MoeData/Ui/error.webp`;//默认头像
+	return img;//默认头像
 }
 function loadname(id,index)
 {
@@ -374,11 +365,7 @@ function removeChar(n)
 //创建人物
 $('body').on('click',"#makecus",function()
 {
-	let info = {
-		no: 'custom-'+getNowDate(),
-		make: !0
-	}
-	custom_char(info)
+	alert('请通过新版MoeTalk创建或编辑角色')
 })
 //储存头像
 $("body").append("<input id='custom' hidden type='file' accept='image/*' multiple>");//添加上传标签

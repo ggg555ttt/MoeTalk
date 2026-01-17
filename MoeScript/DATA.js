@@ -3,19 +3,24 @@ var DATA_NowTime = 0
 function loaddata(json,mode)//识别存档
 {
 	while(typeof json === 'string')json = JSON.parse(json)
+	INIT_loading(false)
 	if(!json.MoeTalk)
 	{
-		alert('存档无法识别！\n如果是旧版存档请通过“访问旧版”读取！')
-		throw "错误存档";
+		let OLdJson = UPDATE_OldData(json)
+		json = {}
+		json.INFO = {}//存档信息
+		json.INFO.title = OLdJson[0]['title']
+		json.INFO.nickname = OLdJson[0]['nickname']
+		json.INFO.date = OLdJson[0]['date']
+		json.CHAR = {}//自定义角色
+		json.CHAR.id = OLdJson[0].mt_char
+		json.CHAR.image = OLdJson[0].mt_head
+		json.EMOJI = {id:{},image:{}}//自定义表情
+		json.CHAT = OLdJson[1]//MMT
+		json.SETTING = mt_settings//设置信息
 	}
-
 	if(mode === 'player')
 	{
-		if(json.CHAR)
-		{
-			mt_schar = json.CHAR.id
-			mt_shead = json.CHAR.image
-		}
 		if(json.SETTING)
 		{
 			MMT目录.设置 = json.SETTING
@@ -60,18 +65,240 @@ function loaddata(json,mode)//识别存档
 	else
 	{
 		if(!json.INFO)json.INFO = {title:"",nickname:"",date:""}
-		if(!json.CHAR)json.CHAR = {id:{},image:{}}
-		if(!json.EMOJI)json.EMOJI = {image:{}}
-		mt_schar = {...mt_schar,...json.CHAR.id}
-		mt_shead = {...mt_shead,...json.CHAR.image}
-		saveStorage('mt-char',mt_schar,'session')
-		saveStorage('mt-head',mt_shead,'session')
+		if(json.CHAR || json.EMOJI)
+		{
+			if(!json.CHAR)json.CHAR = {id:{},image:{}}
+			if(!json.EMOJI)json.EMOJI = {image:{}}	
+			if(json.EMOJI.id)
+			{
+				json.EMOJI.Emoji = json.EMOJI.id
+				delete json.EMOJI.id
+			}			
+			json.CUSTOM = {}
+			json.CUSTOM.CHAR = json.CHAR.id
+			json.CUSTOM.EMOJI = json.EMOJI
+			json.CUSTOM.IMAGE = {...json.CHAR.image,...json.EMOJI.image}
+			delete json.CUSTOM.EMOJI.image
+			delete json.CHAR
+			delete json.EMOJI
+		}
 		foreach(json.CHAT,function(k,v)
 		{
 			repairCF(json.CHAT[k])
 		})
 	}
-	
+	return json
+}
+function repairCF(data)
+{
+	if(!data.sCharacter)return
+	data.sCharacter.no = id_map[0][data.sCharacter.no] || data.sCharacter.no
+	data.sCharacter.index = toString(id_map[1][data.sCharacter.index] || data.sCharacter.index)
+	if(data.type === 'image')
+	{
+		data.content = data.content || ''
+		data.file = (data.file || data.content).replace('Images','GameData')
+	}
+}
+function UPDATE_OldData(json)//识别存档
+{
+	let josnsize = (json.length/1024).toFixed(0)
+	let custom_char = {};
+	let custom_head = {};
+	if(typeof json === 'string')json = JSON.parse(json)
+	if(!json[0] || (json[0] && !json[0].title))//错误数据
+	{
+		json[0] = {};
+		json[1] = [];
+		json[0]['title'] = '错误存档'
+		json[0]['nickname'] = '无法识别的数据'
+		json[0]['date'] = '强制上传可能会损坏您的存档'
+	}
+
+	if(json[0] && (json[0].mt_char || json[0].custom))//mt旧版自定义角色转义
+	{
+		if(json[0].custom && JSON.parse(json[0].custom)[0].club[0].characters)
+		{
+			json[0].mt_char = {}
+			json[0].mt_head = {}
+			let i;
+			$.each(JSON.parse(json[0].custom)[0].club[0].characters,function(k,v)
+			{
+				json[0].mt_char[v.no] = v.zh_cn
+			})
+			$.each(JSON.parse(json[0].heads)[0],function(k,v)
+			{
+				if(k.split('.').length > 1)i = k.split('.')[0];
+				if(k.split('/').length > 1)i = k.split('.')[0];
+				json[0].mt_head[i] = v;
+			})
+		}
+		if(typeof json[0].mt_char === 'object')
+		{
+			json[0].mt_char = JSON.stringify(json[0].mt_char)
+			json[0].mt_head = JSON.stringify(json[0].mt_head)
+		}
+		custom_char = JSON.parse(json[0].mt_char);
+		custom_head = JSON.parse(json[0].mt_head);
+	}
+
+	if(json['custom_chars'])//ct自定义角色
+	{
+		$.each(json['custom_chars'],function(k,v)
+		{
+			if(v['char_id'].split('-')[1] !== 'MT')
+			{
+				custom_char[v.char_id] = {}
+				custom_char[v.char_id].name = v.name
+				custom_head[v.char_id] = v.img
+			}
+		})
+	}
+
+	if(json['chars'])//ct待选角色
+	{
+		json[0]['选择角色'] = {}
+		json[0]['选择角色'].no = 0
+		json[0]['选择角色'].index = 1
+		json[0]['选择角色'].list = []
+		
+		$.each(json['chars'],function(k,v)
+		{
+			json[0]['选择角色'].list[k] = {}
+			if(v['char_id'].split('-')[0] === 'ba')
+			{
+				json[0]['选择角色'].list[k].no = v['char_id'].split('-')[1]
+				json[0]['选择角色'].list[k].index = v['img']
+			}
+			else if(v['char_id'].split('-')[1] === 'MT')
+			{
+				json[0]['选择角色'].list[k].no = v['char_id'].split('-')[2]
+				json[0]['选择角色'].list[k].index = v['char_id'].split('-')[3]
+			}
+			else
+			{
+				json[0]['选择角色'].list[k].no = v['char_id']
+				json[0]['选择角色'].list[k].index = v['char_id']
+			}
+			json[0]['选择角色'].list[k].index = json[0]['选择角色'].list[k].index.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
+			id_map[0][json[0]['选择角色'].list[k].no] ? json[0]['选择角色'].list[k].no = id_map[0][json[0]['选择角色'].list[k].no] : ''
+			id_map[1][json[0]['选择角色'].list[k].index] ? json[0]['选择角色'].list[k].index = id_map[1][json[0]['选择角色'].list[k].index] : ''
+		})
+	}
+	let length = 0;
+	$.each(custom_char,function(k,v)
+	{
+		length = length+1
+	})
+	//console.log(custom_char)
+	if(json['chat'])//ct存档
+	{
+		json[1] = [];
+		json[0]['title'] = 'ClosureTalk存档'
+		json[0]['nickname'] = '存档大小：'+josnsize+'KB'
+		json[0]['date'] = `${length ? length : 0}名自定义角色`
+		$.each(json['chat'],function(k,v)
+		{
+			json[1][k] = {};
+			json[1][k]['replyDepth'] = 0
+
+			json[1][k]['sCharacter'] = {};
+			json[1][k]['sCharacter']['no'] = v['char_id'] ? v['char_id'].split('-')[1] : 0
+			json[1][k]['sCharacter']['index'] = v['img'] ? v['img'].split('.').shift() : 1
+			if(v['img'] === 'uploaded')
+			{
+				json[1][k]['sCharacter']['no'] = v['char_id']
+				json[1][k]['sCharacter']['index'] = v['char_id']
+				if(v['char_id'].split('-')[1] === 'MT')
+				{
+					json[1][k]['sCharacter']['no'] = v['char_id'].split('-')[2]
+					json[1][k]['sCharacter']['index'] = v['char_id'].split('-')[3]
+				}
+			}
+
+			json[1][k]['content'] = v['content'];
+
+			if(v['yuzutalk']['type'] === 'TEXT')json[1][k]['type'] = 'chat'
+			if(v['yuzutalk']['type'] === 'RELATIONSHIPSTORY')json[1][k]['type'] = 'heart'
+			if(v['yuzutalk']['type'] === 'NARRATION')json[1][k]['type'] = 'info'
+			if(v['yuzutalk']['type'] === 'CHOICES')
+			{
+				json[1][k]['type'] = 'reply'
+			}
+			if(v['yuzutalk']['type'] === 'IMAGE')
+			{
+				json[1][k]['type'] = 'image'
+				json[1][k]['content'] = ''
+				json[1][k]['file'] = v['content'].replace('resources/ba','GameData/BLDA/Emoji').replace(MoeTalkURL,'');
+			}
+
+			if(v.yuzutalk.nameOverride)json[1][k]['name'] = v.yuzutalk.nameOverride;
+			if(v.yuzutalk.avatarState === 'SHOW')json[1][k]['isFirst'] = true;
+			if(v.is_breaking === true)json[1][k]['is_breaking'] = true;
+		})
+	}
+	if(json['talkHistory'])
+	{
+		json[1] = [];
+		json[0]['title'] = json['name']
+		json[0]['nickname'] = 'YuukaTalk存档'
+		json[0]['date'] = '无法显示自定义角色头像和外部上传图片'
+		json['talkHistory'].map(function(v,k)
+		{
+			json[1][k] = {};
+			json[1][k].content = ''
+			json[1][k].replyDepth = 0
+			json[1][k].sCharacter = {}
+			json[1][k].sCharacter.no = 0
+			json[1][k].sCharacter.index = 1
+			v.type = v.type.split('.').slice(-1)[0]
+			if(v.talker)
+			{
+				if(v.talker.nameRoma !== 'sensei')
+				{
+					json[1][k].name = v.talker.name
+					json[1][k].sCharacter.no = 'YuukaTalk'
+					json[1][k].sCharacter.index = v.talker.currentAvatar
+				}
+			}
+			if(v.type === 'PureText')
+			{
+				json[1][k].isFirst = v.isFirst
+				json[1][k].content = v.text
+				json[1][k].type = 'chat'
+			}
+			if(v.type === 'Branch')
+			{
+				json[1][k].content = v.textOptions.join('\n')
+				json[1][k].type = 'reply'
+			}
+			if(v.type === 'LoveScene')
+			{
+				json[1][k].name = v.studentName
+				json[1][k].type = 'heart'
+			}
+			if(v.type === 'Narration')
+			{
+				json[1][k].content = v.text
+				json[1][k].type = 'info'
+			}
+			if(v.type === 'Photo')
+			{
+				if(v.uri.indexOf('file:///android_asset') > -1)
+				{
+					json[1][k].content = v.uri.replace('file:///android_asset','https://mirror.ghproxy.com/https://github.com/Eynnzerr/YuukaTalk/blob/dd45c56e35d64b8d9375de81985541f4f238e170/app/src/main/assets')
+				}
+				else
+				{
+					json[1][k].content = `MoeData/Ui/error.webp`;
+				}
+				json[1][k].type = 'image'
+			}
+			json[1][k].isFirst = false
+		})
+	}
+	json[0].mt_char = custom_char
+	json[0].mt_head = custom_head
 	return json
 }
 $("body").on('click',"#cutdata",function()
@@ -82,44 +309,121 @@ $("body").on('click',"#cutdata",function()
 		let config = {}
 		config.id = Math.random().toString().replace('0.','')
 		config.title = '截取存档'
-		config.yes = function()
+		config.yes = async function()
 		{
-			let json = {};
 			let filename = 'MoeTalk截取存档'
-			let title = $(`.alert_${config.id} input`).eq(0).val() || '无题'
-			let nickname = $(`.alert_${config.id} input`).eq(1).val()
 			let time = getNowDate()
-			json.MoeTalk = 本地应用版本[0]
-			json.INFO = {}//存档信息
-			json.INFO.title = title
-			json.INFO.nickname = nickname
-			json.INFO.date = time
-			json.CHAR = {}//自定义角色
-			json.CHAR.id = mt_char
-			json.CHAR.image = mt_head
-			json.EMOJI = EMOJI_CustomEmoji//自定义表情
-			json.SETTING = mt_settings//设置信息
-			json.CHAT = []//MMT数据
+			let mmt = []
+			let info = {};
+			info.title = $(`.alert_${config.id} input`).eq(0).val() || '无题'
+			info.nickname = $(`.alert_${config.id} input`).eq(1).val()
+			info.date = time
 			$(".dels:checked").each(function(k,v)
 			{
-				json.CHAT.push(chats[$(".dels").index($(this))]);
+				mmt.push(chats[$(".dels").index($(this))]);
 			})
+			let json = await 生成存档(info,false,mmt)
 			$('.存档格式').val('json')
-			filename += time+'_'
 			if(mt_settings['隐藏前缀'])filename = ''
-			导出存档(`${filename}${title}`,json,'json')
+			else filename += time+'_'
+			导出存档(`${filename}${info.title}`,json,'json')
 		}
 		alert(text,config)
 		
 	}
 	else alert('你没有选中数据！')
 });
-function repairCF(data)
+async function 生成存档(info,cus = false,mmt)
 {
-	if(!data.sCharacter)return
-	if(data.type === 'image')
-	{
-		data.content = data.content || ''
-		data.file = data.file || data.content
+	let json = {}
+	if(!info)info = {}
+	if(!info.title)info.title = '无题'
+	if(!info.nickname)info.nickname = '无名'
+	if(!info.date)info.date = '未知'
+	if(!mmt)mmt = [...chats,...otherChats]
+	json.MoeTalk = 本地应用版本[0]
+	json.CHAT = mmt
+	json.SETTING = mt_settings
+	json.INFO = info
+	json.TEMP = {CHAR:{},IMAGE:{}}
+	for(let i=0,l=mmt.length;i<l;i++)
+	{//记录MMT中使用的数据
+		let chat = mmt[i]
+		let id = chat.sCharacter.no
+		let img = chat.sCharacter.index
+		if(!json.TEMP.CHAR[id])
+		{//自定义角色
+			if(mt_char[id])json.TEMP.CHAR[id] = mt_char[id]
+			if(mt_schar[id])json.TEMP.CHAR[id] = mt_schar[id]
+			if(json.TEMP.CHAR[id])delete json.TEMP.CHAR[id].emoji
+		}
+		if(!json.TEMP.IMAGE[img] && (/custom-/.test(img) || img>999))
+		{//自定义头像
+			let head = await MoeTemp.getItem(img)
+			if(!head)head = await MoeImage.getItem(img)
+			if(head)json.TEMP.IMAGE[img] = head
+		}
+		let heads = chat.heads && chat.heads.list || []
+		for(let i=0,l=heads.length;i<l;i++)
+		{//自定义头像
+			img = heads[i]
+			if(!json.TEMP.IMAGE[img] && (/custom-/.test(img) || img>999))
+			{
+				let head = await MoeTemp.getItem(img)
+				if(!head)head = await MoeImage.getItem(img)
+				if(head)json.TEMP.IMAGE[img] = head
+			}
+		}
 	}
+	if(cus)//记录所有自定义数据
+	{
+		json.CUSTOM = {}
+		json.CUSTOM.CHAR = mt_char
+		json.CUSTOM.EMOJI = EMOJI_CustomEmoji
+		json.CUSTOM.IMAGE = {}
+		await MoeImage.iterate((value, key, iterationNumber)=>
+		{
+			if(json.TEMP.IMAGE[key])delete json.TEMP.IMAGE[key]
+			json.CUSTOM.IMAGE[key] = value
+		});
+	}
+	return json
+}
+async function 读取存档(json)
+{
+	if(chats.length+otherChats.length)await MoeProject.setItem('自动备份',await 生成存档())
+	chats = []
+	otherChats = []
+	json.CHAT.map(function(v,k)
+	{
+		if(v.replyDepth !== 0)otherChats.push(v)
+		else chats.push(v)
+	})
+	//写入临时数据
+	MoeTemp.clear()
+	if(!json.TEMP)json.TEMP = {CHAR:{},IMAGE:{}}
+	mt_schar = json.TEMP.CHAR
+	for(let key in json.TEMP.IMAGE)
+	{
+		await MoeTemp.setItem(key,json.TEMP.IMAGE[key])
+	}
+	await MoeTemp.setItem('临时角色',mt_schar)
+	//写入自定义数据
+	if(json.CUSTOM)
+	{
+		mt_char = {...mt_char,...json.CUSTOM.CHAR}
+		EMOJI_CustomEmoji = {...EMOJI_CustomEmoji,...json.CUSTOM.EMOJI}
+		for(let key in json.CUSTOM.IMAGE)
+		{
+			await MoeImage.setItem(key,json.CUSTOM.IMAGE[key])
+		}
+		await moetalkStorage.setItem('mt-char',mt_char)
+		await moetalkStorage.setItem('DB_EMOJI',EMOJI_CustomEmoji)
+	}
+	if(json.SETTING)mt_settings = json.SETTING
+	CHAR_UpdateChar()
+	log(true)//清除历史记录
+	replyDepth(0,'home')//清除跳转记录
+	saveStorage('设置选项',mt_settings,'local')
+	saveStorage('chats',[...chats,...otherChats],'local')
 }
