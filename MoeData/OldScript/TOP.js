@@ -107,7 +107,7 @@ $('body').on('click',"input",function()
 //工具
 $(".frVjsk").wait(function()
 {
-	$(".frVjsk").append(`<a href='${href}/index.html'><button class='red ${class0}'><b style='color:black;'>新</b></button></a><span class='tool'>回到新版</span><br>`);
+	$(".frVjsk").append(`<a href='index.html'><button class='red ${class0}'><b style='color:black;'>新</b></button></a><span class='tool'>回到新版</span><br>`);
 },".frVjsk")
 //APP
 $('body').on('click',"#app",function()
