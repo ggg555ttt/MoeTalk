@@ -15,9 +15,6 @@ var CHAT_history = [操作历史,{}]
 var EMOJI = {io:'NO',type:'NO',pages:{}}
 var EMOJI_CustomEmoji = {}
 mt_settings['表情信息'] = mt_settings['表情信息'] ? mt_settings['表情信息'] : {}
-var 羁绊背景 = href+'MoeData/Ui/Favor_Schedule_Deco.webp'
-var 回复背景 = href+'MoeData/Ui/Popup_Img_Deco_2.webp'
-var 错误图片 = href+'MoeData/Ui/error.webp'
 MoeTemp.getItem('差分书签').then(json=>{EMOJI.pages = json || {}})
 moetalkStorage.getItem('DB_EMOJI').then(async json=>
 {

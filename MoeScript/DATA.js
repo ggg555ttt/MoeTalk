@@ -357,7 +357,7 @@ async function 生成存档(info,cus = false,mmt)
 			if(mt_schar[id])json.TEMP.CHAR[id] = mt_schar[id]
 			if(json.TEMP.CHAR[id])delete json.TEMP.CHAR[id].emoji
 		}
-		if(!json.TEMP.IMAGE[img] && (/custom-/.test(img) || img>999))
+		if(!json.TEMP.IMAGE[img] && /custom-/.test(img))
 		{//自定义头像
 			let head = await MoeTemp.getItem(img)
 			if(!head)head = await MoeImage.getItem(img)
@@ -367,7 +367,7 @@ async function 生成存档(info,cus = false,mmt)
 		for(let i=0,l=heads.length;i<l;i++)
 		{//自定义头像
 			img = heads[i]
-			if(!json.TEMP.IMAGE[img] && (/custom-/.test(img) || img>999))
+			if(!json.TEMP.IMAGE[img] && /custom-/.test(img))
 			{
 				let head = await MoeTemp.getItem(img)
 				if(!head)head = await MoeImage.getItem(img)

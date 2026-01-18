@@ -3,11 +3,13 @@ var imageArr = [];//截图分段列表
 var imageArrL = 0//截图分段数量
 var imgArea = {}
 var imageZip = null;//压缩文件
-var baseArr = []
 var 截图区域
 var 正在截图 = false
 var 上次截图 = []
 var 首次截图 = false
+var 羁绊背景 = href+'MoeData/Ui/Favor_Schedule_Deco.webp'
+var 回复背景 = href+'MoeData/Ui/Popup_Img_Deco_2.webp'
+var 错误图片 = href+'MoeData/Ui/error.webp'
 async function IMAGE_error(image)
 {
 	let src = image.src ? image.getAttribute('src') : image.target.getAttribute('src')
@@ -64,11 +66,12 @@ async function 等待图片(imgs)
 		let src = img.getAttribute('src') || href+'MoeData/Ui/error.webp';
 
 		//替换自定义图片
-		if(!src.startsWith('data:') && (/custom-|CharFace-|Emoji-/.test(src) || src>999))
+		if(!src.startsWith('data:') && /custom-|CharFace-|Emoji-/.test(src))
 		{
 			let url = src.split('/').pop().replace('.webp','')
 			src = await MoeImage.getItem(url) || await MoeTemp.getItem(url) || href+'MoeData/Ui/error.webp'
 		}
+		else if(本地 && 客户端 === 'HTML5+')src = await urlToBase64(src);
 		img.src = src;// 使用解析后的完整 URL
 	}
 	await 加载图片(imgs)
@@ -156,49 +159,26 @@ function 截图数量(num)
 	//test(height3+((i-1)*16*num))
 	return i;
 }
-function urlToBase64(img,length,callback)
+function urlToBase64(src,length,callback)
 {
-	// setTimeout(function(){callback()},1000)
-	if(!img.src)img = {bg:1,src:img}
-	if(img.src.startsWith('data:') || !img.src.includes('.webp'))
+	return new Promise(resolve =>
 	{
-		baseArr.push('base64')
-		if(baseArr.length === length)callback()
-	}
-	else
-	{
-		
-		return new Promise(resolve =>
+		let xhr = new XMLHttpRequest()
+		xhr.open('get', src, true)
+		xhr.responseType = 'blob'
+		xhr.onload = function()
 		{
-			let xhr = new XMLHttpRequest()
-			xhr.open('get', img.src, true)
-			xhr.responseType = 'blob'
-			xhr.onload = function()
+			if(this.status == 200)
 			{
-				if(this.status == 200)
-				{
-					let blob = this.response
-					let oFileReader = new FileReader()
-					oFileReader.onloadend = function(e)
-					{
-						const base64 = e.target.result
-						img.src = base64
-						baseArr.push('url')
-						if(baseArr.length === length)callback(img.bg ? img.src : '')
-						resolve(base64)
-					}
-					oFileReader.readAsDataURL(blob)
-				}
+				let blob = this.response
+				let oFileReader = new FileReader()
+				oFileReader.onloadend = (e)=>{resolve(e.target.result)}
+				oFileReader.readAsDataURL(blob)
 			}
-			xhr.onerror = function()
-			{
-				img.src = 错误图片
-				baseArr.push('url')
-				if(baseArr.length === length)callback(img.bg ? img.src : '')
-			}
-			xhr.send()
-		})
-	}
+		}
+		xhr.onerror = ()=>{resolve(错误图片)}
+		xhr.send()
+	})
 }
 function mt_title()
 {
@@ -435,26 +415,13 @@ function mt_capture(清晰度,生成图片,标题)
 			callback()
 		}
 	}
-	if(本地 && 客户端 === 'HTML5+')
-	{
-		baseArr = [];
-		let length = 截图区域.find('img').length
-		if(!length)callback()
-		截图区域.find('img').each(function(k)
-		{
-			urlToBase64($(this)[0],length,callback)
-		})
-	}
-	else
-	{
-		callback()
-	}
+	callback()
 }
 if(客户端 === 'HTML5+')
 {
-	urlToBase64(羁绊背景,1,function(img){羁绊背景 = img,baseArr = []})
-	urlToBase64(回复背景,1,function(img){回复背景 = img,baseArr = []})
-	urlToBase64(错误图片,1,function(img){错误图片 = img,baseArr = []})
+	urlToBase64(羁绊背景).then((e)=>{羁绊背景 = e})
+	urlToBase64(回复背景).then((e)=>{回复背景 = e})
+	urlToBase64(错误图片).then((e)=>{错误图片 = e})
 	var time = 0;//初始化起始时间
 	$("body").on('touchstart', 'img', function(e)
 	{
@@ -473,15 +440,26 @@ if(客户端 === 'HTML5+')
 	function showCloseImg(src)
 	{
 		let config = {}
-		config.yes = function()
+		config.yes = async function()
 		{
-			urlToBase64(src,1,function(img)
+			let ext = 'webp'
+			if(data.startsWith('data:'))
+			{//base64转blob
+				ext = src.match(/:image\/(\S*);base64/)[1]
+				let data = atob(src.split(',').pop())
+				let l = data.length;
+				let bytes = new Uint8Array(l);
+				for(let i=0;i<l;i++)bytes[i] = data.charCodeAt(i);
+				data = 'application/octet-stream'
+				data = new Blob([bytes],{type: data});
+				bytes = ''
+			}
+			else 
 			{
-				src = img
-				let ext = src.match(/:image\/(\S*);base64/)[1]
-				saveImg(`${getNowDate()}.${ext}`, src)
-				baseArr = []
-			})
+				ext = data.split('.').pop()
+				data = await getfile(data) || await getfile(href+'MoeData/Ui/error.webp');
+			}
+			保存文件(`${getNowDate()}.${ext}`,data,'image')
 		}
 		alert(`确定要将这张图保存到图库吗？\n<img src='${src}' style='width:100%;'>`,config)
 	}

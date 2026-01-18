@@ -343,12 +343,9 @@ async function $ajax(url,text = '',html = null)
 		if(!arr.includes(ext))//base64转blob
 		{
 			data = atob(data.split(',').pop())
-			let len = data.length;
-			let bytes = new Uint8Array(len);
-			for(let i = 0; i < len; i++)
-			{
-				bytes[i] = data.charCodeAt(i);
-			}
+			let l = data.length;
+			let bytes = new Uint8Array(l);
+			for(let i=0;i<l;i++)bytes[i] = data.charCodeAt(i);
 			data = 'application/octet-stream'
 			return new Blob([bytes],{type: data});
 		}
