@@ -427,3 +427,15 @@ function 校验文件(str,url,ext)
 	}
 	return false
 }
+function formatBytes(bytes,decimals = 2)
+{
+	if(bytes < 0)return '0 B';
+	if(bytes === 0)return '0 B';
+	const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB'];
+
+	const i = Math.floor(Math.log(bytes) / Math.log(1000));// 计算单位级别（0=B, 1=KB, 2=MB, 3=GB）
+
+	if(i<3)decimals = 0
+	const value = parseFloat((bytes/Math.pow(1000, i)).toFixed(decimals));
+	return value + ' ' + sizes[i];
+}

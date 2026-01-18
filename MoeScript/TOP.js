@@ -460,7 +460,7 @@ $("body").on('click',".MoeProject",async function()
 		let button = ` ${保存} ${删除} ${编辑} ${读取}`
 		str = '将当前正在编辑的内容保存为新项目\n'
 		str += '输入项目名：<input>'
-		config.title = mode
+		config.title = '添加'+mode
 		config.yes = async function()
 		{
 			key = 'Chat-'+getNowDate()
@@ -475,29 +475,27 @@ $("body").on('click',".MoeProject",async function()
 			$('.ALERT_MoeProject pre').append(`<div class="${key}"><span>${name}</span>${button}</div>`)
 		}
 	}
+	config.title = `<span class='red'>${config.title}</sapn>`
 	alert(str,config)
 });
 //警告提醒
-$('body').on('click',"#size",function()
+$('body').on('click',"#size",async function()
 {
 	INIT_state()
-	let str = `	长度数值每超过【${mt_settings['高度限制']}】截图时就会自动分割一次，建议手动设置分割点防止自动分割\n`
-	str += `	消息数量过大会造成设备卡顿\n\n`
-	if(performance.memory)
+	let str = ''
+	let s = "<span class='red'>"
+	let ss = "</span>"
+	if('storage' in navigator && 'estimate' in navigator.storage)
 	{
-		let AllMemory = performance.memory.totalJSHeapSize; // 总的JS堆内存大小，单位为字节
-		let MaxMemory = performance.memory.jsHeapSizeLimit; // JS堆内存大小的上限
-		AllMemory = (AllMemory/1048576).toFixed(0)
-		MaxMemory = (MaxMemory/1048576).toFixed(0)
-		str += `	内存占用估算(MB)：${AllMemory}/${MaxMemory}\n`
+		const e = await navigator.storage.estimate();
+		const u = e.usage;
+		const m = e.quota;
+		str += `储存占用信息：${(u/m*100).toFixed(0)}%\n`
+		str += `	使用：${formatBytes(u)}\n`
+		str += `	上限（理论）：${formatBytes(m)}\n`
 	}
-	let length = 0;
-	let length2 = JSON.stringify([...chats,...otherChats]).length;
-	length = parseInt(length/1048576).toFixed(0)
-	length2 = parseInt(length2/1048576).toFixed(0)
-
-	str += `	存储数值估算(MB)：${length}+${length2}\n`
-	str += `	<span class="red">内存占用和存储数值过大会造成设备卡顿或崩溃，请合理分配</span>`
+	str += `每张截图长度上限为${s}${mt_settings['高度限制']}${ss}，建议手动设置${s}切割点${ss}或测试极限长度\n`
+	str += `消息数量达到${s}数百甚至上千${ss}可能会造成操作卡顿或崩溃，请以设备性能为准\n`
 	alert(str)
 	
 });

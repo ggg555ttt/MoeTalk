@@ -417,11 +417,14 @@ function mt_capture(清晰度,生成图片,标题)
 	}
 	callback()
 }
-if(客户端 === 'HTML5+')
+if(客户端 === 'HTML5+' || 客户端 === 'Cordova')
 {
-	urlToBase64(羁绊背景).then((e)=>{羁绊背景 = e})
-	urlToBase64(回复背景).then((e)=>{回复背景 = e})
-	urlToBase64(错误图片).then((e)=>{错误图片 = e})
+	if(客户端 === 'HTML5+')
+	{
+		urlToBase64(羁绊背景).then((e)=>{羁绊背景 = e})
+		urlToBase64(回复背景).then((e)=>{回复背景 = e})
+		urlToBase64(错误图片).then((e)=>{错误图片 = e})
+	}
 	var time = 0;//初始化起始时间
 	$("body").on('touchstart', 'img', function(e)
 	{
@@ -429,7 +432,29 @@ if(客户端 === 'HTML5+')
 		e.stopPropagation();
 		time = setTimeout(function()
 		{
-			showCloseImg(src);
+			let config = {}
+			config.yes = async function()
+			{
+				let ext = 'webp'
+				if(src.startsWith('data:'))
+				{//base64转blob
+					ext = src.match(/:image\/(\S*);base64/)[1]
+					let data = atob(src.split(',').pop())
+					let l = data.length;
+					let bytes = new Uint8Array(l);
+					for(let i=0;i<l;i++)bytes[i] = data.charCodeAt(i);
+					data = 'application/octet-stream'
+					data = new Blob([bytes],{type: data});
+					bytes = ''
+				}
+				else 
+				{
+					ext = data.split('.').pop()
+					data = await getfile(data) || await getfile(href+'MoeData/Ui/error.webp');
+				}
+				保存文件(`${getNowDate()}.${ext}`,data,'image')
+			}
+			alert(`确定要将这张图保存到图库吗？\n<img src='${src}' style='width:100%;'>`,config)
 		}, 2000);//这里设置长按响应时间
 	});
 	$("body").on('touchend', 'img', function(e)
@@ -437,32 +462,6 @@ if(客户端 === 'HTML5+')
 		e.stopPropagation();
 		clearTimeout(time);
 	});
-	function showCloseImg(src)
-	{
-		let config = {}
-		config.yes = async function()
-		{
-			let ext = 'webp'
-			if(data.startsWith('data:'))
-			{//base64转blob
-				ext = src.match(/:image\/(\S*);base64/)[1]
-				let data = atob(src.split(',').pop())
-				let l = data.length;
-				let bytes = new Uint8Array(l);
-				for(let i=0;i<l;i++)bytes[i] = data.charCodeAt(i);
-				data = 'application/octet-stream'
-				data = new Blob([bytes],{type: data});
-				bytes = ''
-			}
-			else 
-			{
-				ext = data.split('.').pop()
-				data = await getfile(data) || await getfile(href+'MoeData/Ui/error.webp');
-			}
-			保存文件(`${getNowDate()}.${ext}`,data,'image')
-		}
-		alert(`确定要将这张图保存到图库吗？\n<img src='${src}' style='width:100%;'>`,config)
-	}
 }
 $("body").on('click',".截图选项",function()
 {

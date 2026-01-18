@@ -201,7 +201,7 @@
 										},
 										children: w.selectedList.map(function(e, n)
 										{
-											return (0, m.jsx)(j,
+											return (0, m.jsx)('img',
 											{
 												style: {zIndex: 200},
 												alt: String(e.no),
@@ -231,7 +231,7 @@
 													saveStorage('设置选项',mt_settings,'local')
 												},
 												onError: function(e){IMAGE_error(e)},
-												className: (0, u.Y)(w.selected, e) ? "selected" : ""
+												className: (0, u.Y)(w.selected, e) ? "eLaCqa fuyFOl fzOyMd selected" : "eLaCqa fuyFOl fzOyMd"
 											}, n)
 										})
 									})
@@ -392,7 +392,7 @@
 							},
 							children: n.profile.map(function(e)
 							{
-								return (0, m.jsx)(c.t_,
+								return (0, m.jsx)('img',
 								{
 									width: 252,
 									height: 252,
@@ -427,7 +427,7 @@
 									className: 1 === r.filter(function(t)
 									{
 										return n.no === t.no && e === t.index
-									}).length ? "selected" : ""
+									}).length ? "eLaCqa fuyFOl selected" : "eLaCqa fuyFOl"
 								}, e)
 							})
 						})
@@ -474,8 +474,9 @@
 								children: [(0, m.jsxs)(S,
 								{
 									style:{height:'auto'},
-									children: [(0, m.jsx)(c.NZ,
+									children: [(0, m.jsx)('img',
 									{
+										className: 'eLaCqa',
 										width: 252,
 										height: 252,
 										src: loadhead(n.no,n.profile[0]),//#左方选择框

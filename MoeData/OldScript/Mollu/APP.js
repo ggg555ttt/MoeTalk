@@ -10041,7 +10041,8 @@
 							{
 								style:
 								{
-									display: i && n || !i ? "flex" : "none"
+									display: i && n || !i ? "flex" : "none",
+									justifyContent: 'flex-start'
 								},
 								children: [(0, O.jsxs)(L,
 								{

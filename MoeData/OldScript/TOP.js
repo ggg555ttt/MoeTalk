@@ -56,7 +56,7 @@ INIT_waiting(function()
 	CHAR_GetCharList()
 	选择角色 = true
 	charList(选择角色)//更新角色
-	$('#mt_watermark').click()//显示消息
+	refreshMessage(chats)//显示消息
 	INIT_loading('结束加载')
 },['mt_char','mt_head','allChats','mt_school','mt_club','mt_characters'])
 
@@ -107,11 +107,7 @@ $('body').on('click',"input",function()
 //工具
 $(".frVjsk").wait(function()
 {
-	$(".frVjsk").append(`<button class='${class0}' id='app'><b style='color:blue;'>A</b></button><span class='tool' align='center'>客户端\n下载地址</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='selectgame'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='makecus'><b style='color:red;'>創</b></button><span class='tool'>创建角色</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:black;'>換</b></button><span class='tool'>切换风格</span><br>`);
-	$(".frVjsk").append(`<a href='${href}setting.html'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
+	$(".frVjsk").append(`<a href='${href}/index.html'><button class='red ${class0}'><b style='color:black;'>新</b></button></a><span class='tool'>回到新版</span><br>`);
 },".frVjsk")
 //APP
 $('body').on('click',"#app",function()
@@ -287,10 +283,12 @@ $('body').on('click',"#mt-style",function()
 function refreshMessage(json)
 {
 	$('.消息').remove()
+	let html = ''
 	json.map(function(v,k)
 	{
-		$$(".Talk__CContainer-sc-1uzn66i-1").append(makeMessage(v.type,v,k,'add'))
+		html += makeMessage(v.type,v,k,'add')
 	})
+	$('.消息底座').before(html)
 	json.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
 }
 function replyDepth(str,mode)
