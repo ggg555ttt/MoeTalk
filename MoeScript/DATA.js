@@ -3,7 +3,6 @@ var DATA_NowTime = 0
 function loaddata(json,mode)//识别存档
 {
 	while(typeof json === 'string')json = JSON.parse(json)
-	INIT_loading(false)
 	if(!json.MoeTalk)
 	{
 		let OLdJson = UPDATE_OldData(json)
@@ -88,6 +87,7 @@ function loaddata(json,mode)//识别存档
 		})
 	}
 	return json
+	INIT_loading(!'加载存档')
 }
 function repairCF(data)
 {
@@ -391,6 +391,7 @@ async function 生成存档(info,cus = false,mmt)
 }
 async function 读取存档(json)
 {
+	INIT_loading('读取存档')
 	if(chats.length+otherChats.length)await MoeProject.setItem('自动备份',await 生成存档())
 	chats = []
 	otherChats = []
@@ -426,4 +427,5 @@ async function 读取存档(json)
 	replyDepth(0,'home')//清除跳转记录
 	saveStorage('设置选项',mt_settings,'local')
 	saveStorage('chats',[...chats,...otherChats],'local')
+	INIT_loading(!'读取存档')
 }

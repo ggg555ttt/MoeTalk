@@ -2261,9 +2261,7 @@
 						},
 						I = async function()
 						{//编译过的存档
-							INIT_loading('读档')
 							await 读取存档(j)
-							INIT_loading(0)
 							N()
 						};
 					return (0, m.jsx)(ea.Xf,
@@ -2333,7 +2331,7 @@
 										},
 										onChange: function(e)
 										{
-											INIT_loading('加载')
+											INIT_loading('加载存档')
 											P(e)
 										}
 									}), (0, m.jsx)('div',

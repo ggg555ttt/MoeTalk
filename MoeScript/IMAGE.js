@@ -160,7 +160,7 @@ function urlToBase64(img,length,callback)
 {
 	// setTimeout(function(){callback()},1000)
 	if(!img.src)img = {bg:1,src:img}
-	if(img.src.indexOf('data:image/') > -1)
+	if(img.src.startsWith('data:') || !img.src.includes('.webp'))
 	{
 		baseArr.push('base64')
 		if(baseArr.length === length)callback()

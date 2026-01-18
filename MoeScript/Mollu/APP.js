@@ -6126,7 +6126,7 @@
 												}
 											}
 											if(!MMT目录)MMT目录 = {作者:{},作品:[]}
-											INIT_loading('结束加载')
+											INIT_loading(!'结束加载')
 											$$('.MMTPlayer')[0].click()
 											return
 										},

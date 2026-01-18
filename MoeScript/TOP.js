@@ -380,6 +380,7 @@ $("body").on('click',"#MoeProject",async function()
 		str += `<div class="${key}"><span>${项目名称[key] || key}</span>${button}</div>`
 	}
 	let config = {}
+	config.title = '项目管理'
 	config.id = 'MoeProject'
 	config.show = true
 	alert(str,config)
