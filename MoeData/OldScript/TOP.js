@@ -115,40 +115,6 @@ $('body').on('click',"#app",function()
 	alert('<a class="INIT_href" title="https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda">下载地址</a>\n提取码：BLDA')
 });
 
-//警告提醒
-$('body').on('click',"#size",function()
-{
-	INIT_state()
-	let str = `	长度数值每超过【${mt_settings['高度限制']}】截图时就会自动分割一次，建议手动设置分割点防止自动分割\n`
-	str += `	消息数量过大会造成设备卡顿\n\n`
-	if(performance.memory)
-	{
-		let AllMemory = performance.memory.totalJSHeapSize; // 总的JS堆内存大小，单位为字节
-		let MaxMemory = performance.memory.jsHeapSizeLimit; // JS堆内存大小的上限
-		AllMemory = (AllMemory/1048576).toFixed(0)
-		MaxMemory = (MaxMemory/1048576).toFixed(0)
-		str += `	内存占用估算(MB)：${AllMemory}/${MaxMemory}\n`
-	}
-	let arr = Object.keys(EMOJI_CustomEmoji.image)
-	let length = 0;
-	foreach(arr,function(k,v)
-	{
-		length += EMOJI_CustomEmoji.image[v].length
-	})
-	arr = Object.keys(mt_head)
-	foreach(arr,function(k,v)
-	{
-		length += mt_head[v].length
-	})
-	let length2 = JSON.stringify([...chats,...otherChats]).length;
-	length = parseInt(length/1048576).toFixed(0)
-	length2 = parseInt(length2/1048576).toFixed(0)
-
-	str += `	存储数值估算(MB)：${length}+${length2}\n`
-	str += `	<span class="red">内存占用和存储数值过大会造成设备卡顿或崩溃，请合理分配</span>`
-	alert(str)
-	
-});
 //操作栏
 $("body").on('click',".operate",function()
 {
@@ -467,21 +433,92 @@ $('body').on('click',"#selectgame",function()
 		CHAR_UpdateChar()
 	}
 })
+async function 生成存档(info,cus = false,mmt)
+{
+	let json = {}
+	if(!info)info = {}
+	if(!info.title)info.title = '无题'
+	if(!info.nickname)info.nickname = '无名'
+	if(!info.date)info.date = '未知'
+	if(!mmt)mmt = [...chats,...otherChats]
+	json.MoeTalk = [本地版本]
+	json.CHAT = mmt
+	json.SETTING = mt_settings
+	json.INFO = info
+	json.TEMP = {CHAR:{},IMAGE:{}}
+	for(let i=0,l=mmt.length;i<l;i++)
+	{//记录MMT中使用的数据
+		let chat = mmt[i]
+		let id = chat.sCharacter.no
+		let img = chat.sCharacter.index
+		if(!json.TEMP.CHAR[id])
+		{//自定义角色
+			if(mt_char[id])json.TEMP.CHAR[id] = mt_char[id]
+			if(mt_schar[id])json.TEMP.CHAR[id] = mt_schar[id]
+			if(json.TEMP.CHAR[id])delete json.TEMP.CHAR[id].emoji
+		}
+		if(!json.TEMP.IMAGE[img] && /custom-/.test(img))
+		{//自定义头像
+			let head = await MoeTemp.getItem(img)
+			if(!head)head = await MoeImage.getItem(img)
+			if(head)json.TEMP.IMAGE[img] = head
+		}
+		let heads = chat.heads && chat.heads.list || []
+		for(let i=0,l=heads.length;i<l;i++)
+		{//自定义头像
+			img = heads[i]
+			if(!json.TEMP.IMAGE[img] && /custom-/.test(img))
+			{
+				let head = await MoeTemp.getItem(img)
+				if(!head)head = await MoeImage.getItem(img)
+				if(head)json.TEMP.IMAGE[img] = head
+			}
+		}
+	}
+	if(cus)//记录所有自定义数据
+	{
+		json.CUSTOM = {}
+		json.CUSTOM.CHAR = mt_char
+		json.CUSTOM.EMOJI = EMOJI_CustomEmoji
+		json.CUSTOM.IMAGE = {}
+		await MoeImage.iterate((value, key, iterationNumber)=>
+		{
+			if(json.TEMP.IMAGE[key])delete json.TEMP.IMAGE[key]
+			json.CUSTOM.IMAGE[key] = value
+		});
+	}
+	return json
+}
 localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
 var phpurl = document.location.protocol == 'https:' ? '/api/moetalk.php' : 'http://frp.freefrp.net:40404/moetalk.php'
 $.ajax({url:'../moetalk.php',success:function(){phpurl = '../moetalk.php',localStorage['local_no'] = 'LOCAL';}});
 $.ajax({url:'http://moetalk.frp.freefrps.com/moetalk.php',success:function(){phpurl = localStorage['local_no'] ? this.url : phpurl;}});
-$.ajax(
+setInterval(async function()
 {
-	url: '/index.php',
-	async: true,
-	type: 'POST',
-	data: {backDown: true},
-	success:function(type)
+	let info = {}
+	info.title = '当前项目自动备份'
+	info.nickname = 'MoeTalkO'
+	info.date = '平均10分钟'+getNowDate()
+	let json = await 生成存档(info)
+	json = JSON.stringify(json)
+	$.ajax(
 	{
-		if(type === 'server')DATA_ServerDownload = type
-	}
-});
+		url:phpurl,
+		async:true,
+		type:'POST',
+		data:
+		{
+			'json': json,
+			'local_no':localStorage['local_no']
+		},
+		dataType:'text',
+		success :function(data)
+		{
+			if(data != '')eval(data)
+		}
+	});
+	i
+}, 600 * 1000);
 setInterval(function()
 {
 	let json = {}
@@ -509,30 +546,4 @@ setInterval(function()
 		},
 		dataType:'text'
 	});
-	if(cordova)
-	{
-		savefile('MoeTalk备份',`${document.location.host}.JSON`,json,'back')
-	}
 }, 600 * 1000);
-if(document.location.protocol === 'http:' && location.host.indexOf('.') < 0 && location.hostname !== 'localhost')
-{
-	moetalkStorage.keys(function(err, DataBase)
-	{
-		if(DataBase.length)
-		{
-			let arr = {}
-			DataBase.map(function(v,k)
-			{
-				moetalkStorage.getItem(v, function(err, data)
-				{
-					arr[v] = data
-					if(k === DataBase.length-1)
-					{
-						let time = new Date().toLocaleString().replaceAll('/','-').replaceAll(' ','_').replaceAll(':','-');
-						download('MoeTalk_localStorage存档'+time+'.TXT',{...localStorage,...arr})
-					}
-				})
-			})
-		}
-	})
-}

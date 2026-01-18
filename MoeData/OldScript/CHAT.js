@@ -1,4 +1,49 @@
 /*@MoeData/OldScript/CHAT.js@*/
+async function IMAGE_error(image)
+{
+	let src = image.src ? image.getAttribute('src') : image.target.getAttribute('src')
+	let url = src.split('/').pop().replace('.webp','')
+	let img = await MoeImage.getItem(url) || await MoeTemp.getItem(url) || href+'MoeData/Ui/error.webp'
+	if(img[0] === 'G')img = href+img
+	if(image.src)image.src = img
+	else image.target.src = img
+	return
+}
+function repairCF(data)
+{
+	if(!data.sCharacter)return
+	data.sCharacter.no = id_map[0][data.sCharacter.no] || data.sCharacter.no
+	data.sCharacter.index = toString(id_map[1][data.sCharacter.index] || data.sCharacter.index)
+	if(mt_settings['选择游戏'] === 'CBJQ')data.sCharacter.index = data.sCharacter.index.replace('sp_','').replace('_L2D','_01')
+	else data.sCharacter.index = data.sCharacter.index.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
+	
+	if(data.type === 'image')
+	{
+		if(!data.file)
+		{
+			data.file = data.content
+			data.content = ''
+		}
+		data.file = data.file.replace('CustomFace','CharFace').replace('Images/Emoji/','GameData/BLDA/Emoji/').replace(MoeTalkURL,'').replace('Images/','GameData/')
+		
+		if(data.file.indexOf('GameData/CharFace/') > -1)
+		{
+			data.file = 'GameData/BLDA/CharFace/'+data.file.split('/').slice(-1)[0].replace('.','/')
+		}
+		if(data.file.indexOf('Face/') > -1)
+		{
+			let arr = data.file.split('/')
+			let str = arr.slice(-1)[0].replace('.webp','')
+			//if(CFInfo[str])data.file = data.file.replace(str,CFInfo[str])
+			arr = str.split('.')
+			if(data.file.indexOf('CharID') > -1 && arr.length > 1)
+			{
+				arr = arr[1]-1
+				data.file = data.file.replace(str,arr)
+			}
+		}
+	}
+}
 var chatIndex = -1//消息索引
 
 var 粘贴板;
