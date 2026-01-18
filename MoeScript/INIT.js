@@ -352,7 +352,7 @@ async function $ajax(url,text = '',html = null)
 		else return data;
 	}
 	let data = await getfile(url,text,html)
-	if(arr.includes(ext) && !校验文件(data,url,ext))data = '';
+	if(arr.includes(ext) && !校验文件(data,url,ext))data = false;
 	if(data || !url.includes(MoeTalkURL))return data//重要
 	if(网址列表.length === 0)
 	{
