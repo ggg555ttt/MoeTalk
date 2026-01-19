@@ -482,9 +482,7 @@
 										src: loadhead(n.no,n.profile[0]),//#左方选择框
 										onError: function(e){IMAGE_error(e)},
 										alt: n.profile[0]
-									}), 
-									//*添加ID和社团信息
-									(0, m.jsxs)(I,
+									}), (0, m.jsxs)(I,
 									{
 										children: [(0, m.jsx)(D,
 										{
@@ -508,9 +506,7 @@
 												}
 											})]
 										})]
-									})
-									//*添加ID和社团信息
-									]
+									})]
 								}), (0, m.jsx)(B,
 								{
 									width: 252,
@@ -898,7 +894,7 @@
 								style: {fontSize: '1.2rem'},
 								className: "bold",
 								children: [L.Z.student[u],`(${o})`]
-							}),(0, m.jsxs)('button',
+							}), (0, m.jsxs)('button',
 							{
 								id: 'makecus',
 								children: '添加角色'

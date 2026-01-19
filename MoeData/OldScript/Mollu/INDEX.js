@@ -680,11 +680,6 @@
 						{
 							return mtlang//#e.global.lang
 						});
-					let headsize;
-					if(n.school[a] === '自定义')
-					{
-						headsize = mt_head[n.no] ? (mt_head[n.no].length/1024).toFixed(0)+'KB' : '-1KB'
-					}
 					return (0, m.jsxs)(N,
 					{
 						children: [(0, m.jsx)(S,
@@ -710,34 +705,30 @@
 										src: loadhead(n.no,n.profile[0]),//#左方选择框
 										onError: function(e){IMAGE_error(e)},
 										alt: n.profile[0]
-									}), 
-									//*添加ID和社团信息
-									(0, m.jsxs)(I,
+									}), (0, m.jsxs)(I,
 									{
-										children: [(0, m.jsx)("h2",
+										children: [(0, m.jsx)(D,
 										{
-											children: (0, m.jsx)(F,
-											{
-												children: (0, m.jsx)(D,
-												{
-													className: "bold",
-													style:{color:'rgb(68, 72, 78)'},
-													children: mt_settings['人物改名'][n.no] || n.name[a].replaceAll("-", " ")
-												})
-											})
-										}), (0, m.jsx)(F,
+											className: "bold",
+											style:{color:'rgb(68, 72, 78)'},
+											children: mt_settings['人物改名'][n.no] || n.name[a].replaceAll("-", " ")
+										}), (0, m.jsx)('span',
 										{
-											children: [(0, m.jsx)(O,
-											{
-												children: [(0, m.jsx)('span',
-												{
-													children:n.club[a]
-												})]
-											})]//@显示社团
+											style: {color:'rgb(111, 119, 127)'},
+											children:n.club[a]
 										})]
-									})
-									//*添加ID和社团信息
-									]
+									})]
+								}), (0, m.jsx)(B,
+								{
+									width: 252,
+									height: 252,
+									src: href+"MoeData/Ui/School/"+(!mt_school[n.school.id] ? n.club['zh_cn'] === '临时角色' ? 'RECYCLE' : 'CUSTOM' : mt_school[n.school.id].en || 'none')+'.webp',//#学校图标
+									onError: function(e){IMAGE_error(e)},
+									onClick: function()
+									{
+										if(n.school['zh_cn'] === '自定义' || n.club['zh_cn'] === '临时角色')removeChar(n);
+									},
+									alt: "school"
 								})]
 							})
 						}), (0, m.jsxs)(T,
@@ -1109,20 +1100,11 @@
 					{
 						children: [(0, m.jsxs)(K,
 						{
-							children: [(0, m.jsx)("h1",
+							children: [(0, m.jsxs)(X,
 							{
-								children: (0, m.jsxs)(X,
-								{
-									className: "bold",
-									children: [L.Z.student[u], " ", (0, m.jsxs)("span",
-									{
-										style:
-										{
-											fontSize: "1.2rem"
-										},
-										children: ["(", o, ")"]
-									})]
-								})
+								style: {fontSize: '1.2rem'},
+								className: "bold",
+								children: [L.Z.student[u],`(${o})`]
 							}), (0, m.jsxs)(W,
 							{
 								style:
@@ -1132,6 +1114,7 @@
 								children: [(0, m.jsx)($,
 								{
 									className: "medium",
+									style: {width: "4.5rem"},
 									onClick: function()
 									{
 										s(!l)
@@ -1139,10 +1122,7 @@
 									},
 									children: (0, m.jsx)(X,
 									{
-										style:
-										{
-											fontSize: "1.1rem"
-										},
+										style: {fontSize: "1.1rem"},
 										children: L.Z[n.sortCharType][u]
 									})
 								}), (0, m.jsx)(c.jl,

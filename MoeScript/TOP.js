@@ -346,6 +346,12 @@ $('body').on('click',"input",function()
 //工具
 $(".frVjsk").wait(function()
 {
+	if(window.location.href.includes('old'))
+	{
+		$(".frVjsk").html('').css('justify-content','flex-start')
+		$(".frVjsk").append(`<a href='index.html'><button class='red ${class0}'><b style='color:black;'>新</b></button></a><span class='tool'>回到新版</span><br>`);
+		return;
+	}
 	if(本地)$(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:red;'>檢</b></button><span class='tool' align='center'>检查更新</span><br>`);
 	else $(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:red;'>端</b></button><span class='tool' style='white-space:pre;' align='center'>下载\n客户端</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' onclick='selectgame()'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
