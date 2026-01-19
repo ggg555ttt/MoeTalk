@@ -125,7 +125,11 @@ function moedev()
 	}
 	alert(str,config)
 }
-
+var FontList = `@font-face{font-family:Blueaka;src:url(./MoeData/Fonts/Blueaka.woff2)}/*默认*/
+@font-face{font-family:Jalnan;src:url(./MoeData/Fonts/Jalnan.ttf)}/*标题*/
+@font-face{font-family:KaiTi;src:url(./MoeData/Fonts/KaiTi.ttf)}/*楷体*/
+@font-face{font-family:Cyrillic;src:local(Arial);unicode-range:U+0400-04FF;}/*匹配西里尔字母*/
+body,textarea,button{font-family:Cyrillic,Blueaka;}`
 if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeData/Fonts/FontList.css' data-n-g='' id='mt-font'>");//加载字体
 //使用说明
 function clearCache()
@@ -346,18 +350,19 @@ $('body').on('click',"input",function()
 //工具
 $(".frVjsk").wait(function()
 {
-	if(window.location.href.includes('old'))
-	{
-		$(".frVjsk").html('').css('justify-content','flex-start')
-		$(".frVjsk").append(`<a href='index.html'><button class='red ${class0}'><b style='color:black;'>新</b></button></a><span class='tool'>回到新版</span><br>`);
-		return;
-	}
 	if(本地)$(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:red;'>檢</b></button><span class='tool' align='center'>检查更新</span><br>`);
 	else $(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:red;'>端</b></button><span class='tool' style='white-space:pre;' align='center'>下载\n客户端</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' onclick='selectgame()'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:blue;'>換</b></button><span class='tool'>切换风格</span><br>`);
 	$(".frVjsk").append(`<button class='${class0}' id='MoeProject'><b style='color:red;'>項</b></button><span class='tool' align='center'>项目管理</span><br>`);
-	$(".frVjsk").append(`<a href='${href}index_old.html'><button class='${class0}'><b style='color:black;'>舊</b></button></a><span class='tool'>访问旧版</span><br>`);
+	if(window.location.href.includes('old'))
+	{
+		$(".frVjsk").append(`<a href='index.html'><button class='red ${class0}'><b style='color:black;'>新</b></button></a><span class='tool'>回到新版</span><br>`);
+	}
+	else
+	{
+		$(".frVjsk").append(`<a href='index_old.html'><button class='${class0}'><b style='color:black;'>舊</b></button></a><span class='tool'>访问旧版</span><br>`);
+	}
 	$(".frVjsk").append(`<a href='${href}setting.html'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
 },".frVjsk")
 $("body").on('click',"#MoeProject",async function()

@@ -828,7 +828,6 @@ $("body").on('click',".设置头像",function()
 {
 	let no = $('.角色头像').attr('alt')
 	let index = $('.角色头像').attr('title')
-	let src = $('.角色头像').attr('src')
 	let HeadList = {direction:'row',list:[]}
 	let checked = $('.dels:checked').length
 	if(CHAT_HeadList)
@@ -955,8 +954,9 @@ $("body").on('click',".预览模式",async function()
 	// await Promise.all([等待图片($('.预览内容')),document.fonts?.ready || Promise.resolve()]);
 	$('.内容预览').click()
 });
-$("body").on('click',".编辑",function()
+function 编辑消息(index)
 {
+	chatIndex = index
 	$('.编辑界面').addClass('visible')//显示编辑界面
 	$(".预览模式").css('color','')
 	$(".操作模式").text('编辑')
@@ -992,7 +992,7 @@ $("body").on('click',".编辑",function()
 	}
 	$('.批量编辑').hide()
 	$('.编辑标题').show()
-	chatIndex = $('.消息').index($(this).parents('.消息'))
+
 	let chat = chats[chatIndex]
 
 	$('.角色ID').text('ID：'+chat.sCharacter.no)
@@ -1024,7 +1024,8 @@ $("body").on('click',".编辑",function()
 
 	if(chat.heads)CHAT_HeadList = {...chat.heads,...{}}	
 	if(chat.style)CHAT_Style = [...chat.style,...[]]
-});
+}
+$("body").on('click',".编辑",function(){编辑消息($('.消息').index($(this).parents('.消息')))});
 $("body").on('click',".头像框",function()
 {
 	chatIndex = $('.消息').index($(this).parents('.消息'))

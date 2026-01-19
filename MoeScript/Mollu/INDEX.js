@@ -1861,7 +1861,7 @@
 									style: {overflow: 'scroll'}
 								}), (0, m.jsx)('iframe',
 								{
-									src: `${href}capture_`+(mt_settings['禁止字体'] ?'nofont' : 'font')+`.html?ver=`+本地应用版本[0],
+									src: `${href}capture.html?ver=`+本地应用版本[0],
 									style: 
 									{
 										// height: '0px'
@@ -1871,6 +1871,9 @@
 									{
 										截图区域 = e.target.contentDocument || e.target.contentWindow.document;
 										截图区域.documentElement.style.fontSize = '16px'
+										const style = 截图区域.createElement('style');
+										style.textContent = FontList
+										if(!mt_settings['禁止字体'])截图区域.head.appendChild(style);
 										截图区域 = $$(截图区域).find('.截图区域')
 										截图区域.outerWidth(mt_settings['宽度限制'])
 									}
@@ -2973,14 +2976,14 @@
 												style: {padding:0},
 												children: mt_settings['选择角色'].list.concat({no:'0',index:'1'}).map(function(e, n)
 												{
-													return (0, m.jsx)(c.t_,
+													return (0, m.jsx)('img',
 													{
 														alt: String(e.no),
 														title: String(e.index),
 														src: loadhead(e.no,e.index),
 														onError: function(e){IMAGE_error(e)},
 														style: {width: '3rem',height: '3rem'},
-														className: '差分映射 '+ (e.no == 差分映射.id && e.index == 差分映射.index ? 'selected' : '')
+														className: '差分映射 '+ (e.no == 差分映射.id && e.index == 差分映射.index ? 'eLaCqa fuyFOl selected' : 'eLaCqa fuyFOl')
 													}, n)
 												})
 											})
