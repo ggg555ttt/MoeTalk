@@ -39,7 +39,6 @@ var MMT目录 = {}//目录
 var $$ = $;//jquery转义
 var winHeight = window.innerHeight
 var 元素尺寸;
-var class0 = 'common__IconButton-sc-1ojome3-0 Header__QuestionButton-sc-17b1not-3 mvcff kNOatn bold';
 
 if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorage['0'])
 {
@@ -194,7 +193,7 @@ function saveStorage(key,val,mode)
 	}
 	if(mode === 'local' && ['chats','mt-char','mt-head','DB_EMOJI','imageArr'].indexOf(key) > -1)
 	{
-		moetalkStorage.setItem(key,val).catch(function(error)
+		数据操作('Ss',key,val).catch(function(error)
 		{
 			let arr = []
 			arr[0] = error
@@ -353,7 +352,7 @@ async function $ajax(url,text = '',html = null)
 	}
 	let data = await getfile(url,text,html)
 	if(arr.includes(ext) && !校验文件(data,url,ext))data = false;
-	if(data || !url.includes(MoeTalkURL))return data//重要
+	if(data)return data//重要
 	if(网址列表.length === 0)
 	{
 		let urls = await getfile('https://api.akams.cn/github#.json')
@@ -438,4 +437,26 @@ function formatBytes(bytes,decimals = 2)
 	if(i<3)decimals = 0
 	const value = parseFloat((bytes/Math.pow(1000, i)).toFixed(decimals));
 	return value + ' ' + sizes[i];
+}
+function 数据操作(C,K = null,V = null)
+{
+	let D,M
+	if(C[0] === 'I')D = MoeImage
+	else if(C[0] === 'T')D = MoeTemp
+	else if(C[0] === 'P')D = MoeProject
+	else if(C[0] === 'S')D = moetalkStorage
+	if(C[1] === 's')M = 'setItem'
+	else if(C[1] === 'g')M = 'getItem'
+	else if(C[1] === 'r')M = 'removeItem'
+	else if(C[1] === 'c')M = 'clear'
+	return new Promise(function(resolve)
+	{
+		D[M](K,V).then((e)=>{resolve(e)}).catch((e)=>
+		{
+			let str = `数据库操作失败！\n这可能是存储空间不足引起的\n如果不是请向开发者反馈此问题\n函数名：${D._config.name}.${M}\n键名：${K}`
+			let config = {id: 'error',title: '<span class="red">错误警告</span>'}
+			alert(str,config)
+			resolve(e)
+		})
+	})
 }

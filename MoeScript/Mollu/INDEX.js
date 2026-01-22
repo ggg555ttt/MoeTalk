@@ -2106,7 +2106,7 @@
 												截图区域.html('')
 												$$('.图片预览').html('')
 												$$('.截图区域').show()
-												moetalkStorage.getItem('imageArr',function(err, data)
+												数据操作('Sg','imageArr',function(err, data)
 												{	
 													上次截图 = data
 													foreach(data,function(k,v)
@@ -3096,7 +3096,7 @@
 																		let id = `${EMOJI.type}-${getNowDate()}_${i}`
 																		if(!EMOJI_CustomEmoji[EMOJI.id])EMOJI_CustomEmoji[EMOJI.id] = {}
 																		EMOJI_CustomEmoji[EMOJI.id][id] = EMOJI.pages[EMOJI.id].custom
-																		await MoeImage.setItem(id,imgs[i].src)
+																		await 数据操作('Is',id,imgs[i].src)
 																	}
 																	$$('.INDEX_Emoji').click()
 																	saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
@@ -3118,7 +3118,7 @@
 																		$$.each($$('.INDEX_EmojiIfno.selected'),function(k,v)
 																		{
 																			v = v.title
-																			MoeImage.removeItem(v)
+																			数据操作('Ir',v)
 																			delete EMOJI_CustomEmoji[EMOJI.id][v]
 																			delete mt_settings['表情信息'][v]
 																		})
@@ -3155,10 +3155,10 @@
 																	if(EMOJI.custom.io)
 																	{//编辑自定义表情
 																		EMOJI_CustomEmoji[EMOJI.id][v] = parseInt($$(`.alert_${config.id} select`).val()-1)
-																		MoeImage.setItem(v,$$('.Emojis').attr('src'))
+																		数据操作('Is',v,$$('.Emojis').attr('src'))
 																		if($$(`.alert_${config.id} input:checked`).length)
 																		{//只删除表情
-																			MoeImage.removeItem(v)
+																			数据操作('Ir',v)
 																			delete EMOJI_CustomEmoji[EMOJI.id][v]
 																			if(!Object.keys(EMOJI_CustomEmoji[EMOJI.id]).length)delete EMOJI_CustomEmoji[EMOJI.id]
 																			$$(`.alert_${config.id} .text`).val('')
@@ -6598,9 +6598,9 @@
 													for(let id in MMT目录.数据.CHAR.image)
 													{
 														let img = MMT目录.数据.CHAR.image[id]
-														await MoeTemp.setItem(id,img)
+														await 数据操作('Ts',id,img)
 													}
-													MoeTemp.setItem('临时角色',mt_schar)
+													数据操作('Ts','临时角色',mt_schar)
 												}
 												delete MMT目录.数据
 											}

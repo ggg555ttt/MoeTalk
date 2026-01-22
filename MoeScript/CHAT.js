@@ -15,8 +15,8 @@ var CHAT_history = [操作历史,{}]
 var EMOJI = {io:'NO',type:'NO',pages:{}}
 var EMOJI_CustomEmoji = {}
 mt_settings['表情信息'] = mt_settings['表情信息'] ? mt_settings['表情信息'] : {}
-MoeTemp.getItem('差分书签').then(json=>{EMOJI.pages = json || {}})
-moetalkStorage.getItem('DB_EMOJI').then(async json=>
+数据操作('Tg','差分书签').then(json=>{EMOJI.pages = json || {}})
+数据操作('Sg','DB_EMOJI').then(async json=>
 {
 	json = json || {}
 	if(json.id)
@@ -35,11 +35,11 @@ moetalkStorage.getItem('DB_EMOJI').then(async json=>
 			$('.处理表情').text(l--)
 			$('.INDEX_EmojiButton').attr('disabled','disabled')
 			$('.INDEX_CharFaceButton').attr('disabled','disabled')
-			await MoeImage.setItem(key,json.image[key])
+			await 数据操作('Is',key,json.image[key])
 			delete json.image[key]
 		}
 		delete json.image
-		moetalkStorage.setItem('DB_EMOJI',json)
+		数据操作('Ss','DB_EMOJI',json)
 		$('.INDEX_EmojiButton').removeAttr('disabled')
 		$('.INDEX_CharFaceButton').removeAttr('disabled')
 		$(`.alert_${config.id} .confirm`).click()
@@ -218,7 +218,7 @@ function mt_emojis(S,mode)
 	{
 		if($(`.差分映射.selected`).length)$(`.差分映射.selected`)[0].scrollIntoView({inline:'center',block: 'nearest'})
 	}, 100)
-	MoeTemp.setItem('差分书签',EMOJI.pages)
+	数据操作('Ts','差分书签',EMOJI.pages)
 	if(EMOJI.custom.io)EMOJI.images.unshift('ADD')
 
 	S(!0)
@@ -247,7 +247,7 @@ function moeLog(arr,mode = false)
 		操作历史.list[操作历史.index] = arr
 	}
 	log()
-	moetalkStorage.setItem('moeLog', 操作历史);
+	数据操作('Ss','moeLog', 操作历史);
 }
 function 撤销(goback)
 {
@@ -1085,13 +1085,13 @@ $("body").on('click',".INDEX_delete",function()
 			info.title = '读取或删除前的项目'
 			info.nickname = '自动备份'
 			info.date = getNowDate();
-			await MoeProject.setItem('自动备份',await 生成存档(info))
+			await 数据操作('Ps','自动备份',await 生成存档(info))
 			otherChats = []
 			clear = true
 			mt_schar = {}
 			EMOJI.pages = {}
 			charList(!0)//更新列表
-			MoeTemp.clear()
+			数据操作('Tc')
 		}
 		sendMessage({},'','delete',indexs)
 		log(clear)

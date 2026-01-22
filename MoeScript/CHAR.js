@@ -259,7 +259,7 @@ async function edit_char()
 	let length = char_info.profile.length
 	for(let i = 0;i < length;i++)
 	{
-		await MoeImage.removeItem(char_info.profile[i])
+		await 数据操作('Ir',char_info.profile[i])
 	}
 	$('.heads img').each(function()
 	{
@@ -267,7 +267,7 @@ async function edit_char()
 		if(mt_char[id])
 		{
 			mt_char[id].head.push(index)
-			MoeImage.setItem(index,$(this).attr('src'))
+			数据操作('Is',index,$(this).attr('src'))
 			if(index !== char_info.no)mt_char[id].names[index] = toString(char_info.names[index])
 		}
 		else if(id !== index)
@@ -298,20 +298,20 @@ async function removeChar(n)
 			mt_char[n.no] = mt_schar[n.no]
 			mt_char[n.no].club = n.school.zh_cn
 			mt_char[n.no].school = '自定义'
-			let img = await MoeTemp.getItem(n.no)
-			if(img)await Promise.all([MoeTemp.removeItem(n.no),MoeImage.setItem(n.no,img)])
+			let img = await 数据操作('Tg',n.no)
+			if(img)await Promise.all([数据操作('Tr',n.no),数据操作('Is',n.no,img)])
 			let head = mt_schar[n.no].head || []
 			for(let i=0,l=head.length;i<l;i++)
 			{
-				img = await MoeTemp.getItem(head[i])
-				if(img)await Promise.all([MoeTemp.removeItem(head[i]),MoeImage.setItem(head[i],img)])
+				img = await 数据操作('Tg',head[i])
+				if(img)await Promise.all([数据操作('Tr',head[i]),数据操作('Is',head[i],img)])
 			}
 			for(let key in mt_schar[n.no].emoji)
 			{
-				img = await MoeTemp.getItem(key)
+				img = await 数据操作('Tg',key)
 				if(img)
 				{
-					await Promise.all([MoeTemp.removeItem(key),MoeImage.setItem(key,img)])
+					await Promise.all([数据操作('Tr',key),数据操作('Is',key,img)])
 					if(!EMOJI_CustomEmoji[n.no])EMOJI_CustomEmoji[n.no] = {}
 					EMOJI_CustomEmoji[n.no][key] = mt_schar[n.no].emoji[key]
 				}
@@ -319,7 +319,7 @@ async function removeChar(n)
 			delete mt_schar[n.no];
 			saveStorage('mt-char',mt_char,'local')
 			saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
-			MoeTemp.setItem('临时角色',mt_schar)
+			数据操作('Ts','临时角色',mt_schar)
 			charList(!0)//更新列表
 		}
 	}
@@ -331,19 +331,19 @@ async function removeChar(n)
 			mt_schar[n.no].club = '临时角色'
 			mt_schar[n.no].school = n.club.zh_cn.replace('#','')
 			mt_schar[n.no].emoji = EMOJI_CustomEmoji[n.no] || {}
-			let img = await MoeImage.getItem(n.no)
-			if(img)await Promise.all([MoeImage.removeItem(n.no),MoeTemp.setItem(n.no,img)])
+			let img = await 数据操作('Ig',n.no)
+			if(img)await Promise.all([数据操作('Ir',n.no),数据操作('Ts',n.no,img)])
 			let head = mt_char[n.no].head || []
 			for(let i=0,l=head.length;i<l;i++)
 			{
-				img = await MoeImage.getItem(head[i])
-				if(img)await Promise.all([MoeImage.removeItem(head[i]),MoeTemp.setItem(head[i],img)])
+				img = await 数据操作('Ig',head[i])
+				if(img)await Promise.all([数据操作('Ir',head[i]),数据操作('Ts',head[i],img)])
 			}
 			let emoji = Object.keys((EMOJI_CustomEmoji[n.no] || {}))
 			for(let i=0,l=emoji.length;i<l;i++)
 			{
-				img = await MoeImage.getItem(emoji[i])
-				if(img)await Promise.all([MoeImage.removeItem(emoji[i]),MoeTemp.setItem(emoji[i],img)])
+				img = await 数据操作('Ig',emoji[i])
+				if(img)await Promise.all([数据操作('Ir',emoji[i]),数据操作('Ts',emoji[i],img)])
 			}
 			mt_settings.选择角色.index = 0
 			mt_settings.选择角色.index = 1
@@ -357,7 +357,7 @@ async function removeChar(n)
 			delete EMOJI_CustomEmoji[n.no]
 			saveStorage('mt-char',mt_char,'local')
 			saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
-			MoeTemp.setItem('临时角色',mt_schar)
+			数据操作('Ts','临时角色',mt_schar)
 			选择角色 = true
 			charList(!0)//更新列表
 		}
@@ -495,10 +495,10 @@ function CHAR_UpdateChar()
 }
 async function tt()
 {
-	let head = await moetalkStorage.getItem('mt-head')
+	let head = await 数据操作('Sg','mt-head')
 	if(head)
 	{
-		for(let key in head)await MoeImage.setItem(key,head[key])
-		moetalkStorage.removeItem('mt-head')
+		for(let key in head)await 数据操作('Is',key,head[key])
+		数据操作('Sr','mt-head')
 	}
 }

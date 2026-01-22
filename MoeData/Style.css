@@ -13,6 +13,8 @@ body{line-height: 1;}
 .blue{color:blue;}
 .red{color:red;}
 .black{color:black;}
+.white{color:white;}
+.green{color:green;}
 .bold{font-family: bold;font-weight: bold;}/* 加粗 */
 
 .dels[type="checkbox"]

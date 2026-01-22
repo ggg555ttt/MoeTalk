@@ -14,7 +14,7 @@ async function IMAGE_error(image)
 {
 	let src = image.src ? image.getAttribute('src') : image.target.getAttribute('src')
 	let url = src.split('/').pop().replace('.webp','')
-	let img = await MoeImage.getItem(url) || await MoeTemp.getItem(url) || href+'MoeData/Ui/error.webp'
+	let img = await 数据操作('Ig',url) || await 数据操作('Tg',url) || href+'MoeData/Ui/error.webp'
 	if(img[0] === 'G')img = href+img
 	if(image.src)image.src = img
 	else image.target.src = img
@@ -69,7 +69,7 @@ async function 等待图片(imgs)
 		if(!src.startsWith('data:') && /custom-|CharFace-|Emoji-/.test(src))
 		{
 			let url = src.split('/').pop().replace('.webp','')
-			src = await MoeImage.getItem(url) || await MoeTemp.getItem(url) || href+'MoeData/Ui/error.webp'
+			src = await 数据操作('Ig',url) || await 数据操作('Tg',url) || href+'MoeData/Ui/error.webp'
 		}
 		else if(本地 && 客户端 === 'HTML5+')src = await urlToBase64(src);
 		img.src = src;// 使用解析后的完整 URL

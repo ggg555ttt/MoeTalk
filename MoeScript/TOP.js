@@ -17,6 +17,7 @@ window.alert = function(text = '',config = {})
 	config.confirm = config.confirm || '确认'
 	config.style = config.style || ''
 	config.yes = config.yes || null
+	$(`.ALERT_${config.id}`).remove()
 let style = `style="user-select: text; line-height: 125%; white-space: pre-wrap; word-break: break-word; text-align: left; width: 100%; font-family: inherit; overflow: scroll;${config.style}"`
 let html = 
 `<div class="btncdx alert ALERT_${config.id} visible" style="z-index: 1000;">
@@ -71,9 +72,9 @@ async function t()
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/CharFaceInfo.json?md5=${md5['CharFaceInfo']}`).then(json => JSON.parse(json)) : {},
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/IdMap.json?md5=${md5['IdMap']}`).then(json => JSON.parse(json)) : [{},{}],
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/CustomFaceAuthor.json?md5=${md5['CustomFaceAuthor']}`).then(json => JSON.parse(json)) : {},
-		moetalkStorage.getItem('mt-char'),
-		moetalkStorage.getItem('chats'),
-		MoeTemp.getItem('临时角色')
+		数据操作('Sg','mt-char'),
+		数据操作('Sg','chats'),
+		数据操作('Tg','临时角色')
 	]);
 	mt_char = mt_char || {}
 	allChats = allChats || []
@@ -350,25 +351,34 @@ $('body').on('click',"input",function()
 //工具
 $(".frVjsk").wait(function()
 {
-	if(本地)$(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:red;'>檢</b></button><span class='tool' align='center'>检查更新</span><br>`);
-	else $(".frVjsk").append(`<button class='${class0}' onclick='update()'><b style='color:red;'>端</b></button><span class='tool' style='white-space:pre;' align='center'>下载\n客户端</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' onclick='selectgame()'><b style='color:blue;'>遊</b></button><span class='tool'>选择游戏</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='mt-style'><b style='color:blue;'>換</b></button><span class='tool'>切换风格</span><br>`);
-	$(".frVjsk").append(`<button class='${class0}' id='MoeProject'><b style='color:red;'>項</b></button><span class='tool' align='center'>项目管理</span><br>`);
-	if(window.location.href.includes('old'))
+	let div = `<div style='display:flex;flex-direction:column;align-items:center;'align='center'>`
+	let button = `${div}<button class='mvcff kNOatn bold'`
+	if(本地)
 	{
-		$(".frVjsk").append(`<a href='index.html'><button class='red ${class0}'><b style='color:black;'>新</b></button></a><span class='tool'>回到新版</span><br>`);
+		$(".frVjsk").append(`${button}onclick='update()'><b class='red'>檢</b></button><p class='white'>检查更新</p></button></div>`);
 	}
 	else
 	{
-		$(".frVjsk").append(`<a href='index_old.html'><button class='${class0}'><b style='color:black;'>舊</b></button></a><span class='tool'>访问旧版</span><br>`);
+		$(".frVjsk").append(`${button}onclick='update()'><b class='red'>端</b></button><p class='white'>下载<br>客户端</p></button></div>`);
 	}
-	$(".frVjsk").append(`<a href='${href}setting.html'><button class='${class0}'><b style='color:black;'>設</b></button></a><span class='tool'>设置页面</span><br>`);
+	$(".frVjsk").append(`${button}onclick='selectgame()'><b class='blue'>遊</b></button><p class='white'>选择游戏</p></button></div>`);
+	$(".frVjsk").append(`${button}id='mt-style'><b class='blue'>換</b></button><p class='white'>切换风格</p></button></div>`);
+	$(".frVjsk").append(`${button}id='MoeProject'><b class='red'>項</b></button><p class='white'>项目管理</p></button></div>`);
+	$(".frVjsk").append(`<a href='setting.html'>${button}><b class='green'>設</b></button><p class='white'>设置页面</p></button></div></a>`);
+	if(window.location.href.includes('old'))
+	{
+		$(".frVjsk").append(`<a href='index.html'>${button}><b class='black'>新</b></button><p class='white'>回到新版</p></button></div></a>`);
+	}
+	else
+	{
+		$(".frVjsk").append(`<a href='index_old.html'>${button}><b class='black'>舊</b></button><p class='white'>访问旧版</p></button></div></a>`);
+	}
+	
 },".frVjsk")
 $("body").on('click',"#MoeProject",async function()
 {
-	let 项目名称 = await MoeProject.getItem('项目名称') || {}
-	let 自动备份 = await MoeProject.getItem('自动备份') || null
+	let 项目名称 = await 数据操作('Pg','项目名称') || {}
+	let 自动备份 = await 数据操作('Pg','自动备份') || null
 	let Projects = await MoeProject.keys() || []
 	let 新项目 = '',保存 = ''
 	if(chats.length+otherChats.length)
@@ -398,7 +408,7 @@ $("body").on('click',"#MoeProject",async function()
 });
 $("body").on('click',".MoeProject",async function()
 {
-	let 项目名称 = await MoeProject.getItem('项目名称') || {}
+	let 项目名称 = await 数据操作('Pg','项目名称') || {}
 	let key = this.parentNode.className
 	let mode = this.title
 	let str = `项目ID：${key}\n项目名：${项目名称[key] || key}\n\n`
@@ -413,13 +423,13 @@ $("body").on('click',".MoeProject",async function()
 			let json,newjson
 			[json,newjson] = await Promise.all(
 			[
-				MoeProject.getItem(key),
+				数据操作('Pg',key),
 				生成存档()
 			])
 			await Promise.all(
 			[
-				MoeProject.setItem('自动备份',json),
-				MoeProject.setItem(key,newjson)
+				数据操作('Ps','自动备份',json),
+				数据操作('Ps',key,newjson)
 			])
 		}
 		
@@ -430,12 +440,12 @@ $("body").on('click',".MoeProject",async function()
 		config.yes = async function()
 		{
 			delete 项目名称[key]
-			let json = await MoeProject.getItem(key)
+			let json = await 数据操作('Pg',key)
 			await Promise.all(
 			[
-				MoeProject.setItem('自动备份',json),
-				MoeProject.setItem('项目名称',项目名称),
-				MoeProject.removeItem(key)
+				数据操作('Ps','自动备份',json),
+				数据操作('Ps','项目名称',项目名称),
+				数据操作('Pr','项目名称')
 			])
 			$(`.${key}`).remove()
 		}
@@ -449,7 +459,7 @@ $("body").on('click',".MoeProject",async function()
 			if(name)
 			{
 				项目名称[key] = name
-				await MoeProject.setItem('项目名称',项目名称)
+				await 数据操作('Ps','项目名称',项目名称)
 				$(`.${key} span`).html(项目名称[key])
 			}
 		}
@@ -459,7 +469,7 @@ $("body").on('click',".MoeProject",async function()
 		str += '确定要读取此项目吗?\n当前正在编辑的项目可在自动备份中恢复'
 		config.yes = async function()
 		{
-			读取存档(await MoeProject.getItem(key))
+			读取存档(await 数据操作('Pg',key))
 		}
 	}
 	if(mode == '新项目')
@@ -479,10 +489,10 @@ $("body").on('click',".MoeProject",async function()
 			if(name)
 			{
 				项目名称[key] = name
-				await MoeProject.setItem('项目名称',项目名称)
+				await 数据操作('Ps','项目名称',项目名称)
 			}
 			else name = key
-			await MoeProject.setItem(key,await 生成存档())
+			await 数据操作('Ps',key,await 生成存档())
 			$('.ALERT_MoeProject pre').append(`<div class="${key}"><span>${name}</span>${button}</div>`)
 		}
 	}
@@ -493,7 +503,7 @@ $("body").on('click',".MoeProject",async function()
 $('body').on('click',"#size",async function()
 {
 	INIT_state()
-	let str = ''
+	let num = 0,str = ''
 	let s = "<span class='red'>"
 	let ss = "</span>"
 	if('storage' in navigator && 'estimate' in navigator.storage)
@@ -505,8 +515,15 @@ $('body').on('click',"#size",async function()
 		str += `	使用：${formatBytes(u)}\n`
 		str += `	上限（理论）：${formatBytes(m)}\n`
 	}
+	for(let i=0,l=chats.length;i<l;i++)
+	{
+		let chat = chats[i]
+		if(!chat.content)continue;
+		if(chat.type !== 'image')num += chat.content.length
+	}
 	str += `每张截图长度上限为${s}${mt_settings['高度限制']}${ss}，建议手动设置${s}切割点${ss}或测试极限长度\n`
 	str += `消息数量达到${s}数百甚至上千${ss}可能会造成操作卡顿或崩溃，请以设备性能为准\n`
+	str += `当前分支总字数统计：${s}${num}${ss}\n`
 	alert(str)
 	
 });
@@ -579,9 +596,13 @@ $('body').on('click',"#delsto",function()
 //隐藏工具按钮拓展
 $('body').on('click',".Screenshot_Mode",function()
 {
+	    
 	if($('.tools').css('display') === 'none')
 	{
-		$('.tools').show()
+		$('.tools').show()//工具栏
+		$('.itLRpr').show()//顶部栏
+		$('.jjPyvz').show()//底部栏
+		$('.dCSLyt').css({top:'3.5rem',paddingBottom:'3.5rem'})
 		$('.消息').each(function()
 		{
 			$(this).append(`<input type="checkbox" class="dels" style="background-color: ${$(this).attr('title')};" data-html2canvas-ignore="true">`)
@@ -592,7 +613,10 @@ $('body').on('click',".Screenshot_Mode",function()
 		$('.消息').css('background-color','').css('border-top','')
 		$('.dels').remove()
 
-		$('.tools').hide()
+		$('.tools').hide()//工具栏
+		$('.itLRpr').hide()//顶部栏
+		$('.jjPyvz').hide()//底部栏
+		$('.dCSLyt').css({top:'0rem',paddingBottom:'0rem'})
 		$('.operateTools').hide()
 	}
 })

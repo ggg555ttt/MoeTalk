@@ -86,8 +86,8 @@ function loaddata(json,mode)//识别存档
 			repairCF(json.CHAT[k])
 		})
 	}
-	return json
 	INIT_loading(!'加载存档')
+	return json
 }
 function repairCF(data)
 {
@@ -359,8 +359,8 @@ async function 生成存档(info,cus = false,mmt)
 		}
 		if(!json.TEMP.IMAGE[img] && /custom-/.test(img))
 		{//自定义头像
-			let head = await MoeTemp.getItem(img)
-			if(!head)head = await MoeImage.getItem(img)
+			let head = await 数据操作('Tg',img)
+			if(!head)head = await 数据操作('Ig',img)
 			if(head)json.TEMP.IMAGE[img] = head
 		}
 		let heads = chat.heads && chat.heads.list || []
@@ -369,8 +369,8 @@ async function 生成存档(info,cus = false,mmt)
 			img = heads[i]
 			if(!json.TEMP.IMAGE[img] && /custom-/.test(img))
 			{
-				let head = await MoeTemp.getItem(img)
-				if(!head)head = await MoeImage.getItem(img)
+				let head = await 数据操作('Tg',img)
+				if(!head)head = await 数据操作('Ig',img)
 				if(head)json.TEMP.IMAGE[img] = head
 			}
 		}
@@ -392,7 +392,7 @@ async function 生成存档(info,cus = false,mmt)
 async function 读取存档(json)
 {
 	INIT_loading('读取存档')
-	if(chats.length+otherChats.length)await MoeProject.setItem('自动备份',await 生成存档())
+	if(chats.length+otherChats.length)await 数据操作('Ps','自动备份',await 生成存档())
 	chats = []
 	otherChats = []
 	json.CHAT.map(function(v,k)
@@ -401,14 +401,14 @@ async function 读取存档(json)
 		else chats.push(v)
 	})
 	//写入临时数据
-	MoeTemp.clear()
+	数据操作('Tc')
 	if(!json.TEMP)json.TEMP = {CHAR:{},IMAGE:{}}
 	mt_schar = json.TEMP.CHAR
 	for(let key in json.TEMP.IMAGE)
 	{
-		await MoeTemp.setItem(key,json.TEMP.IMAGE[key])
+		await 数据操作('Ts',key,json.TEMP.IMAGE[key])
 	}
-	await MoeTemp.setItem('临时角色',mt_schar)
+	await 数据操作('Ts','临时角色',mt_schar)
 	//写入自定义数据
 	if(json.CUSTOM)
 	{
@@ -416,10 +416,10 @@ async function 读取存档(json)
 		EMOJI_CustomEmoji = {...EMOJI_CustomEmoji,...json.CUSTOM.EMOJI}
 		for(let key in json.CUSTOM.IMAGE)
 		{
-			await MoeImage.setItem(key,json.CUSTOM.IMAGE[key])
+			await 数据操作('Is',key,json.CUSTOM.IMAGE[key])
 		}
-		await moetalkStorage.setItem('mt-char',mt_char)
-		await moetalkStorage.setItem('DB_EMOJI',EMOJI_CustomEmoji)
+		await 数据操作('Ss','mt-char',mt_char)
+		await 数据操作('Ss','DB_EMOJI',EMOJI_CustomEmoji)
 	}
 	if(json.SETTING)mt_settings = json.SETTING
 	CHAR_UpdateChar()
