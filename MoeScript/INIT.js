@@ -352,7 +352,7 @@ async function $ajax(url,text = '',html = null)
 	}
 	let data = await getfile(url,text,html)
 	if(arr.includes(ext) && !校验文件(data,url,ext))data = false;
-	if(data)return data//重要
+	if(data || !url.includes('http'))return data//重要
 	if(网址列表.length === 0)
 	{
 		let urls = await getfile('https://api.akams.cn/github#.json')
