@@ -317,11 +317,11 @@ function getfile(url,text = '',html = null)
 			if(this.status === 200 && decodeURIComponent(this.responseURL).includes(url))
 			{
 				if(!this.responseType || !this.response.type.includes('text'))resolve(this.response)//成功
-				else resolve(false)
+				else resolve(null)
 			}
-			else resolve(false)
+			else resolve(null)
 		}
-		xhr.onerror = function(){resolve(false)}
+		xhr.onerror = function(){resolve(null)}
 		xhr.send();
 	})
 }
@@ -338,7 +338,7 @@ async function $ajax(url,text = '',html = null)
 			type: 'POST',
 			data: {getfile: url}
 		})
-		if(!data)return false;
+		if(!data)return null;
 		if(!arr.includes(ext))//base64转blob
 		{
 			data = atob(data.split(',').pop())
@@ -350,8 +350,39 @@ async function $ajax(url,text = '',html = null)
 		}
 		else return data;
 	}
+	if(url.includes('/doc/') && 本地 && 客户端 === 'HTML5+')
+	{
+		return new Promise(function(resolve)
+		{
+			plus.io.resolveLocalFileSystemURL(url,function(entry)
+			{
+				entry.file(function(data)
+				{
+					var reader = new plus.io.FileReader();
+					reader.onload = function(e)
+					{
+						data = e.target.result
+						if(!data)resolve(null);
+						if(!arr.includes(ext))//base64转blob
+						{
+							data = atob(data.split(',').pop())
+							let l = data.length;
+							let bytes = new Uint8Array(l);
+							for(let i=0;i<l;i++)bytes[i] = data.charCodeAt(i);
+							data = 'application/octet-stream'
+							resolve(new Blob([bytes],{type: data}))
+						}
+						else resolve(data)
+					};
+					reader.onerror = function(e){resolve(null)};
+					if(!arr.includes(ext))reader.readAsDataURL(data);
+					else reader.readAsText(data,'utf-8');
+				},function(e){resolve(null)});
+			},function(e){resolve(null)});
+		})
+	}
 	let data = await getfile(url,text,html)
-	if(arr.includes(ext) && !校验文件(data,url,ext))data = false;
+	if(arr.includes(ext) && !校验文件(data,url,ext))data = null;
 	if(data || !url.includes('http'))return data//重要
 	if(网址列表.length === 0)
 	{
@@ -385,7 +416,7 @@ function blobToBase64(blob)
 			var base64 = dataUrl.split(',')[1];
 			resolve(base64)
 		};
-		reader.onerror = function(){resolve(false)};
+		reader.onerror = function(){resolve(null)};
 		reader.readAsDataURL(blob);
 	})
 }
@@ -412,7 +443,7 @@ function RgbToHex(rgb,bg)
 }
 function 校验文件(str,url,ext)
 {
-	if(typeof str !== 'string')return false;
+	if(typeof str !== 'string')return null;
 	if(ext === 'json' && ['[','{'].includes(str[0]))return true;
 	for(let i=0,l=str.length;i<l;i++)
 	{
@@ -424,7 +455,7 @@ function 校验文件(str,url,ext)
 			break;
 		}
 	}
-	return false
+	return null
 }
 function formatBytes(bytes,decimals = 2)
 {

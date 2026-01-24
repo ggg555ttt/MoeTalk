@@ -64,7 +64,7 @@ function compress(base64Img,type = 'head',mode = 'add',length = 0)
 }
 function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 {
-	$('.editMessage').removeClass('visible')
+	$('.编辑界面').removeClass('visible')
 	$('.chatText').val('').innerHeight(27)
 
 	let dels = $('.dels')
@@ -107,7 +107,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 			if(addChat)
 			{
 				indexs[k] = chatIndex = chatIndex+1//向后追加
-				data.sCharacter = {no: $('.editMessage .头像').attr('alt'),index: $('.editMessage .头像').attr('title')}
+				data.sCharacter = {no: $('.角色头像').attr('alt'),index: $('.角色头像').attr('title')}
 			}
 			else
 			{
@@ -203,7 +203,7 @@ function 编辑消息(index)
 	chatIndex = index
 	let chat = chats[chatIndex]
 	CHAT_HeadList = $('.dels:checked').length < 2 && chats[chatIndex] && chats[chatIndex].heads ? {...chats[chatIndex].heads,...{}} : false
-	$('.editMessage').addClass('visible')//显示编辑界面
+	$('.编辑界面').addClass('visible')//显示编辑界面
 	$('.edit_2_1_1 input').hide().prop('checked',false)
 	$('.edit_2_1_1 label').hide()
 
@@ -220,7 +220,7 @@ function 编辑消息(index)
 	{
 		$('.typeTitle').text('批量编辑')
 
-		$('.editMessage .头像').removeAttr('alt').removeAttr('title').attr('src',href+'MoeData/Ui/setting.webp')//.prev().text(CHAT_HeadList ? '列表' : '角色')
+		$('.角色头像').removeAttr('alt').removeAttr('title').attr('src',href+'MoeData/Ui/setting.webp')//.prev().text(CHAT_HeadList ? '列表' : '角色')
 
 		$('.editType').show().parent().show()
 		$('.editTalk').show().parent().show()
@@ -245,7 +245,7 @@ function 编辑消息(index)
 		$('.time').val(chat.time).attr('placeholder','支持换行').innerHeight($('.time')[0].scrollHeight)
 		$('.content').val(chat.type === 'image' ? '' : chat.content).attr('placeholder',chat.content || '').innerHeight($('.content')[0].scrollHeight)
 
-		$('.editMessage .头像').attr('alt',chat.sCharacter.no).attr('title',chat.sCharacter.index).attr('src',loadhead(chat.sCharacter.no,chat.sCharacter.index))//.prev().text(CHAT_HeadList || (chats[chatIndex] && chats[chatIndex].heads) ? '列表' : '角色')
+		$('.角色头像').attr('alt',chat.sCharacter.no).attr('title',chat.sCharacter.index).attr('src',loadhead(chat.sCharacter.no,chat.sCharacter.index))//.prev().text(CHAT_HeadList || (chats[chatIndex] && chats[chatIndex].heads) ? '列表' : '角色')
 
 		if(chat.type === 'image')
 		{
@@ -336,12 +336,4 @@ $("body").on('click',".edit_button button",function()
 		$('.isFirst').next().text('显示头像')
 		$('.isRight').next().text('右侧发言')
 	}
-});
-$("body").on('click',".fzOyMd",function()
-{
-	let no = $(this).attr('alt')
-	let index = $(this).attr('title')
-	$('.editMessage .头像').attr('alt',no).attr('title',index).attr('src',loadhead(no,index))
-	$('.name').attr('placeholder',loadname(no,index))
-	saveStorage('设置选项',mt_settings,'local')
 });

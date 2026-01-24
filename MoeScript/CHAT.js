@@ -428,7 +428,7 @@ function makeMessage(type,data,chatIndex,mode)
 				maxwidth = mt_settings['差分比例'] || '90%'
 			}
 			maxwidth = `max-width:${maxwidth};`
-			图片 = `<img src='${!data.file ? data.content : data.file}' style="${width}${maxwidth};${style}" class="图片 编辑" onerror="IMAGE_error(this)">`
+			图片 = `<img src='${data.file.startsWith('data:') ? data.file : href+data.file}' style="${width}${maxwidth};${style}" class="图片 编辑" onerror="IMAGE_error(this)">`
 		}
 		if(no != 0 && !data.isRight)
 		{//左侧对话
@@ -753,7 +753,7 @@ function 生成消息(内容类型,length)
 	let 截图切割 = $('.截图切割').attr('title')
 	//数据
 	let 内容信息 = $('.内容信息').val()
-	let 图片信息 = $('.图片信息 img').attr('src')
+	let 图片文件 = $('.图片文件').attr('src')
 	let 时间信息 = $('.时间信息').val()
 
 	let data = {}
@@ -773,7 +773,7 @@ function 生成消息(内容类型,length)
 		if(截图切割 != 'noEdit')data.is_breaking = 截图切割 === '截图切割'
 
 		if(内容信息 !== '')data.content = 内容信息 === ' ' ? '' : 内容信息
-		if(内容类型 === 'image' && 图片信息)data.file = 图片信息
+		if(内容类型 === 'image' && 图片文件)data.file = 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'')
 		if(时间信息 !== '')data.content = 时间信息 === ' ' ? '' : 时间信息
 
 		if(CHAT_HeadList)data.heads = CHAT_HeadList
@@ -791,7 +791,7 @@ function 生成消息(内容类型,length)
 	data.is_breaking = 截图切割 === '截图切割'
 
 	data.content = 内容信息
-	data.file = 内容类型 === 'image' ? 图片信息 : ''
+	data.file = 内容类型 === 'image' ? 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'') : ''
 	data.time = 时间信息
 
 	data.heads = CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
@@ -1019,7 +1019,7 @@ function 编辑消息(index)
 	$(`.内容类型_列表[title="${chat.type}"]`).click()
 
 	$('.内容信息').val(chat.content).attr('placeholder',chat.content || '').click();
-	$('.图片信息 img').attr('src',chat.file)
+	$('.图片文件').attr('src',chat.file.startsWith('data:') ? chat.file : href+chat.file)
 	$('.时间信息').val(toString(chat.time)).attr('placeholder',chat.time || '').click();
 
 	if(chat.heads)CHAT_HeadList = {...chat.heads,...{}}	

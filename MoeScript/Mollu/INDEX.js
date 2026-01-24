@@ -3182,7 +3182,7 @@
 															}
 															if($$('.编辑界面').hasClass('visible'))
 															{
-																$$('.图片信息 img').attr('src',link)
+																$$('.图片文件').attr('src',href+link)
 																s()
 															}
 															else
@@ -3958,6 +3958,7 @@
 										},
 										children: [(0, m.jsxs)('img',
 										{
+											className: '图片文件',
 											style:
 											{
 												maxWidth: '50%',
@@ -4072,6 +4073,541 @@
 						})
 					})
 					//*编辑界面
+				},
+				eK_old = function(e)
+				{
+					var n = e.show,
+						t = e.selectChat,
+						o = e.handleShow,
+						a = e.sChatModeType,
+						l = e.setSChatModeType,
+						s = (0, i.T)(),
+						h = (0, i.C)(function(e)
+						{
+							return e.makeChat
+						}),
+						f = (0, i.C)(function(e)
+						{
+							return mtlang//#e.global.lang
+						}),
+						p = (0, i.C)(function(e)
+						{
+							return e.sCharacter.selected
+						}),
+						g = (0, r.useState)(t.type),
+						x = g[0],
+						y = g[1],
+						b = (0, r.useState)(""),
+						j = b[0],
+						w = b[1],
+						_ = (0, r.useRef)(null);
+					return (0, m.jsx)(ea.Xf,
+					{
+						className: n ? "编辑界面 visible" : "编辑界面",
+						style:{position:'absolute'},
+						onDoubleClick: function()
+						{
+							$$('.编辑界面').removeClass('visible').find('input:checkbox').prop('checked',false)//S()
+							CHAT_HeadList = false
+						},
+						children: (0, m.jsxs)(ea.F0,
+						{
+							onDoubleClick: function(e)
+							{
+								return e.stopPropagation(), !1
+							},
+							children: [(0, m.jsxs)(ea.h4,
+							{
+								children: [(0, m.jsx)(ea.Dx,
+								{
+									className: "typeTitle bold"
+								}), (0, m.jsx)(ea.ec,
+								{
+									onClick: function()
+									{
+										$$('.编辑界面').removeClass('visible').find('input:checkbox').prop('checked',false)//S()
+										CHAT_HeadList = false
+									},
+									children: (0, m.jsx)(c.j4,{})
+								})]
+							}), (0, m.jsxs)(ea.$0,
+							{
+								children: [(0, m.jsx)('div',
+								{
+									className: "edit_2",
+									children: [(0, m.jsx)('div',
+									{
+										className:"edit_2_1",
+										children:(0, m.jsx)('div',
+										{
+											style:{textAlign: 'left'},
+											className:"edit_2_1_1 bold",
+											children:[(0, m.jsx)('label',
+											{
+												children:[(0, m.jsx)('input',
+												{
+													type:'checkbox',
+													className:'editType'
+												}),'修改类型']
+											}),(0, m.jsx)('label',
+											{
+												children:[(0, m.jsx)('input',
+												{
+													type:'checkbox',
+													className:'editTalk'
+												}),'修改显示']
+											}),(0, m.jsx)('label',
+											{
+												children:[(0, m.jsx)('input',
+												{
+													type:'checkbox',
+													className:'addChat'
+												}),L.Z.add[f]]
+											}),(0, m.jsx)('label',
+											{
+												style:{color:'blue'},
+												children:[(0, m.jsx)('input',
+												{
+													type:'checkbox',
+													className:'isFirst',
+													onClick: function()
+													{
+														$$('.isCenter').prop('checked',false)
+													}
+												}),(0, m.jsx)('span',{children:'显示头像'})],
+											}),(0, m.jsx)('label',
+											{
+												children:[(0, m.jsx)('input',
+												{
+													type:'checkbox',
+													className:'isRight',
+													onClick: function()
+													{
+														$$('.isCenter').prop('checked',false)
+													}
+												}),(0, m.jsx)('span',{children:'右侧发言'})],
+											}),(0, m.jsx)('label',
+											{
+												children:[(0, m.jsx)('input',
+												{
+													type:'checkbox',
+													className:'is_breaking'
+												}),'截图时在此处分割'],
+												style:{color:'red'}
+											}),(0, m.jsx)('label',
+											{
+												children:[(0, m.jsx)('input',
+												{
+													type:'checkbox',
+													className:'isCenter',
+													onClick: function()
+													{
+														$$('.isFirst').prop('checked',false)
+														$$('.isRight').prop('checked',false)
+													}
+												}),'图片中央显示']
+											})]
+										})
+									}),(0, m.jsx)('div',
+									{
+										className:"edit_button",
+										children: E.PN.map(function(e, n)
+										{
+											return (0, m.jsx)(c.Bx,
+											{
+												hidden: $$('.dels:checked').length > 1 && !$$('.editType').prop('checked'),
+												style:
+												{
+													margin: "0 auto",//@改为居中
+													width: "23%",
+													height: 'auto',
+													whiteSpace: 'nowrap',
+													overflow: 'hidden'
+												},
+												className: a === e ? `${e} bold medium selected` : `${e} bold medium`,
+												title :e,
+												children: L.Z[e][f]
+											}, n)
+										})
+									})]
+								}), (0, m.jsx)('div',
+								{
+									className:"edit_3",
+									children:(0, m.jsx)('div',
+									{
+										className:"edit_3_box1",
+										children:(0, m.jsx)('div',
+										{
+											className:"edit_3_box2",
+											children:(0, m.jsx)('div',
+											{
+												className:"edit_3_box3",
+												children:[(0, m.jsx)('div',
+												{
+													className:"edit_3_box3_1",
+													children: (0, m.jsx)(c.Kx,
+													{
+														maxRows: 10,
+														className:"edit_3_box3_1_1 content medium",
+														onChange: function(e)
+														{
+															$$('.content').val(e.currentTarget.value)
+														}
+													})
+												}),(0, m.jsx)('div',
+												{
+													className:"edit_3_box3_2",
+													children: (0, m.jsx)('div',
+													{
+														className:"edit_3_box3_2_1",
+														children: L.Z.input_comment[f]
+													})
+												})]
+											})
+										})
+									})
+								}), (0, m.jsx)("div",
+								{
+									className:"图片选项 edit_4",
+									style:{justifyContent: 'center'},
+									children: [(0, m.jsx)(eN.g4,
+									{
+										children: '上传图片',
+										style: 
+										{
+											"overflow": "hidden",
+											"text-overflow": "ellipsis",
+											"white-space": "nowrap",
+											"width": "30%",
+											"padding": "0"
+										},
+										onClick: function(e)
+										{
+											_.current.click()
+										}
+									}), (0, m.jsx)(eN.g4,
+									{
+										children: '选择表情',
+										style: 
+										{
+											"overflow": "hidden",
+											"text-overflow": "ellipsis",
+											"white-space": "nowrap",
+											"width": "30%",
+											"padding": "0"
+										},
+										onClick: function(e)
+										{
+											$$('.INDEX_EmojiButton').click()
+										}
+									}), !mt_settings['隐藏差分'] ? (0, m.jsx)(eN.g4,
+									{
+										children: '选择差分',
+										style: 
+										{
+											"overflow": "hidden",
+											"text-overflow": "ellipsis",
+											"white-space": "nowrap",
+											"width": "30%",
+											"padding": "0"
+										},
+										onClick: function(e)
+										{
+											$$('.INDEX_CharFaceButton').click()
+										}
+									}) : '']
+								}), (0, m.jsx)("input",
+								{
+									className: "上传图片",
+									type: "file",
+									ref: _,
+									hidden: 1,
+									accept: "image/*",
+									onChange: function(e)
+									{
+										var file = e.target.files[0]
+										var ready = new FileReader()
+										ready.readAsDataURL(file);
+										ready.onload = function(e)
+										{
+											var base64Img = e.target.result;
+											compress(base64Img,'image','edit')
+										}
+									}
+								}), (0,m.jsx)('img',
+								{
+									className: "图片选项 图片文件",
+									width:"auto",
+									height:"128px",
+									onError: function(e){IMAGE_error(e)}
+								}), (0, m.jsx)('div',
+								{
+									className:"edit_4",
+									children:[(0, m.jsx)('div',
+									{
+										style:
+										{
+											fontSize:'12px',
+											display: 'inline-grid',
+											whiteSpace: "nowrap",
+											justifyItems: 'center',
+											cursor: 'pointer'
+										},
+										children:[(0,m.jsx)('span',
+										{
+											children: '角色'
+										}), (0, m.jsx)('img',
+										{
+											className:'头像 角色头像',
+											style:
+											{
+												width: '40px',
+												height: '40px',
+											},
+											onError: function(e){IMAGE_error(e)},
+											onClick: function(e)
+											{
+												let no = e.target.alt
+												let index = e.target.title
+												let HeadList = {direction:'row',list:[]}
+												let checked = $$('.dels:checked').length
+												if(CHAT_HeadList)
+												{
+													HeadList = CHAT_HeadList
+												}
+												let str = ''
+												str += '<label>头像排列：<input class="radio row" type="radio" name="direction" value="row">横向（注意排版）</label>\n'
+												str += `<label>　　　　　<input class="radio column" type="radio" name="direction" value="column">竖向</label><input type="checkbox" class="fullHeight" ${HeadList.fullHeight ? 'checked' : ''}>文字消息自动铺满\n`
+												str += `头像间距：<input style="font-size:1.2rem;" class="margin text" placeholder="默认值为 -1.5rem" value="${toString(HeadList.margin)}">\n\n`
+
+												str += '<label><input class="radio" type="radio" name="mode" value="add">添加头像</label>'
+												str += '<label><input class="radio" type="radio" name="mode" value="change" checked>切换角色</label>\n'
+												str += `<img class="头像 N_char" src="${index ? loadhead(no,index) : href+'MoeData/Ui/error.webp'}" ${no ? `alt="${no}"` : ''}" ${index ? `title="${index}"` : ''}" onerror="IMAGE_error(this)">`
+												str += `发言者名称：<input style="font-size:1.2rem;color:red;" class="text" placeholder="${$$('.name').attr('placeholder')}" value="${$$('.name').val()}"><div class="N_list">`
+												HeadList.list.map(function(index,k)
+												{
+													str += `<img class="头像" src="${loadhead('LIST',index)}" title="${index}" style="cursor:pointer;" onclick="this.remove()" onerror="IMAGE_error(this)">`
+												})
+												str += '</div>\n'
+
+												str += '头像列表：（点击选择）\n'
+												let str1 = '$(".N_char").attr("src",loadhead(this.alt,this.title)).attr("alt",this.alt).attr("title",this.title).next().attr("placeholder",loadname(this.alt,this.title))'
+												let str2 = '$(".N_list").append(`<img class="头像" src="${loadhead("LIST",this.title)}" title="${this.title}" style="cursor:pointer;" onclick="this.remove()" onerror="IMAGE_error(this)">`)'
+												mt_settings['选择角色'].list.concat({no:'0',index:'1'}).map(function(v,k)
+												{
+													str += `<img class='头像' src='${loadhead(v.no,v.index)}' alt='${v.no}' title='${v.index}' style='cursor:pointer;' onclick='$(".radio:checked")[1].value === "change" ? ${str1} : ${str2}' onerror="IMAGE_error(this)">`
+												})
+
+												$$(`.${HeadList.direction}`).click()
+												let config = {}
+												config.title = '设置头像'
+												config.yes = function()
+												{
+													HeadList.direction = $$('.radio:checked')[0].value
+													HeadList.margin = $$('.margin').val()
+													HeadList.fullHeight = $$('.fullHeight:checked').length ? true : false
+													HeadList.list = []
+													$$('.fullHeight:checked').length ? HeadList.fullHeight = true : ''
+
+													$$('.N_list img[title]').map(function(k,v)
+													{
+														HeadList.list[k] = v.title
+													})
+													CHAT_HeadList = HeadList
+													let img = $$('.N_char')
+													let hl = CHAT_HeadList.list.length
+													let name = img.next()[0]
+													$$('.name').attr('placeholder',name.placeholder).val(name.value)
+													// $('.角色头像_列表').text(hl ? `+${hl}头像` : '')
+													// $('.角色ID').text(img[0].alt ? 'ID：'+img[0].alt : '不更改角色')
+													// $('.设置头像').css('color',CHAT_HeadList.list.length || checked > 1 ? 'red' : 'rgb(75, 105, 137)')
+													if(img[0].title)
+													{
+														e.target.src = img[0].src
+														e.target.alt = img[0].alt
+														e.target.title = img[0].title
+													}
+												}
+												alert(str,config)
+												if(HeadList.direction === "column")$$(".radio.column").click()
+												else $$(".radio.row").click()
+											},
+											src:href+'MoeData/Ui/setting.webp'
+										})]
+									}), (0, m.jsx)('div',
+									{
+										className:"edit_3_box1",
+										style:{border: 0},
+										children:(0, m.jsx)('div',
+										{
+											className:"edit_3_box2",
+											children:(0, m.jsx)('div',
+											{
+												className:"edit_3_box3",
+												children:[(0, m.jsx)('div',
+												{
+													className:"edit_3_box3_1",
+													children: (0, m.jsx)('input',
+													{
+														className:"edit_3_box3_1_1 name bold",
+														onChange: function(e)
+														{
+															$$('.name').val(e.currentTarget.value)
+														}
+													})
+												}),(0, m.jsx)('div',
+												{
+													className:"edit_3_box3_2",
+													children: (0, m.jsx)('div',
+													{
+														className:"edit_3_box3_2_1",
+														children: L.Z.name[f]
+													})
+												})]
+											})
+										})
+									}),(0, m.jsx)('div',
+									{
+										className:"edit_3_box1",
+										children:(0, m.jsx)('div',
+										{
+											className:"edit_3_box2",
+											children:(0, m.jsx)('div',
+											{
+												className:"edit_3_box3",
+												children:[(0, m.jsx)('div',
+												{
+													className:"edit_3_box3_1",
+													children: (0, m.jsx)(c.Kx,
+													{
+														className:"edit_3_box3_1_1 time medium",
+														style:{color:'blue'},
+														maxRows: 5,
+														onChange: function(e)
+														{
+															$$('.time').val(e.currentTarget.value)
+														}
+													})
+												}),(0, m.jsx)('div',
+												{
+													className:"edit_3_box3_2",
+													children: (0, m.jsx)('div',
+													{
+														className:"edit_3_box3_2_1",
+														children: L.Z.time[f]
+													})
+												})]
+											})
+										})
+									})]
+								}), (0, m.jsxs)(ea.$_,
+								{
+									children: [(0, m.jsx)(eO,
+									{
+										title: "删除消息",
+										onClick: function()
+										{
+											$$('.dels:checked').length > 1 ? $$('.INDEX_delete').click() : sendMessage({},'','delete',[chatIndex])
+										},
+										children: (0, m.jsx)(c.xL,
+										{
+											icon: ico.Vui
+										})
+									}), (0, m.jsx)(ea.Lw,
+									{
+										className: "bold",
+										onClick: function()
+										{
+											$$('.编辑界面').removeClass('visible').find('input:checkbox').prop('checked',false)//S()
+											CHAT_HeadList = false
+										},
+										children: L.Z.cancel[f]
+									}), (0, m.jsx)(ea.AZ,
+									{
+										className: "bold",
+										onClick: function()
+										{
+											let type = ''
+											if($$('.dels:checked').length > 1)
+											{
+												let data = {}
+												data.heads = CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
+												if($$('.edit_button .selected').attr('title'))
+												{
+													type = $$('.edit_button .selected').attr('title')
+												}
+
+												if($$('.name').val() && $$('.name').val() !== ' ')data.name = $$('.name').val()
+												if($$('.name').val() === ' ')data.name = ''
+												if($$('.time').val() && $$('.time').val() !== ' ')data.time = $$('.time').val()
+												if($$('.time').val() === ' ')data.time = ''
+												if($$('.content').val() && $$('.content').val() !== ' ')data.content = $$('.content').val()
+												if($$('.content').val() === ' ')data.content = ''
+
+												if(type === 'image' && $$('.图片文件').attr('src') !== '')
+												{
+													data.content = $$('.图片文件').attr('title')
+													data.file = $$('.图片文件').attr('src')
+													data.file = data.file.startsWith('data:') ? data.file : data.file.replace(href,'')
+												}
+
+												if($$('.editTalk').prop('checked'))
+												{
+													data.isFirst = $$('.isFirst').prop('checked')
+													data.isRight = $$('.isRight').prop('checked')
+													data.isCenter = $$('.isCenter').prop('checked')
+												}
+												
+												if($$('.角色头像').attr('alt'))
+												{
+													data.sCharacter = {no: $$('.角色头像').attr('alt'),index: $$('.角色头像').attr('title')}
+												}
+												
+												let indexs = []
+												$$('.dels:checked').each(function(k,v)
+												{
+													indexs.push($$('.dels').index(v))
+												})
+												let config = {}
+												config.confirm = '提交'
+												config.yes = function()
+												{
+													data.isLeft = data.isFirst
+													sendMessage(data,type,'edit',indexs)
+												}
+												let str = `※注意!!!\n只输入一个空格会判断为清空该内容\n图片转为其它类型时会清除文件\n发言人为空时则不修改发言人\n点击【${mt_text.confirm[mtlang]}】开始批量修改`
+												alert(str,config)
+											}
+											else
+											{
+												type = $$('.edit_button .selected').attr('title')
+												let data = 
+												{
+													type: type,
+													name: $$('.name').val(),
+													time: $$('.time').val(),
+													content: type === 'image' ? $$('.图片文件').attr('title') : $$('.content').val(),
+													isFirst: $$('.isFirst').prop('checked'),
+													isCenter: type === 'image' && $$('.isCenter').prop('checked'),
+													isRight: $$('.isRight').prop('checked'),
+													is_breaking: $$('.is_breaking').prop('checked'),
+													file: type === 'image' ? $$('.图片文件').attr('src') : '',
+													sCharacter: {no: $$('.角色头像').attr('alt'),index: $$('.角色头像').attr('title')},
+													heads: CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
+												}
+												data.file = data.file.startsWith('data:') ? data.file : data.file.replace(href,'')
+												data.isLeft = data.isFirst
+												sendMessage(data,type,$$('.addChat').prop('checked') ? 'add' : 'edit',[chatIndex])
+											}
+											CHAT_HeadList = false
+											$$('.编辑界面 :checkbox').prop('checked',false)
+										},
+										children: L.Z.confirm[f]
+									})]
+								})]
+							})]
+						})
+					})
 				},
 				eX = o.ZP.div.withConfig(
 				{
@@ -4728,7 +5264,7 @@
 									children: ''
 								})]
 							})
-						}), (0, m.jsx)(eK,
+						}), (0, m.jsx)(MoeHome === 'index.html' ? eK : eK_old,
 						{
 							show: x,
 							handleShow: _,

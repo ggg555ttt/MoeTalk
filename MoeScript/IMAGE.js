@@ -110,7 +110,7 @@ function compress(base64Img,type = 'head',mode = 'add',length = 0)
 
 		if(type === 'image')
 		{
-			if(mode === 'edit')$('.图片信息 img').attr('src',newBase64)//编辑图片
+			if(mode === 'edit')$('.图片文件').attr('src',newBase64)//编辑图片
 			else if(mode === 'add')sendMessage({content:'',type: 'image',file: newBase64},'image',mode)//发送图片
 			else//上传表情
 			{

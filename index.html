@@ -12,18 +12,19 @@
 		<script src="./MoeScript/Script/filesaver.min.js?md5=e4ba97b61a9ac3206aaa23562801923b"></script><!-- @@下载 -->
 		<!-- <script src="https://unpkg.com/@zumer/snapdom@latest/dist/snapdom.min.js"></script> -->
 		<script>
+var MoeHome = 'index.html'
 //'?eval='+encodeURIComponent("localStorage['HTML5+']='WEB'")
 // delete localStorage['HTML5+']
 //设备信息
 var URLParams = new URLSearchParams(window.location.search)
 if(URLParams.get('eval'))eval(atob(URLParams.get('eval')))
-var href = window.location.href.split(window.location.host)[1].split('?')[0].replace('index.html','')//文件目录地址
+var href = window.location.href.split(window.location.host)[1].split('?')[0].replace(MoeHome,'')//文件目录地址
 var fs,客户端 = false
 var 本地 = false
 if(!window.location.href.includes('http'))本地 = true
 if(window.navigator.userAgent.includes('Html5Plus'))
 {
-	if(本地)href = window.location.href.replace('index.html','')
+	if(本地)href = window.location.href.replace(MoeHome,'')
 	客户端 = 'HTML5+'
 }
 if(window.location.protocol == 'chrome-extension:')
@@ -40,7 +41,7 @@ if(window.location.href.includes('cordova') || localStorage['cordova'])
 }
 if(sessionStorage['phpwin'] === 'phpwin'){客户端 = 'phpwin',本地 = true;}
 //版本信息
-var 本地应用版本 = [260122.194834]//@
+var 本地应用版本 = [260124.195543]//@
 var 网络应用版本,本地数据版本,网络数据版本
 var gamearr = {"BLDA":"碧蓝档案","CBJQ":"尘白禁区","QNZL":"千年之旅","YGST":"犹格索托斯的庭院","DFPJ":"东方Project","NONE":"无"}
 //函数和变量
@@ -101,21 +102,21 @@ if(mt_settings['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="application-name" content="MoeTalk">
-
 		<link rel="shortcut icon" href="./MoeData/Ui/Favor_Schedule_Deco.webp">
+<!-- MoeTalk -->
 		<link rel='stylesheet' href="./MoeData/Style.css?md5=9e139a4259612626cd5378c05c7848e1"><!-- @@样式 -->
-		<script src="./MoeScript/Mollu/TEXT.js?md5=bcca6df6bd21a996053856c604abca13"></script><!-- @@提示文本 -->
-		<script src="./MoeScript/INIT.js?md5=98cf29338aed41930d2bf72f6943e028" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/CLIENT.js?md5=859b6c58a6e67dde91a0b0a572da7fa5" defer></script><!-- @@客户端 -->
+		<script src="./MoeScript/INIT.js?md5=dcec76044af47cd4c5c2e89b93244818" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/CLIENT.js?md5=7972e5a76d03da0da978f17dc4506992" defer></script><!-- @@客户端 -->
 		<script src="./MoeScript/DATA.js?md5=a767a10e91ab0ec336c7bbbb1ecce98c" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAR.js?md5=cd1cdab1368c31651f7eed4dd013e2ed" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/IMAGE.js?md5=6db205f057f9eaa95ae187bdc5d46386" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/CHAT.js?md5=6acc561c1325110062eece8382a7dfd8" defer></script><!-- @@消息 -->
-		<script src="./MoeScript/TOP.js?md5=8fbe3f1aadbc918d9e59d982bb818187" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/IMAGE.js?md5=7fd2d363be505a57a4ee82dd4abc6d44" defer></script><!-- @@截图 -->
+		<script src="./MoeScript/CHAT.js?md5=575075ffbc39488286c8c3e6f47e8b78" defer></script><!-- @@消息 -->
+		<script src="./MoeScript/TOP.js?md5=a62eca1d5d57a83f942d39e1ce34dbe1" defer></script><!-- @@首页 -->
+<!-- MolluTalk -->
+		<script src="./MoeScript/Mollu/TEXT.js?md5=bcca6df6bd21a996053856c604abca13"></script><!-- @@提示文本 -->
 		<script src="./MoeScript/Mollu/MAIN.js?md5=aac2192e9b2c096f149c1ac5b89996d9" defer></script><!-- @@ -->
-		<script src="./MoeScript/Mollu/APP.js?md5=db204dcaa225b5f62ce189dbb331a241" defer></script><!-- @@框架 -->
-		<script src="./MoeScript/Mollu/INDEX.js?md5=c4886ed2d3bbf3e067cda6a95ea44058"></script><!-- @@首页 -->
-		<style data-styled="active" data-styled-version="5.3.8"></style>
+		<script src="./MoeScript/Mollu/APP.js?md5=db204dcaa225b5f62ce189dbb331a241" defer></script><!-- @@ -->
+		<script src="./MoeScript/Mollu/INDEX.js?md5=fec9ff47ab052254f9dae2342476df8c"></script><!-- @@ -->
 	</head>
 	<body style="touch-action: none;-webkit-tap-highlight-color: transparent;tap-highlight-color: transparent;"><!-- MikuTap style -->
 		<div id="__next"></div>
@@ -123,7 +124,7 @@ if(mt_settings['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<div class="弹窗"></div>
 	</body>
 </html>
-<i>进入<a href="setting.html" target='_blank' style='text-decoration: underline;'>设置页面</a></i>
+<i>进入<a href='setting.html'target='_blank'style='text-decoration:underline;'>设置页面</a></i>
 <!-- Default Statcounter code for MoeTalk http://*.* -->
 <script>
 var _hmt = _hmt || [];

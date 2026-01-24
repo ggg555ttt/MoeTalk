@@ -376,7 +376,7 @@ async function 更新数据(time = Date.now())
 	if(网络数据版本 && 本地数据版本[0] < 网络数据版本[0])
 	{
 		if($('.版本:visible').length == 0)update()
-		let 本地列表 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/${game}.json?time=${time}`))
+		let 本地列表 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/${game}.json?time=${time}`)) || {}
 		let 网络列表 = JSON.parse(await $ajax(`${MoeTalkURL}/GameData/${game}/Version/${game}.json?ver=${网络数据版本[0]}`),'获取列表……',$('.更新数据'))
 		let Update = `更新补丁/${game}_${网络数据版本[0]}`
 		let num = [0,0]
