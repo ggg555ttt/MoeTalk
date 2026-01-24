@@ -501,7 +501,7 @@ async function 下载数据(url)
 	}
 	else
 	{
-		let data = await $ajax(`${url}/${filename}`)
+		let data = await getfile(`${url}/${filename}`)
 		if(data)//下载成功
 		{
 			await 保存文件(filename, data)
