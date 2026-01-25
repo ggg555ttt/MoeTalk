@@ -2915,7 +2915,7 @@
 											style:
 											{
 												textAlign:"center",
-												color: EMOJI.custom.io ? 'rgb(63, 81, 181)' : EMOJI.custom.from ? 'red' : mt_charface[EMOJI.id] && mt_charface[EMOJI.id].filter(function(item){return item[0][0].indexOf('CFID') > -1}).length ? 'green' : ''
+												color: EMOJI.custom.io ? 'rgb(63, 81, 181)' : EMOJI.custom.from ? 'red' : mt_charface[EMOJI.id] && mt_charface[EMOJI.id].filter(function(item){return item[0][0].includes('CFID')}).length ? 'green' : ''
 											},
 											children: EMOJI.pageindex
 										}), (0, m.jsx)(c.Bx,
@@ -3180,15 +3180,14 @@
 																alert(`${str}ID：${v}\n信息：${info}\n\n${img}`,config)
 																return
 															}
+															v = EMOJI.type === 'CharFace' ? 'CharFace' : ''
 															if($$('.编辑界面').hasClass('visible'))
-															{
-																$$('.图片文件').attr('src',href+link)
-																s()
+															{//编辑表情
+																$$('.图片文件').attr({src: href+link,title: v}),s()
 															}
 															else
-															{
-																if(e.target.src.startsWith('data:'))link = e.target.src
-																sendMessage({file: link,content: EMOJI.type},'image'), s()
+															{//发送表情
+																sendMessage({file: link,content: v},'image'), s()
 															}
 														},
 													})]
@@ -4816,11 +4815,10 @@
 												className: '图片 编辑',
 												style:
 												{...{
-													maxHeight: n.content.indexOf("Face")>=0 || n.file.indexOf("Face")>=0 ? '360px' : "",
-													maxWidth: n.content.indexOf("Face")>=0 || n.file.indexOf("Face")>=0 ? mt_settings['差分比例'] : mt_settings['图片比例']
+													maxHeight: n.content === 'CharFace' ? '360px' : "",
+													maxWidth: n.content === 'CharFace' ? mt_settings['差分比例'] : mt_settings['图片比例']
 												},...style},//@差分表情宽高百分比
-												src: n.file.indexOf(":image") > -1 ? n.file : href+n.file,
-												title: n.file.indexOf(":image") > -1 ? '' : n.file,
+												src: n.file.startsWith('data:') ? n.file : href+n.file,
 												onError: function(e){IMAGE_error(e)}
 											}) ,n.time ? (0, m.jsx)('div',
 											{//右侧时间戳
@@ -4990,7 +4988,7 @@
 							t.forEach(function(e)
 							{
 
-								e.type === 'reply' && e.content.split('\n').indexOf(o) > -1 && (n = e.replyDepth, r = e.replyGroup)
+								e.type === 'reply' && e.content.split('\n').includes(o) && (n = e.replyDepth, r = e.replyGroup)
 							}), -1 === e ? a((0, eo.Z8)(n)) : a((0, eo.Z8)(0)), a((0, eo.ZZ)(r))
 						};
 						let newchats = []
@@ -5504,7 +5502,7 @@
 								onClick: function()
 								{
 									let language = prompt("Please enter the language\nzh_cn（简体中文）\nzh_tw（繁體中文）\njp（日本語）\nen（English）\nkr（한국어）",mtlang);
-									if (langarr.indexOf(language) > -1)
+									if (langarr.includes(language))
 									{
 										mt_settings['语言选项'] = language
 										saveStorage('设置选项',mt_settings,'local')
@@ -9077,7 +9075,7 @@
 								{
 									var s = e.chats.filter(function(e)
 									{
-										return "reply" === e.type && e.content.split('\n').indexOf(t.replyDepth) > -1//
+										return "reply" === e.type && e.content.split('\n').includes(t.replyDepth)//
 									});
 									if(s.length > 0)
 									{
@@ -9232,11 +9230,10 @@
 												className: '图片',
 												style:
 												{
-													maxHeight: t.content.indexOf("Face")>=0 || t.file.indexOf("Face")>=0 ? '360px' : "",
-													maxWidth: t.content.indexOf("Face")>=0 || t.file.indexOf("Face")>=0 ? MMT目录.设置['差分比例'] : MMT目录.设置['图片比例']
+													maxHeight: t.content === 'CharFace' ? '360px' : "",
+													maxWidth: t.content === 'CharFace' ? MMT目录.设置['差分比例'] : MMT目录.设置['图片比例']
 												},//@差分表情宽高百分比
-												src: t.file.indexOf(":image") > -1 ? t.file : href+t.file,
-												title: t.file.indexOf(":image") > -1 ? '' : t.file,
+												src: t.file.startsWith('data:') ? t.file : href+t.file,
 												onError: function(e){IMAGE_error(e)},
 											}), t.time ? (0, m.jsx)(s.i9,
 											{//右侧时间戳

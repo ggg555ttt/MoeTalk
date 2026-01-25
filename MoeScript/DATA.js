@@ -349,15 +349,15 @@ async function 生成存档(info,cus = false,mmt)
 	for(let i=0,l=mmt.length;i<l;i++)
 	{//记录MMT中使用的数据
 		let chat = mmt[i]
-		let id = chat.sCharacter.no
-		let img = chat.sCharacter.index
+		let id = chat.sCharacter.no.toString()
+		let img = chat.sCharacter.index.toString()
 		if(!json.TEMP.CHAR[id])
 		{//自定义角色
 			if(mt_char[id])json.TEMP.CHAR[id] = mt_char[id]
 			if(mt_schar[id])json.TEMP.CHAR[id] = mt_schar[id]
 			if(json.TEMP.CHAR[id])delete json.TEMP.CHAR[id].emoji
 		}
-		if(!json.TEMP.IMAGE[img] && /custom-/.test(img))
+		if(!json.TEMP.IMAGE[img] && img.startsWith('custom-'))
 		{//自定义头像
 			let head = await 数据操作('Tg',img)
 			if(!head)head = await 数据操作('Ig',img)
@@ -367,12 +367,19 @@ async function 生成存档(info,cus = false,mmt)
 		for(let i=0,l=heads.length;i<l;i++)
 		{//自定义头像
 			img = heads[i]
-			if(!json.TEMP.IMAGE[img] && /custom-/.test(img))
+			if(!json.TEMP.IMAGE[img] && img.startsWith('custom-'))
 			{
 				let head = await 数据操作('Tg',img)
 				if(!head)head = await 数据操作('Ig',img)
 				if(head)json.TEMP.IMAGE[img] = head
 			}
+		}
+		img = chat.file || ''
+		if((img.startsWith('CharFace-') || img.startsWith('Emoji-')) && !json.TEMP.IMAGE[img])
+		{//自定义图片
+			let image = await 数据操作('Tg',img)
+			if(!image)image = await 数据操作('Ig',img)
+			if(image)json.TEMP.IMAGE[img] = image
 		}
 	}
 	if(cus)//记录所有自定义数据

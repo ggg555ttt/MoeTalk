@@ -66,7 +66,7 @@ async function 等待图片(imgs)
 		let src = img.getAttribute('src') || href+'MoeData/Ui/error.webp';
 
 		//替换自定义图片
-		if(!src.startsWith('data:') && /custom-|CharFace-|Emoji-/.test(src))
+		if(!src.startsWith('data:') && (img.startsWith('custom-') || img.startsWith('CharFace-') || img.startsWith('Emoji-')))
 		{
 			let url = src.split('/').pop().replace('.webp','')
 			src = await 数据操作('Ig',url) || await 数据操作('Tg',url) || href+'MoeData/Ui/error.webp'
@@ -110,7 +110,7 @@ function compress(base64Img,type = 'head',mode = 'add',length = 0)
 
 		if(type === 'image')
 		{
-			if(mode === 'edit')$('.图片文件').attr('src',newBase64)//编辑图片
+			if(mode === 'edit')$('.图片文件').attr({src: newBase64,title: ''})//编辑图片
 			else if(mode === 'add')sendMessage({content:'',type: 'image',file: newBase64},'image',mode)//发送图片
 			else//上传表情
 			{

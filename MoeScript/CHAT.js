@@ -422,7 +422,7 @@ function makeMessage(type,data,chatIndex,mode)
 		{
 			let width = ''
 			let maxwidth = mt_settings['图片比例'] || '90%'
-			if(data.content.includes("Face") || data.file.includes("Face"))
+			if(data.content === 'CharFace')
 			{//如果是差分表情
 				width = 'max-height:360px;'
 				maxwidth = mt_settings['差分比例'] || '90%'
@@ -791,7 +791,12 @@ function 生成消息(内容类型,length)
 	data.is_breaking = 截图切割 === '截图切割'
 
 	data.content = 内容信息
-	data.file = 内容类型 === 'image' ? 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'') : ''
+	if(内容类型 === 'image')
+	{
+		data.file = 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'')
+		data.content = $('.图片文件').attr('title')
+	}
+	
 	data.time = 时间信息
 
 	data.heads = CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
@@ -1019,7 +1024,8 @@ function 编辑消息(index)
 	$(`.内容类型_列表[title="${chat.type}"]`).click()
 
 	$('.内容信息').val(chat.content).attr('placeholder',chat.content || '').click();
-	$('.图片文件').attr('src',chat.file.startsWith('data:') ? chat.file : href+chat.file)
+	if(chat.file)$('.图片文件').attr({src: chat.file.startsWith('data:') ? chat.file : href+chat.file,title: chat.content})
+	else $('.图片文件').attr({src: '',title: ''})
 	$('.时间信息').val(toString(chat.time)).attr('placeholder',chat.time || '').click();
 
 	if(chat.heads)CHAT_HeadList = {...chat.heads,...{}}	
