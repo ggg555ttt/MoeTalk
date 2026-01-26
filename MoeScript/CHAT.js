@@ -753,7 +753,8 @@ function 生成消息(内容类型,length)
 	let 截图切割 = $('.截图切割').attr('title')
 	//数据
 	let 内容信息 = $('.内容信息').val()
-	let 图片文件 = $('.图片文件').attr('src')
+	let 图片文件 = $('.图片文件').attr('src') || ''
+	let 图片链接 = $('.图片文件').attr('title') || ''
 	let 时间信息 = $('.时间信息').val()
 
 	let data = {}
@@ -773,7 +774,13 @@ function 生成消息(内容类型,length)
 		if(截图切割 != 'noEdit')data.is_breaking = 截图切割 === '截图切割'
 
 		if(内容信息 !== '')data.content = 内容信息 === ' ' ? '' : 内容信息
-		if(内容类型 === 'image' && 图片文件)data.file = 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'')
+		if(内容类型 === 'image' && 图片文件)
+		{
+			data.content = ''
+			data.file = 图片链接
+			if(图片链接.includes('CharFace'))data.content = 'CharFace'
+			if(!图片链接)data.file = 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'')	
+		}
 		if(时间信息 !== '')data.content = 时间信息 === ' ' ? '' : 时间信息
 
 		if(CHAT_HeadList)data.heads = CHAT_HeadList
@@ -793,8 +800,10 @@ function 生成消息(内容类型,length)
 	data.content = 内容信息
 	if(内容类型 === 'image')
 	{
-		data.file = 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'')
-		data.content = $('.图片文件').attr('title')
+		data.content = ''
+		data.file = 图片链接
+		if(图片链接.includes('CharFace'))data.content = 'CharFace'
+		if(!图片链接)data.file = 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'')	
 	}
 	
 	data.time = 时间信息
@@ -1024,8 +1033,9 @@ function 编辑消息(index)
 	$(`.内容类型_列表[title="${chat.type}"]`).click()
 
 	$('.内容信息').val(chat.content).attr('placeholder',chat.content || '').click();
-	if(chat.file)$('.图片文件').attr({src: chat.file.startsWith('data:') ? chat.file : href+chat.file,title: chat.content})
-	else $('.图片文件').attr({src: '',title: ''})
+	let file = chat.file || ''
+	if(!file.startsWith('data:'))$('.图片文件').attr({src: file,title: file})
+	else $('.图片文件').attr({src: file,title: chat.content})
 	$('.时间信息').val(toString(chat.time)).attr('placeholder',chat.time || '').click();
 
 	if(chat.heads)CHAT_HeadList = {...chat.heads,...{}}	

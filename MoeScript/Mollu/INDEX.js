@@ -3180,14 +3180,13 @@
 																alert(`${str}ID：${v}\n信息：${info}\n\n${img}`,config)
 																return
 															}
-															v = EMOJI.type === 'CharFace' ? 'CharFace' : ''
 															if($$('.编辑界面').hasClass('visible'))
 															{//编辑表情
-																$$('.图片文件').attr({src: href+link,title: v}),s()
+																$$('.图片文件').attr({src: href+link,title: link}),s()
 															}
 															else
 															{//发送表情
-																sendMessage({file: link,content: v},'image'), s()
+																sendMessage({file: link,content: link.includes('CharFace') ? 'CharFace' : ''},'image'), s()
 															}
 														},
 													})]
@@ -4527,6 +4526,8 @@
 										onClick: function()
 										{
 											let type = ''
+											let 图片文件 = $$('.图片文件').attr('src') || ''
+											let 图片链接 = $$('.图片文件').attr('title') || ''
 											if($$('.dels:checked').length > 1)
 											{
 												let data = {}
@@ -4542,12 +4543,12 @@
 												if($$('.time').val() === ' ')data.time = ''
 												if($$('.content').val() && $$('.content').val() !== ' ')data.content = $$('.content').val()
 												if($$('.content').val() === ' ')data.content = ''
-
-												if(type === 'image' && $$('.图片文件').attr('src') !== '')
+												if(type === 'image' && 图片文件)
 												{
-													data.content = $$('.图片文件').attr('title')
-													data.file = $$('.图片文件').attr('src')
-													data.file = data.file.startsWith('data:') ? data.file : data.file.replace(href,'')
+													data.content = ''
+													data.file = 图片链接
+													if(图片链接.includes('CharFace'))data.content = 'CharFace'
+													if(!图片链接)data.file = 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'')
 												}
 
 												if($$('.editTalk').prop('checked'))
@@ -4585,16 +4586,21 @@
 													type: type,
 													name: $$('.name').val(),
 													time: $$('.time').val(),
-													content: type === 'image' ? $$('.图片文件').attr('title') : $$('.content').val(),
+													content: $$('.content').val(),
 													isFirst: $$('.isFirst').prop('checked'),
 													isCenter: type === 'image' && $$('.isCenter').prop('checked'),
 													isRight: $$('.isRight').prop('checked'),
 													is_breaking: $$('.is_breaking').prop('checked'),
-													file: type === 'image' ? $$('.图片文件').attr('src') : '',
 													sCharacter: {no: $$('.角色头像').attr('alt'),index: $$('.角色头像').attr('title')},
 													heads: CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
 												}
-												data.file = data.file.startsWith('data:') ? data.file : data.file.replace(href,'')
+												if(type === 'image' && 图片文件)
+												{
+													data.content = ''
+													data.file = 图片链接
+													if(图片链接.includes('CharFace'))data.content = 'CharFace'
+													if(!图片链接)data.file = 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'')
+												}
 												data.isLeft = data.isFirst
 												sendMessage(data,type,$$('.addChat').prop('checked') ? 'add' : 'edit',[chatIndex])
 											}

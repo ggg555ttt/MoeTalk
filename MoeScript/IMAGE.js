@@ -63,16 +63,21 @@ async function 等待图片(imgs)
 	for(let i=0,l=imgs.length;i<l;i++)
 	{
 		let img = imgs[i];
-		let src = img.getAttribute('src') || href+'MoeData/Ui/error.webp';
-
-		//替换自定义图片
-		if(!src.startsWith('data:') && (src.startsWith('custom-') || src.startsWith('CharFace-') || src.startsWith('Emoji-')))
-		{
+		let src = img.getAttribute('src') || '';
+		if(!src.startsWith('data:'))
+		{//排除base64图片
 			let url = src.split('/').pop().replace('.webp','')
-			src = await 数据操作('Ig',url) || await 数据操作('Tg',url) || href+'MoeData/Ui/error.webp'
+			if(url.startsWith('custom-') || url.startsWith('CharFace-') || url.startsWith('Emoji-'))
+			{//匹配自定义图片
+				src = await 数据操作('Ig',url) || await 数据操作('Tg',url) || href+'MoeData/Ui/error.webp'
+			}
 		}
+		
+		//替换自定义图片
+		
 		else if(本地 && 客户端 === 'HTML5+')src = await urlToBase64(src);
 		img.src = src;// 使用解析后的完整 URL
+
 	}
 	await 加载图片(imgs)
 }

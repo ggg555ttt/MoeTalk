@@ -1,67 +1,4 @@
 /*@MoeScript/Old/OLD.js@*/
-function compress(base64Img,type = 'head',mode = 'add',length = 0)
-{
-	var img = new Image();//创建一个空白图片对象
-	img.src = base64Img;//图片对象添加图片地址
-	img.onload = function()//图片地址加载完后执行操作
-	{
-		w = img.width;
-		h = img.height;
-
-		let x = 0;let y = 0;let l = w;//正方形头像
-
-		if(type === 'image')w > 600 && (h *= 600 / w, w = 600)
-		else
-		{
-			if(w > h)x = (w-h)/2,l = h,h = w;//竖图上下居中
-			else y = (h-w)/2,l = w,w = h;//横图左右居中
-			n = mt_settings['头像尺寸'] ? mt_settings['头像尺寸'] : 300;
-			a = Math.min(1, n / w);(w *= a), (h *= a);//最大长度不得超过300
-		}
-
-		//开始画压缩图
-		var canvas = document.createElement("canvas");
-		var ctx = canvas.getContext("2d");
-		canvas.width = w;//压缩图的宽度
-		canvas.height = h;//压缩图的高度
-
-		if(type === 'image')ctx.drawImage(img,0,0,w,h);
-		else ctx.drawImage(img,x,y,l,l,0,0,w,h);
-
-		var newBase64 = canvas.toDataURL("image/webp");
-
-		if(type === 'image')
-		{
-			if(mode === 'edit')$('.图片文件').show().attr('src',newBase64).attr('title','')//编辑图片
-			else if(mode === 'add')sendMessage({type: 'image',file: newBase64},'image',mode)//发送图片
-			else//上传表情
-			{
-				let Emojis = $('.Emojis')
-				if(Emojis[0].title === 'ADD')Emojis.append(`<img style='width:33%;' src='${newBase64}' onclick="this.remove()">`)
-				else Emojis[0].src = newBase64
-			}
-		}
-		else
-		{
-			if(mode === 'edit')$(".heads .selected").attr('src',newBase64)//编辑头像
-			else
-			{
-				let attr = 'width="252" height="252" decoding="async" data-nimg="1" loading="lazy" style="color: transparent; margin-right: 0.5rem;" class="common__Profile-sc-1ojome3-6 common__ProfileClick-sc-1ojome3-7 eLaCqa fuyFOl"'
-				let index = $('.heads img:eq(-1)').attr('title')
-				if(index)
-				{
-					index = parseInt(index.replace(char_info.no,'').replace('_',''))
-					if(isNaN(index))index = `${char_info.no}_0`
-					else index = `${char_info.no}_${index+1}`
-				}
-				else index = char_info.no
-				$('.heads').append(`<img src="${newBase64}" title="${index}" ${attr}>`)
-				$('#custom-char .confirm').removeAttr('disabled')
-			}
-		}
-		INIT_loading(false)
-	}
-}
 function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 {
 	$('.编辑界面').removeClass('visible')
@@ -212,7 +149,7 @@ function 编辑消息(index)
 
 	$('.edit_3').show()
 	$('.图片选项').hide()
-	$('.图片文件').attr('src','').attr('title',chat.content)
+	$('.图片文件').attr({src: '',title: ''})
 	
 	$('.content').innerHeight(27)
 	$('.time').innerHeight(27)
@@ -252,14 +189,9 @@ function 编辑消息(index)
 			$('.isCenter').show().prop('checked',chat.isCenter).parent().show()
 			$('.图片选项').show()
 			$('.edit_3').hide()
-			if(chat.file)
-			{
-				$('.图片文件').attr('src',chat.file)
-			}
-			else
-			{
-				$('.图片文件').hide()
-			}
+			let file = chat.file || ''
+			if(!file.startsWith('data:'))$('.图片文件').attr({src: file,title: file})
+			else $('.图片文件').attr({src: file,title: chat.content})
 		}
 		if(chat.type === 'info')
 		{
@@ -301,7 +233,6 @@ $("body").on('click',".editTalk",function()
 });
 $("body").on('click',".edit_button button",function()
 {
-	let file = $('.图片文件').attr('src')
 	let type = $(this).attr('title')
 	$('.edit_button button').removeClass('selected')
 	$(`.edit_button .${type}`).addClass('selected')
@@ -310,15 +241,6 @@ $("body").on('click',".edit_button button",function()
 		$('.edit_3').hide()
 		$('.dels:checked').length < 2 || $('.editTalk').prop('checked') ? $('.isCenter').show().parent().show() : ''
 		$('.图片选项').show()
-		if(file)
-		{
-			$('.图片文件').attr('src',file)
-		}
-		else
-		{
-			$('.图片文件').hide().attr('src','')
-			$('.图片信息').text($('.dels:checked').length < 2 ? '无图片' : '默认')
-		}
 	}
 	else
 	{
