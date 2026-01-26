@@ -66,7 +66,7 @@ async function 等待图片(imgs)
 		let src = img.getAttribute('src') || href+'MoeData/Ui/error.webp';
 
 		//替换自定义图片
-		if(!src.startsWith('data:') && (img.startsWith('custom-') || img.startsWith('CharFace-') || img.startsWith('Emoji-')))
+		if(!src.startsWith('data:') && (src.startsWith('custom-') || src.startsWith('CharFace-') || src.startsWith('Emoji-')))
 		{
 			let url = src.split('/').pop().replace('.webp','')
 			src = await 数据操作('Ig',url) || await 数据操作('Tg',url) || href+'MoeData/Ui/error.webp'
