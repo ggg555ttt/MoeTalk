@@ -36,8 +36,8 @@ function loaddata(json,mode)//识别存档
 		if(mode === 'player')json.TEMP = arr
 		else json.CUSTOM = arr
 	}
-	if(mode === 'player')MMT目录.设置 = json.SETTING
 	if(!json.INFO)json.INFO = {title:"",nickname:"",date:""}
+	if(mode === 'player' && json.SETTING)MMT目录.设置 = json.SETTING
 	for(let i=0,l=json.CHAT.length;i<l;i++)repairCF(json.CHAT[i]);
 	INIT_loading(!'加载存档')
 	return json
