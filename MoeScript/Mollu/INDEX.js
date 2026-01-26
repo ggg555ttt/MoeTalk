@@ -3924,7 +3924,8 @@
 											{
 												style:
 												{
-													width: 'auto',
+													width: '16%',
+													backgroundColor: 'rgb(139, 187, 233)',
 													display: 'none'
 												},
 												className: '内容类型_列表 cVRiXh eIEKpg evqKja kwhiZC',
@@ -3966,6 +3967,13 @@
 											onError: function(e){IMAGE_error(e)}
 										}), (0, m.jsxs)('div',
 										{
+											style:
+											{
+												display: 'flex',
+												flexDirection: 'column',
+												justifyContent: 'space-between',
+												width: '50%'
+											},
 											children: [(0, m.jsx)(eN.g4,
 											{
 												children: '选择表情',
