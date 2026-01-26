@@ -480,6 +480,7 @@ function 数据操作(C,K = null,V = null)
 	else if(C[1] === 'g')M = 'getItem'
 	else if(C[1] === 'r')M = 'removeItem'
 	else if(C[1] === 'c')M = 'clear'
+	else if(C[1] === 'k')M = 'keys'
 	return new Promise(function(resolve)
 	{
 		D[M](K,V).then((e)=>{resolve(e)}).catch((e)=>

@@ -14,78 +14,31 @@ function loaddata(json,mode)//识别存档
 		json.CHAR = {}//自定义角色
 		json.CHAR.id = OLdJson[0].mt_char
 		json.CHAR.image = OLdJson[0].mt_head
-		json.EMOJI = {id:{},image:{}}//自定义表情
 		json.CHAT = OLdJson[1]//MMT
 		json.SETTING = mt_settings//设置信息
 	}
-	if(mode === 'player')
+	if(json.CHAR || json.EMOJI)
 	{
-		if(json.SETTING)
+		if(!json.CHAR)json.CHAR = {id:{},image:{}}
+		if(!json.EMOJI)json.EMOJI = {image:{}}
+		if(json.EMOJI.id)
 		{
-			MMT目录.设置 = json.SETTING
+			json.EMOJI.Emoji = json.EMOJI.id
+			delete json.EMOJI.id
 		}
-		let otherChats = []
-		let chats = []
 		let arr = {}
-		let key = '';
-		json.CHAT.map(function(v,k)
-		{
-			repairCF(v);
-			if(MMT目录.数据 && MMT目录.数据.EMOJI.image[v.file])
-			{
-				v.file = MMT目录.数据.EMOJI.image[v.file]
-			}
-			if(v.replyDepth !== 0)otherChats.push(v)
-			else chats.push(v)
-
-			key = v.replyDepth
-			if(v.replyDepth === 0)key = ''
-
-			if(!arr[key])arr[key] = []
-			arr[key].push(v)
-		})
-		$.each(arr,function(k,v)
-		{
-			if(k !== '')
-			{
-				let json = arr[''].filter(function(e)
-				{
-					return e.type === 'reply' && e.content.split('\n').filter(function(e)
-					{
-						return e === k
-					})[0] === k
-				})[0]
-				let index = arr[''].indexOf(json)+1
-				arr[''].splice(index,0,...arr[k]);
-			}
-		})
-		json.CHAT = arr[''] || []
+		arr.CHAR = json.CHAR.id
+		arr.EMOJI = json.EMOJI
+		arr.IMAGE = {...json.CHAR.image,...json.EMOJI.image}
+		delete arr.EMOJI.image
+		delete json.CHAR
+		delete json.EMOJI
+		if(mode === 'player')json.TEMP = arr
+		else json.CUSTOM = arr
 	}
-	else
-	{
-		if(!json.INFO)json.INFO = {title:"",nickname:"",date:""}
-		if(json.CHAR || json.EMOJI)
-		{
-			if(!json.CHAR)json.CHAR = {id:{},image:{}}
-			if(!json.EMOJI)json.EMOJI = {image:{}}	
-			if(json.EMOJI.id)
-			{
-				json.EMOJI.Emoji = json.EMOJI.id
-				delete json.EMOJI.id
-			}			
-			json.CUSTOM = {}
-			json.CUSTOM.CHAR = json.CHAR.id
-			json.CUSTOM.EMOJI = json.EMOJI
-			json.CUSTOM.IMAGE = {...json.CHAR.image,...json.EMOJI.image}
-			delete json.CUSTOM.EMOJI.image
-			delete json.CHAR
-			delete json.EMOJI
-		}
-		foreach(json.CHAT,function(k,v)
-		{
-			repairCF(json.CHAT[k])
-		})
-	}
+	if(mode === 'player')MMT目录.设置 = json.SETTING
+	if(!json.INFO)json.INFO = {title:"",nickname:"",date:""}
+	for(let i=0,l=json.CHAT.length;i<l;i++)repairCF(json.CHAT[i]);
 	INIT_loading(!'加载存档')
 	return json
 }

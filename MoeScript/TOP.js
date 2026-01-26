@@ -133,32 +133,25 @@ var FontList = `@font-face{font-family:Blueaka;src:url(./MoeData/Fonts/Blueaka.w
 body,textarea,button{font-family:Cyrillic,Blueaka;}`
 if(!mt_settings['禁止字体'])$("head").append("<link rel='stylesheet' href='./MoeData/Fonts/FontList.css' data-n-g='' id='mt-font'>");//加载字体
 //使用说明
-function clearCache()
+async function clearCache()
 {
-	window.caches && caches.keys && caches.keys().then(function(keys)
+	if(window.caches && caches.keys)
 	{
-		let length = 0;
-		keys.forEach(function(key)
+		let keys = await caches.keys()
+		for(let i=0,l=keys.length;i<l;i++)await caches.delete(keys[i]);
+		delete sessionStorage['通知文档']
+		delete sessionStorage['最新版本']
+		if(客户端 === 'HTML5+' && 本地)
 		{
-			length=length+1
-			caches.delete(key);
-		});
-		if(keys.length === length)
-		{
-			delete sessionStorage['通知文档']
-			delete sessionStorage['最新版本']
-			if(客户端 === 'HTML5+' && 本地)
-			{
-				delete localStorage['HTML5+']
-				plus.runtime.quit();
-				return
-			}
-			let config = {}
-			config.confirm = '刷新页面'
-			config.yes = function(){location.reload(true)}
-			alert('缓存清除完毕，请立即刷新页面',config)
+			delete localStorage['HTML5+']
+			plus.runtime.quit();
+			return
 		}
-	});
+		let config = {}
+		config.confirm = '刷新页面'
+		config.yes = function(){location.reload(true)}
+		alert('缓存清除完毕，请立即刷新页面',config)
+	}
 }
 async function update(str = '')
 {
@@ -379,7 +372,7 @@ $("body").on('click',"#MoeProject",async function()
 {
 	let 项目名称 = await 数据操作('Pg','项目名称') || {}
 	let 自动备份 = await 数据操作('Pg','自动备份') || null
-	let Projects = await MoeProject.keys() || []
+	let Projects = await 数据操作('Pk') || []
 	let 新项目 = '',保存 = ''
 	if(chats.length+otherChats.length)
 	{

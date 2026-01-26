@@ -7103,6 +7103,7 @@
 										className: `播放${l.ID}-${k}`,//播放
 										onClick: async function()
 										{
+											let DATA
 											INIT_loading()
 											skip = false
 											$$('.nowChapter').text('读取中。。')
@@ -7117,41 +7118,51 @@
 											}
 											p((0, ee.Fe)(playChat))
 
-											let filename = `GameData/${mt_settings['选择游戏']}/Library/${l.ID}`
-											if(本地 && 客户端 && !await file_exists(`${filename}.zip`))
+											if(l.作者 === '项目管理')
 											{
-												let zip = await $ajax(`${MoeTalkURL}/${filename}.zip?md5=${l.MD5}`)
-												await 保存文件(`${filename}.zip`,zip)
-											}
-											if(本地 && 客户端 && !await file_exists(`${filename}-${k}.zip`))
-											{
-												let zip = await $ajax(`${MoeTalkURL}/${filename}-${k}.zip?md5=${l.MD5}`)
-												await 保存文件(`${filename}-${k}.zip`,zip)
-											}
-
-											if(!MMT目录.当前 || MMT目录.当前[0] !== l.ID)
-											{
-												MMT目录.数据 = loaddata(await ZipToJson(`${href}${filename}.zip`),'player')
-												if(MMT目录.数据.CHAR)
+												DATA = loaddata(await 数据操作('Pg',l.MD5),'player')
+												mt_schar = {...mt_schar,...DATA.TEMP.CHAR}
+												for(let id in DATA.TEMP.IMAGE)
 												{
-													mt_schar = {...mt_schar,...MMT目录.数据.CHAR.id}
-													for(let id in MMT目录.数据.CHAR.image)
+													let img = DATA.TEMP.IMAGE[id]
+													await 数据操作('Ts',id,img)
+												}
+												数据操作('Ts','临时角色',mt_schar)
+											}
+											else
+											{
+												let filename = `GameData/${mt_settings['选择游戏']}/Library/${l.ID}`
+												if(本地 && 客户端 && !await file_exists(`${filename}.zip`))
+												{//下载数据文件
+													let zip = await $ajax(`${MoeTalkURL}/${filename}.zip?md5=${l.MD5}`)
+													await 保存文件(`${filename}.zip`,zip)
+												}
+												if(本地 && 客户端 && !await file_exists(`${filename}-${k}.zip`))
+												{//下载章节文件
+													let zip = await $ajax(`${MoeTalkURL}/${filename}-${k}.zip?md5=${l.MD5}`)
+													await 保存文件(`${filename}-${k}.zip`,zip)
+												}
+												if(!MMT目录.当前 || MMT目录.当前[0] !== l.ID)
+												{//读取数据文件
+													DATA = loaddata(await ZipToJson(`${href}${filename}.zip`),'player')
+													mt_schar = {...mt_schar,...DATA.TEMP.CHAR}
+													for(let id in DATA.TEMP.IMAGE)
 													{
-														let img = MMT目录.数据.CHAR.image[id]
+														let img = DATA.TEMP.IMAGE[id]
 														await 数据操作('Ts',id,img)
 													}
 													数据操作('Ts','临时角色',mt_schar)
 												}
-												delete MMT目录.数据
+												DATA = loaddata(await ZipToJson(`${href}${filename}-${k}.zip?md5=${l.MD5}`),'player')
 											}
+
 											MMT目录.当前 = [l.ID,k]
-											let data = loaddata(await ZipToJson(`${href}${filename}-${k}.zip?md5=${l.MD5}`),'player')
-											playChat.chats = data.CHAT
-											playChat.header = data.INFO
-											playChat.chatSpeed = data.CHAT.length < 2 ? 1000 : (0, a.zP)()
-											if(l.备注 && MMT目录.备注[l.备注] && k == 0)data.CHAT.unshift(MMT目录.备注[l.备注])
+											playChat.chats = DATA.CHAT
+											playChat.header = DATA.INFO
+											playChat.chatSpeed = DATA.CHAT.length < 2 ? 1000 : (0, a.zP)()
+											if(l.备注 && MMT目录.备注[l.备注] && k == 0)DATA.CHAT.unshift(MMT目录.备注[l.备注])
 											let 章节 = `${MMT目录.当前[1]+1}/${MMT目录.作品[MMT目录.当前[0]].章节+1}`
-											$$('#size').text(`章节:${章节}\n进度:1/${data.CHAT.length}`)
+											$$('#size').text(`章节:${章节}\n进度:1/${DATA.CHAT.length}`)
 											setTimeout(function(){p((0, ee.Fe)(playChat))}, 1e3)
 											p((0, S.Cz)(!0))
 											$$('.nowChapter').text(`${l.名称}：第${k+1}/${l.章节+1}章`)
@@ -8105,7 +8116,7 @@
 										}
 										L((0, p.Fe)(json))
 										L((0, x.Cz)(!0))
-										MMT目录.数据 = MMT目录.当前 = null
+										MMT目录.当前 = null
 										$$('.nowChapter').text('')
 										O(e)
 										$$('.PLAYER_play').click()
@@ -8538,7 +8549,7 @@
 				{
 					displayName: "EndBox__Container",
 					componentId: "sc-1bnhokl-0"
-				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeData/Ui/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
+				})(["", ";gap:0.5rem;height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeData/Ui/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
 				{
 					return e.theme.common.flexBox(
 					{
@@ -8654,13 +8665,9 @@
 						}), (0, m.jsx)(s.HR,
 						{}), (0, m.jsx)(s._x,
 						{
-							className: "medium",
 							style:style,//@
 							disabled: f,
-							onClick: function()
-							{
-								g(), p(!0)
-							},
+							// onClick: function(){g(), p(!0)},
 							// children: t.content || ((t.name || loadname(t.sCharacter.no,t.sCharacter.index))+r.Z.go_relationship_event[d])
 							dangerouslySetInnerHTML: {__html: t.content || ((t.name || loadname(t.sCharacter.no,t.sCharacter.index))+r.Z.go_relationship_event[d])}
 						})]
@@ -9000,7 +9007,7 @@
 				{
 					displayName: "ReplyBox__Container",
 					componentId: "sc-14pasys-0"
-				})(["", ";height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeData/Ui/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
+				})(["", ";gap:0.5rem;height:auto;padding:0.5rem;font-size:1.1rem;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeData/Ui/Popup_Img_Deco_2.webp');background-repeat:no-repeat;background-position:right top;background-size:auto 10rem;line-height:1.5rem;`], function(e)
 				{
 					return e.theme.common.flexBox(
 					{
@@ -9062,7 +9069,7 @@
 							let 章节 = '1/1'
 							if(MMT目录.当前)章节 = `${MMT目录.当前[1]+1}/${MMT目录.作品[MMT目录.当前[0]].章节+1}`
 							$$('#size').text(`章节:${章节}\n进度:${(n+1) ? (n+1) : e.chats.length}/${e.chats.length}`)
-							if("end" === t.type || "reply" === t.type || "heart" === t.type)r((0, i.eS)((0, l.zP)()));
+							if("end" === t.type || "reply" === t.type)r((0, i.eS)((0, l.zP)()));
 							else if(o && o.replyDepth === e.replyDepth) "{end}" === toString(o.content).trim() && o.replyDepth === t.replyDepth ? (r((0, i.eS)((0, l.zP)())), r((0, i.e$)(
 							{
 								chat: h.Nl

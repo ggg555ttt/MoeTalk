@@ -6125,7 +6125,15 @@
 													}
 												}
 											}
-											if(!MMT目录)MMT目录 = {作者:{},作品:[]}
+											if(!MMT目录)MMT目录 = {作品:[],作者:{}}
+											let 项目名称 = await 数据操作('Pg','项目名称') || {}
+											let Projects = await 数据操作('Pk') || []
+											for(let i=0,l=Projects.length;i<l;i++)
+											{
+												let id = Projects[i]
+												if(id === '项目名称')continue;
+												MMT目录.作品.push({名称: 项目名称[id] || id,ID: MMT目录.作品.length,作者: '项目管理',章节: 0,MD5: id})
+											}
 											INIT_loading(!'结束加载')
 											$$('.MMTPlayer')[0].click()
 											return

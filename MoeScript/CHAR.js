@@ -12,7 +12,7 @@ var CHAR_CharList = []
 function loadhead(id,img)
 {
 	if(id == 0 || img == 1)return `${href}MoeData/Ui/you.webp`;//主角
-	if(/custom-|CharFace-|Emoji-/.test(img))return img
+	if(img.startsWith('custom-') || img.startsWith('CharFace-') || img.startsWith('Emoji-'))return img
 	return `${href}GameData/${mt_settings['选择游戏']}/Char/${img}.webp`;
 }
 function loadname(id,index)
