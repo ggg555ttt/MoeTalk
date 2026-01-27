@@ -10,9 +10,11 @@
 	}
 })();
 const moetalkStorage = localforage.createInstance({name:'moetalkStorage'});//数据库
-const MoeImage = localforage.createInstance({name:'MoeImage'});//数据库
-const MoeTemp = localforage.createInstance({name:'MoeTemp'});//数据库
-const MoeProject = localforage.createInstance({name:'MoeProject'});//数据库
+const MoeImage = localforage.createInstance({name:'MoeImage'});//图片库
+const MoeTemp = localforage.createInstance({name:'MoeTemp'});//临时文件
+const MoeProject = localforage.createInstance({name:'MoeProject'});//项目库
+const MoeCache = localforage.createInstance({name:'MoeCache'});//播放器缓存
+数据操作('Cc')
 if(mt_settings['存储模式'])
 {
 	moetalkStorage.setDriver('localStorageWrapper');
@@ -34,7 +36,7 @@ function os(u = window.navigator.userAgent)
 var browser = os();//获取浏览器信息
 var player = (本地 ? '/' : href)+'Moedata'//播放器地址
 var directory = []//目录
-var MMT目录 = {}//目录
+var MMT目录 = false//目录
 
 var $$ = $;//jquery转义
 var winHeight = window.innerHeight
@@ -476,6 +478,7 @@ function 数据操作(C,K = null,V = null)
 	else if(C[0] === 'T')D = MoeTemp
 	else if(C[0] === 'P')D = MoeProject
 	else if(C[0] === 'S')D = moetalkStorage
+	else if(C[0] === 'C')D = MoeCache
 	if(C[1] === 's')M = 'setItem'
 	else if(C[1] === 'g')M = 'getItem'
 	else if(C[1] === 'r')M = 'removeItem'

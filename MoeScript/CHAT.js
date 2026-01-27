@@ -779,6 +779,7 @@ function 生成消息(内容类型,length)
 			data.content = ''
 			data.file = 图片链接
 			if(图片链接.includes('CharFace'))data.content = 'CharFace'
+			if(图片链接 === 'CharFace' || 图片链接 === 'Emoji')图片链接 = ''
 			if(!图片链接)data.file = 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'')	
 		}
 		if(时间信息 !== '')data.content = 时间信息 === ' ' ? '' : 时间信息
@@ -803,6 +804,7 @@ function 生成消息(内容类型,length)
 		data.content = ''
 		data.file = 图片链接
 		if(图片链接.includes('CharFace'))data.content = 'CharFace'
+		if(图片链接 === 'CharFace' || 图片链接 === 'Emoji')图片链接 = ''
 		if(!图片链接)data.file = 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'')	
 	}
 	

@@ -4556,6 +4556,7 @@
 													data.content = ''
 													data.file = 图片链接
 													if(图片链接.includes('CharFace'))data.content = 'CharFace'
+													if(图片链接 === 'CharFace' || 图片链接 === 'Emoji')图片链接 = ''
 													if(!图片链接)data.file = 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'')
 												}
 
@@ -4607,6 +4608,7 @@
 													data.content = ''
 													data.file = 图片链接
 													if(图片链接.includes('CharFace'))data.content = 'CharFace'
+													if(图片链接 === 'CharFace' || 图片链接 === 'Emoji')图片链接 = ''
 													if(!图片链接)data.file = 图片文件.startsWith('data:') ? 图片文件 : 图片文件.replace(href,'')
 												}
 												data.isLeft = data.isFirst
@@ -7128,14 +7130,16 @@
 
 											if(l.作者 === '项目管理')
 											{
+												await 数据操作('Cc')
 												DATA = loaddata(await 数据操作('Pg',l.MD5),'player')
-												mt_schar = {...mt_schar,...DATA.TEMP.CHAR}
+												MMT目录.角色 = DATA.TEMP.CHAR
+												MMT目录.设置 = DATA.SETTING || mt_settings
 												for(let id in DATA.TEMP.IMAGE)
 												{
 													let img = DATA.TEMP.IMAGE[id]
-													await 数据操作('Ts',id,img)
+													await 数据操作('Cs',id,img)
 												}
-												数据操作('Ts','临时角色',mt_schar)
+												delete DATA.TEMP
 											}
 											else
 											{
@@ -7152,14 +7156,16 @@
 												}
 												if(!MMT目录.当前 || MMT目录.当前[0] !== l.ID)
 												{//读取数据文件
-													DATA = loaddata(await ZipToJson(`${href}${filename}.zip`),'player')
-													mt_schar = {...mt_schar,...DATA.TEMP.CHAR}
+													await 数据操作('Cc')
+													DATA = loaddata(await ZipToJson(`${href}${filename}.zip`),'custom')
+													MMT目录.角色 = DATA.TEMP.CHAR
+													MMT目录.设置 = DATA.SETTING || mt_settings
 													for(let id in DATA.TEMP.IMAGE)
 													{
 														let img = DATA.TEMP.IMAGE[id]
-														await 数据操作('Ts',id,img)
+														await 数据操作('Cs',id,img)
 													}
-													数据操作('Ts','临时角色',mt_schar)
+													delete DATA.TEMP
 												}
 												DATA = loaddata(await ZipToJson(`${href}${filename}-${k}.zip?md5=${l.MD5}`),'player')
 											}
@@ -8032,7 +8038,7 @@
 									n = e.currentTarget.files[0];
 								t.onloadend = function()
 								{
-									"string" == typeof t.result && ("[" === t.result[0] || "{" === t.result[0]) ? (G(loaddata(t.result,'player')), q(!0)) : L((0, m.Y2)(//#编译存档
+									"string" == typeof t.result && ("[" === t.result[0] || "{" === t.result[0]) ? (G(loaddata(t.result,'upload')), q(!0)) : L((0, m.Y2)(//#编译存档
 									{
 										isAlert: !0,
 										title: f.Z.error[b],
@@ -8113,6 +8119,7 @@
 									accept: 'image/png,application/json',
 									onChange: function(e)
 									{
+										INIT_loading('加载存档')
 										skip = false
 										let json = {
 											nowChats: [],
@@ -8409,6 +8416,7 @@
 							header: z.INFO,
 							handleFileUpload: function()
 							{
+								INIT_loading(1)
 								var e = {
 									nowChats: [],
 									replyDepth: 0,
@@ -8418,8 +8426,18 @@
 									{},
 									board_no: 0
 								};
-								L((0, p.Fe)(e)), setTimeout(function()
+								L((0, p.Fe)(e)), setTimeout(async function()
 								{
+									await 数据操作('Cc')
+									MMT目录.当前 = false
+									MMT目录.角色 = z.TEMP.CHAR
+									MMT目录.设置 = z.SETTING || mt_settings
+									for(let id in z.TEMP.IMAGE)
+									{
+										let img = z.TEMP.IMAGE[id]
+										await 数据操作('Cs',id,img)
+									}
+									delete z.TEMP
 									e = {
 										nowChats: [],
 										replyDepth: 0,
@@ -8428,6 +8446,7 @@
 										header: z.INFO,
 										board_no: 0
 									}, L((0, p.Fe)(e)), q(!1), L((0, x.Cz)(!0))
+									INIT_loading(0)
 								}, 1e3)
 							}
 						})]
@@ -8676,8 +8695,7 @@
 							style:style,//@
 							disabled: f,
 							// onClick: function(){g(), p(!0)},
-							// children: t.content || ((t.name || loadname(t.sCharacter.no,t.sCharacter.index))+r.Z.go_relationship_event[d])
-							dangerouslySetInnerHTML: {__html: t.content || ((t.name || loadname(t.sCharacter.no,t.sCharacter.index))+r.Z.go_relationship_event[d])}
+							dangerouslySetInnerHTML: {__html: t.content || ((t.name || loadname(t.sCharacter.no,t.sCharacter.index,'palyer'))+r.Z.go_relationship_event[d])}
 						})]
 					})
 				},
@@ -8685,7 +8703,7 @@
 				{
 					displayName: "HeartBox__Container",
 					componentId: "sc-1gwqj71-0"
-				})(["", ";padding:0.5rem;font-size:1.1rem;height:auto;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeData/Ui/Favor_Schedule_Deco.webp');background-repeat:no-repeat;background-position:right;background-size:auto 100%;line-height:1.5rem;`], function(e)
+				})(["", ";gap:0.5rem;padding:0.5rem;font-size:1.1rem;height:auto;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeData/Ui/Favor_Schedule_Deco.webp');background-repeat:no-repeat;background-position:right;background-size:auto 100%;line-height:1.5rem;`], function(e)
 				{
 					return e.theme.common.flexBox(
 					{
@@ -8888,7 +8906,7 @@
 										className: '头像',
 										style: {zIndex: t.heads ? t.heads.list.length : ''},
 										src: loadhead(t.sCharacter.no,t.sCharacter.index),
-										onError: function(e){IMAGE_error(e)},
+										onError: function(e){IMAGE_error(e,'palyer')},
 										alt: t.sCharacter.index
 									}), t.heads ? t.heads.list.map(function(index,k)
 									{
@@ -8902,7 +8920,7 @@
 												marginTop: t.heads.direction === 'column' ? t.heads.margin ? t.heads.margin : "-1.5rem" : '',
 												marginLeft: t.heads.direction === 'row' ? t.heads.margin ? t.heads.margin : "-1.5rem" : ''
 											},
-											onError: function(e){IMAGE_error(e)}
+											onError: function(e){IMAGE_error(e,'palyer')}
 										})
 									}) : ''] : ''
 								}) : '', (0, m.jsxs)("div",
@@ -8916,7 +8934,7 @@
 									children: [!isCenter && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 									{//人物名称
 										className: "名称 bold",
-										dangerouslySetInnerHTML: {__html: t.name || loadname(t.sCharacter.no,t.sCharacter.index)}
+										dangerouslySetInnerHTML: {__html: t.name || loadname(t.sCharacter.no,t.sCharacter.index,'palyer')}
 									}) : '' , (0, m.jsxs)("div",
 									{//消息内容
 										style:
@@ -8960,7 +8978,7 @@
 									{
 										className: '头像',
 										src: loadhead(t.sCharacter.no,t.sCharacter.index),
-										onError: function(e){IMAGE_error(e)},
+										onError: function(e){IMAGE_error(e,'palyer')},
 										alt: t.sCharacter.index
 									}), t.heads ? t.heads.list.map(function(index,k)
 									{
@@ -8974,7 +8992,7 @@
 												marginTop: t.heads.direction === 'column' ? "-1.5rem" : '',
 												marginLeft: t.heads.direction === 'row' ? "-1.5rem" : ''
 											},
-											onError: function(e){IMAGE_error(e)}
+											onError: function(e){IMAGE_error(e,'palyer')}
 										})
 									}) : ''] : ''
 								}) : '']
@@ -9196,7 +9214,7 @@
 											className: '头像',
 											style: {zIndex: t.heads ? t.heads.list.length : ''},
 											src: loadhead(t.sCharacter.no,t.sCharacter.index),
-											onError: function(e){IMAGE_error(e)},
+											onError: function(e){IMAGE_error(e,'palyer')},
 											alt: t.sCharacter.index
 										}), t.heads ? t.heads.list.map(function(index,k)
 										{
@@ -9210,7 +9228,7 @@
 													marginTop: t.heads.direction === 'column' ? t.heads.margin ? t.heads.margin : "-1.5rem" : '',
 													marginLeft: t.heads.direction === 'row' ? t.heads.margin ? t.heads.margin : "-1.5rem" : ''
 												},
-												onError: function(e){IMAGE_error(e)}
+												onError: function(e){IMAGE_error(e,'palyer')}
 											})
 										}) : ''] : ''
 									}) : '', (0, m.jsxs)("div",
@@ -9224,7 +9242,7 @@
 										children: [!isCenter && isFirst && t.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{//人物名称
 											className: "名称 bold",
-											dangerouslySetInnerHTML: {__html: t.name || loadname(t.sCharacter.no,t.sCharacter.index)}
+											dangerouslySetInnerHTML: {__html: t.name || loadname(t.sCharacter.no,t.sCharacter.index,'palyer')}
 										}) : '' , (0, m.jsxs)("div",
 										{//消息内容
 											style:
@@ -9255,7 +9273,7 @@
 													maxWidth: t.content === 'CharFace' ? MMT目录.设置['差分比例'] : MMT目录.设置['图片比例']
 												},//@差分表情宽高百分比
 												src: t.file.startsWith('data:') ? t.file : href+t.file,
-												onError: function(e){IMAGE_error(e)},
+												onError: function(e){IMAGE_error(e,'palyer')},
 											}), t.time ? (0, m.jsx)(s.i9,
 											{//右侧时间戳
 												className: '时间戳',
@@ -9278,7 +9296,7 @@
 										{
 											className: '头像',
 											src: loadhead(t.sCharacter.no,t.sCharacter.index),
-											onError: function(e){IMAGE_error(e)},
+											onError: function(e){IMAGE_error(e,'palyer')},
 											alt: t.sCharacter.index
 										}), t.heads ? t.heads.list.map(function(index,k)
 										{
@@ -9292,7 +9310,7 @@
 													marginTop: t.heads.direction === 'column' ? "-1.5rem" : '',
 													marginLeft: t.heads.direction === 'row' ? "-1.5rem" : ''
 												},
-												onError: function(e){IMAGE_error(e)}
+												onError: function(e){IMAGE_error(e,'palyer')}
 											})
 										}) : ''] : ''
 									}) : '']

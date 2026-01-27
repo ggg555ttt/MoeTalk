@@ -10,11 +10,11 @@ var 首次截图 = false
 var 羁绊背景 = href+'MoeData/Ui/Favor_Schedule_Deco.webp'
 var 回复背景 = href+'MoeData/Ui/Popup_Img_Deco_2.webp'
 var 错误图片 = href+'MoeData/Ui/error.webp'
-async function IMAGE_error(image)
+async function IMAGE_error(image,play)
 {
 	let src = image.src ? image.getAttribute('src') : image.target.getAttribute('src')
 	let url = src.split('/').pop().replace('.webp','')
-	let img = await 数据操作('Ig',url) || await 数据操作('Tg',url) || href+'MoeData/Ui/error.webp'
+	let img = (play ? await 数据操作('Cg',url) : await 数据操作('Ig',url) || await 数据操作('Tg',url)) || href+'MoeData/Ui/error.webp'
 	if(img[0] === 'G')img = href+img
 	if(image.src)image.src = img
 	else image.target.src = img

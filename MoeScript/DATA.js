@@ -1,6 +1,6 @@
 /*@MoeScript/DATA.js@*/
 var DATA_NowTime = 0
-function loaddata(json,mode)//识别存档
+function loaddata(json,play)//识别存档
 {
 	while(typeof json === 'string')json = JSON.parse(json)
 	if(!json.MoeTalk)
@@ -17,6 +17,9 @@ function loaddata(json,mode)//识别存档
 		json.CHAT = OLdJson[1]//MMT
 		json.SETTING = mt_settings//设置信息
 	}
+	if(!json.TEMP)json.TEMP = {CHAR:{},EMOJI:{},IMAGE:{}}
+	if(!json.CUSTOM)json.CUSTOM = {CHAR:{},EMOJI:{},IMAGE:{}}
+	if(!json.INFO)json.INFO = {title:"",nickname:"",date:""}
 	if(json.CHAR || json.EMOJI)
 	{
 		if(!json.CHAR)json.CHAR = {id:{},image:{}}
@@ -26,19 +29,43 @@ function loaddata(json,mode)//识别存档
 			json.EMOJI.Emoji = json.EMOJI.id
 			delete json.EMOJI.id
 		}
-		let arr = {}
-		arr.CHAR = json.CHAR.id
-		arr.EMOJI = json.EMOJI
-		arr.IMAGE = {...json.CHAR.image,...json.EMOJI.image}
-		delete arr.EMOJI.image
+		json.CUSTOM.CHAR = json.CHAR.id
+		json.CUSTOM.EMOJI = json.EMOJI
+		json.CUSTOM.IMAGE = {...json.CHAR.image,...json.EMOJI.image}
+		delete json.CUSTOM.EMOJI.image
 		delete json.CHAR
 		delete json.EMOJI
-		if(mode === 'player')json.TEMP = arr
-		else json.CUSTOM = arr
 	}
-	if(!json.INFO)json.INFO = {title:"",nickname:"",date:""}
-	if(mode === 'player' && json.SETTING)MMT目录.设置 = json.SETTING
-	for(let i=0,l=json.CHAT.length;i<l;i++)repairCF(json.CHAT[i]);
+	for(let i=0,l=json.CHAT.length;i<l;i++)
+	{
+		repairCF(json.CHAT[i]);
+		if(play == 'upload')
+		{
+			let chat = json.CHAT[i]
+			let id = chat.sCharacter.no.toString()
+			let img = chat.sCharacter.index.toString()
+			//自定义角色
+			if(!json.TEMP.CHAR[id] && json.CUSTOM.CHAR[id])json.TEMP.CHAR[id] = json.CUSTOM.CHAR[id]
+			//自定义头像
+			if(!json.TEMP.IMAGE[img] && json.CUSTOM.IMAGE[img])json.TEMP.IMAGE[img] = json.CUSTOM.IMAGE[img]
+			let heads = chat.heads && chat.heads.list || []
+			for(let i=0,l=heads.length;i<l;i++)
+			{//自定义头像
+				img = heads[i]
+				if(!json.TEMP.IMAGE[img] && json.CUSTOM.IMAGE[img])json.TEMP.IMAGE[img] = json.CUSTOM.IMAGE[img]
+			}
+			img = chat.file || ''
+			if((img.startsWith('CharFace-') || img.startsWith('Emoji-')))
+			{//自定义图片
+				if(!json.TEMP.IMAGE[img] && json.CUSTOM.IMAGE[img])json.TEMP.IMAGE[img] = json.CUSTOM.IMAGE[img]
+			}
+		}
+	}
+	if(play)
+	{
+		if(play == 'custom')json.TEMP = json.CUSTOM
+		delete json.CUSTOM
+	}
 	INIT_loading(!'加载存档')
 	return json
 }
@@ -46,7 +73,7 @@ function repairCF(data)
 {
 	if(!data.sCharacter)return
 	data.sCharacter.no = id_map[0][data.sCharacter.no] || data.sCharacter.no
-	data.sCharacter.index = toString(id_map[1][data.sCharacter.index] || data.sCharacter.index)
+	data.sCharacter.index = String(id_map[1][data.sCharacter.index] || data.sCharacter.index)
 	if(data.type === 'image')
 	{
 		data.content = data.content || ''

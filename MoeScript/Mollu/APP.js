@@ -6096,7 +6096,7 @@
 											$$('.cgldhY').hide()
 											let num = `?num=${Math.random()}`
 											let filename = `GameData/${mt_settings['选择游戏']}/Library.json`
-											MMT目录 = JSON.parse(await $ajax(`${href}${filename}${num}`))
+											if(!MMT目录)MMT目录 = JSON.parse(await $ajax(`${href}${filename}${num}`))
 											if(本地 && 客户端 && MMT目录)
 											{
 												let data = JSON.parse(await $ajax(`${MoeTalkURL}/${filename}${num}`))

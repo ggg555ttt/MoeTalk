@@ -15,11 +15,13 @@ function loadhead(id,img)
 	if(img.startsWith('custom-') || img.startsWith('CharFace-') || img.startsWith('Emoji-'))return img
 	return `${href}GameData/${mt_settings['选择游戏']}/Char/${img}.webp`;
 }
-function loadname(id,index)
+function loadname(id,index,play)
 {
 	if(!mt_characters)return;
 	let you = {kr: "주인공",en: "Lead",jp: "主役",zh_cn: "主角",zh_tw: "主角"}
 	let name = toString(id)
+	let names = (play ? MMT目录.设置['人物改名'] : mt_settings['人物改名']) || {}
+	
 	if(mt_characters[id])
 	{
 		name = mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id
@@ -28,20 +30,28 @@ function loadname(id,index)
 	if(name.split(" ")[1])name = name.split(" ")[1]
 	name = name.replaceAll("-", " ").split("·")[0]
 
-	if(mt_settings['人物改名'][id])name = mt_settings['人物改名'][id];//@改名
-	if(mt_settings['人物改名'][index])name = mt_settings['人物改名'][index];//@改名
+	if(names[id])name = names[id];//@改名
+	if(names[index])name = names[index];//@改名
 
-	if(mt_schar[id])
+	
+	if(play &&  MMT目录.角色[id])
 	{
-		name = mt_schar[id].name
-		if(mt_schar[id].names && mt_schar[id].names[index])name = mt_schar[id].names[index]
+		name = MMT目录.角色[id].name
+		if(MMT目录.角色[id].names && MMT目录.角色[id].names[index])name = MMT目录.角色[id].names[index]
 	}
-	if(mt_char[id])
+	else
 	{
-		name = mt_char[id].name
-		if(mt_char[id].names && mt_char[id].names[index])name = mt_char[id].names[index]
+		if(mt_schar[id])
+		{
+			name = mt_schar[id].name
+			if(mt_schar[id].names && mt_schar[id].names[index])name = mt_schar[id].names[index]
+		}
+		if(mt_char[id])
+		{
+			name = mt_char[id].name
+			if(mt_char[id].names && mt_char[id].names[index])name = mt_char[id].names[index]
+		}
 	}
-
 	if(id == 0)name = you[mtlang]
 	return name
 }
