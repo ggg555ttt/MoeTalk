@@ -112,7 +112,6 @@ if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorag
 	delete localStorage['启动设备']
 	delete localStorage['mt-version']
 	delete localStorage['mt-rand']
-	//if(!mt_settings['后台保存'])delete mt_settings['后台保存']
 	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
 
 }
@@ -287,12 +286,6 @@ function INIT_waiting(callback,arr)//等待变量加载
 function foreach(arr,callback)//循环索引数组
 {
 	for(let i=0,len=arr.length;i<len;i++)callback(i,arr[i])
-}
-if(mt_settings['后台保存'])
-{
-	window.onblur = function(){saveStorage('chats',[...chats,...otherChats],'local')}
-	window.onfocus = function(){saveStorage('chats',[...chats,...otherChats],'local')}
-	window.onbeforeunload = function(){saveStorage('chats',[...chats,...otherChats],'local')}
 }
 function getfile(url,text = '',html = null)
 {

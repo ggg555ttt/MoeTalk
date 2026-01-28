@@ -526,6 +526,12 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 {
 	let addChat = $(".操作模式").text() == '追加'
 	$(".编辑界面 .取消").click()
+	if(MoeHome === 'index_old.html')
+	{
+		$('.编辑界面').removeClass('visible')
+		$('.chatText').val('').innerHeight(27)
+		addChat = $('.addChat').prop('checked')
+	}
 	let dels = $('.dels')
 	let checked = $(".dels:checked")
 	if(indexs.length === 0)indexs[0] = dels.index(checked)
@@ -652,7 +658,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		}
 		if(nextindex)$(nextindex)[0].scrollIntoView({block:'center',behavior:behavior})
 	}, 1)
-	if(!mt_settings['后台保存'])saveStorage('chats',[...chats,...otherChats],'local')
+	saveStorage('chats',[...chats,...otherChats],'local')
 	if(checked.length)$('.消息').css('border-top','').find(".dels:checked").eq(0).parent().css('border-top','2px dashed #a2a2a2')//更新追加虚线
 	chats.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
 	INIT_state()

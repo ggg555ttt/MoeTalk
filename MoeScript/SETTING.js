@@ -283,16 +283,22 @@ $('body').on('click',"#mt-image",function()
 		saveStorage('设置选项',mt_settings,'local')
 	}
 })
-$('body').on('click',"#cleancache",function()
+$('body').on('click',"#cleancache",async function()
 {
-	window.caches && caches.keys && caches.keys().then(function(keys)
+	if(window.caches && caches.keys)
 	{
-		keys.forEach(function(key)
+		let keys = await caches.keys()
+		for(let i=0,l=keys.length;i<l;i++)await caches.delete(keys[i]);
+		delete sessionStorage['通知文档']
+		delete sessionStorage['最新版本']
+		if(客户端 === 'HTML5+' && 本地)
 		{
-			caches.delete(key);
-		});
-	});
-	alert('已清除ServiceWorker缓存')
+			delete localStorage['HTML5+']
+			plus.runtime.quit();
+			return
+		}
+		alert('已清除ServiceWorker缓存')
+	}
 })
 $('body').on('click',"#mt-maxheight",function()
 {
@@ -465,13 +471,13 @@ $("body").on('click',function()
 {
 	$('.mt_settings').text(JSON.stringify(mt_settings,null,4))
 })
-if(mt_settings['文字样式'])
-{
-	$.each(mt_settings['文字样式'],function(k,v)
-	{
-		$('#mt-fontszie').parent().find(`input[title="${k}"]`)[0].value = v['font-size']
-	})
-}
+// if(mt_settings['文字样式'])
+// {
+// 	$.each(mt_settings['文字样式'],function(k,v)
+// 	{
+// 		$('#mt-fontszie').parent().find(`input[title="${k}"]`)[0].value = v['font-size']
+// 	})
+// }
 $('body').on('click',".selectColor",function()
 {
 	$('#titleColor').val(RgbToHex($(this).css('background-color')))

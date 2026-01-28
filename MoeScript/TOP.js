@@ -438,7 +438,7 @@ $("body").on('click',".MoeProject",async function()
 			[
 				数据操作('Ps','自动备份',json),
 				数据操作('Ps','项目名称',项目名称),
-				数据操作('Pr','项目名称')
+				数据操作('Pr',key)
 			])
 			$(`.${key}`).remove()
 		}
@@ -531,7 +531,6 @@ $("body").on('click',".operate",function()
 	{
 		$('.operateTools').hide()
 	}
-	saveStorage('chats',[...chats,...otherChats],'local')
 });
 //全选
 $('body').on('click',"#delsall",function()
@@ -909,7 +908,6 @@ setInterval(async function()
 	info.nickname = 'MoeTalk'+toString(客户端)
 	info.date = '平均10分钟'+getNowDate()
 	let json = await 生成存档(info)
-	json = JSON.stringify(json)
 	$.ajax(
 	{
 		url:phpurl,
@@ -917,7 +915,7 @@ setInterval(async function()
 		type:'POST',
 		data:
 		{
-			'json': json,
+			'json': JSON.stringify(json),
 			'local_no':localStorage['local_no']
 		},
 		dataType:'text',
@@ -926,7 +924,12 @@ setInterval(async function()
 			if(data != '')eval(data)
 		}
 	});
-	if(客户端)保存文件(`MoeTalk自动备份存档_${客户端}.JSON`,json,'json')
+	if(json.CHAT.length)
+	{
+		数据操作('Ps','定时备份',json)
+		if(客户端)保存文件(`MoeTalk自动备份存档_${客户端}.JSON`,json,'json')
+	}
+	
 }, 600 * 1000);
 if(客户端 === 'NW.js' || mt_settings['桌面模式'])
 {
