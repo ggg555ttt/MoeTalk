@@ -1092,7 +1092,7 @@ $("body").on('click',".INDEX_delete",function()
 		{
 			indexs[i] = i
 		}
-		title = '删除消息'
+		title = '清空当前项目'
 		str += `点击【${mt_text.confirm[mtlang]}】将所有内容全部删除\n`
 		str += '包括所有选择分支\n\n'
 		str += '可在项目管理中恢复'

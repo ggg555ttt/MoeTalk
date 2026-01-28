@@ -234,7 +234,7 @@ $(async function()
 	notice += `MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n`
 	notice += '反馈网址：<u><a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/</a></u>\n\n'
 	notice += '※移动端可点击左上<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);" onclick="moedev()"> 三 </i>查看工具栏\n'
-	
+	notice += `※<span style="color:white;background-color:green;">数据丢失请尝试从<button style="line-height:112%;" onclick="$('#MoeProject').click()">项目管理</button>中恢复</span>\n`
 	if(本地)
 	{
 		if(客户端 === 'HTML5+')
@@ -292,10 +292,10 @@ $(async function()
 		}
 		alert(text,config)
 	}
-	let text = `欢迎使用${span}MoeTalk</span>\n有疑问请点击${span}MoeTalk</span>标题\n\n`
-	text += '※<span style="color:white;background-color:red;">数据无价，请注意时常备份您的存档！</span>\n'
-	if(!本地)text += '※<span style="color:white;background-color:red;">网页端连接不稳定建议</span><button style="line-height:112%;" onclick="update()">下载客户端</button>\n'
-	let config = {style:'text-align:center;'}
+	let text = `有疑问请点击${span}MoeTalk</span>标题\n\n`
+	text += `※<span style="color:white;background-color:green;">数据丢失请尝试从<button style="line-height:112%;" onclick="$('#MoeProject').click()">项目管理</button>中恢复</span>\n`
+	if(!本地)text += '※<span style="color:white;background-color:red;">网页端连接不稳定建议<button style="line-height:112%;" onclick="update()">下载客户端</button></span>\n'
+	let config = {title:`欢迎使用${span}MoeTalk</span>`,style:'text-align:center;'}
 	alert(text,config)
 })
 async function newyear(url)
@@ -370,8 +370,14 @@ $(".frVjsk").wait(function()
 },".frVjsk")
 $("body").on('click',"#MoeProject",async function()
 {
+	let config = {}
+	config.title = '项目管理'
+	config.id = 'MoeProject'
+	config.show = true
+	let 自定义数据 = `<button  class='red'onclick="$('.ALERT_MoeProject .cancel').click(),$('#tool-save').click(),$('.bIvkSg').click(),$('.包含自定义数据').prop('checked',true)">自定义数据</button>`
 	let 项目名称 = await 数据操作('Pg','项目名称') || {}
 	let 自动备份 = await 数据操作('Pg','自动备份') || null
+	let 定时备份 = await 数据操作('Pg','定时备份') || null
 	let Projects = await 数据操作('Pk') || []
 	let 新项目 = '',保存 = ''
 	if(chats.length+otherChats.length)
@@ -380,23 +386,22 @@ $("body").on('click',"#MoeProject",async function()
 		保存 = `<button class="MoeProject" title="保存">保存</button>`
 	}
 	let 删除 = `<button class="MoeProject" title="删除">删除</button>`
-	let 编辑 = `<button class="MoeProject" title="编辑">编辑</button>`
+	let 改名 = `<button class="MoeProject" title="改名">改名</button>`
 	let 读取 = `<button class="MoeProject" title="读取">读取</button>`
-	let button = ` ${保存} ${删除} ${编辑} ${读取}`
+	let button = ` ${保存} ${删除} ${改名} ${读取}`
 	let str = ''
 	// if(自动备份)str += `<p>${项目名称[]}</p>`
 	str += 新项目+'\n'
-	if(自动备份)str += `<div class="自动备份">自动备份 ${读取}</div>`
+	str += `<span class='green'>数据无价\n开发者建议您将项目和${自定义数据}下载到本地备份保存\n以防不测\n</span>`
+	if(自动备份)str += `<div class="自动备份">自动备份 ${读取}数据丢失可尝试从此处恢复</div>`
+	if(定时备份)str += `<div class="定时备份">定时备份 ${读取}数据丢失可尝试从此处恢复</div>`
 	for(let i=0,l=Projects.length;i<l;i++)
 	{
 		let key = Projects[i]
-		if(['项目名称','自动备份'].includes(key))continue;
+		if(['项目名称','自动备份','定时备份'].includes(key))continue;
 		str += `<div class="${key}"><span>${项目名称[key] || key}</span>${button}</div>`
 	}
-	let config = {}
-	config.title = '项目管理'
-	config.id = 'MoeProject'
-	config.show = true
+	
 	alert(str,config)
 });
 $("body").on('click',".MoeProject",async function()
@@ -410,7 +415,7 @@ $("body").on('click',".MoeProject",async function()
 	config.title = mode+'项目'
 	if(mode == '保存')
 	{
-		str += '将当前正在编辑的项目保存到此项目中，并自动备份原项目'
+		str += '将当前正在编辑的项目保存到此项目中，并将原项目将替换进<b class="red">自动备份</b>'
 		config.yes = async function()
 		{
 			let json,newjson
@@ -429,7 +434,7 @@ $("body").on('click',".MoeProject",async function()
 	}
 	if(mode == '删除')
 	{
-		str += '将删除此项目，可在自动备份中恢复'
+		str += '删除此项目，并将此项目将替换进<b class="red">自动备份</b>'
 		config.yes = async function()
 		{
 			delete 项目名称[key]
@@ -443,7 +448,7 @@ $("body").on('click',".MoeProject",async function()
 			$(`.${key}`).remove()
 		}
 	}
-	if(mode == '编辑')
+	if(mode == '改名')
 	{
 		str += '新项目名：<input>'
 		config.yes = async function()
@@ -459,7 +464,9 @@ $("body").on('click',".MoeProject",async function()
 	}
 	if(mode == '读取')
 	{
-		str += '确定要读取此项目吗?\n当前正在编辑的项目可在自动备份中恢复'
+		if(key === '自动备份')str += '<p class="red">读取、删除项目前的自动备份，防止误操作</p>'
+		if(key === '定时备份')str += '<p class="red">每10分钟定时备份一次当前项目，可用于数据恢复</p>'
+		str += '确定要读取此项目吗?\n当前正在编辑的项目将替换进<b class="red">自动备份</b>'
 		config.yes = async function()
 		{
 			读取存档(await 数据操作('Pg',key))
@@ -469,9 +476,9 @@ $("body").on('click',".MoeProject",async function()
 	{
 		let 保存 = `<button class="MoeProject" title="保存">保存</button>`
 		let 删除 = `<button class="MoeProject" title="删除">删除</button>`
-		let 编辑 = `<button class="MoeProject" title="编辑">编辑</button>`
+		let 改名 = `<button class="MoeProject" title="改名">改名</button>`
 		let 读取 = `<button class="MoeProject" title="读取">读取</button>`
-		let button = ` ${保存} ${删除} ${编辑} ${读取}`
+		let button = ` ${保存} ${删除} ${改名} ${读取}`
 		str = '将当前正在编辑的内容保存为新项目\n'
 		str += '输入项目名：<input>'
 		config.title = '添加'+mode

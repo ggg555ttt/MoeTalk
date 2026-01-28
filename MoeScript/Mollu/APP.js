@@ -5911,6 +5911,7 @@
 										{
 											let config = {}
 											config.confirm = '刷新'
+											config.title = 'MoeTalk说明'
 											config.style = 'text-align:center;'
 											config.yes = function(){location.reload(true)}
 											alert(localStorage['通知文档'],config)
