@@ -309,7 +309,7 @@ function getfile(url,text = '',html = null)
 		});
 		xhr.onload = function()
 		{
-			if(this.status === 200 && decodeURIComponent(this.responseURL).includes(url))
+			if(this.status === 200)
 			{
 				if(!this.responseType || !this.response.type.includes('text'))resolve(this.response)//成功
 				else resolve(null)

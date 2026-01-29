@@ -6547,7 +6547,7 @@
 									})]
 								})*/]
 							})]
-						}), (0, b.jsxs)(H,
+						}), (0, b.jsxs)('a',
 						{
 							style: 
 							{
@@ -6555,7 +6555,8 @@
 								lineHeight: '3rem',
 								color: 'red'
 							},
-							children: 'QQ反馈交流群：922392676'
+							href: 'https://qm.qq.com/q/4qOEQTDfEs',
+							children: 'QQ反馈交流群：https://qm.qq.com/q/4qOEQTDfEs'
 						}), year+month+day < '250921' ? (0, b.jsxs)(H,
 						{
 							style: 

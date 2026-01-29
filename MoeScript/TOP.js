@@ -385,14 +385,15 @@ $("body").on('click',"#MoeProject",async function()
 		新项目 = `<button class="MoeProject" title="新项目">添加新项目</button>`
 		保存 = `<button class="MoeProject" title="保存">保存</button>`
 	}
-	let 删除 = `<button class="MoeProject" title="删除">删除</button>`
-	let 改名 = `<button class="MoeProject" title="改名">改名</button>`
-	let 读取 = `<button class="MoeProject" title="读取">读取</button>`
-	let button = ` ${保存} ${删除} ${改名} ${读取}`
+	let 删除 = `<button class="MoeProject" title="删除"style="background-color:red;">删除</button>`
+	let 改名 = `<button class="MoeProject" title="改名"style="background-color:white;">改名</button>`
+	let 读取 = `<button class="MoeProject" title="读取"style="background-color:green;">读取</button>`
+	let button = ` ${读取} ${改名} ${保存} ${删除}`
 	let str = ''
 	// if(自动备份)str += `<p>${项目名称[]}</p>`
 	str += 新项目+'\n'
-	str += `<span class='green'>数据无价\n开发者建议您将项目和${自定义数据}下载到本地备份保存\n以防不测\n</span>`
+	str += `<span class='green'>数据无价，为防不测\n开发者建议您将项目和${自定义数据}下载到本地备份保存\n</span>`
+	if(客户端)str += `<span class='red'>客户端会自动下载定时备份存档，出现错误可以恢复</span>`
 	if(自动备份)str += `<div class="自动备份">自动备份 ${读取}数据丢失可尝试从此处恢复</div>`
 	if(定时备份)str += `<div class="定时备份">定时备份 ${读取}数据丢失可尝试从此处恢复</div>`
 	for(let i=0,l=Projects.length;i<l;i++)
