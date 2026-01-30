@@ -54,8 +54,9 @@ body{line-height: 1;}
 button
 {
 	font-size: 1.2rem;
-	background-color: rgb(139, 187, 233);
+	background-color: rgb(76, 91, 111);
 	border-radius: 0.5rem;
+	color: white;
 	cursor: pointer;
 }
 

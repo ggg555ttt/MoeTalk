@@ -29,8 +29,8 @@ let html =
 		<div class="oFeqA" style="max-height: 90%; padding: 0.5rem;">
 			<pre ${style}>${text}</pre>
 			<div class="ia-dnHO">
-				<button class="eLyPUY cancel" alt="${config.id}">${config.cancel}</button>
-				<button class="eLyPUY kebTxe confirm" alt="${config.id}">${config.confirm}</button>
+				<button class="eLyPUY cancel" alt="${config.id}"style="color:white;">${config.cancel}</button>
+				<button class="eLyPUY kebTxe confirm" alt="${config.id}"style="color:red;">${config.confirm}</button>
 			</div>
 		</div>
 	</div>
@@ -385,9 +385,9 @@ $("body").on('click',"#MoeProject",async function()
 		新项目 = `<button class="MoeProject" title="新项目">添加新项目</button>`
 		保存 = `<button class="MoeProject" title="保存">保存</button>`
 	}
-	let 删除 = `<button class="MoeProject" title="删除"style="background-color:red;">删除</button>`
-	let 改名 = `<button class="MoeProject" title="改名"style="background-color:white;">改名</button>`
-	let 读取 = `<button class="MoeProject" title="读取"style="background-color:green;">读取</button>`
+	let 删除 = `<button class="MoeProject" title="删除"style="background-color:red;color:white;">删除</button>`
+	let 改名 = `<button class="MoeProject" title="改名"style="background-color:rgb(139,187,233);">改名</button>`
+	let 读取 = `<button class="MoeProject" title="读取"style="background-color:green;color:white;">读取</button>`
 	let button = ` ${读取} ${改名} ${保存} ${删除}`
 	let str = ''
 	// if(自动备份)str += `<p>${项目名称[]}</p>`
@@ -475,11 +475,12 @@ $("body").on('click',".MoeProject",async function()
 	}
 	if(mode == '新项目')
 	{
+		let 新项目 = `<button class="MoeProject" title="新项目">添加新项目</button>`
 		let 保存 = `<button class="MoeProject" title="保存">保存</button>`
-		let 删除 = `<button class="MoeProject" title="删除">删除</button>`
-		let 改名 = `<button class="MoeProject" title="改名">改名</button>`
-		let 读取 = `<button class="MoeProject" title="读取">读取</button>`
-		let button = ` ${保存} ${删除} ${改名} ${读取}`
+		let 删除 = `<button class="MoeProject" title="删除"style="background-color:red;color:white;">删除</button>`
+		let 改名 = `<button class="MoeProject" title="改名"style="background-color:rgb(139,187,233);">改名</button>`
+		let 读取 = `<button class="MoeProject" title="读取"style="background-color:green;color:white;">读取</button>`
+		let button = ` ${读取} ${改名} ${保存} ${删除}`
 		str = '将当前正在编辑的内容保存为新项目\n'
 		str += '输入项目名：<input>'
 		config.title = '添加'+mode
