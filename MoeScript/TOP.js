@@ -601,9 +601,9 @@ $('body').on('click',".Screenshot_Mode",function()
 	if($('.tools').css('display') === 'none')
 	{
 		$('.tools').show()//工具栏
-		$('.itLRpr').show()//顶部栏
-		$('.jjPyvz').show()//底部栏
-		$('.dCSLyt').css({top:'3.5rem',paddingBottom:'3.5rem'})
+		// $('.itLRpr').show()//顶部栏
+		// $('.jjPyvz').show()//底部栏
+		// $('.dCSLyt').css({top:'3.5rem',paddingBottom:'3.5rem'})
 		$('.消息').each(function()
 		{
 			$(this).append(`<input type="checkbox" class="dels" style="background-color: ${$(this).attr('title')};" data-html2canvas-ignore="true">`)
@@ -615,9 +615,9 @@ $('body').on('click',".Screenshot_Mode",function()
 		$('.dels').remove()
 
 		$('.tools').hide()//工具栏
-		$('.itLRpr').hide()//顶部栏
-		$('.jjPyvz').hide()//底部栏
-		$('.dCSLyt').css({top:'0rem',paddingBottom:'0rem'})
+		// $('.itLRpr').hide()//顶部栏
+		// $('.jjPyvz').hide()//底部栏
+		// $('.dCSLyt').css({top:'0rem',paddingBottom:'0rem'})
 		$('.operateTools').hide()
 	}
 })

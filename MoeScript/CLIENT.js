@@ -1,7 +1,7 @@
 /*@MoeScript/CLIENT.js@*/
 async function isIos()
 {
-	if(本地 || sessionStorage['phpwin'])return
+	if(本地 || localStorage['phpwin'])return
 	let type = await $.ajax(
 	{
 		url: '/index.php',
@@ -32,9 +32,9 @@ async function isIos()
 	{
 		客户端 = 'phpwin'
 		本地 = true
-		sessionStorage['phpwin'] = 'phpwin'
+		localStorage['phpwin'] = 'phpwin'
 	}
-	else sessionStorage['phpwin'] = 'none'
+	else localStorage['phpwin'] = 'none'
 }
 isIos()
 function waitPlus()
