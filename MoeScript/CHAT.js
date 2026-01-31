@@ -1122,7 +1122,88 @@ $("body").on('click',".INDEX_delete",function()
 	}
 	alert(str,config)
 });
-
+$("body").on('click',".快捷短语",function()
+{
+	let style = 'style="background-color:green;"'
+	let html = '预设文本：'
+	html += `<button class="快捷文本"id="引用回复(左)"${style}>引用回复(左)</button>`
+	html += `<button class="快捷文本"id="引用回复(右)"${style}>引用回复(右)</button>`
+	html += '<button class="快捷文本"id="添加文本"style="background-color:rgb(139,187,233);">添加新文本</button>'
+	html += '<button class="快捷文本"id="编辑文本"style="background-color:rgb(139,187,233);"hidden>删除文本</button>\n'
+	html += '自定文本：\n<button class="快捷文本"hidden></button>'
+	if(!mt_settings.快捷文本)mt_settings.快捷文本 = {}
+	for(let id in mt_settings.快捷文本)
+	{
+		let 文本 = mt_settings.快捷文本[id]
+		html += `<button class='快捷文本'id='${id}'>${文本.name || id}</button>`
+	}
+	html += '\n可以复制下面的内容：\n'
+	html += '<textarea style="width:80%;height:10rem;line-height:110%;"id="快捷文本"></textarea>\n'
+	alert(html,{title:'快捷文本'})
+});
+$("body").on('click',".快捷文本",function()
+{
+	let id = this.id
+	let arr = {}
+	arr['引用回复(左)'] = {}
+	arr['引用回复(右)'] = {}
+	arr['引用回复(左)'].text = '<div style="background-color:#5A748E;"><span style="font-size:80%;"> 人物名称<br> 引用内容</span></div><span>回复内容</span>'
+	arr['引用回复(右)'].text = arr['引用回复(左)'].text.replace('5A748E','649EC5')
+	arr = {...arr,...mt_settings.快捷文本}
+	if(arr[id])
+	{
+		$('.快捷文本').css('color','white').attr('alt','')
+		$(this).css('color','red')
+		$(this).attr('alt','red')
+		$('#快捷文本').val(arr[id].text)
+		if(mt_settings.快捷文本[id])
+		{
+			$('#编辑文本').show()
+		}
+		else
+		{
+			$('#编辑文本').hide()
+		}
+	}
+	else
+	{
+		let html = ''
+		let config = {}
+		if(id === '编辑文本')
+		{
+			id = $('.快捷文本[alt="red"]').attr('id')
+			html = `ID：${id}\n名称：${$('#'+id).text()}\n是否要删除当前文本？`
+			config.title = '删除文本'
+			config.confirm = '删除'
+			config.yes = function()
+			{
+				delete mt_settings.快捷文本[id]
+				$('#'+id).remove()
+				$('#编辑文本').hide()
+				saveStorage('设置选项',mt_settings,'local')
+			}
+			alert(html,config)
+		}
+		else
+		{
+			id = 'Text_'+getNowDate()
+			html = '当前内容添加为新文本\n请输入文本名称<input id="文本名称">\n'
+			config.title = '添加文本'
+			config.confirm = '添加'
+			config.yes = function()
+			{
+				mt_settings.快捷文本[id] = {}
+				let name = $('#文本名称').val().trim()
+				if(name)mt_settings.快捷文本[id].name = name
+				mt_settings.快捷文本[id].text = $('#快捷文本').val()
+				$('.快捷文本:eq(-1)').after(`<button class='快捷文本'id='${id}'>${name || id}</button>`)
+				$('#'+id).click()
+				saveStorage('设置选项',mt_settings,'local')
+			}
+			alert(html,config)
+		}
+	}
+});
 $("body").on('click',".INDEX_EmojiIfno",function()
 {
 	$(this).prev().click()

@@ -648,13 +648,22 @@ $('body').on('click',"#mt-style",function()
 	let onclick = "onclick='"
 	onclick += '$(".mt-style").css("color","black"),this.style.color="red",'
 	onclick += '$(".bgcolor").val(this.innerText=="MomoTalk"?"rgb(255,255,255)":"rgb(255,247,225)").next().val(this.innerText=="MomoTalk"?"#FFFFFF":"#FFF7E1"),'
-	onclick += '$(".typecss").val("").eq(3).val(""+(this.innerText=="MomoTalk"?"background-color:rgb(220,229,232)":""))'
-	onclick += "'"
+	onclick += '$(".typecss").val("").eq(3).val(""+(this.innerText=="MomoTalk"?"background-color:rgb(220,229,232)":"")),'
+	onclick += `$(".自定样式").css("color","white").attr("alt",""),$("#编辑方案").hide()'`
 	let style = 'style="width: auto;height: auto;font-size: 1rem;color: black;padding: 0.5rem;margin-bottom: 0.5rem;"'
 	let button = `<button class="cVRiXh eIEKpg evqKja kwhiZC mt-style" ${style} ${onclick}>`
 	let html = ''
-	html += `预设方案：${button}MomoTalk</button> ${button}YuzuTalk</button>\n`
-	html += `聊天背景颜色：<input class="bgcolor" oninput="RgbToHex(this.value,1)"><input type="color" onchange="$('.bgcolor').val(HexToRgb(this.value))">\n`
+	html += `预设方案：${button}MomoTalk</button> ${button}YuzuTalk</button>`
+	html += `<button class='自定样式'id='添加方案'style="background-color:rgb(139,187,233);">添加方案</button>`
+	html += `<button class='自定样式'id='编辑方案'style="background-color:rgb(139,187,233);"hidden>删除方案</button>\n`
+	html += `自定方案：\n<button class='自定样式'hidden></button>`
+	if(!mt_settings.自定样式)mt_settings.自定样式 = {}
+	for(let id in mt_settings.自定样式)
+	{
+		let 样式 = mt_settings.自定样式[id]
+		html += `<button class='自定样式'id='${id}'>${样式.name || id}</button>`
+	}
+	html += `\n聊天背景颜色：<input class="bgcolor" oninput="RgbToHex(this.value,1)"><input type="color" onchange="$('.bgcolor').val(HexToRgb(this.value))">\n`
 	html += '各类型样式定义：（高级）\n'
 	html += '文字：<textarea title="chat" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
 	html += '回复：<textarea title="reply" class="typecss" style="width:80%;height:5rem;line-height:110%;"></textarea>\n'
@@ -664,9 +673,25 @@ $('body').on('click',"#mt-style",function()
 	let config = {}
 	config.title = '风格样式'
 	config.confirm = '提交设置'
+	config.show = true
 	config.yes = function()
 	{
-		mt_settings.风格样式.bgColor = HexToRgb($('.bgcolor').val())
+		mt_settings.风格样式 = 读取样式('html')
+		saveStorage('设置选项',mt_settings,'local')
+		if(!MikuTalk)$('._app__Wrapper-sc-xuvrnm-1').css('background-color',mt_settings.风格样式.bgColor);
+		$('.RightScreen__CContainer-sc-14j003s-2').css('background-color',mt_settings.风格样式.bgColor);
+		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color',mt_settings.风格样式.bgColor);
+		refreshMessage(chats)
+	}
+	alert(html,config)
+	读取样式('json')
+})
+function 读取样式(mode,id)
+{
+	let 风格样式 = {}
+	if(mode == 'html')
+	{
+		风格样式.bgColor = HexToRgb($('.bgcolor').val())
 		$('.typecss').each(function()
 		{
 			let css = []
@@ -681,26 +706,76 @@ $('body').on('click',"#mt-style",function()
 					css.push(v)
 				}
 			})
-			if(css.length)mt_settings.风格样式[this.title] = css
-			else delete mt_settings.风格样式[this.title]
+			if(css.length)风格样式[this.title] = css
+			else delete 风格样式[this.title]
 		})
-		saveStorage('设置选项',mt_settings,'local')
-		if(!MikuTalk)$('._app__Wrapper-sc-xuvrnm-1').css('background-color',mt_settings.风格样式.bgColor);
-		$('.RightScreen__CContainer-sc-14j003s-2').css('background-color',mt_settings.风格样式.bgColor);
-		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color',mt_settings.风格样式.bgColor);
-		refreshMessage(chats)
+		return 风格样式
 	}
-	alert(html,config)
-	$('.bgcolor').val(HexToRgb(mt_settings.风格样式.bgColor)).next().val(RgbToHex(mt_settings.风格样式.bgColor))
-	$('.typecss').each(function()
+	if(mode == 'json')
 	{
-		let style = ''
-		foreach(mt_settings.风格样式[this.title] || [],function(k,v)
+		if(id)风格样式 = mt_settings.自定样式[id].style || {}
+		else 风格样式 = mt_settings.风格样式
+		$('.bgcolor').val(HexToRgb(风格样式.bgColor)).next().val(RgbToHex(风格样式.bgColor))
+		$('.typecss').each(function()
 		{
-			style += `${v[0]}: ${v[1]}\n`
+			let style = ''
+			foreach(风格样式[this.title] || [],function(k,v)
+			{
+				style += `${v[0]}: ${v[1]}\n`
+			})
+			this.value = style
 		})
-		this.value = style
-	})
+	}
+}
+$('body').on('click',".自定样式",function()
+{
+	let id = this.id
+	if(mt_settings.自定样式[id])
+	{
+		$(".mt-style").css("color","black")
+		$('.自定样式').css('color','white').attr('alt','')
+		$(this).css('color','red').attr('alt','red')
+		读取样式('json',id)
+		$('#编辑方案').show()
+	}
+	else
+	{
+		let html = ''
+		let config = {}
+		if(id === '编辑方案')
+		{
+			id = $('.自定样式[alt="red"]').attr('id')
+			html = `ID：${id}\n名称：${$('#'+id).text()}\n是否要删除当前方案？`
+			config.title = '删除方案'
+			config.confirm = '删除'
+			config.yes = function()
+			{
+				delete mt_settings.自定样式[id]
+				$('#'+id).remove()
+				$('#编辑方案').hide()
+				saveStorage('设置选项',mt_settings,'local')
+			}
+			alert(html,config)
+		}
+		else
+		{
+			id = 'Style_'+getNowDate()
+			html = '当前样式添加为新方案\n请输入方案名称<input id="方案名称">\n'
+			config.title = '添加方案'
+			config.confirm = '添加'
+			config.yes = function()
+			{
+				mt_settings.自定样式[id] = {}
+				let name = $("#方案名称").val().trim()
+				if(name)mt_settings.自定样式[id].name = name
+				mt_settings.自定样式[id].style = 读取样式('html')
+				$('.自定样式:eq(-1)').after(`<button class='自定样式'id='${id}'>${name || id}</button>`)
+				$('#'+id).click()
+				saveStorage('设置选项',mt_settings,'local')
+			}
+			alert(html,config)
+		}
+	}
 })
 function refreshMessage(json)
 {

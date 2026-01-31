@@ -4028,29 +4028,21 @@
 											justifyContent: 'space-between',
 											alignItems: 'center'
 										},
-										children: [(0, m.jsx)('div',
+										children: ['设置头像','快捷短语','定义样式'].map(function(v,k)
 										{
-											style:
+											return (0, m.jsx)('div',
 											{
-												width: 'auto',
-												height: 'auto',
-												fontSize: '1.5rem',
-												color: 'black'
-											},
-											className: '设置头像 cVRiXh eIEKpg evqKja kwhiZC',
-											children: '设置头像'
-										}), (0, m.jsx)('div',
-										{
-											style:
-											{
-												width: 'auto',
-												height: 'auto',
-												fontSize: '1.5rem',
-												color: 'black'
-											},
-											className: '定义样式 cVRiXh eIEKpg evqKja kwhiZC',
-											children: '定义样式'
-										})]
+												style:
+												{
+													width: 'auto',
+													height: 'auto',
+													fontSize: '1.5rem',
+													color: 'black'
+												},
+												className: v+' cVRiXh eIEKpg evqKja kwhiZC',
+												children: k === 1 && '快捷文本' || v
+											})
+										})
 									}), '时间信息', (0, m.jsx)(c.Kx,
 									{
 										maxRows: 5,
@@ -5103,7 +5095,7 @@
 							children: [(0, m.jsx)(c.jl,
 							{
 								hidden: !0,
-								style:{height: "auto","width": "auto"},
+								style:{height: "auto","width": "auto",color: "red"},
 								className: '撤销',
 								children: (0, m.jsx)(W,
 								{
@@ -5117,7 +5109,7 @@
 							}), (0, m.jsx)(c.jl,
 							{
 								hidden: !0,
-								style:{height: "auto","width": "auto"},
+								style:{height: "auto","width": "auto",color: "red"},
 								className: '前进',
 								children: (0, m.jsx)(W,
 								{

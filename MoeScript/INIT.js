@@ -415,7 +415,7 @@ function blobToBase64(blob)
 		reader.readAsDataURL(blob);
 	})
 }
-function HexToRgb(hex)
+function HexToRgb(hex='#000000')
 {
 	if(hex[0] !== '#')hex = RgbToHex(hex);
 	hex = hex.replace('#', '')
@@ -426,7 +426,7 @@ function HexToRgb(hex)
 	if(!(rgb[0]<256 && rgb[1]<256 && rgb[2]<256))rgb = [0,0,0]
 	return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
 }
-function RgbToHex(rgb,bg)
+function RgbToHex(rgb='rgb(0,0,0)',bg)
 {
 	if(rgb[0] === '#')rgb = HexToRgb(rgb)
 	let hex = '#'
