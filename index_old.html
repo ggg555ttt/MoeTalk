@@ -8,9 +8,11 @@
 		<script src="./MoeScript/Script/localforage.min.js?md5=fce689ed39d7db8e762a989372349a28"></script><!-- @@存储 -->
 		<script src="./MoeScript/Script/html2canvas.min.js?md5=d7968224430b52a3b587c65061477737"></script><!-- @@截图 -->
 		<script src="./MoeScript/Script/snapdom.min.js?md5=8770a4472a7edf8da74eaa8ea0119605"></script><!-- @@截图 -->
-		<script src="./MoeScript/Script/jszip.min.js?md5=124c9275daa3939c6c8cef4d26148ce7"></script><!-- @@压缩 -->
+		<script src="./MoeScript/Script/jszip.min.js?md5=124c9275daa3939c6c8cef4d26148ce7"></script><!-- @@ZIP -->
 		<script src="./MoeScript/Script/filesaver.min.js?md5=e4ba97b61a9ac3206aaa23562801923b"></script><!-- @@下载 -->
 		<!-- <script src="https://unpkg.com/@zumer/snapdom@latest/dist/snapdom.min.js"></script> -->
+		<script src="./MoeScript/Script/pako.min.js?md5=36b9e8b75bab4e655477e65fbace7380"></script><!-- @@压缩 -->
+		<script src="./MoeScript/Script/rrweb.min.js?md5=64055f0757eca4f37ab35e521e0c6671"></script><!-- @@记录 -->
 		<script>
 var MoeHome = 'index_old.html'
 //'?eval='+encodeURIComponent("localStorage['HTML5+']='WEB'")
@@ -45,7 +47,7 @@ if(localStorage['phpwin'] == 'phpwin')
 	客户端 = 'phpwin'
 }
 //版本信息
-var 本地应用版本 = [260131.232415]//@
+var 本地应用版本 = [260201.192212]//@
 var 网络应用版本,本地数据版本,网络数据版本
 var gamearr = {"BLDA":"碧蓝档案","CBJQ":"尘白禁区","QNZL":"千年之旅","YGST":"犹格索托斯的庭院","DFPJ":"东方Project","NONE":"无"}
 //函数和变量
@@ -113,9 +115,9 @@ if(mt_settings['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<script src="./MoeScript/CLIENT.js?md5=bea673adb8e910e0a7e7d733ad7413a6" defer></script><!-- @@客户端 -->
 		<script src="./MoeScript/DATA.js?md5=14dd676c59192c8693319f8ff99d1510" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAR.js?md5=9080f8050c6bb65993c85a68b75a8e56" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/IMAGE.js?md5=e0c40334eb82fae697e7b66f5f5bc5f7" defer></script><!-- @@截图 -->
+		<script src="./MoeScript/IMAGE.js?md5=46a269b5efd9f34556545d2799ae6a28" defer></script><!-- @@截图 -->
 		<script src="./MoeScript/CHAT.js?md5=cad17e3bfbd31b594a79f3bc6906b403" defer></script><!-- @@消息 -->
-		<script src="./MoeScript/TOP.js?md5=d80877cbce8b6610bb9ebab4fdf286ea" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/TOP.js?md5=28a87332d031eca0e8add184038daec5" defer></script><!-- @@首页 -->
 <!-- MolluTalk -->
 		<script src="./MoeScript/Mollu/TEXT.js?md5=bcca6df6bd21a996053856c604abca13"></script><!-- @@提示文本 -->
 		<script src="./MoeScript/Mollu/MAIN.js?md5=aac2192e9b2c096f149c1ac5b89996d9" defer></script><!-- @@ -->

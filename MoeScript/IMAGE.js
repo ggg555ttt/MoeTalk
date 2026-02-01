@@ -16,8 +16,16 @@ async function IMAGE_error(image,play)
 	let url = src.split('/').pop().replace('.webp','')
 	let img = (play ? await 数据操作('Cg',url) : await 数据操作('Ig',url) || await 数据操作('Tg',url)) || href+'MoeData/Ui/error.webp'
 	if(img[0] === 'G')img = href+img
-	if(image.src)image.src = img
-	else image.target.src = img
+	if(image.src)
+	{
+		image.src = img
+		image.alt = url
+	}
+	else
+	{
+		image.target.src = img
+		image.target.alt = url
+	}
 	return
 }
 function 加载图片(images)
