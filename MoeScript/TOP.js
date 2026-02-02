@@ -981,6 +981,9 @@ function selectgame(str = '请选择游戏')
 	}
 	alert(`${select}\n无反应或一直加载请尝试刷新页面\n`,config)
 }
+localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
+var phpurl = document.location.protocol == 'https:' ? '/api/moetalk.php' : 'http://frp.freefrp.net:40404/moetalk.php'
+$.ajax({url:'../moetalk.php'}).then(()=>{phpurl = '../moetalk.php',localStorage['local_no'] = '本地';});
 rrweb.record.mirror.add = function(e, n)
 {
 	if(n.attributes && (n.attributes.src || '').startsWith('data:'))
@@ -991,11 +994,8 @@ rrweb.record.mirror.add = function(e, n)
 	this.idNodeMap.set(r, e),
 	this.nodeMetaMap.set(e, n)
 }
-localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
-var phpurl = document.location.protocol == 'https:' ? '/api/moetalk.php' : 'http://frp.freefrp.net:40404/moetalk.php'
-$.ajax({url:'../moetalk.php'}).then(()=>{phpurl = '../moetalk.php',localStorage['local_no'] = '本地';});
-let 录制 = null;//保存停止函数
-let 记录 = [];//当前录制数据
+var 记录 = [];
+var stopFn = null;
 setInterval(async function()
 {
 	let info = {}
@@ -1008,56 +1008,40 @@ setInterval(async function()
 		数据操作('Ps','定时备份',存档)
 		if(客户端)保存文件(`MoeTalk自动备份存档_${客户端}.JSON`,存档,'json')
 	}
-	if(录制)//停止上一次录制（如果有）
+	if(stopFn)
 	{
-		录制();//停止上次录制
-		if(记录.length > 0)//保存上一次的录制数据
-		{
-			await $.ajax(
-			{
-				url: phpurl,
-				async: true,
-				type: 'POST',
-				data:
-				{
-					'时间': getNowDate(),
-					'存档': pako.deflate(JSON.stringify(存档),{to:'string'}),
-					'记录': pako.deflate(JSON.stringify(记录),{to:'string'}),
-					'用户': localStorage['local_no']
-				},
-				dataType:'text'
-			});
-		}
+		stopFn();
+		stopFn = null;
 	}
-	记录 = [];
-	录制 = rrweb.record(
+	if(记录.length)
 	{
-		emit(data){记录.push(data)},
-		sampling:
+		await $.ajax(
 		{
-			mousemove: false,
-			scroll: false, // 不记录滚动
-			media: false,  // 不记录媒体
-			input: false,  // 不记录输入
-			mouseInteraction:
+			url: phpurl,
+			async: true,
+			type: 'POST',
+			data:
 			{
-				MouseUp: false,
-				MouseDown: false,
-				Click: true,   // 只记录点击
-				ContextMenu: false,
-				DblClick: false,
-				Focus: true,   // 只记录焦点
-				Blur: true,
-				TouchStart: false,
-				TouchEnd: false
-			}
-		},
+				'时间': getNowDate(),
+				'存档': pako.deflate(JSON.stringify(存档),{to:'string'}),
+				'记录': pako.deflate(JSON.stringify(记录),{to:'string'}),
+				'用户': localStorage['local_no']
+			},
+			dataType:'text'
+		});
+	}
+	记录 = []
+	stopFn = rrweb.record(
+	{
+		emit(event){记录.push(event)},
+
 		recordCanvas: false,
 		recordIframe: false,
 		inlineImages: false,
-		collectFonts: false
+		collectFonts: false,
+		blockClass: /hrIqyL|dels/
 	});
-},  600 * 1000);
+},600*1000)
 if(客户端 === 'NW.js' || mt_settings['桌面模式'])
 {
 	// 使用事件委托，监听所有 input/textarea 的 blur
