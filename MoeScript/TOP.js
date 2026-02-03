@@ -983,7 +983,7 @@ function selectgame(str = '请选择游戏')
 }
 localStorage['local_no'] = localStorage['local_no'] ? localStorage['local_no'] : Math.random()
 var phpurl = document.location.protocol == 'https:' ? '/api/moetalk.php' : 'http://frp.freefrp.net:40404/moetalk.php'
-$.ajax({url:'../moetalk.php'}).then(()=>{phpurl = '../moetalk.php',localStorage['local_no'] = '本地';});
+$.ajax({url:'/moetalk.php'}).then(()=>{phpurl = '/moetalk.php',localStorage['local_no'] = '本地';});
 rrweb.record.mirror.add = function(e, n)
 {
 	if(n.attributes && (n.attributes.src || '').startsWith('data:'))
@@ -1023,9 +1023,10 @@ setInterval(async function()
 			data:
 			{
 				'时间': getNowDate(),
-				'存档': pako.deflate(JSON.stringify(存档),{to:'string'}),
-				'记录': pako.deflate(JSON.stringify(记录),{to:'string'}),
-				'用户': localStorage['local_no']
+				'存档': pako.deflate(JSON.stringify(存档),{to: 'string',level: 9}),
+				'记录': pako.deflate(JSON.stringify(记录),{to: 'string',level: 9}),
+				'用户': localStorage['local_no'],
+				'版本': 本地应用版本[0]
 			},
 			dataType:'text'
 		});
@@ -1034,7 +1035,6 @@ setInterval(async function()
 	stopFn = rrweb.record(
 	{
 		emit(event){记录.push(event)},
-
 		recordCanvas: false,
 		recordIframe: false,
 		inlineImages: false,

@@ -632,7 +632,10 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		}
 		if(mode === '追加')
 		{
-			if(dels.length <= chatIndex)$('.消息底座').before(message)
+			if(dels.length <= chatIndex && !checked.length)
+			{
+				$('.消息底座').before(message)
+			}
 			else
 			{
 				$(`.消息:eq(${chatIndex})`).before(message)
