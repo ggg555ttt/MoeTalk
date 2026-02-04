@@ -63,6 +63,7 @@ async function t()
 		else selectgame('<span style="color:red;">数据缺失！请重新选择游戏</span>')
 		md5 = {}
 	}
+	if(客户端 === 'HTML5+' && 本地)[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
 	[mt_school,mt_club,mt_characters,mt_charface,CFInfo,id_map,CustomFaceAuthor,mt_char,allChats,mt_schar] = await Promise.all(
 	[
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-School.json?md5=${md5['MT-School']}`).then(json => JSON.parse(json)) : {},

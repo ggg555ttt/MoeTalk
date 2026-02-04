@@ -168,25 +168,25 @@ function 截图数量(num)
 	//test(height3+((i-1)*16*num))
 	return i;
 }
-function urlToBase64(src,length,callback)
+function urlToBase64(url)
 {
-	return new Promise(resolve =>
+	return new Promise(function(resolve)
 	{
-		let xhr = new XMLHttpRequest()
-		xhr.open('get', src, true)
-		xhr.responseType = 'blob'
-		xhr.onload = function()
+		plus.io.resolveLocalFileSystemURL(url,function(entry)
 		{
-			if(this.status == 200)
+			entry.file(function(data)
 			{
-				let blob = this.response
-				let oFileReader = new FileReader()
-				oFileReader.onloadend = (e)=>{resolve(e.target.result)}
-				oFileReader.readAsDataURL(blob)
-			}
-		}
-		xhr.onerror = ()=>{resolve(错误图片)}
-		xhr.send()
+				var reader = new plus.io.FileReader();
+				reader.onload = function(e)
+				{
+					data = e.target.result
+					if(!data)resolve(错误图片);
+					else resolve(data)
+				};
+				reader.onerror = function(e){resolve(错误图片)};
+				reader.readAsDataURL(data);
+			},function(e){resolve(错误图片)});
+		},function(e){resolve(错误图片)});
 	})
 }
 function mt_title()
@@ -428,12 +428,6 @@ function mt_capture(清晰度,生成图片,标题)
 }
 if(客户端 === 'HTML5+' || 客户端 === 'Cordova')
 {
-	if(客户端 === 'HTML5+')
-	{
-		urlToBase64(羁绊背景).then((e)=>{羁绊背景 = e})
-		urlToBase64(回复背景).then((e)=>{回复背景 = e})
-		urlToBase64(错误图片).then((e)=>{错误图片 = e})
-	}
 	var time = 0;//初始化起始时间
 	$("body").on('touchstart', 'img', function(e)
 	{
