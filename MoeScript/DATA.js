@@ -281,38 +281,33 @@ function UPDATE_OldData(json)//识别存档
 	json[0].mt_head = custom_head
 	return json
 }
-$("body").on('click',"#cutdata",function()
+function 截取存档()
 {
-	if($(".dels:checked").length > 0)
+	let text = `你一共选中了${$(".dels:checked").length}条数据\n请输入标题和作者名：\n标题：<input style='font-size:1.2rem;'>\n作者：<input style='font-size:1.2rem;'>`
+	let config = {}
+	config.id = Math.random().toString().replace('0.','')
+	config.title = '截取存档'
+	config.yes = async function()
 	{
-		let text = `你一共选中了${$(".dels:checked").length}条数据\n请输入标题和作者名：\n标题：<input style='font-size:1.2rem;'>\n作者：<input style='font-size:1.2rem;'>`
-		let config = {}
-		config.id = Math.random().toString().replace('0.','')
-		config.title = '截取存档'
-		config.yes = async function()
+		let filename = 'MoeTalk截取存档'
+		let time = getNowDate()
+		let mmt = []
+		let info = {};
+		info.title = $(`.alert_${config.id} input`).eq(0).val() || '无题'
+		info.nickname = $(`.alert_${config.id} input`).eq(1).val()
+		info.date = time
+		$(".dels:checked").each(function(k,v)
 		{
-			let filename = 'MoeTalk截取存档'
-			let time = getNowDate()
-			let mmt = []
-			let info = {};
-			info.title = $(`.alert_${config.id} input`).eq(0).val() || '无题'
-			info.nickname = $(`.alert_${config.id} input`).eq(1).val()
-			info.date = time
-			$(".dels:checked").each(function(k,v)
-			{
-				mmt.push(chats[$(".dels").index($(this))]);
-			})
-			let json = await 生成存档(info,false,mmt)
-			$('.存档格式').val('json')
-			if(mt_settings['隐藏前缀'])filename = ''
-			else filename += time+'_'
-			导出存档(`${filename}${info.title}`,json,'json')
-		}
-		alert(text,config)
-		
+			mmt.push(chats[$(".dels").index($(this))]);
+		})
+		let json = await 生成存档(info,false,mmt)
+		$('.存档格式').val('json')
+		if(mt_settings['隐藏前缀'])filename = ''
+		else filename += time+'_'
+		导出存档(`${filename}${info.title}`,json,'json')
 	}
-	else alert('你没有选中数据！')
-});
+	alert(text,config)
+}
 async function 生成存档(info,cus = false,mmt)
 {
 	let json = {}

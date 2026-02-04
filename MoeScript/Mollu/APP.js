@@ -5902,11 +5902,11 @@
 									{
 										style: {cursor: 'pointer'},
 										id: "readme",
-										children: [MikuTalk ? 'MikuTalk' : mt_settings['顶部标题'],客户端 ? (0, O.jsx)('span',
+										children: [MikuTalk ? 'MikuTalk' : mt_settings['顶部标题'], (0, O.jsx)('span',
 										{
-											style: {color: 'blue'},
-											children: 客户端[0].toUpperCase()
-										}) : ''],
+											style: {color: MoeHome == 'index_old.html' ? 'black' : 'blue'},
+											children: 客户端 ? 客户端[0].toUpperCase() : 'B'
+										})],
 										onClick: function()
 										{
 											let config = {}

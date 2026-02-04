@@ -3450,8 +3450,22 @@
 								title: "存档",
 								onClick: function()
 								{
-									click('#tool-save')
 									$$('.包含自定义数据').prop('checked',false)
+									if($$(".dels:checked").length > 0)
+									{
+										let config = {}
+										config.style = 'text-align:center;'
+										config.title = '导出存档'
+										config.id = '导出存档'
+										let confirm = `$$('.ALERT_${config.id} .confirm').click()`
+										let onclick1 = `onclick="$$('#tool-save').click(),${confirm}"`
+										let onclick2 = `onclick="截取存档(),${confirm}"`
+										let button = `<button ${onclick1}>导出完整数据</button><button ${onclick2}>导出选中数据</button>`
+										let html = `<p class='red'>你一共选中了${$$(".dels:checked").length}条数据</p>请选择你的操作：\n`
+										html += `\n<div style="display:flex;justify-content:space-evenly;">${button}</div>\n`
+										alert(html,config)
+									}
+									else click('#tool-save')
 								},
 								children: (0, m.jsx)(c.xL,
 								{
@@ -5146,18 +5160,6 @@
 									})
 								}),
 								onClick: function(){粘贴()}
-							}), (0, m.jsx)(c.jl,
-							{
-								style:{height: "auto","width": "auto"},
-								id: 'cutdata',
-								children: (0, m.jsx)(W,
-								{
-									className: "bold",
-									children: (0, m.jsx)(X,
-									{
-										children: '截取存档'
-									})
-								})
 							})]
 						}), (0, m.jsxs)(no,
 						{
