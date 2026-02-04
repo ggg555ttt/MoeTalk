@@ -1,4 +1,52 @@
 /*@MoeScript/INIT.js@*/
+var 错误日志 = []
+function 记录错误(info){错误日志.push(info)}
+// 捕获运行时错误 (window.onerror / window.addEventListener)
+window.onerror = function(message, source, lineno, colno, error) {
+    const errorInfo = {
+        type: 'js_runtime_error',
+        message: message,
+        stack: error && error.stack ? error.stack : '', // 核心：堆栈信息
+        file: source,
+        position: `${lineno}:${colno}`,
+        url: window.location.href, // 当前页面
+        userAgent: navigator.userAgent, // 浏览器/设备信息
+        time: new Date().toISOString()
+    };
+    
+    // 发送日志到服务器
+    记录错误(errorInfo);
+    
+    // 返回 true 阻止错误在控制台输出（可选）
+    return false; 
+};
+// 捕获 Promise 错误 (unhandledrejection)
+window.addEventListener('unhandledrejection', function(event) {
+    const errorInfo = {
+        type: 'promise_rejection',
+        message: event.reason && event.reason.message || 'Unknown Promise Error',
+        stack: event.reason && event.reason.stack || '',
+        // 如果 reason 是字符串而不是 Error 对象，直接记录
+        rawReason: typeof event.reason === 'object' ? JSON.stringify(event.reason) : event.reason,
+        time: new Date().toISOString()
+    };
+    
+    记录错误(errorInfo);
+});
+// 捕获资源加载错误 (img, script, link)
+// window.addEventListener('error', function(event) {
+//     // 区分是 JS 错误还是 资源 错误
+//     // 资源错误的目标是 HTMLElement (如 img, script)
+//     if (event.target && (event.target.tagName === 'IMG' || event.target.tagName === 'SCRIPT')) {
+//         const errorInfo = {
+//             type: 'resource_error',
+//             tagName: event.target.tagName,
+//             src: event.target.src || event.target.href,
+//             time: new Date().toISOString()
+//         };
+//         记录错误(errorInfo);
+//     }
+// }, true); // 注意：这里必须设为 true (捕获阶段)
 (function()
 {
 	if(!String.prototype.hasOwnProperty("replaceAll"))

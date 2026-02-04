@@ -321,6 +321,7 @@ async function 生成存档(info,cus = false,mmt)
 	json.SETTING = mt_settings
 	json.INFO = info
 	json.TEMP = {CHAR:{},IMAGE:{}}
+	json.ERROR = 错误日志
 	for(let i=0,l=mmt.length;i<l;i++)
 	{//记录MMT中使用的数据
 		let chat = mmt[i]
