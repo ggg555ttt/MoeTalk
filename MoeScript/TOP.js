@@ -989,7 +989,7 @@ rrweb.record.mirror.add = function(e, n)
 {
 	if(n.attributes && (n.attributes.src || '').startsWith('data:'))
 	{
-		n.attributes.src = n.attributes.alt
+		n.attributes.src = n.attributes.title
 	}
 	var r = n.id;
 	this.idNodeMap.set(r, e),

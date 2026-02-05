@@ -19,12 +19,12 @@ async function IMAGE_error(image,play)
 	if(image.src)
 	{
 		image.src = img
-		image.alt = url
+		image.title = url
 	}
 	else
 	{
 		image.target.src = img
-		image.target.alt = url
+		image.target.title = url
 	}
 	return
 }
