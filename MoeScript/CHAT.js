@@ -391,6 +391,8 @@ function makeMessage(type,data,chatIndex,mode)
 
 	let style = '';
 	let 对话角颜色 = '';
+	let title = `title="${no},${index}"`
+	if(data.name)title = ''
 	if(mt_settings['文字样式'][type])
 	{
 		style = `font-size:${mt_settings['文字样式'][type]['font-size']};`
@@ -404,7 +406,7 @@ function makeMessage(type,data,chatIndex,mode)
 	if(type === 'chat' || type === 'image')
 	{
 		let headstyle = data.heads ? `style="z-index:${data.heads.list.length};"` : ''
-		头像 = head ? `<img src="${loadhead(no,index)}" alt="${index}" class="头像"${headstyle} onerror="IMAGE_error(this)">` : ''
+		头像 = head ? `<img src="${loadhead(no,index)}"class="头像"${headstyle} onerror="IMAGE_error(this)">` : ''
 		headstyle = ''
 		if(data.heads && head)
 		{
@@ -433,7 +435,7 @@ function makeMessage(type,data,chatIndex,mode)
 		if(no != 0 && !data.isRight)
 		{//左侧对话
 			头像框 = `<div class="头像框" style="cursor: pointer;${headstyle}">${头像}</div>`
-			名称 = `${head ? `<span class="名称 bold">${data.name || loadname(no,index)}</span>` : ''}`
+			名称 = `${head ? `<span class="名称 bold${title ? ' 名字' : ''}"${title}>${data.name || loadname(no,index)}</span>` : ''}`
 			文本 = `${head ? `<div class="左角" style="border-right-color:${对话角颜色};"></div>` : ''}<span class="文本 编辑" style='${style}'>${data.content}</span>`
 			对话 = 
 			`${头像框}
@@ -448,7 +450,7 @@ function makeMessage(type,data,chatIndex,mode)
 		else
 		{//右侧对话或主角发言
 			头像框 = `${no == 0 ? '' : `<div class="头像框" style="justify-content: flex-end; cursor: pointer;${headstyle}">${头像}</div>`}`
-			名称 = `${head && no != 0 ? `<span class="名称 bold">${data.name || loadname(no,index)}</span>` : ''}`
+			名称 = `${head && no != 0 ? `<span class="名称 bold${title ? ' 名字' : ''}"${title}>${data.name || loadname(no,index)}</span>` : ''}`
 			文本 = `<span style="background: rgb(74, 138, 202);${style}" class="文本 编辑">${data.content}</span>${head || no == 0 ? `<div class="右角" style="border-left-color:${对话角颜色};"></div>` : ''}`
 			对话 = 
 			`${no == 0 ? '<div class="头像框" style="margin-right: 1.5rem;"></div>' : ''}
@@ -464,7 +466,7 @@ function makeMessage(type,data,chatIndex,mode)
 		if(data.isCenter && type === 'image')
 		{
 			对话 = 
-			`<div class="对话" style="align-items: center;">
+			`<div class="头像框 隐藏"></div><div class="对话" style="align-items: center;">
 				<div style="display: flex;justify-content: center;">
 					${type === 'chat' ? 文本 : 图片}
 				</div>
@@ -482,14 +484,14 @@ function makeMessage(type,data,chatIndex,mode)
 				<span class="bold">${mt_text['relationship_event'][mtlang]}</span>
 			</div>
 			<hr class="横线">
-			<button class="羁绊按钮 编辑" style='${style}'>${data.content || ((data.name || loadname(no,index))+mt_text['go_relationship_event'][mtlang])}</button>
+			<button class="羁绊按钮 编辑${title ? ' 名字' : ''}"${title}style='${style}'>${data.content || ((data.name || loadname(no,index))+mt_text['go_relationship_event'][mtlang])}</button>
 		</div>`
 	}
 	if(type === 'info')
 	{
 		data.isLeft ? style += 'text-align: left;' : ''
 		data.isRight ? style += 'text-align: right;' : ''
-		聊天 = `<span class="旁白 编辑" style='${style}'>${data.content}</span>`
+		聊天 = `<div class="头像框 隐藏"></div><span class="旁白 编辑" style='${style}'>${data.content}</span>`
 	}
 	if(type === 'reply')
 	{
@@ -1055,7 +1057,7 @@ function 编辑消息(index)
 $("body").on('click',".编辑",function(){编辑消息($('.消息').index($(this).parents('.消息')))});
 $("body").on('click',".头像框",function()
 {
-	chatIndex = $('.消息').index($(this).parents('.消息'))
+	chatIndex = $('.头像框').index($(this))
 	if(chats[chatIndex].type === 'chat' || chats[chatIndex].type === 'image')
 	{
 		sendMessage({...chats[chatIndex],...{isFirst:!chats[chatIndex].isFirst}},chats[chatIndex].type,'edit',[chatIndex],null)
@@ -1117,7 +1119,8 @@ $("body").on('click',".INDEX_delete",function()
 			clear = true
 			mt_schar = {}
 			EMOJI.pages = {}
-			charList(!0)//更新列表
+			mt_settings.选择角色 = {no: 0,index: 1,list: []}
+			charList(true)//更新列表
 			数据操作('Tc')
 		}
 		sendMessage({},'','delete',indexs)

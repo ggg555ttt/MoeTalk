@@ -71,13 +71,15 @@ function loaddata(json,play)//识别存档
 }
 function repairCF(data)
 {
-	if(!data.sCharacter)return
-	data.sCharacter.no = id_map[0][data.sCharacter.no] || data.sCharacter.no
-	data.sCharacter.index = String(id_map[1][data.sCharacter.index] || data.sCharacter.index)
+	if(!mt_characters || !data.sCharacter)return
+	let id = data.sCharacter.no,head = data.sCharacter.index
+	if(id_map[0][id])id = id_map[0][id] || id
+	if(head < 1000 && mt_characters[id])data.sCharacter.index = mt_characters[id].head.split(',')[0]
+	data.sCharacter.no = id
 	if(data.type === 'image')
 	{
 		data.content = data.content || ''
-		data.file = (data.file || data.content).replace('Images','GameData')
+		data.file = (data.file || data.content).replace('Images','GameData').replaceAll('https://moetalk.netlify.app/','')
 	}
 }
 function UPDATE_OldData(json)//识别存档
@@ -375,6 +377,7 @@ async function 生成存档(info,cus = false,mmt)
 async function 读取存档(json)
 {
 	INIT_loading('读取存档')
+	mt_settings.选择角色 = {no: 0,index: 1,list: []}
 	if(chats.length+otherChats.length)await 数据操作('Ps','自动备份',await 生成存档())
 	chats = []
 	otherChats = []
@@ -405,7 +408,7 @@ async function 读取存档(json)
 		await 数据操作('Ss','DB_EMOJI',EMOJI_CustomEmoji)
 	}
 	if(json.SETTING)mt_settings = json.SETTING
-	CHAR_UpdateChar()
+	加载数据()
 	log(true)//清除历史记录
 	replyDepth(0,'home')//清除跳转记录
 	saveStorage('设置选项',mt_settings,'local')

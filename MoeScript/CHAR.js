@@ -13,27 +13,26 @@ function loadhead(id,img)
 {
 	if(id == 0 || img == 1)return `${href}MoeData/Ui/you.webp`;//主角
 	if(img.startsWith('custom-') || img.startsWith('CharFace-') || img.startsWith('Emoji-'))return img
-	return `${href}GameData/${mt_settings['选择游戏']}/Char/${img}.webp`;
+	return `${href}GameData/${mt_settings['选择游戏']}/Char/${img.replace('_Collection','_BG')}.webp`;
 }
 function loadname(id,index,play)
 {
-	if(!mt_characters)return;
+	if(!mt_characters)return '<br>';
 	let you = {kr: "주인공",en: "Lead",jp: "主役",zh_cn: "主角",zh_tw: "主角"}
-	let name = toString(id)
+	let name = id
 	let names = (play ? MMT目录.设置['人物改名'] : mt_settings['人物改名']) || {}
 	
 	if(mt_characters[id])
 	{
-		name = mt_characters[id].name[mtlang] ? mt_characters[id].name[mtlang] : id
-		name = mt_characters[id].name.别名 ? mt_characters[id].name.别名 : name
+		if(mt_characters[id].name[mtlang])name = mt_characters[id].name[mtlang]
+		if(mt_characters[id].name.别名)name = mt_characters[id].name.别名
+		if(name.split(" ")[1])name = name.split(" ")[1]
+		name = name.replaceAll("-", " ").split("·")[0]
 	}
-	if(name.split(" ")[1])name = name.split(" ")[1]
-	name = name.replaceAll("-", " ").split("·")[0]
 
 	if(names[id])name = names[id];//@改名
 	if(names[index])name = names[index];//@改名
 
-	
 	if(play &&  MMT目录.角色[id])
 	{
 		name = MMT目录.角色[id].name
@@ -109,16 +108,30 @@ function saveclub()
 }
 function charList(selected = !1)
 {
+	$('.名字').each(function()
+	{
+		let name = this.title.split(',')
+		let id = name[0]
+		let img = name[1]
+		name = loadname(id,img)
+		if(this.nodeName === 'BUTTON')name += mt_text['go_relationship_event'][mtlang]
+		$(this).html(name)
+	})
 	saveClub = false;
 	custom_chars()
 	$('.eIEKpg:eq(0)').click();//更新列表
 	if(selected)
 	{
+		选择角色 = selected
 		let index = mt_settings.选择角色.index
 		$('.jotOXZ:eq(0)').click()
 		$('.jotOXZ:eq(1)').click()
 		$(`.fzOyMd[title="${index}"]`).click()
-		if($('.fzOyMd.selected')[0])$('.fzOyMd.selected')[0].scrollIntoView({inline:'center'})//也许只有放在首行才会生效
+		setTimeout(function()
+		{
+			if($('.fzOyMd.selected')[0])$('.fzOyMd.selected')[0].scrollIntoView({inline:'center'})//也许只有放在首行才会生效
+		})
+		
 	}
 	saveClub = true;
 }
@@ -291,7 +304,6 @@ async function edit_char()
 	saveStorage('设置选项',mt_settings,'local')
 	char_info = []
 	$('#custom-char').removeClass('visible')//S()
-	charList(!0)
 }
 $.each(mt_char,function(k,v)
 {
@@ -330,7 +342,6 @@ async function removeChar(n)
 			saveStorage('mt-char',mt_char,'local')
 			saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
 			数据操作('Ts','临时角色',mt_schar)
-			charList(!0)//更新列表
 		}
 	}
 	if(n.school.zh_cn === '自定义')
@@ -355,21 +366,11 @@ async function removeChar(n)
 				img = await 数据操作('Ig',emoji[i])
 				if(img)await Promise.all([数据操作('Ir',emoji[i]),数据操作('Ts',emoji[i],img)])
 			}
-			mt_settings.选择角色.index = 0
-			mt_settings.选择角色.index = 1
-			let list = mt_settings.选择角色.list || []
-			mt_settings.选择角色.list = []
-			for(let i=0,l=list.length;i<l;i++)
-			{
-				if(list[i].no != n.no)mt_settings.选择角色.list.push(list[i])
-			}
 			delete mt_char[n.no];
 			delete EMOJI_CustomEmoji[n.no]
 			saveStorage('mt-char',mt_char,'local')
 			saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
 			数据操作('Ts','临时角色',mt_schar)
-			选择角色 = true
-			charList(!0)//更新列表
 		}
 	}
 }
@@ -458,7 +459,7 @@ $("body").on('click',".heads img",function()
 	}
 	$(this)[0].scrollIntoView()
 });
-function CHAR_GetCharList()
+function 加载角色()
 {
 	CHAR_CharList = []
 	$.each(mt_characters,function(k,v)
@@ -497,18 +498,4 @@ function CHAR_GetCharList()
 			momotalk: true//#改为默认
 		})
 	})
-}
-function CHAR_UpdateChar()
-{
-	club(true)
-	t()
-}
-async function tt()
-{
-	let head = await 数据操作('Sg','mt-head')
-	if(head)
-	{
-		for(let key in head)await 数据操作('Is',key,head[key])
-		数据操作('Sr','mt-head')
-	}
 }

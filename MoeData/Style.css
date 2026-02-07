@@ -1,6 +1,6 @@
 /*@MoeData/Style.css@*/
 @charset "UTF-8";
-*{-webkit-user-select: text;margin: 0px;line-height: inherit;}
+*{margin: 0px;line-height: inherit;}
 body{line-height: 1;}
 .tool
 {
@@ -189,7 +189,6 @@ a
 }
 .文本
 {
-	user-select: text;
 	position: relative;
 	color: white;
 	border-radius: 0.5rem;
@@ -327,7 +326,6 @@ a
 }
 .旁白
 {
-	user-select: text;
 	position: relative;
 	color: rgb(69, 78, 89);
 	width: 100%;
@@ -407,3 +405,4 @@ a
 	50%{transform: rotate(0deg);}
 	75%{transform: rotate(-15deg);}
 }
+.隐藏{display: none;}

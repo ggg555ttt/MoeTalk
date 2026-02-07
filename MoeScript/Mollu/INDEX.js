@@ -228,6 +228,10 @@
 													}
 													_(e)
 													$$('.chatText').click()
+													setTimeout(function()
+													{
+														if($$('.fzOyMd.selected')[0])$$('.fzOyMd.selected')[0].scrollIntoView({inline:'center'})//也许只有放在首行才会生效
+													})
 													saveStorage('设置选项',mt_settings,'local')
 												},
 												onError: function(e){IMAGE_error(e)},
@@ -4740,6 +4744,8 @@
 					// })
 					let isFirst = isfirst(t,l)
 					let isCenter = n.isCenter && n.type === 'image'
+					let title = `${n.sCharacter.no},${n.sCharacter.index}`
+					if(n.name)title = null
 					let style = mt_settings['文字样式'][n.type] ? mt_settings['文字样式'][n.type] : {}
 					delete style.textAlign,style = {...style,...{}}//防止连带修改设置属性
 					foreach([...mt_settings.风格样式[n.type] || [],...n.style || []],function(k,v)
@@ -4782,8 +4788,7 @@
 											className: '头像',
 											style: {zIndex: n.heads ? n.heads.list.length : ''},
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
-											onError: function(e){IMAGE_error(e)},
-											alt: n.sCharacter.index
+											onError: function(e){IMAGE_error(e)}
 										}), n.heads ? n.heads.list.map(function(index,k)
 										{
 											return (0, m.jsx)('img',
@@ -4809,7 +4814,8 @@
 										},
 										children: [!isCenter && isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
 										{//人物名称
-											className: "名称 bold",
+											className: "名称 bold"+(title ? ' 名字' : ''),
+											title: title,
 											dangerouslySetInnerHTML: {__html: n.name || loadname(n.sCharacter.no,n.sCharacter.index)}
 										}) : '' , (0, m.jsxs)("div",
 										{//消息内容
@@ -4865,8 +4871,7 @@
 											className: '头像',
 											src: loadhead(n.sCharacter.no,n.sCharacter.index),
 											style: {zIndex: n.heads ? n.heads.list.length : ''},
-											onError: function(e){IMAGE_error(e)},
-											alt: n.sCharacter.index
+											onError: function(e){IMAGE_error(e)}
 										}), n.heads ? n.heads.list.map(function(index,k)
 										{
 											return (0, m.jsx)('img',
@@ -4920,18 +4925,19 @@
 									})
 								})]
 							})] : "heart" === n.type ? [(0, m.jsx)("div",
-							{className: '头像框'}),(0, m.jsx)(eW,
+							{className: '头像框'}), (0, m.jsx)(eW,
 							{//羁绊
-								className: '编辑',
+								className: '编辑'+(title ? ' 名字' : ''),
+								title: title,
 								style: style,
 								character: n.content || ((n.name || loadname(n.sCharacter.no,n.sCharacter.index))+mt_text.go_relationship_event[mtlang])
-							})] : "info" === n.type ? (0, m.jsx)('span',//eN.vD,
+							})] : "info" === n.type ? [(0, m.jsx)("div", {className: '头像框 隐藏'}), (0, m.jsx)('span',//eN.vD,
 							{//旁白
 								className: '旁白 编辑',
 								style: style,
 								dangerouslySetInnerHTML:{__html:n.content}
 								// children: n.content
-							}) : (0, m.jsx)(m.Fragment,{})
+							})] : (0, m.jsx)(m.Fragment,{})
 						}), h || (0, m.jsx)("input",
 						{//复选框
 							"data-html2canvas-ignore":"true",

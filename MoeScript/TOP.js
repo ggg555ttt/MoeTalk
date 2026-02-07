@@ -18,7 +18,7 @@ window.alert = function(text = '',config = {})
 	config.style = config.style || ''
 	config.yes = config.yes || null
 	$(`.ALERT_${config.id}`).remove()
-let style = `style="user-select: text; line-height: 125%; white-space: pre-wrap; word-break: break-word; text-align: left; width: 100%; font-family: inherit; overflow: scroll;${config.style}"`
+let style = `style="-webkit-user-select: text;user-select: text; line-height: 125%; white-space: pre-wrap; word-break: break-word; text-align: left; width: 100%; font-family: inherit; overflow: scroll;${config.style}"`
 let html = 
 `<div class="btncdx alert ALERT_${config.id} visible" style="z-index: 1000;">
 	<div class="cFtxnG">
@@ -51,9 +51,34 @@ $('body').on('click','.confirm',function()
 	if(ALERT[id])ALERT[id]()
 	$(this).prev().click()
 });
-async function t()
+async function 加载数据()
 {
-	await tt()
+	if(客户端 === 'HTML5+' && 本地)[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
+	let head = await 数据操作('Sg','mt-head')
+	if(head)
+	{
+		for(let key in head)await 数据操作('Is',key,head[key])
+		数据操作('Sr','mt-head')
+	}
+
+	allChats = await 数据操作('Sg','chats') || []
+	otherChats = []
+	chats = []
+	foreach(allChats,function(k,v)
+	{
+		repairCF(allChats[k]);
+		if(allChats[k].replyDepth !== 0)otherChats.push(allChats[k])
+		else chats.push(allChats[k])
+	})
+	allChats = []
+	refreshMessage(chats)//$('#mt_watermark').click()//显示消息
+	$(".INDEX_tips").wait(function()
+	{
+		chats.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
+		otherChats.length ? $('.reply').show() : $('.reply').hide()//选择肢管理
+	},".INDEX_tips");
+
+	club(true)
 	let game = mt_settings['选择游戏'] || 'NONE';
 	let md5 = {}
 	if(game != 'NONE')md5 = JSON.parse(await $ajax(`${href}GameData/${game}/Version/${game}.json?time=${Date.now()}`));
@@ -63,8 +88,7 @@ async function t()
 		else selectgame('<span style="color:red;">数据缺失！请重新选择游戏</span>')
 		md5 = {}
 	}
-	if(客户端 === 'HTML5+' && 本地)[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
-	[mt_school,mt_club,mt_characters,mt_charface,CFInfo,id_map,CustomFaceAuthor,mt_char,allChats,mt_schar] = await Promise.all(
+	[mt_school,mt_club,mt_characters,mt_charface,CFInfo,id_map,CustomFaceAuthor,mt_char,mt_schar] = await Promise.all(
 	[
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-School.json?md5=${md5['MT-School']}`).then(json => JSON.parse(json)) : {},
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-Club.json?md5=${md5['MT-Club']}`).then(json => JSON.parse(json)) : {},
@@ -74,30 +98,12 @@ async function t()
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/IdMap.json?md5=${md5['IdMap']}`).then(json => JSON.parse(json)) : [{},{}],
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/CustomFaceAuthor.json?md5=${md5['CustomFaceAuthor']}`).then(json => JSON.parse(json)) : {},
 		数据操作('Sg','mt-char'),
-		数据操作('Sg','chats'),
 		数据操作('Tg','临时角色')
 	]);
 	mt_char = mt_char || {}
-	allChats = allChats || []
-	otherChats = []
-	chats = []
 	mt_schar = mt_schar || {}
-	foreach(allChats,function(k,v)
-	{
-		repairCF(allChats[k]);
-		if(allChats[k].replyDepth !== 0)otherChats.push(allChats[k])
-		else chats.push(allChats[k])
-	})
-	allChats = []
-	$(".INDEX_tips").wait(function()
-	{
-		chats.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
-		otherChats.length ? $('.reply').show() : $('.reply').hide()//选择肢管理
-	},".INDEX_tips")
-	CHAR_GetCharList()
-	选择角色 = true
-	charList(选择角色)//更新角色
-	refreshMessage(chats)//$('#mt_watermark').click()//显示消息
+	加载角色()
+	charList(true)//更新角色
 	INIT_loading(false)
 }
 
@@ -222,7 +228,7 @@ async function update(str = '')
 }
 $(async function()
 {
-	t()
+	加载数据()
 	if(MikuTalk)
 	{
 		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
@@ -977,7 +983,7 @@ function selectgame(str = '请选择游戏')
 		数据列表 = []
 		await 更新数据()
 		检查数据()
-		CHAR_UpdateChar()
+		加载数据()
 		INIT_loading(false)
 	}
 	alert(`${select}\n无反应或一直加载请尝试刷新页面\n`,config)
