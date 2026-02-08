@@ -53,7 +53,11 @@ $('body').on('click','.confirm',function()
 });
 async function 加载数据()
 {
-	if(客户端 === 'HTML5+' && 本地)[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
+	if(客户端 === 'HTML5+' && 本地)
+	{
+		await waitPlus();
+		[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
+	}
 	let head = await 数据操作('Sg','mt-head')
 	if(head)
 	{

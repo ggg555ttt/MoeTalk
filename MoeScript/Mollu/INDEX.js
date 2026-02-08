@@ -3077,7 +3077,11 @@
 															height: 'auto'
 														},
 														src: v === 'ADD' ? href+'MoeData/Ui/School/RECYCLE.webp' : 前缀+link,//#表情链接
-														onError: function(e){IMAGE_error(e)},
+														onError: function(e)
+														{
+															IMAGE_error(e)
+															if(!EMOJI.custom.io)e.target.parentNode.style.display = 'none'
+														},
 														onClick: function(e)
 														{
 															let config = {}
