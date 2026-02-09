@@ -369,7 +369,6 @@ function mt_capture(清晰度,生成图片,标题)
 
 	let callback = async function()
 	{
-		// if(MikuTalk && 截图区域.css('background-color') === 'rgba(0, 0, 0, 0)')截图区域.css('background-color',MikuTalk)
 		let 截屏工具 = 'html2canvas'
 		截屏工具 = mt_settings['截图工具'] ? mt_settings['截图工具'] : 'html2canvas'
 		// if(imgArea.style)截屏工具 = 'snapdom'

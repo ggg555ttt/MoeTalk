@@ -590,3 +590,31 @@ async function 导出截图(filename,data)
 	}
 	$('.截图数量').text(imageArr.length)
 }
+async function 检测版本()
+{//HTML5+专用，新版替换旧版应用
+	await waitPlus();
+	if(location.href.includes('/www/'))
+	{
+		INIT_loading(false)
+		if(!localStorage['HTML5+'])安装应用()//初始化
+		else
+		{
+			plus.io.resolveLocalFileSystemURL('_doc/MoeData/Version/Version.json',function(entry)
+			{
+				entry.file(function(file)
+				{
+					var reader = new plus.io.FileReader();
+					reader.onload = function(e)
+					{
+						let ver = JSON.parse(e.target.result || '[-1]')[0]
+						if(本地应用版本[0] > ver)安装应用()//版本更新
+						else plus.webview.currentWebview().loadURL(localStorage['HTML5+'])
+					};
+					reader.onerror = function(e){安装应用()};//读取失败
+					reader.readAsText(file, 'utf-8');
+				});
+			},function(e){安装应用()});//文件不存在
+		}
+		return new Promise(() => {});
+	}
+}

@@ -47,9 +47,10 @@ if(localStorage['phpwin'] == 'phpwin')
 	客户端 = 'phpwin'
 }
 //版本信息
-var 本地应用版本 = [260208.131336]//@
+var 本地应用版本 = [260209.231331]//@
 var 网络应用版本,本地数据版本,网络数据版本
 var gamearr = {"BLDA":"碧蓝档案","CBJQ":"尘白禁区","QNZL":"千年之旅","YGST":"犹格索托斯的庭院","DFPJ":"东方Project","NONE":"无"}
+var 本地版本 = 本地应用版本[0]
 //函数和变量
 function loadjs(link,mode = ''){document.write("<scr"+`ipt src='${link}' ${mode}></scr`+"ipt>")}
 var test = console.log
@@ -112,12 +113,12 @@ if(mt_settings['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 <!-- MoeTalk -->
 		<link rel='stylesheet' href="./MoeData/Style.css?md5=47ac300da5bbc29de24dce9083c2a84e"><!-- @@样式 -->
 		<script src="./MoeScript/INIT.js?md5=45de41f542c5e99548f3350dc571a41c" defer></script><!-- @@预定义 -->
-		<script src="./MoeScript/CLIENT.js?md5=bea673adb8e910e0a7e7d733ad7413a6" defer></script><!-- @@客户端 -->
+		<script src="./MoeScript/CLIENT.js?md5=54f94ee4963594c37ddded03ef8c69eb" defer></script><!-- @@客户端 -->
 		<script src="./MoeScript/DATA.js?md5=2afd3cb4993fc5adf0f3b0eca9556f07" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAR.js?md5=5d27c3561b9559c52d440f8c8777be93" defer></script><!-- @@角色 -->
-		<script src="./MoeScript/IMAGE.js?md5=8365a1d1b164368efa10c70169e62b43" defer></script><!-- @@截图 -->
-		<script src="./MoeScript/CHAT.js?md5=d339550602f37f25916691e8cc591d39" defer></script><!-- @@消息 -->
-		<script src="./MoeScript/TOP.js?md5=2da8decedad970582056d3f6a906cc26" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/IMAGE.js?md5=608b7a998a01bf3654d6ce14f2edd2e3" defer></script><!-- @@截图 -->
+		<script src="./MoeScript/CHAT.js?md5=55206306bdb13e2eec13cdb94258df9b" defer></script><!-- @@消息 -->
+		<script src="./MoeScript/TOP.js?md5=23db6dea2d9239b41a10edcd1b5615a4" defer></script><!-- @@首页 -->
 <!-- MolluTalk -->
 		<script src="./MoeScript/Mollu/TEXT.js?md5=bcca6df6bd21a996053856c604abca13"></script><!-- @@提示文本 -->
 		<script src="./MoeScript/Mollu/MAIN.js?md5=aac2192e9b2c096f149c1ac5b89996d9" defer></script><!-- @@ -->

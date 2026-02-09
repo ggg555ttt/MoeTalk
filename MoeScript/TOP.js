@@ -53,11 +53,6 @@ $('body').on('click','.confirm',function()
 });
 async function 加载数据()
 {
-	if(客户端 === 'HTML5+' && 本地)
-	{
-		await waitPlus();
-		[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
-	}
 	let head = await 数据操作('Sg','mt-head')
 	if(head)
 	{
@@ -173,7 +168,7 @@ async function update(str = '')
 	let readme = str
 	if(本地 && 客户端)
 	{
-		readme += `MoeTalk：<span style='color:red;' class='版本 bold'>${本地应用版本}</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
+		readme += `MoeTalk：<span style='color:red;' class='版本 bold'>${本地版本}</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
 		if(game !== 'NONE')
 		{
 			readme += `${gamearr[game]}：<span style='color:red;' class='版本 bold'>读取中。。。</span> 最新<span style='color:red;' class='版本 bold'>读取中。。。</span>\n`
@@ -232,11 +227,17 @@ async function update(str = '')
 }
 $(async function()
 {
+	if(本地 && 客户端 === 'HTML5+')
+	{
+		await 检测版本();
+		[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
+	}
 	加载数据()
 	if(MikuTalk)
 	{
-		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
 		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','transparent');
+		$('.RightScreen__CContainer-sc-14j003s-2').css('background-color','transparent');
+		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
 		$("#view").click()
 	}
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
@@ -248,37 +249,6 @@ $(async function()
 	notice += `※<span style="color:white;background-color:green;">数据丢失请尝试从<button style="line-height:112%;" onclick="$('#MoeProject').click()">项目管理</button>中恢复</span>\n`
 	if(本地)
 	{
-		if(客户端 === 'HTML5+')
-		{
-			if(location.href.includes('/www/') && !localStorage['HTML5+'])
-			{
-				安装应用()
-				return
-			}
-			else if(localStorage['HTML5+'] && localStorage['HTML5+'].includes('file'))
-			{
-				if(href.includes('/www/') || href.includes('http'))
-				{
-					await waitPlus()
-					plus.io.resolveLocalFileSystemURL('_doc/MoeData/Version/Version.json',function(entry)
-					{
-						entry.file(function(file)
-						{
-							var reader = new plus.io.FileReader();
-							reader.onload = function(e)
-							{
-								let ver = JSON.parse(e.target.result || '[-1]')[0]
-								if(本地应用版本[0] > ver)安装应用()
-								else plus.webview.currentWebview().loadURL(localStorage['HTML5+'])
-							};
-							reader.onerror = function(e){安装应用()};
-							reader.readAsText(file, 'utf-8');
-						});
-					},function(e){安装应用()});
-					return
-				}
-			}
-		}
 		if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
 		else
 		{
@@ -689,9 +659,12 @@ $('body').on('click',"#mt-style",function()
 	{
 		mt_settings.风格样式 = 读取样式('html')
 		saveStorage('设置选项',mt_settings,'local')
-		if(!MikuTalk)$('._app__Wrapper-sc-xuvrnm-1').css('background-color',mt_settings.风格样式.bgColor);
-		$('.RightScreen__CContainer-sc-14j003s-2').css('background-color',mt_settings.风格样式.bgColor);
-		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color',mt_settings.风格样式.bgColor);
+		if(!MikuTalk)
+		{
+			$('._app__Wrapper-sc-xuvrnm-1').css('background-color',mt_settings.风格样式.bgColor);
+			$('.RightScreen__CContainer-sc-14j003s-2').css('background-color',mt_settings.风格样式.bgColor);
+			$('.Talk__CContainer-sc-1uzn66i-1').css('background-color',mt_settings.风格样式.bgColor);
+		}
 		refreshMessage(chats)
 	}
 	alert(html,config)
@@ -1037,7 +1010,7 @@ setInterval(async function()
 				'存档': pako.deflate(JSON.stringify(存档),{to: 'string',level: 9}),
 				'记录': pako.deflate(JSON.stringify(记录),{to: 'string',level: 9}),
 				'用户': localStorage['local_no'],
-				'版本': 本地应用版本[0]
+				'版本': 本地版本
 			},
 			dataType:'text'
 		});

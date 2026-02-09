@@ -361,7 +361,7 @@ function isfirst(chatIndex,chats,mode)
 }
 function makeMessage(type,data,chatIndex,mode)
 {
-	let 聊天,头像,头像框,对话,名称,文本,图片;
+	let 聊天,头像,头像框,对话,名称,文本,图片,背景色 = '';
 	let no = data.sCharacter.no
 	let index = data.sCharacter.index
 	let alt = ''
@@ -377,6 +377,7 @@ function makeMessage(type,data,chatIndex,mode)
 	else if(mode === '预览')
 	{
 		head = data.isFirst
+		背景色 = mt_settings.风格样式.bgColor
 	}
 	else
 	{
@@ -519,7 +520,7 @@ function makeMessage(type,data,chatIndex,mode)
 		复选框 = `<input type="checkbox" ${selected ? 'checked' : ''} class="dels" style="background-color: ${color};" data-html2canvas-ignore="true">`
 	}
 	if(mode === '预览')复选框 = ''
-	return `<div class="消息" title='${color}' style="${head ? '' : 'padding: 0.5rem 1rem 0px;'}background-color:${selected && mode !== 'area' ? '#CAD7DD;' : mt_settings.风格样式.bgColor};" ${alt}>
+	return `<div class="消息" title='${color}' style="${head ? '' : 'padding: 0.5rem 1rem 0px;'}background-color:${selected && mode !== 'area' ? '#CAD7DD;' : 背景色};" ${alt}>
 		${聊天}
 		${复选框}
 	</div>`
