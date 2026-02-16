@@ -1,4 +1,5 @@
 /*@MoeScript/TOP.js@*/
+var 恭喜发财 = false
 pause = true
 skip = false
 if(mt_settings['调试模式'])var vConsole = new window.VConsole();
@@ -273,6 +274,9 @@ $(async function()
 		}
 		alert(text,config)
 	}
+	let ymd = parseInt(year+month+day)
+	ymd = ymd >= 260216 && ymd <= 260223;
+	if(month+day == '0101' || ymd)恭喜发财 = ymd
 	let text = `有疑问请点击${span}MoeTalk</span>标题\n\n`
 	text += `※<span style="color:white;background-color:green;">数据丢失请尝试从<button style="line-height:112%;" onclick="$('#MoeProject').click()">项目管理</button>中恢复</span>\n`
 	if(!本地)text += '※<span style="color:white;background-color:red;">网页端连接不稳定建议<button style="line-height:112%;" onclick="update()">下载客户端</button></span>\n'
@@ -300,9 +304,7 @@ $("body").on('click',function(e)
 	$('.chatText').attr('placeholder',name+'：'+str)
 	if(e.originalEvent && e.originalEvent.isTrusted)//判断是否是真实点击事件
 	{
-		let ymd = parseInt(year+month+day)
-		ymd = ymd >= 260216 && ymd <= 260223;
-		if(month+day == '0101' || ymd)//新年快乐
+		if(恭喜发财)//新年快乐
 		{
 			newyear(`${MoeTalkURL}/plugins/newyear.mp3`)
 			newyear = ()=>{}
