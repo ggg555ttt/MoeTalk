@@ -2950,7 +2950,7 @@
 												right: 0
 											},
 											hidden: EMOJI.type === 'Emoji' && !EMOJI.custom.io,
-											children: EMOJI.type === 'Emoji' ? EMOJI.custom.io ? '编辑' : '管理' : EMOJI.custom.from ? '❗声明' : '信息',
+											children: EMOJI.type === 'Emoji' ? EMOJI.custom.io ? '编辑' : '管理' : EMOJI.custom.from ? '❗声明' : '编辑',
 											onClick: function()
 											{
 												$$('.INDEX_EmojiIfno:visible').length ? $$('.INDEX_EmojiIfno').hide() : $$('.INDEX_EmojiIfno').show()
@@ -2999,11 +2999,13 @@
 										{
 											children: [EMOJI.images.map(function(v,k)
 											{
+												let no = mt_settings['选择角色'].no
+												let index = mt_settings['选择角色'].index
 												let link = EMOJI.path+v+'.webp'
 												let 前缀 = href+''
 												let EmojiInfo = mt_settings['表情信息'][v] ? mt_settings['表情信息'][v] : CFInfo[v] ? CFInfo[v] : v
 												EmojiInfo = EmojiInfo === undefined ? '' : EmojiInfo
-												if(EMOJI.custom.io)
+												if(v.startsWith('CharFace-') || v.startsWith('Emoji-'))
 												{
 													前缀 = ''
 													link = v
@@ -3046,7 +3048,14 @@
 															},
 															children: '点击编辑\n',
 															hidden: !link
-														}) : '',EmojiInfo],
+														}) : '',(0, m.jsx)('span',
+														{
+															style:
+															{
+																color: !EMOJI.custom.io && EMOJI_CustomEmoji[no] && EMOJI_CustomEmoji[no][v] > -1 ? 'green' : ''
+															},
+															children: EmojiInfo
+														})],
 														title: v,
 														onClick:function(e)
 														{
@@ -3065,7 +3074,14 @@
 															}
 															else e.target.nextElementSibling.click()
 														}
-													}), mt_settings['表情信息'][v] || v.substring(v.lastIndexOf('/')+1),(0, m.jsx)('img',
+													}), (0, m.jsx)('span',
+													{
+														style:
+														{
+															color: !EMOJI.custom.io && EMOJI_CustomEmoji[no] && EMOJI_CustomEmoji[no][v] > -1 ? 'green' : ''
+														},
+														children: mt_settings['表情信息'][v] || v.substring(v.lastIndexOf('/')+1),
+													}) ,(0, m.jsx)('img',
 													{
 														alt: EMOJI.type,
 														height: 310,
@@ -3140,13 +3156,12 @@
 																config.title = '编辑表情'
 																config.confirm = '提交'
 																let str = ''
-																let img = `<img class="Emojis" src='${前缀+link}' style='width:100%;' onerror='IMAGE_error(this)'>`
+																let img = `<img class="Emojis" src='${前缀+link}' style='width:50%;' onerror='IMAGE_error(this)'>`
+																let select = ''
 																let now = parseInt(EMOJI.pageindex.split(' / ')[0])//当前页
 																let end = parseInt(EMOJI.pageindex.split(' / ')[1])//终点页
 																if(EMOJI.custom.io)
 																{
-																	let select = ''
-																	
 																	for(n=1;n<=end;n++)
 																	{
 																		select += `<option ${n === now ? "selected style='color:red;'" : ""}>${n}</option>`
@@ -3154,8 +3169,32 @@
 																	select += `<option>${end+1}</option>`
 																	str += '<input type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">只删除表情</span>\n'
 																	str += `移动到：第<select style='font-size:1.2rem;'>${select}</select>页`
-																	img = `<button onclick='$("#custom").attr("title","image").attr("alt","emoji").click()'>点击更改图片\n${img}</button>`
+																	if(v.startsWith('CharFace-') || v.startsWith('Emoji-'))
+																	{
+																		img = `<button onclick='$("#custom").attr("title","image").attr("alt","emoji").click()'>点击更改图片\n${img}</button>`
+																	}
 																}
+																else
+																{
+																	now = -1
+																	end = {}
+																	let arr = EMOJI_CustomEmoji[no] || {}
+																	for(let key in arr)
+																	{
+																		if(key == v)now = arr[key]
+																		end[arr[key]] = arr[key]
+																	}
+																	end = Object.keys(end).length
+																	for(let n=1;n<=end;n++)
+																	{
+																		select += `<option ${n-1 === now ? "selected style='color:red;'" : ""}>${n}</option>`
+																	}
+																	select += `<option>${end+1}</option>`
+																	str += `<span class="green">当前角色</span>：<img class="头像"src="${loadhead(no,index)}"onerror="IMAGE_error(this)">`
+																	str += `第<select style='font-size:1.2rem;'>${select}</select>页\n`
+																	str += `<input ${now > -1 ? 'checked' : ''} type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">将此差分添加到<span class="green">当前角色</span>的自定义分类↑</span>\n`
+																}
+																
 																str += '\n'
 																let info = `<input style='font-size:1.2rem;' class='text' placeholder='${toString(CFInfo[v])}' value='${mt_settings['表情信息'][v] || ''}'>`
 																config.yes = function()
@@ -3163,7 +3202,7 @@
 																	if(EMOJI.custom.io)
 																	{//编辑自定义表情
 																		EMOJI_CustomEmoji[EMOJI.id][v] = parseInt($$(`.alert_${config.id} select`).val()-1)
-																		数据操作('Is',v,$$('.Emojis').attr('src'))
+																		if(v.startsWith('CharFace-') || v.startsWith('Emoji-'))数据操作('Is',v,$$('.Emojis').attr('src'))
 																		if($$(`.alert_${config.id} input:checked`).length)
 																		{//只删除表情
 																			数据操作('Ir',v)
@@ -3171,11 +3210,19 @@
 																			if(!Object.keys(EMOJI_CustomEmoji[EMOJI.id]).length)delete EMOJI_CustomEmoji[EMOJI.id]
 																			$$(`.alert_${config.id} .text`).val('')
 																		}
-																		//存入数据库
-																		saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
 																	}
+																	else
+																	{//编辑内置表情
+																		if($$(`.alert_${config.id} input:checked`).length)
+																		{//添加进自定义分类
+																			EMOJI_CustomEmoji[no] = EMOJI_CustomEmoji[no] || {}
+																			EMOJI_CustomEmoji[no][v] = parseInt($$(`.alert_${config.id} select`).val()-1)
+																		}
+																		else if(EMOJI_CustomEmoji[no])delete EMOJI_CustomEmoji[no][v]//添加进自定义分类
+																	}
+																	saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')//存入数据库
 																	if($$(`.alert_${config.id} .text`).val())
-																	{
+																	{//编辑表情信息
 																		mt_settings['表情信息'][v] = $$(`.alert_${config.id} .text`).val()
 																	}
 																	else
