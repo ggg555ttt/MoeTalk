@@ -3144,7 +3144,7 @@
 																			v = v.title
 																			数据操作('Ir',v)
 																			delete EMOJI_CustomEmoji[EMOJI.id][v]
-																			delete mt_settings['表情信息'][v]
+																			if(v.startsWith('CharFace-') || v.startsWith('Emoji-'))delete mt_settings['表情信息'][v]
 																		})
 																		saveStorage('设置选项',mt_settings,'local')
 																		saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
@@ -3208,7 +3208,7 @@
 																			数据操作('Ir',v)
 																			delete EMOJI_CustomEmoji[EMOJI.id][v]
 																			if(!Object.keys(EMOJI_CustomEmoji[EMOJI.id]).length)delete EMOJI_CustomEmoji[EMOJI.id]
-																			$$(`.alert_${config.id} .text`).val('')
+																			if(v.startsWith('CharFace-') || v.startsWith('Emoji-'))$$(`.alert_${config.id} .text`).val('')
 																		}
 																	}
 																	else
