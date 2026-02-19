@@ -363,6 +363,7 @@ async function 生成存档(info,cus = false,mmt)
 	if(cus)//记录所有自定义数据
 	{
 		json.CUSTOM = {}
+		json.CUSTOM.HEAD = mt_head
 		json.CUSTOM.CHAR = mt_char
 		json.CUSTOM.EMOJI = EMOJI_CustomEmoji
 		json.CUSTOM.IMAGE = {}
@@ -399,6 +400,7 @@ async function 读取存档(json)
 	if(json.CUSTOM)
 	{
 		mt_char = {...mt_char,...json.CUSTOM.CHAR}
+		mt_head = {...mt_head,...json.CUSTOM.HEAD}
 		EMOJI_CustomEmoji = {...EMOJI_CustomEmoji,...json.CUSTOM.EMOJI}
 		for(let key in json.CUSTOM.IMAGE)
 		{

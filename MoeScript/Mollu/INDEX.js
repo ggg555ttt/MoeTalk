@@ -1319,7 +1319,7 @@
 										}
 									}), (0, m.jsx)('div',
 									{
-										className: 'edithead',
+										className: 'edithead 添加头像',
 										style:
 										{
 											fontSize:'12px',
@@ -1371,7 +1371,7 @@
 										}
 									}), (0, m.jsx)('div',
 									{
-										className: 'edithead',
+										className: 'edithead 删除头像',
 										style:
 										{
 											fontSize:'12px',
@@ -1399,7 +1399,7 @@
 										}
 									}), (0, m.jsx)('div',
 									{
-										className: 'edithead',
+										className: 'edithead 更改头像',
 										style:
 										{
 											fontSize:'12px',
@@ -2954,20 +2954,25 @@
 											onClick: function()
 											{
 												$$('.INDEX_EmojiIfno:visible').length ? $$('.INDEX_EmojiIfno').hide() : $$('.INDEX_EmojiIfno').show()
-												if(EMOJI.custom.from)
+												if($$('.INDEX_EmojiIfno:visible').length > 0)
 												{
-													let config = {}
-													config.title = '版权声明'
-													config.style = 'text-align:center;'
 													let str = ''
-													str += `作者：${EMOJI.custom.from.name}\n`
-													str += `<a href='${EMOJI.custom.from.link}'><u>${EMOJI.custom.from.link}</u></a>\n`
-													str += '<span style="color:red;">请尊重作者的劳动成果\n严禁用本套立绘差分进行牟利和商业用途\n违者将追究法律责任！\n</span>'
-													if($$('.INDEX_EmojiIfno:visible').length > 0)str += '现在点击表情将编辑信息\n'
-													else str += '现在点击表情将发送表情\n'
+													let config = {}
+													config.style = 'text-align:center;'
+													if(EMOJI.custom.from)
+													{
+														config.title = '版权声明'
+														str += `作者：${EMOJI.custom.from.name}\n`
+														str += `<a href='${EMOJI.custom.from.link}'><u>${EMOJI.custom.from.link}</u></a>\n`
+														str += '<span style="color:red;">请尊重作者的劳动成果\n严禁用本套立绘差分进行牟利和商业用途\n违者将追究法律责任！\n</span>'
+													}
+													else
+													{
+														config.title = '编辑表情'
+													}
+													str += `现在点击图片可编辑表情\n点击图片上方蓝字可多选\n`
 													alert(str,config)
 												}
-												
 											}
 										})]
 									}), (0, m.jsxs)(ea.h4,
@@ -3046,7 +3051,7 @@
 																"width": "auto",
 																"color": "rgb(63, 81, 181)"
 															},
-															children: '点击编辑\n',
+															children: '编辑表情\n',
 															hidden: !link
 														}) : '',(0, m.jsx)('span',
 														{
@@ -3059,8 +3064,7 @@
 														title: v,
 														onClick:function(e)
 														{
-															if(!EMOJI.custom.io)return
-															if(e.target.innerText === '点击编辑\n')
+															if(e.target.innerText === '编辑表情\n')
 															{
 																e.target.innerText = '已选中\n'
 																e.target.style.color = "red"
@@ -3068,11 +3072,10 @@
 															}
 															else if(e.target.innerText === '已选中\n')
 															{
-																e.target.innerText = '点击编辑\n'
+																e.target.innerText = '编辑表情\n'
 																e.target.style.color = "rgb(63, 81, 181)"
 																e.target.parentElement.classList.remove('selected')
 															}
-															else e.target.nextElementSibling.click()
 														}
 													}), (0, m.jsx)('span',
 													{
@@ -3130,36 +3133,73 @@
 															}
 															if($$('.INDEX_EmojiIfno:visible').length && EmojiInfo !== '')
 															{
-																if(selectNum > 1)
-																{
-																	config.title = '批量删除'
-																	config.confirm = '提交'
-																	let str = `已选中${selectNum}个数据\n`
-																	str += '<input type="checkbox" style="width:1rem;height:1rem;">确认删除表情\n'
-																	config.yes = function()
-																	{
-																		if(!$$(`.alert_${config.id} input:checked`).length)return
-																		$$.each($$('.INDEX_EmojiIfno.selected'),function(k,v)
-																		{
-																			v = v.title
-																			数据操作('Ir',v)
-																			delete EMOJI_CustomEmoji[EMOJI.id][v]
-																			if(v.startsWith('CharFace-') || v.startsWith('Emoji-'))delete mt_settings['表情信息'][v]
-																		})
-																		saveStorage('设置选项',mt_settings,'local')
-																		saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
-																		$$('.INDEX_Emoji').click()
-																	}
-																	alert(str,config)
-																	return
-																}
-																config.title = '编辑表情'
-																config.confirm = '提交'
 																let str = ''
 																let img = `<img class="Emojis" src='${前缀+link}' style='width:50%;' onerror='IMAGE_error(this)'>`
 																let select = ''
 																let now = parseInt(EMOJI.pageindex.split(' / ')[0])//当前页
 																let end = parseInt(EMOJI.pageindex.split(' / ')[1])//终点页
+																config.title = '编辑表情'
+																config.confirm = '提交'
+																if(selectNum > 1)
+																{
+																	if(EMOJI.custom.io)
+																	{
+																		config.title = '批量删除表情'
+																		let str = `已选中${selectNum}个数据\n`
+																		str += '<input type="checkbox" style="width:1rem;height:1rem;">确认删除表情\n'
+																		config.yes = function()
+																		{
+																			if(!$$(`.alert_${config.id} input:checked`).length)return
+																			$$.each($$('.INDEX_EmojiIfno.selected'),function(k,v)
+																			{
+																				v = v.title
+																				数据操作('Ir',v)
+																				delete EMOJI_CustomEmoji[EMOJI.id][v]
+																				if(v.startsWith('CharFace-') || v.startsWith('Emoji-'))delete mt_settings['表情信息'][v]
+																			})
+																			saveStorage('设置选项',mt_settings,'local')
+																			saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
+																			$$('.INDEX_Emoji').click()
+																		}
+																		alert(str,config)
+																	}
+																	else
+																	{
+																		config.title = '批量添加表情'
+																		now = -1
+																		end = {}
+																		let arr = EMOJI_CustomEmoji[no] || {}
+																		for(let key in arr)
+																		{
+																			if(key == v)now = arr[key]
+																			end[arr[key]] = arr[key]
+																		}
+																		end = Object.keys(end).length
+																		for(let n=1;n<=end;n++)
+																		{
+																			select += `<option>${n}</option>`
+																		}
+																		select += `<option>${end+1}</option>`
+																		str += `<span class="green">当前角色</span>：<img class="头像"src="${loadhead(no,index)}"onerror="IMAGE_error(this)">`
+																		str += `第<select style='font-size:1.2rem;'>${select}</select>页\n`
+																		str += `已选中${selectNum}个数据\n`
+																		str += `<input type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">将这些表情添加到<span class="green">当前角色</span>的自定义分类↑</span>\n`
+																		config.yes = function()
+																		{
+																			if(!$$(`.alert_${config.id} input:checked`).length)return
+																			$$.each($$('.INDEX_EmojiIfno.selected'),function(k,v)
+																			{
+																				v = v.title
+																				EMOJI_CustomEmoji[no] = EMOJI_CustomEmoji[no] || {}
+																				EMOJI_CustomEmoji[no][v] = parseInt($$(`.alert_${config.id} select`).val()-1)
+																			})
+																			saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
+																			$$('.INDEX_Emoji').click()
+																		}
+																		alert(str,config)
+																	}
+																	return
+																}
 																if(EMOJI.custom.io)
 																{
 																	for(n=1;n<=end;n++)
@@ -3192,7 +3232,7 @@
 																	select += `<option>${end+1}</option>`
 																	str += `<span class="green">当前角色</span>：<img class="头像"src="${loadhead(no,index)}"onerror="IMAGE_error(this)">`
 																	str += `第<select style='font-size:1.2rem;'>${select}</select>页\n`
-																	str += `<input ${now > -1 ? 'checked' : ''} type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">将此差分添加到<span class="green">当前角色</span>的自定义分类↑</span>\n`
+																	str += `<input ${now > -1 ? 'checked' : ''} type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">将此表情添加到<span class="green">当前角色</span>的自定义分类↑</span>\n`
 																}
 																
 																str += '\n'
@@ -6134,71 +6174,7 @@
 					})
 				},
 				w = n(8024),
-				j = function(e)
-				{
-					var t = e.character,
-						n = e.option,
-						o = e.changeOption,
-						r = (0, c.C)(function(e)
-						{
-							return e.global.lang
-						}),
-						i = function()
-						{
-							o(
-							{
-								PAGE: 1,
-								M_TYPE: n.M_TYPE,
-								O_TYPE: n.O_TYPE,
-								B_TYPE: n.B_TYPE,
-								C_TYPE: n.C_TYPE,
-								CONTENT: t.no.toString(),
-								LANG: n.LANG,
-								MEMBER_NO: (null == n ? void 0 : n.MEMBER_NO) || 0
-							})
-						};
-					return (0, b.jsx)(T,
-					{
-						children: (0, b.jsx)(v,
-						{
-							children: (0, b.jsxs)(N,
-							{
-								onClick: function()
-								{
-									i()
-								},
-								children: [(0, b.jsxs)(v,
-								{
-									children: [(0, b.jsx)(x.NZ,
-									{
-										width: 252,
-										height: 252,
-										alt: "profile",
-										src: loadhead(t.no,t.profile[0]),//#左方选择框
-										onError: function(e){IMAGE_error(e)}
-									}), (0, b.jsxs)(C,
-									{
-										children: [(0, b.jsx)("h2",
-										{
-											className: "bold",
-											children: t.name[r].replaceAll("-", " ")
-										}), (0, b.jsx)(O,
-										{
-											children: t.club[r]
-										})]
-									})]
-								}), (0, b.jsx)(P,
-								{
-									width: 252,
-									height: 252,
-									src: href+"MoeData/Ui/School/"+(t.school[mtlang] === '自定义' ? '自定义' : mt_characters[t.no].school)+'.webp',//#学校图标
-									onError: function(e){IMAGE_error(e)},
-									alt: "school"
-								})]
-							})
-						})
-					})
-				},
+				j = {},//
 				T = g.ZP.div.withConfig(
 				{
 					displayName: "Character__Container",

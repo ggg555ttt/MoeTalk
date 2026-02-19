@@ -10363,7 +10363,6 @@
 							zh_cn: "MoeTalk",
 							zh_tw: "MoeTalk"
 						},
-						illust: 0,
 						profile: [1],
 						momotalk: !1,
 						open: !1

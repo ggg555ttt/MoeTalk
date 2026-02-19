@@ -88,7 +88,7 @@ async function 加载数据()
 		else selectgame('<span style="color:red;">数据缺失！请重新选择游戏</span>')
 		md5 = {}
 	}
-	[mt_school,mt_club,mt_characters,mt_charface,CFInfo,id_map,CustomFaceAuthor,mt_char,mt_schar] = await Promise.all(
+	[mt_school,mt_club,mt_characters,mt_charface,CFInfo,id_map,CustomFaceAuthor,mt_char,mt_schar,mt_head] = await Promise.all(
 	[
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-School.json?md5=${md5['MT-School']}`).then(json => JSON.parse(json)) : {},
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-Club.json?md5=${md5['MT-Club']}`).then(json => JSON.parse(json)) : {},
@@ -98,10 +98,12 @@ async function 加载数据()
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/IdMap.json?md5=${md5['IdMap']}`).then(json => JSON.parse(json)) : [{},{}],
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/CustomFaceAuthor.json?md5=${md5['CustomFaceAuthor']}`).then(json => JSON.parse(json)) : {},
 		数据操作('Sg','mt-char'),
-		数据操作('Tg','临时角色')
+		数据操作('Tg','临时角色'),
+		数据操作('Sg','自定头像')
 	]);
 	mt_char = mt_char || {}
 	mt_schar = mt_schar || {}
+	mt_head = mt_head || {}
 	加载角色()
 	charList(true)//更新角色
 	INIT_loading(false)

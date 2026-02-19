@@ -135,13 +135,16 @@ function compress(base64Img,type = 'head',mode = 'add',length = 0)
 			{
 				let attr = 'width="252" height="252" decoding="async" data-nimg="1" loading="lazy" style="color: transparent; margin-right: 0.5rem;" class="common__Profile-sc-1ojome3-6 common__ProfileClick-sc-1ojome3-7 eLaCqa fuyFOl"'
 				let index = $('.heads img:eq(-1)').attr('title')
+				let id = char_info.no
 				if(index)
 				{
-					index = parseInt(index.replace(char_info.no,'').replace('_',''))
-					if(isNaN(index))index = `${char_info.no}_0`
-					else index = `${char_info.no}_${index+1}`
+
+					if(!id.startsWith('custom-'))id = 'custom-'+id
+					index = parseInt(index.replace(id,'').replace('_',''))
+					if(isNaN(index))index = `${id}_0`
+					else index = `${id}_${index+1}`
 				}
-				else index = char_info.no
+				else index = id
 				$('.heads').append(`<img src="${newBase64}" title="${index}" ${attr}>`)
 				$('#custom-char .yes').removeAttr('disabled')
 				$('.headinfo').show()
