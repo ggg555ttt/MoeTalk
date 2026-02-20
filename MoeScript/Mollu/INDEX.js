@@ -1737,7 +1737,7 @@
 										let str = ''
 										str += '	1。MoeTalk的默认截图工具对特殊样式的支持有限，'
 										str += '如果你的文档中含有较复杂的特殊样式，'
-										str += '建议在“修改截图设置”中更换截图工具（snapdom）。\n'
+										str += '建议在设置选项中的“截图设置”中更换截图工具（snapdom）。\n'
 										str += '	2。多张图片连续下载建议开启“打包下载”（上限2G）\n'
 										str += '	3。若下载失败，图片可手动保存，手动保存失败请尝试将“图片格式”改为webp\n'
 										alert(str)
@@ -2041,56 +2041,7 @@
 											display: 'flex',
 											justifyContent: 'space-evenly'
 										},
-										children: [(0, m.jsx)("button",
-										{
-											style:
-											{
-												width: 'auto',
-												height: 'auto',
-												fontSize: '1rem',
-												color: 'black',
-												padding: '0.5rem',
-												marginBottom: '0.5rem'
-											},
-											className: 'cVRiXh eIEKpg evqKja kwhiZC',
-											children: '修改截图设置',
-											onClick: function()
-											{
-												let option = ''
-												option += `<option value="image/png" ${mt_settings['图片格式'] == 'image/png' ? 'selected' : ''}>png</option>`
-												option += `<option value="image/jpeg" ${mt_settings['图片格式'] == 'image/jpeg' ? 'selected' : ''}>jpeg</option>`
-												option += `<option value="image/webp" ${mt_settings['图片格式'] == 'image/webp'? 'selected' : ''}>webp</option>`
-												option += `<option value="image/bmp" ${mt_settings['图片格式'] == 'image/bmp' ? 'selected' : ''}>bmp</option>`
-												option += `<option value="image/gif" ${mt_settings['图片格式'] == 'image/gif' ? 'selected' : ''}">gif</option>`
-												let str = ''
-												str += `<input class='打包下载' type='checkbox' ${mt_settings['打包下载'] ? 'checked' : ''}>打包下载\n`
-												str += `<input class='隐藏前缀' type='checkbox' ${mt_settings['隐藏前缀'] ? 'checked' : ''}>隐藏下载文件名前缀\n`
-												str += `图片宽度：（默认500，上限需测试）\n<input class='宽度限制' type="number" value="${mt_settings['宽度限制']}">\n`
-												str += `图片最大高度：（默认16384，上限需测试）\n<input class='高度限制' type="number" value="${mt_settings['高度限制']}">\n`
-												str += `图片格式：（默认png，其它格式需测试）\n`
-												str += `<select class='图片格式' style='font-size: 1.5rem;'>${option}</select>\n`
-												option = `<option value="html2canvas" ${mt_settings['截图工具'] != 'snapdom' ? 'selected' : ''}>html2canvas（默认）</option>`
-												option += `<option value="snapdom" ${mt_settings['截图工具'] == 'snapdom' ? 'selected' : ''}>snapdom（测试）</option>`
-												str += `截图工具：\n`
-												str += `<select class='截图工具' style='font-size: 1.5rem;'>${option}</select>\n`
-												let config = {}
-												config.title = '截图设置'
-												config.confirm = '提交'
-												config.id = Math.random().toString().replace('0.','')
-												config.yes = function()
-												{
-													mt_settings['宽度限制'] = $$(`.alert_${config.id} .宽度限制`).val() || 500
-													mt_settings['高度限制'] = $$(`.alert_${config.id} .高度限制`).val() || 16384
-													mt_settings['图片格式'] = $$(`.alert_${config.id} .图片格式`).val()
-													mt_settings['截图工具'] = $$(`.alert_${config.id} .截图工具`).val()
-													mt_settings['打包下载'] = $$(`.alert_${config.id} .打包下载`).prop('checked')
-													mt_settings['隐藏前缀'] = $$(`.alert_${config.id} .隐藏前缀`).prop('checked')
-													saveStorage('设置选项',mt_settings,'local')
-												}
-												alert(str,config)
-											}
-										})
-										, (0, m.jsx)("button",
+										children: (0, m.jsx)("button",
 										{
 											style:
 											{
@@ -2131,7 +2082,6 @@
 												j("1")
 											}
 										})
-										]
 									}), (0, m.jsxs)(ea.$_,
 									{
 										children: [(0, m.jsx)(ea.Lw,
@@ -3799,7 +3749,7 @@
 										let str = ''
 										str += '	1。MoeTalk的默认截图工具对特殊样式的支持有限，'
 										str += '如果你的文档中含有较复杂的特殊样式，'
-										str += '建议在“修改截图设置”中更换截图工具（snapdom）。\n'
+										str += '建议在设置选项中的“截图设置”中更换截图工具（snapdom）。\n'
 										str += '	2。自定义表情和差分的ID可以通过img标签来引用，'
 										str += '但标签内一定要加入onerror="IMAGE_error(this)"，'
 										str += '图片尺寸可能会偏大，请设置好宽高属性"。\n'

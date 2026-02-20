@@ -109,32 +109,6 @@ async function 加载数据()
 	INIT_loading(false)
 }
 
-function moedev()
-{
-	let 调试模式 = mt_settings['调试模式'] ? 'checked' : ''
-	let 桌面模式 = mt_settings['桌面模式'] ? 'checked' : ''
-	let str = ''
-	str += `开启调试模式（测试）：<input class="调试模式" ${调试模式} type="checkbox"/>\n`
-	str += `开启桌面模式（测试）：<input class="桌面模式" ${桌面模式} type="checkbox"/>\n`
-	str += '提交后请刷新页面\n'
-	str += '代码注入（测试）：<textarea style="width:100%;height:20rem;line-height:1.42;"></textarea>\n'
-	str += 'Android客户端无法更新应用版本请尝试清除缓存\n'
-	str += '<button class="red" onclick="clearCache()">清除缓存</button>\n'
-	let config = {}
-	config.id = Math.random().toString().replace('0.','')
-	config.title = '实验性选项'
-	config.confirm = '提交设置'
-	config.yes = function()
-	{
-		if($('.调试模式').prop('checked'))mt_settings['调试模式'] = true
-		else delete mt_settings['调试模式']
-		if($('.桌面模式').prop('checked'))mt_settings['桌面模式'] = true
-		else delete mt_settings['桌面模式']
-		if($(`.alert_${config.id} textarea`).val())eval($(`.alert_${config.id} textarea`).val())
-		saveStorage('设置选项',mt_settings,'local')
-	}
-	alert(str,config)
-}
 var FontList = `@font-face{font-family:Blueaka;src:url(./MoeData/Fonts/Blueaka.woff2)}/*默认*/
 @font-face{font-family:Jalnan;src:url(./MoeData/Fonts/Jalnan.ttf)}/*标题*/
 @font-face{font-family:KaiTi;src:url(./MoeData/Fonts/KaiTi.ttf)}/*楷体*/
@@ -201,7 +175,7 @@ async function update(str = '')
 	let link = `<a class="INIT_href bold" title="${bdwp}" style="text-decoration:underline;">${bdwp}</a>`
 	readme += `客户端下载地址：\n${link}\n提取码：BLDA\n`
 	let config = {}
-	config.title = 本地 ? '检查更新' : '下载客户端'
+	config.title = 本地 ? '更新应用' : '下载客户端'
 	config.id = Math.random().toString().replace('0.','')
 	config.yes = function()
 	{
@@ -248,8 +222,8 @@ $(async function()
 	let notice = ''
 	notice += `MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n`
 	notice += '反馈网址：<u><a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/</a></u>\n\n'
-	notice += '※移动端可点击左上<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);" onclick="moedev()"> 三 </i>查看工具栏\n'
-	notice += `※<span style="color:white;background-color:green;">数据丢失请尝试从<button style="line-height:112%;" onclick="$('#MoeProject').click()">项目管理</button>中恢复</span>\n`
+	notice += '※移动端可点击左上<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏\n'
+	notice += `※<span style="color:white;background-color:green;">数据丢失请尝试从<button style="line-height:112%;"onclick="$('#MoeProject').click()">项目管理</button>中恢复</span>\n`
 	if(本地)
 	{
 		if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
@@ -331,18 +305,11 @@ $(".frVjsk").wait(function()
 {
 	let div = `<div style='display:flex;flex-direction:column;align-items:center;'align='center'>`
 	let button = `${div}<button class='mvcff kNOatn bold'`
-	if(本地)
-	{
-		$(".frVjsk").append(`${button}onclick='update()'><b class='red'>檢</b></button><p class='white'>检查更新</p></button></div>`);
-	}
-	else
-	{
-		$(".frVjsk").append(`${button}onclick='update()'><b class='red'>端</b></button><p class='white'>下载<br>客户端</p></button></div>`);
-	}
+	$(".frVjsk").append(`${button}id='支持作者'><b class='red'>支</b></button><p class='white'>支持作者</p></button></div>`);
+	$(".frVjsk").append(`${button}onclick='update()'><b class='blue'>應</b></button><p class='white'>${本地?'更新应用':'下载应用'}</p></button></div>`);
 	$(".frVjsk").append(`${button}onclick='selectgame()'><b class='blue'>遊</b></button><p class='white'>选择游戏</p></button></div>`);
-	$(".frVjsk").append(`${button}id='mt-style'><b class='blue'>換</b></button><p class='white'>切换风格</p></button></div>`);
-	$(".frVjsk").append(`${button}id='MoeProject'><b class='red'>項</b></button><p class='white'>项目管理</p></button></div>`);
-	$(".frVjsk").append(`<a href='setting.html'>${button}><b class='green'>設</b></button><p class='white'>设置页面</p></button></div></a>`);
+	$(".frVjsk").append(`${button}id='MoeProject'><b class='blue'>項</b></button><p class='white'>项目管理</p></button></div>`);
+	$(".frVjsk").append(`${button}id='设置选项'><b class='green'>設</b></button><p class='white'>设置选项</p></button></div>`);
 	if(window.location.href.includes('old'))
 	{
 		$(".frVjsk").append(`<a href='index.html'>${button}><b class='black'>新</b></button><p class='white'>回到新版</p></button></div></a>`);
@@ -351,8 +318,116 @@ $(".frVjsk").wait(function()
 	{
 		$(".frVjsk").append(`<a href='index_old.html'>${button}><b class='black'>舊</b></button><p class='white'>访问旧版</p></button></div></a>`);
 	}
-	
 },".frVjsk")
+$("body").on('click',"#支持作者",function()
+{
+	let str = '',config = {}
+	config.title = '支持开发者'
+
+	str += '创作不易，您的支持和反馈是对我最大的鼓励！\n'
+	str += '反馈网址：<a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/</a>\n'
+	str += `作者爱发电：<a href="https://afdian.com/a/MoeTalk/">https://afdian.com/a/MoeTalk/</a>\n`
+	str += `作者赞赏码：\n<img style="width:50%;"src="${href}/MoeData/Ui/pay.webp">`
+	alert(str,config)
+});
+$("body").on('click',"#设置选项",function()
+{
+	let str = '',config = {}
+	config.title = '设置选项'
+	str += '反馈网址：<a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/</a>\n\n'
+	str += "<button id='mt-style'>切换风格</button> "
+	str += "<button id='截图设置'>截图设置</button> "
+	str += "<button id='下载设置'>下载设置</button> "
+	str += "<button id='实验选项'>实验性选项</button> "
+	str += "<button id='清除缓存'>清除缓存</button> "
+	str += "<div style='display:flex;justify-content:center;'><h1><a class='bold'style='text-decoration:underline;'href='setting.html'>更多设置</a></h1></div>\n"
+	alert(str,config)
+});
+$("body").on('click',"#截图设置",function()
+{
+	let option = ''
+	option += `<option value="image/png" ${mt_settings['图片格式'] == 'image/png' ? 'selected' : ''}>png</option>`
+	option += `<option value="image/jpeg" ${mt_settings['图片格式'] == 'image/jpeg' ? 'selected' : ''}>jpeg</option>`
+	option += `<option value="image/webp" ${mt_settings['图片格式'] == 'image/webp'? 'selected' : ''}>webp</option>`
+	option += `<option value="image/bmp" ${mt_settings['图片格式'] == 'image/bmp' ? 'selected' : ''}>bmp</option>`
+	option += `<option value="image/gif" ${mt_settings['图片格式'] == 'image/gif' ? 'selected' : ''}">gif</option>`
+	let str = ''
+	str += `图片宽度：（默认500，上限需测试）\n<input class='宽度限制' type="number" value="${mt_settings['宽度限制']}">\n`
+	str += `图片最大高度：（默认16384，上限需测试）\n<input class='高度限制' type="number" value="${mt_settings['高度限制']}">\n`
+	str += `图片格式：（默认png，其它格式需测试）\n`
+	str += `<select class='图片格式' style='font-size: 1.5rem;'>${option}</select>\n`
+	option = `<option value="html2canvas" ${mt_settings['截图工具'] != 'snapdom' ? 'selected' : ''}>html2canvas（默认）</option>`
+	option += `<option value="snapdom" ${mt_settings['截图工具'] == 'snapdom' ? 'selected' : ''}>snapdom（测试）</option>`
+	str += `截图工具：\n`
+	str += `<select class='截图工具' style='font-size: 1.5rem;'>${option}</select>\n`
+	let config = {}
+	config.title = '截图设置'
+	config.confirm = '提交'
+	config.id = Math.random().toString().replace('0.','')
+	config.yes = function()
+	{
+		mt_settings['宽度限制'] = $$(`.alert_${config.id} .宽度限制`).val() || 500
+		mt_settings['高度限制'] = $$(`.alert_${config.id} .高度限制`).val() || 16384
+		mt_settings['图片格式'] = $$(`.alert_${config.id} .图片格式`).val()
+		mt_settings['截图工具'] = $$(`.alert_${config.id} .截图工具`).val()
+		saveStorage('设置选项',mt_settings,'local')
+	}
+	alert(str,config)
+});
+$("body").on('click',"#下载设置",function()
+{
+	let str = ''
+	str += `<input class='隐藏前缀' type='checkbox' ${mt_settings['隐藏前缀'] ? 'checked' : ''}>隐藏下载文件名前缀\n`
+	str += `<input class='打包下载' type='checkbox' ${mt_settings['打包下载'] ? 'checked' : ''}>图片打包下载\n`
+	let config = {}
+	config.title = '下载设置'
+	config.confirm = '提交'
+	config.id = Math.random().toString().replace('0.','')
+	config.yes = function()
+	{
+		mt_settings['隐藏前缀'] = $$(`.alert_${config.id} .隐藏前缀`).prop('checked')
+		mt_settings['打包下载'] = $$(`.alert_${config.id} .打包下载`).prop('checked')
+		saveStorage('设置选项',mt_settings,'local')
+	}
+	alert(str,config)
+});
+$("body").on('click',"#清除缓存",function()
+{
+	let str = '清除缓存可能会导致资源加载速度变慢，如非必要不推荐尝试清除\n'
+	str += 'Android客户端会回到初始版本，无法更新应用时可尝试此选项\n'
+	let config = {}
+	config.title = '清除缓存'
+	config.confirm = '清除'
+	config.yes = function()
+	{
+		clearCache()
+	}
+	alert(str,config)
+});
+$("body").on('click',"#实验选项",function()
+{
+	let 调试模式 = mt_settings['调试模式'] ? 'checked' : ''
+	let 桌面模式 = mt_settings['桌面模式'] ? 'checked' : ''
+	let str = ''
+	str += `开启调试模式（测试）：<input class="调试模式" ${调试模式} type="checkbox"/>\n`
+	str += `开启桌面模式（测试）：<input class="桌面模式" ${桌面模式} type="checkbox"/>\n`
+	str += '提交后请刷新页面\n'
+	str += '代码注入（测试）：<textarea style="width:100%;height:20rem;line-height:1.42;"></textarea>\n'
+	let config = {}
+	config.id = Math.random().toString().replace('0.','')
+	config.title = '实验性选项'
+	config.confirm = '提交设置'
+	config.yes = function()
+	{
+		if($('.调试模式').prop('checked'))mt_settings['调试模式'] = true
+		else delete mt_settings['调试模式']
+		if($('.桌面模式').prop('checked'))mt_settings['桌面模式'] = true
+		else delete mt_settings['桌面模式']
+		if($(`.alert_${config.id} textarea`).val())eval($(`.alert_${config.id} textarea`).val())
+		saveStorage('设置选项',mt_settings,'local')
+	}
+	alert(str,config)
+});
 $("body").on('click',"#MoeProject",async function()
 {
 	let config = {}
@@ -949,7 +1024,7 @@ function selectgame(str = '请选择游戏')
 	if(本地 && 客户端)
 	{
 		select += `<span style='background-color:red;color:white;'>提交后会自动下载对应游戏的最新数据</span>\n`
-		select += `如果无法正常下载\n请通过<span class="blue bold">檢</span>查更新下载离线数据包\n也可用于查看文件下载进度\n`
+		select += `如果无法正常下载\n请通过更新<span class="blue bold">應</span>用下载离线数据包\n也可用于查看文件下载进度\n`
 	}
 	
 	let config = {}

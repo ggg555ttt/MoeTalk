@@ -459,8 +459,8 @@ if(客户端 === 'HTML5+' || 客户端 === 'Cordova')
 				}
 				保存文件(`${getNowDate()}.${ext}`,data,'image')
 			}
-			alert(`确定要将这张图保存到图库吗？\n<img src='${src}' style='width:100%;'>`,config)
-		}, 2000);//这里设置长按响应时间
+			alert(`确定要将这张图保存到图库吗？\n<img src='${src}' style='width:50%;'>`,config)
+		}, 1000);//这里设置长按响应时间
 	});
 	$("body").on('touchend', 'img', function(e)
 	{
