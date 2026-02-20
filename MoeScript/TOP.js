@@ -327,7 +327,7 @@ $("body").on('click',"#支持作者",function()
 	str += '创作不易，您的支持和反馈是对我最大的鼓励！\n'
 	str += '反馈网址：<a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/</a>\n'
 	str += `作者爱发电：<a href="https://afdian.com/a/MoeTalk/">https://afdian.com/a/MoeTalk/</a>\n`
-	str += `作者赞赏码：\n<img style="width:50%;"src="${href}/MoeData/Ui/pay.webp">`
+	str += `作者赞赏码：\n<img style="width:50%;"src="${href}MoeData/Ui/pay.webp">`
 	alert(str,config)
 });
 $("body").on('click',"#设置选项",function()
