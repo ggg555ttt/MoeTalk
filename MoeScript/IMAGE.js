@@ -403,22 +403,43 @@ function mt_capture(清晰度,生成图片,标题)
 				if(首次截图)导出截图(filename,blob)
 				首次截图 = true
 			}
+			let format = mt_settings['图片格式'] || 'image/png'
+			let handleBlob = function(blob)
+			{
+				if(!blob)
+				{
+					if(format === 'image/png')
+					{
+						callback()
+						return
+					}
+					INIT_loading(false)
+					正在截图 = false
+					alert('当前浏览器不支持该图片格式')
+					return
+				}
+				if(format !== 'image/png' && blob.type && blob.type !== format)
+				{
+					INIT_loading(false)
+					正在截图 = false
+					alert('当前浏览器不支持该图片格式')
+					return
+				}
+				func(blob)
+			}
 			if(截屏工具 == 'html2canvas')
 			{
 				img.toBlob(function(blob)
 				{
-					blob ? func(blob) : callback()
-				})
+					handleBlob(blob)
+				}, format)
 			}
 			else
 			{
-				(await img.toCanvas()).toBlob(async function()
+				(await img.toCanvas()).toBlob(function(blob)
 				{
-					(await img.toCanvas()).toBlob(function(blob)
-					{
-						func(blob)
-					})
-				})
+					handleBlob(blob)
+				}, format)
 			}
 		}
 		catch
