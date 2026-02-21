@@ -565,7 +565,7 @@ $("body").on('click',".MoeProject",async function()
 $('body').on('click',"#size",async function()
 {
 	INIT_state()
-	let num = 0,str = ''
+	let num = 0,onum = 0,str = ''
 	let s = "<span class='red'>"
 	let ss = "</span>"
 	if('storage' in navigator && 'estimate' in navigator.storage)
@@ -583,9 +583,17 @@ $('body').on('click',"#size",async function()
 		if(!chat.content)continue;
 		if(chat.type !== 'image')num += chat.content.length
 	}
+	for(let i=0,l=otherChats.length;i<l;i++)
+	{
+		let chat = otherChats[i]
+		if(!chat.content)continue;
+		if(chat.type !== 'image')onum += chat.content.length
+	}
 	str += `每张截图长度上限为${s}${mt_settings['高度限制']}${ss}，建议手动设置${s}切割点${ss}或测试极限长度\n`
 	str += `消息数量达到${s}数百甚至上千${ss}可能会造成操作卡顿或崩溃，请以设备性能为准\n`
 	str += `当前分支总字数统计：${s}${num}${ss}\n`
+	str += `其它分支总字数统计：${s}${onum}${ss}(共${otherChats.length}条数据)\n`
+	str += `消息数量过多时，可以将其转入选择肢，避免卡顿\n`
 	alert(str)
 	
 });
