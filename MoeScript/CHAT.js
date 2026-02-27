@@ -2,7 +2,7 @@
 var chatIndex = -1//消息索引
 
 var 粘贴板;
-
+var 搜索 = [];
 var replyDepths = [0];//选择肢总集
 
 var allChats = false
@@ -251,7 +251,7 @@ function moeLog(arr,mode = false)
 }
 function 撤销(goback)
 {
-	$(".dels").prop("checked",false).parent().css("background-color","").css('border-top','')
+	取消选择()
 	if(goback === '前进')操作历史.index++
 	let data = 操作历史.list[操作历史.index].chats
 	let indexs = 操作历史.list[操作历史.index].indexs
@@ -307,14 +307,12 @@ function log(clear = false)
 function 复制()
 {
 	粘贴板 = []
-	if($(".dels:checked").length)
+	if(选择列表.length)
 	{
-		let index;
-		$(".dels:checked").each(function()
+		for(let i=0,l=选择列表.length;i<l;i++)
 		{
-			index = $('.dels').index($(this))
-			粘贴板.push(chats[index])
-		})
+			粘贴板.push(chats[选择列表[i]])
+		}
 		$(".粘贴").show()
 	}
 	else
@@ -324,12 +322,16 @@ function 复制()
 }
 function 粘贴()
 {
-	let index = $('.dels').index($(".dels:checked:eq(0)"))
+	let index = 选择列表[0]
 	let indexs = []
-	let length = 粘贴板.length
-	for(let i = 0;i < length;i++)
+	if(index === undefined)index = -1
+	for(let i=0,l=粘贴板.length;i<l;i++)
 	{
-		if(index !== -1)indexs.push(index+i)
+		if(index !== -1)
+		{
+			indexs.push(index+i)
+			选择列表[0]++
+		}
 		else indexs.push(index)
 	}
 	sendMessage(粘贴板,'','追加',indexs)
@@ -383,7 +385,7 @@ function makeMessage(type,data,chatIndex,mode)
 	{
 		alt = ''
 		head = isfirst(chatIndex,chats)
-		selected = $(`.dels:eq(${chatIndex})`).prop('checked') && mode !== 'add' && mode !== '追加' ? true : false
+		selected = 选择列表.includes(chatIndex) && mode !== 'add' && mode !== '追加' ? true : false
 	}
 
 	if(data.isFirst === true)color = 'blue';
@@ -535,9 +537,9 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		$('.chatText').val('').innerHeight(27)
 		addChat = $('.addChat').prop('checked')
 	}
-	let dels = $('.dels')
-	let checked = $(".dels:checked")
-	if(indexs.length === 0)indexs[0] = dels.index(checked)
+
+	if(indexs.length === 0)indexs[0] = 选择列表[0]
+	if(indexs[0] === undefined)indexs[0] = -1
 	let replyDepth = replyDepths.slice(-1)[0]
 	let nextindex;
 	
@@ -584,7 +586,11 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 				//data.isRight = ['chat','image'].indexOf(type) > -1 && mt_settings['右侧发言'][mt_settings['选择角色'].no]
 				//data.is_breaking = !1
 				data.sCharacter = {no:mt_settings['选择角色'].no,index:mt_settings['选择角色'].index}
-				if(checked.length)chatIndex = dels.index(checked)//向前追加
+				if(选择列表.length)
+				{
+					chatIndex = 选择列表[0]//向前追加
+					选择列表[0]++
+				}
 				else chatIndex = chats.length//末尾追加
 			}
 			try
@@ -609,50 +615,50 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		let message = mode === 'delete' ? '' : makeMessage(chats[chatIndex].type,chats[chatIndex],chatIndex,mode)
 		if(mode === 'delete')
 		{
-			$(`.消息:eq(${chatIndex})`).remove()
+			删除消息(chatIndex);
 			chatIndex = chatIndex-1
 		}
 		if(mode === 'edit')
 		{
 			let chat = chats[chatIndex]
-
-			$(`.消息:eq(${chatIndex})`)[0].outerHTML = message
+			消息替换(chatIndex, message);
 		}
 		if(mode === 'add')
 		{
-			if(chats.length === 1)$('.消息底座').before(message)
+			if(chats.length === 1)末尾追加(message);
 			else
 			{
-				if(checked.length && !addChat)
+				if(选择列表.length && !addChat)
 				{
-					$(`.消息:eq(${chatIndex})`).before(message)
+					向前追加(chatIndex, message);
 				}
 				else
 				{
-					$(`.消息:eq(${chatIndex-1})`).after(message)
+					向后追加(chatIndex-1, message);
 				}
 			}
 		}
 		if(mode === '追加')
 		{
-			if(dels.length <= chatIndex && !checked.length)
+			if(window.chatList.msgIndexMap.length <= chatIndex && !选择列表.length)
 			{
-				$('.消息底座').before(message)
+				末尾追加(message);
 			}
 			else
 			{
-				$(`.消息:eq(${chatIndex})`).before(message)
+				向前追加(chatIndex, message);
 			}
 		}
 		//处理下条消息
 		let nextchat = chats[chatIndex+1] && (!indexs[k+1] || indexs[k]+1 !== indexs[k+1]) ? chats[chatIndex+1] : false
-		if(nextchat)$(`.消息:eq(${chatIndex+1})`)[0].outerHTML = makeMessage(nextchat.type,nextchat,chatIndex+1)
-		nextindex = (mode === 'add' || mode === 'delete') && chatIndex !== -1 ? `.消息:eq(${chatIndex})` : ''
+		if(nextchat){消息替换(chatIndex+1, makeMessage(nextchat.type,nextchat,chatIndex+1));}
+		nextindex = (mode === 'add' || mode === 'delete') && chatIndex !== -1 ? chatIndex : null
 		if((撤销 || addChat || mode === '追加' || (mode === 'edit' && 撤销 !== null)) && mode !== 'delete')
 		{
-			nextindex = blink(`.消息:eq(${chatIndex})`) ? `.消息:eq(${chatIndex})` : ''
+			nextindex = blink(chatIndex) ? chatIndex : null
 		}
 	})
+	if(选择列表.length)updateFirstCheckedBorder()
 	arr.indexs = indexs;moeLog(arr,撤销)//添加操作记录
 	setTimeout(function()
 	{//编辑位置跳转
@@ -662,10 +668,9 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 			behavior = "auto"
 			if(winHeight === window.innerHeight)behavior = "smooth"
 		}
-		if(nextindex)$(nextindex)[0].scrollIntoView({block:'center',behavior:behavior})
-	}, 1)
+		if(nextindex !== null)跳转索引(nextindex,{block:'center',behavior:behavior});
+	}, 100)
 	saveStorage('chats',[...chats,...otherChats],'local')
-	if(checked.length)$('.消息').css('border-top','').find(".dels:checked").eq(0).parent().css('border-top','2px dashed #a2a2a2')//更新追加虚线
 	chats.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
 	INIT_state()
 }
@@ -689,7 +694,7 @@ $("body").on('click',".显示位置",function()
 {
 	let 位置 = this.title
 	let arr = {}
-	if($(".dels:checked").length > 1)
+	if(选择列表.length > 1)
 	{
 		arr = {isLeft:'<<',isCenter:'><',isRight:'>>',isDefault:'<>'}
 		if(位置 == 'isLeft')位置 = 'isCenter'
@@ -712,7 +717,7 @@ function 显示位置_说明(类型,说明)
 {
 	let 角色头像 = $('.角色头像')[0]
 	let arr =  {isLeft:'靠左',isCenter:'居中',isRight:'靠右'}
-	if($(".dels:checked").length < 2)
+	if(选择列表.length < 2)
 	{
 		if(类型 == 'chat')arr = {isLeft:'默认靠左',isCenter:'默认靠左',isRight:'靠右'}
 		if(类型 == 'reply' || 类型 == 'heart' || 角色头像.alt == 0)arr = {isLeft:'默认靠右',isCenter:'默认靠右',isRight:'默认靠右'}
@@ -829,8 +834,7 @@ function 生成消息(内容类型,length)
 }
 $("body").on('click',".编辑界面 .确认",function()
 {
-	let indexs = []
-	$('.dels:checked').each(function(k,v){indexs.push($('.dels').index(v))})
+	let indexs = 选择列表;
 	let 操作模式 = $(".操作模式").text() == '追加' ? 'add' : 'edit'
 	let 内容类型 = $('.内容类型').attr('title')
 	if(!['chat','reply','heart','info','image'].includes(内容类型))内容类型 = ''
@@ -850,14 +854,14 @@ $("body").on('click',".编辑界面 .取消",function()
 });
 $("body").on('click',".编辑界面 .删除",function()
 {
-	$('.dels:checked').length > 1 ? $('.INDEX_delete').click() : sendMessage({},'','delete',[chatIndex])
+	选择列表.length > 1 ? $('.INDEX_delete').click() : sendMessage({},'','delete',[chatIndex])
 });
 $("body").on('click',".设置头像",function()
 {
 	let no = $('.角色头像').attr('alt')
 	let index = $('.角色头像').attr('title')
 	let HeadList = {direction:'row',list:[]}
-	let checked = $('.dels:checked').length
+	let checked = 选择列表.length
 	if(CHAT_HeadList)
 	{
 		HeadList = CHAT_HeadList
@@ -919,7 +923,7 @@ $("body").on('click',".设置头像",function()
 });
 $("body").on('click',".定义样式",function()
 {
-	let checked = $('.dels:checked').length
+	let checked = 选择列表.length
 	let text = `<textarea class="bold css scrollbar" style="font-size:1rem;width:100%;height:${$('body').height()*0.7};"></textarea>`
 	let config = {}
 	config.title = '内容样式'
@@ -989,7 +993,7 @@ function 编辑消息(index)
 	$(".预览模式").css('color','')
 	$(".操作模式").text('编辑')
 
-	let checked = $('.dels:checked').length
+	let checked = 选择列表.length
 	if(checked > 1)
 	{
 		$('.批量编辑').show()
@@ -1055,10 +1059,10 @@ function 编辑消息(index)
 	if(chat.heads)CHAT_HeadList = {...chat.heads,...{}}	
 	if(chat.style)CHAT_Style = [...chat.style,...[]]
 }
-$("body").on('click',".编辑",function(){编辑消息($('.消息').index($(this).parents('.消息')))});
+$("body").on('click',".编辑",function(){编辑消息(获取索引($(this)[0]))});
 $("body").on('click',".头像框",function()
 {
-	chatIndex = $('.头像框').index($(this))
+	chatIndex = 获取索引($(this)[0]);
 	if(chats[chatIndex].type === 'chat' || chats[chatIndex].type === 'image')
 	{
 		sendMessage({...chats[chatIndex],...{isFirst:!chats[chatIndex].isFirst}},chats[chatIndex].type,'edit',[chatIndex],null)
@@ -1080,14 +1084,11 @@ $("body").on('click',".INDEX_delete",function()
 	let title = ''
 	let clear = false
 
-	if($(".dels:checked").length)
+	if(选择列表.length)
 	{
-		$('.dels:checked').each(function(k,v)
-		{
-			indexs.push($('.dels').index(v))
-		})
+		indexs = 选择列表
 		title = '批量删除'
-		str += `您一共选中了${$(".dels:checked").length}条消息\n\n点击【${mt_text.confirm[mtlang]}】将删除\n`
+		str += `您一共选中了${选择列表.length}条消息\n\n点击【${mt_text.confirm[mtlang]}】将删除\n`
 		str += '操作可撤销'
 	}
 	else
@@ -1120,8 +1121,10 @@ $("body").on('click',".INDEX_delete",function()
 			clear = true
 			mt_schar = {}
 			EMOJI.pages = {}
-			mt_settings.选择角色 = {no: 0,index: 1,list: []}
-			charList(true)//更新列表
+			replyDepths = [0]
+			$('.reply').hide()
+			// mt_settings.选择角色 = {no: 0,index: 1,list: []}
+			// charList(true)//更新列表
 			数据操作('Tc')
 		}
 		sendMessage({},'','delete',indexs)

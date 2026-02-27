@@ -109,15 +109,7 @@ function saveclub()
 }
 function charList(selected = !1)
 {
-	$('.名字').each(function()
-	{
-		let name = this.title.split(',')
-		let id = name[0]
-		let img = name[1]
-		name = loadname(id,img)
-		if(this.nodeName === 'BUTTON')name += mt_text['go_relationship_event'][mtlang]
-		$(this).html(name)
-	})
+	updateAllNames();
 	saveClub = false;
 	custom_chars()
 	$('.eIEKpg:eq(0)').click();//更新列表

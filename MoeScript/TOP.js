@@ -60,7 +60,6 @@ async function 加载数据()
 		for(let key in head)await 数据操作('Is',key,head[key])
 		数据操作('Sr','mt-head')
 	}
-
 	allChats = await 数据操作('Sg','chats') || []
 	otherChats = []
 	chats = []
@@ -72,11 +71,6 @@ async function 加载数据()
 	})
 	allChats = []
 	refreshMessage(chats)//$('#mt_watermark').click()//显示消息
-	$(".INDEX_tips").wait(function()
-	{
-		chats.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
-		otherChats.length ? $('.reply').show() : $('.reply').hide()//选择肢管理
-	},".INDEX_tips");
 
 	club(true)
 	let game = mt_settings['选择游戏'] || 'NONE';
@@ -209,6 +203,7 @@ $(async function()
 		await 检测版本();
 		[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
 	}
+	if(mt_settings['虚拟滚动'] !== '关闭')window.chatList = new DynamicVirtualScroll('.显示区域', '.元素列表');
 	加载数据()
 	if(MikuTalk)
 	{
@@ -274,10 +269,6 @@ async function newyear(url)
 $("body").on('click',function(e)
 {
 	INIT_state()
-	$('.delsNum').text($(".dels:checked").length)
-	let name = loadname(mt_settings['选择角色'].no,mt_settings['选择角色'].index)
-	let str = $(".dels:checked").length ? '在选中的消息上方插入' : mt_text.input_comment[mtlang]
-	$('.chatText').attr('placeholder',name+'：'+str)
 	if(e.originalEvent && e.originalEvent.isTrusted)//判断是否是真实点击事件
 	{
 		if(恭喜发财)//新年快乐
@@ -338,10 +329,56 @@ $("body").on('click',"#设置选项",function()
 	str += "<button id='mt-style'>切换风格</button> "
 	str += "<button id='截图设置'>截图设置</button> "
 	str += "<button id='下载设置'>下载设置</button> "
-	str += "<button id='实验选项'>实验性选项</button> "
+	str += "<button id='发送方式'>文字发送方式</button> "
+	str += "<button id='虚拟滚动'>虚拟滚动（测试）</button><br><br>"
+	str += "<button id='实验选项'>实验性选项（测试）</button> "
 	str += "<button id='清除缓存'>清除缓存</button> "
 	str += "<div style='display:flex;justify-content:center;'><h1><a class='bold'style='text-decoration:underline;'href='setting.html'>更多设置</a></h1></div>\n"
 	alert(str,config)
+});
+$("body").on('click',"#发送方式",function()
+{
+	mt_settings['发送方式'] = mt_settings['发送方式'] || '点击'
+	let str = `当前文字发送方式：<button class="发送方式"onclick="innerText=innerText=='回车'?'点击':'回车'">${mt_settings['发送方式']}</button>\n\n`
+	str += '通用快捷按键：\n换行：Shift+Enter\n发送：Ctrl+Enter'
+	let config = {}
+	config.title = '文字发送方式'
+	config.confirm = '提交'
+	config.yes = function()
+	{
+		mt_settings['发送方式'] = $('.发送方式').text()
+		saveStorage('设置选项',mt_settings,'local')
+	}
+	alert(str,config)
+});
+$("body").on('click',"#虚拟滚动",function()
+{
+	let str = '此功能开启后可改善浏览和编辑体验，部分设备可能会有问题\n'
+	str += `开启<input type="checkbox" ${mt_settings['虚拟滚动'] == '关闭' ? '' : 'checked'}>`
+	let config = {}
+	config.title = '虚拟滚动（测试）'
+	config.confirm = '提交'
+	config.id = Math.random().toString().replace('0.','')
+	config.yes = function()
+	{
+		if($(`.alert_${config.id} input`).prop('checked'))
+		{
+			mt_settings['虚拟滚动'] = '开启'
+			if(!window.chatList)window.chatList = new DynamicVirtualScroll('.显示区域', '.元素列表');
+		}
+		else
+		{
+			mt_settings['虚拟滚动'] = '关闭'
+			if(window.chatList)
+			{
+				window.chatList.destroy()
+				window.chatList = null
+			}
+		}
+		saveStorage('设置选项',mt_settings,'local')
+	}
+	alert(str,config)
+
 });
 $("body").on('click',"#截图设置",function()
 {
@@ -366,10 +403,10 @@ $("body").on('click',"#截图设置",function()
 	config.id = Math.random().toString().replace('0.','')
 	config.yes = function()
 	{
-		mt_settings['宽度限制'] = $$(`.alert_${config.id} .宽度限制`).val() || 500
-		mt_settings['高度限制'] = $$(`.alert_${config.id} .高度限制`).val() || 16384
-		mt_settings['图片格式'] = $$(`.alert_${config.id} .图片格式`).val()
-		mt_settings['截图工具'] = $$(`.alert_${config.id} .截图工具`).val()
+		mt_settings['宽度限制'] = $(`.alert_${config.id} .宽度限制`).val() || 500
+		mt_settings['高度限制'] = $(`.alert_${config.id} .高度限制`).val() || 16384
+		mt_settings['图片格式'] = $(`.alert_${config.id} .图片格式`).val()
+		mt_settings['截图工具'] = $(`.alert_${config.id} .截图工具`).val()
 		saveStorage('设置选项',mt_settings,'local')
 	}
 	alert(str,config)
@@ -609,107 +646,6 @@ $("body").on('click',".operate",function()
 		$('.operateTools').hide()
 	}
 });
-//全选
-$('body').on('click',"#delsall",function()
-{
-	if($(".dels:checked").length !== $(".dels").length)
-	{
-		$(".dels").each(function()
-		{
-			$(this).prop("checked",true);
-			$(this).parent().css("background-color","rgb(202,215,221)")//
-		});
-	}
-	else
-	{
-		$(".dels").each(function()
-		{
-			$(this).prop("checked",false);
-			$(this).parent().css("background-color","")//
-		});
-	}
-	$('.消息').css('border-top','')
-	$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
-})
-//反选
-$('body').on('click',"#rdelsall",function()
-{
-	$(".dels").each(function()
-	{
-		$(this).prop("checked",!$(this).prop("checked"));
-		if($(this).prop('checked'))$(this).parent().css("background-color","rgb(202,215,221)")//
-		else $(this).parent().css("background-color","")//
-	});
-	$('.消息').css('border-top','')
-	$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
-})
-//区间选择
-$('body').on('click',"#delsto",function()
-{
-	if($(".dels:checked").length > 1)
-	{
-		let start = $(".dels").index($(".dels:checked:eq(0)"));
-		let end = $(".dels").index($(".dels:checked:eq(-1)"));
-		$(".dels").each(function(index)
-		{
-			if(index >= start && index <= end)
-			{
-				$(this).prop("checked",true);
-				$(this).parent().css("background-color","rgb(202,215,221)")//
-			}
-		});
-	}
-	$('.消息').css('border-top','')
-	$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
-})
-//隐藏工具按钮拓展
-$('body').on('click',".Screenshot_Mode",function()
-{
-	    
-	if($('.tools').css('display') === 'none')
-	{
-		$('.tools').show()//工具栏
-		// $('.itLRpr').show()//顶部栏
-		// $('.jjPyvz').show()//底部栏
-		// $('.dCSLyt').css({top:'3.5rem',paddingBottom:'3.5rem'})
-		$('.消息').each(function()
-		{
-			$(this).append(`<input type="checkbox" class="dels" style="background-color: ${$(this).attr('title')};" data-html2canvas-ignore="true">`)
-		})
-	}
-	else
-	{
-		$('.消息').css('background-color','').css('border-top','')
-		$('.dels').remove()
-
-		$('.tools').hide()//工具栏
-		// $('.itLRpr').hide()//顶部栏
-		// $('.jjPyvz').hide()//底部栏
-		// $('.dCSLyt').css({top:'0rem',paddingBottom:'0rem'})
-		$('.operateTools').hide()
-	}
-})
-//选框被选中背景色
-$('body').on('change',".dels",function()
-{
-	if($(this).prop('checked'))
-	{
-		$(this).parent().css("background-color","rgb(202,215,221)")//
-		$('.消息').css('border-top','')
-		$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
-	}
-	else
-	{
-		$(this).parent().css("background-color","")
-		$('.消息').css('border-top','')
-		$(".dels:checked:eq(0)").parent().css('border-top','2px dashed #a2a2a2')
-	}
-})
-//自动跳到被选位置
-$('body').on('click',".chatText",function()
-{
-	if($(".dels:checked").length > 0)$(".dels:checked")[0].scrollIntoView({block:'center',behavior:"smooth"})
-})
 //切换风格
 $('body').on('click',"#mt-style",function()
 {
@@ -848,17 +784,7 @@ $('body').on('click',".自定样式",function()
 		}
 	}
 })
-function refreshMessage(json)
-{
-	$('.消息').remove()
-	let html = ''
-	json.map(function(v,k)
-	{
-		html += makeMessage(v.type,v,k,'add')
-	})
-	$('.消息底座').before(html)
-	json.length ? $('.INDEX_tips').hide() : $('.INDEX_tips').show()//开头提示
-}
+
 function replyDepth(str,mode)
 {
 	let replyButton,reply = 0
@@ -933,7 +859,7 @@ function replyDepth(str,mode)
 }
 $("body").on('click',".选择肢.跳转",function()
 {
-	if(!$(this).text())return;
+	if(!$(this).text().trim())return;
 	replyDepth($(this).text(),'go')
 	refreshMessage(chats)
 });
@@ -942,19 +868,11 @@ $("body").on('click',".replyBack",function()
 {
 	let replyButton = replyDepth(null,'back')
 	refreshMessage(chats)
-	setTimeout(function()
-	{
-		if(replyButton !== 0)$(`.跳转:contains("${replyButton}")`)[0].scrollIntoView({block:'center',behavior:"smooth"})
-	}, 100)
 });
 $("body").on('click',".replyHome",function()
 {
 	let replyButton = replyDepth(0,'home')
 	refreshMessage(chats)
-	setTimeout(function()
-	{
-		if(replyButton !== 0)$(`.跳转:contains("${replyButton}")`)[0].scrollIntoView({block:'center',behavior:"smooth"})
-	}, 100)
 });
 function TOP_replyEdit()
 {
@@ -1115,44 +1033,36 @@ setInterval(async function()
 },600*1000)
 if(客户端 === 'NW.js' || mt_settings['桌面模式'])
 {
-	// 使用事件委托，监听所有 input/textarea 的 blur
-	document.addEventListener('blur', (event) => {
-	  const el = event.target;
-	  const to = event.relatedTarget;
-
-	  if (!el.matches?.('input, textarea')) return;
-	  if (to?.matches?.('input, textarea')) return;
-
-	  // 防抖 + 微任务优化（非必需，但更流畅）
-	  queueMicrotask(() => {
-	    if (document.activeElement !== el) {
-	      el.focus();
-	    }
-	  });
-	}, true); // 必须用捕获阶段
+	// 使用事件委托，监听全局 blur
+	document.addEventListener('blur',(event)=>
+	{
+		const el = event.target;
+		// 1. 【最高性能判断】直接比对 tagName 字符串，比 .matches() 快一个数量级
+		if (el.tagName !== 'TEXTAREA') return;
+		const to = event.relatedTarget;
+		// 3. 【最高性能判断】目标节点的判断同样改用 tagName
+		if (to && to.tagName === 'TEXTAREA')return;
+		// 防抖 + 微任务优化
+		queueMicrotask(()=> 
+		{
+			// 4. 【额外保险】强烈建议加上 preventScroll: true
+			// 这样即使是普通的文本输入框被强行拉回焦点，也不会引发页面意外的滚动跳转
+			if(document.activeElement !== el)el.focus({preventScroll: true}); 
+		});
+	}, true); // 捕获阶段
 }
-
-
-/*
-function getVisibleParagraphs() {
-  const $container = $('.gGreRb');
-  const containerRect = $container[0].getBoundingClientRect();
-  const visible = [];
-
-  $('.hGxlOh .消息').each(function() {
-    const pRect = this.getBoundingClientRect();
-
-    // 判断是否在可视区域内
-    if (pRect.bottom > containerRect.top && pRect.top < containerRect.bottom) {
-      visible.push($(this));
-    }
-  });
-
-  return visible;
+else
+{
+	document.addEventListener('mousedown',(event)=>
+	{
+		// 1. 判断点击的区域是否是我们的特定 ID 或 Class（支持内部子元素）
+		const isSpecificTarget = event.target.closest('#发送消息');
+		// 如果点到的不是特定元素，什么都不做，让系统正常处理（正常失焦）
+		if (!isSpecificTarget) return;
+		// 2. 检查当前处于焦点状态的是否是 TEXTAREA
+		const activeEl = document.activeElement;
+		// 3. 【核心逻辑】阻止鼠标按下的默认行为！
+		// 这样点击特定按钮时，浏览器的焦点根本就不会发生转移，TEXTAREA 原生保持激活！
+		if(activeEl && activeEl.tagName === 'TEXTAREA')event.preventDefault();
+	});
 }
-// 使用示例：滚动时检测
-$('.gGreRb').on('scroll', function() {
-  const visiblePs = getVisibleParagraphs();
-  console.log('Currently visible <p>:', visiblePs);
-});
-*/

@@ -285,7 +285,7 @@ function UPDATE_OldData(json)//识别存档
 }
 function 截取存档()
 {
-	let text = `你一共选中了${$(".dels:checked").length}条数据\n请输入标题和作者名：\n标题：<input style='font-size:1.2rem;'>\n作者：<input style='font-size:1.2rem;'>`
+	let text = `你一共选中了${选择列表.length}条数据\n请输入标题和作者名：\n标题：<input style='font-size:1.2rem;'>\n作者：<input style='font-size:1.2rem;'>`
 	let config = {}
 	config.id = Math.random().toString().replace('0.','')
 	config.title = '截取存档'
@@ -298,10 +298,10 @@ function 截取存档()
 		info.title = $(`.alert_${config.id} input`).eq(0).val() || '无题'
 		info.nickname = $(`.alert_${config.id} input`).eq(1).val()
 		info.date = time
-		$(".dels:checked").each(function(k,v)
+		for(let i=0,l=选择列表.length;i<l;i++)
 		{
-			mmt.push(chats[$(".dels").index($(this))]);
-		})
+			mmt.push(chats[选择列表[i]])
+		}
 		let json = await 生成存档(info,false,mmt)
 		$('.存档格式').val('json')
 		if(mt_settings['隐藏前缀'])filename = ''

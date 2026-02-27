@@ -3,13 +3,13 @@ function 编辑消息(index)
 {
 	chatIndex = index
 	let chat = chats[chatIndex]
-	CHAT_HeadList = $('.dels:checked').length < 2 && chats[chatIndex] && chats[chatIndex].heads ? {...chats[chatIndex].heads,...{}} : false
+	CHAT_HeadList = 选择列表.length < 2 && chats[chatIndex] && chats[chatIndex].heads ? {...chats[chatIndex].heads,...{}} : false
 	$('.编辑界面').addClass('visible')//显示编辑界面
 	$('.edit_2_1_1 input').hide().prop('checked',false)
 	$('.edit_2_1_1 label').hide()
 
 	$('.edit_button button').hide().removeClass('selected')
-	if($('.dels:checked').length < 2)$(`.edit_button .${chat.type}`).addClass('selected') 
+	if(选择列表.length < 2)$(`.edit_button .${chat.type}`).addClass('selected') 
 
 	$('.edit_3').show()
 	$('.图片选项').hide()
@@ -17,7 +17,7 @@ function 编辑消息(index)
 	
 	$('.content').innerHeight(27)
 	$('.time').innerHeight(27)
-	if($('.dels:checked').length > 1)
+	if(选择列表.length > 1)
 	{
 		$('.typeTitle').text('批量编辑')
 
@@ -103,7 +103,7 @@ $("body").on('click',".edit_button button",function()
 	if(type === 'image')
 	{
 		$('.edit_3').hide()
-		$('.dels:checked').length < 2 || $('.editTalk').prop('checked') ? $('.isCenter').show().parent().show() : ''
+		选择列表.length < 2 || $('.editTalk').prop('checked') ? $('.isCenter').show().parent().show() : ''
 		$('.图片选项').show()
 	}
 	else

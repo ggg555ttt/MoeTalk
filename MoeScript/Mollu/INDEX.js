@@ -211,10 +211,12 @@
 												src: loadhead(e.no,e.index),//#下方快捷角色选择框
 												onClick: function(img)
 												{
+													let no = img.target.alt
+													let index = img.target.title
+													let name = loadname(no, index)
 													if($$('.编辑界面').hasClass('visible'))
 													{
-														let no = img.target.alt
-														let index = img.target.title
+														
 														$$('.角色头像').attr(
 														{
 															alt: no,
@@ -222,12 +224,13 @@
 															src: loadhead(no, index)
 														})
 														$$('.角色ID').text('ID：'+no)
-														$$('.角色名称').attr('placeholder',loadname(no, index))
+														$$('.角色名称').attr('placeholder',name)
 														显示位置_说明($$('.内容类型').attr('title'),$$('.显示位置').attr('title'))
 														return
 													}
 													_(e)
-													$$('.chatText').click()
+													let str = 选择列表.length ? '在上方插入' : mt_text.input_comment[mtlang]
+													$$('.chatText').click().attr('placeholder',name+'：'+str)
 													setTimeout(function()
 													{
 														if($$('.fzOyMd.selected')[0])$$('.fzOyMd.selected')[0].scrollIntoView({inline:'center'})//也许只有放在首行才会生效
@@ -266,10 +269,11 @@
 								src: loadhead(d.I.no,d.I.index),//#右侧老师本人
 								onClick: function(img)
 								{
+									let no = img.target.alt
+									let index = img.target.title
+									let name = loadname(no, index)
 									if($$('.编辑界面').hasClass('visible'))
 									{
-										let no = img.target.alt
-										let index = img.target.title
 										$$('.角色头像').attr(
 										{
 											alt: no,
@@ -277,12 +281,13 @@
 											src: loadhead(no, index)
 										})
 										$$('.角色ID').text('ID：'+no)
-										$$('.角色名称').attr('placeholder',loadname(no, index))
+										$$('.角色名称').attr('placeholder',name)
 										显示位置_说明($$('.内容类型').attr('title'),$$('.显示位置').attr('title'))
 										return
 									}
 									e((0, h.Ks)(d.I))
-									$$('.chatText').click()
+									let str = 选择列表.length ? '在上方插入' : mt_text.input_comment[mtlang]
+									$$('.chatText').click().attr('placeholder',name+'：'+str)
 									saveStorage('设置选项',mt_settings,'local')
 								},
 								priority: !0
@@ -1074,6 +1079,11 @@
 			}
 			var Q = function()
 				{
+					if(MMT目录)
+					{
+						MMT目录 = false
+						location.reload(true)
+					}
 					var e, n = (0, i.C)(function(e)
 						{
 							return e.global.isMobile
@@ -1745,7 +1755,7 @@
 								}), (0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
-									children: [`${$$('.dels:checked').length ? '区域截图' : L.Z.download_to_image[g]}`,'(',(0, m.jsx)('span',
+									children: [`${选择列表.length ? '区域截图' : L.Z.download_to_image[g]}`,'(',(0, m.jsx)('span',
 									{
 										className: "截图数量",
 										children: imageArr.length
@@ -1781,7 +1791,16 @@
 								}), (0, m.jsx)('取消',{
 									hidden: true,
 									className: '关闭截图',
-									onClick: function(){srceenMode(),D(),$$('.截图区域').hide()}
+									onClick: function()
+									{
+										srceenMode()
+										D()
+										$$('.截图区域').hide()
+										if(mt_settings['虚拟滚动'] !== '关闭' && !window.chatList)
+										{
+											window.chatList = new DynamicVirtualScroll('.显示区域', '.元素列表');
+										}
+									}
 								})]
 							}), (0, m.jsx)("div",
 							{
@@ -1963,6 +1982,7 @@
 														className: "scale",
 														onChange: function()
 														{
+															INIT_loading(1)
 															截屏预览(e)
 															P(e)
 														},
@@ -2014,10 +2034,10 @@
 										{
 											$$('#size').click()
 										},
-										children: [$$('.dels:checked').length ? '已选中' : '共', (0, m.jsx)("span",
+										children: [选择列表.length ? '已选中' : '共', (0, m.jsx)("span",
 										{
 											className:'bold red',
-											children: $$('.dels:checked').length || chats.length
+											children: 选择列表.length || chats.length
 										}), '条消息，长', (0, m.jsx)("span",
 										{
 											className:'INDEX_imageLength bold red',
@@ -2098,6 +2118,7 @@
 											disabled: chats.length < 1,
 											onClick: function()
 											{
+												INIT_loading(1)
 												截屏预览(S)
 												O()
 											},
@@ -2602,7 +2623,7 @@
 							{
 								id: "tool-image",//@截图工具
 								title: "Image Download",
-								onClick: function()
+								onClick: async function()
 								{
 									$$('#download_to_image').css({zIndex:300,opacity:'',visibility:''})
 									if(正在截图)y(!0)
@@ -2610,8 +2631,19 @@
 									{
 										$$('.关闭截图').click()
 										imageArrL = 0
+										INIT_loading(1)
+										if(window.chatList)
+										{
+											window.chatList.destroy()
+											window.chatList = null
+											await 等待图片($$('.hGxlOh'))
+										}
 										mt_title()
-										setTimeout(function(){截屏预览(),y(!0)},1)
+										setTimeout(function()
+										{
+											截屏预览()
+											y(!0)
+										},100)
 									}
 									
 								}
@@ -3337,20 +3369,16 @@
 					var P = function(e, n)
 						{
 							//*更改文字发送方式
-							if(13 === (e.which || e.keyCode) && !(e.ctrlKey || e.shiftKey) && "" !== e.currentTarget.value && mt_settings['发送方式'] === '回车')
-							{
+							if(13 === (e.which || e.keyCode) && !e.shiftKey && "" !== e.currentTarget.value && mt_settings['发送方式'] === '回车')
+							{//回车发送
 								e.preventDefault()
 								n()
 							}
-							if(13 === (e.which || e.keyCode) && (e.ctrlKey || e.shiftKey) && "" !== e.currentTarget.value && mt_settings['发送方式'] === '点击')
-							{
+							if(13 === (e.which || e.keyCode) && e.ctrlKey && !e.shiftKey && "" !== e.currentTarget.value && mt_settings['发送方式'] !== '回车')
+							{//点击发送
 								e.preventDefault()
 								n()
 							}
-							//*更改文字发送方式
-							/*
-							13 === (e.which || e.keyCode) && (e.ctrlKey || e.shiftKey) && (e.preventDefault(), "" !== e.currentTarget.value && n())
-							*/
 						};
 					return (0, m.jsxs)(eq,
 					{
@@ -3389,7 +3417,7 @@
 												let text = $$('.chatText')[0]
 												if(text.value !== '')
 												{
-													sendMessage({content: text.value},'chat')//#单击发送
+													sendMessage({content: text.value},'chat')//#按键发送
 													text.value = ''
 													text.click()
 												}
@@ -3399,14 +3427,15 @@
 								})
 							}), (0, m.jsx)(eU,
 							{
-								title: "send",
+								title: "发送消息",
+								id: '发送消息',
 								//disabled: w.length < 1,
 								onClick: function()
 								{
 									let text = $$('.chatText')[0]
 									if(text.value !== '')
 									{
-										sendMessage({content: text.value},'chat')//#单击发送
+										sendMessage({content: text.value},'chat')//#点击发送
 										text.value = ''
 										text.click()
 									}
@@ -3496,7 +3525,7 @@
 								onClick: function()
 								{
 									$$('.包含自定义数据').prop('checked',false)
-									if($$(".dels:checked").length > 0)
+									if(选择列表.length > 0)
 									{
 										let config = {}
 										config.style = 'text-align:center;'
@@ -3506,7 +3535,7 @@
 										let onclick1 = `onclick="$$('#tool-save').click(),${confirm}"`
 										let onclick2 = `onclick="截取存档(),${confirm}"`
 										let button = `<button ${onclick1}>导出完整数据</button><button ${onclick2}>导出选中数据</button>`
-										let html = `<p class='red'>你一共选中了${$$(".dels:checked").length}条数据</p>请选择你的操作：\n`
+										let html = `<p class='red'>你一共选中了${选择列表.length}条数据</p>请选择你的操作：\n`
 										html += `\n<div style="display:flex;justify-content:space-evenly;">${button}</div>\n`
 										alert(html,config)
 									}
@@ -4272,7 +4301,7 @@
 										{
 											return (0, m.jsx)(c.Bx,
 											{
-												hidden: $$('.dels:checked').length > 1 && !$$('.editType').prop('checked'),
+												hidden: 选择列表.length > 1 && !$$('.editType').prop('checked'),
 												style:
 												{
 													margin: "0 auto",//@改为居中
@@ -4427,7 +4456,7 @@
 												let no = e.target.alt
 												let index = e.target.title
 												let HeadList = {direction:'row',list:[]}
-												let checked = $$('.dels:checked').length
+												let checked = 选择列表.length
 												if(CHAT_HeadList)
 												{
 													HeadList = CHAT_HeadList
@@ -4564,7 +4593,7 @@
 										title: "删除消息",
 										onClick: function()
 										{
-											$$('.dels:checked').length > 1 ? $$('.INDEX_delete').click() : sendMessage({},'','delete',[chatIndex])
+											选择列表.length > 1 ? $$('.INDEX_delete').click() : sendMessage({},'','delete',[chatIndex])
 										},
 										children: (0, m.jsx)(c.xL,
 										{
@@ -4587,7 +4616,7 @@
 											let type = ''
 											let 图片文件 = $$('.图片文件').attr('src') || ''
 											let 图片链接 = $$('.图片文件').attr('title') || ''
-											if($$('.dels:checked').length > 1)
+											if(选择列表.length > 1)
 											{
 												let data = {}
 												data.heads = CHAT_HeadList ? CHAT_HeadList : {direction:'row',list:[]}
@@ -4622,18 +4651,13 @@
 												{
 													data.sCharacter = {no: $$('.角色头像').attr('alt'),index: $$('.角色头像').attr('title')}
 												}
-												
-												let indexs = []
-												$$('.dels:checked').each(function(k,v)
-												{
-													indexs.push($$('.dels').index(v))
-												})
+
 												let config = {}
 												config.confirm = '提交'
 												config.yes = function()
 												{
 													data.isLeft = data.isFirst
-													sendMessage(data,type,'edit',indexs)
+													sendMessage(data,type,'edit',选择列表)
 												}
 												let str = `※注意!!!\n只输入一个空格会判断为清空该内容\n图片转为其它类型时会清除文件\n发言人为空时则不修改发言人\n点击【${mt_text.confirm[mtlang]}】开始批量修改`
 												alert(str,config)
@@ -4675,340 +4699,6 @@
 						})
 					})
 				},
-				eX = o.ZP.div.withConfig(
-				{
-					displayName: "PopupChatChange__Wrapper",
-					componentId: "sc-11i0qdg-0"
-				})(["", " height:auto;padding-bottom:1rem;"], function(e)
-				{
-					return e.theme.common.flexBox(
-					{})
-				}),
-				eW = function(e)
-				{
-					var n = e.character,
-						t = (0, i.C)(function(e)
-						{
-							return mtlang//#e.global.lang
-						});
-					return (0, m.jsxs)(e$,
-					{
-						children: [(0, m.jsxs)(eJ,
-						{
-							style:
-							{
-								alignItems: "center"
-							},
-							children: [(0, m.jsx)(eV,
-							{}), (0, m.jsx)("span",
-							{
-								className: "bold",
-								children: L.Z.relationship_event[t]
-							})]
-						}), (0, m.jsx)(eN.HR,
-						{}), (0, m.jsx)(eN._x,
-						{
-							style:e.style,
-							className: "medium 编辑",
-							dangerouslySetInnerHTML:{__html:n}
-							// children: n
-						})]
-					})
-				},
-				e$ = o.ZP.div.withConfig(
-				{
-					displayName: "HeartBox__Container",
-					componentId: "sc-cwriov-0"
-				})(["", ";padding:0.5rem;font-size:1.1rem;height:auto;border:1px solid ", ";border-radius:1rem;color:", ";background-color:", `;background-image:url('${href}MoeData/Ui/Favor_Schedule_Deco.webp');background-repeat:no-repeat;background-position:right;background-size:auto 100%;line-height:1.5rem;`], function(e)
-				//#心形背景
-				{
-					return e.theme.common.flexBox(
-					{
-						direction: "column",
-						align: "flex-start"
-					})
-				}, function(e)
-				{
-					return e.theme.color.rgb221_210_216
-				}, function(e)
-				{
-					return e.theme.color.rgb76_91_111
-				}, function(e)
-				{
-					return e.theme.color.rgb252_238_240
-				}),
-				eJ = o.ZP.div.withConfig(
-				{
-					displayName: "HeartBox__Flex",
-					componentId: "sc-cwriov-1"
-				})(["", ";height:auto;"], function(e)
-				{
-					return e.theme.common.flexBox(
-					{
-						justify: "flex-start"
-					})
-				}),
-				eV = o.ZP.div.withConfig(
-				{
-					displayName: "HeartBox__Border",
-					componentId: "sc-cwriov-2"
-				})(["border-left:2px solid ", ";height:1.1rem;margin-right:0.3rem;"], function(e)
-				{
-					return e.theme.color.rgb252_142_155
-				}),
-				e6 = function(e)
-				{//消息界面
-					var n = e.chat,//{...e.chat,...{}},
-						t = e.index,
-						o = e.handleShow,
-						a = (0, i.T)(),
-						l = (0, i.C)(function(e)
-						{
-							return e.makeChat.chats
-						}),
-						d = (0, i.C)(function(e)
-						{
-							return mtlang//#e.global.lang
-						}),
-						h = (0, i.C)(function(e)
-						{
-							return e.global.isScreenshot
-						}),
-						f = (0, r.useRef)(null);
-					// let html = makeMessage(n.type,n,t,'index')
-					// return (0, m.jsx)('div',
-					// {
-					// 	className: '消息',
-					// 	title: n.is_breaking === true ? 'red' : n.isFirst === true ? 'blue' : 'transparent',
-					// 	style: {padding: html[1] ? "" : "0.5rem 1rem 0 1rem"},
-					// 	dangerouslySetInnerHTML: {__html: html[0]}
-					// })
-					let isFirst = isfirst(t,l)
-					let isCenter = n.isCenter && n.type === 'image'
-					let title = `${n.sCharacter.no},${n.sCharacter.index}`
-					if(n.name)title = null
-					let style = mt_settings['文字样式'][n.type] ? mt_settings['文字样式'][n.type] : {}
-					delete style.textAlign,style = {...style,...{}}//防止连带修改设置属性
-					foreach([...mt_settings.风格样式[n.type] || [],...n.style || []],function(k,v)
-					{
-						style[v[0]] = v[1]
-					})
-					if(n.type === 'info')
-					{
-						n.isLeft ? style.textAlign = 'left' : ''
-						n.isRight ? style.textAlign = 'right' : ''
-					}
-					if(n.heads && (!n.heads.list || n.heads.list.length < 1))delete n.heads
-					if(!n.content)n.content = ''
-					if(!n.file)n.file = ''
-					return (0, m.jsx)('div',
-					{
-						className: '消息',
-						title: n.is_breaking === true ? 'red' : n.isFirst === true ? 'blue' : 'transparent',
-						ref: f,
-						style: {padding: isFirst ? "" : "0.5rem 1rem 0 1rem"},
-						children: [(0, m.jsxs)(m.Fragment,
-						{
-							children: "chat" === n.type || "image" === n.type ? (0, m.jsxs)(m.Fragment,
-							{//整体图文消息
-								children: (0, m.jsxs)('div',
-								{//整体图文消息
-									className: '聊天',
-									children: [!isCenter && !n.isRight ? (0, m.jsx)('div',
-									{//左侧头像框
-										className: '头像框',
-										style: n.sCharacter.no != 0 ? 
-										{
-											cursor: "pointer",
-											minWidth: n.heads && isFirst ? "max-content" : "5rem",
-											paddingRight: n.heads && isFirst ? "1rem" : "auto",
-											flexDirection: n.heads ? n.heads.direction : ""
-										} : {marginRight: '1.5rem'},
-										children: isFirst && n.sCharacter.no != 0 ? [(0, m.jsx)('img',
-										{//左侧头像
-											className: '头像',
-											style: {zIndex: n.heads ? n.heads.list.length : ''},
-											src: loadhead(n.sCharacter.no,n.sCharacter.index),
-											onError: function(e){IMAGE_error(e)}
-										}), n.heads ? n.heads.list.map(function(index,k)
-										{
-											return (0, m.jsx)('img',
-											{//左侧头像
-												className: '头像',
-												src: loadhead('LIST',index),
-												style: 
-												{
-													zIndex: n.heads.list.length-k-1,
-													marginTop: n.heads.direction === 'column' ? n.heads.margin ? n.heads.margin : "-1.5rem" : '',
-													marginLeft: n.heads.direction === 'row' ? n.heads.margin ? n.heads.margin : "-1.5rem" : ''
-												},
-												onError: function(e){IMAGE_error(e)}
-											})
-										}) : ''] : ''
-									}) : '', (0, m.jsxs)("div",
-									{//图文消息
-										className: "对话",
-										style: 
-										{
-											alignItems: isCenter ? 'center' : n.isRight || n.sCharacter.no == 0 ? 'flex-end' : 'flex-start',
-											height: n.heads && n.heads.fullHeight ? '100%' : ''
-										},
-										children: [!isCenter && isFirst && n.sCharacter.no != 0 ? (0, m.jsx)("span",
-										{//人物名称
-											className: "名称 bold"+(title ? ' 名字' : ''),
-											title: title,
-											dangerouslySetInnerHTML: {__html: n.name || loadname(n.sCharacter.no,n.sCharacter.index)}
-										}) : '' , (0, m.jsxs)("div",
-										{//消息内容
-											style:
-											{
-												display: "flex",
-												height: "100%",
-												justifyContent: isCenter ? 'center' : n.isRight || n.sCharacter.no == 0 ? 'flex-end' : '',
-											},
-											children: [n.time ? (0, m.jsx)('div',
-											{//左侧时间戳
-												className: '时间戳',
-												hidden: (!n.time || n.sCharacter.no != 0) && !n.isRight,
-												dangerouslySetInnerHTML:{__html:n.time}// children: n.time
-											}) : '', "chat" === n.type ? [!n.isRight && isFirst && n.sCharacter.no != 0 ? (0, m.jsx)('div',
-											{className: '左角',style:{borderRightColor:style['background-color']}}) : '', (0, m.jsx)('span',
-											{//文本消息
-												className: '文本 编辑',
-												style: n.isRight || n.sCharacter.no == 0 ? {...{background: 'rgb(74, 138, 202)'},...style} : style,
-												dangerouslySetInnerHTML:{__html:n.content}
-												// children: n.content
-											}), (n.isRight && isFirst) || n.sCharacter.no == 0 ? (0, m.jsx)('div',
-											{className: '右角',style:{borderLeftColor:style['background-color']}}) : ''] : (0, m.jsx)('img',
-											{//图片消息
-												className: '图片 编辑',
-												style:
-												{...{
-													maxHeight: n.content === 'CharFace' ? '360px' : "",
-													maxWidth: n.content === 'CharFace' ? mt_settings['差分比例'] : mt_settings['图片比例']
-												},...style},//@差分表情宽高百分比
-												src: n.file.startsWith('data:') ? n.file : href+n.file,
-												onError: function(e){IMAGE_error(e)}
-											}) ,n.time ? (0, m.jsx)('div',
-											{//右侧时间戳
-												className: '时间戳',
-												hidden: !n.time || n.sCharacter.no == 0 || n.isRight || isCenter,
-												dangerouslySetInnerHTML:{__html:n.time}// children: n.time
-											}) : '']
-										})]
-									}), !isCenter && n.isRight && n.sCharacter.no != 0 ? (0, m.jsx)('div',
-									{//右侧头像框
-										className: '头像框',
-										style:
-										{
-											justifyContent:'flex-end',
-											cursor: "pointer",
-											minWidth: n.heads && isFirst ? "max-content" : "5rem",
-											paddingLeft: n.heads && isFirst ? "1rem" : "auto",
-											flexDirection: n.heads ? n.heads.direction : ""
-										},
-										children: isFirst && n.sCharacter.no != 0 ? [(0, m.jsx)('img',
-										{//右侧头像
-											className: '头像',
-											src: loadhead(n.sCharacter.no,n.sCharacter.index),
-											style: {zIndex: n.heads ? n.heads.list.length : ''},
-											onError: function(e){IMAGE_error(e)}
-										}), n.heads ? n.heads.list.map(function(index,k)
-										{
-											return (0, m.jsx)('img',
-											{//右侧头像
-												className: '头像',
-												src: loadhead('LIST',index),
-												style: 
-												{
-													zIndex: n.heads.list.length-k-1,
-													marginTop: n.heads.direction === 'column' ? "-1.5rem" : '',
-													marginLeft: n.heads.direction === 'row' ? "-1.5rem" : ''
-												},
-												onError: function(e){IMAGE_error(e)}
-											})
-										}) : ''] : ''
-									}) : '']
-								})
-							}) : "reply" === n.type ? [(0, m.jsx)("div",
-							{//回复
-								className: '头像框',
-								children: (0, m.jsx)(ne,
-								{
-									className: '编辑',
-									children: (0, m.jsx)(c.xL,{icon: ei.Yai}),
-									"data-html2canvas-ignore": "true"
-								})
-							}),(0, m.jsx)('div',
-							{
-								className: '回复',
-								style:{backgroundImage:`url(${href}MoeData/Ui/Popup_Img_Deco_2.webp)`},
-								children: [(0, m.jsx)('div',
-								{
-									className: '消息标题',
-									children: [(0, m.jsx)('div',
-									{
-										className: '竖线',
-										style: {borderLeft: '2px solid rgb(39, 153, 228)'}
-									}),(0, m.jsx)('span',
-									{
-										className: 'bold',
-										children: L.Z['reply'][mtlang]
-									})]
-								}), (0, m.jsx)(eN.HR,{}), n.content.split('\n').map(function(v,k)
-								{
-									return (0, m.jsx)('div',
-									{
-										className: '选择肢 跳转',
-										style: style,
-										dangerouslySetInnerHTML:{__html:v}
-										// children: v
-									})
-								})]
-							})] : "heart" === n.type ? [(0, m.jsx)("div",
-							{className: '头像框'}), (0, m.jsx)(eW,
-							{//羁绊
-								className: '编辑'+(title ? ' 名字' : ''),
-								title: title,
-								style: style,
-								character: n.content || ((n.name || loadname(n.sCharacter.no,n.sCharacter.index))+mt_text.go_relationship_event[mtlang])
-							})] : "info" === n.type ? [(0, m.jsx)("div", {className: '头像框 隐藏'}), (0, m.jsx)('span',//eN.vD,
-							{//旁白
-								className: '旁白 编辑',
-								style: style,
-								dangerouslySetInnerHTML:{__html:n.content}
-								// children: n.content
-							})] : (0, m.jsx)(m.Fragment,{})
-						}), h || (0, m.jsx)("input",
-						{//复选框
-							"data-html2canvas-ignore":"true",
-							style:{backgroundColor:n.is_breaking === true ? 'red' : n.isFirst === true ? 'blue' : 'transparent'},
-							type: "checkbox",
-							className:"dels"
-						})]
-					})
-				},
-				e8 = o.ZP.div.withConfig(
-				{
-					displayName: "Chat__Flex",
-					componentId: "sc-5hhx0-0"
-				})(["", ";height:auto;"], function(e)
-				{
-					return e.theme.common.flexBox(
-					{
-						justify: "flex-end",
-						align: "flex-start"//#
-					})
-				}),
-				ne = (0, o.ZP)(c.hU).withConfig(
-				{
-					displayName: "Chat__EditButton",
-					componentId: "sc-5hhx0-1"
-				})(["align-self:end;margin:0rem 0.5rem;color:", ";height:1.2rem;width:1.2rem;flex-shrink:0;"], function(e)
-				//#height:auto;防止编辑按钮下移
-				{
-					return e.theme.color.rgb45_70_100
-				}),
 				nn = function(e)
 				{
 					var n = e.scrollRef,
@@ -5143,78 +4833,195 @@
 									children: L.Z['delete'][mtlang]
 								})
 							})]
-						}), (0, m.jsxs)(eD,
+						}), (0, m.jsxs)('div',
 						{
-							className: "operateTools",
 							style:
 							{
 								display: 'none',
-								padding: "5px 10px",
-								width: "100%",
 								backgroundColor: 'rgb(243, 247, 248)'
 							},
-							children: [(0, m.jsx)(c.jl,
+							className: "operateTools",
+							children: [(0, m.jsxs)(eD,
 							{
-								hidden: !0,
-								style:{height: "auto","width": "auto",color: "red"},
-								className: '撤销',
-								children: (0, m.jsx)(W,
+								style:
 								{
-									className: "bold",
-									children: (0, m.jsx)(X,
+									padding: "5px 10px",
+									width: "100%"
+								},
+								children: [(0, m.jsx)(c.jl,
+								{
+									hidden: !0,
+									style:{height: "auto","width": "auto",color: "red"},
+									className: '撤销',
+									children: (0, m.jsx)(W,
 									{
-										children: '撤销'
-									})
-								}),
-								onClick: function(){撤销('撤销')}
-							}), (0, m.jsx)(c.jl,
+										className: "bold",
+										children: (0, m.jsx)(X,
+										{
+											children: '撤销'
+										})
+									}),
+									onClick: function(){撤销('撤销')}
+								}), (0, m.jsx)(c.jl,
+								{
+									hidden: !0,
+									style:{height: "auto","width": "auto",color: "red"},
+									className: '前进',
+									children: (0, m.jsx)(W,
+									{
+										className: "bold",
+										children: (0, m.jsx)(X,
+										{
+											children: '前进'
+										})
+									}),onClick: function(){撤销('前进')}
+								}), (0, m.jsx)(c.jl,
+								{
+									style:{height: "auto","width": "auto"},
+									className: '复制',
+									children: (0, m.jsx)(W,
+									{
+										className: "bold",
+										children: (0, m.jsx)(X,
+										{
+											children: '复制'
+										})
+									}),
+									onClick: function(){复制()}
+								}), (0, m.jsx)(c.jl,
+								{
+									hidden: !粘贴板,
+									style:{height: "auto","width": "auto"},
+									className: '粘贴',
+									children: (0, m.jsx)(W,
+									{
+										className: "bold",
+										children: (0, m.jsx)(X,
+										{
+											children: '粘贴'
+										})
+									}),
+									onClick: function(){粘贴()}
+								}), (0, m.jsx)(c.jl,
+								{
+									style:{height: "auto","width": "auto"},
+									children: (0, m.jsx)(W,
+									{
+										className: "bold",
+										children: (0, m.jsx)(X,
+										{
+											children: '搜索'
+										})
+									}),
+									onClick: function()
+									{
+										if($$('.搜索').css('display') === 'none')
+										{
+											$$('.搜索').show().next().show()
+										}
+										else
+										{
+											$$('.搜索').hide().next().hide()
+										}
+									}
+								})]
+							}), (0, m.jsxs)(eD,
 							{
-								hidden: !0,
-								style:{height: "auto","width": "auto",color: "red"},
-								className: '前进',
-								children: (0, m.jsx)(W,
+								className: '搜索',
+								style: {display: 'none'},
+								children: [(0, m.jsx)(c.Kx,
 								{
-									className: "bold",
-									children: (0, m.jsx)(X,
+									maxRows: 10,
+									className:"搜索框 scrollbar",
+									style: 
 									{
-										children: '前进'
-									})
-								}),onClick: function(){撤销('前进')}
-							}), (0, m.jsx)(c.jl,
+										border:'2px solid rgb(139, 187, 233)',
+										color: 'red'
+									},
+								}), (0, m.jsx)('button',
+								{
+									style: 
+									{
+										width: '15%',
+										height: '100%'
+									},
+									className: 'red',
+									children: '查找',
+									onClick: function()
+									{
+										搜索 = []
+										let str = $$('.搜索框').val()
+										if(str === '')
+										{
+											$$('.查找').html('')
+											return
+										}
+										for(let k=0,l=chats.length;k<l;k++)
+										{
+											let type = chats[k].type
+											let content = chats[k].content
+											if(type == 'chat' && content.includes(str))搜索.push(k)
+										}
+										let html = []
+										for(let i=0,l=搜索.length;i<l;i++)
+										{
+											html.push(`<option value='${i}'>${i+1}/${l}</option>`)
+										}
+										html = html.join('')
+										$$('.查找').html(html)
+										跳转索引(搜索[0],{block: 'center'})
+									}
+								})]
+							}), (0, m.jsxs)(eD,
 							{
-								style:{height: "auto","width": "auto"},
-								className: '复制',
-								children: (0, m.jsx)(W,
+								style: {display: 'none'},
+								children: [(0, m.jsx)(ni,
 								{
-									className: "bold",
-									children: (0, m.jsx)(X,
+									children: (0, m.jsx)(c.xL,
 									{
-										children: '复制'
-									})
-								}),
-								onClick: function(){复制()}
-							}), (0, m.jsx)(c.jl,
-							{
-								hidden: !粘贴板,
-								style:{height: "auto","width": "auto"},
-								className: '粘贴',
-								children: (0, m.jsx)(W,
+										icon: ei.O24
+									}),
+									onClick: function()
+									{
+										if(!搜索.length)return
+										let index = parseInt($$('.查找').val())-1
+										if(index == -1)index = 搜索.length-1
+										$$('.查找').val(index)
+										跳转索引(搜索[index],{block: 'center'})
+									}
+								}), (0, m.jsx)('select',
 								{
-									className: "bold",
-									children: (0, m.jsx)(X,
+									className: '查找',
+									style: {fontSize: '2rem'},
+									onChange: function(e)
 									{
-										children: '粘贴'
-									})
-								}),
-								onClick: function(){粘贴()}
+										跳转索引(搜索[e.target.value],{block: 'center'})
+									}
+								}), (0, m.jsx)(ni,
+								{
+									style: {transform: 'scaleX(-1)'},
+									children: (0, m.jsx)(c.xL,
+									{
+										icon: ei.O24
+									}),
+									onClick: function()
+									{
+										if(!搜索.length)return
+										let index = parseInt($$('.查找').val())+1
+										if(index == 搜索.length)index = 0
+										$$('.查找').val(index)
+										跳转索引(搜索[index],{block: 'center'})
+									}
+								})]
 							})]
 						}), (0, m.jsxs)(no,
 						{
 							className: 'reply',
+							style: {display: "none"},
 							children: [(0, m.jsx)(ni,
 							{
 								className: 'replyBack',
-								style:{display:"none"},
+								style: {display: "none"},
 								children: (0, m.jsx)(c.xL,
 								{
 									icon: ei.O24
@@ -5224,7 +5031,7 @@
 								className: "选择肢 replyText",
 								style: 
 								{
-									maxWidth:'80%',
+									maxWidth: '80%',
 									margin: 'auto 1rem',
 									overflow: 'hidden',
 									wordBreak: 'break-word',
@@ -5247,9 +5054,11 @@
 							})]
 						}), (0, m.jsx)(nt,
 						{
+							className: '显示区域',
 							children: (0, m.jsx)(nr,
 							{
 								ref: n,
+								className: '元素列表',
 								children: [(0, m.jsx)('div',
 								{
 									onClick: function()
@@ -5304,14 +5113,6 @@
 											children: ''
 										})]
 									})]
-								}),t.map(function(e, n)
-								{
-									return e.replyDepth === o && (0, m.jsx)(e6,
-									{
-										index: n,
-										handleShow: _,
-										chat: e
-									}, n)
 								}), (0, m.jsx)('div',
 								{
 									className: '消息底座',

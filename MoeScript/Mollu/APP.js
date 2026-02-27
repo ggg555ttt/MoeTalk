@@ -6073,11 +6073,9 @@
 								style: {display: i && n || !i ? "flex" : "none"},
 								children: [(0, O.jsxs)(L,
 								{
-									children: [(0, O.jsx)(F,
+									children: [(0, O.jsx)('div',
 									{
-										href: "/",
-										onClick: function(e){h(e, "/")},
-										className: "/" === e.pathname ? "selected" : "",
+										onClick: function(e){location.reload(true)},
 										children: (0, O.jsx)(V,
 										{
 											children: (0, O.jsx)(W,
@@ -6093,6 +6091,7 @@
 									{
 										onClick: async function(e)
 										{
+											if(MMT目录)return
 											INIT_loading('开始加载')
 											$$('.cgldhY').hide()
 											let num = `?num=${Math.random()}`

@@ -254,7 +254,6 @@ function 截屏预览(S)
 		$('.消息[alt="capture"]').removeAttr('alt').css('padding','0.5rem 1rem 0px').find('.文本').siblings().remove();
 	}
 
-	INIT_loading('开始加载')
 	imageArr = []
 
 	if(typeof S !== 'number')S = parseFloat($('.scale:checked').val())
@@ -326,7 +325,7 @@ function 截屏预览(S)
 		imageArrL--
 	}
 		
-	INIT_loading('结束加载')
+	INIT_loading(false)
 }
 //截屏功能
 async function 内容预览()

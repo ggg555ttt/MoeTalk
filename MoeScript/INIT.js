@@ -109,7 +109,6 @@ if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorag
 	//if(!mt_settings['禁止字体'])mt_settings['禁止字体'] = false
 	if(!mt_settings['高度限制'])mt_settings['高度限制'] = 16384
 	//if(!mt_settings['头像尺寸'])mt_settings['头像尺寸'] = 300
-	if(!mt_settings['发送方式'])mt_settings['发送方式'] = '回车'
 	if(!mt_settings['社团列表'])mt_settings['社团列表'] = {}
 	if(!mt_settings['文字样式'])mt_settings['文字样式'] = {}
 	if(!mt_settings['宽度限制'])mt_settings['宽度限制'] = 500
@@ -163,6 +162,7 @@ if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorag
 	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
 
 }
+if(!mt_settings['虚拟滚动'] && browser.isIos)mt_settings['虚拟滚动'] = '关闭'
 mt_settings['当前网址'] = window.location.href
 if(!mt_settings.风格样式 || mt_settings.风格样式[0])
 {
@@ -268,13 +268,6 @@ function Translator(str)
 {
 	if(!mt_text[str] || !mt_text[str][mtlang])return str;
 	return mt_text[str][mtlang];
-}
-function blink(element)
-{
-	return $(element).fadeOut(500, function() 
-	{
-		$(this).fadeIn(500, function() {});
-	})[0];
 }
 //警告
 function INIT_state(num)

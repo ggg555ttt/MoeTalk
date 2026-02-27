@@ -117,20 +117,22 @@ $('body').on('click',"#language",function()
 //发送方式
 $('body').on('click',"#send",function()
 {
-	if(localStorage['send'])
+	if(mt_settings['发送方式'] === '回车')
 	{
-		if(confirm('当前发送方式为点击按钮发送，是否换为回车发送？'))
+		if(confirm('当前发送方式为回车发送，是否换为点击按钮发送？'))
 		{
-			localStorage.removeItem('send');
+			mt_settings['发送方式'] = '点击'
 		}
 	}
 	else
 	{
-		if(confirm('当前发送方式为回车发送，是否换为点击按钮发送？'))
+		if(confirm('当前发送方式为点击按钮发送，是否换为回车发送？'))
 		{
-			localStorage['send'] = 'click';
+			mt_settings['发送方式'] = '回车'
 		}
 	}
+	alert('当前文字发送方式为：'+mt_settings['发送方式'])
+	saveStorage('设置选项',mt_settings,'local')
 })
 //字体加载
 $('body').on('click',"#font",function()
