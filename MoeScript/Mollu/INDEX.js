@@ -238,7 +238,7 @@
 													saveStorage('设置选项',mt_settings,'local')
 												},
 												onError: function(e){IMAGE_error(e)},
-												className: (0, u.Y)(w.selected, e) ? "eLaCqa fuyFOl fzOyMd selected" : "eLaCqa fuyFOl fzOyMd"
+												className: (0, u.Y)(w.selected, e) ? "保持焦点 eLaCqa fuyFOl fzOyMd selected" : "保持焦点 eLaCqa fuyFOl fzOyMd"
 											}, n)
 										})
 									})
@@ -255,7 +255,7 @@
 						{
 							children: [(0, m.jsx)(j,
 							{
-								className: (0, u.Y)(w.selected, d.I) ? "selected" : "",
+								className: (0, u.Y)(w.selected, d.I) ? "保持焦点 selected" : "保持焦点",
 								style:
 								{
 									display: !f || c ? "block" : "none",
@@ -3428,8 +3428,8 @@
 							}), (0, m.jsx)(eU,
 							{
 								title: "发送消息",
-								id: '发送消息',
-								//disabled: w.length < 1,
+								className: '保持焦点',
+								style: {height: '100%'},
 								onClick: function()
 								{
 									let text = $$('.chatText')[0]
