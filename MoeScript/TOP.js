@@ -1056,7 +1056,7 @@ else
 	document.addEventListener('mousedown',(event)=>
 	{
 		// 1. 判断点击的区域是否是我们的特定 ID 或 Class（支持内部子元素）
-		const isSpecificTarget = event.target.closest('.保持焦点');
+		const isSpecificTarget = event.target.closest('.锁定焦点');
 		// 如果点到的不是特定元素，什么都不做，让系统正常处理（正常失焦）
 		if (!isSpecificTarget) return;
 		// 2. 检查当前处于焦点状态的是否是 TEXTAREA

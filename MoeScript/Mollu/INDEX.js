@@ -180,6 +180,7 @@
 							})]
 						}), w.selectedList.length > 0 ? (0, m.jsx)(g,
 						{
+							className: '锁定焦点',
 							style:
 							{
 								flexGrow: "1",
@@ -238,7 +239,7 @@
 													saveStorage('设置选项',mt_settings,'local')
 												},
 												onError: function(e){IMAGE_error(e)},
-												className: (0, u.Y)(w.selected, e) ? "保持焦点 eLaCqa fuyFOl fzOyMd selected" : "保持焦点 eLaCqa fuyFOl fzOyMd"
+												className: (0, u.Y)(w.selected, e) ? "eLaCqa fuyFOl fzOyMd selected" : "eLaCqa fuyFOl fzOyMd"
 											}, n)
 										})
 									})
@@ -253,9 +254,10 @@
 							children:L.Z.select_char[mtlang]+'<'
 						}), (0, m.jsxs)(g,
 						{
+							className: '锁定焦点',
 							children: [(0, m.jsx)(j,
 							{
-								className: (0, u.Y)(w.selected, d.I) ? "保持焦点 selected" : "保持焦点",
+								className: (0, u.Y)(w.selected, d.I) ? "selected" : "",
 								style:
 								{
 									display: !f || c ? "block" : "none",
@@ -3384,6 +3386,7 @@
 					{
 						children: [(0, m.jsxs)(eG,
 						{
+							className: '锁定焦点',
 							children: [(0, m.jsx)(eU,
 							{
 								style:
@@ -3428,7 +3431,6 @@
 							}), (0, m.jsx)(eU,
 							{
 								title: "发送消息",
-								className: '保持焦点',
 								style: {height: '100%'},
 								onClick: function()
 								{
@@ -4970,6 +4972,7 @@
 										html = html.join('')
 										$$('.查找').html(html)
 										跳转索引(搜索[0],{block: 'center'})
+										blink(搜索[0])
 									}
 								})]
 							}), (0, m.jsxs)(eD,
@@ -4988,6 +4991,7 @@
 										if(index == -1)index = 搜索.length-1
 										$$('.查找').val(index)
 										跳转索引(搜索[index],{block: 'center'})
+										blink(搜索[index])
 									}
 								}), (0, m.jsx)('select',
 								{
@@ -4996,6 +5000,7 @@
 									onChange: function(e)
 									{
 										跳转索引(搜索[e.target.value],{block: 'center'})
+										blink(搜索[e.target.value])
 									}
 								}), (0, m.jsx)(ni,
 								{
@@ -5011,6 +5016,7 @@
 										if(index == 搜索.length)index = 0
 										$$('.查找').val(index)
 										跳转索引(搜索[index],{block: 'center'})
+										blink(搜索[index])
 									}
 								})]
 							})]

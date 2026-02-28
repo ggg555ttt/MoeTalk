@@ -905,6 +905,7 @@ function refreshMessage(json) {
 }
 function blink(chatIndex)
 {
+	if(chatIndex === undefined)return
 	if(mt_settings['虚拟滚动'] == '关闭')
 	{
 		let element = $(`.消息:eq(${chatIndex})`).fadeOut(500, function() 
@@ -916,13 +917,40 @@ function blink(chatIndex)
 	}
 	else
 	{
+		// 1. O(1) 极速获取该消息在虚拟列表中的真实数组索引
 		const realIndex = window.chatList._getRealIndex(chatIndex);
 		if (realIndex === -1) return null;
+
+		// 2. 获取该消息对应的原生 DOM 元素（注意：此时它可能还在内存里没上屏）
+		const el = window.chatList.items[realIndex].el;
+
+		// 3. 🚨 核心修复：使用 setTimeout 将动画推迟 50 毫秒执行
+		// 这样可以完美避开浏览器的渲染帧，确保虚拟滚动已经把新 DOM 插入到了页面上
+		setTimeout(() => {
+			
+			// 此时再判断，如果它真的在屏幕可视范围内（没有被滑走），就开始闪烁
+			if (el.isConnected) {
+				// 原生底层动画 API：纯 GPU 渲染，不改 style，不引发排错乱
+				el.animate([
+					{ opacity: 1 }, // 0ms: 完全显示
+					{ opacity: 0 }, // 500ms: 渐隐到透明
+					{ opacity: 1 }  // 1000ms: 恢复正常
+				], {
+					duration: 1000,     // 动画耗时 1 秒
+					iterations: 1,      // 执行 1 次
+					easing: 'ease-in-out' // 平滑过渡
+				});
+			}
+			
+		}, 50); // 50ms 刚好能跨过 requestAnimationFrame 的防抖周期
+
+		// 4. 依然可以同步返回该 DOM 元素，不影响你原有的业务逻辑
 		return realIndex;
 	}
 }
 function 跳转索引(chatIndex, options)
 {
+	if(chatIndex === undefined)return
 	if(mt_settings['虚拟滚动'] == '关闭')$(`.消息:eq(${chatIndex})`)[0].scrollIntoView(options)
 	else window.chatList.scrollToIndex(chatIndex, options)
 }
