@@ -1041,7 +1041,7 @@ if(客户端 === 'NW.js' || mt_settings['桌面模式'])
 		if (el.tagName !== 'TEXTAREA') return;
 		const to = event.relatedTarget;
 		// 3. 【最高性能判断】目标节点的判断同样改用 tagName
-		if (to && to.tagName === 'TEXTAREA')return;
+		if (to && (to.tagName === 'TEXTAREA' || to.tagName === 'INPUT'))return;
 		// 防抖 + 微任务优化
 		queueMicrotask(()=> 
 		{
