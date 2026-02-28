@@ -1031,7 +1031,7 @@ setInterval(async function()
 		blockClass: /hrIqyL|dels/
 	});
 },600*1000)
-if(客户端 === 'NW.js' || mt_settings['桌面模式'])
+if(mt_settings['桌面模式'])
 {
 	// 使用事件委托，监听全局 blur
 	document.addEventListener('blur',(event)=>
