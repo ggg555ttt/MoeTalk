@@ -640,7 +640,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		}
 		if(mode === '追加')
 		{
-			if(window.chatList.msgIndexMap.length <= chatIndex && !选择列表.length)
+			if(!选择列表.length)
 			{
 				末尾追加(message);
 			}
