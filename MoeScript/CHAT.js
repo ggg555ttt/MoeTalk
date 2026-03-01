@@ -617,6 +617,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		{
 			删除消息(chatIndex);
 			chatIndex = chatIndex-1
+			if(选择列表.length)取消选择()
 		}
 		if(mode === 'edit')
 		{
@@ -640,7 +641,8 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		}
 		if(mode === '追加')
 		{
-			if(!选择列表.length)
+			let length = mt_settings['虚拟滚动'] == '关闭' ? $('.dels').length : window.chatList.msgIndexMap.length
+			if(length <= chatIndex)
 			{
 				末尾追加(message);
 			}
