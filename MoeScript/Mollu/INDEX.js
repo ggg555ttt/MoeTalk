@@ -230,8 +230,7 @@
 														return
 													}
 													_(e)
-													let str = 选择列表.length ? '在上方插入' : mt_text.input_comment[mtlang]
-													$$('.chatText').click().attr('placeholder',name+'：'+str)
+													$$('.chatText').click()
 													setTimeout(function()
 													{
 														if($$('.fzOyMd.selected')[0])$$('.fzOyMd.selected')[0].scrollIntoView({inline:'center'})//也许只有放在首行才会生效
@@ -288,8 +287,7 @@
 										return
 									}
 									e((0, h.Ks)(d.I))
-									let str = 选择列表.length ? '在上方插入' : mt_text.input_comment[mtlang]
-									$$('.chatText').click().attr('placeholder',name+'：'+str)
+									$$('.chatText').click()
 									saveStorage('设置选项',mt_settings,'local')
 								},
 								priority: !0
@@ -433,6 +431,7 @@
 												$$('.fzoymd.selected')[0].scrollIntoView()
 											}, 1)
 										}
+										$$('.chatText').click()
 										saveStorage('设置选项',mt_settings,'local')
 									},
 									className: 1 === r.filter(function(t)
@@ -1285,7 +1284,7 @@
 										fontSize: '1.5rem',
 										marginInline: '0.5rem',
 										padding: '0',
-										color: 'rgb(45, 70, 100)'
+										color: 'green'
 									},
 									className: "bold",
 									children: '提示',
@@ -1510,7 +1509,7 @@
 									children: (0, m.jsx)(c.j4,
 									{})
 								})]
-							}), '选择肢可以换行分割', (0, m.jsxs)(ea.$0,
+							}), '回复可以通过换行分割', (0, m.jsxs)(ea.$0,
 							{
 								children: [(0, m.jsx)('div',
 								{
@@ -1580,7 +1579,7 @@
 								{
 									children: (0, m.jsx)(c.Kx,
 									{
-										className: "medium chatText",
+										className: "chatText",
 										placeholder: L.Z.input_comment[g],
 										maxRows: 5,
 										value: h,
@@ -1740,7 +1739,7 @@
 										fontSize: '1.5rem',
 										marginInline: '0.5rem',
 										padding: '0',
-										color: 'rgb(45, 70, 100)'
+										color: 'green'
 									},
 									className: "bold",
 									children: '提示',
@@ -2036,19 +2035,19 @@
 										{
 											$$('#size').click()
 										},
-										children: [选择列表.length ? '已选中' : '共', (0, m.jsx)("span",
+										children: ['数据：', (0, m.jsx)("span",
 										{
 											className:'bold red',
 											children: 选择列表.length || chats.length
-										}), '条消息，长', (0, m.jsx)("span",
+										}), '长度：', (0, m.jsx)("span",
 										{
 											className:'INDEX_imageLength bold red',
 											children: INIT_state(S)
-										}), '，将生成', (0, m.jsx)("span",
+										}), '生成：', (0, m.jsx)("span",
 										{
 											className:'bold red',
 											children: imageArr.length
-										}), '张',(0, m.jsx)("span",
+										}), (0, m.jsx)("span",
 										{
 											id:'mt-image',
 											className:'bold blue',
@@ -3129,7 +3128,7 @@
 																	if(EMOJI.custom.io)
 																	{
 																		config.title = '批量删除表情'
-																		let str = `已选中${selectNum}个数据\n`
+																		let str = `已选中数据：${selectNum}\n`
 																		str += '<input type="checkbox" style="width:1rem;height:1rem;">确认删除表情\n'
 																		config.yes = function()
 																		{
@@ -3164,9 +3163,9 @@
 																			select += `<option>${n}</option>`
 																		}
 																		select += `<option>${end+1}</option>`
+																		str += `已选中数据：${selectNum}\n`
 																		str += `<span class="green">当前角色</span>：<img class="头像"src="${loadhead(no,index)}"onerror="IMAGE_error(this)">`
 																		str += `第<select style='font-size:1.2rem;'>${select}</select>页\n`
-																		str += `已选中${selectNum}个数据\n`
 																		str += `<input type="checkbox" style="width:1rem;height:1rem;"><span onclick="$(this).prev().click()">将这些表情添加到<span class="green">当前角色</span>的自定义分类↑</span>\n`
 																		config.yes = function()
 																		{
@@ -3382,6 +3381,8 @@
 								n()
 							}
 						};
+					let name = loadname(mt_settings['选择角色'].no, mt_settings['选择角色'].index)
+					let str = 选择列表.length ? '在上方插入' : L.Z.input_comment[h]
 					return (0, m.jsxs)(eq,
 					{
 						children: [(0, m.jsxs)(eG,
@@ -3410,8 +3411,8 @@
 								{
 									children: [(0, m.jsx)(c.Kx,
 									{
-										className: "medium chatText",
-										placeholder: L.Z.input_comment[h],
+										className: "chatText",
+										placeholder: `${name}：${str}`,
 										maxRows: 5,
 										onKeyDown: function(e)
 										{
@@ -3537,7 +3538,7 @@
 										let onclick1 = `onclick="$$('#tool-save').click(),${confirm}"`
 										let onclick2 = `onclick="截取存档(),${confirm}"`
 										let button = `<button ${onclick1}>导出完整数据</button><button ${onclick2}>导出选中数据</button>`
-										let html = `<p class='red'>你一共选中了${选择列表.length}条数据</p>请选择你的操作：\n`
+										let html = `<p class='red'>已选中数据：${选择列表.length}</p>请选择你的操作：\n`
 										html += `\n<div style="display:flex;justify-content:space-evenly;">${button}</div>\n`
 										alert(html,config)
 									}
@@ -3771,16 +3772,15 @@
 										fontSize: '1.5rem',
 										marginInline: '0.5rem',
 										padding: '0rem',
-										color: 'rgb(45, 70, 100)'
+										color: 'green'
 									},
 									className: "bold",
 									children: '提示',
 									onClick:function()
 									{
 										let str = ''
-										str += '	1。MoeTalk的默认截图工具对特殊样式的支持有限，'
-										str += '如果你的文档中含有较复杂的特殊样式，'
-										str += '建议在设置选项中的“截图设置”中更换截图工具（snapdom）。\n'
+										str += '	1。点击左上角头像可以设置显示或隐藏，'
+										str += '“设置头像”可以修改发言角色\n'
 										str += '	2。自定义表情和差分的ID可以通过img标签来引用，'
 										str += '但标签内一定要加入onerror="IMAGE_error(this)"，'
 										str += '图片尺寸可能会偏大，请设置好宽高属性"。\n'
@@ -5048,7 +5048,7 @@
 								{
 									TOP_replyEdit()
 								},
-								children: "选择肢管理"
+								children: "分支管理"
 							}, n), (0, m.jsx)(ni,
 							{
 								className: 'replyHome',
@@ -5277,7 +5277,7 @@
 										color:'rgb(45, 70, 100)'
 									},
 									icon: ico.DBf
-								}),'选择肢、旁白、羁绊事件']
+								}),'回复、旁白、羁绊事件']
 							}), (0, m.jsx)("span",
 							{
 								style:

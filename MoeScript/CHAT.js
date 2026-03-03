@@ -1002,7 +1002,7 @@ function 编辑消息(index)
 		$('.编辑标题').hide()
 		$('.显示开关').removeClass('selected').css('color','')
 		$('.角色ID').text('不更改角色')
-		$('.内容索引').text(`选中了${checked}条消息`)
+		$('.内容索引').text(`已选中数据：${checked}`)
 		$('.角色头像_列表').text('')
 		$('.角色名称').attr('placeholder','不修改名称').val('')
 		$('.设置头像').css('color','black')
@@ -1090,7 +1090,7 @@ $("body").on('click',".INDEX_delete",function()
 	{
 		indexs = 选择列表
 		title = '批量删除'
-		str += `您一共选中了${选择列表.length}条消息\n\n点击【${mt_text.confirm[mtlang]}】将删除\n`
+		str += `已选中数据：${选择列表.length}\n\n点击【${mt_text.confirm[mtlang]}】将删除\n`
 		str += '操作可撤销'
 	}
 	else
@@ -1101,10 +1101,10 @@ $("body").on('click',".INDEX_delete",function()
 		{
 			indexs[i] = i
 		}
-		title = '清空当前项目'
+		title = '删除项目'
+		str += `将删除当前正在编辑的项目，包括所有分支\n\n`
 		str += `点击【${mt_text.confirm[mtlang]}】将所有内容全部删除\n`
-		str += '包括所有选择分支\n\n'
-		str += '可在项目管理中恢复'
+		str += '可在项目管理中的<b class="red">自动备份</b>中恢复'
 	}
 	
 	let config = {}

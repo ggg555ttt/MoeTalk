@@ -277,11 +277,11 @@ function INIT_state(num)
 	let height = parseInt($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num)
 	if(chats.length > 300)//if(height > mt_settings['高度限制'])//检测聊天框宽度
 	{
-		$("#size").text(`长度: ${height}\n消息: ${chats.length}`).css('background-color','red');//显示警告
+		$("#size").text(`长度: ${height}\n数据: ${chats.length}`).css('background-color','red');//显示警告
 	}
 	else
 	{
-		$("#size").text(`长度: ${height}\n消息: ${chats.length}`).css('background-color','');//隐藏警告
+		$("#size").text(`长度: ${height}\n数据: ${chats.length}`).css('background-color','');//隐藏警告
 	}
 	return height
 }

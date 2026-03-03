@@ -627,10 +627,10 @@ $('body').on('click',"#size",async function()
 		if(chat.type !== 'image')onum += chat.content.length
 	}
 	str += `每张截图长度上限为${s}${mt_settings['高度限制']}${ss}，建议手动设置${s}切割点${ss}或测试极限长度\n`
-	str += `消息数量达到${s}数百甚至上千${ss}可能会造成操作卡顿或崩溃，请以设备性能为准\n`
+	str += `数据量达到${s}数百甚至上千${ss}可能会造成操作卡顿或崩溃，请以设备性能为准\n`
 	str += `当前分支总字数统计：${s}${num}${ss}\n`
 	str += `其它分支总字数统计：${s}${onum}${ss}(共${otherChats.length}条数据)\n`
-	str += `消息数量过多时，可以将其转入选择肢，避免卡顿\n`
+	str += `数据量过多时，可以将其转入选择肢，避免卡顿\n`
 	alert(str)
 	
 });
@@ -852,7 +852,7 @@ function replyDepth(str,mode)
 	}
 	else
 	{
-		$('.replyBack').hide().next().text('选择肢管理').next().hide()
+		$('.replyBack').hide().next().text('分支管理').next().hide()
 	}
 	log()
 	return replyButton
@@ -900,7 +900,7 @@ function TOP_replyEdit()
 		}
 
 		let config = {}
-		config.title = '选择肢管理'
+		config.title = '分支管理'
 		config.confirm = '跳转'
 		config.yes = function()
 		{
@@ -916,12 +916,12 @@ function TOP_replyEdit()
 	else if(chats.length)
 	{
 		let nowreply = replyDepths[replyDepths.length-1]
-		str = `请输入新的选择肢名称：\n<input value="${nowreply}">\n\n`
-		str += '同时不要忘记更改外部的选择肢文字\n重名选择肢会自动合并\n'
+		str = `请输入新的分支名称：\n<input value="${nowreply}">\n\n`
+		str += '同时不要忘记更改外部的回复文字\n重名分支会自动合并\n'
 		str += '操作无法撤销'
 
 		let config = {}
-		config.title = '选择肢编辑'
+		config.title = '分支编辑'
 		config.id = Math.random().toString().replace('0.','')
 		config.yes = function()
 		{

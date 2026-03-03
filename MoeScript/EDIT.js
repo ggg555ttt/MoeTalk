@@ -525,48 +525,46 @@ function updateFirstCheckedBorder() {
 		{
 			if(v.checked)选择列表.push(k)
 		})
-		$('.delsNum').text(选择列表.length)
-		let name = loadname(mt_settings['选择角色'].no,mt_settings['选择角色'].index)
-		let str = 选择列表.length ? '在上方插入' : mt_text.input_comment[mtlang]
-		$('.chatText').attr('placeholder',name+'：'+str)
-		return
 	}
-	选择列表 = window.chatList.getSelectedIndices();
+	else
+	{
+		选择列表 = window.chatList.getSelectedIndices();
+		let newFirstCheckedEl = null;
+
+		// 局部变量缓存
+		const map = window.chatList.msgIndexMap;
+		const items = window.chatList.items;
+		const len = map.length;
+
+		for (let i = 0; i < len; i++) {
+			const el = items[map[i]].el;
+			
+			// 极致内联展开
+			let cb = el.__vs_checkbox;
+			if (cb === undefined) {
+				cb = el.__vs_checkbox = el.querySelector('.dels');
+			}
+			
+			if (cb && cb.checked) {
+				newFirstCheckedEl = el;
+				break; // 找到第一个立马中断，绝对不往下走了
+			}
+		}
+
+		if (prevFirstCheckedEl && prevFirstCheckedEl !== newFirstCheckedEl) {
+			prevFirstCheckedEl.style.borderTop = '';
+		}
+
+		if (newFirstCheckedEl) {
+			newFirstCheckedEl.style.borderTop = '2px dashed #a2a2a2';
+		}
+
+		prevFirstCheckedEl = newFirstCheckedEl;
+	}
 	$('.delsNum').text(选择列表.length)
 	let name = loadname(mt_settings['选择角色'].no,mt_settings['选择角色'].index)
 	let str = 选择列表.length ? '在上方插入' : mt_text.input_comment[mtlang]
 	$('.chatText').attr('placeholder',name+'：'+str)
-	let newFirstCheckedEl = null;
-
-	// 局部变量缓存
-	const map = window.chatList.msgIndexMap;
-	const items = window.chatList.items;
-	const len = map.length;
-
-	for (let i = 0; i < len; i++) {
-		const el = items[map[i]].el;
-		
-		// 极致内联展开
-		let cb = el.__vs_checkbox;
-		if (cb === undefined) {
-			cb = el.__vs_checkbox = el.querySelector('.dels');
-		}
-		
-		if (cb && cb.checked) {
-			newFirstCheckedEl = el;
-			break; // 找到第一个立马中断，绝对不往下走了
-		}
-	}
-
-	if (prevFirstCheckedEl && prevFirstCheckedEl !== newFirstCheckedEl) {
-		prevFirstCheckedEl.style.borderTop = '';
-	}
-
-	if (newFirstCheckedEl) {
-		newFirstCheckedEl.style.borderTop = '2px dashed #a2a2a2';
-	}
-
-	prevFirstCheckedEl = newFirstCheckedEl;
 }
 function 取消选择()
 {
@@ -806,8 +804,10 @@ $('body').on('change', ".dels", function() {
 // 6. 自动跳到被选位置
 $('body').on('click', ".chatText", function() {
 	// 直接获取被勾选的第一个消息序号
-	
+	let name = loadname(mt_settings['选择角色'].no, mt_settings['选择角色'].index)
+	let str = mt_text.input_comment[mtlang]
 	if (选择列表.length > 0) {
+		str = '在上方插入'
 		const firstChatIndex = 选择列表[0];
 		// 调用咱们写的高级原生跳转模拟方法，带平滑滚动并且居中
 		跳转索引(firstChatIndex, { 
@@ -815,6 +815,7 @@ $('body').on('click', ".chatText", function() {
 			block: 'center' 
 		});
 	}
+	$('.chatText').attr('placeholder',name+'：'+str)
 });
 // 高性能批量更新所有名字
 function updateAllNames() {
