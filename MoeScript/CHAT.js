@@ -1065,6 +1065,7 @@ $("body").on('click',".编辑",function(){编辑消息(获取索引($(this)[0]))
 $("body").on('click',".头像框",function()
 {
 	chatIndex = 获取索引($(this)[0]);
+	if(chats[chatIndex].sCharacter.no == 0)return
 	if(chats[chatIndex].type === 'chat' || chats[chatIndex].type === 'image')
 	{
 		sendMessage({...chats[chatIndex],...{isFirst:!chats[chatIndex].isFirst}},chats[chatIndex].type,'edit',[chatIndex],null)
