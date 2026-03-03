@@ -772,6 +772,7 @@ $('body').on('click', ".Screenshot_Mode", function() {
 			prevFirstCheckedEl = null;
 		}
 	}
+	取消选择()
 });
 
 // 5. 选框被选中时背景色变化
