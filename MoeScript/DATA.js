@@ -18,10 +18,10 @@ function loaddata(json,play)//识别存档
 		json.SETTING = mt_settings//设置信息
 	}
 	if(!json.TEMP)json.TEMP = {CHAR:{},EMOJI:{},IMAGE:{}}
-	if(!json.CUSTOM)json.CUSTOM = {CHAR:{},EMOJI:{},IMAGE:{}}
 	if(!json.INFO)json.INFO = {title:"",nickname:"",date:""}
 	if(json.CHAR || json.EMOJI)
 	{
+		if(!json.CUSTOM)json.CUSTOM = {CHAR:{},EMOJI:{},IMAGE:{}}
 		if(!json.CHAR)json.CHAR = {id:{},image:{}}
 		if(!json.EMOJI)json.EMOJI = {image:{}}
 		if(json.EMOJI.id)
@@ -36,6 +36,8 @@ function loaddata(json,play)//识别存档
 		delete json.CHAR
 		delete json.EMOJI
 	}
+
+	if(play && !json.CUSTOM)json.CUSTOM = {CHAR:{},EMOJI:{},IMAGE:{}}
 	for(let i=0,l=json.CHAT.length;i<l;i++)
 	{
 		repairCF(json.CHAT[i]);
@@ -61,6 +63,7 @@ function loaddata(json,play)//识别存档
 			}
 		}
 	}
+
 	if(play)
 	{
 		if(play == 'custom')json.TEMP = json.CUSTOM
