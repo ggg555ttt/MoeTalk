@@ -1222,37 +1222,7 @@
 						{
 							t(!1), s("")
 						};
-					return [(0, m.jsx)(ea.Xf,
-					{
-						className: n ? "visible medium" : "medium",
-						onDoubleClick: function()
-						{
-							d()
-						},
-						children: (0, m.jsxs)(ea.F0,
-						{
-							onDoubleClick: function(e)
-							{
-								return e.stopPropagation(), !1
-							},
-							children: [(0, m.jsxs)(ea.h4,
-							{
-								children: [(0, m.jsx)(ea.Dx,
-								{
-									className: "bold",
-									children: L.Z.info[u]
-								}), (0, m.jsx)(ea.ec,
-								{
-									onClick: function()
-									{
-										d()
-									},
-									children: (0, m.jsx)(c.j4,
-									{})
-								})]
-							})]
-						})
-					}), (0, m.jsx)(ea.Xf,
+					return (0, m.jsx)(ea.Xf,
 					{
 						id: 'custom-char',
 						style: {zIndex: 300},
@@ -1456,7 +1426,7 @@
 								})]
 							})]
 						})
-					})]
+					})
 				},
 				es = function(e)
 				{
@@ -1479,11 +1449,13 @@
 						x = (0, i.T)(),
 						y = function()
 						{
-							o(!1), f("")
+							$$('.chatText:eq(1)').val('')
+							$$('.回复旁白羁绊').removeClass('visible')
+							// o(!1), f("")
 						};
 					return (0, m.jsx)(ea.Xf,
 					{
-						className: n ? "visible medium" : "medium",
+						className: '回复旁白羁绊',
 						onDoubleClick: function()
 						{
 							y()
@@ -1534,6 +1506,7 @@
 										onClick: function(e)
 										{
 											$$('.开关').css('color','').removeClass('selected')
+											$$('.透明旁白背景').parent().hide()
 											e.target.style.color = 'red'
 											e.target.classList.add('selected');
 										}
@@ -1553,6 +1526,7 @@
 										onClick: function(e)
 										{
 											$$('.开关').css('color','').removeClass('selected')
+											$$('.透明旁白背景').parent().show()
 											e.target.style.color = 'red'
 											e.target.classList.add('selected');  
 										}
@@ -1571,22 +1545,25 @@
 										onClick: function(e)
 										{
 											$$('.开关').css('color','').removeClass('selected')
+											$$('.透明旁白背景').parent().hide()
 											e.target.style.color = 'red'
 											e.target.classList.add('selected');  
 										}
 									})]
+								}), (0, m.jsx)('span',
+								{
+									children: [(0, m.jsx)('input',
+									{
+										className: '透明旁白背景',
+										type: 'checkbox'
+									}), '透明旁白背景（改为其它类型时需修改样式）']
 								}), (0, m.jsx)(c.OP,
 								{
 									children: (0, m.jsx)(c.Kx,
 									{
 										className: "chatText",
 										placeholder: L.Z.input_comment[g],
-										maxRows: 5,
-										value: h,
-										onChange: function(e)
-										{
-											f(e.currentTarget.value)
-										}
+										maxRows: 5
 									})
 								}), (0, m.jsxs)(ea.$_,
 								{
@@ -1603,7 +1580,14 @@
 										className: "bold",
 										onClick: function()
 										{
-											sendMessage({content: h},$$('.开关.selected').val()), y()
+											let data = {content: $$('.chatText:eq(1)').val()}
+											let type = $$('.开关.selected').val()
+											if(type == 'info' && $$('.透明旁白背景').prop('checked'))
+											{
+												data.style = [["background-color","transparent"]]
+											}
+											sendMessage(data,type)
+											y()
 										},
 										children: L.Z.confirm[g]
 									})]
@@ -2603,25 +2587,6 @@
 						{
 							children: [(0, m.jsx)(eO,
 							{
-								id: "tool-reply",//@选择肢
-								title: "Reply",
-								onClick: function()
-								{
-									v(!0)
-								}
-							}), (0, m.jsx)(eO,
-							{
-								id: "tool-info",//@旁白
-								title: "Info",
-								onClick: function()
-								{
-									I(!0)
-								}
-							})]
-						}), (0, m.jsxs)(eD,
-						{
-							children: [(0, m.jsx)(eO,
-							{
 								id: "tool-image",//@截图工具
 								title: "Image Download",
 								onClick: async function()
@@ -3509,7 +3474,8 @@
 								title: "选项",
 								onClick: function()
 								{
-									click('#tool-reply')
+									$$('.回复旁白羁绊').addClass('visible')
+									$$('.chatText:eq(1)').val($$('.chatText:eq(0)').val())
 								},
 								children: (0, m.jsx)(c.xL,
 								{
