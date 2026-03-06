@@ -335,6 +335,7 @@ async function 内容预览()
 	// if($('.定义样式').css('color') === 'rgb(255, 0, 0)')截屏工具 = 'snapdom'
 	let img = await window[截屏工具]($(".预览内容")[0],
 	{
+		backgroundcolor: null,
 		logging: !1,
 		allowTaint: !0,
 		useCORS: !0,

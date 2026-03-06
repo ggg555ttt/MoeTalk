@@ -136,7 +136,6 @@ async function ZipToJson(file,text = '',html = null)
 {
 	let json = await $ajax(file,text,html)
 	if(typeof json === 'string')return file
-	json = await json.arrayBuffer()
 	json = await JSZip.loadAsync(json);
 	return await json.files[Object.keys(json.files)[0]].async('string')
 }

@@ -1103,7 +1103,7 @@ $("body").on('click',".INDEX_delete",function()
 			indexs[i] = i
 		}
 		title = '删除项目'
-		str += `将删除当前正在编辑的项目，包括所有分支\n\n`
+		str += `删除当前正在编辑的项目，包括所有分支\n\n`
 		str += `点击【${mt_text.confirm[mtlang]}】将所有内容全部删除\n`
 		str += '可在项目管理中的<b class="red">自动备份</b>中恢复'
 	}

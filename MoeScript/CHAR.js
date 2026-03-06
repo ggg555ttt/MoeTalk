@@ -329,7 +329,7 @@ async function removeChar(n)
 	club(true)
 	if(n.club.zh_cn === '临时角色')
 	{
-		if(confirm(`角色名：${mt_schar[n.no].name.replaceAll("-", " ")}\nID：${n.no}\n确定将这名角色添加进自定义角色列表？`))
+		if(confirm(`角色名：${mt_schar[n.no].name}\nID：${n.no}\n确定将这名角色添加进自定义角色列表？`))
 		{
 			mt_char[n.no] = mt_schar[n.no]
 			mt_char[n.no].club = n.school.zh_cn
@@ -387,6 +387,7 @@ async function removeChar(n)
 			数据操作('Ts','临时角色',mt_schar)
 		}
 	}
+	charList(true)//更新角色
 }
 //创建人物
 $('body').on('click',"#makecus",function()

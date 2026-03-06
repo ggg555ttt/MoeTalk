@@ -3432,7 +3432,6 @@
 							}), (0, m.jsx)(eU,
 							{
 								title: "发送消息",
-								style: {height: '100%'},
 								onClick: function()
 								{
 									let text = $$('.chatText')[0]
@@ -4015,6 +4014,7 @@
 												style:
 												{
 													width: '16%',
+													height: 'auto',
 													backgroundColor: 'rgb(139, 187, 233)',
 													display: 'none'
 												},
@@ -4942,11 +4942,7 @@
 									},
 								}), (0, m.jsx)('button',
 								{
-									style: 
-									{
-										width: '15%',
-										height: '100%'
-									},
+									style: {width: '15%'},
 									className: 'red',
 									children: '查找',
 									onClick: function()
@@ -4980,6 +4976,7 @@
 								style: {display: 'none'},
 								children: [(0, m.jsx)(ni,
 								{
+									style: {height: '2.5rem'},
 									children: (0, m.jsx)(c.xL,
 									{
 										icon: ei.O24
@@ -5004,7 +5001,7 @@
 									}
 								}), (0, m.jsx)(ni,
 								{
-									style: {transform: 'scaleX(-1)'},
+									style: {transform: 'scaleX(-1)', height: '2.5rem'},
 									children: (0, m.jsx)(c.xL,
 									{
 										icon: ei.O24
@@ -5216,18 +5213,13 @@
 							{
 								display: "flex"
 							},
-							children: (0, m.jsx)(nn,
+							children: [(0, m.jsx)(nn,
 							{
 								scrollRef: t
-							})
-						}), (0, m.jsx)(ns,
+							}), (0, m.jsx)(ns,
 						{
 							className: "INDEX_tips",
-							style:
-							{
-								justifyContent: 'space-around',
-								height: '50%'
-							},
+							style: {justifyContent: 'space-around'},
 							children: [(0, m.jsx)("span",
 							{
 								style:
@@ -5374,6 +5366,7 @@
 									}
 								}
 							})]
+						})]
 						}), (0, m.jsx)(eA,
 						{
 							scrollRef: t
