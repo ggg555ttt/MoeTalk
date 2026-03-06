@@ -880,12 +880,22 @@ function refreshMessage(json) {
 	const finalHtml = htmlArray.join('');
 	if(mt_settings['虚拟滚动'] == '关闭')
 	{
-		$('.消息').remove()
+		if(window.chatList)
+		{
+			window.chatList.replaceAllMessages('');
+			window.chatList.destroy()
+			window.chatList = null
+		}
+		else
+		{
+			$('.消息').remove()
+		}
 		$('.消息底座').before(finalHtml)
 	}
 	else
 	{
 		// 4. 交给虚拟滚动实例一次性处理
+		if(!window.chatList)window.chatList = new DynamicVirtualScroll('.显示区域', '.元素列表');
 		window.chatList.replaceAllMessages(finalHtml);
 	}
 	if(json.length)

@@ -203,7 +203,6 @@ $(async function()
 		await 检测版本();
 		[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
 	}
-	if(mt_settings['虚拟滚动'] !== '关闭')window.chatList = new DynamicVirtualScroll('.显示区域', '.元素列表');
 	加载数据()
 	if(MikuTalk)
 	{

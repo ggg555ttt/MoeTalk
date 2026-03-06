@@ -400,7 +400,7 @@ function makeMessage(type,data,chatIndex,mode)
 	{
 		style = `font-size:${mt_settings['文字样式'][type]['font-size']};`
 	}
-	foreach([...data.style || [],...mt_settings.风格样式[type] || []],function(k,v)
+	foreach([...mt_settings.风格样式[type] || [],...data.style || []],function(k,v)
 	{
 		style += `${v[0]}:${v[1]};`
 		if(v[0] == 'background-color')对话角颜色 = v[1]
