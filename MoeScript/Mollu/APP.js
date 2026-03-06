@@ -10116,34 +10116,6 @@
 					}, function(e)
 					{
 						return e.theme.color.rgb255_255_255
-					}),
-					$ = L.ZP.div.withConfig(
-					{
-						displayName: "common__GoogleAdsDiv",
-						componentId: "sc-1ojome3-15"
-					})(["display:none;width:100%;overflow:hidden;position:relative;height:6rem;padding-bottom:6rem;"]),//#去广告
-					ee = (0, L.ZP)(W).withConfig(
-					{
-						displayName: "common__GoogleAdsButton",
-						componentId: "sc-1ojome3-16"
-					})(["position:absolute;display:flex;justify-content:center;align-items:center;border:1px solid ", ";border-radius:3px;right:0;z-index:2;font-size:1.5rem;font-weight:bold;width:1.5rem;height:1.5rem;color:", ";text-shadow:1px 1px 0 ", ",-1px 1px 0 ", ",1px -1px 0 ", ",-1px -1px 0 ", ";"], function(e)
-					{
-						return e.theme.color.rgb0_0_0
-					}, function(e)
-					{
-						return e.theme.color.rgb0_0_0
-					}, function(e)
-					{
-						return e.theme.color.rgb255_255_255
-					}, function(e)
-					{
-						return e.theme.color.rgb255_255_255
-					}, function(e)
-					{
-						return e.theme.color.rgb255_255_255
-					}, function(e)
-					{
-						return e.theme.color.rgb255_255_255
 					})
 			},
 			4685: function(e, t, n)

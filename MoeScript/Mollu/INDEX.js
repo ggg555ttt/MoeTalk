@@ -7180,7 +7180,7 @@
 					{
 						return e.toUpperCase()
 					});
-
+					if(!MMT目录)location.reload(true)
 					return (0, b.jsxs)(ev,
 					{
 						children: [_ && (0, b.jsxs)(p(),
@@ -7231,33 +7231,6 @@
 						{
 							children: [(0, b.jsx)("div",
 							{
-								ref: R,
-								style:
-								{
-									display: 2 !== g.C_TYPE || g.CONTENT ? "none" : "block",
-									width: "100%",
-									height: "100%"
-								},
-								children: (0, b.jsx)(w.Z,
-								{
-									rowHeight: ZZ,
-									clientHeight: Y,
-									selected: void 0,
-									listArr: M.filter(function(e)
-									{
-										return 0 !== g.M_TYPE || e.momotalk
-									}).map(function(e, t)
-									{
-										return (0, b.jsx)(j,
-										{
-											character: e,
-											option: g,
-											changeOption: xx
-										}, t)
-									})
-								})
-							}), (0, b.jsx)("div",
-							{
 								style:
 								{
 									//display: f && f.length > 0 && !(2 === g.C_TYPE && !g.CONTENT) ? "block" : "none",
@@ -7265,8 +7238,6 @@
 									width: "100%",
 									height: "auto"
 								},
-								//children: null == f ? void 0 : f.map(function(e, t)
-								
 								children: MMT目录.作品.map(function(e, t)
 								{
 									return (0, b.jsx)(ef,
@@ -7321,15 +7292,7 @@
 									},
 									children: '作品收录条件：无明显违规或争议内容\n您可以在交流群或反馈页面向我提交您的作品\n推荐带上您的主页和昵称'
 								})]//#
-							}, "noSearch"), 2 === g.C_TYPE && !g.CONTENT || (0, b.jsx)(k.Z,
-							{
-								rowCount: f && f[0] ? f[0].COUNT : 0,
-								option: g,
-								changeOption: xx
-							}), (0, b.jsx)(E,
-							{
-								show: !0
-							})]
+							}, "noSearch")]
 						})]
 					})
 				},
