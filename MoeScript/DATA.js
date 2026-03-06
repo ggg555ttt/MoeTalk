@@ -8,6 +8,15 @@ function loaddata(json,play)//识别存档
 		let OLdJson = UPDATE_OldData(json)
 		json = {}
 		json.INFO = {}//存档信息
+		if(!OLdJson)
+		{
+			json.INFO.title = '错误存档'
+			json.INFO.nickname = '无法识别'
+			json.INFO.date = '请勿上传'
+			json.CHAT = chats//MMT
+			INIT_loading(!'加载存档')
+			return json
+		}
 		json.INFO.title = OLdJson[0]['title']
 		json.INFO.nickname = OLdJson[0]['nickname']
 		json.INFO.date = OLdJson[0]['date']
@@ -75,10 +84,13 @@ function loaddata(json,play)//识别存档
 function repairCF(data)
 {
 	if(!mt_characters || !data.sCharacter)return
-	let id = data.sCharacter.no,head = data.sCharacter.index
+	let id = data.sCharacter.no
+	let head = data.sCharacter.index
 	if(id_map[0][id])id = id_map[0][id] || id
-	if(head < 1000 && mt_characters[id])data.sCharacter.index = mt_characters[id].head.split(',')[0]
+	if(id_map[1][head])head = id_map[1][head] || head
+	if(head < 1000 && mt_characters[id])head = mt_characters[id].head.split(',')[0]
 	data.sCharacter.no = id
+	data.sCharacter.index = head
 	if(data.type === 'image')
 	{
 		data.content = data.content || ''
@@ -93,11 +105,7 @@ function UPDATE_OldData(json)//识别存档
 	if(typeof json === 'string')json = JSON.parse(json)
 	if(!json[0] || (json[0] && !json[0].title))//错误数据
 	{
-		json[0] = {};
-		json[1] = [];
-		json[0]['title'] = '错误存档'
-		json[0]['nickname'] = '无法识别的数据'
-		json[0]['date'] = '强制上传可能会损坏您的存档'
+		return false
 	}
 
 	if(json[0] && (json[0].mt_char || json[0].custom))//mt旧版自定义角色转义
