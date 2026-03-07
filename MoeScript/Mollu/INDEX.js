@@ -7180,7 +7180,6 @@
 					{
 						return e.toUpperCase()
 					});
-					if(!MMT目录)location.reload(true)
 					return (0, b.jsxs)(ev,
 					{
 						children: [_ && (0, b.jsxs)(p(),
