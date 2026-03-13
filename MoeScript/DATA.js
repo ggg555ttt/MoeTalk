@@ -99,14 +99,11 @@ function repairCF(data)
 }
 function UPDATE_OldData(json)//识别存档
 {
-	let josnsize = (json.length/1024).toFixed(0)
 	let custom_char = {};
 	let custom_head = {};
 	if(typeof json === 'string')json = JSON.parse(json)
-	if(!json[0] || (json[0] && !json[0].title))//错误数据
-	{
-		return false
-	}
+	let isMT = json.length === 2 && json[0].title !== undefined && json[0].nickname !== undefined && json[0].date
+	if(!isMT && !json['chat'])return false//错误数据
 
 	if(json[0] && (json[0].mt_char || json[0].custom))//mt旧版自定义角色转义
 	{
@@ -147,49 +144,13 @@ function UPDATE_OldData(json)//识别存档
 			}
 		})
 	}
-
-	if(json['chars'])//ct待选角色
-	{
-		json[0]['选择角色'] = {}
-		json[0]['选择角色'].no = 0
-		json[0]['选择角色'].index = 1
-		json[0]['选择角色'].list = []
-		
-		$.each(json['chars'],function(k,v)
-		{
-			json[0]['选择角色'].list[k] = {}
-			if(v['char_id'].split('-')[0] === 'ba')
-			{
-				json[0]['选择角色'].list[k].no = v['char_id'].split('-')[1]
-				json[0]['选择角色'].list[k].index = v['img']
-			}
-			else if(v['char_id'].split('-')[1] === 'MT')
-			{
-				json[0]['选择角色'].list[k].no = v['char_id'].split('-')[2]
-				json[0]['选择角色'].list[k].index = v['char_id'].split('-')[3]
-			}
-			else
-			{
-				json[0]['选择角色'].list[k].no = v['char_id']
-				json[0]['选择角色'].list[k].index = v['char_id']
-			}
-			json[0]['选择角色'].list[k].index = json[0]['选择角色'].list[k].index.replace('Student_Portrait_','').replace('NPC_Portrait_','').replace('Lobbyillust_Icon_','').replace('_01','_L2D').replace('_Collection','_BG')
-			id_map[0][json[0]['选择角色'].list[k].no] ? json[0]['选择角色'].list[k].no = id_map[0][json[0]['选择角色'].list[k].no] : ''
-			id_map[1][json[0]['选择角色'].list[k].index] ? json[0]['选择角色'].list[k].index = id_map[1][json[0]['选择角色'].list[k].index] : ''
-		})
-	}
-	let length = 0;
-	$.each(custom_char,function(k,v)
-	{
-		length = length+1
-	})
-	//console.log(custom_char)
 	if(json['chat'])//ct存档
 	{
+		json[0] = []
 		json[1] = [];
 		json[0]['title'] = 'ClosureTalk存档'
-		json[0]['nickname'] = '存档大小：'+josnsize+'KB'
-		json[0]['date'] = `${length ? length : 0}名自定义角色`
+		json[0]['nickname'] = ''
+		json[0]['date'] = ''
 		$.each(json['chat'],function(k,v)
 		{
 			json[1][k] = {};
@@ -228,66 +189,6 @@ function UPDATE_OldData(json)//识别存档
 			if(v.yuzutalk.nameOverride)json[1][k]['name'] = v.yuzutalk.nameOverride;
 			if(v.yuzutalk.avatarState === 'SHOW')json[1][k]['isFirst'] = true;
 			if(v.is_breaking === true)json[1][k]['is_breaking'] = true;
-		})
-	}
-	if(json['talkHistory'])
-	{
-		json[1] = [];
-		json[0]['title'] = json['name']
-		json[0]['nickname'] = 'YuukaTalk存档'
-		json[0]['date'] = '无法显示自定义角色头像和外部上传图片'
-		json['talkHistory'].map(function(v,k)
-		{
-			json[1][k] = {};
-			json[1][k].content = ''
-			json[1][k].replyDepth = 0
-			json[1][k].sCharacter = {}
-			json[1][k].sCharacter.no = 0
-			json[1][k].sCharacter.index = 1
-			v.type = v.type.split('.').slice(-1)[0]
-			if(v.talker)
-			{
-				if(v.talker.nameRoma !== 'sensei')
-				{
-					json[1][k].name = v.talker.name
-					json[1][k].sCharacter.no = 'YuukaTalk'
-					json[1][k].sCharacter.index = v.talker.currentAvatar
-				}
-			}
-			if(v.type === 'PureText')
-			{
-				json[1][k].isFirst = v.isFirst
-				json[1][k].content = v.text
-				json[1][k].type = 'chat'
-			}
-			if(v.type === 'Branch')
-			{
-				json[1][k].content = v.textOptions.join('\n')
-				json[1][k].type = 'reply'
-			}
-			if(v.type === 'LoveScene')
-			{
-				json[1][k].name = v.studentName
-				json[1][k].type = 'heart'
-			}
-			if(v.type === 'Narration')
-			{
-				json[1][k].content = v.text
-				json[1][k].type = 'info'
-			}
-			if(v.type === 'Photo')
-			{
-				if(v.uri.indexOf('file:///android_asset') > -1)
-				{
-					json[1][k].content = v.uri.replace('file:///android_asset','https://mirror.ghproxy.com/https://github.com/Eynnzerr/YuukaTalk/blob/dd45c56e35d64b8d9375de81985541f4f238e170/app/src/main/assets')
-				}
-				else
-				{
-					json[1][k].content = `MoeData/Ui/error.webp`;
-				}
-				json[1][k].type = 'image'
-			}
-			json[1][k].isFirst = false
 		})
 	}
 	json[0].mt_char = custom_char

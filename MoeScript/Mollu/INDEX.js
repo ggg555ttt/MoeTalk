@@ -2294,7 +2294,7 @@
 											INIT_loading('加载存档')
 											P(e)
 										}
-									}), (0, m.jsx)('div',
+									}), '支持MoeTalk和ClosureTalk存档', (0, m.jsx)('div',
 									{
 										style:
 										{
@@ -2458,16 +2458,16 @@
 										}), (0, m.jsxs)(eT,
 										{
 											style: {'color': 'red'},
-											children: j.CUSTOM ? ['包含自定义数据', (0, m.jsxs)('button',
+											children: j.CUSTOM ? (0, m.jsxs)('button',
 											{
-												children: '统计',
+												children: '统计自定义数据',
 												onClick: function()
 												{
 													let c = Object.keys(j.CUSTOM.CHAR).length
 													let n = Object.keys(j.CUSTOM.IMAGE).length
 													alert(`角色总数：${c}\n图片总数：${n}`)
 												}
-											})] : ''
+											}) : ''
 										})]
 									}), (0, m.jsxs)("span",
 									{
