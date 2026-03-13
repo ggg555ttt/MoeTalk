@@ -134,6 +134,7 @@ function UPDATE_OldData(json)//识别存档
 
 	if(json['custom_chars'])//ct自定义角色
 	{
+		if(!json['custom_chars'].length)json['custom_chars'] = []
 		$.each(json['custom_chars'],function(k,v)
 		{
 			if(v['char_id'].split('-')[1] !== 'MT')
@@ -146,6 +147,7 @@ function UPDATE_OldData(json)//识别存档
 	}
 	if(json['chat'])//ct存档
 	{
+		if(!json['chat'].length)json['chat'] = []
 		json[0] = []
 		json[1] = [];
 		json[0]['title'] = 'ClosureTalk存档'
