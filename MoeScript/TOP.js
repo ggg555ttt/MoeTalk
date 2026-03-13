@@ -1037,10 +1037,10 @@ if(mt_settings['桌面模式'])
 	{
 		const el = event.target;
 		// 1. 【最高性能判断】直接比对 tagName 字符串，比 .matches() 快一个数量级
-		if (el.tagName !== 'TEXTAREA') return;
+		if(el.tagName !== 'TEXTAREA')return;
 		const to = event.relatedTarget;
 		// 3. 【最高性能判断】目标节点的判断同样改用 tagName
-		if (to && (to.tagName === 'TEXTAREA' || to.tagName === 'INPUT'))return;
+		if(to && (to.tagName === 'TEXTAREA' || to.type === 'text'))return;
 		// 防抖 + 微任务优化
 		queueMicrotask(()=> 
 		{
@@ -1057,7 +1057,7 @@ else
 		// 1. 判断点击的区域是否是我们的特定 ID 或 Class（支持内部子元素）
 		const isSpecificTarget = event.target.closest('.锁定焦点');
 		// 如果点到的不是特定元素，什么都不做，让系统正常处理（正常失焦）
-		if (!isSpecificTarget) return;
+		if(!isSpecificTarget || event.target.tagName === 'TEXTAREA')return;
 		// 2. 检查当前处于焦点状态的是否是 TEXTAREA
 		const activeEl = document.activeElement;
 		// 3. 【核心逻辑】阻止鼠标按下的默认行为！

@@ -505,6 +505,48 @@ function formatBytes(bytes,decimals = 2)
 	const value = parseFloat((bytes/Math.pow(1000, i)).toFixed(decimals));
 	return value + ' ' + sizes[i];
 }
+class Base64Utils {
+  static toBlob(base64, mimeType = '') {
+    const parts = base64.split(';base64,');
+    if (parts.length === 2) {
+      mimeType = parts[0].split(':')[1] || mimeType;
+      base64 = parts[1];
+    }
+
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: mimeType });
+  }
+
+  static toDataURL(blob) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.readAsDataURL(blob);
+    });
+  }
+}
+async function cacheFile(C,blob)
+{
+	// if(C[2] == '清')
+	const cache = await caches.open(C[0]);
+	if(C[2] == '删')return await cache.delete(C[1]);
+	if(C[2] == '写')
+	{
+		blob = Base64Utils.toBlob(blob)
+		const headers = new Headers(//显式声明 Headers
+		{	
+			'Content-Type': blob.type || 'application/octet-stream',//从blob获取类型，如果没有则给个默认值
+			'Content-Length': blob.size.toString()//明确写入Content-Length，解决长度为 0 的问题
+		});
+		const response = new Response(blob, {headers: headers});
+		await cache.put(C[1], response);
+	}
+}
 function 数据操作(C,K = null,V = null)
 {
 	let D,M
@@ -518,9 +560,22 @@ function 数据操作(C,K = null,V = null)
 	else if(C[1] === 'r')M = 'removeItem'
 	else if(C[1] === 'c')M = 'clear'
 	else if(C[1] === 'k')M = 'keys'
+	
 	return new Promise(function(resolve)
 	{
-		D[M](K,V).then((e)=>{resolve(e)}).catch((e)=>
+		D[M](K,V).then((e)=>
+		{
+			// if(C[1] === 's' || C[1] === 'r')C += '删'
+			// if(C[1] === 'c')C += '清';
+			// if(C[2] && typeof e === 'string')
+			// {
+			// 	C = C.split('')
+			// 	C[0] = D._config.name
+			// 	C[1] = new URL(K, window.location.href).href;
+			// 	cacheFile(C,e)
+			// }
+			resolve(e)
+		}).catch((e)=>
 		{
 			let str = `数据库操作失败！\n这可能是存储空间不足引起的\n如果不是请向开发者反馈此问题\n函数名：${D._config.name}.${M}\n键名：${K}`
 			let config = {id: 'error',title: '<span class="red">错误警告</span>'}

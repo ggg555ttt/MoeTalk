@@ -14,7 +14,7 @@ async function IMAGE_error(image,play)
 {
 	let src = image.src ? image.getAttribute('src') : image.target.getAttribute('src')
 	let url = src.split('/').pop().replace('.webp','')
-	let img = (play ? await 数据操作('Cg',url) : await 数据操作('Ig',url) || await 数据操作('Tg',url)) || href+'MoeData/Ui/error.webp'
+	let img = (play ? await 数据操作('Cg写',url) : await 数据操作('Ig写',url) || await 数据操作('Tg写',url)) || href+'MoeData/Ui/error.webp'
 	if(img[0] === 'G')img = href+img
 	if(image.src)
 	{

@@ -30,14 +30,11 @@ this.addEventListener('activate', event => {
 		caches.keys().then((nameList) => {
 			return Promise.all(
 				nameList.map((i) => {
-					if (i !== cacheName) {
+					if (i == 'next-data') {
 						return caches.delete(i)
 					}
 				})
 			)
-			// for(var i = 0; i < nameList.length; i++){
-			//	 if(i !== cacheName) caches.delete(i);
-			// }
 		}).catch(e => console.log(e))
 	)
 })
