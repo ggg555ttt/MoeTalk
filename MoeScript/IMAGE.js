@@ -427,7 +427,7 @@ function mt_capture(清晰度,生成图片,标题)
 	}
 	callback()
 }
-if(客户端 === 'HTML5+' || 客户端 === 'Cordova')
+if(客户端 === 'HTML5+' || 客户端 === 'Cordova' || 客户端 === 'NW.js')
 {
 	var time = 0;//初始化起始时间
 	$("body").on('touchstart', 'img', function(e)
@@ -458,7 +458,7 @@ if(客户端 === 'HTML5+' || 客户端 === 'Cordova')
 				}
 				保存文件(`${getNowDate()}.${ext}`,data,'image')
 			}
-			alert(`确定要将这张图保存到图库吗？\n<img src='${src}' style='width:50%;'>`,config)
+			alert(`确定要保存这张图片吗？\n<img src='${src}' style='width:50%;'>`,config)
 		}, 1000);//这里设置长按响应时间
 	});
 	$("body").on('touchend', 'img', function(e)

@@ -415,6 +415,14 @@ $("body").on('click',"#下载设置",function()
 	let str = ''
 	str += `<input class='隐藏前缀' type='checkbox' ${mt_settings['隐藏前缀'] ? 'checked' : ''}>隐藏下载文件名前缀\n`
 	str += `<input class='打包下载' type='checkbox' ${mt_settings['打包下载'] ? 'checked' : ''}>图片打包下载\n`
+	if(客户端 === 'NW.js')
+	{
+		str += '<input type="file" id="下载位置" nwdirectory hidden/>'
+		str += `<p><button class='下载位置'>存档下载位置</button></p>`
+		if(localStorage['存档下载位置'])str += `<p id='存档下载位置'>${localStorage['存档下载位置']}<button class='默认下载位置' onclick='$("#存档下载位置").remove()'>恢复默认</button></p>`
+		str += `<p><button class='下载位置'>图片下载位置</button></p>`
+		if(localStorage['图片下载位置'])str += `<p id='图片下载位置'>${localStorage['图片下载位置']}<button class='默认下载位置' onclick='$("#图片下载位置").remove()'>恢复默认</button></p>`
+	}
 	let config = {}
 	config.title = '下载设置'
 	config.confirm = '提交'
@@ -423,10 +431,30 @@ $("body").on('click',"#下载设置",function()
 	{
 		mt_settings['隐藏前缀'] = $$(`.alert_${config.id} .隐藏前缀`).prop('checked')
 		mt_settings['打包下载'] = $$(`.alert_${config.id} .打包下载`).prop('checked')
+		$('.默认下载位置').remove()
+		localStorage['存档下载位置'] = $('#存档下载位置').text()
+		localStorage['图片下载位置'] = $('#图片下载位置').text()
 		saveStorage('设置选项',mt_settings,'local')
 	}
 	alert(str,config)
 });
+$("body").on('click',".下载位置",function()
+{ 
+	$('#下载位置').attr('title',$(this).text()).click()
+});
+const folderSelector = document.getElementById('folderSelector');
+const pathDisplay = document.getElementById('pathDisplay');
+$("body").on('change','#下载位置',function()
+{
+	if(this.files.length > 0)
+	{
+		let path = this.files[0].path
+		let id = this.title
+		$('#'+id).remove()
+		if(id.startsWith('存档'))$('.下载位置:eq(0)').parent().after(`<p id='存档下载位置'>${path}<button class='默认下载位置' onclick='$("#存档下载位置").remove()'>恢复默认</button></p>`)
+		else $('.下载位置:eq(1)').parent().after(`<p id='图片下载位置'>${path}<button class='默认下载位置' onclick='$("#图片下载位置").remove()'>恢复默认</button></p>`)
+	}
+})
 $("body").on('click',"#清除缓存",function()
 {
 	let str = '清除缓存可能会导致资源加载速度变慢，如非必要不推荐尝试清除\n'

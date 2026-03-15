@@ -878,6 +878,7 @@ function refreshMessage(json) {
 	
 	// 3. 使用 .join('') 一次性将数组合并为巨型 HTML 字符串 (比 += 拼接快很多)
 	const finalHtml = htmlArray.join('');
+	if(!mt_settings['虚拟滚动'] && browser.isIos)mt_settings['虚拟滚动'] = '关闭'
 	if(mt_settings['虚拟滚动'] == '关闭')
 	{
 		if(window.chatList)

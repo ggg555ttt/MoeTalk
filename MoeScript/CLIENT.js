@@ -202,11 +202,29 @@ async function 保存文件(filename, data, type = 2)
 	}
 	if(客户端 === 'NW.js')
 	{
-		if(type === 'json')filename = 'MoeTalk存档/'+filename
-		if(type === 'image' || type === 'zip')filename = 'MoeTalk截图/'+filename
+		let path = ''
+		if(type === 'json')
+		{
+			if(localStorage['存档下载位置'])path = localStorage['存档下载位置']+'/'
+			else path = process.cwd()+'/MoeTalk存档/'
+		}
+		if(type === 'image' || type === 'zip')
+		{
+			if(localStorage['图片下载位置'])path = localStorage['图片下载位置']+'/'
+			else path = process.cwd()+'/MoeTalk截图/'
+		}
+		path = path.replaceAll('\\','/').replaceAll('//','/')
 		data = Buffer.from(await data.arrayBuffer());//将 Blob 转为 Buffer
-		await fs.outputFile(filename, data);
-		return `客户端路径/${filename}`
+		try
+		{
+			await fs.outputFile(path+filename, data);
+			return path+filename
+		}
+		catch
+		{
+			alert(`文件名：<p class='red'>${path+filename}</p>路径不存在或没有读写权限！`,{title: '下载失败！'})
+		}
+		return ''
 	}
 	if(客户端 === 'HTML5+')
 	{
@@ -521,7 +539,7 @@ async function 导出存档(filename,json)
 	if($('.存档格式').val() === 'json')
 	{
 		filename = await 保存文件(filename+'.JSON',json,'json')
-		alert(`<span style="color:red;">${filename}</span>已下载\n`)
+		if(filename)alert(`<p class='red'>${filename}</p>已下载`)
 		return
 	}
 	let png = await html2canvas($('.ckdZao')[0],
@@ -555,11 +573,11 @@ async function 导出存档(filename,json)
 		png = new Blob([png, zip],{type: 'image/png'})
 		filename = await 保存文件(filename+'.PNG',png,'json')
 		png = await blobToBase64(png)
-		let str = `<span style="color:red;">${filename}</span>已下载\n`
+		let str = `<p class='red'>${filename}</p>已下载\n`
 		str += '如果下载失败，请尝试手动保存下方的图片\n'
 		str += `<img src='data:image/png;base64,${png}'style='border: 2px solid red;width: 100%;'>\n`
 		str += '可将图片后缀名改为"zip"后解压'
-		alert(str)
+		if(filename)alert(str)
 	}
 	file.readAsArrayBuffer(await new JSZip().file('json.txt',json).generateAsync({type: 'blob'}))
 }
