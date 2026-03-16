@@ -2266,6 +2266,10 @@
 									{
 										value: 'image',
 										children: '图片'
+									}), (0, m.jsx)("option",
+									{
+										value: 'txt',
+										children: '文本'
 									})]
 								}),'无法下载请将格式改为图片后手动保存']
 							}), (0, m.jsx)("p",
@@ -2422,6 +2426,29 @@
 											className: "bold",
 											onClick: async function()
 											{
+												if($$('.存档格式').val() === 'txt')
+												{
+													let txt = ''
+													for(let i=0,l=chats.length;i<l;i++)
+													{
+														let type = chats[i].type
+														let text = chats[i].content
+														let name = chats[i].name || loadname(chats[i].sCharacter.no,chats[i].sCharacter.index)
+														if(type == 'chat')txt += `${name}：「${text}」\n\n`
+														if(type == 'image')txt += `${name}：*图片*\n\n`
+														if(type == 'reply')txt += `回复：「${text}」\n\n`
+														if(type == 'info')txt += `旁白：「${text}」\n\n`
+														if(type == 'heart')txt += `${name}：${text || '*羁绊剧情*'}\n\n`
+													}
+													if(txt !== '')
+													{
+														let title = mt_settings['截图选项'].titleStr = $$('.mt_title:eq(-1)').val()
+														let filename = 'MoeTalk文本'+getNowDate()+'_'
+														if(mt_settings['隐藏前缀'])filename = ''
+														导出存档(`${filename}${title || '无题'}`,txt)
+													}
+													return
+												}
 												let cus = false
 												let info = {}
 												info.title = mt_settings['截图选项'].titleStr = $$('.mt_title:eq(-1)').val()

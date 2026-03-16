@@ -536,9 +536,10 @@ async function 导出存档(filename,json)
 {
 	if(typeof json !== 'string')json = JSON.stringify(json)
 	json = new Blob([json],{type: 'application/json'})
-	if($('.存档格式').val() === 'json')
+	let mode = $('.存档格式').val()
+	if(mode === 'json' || mode === 'txt')
 	{
-		filename = await 保存文件(filename+'.JSON',json,'json')
+		filename = await 保存文件(filename+'.'+mode.toUpperCase(),json,'json')
 		if(filename)alert(`<p class='red'>${filename}</p>已下载`)
 		return
 	}
