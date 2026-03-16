@@ -353,7 +353,7 @@ $("body").on('click',"#发送方式",function()
 $("body").on('click',"#虚拟滚动",function()
 {
 	let str = '此功能开启后可改善浏览和编辑体验，部分设备可能会有问题\n'
-	str += `开启<input type="checkbox" ${mt_settings['虚拟滚动'] == '关闭' ? '' : 'checked'}>`
+	str += `开启<input type="checkbox" ${虚拟滚动 == '关闭' ? '' : 'checked'}>`
 	let config = {}
 	config.title = '虚拟滚动（测试）'
 	config.confirm = '提交'
@@ -362,19 +362,19 @@ $("body").on('click',"#虚拟滚动",function()
 	{
 		if($(`.alert_${config.id} input`).prop('checked'))
 		{
-			mt_settings['虚拟滚动'] = '开启'
+			虚拟滚动 = '开启'
 			if(!window.chatList)window.chatList = new DynamicVirtualScroll('.显示区域', '.元素列表');
 		}
 		else
 		{
-			mt_settings['虚拟滚动'] = '关闭'
+			虚拟滚动 = '关闭'
 			if(window.chatList)
 			{
 				window.chatList.destroy()
 				window.chatList = null
 			}
 		}
-		saveStorage('设置选项',mt_settings,'local')
+		localStorage['虚拟滚动'] = 虚拟滚动
 	}
 	alert(str,config)
 

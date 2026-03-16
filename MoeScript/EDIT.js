@@ -1,5 +1,7 @@
 /*@MoeScript/EDIT.js@*/
 var 选择列表 = []
+var 虚拟滚动 = localStorage['虚拟滚动']
+if(!虚拟滚动 && 设备信息.device.isApple)虚拟滚动 = '关闭'
 /**
  * 高性能动态高度虚拟滚动列表 (纯 JS 无框架版)
  * 专为百万级 DOM 和频繁增删改查设计
@@ -516,7 +518,7 @@ let prevFirstCheckedEl = null;
 
 // $O(1)$ 边框截断更新算法
 function updateFirstCheckedBorder() {
-	if(mt_settings['虚拟滚动'] == '关闭')
+	if(虚拟滚动 == '关闭')
 	{
 		选择列表 = []
 		$('.消息').css('border-top','')
@@ -568,7 +570,7 @@ function updateFirstCheckedBorder() {
 }
 function 取消选择()
 {
-	if(mt_settings['虚拟滚动'] == '关闭')
+	if(虚拟滚动 == '关闭')
 	{
 		$(".dels").prop("checked",false).parent().css("background-color","");
 	}
@@ -592,7 +594,7 @@ function 取消选择()
 }
 // 1. 全选
 $('body').on('click', "#delsall", function() {
-	if(mt_settings['虚拟滚动'] == '关闭')
+	if(虚拟滚动 == '关闭')
 	{
 		if($(".dels:checked").length !== $(".dels").length)
 		{
@@ -638,7 +640,7 @@ $('body').on('click', "#delsall", function() {
 
 // 2. 反选
 $('body').on('click', "#rdelsall", function() {
-	if(mt_settings['虚拟滚动'] == '关闭')
+	if(虚拟滚动 == '关闭')
 	{
 		$(".dels").each(function()
 		{
@@ -664,7 +666,7 @@ $('body').on('click', "#rdelsall", function() {
 
 // 3. 区间选择
 $('body').on('click', "#delsto", function() {
-	if(mt_settings['虚拟滚动'] == '关闭')
+	if(虚拟滚动 == '关闭')
 	{
 		if($(".dels:checked").length > 1)
 		{
@@ -711,7 +713,7 @@ $('body').on('click', "#delsto", function() {
 
 // 4. 隐藏 / 显示 工具按钮拓展 (截图模式)
 $('body').on('click', ".Screenshot_Mode", function() {
-	if(mt_settings['虚拟滚动'] == '关闭')
+	if(虚拟滚动 == '关闭')
 	{
 		if($('.tools').css('display') === 'none')
 		{
@@ -777,7 +779,7 @@ $('body').on('click', ".Screenshot_Mode", function() {
 
 // 5. 选框被选中时背景色变化
 $('body').on('change', ".dels", function() {
-	if(mt_settings['虚拟滚动'] == '关闭')
+	if(虚拟滚动 == '关闭')
 	{
 		if($(this).prop('checked'))
 		{
@@ -820,7 +822,7 @@ $('body').on('click', ".chatText", function() {
 });
 // 高性能批量更新所有名字
 function updateAllNames() {
-	if(mt_settings['虚拟滚动'] == '关闭')
+	if(虚拟滚动 == '关闭')
 	{
 		$('.名字').each(function()
 		{
@@ -878,8 +880,7 @@ function refreshMessage(json) {
 	
 	// 3. 使用 .join('') 一次性将数组合并为巨型 HTML 字符串 (比 += 拼接快很多)
 	const finalHtml = htmlArray.join('');
-	if(!mt_settings['虚拟滚动'] && browser.isIos)mt_settings['虚拟滚动'] = '关闭'
-	if(mt_settings['虚拟滚动'] == '关闭')
+	if(虚拟滚动 == '关闭')
 	{
 		if(window.chatList)
 		{
@@ -911,7 +912,7 @@ function refreshMessage(json) {
 	}
 	// （可选）如果你希望刷新数据后，自动平滑滚动到最新的一条消息，可以加上这句：
 	setTimeout(() => {
-		跳转索引(json.length - 1, { behavior: 'auto', block: 'end' });
+		json.length && 跳转索引(json.length - 1, { behavior: 'auto', block: 'end' });
 	}, 100);
 	选择列表 = []
 	$('.delsNum').text(0)
@@ -919,7 +920,7 @@ function refreshMessage(json) {
 function blink(chatIndex)
 {
 	if(chatIndex === undefined)return
-	if(mt_settings['虚拟滚动'] == '关闭')
+	if(虚拟滚动 == '关闭')
 	{
 		let element = $(`.消息:eq(${chatIndex})`).fadeOut(500, function() 
 		{
@@ -964,36 +965,36 @@ function blink(chatIndex)
 function 跳转索引(chatIndex, options)
 {
 	if(chatIndex === undefined)return
-	if(mt_settings['虚拟滚动'] == '关闭')$(`.消息:eq(${chatIndex})`)[0].scrollIntoView(options)
+	if(虚拟滚动 == '关闭')$(`.消息:eq(${chatIndex})`)[0].scrollIntoView(options)
 	else window.chatList.scrollToIndex(chatIndex, options)
 }
 function 获取索引(element)
 {
-	if(mt_settings['虚拟滚动'] == '关闭')return $('.消息').index(element.closest('.消息'))
+	if(虚拟滚动 == '关闭')return $('.消息').index(element.closest('.消息'))
 	else return element.closest('.消息').__vs_chatIndex
 }
 function 向前追加(chatIndex, message)
 {
-	if(mt_settings['虚拟滚动'] == '关闭')$(`.消息:eq(${chatIndex})`).before(message);
+	if(虚拟滚动 == '关闭')$(`.消息:eq(${chatIndex})`).before(message);
 	else window.chatList.insertBeforeMessage(chatIndex, message);
 }
 function 向后追加(chatIndex, message)
 {
-	if(mt_settings['虚拟滚动'] == '关闭')$(`.消息:eq(${chatIndex})`).after(message);
+	if(虚拟滚动 == '关闭')$(`.消息:eq(${chatIndex})`).after(message);
 	else window.chatList.insertAfterMessage(chatIndex, message);
 }
 function 末尾追加(message)
 {
-	if(mt_settings['虚拟滚动'] == '关闭')$('.消息底座').before(message);
+	if(虚拟滚动 == '关闭')$('.消息底座').before(message);
 	else window.chatList.appendMessage(message);
 }
 function 消息替换(chatIndex, message)
 {
-	if(mt_settings['虚拟滚动'] == '关闭')$(`.消息:eq(${chatIndex})`)[0].outerHTML = message;
+	if(虚拟滚动 == '关闭')$(`.消息:eq(${chatIndex})`)[0].outerHTML = message;
 	else window.chatList.updateMessage(chatIndex, message);
 }
 function 删除消息(chatIndex)
 {
-	if(mt_settings['虚拟滚动'] == '关闭')$(`.消息:eq(${chatIndex})`).remove();
+	if(虚拟滚动 == '关闭')$(`.消息:eq(${chatIndex})`).remove();
 	else window.chatList.removeMessage(chatIndex);
 }

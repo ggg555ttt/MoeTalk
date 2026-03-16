@@ -77,11 +77,85 @@ if(mt_settings['存储模式'])
 		}
 	})
 }
-function os(u = window.navigator.userAgent)
-{
-	return {isMobile:!!u.match(/AppleWebKit.*Mobile/i)||!!u.match(/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/),isWechat:!!u.match(/MicroMessenger/i),isQQ:!!u.match(/QQ/i),isIos:!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),isAndroid:!!u.match(/(Android);?[\s/]+([\d.]+)?/),isiPhone:!!u.match(/(iPhone\sOS)\s([\d_]+)/),isSafari:!!u.match(/Safari/),isFirefox:!!u.match(/Firefox/),isOpera:!!u.match(/Opera/),isChrome:u.match(/Chrome/i)!==null&&u.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i)===null?true:false,isDeskTop:(()=>{const Agents=['Android','iPhone','SymbianOS','Windows Phone','iPad','iPod','okhttp/3.9.1'];let flag=true;for(let i=0,LEN=Agents.length;i<LEN;i++){if(u.indexOf(Agents[i])!==-1){flag=false;break}}return flag})()};
+function getDeviceAndBrowserInfo() {
+  const ua = navigator.userAgent.toLowerCase();
+
+  // ================= 1. 判断设备 (Device) =================
+  const isMac = /macintosh|mac os x/i.test(ua);
+  const isIPhone = /iphone/i.test(ua);
+  const isIPod = /ipod/i.test(ua);
+  // 修复 iPadOS 13+ 将 UA 伪装成 Mac 的问题（通过最大触控点数判断）
+  const isIPad = /ipad/i.test(ua) || (isMac && navigator.maxTouchPoints > 0);
+
+  // 核心需求：统一的苹果设备判断 (Mac, iPhone, iPad, iPod)
+  const isApple = isMac || isIPhone || isIPod || isIPad;
+  
+  const isAndroid = /android|adr/i.test(ua);
+  const isWindows = /windows|win32|win64/i.test(ua);
+
+  // 判断是移动端还是 PC 端
+  const isMobile = isIPhone || isIPad || isIPod || isAndroid || /mobile/i.test(ua);
+  const isPc = !isMobile;
+
+  // 提取具体的设备类型名称
+  let deviceType = 'unknown';
+  if (isIPhone) deviceType = 'iphone';
+  else if (isIPad) deviceType = 'ipad';
+  else if (isMac && !isIPad) deviceType = 'mac'; // 排除被误判的 iPad
+  else if (isAndroid) deviceType = 'android';
+  else if (isWindows) deviceType = 'windows';
+
+  // ================= 2. 判断浏览器 (Browser) =================
+  const isWechat = /micromessenger/i.test(ua); // 微信内置浏览器
+  const isEdge = /edg/i.test(ua) || /edge/i.test(ua);
+  const isFirefox = /firefox/i.test(ua);
+  // Chrome 的 UA 里包含 Safari，Edge 的 UA 包含 Chrome，所以需要按优先级排除
+  const isChrome = /chrome/i.test(ua) && !isEdge;
+  const isSafari = /safari/i.test(ua) && !/chrome/i.test(ua) && !isAndroid;
+
+  // 提取浏览器类型和版本号
+  let browserType = 'unknown';
+  let browserVersion = 'unknown';
+
+  if (isWechat) {
+    browserType = 'wechat';
+    browserVersion = (ua.match(/micromessenger\/([\d.]+)/) || [])[1] || 'unknown';
+  } else if (isEdge) {
+    browserType = 'edge';
+    browserVersion = (ua.match(/edg\/([\d.]+)/) || ua.match(/edge\/([\d.]+)/) || [])[1] || 'unknown';
+  } else if (isFirefox) {
+    browserType = 'firefox';
+    browserVersion = (ua.match(/firefox\/([\d.]+)/) || [])[1] || 'unknown';
+  } else if (isChrome) {
+    browserType = 'chrome';
+    browserVersion = (ua.match(/chrome\/([\d.]+)/) || [])[1] || 'unknown';
+  } else if (isSafari) {
+    browserType = 'safari';
+    browserVersion = (ua.match(/version\/([\d.]+)/) || [])[1] || 'unknown';
+  }
+
+  // ================= 3. 返回结果 =================
+  return {
+    device: {
+      isApple,     // 是否为苹果公司设备 (Mac, iPhone, iPad等)
+      isAndroid,   // 是否为安卓设备
+      isWindows,   // 是否为 Windows 设备
+      isMobile,    // 是否为移动端
+      isPc,        // 是否为 PC 端
+      type: deviceType // 'mac' | 'iphone' | 'ipad' | 'android' | 'windows' | 'unknown'
+    },
+    browser: {
+      isWechat,    // 是否为微信浏览器
+      isChrome,
+      isSafari,
+      isFirefox,
+      isEdge,
+      type: browserType,       // 'chrome' | 'safari' | 'firefox' | 'edge' | 'wechat' | 'unknown'
+      version: browserVersion  // 浏览器版本号，例如 '114.0.0.0'
+    }
+  };
 }
-var browser = os();//获取浏览器信息
+var 设备信息 = getDeviceAndBrowserInfo()
 var player = (本地 ? '/' : href)+'Moedata'//播放器地址
 var directory = []//目录
 var MMT目录 = false//目录
@@ -162,7 +236,6 @@ if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorag
 	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
 
 }
-if(!mt_settings['虚拟滚动'] && browser.isIos)mt_settings['虚拟滚动'] = '关闭'
 mt_settings['当前网址'] = window.location.href
 if(!mt_settings.风格样式 || mt_settings.风格样式[0])
 {
@@ -171,7 +244,7 @@ if(!mt_settings.风格样式 || mt_settings.风格样式[0])
 	mt_settings.风格样式.info = [['background-color','rgb(220, 229, 232)']]
 }
 mt_settings['右侧发言'] = mt_settings['右侧发言'] ? mt_settings['右侧发言'] : {}
-if(browser.isFirefox)mt_settings['禁止字体'] = true
+if(设备信息.browser.isFirefox)mt_settings['禁止字体'] = true
 saveStorage('设置选项',mt_settings,'local')
 
 //元素出现后执行代码
@@ -532,7 +605,7 @@ class Base64Utils {
 }
 async function cacheFile(C,blob)
 {
-	// if(C[2] == '清')
+	if(C[2] == '清')return await caches.delete(C[0]);
 	const cache = await caches.open(C[0]);
 	if(C[2] == '删')return await cache.delete(C[1]);
 	if(C[2] == '写')

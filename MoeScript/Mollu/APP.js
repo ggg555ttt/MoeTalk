@@ -4672,7 +4672,7 @@
 									l = c.widths,
 									f = c.kind,
 									h = l.length - 1;
-								if(browser.isIos === true || browser.isiPhone === true)return {
+								if(设备信息.device.isApple)return {
 									sizes: s || "w" !== f ? s : "100vw",///禁用则ios截图功能失效
 									srcSet: l.map(function(e, r)
 									{
@@ -10180,7 +10180,7 @@
 					{
 						displayName: "popup__ModalContainer",
 						componentId: "sc-1ardd6p-1"
-					})([`background:white;max-width:${browser.isMobile ? '30' : '45'}rem;margin:auto;height:auto;width:100%;border-radius:1rem;-webkit-border-radius:1rem;-moz-border-radius:1rem;box-shadow:0rem 0.2rem 0.3rem `, ";"], function(e)
+					})(['background:white;max-width:45rem;margin:auto;height:auto;width:100%;border-radius:1rem;-webkit-border-radius:1rem;-moz-border-radius:1rem;box-shadow:0rem 0.2rem 0.3rem ', ";"], function(e)
 					{
 						return e.theme.color.rgb60_60_60
 					}),

@@ -1781,7 +1781,7 @@
 										srceenMode()
 										D()
 										$$('.截图区域').hide()
-										if(mt_settings['虚拟滚动'] !== '关闭' && !window.chatList)
+										if(虚拟滚动 !== '关闭' && !window.chatList)
 										{
 											window.chatList = new DynamicVirtualScroll('.显示区域', '.元素列表');
 										}
@@ -1849,7 +1849,7 @@
 										{
 											imageArr = 上次截图.slice($$('.上次截图').val(),上次截图.length)
 											imageArrL = localStorage['imageArrL'] || imageArr.length
-											if((browser.isIos || browser.isiPhone || mt_settings['打包下载']) && imageArrL > 1)imageZip = false;
+											if((设备信息.device.isApple || mt_settings['打包下载']) && imageArrL > 1)imageZip = false;
 											if(客户端 === 'phpwin' && !mt_settings['打包下载'])imageZip = null
 											if(imageZip === false)imageZip = new JSZip();
 											$$('.mt_capture').click()
@@ -3274,7 +3274,7 @@
 				{
 					displayName: "PopupEmoticonChat__Section2",
 					componentId: "sc-vzjcea-0"
-				})(["", `;overflow:hidden;overflow-y:auto;max-height:${browser.isMobile ? '30' : '45'}rem;padding:0.5rem;`], function(e)
+				})(["", ';overflow:hidden;overflow-y:auto;max-height:80%;padding:0.5rem;'], function(e)
 				{
 					return e.theme.common.flexBox(
 					{
@@ -4951,7 +4951,8 @@
 										{
 											let type = chats[k].type
 											let content = chats[k].content
-											if(type == 'chat' && content.includes(str))搜索.push(k)
+											if(type == 'image' || !content)continue;
+											if(content.includes(str))搜索.push(k)
 										}
 										let html = []
 										for(let i=0,l=搜索.length;i<l;i++)

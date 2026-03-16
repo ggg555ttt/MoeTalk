@@ -641,7 +641,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		}
 		if(mode === '追加')
 		{
-			let length = mt_settings['虚拟滚动'] == '关闭' ? $('.dels').length : window.chatList.msgIndexMap.length
+			let length = 虚拟滚动 == '关闭' ? $('.dels').length : window.chatList.msgIndexMap.length
 			if(length <= chatIndex)
 			{
 				末尾追加(message);
@@ -665,11 +665,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 	setTimeout(function()
 	{//编辑位置跳转
 		let behavior = "smooth"
-		if(['heart','info','reply'].includes(type) && !browser.isDeskTop)
-		{
-			behavior = "auto"
-			if(winHeight === window.innerHeight)behavior = "smooth"
-		}
+		if(['heart','info','reply'].includes(type))behavior = "auto"
 		if(nextindex !== null)跳转索引(nextindex,{block:'center',behavior:behavior});
 	}, 100)
 	saveStorage('chats',[...chats,...otherChats],'local')

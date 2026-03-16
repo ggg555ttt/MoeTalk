@@ -274,6 +274,23 @@ async function 生成存档(info,cus = false,mmt)
 			if(image)json.TEMP.IMAGE[img] = image
 		}
 	}
+	for(let i=0,l=mt_settings['选择角色'].list.length;i<l;i++)
+	{
+		let id = mt_settings['选择角色'].list[i].no.toString()
+		let img = mt_settings['选择角色'].list[i].index.toString()
+		if(!json.TEMP.CHAR[id])
+		{//自定义角色
+			if(mt_char[id])json.TEMP.CHAR[id] = mt_char[id]
+			if(mt_schar[id])json.TEMP.CHAR[id] = mt_schar[id]
+			if(json.TEMP.CHAR[id])delete json.TEMP.CHAR[id].emoji
+		}
+		if(!json.TEMP.IMAGE[img] && img.startsWith('custom-'))
+		{//自定义头像
+			let head = await 数据操作('Tg',img)
+			if(!head)head = await 数据操作('Ig',img)
+			if(head)json.TEMP.IMAGE[img] = head
+		}
+	}
 	if(cus)//记录所有自定义数据
 	{
 		json.CUSTOM = {}
