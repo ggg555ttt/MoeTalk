@@ -534,8 +534,16 @@ async function 下载数据(url)
 }
 async function 导出存档(filename,json)
 {
-	if(typeof json !== 'string')json = JSON.stringify(json)
-	json = new Blob([json],{type: 'application/json'})
+	// 完全手动递归拆解，绝对不会生成超大字符串
+	if(typeof json == 'string')json = [json]
+	else
+	{
+		let chunks = [];
+		stringifyToChunks(json, chunks)
+		json = chunks
+		chunks = ''
+	}
+	json = new Blob(json,{type: 'application/json'})
 	let mode = $('.存档格式').val()
 	if(mode === 'json' || mode === 'txt')
 	{
@@ -543,7 +551,7 @@ async function 导出存档(filename,json)
 		if(filename)alert(`<p class='red'>${filename}</p>已下载`)
 		return
 	}
-	let png = await html2canvas($('.ckdZao')[0],
+	let png = await html2canvas($('.ckdZao')[1],
 	{
 		logging: !1,
 		allowTaint: !0,

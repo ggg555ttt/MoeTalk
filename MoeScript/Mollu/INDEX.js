@@ -2186,6 +2186,7 @@
 						},
 						P = function(e)
 						{
+							//fileInput(e)
 							if(null !== e.currentTarget.files)
 							{
 								var n = new FileReader,
@@ -2239,47 +2240,46 @@
 							},
 							children: [(0, m.jsxs)(ea.h4,
 							{
-								children: [(0, m.jsx)(ea.Dx,
+								style:
+								{
+									justifyContent: 'space-between',
+									alignItems: 'center',
+									height:'auto'
+								},
+								children: [(0, m.jsx)(c.Bx,
+								{
+									style:
+									{
+										width: "auto",
+										height: 'auto',
+										fontSize: '1.5rem',
+										marginInline: '0.5rem',
+										padding: '0',
+										color: 'green'
+									},
+									className: "bold",
+									children: '提示',
+									onClick:function()
+									{
+										alert('无法下载JSON存档请将格式改为图片后手动保存')
+									}
+								}), (0, m.jsx)(ea.Dx,
 								{
 									className: "bold",
 									children: L.Z.sharedFile[d]
 								}), (0, m.jsx)(ea.ec,
 								{
+									style:
+									{
+										position: 'unset',
+										marginInline: '0.5rem'
+									},
 									onClick: function()
 									{
 										N()
 									},
-									children: (0, m.jsx)(c.j4,
-									{})
+									children: (0, m.jsx)(c.j4,{})
 								})]
-							}), (0, m.jsx)("p",
-							{
-								hidden: x !== "download",
-								children: ['存档格式：', (0, m.jsx)("select",
-								{
-									className: '存档格式',
-									children: [(0, m.jsx)("option",
-									{
-										value: 'json',
-										children: 'JSON'
-									}), (0, m.jsx)("option",
-									{
-										value: 'image',
-										children: '图片'
-									}), (0, m.jsx)("option",
-									{
-										value: 'txt',
-										children: '文本'
-									})]
-								}),'无法下载请将格式改为图片后手动保存']
-							}), (0, m.jsx)("p",
-							{
-								hidden: x !== "download",
-								children: [(0, m.jsx)("input",
-								{
-									className: '包含自定义数据',
-									type: 'checkbox'
-								}),'包含自定义数据']
 							}), (0, m.jsx)(ea.$0,
 							{
 								style: {padding: '0.5rem'},
@@ -2348,10 +2348,7 @@
 										})]
 									}), (0, m.jsx)(eN.HR,
 									{
-										style:
-										{
-											margin: "1rem 0"
-										}
+										style: {margin: "1rem 0"}
 									}), (0, m.jsxs)(eP,
 									{
 										onClick: function()
@@ -2375,12 +2372,49 @@
 										}), (0, m.jsx)("span",
 										{
 											className: "bold",
-											children: '导出存档'
+											children: '下载存档'
 										})]
 									})]
-								}) : "download" === x ? (0, m.jsxs)(m.Fragment,
+								}) : "download" === x ? [选择列表.length ? (0, m.jsxs)('span',
+								{
+									className: 'red',
+									children: '已选中数据：'+选择列表.length
+								}) : '', (0, m.jsxs)(m.Fragment,
 								{
 									children: [(0, m.jsxs)(eB,
+									{
+										className: 'bold',
+										children: [(0, m.jsx)("span",
+										{
+											children: ['存档格式：', (0, m.jsx)("select",
+											{
+												style: {fontSize: "100%"},
+												className: '存档格式 blue bold',
+												children: [(0, m.jsx)("option",
+												{
+													value: 'json',
+													children: 'JSON'
+												}), (0, m.jsx)("option",
+												{
+													value: 'image',
+													children: '图片'
+												}), (0, m.jsx)("option",
+												{
+													value: 'txt',
+													children: '文本'
+												})]
+											}), ' 包含自定义数据', (0, m.jsx)("input",
+											{
+												style:
+												{
+													width: '1rem',
+													height: '1rem'
+												},
+												className: '包含自定义数据',
+												type: 'checkbox'
+											})]
+										})]
+									}), (0, m.jsxs)(eB,
 									{
 										children: [L.Z.title[d], (0, m.jsx)(c.OP,
 										{
@@ -2426,14 +2460,25 @@
 											className: "bold",
 											onClick: async function()
 											{
+												let mmt = [...chats,...otherChats]
+												let filename = 'MoeTalk存档'
+												if(选择列表.length)
+												{
+													mmt = []
+													filename = 'MoeTalk截取存档'
+													for(let i=0;i<选择列表.length;i++)
+													{
+														mmt.push(chats[选择列表[i]])
+													}
+												}
 												if($$('.存档格式').val() === 'txt')
 												{
 													let txt = ''
-													for(let i=0,l=chats.length;i<l;i++)
+													for(let i=0,l=mmt.length;i<l;i++)
 													{
-														let type = chats[i].type
-														let text = chats[i].content
-														let name = chats[i].name || loadname(chats[i].sCharacter.no,chats[i].sCharacter.index)
+														let type = mmt[i].type
+														let text = mmt[i].content
+														let name = mmt[i].name || loadname(mmt[i].sCharacter.no,mmt[i].sCharacter.index)
 														if(type == 'chat')txt += `${name}：「${text}」\n\n`
 														if(type == 'image')txt += `${name}：*图片*\n\n`
 														if(type == 'reply')txt += `回复：「${text}」\n\n`
@@ -2443,7 +2488,7 @@
 													if(txt !== '')
 													{
 														let title = mt_settings['截图选项'].titleStr = $$('.mt_title:eq(-1)').val()
-														let filename = 'MoeTalk文本'+getNowDate()+'_'
+														filename = 'MoeTalk文本'+getNowDate()+'_'
 														if(mt_settings['隐藏前缀'])filename = ''
 														导出存档(`${filename}${title || '无题'}`,txt)
 													}
@@ -2455,14 +2500,14 @@
 												info.nickname = mt_settings['截图选项'].writerStr = $$('.mt_writer:eq(-1)').val()
 												info.date = getNowDate();
 												if($$('.包含自定义数据').prop('checked'))cus = true
-												let filename = 'MoeTalk存档'+info.date+'_'
+												filename = filename+info.date+'_'
 												if(mt_settings['隐藏前缀'])filename = ''
-												导出存档(`${filename}${info.title || '无题'}`,await 生成存档(info,cus))
+												导出存档(`${filename}${info.title || '无题'}`,await 生成存档(info,cus,mmt))
 											},
 											children: L.Z.download[d]
 										})]
 									})]
-								}) : (0, m.jsxs)(m.Fragment,
+								})] : (0, m.jsxs)(m.Fragment,
 								{
 									children: [(0, m.jsx)("span",
 									{
@@ -3520,21 +3565,7 @@
 								onClick: function()
 								{
 									$$('.包含自定义数据').prop('checked',false)
-									if(选择列表.length > 0)
-									{
-										let config = {}
-										config.style = 'text-align:center;'
-										config.title = '导出存档'
-										config.id = '导出存档'
-										let confirm = `$$('.ALERT_${config.id} .confirm').click()`
-										let onclick1 = `onclick="$$('#tool-save').click(),${confirm}"`
-										let onclick2 = `onclick="截取存档(),${confirm}"`
-										let button = `<button ${onclick1}>导出完整数据</button><button ${onclick2}>导出选中数据</button>`
-										let html = `<p class='red'>已选中数据：${选择列表.length}</p>请选择你的操作：\n`
-										html += `\n<div style="display:flex;justify-content:space-evenly;">${button}</div>\n`
-										alert(html,config)
-									}
-									else click('#tool-save')
+									click('#tool-save')
 								},
 								children: (0, m.jsx)(c.xL,
 								{

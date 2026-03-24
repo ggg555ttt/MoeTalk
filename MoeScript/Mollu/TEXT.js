@@ -312,7 +312,7 @@ var mt_text = {
 		"kr": "공유파일",
 		"en": "Shared File",
 		"jp": "共有ファイル",
-		"zh_cn": "存档文件",
+		"zh_cn": "传输存档",
 		"zh_tw": "存檔文件"
 	},
 	"relationship_event": {
