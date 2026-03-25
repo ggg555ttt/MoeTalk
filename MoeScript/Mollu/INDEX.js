@@ -1732,9 +1732,10 @@
 										let str = ''
 										str += '	1。MoeTalk的默认截图工具对特殊样式的支持有限，'
 										str += '如果你的文档中含有较复杂的特殊样式，'
-										str += '建议在设置选项中的“截图设置”中更换截图工具（snapdom）。\n'
-										str += '	2。多张图片连续下载建议开启“打包下载”（上限2G）\n'
-										str += '	3。若下载失败，图片可手动保存，手动保存失败请尝试将“图片格式”改为webp\n'
+										str += '建议在“截图设置”中更换截图工具（snapdom）。\n'
+										str += `	2。图片下载失败建议${!客户端 ? '在“下载设置”中开启流式下载，或尝试' : ''}`
+										str += '手动保存图片（最好将“图片格式”改为webp）。\n'
+										str += '	※以上选项请在【设置选项】中切换\n'
 										alert(str)
 									}
 								}), (0, m.jsx)(ea.Dx,
@@ -2184,9 +2185,18 @@
 						{
 							o(!1), p(""), y("")
 						},
-						P = function(e)
+						P = async function(e)
 						{
-							//fileInput(e)
+							let filename = e.target.files[0].name
+							if(filename.toLowerCase().split('.').pop() == 'json')
+							{
+								存档信息 = {}
+								await fileInput(e)
+								w(loaddata(存档信息))
+								y("upload")
+								存档信息 = {}
+								return
+							}
 							if(null !== e.currentTarget.files)
 							{
 								var n = new FileReader,
@@ -2261,7 +2271,7 @@
 									children: '提示',
 									onClick:function()
 									{
-										alert('无法下载JSON存档请将格式改为图片后手动保存')
+										alert(`若下载失败，请${!客户端 ? '在【设置选项】=>“下载设置”中开启流式下载\n或' : ''}向开发者反馈`)
 									}
 								}), (0, m.jsx)(ea.Dx,
 								{
@@ -2392,15 +2402,11 @@
 												className: '存档格式 blue bold',
 												children: [(0, m.jsx)("option",
 												{
-													value: 'json',
+													value: 'JSON',
 													children: 'JSON'
 												}), (0, m.jsx)("option",
 												{
-													value: 'image',
-													children: '图片'
-												}), (0, m.jsx)("option",
-												{
-													value: 'txt',
+													value: 'TXT',
 													children: '文本'
 												})]
 											}), ' 包含自定义数据', (0, m.jsx)("input",
@@ -2460,6 +2466,7 @@
 											className: "bold",
 											onClick: async function()
 											{
+												INIT_loading('下载存档')
 												let mmt = [...chats,...otherChats]
 												let filename = 'MoeTalk存档'
 												if(选择列表.length)
@@ -2471,7 +2478,7 @@
 														mmt.push(chats[选择列表[i]])
 													}
 												}
-												if($$('.存档格式').val() === 'txt')
+												if($$('.存档格式').val() === 'TXT')
 												{
 													let txt = ''
 													for(let i=0,l=mmt.length;i<l;i++)
@@ -8639,7 +8646,8 @@
 						};
 					let isFirst = isfirst(n.chats.indexOf(t),n.chats,'player')
 					let isCenter = t.isCenter && t.type === 'image'
-					let style = MMT目录.设置['文字样式'][t.type] ? MMT目录.设置['文字样式'][t.type] : {}
+					let style = {}
+					if(MMT目录.设置['文字样式'] && MMT目录.设置['文字样式'][t.type])style = MMT目录.设置['文字样式'][t.type]
 					delete style.textAlign
 					style = {...style,...{}}//防止连带修改设置属性
 					foreach([...MMT目录.设置.风格样式[t.type] || [],...t.style || []],function(k,v)
@@ -8911,8 +8919,10 @@
 						}, [r]);
 					let isFirst = isfirst(c.chats.indexOf(t),c.chats,'player')
 					let isCenter = t.isCenter && t.type === 'image'
-					let style = MMT目录.设置['文字样式'][t.type] ? MMT目录.设置['文字样式'][t.type] : {}
-					delete style.textAlign,style = {...style,...{}}//防止连带修改设置属性
+					let style = {}
+					if(MMT目录.设置['文字样式'] && MMT目录.设置['文字样式'][t.type])style = MMT目录.设置['文字样式'][t.type]
+					delete style.textAlign
+					style = {...style,...{}}//防止连带修改设置属性
 					foreach([...MMT目录.设置.风格样式[t.type] || [],...t.style || []],function(k,v)
 					{
 						style[v[0]] = v[1]

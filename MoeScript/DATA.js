@@ -3,7 +3,7 @@ var DATA_NowTime = 0
 function loaddata(json,play)//识别存档
 {
 	while(typeof json === 'string')json = JSON.parse(json)
-	if(!json.MoeTalk)
+	if(!json.MoeTalk)//旧存档或错误存档
 	{
 		let OLdJson = UPDATE_OldData(json)
 		json = {}
@@ -13,17 +13,21 @@ function loaddata(json,play)//识别存档
 			json.INFO.title = '错误存档'
 			json.INFO.nickname = '无法识别'
 			json.INFO.date = '请勿上传'
-			json.CHAT = chats//MMT
-			INIT_loading(!'加载存档')
-			return json
+			json.CHAT = []//MMT
 		}
-		json.INFO.title = OLdJson[0]['title']
-		json.INFO.nickname = OLdJson[0]['nickname']
-		json.INFO.date = OLdJson[0]['date']
-		json.CHAR = {}//自定义角色
-		json.CHAR.id = OLdJson[0].mt_char
-		json.CHAR.image = OLdJson[0].mt_head
-		json.CHAT = OLdJson[1]//MMT
+		else
+		{
+			json.INFO.title = OLdJson[0]['title']
+			json.INFO.nickname = OLdJson[0]['nickname']
+			json.INFO.date = OLdJson[0]['date']
+			json.CHAT = OLdJson[1]//MMT
+			if(Object.keys(OLdJson[0].mt_char).length)
+			{
+				json.CHAR = {}//自定义角色
+				json.CHAR.id = OLdJson[0].mt_char
+				json.CHAR.image = OLdJson[0].mt_head
+			}
+		}
 		json.SETTING = mt_settings//设置信息
 	}
 	if(!json.TEMP)json.TEMP = {CHAR:{},EMOJI:{},IMAGE:{}}
@@ -91,6 +95,7 @@ function repairCF(data)
 	if(head < 1000 && mt_characters[id])head = mt_characters[id].head.split(',')[0]
 	data.sCharacter.no = id
 	data.sCharacter.index = head
+	if(data.heads && (!data.heads.list || !data.heads.list.length))delete data.heads
 	if(data.type === 'image')
 	{
 		data.content = data.content || ''
@@ -102,8 +107,8 @@ function UPDATE_OldData(json)//识别存档
 	let custom_char = {};
 	let custom_head = {};
 	if(typeof json === 'string')json = JSON.parse(json)
-	let isMT = json.length === 2 && json[0].title !== undefined && json[0].nickname !== undefined && json[0].date
-	if(!isMT && !json['chat'])return false//错误数据
+	let isMT = json[0] && json[1] && !json[2] && json[0].title !== undefined && json[0].nickname !== undefined && json[0].date
+	if(!isMT && typeof json['chat'] !== 'object')return false//错误数据
 
 	if(json[0] && (json[0].mt_char || json[0].custom))//mt旧版自定义角色转义
 	{
@@ -297,6 +302,7 @@ async function 读取存档(json)
 		await 数据操作('Ss','DB_EMOJI',EMOJI_CustomEmoji)
 	}
 	if(json.SETTING)mt_settings = json.SETTING
+	setting()
 	加载数据()
 	log(true)//清除历史记录
 	replyDepth(0,'home')//清除跳转记录
@@ -338,150 +344,164 @@ function stringifyToChunks(data, chunks) {
 		return;
 	}
 }
-async function fileInput(e){
-	const file = e.target.files[0];
-	if (!file) return;
+function fileInput(e)
+{
+	return new Promise(resolve =>
+	{
+		const file = e.target.files[0];
+		if (!file) return;
 
-	const CHUNK_SIZE = 1024 * 1024; // 每次读取 1MB
-	let offset = 0;
-	const reader = new FileReader();
+		const CHUNK_SIZE = 1024 * 1024; // 每次读取 1MB
+		let offset = 0;
+		const reader = new FileReader();
 
-	// ========= 核心状态机变量（跨块持久化） =========
-	let stack = [];		  // 记录当前路径和层级结构
-	let inString = false;	// 是否正在读取字符串
-	let stringVal = '';	  // 当前正在读取的字符串缓存
-	let escape = false;	  // 是否处于转义字符状态 (\)
-	let isKey = false;	   // 当前读取的字符串是否是对象的键名 (Key)
-	let inPrimitive = false; // 是否正在读取基本类型 (数字/布尔值/null)
-	let primitiveVal = '';   // 当前基本类型的字符串缓存
+		// ========= 核心状态机变量（跨块持久化） =========
+		let stack = [];		  // 记录当前路径和层级结构
+		let inString = false;	// 是否正在读取字符串
+		let stringVal = '';	  // 当前正在读取的字符串缓存
+		let escape = false;	  // 是否处于转义字符状态 (\)
+		let isKey = false;	   // 当前读取的字符串是否是对象的键名 (Key)
+		let inPrimitive = false; // 是否正在读取基本类型 (数字/布尔值/null)
+		let primitiveVal = '';   // 当前基本类型的字符串缓存
 
-	// 辅助函数：获取当前的完整键名路径
-	function getPath() {
-		return stack.map(s => s.type === 'obj' ? s.key : s.index).filter(k => k !== null);
-	}
+		// 辅助函数：获取当前的完整键名路径
+		function getPath() {
+			return stack.map(s => s.type === 'obj' ? s.key : s.index).filter(k => k !== null);
+		}
 
-	reader.onload = function(e) {
-		const chunk = e.target.result;
+		reader.onload = function(e) {
+			const chunk = e.target.result;
 
-		// 逐个字符进行状态机分析
-		for (let i = 0; i < chunk.length; i++) {
-			const char = chunk[i];
+			// 逐个字符进行状态机分析
+			for (let i = 0; i < chunk.length; i++) {
+				const char = chunk[i];
 
-			// 1. 正在读取字符串（键名或字符串值）
-			if (inString) {
-				stringVal += char; // 保留包含引号的完整字符串
-				if (escape) {
-					escape = false;
-				} else if (char === '\\') {
-					escape = true;
-				} else if (char === '"') {
-					inString = false; // 字符串结束
-					try {
-						// 利用原生 JSON.parse 安全还原字符串 (自动处理换行、Unicode转义)
-						const parsedStr = JSON.parse(stringVal);
-						if (isKey) {
-							stack[stack.length - 1].key = parsedStr; // 记录键名
-						} else {
-							// 【抛出值】这是一个字符串叶子节点！
-							processValue(getPath(), parsedStr);
-							// 如果父级是数组，数组下标 +1
+				// 1. 正在读取字符串（键名或字符串值）
+				if (inString) {
+					stringVal += char; // 保留包含引号的完整字符串
+					if (escape) {
+						escape = false;
+					} else if (char === '\\') {
+						escape = true;
+					} else if (char === '"') {
+						inString = false; // 字符串结束
+						try {
+							// 利用原生 JSON.parse 安全还原字符串 (自动处理换行、Unicode转义)
+							const parsedStr = JSON.parse(stringVal);
+							if (isKey) {
+								stack[stack.length - 1].key = parsedStr; // 记录键名
+							} else {
+								// 【抛出值】这是一个字符串叶子节点！
+								processValue(getPath(), parsedStr);
+								// 如果父级是数组，数组下标 +1
+								if (stack.length > 0 && stack[stack.length - 1].type === 'arr') {
+									stack[stack.length - 1].index++;
+								}
+							}
+						} catch (err) {
+							// console.error("解析字符串片段失败", stringVal);
+						}
+					}
+					continue; // 字符串内部不参与后面的结构匹配
+				}
+
+				// 2. 正在读取基本数据类型 (数字/true/false/null)
+				if (inPrimitive) {
+					// 遇到空格、逗号、右括号等，说明基本类型读取完毕
+					if (/[\s,}\]]/.test(char)) {
+						inPrimitive = false;
+						try {
+							const val = JSON.parse(primitiveVal);
+							// 【抛出值】这是一个基本类型叶子节点！
+							processValue(getPath(), val);
 							if (stack.length > 0 && stack[stack.length - 1].type === 'arr') {
 								stack[stack.length - 1].index++;
 							}
-						}
-					} catch (err) {
-						console.error("解析字符串片段失败", stringVal);
+						} catch (err) {}
+						primitiveVal = '';
+						i--; // 【重要】退回一个字符，让外层逻辑继续处理这个逗号或括号
+					} else {
+						primitiveVal += char;
 					}
+					continue;
 				}
-				continue; // 字符串内部不参与后面的结构匹配
+
+				// 3. 寻找结构符号模式 (忽略所有非字符串外的空白符)
+				if (/\s/.test(char)) continue;
+
+				if (char === '{') {
+					stack.push({ type: 'obj', key: null });
+					isKey = true; // 遇到左括号，下一个字符串肯定是 Key
+				} else if (char === '}') {
+					stack.pop();
+					if (stack.length > 0 && stack[stack.length - 1].type === 'arr') {
+						stack[stack.length - 1].index++;
+					}
+				} else if (char === '[') {
+					stack.push({ type: 'arr', index: 0 }); // 遇到数组，初始化下标 0
+				} else if (char === ']') {
+					stack.pop();
+					if (stack.length > 0 && stack[stack.length - 1].type === 'arr') {
+						stack[stack.length - 1].index++;
+					}
+				} else if (char === ':') {
+					isKey = false; // 冒号之后肯定跟着的是 Value
+				} else if (char === ',') {
+					if (stack.length > 0 && stack[stack.length - 1].type === 'obj') {
+						isKey = true; // 对象里的逗号之后，肯定跟着一个新的 Key
+					}
+				} else if (char === '"') {
+					inString = true;
+					stringVal = char; // 记录起始引号
+					escape = false;
+				} else if (/[0-9tfn\-]/i.test(char)) {
+					// 匹配到 数字, true, false, null 的开头字符
+					inPrimitive = true;
+					primitiveVal = char;
+				}
 			}
 
-			// 2. 正在读取基本数据类型 (数字/true/false/null)
-			if (inPrimitive) {
-				// 遇到空格、逗号、右括号等，说明基本类型读取完毕
-				if (/[\s,}\]]/.test(char)) {
-					inPrimitive = false;
+			offset += CHUNK_SIZE;
+
+			// 判断是否继续读取
+			if (offset < file.size) {
+				readNextChunk();
+			} else {
+				// 处理刚好以数字/布尔值结尾，没有符号闭合的极端情况
+				if (inPrimitive && primitiveVal) {
 					try {
-						const val = JSON.parse(primitiveVal);
-						// 【抛出值】这是一个基本类型叶子节点！
-						processValue(getPath(), val);
-						if (stack.length > 0 && stack[stack.length - 1].type === 'arr') {
-							stack[stack.length - 1].index++;
-						}
+						processValue(getPath(), JSON.parse(primitiveVal));
 					} catch (err) {}
-					primitiveVal = '';
-					i--; // 【重要】退回一个字符，让外层逻辑继续处理这个逗号或括号
-				} else {
-					primitiveVal += char;
 				}
-				continue;
+				resolve();
 			}
+		};
 
-			// 3. 寻找结构符号模式 (忽略所有非字符串外的空白符)
-			if (/\s/.test(char)) continue;
-
-			if (char === '{') {
-				stack.push({ type: 'obj', key: null });
-				isKey = true; // 遇到左括号，下一个字符串肯定是 Key
-			} else if (char === '}') {
-				stack.pop();
-				if (stack.length > 0 && stack[stack.length - 1].type === 'arr') {
-					stack[stack.length - 1].index++;
-				}
-			} else if (char === '[') {
-				stack.push({ type: 'arr', index: 0 }); // 遇到数组，初始化下标 0
-			} else if (char === ']') {
-				stack.pop();
-				if (stack.length > 0 && stack[stack.length - 1].type === 'arr') {
-					stack[stack.length - 1].index++;
-				}
-			} else if (char === ':') {
-				isKey = false; // 冒号之后肯定跟着的是 Value
-			} else if (char === ',') {
-				if (stack.length > 0 && stack[stack.length - 1].type === 'obj') {
-					isKey = true; // 对象里的逗号之后，肯定跟着一个新的 Key
-				}
-			} else if (char === '"') {
-				inString = true;
-				stringVal = char; // 记录起始引号
-				escape = false;
-			} else if (/[0-9tfn\-]/i.test(char)) {
-				// 匹配到 数字, true, false, null 的开头字符
-				inPrimitive = true;
-				primitiveVal = char;
-			}
+		function readNextChunk() {
+			const slice = file.slice(offset, offset + CHUNK_SIZE);
+			reader.readAsText(slice);
 		}
 
-		offset += CHUNK_SIZE;
-
-		// 判断是否继续读取
-		if (offset < file.size) {
-			readNextChunk();
-		} else {
-			// 处理刚好以数字/布尔值结尾，没有符号闭合的极端情况
-			if (inPrimitive && primitiveVal) {
-				try {
-					processValue(getPath(), JSON.parse(primitiveVal));
-				} catch (err) {}
-			}
-			console.log("全兼容模式：超大文件所有节点解析完成！");
-		}
-	};
-
-	function readNextChunk() {
-		const slice = file.slice(offset, offset + CHUNK_SIZE);
-		reader.readAsText(slice);
-	}
-
-	console.log("开始流式逐个节点解析...");
-	readNextChunk();
+		// console.log("开始流式逐个节点解析...");
+		readNextChunk();
+	});
 }
 
 // ==========================================
 // 你的业务处理函数：将获得完整路径和对应的基础值
 // ==========================================
-var 存档信息 = []
-function processValue(pathArray, value)
+var 存档信息 = {}
+function processValue(keys, value)
 {
-	test(存档信息)
+	let current = 存档信息
+	let len = keys.length
+	for(let i=0;i<len-1;i++)//⚠️关键修改：只循环到倒数第1个键
+	{
+		let key = keys[i];
+		let nextKey = keys[i+1];
+
+		if(current[key] === undefined)current[key] = typeof nextKey === 'number' ? [] : Object.create(null);
+		current = current[key];
+	}
+	current[keys[len-1]] = value;
 }

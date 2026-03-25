@@ -396,7 +396,7 @@ function makeMessage(type,data,chatIndex,mode)
 	let 对话角颜色 = '';
 	let title = `title="${no},${index}"`
 	if(data.name)title = ''
-	if(mt_settings['文字样式'][type])
+	if(mt_settings['文字样式'] && mt_settings['文字样式'][type])
 	{
 		style = `font-size:${mt_settings['文字样式'][type]['font-size']};`
 	}

@@ -63,20 +63,6 @@ const MoeTemp = localforage.createInstance({name:'MoeTemp'});//临时文件
 const MoeProject = localforage.createInstance({name:'MoeProject'});//项目库
 const MoeCache = localforage.createInstance({name:'MoeCache'});//播放器缓存
 数据操作('Cc')
-if(mt_settings['存储模式'])
-{
-	moetalkStorage.setDriver('localStorageWrapper');
-	['chats','mt-char','mt-head'].map(function(key,k)
-	{
-		if(localStorage[key])
-		{
-			sessionStorage[key] = localStorage[key]
-			delete localStorage[key]
-			localStorage['moetalkStorage/'+key] = sessionStorage[key]
-			delete sessionStorage[key]
-		}
-	})
-}
 function getDeviceAndBrowserInfo() {
   const ua = navigator.userAgent.toLowerCase();
 
@@ -163,32 +149,19 @@ var MMT目录 = false//目录
 var $$ = $;//jquery转义
 var winHeight = window.innerHeight
 var 元素尺寸;
-
-if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorage['0'])
+function setting()
 {
-	let lang = window.navigator.language.toLowerCase()
-	if(['zh-cn','zh-sg'].indexOf(lang) > -1)lang = 'zh_cn'
-	if(['zh-tw','zh-hk'].indexOf(lang) > -1)lang = 'zh_tw'
-	if(lang.indexOf('en') > -1)lang = 'en'
-	if(['ja','ja-jp'].indexOf(lang) > -1)lang = 'jp'
-	if(['ko','ko-kr'].indexOf(lang) > -1)lang = 'kr'
-	if(['zh_cn','zh_tw','en','jp','kr'].indexOf(lang) < 0)lang = 'en'
-
-	if(!mt_settings['语言选项'])mt_settings['语言选项'] = lang
 	if(!mt_settings['图片比例'])mt_settings['图片比例'] = '90%'
 	if(!mt_settings['差分比例'])mt_settings['差分比例'] = '90%'
 	if(!mt_settings['排序方式'])mt_settings['排序方式'] = 'name'
-	if(!mt_settings['人物改名'])mt_settings['人物改名'] = {}
-	if(!mt_settings['图片格式'])mt_settings['图片格式'] = 'image/png'
-	//if(!mt_settings['禁止字体'])mt_settings['禁止字体'] = false
-	if(!mt_settings['高度限制'])mt_settings['高度限制'] = 16384
-	//if(!mt_settings['头像尺寸'])mt_settings['头像尺寸'] = 300
-	if(!mt_settings['社团列表'])mt_settings['社团列表'] = {}
-	if(!mt_settings['文字样式'])mt_settings['文字样式'] = {}
-	if(!mt_settings['宽度限制'])mt_settings['宽度限制'] = 500
 	if(!mt_settings['顶部标题'])mt_settings['顶部标题'] = 'MoeTalk'
+	if(!mt_settings['图片格式'])mt_settings['图片格式'] = 'image/png'
+	if(!mt_settings['高度限制'])mt_settings['高度限制'] = 16384
+	if(!mt_settings['宽度限制'])mt_settings['宽度限制'] = 500
+	if(!mt_settings['人物改名'])mt_settings['人物改名'] = {}
 	if(!mt_settings['社团列表'])mt_settings['社团列表'] = {}
 	if(!mt_settings['截图选项'])mt_settings['截图选项'] = {}
+	if(!mt_settings['右侧发言'])mt_settings['右侧发言'] = {}
 	if(!mt_settings['选择角色'])
 	{
 		mt_settings['选择角色'] = {}
@@ -196,57 +169,29 @@ if(!localStorage['通知文档'] || !localStorage['设置选项'] || localStorag
 		mt_settings['选择角色'].index = 1
 		mt_settings['选择角色'].list = []
 	}
+	if(!mt_settings.风格样式 || mt_settings.风格样式[0])
+	{
+		mt_settings.风格样式 = {}
+		mt_settings.风格样式.bgColor = 'transparent'
+		mt_settings.风格样式.info = [['background-color','rgb(220, 229, 232)']]
+	}
+	if(!mt_settings['语言选项'])
+	{
+		let lang = window.navigator.language.toLowerCase()
+		if(lang.includes('en'))mt_settings['语言选项'] = 'en'
+		else if(['ja','ja-jp'].includes(lang))mt_settings['语言选项'] = 'jp'
+		else if(['ko','ko-kr'].includes(lang))mt_settings['语言选项'] = 'kr'
+		else if(['zh-tw','zh-hk'].includes(lang))mt_settings['语言选项'] = 'zh_tw'
+		else mt_settings['语言选项'] = 'zh_cn'
+	}
+	if(!['zh_cn','zh_tw','en','jp','kr'].includes(mt_settings['语言选项']))mt_settings['语言选项'] = 'zh_cn'
+	if(设备信息.browser.isFirefox)mt_settings['禁止字体'] = true
+	mt_settings['当前网址'] = window.location.href
 	mt_settings['设备信息'] = window.navigator.userAgent
-	delete localStorage['0']
-	delete localStorage['1']	
-	delete localStorage['mt-lang']
-	delete localStorage['mt-size']
-	delete localStorage['mt-cfsize']
-	delete localStorage['mt-order']
-	delete localStorage['mt-style']
-	delete localStorage['mt-name']
-	delete localStorage['mt-image']
-	delete localStorage['mt-nofont']
-	delete localStorage['mt-maxheight']
-	delete localStorage['hnum']
-	delete localStorage['send']
-	delete localStorage['CharFaceIndex']
-	delete localStorage['mt-club']
-	delete localStorage['mt-date']
-	delete localStorage['lang']
-	delete localStorage['first']
-	delete localStorage['mt-edit']
-	delete localStorage['mt-font']
-	delete localStorage['replyNo']
-	delete localStorage['replyGroup']
-	delete localStorage['mt-selectedList']
-	delete localStorage['vConsole_switch_y']
-	delete localStorage['vConsole_switch_x']
-	delete localStorage['MoeTalk']
-	delete localStorage['顶部标题']
-	delete localStorage['heads']
-	delete localStorage['qchar']
-	delete localStorage['png']
-	delete localStorage['启动时间']
-	delete localStorage['启动次数']
-	delete localStorage['启动网址']
-	delete localStorage['启动设备']
-	delete localStorage['mt-version']
-	delete localStorage['mt-rand']
-	if(!mt_settings['存储模式'] || mt_settings['存储模式'] === 'indexedDB')delete mt_settings['存储模式']
-
 }
-mt_settings['当前网址'] = window.location.href
-if(!mt_settings.风格样式 || mt_settings.风格样式[0])
-{
-	mt_settings.风格样式 = {}
-	mt_settings.风格样式.bgColor = 'transparent'
-	mt_settings.风格样式.info = [['background-color','rgb(220, 229, 232)']]
-}
-mt_settings['右侧发言'] = mt_settings['右侧发言'] ? mt_settings['右侧发言'] : {}
-if(设备信息.browser.isFirefox)mt_settings['禁止字体'] = true
+setting()
+var mtlang = mt_settings['语言选项']
 saveStorage('设置选项',mt_settings,'local')
-
 //元素出现后执行代码
 jQuery.fn.wait = function (func,cls,times,interval)
 {

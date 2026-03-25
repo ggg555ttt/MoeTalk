@@ -414,7 +414,8 @@ $("body").on('click',"#下载设置",function()
 {
 	let str = ''
 	str += `<input class='隐藏前缀' type='checkbox' ${mt_settings['隐藏前缀'] ? 'checked' : ''}>隐藏下载文件名前缀\n`
-	str += `<input class='打包下载' type='checkbox' ${mt_settings['打包下载'] ? 'checked' : ''}>图片打包下载\n`
+	str += `<input class='打包下载' type='checkbox' ${mt_settings['打包下载'] ? 'checked' : ''}>图片打包下载（多张图片整合为ZIP）\n`
+	if(!客户端)str += `<input class='流式下载' type='checkbox' ${mt_settings['流式下载'] ? 'checked' : ''}>流式下载（目前用于解决部分浏览器无法下载文件的BUG）\n`
 	if(客户端 === 'NW.js')
 	{
 		str += '<input type="file" id="下载位置" nwdirectory hidden/>'
@@ -431,6 +432,7 @@ $("body").on('click',"#下载设置",function()
 	{
 		mt_settings['隐藏前缀'] = $$(`.alert_${config.id} .隐藏前缀`).prop('checked')
 		mt_settings['打包下载'] = $$(`.alert_${config.id} .打包下载`).prop('checked')
+		mt_settings['流式下载'] = $$(`.alert_${config.id} .流式下载`).prop('checked')
 		$('.默认下载位置').remove()
 		localStorage['存档下载位置'] = $('#存档下载位置').text()
 		localStorage['图片下载位置'] = $('#图片下载位置').text()

@@ -197,7 +197,26 @@ async function 保存文件(filename, data, type = 2)
 	if(typeof data === 'string')data = new Blob([data],{type: 'application/octet-stream'});
 	if(!客户端)
 	{
-		saveAs(data, filename);
+		if(mt_settings['流式下载'])
+		{
+			streamSaver.mitm = 'plugins/streamsaver/mitm.html';
+			const fileStream = streamSaver.createWriteStream(filename,{size: data.size});
+			const readableStream = data.stream();
+			// 现代浏览器支持直接使用 pipeTo
+			if(readableStream.pipeTo)await readableStream.pipeTo(fileStream);
+			else// 兼容老版本浏览器的备用方案
+			{
+				const reader = readableStream.getReader();
+				const writer = fileStream.getWriter();
+
+				const pump = () => reader.read().then(res => 
+					res.done ? writer.close() : writer.write(res.value).then(pump)
+				);
+				await pump();
+			}
+		}
+		else saveAs(data, filename)
+		INIT_loading(!'下载完毕')
 		return filename
 	}
 	if(客户端 === 'NW.js')
@@ -544,51 +563,9 @@ async function 导出存档(filename,json)
 		chunks = ''
 	}
 	json = new Blob(json,{type: 'application/json'})
-	let mode = $('.存档格式').val()
-	if(mode === 'json' || mode === 'txt')
-	{
-		filename = await 保存文件(filename+'.'+mode.toUpperCase(),json,'json')
-		if(filename)alert(`<p class='red'>${filename}</p>已下载`)
-		return
-	}
-	let png = await html2canvas($('.ckdZao')[1],
-	{
-		logging: !1,
-		allowTaint: !0,
-		useCORS: !0,
-		scale: 1.1,
-		compress: true,
-		embedFonts: true//snapdom
-	})
-	png = atob(png.toDataURL('image/png').split(',')[1])
-	for(var zip=Array(png.length),i=0,l=zip.length;i<l;i++)zip[i] = png.charCodeAt(i);
-
-	let file = new FileReader;
-	file.onload = async function()
-	{
-		png = new Blob([new Uint8Array(zip)],{type: 'image/png'})
-		zip = new DataView(file.result)
-		let a = png.size,
-			b = zip.byteLength-22,
-			c = zip.getUint32(b+16, !0);
-		for(zip.setUint32(b+16, c+a, !0); c<b;)
-		{
-			let d = zip.getUint16(c+28, !0),
-				e = zip.getUint16(c+30, !0),
-				f = zip.getUint32(c+42, !0);
-			zip.setUint32(c+42, f+a, !0)
-			c += 46+d+e
-		}
-		png = new Blob([png, zip],{type: 'image/png'})
-		filename = await 保存文件(filename+'.PNG',png,'json')
-		png = await blobToBase64(png)
-		let str = `<p class='red'>${filename}</p>已下载\n`
-		str += '如果下载失败，请尝试手动保存下方的图片\n'
-		str += `<img src='data:image/png;base64,${png}'style='border: 2px solid red;width: 100%;'>\n`
-		str += '可将图片后缀名改为"zip"后解压'
-		if(filename)alert(str)
-	}
-	file.readAsArrayBuffer(await new JSZip().file('json.txt',json).generateAsync({type: 'blob'}))
+	filename = await 保存文件(filename+'.'+$('.存档格式').val(),json,'json')
+	if(filename)alert(`<p class='red'>${filename}</p>已下载`)
+	return
 }
 async function 导出截图(filename,data)
 {
