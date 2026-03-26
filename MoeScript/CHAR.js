@@ -55,21 +55,6 @@ function loadname(id,index,play)
 	if(id == 0)name = you[mtlang]
 	return name
 }
-function selectClick(num)
-{
-	let select,index = $('.Footer__Flex-sc-1rjbi2j-1 img').index($('.Footer__Flex-sc-1rjbi2j-1 img.selected'));
-	if(num === 37)
-	{
-		if(index === 0)select = $('.Footer__Flex-sc-1rjbi2j-1 img').length-1
-		else select = index-1
-	}
-	else
-	{
-		if(index === $('.Footer__Flex-sc-1rjbi2j-1 img').length-1)select = 0
-		else select = index+1
-	}
-	$('.Footer__Flex-sc-1rjbi2j-1 img').eq(select).click();
-}
 function club(clear = false)
 {
 	if(clear === false)

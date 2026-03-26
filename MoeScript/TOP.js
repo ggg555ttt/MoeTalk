@@ -277,13 +277,57 @@ $("body").on('click',function(e)
 		}
 	}
 })
-$(window).keydown(function(event)
+function selectClick(按键)
 {
-	if($('#emoji').length === 0)
+	let select,index = $('.Footer__Flex-sc-1rjbi2j-1 img').index($('.Footer__Flex-sc-1rjbi2j-1 img.selected'));
+	if(按键 === '<')
 	{
-		if(event.ctrlKey && event.which == 37)selectClick(37);
-		if(event.ctrlKey && event.which == 39)selectClick(39);
+		if(index === 0)select = $('.Footer__Flex-sc-1rjbi2j-1 img').length-1
+		else select = index-1
 	}
+	else if(按键 === '>')
+	{
+		if(index === $('.Footer__Flex-sc-1rjbi2j-1 img').length-1)select = 0
+		else select = index+1
+	}
+	else select = $('.Footer__Flex-sc-1rjbi2j-1 img').length-1
+	$('.Footer__Flex-sc-1rjbi2j-1 img').eq(select).click();
+}
+$(window).keydown(function(event)
+{	
+	if(event.ctrlKey)
+	{
+		if($('#emoji').length === 0)
+		{
+			if(event.which == 188)selectClick('<');
+			if(event.which == 190)selectClick('>');
+			if(event.which == 191)selectClick('主角');
+		}
+		if($('.chatText:eq(0)').is(':focus'))
+		{
+			let val = $('.chatText:eq(0)').val()
+			if(event.which == 82 && val)
+			{
+				event.preventDefault();
+				sendMessage({content: val},'reply')
+				$('.chatText:eq(0)').val('')
+			}
+			if(event.which == 73 && val)
+			{
+				event.preventDefault();
+				sendMessage({content: val},'info')
+				$('.chatText:eq(0)').val('')
+			}
+			if(event.which == 72)
+			{
+				event.preventDefault();
+				sendMessage({content: val},'heart')
+				$('.chatText:eq(0)').val('')
+			}
+		}
+	}
+	
+	
 });
 //清除冗余文件数据
 $('body').on('click',"input",function()
@@ -332,14 +376,22 @@ $("body").on('click',"#设置选项",function()
 	str += "<button id='虚拟滚动'>虚拟滚动（测试）</button><br><br>"
 	str += "<button id='实验选项'>实验性选项（测试）</button> "
 	str += "<button id='清除缓存'>清除缓存</button> "
+	str += "<button id='快捷键说明'>快捷键说明</button> "
 	str += "<div style='display:flex;justify-content:center;'><h1><a class='bold'style='text-decoration:underline;'href='setting.html'>更多设置</a></h1></div>\n"
+	alert(str,config)
+});
+
+$("body").on('click',"#快捷键说明",function()
+{
+	let str = "文本换行：Shift+Enter\n发送文本：Ctrl+Enter\n发送回复：Ctrl+R\n发送旁白：Ctrl+I\n发送羁绊：Ctrl+H\n前一角色：Ctrl+<\n后一角色：Ctrl+>\n主要角色：Ctrl+?\n"
+	let config = {}
+	config.title = '快捷键说明'
 	alert(str,config)
 });
 $("body").on('click',"#发送方式",function()
 {
 	mt_settings['发送方式'] = mt_settings['发送方式'] || '点击'
 	let str = `当前文字发送方式：<button class="发送方式"onclick="innerText=innerText=='回车'?'点击':'回车'">${mt_settings['发送方式']}</button>\n\n`
-	str += '通用快捷按键：\n换行：Shift+Enter\n发送：Ctrl+Enter'
 	let config = {}
 	config.title = '文字发送方式'
 	config.confirm = '提交'
