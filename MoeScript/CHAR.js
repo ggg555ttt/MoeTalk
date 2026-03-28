@@ -8,7 +8,9 @@ var saveClub = true;//社团保存开关
 var 选择角色 = true;//快捷角色开关
 var mt_schar = {}//临时角色数据
 var CHAR_CharList = []
-var mt_head = {}
+var CUSTOM_CHAR = {}
+var CUSTOM_HEAD = {}
+var CUSTOM_NAME = {}
 //读取头像
 function loadhead(id,img)
 {
@@ -258,7 +260,7 @@ async function edit_char()
 		mt_settings.人物改名[id] = name
 		if(!mt_settings.人物改名[id])delete mt_settings.人物改名[id]
 
-		mt_head[id] = []
+		CUSTOM_HEAD[id] = []
 	}
 	let arr = char_info.profile || []
 	for(let i=0,l=arr.length;i<l;i++)
@@ -284,20 +286,20 @@ async function edit_char()
 		{
 			if(index.startsWith('custom-'))
 			{
-				mt_head[id].push(index)
+				CUSTOM_HEAD[id].push(index)
 				数据操作('Is',index,$(this).attr('src'))
 			}
 			mt_settings.人物改名[index] = toString(char_info.names[index])
 			if(!mt_settings.人物改名[index])delete mt_settings.人物改名[index]
 		}
 	})
-	if(mt_head[id])
+	if(CUSTOM_HEAD[id])
 	{
 		CHAR_CharList[char_info.index].profile = arr
-		if(!mt_head[id].length)delete mt_head[id]
+		if(!CUSTOM_HEAD[id].length)delete CUSTOM_HEAD[id]
 	}
 	$('#custom-char .rightSend').prop('checked') ? mt_settings['右侧发言'][id] = true : delete mt_settings['右侧发言'][id]
-	数据操作('Ss','自定头像',mt_head)
+	数据操作('Ss','自定头像',CUSTOM_HEAD)
 	saveStorage('mt-char',mt_char,'local')
 	saveStorage('设置选项',mt_settings,'local')
 	char_info = []
@@ -333,13 +335,13 @@ async function removeChar(n)
 				if(img)
 				{
 					await Promise.all([数据操作('Tr',key),数据操作('Is',key,img)])
-					if(!EMOJI_CustomEmoji[n.no])EMOJI_CustomEmoji[n.no] = {}
-					EMOJI_CustomEmoji[n.no][key] = mt_schar[n.no].emoji[key]
+					if(!CUSTOM_EMOJI[n.no])CUSTOM_EMOJI[n.no] = {}
+					CUSTOM_EMOJI[n.no][key] = mt_schar[n.no].emoji[key]
 				}
 			}
 			delete mt_schar[n.no];
 			saveStorage('mt-char',mt_char,'local')
-			saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
+			saveStorage('DB_EMOJI',CUSTOM_EMOJI,'local')
 			数据操作('Ts','临时角色',mt_schar)
 		}
 	}
@@ -350,7 +352,7 @@ async function removeChar(n)
 			mt_schar[n.no] = mt_char[n.no]
 			mt_schar[n.no].club = '临时角色'
 			mt_schar[n.no].school = n.club.zh_cn.replace('#','')
-			mt_schar[n.no].emoji = EMOJI_CustomEmoji[n.no] || {}
+			mt_schar[n.no].emoji = CUSTOM_EMOJI[n.no] || {}
 			let img = await 数据操作('Ig',n.no)
 			if(img)await Promise.all([数据操作('Ir',n.no),数据操作('Ts',n.no,img)])
 			let head = mt_char[n.no].head || []
@@ -359,16 +361,16 @@ async function removeChar(n)
 				img = await 数据操作('Ig',head[i])
 				if(img)await Promise.all([数据操作('Ir',head[i]),数据操作('Ts',head[i],img)])
 			}
-			let emoji = Object.keys((EMOJI_CustomEmoji[n.no] || {}))
+			let emoji = Object.keys((CUSTOM_EMOJI[n.no] || {}))
 			for(let i=0,l=emoji.length;i<l;i++)
 			{
 				img = await 数据操作('Ig',emoji[i])
 				if(img)await Promise.all([数据操作('Ir',emoji[i]),数据操作('Ts',emoji[i],img)])
 			}
 			delete mt_char[n.no];
-			delete EMOJI_CustomEmoji[n.no]
+			delete CUSTOM_EMOJI[n.no]
 			saveStorage('mt-char',mt_char,'local')
-			saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
+			saveStorage('DB_EMOJI',CUSTOM_EMOJI,'local')
 			数据操作('Ts','临时角色',mt_schar)
 		}
 	}
@@ -499,11 +501,11 @@ function 加载角色()
 			open: true,//#改为默认
 			momotalk: true//#改为默认
 		}
-		if(mt_head[k])
+		if(CUSTOM_HEAD[k])
 		{
-			for(let i=0,l=mt_head[k].length;i<l;i++)
+			for(let i=0,l=CUSTOM_HEAD[k].length;i<l;i++)
 			{
-				arr.profile.push(mt_head[k][i])
+				arr.profile.push(CUSTOM_HEAD[k][i])
 			}
 		}
 		CHAR_CharList.push(arr)

@@ -155,7 +155,6 @@ function setting()
 	if(!mt_settings['差分比例'])mt_settings['差分比例'] = '90%'
 	if(!mt_settings['排序方式'])mt_settings['排序方式'] = 'name'
 	if(!mt_settings['顶部标题'])mt_settings['顶部标题'] = 'MoeTalk'
-	if(!mt_settings['图片格式'])mt_settings['图片格式'] = 'image/png'
 	if(!mt_settings['高度限制'])mt_settings['高度限制'] = 16384
 	if(!mt_settings['宽度限制'])mt_settings['宽度限制'] = 500
 	if(!mt_settings['人物改名'])mt_settings['人物改名'] = {}

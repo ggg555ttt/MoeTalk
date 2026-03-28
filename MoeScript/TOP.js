@@ -65,7 +65,6 @@ async function 加载数据()
 	chats = []
 	foreach(allChats,function(k,v)
 	{
-		repairCF(allChats[k]);
 		if(allChats[k].replyDepth !== 0)otherChats.push(allChats[k])
 		else chats.push(allChats[k])
 	})
@@ -82,7 +81,7 @@ async function 加载数据()
 		else selectgame('<span style="color:red;">数据缺失！请重新选择游戏</span>')
 		md5 = {}
 	}
-	[mt_school,mt_club,mt_characters,mt_charface,CFInfo,id_map,CustomFaceAuthor,mt_char,mt_schar,mt_head] = await Promise.all(
+	[mt_school,mt_club,mt_characters,mt_charface,CFInfo,id_map,CustomFaceAuthor,mt_char,mt_schar,CUSTOM_HEAD] = await Promise.all(
 	[
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-School.json?md5=${md5['MT-School']}`).then(json => JSON.parse(json)) : {},
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/MT-Club.json?md5=${md5['MT-Club']}`).then(json => JSON.parse(json)) : {},
@@ -91,13 +90,10 @@ async function 加载数据()
 		game != 'NONE' ? $ajax(`${href}GameData/${game}/CharFaceInfo.json?md5=${md5['CharFaceInfo']}`).then(json => JSON.parse(json)) : {},
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/IdMap.json?md5=${md5['IdMap']}`).then(json => JSON.parse(json)) : [{},{}],
 		game == 'BLDA' ? $ajax(`${href}GameData/${game}/CustomFaceAuthor.json?md5=${md5['CustomFaceAuthor']}`).then(json => JSON.parse(json)) : {},
-		数据操作('Sg','mt-char'),
-		数据操作('Tg','临时角色'),
-		数据操作('Sg','自定头像')
+		数据操作('Sg','mt-char').then(json => json || {}),
+		数据操作('Tg','临时角色').then(json => json || {}),
+		数据操作('Sg','自定头像').then(json => json || {})
 	]);
-	mt_char = mt_char || {}
-	mt_schar = mt_schar || {}
-	mt_head = mt_head || {}
 	加载角色()
 	charList(true)//更新角色
 	INIT_loading(false)
@@ -434,18 +430,11 @@ $("body").on('click',"#虚拟滚动",function()
 $("body").on('click',"#截图设置",function()
 {
 	let option = ''
-	option += `<option value="image/png" ${mt_settings['图片格式'] == 'image/png' ? 'selected' : ''}>png</option>`
-	option += `<option value="image/jpeg" ${mt_settings['图片格式'] == 'image/jpeg' ? 'selected' : ''}>jpeg</option>`
-	option += `<option value="image/webp" ${mt_settings['图片格式'] == 'image/webp'? 'selected' : ''}>webp</option>`
-	option += `<option value="image/bmp" ${mt_settings['图片格式'] == 'image/bmp' ? 'selected' : ''}>bmp</option>`
-	option += `<option value="image/gif" ${mt_settings['图片格式'] == 'image/gif' ? 'selected' : ''}">gif</option>`
+	option = `<option value="html2canvas" ${mt_settings['截图工具'] != 'snapdom' ? 'selected' : ''}>html2canvas（默认）</option>`
+	option += `<option value="snapdom" ${mt_settings['截图工具'] == 'snapdom' ? 'selected' : ''}>snapdom（测试）</option>`
 	let str = ''
 	str += `图片宽度：（默认500，上限需测试）\n<input class='宽度限制' type="number" value="${mt_settings['宽度限制']}">\n`
 	str += `图片最大高度：（默认16384，上限需测试）\n<input class='高度限制' type="number" value="${mt_settings['高度限制']}">\n`
-	str += `图片格式：（默认png，其它格式需测试）\n`
-	str += `<select class='图片格式' style='font-size: 1.5rem;'>${option}</select>\n`
-	option = `<option value="html2canvas" ${mt_settings['截图工具'] != 'snapdom' ? 'selected' : ''}>html2canvas（默认）</option>`
-	option += `<option value="snapdom" ${mt_settings['截图工具'] == 'snapdom' ? 'selected' : ''}>snapdom（测试）</option>`
 	str += `截图工具：\n`
 	str += `<select class='截图工具' style='font-size: 1.5rem;'>${option}</select>\n`
 	let config = {}
@@ -456,7 +445,6 @@ $("body").on('click',"#截图设置",function()
 	{
 		mt_settings['宽度限制'] = $(`.alert_${config.id} .宽度限制`).val() || 500
 		mt_settings['高度限制'] = $(`.alert_${config.id} .高度限制`).val() || 16384
-		mt_settings['图片格式'] = $(`.alert_${config.id} .图片格式`).val()
 		mt_settings['截图工具'] = $(`.alert_${config.id} .截图工具`).val()
 		saveStorage('设置选项',mt_settings,'local')
 	}

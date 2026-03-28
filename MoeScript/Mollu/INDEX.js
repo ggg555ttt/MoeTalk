@@ -1734,7 +1734,7 @@
 										str += '如果你的文档中含有较复杂的特殊样式，'
 										str += '建议在“截图设置”中更换截图工具（snapdom）。\n'
 										str += `	2。图片下载失败建议${!客户端 ? '在“下载设置”中开启流式下载，或尝试' : ''}`
-										str += '手动保存图片（最好将“图片格式”改为webp）。\n'
+										str += '手动保存图片\n'
 										str += '	※以上选项请在【设置选项】中切换\n'
 										alert(str)
 									}
@@ -2006,7 +2006,7 @@
 											fontSize: "0.9rem",
 											marginBottom: "0.5rem"
 										},
-										children: L.Z.down_comment1[g]
+										children: [L.Z.down_comment1[g],'首张图片自带存档']
 									}), (0, m.jsx)("span",
 									{
 										style:
@@ -2028,17 +2028,11 @@
 										{
 											className:'INDEX_imageLength bold red',
 											children: INIT_state(S)
-										}), '生成：', (0, m.jsx)("span",
+										}), '图片：', (0, m.jsx)("span",
 										{
 											className:'bold red',
 											children: imageArr.length
-										}), (0, m.jsx)("span",
-										{
-											id:'mt-image',
-											className:'bold blue',
-											style: {fontSize:'1.1rem'},
-											children:mt_settings['图片格式'].split('/')[1]
-										}), '图片']
+										})]
 									}), (0, m.jsx)("div",
 									{
 										style:
@@ -3084,7 +3078,7 @@
 														{
 															style:
 															{
-																color: !EMOJI.custom.io && EMOJI_CustomEmoji[no] && EMOJI_CustomEmoji[no][v] > -1 ? 'green' : ''
+																color: !EMOJI.custom.io && CUSTOM_EMOJI[no] && CUSTOM_EMOJI[no][v] > -1 ? 'green' : ''
 															},
 															children: EmojiInfo
 														})],
@@ -3108,7 +3102,7 @@
 													{
 														style:
 														{
-															color: !EMOJI.custom.io && EMOJI_CustomEmoji[no] && EMOJI_CustomEmoji[no][v] > -1 ? 'green' : ''
+															color: !EMOJI.custom.io && CUSTOM_EMOJI[no] && CUSTOM_EMOJI[no][v] > -1 ? 'green' : ''
 														},
 														children: mt_settings['表情信息'][v] || v.substring(v.lastIndexOf('/')+1),
 													}) ,(0, m.jsx)('img',
@@ -3148,12 +3142,12 @@
 																	for(let i=0,l=imgs.length;i<l;i++)
 																	{
 																		let id = `${EMOJI.type}-${getNowDate()}_${i}`
-																		if(!EMOJI_CustomEmoji[EMOJI.id])EMOJI_CustomEmoji[EMOJI.id] = {}
-																		EMOJI_CustomEmoji[EMOJI.id][id] = EMOJI.pages[EMOJI.id].custom
+																		if(!CUSTOM_EMOJI[EMOJI.id])CUSTOM_EMOJI[EMOJI.id] = {}
+																		CUSTOM_EMOJI[EMOJI.id][id] = EMOJI.pages[EMOJI.id].custom
 																		await 数据操作('Is',id,imgs[i].src)
 																	}
 																	$$('.INDEX_Emoji').click()
-																	saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
+																	saveStorage('DB_EMOJI',CUSTOM_EMOJI,'local')
 																}
 																alert(str,config)
 																return
@@ -3181,11 +3175,11 @@
 																			{
 																				v = v.title
 																				数据操作('Ir',v)
-																				delete EMOJI_CustomEmoji[EMOJI.id][v]
+																				delete CUSTOM_EMOJI[EMOJI.id][v]
 																				if(v.startsWith('CharFace-') || v.startsWith('Emoji-'))delete mt_settings['表情信息'][v]
 																			})
 																			saveStorage('设置选项',mt_settings,'local')
-																			saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
+																			saveStorage('DB_EMOJI',CUSTOM_EMOJI,'local')
 																			$$('.INDEX_Emoji').click()
 																		}
 																		alert(str,config)
@@ -3195,7 +3189,7 @@
 																		config.title = '批量添加表情'
 																		now = -1
 																		end = {}
-																		let arr = EMOJI_CustomEmoji[no] || {}
+																		let arr = CUSTOM_EMOJI[no] || {}
 																		for(let key in arr)
 																		{
 																			if(key == v)now = arr[key]
@@ -3217,10 +3211,10 @@
 																			$$.each($$('.INDEX_EmojiIfno.selected'),function(k,v)
 																			{
 																				v = v.title
-																				EMOJI_CustomEmoji[no] = EMOJI_CustomEmoji[no] || {}
-																				EMOJI_CustomEmoji[no][v] = parseInt($$(`.alert_${config.id} select`).val()-1)
+																				CUSTOM_EMOJI[no] = CUSTOM_EMOJI[no] || {}
+																				CUSTOM_EMOJI[no][v] = parseInt($$(`.alert_${config.id} select`).val()-1)
 																			})
-																			saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')
+																			saveStorage('DB_EMOJI',CUSTOM_EMOJI,'local')
 																			$$('.INDEX_Emoji').click()
 																		}
 																		alert(str,config)
@@ -3245,7 +3239,7 @@
 																{
 																	now = -1
 																	end = {}
-																	let arr = EMOJI_CustomEmoji[no] || {}
+																	let arr = CUSTOM_EMOJI[no] || {}
 																	for(let key in arr)
 																	{
 																		if(key == v)now = arr[key]
@@ -3268,13 +3262,13 @@
 																{
 																	if(EMOJI.custom.io)
 																	{//编辑自定义表情
-																		EMOJI_CustomEmoji[EMOJI.id][v] = parseInt($$(`.alert_${config.id} select`).val()-1)
+																		CUSTOM_EMOJI[EMOJI.id][v] = parseInt($$(`.alert_${config.id} select`).val()-1)
 																		if(v.startsWith('CharFace-') || v.startsWith('Emoji-'))数据操作('Is',v,$$('.Emojis').attr('src'))
 																		if($$(`.alert_${config.id} input:checked`).length)
 																		{//只删除表情
 																			数据操作('Ir',v)
-																			delete EMOJI_CustomEmoji[EMOJI.id][v]
-																			if(!Object.keys(EMOJI_CustomEmoji[EMOJI.id]).length)delete EMOJI_CustomEmoji[EMOJI.id]
+																			delete CUSTOM_EMOJI[EMOJI.id][v]
+																			if(!Object.keys(CUSTOM_EMOJI[EMOJI.id]).length)delete CUSTOM_EMOJI[EMOJI.id]
 																			if(v.startsWith('CharFace-') || v.startsWith('Emoji-'))$$(`.alert_${config.id} .text`).val('')
 																		}
 																	}
@@ -3282,12 +3276,12 @@
 																	{//编辑内置表情
 																		if($$(`.alert_${config.id} input:checked`).length)
 																		{//添加进自定义分类
-																			EMOJI_CustomEmoji[no] = EMOJI_CustomEmoji[no] || {}
-																			EMOJI_CustomEmoji[no][v] = parseInt($$(`.alert_${config.id} select`).val()-1)
+																			CUSTOM_EMOJI[no] = CUSTOM_EMOJI[no] || {}
+																			CUSTOM_EMOJI[no][v] = parseInt($$(`.alert_${config.id} select`).val()-1)
 																		}
-																		else if(EMOJI_CustomEmoji[no])delete EMOJI_CustomEmoji[no][v]//添加进自定义分类
+																		else if(CUSTOM_EMOJI[no])delete CUSTOM_EMOJI[no][v]//添加进自定义分类
 																	}
-																	saveStorage('DB_EMOJI',EMOJI_CustomEmoji,'local')//存入数据库
+																	saveStorage('DB_EMOJI',CUSTOM_EMOJI,'local')//存入数据库
 																	if($$(`.alert_${config.id} .text`).val())
 																	{//编辑表情信息
 																		mt_settings['表情信息'][v] = $$(`.alert_${config.id} .text`).val()

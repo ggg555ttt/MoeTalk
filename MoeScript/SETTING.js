@@ -51,57 +51,91 @@ $('body').on('change',"#loadcusfile",function()
 		}
 	}
 });
-$('body').on('click',"#savedata",function()
+
+$('body').on('click',"#savedata",async function()
 {
-	alert('MoeTalk出现错误时可以向开发者提交此文件\n另外请不要将此文件作为存档上传至MoeTalk！')
-	moetalkStorage.keys(function(err, DataBase)
+	alert('MoeTalk备份数据下载中\n如果数据量过大，请您耐心等待至弹窗再次出现')
+	let json = {'MoeTalk备份数据':'MoeTalk备份数据'}
+	json.localStorage = localStorage
+	json.sessionStorage = sessionStorage
+	json.IndexedDB = {}
+	let D,C = ['MoeImage','MoeTemp','MoeProject','moetalkStorage','MoeCache']
+	for(let i=0,l=C.length;i<l;i++)
 	{
-		if(DataBase.length)
+		if(C[i] === 'MoeImage')D = MoeImage
+		if(C[i] === 'MoeTemp')D = MoeTemp
+		if(C[i] === 'MoeProject')D = MoeProject
+		if(C[i] === 'moetalkStorage')D = moetalkStorage
+		if(C[i] === 'MoeCache')D = MoeCache
+		json.IndexedDB[C[i]] = {}
+		await D.iterate((value, key, iterationNumber)=>
 		{
-			let arr = {}
-			DataBase.map(function(v,k)
-			{
-				moetalkStorage.getItem(v, async function(err, data)
-				{
-					arr[v] = data
-					if(k === DataBase.length-1)
-					{
-						filename = await 保存文件('MoeTalk本地数据存档_'+getNowDate()+'.TXT', {...localStorage,...arr},'json')
-						alert(filename+'\n已下载！')
-					}
-				})
-			})
-		}
-	})
+			json.IndexedDB[C[i]][key] = value
+		})
+	}
+	let chunks = [];
+	stringifyToChunks(json, chunks)
+	json = chunks
+	chunks = ''
+	json = new Blob(json,{type: 'application/json'})
+	let filename = await 保存文件(`moetalk备份数据-${getNowDate()}.json`,json,'json')
+	alert(filename+'\n下载完成！')
 });
-$("body").append("<input id='loaddatafile' accept='text/plain' hidden type='file'>");
+$("body").append("<input id='loaddatafile' accept='application/json' hidden type='file'>");
 $('body').on('click',"#loaddata",function()
 {
-	alert('请上传MoeTalk本地数据存档\n此选项多为开发者测试用\n不建议用户使用！')
+	alert('这里只能提交专门的MoeTalk备份数据\n提交文件后，如果数据量较大，请耐心等待至弹窗再次出现\n请注意，此操作会覆盖原数据！')
 	$("#loaddatafile").click();
 })
-$('body').on('change',"#loaddatafile",function()
+$('body').on('change',"#loaddatafile",async function(e)
 {
-	let file = this.files[0];
-	let reader=new FileReader();
-	reader.readAsText(file);
-	reader.onload = function(e)
+	存档信息 = {}
+	await fileInput(e)
+	if(!存档信息.MoeTalk备份数据)
 	{
-		localStorage.clear()
-		let json = JSON.parse(this.result)
-		mt_settings = json['设置选项'] ? JSON.parse(json['设置选项']) : {}
-		if(!mt_settings['存储模式'])moetalkStorage.clear()
-		$.each(json,function(k,v)
-		{
-			if(['chats','mt-char','mt-head','moeLog','DB_EMOJI'].indexOf(k) > -1)
-			{
-				if(!mt_settings['存储模式'])moetalkStorage.setItem(k,v)
-				else localStorage[k] = v;
-			}
-			else localStorage[k] = v;
-		})
-		alert('需返回页面确认读取成功')
+		存档信息 = {}
+		alert('此文件并非备份数据存档！\n有疑问请向开发者反馈并提供此文件')
+		return
 	}
+	else
+	{
+		delete 存档信息.MoeTalk备份数据
+	}
+	for(let K in 存档信息)
+	{
+		if(K == 'localStorage')
+		{
+			localStorage.clear()
+			for(let C in 存档信息[K])localStorage[C] = 存档信息[K][C]
+		}
+		if(K == 'sessionStorage')
+		{
+			sessionStorage.clear()
+			for(let C in 存档信息[K])sessionStorage[C] = 存档信息[K][C]
+		}
+		if(K == 'IndexedDB')
+		{
+			for(let C in 存档信息[K])
+			{
+				let D
+				if(C === 'MoeImage')D = 'I'
+				if(C === 'MoeTemp')D = 'T'
+				if(C === 'MoeProject')D = 'P'
+				if(C === 'moetalkStorage')D = 'S'
+				if(C === 'MoeCache')D = 'C'
+				await 数据操作(D+'c')
+				for(let key in 存档信息[K][C])
+				{
+					let val = 存档信息[K][C][key]
+					delete 存档信息[K][C][key]
+					await 数据操作(D+'s',key,val)
+				}
+			}
+		}
+		delete 存档信息[K]
+	}
+	$('body').html(`<h1><a href='#' onclick="back()"><i style='color: red; font-weight: bold;'>返回MoeTalk</i></a></h1>`)
+	alert('数据恢复成功！\n请返回MoeTalk确认')
 });
 //更改语言
 $('body').on('click',"#language",function()
@@ -164,16 +198,25 @@ $('body').on('click',"#hnum",function()
 })
 
 //清除数据
-$("body").on('click','#clean',function()
+$("body").on('click','#clean',async function()
 {
 	let cl = '';
-	let msg = prompt("此操作会将你的所有存档数据一个不留的全部清除，如果你知道自己在干什么，请输入“确认清除”后点击确定\n"+cl);
+	let msg = prompt("此操作会将你的所有存档数据一个不留的全部清除\n如果你知道自己在干什么，请输入“确认清除”后点击确定\n等待弹窗再次出现后返回MoeTalk页面"+cl);
 	if(msg == '确认清除')
 	{
 		localStorage.clear();
 		sessionStorage.clear();
-		moetalkStorage.clear();
-		window.location.reload();//刷新页面
+		await MoeImage.clear()
+		await MoeTemp.clear()
+		await MoeProject.clear()
+		await moetalkStorage.clear()
+		await MoeCache.clear()
+		$('body').html(`<h1><a href='#' onclick="back()"><i style='color: red; font-weight: bold;'>返回MoeTalk</i></a></h1>`)
+		alert('所有数据清除完毕！')
+	}
+	else
+	{
+		alert('已放弃操作')
 	}
 })
 //设置整体上传的图片宽高百分比
@@ -233,7 +276,7 @@ function parseFile(file) {
 			const extData = data.subarray(endIndex, endIndex + maxExtLength);
 			const ext = data2str(extData);
 			const subData = data.subarray(endIndex + maxExtLength);
-			const blob = new Blob([subData], { type: mt_settings['图片格式']});
+			const blob = new Blob([subData], { type: 'image/png'});
 			if (blob.size < 1) {
 				return alert('该文件没有解析出存档文件！');
 			}
@@ -275,16 +318,6 @@ function blobToArrayBuffer(file) {
 		reader.readAsArrayBuffer(file);
 	});
 }
-$('body').on('click',"#mt-image",function()
-{
-	let image = prompt("请输入生成图片的格式：（不要乱输入）\npng（默认，质量最好体积最大）\njpeg（体积小，注意不是jpg）\nwebp（体积更小，不推荐火狐）", mt_settings['图片格式'].split('/')[1]);
-	if(image != null)
-	{
-		alert('更改完成，如果图片生成错误请尝试改为其它参数');
-		mt_settings['图片格式'] = 'image/'+image;
-		saveStorage('设置选项',mt_settings,'local')
-	}
-})
 $('body').on('click',"#cleancache",async function()
 {
 	if(window.caches && caches.keys)

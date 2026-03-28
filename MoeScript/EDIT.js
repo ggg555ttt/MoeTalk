@@ -874,6 +874,7 @@ function refreshMessage(json) {
 	// 2. 使用最原生的 for 循环，速度最快
 	for (let k = 0; k < len; k++) {
 		const v = json[k];
+		repairChat(v)
 		// 直接往指定下标塞入数据
 		htmlArray[k] = makeMessage(v.type, v, k, 'add');
 	}

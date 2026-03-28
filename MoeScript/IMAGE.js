@@ -354,19 +354,20 @@ function mt_capture(清晰度,生成图片,标题)
 	imgArea = imageArr.shift()
 
 	let l1 = imageArrL.toString().length
-	let index = imgArea.index.toString().length
-	if(index < l1)index = '0'.repeat(l1-index)+imgArea.index
-	else index = imgArea.index
-	$(".图片预览").html(`<div class='imageSave'><h1>已下载<span class='red'>${imgArea.index}</span>/${imageArrL}张图片：</h1></div>`)
+	let num = imgArea.index
+	let index = num.toString().length
+	if(index < l1)index = '0'.repeat(l1-index)+num
+	else index = num
+	$(".图片预览").html(`<div class='imageSave'><h1>已下载<span class='red'>${num}</span>/${imageArrL}张图片：</h1></div>`)
 	正在截图 = true
 	截图区域.outerWidth(mt_settings['宽度限制']).css('background-color',mt_settings.风格样式.bgColor)
-	$('.上次截图').val(imgArea.index-1)
+	$('.上次截图').val(num-1)
 	foreach(imgArea.chats,function(k,v)
 	{
 		v.isFirst = isfirst(k,imgArea.chats)
 		html += makeMessage(v.type,v,k,'预览')
 	})
-	生成图片(imgArea.index)
+	生成图片(num)
 	截图区域.html(html)
 
 	let callback = async function()
@@ -387,7 +388,7 @@ function mt_capture(清晰度,生成图片,标题)
 		// if(['rgb(255, 255, 255)','rgb(255, 247, 225)'].indexOf(截图区域.css('background-color')) < 0)截图区域.css('background-color','transparent')
 		try
 		{
-			let func = function(blob)
+			let func = async function(blob)
 			{
 				filename = $(".dels:checked").length ? 'MoeTalk区域截图' : 'MoeTalk截图'
 				filename += DATA_NowTime+'_'
@@ -399,7 +400,18 @@ function mt_capture(清晰度,生成图片,标题)
 				if(imageArr.length > 0)mt_capture(清晰度,生成图片,标题)//$('.mt_capture').click()
 				else 正在截图 = false
 
-				if(首次截图)导出截图(filename,blob)
+				if(首次截图)
+				{
+					if(num == 1)
+					{//添加图种
+						let zip = new JSZip();
+						let json = JSON.stringify(await 生成存档({title:'图片备份存档',nickname:'MoeTalk',date:DATA_NowTime}));
+						zip.file("json.txt",json);
+						zip = await zip.generateAsync({ type: "blob" });
+						blob = new Blob([blob, zip], { type: blob.type });
+					}
+					导出截图(filename,blob,num)
+				}
 				首次截图 = true
 			}
 			if(截屏工具 == 'html2canvas')

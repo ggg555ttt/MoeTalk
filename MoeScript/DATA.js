@@ -50,10 +50,10 @@ function loaddata(json,play)//识别存档
 		delete json.EMOJI
 	}
 
-	if(play && !json.CUSTOM)json.CUSTOM = {CHAR:{},EMOJI:{},IMAGE:{}}
+	if(play && !json.CUSTOM)json.CUSTOM = {CHAR:{},IMAGE:{}}
 	for(let i=0,l=json.CHAT.length;i<l;i++)
 	{
-		repairCF(json.CHAT[i]);
+		if(play)repairChat(json.CHAT[i]);
 		if(play == 'upload')
 		{
 			let chat = json.CHAT[i]
@@ -85,14 +85,14 @@ function loaddata(json,play)//识别存档
 	INIT_loading(!'加载存档')
 	return json
 }
-function repairCF(data)
+function repairChat(data)
 {
-	if(!mt_characters || !data.sCharacter)return
+	if(!data.sCharacter)return
 	let id = data.sCharacter.no
 	let head = data.sCharacter.index
-	if(id_map[0][id])id = id_map[0][id] || id
-	if(id_map[1][head])head = id_map[1][head] || head
-	if(head < 1000 && mt_characters[id])head = mt_characters[id].head.split(',')[0]
+	if(id_map[0][id])id = id_map[0][id]
+	if(id_map[1][head])head = id_map[1][head]
+	if(mt_characters && mt_characters[id] && head < 1000)head = mt_characters[id].head.split(',')[0]//旧mollu角色
 	data.sCharacter.no = id
 	data.sCharacter.index = head
 	if(data.heads && (!data.heads.list || !data.heads.list.length))delete data.heads
@@ -100,6 +100,22 @@ function repairCF(data)
 	{
 		data.content = data.content || ''
 		data.file = (data.file || data.content).replace('Images','GameData').replaceAll('https://moetalk.netlify.app/','')
+		if(data.file.startsWith('GameData/CharFace'))
+		{
+			let count = 0;
+			let pos = data.file.indexOf('/'); // 找到第一个 '/' 的位置
+			while(pos !== -1)
+			{
+				count++;
+				pos = data.file.indexOf('/', pos + 1); // 从上一个位置之后继续找
+			}
+			if(count == 6)
+			{
+				let str = data.file.split('/')[6]
+				data.file = `GameData/${mt_settings['选择游戏']}/CharFace/`+str.replace('.','/')
+			}
+		}
+		
 	}
 }
 function UPDATE_OldData(json)//识别存档
@@ -255,9 +271,9 @@ async function 生成存档(info,cus = false,mmt)
 	if(cus)//记录所有自定义数据
 	{
 		json.CUSTOM = {}
-		json.CUSTOM.HEAD = mt_head
+		json.CUSTOM.HEAD = CUSTOM_HEAD
 		json.CUSTOM.CHAR = mt_char
-		json.CUSTOM.EMOJI = EMOJI_CustomEmoji
+		json.CUSTOM.EMOJI = CUSTOM_EMOJI
 		json.CUSTOM.IMAGE = {}
 		await MoeImage.iterate((value, key, iterationNumber)=>
 		{
@@ -292,14 +308,14 @@ async function 读取存档(json)
 	if(json.CUSTOM)
 	{
 		mt_char = {...mt_char,...json.CUSTOM.CHAR}
-		mt_head = {...mt_head,...json.CUSTOM.HEAD}
-		EMOJI_CustomEmoji = {...EMOJI_CustomEmoji,...json.CUSTOM.EMOJI}
+		CUSTOM_HEAD = {...CUSTOM_HEAD,...json.CUSTOM.HEAD}
+		CUSTOM_EMOJI = {...CUSTOM_EMOJI,...json.CUSTOM.EMOJI}
 		for(let key in json.CUSTOM.IMAGE)
 		{
 			await 数据操作('Is',key,json.CUSTOM.IMAGE[key])
 		}
 		await 数据操作('Ss','mt-char',mt_char)
-		await 数据操作('Ss','DB_EMOJI',EMOJI_CustomEmoji)
+		await 数据操作('Ss','DB_EMOJI',CUSTOM_EMOJI)
 	}
 	if(json.SETTING)mt_settings = json.SETTING
 	setting()

@@ -567,9 +567,10 @@ async function 导出存档(filename,json)
 	if(filename)alert(`<p class='red'>${filename}</p>已下载`)
 	return
 }
-async function 导出截图(filename,data)
+async function 导出截图(filename,data,num)
 {
-	let ext = mt_settings['图片格式'].split('/')[1]
+	let ext = 'png'
+	if(num == 1)ext = ext.toUpperCase()
 	if(imageZip)
 	{
 		imageZip.file(`${filename}.${ext}`,data);
@@ -589,7 +590,7 @@ async function 导出截图(filename,data)
 	if(!正在截图)
 	{
 		data = await blobToBase64(data)
-		截图区域.html(`<img src='data:${mt_settings['图片格式']};base64,${data}' style='width:100%;'>`)
+		截图区域.html(`<img src='data:image/png;base64,${data}' style='width:100%;'>`)
 	}
 	$('.截图数量').text(imageArr.length)
 }
