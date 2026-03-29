@@ -5149,7 +5149,7 @@
 									children: ''
 								})]
 							})
-						}), (0, m.jsx)(MoeHome === 'index.html' ? eK : eK_old,
+						}), (0, m.jsx)(OldTalk ? eK_old : eK,
 						{
 							show: x,
 							handleShow: _,

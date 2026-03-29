@@ -340,13 +340,15 @@ $(".frVjsk").wait(function()
 	$(".frVjsk").append(`${button}onclick='selectgame()'><b class='blue'>遊</b></button><p class='white'>选择游戏</p></button></div>`);
 	$(".frVjsk").append(`${button}id='MoeProject'><b class='blue'>項</b></button><p class='white'>项目管理</p></button></div>`);
 	$(".frVjsk").append(`${button}id='设置选项'><b class='green'>設</b></button><p class='white'>设置选项</p></button></div>`);
-	if(window.location.href.includes('old'))
+	if(OldTalk)
 	{
-		$(".frVjsk").append(`<a href='index.html'>${button}><b class='black'>新</b></button><p class='white'>回到新版</p></button></div></a>`);
+		let click = `onclick="delete localStorage['OldTalk'],location.reload(true)"`
+		$(".frVjsk").append(`<span ${click}>${button}><b class='black'>新</b></button><p class='white'>回到新版</p></button></div></span>`);
 	}
 	else
 	{
-		$(".frVjsk").append(`<a href='index_old.html'>${button}><b class='black'>舊</b></button><p class='white'>访问旧版</p></button></div></a>`);
+		let click = `onclick="localStorage['OldTalk'] = '旧版MoeTalk',location.reload(true)"`
+		$(".frVjsk").append(`<span ${click}>${button}><b class='black'>舊</b></button><p class='white'>访问旧版</p></button></div></span>`);
 	}
 },".frVjsk")
 $("body").on('click',"#支持作者",function()

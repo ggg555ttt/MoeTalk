@@ -531,7 +531,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 {
 	let addChat = $(".操作模式").text() == '追加'
 	$(".编辑界面 .取消").click()
-	if(MoeHome === 'index_old.html')
+	if(OldTalk)
 	{
 		$('.编辑界面').removeClass('visible')
 		$('.chatText').val('').innerHeight(27)
