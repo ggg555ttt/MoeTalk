@@ -57,6 +57,7 @@ $('body').on('click',"#savedata",async function()
 	alert('MoeTalk备份数据下载中\n如果数据量过大，请您耐心等待至弹窗再次出现')
 	let json = {'MoeTalk备份数据':'MoeTalk备份数据'}
 	json.localStorage = localStorage
+	delete json.localStorage['cordova']
 	json.sessionStorage = sessionStorage
 	json.IndexedDB = {}
 	let D,C = ['MoeImage','MoeTemp','MoeProject','moetalkStorage','MoeCache']
@@ -245,11 +246,9 @@ $("body").on('click','#mt-cfsize',function()
 $("body").on('click','#mt-title',function()
 {
 	let title = mt_settings['顶部标题'];
-	let msg = prompt("请输入标题文字",title);
-	if(msg)
-	{
-		mt_settings['顶部标题'] = msg;
-	}
+	let msg = prompt("请输入标题文字（设为MikuTalk有惊喜）",title).trim();
+	if(msg)mt_settings['顶部标题'] = msg;
+	else mt_settings['顶部标题'] = 'MoeTalk';
 	saveStorage('设置选项',mt_settings,'local')
 })
 

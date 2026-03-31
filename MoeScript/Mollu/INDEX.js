@@ -4067,7 +4067,7 @@
 										{
 											display: 'flex',
 											justifyContent: 'space-around',
-											border:'2px solid rgb(139, 187, 233)',
+											alignItems: 'center',
 											borderRadius: '0.5rem'
 										},
 										children: [(0, m.jsxs)('img',
@@ -4075,8 +4075,10 @@
 											className: '图片文件',
 											style:
 											{
-												maxWidth: '50%',
-												maxHeight: '10rem'
+												maxWidth: '75%',
+												height: '100%',
+												maxHeight: '10rem',
+												border: '2px dashed rgb(139, 187, 233)'
 											},
 											src: '',
 											onError: function(e){IMAGE_error(e)}
@@ -4086,24 +4088,25 @@
 											{
 												display: 'flex',
 												flexDirection: 'column',
-												justifyContent: 'space-between',
-												width: '50%'
+												justifyContent: 'space-around',
+												width: '25%',
+												height: '10rem'
 											},
 											children: [(0, m.jsx)(eN.g4,
 											{
 												children: '选择表情',
 												className: "选择表情",
-												style: {height: 'auto'},
+												style: {height: 'auto',padding: '0.5rem'},
 												onClick: function(e){$$('.INDEX_EmojiButton').click()}
 											}), (0, m.jsx)(eN.g4,
 											{
 												children: '选择差分',
 												className: "选择差分",
-												style: {height: 'auto'},
+												style: {height: 'auto',padding: '0.5rem'},
 												onClick: function(e){$$('.INDEX_CharFaceButton').click()}
 											}), (0, m.jsx)(eN.g4,
 											{
-												style: {height: 'auto'},
+												style: {height: 'auto',padding: '0.5rem'},
 												children: ['上传图片', (0, m.jsx)("input",
 												{
 													className: "上传图片",
@@ -4130,7 +4133,7 @@
 										maxRows: 10,
 										style: 
 										{
-											border:'2px solid rgb(139, 187, 233)',
+											border:'2px dashed rgb(139, 187, 233)',
 											color: 'red'
 										},
 										className:"内容信息 scrollbar"
@@ -4450,8 +4453,11 @@
 								}), (0,m.jsx)('img',
 								{
 									className: "图片选项 图片文件",
-									width:"auto",
-									height:"128px",
+									style:
+									{
+										maxWidth: '100%',
+										maxHeight: '5rem'
+									},
 									onError: function(e){IMAGE_error(e)}
 								}), (0, m.jsx)('div',
 								{

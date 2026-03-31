@@ -5911,10 +5911,26 @@
 										{
 											let config = {}
 											config.confirm = '刷新'
-											config.title = 'MoeTalk说明'
+											config.title = '说明'
 											config.style = 'text-align:center;'
 											config.yes = function(){location.reload(true)}
-											alert(localStorage['通知文档'],config)
+											let text = ''
+											text += 'MoeTalk项目地址：<u><a href="https://github.com/ggg555ttt/MoeTalk/">https://github.com/ggg555ttt/MoeTalk/</a></u>\n'
+											if($$('.dWuwCr:visible').length)
+											{
+												text += '※移动端请点击左上<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏\n'
+											}
+											text += `※MoeTalk每十分钟备份一次存档，可在<button style="line-height:112%;"onclick="$('#MoeProject').click()">项目管理</button>中恢复\n`
+											if(!本地)
+											{
+												text += '※浏览器下MoeTalk有网络连接波动以及数据被清理的风险\n'
+												text += '<span style="color:white;background-color:red;">开发者强烈建议您<button style="line-height:112%;" onclick="update()">安装应用或下载客户端</button></span>\n'
+											}
+											if(MikuTalk)
+											{
+												text += '※通常日期下将标题改为MikuTalk可开启特殊模式'
+											}
+											alert(text,config)
 										}
 									})]
 								}), a || (0, O.jsx)(T,{hidden: "hidden"})]//@隐藏帮助按钮

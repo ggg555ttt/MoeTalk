@@ -1,7 +1,6 @@
 /*@MoeScript/CLIENT.js@*/
 async function isIos()
 {
-	if(本地 || localStorage['phpwin'])return
 	let type = await $.ajax(
 	{
 		url: '/index.php',
@@ -32,11 +31,9 @@ async function isIos()
 	{
 		客户端 = 'phpwin'
 		本地 = true
-		localStorage['phpwin'] = 'phpwin'
+		sessionStorage['phpwin'] = 'phpwin'
 	}
-	else localStorage['phpwin'] = 'none'
 }
-isIos()
 function waitPlus()
 {
 	return new Promise(resolve =>
@@ -622,3 +619,41 @@ async function 检测版本()
 		return new Promise(() => {});
 	}
 }
+// 1. 定义一个变量来保存事件
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+
+// 2. 监听浏览器的 beforeinstallprompt 事件
+window.addEventListener('beforeinstallprompt', (e) => {
+  // 防止 Chrome 67 及更早版本自动显示安装提示
+  e.preventDefault();
+  
+  // 将事件保存下来，以便稍后触发
+  deferredPrompt = e;
+  
+  // 触发事件后，显示我们自定义的安装按钮
+  installBtn.title = '未安装';
+});
+
+// 3. 监听自定义按钮的点击事件
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+
+  // 隐藏按钮（可选，看你的 UI 逻辑）
+  installBtn.title = '已安装';
+
+  // 触发原生的安装提示框
+  deferredPrompt.prompt();
+
+  // 等待用户对提示框做出选择（接受或拒绝）
+  const { outcome } = await deferredPrompt.userChoice;
+  
+  if (outcome === 'accepted') {
+    console.log('用户同意安装 PWA');
+  } else {
+    console.log('用户拒绝安装 PWA');
+  }
+
+  // prompt() 只能调用一次，用完后需要清空变量
+  deferredPrompt = null;
+});

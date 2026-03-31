@@ -163,9 +163,15 @@ async function update(str = '')
 	}
 	let bdwp = 'https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda'
 	let link = `<a class="INIT_href bold" title="${bdwp}" style="text-decoration:underline;">${bdwp}</a>`
-	readme += `客户端下载地址：\n${link}\n提取码：BLDA\n`
+	readme += `本地MoeTalk客户端下载地址：\n${link}\n提取码：BLDA\n`
+	if(!客户端 && installBtn.title == '未安装')
+	{
+		readme += `为了持久保存数据，请点击：`
+		if(!设备信息.device.isApple)readme += '底部共享图标<img src="MoeData/Ui/share.webp"style="width:1.5rem;">，选择“添加到主屏幕”\n'
+		else readme += '<button onclick="installBtn.click()">安装PWA应用</button>\n'
+	}
 	let config = {}
-	config.title = 本地 ? '更新应用' : '下载客户端'
+	config.title = 本地 ? '更新应用' : '安装应用'
 	config.id = Math.random().toString().replace('0.','')
 	config.yes = function()
 	{
@@ -192,61 +198,62 @@ async function update(str = '')
 		$('.版本:eq(3)').text(网络数据版本)
 	}
 }
+var 通知文档 = ''
 $(async function()
 {
-	if(本地 && 客户端 === 'HTML5+')
-	{
-		await 检测版本();
-		[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
-	}
-	加载数据()
-	if(MikuTalk)
-	{
-		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','transparent');
-		$('.RightScreen__CContainer-sc-14j003s-2').css('background-color','transparent');
-		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
-		$("#view").click()
-	}
-	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
-	let span = `<span onclick="$('#readme').click()" style="font-family:Jalnan;background-color:rgb(139,187,233);color:white;padding:4px;cursor:pointer;">`
-	let notice = ''
-	notice += `MoeTalk为基于原作者Raun0129开发的MolluTalk的个人改版\n`
-	notice += '反馈网址：<u><a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/</a></u>\n\n'
-	notice += '※移动端可点击左上<i class="bold"style="font-style:italic;color:white;background-color:rgb(139,187,233);"> 三 </i>查看工具栏\n'
-	notice += `※<span style="color:white;background-color:green;">数据丢失请尝试从<button style="line-height:112%;"onclick="$('#MoeProject').click()">项目管理</button>中恢复</span>\n`
+	if(设备信息.device.isApple && location.host == 'localhost' && !sessionStorage['phpwin'])await isIos()
 	if(本地)
 	{
+		if(客户端 === 'HTML5+')
+		{
+			await 检测版本();
+			[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
+		}
 		if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
 		else
 		{
 			if(mt_settings.自动更新.应用)更新应用()
 			if(mt_settings.自动更新.数据)更新数据()
 		}
+		检查数据()
 	}
-	else notice += '※<span style="color:white;background-color:red;">网页端连接不稳定建议</span><button style="line-height:112%;" onclick="update()">下载客户端</button>\n'
-	await isIos()
-	if(本地 && 客户端)检查数据()
-	if(sessionStorage['通知文档'] == notice)return//
-	localStorage['通知文档'] = notice
-	sessionStorage['通知文档'] = notice
-	if(MikuTalk)
+	加载数据();
+	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
+	let text = ''
+	let config = {}
+	let title = $('#readme').text().slice(0, -1)
+	let span = `<span onclick="$('#readme').click()" style="font-family:Jalnan;background-color:${$('.Header__Navbar-sc-17b1not-0').css('background-color')};color:white;padding:4px;cursor:pointer;">`
+	text += `相关问题请点击${span}${title}</span>标题\n\n`
+	if(!本地)
 	{
-		let text = '愚人节快乐！代码来源：<a title="https://github.com/HFIProgramming/mikutap/" class="INIT_href">MikuTap</a>\n通常日期下将标题改为“MikuTalk”即可开启\n点击“确认”可以关闭'
-		let config = {}
-		config.yes = function()
-		{
-			sessionStorage['MikuTalk'] = 'no'
-			location.reload(true);
-		}
-		alert(text,config)
+		text += '※浏览器下MoeTalk有网络连接波动以及数据被清理的风险\n'
+		text += '<span style="color:white;background-color:red;">开发者强烈建议您<button style="line-height:112%;" onclick="update()">安装应用或下载客户端</button></span>\n'
 	}
+	config.title = `欢迎使用${span}${title}！</span>`
+	config.style = 'text-align:center;'
+	if(MikuTalk || mt_settings['顶部标题'] === 'MikuTalk')
+	{
+		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','transparent');
+		$('.RightScreen__CContainer-sc-14j003s-2').css('background-color','transparent');
+		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
+		$("#view").click()
+		text += 'MikuTap：https://github.com/HFIProgramming/mikutap/\n'
+		text = text.replace('\n\n','\n（当前为愚人节彩蛋模式）\n')
+		if(mt_settings['顶部标题'] != 'MikuTalk')
+		{
+			config.confirm = '取消播放'
+			config.yes = function()
+			{
+				sessionStorage['MikuTalk'] = 'no'
+				location.reload(true);
+			}
+		}
+	}
+	if(sessionStorage['通知文档'])return;
 	let ymd = parseInt(year+month+day)
 	ymd = ymd >= 260216 && ymd <= 260223;
 	if(month+day == '0101' || ymd)恭喜发财 = ymd
-	let text = `有疑问请点击${span}MoeTalk</span>标题\n\n`
-	text += `※<span style="color:white;background-color:green;">数据丢失请尝试从<button style="line-height:112%;" onclick="$('#MoeProject').click()">项目管理</button>中恢复</span>\n`
-	if(!本地)text += '※<span style="color:white;background-color:red;">网页端连接不稳定建议<button style="line-height:112%;" onclick="update()">下载客户端</button></span>\n'
-	let config = {title:`欢迎使用${span}MoeTalk</span>`,style:'text-align:center;'}
+	sessionStorage['通知文档'] = text
 	alert(text,config)
 })
 async function newyear(url)
@@ -336,7 +343,7 @@ $(".frVjsk").wait(function()
 	let div = `<div style='display:flex;flex-direction:column;align-items:center;'align='center'>`
 	let button = `${div}<button class='mvcff kNOatn bold'`
 	$(".frVjsk").append(`${button}id='支持作者'><b class='red'>支</b></button><p class='white'>支持作者</p></button></div>`);
-	$(".frVjsk").append(`${button}onclick='update()'><b class='blue'>應</b></button><p class='white'>${本地?'更新应用':'下载应用'}</p></button></div>`);
+	$(".frVjsk").append(`${button}onclick='update()'><b class='blue'>應</b></button><p class='white'>${本地?'更新':'安装'}应用</p></button></div>`);
 	$(".frVjsk").append(`${button}onclick='selectgame()'><b class='blue'>遊</b></button><p class='white'>选择游戏</p></button></div>`);
 	$(".frVjsk").append(`${button}id='MoeProject'><b class='blue'>項</b></button><p class='white'>项目管理</p></button></div>`);
 	$(".frVjsk").append(`${button}id='设置选项'><b class='green'>設</b></button><p class='white'>设置选项</p></button></div>`);
