@@ -1057,7 +1057,7 @@ function 编辑消息(index)
 	if(chat.heads)CHAT_HeadList = {...chat.heads,...{}}	
 	if(chat.style)CHAT_Style = [...chat.style,...[]]
 }
-$("body").on('click',".编辑",function(){编辑消息(获取索引($(this)[0]))});
+$("body").on('click',".编辑",function(e){编辑消息(获取索引(e.target))});
 $("body").on('click',".头像框",function()
 {
 	chatIndex = 获取索引($(this)[0]);

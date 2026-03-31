@@ -2,7 +2,7 @@
 if(OldTalk)
 {
 	$("head").append(`<link rel='stylesheet' href='./MoeScript/Old/Old.css?ver=${本地版本}'>`);
-	function 编辑消息(index)
+	编辑消息 = function(index)
 	{
 		chatIndex = index
 		let chat = chats[chatIndex]
