@@ -620,40 +620,20 @@ async function 检测版本()
 	}
 }
 // 1. 定义一个变量来保存事件
-let deferredPrompt;
+var 安装PWA应用 = false;
 const installBtn = document.getElementById('installBtn');
-
 // 2. 监听浏览器的 beforeinstallprompt 事件
-window.addEventListener('beforeinstallprompt', (e) => {
-  // 防止 Chrome 67 及更早版本自动显示安装提示
-  e.preventDefault();
-  
-  // 将事件保存下来，以便稍后触发
-  deferredPrompt = e;
-  
-  // 触发事件后，显示我们自定义的安装按钮
-  installBtn.title = '未安装';
+window.addEventListener('beforeinstallprompt',e=>
+{//只有需要安装PWA应用时才会触发
+	e.preventDefault();// 防止 Chrome 67 及更早版本自动显示安装提示
+	安装PWA应用 = e;// 将事件保存下来，以便稍后触发
 });
-
 // 3. 监听自定义按钮的点击事件
-installBtn.addEventListener('click', async () => {
-  if (!deferredPrompt) return;
-
-  // 隐藏按钮（可选，看你的 UI 逻辑）
-  installBtn.title = '已安装';
-
-  // 触发原生的安装提示框
-  deferredPrompt.prompt();
-
-  // 等待用户对提示框做出选择（接受或拒绝）
-  const { outcome } = await deferredPrompt.userChoice;
-  
-  if (outcome === 'accepted') {
-    console.log('用户同意安装 PWA');
-  } else {
-    console.log('用户拒绝安装 PWA');
-  }
-
-  // prompt() 只能调用一次，用完后需要清空变量
-  deferredPrompt = null;
+installBtn.addEventListener('click',async()=>
+{
+	if(!安装PWA应用)return;
+	安装PWA应用.prompt();// 触发原生的安装提示框
+	const { outcome } = await 安装PWA应用.userChoice;// 等待用户对提示框做出选择（接受或拒绝）
+	if(outcome === 'accepted')$(`.alert_安装应用 .cancel`).click()//安装完成
+	安装PWA应用 = null;// prompt() 只能调用一次，用完后需要清空变量
 });

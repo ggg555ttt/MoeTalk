@@ -161,18 +161,27 @@ async function update(str = '')
 			readme += `<button onclick="plus.webview.currentWebview().loadURL('${MoeTalkURL}?eval=${code}')">访问网络端</button>\n`
 		}
 	}
+	if(!客户端)
+	{
+		if(安装PWA应用)
+		{
+			readme += '为了持久保存数据，请点击<button onclick="installBtn.click()">安装PWA应用</button>\n\n'
+		}
+		else if(安装PWA应用 === null)
+		{
+			readme += 'PWA应用已成功安装！\n\n'	
+		}
+		else if(设备信息.device.isApple)
+		{
+			readme += '为了持久保存数据，请点击底部共享图标<img src="MoeData/Ui/share.webp"style="width:1.5rem;">，选择“添加到主屏幕”\n\n'
+		}
+	}
 	let bdwp = 'https://pan.baidu.com/s/1Cc-Us0FM_ehP9h5SDWhrVg?pwd=blda'
 	let link = `<a class="INIT_href bold" title="${bdwp}" style="text-decoration:underline;">${bdwp}</a>`
 	readme += `本地MoeTalk客户端下载地址：\n${link}\n提取码：BLDA\n`
-	if(!客户端 && installBtn.title == '未安装')
-	{
-		readme += `为了持久保存数据，请点击：`
-		if(!设备信息.device.isApple)readme += '底部共享图标<img src="MoeData/Ui/share.webp"style="width:1.5rem;">，选择“添加到主屏幕”\n'
-		else readme += '<button onclick="installBtn.click()">安装PWA应用</button>\n'
-	}
 	let config = {}
 	config.title = 本地 ? '更新应用' : '安装应用'
-	config.id = Math.random().toString().replace('0.','')
+	config.id = '安装应用'
 	config.yes = function()
 	{
 		mt_settings.自动更新.应用 = $(`.alert_${config.id} input:eq(0)`).prop('checked')
