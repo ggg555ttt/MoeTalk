@@ -213,7 +213,6 @@ async function 保存文件(filename, data, type = 2)
 			}
 		}
 		else saveAs(data, filename)
-		INIT_loading(!'下载完毕')
 		return filename
 	}
 	if(客户端 === 'NW.js')
@@ -562,6 +561,7 @@ async function 导出存档(filename,json)
 	json = new Blob(json,{type: 'application/json'})
 	filename = await 保存文件(filename+'.'+$('.存档格式').val(),json,'json')
 	if(filename)alert(`<p class='red'>${filename}</p>已下载`)
+	INIT_loading(!'下载存档')
 	return
 }
 async function 导出截图(filename,data,num)
