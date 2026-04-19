@@ -748,7 +748,7 @@ function 截图切割_说明(截图切割)
 	}
 }
 
-$("body").on('click',".角色头像",function()
+$("body").on('click',".显示头像",function()
 {
 	角色头像_说明(!$('.角色头像_说明').attr('title'))
 });
@@ -854,7 +854,7 @@ $("body").on('click',".编辑界面 .删除",function()
 {
 	选择列表.length > 1 ? $('.INDEX_delete').click() : sendMessage({},'','delete',[chatIndex])
 });
-$("body").on('click',".设置头像",function()
+$("body").on('click',".切换角色",function()
 {
 	let no = $('.角色头像').attr('alt')
 	let index = $('.角色头像').attr('title')
@@ -869,8 +869,8 @@ $("body").on('click',".设置头像",function()
 	str += `<label>　　　　　<input class="radio column" type="radio" name="direction" value="column">竖向</label><input type="checkbox" class="fullHeight" ${HeadList.fullHeight ? 'checked' : ''}>文字消息自动铺满\n`
 	str += `头像间距：<input style="font-size:1.2rem;" class="margin text" placeholder="默认值为 -1.5rem" value="${toString(HeadList.margin)}">\n\n`
 
-	str += '<label><input class="radio" type="radio" name="mode" value="add">添加头像</label>'
-	str += '<label><input class="radio" type="radio" name="mode" value="change" checked>切换角色</label>\n'
+	str += '<label><input class="radio" type="radio" name="mode" value="change" checked>切换角色</label>'
+	str += '<label><input class="radio" type="radio" name="mode" value="add">添加头像</label>\n'
 	str += `<img class="头像 N_char" src="${index ? loadhead(no,index) : href+'MoeData/Ui/error.webp'}" ${no ? `alt="${no}"` : ''}" ${index ? `title="${index}"` : ''}" onerror="IMAGE_error(this)">`
 	str += `发言者名称：<input style="font-size:1.2rem;color:red;" class="text" placeholder="${$('.角色名称').attr('placeholder')}" value="${$('.角色名称').val()}"><div class="N_list">`
 	HeadList.list.map(function(index,k)
@@ -889,7 +889,7 @@ $("body").on('click',".设置头像",function()
 
 	$(`.${HeadList.direction}`).click()
 	let config = {}
-	config.title = '设置头像'
+	config.title = '切换角色/添加头像'
 	config.yes = function()
 	{
 		HeadList.direction = $('.radio:checked')[0].value
@@ -907,9 +907,9 @@ $("body").on('click',".设置头像",function()
 		let hl = CHAT_HeadList.list.length
 		let name = img.next()[0]
 		$('.角色名称').attr('placeholder',name.placeholder).val(name.value)
-		$('.角色头像_列表').text(hl ? `+${hl}头像` : '')
+		$('.角色头像_列表').text(hl ? `x${hl}` : '')
 		$('.角色ID').text(img[0].alt ? 'ID：'+img[0].alt : '不更改角色')
-		$('.设置头像').css('color',CHAT_HeadList.list.length || checked > 1 ? 'red' : 'rgb(75, 105, 137)')
+		$('.切换角色').css('color',CHAT_HeadList.list.length || checked > 1 ? 'red' : 'rgb(75, 105, 137)')
 		if(img[0].title)
 		{
 			$('.角色头像').attr({alt:img[0].alt,title:img[0].title,src:img[0].src})
@@ -1001,7 +1001,7 @@ function 编辑消息(index)
 		$('.内容索引').text(`已选中数据：${checked}`)
 		$('.角色头像_列表').text('')
 		$('.角色名称').attr('placeholder','不修改名称').val('')
-		$('.设置头像').css('color','black')
+		$('.切换角色').css('color','black')
 		$('.定义样式').css('color','black')
 
 		$('.角色头像_说明').text('不修改头像').attr('title','noEdit')
@@ -1027,13 +1027,13 @@ function 编辑消息(index)
 
 	$('.角色ID').text('ID：'+chat.sCharacter.no)
 	$('.内容索引').text(`(${chatIndex+1}/${chats.length})`)
-	$('.设置头像').css('color',chat.heads && chat.heads.list && chat.heads.list.length ? 'red' : 'black')
+	$('.切换角色').css('color',chat.heads && chat.heads.list && chat.heads.list.length ? 'red' : 'black')
 	$('.定义样式').css('color',chat.style && chat.style.length ? 'red' : 'black')
 
 	$('.角色头像').attr({alt:chat.sCharacter.no,title:chat.sCharacter.index,src:loadhead(chat.sCharacter.no,chat.sCharacter.index)})
 	$('.角色名称').attr('placeholder',loadname(chat.sCharacter.no,chat.sCharacter.index)).val(toString(chat.name)).click()
 	let hl = chat.heads && chat.heads.list ? chat.heads.list.length : 0
-	$('.角色头像_列表').text(hl ? `+${hl}头像` : '')
+	$('.角色头像_列表').text(hl ? `x${hl}` : '')
 	let arr = {isLeft:'<<',isCenter:'><',isRight:'>>'}
 	let 位置 = chat.isRight ? 'isRight' : chat.isCenter ? 'isCenter' : 'isLeft'
 	if(!chat.isLeft && !chat.isCenter && !chat.isRight)

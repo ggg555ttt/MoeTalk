@@ -503,7 +503,7 @@ async function 检查数据()
 	{
 		if(!$('.更新数据').length)update()
 		$('.更新数据').text('数据文件下载中……')
-		let data = await $ajax('https://api.akams.cn/github#.json')
+		let data = await getfile('https://api.akams.cn/github#.json')
 		data = data ? JSON.parse(data).data : []
 		网址列表 = []
 		网址列表.push('https://moetalk.netlify.app')

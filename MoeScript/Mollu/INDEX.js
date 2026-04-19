@@ -1257,7 +1257,7 @@
 										color: 'green'
 									},
 									className: "bold",
-									children: '提示',
+									children: '💡',
 									onClick:function()
 									{
 										alert('名称显示优先级：发言者名称 > 头像名称 > 角色名称')
@@ -1726,7 +1726,7 @@
 										color: 'green'
 									},
 									className: "bold",
-									children: '提示',
+									children: '💡',
 									onClick:function()
 									{
 										let str = ''
@@ -2262,7 +2262,7 @@
 										color: 'green'
 									},
 									className: "bold",
-									children: '提示',
+									children: '💡',
 									onClick:function()
 									{
 										alert(`若下载失败，请${!客户端 ? '在【设置选项】=>“下载设置”中开启流式下载\n或' : ''}向开发者反馈`)
@@ -3757,7 +3757,7 @@
 										color: 'rgb(45, 70, 100)'
 									},
 									className: "bold",
-									children: '提示',
+									children: '💡',
 									onClick:function()
 									{
 										alert('文本输入框内只输入一个空格会视为清空该内容\n若想清空样式和头像列表只需进入对应编辑界面\n然后什么都不做并点击确定即可')
@@ -3799,16 +3799,14 @@
 										color: 'green'
 									},
 									className: "bold",
-									children: '提示',
+									children: '💡',
 									onClick:function()
 									{
 										let str = ''
-										str += '	1。点击左上角头像可以设置显示或隐藏，'
-										str += '“设置头像”可以修改发言角色\n'
-										str += '	2。自定义表情和差分的ID可以通过img标签来引用，'
+										str += '	1。自定义表情和差分的ID可以通过img标签来引用，'
 										str += '但标签内一定要加入onerror="IMAGE_error(this)"，'
 										str += '图片尺寸可能会偏大，请设置好宽高属性"。\n'
-										str += '	3。font-family属性可引用的自带字体：'
+										str += '	2。font-family属性可引用的自带字体：'
 										str += 'Blueaka(默认)Jalnan(标题)KaiTi(楷体)。\n'
 										alert(str)
 									}
@@ -3933,6 +3931,10 @@
 												cursor: 'pointer',
 												border: '1px solid rgb(252, 199, 41)'
 											},
+											onClick: function()
+											{
+												$$('.切换角色').click()
+											},
 											onError: function(e){IMAGE_error(e)}
 										}), (0, m.jsxs)('div',
 										{
@@ -3942,19 +3944,32 @@
 												flexDirection: 'column',
 												width: '100%'
 											},
-											children:[(0, m.jsx)(c.Kx,
+											children:[(0, m.jsxs)('div',
 											{
-												maxRows: 5,
 												style:
 												{
-													color: 'rgb(34, 37, 41)',
-													fontSize: '1.5rem',
-													padding: '0rem',
-													border: '0rem',
-													width: 'inherit',
-													background: 'transparent'
+													display: 'flex',
+													justifyContent: 'space-between',
+													width: '100%'
 												},
-												className:"bold 角色名称 scrollbar"
+												children: [(0, m.jsx)(c.Kx,
+												{
+													maxRows: 5,
+													style:
+													{
+														color: 'rgb(34, 37, 41)',
+														fontSize: '1.5rem',
+														padding: '0rem',
+														border: '1px dashed rgb(63, 68, 74)',
+														background: 'transparent'
+													},
+													className: "bold 角色名称 scrollbar"
+												}), (0, m.jsxs)('button',
+												{
+													style: {width: '30%'},
+													className: '显示头像',
+													children: '显示/隐藏头像'
+												})]
 											}), (0, m.jsxs)('div',
 											{
 												style:
@@ -3964,7 +3979,15 @@
 												},
 												children: [(0, m.jsxs)('span',
 												{
-													className: '角色头像_列表'
+													children: [(0, m.jsxs)('span',
+													{
+														style: {color:'black'},
+														children: '←添加头像'
+													}), (0, m.jsxs)('span',
+													{
+														style: {color:'blue'},
+														className: '角色头像_列表'
+													})]
 												}), (0, m.jsxs)('span',
 												{
 													className: '角色头像_说明'
@@ -4146,7 +4169,7 @@
 											justifyContent: 'space-between',
 											alignItems: 'center'
 										},
-										children: ['设置头像','快捷短语','定义样式'].map(function(v,k)
+										children: ['切换角色','快捷短语','定义样式'].map(function(v,k)
 										{
 											return (0, m.jsx)('div',
 											{
