@@ -61,6 +61,7 @@ $('body').on('click',".INDEX_Emoji",function()
 function mt_emojis(S,mode)
 {
 	EMOJI.images = []//表情列表
+	EMOJI.error = []//错误表情列表
 	EMOJI.pageindex = ''//表情书签
 	EMOJI.title = '图片表情'//
 	EMOJI.custom = {}//自设表情
@@ -128,6 +129,13 @@ function mt_emojis(S,mode)
 					}
 					else for(let i=0;i<=index;i++)EMOJI.images.push(`${v[0]}/${i}`)
 				})
+				if(v[2])
+				{
+					foreach(v[2],function(k,index)
+					{
+						EMOJI.error.push(`${v[0]}/${index}`)
+					})
+				}
 			})
 		}
 		if(mode === 'Emoji')
@@ -205,13 +213,14 @@ function mt_emojis(S,mode)
 	}
 
 	let str = toString(EMOJI.images[0])
-	if(str.includes('_REPAIR'))EMOJI.title += `(${EMOJI.images.length}修复)`
-	else if(str.includes('_OLD'))EMOJI.title += `(${EMOJI.images.length}旧设)`
-	else if(str.includes('CharID_'))EMOJI.title += `(${EMOJI.images.length}拓展)`
-	else if(EMOJI.custom.io)EMOJI.title += `(${EMOJI.images.length}自定义)`
+	let imgLength = EMOJI.images.length-EMOJI.error.length
+	if(str.includes('_REPAIR'))EMOJI.title += `(${imgLength}修复)`
+	else if(str.includes('_OLD'))EMOJI.title += `(${imgLength}旧设)`
+	else if(str.includes('CharID_'))EMOJI.title += `(${imgLength}拓展)`
+	else if(EMOJI.custom.io)EMOJI.title += `(${imgLength}自定义)`
 	else
 	{
-		EMOJI.title += `(${EMOJI.images.length})`
+		EMOJI.title += `(${imgLength})`
 	}
 	EMOJI.pageindex = `${PageIndex+1} / ${PageCount || 1}`
 	setTimeout(function()

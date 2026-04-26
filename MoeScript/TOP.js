@@ -226,7 +226,10 @@ $(async function()
 		}
 		检查数据()
 	}
-	加载数据();
+	$(".消息底座").wait(function()
+	{
+		加载数据()
+	},".消息底座");
 	/[\u4e00-\u9fff]/.test($("#readme").text()) && $("#readme").css('font-family','moetalk')
 	let text = ''
 	let config = {}

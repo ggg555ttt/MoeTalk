@@ -14783,11 +14783,6 @@
 					c = (e, t, ...n) =>
 					{
 						return;//@
-						if(t < e.logLevel) return;
-						let r = new Date().toISOString(),
-							i = u[t];
-						if(i) console[i](`[${r}]  ${e.name}:`, ...n);
-						else throw Error(`Attempted to log a message with an invalid logType (value: ${t})`)
 					};
 				class l
 				{

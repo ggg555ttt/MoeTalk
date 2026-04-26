@@ -184,7 +184,6 @@ function setting()
 		else mt_settings['语言选项'] = 'zh_cn'
 	}
 	if(!['zh_cn','zh_tw','en','jp','kr'].includes(mt_settings['语言选项']))mt_settings['语言选项'] = 'zh_cn'
-	if(设备信息.browser.isFirefox)mt_settings['禁止字体'] = true
 	mt_settings['当前网址'] = window.location.href
 	mt_settings['设备信息'] = window.navigator.userAgent
 }
@@ -547,7 +546,7 @@ class Base64Utils {
     });
   }
 }
-async function cacheFile(C,blob)
+async function 缓存文件(C,blob)
 {
 	if(C[2] == '清')return await caches.delete(C[0]);
 	const cache = await caches.open(C[0]);
@@ -582,15 +581,18 @@ function 数据操作(C,K = null,V = null)
 	{
 		D[M](K,V).then((e)=>
 		{
-			// if(C[1] === 's' || C[1] === 'r')C += '删'
-			// if(C[1] === 'c')C += '清';
-			// if(C[2] && typeof e === 'string')
-			// {
-			// 	C = C.split('')
-			// 	C[0] = D._config.name
-			// 	C[1] = new URL(K, window.location.href).href;
-			// 	cacheFile(C,e)
-			// }
+			if(!M && !客户端)
+			{
+				if(C[1] === 's' || C[1] === 'r')C += '删'
+				if(C[1] === 'c')C += '清';
+				if(C[2] && typeof e === 'string')
+				{
+					C = C.split('')
+					C[0] = D._config.name
+					C[1] = new URL(K, window.location.href).href;
+					缓存文件(C,e)
+				}
+			}
 			resolve(e)
 		}).catch((e)=>
 		{

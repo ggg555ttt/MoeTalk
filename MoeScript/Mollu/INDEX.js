@@ -3025,6 +3025,7 @@
 										{
 											children: [EMOJI.images.map(function(v,k)
 											{
+												if(EMOJI.error.includes(v))return;
 												let no = mt_settings['选择角色'].no
 												let index = mt_settings['选择角色'].index
 												let link = EMOJI.path+v+'.webp'
@@ -3120,7 +3121,6 @@
 														onError: function(e)
 														{
 															IMAGE_error(e)
-															if(!EMOJI.custom.io)e.target.parentNode.style.display = 'none'
 														},
 														onClick: function(e)
 														{
@@ -3919,7 +3919,8 @@
 										style:
 										{
 											display: 'flex',
-											width: '100%'
+											width: '100%',
+											alignItems: 'flex-end'
 										},
 										children:[(0, m.jsxs)('img',
 										{
@@ -3966,7 +3967,7 @@
 													className: "bold 角色名称 scrollbar"
 												}), (0, m.jsxs)('button',
 												{
-													style: {width: '30%'},
+													style: {whiteSpace: 'nowrap'},
 													className: '显示头像',
 													children: '显示/隐藏头像'
 												})]

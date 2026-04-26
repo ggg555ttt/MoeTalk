@@ -368,7 +368,7 @@ function mt_capture(清晰度,生成图片,标题)
 		html += makeMessage(v.type,v,k,'预览')
 	})
 	生成图片(num)
-	截图区域.html(html)
+	截图区域.html(html)//.append($('.消息:visible').slice(imgArea.start, imgArea.end).clone())
 
 	let callback = async function()
 	{
@@ -506,3 +506,174 @@ $("body").on('click',".截图选项",function()
 	}
 	saveStorage('设置选项',mt_settings,'local')
 });
+const state = {
+	manifest: null,
+	manifests: [],
+	manifestPromise: null,
+	assetRoot: null,
+	videos: new Map(),
+	failedVideos: new Set(),
+	fallbacks: new Set(),
+	observer: null,
+	manifestWarned: false,
+	srcPatched: false,
+	fetchPatched: false
+};
+function getVideoEntry(videoUrl)
+{
+	if(state.videos.has(videoUrl))return state.videos.get(videoUrl);
+
+	const video = document.createElement("video");
+	video.preload = "auto";
+	video.muted = true;
+	video.playsInline = true;
+	video.crossOrigin = "anonymous";
+	video.style.cssText = "position:fixed;left:-99999px;top:-99999px;width:1px;height:1px;opacity:0;pointer-events:none;";
+	(document.body || document.documentElement).appendChild(video);
+
+	const entry = {
+		videoUrl: videoUrl,
+		video: video,
+		cache: new Map(),
+		failed: false,
+		queue: Promise.resolve(),
+		canvas: document.createElement("canvas"),
+		ctx: null
+	};
+	entry.ctx = entry.canvas.getContext("2d");
+	entry.readyPromise = new Promise(function(resolve,reject)
+	{
+		let resolved = false;
+		function cleanup()
+		{
+			video.removeEventListener("loadedmetadata", onReady);
+			video.removeEventListener("loadeddata", onReady);
+			video.removeEventListener("error", onError);
+		}
+		function onReady()
+		{
+			if(resolved)return;
+			resolved = true;
+			cleanup();
+			resolve(video);
+		}
+		function onError()
+		{
+			cleanup();
+			entry.failed = true;
+			state.failedVideos.add(videoUrl);
+			reject(new Error("Video load failed: " + videoUrl));
+		}
+		video.addEventListener("loadedmetadata", onReady);
+		video.addEventListener("loadeddata", onReady);
+		video.addEventListener("error", onError);
+	});
+
+	video.src = videoUrl;
+	video.load();
+	state.videos.set(videoUrl, entry);
+	return entry;
+}
+async function captureFrame(entry,frameIndex)
+{
+	const video = entry.video;
+	await entry.readyPromise;
+	const fps = frameIndex && frameIndex.fps ? frameIndex.fps : api.fps || 10;
+	const frameNumber = typeof frameIndex === "object" ? frameIndex.frameIndex : frameIndex;
+	// Some mobile browsers can report loaded first-frame video at t=0 but still
+	// paint an empty frame to canvas. Nudging the seek slightly forward keeps us
+	// within frame 0 while making first-frame extraction much more reliable.
+	const frameEpsilon = Math.min(0.001, 1 / Math.max(fps,1) / 4);
+	const seekTime = frameNumber <= 0 ? frameEpsilon : frameNumber / fps + frameEpsilon;
+	await new Promise(function(resolve,reject)
+	{
+		let timeoutId = 0;
+
+		function cleanup()
+		{
+			video.removeEventListener("seeked", onSeeked);
+			video.removeEventListener("error", onError);
+			if(timeoutId)clearTimeout(timeoutId);
+		}
+
+		function onSeeked()
+		{
+			cleanup();
+			resolve();
+		}
+
+		function onError()
+		{
+			cleanup();
+			reject(new Error("Video seek failed"));
+		}
+
+		video.pause();
+		if(Math.abs(video.currentTime - seekTime) < 0.0001 && video.readyState >= 2)
+		{
+			resolve();
+			return;
+		}
+
+		timeoutId = setTimeout(function()
+		{
+			cleanup();
+			reject(new Error("Video seek timeout"));
+		}, 10000);
+
+		video.addEventListener("seeked", onSeeked);
+		video.addEventListener("error", onError);
+		video.currentTime = seekTime;
+	});
+
+	if(entry.canvas.width !== video.videoWidth || entry.canvas.height !== video.videoHeight)
+	{
+		entry.canvas.width = video.videoWidth;
+		entry.canvas.height = video.videoHeight;
+	}
+
+	entry.ctx.clearRect(0,0,entry.canvas.width,entry.canvas.height);
+	entry.ctx.drawImage(video,0,0);
+	return entry.canvas.toDataURL("image/webp");
+}
+async function getFrameDataUrl(source)
+{
+	const frameCandidates = [{
+		"frameIndex": source,
+		"videoUrl": "B.mp4",
+		"fps": 10
+	}];
+	if(!frameCandidates || !frameCandidates.length)return null;
+
+	for(let i = 0,l = frameCandidates.length;i < l;i++)
+	{
+		const frameInfo = frameCandidates[i];
+		if(state.failedVideos.has(frameInfo.videoUrl))continue;
+
+		const entry = getVideoEntry(frameInfo.videoUrl);
+		if(entry.cache.has(frameInfo.frameIndex))return entry.cache.get(frameInfo.frameIndex);
+
+		const dataUrl = await (entry.queue = entry.queue.then(async function()
+		{
+			if(entry.cache.has(frameInfo.frameIndex))return entry.cache.get(frameInfo.frameIndex);
+			const captured = await captureFrame(entry, frameInfo);
+			entry.cache.set(frameInfo.frameIndex,captured);
+			return captured;
+		}).catch(function(error)
+		{
+			entry.failed = true;
+			state.failedVideos.add(frameInfo.videoUrl);
+			console.warn("[HEVC_CHARFACE] frame extraction failed", error);
+			return null;
+		}));
+		test(1)
+		if(dataUrl)return dataUrl;
+	}
+
+	return null;
+}
+// $('img[alt="CharFace"]').each(async(n,img)=>
+// {
+// 	test(img)
+// 	img.src = await getFrameDataUrl(n)
+// })
