@@ -15,7 +15,7 @@ var CUSTOM_NAME = {}
 function loadhead(id,img)
 {
 	if(id == 0 || img == 1)return `${href}MoeData/Ui/you.webp`;//主角
-	if(img.startsWith('custom-') || img.startsWith('CharFace-') || img.startsWith('Emoji-'))return img
+	if(isCusImg(img))return loadImg(img)
 	return `${href}GameData/${mt_settings['选择游戏']}/Char/${img.replace('_Collection','_BG')}.webp`;
 }
 function loadname(id,index,play)

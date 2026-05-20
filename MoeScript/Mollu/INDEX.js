@@ -3029,14 +3029,9 @@
 												let no = mt_settings['选择角色'].no
 												let index = mt_settings['选择角色'].index
 												let link = EMOJI.path+v+'.webp'
-												let 前缀 = href+''
 												let EmojiInfo = mt_settings['表情信息'][v] ? mt_settings['表情信息'][v] : CFInfo[v] ? CFInfo[v] : v
 												EmojiInfo = EmojiInfo === undefined ? '' : EmojiInfo
-												if(v.startsWith('CharFace-') || v.startsWith('Emoji-'))
-												{
-													前缀 = ''
-													link = v
-												}
+												if(isCusImg(v))link = v
 												return (0, m.jsx)('div',
 												{
 													style: 
@@ -3117,7 +3112,7 @@
 															width: '100%',
 															height: 'auto'
 														},
-														src: v === 'ADD' ? href+'MoeData/Ui/School/RECYCLE.webp' : 前缀+link,//#表情链接
+														src: v === 'ADD' ? href+'MoeData/Ui/School/RECYCLE.webp' : loadImg(link),//#表情链接
 														onError: function(e)
 														{
 															IMAGE_error(e)
@@ -3155,7 +3150,7 @@
 															if($$('.INDEX_EmojiIfno:visible').length && EmojiInfo !== '')
 															{
 																let str = ''
-																let img = `<img class="Emojis" src='${前缀+link}' style='width:50%;' onerror='IMAGE_error(this)'>`
+																let img = `<img class="Emojis" src='${loadImg(link)}' style='width:50%;' onerror='IMAGE_error(this)'>`
 																let select = ''
 																let now = parseInt(EMOJI.pageindex.split(' / ')[0])//当前页
 																let end = parseInt(EMOJI.pageindex.split(' / ')[1])//终点页
@@ -3298,7 +3293,7 @@
 															}
 															if($$('.编辑界面').hasClass('visible'))
 															{//编辑表情
-																$$('.图片文件').attr({src: href+link,title: link}),s()
+																$$('.图片文件').attr({src: loadImg(link),title: link}),s()
 															}
 															else
 															{//发送表情

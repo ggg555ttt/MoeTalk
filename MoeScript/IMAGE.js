@@ -28,6 +28,16 @@ async function IMAGE_error(image,play)
 	}
 	return
 }
+function isCusImg(src)
+{
+	src = src || ''
+	return src.startsWith('custom-') || src.startsWith('CharFace-') || src.startsWith('Emoji-')
+}
+function loadImg(src)
+{
+	if(isCusImg(src))return href+`CusImg/${src}.webp`
+	return href+src
+}
 function 加载图片(images)
 {
 	if(images.length === 0)return Promise.resolve();

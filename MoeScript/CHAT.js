@@ -442,7 +442,7 @@ function makeMessage(type,data,chatIndex,mode)
 				maxwidth = mt_settings['差分比例'] || '90%'
 			}
 			maxwidth = `max-width:${maxwidth};`
-			图片 = `<img src='${data.file.startsWith('data:') ? data.file : href+data.file}' style="${width}${maxwidth};${style}" class="图片 编辑" onerror="IMAGE_error(this)">`
+			图片 = `<img src='${data.file.startsWith('data:') ? data.file : loadImg(data.file)}' style="${width}${maxwidth};${style}" class="图片 编辑" onerror="IMAGE_error(this)">`
 		}
 		if(no != 0 && !data.isRight)
 		{//左侧对话
@@ -1059,7 +1059,7 @@ function 编辑消息(index)
 
 	$('.内容信息').val(chat.content).attr('placeholder',chat.content || '').click();
 	let file = chat.file || ''
-	if(!file.startsWith('data:'))$('.图片文件').attr({src: file,title: file})
+	if(!file.startsWith('data:'))$('.图片文件').attr({src: loadImg(file),title: file})
 	else $('.图片文件').attr({src: file,title: chat.content})
 	$('.时间信息').val(toString(chat.time)).attr('placeholder',chat.time || '').click();
 
