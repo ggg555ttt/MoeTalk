@@ -3886,7 +3886,8 @@
 										width: '100%',
 										fontSize: '1rem',
 										textAlign: 'start',
-										overflow: 'scroll'
+										overflow: 'scroll',
+										color: 'rgb(111, 119, 127)'
 									},
 									children:[(0, m.jsxs)('div',
 									{
@@ -3975,11 +3976,7 @@
 												},
 												children: [(0, m.jsxs)('span',
 												{
-													children: [(0, m.jsxs)('span',
-													{
-														style: {color:'black'},
-														children: '←添加头像'
-													}), (0, m.jsxs)('span',
+													children: ['←添加头像', (0, m.jsxs)('span',
 													{
 														style: {color:'blue'},
 														className: '角色头像_列表'
