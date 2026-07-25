@@ -188,6 +188,13 @@ async function clearCache()
 		alert('缓存清除完毕，请立即刷新页面',config)
 	}
 }
+function escapeHTML(str) {
+    return str.replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;")
+              .replace(/"/g, "&quot;")
+              .replace(/'/g, "&#039;");
+}
 async function update(str = '')
 {
 	if(!mt_settings.自动更新)mt_settings.自动更新 = {应用:false,数据:false}
@@ -222,19 +229,26 @@ async function update(str = '')
 			readme += `<button onclick="plus.webview.currentWebview().loadURL('${MoeTalkURL}?eval=${code}')">访问网络端</button>\n`
 		}
 	}
+	let r = '<b style="color:red;">→</b>'
+	let span = '<span style="background-color:#526792;color:white;">'
 	let php = `<?php file_put_contents('index.php',file_get_contents('${location.origin}/MoeData/phpwin.js'));exit("<script>location.replace('index.php')</script>");`
 	let phpwin = 'https://apps.apple.com/cn/app/phpwin/id1157634089'
-	let pg = ''
-	pg += `首先安装phpwin：<a class="INIT_href bold" title="${phpwin}" style="text-decoration:underline;">${phpwin}</a>\n`
-	pg += `进入index.php文件后将所有内容改为：${php}`
-	pg += `Edit ▾→Select all→Paste\nFile ▾→Save→Close`
-	if(!客户端)readme += '<i class="bold red">浏览器数据有被系统清理的风险，开发强烈建议您安装本地客户端\n</i>'
+	let pg = 'IOS客户端安装教程：\n'
+	pg += `<i class="red">1.</i>首先安装phpwin：<a class="INIT_href bold" title="${phpwin}" style="text-decoration:underline;">${phpwin}</a>\n`
+	pg += `<i class="red">2.</i>复制这段字符串：<span style="background-color:black;color:white;">${escapeHTML(php)}</span>\n`
+	pg += `<i class="red">3.</i>打开phpwin，进入文件<span style="background-color:#F2F2F2;color:#526792;">index.php</span>\n`
+	pg += `<i class="red">4.</i>选择所有内容${span}Edit ▾${r}Select all</span>\n`
+	pg += `<i class="red">5.</i>粘贴复制的内容${span}Edit ▾${r}Paste</span>\n`
+	pg += `<i class="red">6.</i>保存文件${span}File ▾${r}Save</span>\n`
+	pg += `<i class="red">7.</i>关闭文件${span}File ▾${r}Close</span>\n`
+	pg += `<i class="red">8.</i>点击右下角Server，再点击Root右侧的网站进入MoeTalk\n`
+	pg += `<i class="red">9.</i>耐心等待安装完成\n`
 	let bdwp = 'https://pan.baidu.com/s/19TBLCa1ammOPV7LAXma7MA?pwd=bwsm'
 	bdwp = `2.<a class="INIT_href bold" title="${bdwp}" style="text-decoration:underline;">${bdwp}</a>提取码：${bdwp.split('=')[1]}`
 	let lzwp = 'https://404.lanzouu.com/b0kp4vckd?pwd=9ge9'
 	lzwp = `1.<a class="INIT_href bold" title="${lzwp}" style="text-decoration:underline;">${lzwp}</a>提取码：${lzwp.split('=')[1]}`
 	readme += `客户端下载地址：\n${lzwp}\n${bdwp}`
-
+	if(设备信息.device.isApple && window.location.protocol == 'https:')readme = pg
 	let config = {}
 	config.title = 本地 ? '更新应用' : '安装应用'
 	config.id = '安装应用'
@@ -292,11 +306,7 @@ $(async function()
 	let title = $('#readme').text().slice(0, -1)
 	let span = `<i onclick="$('#readme').click()"class="bold"style="background-color:${$('.Header__Navbar-sc-17b1not-0').css('background-color')};color:white;cursor:pointer;">`
 	text += `相关问题请点击${span}${title}</i>标题\n标题旁大写字母代表设备标识\n`
-	if(!本地)
-	{
-		text += '※浏览器下MoeTalk有网络连接波动以及数据被清理的风险\n'
-		text += '<span style="color:white;background-color:red;">开发者强烈建议您<button style="line-height:112%;" onclick="update()">安装客户端</button></span>\n'
-	}
+	if(!本地)text += '<i class="bold red">浏览器数据有被系统清理的风险，开发强烈建议您<button style="line-height:112%;" onclick="update()">安装客户端</button>\n</i>'
 	config.title = `欢迎使用MoeTalk！`
 	config.style = 'text-align:center;'
 	if(MikuTalk || mt_settings['顶部标题'] === 'MikuTalk')

@@ -237,8 +237,8 @@ async function 安装应用()
 	let 本地列表 = JSON.parse(await $ajax(`${MoeTalkURL}/MoeData/Version/MoeTalk.json?ver=${应用版本[0]}`))
 
 	let 更新补丁 = `更新补丁/MoeTalk_${应用版本[0]}`
-	await 保存文件(`${更新补丁}/MoeData/Version/MoeTalk.json`,JSON.stringify(应用版本))
-	await 保存文件(`${更新补丁}/MoeData/Version/Version.json`,JSON.stringify(本地列表))
+	await 保存文件(`${更新补丁}/MoeData/Version/Version.json`,JSON.stringify(应用版本))
+	await 保存文件(`${更新补丁}/MoeData/Version/MoeTalk.json`,JSON.stringify(本地列表))
 	
 	let 文件列表 = Object.keys(本地列表)
 	for(let i=0,l=文件列表.length;i<l;i++)
