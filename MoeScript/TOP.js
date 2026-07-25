@@ -3,7 +3,6 @@ var 恭喜发财 = false
 pause = true
 skip = false
 if(localStorage['调试模式'])var vConsole = new window.VConsole();
-INIT_loading('开始加载')
 
 var ALERT = {}
 window.alert = function(text = '',config = {})

@@ -7053,7 +7053,7 @@
 										onClick: async function()
 										{
 											let DATA
-											INIT_loading()
+											INIT_loading(1)
 											skip = false
 											$$('.nowChapter').text('读取中。。')
 											let playChat = 

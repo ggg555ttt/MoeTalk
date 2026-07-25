@@ -426,20 +426,8 @@ $('body').on('click',".INIT_href",function()
 })
 function INIT_loading(loading = '加载')
 {
-	let className = '.Loading__MainLoading-sc-cfft3t-0'
-	if($(className).length)
-	{
-		if($(className+':visible').length || !loading)$(className).hide()
-		else $(className).show()
-	}
-	else
-	{
-		$(className).wait(function()
-		{
-			if($(className+':visible').length || !loading)$(className).hide()
-			else $(className).show()
-		},className)
-	}
+	if(!loading)$('.Loading_0').hide()
+	else $('.Loading_0').show()
 }
 function INIT_waiting(callback,arr)//等待变量加载
 {
@@ -708,41 +696,13 @@ function 并发处理(...promises) {
     });
   });
 }
-async function 缓存文件(DB,C,K,V)
-{
-	if(客户端)return
-	if(C[1] === 'r')C += '删'
-	if(C[1] === 'c')C += '清';
-	if(C[2])
-	{
-		C = C.split('')
-		C[0] = DB
-		C[1] = `${href}用户数据/${DB}/${K}.webp`
-	}
-	if(!isBase64(V) || !C[2])return
-
-	const cache = await caches.open(C[0]);
-	if(C[2] == '删')return await cache.delete(C[1]);
-	if(C[2] == '清')return await caches.delete(C[0]);
-	if(C[2] == '写')
-	{
-		V = await Base64ToBlob(V)
-		const headers = new Headers(//显式声明 Headers
-		{	
-			'Content-Type': V.type || 'application/octet-stream',//从blob获取类型，如果没有则给个默认值
-			'Content-Length': V.size.toString()//明确写入Content-Length，解决长度为 0 的问题
-		});
-		const response = new Response(V, {headers: headers});
-		await cache.put(C[1], response);
-	}
-}
 function 处理数据(D,M,C,K,V)
 {
 	return new Promise(function(resolve)
 	{
 		D[M](K,V).then((e)=>
 		{
-			if(localStorage['调试模式'])缓存文件(D._config.name,C,K,e)
+			// if(localStorage['调试模式'])缓存文件(D._config.name,C,K,e)
 			resolve(e)
 		}).catch((e)=>
 		{
@@ -753,12 +713,67 @@ function 处理数据(D,M,C,K,V)
 		})
 	})
 }
+async function 处理缓存(DB,C,K,V)
+{
+	if(!navigator.serviceWorker.controller)return null
+	if(C[1] === 'c')
+	{
+		if(C === 'Tc')TempImg.clear()
+		return await caches.delete(DB);
+	}
+	let file = `${href}用户数据/${DB}/`
+	const cache = await caches.open(DB);
+	if(C[1] === 's' && V)
+	{
+		if(C[0] === 'T')TempImg.add(K)
+		if(typeof V === 'object')
+		{
+			file += `${K}.json`
+			V = new Blob([JSON.stringify(V)],{type:'application/json'});
+		}
+		else
+		{
+			file += `${K}.webp`
+			V = await Base64ToBlob(V)
+		}
+		const headers = new Headers(//显式声明 Headers
+		{	
+			'Content-Type': V.type || 'application/octet-stream',//从blob获取类型，如果没有则给个默认值
+			'Content-Length': V.size.toString()//明确写入Content-Length，解决长度为 0 的问题
+		});
+		await cache.put(file, new Response(V, {headers: headers}));
+		return file;
+	}
+	if(C[1] === 'g' && K)
+	{
+		if(isCusImg(K))
+		{
+			file += `${K}.webp`
+			if(C[0] === 'T')TempImg.add(K)
+			return await BlobToBase64(await $ajax(file))
+		}
+		else
+		{
+			file += `${K}.json`
+			return JSON.parse(await $ajax(file))
+		}
+	}
+	if(C[1] === 'r' && K)
+	{
+		if(C === 'Tr')TempImg.delete(K)
+		if(isCusImg(K))file += `${K}.webp`
+		else file += `${K}.json`
+		await cache.delete(file);
+		return file;
+	}
+	return null;
+}
 async function 处理文件(DB,C,K,V)
 {
 	if(!本地)
 	{
 		if(K === 'chats' && C === 'Ss')localStorage['chats'] = JSON.stringify(V)
-		return null;
+		return await 处理缓存(DB,C,K,V);
 	}
 	if(C[1] === 's' && window.保存文件 && V)
 	{
@@ -773,7 +788,6 @@ async function 处理文件(DB,C,K,V)
 		let file = `用户数据/${DB}/${K}`
 		if(isCusImg(K))
 		{
-
 			file += '.webp'
 			return await BlobToBase64(await $ajax(file))
 		}

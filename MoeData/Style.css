@@ -382,6 +382,44 @@ a
 {
 	background: #555; /* 鼠标悬停时滑块颜色 */
 }
+.Loading_0
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    transition: opacity 0.5s ease-in-out;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.4);
+}
+.Loading_1
+{
+	display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.Loading_2
+{
+	margin: auto;
+    height: 4rem;
+    width: 4rem;
+    border-width: 0.4rem;
+    border-style: solid;
+    border-color: rgb(139, 187, 233) rgb(139, 187, 233) white white;
+    border-image: initial;
+    border-radius: 100%;
+    animation: 800ms linear 0s infinite normal none running spin;
+}
+@keyframes spin
+{
+	0%{transform: rotate(0deg);}
+	100%{transform: rotate(359deg);}
+}
 
 .zhengwen
 {

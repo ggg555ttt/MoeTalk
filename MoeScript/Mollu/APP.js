@@ -7480,45 +7480,7 @@
 						})
 					}
 				}, "PRIVATE")), (0, eh.KN)(tv, tb), (0, eh.KN)(tv, tb, "esm2017");
-				var tP = function()
-				{
-					var e = (0, k.C)(function(e)
-					{
-						return e.global.isLoading
-					});
-					return [(0, O.jsx)(tI,
-					{
-						style:
-						{
-							display: e ? "block" : "none"
-						},
-						children: (0, O.jsx)(tT,
-						{
-							children: (0, O.jsx)('button',
-							{
-								style:
-								{
-									whiteSpace: 'pre-wrap',
-									fontSize: '2rem'
-								},
-								className: 'bold',
-								children: '点击可隐藏加载界面\n通常建议您耐心等待',
-							})
-						})
-					}), (0, O.jsx)(tI,
-					{
-						style:
-						{
-							display: e ? "block" : "none"
-						},
-						children: (0, O.jsx)(tT,
-						{
-							children: (0, O.jsx)(tN,{}),
-							onClick: function(){INIT_loading(false)}
-						})
-					})]
-				},
-				tI = h.ZP.div.withConfig(
+				var tI = h.ZP.div.withConfig(
 				{
 					displayName: "Loading__MainLoading",
 					componentId: "sc-cfft3t-0"
@@ -7569,6 +7531,8 @@
 				}
 				var tL = function(e)
 					{
+						const position = document.documentElement.style.position
+						if(!position)document.documentElement.style.position = 'fixed'
 						el(), ef()//$, tS(), tM();
 						var t = (0, k.C)(function(e)
 							{
@@ -7587,7 +7551,7 @@
 							{
 								className: n,
 								lang: (0, z.Vy)(t),
-								children: [e.children,(0, O.jsx)(tP,{}),(0, O.jsx)('div',{id:'view'})]//#加入mikutap,(0, O.jsx)('div',{id:'view'})
+								children: [e.children,(0, O.jsx)('div',{id:'view'})]//#加入mikutap,(0, O.jsx)('div',{id:'view'})
 								//$ [e.children, (0, O.jsx)(tx,
 								// {}), (0, O.jsx)(tE,
 								// {}), (0, O.jsx)(tP,

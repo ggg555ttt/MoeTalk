@@ -32,7 +32,7 @@ async function IMAGE_error(image,play)
 	}
 	else
 	{
-		img = (play ? await 数据操作('Cg写',url) : await 数据操作('Ig写',url) || await 数据操作('Tg写',url)) || href+'MoeData/Ui/error.webp'
+		img = (play ? await 数据操作('Cg',url) : await 数据操作('Ig',url) || await 数据操作('Tg',url)) || href+'MoeData/Ui/error.webp'
 		if(img[0] === 'G')img = href+img
 	}
 	if(image.src)
@@ -49,15 +49,16 @@ async function IMAGE_error(image,play)
 }
 function isCusImg(src)
 {
-	if(typeof src != 'string')src = ''
+	if(typeof src !== 'string')return !1
 	return src.startsWith('custom-') ||
 	src.startsWith('CharFace-') ||
 	src.startsWith('Emoji-') ||
 	src.startsWith('Image-') ||
-	(GAME == 'BLDA' && src > 999) 
+	(GAME === 'BLDA' && src > 999) 
 }
 function loadImg(src)
 {
+	if(src.startsWith('Image-'))return href+`用户数据/MoeTemp/${src}.webp`
 	if(isCusImg(src))return href+`用户数据/${TempImg.has(src) ? 'MoeTemp' : 'MoeImage'}/${src}.webp`
 	return href+src
 }

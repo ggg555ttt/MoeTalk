@@ -396,7 +396,7 @@ $('body').on('click',"#makecus",function()
 $("body").append("<input id='custom' hidden type='file' accept='image/*' multiple>");//添加上传标签
 $("body").on('change','#custom',function()
 {
-	INIT_loading('开始加载')
+	INIT_loading('IMAGE compress')
 	
 	//文件改变时,获取文件,并转化为base64字符串
 	let files = [...this.files,...[]]
