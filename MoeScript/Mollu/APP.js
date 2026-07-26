@@ -5563,7 +5563,6 @@
 					g = function(e, t, n, r)
 					{
 						var i, a;
-						n.sortCharType = mt_settings['排序方式']//@读取排序方式
 						if(r === 'zh_cn' || r === 'zh_tw'){r = 'pinyin'}//@中文改为拼音排序
 						//*按ID排序
 						if("ID" === n.sortCharType)
@@ -5581,17 +5580,6 @@
 						}
 						else i = e[n.sortCharType][r], a = t[n.sortCharType][r];
 						return (i = i.toLowerCase(), a = a.toLowerCase(), n.order) ? i < a ? -1 : i > a ? 1 : 0 : i < a ? 1 : i > a ? -1 : 0
-						/*
-						var i, a;
-						if("name" === n.sortCharType)
-						{
-							var o = e[n.sortCharType][r],
-								s = t[n.sortCharType][r];
-							i = o.split(" ")[1] || o.replaceAll("-", " "), a = s.split(" ")[1] || s.replaceAll("-", " ")
-						}
-						else i = e[n.sortCharType][r], a = t[n.sortCharType][r];
-						return (i = i.toLowerCase(), a = a.toLowerCase(), n.order) ? i < a ? -1 : i > a ? 1 : 0 : i < a ? 1 : i > a ? -1 : 0
-						*/
 					},
 					v = function(e, t)
 					{
@@ -6217,7 +6205,7 @@
 					{
 						displayName: "SideBar__Container",
 						componentId: "sc-v5z5y3-0"
-					})(["", " flex-shrink:0;background-color:", ";overflow-y:scroll;width:5rem;height:100%;z-index:4;@media screen and (max-width:768px){display:none;}"], function(e)
+					})(["", " flex-shrink:0;background-color:", ";overflow-y:scroll;width:5rem;height:100%;z-index:400;@media screen and (max-width:768px){display:none;}"], function(e)
 					{
 						return e.theme.common.flexBox(
 						{
@@ -6264,7 +6252,7 @@
 					{
 						displayName: "SideBar__BgDiv",
 						componentId: "sc-v5z5y3-5"
-					})(["position:absolute;margin-top:3.5rem;width:100%;height:100%;background-color:", ";z-Index:3;opacity:0;transition:opacity 0.25s ease-in-out;"], function(e)
+					})(["position:absolute;margin-top:3.5rem;width:100%;height:100%;background-color:", ";z-index:300;opacity:0;transition:opacity 0.25s ease-in-out;"], function(e)
 					{
 						return e.theme.color.rgba0_0_0_6
 					}),

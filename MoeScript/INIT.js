@@ -232,7 +232,6 @@ if(缩放比例 >= 10 && 缩放比例 <= 20)缩放比例 += 'px'
 else 缩放比例 = null;
 function setting(SETTING)
 {
-	if(!SETTING['排序方式'])SETTING['排序方式'] = 'name'
 	if(!SETTING['顶部标题'])SETTING['顶部标题'] = 'MoeTalk'
 	if(!SETTING['高度限制'])SETTING['高度限制'] = 16384
 	if(!SETTING['宽度限制'])SETTING['宽度限制'] = 500

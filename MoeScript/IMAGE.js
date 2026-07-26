@@ -491,20 +491,25 @@ function mt_capture(清晰度,生成图片,标题)
 	}
 	callback()
 }
-async function 测试截图()
+async function 测试截图(testHeight)
 {
+	let height = $('.元素列表').height()
+	if(!testHeight || isNaN(testHeight))testHeight = height
+	$('.元素列表').height(testHeight)
 	let img = await html2canvas($('.元素列表')[0],
 	{
 		logging: !1,
 		allowTaint: !0,
 		useCORS: !0,
-		scale: 1.1,
+		scale: 1,
 		compress: true,
 		embedFonts: true//snapdom
 	})
 	img.toBlob(function(blob)
 	{
-		导出截图('test',blob,1)
+		$('.元素列表').height(height)
+		if(blob)alert('截图成功\n长度：'+testHeight)
+		else alert('截图失败\n长度：'+testHeight)
 	},mt_settings['图片格式'] || 'image/png')
 }
 if(客户端)

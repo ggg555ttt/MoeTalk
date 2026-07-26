@@ -229,6 +229,11 @@ function 内部下载(filename, data, type)
 }
 async function 保存文件(filename, data, type = 2)
 {
+	if(!data)
+	{
+		alert(`文件 ${filename} 保存失败!`)
+		return null;
+	}
 	if(typeof data === 'object' && !data.size)data = JSON.stringify(data)
 	if(typeof data === 'string')data = new Blob([data],{type: 'application/octet-stream'});
 	if(filename === '用户数据/moetalkStorage/chats.json')localStorage['chats'] = data
@@ -279,7 +284,7 @@ async function 保存文件(filename, data, type = 2)
 		{
 			alert(`文件名：<p class='red'>${path+filename}</p>路径不存在或没有读写权限！`,{title: '下载失败！'})
 		}
-		return ''
+		return null
 	}
 	if(客户端 === 'HTML5+')
 	{
@@ -633,7 +638,7 @@ async function 导出截图(filename,data,num)
 	if(!正在截图)
 	{
 		data = await blobToBase64(data)
-		截图区域.html(`<img src='data:${mt_settings['图片格式'] || 'image/png'};base64,${data}' style='width:100%;'>`)
+		$('.截图区域').html(`<img src='data:${mt_settings['图片格式'] || 'image/png'};base64,${data}' style='width:100%;'>`)
 	}
 	$('.截图数量').text(imageArr.length)
 }

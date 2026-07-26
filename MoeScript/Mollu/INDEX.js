@@ -812,11 +812,10 @@
 									className: "medium",
 									onClick: function()
 									{
-										//*储存分类和排序方式
-										mt_settings['排序方式'] = u
+										//*储存分类
 										if(saveClub)saveclub()
 										custom_chars(mt_char,mt_schar)
-										//*储存分类和排序方式
+										//*储存分类
 										t(), a(
 										{
 											sortCharType: u

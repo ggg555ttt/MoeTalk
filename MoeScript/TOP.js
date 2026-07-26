@@ -708,10 +708,10 @@ $("body").on('click',"#清除缓存",function()
 $("body").on('click',"#实验选项",function()
 {
 	let 调试模式 = localStorage['调试模式'] ? 'checked' : ''
-	let str = ''
-	str += `开启调试模式（测试）：<input class="调试模式" ${调试模式} type="checkbox"/>\n`
-	str += '提交后请刷新页面\n'
-	str += '代码注入（测试）：<textarea style="width:100%;height:20rem;line-height:1.42;"></textarea>\n'
+	let str = '<i class="red">此处为开发者测试专用</i>\n'
+	str += `开启调试模式：<input class="调试模式" ${调试模式} type="checkbox"/>\n`
+	str += `<button onclick="测试截图(parseInt($('#测试截图').val()))">测试截图</button>长度：<input id="测试截图">\n`
+	str += '代码注入：<textarea style="width:100%;height:20rem;line-height:1.42;"></textarea>\n'
 	let config = {}
 	config.id = Math.random().toString().replace('0.','')
 	config.title = '开发者选项'
