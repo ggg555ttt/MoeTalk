@@ -5,16 +5,16 @@ async function 删除文件(path)
 	if(客户端 === 'HTML5+')
 	{
 		path = '_doc/'+path
-		return new Promise(function(resolve, reject)
+		return new Promise(function(resolve)
 		{
 			plus.io.resolveLocalFileSystemURL(path, function (entry)
 			{
-				if(entry.isFile)entry.remove(()=>resolve(true),reject);//删除文件
-				else entry.removeRecursively(()=>resolve(true),reject);//删除目录
+				if(entry.isFile)entry.remove(()=>resolve(true),resolve(null));//删除文件
+				else entry.removeRecursively(()=>resolve(true),resolve(null));//删除目录
 			},function(e)// code 10 = NOT_FOUND_ERR，目标不存在时做幂等处理
 			{
 				if(e && e.code === 10)resolve(null);
-				else reject(e);
+				else resolve(null);
 			});
 		});
 	}
