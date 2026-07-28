@@ -11,6 +11,7 @@ var 羁绊背景 = href+'MoeData/Ui/Favor_Schedule_Deco.webp'
 var 回复背景 = href+'MoeData/Ui/Popup_Img_Deco_2.webp'
 var 错误图片 = href+'MoeData/Ui/error.webp'
 var 下载文件 = {}
+var 截图长度 = isNaN(parseInt(localStorage['截图长度'])) ? 16384 : parseInt(localStorage['截图长度'])
 async function IMAGE_error(image,play)
 {
 	let src,url,img
@@ -209,7 +210,7 @@ function 截图数量(num)
 	{
 		height = $(this).outerHeight()+height
 		height2 = $(this).next().outerHeight()
-		if((height+height2+16)*num > mt_settings['高度限制'])
+		if((height+height2+16)*num > 截图长度)
 		{
 			i++
 			height = 0
@@ -337,7 +338,7 @@ function 截屏预览(S)
 		// {
 		// 	消息[0].outerHTML = makeMessage(json[end].type,json[end],end,'area')
 		// }
-		if(length > mt_settings['高度限制'] || 消息.attr('title') === 'red' || 平均)//
+		if(length > 截图长度 || 消息.attr('title') === 'red' || 平均)//
 		{
 			if(['chat','image'].indexOf(json[end].type) > -1 && json[end].sCharacter.no != 0 && !isfirst(end,json))
 			{
@@ -491,12 +492,16 @@ function mt_capture(清晰度,生成图片,标题)
 	}
 	callback()
 }
-async function 测试截图(testHeight)
+async function 测试截图(height,width)
 {
-	let height = $('.元素列表').height()
-	if(!testHeight || isNaN(testHeight))testHeight = height
-	$('.元素列表').height(testHeight)
-	let img = await html2canvas($('.元素列表')[0],
+	const 测试区域 = $('.元素列表')
+	const 原始长度 = parseInt(测试区域.height())
+	const 原始宽度 = parseInt(测试区域.width())
+	if(!height)height = 原始长度
+	if(!width)width = 原始宽度
+	测试区域.height(height)
+	测试区域.width(width)
+	let img = await html2canvas(测试区域[0],
 	{
 		logging: !1,
 		allowTaint: !0,
@@ -507,10 +512,56 @@ async function 测试截图(testHeight)
 	})
 	img.toBlob(function(blob)
 	{
-		$('.元素列表').height(height)
-		if(blob)alert('截图成功\n长度：'+testHeight)
-		else alert('截图失败\n长度：'+testHeight)
+		测试区域.height(原始长度)
+		测试区域.width(原始宽度)
+		blob ? test(true,height,width) : test(false,height,width)
 	},mt_settings['图片格式'] || 'image/png')
+}
+async function 长度估算()
+{
+	INIT_loading(1)
+	alert('<i class="red 长度估算">长度估算中。。。请稍等</i>',{title:'截图长度估算'})
+	const 截图测试 = async function(height)
+	{
+		const 测试区域 = $('#截图测试>div')
+		测试区域.height(height)
+		let img = await html2canvas(测试区域[0],
+		{
+			logging: !1,
+			allowTaint: !0,
+			useCORS: !0,
+			scale: 1,
+			compress: true,
+			embedFonts: true//snapdom
+		})
+		return new Promise(function(resolve)
+		{
+			img.toBlob(function(blob)
+			{
+				测试区域.height(1)
+				blob ? resolve(true) : resolve(false)
+			},mt_settings['图片格式'] || 'image/png')
+		});
+	}
+	let low = 1;
+	let high = 100000;
+	let answer = null;
+
+	while (low <= high)
+	{
+		const mid = Math.floor((low + high) / 2);
+		const result = await 截图测试(mid);
+
+		if(result)// mid 可能是答案，也可能答案在右边
+		{
+			answer = mid;
+			low = mid + 1;
+		}
+		else high = mid - 1;// mid 太大了，答案一定在左边
+	}
+	$('.长度估算').text(`最大截图长度为：${answer}\n仅供参考`)
+	INIT_loading(0)
+	return answer;
 }
 if(客户端)
 {

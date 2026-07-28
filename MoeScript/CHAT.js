@@ -113,10 +113,22 @@ function mt_emojis(S,mode)
 	let PageCount = 0
 	if(type === 'origin')
 	{
-		let arr
-		if(角色信息.info[id])arr = 角色信息.info[id][1]
-		if(mode === 'CharFace' && arr)
+		let arr = [[]]
+		if(mode === 'CharFace' && 角色信息.info[id])
 		{
+			if(mt_settings['整合差分'])
+			{
+				foreach(角色信息.info[id][1],function(k,v)
+				{
+					if(typeof v[0][3] !== 'number')arr[0] = [...arr[0],...v]//官方差分
+					else//拓展差分
+					{
+						if(k === 0)arr = []
+						arr.push(v)
+					}
+				})
+			}
+			else arr = 角色信息.info[id][1]
 			PageCount = arr.length//
 			if(PageIndex < 0)PageIndex = EMOJI.pages[id][type] = PageCount-1
 			if(isNaN(PageIndex) || PageIndex >= PageCount)PageIndex = EMOJI.pages[id][type] = 0

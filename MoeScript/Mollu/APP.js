@@ -5899,6 +5899,16 @@
 											className: 'bold',
 											style: {color: OldTalk ? 'black' : 'blue'},
 											children: 客户端 ? 客户端[0].toUpperCase() : 'B'
+										}), (0, O.jsx)('div',
+										{
+											id: '截图测试',
+											style:
+											{
+												width: '1px',
+												height: '1px',
+												overflow: 'hidden'
+											},
+											children: (0, O.jsx)('div',{})
 										})],
 										onClick: function()
 										{

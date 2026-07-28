@@ -233,7 +233,6 @@ else 缩放比例 = null;
 function setting(SETTING)
 {
 	if(!SETTING['顶部标题'])SETTING['顶部标题'] = 'MoeTalk'
-	if(!SETTING['高度限制'])SETTING['高度限制'] = 16384
 	if(!SETTING['宽度限制'])SETTING['宽度限制'] = 500
 	if(!SETTING['人物改名'])SETTING['人物改名'] = {}
 	if(!SETTING['社团列表'])SETTING['社团列表'] = {}
@@ -402,7 +401,7 @@ function INIT_state(num)
 	if($('.nowChapter').length)return
 	if(!num)num = 1.1
 	let height = parseInt($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num)
-	if(chats.length > 300)//if(height > mt_settings['高度限制'])//检测聊天框宽度
+	if(chats.length > 300)
 	{
 		$("#size").text(`长度: ${height}\n数据: ${chats.length}`).css('background-color','red');//显示警告
 	}

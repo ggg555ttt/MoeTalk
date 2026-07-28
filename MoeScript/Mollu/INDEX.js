@@ -2999,7 +2999,8 @@
 												if(角色信息.info[id] && !EMOJI.custom.io)
 												{
 													if(typeof 角色信息.info[id][1][EMOJI.pagecount-1][0][3] == 'number')color = 'green'
-													if(typeof 角色信息.info[id][1][k][0][3] == 'number')color = 'red'
+													if(mt_settings['整合差分'] && typeof 角色信息.info[id][1].slice(0-k)[0][0][3] == 'number')color = 'red'
+													else if(typeof 角色信息.info[id][1][k][0][3] == 'number')color = 'red'
 												}
 												return (0, m.jsx)('option',
 												{
