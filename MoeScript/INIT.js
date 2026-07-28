@@ -403,11 +403,11 @@ function INIT_state(num)
 	let height = parseInt($(".Talk__CContainer-sc-1uzn66i-1").outerHeight()*num)
 	if(chats.length > 300)
 	{
-		$("#size").text(`长度: ${height}\n数据: ${chats.length}`).css('background-color','red');//显示警告
+		$("#size").text(`高度: ${height}\n数据: ${chats.length}`).css('background-color','red');//显示警告
 	}
 	else
 	{
-		$("#size").text(`长度: ${height}\n数据: ${chats.length}`).css('background-color','');//隐藏警告
+		$("#size").text(`高度: ${height}\n数据: ${chats.length}`).css('background-color','');//隐藏警告
 	}
 	return height
 }
@@ -737,7 +737,7 @@ async function 处理缓存(DB,C,K,V)
 		const headers = new Headers(//显式声明 Headers
 		{	
 			'Content-Type': V.type || 'application/octet-stream',//从blob获取类型，如果没有则给个默认值
-			'Content-Length': V.size.toString()//明确写入Content-Length，解决长度为 0 的问题
+			'Content-Length': V.size.toString()//明确写入Content-Length，解决大小为 0 的问题
 		});
 		await cache.put(file, new Response(V, {headers: headers}));
 		return file;
@@ -770,7 +770,7 @@ async function 处理文件(DB,C,K,V)
 {
 	if(!本地)
 	{
-		if(K === 'chats' && C === 'Ss')localStorage['chats'] = JSON.stringify(V)
+		if(K === 'chats' && C === 'Ss')localStorage['MMT'] = JSON.stringify(V)
 		return await 处理缓存(DB,C,K,V);
 	}
 	if(C[1] === 's' && window.保存文件 && V)

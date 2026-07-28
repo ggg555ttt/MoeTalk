@@ -11,7 +11,7 @@ var 羁绊背景 = href+'MoeData/Ui/Favor_Schedule_Deco.webp'
 var 回复背景 = href+'MoeData/Ui/Popup_Img_Deco_2.webp'
 var 错误图片 = href+'MoeData/Ui/error.webp'
 var 下载文件 = {}
-var 截图长度 = isNaN(parseInt(localStorage['截图长度'])) ? 16384 : parseInt(localStorage['截图长度'])
+var 截图高度 = isNaN(parseInt(localStorage['截图高度'])) ? 16384 : parseInt(localStorage['截图高度'])
 async function IMAGE_error(image,play)
 {
 	let src,url,img
@@ -138,7 +138,7 @@ function compress(base64Img,type = 'head',mode = 'add',length = 0)
 			if(w > h)x = (w-h)/2,l = h,h = w;//竖图上下居中
 			else y = (h-w)/2,l = w,w = h;//横图左右居中
 			n = mt_settings['头像尺寸'] ? mt_settings['头像尺寸'] : 300;
-			a = Math.min(1, n / w);(w *= a), (h *= a);//最大长度不得超过300
+			a = Math.min(1, n / w);(w *= a), (h *= a);//最大高度不得超过300
 		}
 
 		//开始画压缩图
@@ -210,7 +210,7 @@ function 截图数量(num)
 	{
 		height = $(this).outerHeight()+height
 		height2 = $(this).next().outerHeight()
-		if((height+height2+16)*num > 截图长度)
+		if((height+height2+16)*num > 截图高度)
 		{
 			i++
 			height = 0
@@ -316,7 +316,7 @@ function 截屏预览(S)
 	{
 		json.push({...v,...{}})
 	})
-	let 平均 = false//,平均数 = 截图数量(S),总长度 = INIT_state(S)+((平均数-1)*16*S),平均长度 = Math.ceil(总长度/平均数)
+	let 平均 = false//,平均数 = 截图数量(S),总高度 = INIT_state(S)+((平均数-1)*16*S),平均高度 = Math.ceil(总高度/平均数)
 	if($(".dels:checked").length)//区域截图
 	{
 		json = []
@@ -338,7 +338,7 @@ function 截屏预览(S)
 		// {
 		// 	消息[0].outerHTML = makeMessage(json[end].type,json[end],end,'area')
 		// }
-		if(length > 截图长度 || 消息.attr('title') === 'red' || 平均)//
+		if(length > 截图高度 || 消息.attr('title') === 'red' || 平均)//
 		{
 			if(['chat','image'].indexOf(json[end].type) > -1 && json[end].sCharacter.no != 0 && !isfirst(end,json))
 			{
@@ -354,7 +354,7 @@ function 截屏预览(S)
 			style = 平均 = false
 			// chats[end-1].is_breaking = true
 		}
-		//if(length > 平均长度)平均 = true
+		//if(length > 平均高度)平均 = true
 		if(end === json.length-1)
 		{
 			imageArr.push({start: start,end: json.length,index: imageArr.length+1,chats: json.slice(start,json.length),style})
@@ -492,13 +492,14 @@ function mt_capture(清晰度,生成图片,标题)
 	}
 	callback()
 }
-async function 测试截图(height,width)
+async function 测试截图()
 {
+	INIT_loading(1)
 	const 测试区域 = $('.元素列表')
-	const 原始长度 = parseInt(测试区域.height())
+	const 原始高度 = parseInt(测试区域.height())
 	const 原始宽度 = parseInt(测试区域.width())
-	if(!height)height = 原始长度
-	if(!width)width = 原始宽度
+	const height = parseInt($('#测试高度').val()) || 原始高度
+	const width = parseInt($('#测试宽度').val()) || 原始宽度
 	测试区域.height(height)
 	测试区域.width(width)
 	let img = await html2canvas(测试区域[0],
@@ -512,18 +513,30 @@ async function 测试截图(height,width)
 	})
 	img.toBlob(function(blob)
 	{
-		测试区域.height(原始长度)
+		测试区域.height(原始高度)
 		测试区域.width(原始宽度)
-		blob ? test(true,height,width) : test(false,height,width)
+		alert((blob ? '成功！' : '失败。。。')+'\nH：'+height+' W：'+width)
+		INIT_loading(0)
 	},mt_settings['图片格式'] || 'image/png')
 }
-async function 长度估算()
+$("body").on('click',"#高度估算",function()
+{ 
+	let str = '<div id="截图测试"style="width:1px;height:1px;overflow:hidden;"><div></div></div>'
+	str += '测试宽度<input id="测试宽度"type="number"value="550">\n'
+	str += '<button onclick="高度估算()">点击估算</button>\n'
+	str += '<span></span>\n'
+	str += '<i class="red 高度估算"></i>\n'
+	alert(str,{title:'截图高度估算'})
+});
+async function 高度估算()
 {
-	INIT_loading(1)
-	alert('<i class="red 长度估算">长度估算中。。。请稍等</i>',{title:'截图长度估算'})
+	$('.高度估算').prev().text('高度估算中。。。请耐心等待')
 	const 截图测试 = async function(height)
 	{
-		const 测试区域 = $('#截图测试>div')
+		const 测试区域 = $('#截图测试>div')//.元素列表
+		const 原始高度 = parseInt(测试区域.height())
+		const 原始宽度 = parseInt(测试区域.width())
+		const width = parseInt($('#测试宽度').val()) || 原始宽度
 		测试区域.height(height)
 		let img = await html2canvas(测试区域[0],
 		{
@@ -538,7 +551,8 @@ async function 长度估算()
 		{
 			img.toBlob(function(blob)
 			{
-				测试区域.height(1)
+				测试区域.height(原始高度)
+				测试区域.width(原始宽度)
 				blob ? resolve(true) : resolve(false)
 			},mt_settings['图片格式'] || 'image/png')
 		});
@@ -556,10 +570,16 @@ async function 长度估算()
 		{
 			answer = mid;
 			low = mid + 1;
+			$('.高度估算').text(`测试高度：${mid} 成功`)
 		}
-		else high = mid - 1;// mid 太大了，答案一定在左边
+		else
+		{
+			high = mid - 1;// mid 太大了，答案一定在左边
+			$('.高度估算').text(`测试高度：${mid} 失败`)
+		}
 	}
-	$('.长度估算').text(`最大截图长度为：${answer}\n仅供参考`)
+	$('.高度估算').prev().text('')
+	$('.高度估算').text(`最大截图高度为：${answer}\n仅供参考`)
 	INIT_loading(0)
 	return answer;
 }

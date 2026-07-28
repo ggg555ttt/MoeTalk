@@ -53,8 +53,8 @@ async function 加载数据(first = null,MMT = null)
 //加载消息
 	if(!MMT)
 	{
-		MMT = await 数据操作('Sg','chats') || []
-		if(!MMT.length)try{MMT = JSON.parse(localStorage['chats'])}catch{}
+		if(!localStorage['MMT'])MMT = await 数据操作('Sg','chats') || []
+		else MMT = JSON.parse(localStorage['MMT'])
 	}
 
 	otherChats = []
@@ -457,7 +457,6 @@ $("body").on('click',"#设置选项",function()
 	str += "<button id='截图设置'>截图/下载设置</button> "
 	str += "<button id='布局设置'>标题/布局设置</button> "
 	str += "<button id='操作设置'>软件操作设置</button> "
-	str += "<button id='差分设置'>差分设置</button> "
 
 	str += "<br><br><button onclick='语言选项()'>语言选项</button> "
 	str += "<button id='虚拟滚动'>虚拟滚动（测试）</button> "
@@ -467,23 +466,10 @@ $("body").on('click',"#设置选项",function()
 	str += "<div style='display:flex;justify-content:center;'><h1><a class='bold'style='text-decoration:underline;'href='setting.html'>更多设置</a></h1></div>\n"
 	alert(str,config)
 });
-$("body").on('click',"#差分设置",function()
-{
-	let str = '<input type="checkbox"class="整合差分">官方差分单页显示\n'
-	let config = {}
-	config.title = '差分设置'
-	config.yes = function()
-	{
-		if($('.整合差分').prop('checked'))mt_settings['整合差分'] = true
-		else delete mt_settings['整合差分']
-		saveStorage('设置选项',mt_settings,'local')
-	}
-	alert(str,config)
-	if(mt_settings['整合差分'])$('.整合差分').prop('checked',true)
-});
 $("body").on('click',"#字体设置",function()
 {
 	let str = '<input type="checkbox"class="加载字体">加载字体\n'
+	str += '<input type="checkbox"class="整合差分">官方差分单页显示\n'
 	str += '字体和图片大小请在【MMT风格自定义】中修改'
 	let config = {}
 	config.title = '字体设置'
@@ -491,11 +477,14 @@ $("body").on('click',"#字体设置",function()
 	{
 		mt_settings['禁止字体'] = true
 		if($('.加载字体').prop('checked'))delete mt_settings['禁止字体']
+		if($('.整合差分').prop('checked'))mt_settings['整合差分'] = true
+		else delete mt_settings['整合差分']
 		saveStorage('设置选项',mt_settings,'local')
 		加载字体()
 	}
 	alert(str,config)
 	if(!mt_settings.禁止字体)$('.加载字体').prop('checked',true)
+	if(mt_settings['整合差分'])$('.整合差分').prop('checked',true)	
 });
 $("body").on('click',"#布局设置",function()
 {
@@ -646,7 +635,7 @@ $("body").on('click',"#截图设置",function()
 	str += '\n'
 	str += `<input class='打包下载' type='checkbox' ${mt_settings['打包下载'] ? 'checked' : ''}>图片打包下载（多张图片整合为ZIP）\n`
 	str += `图片宽度：（默认500，上限需测试）\n<input class='宽度限制' type="number" value="${mt_settings['宽度限制']}">\n`
-	str += `图片最大高度：（默认16384，上限需测试）\n<input class='截图长度' type="number"><button onclick="长度估算()">最大长度估算</button>\n`
+	str += `图片最大高度：（默认16384，上限需测试）\n<input class='截图高度' type="number"><button id="高度估算">最大高度估算</button>\n`
 	str += `图片下载格式：\n<select class='图片格式' style='font-size: 1.5rem;'>${ext}</select>\n`
 	str += `截图工具：\n<select class='截图工具' style='font-size: 1.5rem;'>${option}</select>\n`
 
@@ -658,15 +647,15 @@ $("body").on('click',"#截图设置",function()
 	{
 		mt_settings['打包下载'] = $('.打包下载').prop('checked')
 		mt_settings['宽度限制'] = $('.宽度限制').val() || 500
-		if($('.截图长度').val() > 0)
+		if($('.截图高度').val() > 0)
 		{
-			截图长度 = $('.截图长度').val()
-			localStorage['截图长度'] = 截图长度
+			截图高度 = $('.截图高度').val()
+			localStorage['截图高度'] = 截图高度
 		}
 		else
 		{
-			截图长度 = 16384
-			delete localStorage['截图长度']
+			截图高度 = 16384
+			delete localStorage['截图高度']
 		}
 		mt_settings['截图工具'] = $('.截图工具').val()
 		mt_settings['图片格式'] = $('.图片格式').val()
@@ -678,7 +667,7 @@ $("body").on('click',"#截图设置",function()
 		saveStorage('设置选项',mt_settings,'local')
 	}
 	alert(str,config)
-	$('.截图长度').val(截图长度)
+	$('.截图高度').val(截图高度)
 	$('.隐藏前缀').prop('checked',mt_settings['隐藏前缀'])
 	$('.流式下载').prop('checked',mt_settings['流式下载'])
 	$(`.截图工具 option[value="${mt_settings['截图工具']}"]`).prop('selected', true);
@@ -735,6 +724,7 @@ $("body").on('click',"#实验选项",function()
 	let 调试模式 = localStorage['调试模式'] ? 'checked' : ''
 	let str = '<i class="red">此处为开发者测试专用</i>\n'
 	str += `开启调试模式：<input class="调试模式" ${调试模式} type="checkbox"/>\n`
+	str += `<button onclick='测试截图()'>测试截图</button>宽：<input id='测试宽度'type='number'>高：<input id='测试高度'type='number'>\n`
 	str += '代码注入：<textarea style="width:100%;height:20rem;line-height:1.42;"></textarea>\n'
 	let config = {}
 	config.id = Math.random().toString().replace('0.','')
@@ -910,7 +900,7 @@ $('body').on('click',"#size",async function()
 		if(!chat.content)continue;
 		if(chat.type !== 'image')onum += chat.content.length
 	}
-	str += `每张截图长度上限为${s}${截图长度}${ss}，建议手动设置${s}切割点${ss}或测试极限长度\n`
+	str += `每张截图高度上限为${s}${截图高度}${ss}，建议手动设置${s}切割点${ss}或测试极限高度\n`
 	str += `数据量达到${s}数百甚至上千${ss}可能会造成操作卡顿或崩溃，请以设备性能为准\n`
 	str += `当前分支总字数统计：${s}${num}${ss}\n`
 	str += `其它分支总字数统计：${s}${onum}${ss}(共${otherChats.length}条数据)\n`

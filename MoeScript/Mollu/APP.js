@@ -5899,16 +5899,6 @@
 											className: 'bold',
 											style: {color: OldTalk ? 'black' : 'blue'},
 											children: 客户端 ? 客户端[0].toUpperCase() : 'B'
-										}), (0, O.jsx)('div',
-										{
-											id: '截图测试',
-											style:
-											{
-												width: '1px',
-												height: '1px',
-												overflow: 'hidden'
-											},
-											children: (0, O.jsx)('div',{})
 										})],
 										onClick: function()
 										{
@@ -7482,7 +7472,7 @@
 				{
 					displayName: "Loading__MainLoading",
 					componentId: "sc-cfft3t-0"
-				})(["position:absolute;width:100%;height:100%;z-index:9999;background-color:rgb(139,187,233);transition:opacity 0.5s ease-in-out;margin:auto;background:rgb(0,0,0,0.4);"]),
+				})(["position:absolute;width:100%;height:100%;z-index:900;background-color:rgb(139,187,233);transition:opacity 0.5s ease-in-out;margin:auto;background:rgb(0,0,0,0.4);"]),
 				tT = h.ZP.div.withConfig(
 				{
 					displayName: "Loading__Flex",

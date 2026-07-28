@@ -2023,7 +2023,7 @@
 										{
 											className:'bold red',
 											children: 选择列表.length || chats.length
-										}), '长度：', (0, m.jsx)("span",
+										}), '高度：', (0, m.jsx)("span",
 										{
 											className:'INDEX_imageLength bold red',
 											children: INIT_state(S)
