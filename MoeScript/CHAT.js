@@ -113,9 +113,9 @@ function mt_emojis(S,mode)
 	let PageCount = 0
 	if(type === 'origin')
 	{
-		let arr = [[]]
-		if(mode === 'CharFace' && 角色信息.info[id])
+		if(mode === 'CharFace' && 角色信息.info[id] && 角色信息.info[id][1])
 		{
+			let arr = [[]]
 			if(mt_settings['整合差分'])
 			{
 				foreach(角色信息.info[id][1],function(k,v)
@@ -172,7 +172,6 @@ function mt_emojis(S,mode)
 						else for(let i=0;i<=index;i++)EMOJI.images.push(`${path}/${i}`)
 					})
 				}
-				
 			})
 		}
 		if(mode === 'Emoji')
