@@ -183,7 +183,6 @@
 							className: '锁定焦点',
 							style:
 							{
-								zIndex: 200,
 								flexGrow: "1",
 								overflow: "hidden",
 								margin: "0",
@@ -1230,7 +1229,7 @@
 					return (0, m.jsx)(ea.Xf,
 					{
 						id: 'custom-char',
-						style: {zIndex: 300},
+						style: {zIndex: 400},
 						onDoubleClick: function()
 						{
 							char_info = []
@@ -2707,7 +2706,7 @@
 								title: "Image Download",
 								onClick: async function()
 								{
-									$$('#download_to_image').css({zIndex:300,opacity:'',visibility:''})
+									// $$('#download_to_image').css({zIndex:400,opacity:'',visibility:''})
 									if(正在截图)y(!0)
 									else
 									{
@@ -2839,7 +2838,7 @@
 							children: (0, m.jsx)(ea.Xf,
 							{
 								id:'emoji',//@
-								style: {zIndex: 300},
+								style: {zIndex: 400},
 								className: n ? "visible medium" : "medium",
 								onDoubleClick: function()
 								{

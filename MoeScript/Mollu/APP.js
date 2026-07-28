@@ -6205,7 +6205,7 @@
 					{
 						displayName: "SideBar__Container",
 						componentId: "sc-v5z5y3-0"
-					})(["", " flex-shrink:0;background-color:", ";overflow-y:scroll;width:5rem;height:100%;z-index:400;@media screen and (max-width:768px){display:none;}"], function(e)
+					})(["", " flex-shrink:0;background-color:", ";overflow-y:scroll;width:5rem;height:100%;z-index:200;@media screen and (max-width:768px){display:none;}"], function(e)
 					{
 						return e.theme.common.flexBox(
 						{
@@ -6252,7 +6252,7 @@
 					{
 						displayName: "SideBar__BgDiv",
 						componentId: "sc-v5z5y3-5"
-					})(["position:absolute;margin-top:3.5rem;width:100%;height:100%;background-color:", ";z-index:300;opacity:0;transition:opacity 0.25s ease-in-out;"], function(e)
+					})(["position:absolute;margin-top:3.5rem;width:100%;height:100%;background-color:", ";z-index:100;opacity:0;transition:opacity 0.25s ease-in-out;"], function(e)
 					{
 						return e.theme.color.rgba0_0_0_6
 					}),
@@ -7472,7 +7472,7 @@
 				{
 					displayName: "Loading__MainLoading",
 					componentId: "sc-cfft3t-0"
-				})(["position:absolute;width:100%;height:100%;z-index:900;background-color:rgb(139,187,233);transition:opacity 0.5s ease-in-out;margin:auto;background:rgb(0,0,0,0.4);"]),
+				})(["position:absolute;width:100%;height:100%;z-index:9999;background-color:rgb(139,187,233);transition:opacity 0.5s ease-in-out;margin:auto;background:rgb(0,0,0,0.4);"]),
 				tT = h.ZP.div.withConfig(
 				{
 					displayName: "Loading__Flex",
@@ -10129,7 +10129,7 @@
 					{
 						displayName: "popup__MyModal",
 						componentId: "sc-1ardd6p-0"
-					})(["", ";visibility:hidden;user-select:none;position:fixed;top:0;left:0;width:100%;height:100%;overflow:auto;background-color:", ";z-index:100;opacity:0;transition:opacity 0s;&.visible{visibility:visible;opacity:1;}"], function(e)
+					})(["", ";visibility:hidden;user-select:none;position:fixed;top:0;left:0;width:100%;height:100%;overflow:auto;background-color:", ";z-index:300;opacity:0;transition:opacity 0s;&.visible{visibility:visible;opacity:1;}"], function(e)
 					{
 						return e.theme.common.flexBox(
 						{

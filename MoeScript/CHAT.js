@@ -885,6 +885,7 @@ $("body").on('click',".编辑界面 .确认",function()
 });
 $("body").on('click',".编辑界面 .取消",function()
 {
+	$('.锁定焦点').slice(1,3).css('z-index','')
 	$('.编辑界面').removeClass('visible')
 	$('.内容界面').show()
 	$('.预览界面').hide()
@@ -1011,6 +1012,7 @@ $("body").on('click',".预览模式",async function()
 function 编辑消息(index)
 {
 	chatIndex = index
+	$('.锁定焦点').slice(1,3).css('z-index','300')
 	$('.编辑界面').addClass('visible')//显示编辑界面
 	$(".预览模式").css('color','')
 	$(".操作模式").text('编辑')
@@ -1248,10 +1250,12 @@ $("body").on('click',".INDEX_EmojiIfno",function()
 //差分信息
 var CHAT_HeadList = false
 var CHAT_Style = false
-
-// 编辑界面 100
-// 角色列表 200
-// 表情界面 300
-// 角色编辑 300
-// 截图界面 300
+// 加载界面 9999
 // 通知界面 1000
+// 角色编辑 400
+// 表情界面 400
+// 截图界面 400
+// 编辑界面 300
+// 侧边按钮 200
+// 遮罩界面 100
+// 角色列表 300

@@ -533,7 +533,7 @@ async function 高度估算()
 	$('.高度估算').prev().text('高度估算中。。。请耐心等待')
 	const 截图测试 = async function(height)
 	{
-		const 测试区域 = $('#截图测试>div')//.元素列表
+		const 测试区域 = $(设备信息.device.isApple ? '.元素列表' : '#截图测试>div')
 		const 原始高度 = parseInt(测试区域.height())
 		const 原始宽度 = parseInt(测试区域.width())
 		const width = parseInt($('#测试宽度').val()) || 原始宽度
