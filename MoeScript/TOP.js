@@ -472,7 +472,7 @@ $("body").on('click',"#字体设置",function()
 	str += '<input type="checkbox"class="整合差分">官方差分单页显示\n'
 	str += '字体和图片大小请在【MMT风格自定义】中修改'
 	let config = {}
-	config.title = '字体设置'
+	config.title = '字体/图片设置'
 	config.yes = function()
 	{
 		mt_settings['禁止字体'] = true
