@@ -4,7 +4,7 @@ pause = true
 skip = false
 if(localStorage['调试模式'])var vConsole = new window.VConsole();
 
-var ALERT = {}
+var ALERT = {confirm:{},cancel:{}}
 window.alert = function(text = '',config = {})
 {
 	if(config.show)$('.alert').removeClass('visible')
@@ -14,6 +14,7 @@ window.alert = function(text = '',config = {})
 	config.confirm = config.confirm || '确认'
 	config.style = config.style || ''
 	config.yes = config.yes || null
+	config.no = config.no || null
 	$(`.ALERT_${config.id}`).remove()
 let style = `style="-webkit-user-select: text;user-select: text; line-height: 125%; white-space: pre-wrap; word-break: break-word; text-align: left; width: 100%; font-family: inherit; overflow: scroll;${config.style}"`
 let html = 
@@ -32,29 +33,34 @@ let html =
 		</div>
 	</div>
 </div>`
-	ALERT[config.id] = config.yes
+	ALERT.confirm[config.id] = config.yes
+	ALERT.cancel[config.id] = config.no
 	$('.弹窗').append(html)
 }
-$('body').on('click','.cancel',function()
-{
-	let id = $(this).attr('alt')
-	delete ALERT[id]
-	$(`.ALERT_${id}`).remove()
-	$('.alert').last().addClass('visible')
-});
 $('body').on('click','.confirm',function()
 {
 	let id = $(this).attr('alt')
-	if(ALERT[id])ALERT[id]()
+	delete ALERT.cancel[id]
+	if(ALERT.confirm[id])ALERT.confirm[id]()
 	$(this).prev().click()
 });
+$('body').on('click','.cancel',function()
+{
+	let id = $(this).attr('alt')
+	delete ALERT.confirm[id]
+	if(ALERT.cancel[id])ALERT.cancel[id]()
+	$(`.ALERT_${id}`).remove()
+	$('.alert').last().addClass('visible')
+});
+
 async function 加载数据(first = null,MMT = null)
 {
 //加载消息
 	if(!MMT)
 	{
-		if(!localStorage['MMT'])MMT = await 数据操作('Sg','chats') || []
-		else MMT = JSON.parse(localStorage['MMT'])
+		try{MMT = JSON.parse(localStorage['MMT'])}
+		catch{MMT = null}
+		if(!MMT)MMT = await 数据操作('Sg','chats') || []
 	}
 
 	otherChats = []
@@ -142,11 +148,8 @@ var 网络字体 = `@import url(https://moetalk.xiyihan.cn/MoeData/Fonts/Blueaka
 var 本地字体 = `@font-face{font-family:Blueaka;src:url(./MoeData/Fonts/Blueaka.woff2)}body,input,button,textarea{font-family:Cyrillic,Blueaka;}`
 async function 加载字体(FontCss = `@import url(./MoeData/Fonts/Blueaka/Blueaka.css);body,input,button,textarea{font-family:Cyrillic,Blueaka;}`)
 {
-	if(mt_settings['禁止字体'])
-	{
-		$('#MoeFont').remove()
-		return;
-	}
+	$('#MoeFont').remove()
+	if(mt_settings['禁止字体'])return;
 	if(本地)
 	{
 		if(await file_exists('MoeData/Fonts/Blueaka.woff2'))FontCss = 本地字体

@@ -526,11 +526,13 @@ $("body").on('click',"#高度估算",function()
 	str += '<button onclick="高度估算()">点击估算</button>\n'
 	str += '<span></span>\n'
 	str += '<i class="red 高度估算"></i>\n'
-	alert(str,{title:'截图高度估算'})
+	let cb = function(){refreshMessage(chats)}
+	alert(str,{title:'截图高度估算',yes:cb,no:cb})
 });
 async function 高度估算()
 {
 	$('.高度估算').prev().text('高度估算中。。。请耐心等待')
+	refreshMessage([])
 	const 截图测试 = async function(height)
 	{
 		const 测试区域 = $(设备信息.device.isApple ? '.元素列表' : '#截图测试>div')

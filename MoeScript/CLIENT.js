@@ -235,8 +235,11 @@ async function 保存文件(filename, data, type = 2)
 		return null;
 	}
 	if(typeof data === 'object' && !data.size)data = JSON.stringify(data)
-	if(typeof data === 'string')data = new Blob([data],{type: 'application/octet-stream'});
-	if(filename === '用户数据/moetalkStorage/chats.json')localStorage['MMT'] = data
+	if(typeof data === 'string')
+	{
+		if(filename === '用户数据/moetalkStorage/chats.json')localStorage['MMT'] = data
+		data = new Blob([data],{type: 'application/octet-stream'});
+	}
 	if(!客户端)
 	{
 		if(mt_settings['流式下载'] && window.location.protocol == 'https:')
