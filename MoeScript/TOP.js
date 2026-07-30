@@ -4,7 +4,7 @@ pause = true
 skip = false
 if(localStorage['调试模式'])var vConsole = new window.VConsole();
 
-var ALERT = {confirm:{},cancel:{}}
+var ALERT = {confirm:{},cancel:{},close:{}}
 window.alert = function(text = '',config = {})
 {
 	if(config.show)$('.alert').removeClass('visible')
@@ -15,6 +15,7 @@ window.alert = function(text = '',config = {})
 	config.style = config.style || ''
 	config.yes = config.yes || null
 	config.no = config.no || null
+	config.x = config.x || config.no
 	$(`.ALERT_${config.id}`).remove()
 let style = `style="-webkit-user-select: text;user-select: text; line-height: 125%; white-space: pre-wrap; word-break: break-word; text-align: left; width: 100%; font-family: inherit; overflow: scroll;${config.style}"`
 let html = 
@@ -22,7 +23,7 @@ let html =
 	<div class="cFtxnG">
 		<div class="duPzcp" style="height: auto;">
 			<span class="GsrFM title" style="border-bottom: 4px solid;">${config.title}</span>
-			<div class="kncnxt cancel" style="top: 12.5%;user-select: none;cursor: pointer;" alt="${config.id}">❌</div>
+			<div class="kncnxt close" style="top: 12.5%;user-select: none;cursor: pointer;" alt="${config.id}">❌</div>
 		</div>
 		<div class="oFeqA" style="max-height: 90%; padding: 0.5rem;">
 			<pre ${style}>${text}</pre>
@@ -35,20 +36,36 @@ let html =
 </div>`
 	ALERT.confirm[config.id] = config.yes
 	ALERT.cancel[config.id] = config.no
+	ALERT.close[config.id] = config.x
 	$('.弹窗').append(html)
 }
 $('body').on('click','.confirm',function()
 {
 	let id = $(this).attr('alt')
-	delete ALERT.cancel[id]
 	if(ALERT.confirm[id])ALERT.confirm[id]()
-	$(this).prev().click()
+	delete ALERT.confirm[id]
+	delete ALERT.cancel[id]
+	delete ALERT.close[id]
+	$(`.ALERT_${id}`).remove()
+	$('.alert').last().addClass('visible')
 });
 $('body').on('click','.cancel',function()
 {
 	let id = $(this).attr('alt')
-	delete ALERT.confirm[id]
 	if(ALERT.cancel[id])ALERT.cancel[id]()
+	delete ALERT.confirm[id]
+	delete ALERT.cancel[id]
+	delete ALERT.close[id]
+	$(`.ALERT_${id}`).remove()
+	$('.alert').last().addClass('visible')
+});
+$('body').on('click','.close',function()
+{
+	let id = $(this).attr('alt')
+	if(ALERT.close[id])ALERT.close[id]()
+	delete ALERT.confirm[id]
+	delete ALERT.cancel[id]
+	delete ALERT.close[id]
 	$(`.ALERT_${id}`).remove()
 	$('.alert').last().addClass('visible')
 });
@@ -279,7 +296,53 @@ async function update(str = '')
 		$('.版本:eq(3)').text(网络数据版本)
 	}
 }
-var 通知文档 = ''
+function readme(first = 0)
+{
+	let text = ''
+	const config = {}
+	const title = $('#readme').text().slice(0, -1)
+	const bgclr = $('.Header__Navbar-sc-17b1not-0').css('background-color')
+	const i = `<i class="bold"style="background-color:${bgclr};color:white;">`
+	const 反馈网址 = 'https://wj.qq.com/s2/14292312/3ade/'
+	const 项目管理 = `<button style="line-height:112%;"onclick="$('#MoeProject').click()">项目管理</button>`
+	const 设置选项 = `<button style="line-height:112%;"onclick="$('#设置选项').click()">设置选项</button>`
+
+	if(window.innerWidth <= 768)text += `工具栏请点击${i} 三 </i>\n`
+	if(MikuTalk || mt_settings['顶部标题'] === 'MikuTalk')
+	{
+		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','transparent');
+		$('.RightScreen__CContainer-sc-14j003s-2').css('background-color','transparent');
+		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
+		if(first)$("#view").click()
+		text += '当前为愚人节彩蛋模式，点击❌将暂停播放\n'
+		text += 'MikuTap：https://github.com/HFIProgramming/mikutap/\n'
+		if(mt_settings['顶部标题'] != 'MikuTalk')
+		{
+			config.x = function()
+			{
+				sessionStorage['MikuTalk'] = 'no'
+				location.reload(true);
+			}
+		}
+	}
+	text += `反馈网址：<a href="${反馈网址}">${反馈网址}</a>\n`
+	if(first)text += `注意事项请点击${i}${title}</i>\n`
+	else
+	{
+		text += `※MoeTalk有自动备份机制，${项目管理}可恢复 ${设置选项}可修改\n`
+		config.confirm = '刷新页面'
+		config.yes = function(){location.reload(true)}
+	}
+	if(!本地)text += '<i class="bold red">浏览器有数据丢失风险，建议<button style="line-height:112%;"onclick="update()">安装客户端</button>\n</i>'
+
+	config.title = `MoeTalk说明`
+	config.style = 'text-align:center;'
+	if(!sessionStorage['通知文档'] || !first)alert(text,config)
+	sessionStorage['通知文档'] = true
+	let ymd = parseInt(year+month+day)
+	ymd = ymd >= 260216 && ymd <= 260223;
+	if(month+day == '0101' || ymd)恭喜发财 = ymd
+}
 $(async function()
 {
 	if((设备信息.device.isApple && window.location.protocol == 'http:') || localStorage['phpwin'])await isIos()
@@ -303,38 +366,7 @@ $(async function()
 	{
 		加载数据('初始加载')
 	},".消息底座");
-	let text = ''
-	let config = {}
-	let title = $('#readme').text().slice(0, -1)
-	let span = `<i onclick="$('#readme').click()"class="bold"style="background-color:${$('.Header__Navbar-sc-17b1not-0').css('background-color')};color:white;cursor:pointer;">`
-	text += `相关问题请点击${span}${title}</i>标题\n标题旁大写字母代表设备标识\n`
-	if(!本地)text += '<i class="bold red">浏览器数据有被系统清理的风险，开发强烈建议您<button style="line-height:112%;" onclick="update()">安装客户端</button>\n</i>'
-	config.title = `欢迎使用MoeTalk！`
-	config.style = 'text-align:center;'
-	if(MikuTalk || mt_settings['顶部标题'] === 'MikuTalk')
-	{
-		$('._app__Wrapper-sc-xuvrnm-1').css('background-color','transparent');
-		$('.RightScreen__CContainer-sc-14j003s-2').css('background-color','transparent');
-		$('.Talk__CContainer-sc-1uzn66i-1').css('background-color','transparent');
-		$("#view").click()
-		text += 'MikuTap：https://github.com/HFIProgramming/mikutap/\n'
-		text = text.replace('\n\n','\n（当前为愚人节彩蛋模式）\n')
-		if(mt_settings['顶部标题'] != 'MikuTalk')
-		{
-			config.confirm = '取消播放'
-			config.yes = function()
-			{
-				sessionStorage['MikuTalk'] = 'no'
-				location.reload(true);
-			}
-		}
-	}
-	if(sessionStorage['通知文档'])return;
-	let ymd = parseInt(year+month+day)
-	ymd = ymd >= 260216 && ymd <= 260223;
-	if(month+day == '0101' || ymd)恭喜发财 = ymd
-	sessionStorage['通知文档'] = text
-	alert(text,config)
+	readme(true)
 })
 async function newyear(url)
 {
@@ -442,9 +474,9 @@ $("body").on('click',"#支持作者",function()
 {
 	let str = '',config = {}
 	config.title = '支持开发者'
-
+	const 反馈网址 = 'https://wj.qq.com/s2/14292312/3ade/'
 	str += '创作不易，您的支持和反馈是对我最大的鼓励！\n'
-	str += '反馈网址：<a href="https://wj.qq.com/s2/14292312/3ade/">https://wj.qq.com/s2/14292312/3ade/</a>\n'
+	str += `反馈网址：<a href="${反馈网址}">${反馈网址}</a>\n`
 	str += `作者爱发电：<a href="https://afdian.com/a/MoeTalk/">https://afdian.com/a/MoeTalk/</a>\n`
 	str += `作者赞赏码：\n<img style="width:50%;"src="${href}MoeData/Ui/pay.webp">`
 	alert(str,config)
@@ -746,7 +778,6 @@ $("body").on('click',"#MoeProject",async function()
 	config.title = '项目管理'
 	config.id = 'MoeProject'
 	config.show = true
-	let 自定义数据 = `<button  class='red'onclick="$('.ALERT_MoeProject .cancel').click(),$('#tool-save').click(),$('.bIvkSg').click(),$('.包含自定义数据').prop('checked',true)">自定义数据</button>`
 	let 项目名称 = await 数据操作('Pg','项目名称') || {}
 	let 操作备份 = await 数据操作('Pg','操作备份') || null
 	let 自动备份 = await 数据操作('Pg','自动备份') || null
@@ -764,7 +795,7 @@ $("body").on('click',"#MoeProject",async function()
 	let str = ''
 	// if(自动备份)str += `<p>${项目名称[]}</p>`
 	str += 新项目+'\n'
-	str += `<span class='green'>数据无价，为防不测\n开发者建议您将项目和${自定义数据}下载到本地备份保存\n</span>`
+	str += `<span class='green'>数据无价，建议时常手动备份数据</span>`
 	if(客户端)str += `<span class='red'>客户端会自动下载操作备份存档，出现错误可以恢复</span>`
 	if(操作备份)str += `<div class="操作备份">操作备份 ${读取}数据丢失可尝试从此处恢复</div>`
 	if(自动备份)str += `<div class="自动备份">自动备份 ${读取}数据丢失可尝试从此处恢复</div>`

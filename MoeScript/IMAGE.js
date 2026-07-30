@@ -522,8 +522,7 @@ async function 测试截图()
 $("body").on('click',"#高度估算",function()
 { 
 	let str = '<div id="截图测试"style="width:1px;height:1px;overflow:hidden;"><div></div></div>'
-	str += '测试宽度<input id="测试宽度"type="number"value="550">\n'
-	str += '<button onclick="高度估算()">点击估算</button>\n'
+	str += '测试宽度<input id="测试宽度"type="number"value="550"><button onclick="高度估算()">点击估算</button>\n'
 	str += '<span></span>\n'
 	str += '<i class="red 高度估算"></i>\n'
 	let cb = function(){refreshMessage(chats)}
@@ -532,10 +531,11 @@ $("body").on('click',"#高度估算",function()
 async function 高度估算()
 {
 	$('.高度估算').prev().text('高度估算中。。。请耐心等待')
+	$('#测试宽度').next().remove()
 	refreshMessage([])
 	const 截图测试 = async function(height)
 	{
-		const 测试区域 = $(设备信息.device.isApple ? '.元素列表' : '#截图测试>div')
+		const 测试区域 = $('.元素列表')//设备信息.device.isApple ? '.元素列表' : '#截图测试>div'
 		const 原始高度 = parseInt(测试区域.height())
 		const 原始宽度 = parseInt(测试区域.width())
 		const width = parseInt($('#测试宽度').val()) || 原始宽度

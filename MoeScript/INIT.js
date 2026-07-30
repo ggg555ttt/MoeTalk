@@ -63,8 +63,13 @@ function 读取样式(mode,id)
 		return style
 	}
 }
+delete localStorage['ERROR']
 var 错误日志 = []
-function 记录错误(info){错误日志.push(info)}
+function 记录错误(info)
+{
+	错误日志.push(info)
+	localStorage['ERROR'] = JSON.stringify(错误日志)
+}
 // 捕获运行时错误 (window.onerror / window.addEventListener)
 window.onerror = function(message, source, lineno, colno, error) {
     const errorInfo = {

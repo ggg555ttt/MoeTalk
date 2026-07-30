@@ -1,4 +1,6 @@
 /*@MoeScript/SETTING.js@*/
+delete sessionStorage['通知文档']
+delete sessionStorage['MikuTalk']
 var vConsole = new window.VConsole();
 删除文件('更新补丁')
 $('body').on('click',"input",function()

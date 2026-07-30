@@ -229,11 +229,7 @@ function 内部下载(filename, data, type)
 }
 async function 保存文件(filename, data, type = 2)
 {
-	if(!data)
-	{
-		alert(`文件 ${filename} 保存失败!`)
-		return null;
-	}
+	if(!data)return null;
 	if(typeof data === 'object' && !data.size)data = JSON.stringify(data)
 	if(typeof data === 'string')
 	{
@@ -283,10 +279,7 @@ async function 保存文件(filename, data, type = 2)
 			await fs.outputFile(path+filename, data);
 			return path+filename
 		}
-		catch
-		{
-			alert(`文件名：<p class='red'>${path+filename}</p>路径不存在或没有读写权限！`,{title: '下载失败！'})
-		}
+		catch {return null}
 		return null
 	}
 	if(客户端 === 'HTML5+')
