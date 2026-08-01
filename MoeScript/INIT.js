@@ -63,7 +63,6 @@ function 读取样式(mode,id)
 		return style
 	}
 }
-delete localStorage['ERROR']
 var 错误日志 = []
 function 记录错误(info)
 {
