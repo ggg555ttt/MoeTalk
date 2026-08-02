@@ -74,12 +74,12 @@ $('body').on('click',"#savedata",async function()
 	json = chunks
 	chunks = ''
 	json = new Blob(json,{type: 'application/json'})
-	let filename = await 保存文件(`moetalk备份数据-${getNowDate()}.json`,json,'json')
+	let filename = await 保存文件(`MoeTalk备份数据-${getNowDate()}.TXT`,json,'json')
 	alert(filename+'\n下载完成！')
 });
 
 //恢复数据
-$("body").append("<input id='loaddatafile' accept='application/json' hidden type='file'>");
+$("body").append("<input id='loaddatafile' accept='text/plain' hidden type='file'>");
 $('body').on('click',"#loaddata",function()
 {
 	alert('这里只能提交专门的MoeTalk备份数据\n提交文件后，如果数据量较大，请耐心等待至弹窗再次出现\n请注意，此操作会覆盖原数据！')

@@ -416,6 +416,7 @@ function mt_capture(清晰度,生成图片,标题)
 		v.isFirst = isfirst(k,imgArea.chats)
 		html += makeMessage(v.type,v,k,'预览')
 	})
+	html += '<div style="height:1rem;"></div>'
 	生成图片(num)
 	截图区域.html(html)//.append($('.消息:visible').slice(imgArea.start, imgArea.end).clone())
 

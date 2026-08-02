@@ -13,6 +13,12 @@ function loaddata(json,play)//识别存档
 			json.INFO.title = '错误存档'
 			json.INFO.nickname = '无法识别'
 			json.INFO.date = '请勿上传'
+			if(存档信息.MoeTalk备份数据)
+			{
+				json.INFO.title = 'MoeTalk备份数据'
+				json.INFO.nickname = '此处无法读取'
+				json.INFO.date = '请在【设置选项】中读取'
+			}
 			json.CHAT = []//MMT
 		}
 		else

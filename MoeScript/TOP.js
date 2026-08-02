@@ -495,7 +495,7 @@ $("body").on('click',"#设置选项",function()
 
 	str += "<br><br><button onclick='语言选项()'>语言选项</button> "
 	str += "<button id='虚拟滚动'>虚拟滚动（测试）</button> "
-	str += "<button id='自动备份设置'>自动备份设置</button> "
+	str += "<button id='备份设置'>备份/恢复设置</button> "
 	str += "<button id='清除缓存'>清除缓存</button> "
 	str += "<button id='实验选项'>开发者选项</button> "
 	str += "<div style='display:flex;justify-content:center;'><h1><a class='bold'style='text-decoration:underline;'href='setting.html'>更多设置</a></h1></div>\n"
@@ -572,12 +572,13 @@ function 语言选项()
 	alert('Please select the language：'+str,config)
 	$('.语言选项').val(localStorage['语言选项'])
 }
-$("body").on('click',"#自动备份设置",function()
+$("body").on('click',"#备份设置",function()
 {
 	let 自动备份 = 10
 	if(localStorage['自动备份'] > -1)自动备份 = localStorage['自动备份']
 	let str = `自动备份间隔：<input class="自动备份设置" min="0" type="number" value="${自动备份}">分钟（0则不备份）\n`
-	str += '执行备份时会有几秒卡顿\n可在<b class="red">项目管理-自动备份</b>中读取\n提交后需刷新页面'
+	str += '执行备份时会有几秒卡顿，可在<b class="red">项目管理-自动备份</b>中读取\n提交后需刷新页面\n'
+	str += '<button onclick="备份数据()">备份数据</button> <button onclick="恢复数据()">恢复数据</button>'
 	let config = {}
 	config.title = '自动备份设置'
 	config.yes = function()
@@ -589,6 +590,100 @@ $("body").on('click',"#自动备份设置",function()
 		saveStorage('设置选项',mt_settings,'local')
 	}
 	alert(str,config)
+});
+async function 备份数据()
+{
+	let str = '<i class="bold red 备份数据">备份数据下载中，请耐心等待</i>'
+	let config = {id:'备份数据',title:'备份数据'}
+	alert(str,config)
+	$('.ALERT_备份数据 .ia-dnHO').hide()
+	$('.ALERT_备份数据 .close').hide()
+	let json = {'MoeTalk备份数据':'MoeTalk备份数据'}
+	json.localStorage = localStorage
+	json.sessionStorage = sessionStorage
+	json.IndexedDB = {}
+	let D,C = ['MoeImage','MoeTemp','MoeProject','moetalkStorage','MoeCache']
+	for(let i=0,l=C.length;i<l;i++)
+	{
+		if(C[i] === 'MoeImage')D = MoeImage
+		if(C[i] === 'MoeTemp')D = MoeTemp
+		if(C[i] === 'MoeProject')D = MoeProject
+		if(C[i] === 'moetalkStorage')D = moetalkStorage
+		if(C[i] === 'MoeCache')D = MoeCache
+		json.IndexedDB[C[i]] = {}
+		await D.iterate((value, key, iterationNumber)=>
+		{
+			json.IndexedDB[C[i]][key] = value
+		})
+	}
+	delete json.localStorage['cordova']
+	let chunks = [];
+	stringifyToChunks(json, chunks)
+	json = chunks
+	chunks = ''
+	json = new Blob(json,{type: 'application/json'})
+	let filename = await 保存文件(`MoeTalk备份数据-${getNowDate()}.TXT`,json,'json')
+	$('.ALERT_备份数据 .ia-dnHO').show()
+	$('.ALERT_备份数据 .close').show()
+	$('.备份数据').text(filename+'\n下载完成！')
+}
+$("body").append("<input id='恢复数据' accept='text/plain' hidden type='file'>");
+async function 恢复数据()
+{
+	let str = '<i class="bold red">此操作会覆盖现有数据</i>\n'
+	str += '<i class="bold 恢复数据">存档加载完毕后会自动刷新页面</i>\n'
+	str += `<button onclick="$('#恢复数据').click()">恢复备份数据</button>`
+	let config = {id:'恢复数据',title:'恢复数据'}
+	alert(str,config)
+}
+$('body').on('change',"#恢复数据",async function(e)
+{
+	存档信息 = {}
+	await fileInput(e)
+	if(!存档信息.MoeTalk备份数据)
+	{
+		存档信息 = {}
+		$('.恢复数据').text('此文件并非备份数据存档！\n有疑问请向开发者反馈并提供此文件')
+		return
+	}
+	else delete 存档信息.MoeTalk备份数据
+	$('.ALERT_恢复数据 .ia-dnHO').hide()
+	$('.ALERT_恢复数据 .close').hide()
+	$('.恢复数据').text('数据读取中，请耐心等待').next().remove()
+	for(let K in 存档信息)
+	{
+		if(K == 'localStorage')
+		{
+			localStorage.clear()
+			for(let C in 存档信息[K])localStorage[C] = 存档信息[K][C]
+		}
+		if(K == 'sessionStorage')
+		{
+			sessionStorage.clear()
+			for(let C in 存档信息[K])sessionStorage[C] = 存档信息[K][C]
+		}
+		if(K == 'IndexedDB')
+		{
+			for(let C in 存档信息[K])
+			{
+				let D
+				if(C === 'MoeImage')D = 'I'
+				if(C === 'MoeTemp')D = 'T'
+				if(C === 'MoeProject')D = 'P'
+				if(C === 'moetalkStorage')D = 'S'
+				if(C === 'MoeCache')D = 'C'
+				await 数据操作(D+'c')
+				for(let key in 存档信息[K][C])
+				{
+					let val = 存档信息[K][C][key]
+					delete 存档信息[K][C][key]
+					await 数据操作(D+'s',key,val)
+				}
+			}
+		}
+		delete 存档信息[K]
+	}
+	location.reload(true)
 });
 $("body").on('click',"#操作设置",function()
 {
