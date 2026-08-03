@@ -207,12 +207,9 @@ async function clearCache()
 		alert('缓存清除完毕，请立即刷新页面',config)
 	}
 }
-function escapeHTML(str) {
-    return str.replace(/&/g, "&amp;")
-              .replace(/</g, "&lt;")
-              .replace(/>/g, "&gt;")
-              .replace(/"/g, "&quot;")
-              .replace(/'/g, "&#039;");
+function escapeHTML(str)
+{
+	return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
 async function update(str = '')
 {
@@ -576,11 +573,14 @@ $("body").on('click',"#备份设置",function()
 {
 	let 自动备份 = 10
 	if(localStorage['自动备份'] > -1)自动备份 = localStorage['自动备份']
-	let str = `自动备份间隔：<input class="自动备份设置" min="0" type="number" value="${自动备份}">分钟（0则不备份）\n`
-	str += '执行备份时会有几秒卡顿，可在<b class="red">项目管理-自动备份</b>中读取\n提交后需刷新页面\n'
-	str += '<button onclick="备份数据()">备份数据</button> <button onclick="恢复数据()">恢复数据</button>'
+	let str = '自动备份：（提交后需刷新页面）\n'
+	str += `自动备份间隔：<input class="自动备份设置" min="0" type="number" value="${自动备份}">分钟（0则不备份）\n`
+	str += '执行备份时会有几秒卡顿，可以在此处修改\n存档可在<b class="red">项目管理-自动备份</b>中读取'
+	if(客户端)str += '，文件会自动保存在【MoeTalk存档下载目录】中'
+	str += '\n'
+	str += '\n数据备份/恢复：\n<button onclick="备份数据()">备份所有数据</button> <button onclick="恢复数据()">恢复备份数据</button>'
 	let config = {}
-	config.title = '自动备份设置'
+	config.title = '备份/恢复设置'
 	config.yes = function()
 	{
 		let num = $('.自动备份设置').val()
@@ -630,7 +630,7 @@ async function 备份数据()
 $("body").append("<input id='恢复数据' accept='text/plain' hidden type='file'>");
 async function 恢复数据()
 {
-	let str = '<i class="bold red">此操作会覆盖现有数据</i>\n'
+	let str = '<i class="bold red">此操作会覆盖现有数据，请谨慎使用</i>\n'
 	str += '<i class="bold 恢复数据">存档加载完毕后会自动刷新页面</i>\n'
 	str += `<button onclick="$('#恢复数据').click()">恢复备份数据</button>`
 	let config = {id:'恢复数据',title:'恢复数据'}
@@ -966,7 +966,11 @@ $("body").on('click',".MoeProject",async function()
 		let 自动备份 = 10
 		if(localStorage['自动备份'] > -1)自动备份 = localStorage['自动备份']
 		if(key === '操作备份')str += '<p class="red">读取、删除项目前的自动备份，防止误操作</p>'
-		if(key === '自动备份')str += `<p class="red">每${自动备份}分钟自动备份一次当前项目，可用于数据恢复</p>`
+		if(key === '自动备份')
+		{
+			str += `<p class="red">每${自动备份}分钟自动备份一次当前项目，可用于数据恢复</p>`
+			str += `<p class="blue">执行备份时会有几秒卡顿，设置选项可修改</p>`
+		}
 		str += '确定要读取此项目吗?\n当前内容将暂存入<b class="red">操作备份</b>'
 		config.yes = async function()
 		{

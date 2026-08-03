@@ -1,4 +1,30 @@
 /*@MoeScript/CLIENT.js@*/
+async function remove(target)
+{
+	try
+	{
+		const stat = await fs.lstat(target);
+		if(stat.isDirectory())
+		{
+			const entries = await fs.readdir(target, { withFileTypes: true });
+
+			// 限制每批次并发删除 200 个文件（既能吃满磁盘性能，又绝不卡死/报错）
+			const BATCH_SIZE = 200; 
+			for(let i = 0; i < entries.length; i += BATCH_SIZE)
+			{
+				const batch = entries.slice(i, i + BATCH_SIZE);
+				await Promise.all(batch.map(entry=>// 批次内并行删除
+				{
+					const childPath = `${target}/${entry.name}`;
+					return entry.isDirectory() ? remove(childPath) : fs.unlink(childPath);
+				}));
+			}
+			await fs.rmdir(target);//删除空目录
+		}
+		else await fs.unlink(target);//删除文件
+		return target
+	}catch(err){return null;}//失败或不存在统一返回 null
+}
 async function 删除文件(path)
 {
 	if(!本地)return null
@@ -28,7 +54,7 @@ async function 删除文件(path)
 			dataType: 'text'
 		})
 	}
-	if(客户端 === 'NW.js')await fs.remove(path)
+	if(客户端 === 'NW.js')return await remove(path)
 }
 async function isIos()
 {
