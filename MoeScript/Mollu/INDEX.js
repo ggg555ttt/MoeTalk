@@ -206,8 +206,6 @@
 											{
 												alt: String(e.no),
 												title: String(e.index),
-												width: 252,
-												height: 252,
 												src: loadhead(e.no,e.index),//#下方快捷角色选择框
 												onClick: function(img)
 												{
@@ -260,8 +258,6 @@
 									display: !f || c ? "block" : "none",
 									margin: "0rem"
 								},
-								width: 252,
-								height: 252,
 								alt: String(d.I.no),
 								title: String(d.I.index),
 								src: loadhead(d.I.no,d.I.index),//#右侧老师本人
@@ -400,8 +396,6 @@
 							{
 								return (0, m.jsx)('img',
 								{
-									width: 252,
-									height: 252,
 									alt: e,
 									src: loadhead(n.no,e),//#左方人物皮肤选择分支
 									style:{margin:'0.2rem'},
@@ -484,8 +478,6 @@
 									children: [mt_settings.右侧发言[n.no] ? '' : (0, m.jsx)('img',
 									{
 										className: 'eLaCqa',
-										width: 252,
-										height: 252,
 										src: loadhead(n.no,n.profile[0]),//#左方选择框
 										onError: function(e){IMAGE_error(e)},
 										alt: n.profile[0]
@@ -516,16 +508,12 @@
 									}), mt_settings.右侧发言[n.no] ? (0, m.jsx)('img',
 									{
 										className: 'eLaCqa',
-										width: 252,
-										height: 252,
 										src: loadhead(n.no,n.profile[0]),//#左方选择框
 										onError: function(e){IMAGE_error(e)},
 										alt: n.profile[0]
 									}) : '']
 								}), (0, m.jsx)(B,
 								{
-									width: 252,
-									height: 252,
 									src: href+"MoeData/Ui/School/"+n.school.img+'.webp',//#学校图标
 									onError: function(e){IMAGE_error(e)},
 									onClick: function()
@@ -694,7 +682,13 @@
 							}), (0, m.jsx)(q,
 							{
 								//*新增社团分类
-								style:{overflow:'scroll',display:'block'},//@滚动支持
+								style:
+								{
+									overflow:'scroll',
+									display: 'flex',
+									flexWrap: 'wrap',
+									justifyContent: 'flex-start'
+								},//@滚动支持
 								children: [E.h5.map(function(e, n)
 								{
 									return (0, m.jsx)(c.Bx,
@@ -733,13 +727,14 @@
 									children: [(0, m.jsx)('button',
 									{
 										className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 cVRiXh kwhiZC medium",
-										children: [(0, m.jsx)('p',
-										{
-											className: "multiSel 自定义"
-										}), (0, m.jsx)('span',
+										children: [(0, m.jsx)('span',
 										{
 											className: "hida",
 											children: '自定义'
+										}), (0, m.jsx)('i',
+										{
+											style: {color: 'white'},
+											className: "multiSel 自定义"
 										})]
 									}), (0, m.jsx)('ul',
 									{
@@ -775,14 +770,19 @@
 										className: "dropdown",
 										children: [(0, m.jsx)('button',
 										{
-											className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 cVRiXh kwhiZC medium",
-											children: [(0, m.jsx)('p',
-											{
-												className: "multiSel "+v
-											}), (0, m.jsx)('span',
+											className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 kwhiZC medium",
+											children: [(0, m.jsx)('span',
 											{
 												className: "hida",
-												children: mt_school[v][LANG] ? mt_school[v][LANG] : v
+												children: [mt_school[v][LANG] ? mt_school[v][LANG] : v, GAME === 'BLDA' ? (0, m.jsx)(B,
+												{
+													src: href+"MoeData/Ui/School/"+(mt_school[v].en)+'.webp',//#学校图标
+													onError: function(e){IMAGE_error(e)}
+												}) : '']
+											}), (0, m.jsx)('i',
+											{
+												style: {color: 'white'},
+												className: "multiSel "+v
 											})]
 										}), (0, m.jsx)('ul',
 										{
@@ -905,13 +905,12 @@
 						{
 							children: [(0, m.jsxs)(X,
 							{
-								style: {fontSize: '1.2rem'},
 								className: "bold",
 								children: [L.Z.student[u],`(${o})`]
 							}), (0, m.jsxs)('button',
 							{
 								id: 'makecus',
-								children: '添加角色'
+								children: L.Z.add[u]+L.Z.student[u]
 							}), (0, m.jsxs)(W,
 							{
 								style:
@@ -930,7 +929,7 @@
 									children: (0, m.jsx)(X,
 									{
 										style: {fontSize: "1.1rem"},
-										children: L.Z[n.sortCharType][u]
+										children: '分组'
 									})
 								}), (0, m.jsx)(c.jl,
 								{

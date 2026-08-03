@@ -94,8 +94,7 @@ window.addEventListener('unhandledrejection', function(event) {
         type: 'promise_rejection',
         message: event.reason && event.reason.message || 'Unknown Promise Error',
         stack: event.reason && event.reason.stack || '',
-        // 如果 reason 是字符串而不是 Error 对象，直接记录
-        rawReason: typeof event.reason === 'object' ? JSON.stringify(event.reason) : event.reason,
+        rawReason: event.reason,
         time: new Date().toISOString()
     };
     
