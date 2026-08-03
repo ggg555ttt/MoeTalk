@@ -51,21 +51,22 @@ body{line-height: 1;}
 	display: flex;
 	align-items: center;
     justify-content: center;
+    line-break: anywhere;
 }
 .hida
 {
-	padding: 0 0.5rem;
+	padding: 0 0.3rem;
 	color: rgb(75, 105, 137);
 	display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 1rem;
 }
-.dropdown li{padding: 0 0.5rem;}
+.dropdown li{padding: 0.3rem;}
 .dropdown ul{display: none;}
 .dropdown .title
 {
-	padding: 5px 5px 5px 5px;
+	padding: 0.3rem;
 	white-space: nowrap;
 }
 

@@ -419,30 +419,28 @@ $("body").on('click',".dropdown button",function()
     css.display = 'flex'
     css.flexFlow = 'wrap'
     css.listStyle = 'none'
-    css.width = $('.GroupModal__Body-sc-123a00a-2').width()
 	$(this).next().slideToggle('fast').css(css);
 });
-
 $("body").on('click','.mutliSelect input[type="checkbox"]',function()
 {
 
 	var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').parent().text(),
-		title = $(this).parent().text() + ",";
+		title = $(this).parent().text();
 
 	var school = $(this).attr('school');
 	var id = school+'/'+$(this).val();
 
 	if($(this).is(':checked')) 
 	{
-		var html = '<span class="title" title="'+id+'">'+title+'</span>';
+		var html = '<b class="title" title="'+id+'">|<i class="white">'+title+'</i><b/>';
 		$('.multiSel.'+school).append(html);
 		$('.'+school).prev().css('color','red');
 		$('.'+school).parent().css("background-color","rgb(139, 187, 233)")
 	}
 	else
 	{
-		$('span[title="'+id+'"]').remove();
-		if($('.'+school).find('span').length === 0)
+		$('b[title="'+id+'"]').remove();
+		if($('.'+school).find('b.title').length === 0)
 		{
 			$('.'+school).prev().css('color','')
 			$('.'+school).parent().css("background-color","")
@@ -507,7 +505,11 @@ function 加载角色()
 			char.school[la] = 角色信息.name[la][index[0]] || 角色信息.name.zh_cn[index[0]] || char.school.id
 			mt_school[char.school.id][la] = char.school[la]
 		}
-		char.school.img = 角色信息.name.en[index[0]] || 'none'
+		mt_school[char.school.id].img = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+		if(角色信息.name.en[index[0]])
+		{
+			mt_school[char.school.id].img = href+'MoeData/Ui/School/'+mt_school[char.school.id].en.toUpperCase()+'.webp'
+		}
 		for(let i=0;i<6;i++)
 		{
 			let la = lang[i]

@@ -514,7 +514,7 @@
 									}) : '']
 								}), (0, m.jsx)(B,
 								{
-									src: href+"MoeData/Ui/School/"+n.school.img+'.webp',//#学校图标
+									src: n.school.img || mt_school[n.school.id].img,//#学校图标
 									onError: function(e){IMAGE_error(e)},
 									onClick: function()
 									{
@@ -687,7 +687,8 @@
 									overflow:'scroll',
 									display: 'flex',
 									flexWrap: 'wrap',
-									justifyContent: 'flex-start'
+									justifyContent: 'flex-start',
+									alignItems: 'flex-start'
 								},//@滚动支持
 								children: [E.h5.map(function(e, n)
 								{
@@ -731,10 +732,9 @@
 										{
 											className: "hida",
 											children: '自定义'
-										}), (0, m.jsx)('i',
+										}), (0, m.jsx)('span',
 										{
-											style: {color: 'white'},
-											className: "multiSel 自定义"
+											className: "black multiSel 自定义"
 										})]
 									}), (0, m.jsx)('ul',
 									{
@@ -776,13 +776,12 @@
 												className: "hida",
 												children: [mt_school[v][LANG] ? mt_school[v][LANG] : v, GAME === 'BLDA' ? (0, m.jsx)(B,
 												{
-													src: href+"MoeData/Ui/School/"+(mt_school[v].en)+'.webp',//#学校图标
+													src: mt_school[v].img,//#学校图标
 													onError: function(e){IMAGE_error(e)}
 												}) : '']
-											}), (0, m.jsx)('i',
+											}), (0, m.jsx)('span',
 											{
-												style: {color: 'white'},
-												className: "multiSel "+v
+												className: "black multiSel "+v
 											})]
 										}), (0, m.jsx)('ul',
 										{

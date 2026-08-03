@@ -390,7 +390,7 @@ function saveStorage(key,val,mode)
 function localization(str,img)
 {
 	const arr = {zh_cn:str,zh_tw:str,en:str,jp:str,kr:str,pinyin:str,id:str}
-	if(img)arr.img = img
+	if(img)arr.img = href+'MoeData/Ui/School/'+img+'.webp'
 	return arr
 }
 function Translator(str)
