@@ -490,7 +490,11 @@
 											children: mt_settings['人物改名'][n.no] || n.name[a].replaceAll("-", " ")
 										}), (0, m.jsx)('span',
 										{
-											style: {color:'rgb(111, 119, 127)'},
+											style:
+											{
+												color: 'rgb(111, 119, 127)',
+												zIndex: 100
+											},
 											children:[n.club[a],(0, m.jsx)(c.xL,
 											{
 												style:
@@ -902,6 +906,7 @@
 					{
 						children: [(0, m.jsxs)(K,
 						{
+							style: {flexWrap: 'wrap'},
 							children: [(0, m.jsxs)(X,
 							{
 								className: "bold",
@@ -4152,10 +4157,12 @@
 													style:
 													{
 														display: k == 0 ? 'flex' : '',
+														flexWrap: k == 0 ? 'wrap' : '',
 														width: 'auto',
 														height: 'auto',
 														fontSize: '1.5rem',
-														color: 'black'
+														color: 'black',
+														textAlign: 'start'
 													},
 													className: v+' cVRiXh eIEKpg evqKja kwhiZC'
 												})
