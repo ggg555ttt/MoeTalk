@@ -470,7 +470,7 @@
 							{
 								onClick: function()
 								{
-									if(n.club[a] !== '临时角色')t === n ? r(null) : r(n)
+									if(n.custom !== '临时')t === n ? r(null) : r(n)
 								},
 								children: [(0, m.jsxs)(S,
 								{
@@ -490,9 +490,13 @@
 											children: mt_settings['人物改名'][n.no] || n.name[a].replaceAll("-", " ")
 										}), (0, m.jsx)('span',
 										{
+											style: {color: 'rgb(111, 119, 127)'},
+											children: n.school[a]
+										}), (0, m.jsx)('span',
+										{
 											style:
 											{
-												color: 'rgb(111, 119, 127)',
+												color: 'rgb(75, 105, 137)',
 												zIndex: 100
 											},
 											children:[n.club[a],(0, m.jsx)(c.xL,
@@ -522,7 +526,7 @@
 									onError: function(e){IMAGE_error(e)},
 									onClick: function()
 									{
-										if(n.school['zh_cn'] === '自定义' || n.club['zh_cn'] === '临时角色')removeChar(n);
+										if(n.custom)removeChar(n);
 									},
 									alt: "school"
 								})]
@@ -726,46 +730,47 @@
 										children: mt_text['clear'][LANG]+mt_text['select'][LANG]
 									})]
 								}), 
-								(0, m.jsx)('dl',
+								Object.keys(mt_clubs).map(function(v, k)
 								{
-									className: "dropdown",
-									children: [(0, m.jsx)('button',
+									return (0, m.jsx)('dl',
 									{
-										className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 cVRiXh kwhiZC medium",
-										children: [(0, m.jsx)('span',
+										className: "dropdown",
+										children: [(0, m.jsx)('button',
 										{
-											className: "hida",
-											children: '自定义'
-										}), (0, m.jsx)('span',
-										{
-											className: "black multiSel 自定义"
-										})]
-									}), (0, m.jsx)('ul',
-									{
-										className: "mutliSelect",
-										children: [mt_clubs.map(function(v,k)
-										{
-											return (0, m.jsx)('li',
+											className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 kwhiZC button",
+											children: [(0, m.jsx)('span',
 											{
-												children: [(0, m.jsx)('input',
+												className: "hida",
+												children: '💟'+v
+											}), (0, m.jsx)('span',
+											{
+												className: "black multiSel 💟"+v
+											})]
+										}), (0, m.jsx)('ul',
+										{
+											className: "mutliSelect",
+											id: '💟'+v,
+											children: [Object.keys(mt_clubs[v]).map(function(value, index)
+											{
+												return (0, m.jsx)('li',
 												{
-													type: "checkbox",
-													className: "club",
-													school: "自定义",
-													value: v
-												}),v]//
-											})
-										}), (0, m.jsx)('li',
-										{
-											children: [(0, m.jsx)('input',
+													children: [(0, m.jsx)('input',
+													{
+														type: "checkbox",
+														className: "club",
+														title: '💟'+v,
+														value: value
+													}), value]
+												})
+											}), (0, m.jsx)('button',
 											{
-												type: "checkbox",
-												className: "club",
-												school: "自定义",
-												value: "临时角色"
-											}),"临时角色"]
+												className: '全选分组',
+												title: '💟'+v,
+												style: {fontSize: '1rem'},
+												children: '全选'
+											})]
 										})]
-									})]
+									})
 								}),
 								mt_club && mt_school ? Object.keys(mt_school).map(function(v, k)
 								{
@@ -774,7 +779,7 @@
 										className: "dropdown",
 										children: [(0, m.jsx)('button',
 										{
-											className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 kwhiZC medium",
+											className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 kwhiZC button",
 											children: [(0, m.jsx)('span',
 											{
 												className: "hida",
@@ -790,7 +795,8 @@
 										}), (0, m.jsx)('ul',
 										{
 											className: "mutliSelect",
-											children: Object.keys(mt_club[v]).map(function(value, index)
+											id: v,
+											children: [Object.keys(mt_club[v]).map(function(value, index)
 											{
 												return (0, m.jsx)('li',
 												{
@@ -798,14 +804,49 @@
 													{
 														type: "checkbox",
 														className: "club",
-														school: v,
+														title: v,
 														value: value
 													}),mt_club[v][value][LANG] ? mt_club[v][value][LANG] : value]
 												})
-											})
+											}), (0, m.jsx)('button',
+											{
+												className: '全选分组',
+												title: v,
+												style: {fontSize: '1rem'},
+												children: '全选'
+											})]
 										})]
 									})
-								}) : '']
+								}) : '', (0, m.jsx)('dl',
+								{
+									className: "dropdown",
+									children: [(0, m.jsx)('button',
+									{
+										className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 kwhiZC button",
+										children: [(0, m.jsx)('span',
+										{
+											className: "hida",
+											children: '🗑️临时角色'
+										}), (0, m.jsx)('span',
+										{
+											className: "black multiSel 🗑️临时角色"
+										})]
+									}), (0, m.jsx)('ul',
+									{
+										className: "mutliSelect",
+										id: '🗑️临时角色',
+										children: (0, m.jsx)('li',
+										{
+											children: [(0, m.jsx)('input',
+											{
+												type: "checkbox",
+												className: "club",
+												title: '🗑️临时角色',
+												value: '临时角色'
+											}), '临时角色']
+										})
+									})]
+								})]
 								//*新增社团分类
 							}), (0, m.jsx)(A,
 							{
@@ -1121,7 +1162,7 @@
 							let chars = []
 							chars = [...mt_schars,...mt_chars,...CHAR_CharList].filter(function(char)
 							{
-								return mt_settings['社团列表'][char.club.id]
+								return mt_settings['社团列表'][char.school.id+'-'+char.club.id]
 							})
 							return (chars.length < 1 ? [...mt_schars,...mt_chars,...CHAR_CharList] : chars).filter(function(e)
 							{
@@ -1334,6 +1375,13 @@
 										onClick:function()
 										{
 											$$("#custom").attr('title','head').attr('alt','add').click()
+										}
+									}), (0, m.jsx)('br',{}), mt_text.school[LANG], (0, m.jsx)('input',
+									{
+										className:"schoolname bold",
+										onChange: function(e)
+										{
+											$$('.schoolname').val(e.currentTarget.value)
 										}
 									}), (0, m.jsx)('br',{}), mt_text.club[LANG], (0, m.jsx)('input',
 									{

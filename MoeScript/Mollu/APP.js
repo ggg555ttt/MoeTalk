@@ -5555,7 +5555,7 @@
 					},
 					m = function(e, t)
 					{
-						return e.open && (0 === t.length || o.VP.map(function(t)
+						return (0 === t.length || o.VP.map(function(t)
 						{
 							return e.name[t].replaceAll("-", " ") + " " + e.club[t] + " " + e.school[t] + " "
 						}).toString().toLowerCase().includes(t.toLowerCase())) ? e : null
@@ -10286,9 +10286,7 @@
 							zh_cn: "MoeTalk",
 							zh_tw: "MoeTalk"
 						},
-						profile: [1],
-						momotalk: !1,
-						open: !1
+						profile: [1]
 					}//#更改名称
 			},
 			8681: function(e, t, n)

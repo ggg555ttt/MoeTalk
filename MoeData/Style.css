@@ -40,7 +40,7 @@ body{line-height: 1;}
 	position: relative;
 	line-height: 1.42;
 }
-.dropdown button
+.dropdown .button
 {
 	height: 2.5rem;
 	height: auto;
@@ -48,9 +48,6 @@ body{line-height: 1;}
 	background-color: rgb(243, 247, 248);
 	width: 100%;
 	min-width: 6rem;
-	display: flex;
-	align-items: center;
-    justify-content: center;
 }
 .multiSel
 {
@@ -65,6 +62,7 @@ body{line-height: 1;}
     flex-direction: column;
     align-items: center;
     font-size: 1rem;
+    white-space: nowrap;
 }
 .dropdown li{padding: 0.3rem;}
 .dropdown ul{display: none;}
