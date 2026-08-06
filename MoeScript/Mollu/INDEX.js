@@ -491,7 +491,7 @@
 										}), (0, m.jsx)('span',
 										{
 											style: {color: 'rgb(111, 119, 127)'},
-											children: n.school[a]
+											children: n.school[a].replace('💟','')
 										}), (0, m.jsx)('span',
 										{
 											style:
@@ -741,7 +741,11 @@
 											children: [(0, m.jsx)('span',
 											{
 												className: "hida",
-												children: '💟'+v
+												children: [v, (0, m.jsx)(B,
+												{
+													src: href+'MoeData/Ui/Favor_Schedule_Deco.webp',//#学校图标
+													onError: function(e){IMAGE_error(e)}
+												})]
 											}), (0, m.jsx)('span',
 											{
 												className: "black multiSel 💟"+v

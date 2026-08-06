@@ -149,13 +149,13 @@ $("body").on('click','.mutliSelect input[type="checkbox"]',function()
 		}
 	}
 });
-$("body").on('click','.multiSel .title',function(e)
-{
-	e.stopPropagation();
-	let school = $(this).attr('title')
-	let club = $(this).attr('alt')
-	$(`#${school} input[value="${club}"]`).click()
-});
+// $("body").on('click','.multiSel .title',function(e)
+// {
+// 	e.stopPropagation();
+// 	let school = $(this).attr('title')
+// 	let club = $(this).attr('alt')
+// 	$(`#${school} input[value="${club}"]`).click()
+// });
 function charList(selected = !1)
 {
 	updateAllNames();
