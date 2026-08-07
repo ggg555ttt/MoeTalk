@@ -100,8 +100,8 @@ function saveclub()
 }
 $("body").on('click',".全选分组",function()
 {
-	const checkbox = $('#'+this.title+' .club')
-	const checked = $('#'+this.title+' .club:checked')
+	const checkbox = $(`.mutliSelect[title="${this.title}"] .club`)
+	const checked = $(`.mutliSelect[title="${this.title}"] .club:checked`)
 	if(checkbox.length !== checked.length)
 	{
 		checkbox.each(function()
@@ -135,17 +135,17 @@ $("body").on('click','.mutliSelect input[type="checkbox"]',function()
 	if($(this).is(':checked')) 
 	{
 		var html = `<b class="title" title="${school}"alt="${club}">${school.startsWith('💟') ? '#' : '|'}<i class="white">${title}</i></b>`
-		$('.multiSel.'+school).append(html);
-		$('.'+school).prev().css('color','red');
-		$('.'+school).parent().css("background-color","rgb(139, 187, 233)")
+		$(`.multiSel[title="${school}"]`).append(html);
+		$(`.multiSel[title="${school}"]`).prev().css('color','red');
+		$(`.multiSel[title="${school}"]`).parent().css("background-color","rgb(139, 187, 233)")
 	}
 	else
 	{
 		$(`b[title="${school}"][alt="${club}"]`).remove();
-		if($('.'+school).find('b.title').length === 0)
+		if($(`.multiSel[title="${school}"]`).find('b.title').length === 0)
 		{
-			$('.'+school).prev().css('color','')
-			$('.'+school).parent().css("background-color","")
+			$(`.multiSel[title="${school}"]`).prev().css('color','')
+			$(`.multiSel[title="${school}"]`).parent().css("background-color","")
 		}
 	}
 });

@@ -754,12 +754,13 @@
 												})]
 											}), (0, m.jsx)('span',
 											{
-												className: "black multiSel 💟"+v
+												className: "black multiSel",
+												title: '💟'+v
 											})]
 										}), (0, m.jsx)('ul',
 										{
 											className: "mutliSelect",
-											id: '💟'+v,
+											title: '💟'+v,
 											children: [Object.keys(mt_clubs[v]).map(function(value, index)
 											{
 												return (0, m.jsx)('li',
@@ -800,12 +801,13 @@
 												}) : '']
 											}), (0, m.jsx)('span',
 											{
-												className: "black multiSel "+v
+												className: "black multiSel",
+												title: v
 											})]
 										}), (0, m.jsx)('ul',
 										{
 											className: "mutliSelect",
-											id: v,
+											title: v,
 											children: [Object.keys(mt_club[v]).map(function(value, index)
 											{
 												return (0, m.jsx)('li',
@@ -839,12 +841,13 @@
 											children: '🗑️临时角色'
 										}), (0, m.jsx)('span',
 										{
-											className: "black multiSel 🗑️临时角色"
+											className: "black multiSel",
+											title: '🗑️临时角色'
 										})]
 									}), (0, m.jsx)('ul',
 									{
 										className: "mutliSelect",
-										id: '🗑️临时角色',
+										title: '🗑️临时角色',
 										children: (0, m.jsx)('li',
 										{
 											children: [(0, m.jsx)('input',
