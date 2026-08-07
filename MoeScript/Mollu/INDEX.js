@@ -487,7 +487,11 @@
 										alt: n.profile[0]
 									}), (0, m.jsxs)(I,
 									{
-										style: {overflow: 'hidden'},
+										style:
+										{
+											overflow: 'hidden',
+											whiteSpace: 'nowrap'
+										},
 										children: [(0, m.jsx)(D,
 										{
 											className: "bold",
@@ -3234,6 +3238,7 @@
 																{
 																	style:
 																	{
+																		wordBreak: 'break-all',
 																		color: !EMOJI.custom.io && CUSTOM_EMOJI[no] && CUSTOM_EMOJI[no][v] > -1 ? 'green' : ''
 																	},
 																	children: EmojiInfo
@@ -3258,6 +3263,7 @@
 															{
 																style:
 																{
+																	wordBreak: 'break-all',
 																	color: !EMOJI.custom.io && CUSTOM_EMOJI[no] && CUSTOM_EMOJI[no][v] > -1 ? 'green' : ''
 																},
 																children: EmojiInfo,

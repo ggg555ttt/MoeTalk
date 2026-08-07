@@ -94,7 +94,7 @@ function saveclub()
 	mt_settings['社团列表'] = {};
 	$(".club:checked").each(function()
 	{
-		mt_settings['社团列表'][this.title+'-'+this.value] = 'YES'
+		mt_settings['社团列表'][this.title+'-'+this.value] = 1
 	})
 	saveStorage('设置选项',mt_settings,'local')
 }
