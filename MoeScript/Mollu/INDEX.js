@@ -474,7 +474,11 @@
 								},
 								children: [(0, m.jsxs)(S,
 								{
-									style:{height:'auto'},
+									style:
+									{
+										height: 'auto',
+										overflow: 'hidden'
+									},
 									children: [mt_settings.右侧发言[n.no] ? '' : (0, m.jsx)('img',
 									{
 										className: 'eLaCqa',
@@ -483,35 +487,33 @@
 										alt: n.profile[0]
 									}), (0, m.jsxs)(I,
 									{
+										style: {overflow: 'hidden'},
 										children: [(0, m.jsx)(D,
 										{
 											className: "bold",
-											style:{color:'rgb(68, 72, 78)'},
-											children: mt_settings['人物改名'][n.no] || n.name[a].replaceAll("-", " ")
-										}), (0, m.jsx)('span',
-										{
-											style: {color: 'rgb(111, 119, 127)'},
-											children: n.school[a].replace('💟','')
-										}), (0, m.jsx)('span',
-										{
-											style:
-											{
-												color: 'rgb(75, 105, 137)',
-												zIndex: 100
-											},
-											children:[n.club[a],(0, m.jsx)(c.xL,
+											style: {color: 'rgb(68, 72, 78)'},
+											children: [(0, m.jsx)(c.xL,
 											{
 												style:
 												{
 													width: "1rem",
-													height: "1rem"
+													height: "1rem",
+													color: 'rgb(75, 105, 137)'
 												},
 												icon: ei.Yai,
 												onClick: function()
 												{
 													custom_char(n);
 												}
-											})]
+											}), mt_settings['人物改名'][n.no] || n.name[a].replaceAll("-", " ")]
+										}), (0, m.jsx)('span',
+										{
+											style: {color: 'rgb(111, 119, 127)'},
+											children: n.school[a].replace('💟','')
+										}), (0, m.jsx)('span',
+										{
+											style: {color: 'rgb(111, 119, 127)'},
+											children: n.club[a]
 										})]
 									}), mt_settings.右侧发言[n.no] ? (0, m.jsx)('img',
 									{
@@ -1280,8 +1282,7 @@
 						style: {zIndex: 400},
 						onDoubleClick: function()
 						{
-							char_info = []
-							$$('#custom-char').removeClass('visible')//S()
+							$$('#custom-char .no').click()
 						},
 						children: (0, m.jsxs)(ea.F0,
 						{
@@ -1326,8 +1327,7 @@
 									},
 									onClick: function()
 									{
-										char_info = []
-										$$('#custom-char').removeClass('visible')//S()
+										$$('#custom-char .no').click()
 									},
 									children: (0, m.jsx)(c.j4,{})
 								})]
@@ -1399,7 +1399,11 @@
 								{
 									className: 'headinfo',
 									style: {width: '100%'},
-									children: [(0, m.jsx)(HList.Z,
+									children: [(0, m.jsx)('div',
+									{
+										className: 'delheads',
+										hidden: !0
+									}), (0, m.jsx)(HList.Z,
 									{
 										children: (0, m.jsx)(k,
 										{
@@ -1437,10 +1441,13 @@
 										})],
 										onClick:function()
 										{
-											let index = $$(".heads .selected").index()
+											let delhead = $$(".heads .selected")
+											let index = delhead.index()
 											let length = $$(".heads img").length
+											let title = delhead[0].title
 											if(length === index+1)index--
-											delete char_info.names[$$(".heads .selected").remove().attr('title')]
+											$$('.delheads').append(delhead)
+											delete char_info.names[title]
 											$$(`.heads img:eq(${index})`).click()
 										}
 									}), (0, m.jsx)('div',
@@ -1472,10 +1479,11 @@
 								{
 									children: [(0, m.jsx)(ea.Lw,
 									{
-										className: "bold",
+										className: "bold no",
 										onClick: function()
 										{
 											char_info = []
+											$$('.delheads').html('')
 											$$('#custom-char').removeClass('visible')//S()
 										},
 										children: mt_text.cancel[LANG]

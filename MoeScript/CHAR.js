@@ -338,17 +338,16 @@ async function edit_char()
 
 		CUSTOM_HEAD[id] = []
 	}
-	let arr = []
 	for(const img of document.querySelectorAll('.heads img'))
 	{
 		const index = img.title
 		const src = img.src
-		arr.push(index)
 		if(mt_char[id])
 		{
 			mt_char[id].head.push(index)
 			await 数据操作('Is',index,src)
-			if(index !== char_info.no)mt_char[id].names[index] = toString(char_info.names[index])
+			mt_char[id].names[index] = toString(char_info.names[index])
+			if(!mt_char[id].names[index])delete mt_char[id].names[index]
 		}
 		else if(id !== index)
 		{
@@ -361,14 +360,12 @@ async function edit_char()
 			if(!mt_settings.人物改名[index])delete mt_settings.人物改名[index]
 		}
 	}
-	for(let i=0,l=char_info.profile.length;i<l;i++)
+	for(const img of document.querySelectorAll('.delheads img'))
 	{
-		const img = char_info.profile[i]
-		if(img.startsWith('custom-') && !arr.includes(img))
-		{
-			delete mt_settings.人物改名[img]
-			await 数据操作('Ir',img)
-		}
+		const index = img.title
+		const src = img.src
+		await Promise.all([数据操作('Ir',index),数据操作('Ts',index,src)])
+		delete mt_settings.人物改名[index]
 	}
 	if(CUSTOM_HEAD[id])
 	{
@@ -376,11 +373,10 @@ async function edit_char()
 		if(!CUSTOM_HEAD[id].length)delete CUSTOM_HEAD[id]
 	}
 	$('#custom-char .rightSend').prop('checked') ? mt_settings['右侧发言'][id] = true : delete mt_settings['右侧发言'][id]
+	$('#custom-char .no').click()
 	数据操作('Ss','自定头像',CUSTOM_HEAD)
 	saveStorage('mt-char',mt_char,'local')
 	saveStorage('设置选项',mt_settings,'local')
-	char_info = []
-	$('#custom-char').removeClass('visible')//S()
 	charList(true)//更新角色
 }
 
@@ -495,7 +491,7 @@ $("body").on('click',".heads img",function()
 		if(mt_char[index])name = mt_char[index].name
 		if(mt_schar[index])name = mt_schar[index].name
 		if(mt_settings.人物改名[index])name = mt_settings.人物改名[index]
-		$('.headname').val(char_info.make ? '' : name).attr('disabled','disabled')
+		// $('.headname').val(char_info.make ? '' : name).attr('disabled','disabled')
 		$('.删除头像').hide()
 	}
 	else if(index.startsWith('custom-'))$('.edithead').show()

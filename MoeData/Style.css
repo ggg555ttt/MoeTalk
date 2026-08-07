@@ -31,7 +31,7 @@ body{line-height: 1;}
 }
 .dels[type="checkbox"]:checked{background: url("data:image/webp;base64,UklGRq4BAABXRUJQVlA4WAoAAAAwAAAADgAAEgAAVlA4TJABAAAvDoAEEOfiOrZtpdlPv3Bpgi5pkzqc5HIiTTiIJEmRaub4HjS9fzuMXYwiSZJSPcPpAA+YxCQW+PLesx01kuTI0Y2qXm9+R+MSWARmHhOv8XJbrp/2+Ss+lzXl2M5V/p9SquN/SGlimnPfxXT2j8R0tkTsF8mJvOzCvHK2x0zeyZOe9PgxEVdRaNeYQpSnY1zNcdFfraBPIU6jTYgTgjhNpXgIRSUR5tWnNhAJh4BRVIrDRVAuRtXmNBDKgwqwggsKslL8HIxggACAAfyBAgAAAAUEAACHsW2bzolt27b9Eef/Hzvv9d9H3EJE/xW2bdsoO909AwAgj1UTcgD4MFVi8VgmVV+mjo4JpZO45sOUkRmhlJJ59J0qgsx9v6O7I+HDSsi8zGXVnFK+L944v9w3eAjpUO/RCJUlMgyM7mJJ5+neaxZrff1gD5uiA57OrWqGu7IlQt0GeNq3igmw1/cpJwB3+1o2AXBmtHjTupaM77XGjx9wNS9FA96f9U1B/5tz/h+5f2R0vzk9D/xD9sMB") no-repeat center center;}
 .PLAYER_Loading,.PLAYER_Loading:before,.PLAYER_Loading:after{color:#ffffff;top:-2.7rem;border-radius:50%;width:0.5rem;height:0.5rem;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation:load7 3s infinite ease-in-out;animation:load7 3s infinite ease-in-out;}.PLAYER_Loading{margin:1.2rem 2rem 0rem 2rem;position:relative;text-indent:-9999rem;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation-delay:-0.2s;animation-delay:-0.2s;}.PLAYER_Loading:before,.PLAYER_Loading:after{content:'';position:absolute;top:0;}.PLAYER_Loading:before{left:-1.2rem;-webkit-animation-delay:-0.4s;animation-delay:-0.4s;}.PLAYER_Loading:after{left:1.2rem;}@-webkit-keyframes load7{0%,80%,100%{box-shadow:0 2rem 0 -1rem;}40%{box-shadow:0 2rem 0 0;}}@keyframes load7{0%,80%,100%{box-shadow:0 2rem 0 -1rem;}40%{box-shadow:0 2rem 0 0;}}
-
+i{word-break: break-all;}
 .dropdown,.dropdown button,.dropdown .mutliSelect
 {
 	width: auto;
@@ -62,9 +62,18 @@ body{line-height: 1;}
     flex-direction: column;
     align-items: center;
     font-size: 1rem;
-    white-space: nowrap;
+    word-break: break-all;
+    white-space: pre-wrap;
+    text-align: left;
 }
-.dropdown li{padding: 0.3rem;}
+.dropdown li
+{
+	padding: 0.3rem;
+	word-break: break-all;
+    white-space: pre-wrap;
+    text-align: left;
+}
+}
 .dropdown ul{display: none;}
 .dropdown .title
 {

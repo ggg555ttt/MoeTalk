@@ -716,7 +716,7 @@ function 处理数据(D,M,C,K,V)
 }
 async function 处理缓存(DB,C,K,V)
 {
-	if(!navigator.serviceWorker.controller)return null
+	if(!navigator.serviceWorker || !navigator.serviceWorker.controller)return null
 	if(C[1] === 'c')
 	{
 		if(C === 'Tc')TempImg.clear()
