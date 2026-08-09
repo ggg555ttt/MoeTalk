@@ -3,7 +3,7 @@ var mt_char = false//自定义角色数据
 var mt_chars = false//自定义角色列表
 var mt_schars = false//临时角色列表
 var mt_clubs = {}//自定义社团列表
-var char_info = {}//角色信息
+var char_info = {}//角色编辑信息
 var saveClub = true;//社团保存开关
 var 选择角色 = true;//快捷角色开关
 var mt_schar = {}//临时角色数据
@@ -12,9 +12,10 @@ var CUSTOM_CHAR = {}
 var CUSTOM_HEAD = {}
 var CUSTOM_NAME = {}
 var 角色信息 = {info:{},name:{},group:[],charface:[]}
-var mt_school,mt_club
-var id_map = [{},{}]
-var CustomFaceAuthor = {}
+var mt_school = {}//学院列表
+var mt_club = {}//社团列表
+var id_map = [{},{}]//id索引映射表
+var CustomFaceAuthor = {}//差分作者信息
 var CFInfo = {}//表情差分信息
 //读取头像
 function loadhead(id,img)

@@ -588,8 +588,9 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 	
 	let arr = {chats: [],mode: mode};//操作记录
 	if(!data[0])data.replyDepth = replyDepth//单条消息发送专用
-	$.each(indexs,function(k,chatIndex)
+	for(let k=0,l=indexs.length;k<l;k++)
 	{
+		let chatIndex = indexs[k]
 		if(chatIndex === -1)
 		{//末尾追加
 			chatIndex = chats.length
@@ -702,7 +703,7 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 		{
 			nextindex = blink(chatIndex) ? chatIndex : null
 		}
-	})
+	}
 	if(选择列表.length)updateFirstCheckedBorder()
 	arr.indexs = indexs;moeLog(arr,撤销)//添加操作记录
 	setTimeout(function()

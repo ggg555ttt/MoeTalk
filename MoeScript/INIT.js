@@ -283,6 +283,7 @@ function setting(SETTING)
 	delete SETTING.差分比例
 	delete SETTING.图片比例
 	delete SETTING.文字样式
+	delete SETTING.排序方式
 	return SETTING
 }
 mt_settings = setting(mt_settings)
@@ -716,7 +717,7 @@ function 处理数据(D,M,C,K,V)
 }
 async function 处理缓存(DB,C,K,V)
 {
-	if(!navigator.serviceWorker || !navigator.serviceWorker.controller)return null
+	if(location.protocol === 'http:')return null
 	if(C[1] === 'c')
 	{
 		if(C === 'Tc')TempImg.clear()

@@ -735,8 +735,7 @@
 										},
 										children: mt_text['clear'][LANG]+mt_text['select'][LANG]
 									})]
-								}), 
-								Object.keys(mt_clubs).map(function(v, k)
+								}), Object.keys(mt_clubs).map(function(v, k)
 								{
 									return (0, m.jsx)('dl',
 									{
@@ -782,8 +781,40 @@
 											})]
 										})]
 									})
-								}),
-								mt_club && mt_school ? Object.keys(mt_school).map(function(v, k)
+								}), (0, m.jsx)('dl',
+								{
+									className: "dropdown",
+									children: [(0, m.jsx)('button',
+									{
+										className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 kwhiZC button",
+										children: [(0, m.jsx)('span',
+										{
+											className: "hida",
+											children: '🗑️临时角色'
+										}), (0, m.jsx)('span',
+										{
+											className: "black multiSel",
+											title: '🗑️临时角色'
+										})]
+									}), (0, m.jsx)('ul',
+									{
+										className: "mutliSelect",
+										title: '🗑️临时角色',
+										children: (0, m.jsx)('li',
+										{
+											children: [(0, m.jsx)('input',
+											{
+												type: "checkbox",
+												className: "club",
+												title: '🗑️临时角色',
+												value: '临时角色'
+											}), '临时角色']
+										})
+									})]
+								}), (0, m.jsx)('div',
+								{
+									style: {width: '100%'}
+								}), Object.keys(mt_club).map(function(v, k)
 								{
 									return (0, m.jsx)('dl',
 									{
@@ -818,7 +849,7 @@
 														className: "club",
 														title: v,
 														value: value
-													}),mt_club[v][value][LANG] ? mt_club[v][value][LANG] : value]
+													}), mt_club[v][value][LANG] || value]
 												})
 											}), (0, m.jsx)('button',
 											{
@@ -829,38 +860,7 @@
 											})]
 										})]
 									})
-								}) : '', (0, m.jsx)('dl',
-								{
-									className: "dropdown",
-									children: [(0, m.jsx)('button',
-									{
-										className: "common__Button-sc-1ojome3-8 common__GroupButton-sc-1ojome3-10 kwhiZC button",
-										children: [(0, m.jsx)('span',
-										{
-											className: "hida",
-											children: '🗑️临时角色'
-										}), (0, m.jsx)('span',
-										{
-											className: "black multiSel",
-											title: '🗑️临时角色'
-										})]
-									}), (0, m.jsx)('ul',
-									{
-										className: "mutliSelect",
-										title: '🗑️临时角色',
-										children: (0, m.jsx)('li',
-										{
-											children: [(0, m.jsx)('input',
-											{
-												type: "checkbox",
-												className: "club",
-												title: '🗑️临时角色',
-												value: '临时角色'
-											}), '临时角色']
-										})
-									})]
-								})]
-								//*新增社团分类
+								})]//*社团分类
 							}), (0, m.jsx)(A,
 							{
 								children: (0, m.jsx)(c.Mm,
@@ -9121,6 +9121,11 @@
 					let isFirst = isfirst(c.chats.indexOf(t),c.chats,'player')
 					let isCenter = t.isCenter && t.type === 'image'
 					let style = MMT目录.设置.风格样式[t.type] || ''
+					if(t.type === 'image')
+					{
+						if(t.content === 'CharFace' && MMT目录.设置.风格样式['charface'])style += MMT目录.设置.风格样式['charface']
+						if(t.content === 'Emoji' && MMT目录.设置.风格样式['emoji'])style += MMT目录.设置.风格样式['emoji']
+					}
 					if(typeof t.style == 'object')t.style = 读取样式('str',t.style)
 					style = 读取样式('obj',style+(t.style || ''))
 					if(t.heads && (!t.heads.list || t.heads.list.length < 1))delete t.heads
@@ -9233,11 +9238,7 @@
 											{className: '右角',style:{borderLeftColor:style['background-color']}}) : '' ] : (0, m.jsx)('img',
 											{//图片消息
 												className: '图片',
-												style:
-												{
-													maxHeight: t.content === 'CharFace' ? '360px' : "",
-													maxWidth: t.content === 'CharFace' ? MMT目录.设置['差分比例'] : MMT目录.设置['图片比例']
-												},//@差分表情宽高百分比
+												style: style,
 												src: isBase64(t.file) ? t.file : href+t.file,
 												onError: function(e){IMAGE_error(e,'palyer')},
 											}), t.time ? (0, m.jsx)(s.i9,

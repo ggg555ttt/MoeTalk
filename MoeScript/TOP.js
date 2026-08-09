@@ -112,6 +112,7 @@ async function 加载数据(first = null,MMT = null)
 			数据操作('Sg','自定头像').then(json => json || {})
 		]);
 	}
+	else mt_settings = setting(mt_settings)
 	if(localStorage[GAME+'/Char'])
 	{
 		角色信息 = pako.inflate(localStorage[GAME+'/Char'],{to:'string'})
@@ -489,9 +490,9 @@ $("body").on('click',"#设置选项",function()
 	str += "<button id='截图设置'>截图/下载设置</button> "
 	str += "<button id='布局设置'>标题/布局设置</button> "
 	str += "<button id='操作设置'>软件操作设置</button> "
+	str += "<button id='虚拟滚动'>虚拟滚动（测试）</button> "
 
 	str += "<br><br><button onclick='语言选项()'>语言选项</button> "
-	str += "<button id='虚拟滚动'>虚拟滚动（测试）</button> "
 	str += "<button id='备份设置'>备份/恢复设置</button> "
 	str += "<button id='清除缓存'>清除缓存</button> "
 	str += "<button id='实验选项'>开发者选项</button> "
