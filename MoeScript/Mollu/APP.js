@@ -10257,11 +10257,11 @@
 					}
 				});
 				var r = {
-						no: 0,
-						index: 1
+						no: '0',
+						index: '1'
 					},
 					i = {
-						no: 0,
+						no: '0',
 						name:
 						{
 							kr: "주인공",
@@ -10286,7 +10286,7 @@
 							zh_cn: "MoeTalk",
 							zh_tw: "MoeTalk"
 						},
-						profile: [1]
+						profile: ['1']
 					}//#更改名称
 			},
 			8681: function(e, t, n)

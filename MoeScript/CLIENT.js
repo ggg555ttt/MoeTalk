@@ -259,7 +259,17 @@ async function 保存文件(filename, data, type = 2)
 	if(typeof data === 'object' && !data.size)data = JSON.stringify(data)
 	if(typeof data === 'string')
 	{
-		if(filename === '用户数据/moetalkStorage/chats.json')localStorage['MMT'] = data
+		if(filename === '用户数据/moetalkStorage/chats.json')
+		{
+			try
+			{
+				localStorage['MMT'] = data
+			}
+			catch
+			{
+				delete localStorage['MMT']
+			}
+		}
 		data = new Blob([data],{type: 'application/octet-stream'});
 	}
 	if(!客户端)

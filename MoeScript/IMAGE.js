@@ -194,6 +194,7 @@ function compress(base64Img,type = 'head',mode = 'add',length = 0)
 					else index = `${id}_${index+1}`
 				}
 				else index = id
+				$(`.delheads img[title='${index}']`).remove()
 				$('.heads').append(`<img src="${newBase64}" title="${index}" ${attr}>`)
 				$('#custom-char .yes').removeAttr('disabled')
 				$('.headinfo').show()

@@ -339,11 +339,11 @@ async function edit_char()
 
 		CUSTOM_HEAD[id] = []
 	}
-	for(const img of document.querySelectorAll('.heads img'))
+	await Promise.all([并发处理数据(document.querySelectorAll('.heads img'), async(key, img)=>
 	{
 		const index = img.title
 		const src = img.src
-		if(mt_char[id])
+		if(mt_char[id])//自定义角色
 		{
 			mt_char[id].head.push(index)
 			await 数据操作('Is',index,src)
@@ -360,14 +360,14 @@ async function edit_char()
 			mt_settings.人物改名[index] = toString(char_info.names[index])
 			if(!mt_settings.人物改名[index])delete mt_settings.人物改名[index]
 		}
-	}
-	for(const img of document.querySelectorAll('.delheads img'))
+	}),
+	并发处理数据(document.querySelectorAll('.delheads img'), async(key, img)=>
 	{
 		const index = img.title
 		const src = img.src
 		await Promise.all([数据操作('Ir',index),数据操作('Ts',index,src)])
 		delete mt_settings.人物改名[index]
-	}
+	})])
 	if(CUSTOM_HEAD[id])
 	{
 		CHAR_CharList[char_info.index].profile = arr

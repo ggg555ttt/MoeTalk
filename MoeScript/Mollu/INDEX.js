@@ -2642,16 +2642,20 @@
 										}), (0, m.jsxs)(eT,
 										{
 											style: {'color': 'red'},
-											children: j.CUSTOM ? (0, m.jsxs)('button',
+											children: j.CUSTOM ? [(0, m.jsxs)('input',
 											{
-												children: '统计自定义数据',
+												className: '添加自定义数据',
+												type: 'checkbox'
+											}), '添加自定义数据', (0, m.jsxs)('button',
+											{
+												children: '统计',
 												onClick: function()
 												{
 													let c = Object.keys(j.CUSTOM.CHAR).length
 													let n = Object.keys(j.CUSTOM.IMAGE).length
 													alert(`角色总数：${c}\n图片总数：${n}`)
 												}
-											}) : ''
+											})] : ''
 										})]
 									}), (0, m.jsxs)("span",
 									{

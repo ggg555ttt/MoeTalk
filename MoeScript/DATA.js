@@ -37,6 +37,7 @@ function loaddata(json,play)//识别存档
 		json.SETTING = mt_settings//设置信息
 	}
 	if(!json.TEMP)json.TEMP = {CHAR:{},EMOJI:{},IMAGE:{}}
+	if(!json.TEMP.IMAGE)json.TEMP.IMAGE = {}
 	if(!json.INFO)json.INFO = {title:"",nickname:"",date:""}
 	if(json.CHAR || json.EMOJI)
 	{
@@ -62,23 +63,19 @@ function loaddata(json,play)//识别存档
 		if(play)repairChat(json.CHAT[i]);
 		if(play == 'upload')
 		{
-			let chat = json.CHAT[i]
-			let id = chat.sCharacter.no.toString()
-			let img = chat.sCharacter.index.toString()
+			const chat = json.CHAT[i]
+			const id = chat.sCharacter.no
 			//自定义角色
 			if(!json.TEMP.CHAR[id] && json.CUSTOM.CHAR[id])json.TEMP.CHAR[id] = json.CUSTOM.CHAR[id]
-			//自定义头像
-			if(!json.TEMP.IMAGE[img] && json.CUSTOM.IMAGE[img])json.TEMP.IMAGE[img] = json.CUSTOM.IMAGE[img]
-			let heads = chat.heads && chat.heads.list || []
-			for(let i=0,l=heads.length;i<l;i++)
-			{//自定义头像
-				img = heads[i]
-				if(!json.TEMP.IMAGE[img] && json.CUSTOM.IMAGE[img])json.TEMP.IMAGE[img] = json.CUSTOM.IMAGE[img]
-			}
-			img = chat.file || ''
-			if(isCusImg(img))
-			{//自定义图片
-				if(!json.TEMP.IMAGE[img] && json.CUSTOM.IMAGE[img])json.TEMP.IMAGE[img] = json.CUSTOM.IMAGE[img]
+			//自定义图片
+			const imgs = [chat.sCharacter.index, ...chat.heads && chat.heads.list || [], chat.file || '']
+			for(let i=0,l=imgs.length;i<l;i++)
+			{
+				const img = imgs[i]
+				if(isCusImg(img) && !json.TEMP.IMAGE[img] && json.CUSTOM.IMAGE[img])
+				{
+					json.TEMP.IMAGE[img] = json.CUSTOM.IMAGE[img]
+				}
 			}
 		}
 	}
@@ -93,9 +90,11 @@ function loaddata(json,play)//识别存档
 }
 function repairChat(data)
 {
-	if(!data.sCharacter)return
-	let id = toString(data.sCharacter.no)
-	let head = toString(data.sCharacter.index)
+	if(!data.sCharacter)data.sCharacter = {no: '0', index: '1'}
+	data.sCharacter.no = toString(data.sCharacter.no)
+	data.sCharacter.index = toString(data.sCharacter.index)
+	let id = data.sCharacter.no
+	let head = data.sCharacter.index
 	if(id_map[0][id])id = id_map[0][id]
 	if(id_map[1][head])head = id_map[1][head]
 	if(角色信息.info[id] && head < 1000)head = 角色信息.info[id][2][0]//旧mollu角色
@@ -239,42 +238,27 @@ async function 生成存档(info,cus = false,mmt)
 	json.INFO = info
 	json.TEMP = {CHAR:{},IMAGE:{}}
 	json.ERROR = localStorage['ERROR'] || '[]'
+	const imgArr = new Set()
 	for(let i=0,l=mmt.length;i<l;i++)
 	{//记录MMT中使用的数据
-		let chat = mmt[i]
-		let id = chat.sCharacter.no.toString()
-		let img = chat.sCharacter.index.toString()
-		if(!json.TEMP.CHAR[id])
-		{//自定义角色
+		const chat = mmt[i]
+		const id = chat.sCharacter.no
+		if(!json.TEMP.CHAR[id])//自定义角色
+		{
 			if(mt_char[id])json.TEMP.CHAR[id] = mt_char[id]
 			if(mt_schar[id])json.TEMP.CHAR[id] = mt_schar[id]
 			if(json.TEMP.CHAR[id])delete json.TEMP.CHAR[id].emoji
 		}
-		if(!json.TEMP.IMAGE[img] && isCusImg(img))
-		{//自定义头像
-			let head = await 数据操作('Tg',img)
-			if(!head)head = await 数据操作('Ig',img)
-			if(head)json.TEMP.IMAGE[img] = head
-		}
-		let heads = chat.heads && chat.heads.list || []
-		for(let i=0,l=heads.length;i<l;i++)
-		{//自定义头像
-			img = heads[i]
-			if(!json.TEMP.IMAGE[img] && isCusImg(img))
-			{
-				let head = await 数据操作('Tg',img)
-				if(!head)head = await 数据操作('Ig',img)
-				if(head)json.TEMP.IMAGE[img] = head
-			}
-		}
-		img = chat.file || ''
-		if(isCusImg(img) && !json.TEMP.IMAGE[img])
-		{//自定义图片
-			let image = await 数据操作('Tg',img)
-			if(!image)image = await 数据操作('Ig',img)
-			if(image)json.TEMP.IMAGE[img] = image
+		const imgs = [chat.sCharacter.index, ...chat.heads && chat.heads.list || [], chat.file || '']
+		for(let i=0,l=imgs.length;i<l;i++)
+		{
+			if(isCusImg(imgs[i]))imgArr.add(imgs[i])//自定义头像
 		}
 	}
+	await 并发处理数据([...imgArr] ,async(key, img)=>
+	{
+		json.TEMP.IMAGE[img] = await 数据操作('Tg',img) || await 数据操作('Tg',img);
+	});
 	if(cus)//记录所有自定义数据
 	{
 		json.CUSTOM = {}
@@ -293,34 +277,54 @@ async function 生成存档(info,cus = false,mmt)
 async function 读取存档(json)
 {
 	INIT_loading('读取存档')
+	const loadCus = $('.添加自定义数据').prop('checked')
 	json.SETTING.选择角色 = mt_settings.选择角色
 	if(chats.length+otherChats.length)await 数据操作('Ps','操作备份',await 生成存档())
 	chats = []
 	otherChats = []
+	if(!json.TEMP)json.TEMP = {CHAR:{},IMAGE:{}}
 	json.CHAT.map(function(v,k)
 	{
+		if(!loadCus && json.CUSTOM)
+		{
+			//自定义角色
+			const id = v.sCharacter.no
+			if(isCusImg(id) && json.CUSTOM.CHAR[id] && !json.TEMP.CHAR[id])
+			{
+				json.TEMP.CHAR[id] = json.CUSTOM.CHAR[id]
+			}
+			//自定义图片
+			const imgs = [v.sCharacter.index, ...v.heads && v.heads.list || [], v.file || '']
+			for(let i=0,l=imgs.length;i<l;i++)
+			{
+				const img = imgs[i]
+				if(isCusImg(img) && json.CUSTOM.IMAGE[img] && !json.TEMP.IMAGE[img])
+				{
+					json.TEMP.IMAGE[img] = json.CUSTOM.IMAGE[img]
+				}
+			}
+		}
 		if(v.replyDepth !== 0)otherChats.push(v)
 		else chats.push(v)
 	})
 	//写入临时数据
 	await 数据操作('Tc')
-	if(!json.TEMP)json.TEMP = {CHAR:{},IMAGE:{}}
 	mt_schar = json.TEMP.CHAR || {}
-	for(let key in json.TEMP.IMAGE)
+	await 并发处理数据(json.TEMP.IMAGE ,async(key, img)=>
 	{
-		await 数据操作('Ts',key,json.TEMP.IMAGE[key])
-	}
+		await 数据操作('Ts',key,img)
+	});
 	await 数据操作('Ts','临时角色',mt_schar)
 	//写入自定义数据
-	if(json.CUSTOM)
+	if(loadCus && json.CUSTOM)
 	{
 		mt_char = {...mt_char,...json.CUSTOM.CHAR}
 		CUSTOM_HEAD = {...CUSTOM_HEAD,...json.CUSTOM.HEAD}
 		CUSTOM_EMOJI = {...CUSTOM_EMOJI,...json.CUSTOM.EMOJI}
-		for(let key in json.CUSTOM.IMAGE)
+		await 并发处理数据(json.CUSTOM.IMAGE ,async(key, img)=>
 		{
-			await 数据操作('Is',key,json.CUSTOM.IMAGE[key])
-		}
+			await 数据操作('Is',key,img)
+		});
 		await 数据操作('Ss','mt-char',mt_char)
 		await 数据操作('Ss','DB_EMOJI',CUSTOM_EMOJI)
 	}

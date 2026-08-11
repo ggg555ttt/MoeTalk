@@ -1,5 +1,79 @@
 /*@MoeScript/INIT.js@*/
 var TempImg = new Set()
+async function 并发处理数据(data, handler, limit = 5)
+{
+	if(typeof handler !== 'function')throw new Error('handler 必须是函数');
+
+	const errors = [];
+	let index = 0;
+	let total = 0;
+	let next = null;
+
+	let successCount = 0;
+	let failCount = 0;
+
+	// 数组类型
+	if(data.length >= 0)
+	{
+		total = data.length;
+		next = ()=>
+		{
+			while(index < total) 
+			{
+				const i = index++;
+				// 如果你的数组可能是稀疏数组，并且想跳过空位，可以打开下面这句
+				// if (!(i in data)) continue;
+				return {key: i,value: data[i]};// 数组下标，默认给数字；如果想要字符串，改成 String(i)
+			}
+
+			return null;
+		};
+	}
+  	else// 普通对象类型
+	{
+		const keys = [];
+		for(let key in data)keys.push(key);
+
+		total = keys.length;
+
+		next = ()=>
+		{
+			if(index >= total)return null;
+			const key = keys[index++];
+			return {key, value: data[key]};
+		};
+	}
+	async function worker()
+	{
+		while(true)
+		{
+			const item = next();
+			if (!item) break;
+			try
+			{
+				await handler(item.key, item.value, item);
+				successCount++;
+			}
+			catch(err)
+			{
+				failCount++;
+				errors.push(
+				{
+					key: item.key,
+					value: item.value,
+					err
+				});
+			}
+		}
+	}
+
+	const workers = [];
+	const workerCount = Math.min(limit, total);
+	for(let i = 0; i < workerCount; i++)workers.push(worker());
+	await Promise.all(workers);
+
+	return {successCount, failCount, errors};
+}
 function 读取样式(mode,id)
 {
 	let 风格样式 = {}
@@ -354,8 +428,9 @@ function getNowDate()
 }
 function toString(val)
 {
-	if(!val)return ''
-	else return val.toString()
+	if(typeof val === 'number')val = val.toString()
+	if(typeof val !== 'string')val = ''
+	return val
 }
 function isTrue(val)
 {
@@ -774,7 +849,17 @@ async function 处理文件(DB,C,K,V)
 {
 	if(!本地)
 	{
-		if(K === 'chats' && C === 'Ss')localStorage['MMT'] = JSON.stringify(V)
+		if(K === 'chats' && C === 'Ss')
+		{
+			try
+			{
+				localStorage['MMT'] = JSON.stringify(V)
+			}
+			catch
+			{
+				delete localStorage['MMT']
+			}
+		}
 		return await 处理缓存(DB,C,K,V);
 	}
 	if(C[1] === 's' && window.保存文件 && V)
