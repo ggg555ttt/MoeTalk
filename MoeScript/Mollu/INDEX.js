@@ -968,7 +968,7 @@
 							}), (0, m.jsxs)('button',
 							{
 								id: 'makecus',
-								children: L.Z.add[u]+L.Z.student[u]
+								children: L.Z.student[u]+L.Z.add[u]
 							}), (0, m.jsxs)(W,
 							{
 								style:
@@ -4495,7 +4495,7 @@
 												{
 													type:'checkbox',
 													className:'addChat'
-												}),L.Z.add[f]]
+												}), L.Z.add[f]]
 											}),(0, m.jsx)('label',
 											{
 												style:{color:'blue'},

@@ -1,7 +1,7 @@
-/*@MoeScript/Old/OLD.js@*/
+/*@MoeScript/Style/OLD.js@*/
 if(OldTalk)
 {
-	$("head").append(`<link rel='stylesheet' href='./MoeScript/Old/Old.css?ver=${本地版本}'>`);
+	$("head").append(`<link rel='stylesheet' href='./MoeScript/Style/Old.css?ver=${本地版本}'>`);
 	编辑消息 = function(index)
 	{
 		chatIndex = index
