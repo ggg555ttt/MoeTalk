@@ -495,14 +495,14 @@
 										children: [(0, m.jsx)(D,
 										{
 											className: "bold",
-											style: {color: 'rgb(68, 72, 78)'},
+											style: {fontSize: '1.2rem',color: 'rgb(45, 70, 100)'},
 											children: [(0, m.jsx)(c.xL,
 											{
 												style:
 												{
 													width: "1rem",
 													height: "1rem",
-													color: 'rgb(75, 105, 137)'
+													color: 'rgb(68, 72, 78)'
 												},
 												icon: ei.Yai,
 												onClick: function()
@@ -510,13 +510,13 @@
 													custom_char(n);
 												}
 											}), mt_settings['人物改名'][n.no] || n.name[a].replaceAll("-", " ")]
-										}), (0, m.jsx)('span',
+										}), (0, m.jsx)('i',
 										{
-											style: {color: 'rgb(111, 119, 127)'},
+											style: {fontSize: '0.9rem',color: 'rgb(111, 119, 127)'},
 											children: n.school[a].replace('💟','')
-										}), (0, m.jsx)('span',
+										}), (0, m.jsx)('i',
 										{
-											style: {color: 'rgb(111, 119, 127)'},
+											style: {fontSize: '0.9rem',color: 'rgb(111, 119, 127)'},
 											children: n.club[a]
 										})]
 									}), mt_settings.右侧发言[n.no] ? (0, m.jsx)('img',

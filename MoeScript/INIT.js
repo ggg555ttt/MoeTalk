@@ -783,9 +783,11 @@ function 处理数据(D,M,C,K,V)
 			resolve(e)
 		}).catch((e)=>
 		{
-			let str = `数据库操作失败！\n这可能是存储空间不足引起的\n如果不是请向开发者反馈此问题\n函数名：${D._config.name}.${M}\n键名：${K}`
+			let str = '数据库操作失败！这可能是存储空间不足引起的，如果不是请向开发者反馈此问题\n'
+			let info = `函数名：${D._config.name}.${M}键名：${K}信息：${e}`
 			let config = {id: 'error',title: '<span class="red">错误警告</span>'}
-			alert(str,config)
+			记录错误(info)
+			alert(str+info,config)
 			resolve(e)
 		})
 	})
