@@ -864,7 +864,7 @@ $("body").on('click',"#实验选项",function()
 	{
 		if($('.调试模式').prop('checked'))localStorage['调试模式'] = true
 		else delete localStorage['调试模式']
-		if($(`.alert_${config.id} textarea`).val())eval($(`.alert_${config.id} textarea`).val())
+		// Code injection via eval() removed for security reasons
 	}
 	alert(str,config)
 });
