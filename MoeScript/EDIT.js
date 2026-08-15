@@ -808,7 +808,9 @@ $('body').on('change', ".dels", function() {
 $('body').on('click', ".chatText", function() {
 	$('.fzOyMd.selected')[0].scrollIntoView({inline:'center'})
 	// 直接获取被勾选的第一个消息序号
-	let name = loadname(mt_settings['选择角色'].no, mt_settings['选择角色'].index)
+	const id = mt_settings['选择角色'].no
+	const index = mt_settings['选择角色'].index
+	let name = loadname(id, index)
 	let str = mt_text.input_comment[LANG]
 	if (选择列表.length > 0) {
 		str = '在上方插入'
@@ -819,7 +821,7 @@ $('body').on('click', ".chatText", function() {
 			block: 'center' 
 		});
 	}
-	$('.chatText').attr('placeholder',name+'：'+str)
+	$('.chatText').css('text-align',(mt_settings.右侧发言[id] || id === '0') && 'right' || '').attr('placeholder',name+'：'+str)
 });
 // 高性能批量更新所有名字
 function updateAllNames() {

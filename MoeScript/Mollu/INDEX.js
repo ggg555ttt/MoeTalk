@@ -512,11 +512,11 @@
 											}), mt_settings['人物改名'][n.no] || n.name[a].replaceAll("-", " ")]
 										}), (0, m.jsx)('i',
 										{
-											style: {fontSize: '0.9rem',color: 'rgb(111, 119, 127)'},
+											style: {fontSize: '1rem',color: 'rgb(111, 119, 127)'},
 											children: n.school[a].replace('💟','')
 										}), (0, m.jsx)('i',
 										{
-											style: {fontSize: '0.9rem',color: 'rgb(111, 119, 127)'},
+											style: {fontSize: '1rem',color: 'rgb(111, 119, 127)'},
 											children: n.club[a]
 										})]
 									}), mt_settings.右侧发言[n.no] ? (0, m.jsx)('img',
@@ -1446,7 +1446,7 @@
 											},
 											src:href+'MoeData/Ui/School/CUSTOM.webp'
 										})],
-										onClick:function()
+										onClick: function()
 										{
 											let delhead = $$(".heads .selected")
 											let index = delhead.index()

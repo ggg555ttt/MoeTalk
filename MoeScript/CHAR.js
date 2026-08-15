@@ -318,7 +318,7 @@ async function edit_char()
 	let club = $('.clubname').val() || ''
 	let name = $('.charname').val() || $('.charname').attr('placeholder')
 	let id = char_info.no
-	let index;
+	let index,arr = [];
 
 	if(mt_char[id] || char_info.make)
 	{
@@ -350,14 +350,15 @@ async function edit_char()
 			mt_char[id].names[index] = toString(char_info.names[index])
 			if(!mt_char[id].names[index])delete mt_char[id].names[index]
 		}
-		else if(id !== index)
+		else
 		{
+			arr.push(index)
 			if(index.startsWith('custom-'))
 			{
 				CUSTOM_HEAD[id].push(index)
 				await 数据操作('Is',index,src)
 			}
-			mt_settings.人物改名[index] = toString(char_info.names[index])
+			if(id !== index)mt_settings.人物改名[index] = toString(char_info.names[index])
 			if(!mt_settings.人物改名[index])delete mt_settings.人物改名[index]
 		}
 	}),
@@ -492,6 +493,7 @@ $("body").on('click',".heads img",function()
 		if(mt_char[index])name = mt_char[index].name
 		if(mt_schar[index])name = mt_schar[index].name
 		if(mt_settings.人物改名[index])name = mt_settings.人物改名[index]
+		if(!char_info.custom)$('.headname').attr('disabled','disabled')
 		// $('.headname').val(char_info.make ? '' : name).attr('disabled','disabled')
 		$('.删除头像').hide()
 	}
