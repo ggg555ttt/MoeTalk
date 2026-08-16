@@ -3633,7 +3633,9 @@
 												{
 													sendMessage({content: text.value},'chat')//#按键发送
 													text.value = ''
+													text.title = '按键发送'
 													text.click()
+													text.title = ''
 												}
 											})
 										},
@@ -3649,7 +3651,9 @@
 									{
 										sendMessage({content: text.value},'chat')//#点击发送
 										text.value = ''
+										text.title = '点击发送'
 										text.click()
+										text.title = ''
 									}
 								},
 								children: (0, m.jsx)(c.xL,

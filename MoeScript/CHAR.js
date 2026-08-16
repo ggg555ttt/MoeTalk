@@ -135,7 +135,7 @@ $("body").on('click','.mutliSelect input[type="checkbox"]',function()
 
 	if($(this).is(':checked')) 
 	{
-		var html = `<b class="title" title="${school}"alt="${club}">${school.startsWith('💟') ? '#' : '|'}<i class="white">${title}</i></b>`
+		var html = `<b class="title" title="${school}"alt="${club}">${school.startsWith('💟') ? '#' : '|'}<i class="white">${escapeHTML(title)}</i></b>`
 		$(`.multiSel[title="${school}"]`).append(html);
 		$(`.multiSel[title="${school}"]`).prev().css('color','red');
 		$(`.multiSel[title="${school}"]`).parent().css("background-color","rgb(139, 187, 233)")

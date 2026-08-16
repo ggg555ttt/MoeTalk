@@ -709,7 +709,9 @@ function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 	setTimeout(function()
 	{//编辑位置跳转
 		let behavior = "smooth"
-		if(['heart','info','reply'].includes(type))behavior = "auto"
+		const notEnd = window.chatList && !chatList.renderedIndices.has(chats.length+1)
+		const isHIR = ['heart','info','reply'].includes(type)
+		if(notEnd || isHIR)behavior = "auto"
 		if(nextindex !== null)跳转索引(nextindex,{block:'center',behavior:behavior});
 	}, 100)
 	数据操作('Ss','chats',[...chats,...otherChats])
