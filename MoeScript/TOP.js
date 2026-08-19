@@ -94,6 +94,7 @@ async function 加载数据(first = null,MMT = null)
 	角色信息 = {info:{},name:{},group:[],charface:[]}
 	CFInfo = {}
 	CustomFaceAuthor = {}
+	Birthday = {}
 	let md5
 	let head = await 数据操作('Sg','mt-head')
 	if(head)
@@ -144,11 +145,12 @@ async function 加载数据(first = null,MMT = null)
 		}
 		if(GAME == 'BLDA')
 		{
-			[CFInfo, id_map, CustomFaceAuthor] = await Promise.all(
+			[CFInfo, id_map, CustomFaceAuthor, Birthday] = await Promise.all(
 			[
-				$ajax(`${href}GameData/${GAME}/CharFaceInfo.json?md5=${md5['CharFaceInfo']}`).then(json => JSON.parse(json)),
-				$ajax(`${href}GameData/${GAME}/IdMap.json?md5=${md5['IdMap']}`).then(json => JSON.parse(json)),
-				$ajax(`${href}GameData/${GAME}/CustomFaceAuthor.json?md5=${md5['CustomFaceAuthor']}`).then(json => JSON.parse(json))
+				$ajax(`${href}GameData/${GAME}/CharFaceInfo.json?md5=${md5['CharFaceInfo']}`).then(json => JSON.parse(json || '{}')),
+				$ajax(`${href}GameData/${GAME}/IdMap.json?md5=${md5['IdMap']}`).then(json => JSON.parse(json || '[{},{}]')),
+				$ajax(`${href}GameData/${GAME}/CustomFaceAuthor.json?md5=${md5['CustomFaceAuthor']}`).then(json => JSON.parse(json || '{}')),
+				$ajax(`${href}GameData/${GAME}/Birthday.json?md5=${md5['Birthday']}`).then(json => JSON.parse(json || '{}'))
 			]);
 		}
 	}

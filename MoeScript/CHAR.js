@@ -17,6 +17,8 @@ var mt_club = {}//社团列表
 var id_map = [{},{}]//id索引映射表
 var CustomFaceAuthor = {}//差分作者信息
 var CFInfo = {}//表情差分信息
+var Birthday = {}
+var sortCharType = "name"
 //读取头像
 function loadhead(id,img)
 {
@@ -251,10 +253,12 @@ function custom_char(info)
 		char_info.name = char_info.name[LANG]
 	}
 	let names = mt_settings.人物改名;
+	let birthday = ''
+	if(Birthday[char_info.no])birthday = '生日：'+Birthday[char_info.no]
 	$('#custom-char .rightSend').prop('checked',false).prop('checked',mt_settings['右侧发言'][char_info.no])
 	$('#custom-char .typeTitle').text('修改角色')
 	$('#custom-char .yes').removeAttr('disabled')
-	$('#custom-char .charid').html(`<span class='red'>ID：${char_info.no}</span><br>`)
+	$('#custom-char .charid').html(`<span class='red'>ID：${char_info.no}</span>${birthday}<br>`)
 	$('.schoolname').val(char_info.school).removeAttr('disabled')
 	$('.clubname').val(char_info.club).removeAttr('disabled')
 	$('.charname').val(names[char_info.no] || '').attr('placeholder',char_info.name)
@@ -582,4 +586,22 @@ function 加载角色()
 		}
 		CHAR_CharList.push(char)
 	}
+}
+function getNextBirthdayDays(birthday) {
+  if (!birthday) return Infinity;
+
+  const [month, day] = birthday.split('-').map(Number);
+
+  if (!month || !day) return Infinity;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  let nextBirthday = new Date(today.getFullYear(), month - 1, day);
+
+  if (nextBirthday < today) {
+    nextBirthday = new Date(today.getFullYear() + 1, month - 1, day);
+  }
+
+  return Math.round((nextBirthday - today) / 86400000);
 }

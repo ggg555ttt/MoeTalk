@@ -458,6 +458,12 @@
 						{
 							return LANG//#e.global.lang
 						});
+					let birthday;
+					if(sortCharType == '生日' && Birthday[n.no])
+					{
+						birthday = getNextBirthdayDays(Birthday[n.no])
+						if(birthday < 999)birthday = toString(birthday)
+					}
 					return (0, m.jsxs)(N,
 					{
 						children: [(0, m.jsx)(S,
@@ -490,7 +496,8 @@
 										style:
 										{
 											overflow: 'hidden',
-											whiteSpace: 'nowrap'
+											whiteSpace: 'nowrap',
+											maxHeight: '5rem'
 										},
 										children: [(0, m.jsx)(D,
 										{
@@ -518,7 +525,11 @@
 										{
 											style: {fontSize: '1rem',color: 'rgb(111, 119, 127)'},
 											children: n.club[a]
-										})]
+										}), typeof birthday == 'string' ? (0, m.jsx)('b',
+										{
+											style: {fontSize: '1rem',color: 'red'},
+											children: birthday == '0' ? '今天是她的生日' : `离生日还有${birthday}天`
+										}) : '']
 									}), mt_settings.右侧发言[n.no] ? (0, m.jsx)('img',
 									{
 										className: 'eLaCqa',
@@ -716,7 +727,16 @@
 										},
 										children: L.Z[e][l]
 									}, n)
-								}), (0, m.jsxs)(A,
+								}), GAME == 'BLDA'? (0, m.jsx)(c.Bx,
+								{
+									style: {padding: 0},
+									className: u === '生日' ? "selected" : "",
+									onClick: function()
+									{
+										d('生日')
+									},
+									children: '生日'
+								}) : '', (0, m.jsxs)(A,
 								{
 									children: [(0, m.jsx)(G,
 									{
@@ -872,6 +892,7 @@
 										if(saveClub)saveclub()
 										custom_chars(mt_char,mt_schar)
 										//*储存分类
+										sortCharType = u
 										t(), a(
 										{
 											sortCharType: u
