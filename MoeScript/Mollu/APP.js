@@ -5564,11 +5564,11 @@
 					{
 						var i, a;
 						if(r === 'zh_cn' || r === 'zh_tw'){r = 'pinyin'}//@中文改为拼音排序
-						if("生日" === n.sortCharType && GAME == 'BLDA')
+						if("生日" === n.sortCharType)
 						{
-							return getNextBirthdayDays(Birthday[e.no]) - getNextBirthdayDays(Birthday[t.no]);
+							if(GAME == 'BLDA')return getNextBirthdayDays(Birthday[e.no]) - getNextBirthdayDays(Birthday[t.no]);
+							else n.sortCharType = "name"
 						}
-						else n.sortCharType = "name"
 						//*按ID排序
 						if("ID" === n.sortCharType)
 						{
