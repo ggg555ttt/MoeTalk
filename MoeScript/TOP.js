@@ -1,4 +1,5 @@
 /*@MoeScript/TOP.js@*/
+INIT_loading('加载')
 var 恭喜发财 = false
 pause = true
 skip = false
@@ -72,6 +73,8 @@ $('body').on('click','.close',function()
 
 async function 加载数据(first = null,MMT = null)
 {
+	加载字体()
+	自定义CSS()
 //加载消息
 	if(!MMT)
 	{
@@ -188,7 +191,15 @@ async function 加载字体(FontCss = `@import url(./MoeData/Fonts/Blueaka/Bluea
 	style.id = 'MoeFont'
 	document.head.appendChild(style);
 }
-
+async function 自定义CSS()
+{
+	$('#CusCss').remove()
+	if(!localStorage['自定义CSS'])return;
+	const style = document.createElement('style');
+	style.textContent = localStorage['自定义CSS']
+	style.id = 'CusCss'
+	document.head.appendChild(style);
+}
 //使用说明
 async function clearCache()
 {
@@ -361,7 +372,6 @@ $(async function()
 		}
 		检查数据()
 	}
-	加载字体()
 	$(".消息底座").wait(function()
 	{
 		加载数据('初始加载')
@@ -493,6 +503,7 @@ $("body").on('click',"#设置选项",function()
 	str += "<button id='布局设置'>标题/布局设置</button> "
 	str += "<button id='操作设置'>软件操作设置</button> "
 	str += "<button id='虚拟滚动'>虚拟滚动（测试）</button> "
+	str += "<button id='自定义CSS'>自定义CSS（测试）</button> "
 
 	str += "<br><br><button onclick='语言选项()'>语言选项</button> "
 	str += "<button id='备份设置'>备份/恢复设置</button> "
@@ -520,6 +531,22 @@ $("body").on('click',"#字体设置",function()
 	alert(str,config)
 	if(!mt_settings.禁止字体)$('.加载字体').prop('checked',true)
 	if(mt_settings['整合差分'])$('.整合差分').prop('checked',true)	
+});
+$("body").on('click',"#自定义CSS",function()
+{
+	let 教程 = 'https://www.runoob.com/css/css-tutorial.html'
+	let str = `教程网站：<a href="${教程}">${教程}</a>\n`
+	str += '<textarea class="bold 自定义CSS scrollbar" style="font-size:1rem;width:100%;height:524.3;"></textarea>'
+	let config = {}
+	config.title = '自定义CSS'
+	config.yes = function()
+	{
+		localStorage['自定义CSS'] = $('.自定义CSS').val()
+		if(!localStorage['自定义CSS'])delete localStorage['自定义CSS']
+		自定义CSS()
+	}
+	alert(str,config)
+	if(localStorage['自定义CSS'])$('.自定义CSS').val(localStorage['自定义CSS'])
 });
 $("body").on('click',"#布局设置",function()
 {
@@ -756,7 +783,7 @@ $("body").on('click',"#截图设置",function()
 	ext += '<option value="image/webp">webp</option>'
 	let str = ''
 	str += `<input class='隐藏前缀' type='checkbox'>隐藏下载文件名前缀\n`
-	if(!客户端)str += `<input class='流式下载' type='checkbox'}>文件流式下载（解决部分浏览器无法下载文件的问题）\n`
+	if(!客户端)str += `<input class='流式下载' type='checkbox'}>流式下载（测试）\n`
 	if(客户端 === 'NW.js')
 	{
 		str += '<input type="file" id="下载位置" nwdirectory hidden/>'

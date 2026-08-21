@@ -21,8 +21,6 @@
 		<script src="./MoeScript/Script/pako.min.js?md5=36b9e8b75bab4e655477e65fbace7380"></script><!-- @@压缩 -->
 		<script src="./MoeScript/Script/rrweb.min.js?md5=64055f0757eca4f37ab35e521e0c6671"></script><!-- @@记录 -->
 		<script>
-
-
 var OldTalk = localStorage['OldTalk'] ? true : false
 //'?eval='+encodeURIComponent("localStorage['HTML5+']='WEB'")
 // delete localStorage['HTML5+']
@@ -57,7 +55,7 @@ if(URLParams.get('phpwin') || localStorage['phpwin'])
 	localStorage['phpwin'] = 客户端
 }
 //版本信息
-var 本地应用版本 = [260820.0115]//@
+var 本地应用版本 = [260821.160639]//@
 var 网络应用版本,本地数据版本,网络数据版本
 var gamearr = {"BLDA":"碧蓝档案","CBJQ":"尘白禁区","QNZL":"千年之旅","YGST":"犹格索托斯的庭院","DFPJ":"东方Project","NONE":"无"}
 var 本地版本 = 本地应用版本[0]
@@ -120,14 +118,14 @@ if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<link rel="shortcut icon" href="./MoeData/Ui/Favor_Schedule_Deco.webp">
 <!-- MoeTalk -->
 		<link rel='stylesheet' href="./MoeScript/Style/Style.css?md5=44f815cf8fa95f3d334c2b6f09d1e88b"><!-- @@样式 -->
-		<script src="./MoeScript/INIT.js?md5=ff6a70c7c15bff755d73ad2ebf11166f" defer></script><!-- @@预定义 -->
+		<script src="./MoeScript/INIT.js?md5=5ce5a8791bcdde09a97efe2c48401670" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/EDIT.js?md5=845dee5543575617a2c0d531f59e974e" defer></script><!-- @@预定义 -->
 		<script src="./MoeScript/CLIENT.js?md5=187a7e94625a3013e93cd7b4c436e83a" defer></script><!-- @@客户端 -->
 		<script src="./MoeScript/DATA.js?md5=2f3ba578fbf7eba32ce53f7c3db07fc9" defer></script><!-- @@存档 -->
 		<script src="./MoeScript/CHAR.js?md5=3c17d616ea9c8626ecb0e0c879678108" defer></script><!-- @@角色 -->
 		<script src="./MoeScript/IMAGE.js?md5=e7df1efdb8a141bcb33dba11540f4bee" defer></script><!-- @@截图 -->
 		<script src="./MoeScript/CHAT.js?md5=e2ef42f7443a11b1f17c7776565bdd42" defer></script><!-- @@消息 -->
-		<script src="./MoeScript/TOP.js?md5=a768cf2e945b2a225af57a85e0440c11" defer></script><!-- @@首页 -->
+		<script src="./MoeScript/TOP.js?md5=1db9e7e03c537a2fcc8d3ffa583a3643" defer></script><!-- @@首页 -->
 <!-- MolluTalk -->
 		<script src="./MoeScript/Mollu/TEXT.js?md5=2066b841284d6e02e23314fd99773921"></script><!-- @@提示文本 -->
 		<script src="./MoeScript/Mollu/MAIN.js?md5=ee8dd486856f4fa5580f9eab8094e728" defer></script><!-- @@ -->
@@ -136,8 +134,7 @@ if(localStorage['调试模式'])loadjs('./MoeScript/Script/vconsole.min.js')
 		<script src="./MoeScript/Style/OLD.js?md5=58e69e1ed23cd3ca28b80896c1b24f48" defer></script><!-- @@旧版脚本 -->
 	</head>
 	<body style="touch-action: none;-webkit-tap-highlight-color: transparent;tap-highlight-color: transparent;"><!-- MikuTap style -->
-		<div class="Loading_0"><div class="Loading_1"><button class="bold" style="white-space: pre-wrap; font-size: 2rem;">点击可隐藏加载界面<br>通常建议您耐心等待</button></div></div>
-		<div class="Loading_0" onclick="$('.Loading_0').hide()"><div class="Loading_1"><span class="Loading_2"></span></div></div>
+		<div class="Loading"></div>
 		<div id="__next"></div>
 		<div class="弹窗"></div>
 		<script id="__NEXT_DATA__" type="application/json">{"props": {},"page": "/"}</script>

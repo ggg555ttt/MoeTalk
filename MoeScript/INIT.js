@@ -503,8 +503,15 @@ $('body').on('click',".INIT_href",function()
 })
 function INIT_loading(loading = '加载')
 {
-	if(!loading)$('.Loading_0').hide()
-	else $('.Loading_0').show()
+	let html = 
+`<div class="Loading_0">
+	<div class="Loading_1">
+		<button class="bold" style="white-space: pre-wrap; font-size: 2rem;">点击可隐藏加载界面<br>通常建议您耐心等待</button>
+	</div>
+</div>
+<div class="Loading_0" onclick="$('.Loading').html('')"><div class="Loading_1"><span class="Loading_2"></span></div></div>`
+	if(!loading)$('.Loading').html('')
+	else $('.Loading').html(html)
 }
 function INIT_waiting(callback,arr)//等待变量加载
 {
