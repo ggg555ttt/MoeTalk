@@ -1,6 +1,6 @@
 /*@ServiceWorker.js@*/
 let cacheName = '缓存';
-let hevcCharFaceFallbackCache = 'hevc-charface-fallback-v1';
+let hevcCharFaceFallbackCache = 'Video';
 
 // 预缓存文件列表
 const cacheList = []

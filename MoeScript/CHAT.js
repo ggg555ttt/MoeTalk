@@ -69,7 +69,7 @@ function mt_emojis(S,mode)
 	EMOJI.path = `GameData/${GAME}/${mode}/`//表情路径
 	EMOJI.pages.type = mode
 	EMOJI.color = 'rgb(45, 70, 100)'
-	EMOJI.plugin = ''
+	EMOJI.plugin = {}
 	let id = 'Emoji';
 	if(mode === 'CharFace')
 	{
@@ -139,7 +139,7 @@ function mt_emojis(S,mode)
 			if(typeof CharFace[0][3] == 'number')
 			{
 				EMOJI.color = 'red'
-				EMOJI.plugin = CustomFaceAuthor[`CFID_${CharFace[0][3]}`]
+				EMOJI.plugin = CustomFaceAuthor[`CFID_${CharFace[0][3]}`] || {}
 			}
 			let charid = 角色信息.info[id][0][3]
 			foreach(CharFace,function(k,v)
@@ -150,6 +150,9 @@ function mt_emojis(S,mode)
 					if(typeof path == 'number')path = '-'+path
 					else if(path != '')path = '_'+path
 					path = `CFID_${v[3]}/CharID_${charid}${path}`;//拓展差分
+					EMOJI.plugin.id = path
+					if(!VIDEO.info[GAME])VIDEO.info[GAME] = {};
+					if(!VIDEO.info[GAME][path])VIDEO.info[GAME][path] = [[],0];
 				}
 				if(typeof v[3] == 'object')//错误文件
 				{

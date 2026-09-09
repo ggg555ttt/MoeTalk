@@ -16,7 +16,6 @@ var mt_school = {}//学院列表
 var mt_club = {}//社团列表
 var id_map = [{},{}]//id索引映射表
 var CustomFaceAuthor = {}//差分作者信息
-var CFInfo = {}//表情差分信息
 var Birthday = {}
 var sortCharType = "name"
 //读取头像

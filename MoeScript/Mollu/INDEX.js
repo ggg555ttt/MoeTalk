@@ -2964,6 +2964,7 @@
 					//*定义差分文件链接
 					if(EMOJI.io != 'NO')
 					{
+						VIDEO.failedFrames.clear()//清空标记
 						EMOJI.type = EMOJI.io;
 						EMOJI.io = 'NO';//@加入判断
 						return (0, m.jsx)(m.Fragment,
@@ -3178,12 +3179,12 @@
 											{
 												"width": "auto",
 												height: '100%',
-												color: EMOJI.plugin ? 'red' : '#3f51b5',
+												color: EMOJI.plugin.name ? 'red' : '#3f51b5',
 												position: 'absolute',
 												right: 0
 											},
 											hidden: EMOJI.type === 'Emoji' && !EMOJI.custom.io,
-											children: EMOJI.type === 'Emoji' ? EMOJI.custom.io ? '编辑' : '管理' : EMOJI.plugin ? '❗声明' : '编辑',
+											children: EMOJI.type === 'Emoji' ? EMOJI.custom.io ? '编辑' : '管理' : EMOJI.plugin.name ? '❗声明' : '编辑',
 											onClick: function()
 											{
 												$$('.INDEX_EmojiIfno:visible').length ? $$('.INDEX_EmojiIfno').hide() : $$('.INDEX_EmojiIfno').show()
@@ -3192,7 +3193,7 @@
 													let str = ''
 													let config = {}
 													config.style = 'text-align:center;'
-													if(EMOJI.plugin)
+													if(EMOJI.plugin.name)
 													{
 														config.title = '版权声明'
 														str += `作者：${EMOJI.plugin.name}\n`
@@ -3260,8 +3261,9 @@
 													let no = mt_settings['选择角色'].no
 													let index = mt_settings['选择角色'].index
 													let link = EMOJI.path+v+'.webp'
-													let EmojiInfo = mt_settings['表情信息'] && mt_settings['表情信息'][v] ? mt_settings['表情信息'][v] : CFInfo[v] ? CFInfo[v] : v
-													EmojiInfo = EmojiInfo === undefined ? '' : EmojiInfo
+													let EmojiInfo = v
+													if(EMOJI.plugin.id)EmojiInfo = VIDEO.info[GAME][EMOJI.plugin.id][0][k] || v
+													if(mt_settings['表情信息'][v])EmojiInfo = mt_settings['表情信息'][v]
 													if(isCusImg(v))link = v
 													let src = v === 'ADD' ? href+'MoeData/Ui/School/RECYCLE.webp' : loadImg(link)
 													return (0, m.jsx)('div',
@@ -3489,7 +3491,7 @@
 																	}
 																	
 																	str += '\n'
-																	let info = `<input style='font-size:1.2rem;' class='text' placeholder='${toString(CFInfo[v])}' value='${mt_settings['表情信息'][v] || ''}'>`
+																	let info = `<input style='font-size:1.2rem;width:80%;' class='text' placeholder='${EmojiInfo}' value='${mt_settings['表情信息'][v] || ''}'>`
 																	config.yes = function()
 																	{
 																		if(EMOJI.custom.io)

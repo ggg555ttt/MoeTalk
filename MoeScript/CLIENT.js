@@ -194,12 +194,12 @@ async function findInvalidFiles(filePaths, concurrency = 30)
 	await Promise.all(workers);
 	return invalidList;
 }
-async function ZipToJson(file,text = '',html = null)
+async function ZipToJson(file,text = '',html = null)//读取文件内的json
 {
-	let json = await $ajax(file,text,html)
-	if(typeof json === 'string')return file
-	json = await JSZip.loadAsync(json);
-	return await json.files['data.json'].async('string')
+	if(typeof file !== 'object')file = await $ajax(file,text,html)//url
+	if(typeof file === 'string')return file//json
+	file = await JSZip.loadAsync(file);//zip、mp4、blob
+	return await file.files['data.json'].async('string')
 }
 function 外部下载(filename, data)
 {//HTML5+，用于下载存档和zip
@@ -528,7 +528,7 @@ var 数据列表 = []
 var 网址列表 = []
 async function 检查数据()
 {
-	if(!本地 || GAME == 'NONE')return
+	if(!本地 || GAME == 'NONE' || localStorage['调试模式'])return
 	$('.更新数据').text('获取文件列表……')
 	await waitPlus()
 	数据列表 = []

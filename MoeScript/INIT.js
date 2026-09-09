@@ -125,7 +125,7 @@ function 读取样式(mode,id)
 	if(mode == 'obj')//CSS字符串转对象
 	{
 		let style = {}
-		let css = id.split('\n');
+		let css = (id || '').split('\n');
 		foreach(css,function(k,v)
 		{
 			v = v.split(';')[0].split(':')
@@ -799,16 +799,17 @@ function 处理数据(D,M,C,K,V)
 		})
 	})
 }
+var Caches = {}
 async function 处理缓存(DB,C,K,V)
 {
-	if(location.protocol === 'http:')return null
+	if(location.protocol === 'http:' || !caches)return null
 	if(C[1] === 'c')
 	{
 		if(C === 'Tc')TempImg.clear()
 		return await caches.delete(DB);
 	}
 	let file = `${href}用户数据/${DB}/`
-	const cache = await caches.open(DB);
+	if(!Caches[DB])Caches[DB] = await caches.open(DB);
 	if(C[1] === 's' && V)
 	{
 		if(C[0] === 'T')TempImg.add(K)
@@ -827,7 +828,7 @@ async function 处理缓存(DB,C,K,V)
 			'Content-Type': V.type || 'application/octet-stream',//从blob获取类型，如果没有则给个默认值
 			'Content-Length': V.size.toString()//明确写入Content-Length，解决大小为 0 的问题
 		});
-		await cache.put(file, new Response(V, {headers: headers}));
+		await Caches[DB].put(file, new Response(V, {headers: headers}));
 		return file;
 	}
 	if(C[1] === 'g' && K)
@@ -849,7 +850,7 @@ async function 处理缓存(DB,C,K,V)
 		if(C === 'Tr')TempImg.delete(K)
 		if(isCusImg(K))file += `${K}.webp`
 		else file += `${K}.json`
-		await cache.delete(file);
+		await Caches[DB].delete(file);
 		return file;
 	}
 	return null;

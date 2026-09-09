@@ -35,8 +35,9 @@ async function IMAGE_error(image,play)
 	}
 	else
 	{
-		img = (play ? await 数据操作('Cg',url) : await 数据操作('Ig',url) || await 数据操作('Tg',url)) || href+'MoeData/Ui/error.webp'
-		if(img[0] === 'G')img = href+img
+		if(isCusImg(url))img = play ? await 数据操作('Cg',url) : await 数据操作('Ig',url) || await 数据操作('Tg',url)
+		if(!img)img = href+'MoeData/Ui/error.webp'
+		// if(img[0] === 'G')img = href+img
 	}
 	if(image.src)
 	{

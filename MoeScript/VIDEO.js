@@ -13,21 +13,21 @@
  * 3. 性能优化：内置 Video 实例复用、帧缓存、请求队列串行化，避免重复解码和 Seek 冲突。
  */
 
-/**
- * 全局状态管理对象
- */
-const state = {
-	manifest: {BLDA:{}},       // 当前使用的主 manifest 对象
-	assetRoot: null,           // 资源根目录 URL
+const VIDEO =
+{
+	list: {},
+	info: {},                  // 当前使用的主 manifest 对象
+	downVideos: new Set(),     // 重新下载的视频文件
 	videos: new Map(),         // 缓存已创建的 <video> 元素及其上下文 (Map<videoUrl, entry>)
 	failedVideos: new Set(),   // 记录加载或解码失败的 video URL，避免重复尝试
+	failedFrames: new Set(),   // 缺失的帧，避免写入缓存
 	fallbacks: new Set(),      // 记录已通过 Service Worker 缓存的回退资源 URL
 	observer: null,            // DOM MutationObserver 实例
-	manifestWarned: false,     // 防止重复打印 manifest 加载失败的警告
 	srcPatched: false,         // 标记 src setter 是否已被劫持
 	fetchPatched: false        // 标记 fetch 是否已被劫持
 };
-(function() {
+(function()
+{
 	if(!localStorage['调试模式'])return
 	"use strict";
 
@@ -59,40 +59,13 @@ const state = {
 	}
 
 	/**
-	 * 获取 manifest 文件的候选 URL 列表
-	 * @returns {string[]} URL 数组
-	 */
-	function getManifestUrls() {
-		const configured = userConfig.manifestUrl;
-		// 优先使用用户配置的 URL
-		if (Array.isArray(configured) && configured.length) return configured.slice();
-		if (configured) return [configured];
-
-		// 默认候选路径列表
-		const candidates = [
-			"Video/manifest.json"//"Video/manifest.json"
-		];
-		const urls = [];
-		for (let i = 0, l = candidates.length; i < l; i++) {
-			try {
-				// 尝试将其解析为相对于当前页面 URL 的绝对 URL
-				urls.push(new URL(candidates[i], window.location.href).href);
-			} catch (error) {
-				// 解析失败则保留原字符串
-				urls.push(candidates[i]);
-			}
-		}
-		// 去重返回
-		return Array.from(new Set(urls));
-	}
-
-	/**
 	 * 规范化目录级别的资源路径
 	 * 提取包含 "GameData/" 且包含 TestFace 的路径，去除查询参数和哈希
 	 * @param {string} source 原始路径
 	 * @returns {string|null} 规范化后的路径，若不匹配规则则返回 null
 	 */
-	function normalizeDirectorySource(source) {
+	function normalizeDirectorySource(source)
+	{
 		if (!source) return null;
 		let raw = String(source);
 		let matchIndex = raw.lastIndexOf("GameData/");
@@ -102,14 +75,13 @@ const state = {
 		let normalized = raw.slice(matchIndex).split("?")[0].split("#")[0].replaceAll("\\", "/");
 		
 		// 必须是 CharFace 目录下的资源
-		if (!normalized.includes(TestFace)) return null;
-		if (normalized.endsWith("/")) normalized = normalized.slice(0, -1);
+		if(!normalized.includes(TestFace))return null;
+		if(normalized.endsWith("/"))normalized = normalized.slice(0, -1);
 		
-		try {
+		try
+		{
 			normalized = decodeURIComponent(normalized);
-		} catch (error) {
-			// 解码失败时保留原始字符串，避免崩溃
-		}
+		}catch(error){}// 解码失败时保留原始字符串，避免崩溃
 		return normalized;
 	}
 
@@ -118,7 +90,8 @@ const state = {
 	 * @param {string} source 原始路径
 	 * @returns {string|null} 规范化后的路径，且必须以 .webp 结尾，否则返回 null
 	 */
-	function normalizeSource(source) {
+	function normalizeSource(source)
+	{
 		let normalized = normalizeDirectorySource(source);
 		if (!normalized) return null;
 		if (!normalized.toLowerCase().endsWith(".webp")) return null;
@@ -144,8 +117,9 @@ const state = {
 		return {
 			CharFaceId: CharFaceId,
 			frameIndex: frameIndex,
+			frameName: frameIndex,
 			isPlus: isPlus,
-			videoUrl: `Video/${GAME}/${CharFaceId}.mp4`,
+			videoUrl: `GameData/${GAME}/Video/${CharFaceId}.mp4`,
 			normalized: source
 		};
 	}
@@ -184,14 +158,15 @@ const state = {
 	 * @param {boolean} forceBlank 是否在等待期间强制显示空白占位图
 	 * @returns {boolean} 是否成功接管了替换流程
 	 */
-	function queueImageReplacement(image, source, forceBlank = true) {
+	function queueImageReplacement(image, source, forceBlank = true)
+	{
 		const normalized = normalizeSource(source);
 		if (!normalized) return false;
 		
 		// 如果已经是降级状态且源相同，避免重复处理
 		if (image.dataset.hevcCharfaceState === "fallback" && image.dataset.hevcCharfaceSource === normalized) return false;
 		
-		const frameInfo = getFrameInfoFromManifest(source);
+		const frameInfo = getFrameInfoFromManifest(normalized);
 		if (frameInfo && frameInfo.missing) {
 			image.dataset.hevcOriginalSrc = source;
 			image.dataset.hevcCharfaceSource = normalized;
@@ -213,8 +188,9 @@ const state = {
 		}
 
 		// 异步执行帧提取，避免阻塞主线程
-		Promise.resolve().then(async function() {
-			const dataUrl = await getFrameDataUrl(source);
+		Promise.resolve().then(async function()
+		{
+			const dataUrl = await getFrameDataUrl(normalized);
 			// 检查 requestId 是否匹配，不匹配说明期间 src 又被修改了，直接丢弃结果
 			if (image.dataset.hevcRequestId !== requestId) return;
 
@@ -244,8 +220,9 @@ const state = {
 	/**
 	 * 劫持 HTMLImageElement 的 src 属性 setter 和 setAttribute 方法
 	 */
-	function patchImageSourceHooks() {
-		if (state.srcPatched || !imageSrcDescriptor || !imageSrcDescriptor.set) return;
+	function patchImageSourceHooks()
+	{
+		if (VIDEO.srcPatched || !imageSrcDescriptor || !imageSrcDescriptor.set) return;
 
 		// 劫持 src 属性赋值
 		Object.defineProperty(HTMLImageElement.prototype, "src", {
@@ -276,15 +253,16 @@ const state = {
 			return originalSetAttribute.call(this, name, value);
 		};
 
-		state.srcPatched = true;
+		VIDEO.srcPatched = true;
 	}
 
 	/**
 	 * 劫持 window.fetch 方法
 	 * 当业务代码通过 fetch 请求被管理的图片时，直接返回提取好的 Data URL 构成的 Response
 	 */
-	function patchFetchHook() {
-		if (state.fetchPatched || !originalFetch) return;
+	function patchFetchHook()
+	{
+		if (VIDEO.fetchPatched || !originalFetch) return;
 
 		window.fetch = async function(input, init) {
 			const requestMethod = getFetchMethod(input, init);
@@ -297,7 +275,7 @@ const state = {
 			if (!normalized) return originalFetch(input, init);
 
 			// 尝试获取帧的 Data URL
-			const dataUrl = await getFrameDataUrl(source);
+			const dataUrl = await getFrameDataUrl(normalized);
 			if (!dataUrl) return originalFetch(input, init);
 
 			// 成功获取则同步到 Service Worker 缓存，并返回伪造的 Response
@@ -305,7 +283,7 @@ const state = {
 			return createFetchResponse(dataUrl, normalized);
 		};
 
-		state.fetchPatched = true;
+		VIDEO.fetchPatched = true;
 	}
 
 	function getFetchMethod(input, init) {
@@ -323,7 +301,8 @@ const state = {
 	/**
 	 * 根据 Data URL 创建一个伪造的 Fetch Response 对象
 	 */
-	async function createFetchResponse(dataUrl, source) {
+	async function createFetchResponse(dataUrl, source)
+	{
 		const response = await originalFetch(dataUrl);
 		if (!response.ok) return response;
 
@@ -331,7 +310,8 @@ const state = {
 		return new Response(blob, {
 			status: 200,
 			statusText: "OK",
-			headers: {
+			headers:
+			{
 				"Content-Type": blob.type || "image/png",
 				"Cache-Control": "public, max-age=31536000, immutable",
 				"X-MT-Hevc-CharFace": "1", // 自定义响应头，标记此响应由本脚本生成
@@ -346,59 +326,85 @@ const state = {
 	async function resolveFrameInfo(source)
 	{
 		const frameInfo = getFrameInfoFromManifest(source);
-		if (!frameInfo || frameInfo.missing) return null;
+		if (!frameInfo || frameInfo.missing || GAME === 'NONE') return null;
 
-		let CharFaceId = frameInfo.CharFaceId,frameIndex = frameInfo.frameIndex;
+		let CharFaceId = frameInfo.CharFaceId
+		let frameIndex = frameInfo.frameIndex
+		let videoUrl = frameInfo.videoUrl
 
-	    // 初始化一个对象，专门用来缓存 Promise
-		if(!state.cfPromises)state.cfPromises = {};
-		if(!frameInfo.isPlus)
+		// 初始化一个对象，专门用来缓存 Promise
+		if(!VIDEO.cfPromises)VIDEO.cfPromises = {};
+		if(!VIDEO.info[GAME])VIDEO.info[GAME] = {};
+		if(!VIDEO.info[GAME][CharFaceId])VIDEO.info[GAME][CharFaceId] = [[],0];
+		if(!VIDEO.list[GAME] && localStorage[GAME+'/Char'])
 		{
-	        // 如果该 ID 还没有对应的 Promise，说明是第一次请求，开始加载
-	        if(!state.cfPromises[CharFaceId])
-	        {
-	            state.cfPromises[CharFaceId] = (async () =>
-	            {
-	                try
-	                {
-						const json = JSON.parse(await ZipToJson(`Video/${GAME}/${CharFaceId}.mp4`));
-	                    // 确保 manifest 结构存在
-						if(!state.manifest[GAME])state.manifest[GAME] = {};
-						state.manifest[GAME][CharFaceId] = json;
-	                }
-	                catch (error)
-	                {
-	                    console.error(`加载 ${CharFaceId} 失败:`, error);
-	                    // 如果加载失败，必须从缓存中移除，否则后续请求会永远卡在这个失败的 Promise 上
-	                    delete state.cfPromises[CharFaceId]; 
-	                    throw error; // 继续抛出错误，让调用方知道失败了
-	                }
-	            })();
-	        }
-	        
-	        // 无论是正在加载还是已经加载完成，都 await 这个 Promise
-	        // 如果正在加载，这里会暂停等待；如果已经加载完，这里会瞬间通过
-	        await state.cfPromises[CharFaceId];
-	        frameInfo.frameIndex = state.manifest[GAME][CharFaceId][frameIndex]
-		}
-
-		
-		return frameInfo;
-	}
-	/**
-	 * 将相对路径的视频路径解析为绝对 URL
-	 */
-	function resolveVideoUrl(videoPath, assetRoot) {
-		const rawPath = String(videoPath || "").replaceAll("\\", "/");
-		const fileName = rawPath.split("/").pop();
-		if (assetRoot && fileName) {
-			try {
-				return new URL(fileName, assetRoot).href;
-			} catch (error) {
-				// 解析失败则回退到下面的逻辑
+			VIDEO.list[GAME] = new Set();
+			let ARR = JSON.parse(pako.inflate(localStorage[GAME+'/Char'],{to:'string'}))
+			for(let id in ARR.info)
+			{
+				if(ARR.info[id][1])
+				{
+					for(let ai=0,al=ARR.info[id][1].length;ai<al;ai++)
+					{
+						let page = ARR.info[id][1][ai]
+						for(let pi=0,pl=page.length;pi<pl;pi++)
+						{
+							let cf = page[pi][2]
+							let img = page[pi][0]
+							if(localStorage['调试模式'] && typeof page[pi][3] == 'number')
+							{
+								const charid = ARR.info[id][0][3]
+								if(typeof img == 'number')img = '-'+img
+								else if(img != '')img = '_'+img
+								img = `CFID_${page[pi][3]}/CharID_${charid}${img}`;//拓展差分
+							}
+							VIDEO.list[GAME].add(img)
+						}
+					}
+					
+				}
 			}
 		}
-		return new URL(rawPath, window.location.href).href;
+		// 如果该 ID 还没有对应的 Promise，说明是第一次请求，开始加载
+		if(!VIDEO.cfPromises[CharFaceId] || VIDEO.failedVideos.has(videoUrl))
+		{
+			VIDEO.cfPromises[CharFaceId] = (async () =>
+			{
+				try
+				{
+					if(VIDEO.failedVideos.has(videoUrl) && !VIDEO.downVideos.has(videoUrl))
+					{
+						VIDEO.downVideos.add(videoUrl)//防止视频重复下载
+						VIDEO.videos.delete(videoUrl)//删除旧视频件缓存
+						VIDEO.failedVideos.delete(videoUrl)//删除标记
+						if(!Caches.缓存)Caches.缓存 = await caches.open('缓存');
+						await Caches.缓存.delete(videoUrl)
+					}
+					let json = await getfile(videoUrl)
+					if(本地 && !json)//本地不存在，就将网络资源下载到本地
+					{
+						json = await getfile(`${MoeTalkURL}/${videoUrl}`)//$ajax
+						await 保存文件(videoUrl,json)
+					}
+					json = JSON.parse(await ZipToJson(json));
+					// json[0] = []//测试
+					VIDEO.info[GAME][CharFaceId] = json;
+					
+				}
+				catch(error)
+				{
+					console.error(`加载 ${CharFaceId} 失败:`, error);
+					// 如果加载失败，必须从缓存中移除，否则后续请求会永远卡在这个失败的 Promise 上
+					delete VIDEO.cfPromises[CharFaceId]; 
+					throw error; // 继续抛出错误，让调用方知道失败了
+				}
+			})();
+		}
+		// 无论是正在加载还是已经加载完成，都 await 这个 Promise
+		// 如果正在加载，这里会暂停等待；如果已经加载完，这里会瞬间通过
+		await VIDEO.cfPromises[CharFaceId];
+		if(!frameInfo.isPlus)frameInfo.frameIndex = VIDEO.info[GAME][CharFaceId][0].indexOf(frameIndex)
+		return frameInfo;
 	}
 
 	/**
@@ -406,8 +412,9 @@ const state = {
 	 * @param {string} videoUrl 视频 URL
 	 * @returns {Object} Video 管理条目
 	 */
-	function getVideoEntry(videoUrl) {
-		if (state.videos.has(videoUrl)) return state.videos.get(videoUrl);
+	function getVideoEntry(videoUrl)
+	{
+		if(VIDEO.videos.has(videoUrl))return VIDEO.videos.get(videoUrl);
 
 		const video = document.createElement("video");
 		video.preload = "auto";
@@ -430,23 +437,27 @@ const state = {
 		entry.ctx = entry.canvas.getContext("2d");
 		
 		// 包装一个 Promise 用于等待视频元数据加载完成
-		entry.readyPromise = new Promise(function(resolve, reject) {
+		entry.readyPromise = new Promise(function(resolve, reject)
+		{
 			let resolved = false;
-			function cleanup() {
+			function cleanup()
+			{
 				video.removeEventListener("loadedmetadata", onReady);
 				video.removeEventListener("loadeddata", onReady);
 				video.removeEventListener("error", onError);
 			}
-			function onReady() {
+			function onReady()
+			{
 				if (resolved) return;
 				resolved = true;
 				cleanup();
 				resolve(video);
 			}
-			function onError() {
+			function onError()
+			{
 				cleanup();
 				entry.failed = true;
-				state.failedVideos.add(videoUrl);
+				VIDEO.failedVideos.add(videoUrl);
 				reject(new Error("Video load failed: " + videoUrl));
 			}
 			video.addEventListener("loadedmetadata", onReady);
@@ -456,7 +467,7 @@ const state = {
 
 		video.src = videoUrl;
 		video.load();
-		state.videos.set(videoUrl, entry);
+		VIDEO.videos.set(videoUrl, entry);
 		return entry;
 	}
 
@@ -464,33 +475,34 @@ const state = {
 	 * 将成功提取的 Data URL 通知 Service Worker 进行缓存
 	 * 这样后续原生的网络请求也能直接命中缓存，提升整体性能
 	 */
-	function syncFallbackCache(source, dataUrl) {
-		if (!source || !dataUrl || !navigator.serviceWorker) return;
+	function syncFallbackCache(source, dataUrl)
+	{
+		if(dataUrl === BLANK_IMAGE || !dataUrl || !navigator.serviceWorker || 本地)return;
 		let absoluteUrl = "";
-		try {
+		try
+		{
 			absoluteUrl = new URL(source, window.location.href).href;
-		} catch (error) {
-			return;
-		}
-		if (state.fallbacks.has(absoluteUrl)) return;
-		state.fallbacks.add(absoluteUrl);
+		}catch(error){return;}
+		if(VIDEO.fallbacks.has(source))return;
+		VIDEO.fallbacks.add(source);
 
-		const payload = {
+		const payload =
+		{
 			type: "MT_HEVC_CHARFACE_CACHE_PUT",
 			url: absoluteUrl,
 			dataUrl: dataUrl
 		};
 
-		Promise.resolve(navigator.serviceWorker.ready).then(function(registration) {
+		Promise.resolve(navigator.serviceWorker.ready).then(function(registration)
+		{
 			const target = navigator.serviceWorker.controller || registration.active || registration.waiting;
-			if (!target) {
-				state.fallbacks.delete(absoluteUrl);
+			if(!target)
+			{
+				VIDEO.fallbacks.delete(source);
 				return;
 			}
 			target.postMessage(payload);
-		}).catch(function() {
-			state.fallbacks.delete(absoluteUrl);
-		});
+		}).catch(() => VIDEO.fallbacks.delete(source));
 	}
 
 	/**
@@ -499,41 +511,54 @@ const state = {
 	 * @param {number|Object} frameIndex 帧索引或包含 frameIndex 和 fps 的对象
 	 * @returns {Promise<string>} 提取出的图片 Data URL
 	 */
-	async function captureFrame(entry, frameIndex) {
+	async function captureFrame(entry, frameInfo)
+	{
 		const video = entry.video;
-		await entry.readyPromise;
-		
-		const fps = (frameIndex && frameIndex.fps) ? frameIndex.fps : 10;
-		const frameNumber = typeof frameIndex === "object" ? frameIndex.frameIndex : frameIndex;
-		
+		const frameNumber = frameInfo.frameIndex;
+		await entry.readyPromise;//加载视频
 		// 【移动端兼容性 Hack】
 		// 某些移动浏览器在 t=0 时报告视频已加载，但实际绘制到 canvas 时是空白帧。
 		// 将 seek 时间微微向前偏移 (epsilon)，可以保持在第 0 帧的范围内，同时大幅提高首帧提取的可靠性。
-		const frameEpsilon = Math.min(0.001, 1 / Math.max(fps, 1) / 4);
-		const seekTime = frameNumber <= 0 ? frameEpsilon : (frameNumber / fps) + frameEpsilon;
-		
-		await new Promise(function(resolve, reject) {
+		const frameEpsilon = 1000;
+		const seekTime = frameNumber <= 0 ? 0.001 : (frameNumber*100+1)/frameEpsilon;
+		const 缺帧 = frameNumber/10 >= video.duration || frameNumber < 0
+		if(缺帧)
+		{
+			VIDEO.failedFrames.add(frameInfo.normalized)
+			const 缺帧 = !VIDEO.failedVideos.has(frameInfo.videoUrl)
+			if(缺帧 && !VIDEO.downVideos.has(frameInfo.videoUrl))
+			{
+				VIDEO.failedVideos.add(frameInfo.videoUrl)
+			}
+			return BLANK_IMAGE
+		}
+		await new Promise(function(resolve, reject)
+		{
 			let timeoutId = 0;
 
-			function cleanup() {
+			function cleanup()
+			{
 				video.removeEventListener("seeked", onSeeked);
 				video.removeEventListener("error", onError);
-				if (timeoutId) clearTimeout(timeoutId);
+				if(timeoutId)clearTimeout(timeoutId);
 			}
 
-			function onSeeked() {
+			function onSeeked()
+			{
 				cleanup();
 				resolve();
 			}
 
-			function onError() {
+			function onError()
+			{
 				cleanup();
 				reject(new Error("Video seek failed"));
 			}
 
 			video.pause();
 			// 如果当前时间已经非常接近目标时间且已就绪，直接跳过 seek
-			if (Math.abs(video.currentTime - seekTime) < 0.0001 && video.readyState >= 2) {
+			if(Math.abs(video.currentTime - seekTime) < 0.0001 && video.readyState >= 2)
+			{
 				resolve();
 				return;
 			}
@@ -546,6 +571,8 @@ const state = {
 
 			video.addEventListener("seeked", onSeeked);
 			video.addEventListener("error", onError);
+			
+			
 			video.currentTime = seekTime;
 		});
 
@@ -564,15 +591,14 @@ const state = {
 	 * 获取指定来源图片的帧 Data URL
 	 * 包含多级缓存和并发控制
 	 */
-	async function getFrameDataUrl(source) {
-		const frameInfo = await resolveFrameInfo(source);
+	async function getFrameDataUrl(source)
+	{
+		const frameInfo = await resolveFrameInfo(source);//视频存在
 		if(!frameInfo)return null;
-
-		// if (state.failedVideos.has(frameInfo.videoUrl)) continue;
 
 		const entry = getVideoEntry(frameInfo.videoUrl);
 		// 1. 检查内存缓存，如果已提取过直接返回
-		if (entry.cache.has(frameInfo.frameIndex)) return entry.cache.get(frameInfo.frameIndex);
+		if(entry.cache.has(frameInfo.frameIndex))return entry.cache.get(frameInfo.frameIndex);
 
 		// 2. 使用 entry.queue 串行化提取任务
 		// 防止多个相同的图片同时请求同一帧时，触发多次并发的 video seek 操作导致性能浪费或画面错乱
@@ -580,19 +606,18 @@ const state = {
 		{
 			// 再次检查缓存（双重检查锁定模式），因为排队期间可能已被其他请求提取完毕
 			if (entry.cache.has(frameInfo.frameIndex)) return entry.cache.get(frameInfo.frameIndex);
-			
+
 			const captured = await captureFrame(entry, frameInfo);
-			entry.cache.set(frameInfo.frameIndex, captured);
+			if(!VIDEO.failedFrames.has(source))entry.cache.set(frameInfo.frameIndex, captured);
 			return captured;
-		}).catch(function(error)
+		}).catch(async function(error)
 		{
-			entry.failed = true;
-			state.failedVideos.add(frameInfo.videoUrl);
-			console.warn("[HEVC_CHARFACE] frame extraction failed", error);
+			//视频缺帧
+			//captureFrame会将缺失帧改为空白，此处可能没用了
 			return null;
 		}));
 
-		if (dataUrl) return dataUrl;
+		if(dataUrl)return dataUrl;
 
 		return null;
 	}
@@ -605,9 +630,10 @@ const state = {
 
 		const originalSource = image.dataset.hevcOriginalSrc || image.getAttribute("src") || image.currentSrc || image.src;
 		const normalized = normalizeSource(originalSource);
+
 		if (!normalized) return;
 		
-		const frameInfo = getFrameInfoFromManifest(originalSource);
+		const frameInfo = getFrameInfoFromManifest(normalized);
 		if (frameInfo && frameInfo.missing) {
 			image.dataset.hevcOriginalSrc = originalSource;
 			image.dataset.hevcCharfaceSource = normalized;
@@ -662,7 +688,7 @@ const state = {
 	            const normalized = normalizeSource(originalSource);
 	            
 	            // 从资源清单（manifest）中获取当前帧的详细信息
-	            const frameInfo = getFrameInfoFromManifest(originalSource);
+	            const frameInfo = getFrameInfoFromManifest(normalized);
 
 	            // 【场景 A】：如果清单中明确标记该帧缺失（missing），则进入回退（fallback）逻辑
 	            if (frameInfo && frameInfo.missing) {
@@ -680,7 +706,7 @@ const state = {
 	            }
 
 	            // 【场景 C】：尝试异步获取该帧的 Data URL（可能是通过 Canvas 重新渲染、或从缓存解码得到的 base64/Blob 数据）
-	            const dataUrl = await getFrameDataUrl(originalSource);
+	            const dataUrl = await getFrameDataUrl(normalized);
 	            
 	            if (dataUrl) {
 	                target.dataset.hevcCharfaceState = "done"; // 标记处理完成
@@ -716,7 +742,7 @@ const state = {
 		scanNode(document.documentElement);
 
 		// 启动 DOM 监听，自动处理动态插入的图片或 src 属性的变更
-		state.observer = new MutationObserver(function(records) {
+		VIDEO.observer = new MutationObserver(function(records) {
 			records.forEach(function(record) {
 				if (record.type === "attributes") {
 					applyToImage(record.target);
@@ -729,7 +755,7 @@ const state = {
 			});
 		});
 
-		state.observer.observe(document.documentElement, {
+		VIDEO.observer.observe(document.documentElement, {
 			childList: true,
 			subtree: true,
 			attributes: true,
