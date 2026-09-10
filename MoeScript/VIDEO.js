@@ -528,7 +528,7 @@ const VIDEO =
 		// 某些移动浏览器在 t=0 时报告视频已加载，但实际绘制到 canvas 时是空白帧。
 		// 将 seek 时间微微向前偏移 (epsilon)，可以保持在第 0 帧的范围内，同时大幅提高首帧提取的可靠性。
 		const frameEpsilon = 1000;
-		const seekTime = frameNumber <= 0 ? 0.025 : (frameNumber*250+1)/frameEpsilon;
+		const seekTime = frameNumber <= 0 ? 0.025 : (frameNumber*100+1)/frameEpsilon;
 		const 缺帧 = frameNumber/10 >= video.duration || frameNumber < 0
 		if(缺帧)
 		{
