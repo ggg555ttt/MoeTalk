@@ -11,13 +11,14 @@ var CHAR_CharList = []
 var CUSTOM_CHAR = {}
 var CUSTOM_HEAD = {}
 var CUSTOM_NAME = {}
-var 角色信息 = {info:{},name:{},group:[],charface:[]}
+var 角色信息 = null
 var mt_school = {}//学院列表
 var mt_club = {}//社团列表
 var id_map = [{},{}]//id索引映射表
 var CustomFaceAuthor = {}//差分作者信息
 var Birthday = {}
 var sortCharType = "name"
+if(localStorage[GAME+'/Char'])角色信息 = JSON.parse(pako.inflate(localStorage[GAME+'/Char'],{to:'string'}))
 //读取头像
 function loadhead(id,img)
 {
@@ -33,7 +34,7 @@ function loadname(id,index,play)
 	let name = id
 	let names = (play ? MMT目录.设置['人物改名'] : mt_settings['人物改名']) || {}
 
-	if(角色信息.info[id])
+	if(角色信息 && 角色信息.info[id])
 	{
 		name = 角色信息.name[LANG][角色信息.info[id][0][2]] || id
 		if(name.split(" ")[1])name = name.split(" ")[1]
@@ -160,7 +161,7 @@ $("body").on('click','.mutliSelect input[type="checkbox"]',function()
 // });
 function charList(selected = !1)
 {
-	updateAllNames();
+	// updateAllNames();
 	saveClub = false;
 	custom_chars()
 	$('.eIEKpg:eq(0)').click();//更新列表
@@ -575,21 +576,14 @@ function 加载角色()
 		CHAR_CharList.push(char)
 	}
 }
-function getNextBirthdayDays(birthday) {
-  if (!birthday) return Infinity;
-
-  const [month, day] = birthday.split('-').map(Number);
-
-  if (!month || !day) return Infinity;
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  let nextBirthday = new Date(today.getFullYear(), month - 1, day);
-
-  if (nextBirthday < today) {
-    nextBirthday = new Date(today.getFullYear() + 1, month - 1, day);
-  }
-
-  return Math.round((nextBirthday - today) / 86400000);
+function getNextBirthdayDays(birthday)
+{
+	if(!birthday)return Infinity;
+	const [month, day] = birthday.split('-').map(Number);
+	if(!month || !day)return Infinity;
+	const today = new Date();
+	today.setHours(0, 0, 0, 0);
+	let nextBirthday = new Date(today.getFullYear(), month - 1, day);
+	if(nextBirthday < today)nextBirthday = new Date(today.getFullYear() + 1, month - 1, day);
+	return Math.round((nextBirthday - today) / 86400000);
 }

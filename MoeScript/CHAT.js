@@ -6,7 +6,7 @@ var 搜索 = [];
 var replyDepths = [0];//选择肢总集
 
 var otherChats = []//其他分支内容
-var chats = []//当前分支内容
+var chats = '1'//当前分支内容
 var 差分映射 = false
 
 var 操作历史 = {index: -1,list: []}
@@ -575,6 +575,7 @@ function makeMessage(type,data,chatIndex,mode)
 }
 function sendMessage(data,type,mode = 'add',indexs = [],撤销 = false)
 {
+	if(chats === '1')return
 	let addChat = $(".操作模式").text() == '追加'
 	$(".编辑界面 .取消").click()
 	if(OldTalk)

@@ -105,6 +105,34 @@ const VIDEO =
 	 */
 	function getFrameInfoFromManifest(source)
 	{//#
+		if(!VIDEO.list[GAME])VIDEO.list[GAME] = new Set();
+		if(localStorage[GAME+'/Char'])
+		{
+			for(let id in 角色信息.info)
+			{
+				if(角色信息.info[id][1])
+				{
+					for(let ai=0,al=角色信息.info[id][1].length;ai<al;ai++)
+					{
+						let page = 角色信息.info[id][1][ai]
+						for(let pi=0,pl=page.length;pi<pl;pi++)
+						{
+							let cf = page[pi][2]
+							let img = page[pi][0]
+							if(typeof page[pi][3] == 'number')
+							{
+								const charid = 角色信息.info[id][0][3]
+								if(typeof img == 'number')img = '-'+img
+								else if(img != '')img = '_'+img
+								img = `CFID_${page[pi][3]}/CharID_${charid}${img}`;//拓展差分
+							}
+							VIDEO.list[GAME].add(img)
+						}
+					}
+					
+				}
+			}
+		}
 		let CharFaceId, frameIndex, isPlus = false
 		if(source && source.includes(TestFace))
 		{
@@ -113,7 +141,7 @@ const VIDEO =
 			isPlus = CharFaceId.length > 1
 			CharFaceId = CharFaceId.join('/');
 		}else return null;
-
+		if(!VIDEO.list[GAME].has(CharFaceId))return null;
 		return {
 			CharFaceId: CharFaceId,
 			frameIndex: frameIndex,
@@ -336,35 +364,6 @@ const VIDEO =
 		if(!VIDEO.cfPromises)VIDEO.cfPromises = {};
 		if(!VIDEO.info[GAME])VIDEO.info[GAME] = {};
 		if(!VIDEO.info[GAME][CharFaceId])VIDEO.info[GAME][CharFaceId] = [[],0];
-		if(!VIDEO.list[GAME] && localStorage[GAME+'/Char'])
-		{
-			VIDEO.list[GAME] = new Set();
-			let ARR = JSON.parse(pako.inflate(localStorage[GAME+'/Char'],{to:'string'}))
-			for(let id in ARR.info)
-			{
-				if(ARR.info[id][1])
-				{
-					for(let ai=0,al=ARR.info[id][1].length;ai<al;ai++)
-					{
-						let page = ARR.info[id][1][ai]
-						for(let pi=0,pl=page.length;pi<pl;pi++)
-						{
-							let cf = page[pi][2]
-							let img = page[pi][0]
-							if(localStorage['调试模式'] && typeof page[pi][3] == 'number')
-							{
-								const charid = ARR.info[id][0][3]
-								if(typeof img == 'number')img = '-'+img
-								else if(img != '')img = '_'+img
-								img = `CFID_${page[pi][3]}/CharID_${charid}${img}`;//拓展差分
-							}
-							VIDEO.list[GAME].add(img)
-						}
-					}
-					
-				}
-			}
-		}
 		// 如果该 ID 还没有对应的 Promise，说明是第一次请求，开始加载
 		if(!VIDEO.cfPromises[CharFaceId] || VIDEO.failedVideos.has(videoUrl))
 		{
@@ -382,7 +381,7 @@ const VIDEO =
 						await 删除文件(videoUrl)//删除文件
 					}
 					let json = await getfile(videoUrl)
-					if(本地 && !json)//本地不存在，就将网络资源下载到本地
+					if(本地 && !json && !离线)//本地不存在，就将网络资源下载到本地
 					{
 						json = await $ajax(`${MoeTalkURL}/${videoUrl}`)//$ajax
 						await 保存文件(videoUrl,json)

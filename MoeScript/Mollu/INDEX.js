@@ -5070,9 +5070,6 @@
 								e.type === 'reply' && e.content.split('\n').includes(o) && (n = e.replyDepth, r = e.replyGroup)
 							}), -1 === e ? a((0, eo.Z8)(n)) : a((0, eo.Z8)(0)), a((0, eo.ZZ)(r))
 						};
-						let newchats = []
-						chats.map(function(v,k){newchats[k] = v})
-						chats = newchats
 					return (0, m.jsxs)("div",
 					{
 						style:

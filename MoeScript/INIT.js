@@ -639,7 +639,7 @@ async function $ajax(url,text = '',html = null)
 	}
 	let data = await getfile(url,text,html)
 	if(arr.includes(ext) && !校验文件(data,url,ext))data = null;
-	if(data || !url.includes('http'))return data//重要
+	if(data || !url.includes('http') || 离线)return data//重要
 	if(网址列表.length === 0)
 	{
 		let urls = await getfile('MoeData/links.json')
@@ -939,4 +939,38 @@ async function 数据操作(C,K = null,V = null)
 		]);
 	}
 	return V
+}
+async function checkWithTimeout(url, timeoutMs = 5000)
+{
+	const controller = new AbortController();
+	const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+	try
+	{
+		await fetch(url,
+		{ 
+			method: 'HEAD', 
+			mode: 'no-cors', 
+			signal: controller.signal 
+		})
+		clearTimeout(timeoutId);
+		return true;
+	}
+	catch(error) 
+	{
+		// if(error.name === 'AbortError')console.error('请求超时！');
+		// else console.error('网络错误！');
+		return false;
+	}
+}
+var 离线 = true
+if(本地)
+{
+	checkWithTimeout('https://www.baidu.com/').then(async result=>
+	{
+		离线 = !result
+		if(!await checkWithTimeout(MoeTalkURL))
+		{
+			MoeTalkURL = 'https://moetalk.netlify.app'
+		}
+	});
 }

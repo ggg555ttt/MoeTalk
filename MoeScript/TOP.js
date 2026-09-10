@@ -76,6 +76,25 @@ async function 加载数据(first = null,MMT = null)
 	加载字体()
 	自定义CSS()
 	if(!first)mt_settings = setting(mt_settings)
+//加载自定义角色
+	if(first)
+	{
+		if(本地)数据操作('Tk').then(arr=>{TempImg = new Set(arr || [])});
+		[mt_char,mt_schar,CUSTOM_HEAD] = await Promise.all(
+		[
+			数据操作('Sg','mt-char').then(json => json || {}),
+			数据操作('Tg','临时角色').then(json => json || {}),
+			数据操作('Sg','自定头像').then(json => json || {})
+		]);
+	}
+//加载角色
+	if(角色信息)
+	{
+		加载角色()
+		club(true)
+		charList(true)//更新角色
+	}
+	else 角色信息 = {info:{},name:{},group:[],charface:[]}
 //加载消息
 	if(!MMT)
 	{
@@ -83,7 +102,6 @@ async function 加载数据(first = null,MMT = null)
 		catch{MMT = null}
 		if(!MMT)MMT = await 数据操作('Sg','chats') || []
 	}
-
 	otherChats = []
 	chats = []
 	foreach(MMT,function(k,v)
@@ -95,7 +113,6 @@ async function 加载数据(first = null,MMT = null)
 	$('.jotOXZ').eq(3).click()//显示右侧
 	INIT_loading(false)
 //初始化
-	角色信息 = {info:{},name:{},group:[],charface:[]}
 	CustomFaceAuthor = {}
 	Birthday = {}
 	let md5
@@ -104,15 +121,6 @@ async function 加载数据(first = null,MMT = null)
 	{
 		for(let key in head)await 数据操作('Is',key,head[key])
 		数据操作('Sr','mt-head')
-	}
-//加载角色
-	if(localStorage[GAME+'/Char'])
-	{
-		角色信息 = pako.inflate(localStorage[GAME+'/Char'],{to:'string'})
-		角色信息 = JSON.parse(角色信息)
-		加载角色()
-		club(true)
-		charList(true)//更新角色
 	}
 //加载文件
 	if(GAME != 'NONE')
@@ -152,18 +160,6 @@ async function 加载数据(first = null,MMT = null)
 		charList(true)//更新角色
 	}
 	if(!mt_settings['选择游戏'])selectgame()
-//加载自定义角色
-	if(first)
-	{
-		if(本地)数据操作('Tk').then(arr=>{TempImg = new Set(arr || [])});
-		[mt_char,mt_schar,CUSTOM_HEAD] = await Promise.all(
-		[
-			数据操作('Sg','mt-char').then(json => json || {}),
-			数据操作('Tg','临时角色').then(json => json || {}),
-			数据操作('Sg','自定头像').then(json => json || {})
-		]);
-		charList(true)//更新角色
-	}
 }
 
 var 字体链接 = `${xiyihan}/MoeData/Fonts/Blueaka.woff2`
