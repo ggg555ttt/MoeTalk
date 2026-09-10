@@ -312,7 +312,7 @@ const VIDEO =
 			statusText: "OK",
 			headers:
 			{
-				"Content-Type": blob.type || "image/png",
+				"Content-Type": blob.type || "image/webp",
 				"Cache-Control": "public, max-age=31536000, immutable",
 				"X-MT-Hevc-CharFace": "1", // 自定义响应头，标记此响应由本脚本生成
 				"X-MT-Hevc-CharFace-Source": source
@@ -379,17 +379,18 @@ const VIDEO =
 						VIDEO.failedVideos.delete(videoUrl)//删除标记
 						if(!Caches.缓存)Caches.缓存 = await caches.open('缓存');
 						await Caches.缓存.delete(videoUrl)
+						await 删除文件(videoUrl)//删除文件
 					}
 					let json = await getfile(videoUrl)
 					if(本地 && !json)//本地不存在，就将网络资源下载到本地
 					{
-						json = await getfile(`${MoeTalkURL}/${videoUrl}`)//$ajax
+						json = await $ajax(`${MoeTalkURL}/${videoUrl}`)//$ajax
 						await 保存文件(videoUrl,json)
 					}
 					json = JSON.parse(await ZipToJson(json));
 					// json[0] = []//测试
 					VIDEO.info[GAME][CharFaceId] = json;
-					
+					$('video').remove()
 				}
 				catch(error)
 				{
@@ -477,7 +478,15 @@ const VIDEO =
 	 */
 	function syncFallbackCache(source, dataUrl)
 	{
-		if(dataUrl === BLANK_IMAGE || !dataUrl || !navigator.serviceWorker || 本地)return;
+		if(本地)
+		{
+			Promise.resolve().then(async function()
+			{
+				await 保存文件(source,await Base64ToBlob(dataUrl))
+			})
+			return;
+		}
+		if(dataUrl === BLANK_IMAGE || !dataUrl || !navigator.serviceWorker)return;
 		let absoluteUrl = "";
 		try
 		{
@@ -520,7 +529,7 @@ const VIDEO =
 		// 某些移动浏览器在 t=0 时报告视频已加载，但实际绘制到 canvas 时是空白帧。
 		// 将 seek 时间微微向前偏移 (epsilon)，可以保持在第 0 帧的范围内，同时大幅提高首帧提取的可靠性。
 		const frameEpsilon = 1000;
-		const seekTime = frameNumber <= 0 ? 0.001 : (frameNumber*100+1)/frameEpsilon;
+		const seekTime = frameNumber <= 0 ? 0.025 : (frameNumber*250+1)/frameEpsilon;
 		const 缺帧 = frameNumber/10 >= video.duration || frameNumber < 0
 		if(缺帧)
 		{
@@ -584,7 +593,7 @@ const VIDEO =
 
 		entry.ctx.clearRect(0, 0, entry.canvas.width, entry.canvas.height);
 		entry.ctx.drawImage(video, 0, 0);
-		return entry.canvas.toDataURL("image/png");
+		return entry.canvas.toDataURL("image/webp");
 	}
 
 	/**
@@ -612,9 +621,11 @@ const VIDEO =
 			return captured;
 		}).catch(async function(error)
 		{
-			//视频缺帧
-			//captureFrame会将缺失帧改为空白，此处可能没用了
-			return null;
+			if(!VIDEO.downVideos.has(frameInfo.videoUrl))
+			{
+				VIDEO.failedVideos.add(frameInfo.videoUrl)
+			}
+			return BLANK_IMAGE
 		}));
 
 		if(dataUrl)return dataUrl;

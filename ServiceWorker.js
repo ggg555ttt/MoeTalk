@@ -72,7 +72,7 @@ self.addEventListener('message', event => {
 		{
 			headers:
 			{
-				'Content-Type': blob.type || 'image/png',
+				'Content-Type': blob.type || 'image/webp',
 				'Cache-Control': 'public, max-age=31536000, immutable',
 				'X-MT-Hevc-CharFace': '1'
 			}
