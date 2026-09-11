@@ -116,7 +116,7 @@ async function 加载数据(first = null,MMT = null)
 	CustomFaceAuthor = {}
 	Birthday = {}
 	let md5
-	let head = await 数据操作('Sg','mt-head')
+	let head = await 处理数据(moetalkStorage,'getItem','Sg','mt-head',null)
 	if(head)
 	{
 		for(let key in head)await 数据操作('Is',key,head[key])

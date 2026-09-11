@@ -751,6 +751,7 @@ async function Base64ToBlob(base64String)
 }
 async function BlobToBase64(blob)
 {
+	if(!blob)return null
 	return new Promise((resolve, reject)=>
 	{
 		const reader = new FileReader();
@@ -800,7 +801,7 @@ function 处理数据(D,M,C,K,V)
 	{
 		D[M](K,V).then((e)=>
 		{
-			// if(localStorage['调试模式'])缓存文件(D._config.name,C,K,e)
+			if(C[1] === 'g' && e)处理文件(D._config.name,C,K,e)
 			resolve(e)
 		}).catch((e)=>
 		{
@@ -816,7 +817,7 @@ function 处理数据(D,M,C,K,V)
 var Caches = {}
 async function 处理缓存(DB,C,K,V)
 {
-	if(location.protocol === 'http:' || !caches)return null
+	if(!caches)return null
 	if(C[1] === 'c')
 	{
 		if(C === 'Tc')TempImg.clear()
@@ -824,7 +825,7 @@ async function 处理缓存(DB,C,K,V)
 	}
 	let file = `${href}用户数据/${DB}/`
 	if(!Caches[DB])Caches[DB] = await caches.open(DB);
-	if(C[1] === 's' && V)
+	if((C[1] === 's' || C[1] === 'g') && V)
 	{
 		if(C[0] === 'T')TempImg.add(K)
 		if(typeof V === 'object')
@@ -840,6 +841,7 @@ async function 处理缓存(DB,C,K,V)
 		const headers = new Headers(//显式声明 Headers
 		{	
 			'Content-Type': V.type || 'application/octet-stream',//从blob获取类型，如果没有则给个默认值
+			'Cache-Control': 'public, max-age=31536000',
 			'Content-Length': V.size.toString()//明确写入Content-Length，解决大小为 0 的问题
 		});
 		await Caches[DB].put(file, new Response(V, {headers: headers}));
@@ -850,7 +852,7 @@ async function 处理缓存(DB,C,K,V)
 		if(isCusImg(K))
 		{
 			file += `${K}.webp`
-			if(C[0] === 'T')TempImg.add(K)
+			// if(C[0] === 'T')TempImg.add(K)
 			return await BlobToBase64(await $ajax(file))
 		}
 		else

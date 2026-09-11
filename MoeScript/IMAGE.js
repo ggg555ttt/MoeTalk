@@ -12,8 +12,6 @@ var 回复背景 = href+'MoeData/Ui/Popup_Img_Deco_2.webp'
 var 错误图片 = href+'MoeData/Ui/error.webp'
 var 下载文件 = {}
 var 截图高度 = isNaN(parseInt(localStorage['截图高度'])) ? 16384 : parseInt(localStorage['截图高度'])
-var TestFace = '/CharFace/'
-if(localStorage['调试模式'])TestFace = '/TestFace/'
 async function IMAGE_error(image,play)
 {
 	let src,url,img
@@ -64,7 +62,6 @@ function loadImg(src)
 {
 	if(src.startsWith('Image-'))return href+`用户数据/MoeTemp/${src}.webp`
 	if(isCusImg(src))return href+`用户数据/${TempImg.has(src) ? 'MoeTemp' : 'MoeImage'}/${src}.webp`
-	if(localStorage['调试模式'])src = src.replace('/CharFace/',TestFace)
 	return href+src
 }
 function 加载图片(images)

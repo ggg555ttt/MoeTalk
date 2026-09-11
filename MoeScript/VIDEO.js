@@ -18,7 +18,7 @@ const imageSrcDescriptor = Object.getOwnPropertyDescriptor(HTMLImageElement.prot
 
 /**
  * 规范化目录级别的资源路径
- * 提取包含 "GameData/" 且包含 TestFace 的路径，去除查询参数和哈希
+ * 提取包含 "GameData/" 且包含 '/CharFace/' 的路径，去除查询参数和哈希
  * @param {string} source 原始路径
  * @returns {string|null} 规范化后的路径，若不匹配规则则返回 null
  */
@@ -33,7 +33,7 @@ function normalizeDirectorySource(source)
 	let normalized = raw.slice(matchIndex).split("?")[0].split("#")[0].replaceAll("\\", "/");
 	
 	// 必须是 CharFace 目录下的资源
-	if(!normalized.includes(TestFace))return null;
+	if(!normalized.includes('/CharFace/'))return null;
 	if(normalized.endsWith("/"))normalized = normalized.slice(0, -1);
 	
 	try
@@ -91,9 +91,9 @@ function getFrameInfoFromManifest(source)
 		}
 	}
 	let CharFaceId, frameIndex, isPlus = false
-	if(source && source.includes(TestFace))
+	if(source && source.includes('/CharFace/'))
 	{
-		CharFaceId = source.split(TestFace).pop().replace('.webp','').split('/')
+		CharFaceId = source.split('/CharFace/').pop().replace('.webp','').split('/')
 		frameIndex = CharFaceId.pop();
 		isPlus = CharFaceId.length > 1
 		CharFaceId = CharFaceId.join('/');
@@ -267,7 +267,7 @@ function syncFallbackCache(source, dataUrl)
 
 	const payload =
 	{
-		type: "MT_HEVC_CHARFACE_CACHE_PUT",
+		type: "VIDEO",
 		url: source,
 		dataUrl: dataUrl
 	};
@@ -479,4 +479,4 @@ function patchImageError()
  * 脚本启动入口
  */
 function start(){patchImageError();}
-if(localStorage['调试模式'])start();
+start();
