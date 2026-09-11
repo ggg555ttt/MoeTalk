@@ -16,8 +16,6 @@
 // 缓存原生 HTMLImageElement.prototype.src 的属性描述符，用于绕过劫持直接赋值
 const imageSrcDescriptor = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
 
-if(localStorage['调试模式'])start();
-
 /**
  * 规范化目录级别的资源路径
  * 提取包含 "GameData/" 且包含 TestFace 的路径，去除查询参数和哈希
@@ -481,3 +479,4 @@ function patchImageError()
  * 脚本启动入口
  */
 function start(){patchImageError();}
+if(localStorage['调试模式'])start();
