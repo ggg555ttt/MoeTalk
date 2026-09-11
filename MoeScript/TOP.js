@@ -366,7 +366,6 @@ $(async function()
 			if(mt_settings.自动更新.应用)更新应用()
 			if(mt_settings.自动更新.数据)更新数据()
 		}
-		检查数据()
 	}
 	$(".消息底座").wait(function()
 	{
@@ -1387,9 +1386,7 @@ function selectgame(str = '请选择游戏')
 		GAME = $(`.alert_${config.id} select`).val()
 		mt_settings['选择游戏'] = GAME
 		saveStorage('设置选项',mt_settings,'local')
-		数据列表 = []
 		await 更新数据()
-		检查数据()
 		加载数据()
 		INIT_loading(false)
 	}

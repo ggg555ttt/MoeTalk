@@ -532,7 +532,7 @@ function 加载角色()
 			char.school[la] = 角色信息.name[la][index[0]] || 角色信息.name.zh_cn[index[0]] || char.school.id
 			mt_school[char.school.id][la] = char.school[la]
 		}
-		mt_school[char.school.id].img = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+		mt_school[char.school.id].img = BLANK_IMAGE
 		if(角色信息.name.en[index[0]])
 		{
 			mt_school[char.school.id].img = href+'MoeData/Ui/School/'+mt_school[char.school.id].en.toUpperCase()+'.webp'

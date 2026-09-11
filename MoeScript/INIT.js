@@ -1,5 +1,19 @@
 /*@MoeScript/INIT.js@*/
 var TempImg = new Set()
+var 网址列表 = []
+const VIDEO =
+{
+	list: {},
+	info: {},                  // 当前使用的主 manifest 对象
+	downVideos: new Set(),     // 重新下载的视频文件
+	videos: new Map(),         // 缓存已创建的 <video> 元素及其上下文 (Map<videoUrl, entry>)
+	failedVideos: new Set(),   // 记录加载或解码失败的 video URL，避免重复尝试
+	failedFrames: new Set(),   // 缺失的帧，避免写入缓存
+	fallbacks: new Set(),      // 记录已通过 Service Worker 缓存的回退资源 URL
+};
+
+// 1x1 像素的透明 GIF，用于在异步提取帧期间占位，防止图片闪烁或显示破损图标
+const BLANK_IMAGE = "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=";
 async function 并发处理数据(data, handler, limit = 5)
 {
 	if(typeof handler !== 'function')throw new Error('handler 必须是函数');

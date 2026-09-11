@@ -3350,8 +3350,7 @@
 																width: '100%',
 																height: 'auto'
 															},
-															name: src,//#表情链接
-															src: href+'MoeData/Ui/School/NONE.webp',
+															src: src,
 															onError: function(e)
 															{
 																IMAGE_error(e)
@@ -4359,7 +4358,7 @@
 										},
 										children: [(0, m.jsxs)('img',
 										{
-											className: '图片文件',
+											className: '图片选项 图片文件',
 											style:
 											{
 												maxWidth: '75%',
