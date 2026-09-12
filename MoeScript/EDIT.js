@@ -805,7 +805,8 @@ $('body').on('change', ".dels", function() {
 });
 // 6. 自动跳到被选位置
 $('body').on('click', ".chatText", function() {
-	$('.fzOyMd.selected')[0].scrollIntoView({inline:'center'})
+	const e = $('.fzOyMd.selected')[0]
+	if(e)e.scrollIntoView({inline:'center'})
 	if(this.title)return
 	// 直接获取被勾选的第一个消息序号
 	const id = mt_settings['选择角色'].no

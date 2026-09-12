@@ -75,7 +75,6 @@ async function 加载数据(first = null,MMT = null)
 {
 	加载字体()
 	自定义CSS()
-	if(!first)mt_settings = setting(mt_settings)
 //加载自定义角色
 	if(first)
 	{
@@ -86,7 +85,9 @@ async function 加载数据(first = null,MMT = null)
 			数据操作('Tg','临时角色').then(json => json || {}),
 			数据操作('Sg','自定头像').then(json => json || {})
 		]);
+		$('.jotOXZ').eq(3).click()//显示右侧
 	}
+	else mt_settings = setting(mt_settings)
 //加载角色
 	if(角色信息)
 	{
@@ -110,7 +111,7 @@ async function 加载数据(first = null,MMT = null)
 		else chats.push(MMT[k])
 	})
 	refreshMessage(chats)//$('#mt_watermark').click()//显示消息
-	$('.jotOXZ').eq(3).click()//显示右侧
+	
 	INIT_loading(false)
 //初始化
 	CustomFaceAuthor = {}
@@ -1386,6 +1387,8 @@ function selectgame(str = '请选择游戏')
 		GAME = $(`.alert_${config.id} select`).val()
 		mt_settings['选择游戏'] = GAME
 		saveStorage('设置选项',mt_settings,'local')
+		if(localStorage[GAME+'/Char'])角色信息 = JSON.parse(pako.inflate(localStorage[GAME+'/Char'],{to:'string'}))
+		else 角色信息 = null
 		await 更新数据()
 		加载数据()
 		INIT_loading(false)
