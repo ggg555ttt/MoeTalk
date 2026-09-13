@@ -151,8 +151,6 @@ function mt_emojis(S,mode)
 					else if(path != '')path = '_'+path
 					path = `CFID_${v[3]}/CharID_${charid}${path}`;//拓展差分
 					EMOJI.plugin.id = path
-					if(!VIDEO.info[GAME])VIDEO.info[GAME] = {};
-					if(!VIDEO.info[GAME][path])VIDEO.info[GAME][path] = [[],0];
 				}
 				if(typeof v[3] == 'object')//错误文件
 				{

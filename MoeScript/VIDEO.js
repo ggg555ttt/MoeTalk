@@ -1,43 +1,65 @@
 /*@MoeScript/VIDEO.js@*/
 /**
- * 角色头像动态替换脚本（高并发性能版）
- *
- * 【性能模型】
- * 1. 热路径零等待：seeked → drawImage → toBlob 直接出图，与原生同速。
- * 2. 解码池并发：每个视频 N 个 <video> 通道（VIDEO.concurrency），不同帧真并行提取。
- * 3. lookahead 预取：取第 N 帧后用空闲通道预取 N+1..N+K，连续提取后续请求直接命中缓存。
- * 4. rVFC 探针在 seek 前注册（绝不错过回调）：首帧校准 bias；稳态只做异步校验，
- *    发现异常才将该通道切入安全模式（每帧等呈现），实现"默认全速、问题自愈"。
- * 5. 老引擎全链路降级：无 rVFC → 首帧双 rAF 后全速；无 toBlob → toDataURL 转换；
- *    无 createObjectURL → 直连 URL。
- * 6. SW 缓存同步移至 requestIdleCallback，不抢提取热路径。
+ * HEVC 角色头像动态替换脚本
+ * 
+ * 【核心功能】
+ * 拦截网页中对特定角色头像（CharFace）静态图片（如 .webp）的请求，
+ * 通过读取 manifest.json 映射表，将请求重定向到对应的 HEVC 编码视频文件，
+ * 并在前端通过 <video> + <canvas> 提取指定帧，转换为 Data URL 替换原图片。
+ * 
+ * 【主要优势】
+ * 1. 节省带宽：视频压缩率远高于大量零散的静态图片。
+ * 2. 无感替换：通过劫持 src setter、setAttribute 和 fetch，实现对业务代码的零侵入。
+ * 3. 性能优化：内置 Video 实例复用、帧缓存、请求队列串行化，避免重复解码和 Seek 冲突。
  */
+const VIDEO =
+{
+	list: {},
+	info: {},                  // 当前使用的主 manifest 对象
+	downVideos: new Set(),     // 重新下载的视频文件
+	videos: new Map(),         // 缓存已创建的 <video> 元素及其上下文 (Map<videoUrl, entry>)
+	failedVideos: new Set(),   // 记录加载或解码失败的 video URL，避免重复尝试
+	failedFrames: new Set(),   // 缺失的帧，避免写入缓存
+	fallbacks: new Set(),      // 记录已通过 Service Worker 缓存的回退资源 URL
+};
 
+// 1x1 像素的透明 GIF，用于在异步提取帧期间占位，防止图片闪烁或显示破损图标
+const BLANK_IMAGE = "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=";
+// 缓存原生 HTMLImageElement.prototype.src 的属性描述符，用于绕过劫持直接赋值
 const imageSrcDescriptor = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
 
-const FPS = 10;
-const FRAME_DURATION = 1 / FPS;
-const MAX_FRAME_CACHE = 200;
-const MAX_BLOB_STORE = 24;
-
-
-/* ================= 路径规范化 ================= */
-
+/**
+ * 规范化目录级别的资源路径
+ * 提取包含 "GameData/" 且包含 '/CharFace/' 的路径，去除查询参数和哈希
+ * @param {string} source 原始路径
+ * @returns {string|null} 规范化后的路径，若不匹配规则则返回 null
+ */
 function normalizeDirectorySource(source)
 {
 	if (!source) return null;
 	let raw = String(source);
 	let matchIndex = raw.lastIndexOf("GameData/");
 	if (matchIndex < 0) return null;
-
-	let normalized = raw.slice(matchIndex).split("?")[0].split("#")[0].replace(/\\/g, "/");
-	if (normalized.indexOf('/CharFace/') < 0) return null;
-	if (normalized.endsWith("/")) normalized = normalized.slice(0, -1);
-
-	try { normalized = decodeURIComponent(normalized); } catch (error) {}
+	
+	// 截取 GameData/ 之后的部分，并去除 URL 参数和锚点，统一斜杠方向
+	let normalized = raw.slice(matchIndex).split("?")[0].split("#")[0].replaceAll("\\", "/");
+	
+	// 必须是 CharFace 目录下的资源
+	if(!normalized.includes('/CharFace/'))return null;
+	if(normalized.endsWith("/"))normalized = normalized.slice(0, -1);
+	
+	try
+	{
+		normalized = decodeURIComponent(normalized);
+	}catch(error){}// 解码失败时保留原始字符串，避免崩溃
 	return normalized;
 }
 
+/**
+ * 规范化完整的图片资源路径
+ * @param {string} source 原始路径
+ * @returns {string|null} 规范化后的路径，且必须以 .webp 结尾，否则返回 null
+ */
 function normalizeSource(source)
 {
 	let normalized = normalizeDirectorySource(source);
@@ -46,47 +68,49 @@ function normalizeSource(source)
 	return normalized;
 }
 
-/* ================= manifest 解析 ================= */
-
+/**
+ * 从 manifest 中解析特定图片的帧信息
+ * @param {string} source 原始图片路径
+ * @returns {Object|null} 包含 frameIndex, videoUrl, fps 等信息的对象，或标记 missing 的对象
+ */
 function getFrameInfoFromManifest(source)
-{
-	if (!VIDEO.list[GAME]) VIDEO.list[GAME] = new Set();
-	if (localStorage[GAME + '/Char'] && VIDEO.list[GAME].size === 0)
+{//#
+	if(!VIDEO.list[GAME])VIDEO.list[GAME] = new Set();
+	if(localStorage[GAME+'/Char'] && !VIDEO.list[GAME].size)
 	{
-		for (let id in 角色信息.info)
+		for(let id in 角色信息.info)
 		{
-			if (角色信息.info[id][1])
+			if(角色信息.info[id][1])
 			{
-				for (let ai = 0, al = 角色信息.info[id][1].length; ai < al; ai++)
+				for(let ai=0,al=角色信息.info[id][1].length;ai<al;ai++)
 				{
-					let page = 角色信息.info[id][1][ai];
-					for (let pi = 0, pl = page.length; pi < pl; pi++)
+					let page = 角色信息.info[id][1][ai]
+					for(let pi=0,pl=page.length;pi<pl;pi++)
 					{
-						let img = page[pi][0];
-						if (typeof page[pi][3] == 'number')
+						let cf = page[pi][2]
+						let img = page[pi][0]
+						if(typeof page[pi][3] == 'number')
 						{
-							const charid = 角色信息.info[id][0][3];
-							if (typeof img == 'number') img = '-' + img;
-							else if (img != '') img = '_' + img;
-							img = `CFID_${page[pi][3]}/CharID_${charid}${img}`;
+							const charid = 角色信息.info[id][0][3]
+							if(typeof img == 'number')img = '-'+img
+							else if(img != '')img = '_'+img
+							img = `CFID_${page[pi][3]}/CharID_${charid}${img}`;//拓展差分
 						}
-						VIDEO.list[GAME].add(img);
+						VIDEO.list[GAME].add(img)
 					}
 				}
 			}
 		}
 	}
-
-	let CharFaceId, frameIndex, isPlus = false;
-	if (source && source.includes('/CharFace/'))
+	let CharFaceId, frameIndex, isPlus = false
+	if(source && source.includes('/CharFace/'))
 	{
-		CharFaceId = source.split('/CharFace/').pop().replace('.webp', '').split('/');
+		CharFaceId = source.split('/CharFace/').pop().replace('.webp','').split('/')
 		frameIndex = CharFaceId.pop();
-		isPlus = CharFaceId.length > 1;
+		isPlus = CharFaceId.length > 1
 		CharFaceId = CharFaceId.join('/');
-	} else return null;
-
-	if (!VIDEO.list[GAME].has(CharFaceId)) return null;
+	}else return null;
+	if(!VIDEO.list[GAME].has(CharFaceId))return null;
 	return {
 		CharFaceId: CharFaceId,
 		frameIndex: frameIndex,
@@ -97,193 +121,111 @@ function getFrameInfoFromManifest(source)
 	};
 }
 
-/* ================= 基础工具 ================= */
-
+/**
+ * 绕过劫持逻辑，直接设置 image 的 src 属性
+ * 通过设置 bypass 标志位，防止触发我们自己的 setter 导致无限递归
+ */
 function setImageSourceDirect(image, source)
 {
 	if (!image || !imageSrcDescriptor || !imageSrcDescriptor.set) return;
 	image.dataset.hevcCharfaceBypass = "1";
-	try { imageSrcDescriptor.set.call(image, source); }
-	finally { delete image.dataset.hevcCharfaceBypass; }
-}
-
-function dataUrlToBlob(dataUrl)
-{
 	try {
-		const parts = dataUrl.split(",");
-		const mime = (parts[0].match(/:(.*?);/) || [])[1] || "image/webp";
-		const bin = atob(parts[1]);
-		const arr = new Uint8Array(bin.length);
-		for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
-		return new Blob([arr], { type: mime });
-	} catch (e) { return null; }
-}
-
-function blobToDataUrl(blob)
-{
-	return new Promise(function(resolve) {
-		try {
-			const fr = new FileReader();
-			fr.onload = function(){ resolve(fr.result); };
-			fr.onerror = function(){ resolve(null); };
-			fr.readAsDataURL(blob);
-		} catch (e) { resolve(null); }
-	});
-}
-
-function canvasToBlob(canvas, type, quality)
-{
-	return new Promise(function(resolve) {
-		if (canvas.toBlob) { canvas.toBlob(function(b){ resolve(b || null); }, type, quality); return; }
-		resolve(dataUrlToBlob(canvas.toDataURL(type, quality)));
-	});
-}
-
-function waitPaint()
-{
-	return new Promise(function(resolve) {
-		requestAnimationFrame(function() { requestAnimationFrame(function() { resolve(); }); });
-	});
-}
-
-// rVFC 探针：必须在 seek 之前注册，才能捕获本次 seek 的呈现回调
-function presentProbe(video, timeout)
-{
-	let resolveFn;
-	const promise = new Promise(function(r) { resolveFn = r; });
-	let done = false;
-	const timer = setTimeout(function() { if (!done) { done = true; resolveFn(null); } }, timeout || 1000);
-	try {
-		video.requestVideoFrameCallback(function(now, meta) {
-			if (!done) { done = true; clearTimeout(timer); resolveFn(meta); }
-		});
-	} catch (e) { if (!done) { done = true; clearTimeout(timer); resolveFn(null); } }
-	return promise;
-}
-
-function cleanupStrayVideos()
-{
-	const list = document.getElementsByTagName("video");
-	for (let i = list.length - 1; i >= 0; i--)
-	{
-		if (!list[i].dataset.hevcManaged && list[i].parentNode) list[i].parentNode.removeChild(list[i]);
+		imageSrcDescriptor.set.call(image, source);
+	} finally {
+		delete image.dataset.hevcCharfaceBypass;
 	}
 }
 
-/* ================= 二进制加载：ZIP 元数据 + Blob URL ================= */
-
-async function ensureVideoBlob(videoUrl)
-{
-	if (VIDEO.blobStore.has(videoUrl)) return VIDEO.blobStore.get(videoUrl);
-
-	let raw = await getfile(videoUrl);
-	if (本地 && !raw && !离线)
-	{
-		raw = await $ajax(`${MoeTalkURL}/${videoUrl}`);
-		await 保存文件(videoUrl, raw);
-	}
-
-	const json = JSON.parse(await ZipToJson(raw));
-	const blob = (raw instanceof Blob) ? raw : new Blob([raw], { type: "video/mp4" });
-	const store = {
-		blob: blob,
-		url: (typeof URL.createObjectURL === "function") ? URL.createObjectURL(blob) : videoUrl,
-		json: json
-	};
-	VIDEO.blobStore.set(videoUrl, store);
-
-	if (VIDEO.blobStore.size > MAX_BLOB_STORE)
-	{
-		const iter = VIDEO.blobStore.keys();
-		let r;
-		while (!(r = iter.next()).done)
-		{
-			if (!VIDEO.videos.has(r.value))
-			{
-				const old = VIDEO.blobStore.get(r.value);
-				if (old && old.url.indexOf("blob:") === 0) URL.revokeObjectURL(old.url);
-				VIDEO.blobStore.delete(r.value);
-				break;
-			}
-		}
-	}
-	return store;
-}
-
+/**
+ * 解析资源对应的帧信息（包含等待 manifest 加载）
+ */
 async function resolveFrameInfo(source)
 {
 	const frameInfo = getFrameInfoFromManifest(source);
 	if (!frameInfo || frameInfo.missing || GAME === 'NONE') return null;
 
-	const CharFaceId = frameInfo.CharFaceId;
-	const videoUrl = frameInfo.videoUrl;
+	let CharFaceId = frameInfo.CharFaceId
+	let frameIndex = frameInfo.frameIndex
+	let videoUrl = frameInfo.videoUrl
 
-	if (!VIDEO.info[GAME]) VIDEO.info[GAME] = {};
-	if (!VIDEO.info[GAME][CharFaceId]) VIDEO.info[GAME][CharFaceId] = [[], 0];
-
-	if (!VIDEO.cfPromises[CharFaceId] || VIDEO.failedVideos.has(videoUrl))
+	// 初始化一个对象，专门用来缓存 Promise
+	if(!VIDEO.cfPromises)VIDEO.cfPromises = {};
+	if(!VIDEO.info[GAME])VIDEO.info[GAME] = {};
+	if(!VIDEO.info[GAME][CharFaceId])VIDEO.info[GAME][CharFaceId] = [[],0];
+	// 如果该 ID 还没有对应的 Promise，说明是第一次请求，开始加载
+	if(!VIDEO.cfPromises[CharFaceId] || VIDEO.failedVideos.has(videoUrl))
 	{
 		VIDEO.cfPromises[CharFaceId] = (async () =>
 		{
 			try
 			{
-				if (VIDEO.failedVideos.has(videoUrl) && !VIDEO.downVideos.has(videoUrl))
+				if(VIDEO.failedVideos.has(videoUrl) && !VIDEO.downVideos.has(videoUrl))
 				{
-					VIDEO.downVideos.add(videoUrl);
-					evictGroup(videoUrl);
-					const old = VIDEO.blobStore.get(videoUrl);
-					if (old && old.url.indexOf("blob:") === 0) URL.revokeObjectURL(old.url);
-					VIDEO.blobStore.delete(videoUrl);
-					VIDEO.failedVideos.delete(videoUrl);
-					if (!Caches.缓存) Caches.缓存 = await caches.open('缓存');
-					await Caches.缓存.delete(videoUrl);
-					await 删除文件(videoUrl);
+					VIDEO.downVideos.add(videoUrl)//防止视频重复下载
+					VIDEO.videos.delete(videoUrl)//删除旧视频件缓存
+					VIDEO.failedVideos.delete(videoUrl)//删除标记
+					if(!Caches.缓存)Caches.缓存 = await caches.open('缓存');
+					await Caches.缓存.delete(videoUrl)
+					await 删除文件(videoUrl)//删除文件
 				}
-
-				const store = await ensureVideoBlob(videoUrl);
-				VIDEO.info[GAME][CharFaceId] = store.json;
-				cleanupStrayVideos();
+				let json = await getfile(videoUrl)
+				if(本地 && !json && !离线)//本地不存在，就将网络资源下载到本地
+				{
+					json = await $ajax(`${MoeTalkURL}/${videoUrl}`)//$ajax
+					await 保存文件(videoUrl,json)
+				}
+				json = JSON.parse(await ZipToJson(json));
+				// json[0] = []//测试
+				VIDEO.info[GAME][CharFaceId] = json;
+				$('video').remove()
 			}
-			catch (error)
+			catch(error)
 			{
 				console.error(`加载 ${CharFaceId} 失败:`, error);
-				delete VIDEO.cfPromises[CharFaceId];
-				throw error;
+				// 如果加载失败，必须从缓存中移除，否则后续请求会永远卡在这个失败的 Promise 上
+				delete VIDEO.cfPromises[CharFaceId]; 
+				throw error; // 继续抛出错误，让调用方知道失败了
 			}
 		})();
 	}
-
+	// 无论是正在加载还是已经加载完成，都 await 这个 Promise
+	// 如果正在加载，这里会暂停等待；如果已经加载完，这里会瞬间通过
 	await VIDEO.cfPromises[CharFaceId];
-	if (!frameInfo.isPlus) frameInfo.frameIndex = VIDEO.info[GAME][CharFaceId][0].indexOf(frameInfo.frameIndex);
+	if(!frameInfo.isPlus)frameInfo.frameIndex = VIDEO.info[GAME][CharFaceId][0].indexOf(frameIndex)
 	return frameInfo;
 }
 
-/* ================= 解码池（group = 多通道） ================= */
-
-function createSlot(store, videoUrl)
+/**
+ * 获取或创建 Video 元素的管理条目 (单例模式)
+ * @param {string} videoUrl 视频 URL
+ * @returns {Object} Video 管理条目
+ */
+function getVideoEntry(videoUrl)
 {
+	if(VIDEO.videos.has(videoUrl))return VIDEO.videos.get(videoUrl);
+
 	const video = document.createElement("video");
 	video.preload = "auto";
 	video.muted = true;
 	video.playsInline = true;
 	video.crossOrigin = "anonymous";
-	video.dataset.hevcManaged = "1";
+	// 将 video 元素隐藏并移出可视区域，避免影响页面布局
 	video.style.cssText = "position:fixed;left:-99999px;top:-99999px;width:1px;height:1px;opacity:0;pointer-events:none;";
 	(document.body || document.documentElement).appendChild(video);
 
-	const slot = {
+	const entry = {
+		videoUrl: videoUrl,
 		video: video,
+		cache: new Map(),        // 缓存已提取的帧 (frameIndex -> dataUrl)
+		failed: false,           // 标记该视频是否已失效
+		queue: Promise.resolve(),// 串行化 seek 操作，防止并发 seek 导致冲突
 		canvas: document.createElement("canvas"),
-		ctx: null,
-		queue: Promise.resolve(),
-		queueLen: 0,
-		calibrated: false,   // 首帧校准完成标志
-		unstable: false,     // 异常后置 true → 该通道进入安全模式
-		readyPromise: null
+		ctx: null
 	};
-	slot.ctx = slot.canvas.getContext("2d"); // 不开 desynchronized
-
-	slot.readyPromise = new Promise(function(resolve, reject)
+	entry.ctx = entry.canvas.getContext("2d");
+	
+	// 包装一个 Promise 用于等待视频元数据加载完成
+	entry.readyPromise = new Promise(function(resolve, reject)
 	{
 		let resolved = false;
 		function cleanup()
@@ -302,6 +244,7 @@ function createSlot(store, videoUrl)
 		function onError()
 		{
 			cleanup();
+			entry.failed = true;
 			VIDEO.failedVideos.add(videoUrl);
 			reject(new Error("Video load failed: " + videoUrl));
 		}
@@ -310,388 +253,274 @@ function createSlot(store, videoUrl)
 		video.addEventListener("error", onError);
 	});
 
-	video.src = store ? store.url : videoUrl; // Blob URL：零网络请求
+	video.src = videoUrl;
 	video.load();
-	return slot;
+	VIDEO.videos.set(videoUrl, entry);
+	return entry;
 }
 
-function evictGroup(videoUrl)
+/**
+ * 将成功提取的 Data URL 通知 Service Worker 进行缓存
+ * 这样后续原生的网络请求也能直接命中缓存，提升整体性能
+ */
+function syncFallbackCache(source, dataUrl)
 {
-	const group = VIDEO.videos.get(videoUrl);
-	const i = VIDEO.lruOrder.indexOf(videoUrl);
-	if (i >= 0) VIDEO.lruOrder.splice(i, 1);
-	if (!group) return;
-
-	group.cache.forEach(function(item) {
-		if (item && item.url && item.url.indexOf("blob:") === 0) URL.revokeObjectURL(item.url);
-	});
-	group.cache.clear();
-	group.pending.clear();
-	group.slots.forEach(function(slot) {
-		slot.video.pause();
-		slot.video.removeAttribute("src");
-		try { slot.video.load(); } catch (e) {}
-		if (slot.video.parentNode) slot.video.parentNode.removeChild(slot.video);
-	});
-	VIDEO.videos.delete(videoUrl);
-}
-
-function getGroup(videoUrl)
-{
-	if (VIDEO.videos.has(videoUrl))
+	if(本地)
 	{
-		const i = VIDEO.lruOrder.indexOf(videoUrl);
-		if (i >= 0) VIDEO.lruOrder.splice(i, 1);
-		VIDEO.lruOrder.push(videoUrl);
-		return VIDEO.videos.get(videoUrl);
-	}
-
-	while (VIDEO.lruOrder.length >= VIDEO.maxGroups) evictGroup(VIDEO.lruOrder[0]);
-
-	const store = VIDEO.blobStore.get(videoUrl);
-	const n = Math.max(1, Math.min(4, VIDEO.concurrency | 0 || 1));
-	const group = {
-		videoUrl: videoUrl,
-		cache: new Map(),
-		pending: new Map(),
-		slots: [],
-		seekBias: 0,
-		calibSupported: undefined
-	};
-	for (let i = 0; i < n; i++) group.slots.push(createSlot(store, videoUrl));
-	VIDEO.videos.set(videoUrl, group);
-	VIDEO.lruOrder.push(videoUrl);
-	return group;
-}
-
-function trimFrameCache(group)
-{
-	if (group.cache.size <= MAX_FRAME_CACHE) return;
-	const oldest = group.cache.keys().next().value;
-	const old = group.cache.get(oldest);
-	group.cache.delete(oldest);
-	if (old && old.url.indexOf("blob:") === 0) URL.revokeObjectURL(old.url);
-}
-
-/* ================= 任务分发（并发调度） ================= */
-
-function slotMode(slot)
-{
-	if (!slot.calibrated) return "calibrate";       // 首帧：校准 bias
-	if (VIDEO.safePresent || slot.unstable) return "safe"; // 安全模式：每帧等呈现
-	return "fast";                                   // 稳态：零等待全速
-}
-
-function dispatch(group, frameInfo, options)
-{
-	const idleOnly = !!(options && options.idleOnly);
-	let slot = null;
-	for (let i = 0; i < group.slots.length; i++)
-	{
-		const s = group.slots[i];
-		if (idleOnly && s.queueLen > 0) continue; // 预取只占用完全空闲的通道
-		if (!slot || s.queueLen < slot.queueLen) slot = s;
-	}
-	if (!slot) return null;
-
-	slot.queueLen++;
-	const mode = slotMode(slot);
-	const task = slot.queue.then(function() {
-		return captureFrame(slot, group, frameInfo, mode, 0);
-	}).then(function(r) { slot.queueLen--; return r; },
-		  function(e) { slot.queueLen--; throw e; });
-	slot.queue = task.catch(function() {}); // 链条不断
-	return task;
-}
-
-/* ================= seek 与核心提取 ================= */
-
-function seekVideo(video, seekTime)
-{
-	return new Promise(function(resolve, reject)
-	{
-		let timeoutId = 0;
-		function cleanup()
+		Promise.resolve().then(async function()
 		{
-			video.removeEventListener("seeked", onSeeked);
-			video.removeEventListener("error", onError);
-			if (timeoutId) clearTimeout(timeoutId);
-		}
-		function onSeeked() { cleanup(); resolve(); }
-		function onError() { cleanup(); reject(new Error("Video seek failed")); }
-
-		video.pause();
-		if (Math.abs(video.currentTime - seekTime) < 0.0001 && video.readyState >= 2)
-		{
-			resolve();
-			return;
-		}
-		timeoutId = setTimeout(function() {
-			cleanup();
-			reject(new Error("Video seek timeout"));
-		}, 10000);
-
-		video.addEventListener("seeked", onSeeked);
-		video.addEventListener("error", onError);
-		video.currentTime = seekTime;
-	});
-}
-
-function ensureCanvasSize(slot, source)
-{
-	if (slot.canvas.width !== source.videoWidth || slot.canvas.height !== source.videoHeight)
-	{
-		slot.canvas.width = source.videoWidth;
-		slot.canvas.height = source.videoHeight;
-	}
-}
-
-async function captureFrame(slot, group, frameInfo, mode, attempt)
-{
-	attempt = attempt || 0;
-	const video = slot.video;
-	const frameNumber = Number(frameInfo.frameIndex);
-	await slot.readyPromise;
-
-	if (isNaN(frameNumber) || frameNumber < 0 || frameNumber * FRAME_DURATION >= video.duration)
-	{
-		if (frameInfo.normalized) VIDEO.failedFrames.add(frameInfo.normalized);
-		if (!VIDEO.failedVideos.has(group.videoUrl) && !VIDEO.downVideos.has(group.videoUrl))
-		{
-			VIDEO.failedVideos.add(group.videoUrl);
-		}
-		return { url: BLANK_IMAGE, blob: null };
-	}
-
-	// 帧中点 seek：免疫各硬件解码器舍入差异
-	const seekTime = Math.max(0, (frameNumber - (group.seekBias || 0)) * FRAME_DURATION + FRAME_DURATION / 2);
-
-	// 探针必须在 seek 前注册
-	let probePromise = null;
-	if (group.calibSupported !== false)
-	{
-		if (typeof video.requestVideoFrameCallback === "function")
-		{
-			probePromise = presentProbe(video, mode === "fast" ? 1500 : (mode === "safe" ? 150 : 1200));
-		}
-		else group.calibSupported = false;
-	}
-
-	await seekVideo(video, seekTime);
-
-	if (mode !== "fast")
-	{
-		// 校准/安全模式：等呈现回调（拿不到则等一次双 rAF）
-		let meta = probePromise ? await probePromise : null;
-		if (!meta) await waitPaint();
-		if (meta && typeof meta.mediaTime === "number" && attempt < 2)
-		{
-			const diff = Math.round(meta.mediaTime * FPS) - frameNumber;
-			if (diff !== 0 && Math.abs(diff) <= 3)
-			{
-				group.seekBias = (group.seekBias || 0) + diff;
-				slot.unstable = true;
-				return captureFrame(slot, group, frameInfo, mode, attempt + 1);
-			}
-		}
-		slot.calibrated = true;
-	}
-	else if (probePromise)
-	{
-		// 快速路径：异步校验，不阻塞出图；发现异常才切安全模式并纠正
-		probePromise.then(function(meta) {
-			if (!meta || typeof meta.mediaTime !== "number") return;
-			const diff = Math.round(meta.mediaTime * FPS) - frameNumber;
-			if (diff !== 0 && Math.abs(diff) <= 3)
-			{
-				group.seekBias = (group.seekBias || 0) + diff;
-				slot.unstable = true;
-				group.cache.delete(frameNumber); // 清除可能的错帧缓存
-			}
-			else if (diff !== 0) slot.unstable = true;
-		});
-	}
-
-	// 绘制（drawImage 全覆盖不透明帧，无需 clearRect）
-	ensureCanvasSize(slot, video);
-	let drawn = false;
-	try { slot.ctx.drawImage(video, 0, 0); drawn = true; } catch (e) {}
-	if (!drawn && typeof createImageBitmap === "function")
-	{
-		const bmp = await createImageBitmap(video);
-		try { ensureCanvasSize(slot, bmp); slot.ctx.drawImage(bmp, 0, 0); drawn = true; }
-		finally { if (bmp.close) bmp.close(); }
-	}
-	if (!drawn) throw new Error("Frame draw failed");
-
-	const blob = await canvasToBlob(slot.canvas, "image/webp", 0.9);
-	if (!blob) throw new Error("Frame encode failed");
-	return { url: URL.createObjectURL(blob), blob: blob };
-}
-
-/* ================= lookahead 预取 ================= */
-
-function scheduleLookahead(group, fromKey)
-{
-	const la = VIDEO.lookahead | 0;
-	if (la <= 0) return;
-	const duration = group.slots[0].video.duration;
-
-	for (let d = 1; d <= la; d++)
-	{
-		const k = fromKey + d;
-		if (!isFinite(duration) || k * FRAME_DURATION >= duration) break;
-		if (group.cache.has(k) || group.pending.has(k)) continue;
-
-		const fi = { frameIndex: k, isPlus: true, videoUrl: group.videoUrl, normalized: "" };
-		const t = dispatch(group, fi, { idleOnly: true });
-		if (!t) continue; // 无空闲通道则放弃预取，绝不与按需请求抢资源
-
-		const w = t.then(function(result) {
-			group.pending.delete(k);
-			if (result && result.blob) { group.cache.set(k, result); trimFrameCache(group); }
-			return result;
-		});
-		w.catch(function() { group.pending.delete(k); });
-		group.pending.set(k, w);
-	}
-}
-
-/* ================= 对外取帧入口 ================= */
-
-async function getFrameDataUrl(source)
-{
-	const frameInfo = await resolveFrameInfo(source);
-	if (!frameInfo) return null;
-
-	const group = getGroup(frameInfo.videoUrl);
-	const key = Number(frameInfo.frameIndex);
-
-	// 1. 缓存命中（预取的价值在这里兑现）
-	if (group.cache.has(key))
-	{
-		scheduleLookahead(group, key);
-		return group.cache.get(key).url;
-	}
-	// 2. 同帧去重
-	if (group.pending.has(key))
-	{
-		const shared = await group.pending.get(key);
-		return shared.url;
-	}
-
-	// 3. 分发到最闲通道
-	const task = dispatch(group, frameInfo, null).catch(function(error) {
-		console.error("帧提取失败:", frameInfo.videoUrl, key, error);
-		if (!VIDEO.downVideos.has(frameInfo.videoUrl)) VIDEO.failedVideos.add(frameInfo.videoUrl);
-		return { url: BLANK_IMAGE, blob: null };
-	});
-
-	const wrapped = task.then(function(result) {
-		group.pending.delete(key);
-		if (result.blob && !VIDEO.failedFrames.has(source))
-		{
-			group.cache.set(key, result);
-			trimFrameCache(group);
-		}
-		return result;
-	});
-	group.pending.set(key, wrapped);
-
-	const result = await wrapped;
-	if (result.blob && result.url !== BLANK_IMAGE)
-	{
-		scheduleLookahead(group, key);
-		syncFallbackCacheIdle(frameInfo.normalized, result.blob);
-	}
-	return result.url;
-}
-
-/* ================= 缓存同步（空闲期执行） ================= */
-
-function syncFallbackCacheIdle(source, blob)
-{
-	const run = function() { syncFallbackCache(source, blob); };
-	if (typeof requestIdleCallback === "function") requestIdleCallback(run, { timeout: 2000 });
-	else setTimeout(run, 0);
-}
-
-function syncFallbackCache(source, blob)
-{
-	if (本地)
-	{
-		Promise.resolve().then(async function() {
-			await 保存文件(source, blob);
-		});
+			await 保存文件(source,await Base64ToBlob(dataUrl))
+		})
 		return;
 	}
-	if (!navigator.serviceWorker || !blob) return;
-	if (VIDEO.fallbacks.has(source)) return;
+	if(!navigator.serviceWorker || !isBase64(dataUrl) || dataUrl === BLANK_IMAGE)return;
+	if(VIDEO.fallbacks.has(source))return;
 	VIDEO.fallbacks.add(source);
 
-	Promise.resolve().then(async function()
+	const payload =
 	{
-		const payload = { type: "VIDEO", url: source };
-		if (VIDEO.swLegacy) payload.dataUrl = await blobToDataUrl(blob);
-		else payload.blob = blob;
-
-		const registration = await navigator.serviceWorker.ready;
-		const target = navigator.serviceWorker.controller || registration.active || registration.waiting;
-		if (!target) { VIDEO.fallbacks.delete(source); return; }
-		target.postMessage(payload);
-	}).catch(function() { VIDEO.fallbacks.delete(source); });
-}
-
-/* ================= IMAGE_error 劫持 ================= */
-
-function patchImageError()
-{
-	if (typeof window.IMAGE_error !== "function" || window.IMAGE_error._hevcPatched) return;
-	const original = window.IMAGE_error;
-
-	const patched = async function(image, play)
-	{
-		const target = image && image.target ? image.target : image;
-		if (target)
-		{
-			const originalSource = (target.dataset && target.dataset.hevcOriginalSrc)
-				? target.dataset.hevcOriginalSrc
-				: (target.getAttribute && target.getAttribute("src")) || target.src;
-			const normalized = normalizeSource(originalSource);
-
-			if (!normalized)
-			{
-				target.dataset.hevcOriginalSrc = originalSource;
-				target.dataset.hevcCharfaceSource = "";
-				target.dataset.hevcCharfaceState = "fallback";
-				return original.apply(this, arguments);
-			}
-
-			if (target.dataset &&
-				target.dataset.hevcCharfaceState === "fallback" &&
-				target.dataset.hevcCharfaceSource === normalized)
-			{
-				return original.apply(this, arguments);
-			}
-
-			const dataUrl = await getFrameDataUrl(normalized);
-			if (dataUrl)
-			{
-				target.dataset.hevcCharfaceState = "done";
-				if (!target.dataset.hevcOriginalSrc && target.className !== '图片选项 图片文件')
-				{
-					target.dataset.hevcOriginalSrc = originalSource;
-				}
-				setImageSourceDirect(target, dataUrl);
-				return;
-			}
-		}
-		return original.apply(this, arguments);
+		type: "VIDEO",
+		url: source,
+		dataUrl: dataUrl
 	};
 
-	patched._hevcPatched = true;
-	window.IMAGE_error = patched;
+	Promise.resolve(navigator.serviceWorker.ready).then(function(registration)
+	{
+		const target = navigator.serviceWorker.controller || registration.active || registration.waiting;
+		if(!target)
+		{
+			VIDEO.fallbacks.delete(source);
+			return;
+		}
+		target.postMessage(payload);
+	}).catch(() => VIDEO.fallbacks.delete(source));
 }
 
-function start(){ patchImageError(); }
+/**
+ * 核心帧提取逻辑：控制 video 跳转到指定帧并绘制到 canvas
+ * @param {Object} entry Video 管理条目
+ * @param {number|Object} frameIndex 帧索引或包含 frameIndex 和 fps 的对象
+ * @returns {Promise<string>} 提取出的图片 Data URL
+ */
+async function captureFrame(entry, frameInfo)
+{
+	const video = entry.video;
+	const frameNumber = frameInfo.frameIndex;
+	await entry.readyPromise;//加载视频
+	// 【移动端兼容性 Hack】
+	// 某些移动浏览器在 t=0 时报告视频已加载，但实际绘制到 canvas 时是空白帧。
+	// 将 seek 时间微微向前偏移 (epsilon)，可以保持在第 0 帧的范围内，同时大幅提高首帧提取的可靠性。
+	const frameEpsilon = 1000;
+	const seekTime = frameNumber <= 0 ? 0.001 : (frameNumber*100+1)/frameEpsilon;
+	const 缺帧 = frameNumber/10 >= video.duration || frameNumber < 0
+	if(缺帧)
+	{
+		VIDEO.failedFrames.add(frameInfo.normalized)
+		const 缺帧 = !VIDEO.failedVideos.has(frameInfo.videoUrl)
+		if(缺帧 && !VIDEO.downVideos.has(frameInfo.videoUrl))
+		{
+			VIDEO.failedVideos.add(frameInfo.videoUrl)
+		}
+		return BLANK_IMAGE
+	}
+	/**
+ * 等待视频 Seek 并且确保 GPU 渲染纹理完全就绪
+ */
+	await new Promise(function(resolve, reject)
+	{
+	    let timeoutId = 0;
+
+	    function cleanup()
+	    {
+	        video.removeEventListener("seeked", onSeeked);
+	        video.removeEventListener("error", onError);
+	        if (timeoutId) clearTimeout(timeoutId);
+	    }
+
+	    // 真正的绘制就绪等待
+	    function waitFrameReady()
+	    {
+	        // 核心方案：现代浏览器使用 requestVideoFrameCallback
+	        // 它能百分百确保视频帧已解码并呈现在显存纹理中，杜绝撕裂和脏帧
+	        if ("requestVideoFrameCallback" in video)
+	        {
+	            let rVfcId = video.requestVideoFrameCallback(function() {
+	                cleanup();
+	                resolve();
+	            });
+	            // 防止部分极旧版本内核在 paused 状态下偶发漏触发 rVFC 的保底
+	            setTimeout(function() {
+	                cleanup();
+	                resolve();
+	            }, 100);
+	        }
+	        else
+	        {
+	            // 降级方案：等待两帧 requestAnimationFrame，给 GPU 缓冲足够的时间完成 SwapBuffer
+	            requestAnimationFrame(function() {
+	                requestAnimationFrame(function() {
+	                    cleanup();
+	                    resolve();
+	                });
+	            });
+	        }
+	    }
+
+	    function onSeeked()
+	    {
+	        // 监听到 seeked 后不要立刻 drawImage，而是等待 GPU 帧表面刷新完成
+	        waitFrameReady();
+	    }
+
+	    function onError()
+	    {
+	        cleanup();
+	        reject(new Error("Video seek failed"));
+	    }
+
+	    video.pause();
+
+	    // 如果当前时间已经非常接近目标时间且已就绪，仍需确保纹理绘制
+	    if (Math.abs(video.currentTime - seekTime) < 0.0001 && video.readyState >= 2)
+	    {
+	        waitFrameReady();
+	        return;
+	    }
+
+	    // 设置超时保护，防止 seek 永远不触发
+	    timeoutId = setTimeout(function() {
+	        cleanup();
+	        reject(new Error("Video seek timeout"));
+	    }, 10000);
+
+	    video.addEventListener("seeked", onSeeked);
+	    video.addEventListener("error", onError);
+
+	    video.currentTime = seekTime;
+	});
+
+	// 确保 canvas 尺寸与视频实际分辨率一致
+	if (entry.canvas.width !== video.videoWidth || entry.canvas.height !== video.videoHeight) {
+		entry.canvas.width = video.videoWidth;
+		entry.canvas.height = video.videoHeight;
+	}
+
+	entry.ctx.clearRect(0, 0, entry.canvas.width, entry.canvas.height);
+	entry.ctx.drawImage(video, 0, 0);
+	return entry.canvas.toDataURL("image/webp");
+}
+
+/**
+ * 获取指定来源图片的帧 Data URL
+ * 包含多级缓存和并发控制
+ */
+async function getFrameDataUrl(source)
+{
+	const frameInfo = await resolveFrameInfo(source);//视频存在
+	if(!frameInfo)return null;
+
+	const entry = getVideoEntry(frameInfo.videoUrl);
+	// 1. 检查内存缓存，如果已提取过直接返回
+	if(entry.cache.has(frameInfo.frameIndex))return entry.cache.get(frameInfo.frameIndex);
+
+	// 2. 使用 entry.queue 串行化提取任务
+	// 防止多个相同的图片同时请求同一帧时，触发多次并发的 video seek 操作导致性能浪费或画面错乱
+	const dataUrl = await (entry.queue = entry.queue.then(async function()
+	{
+		// 再次检查缓存（双重检查锁定模式），因为排队期间可能已被其他请求提取完毕
+		if (entry.cache.has(frameInfo.frameIndex)) return entry.cache.get(frameInfo.frameIndex);
+
+		const captured = await captureFrame(entry, frameInfo);
+		if(!VIDEO.failedFrames.has(source))entry.cache.set(frameInfo.frameIndex, captured);
+		return captured;
+	}).catch(async function(error)
+	{
+		if(!VIDEO.downVideos.has(frameInfo.videoUrl))
+		{
+			VIDEO.failedVideos.add(frameInfo.videoUrl)
+		}
+		return BLANK_IMAGE
+	}));
+
+	if(dataUrl)return dataUrl;
+
+	return null;
+}
+
+/**
+ * 劫持宿主环境可能存在的图片错误处理函数 (如 window.IMAGE_error)
+ * 在图片原生加载失败时，尝试作为最后的手段进行修复
+ */
+function patchImageError()
+{
+    // 1. 防止重复打补丁：检查 IMAGE_error 是否为函数，且是否已经包含 _hevcPatched 标记
+    if (typeof window.IMAGE_error !== "function" || window.IMAGE_error._hevcPatched) return;
+
+    // 2. 保存原始的 IMAGE_error 函数引用，以便在需要时回退调用
+    const original = window.IMAGE_error;
+
+    // 3. 定义新的异步拦截函数，用于替换原始的全局错误处理函数
+    const patched = async function (image, play)
+    {
+        // 兼容处理：如果传入的是事件对象，则取 target，否则直接取 image 本身作为目标 DOM 元素
+        const target = image && image.target ? image.target : image;
+
+        if(target)
+        {
+            // 获取原始的图片 src。优先使用之前缓存的 hevcOriginalSrc，否则读取当前的 src 属性
+            const originalSource = target.dataset && target.dataset.hevcOriginalSrc 
+                ? target.dataset.hevcOriginalSrc 
+                : (target.getAttribute && target.getAttribute("src")) || target.src;
+
+            // 对原始 src 进行标准化处理（通常用于生成备用图片的路径，如将视频帧路径转为立绘路径）
+            const normalized = normalizeSource(originalSource);
+
+            // 【场景 A】：如果清单中明确标记该帧缺失（missing），则进入回退（fallback）逻辑
+            if(!normalized)
+            {
+                target.dataset.hevcOriginalSrc = originalSource;       // 备份原始 src，防止丢失
+                target.dataset.hevcCharfaceSource = normalized || "";  // 设置备用 src（如角色立绘 charface）
+                target.dataset.hevcCharfaceState = "fallback";         // 标记当前状态为 fallback（回退中）
+                return original.apply(this, arguments);                // 执行原始的错误处理逻辑
+            }
+
+            // 【场景 B】：防死循环机制。如果当前已经是 fallback 状态，且当前 src 就是备用 src，说明备用图也加载失败了
+            if (target.dataset && 
+                target.dataset.hevcCharfaceState === "fallback" && 
+                target.dataset.hevcCharfaceSource === normalized)
+            {
+                return original.apply(this, arguments); // 直接执行原始错误处理，不再重试，防止无限循环
+            }
+
+            // 【场景 C】：尝试异步获取该帧的 Data URL（可能是通过 Canvas 重新渲染、或从缓存解码得到的 base64/Blob 数据）
+            const dataUrl = await getFrameDataUrl(normalized);
+            
+            if(dataUrl)
+            {
+                target.dataset.hevcCharfaceState = "done"; // 标记处理完成
+                if(!target.dataset.hevcOriginalSrc && target.className !== '图片选项 图片文件')
+                {
+                    target.dataset.hevcOriginalSrc = originalSource; // 确保原始 src 被备份
+                }
+                syncFallbackCache(normalized, dataUrl);
+                setImageSourceDirect(target, dataUrl);
+                return; // 修复成功，拦截结束
+            }
+        }
+        
+        // 【兜底逻辑】：如果 target 不存在，或上述修复手段均失败（如获取 dataUrl 失败），则调用原始的 IMAGE_error 处理函数
+        return original.apply(this, arguments);
+    };
+
+    // 4. 给新函数打上标记，防止 patchImageError 被多次调用时重复 patch
+    patched._hevcPatched = true;
+    
+    // 5. 用新函数覆盖全局的 IMAGE_error，完成拦截
+    window.IMAGE_error = patched;
+}
+
+/**
+ * 脚本启动入口
+ */
+function start(){patchImageError();}
 start();

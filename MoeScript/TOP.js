@@ -367,6 +367,7 @@ $(async function()
 			if(mt_settings.自动更新.应用)更新应用()
 			if(mt_settings.自动更新.数据)更新数据()
 		}
+		检查数据()
 	}
 	$(".消息底座").wait(function()
 	{
@@ -1390,6 +1391,7 @@ function selectgame(str = '请选择游戏')
 		if(localStorage[GAME+'/Char'])角色信息 = JSON.parse(pako.inflate(localStorage[GAME+'/Char'],{to:'string'}))
 		else 角色信息 = null
 		await 更新数据()
+		检查数据()
 		加载数据()
 		INIT_loading(false)
 	}

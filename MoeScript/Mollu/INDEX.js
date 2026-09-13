@@ -2964,7 +2964,6 @@
 					//*定义差分文件链接
 					if(EMOJI.io != 'NO')
 					{
-						VIDEO.failedFrames.clear()//清空标记
 						EMOJI.type = EMOJI.io;
 						EMOJI.io = 'NO';//@加入判断
 						return (0, m.jsx)(m.Fragment,
@@ -3262,7 +3261,6 @@
 													let index = mt_settings['选择角色'].index
 													let link = EMOJI.path+v+'.webp'
 													let EmojiInfo = v
-													if(EMOJI.plugin.id)EmojiInfo = VIDEO.info[GAME][EMOJI.plugin.id][0][k] || v
 													if(mt_settings['表情信息'][v])EmojiInfo = mt_settings['表情信息'][v]
 													if(isCusImg(v))link = v
 													let src = v === 'ADD' ? href+'MoeData/Ui/School/RECYCLE.webp' : loadImg(link)

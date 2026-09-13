@@ -1,28 +1,8 @@
 /*@MoeScript/INIT.js@*/
 var TempImg = new Set()
+var 文件总数 = '0'
+var 数据列表 = []
 var 网址列表 = []
-const VIDEO =
-{
-	list: {},
-	info: {},
-	downVideos: new Set(),
-	videos: new Map(),         // videoUrl -> group（解码池）
-	blobStore: new Map(),      // videoUrl -> { blob, url, json }
-	lruOrder: [],
-	failedVideos: new Set(),
-	failedFrames: new Set(),
-	fallbacks: new Set(),
-	cfPromises: {},
-	concurrency: 3,            // 每视频并行解码通道数
-	lookahead: 2,              // 空闲预取帧数
-	safePresent: false,        // true = 每帧强制等呈现（问题设备保险丝）
-	maxGroups: 4,              // 常驻视频组上限
-	swLegacy: true,            // true = SW 沿用旧契约(dataUrl)
-};
-
-
-// 1x1 像素的透明 GIF，用于在异步提取帧期间占位，防止图片闪烁或显示破损图标
-const BLANK_IMAGE = "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=";
 async function 并发处理数据(data, handler, limit = 5)
 {
 	if(typeof handler !== 'function')throw new Error('handler 必须是函数');
