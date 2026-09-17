@@ -5,6 +5,7 @@ pause = true
 skip = false
 if(localStorage['调试模式'])var vConsole = new window.VConsole();
 
+
 var ALERT = {confirm:{},cancel:{},close:{}}
 window.alert = function(text = '',config = {})
 {
@@ -117,7 +118,7 @@ async function 加载数据(first = null,MMT = null)
 	CustomFaceAuthor = {}
 	Birthday = {}
 	let md5
-	let head = await 处理数据(moetalkStorage,'getItem','Sg','mt-head',null)
+	let head = await moetalkStorage.getItem('mt-head') || null
 	if(head)
 	{
 		for(let key in head)await 数据操作('Is',key,head[key])
@@ -162,29 +163,38 @@ async function 加载数据(first = null,MMT = null)
 	}
 	if(!mt_settings['选择游戏'])selectgame()
 }
-
-var 字体链接 = `${xiyihan}/MoeData/Fonts/Blueaka.woff2`
-var 网络字体 = `@import url(${xiyihan}/MoeData/Fonts/Blueaka/Blueaka.css);body,input,button,textarea{font-family:Cyrillic,Blueaka;}`
-var 本地字体 = `@font-face{font-family:Blueaka;src:url(./MoeData/Fonts/Blueaka.woff2)}body,input,button,textarea{font-family:Cyrillic,Blueaka;}`
-async function 加载字体(FontCss = `@import url(./MoeData/Fonts/Blueaka/Blueaka.css);body,input,button,textarea{font-family:Cyrillic,Blueaka;}`)
-{
+let 字体文件,字体列表 = null
+async function 加载字体(FontCss = `@import url(./MoeData/Fonts/Blueaka/Blueaka.css);`)
+{//
 	$('#MoeFont').remove()
 	if(mt_settings['禁止字体'])return;
+	let CusFont = ''
+	if(!字体列表)字体列表 = await MoeFont.getItem('字体列表') || {}
+	for(let id in 字体列表)
+	{
+		// if(!字体列表[id].load)continue
+		const src = await MoeFont.getItem(id)
+		CusFont += `@font-face{font-family:${id};src:url(${src})}\n`
+	}
 	if(本地)
 	{
-		if(await file_exists('MoeData/Fonts/Blueaka.woff2'))FontCss = 本地字体
+		if(await file_exists('MoeData/Fonts/Blueaka.woff2'))
+		{
+			FontCss = `@font-face{font-family:Blueaka;src:url(./MoeData/Fonts/Blueaka.woff2)}`
+		}
 		else
 		{
-			FontCss = 网络字体
-			$ajax(字体链接).then(function(data)
+			FontCss = `@import url(${xiyihan}/MoeData/Fonts/Blueaka/Blueaka.css);`
+			$ajax(`${xiyihan}/MoeData/Fonts/Blueaka.woff2`).then(function(data)
 			{
 				if(data)保存文件('MoeData/Fonts/Blueaka.woff2',data)
 			})
 		}
 	}
-	
+	let 默认字体 = mt_settings.默认字体 || 'Cyrillic,Blueaka'
 	const style = document.createElement('style');
-	style.textContent = FontCss
+	style.textContent = FontCss+CusFont
+	style.textContent += `body,input,button,textarea{font-family:${默认字体};}`
 	style.id = 'MoeFont'
 	document.head.appendChild(style);
 }
@@ -509,25 +519,228 @@ $("body").on('click',"#设置选项",function()
 	str += "<div style='display:flex;justify-content:center;'><h1><a class='bold'style='text-decoration:underline;'href='setting.html'>更多设置</a></h1></div>\n"
 	alert(str,config)
 });
-$("body").on('click',"#字体设置",function()
+$("body").on('change','#字体列表 select',async function()
 {
-	let str = '<input type="checkbox"class="加载字体">加载字体\n'
-	str += '<input type="checkbox"class="整合差分">官方差分单页显示\n'
-	str += '字体和图片大小请在【MMT风格自定义】中修改'
+	$('#字体预览').html(测试字体(this.value,'TestFont'))
+})
+function 测试字体(ID,id)
+{
+	$(`#${id}`).html('')
+	let text = ''
+	text += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ\n'
+	text += 'abcdefghijklmnopqrstuvwxyz\n'
+	text += '0123456789\n'
+	text += '!@#$%^&*()_+-=[]{}|;\':\",./\\<>?~`\n'
+	text += 'Innovation in China 中国智造，慧及全球 0123456789\n'
+	if(isBase64(ID))
+	{
+		const style = document.createElement('style');
+		style.textContent = `@font-face{font-family:${id};src:url(${ID})}`
+		document.getElementById(id).appendChild(style);
+	}
+	else
+	{
+		MoeFont.getItem(ID).then(function(src)
+		{
+			if(!src)return
+			const style = document.createElement('style');
+			style.textContent = `@font-face{font-family:${id};src:url(${src})}`
+			document.getElementById(id).appendChild(style);
+		})
+	}
+	return `<textarea style="font-size:1.5rem;font-family:${id};width:100%;height:10rem;line-height:110%;">${text}</textarea>`
+}
+function 更新字体列表(ID = null)
+{
+	
+	let option = ''
+	let Blueaka = '<option value="Blueaka">Blueaka(默认)</option>'
+	for(let id in 字体列表)
+	{
+		option += `<option value="${id}">${字体列表[id].name || id}</option>`
+	}
+	if(typeof ID === 'string')
+	{
+		let btn = '<button onclick="编辑字体(this)">修改</button> <button onclick="编辑字体(this)">删除</button>'
+		let str = option ? `<select style="font-size:1.5rem;">${option}</select> ${btn}` : ''
+		$('#字体列表').html(str)
+		if(ID === '管理字体')ID = $('#字体列表 select').val()
+		$('#字体列表 select').val(ID)
+		if(str)$('#字体预览').html(测试字体(ID,'TestFont'))
+		else
+		{
+			$('#TestFont').html('')
+			$('#字体预览').html('')
+		}
+	}
+	$('.字体列表').each(function()
+	{
+		let html = $(this)
+		let type = html.parent().attr('title')
+		let id = html.val()
+		if(typeof ID === 'object')id = ID[type] || 'Blueaka'
+		if(!字体列表[id])id = 'Blueaka'
+		html.html(Blueaka+option).val(id)
+	})
+}
+
+async function 管理字体()
+{
+	let str = '<button onclick="编辑字体()">添加字体</button>'
+	str += '<div id="字体列表"></div>'
+	str += '<div id="TestFont"></div>'
+	str += '<div id="字体预览"></div>'
+	alert(str)
+	更新字体列表('管理字体')
+}
+$("body").on('change','#fontfile',function()
+{
+	INIT_loading(1)
+	let file = this.files[0]
+	const reader = new FileReader();
+	reader.readAsDataURL(file);
+	reader.onload = async function()
+	{
+		字体文件 = reader.result
+		$('#字体预览2').html(测试字体(字体文件,'TestFont2'))
+		$('#fontinfo').text('字体已上传')
+		$('.ALERT_编辑字体 .confirm').removeAttr('disabled')
+		INIT_loading(0)
+	}
+})
+function 编辑字体(e = null)
+{
+	字体文件 = null
+	let id,mode = '添加'
+	if(e)
+	{
+		e = $(e)
+		mode = e.text()
+		id = e.parent().find('select').val()
+	}
+	else id = 'Font-'+getNowDate()
+	
+	let str = `字体ID：${id}\n`
+	if(mode === '删除')
+	{
+		str = '<b class="red">是否删除字体？</b>\n'
+		str += `字体ID：${id}\n`
+		str += `字体名称：${字体列表[id].name || id}\n`
+	}
+	else
+	{
+		str += '字体名称：<input id="fontname">'
+		str += `<button onclick="$('#fontfile').click()">上传文件</button>`
+		str += '<span id="fontinfo"></span>'
+		str += '<input id="fontfile"type="file"hidden>'
+	}
+	str += '<div id="TestFont2"></div>'
+	str += '<div id="字体预览2"></div>'
+	let config = {}
+	config.title = mode+'字体'
+	config.id = '编辑字体'
+	config.yes = async function()
+	{
+		INIT_loading(1)
+		if(mode === '删除')
+		{
+			delete 字体列表[id]
+			await MoeFont.setItem('字体列表',字体列表)
+			await MoeFont.removeItem(id)
+			更新字体列表('管理字体')
+			INIT_loading(0)
+			return
+		}
+		字体列表[id] = 字体列表[id] || {}
+		字体列表[id].name = $('#fontname').val() || ''
+		await MoeFont.setItem('字体列表',字体列表)
+		if(字体文件)await MoeFont.setItem(id,字体文件)
+		字体文件 = null
+		更新字体列表(id)
+		INIT_loading(0)
+	}
+	config.no = function(){字体文件 = null}
+	alert(str,config)
+	if(mode === '添加')$('.ALERT_编辑字体 .confirm').attr('disabled','disabled')
+	else $('#字体预览2').html(测试字体(id,'TestFont2'))
+	let name = 字体列表[id] ? 字体列表[id].name : ''
+	$('#fontname').val(name).attr('placeholder',name)
+}
+
+$("body").on('click',"#字体设置",async function()
+{
+	let select = '<select class="字体列表"style="font-size:1.5rem;"><option value="Blueaka">Blueaka(默认)</option></select>'
+	let arr = ['chat','reply','heart','info']
+	let font = {默认: mt_settings.默认字体 || ''}
+	let css = {}
+	let str = ''
+	str += '字体设置：<input type="checkbox"class="加载字体">加载字体'
+	str += ` <button onclick="管理字体()">管理字体</button> <span title="默认">默认字体${select}</span>\n`
+	for(let i=0,l=arr.length;i<l;i++)
+	{
+		let type = arr[i]
+		css[type] = 读取样式('obj',mt_settings.风格样式[type])
+		str += `<i class='red'>${mt_text[type][LANG]}</i>：`
+		str += `字体大小：<input title="${type}"placeholder="1.1rem"value="${toString(css[type]['font-size'])}">`
+		str += `<span title="${type}">字体选择：${select}</span>\n`
+		font[type] = css[type]['font-family'] || ''
+	}
+	let charface = 读取样式('obj',mt_settings.风格样式.charface)
+	let emoji = 读取样式('obj',mt_settings.风格样式.emoji)
+	let image = 读取样式('obj',mt_settings.风格样式.image)
+	str += '图片设置：<input type="checkbox"class="整合差分">官方差分单页显示\n'
+	arr = {charface:'角色表情',emoji:'图片表情',image:'上传图片'}
+	for(let type in arr)
+	{
+		css[type] = 读取样式('obj',mt_settings.风格样式[type])
+		str += `<i class='red'>${arr[type]}</i>：`
+		str += `图片大小：<input title="${type}"placeholder="90%"value="${toString(css[type]['max-width'])}">\n`
+	}
 	let config = {}
 	config.title = '字体/图片设置'
+	config.id = '字图设置'
 	config.yes = function()
 	{
+		let id = config.id
+		let arr = ['chat','reply','heart','info']
+		$(`.ALERT_${id} input`).each(function()
+		{
+			let type = this.title
+			let val = this.value
+			if(type)
+			{
+				let css = 读取样式('obj',mt_settings.风格样式[type]) 
+				if(arr.includes(type))
+				{
+					let font = $(`.ALERT_${id} span[title="${type}"] select`).val()
+					if(!font || font === 'Blueaka')delete css['font-family']
+					else css['font-family'] = font
+					if(!val || val === '1.1rem')delete css['font-size']
+					else css['font-size'] = val
+				}
+				else
+				{
+					if(!val || val === '90%')delete css['max-width']
+					else css['max-width'] = val
+				}
+				mt_settings.风格样式[type] = 读取样式('str',css)
+			}
+		})
 		mt_settings['禁止字体'] = true
 		if($('.加载字体').prop('checked'))delete mt_settings['禁止字体']
 		if($('.整合差分').prop('checked'))mt_settings['整合差分'] = true
 		else delete mt_settings['整合差分']
+		let font = $(`.ALERT_${id} span[title="默认"] select`).val()
+		if(!font || font === 'Blueaka')delete mt_settings['默认字体']
+		else mt_settings['默认字体'] = font
 		saveStorage('设置选项',mt_settings,'local')
 		加载字体()
+		refreshMessage(chats)
 	}
 	alert(str,config)
 	if(!mt_settings.禁止字体)$('.加载字体').prop('checked',true)
 	if(mt_settings['整合差分'])$('.整合差分').prop('checked',true)	
+	更新字体列表(font)
 });
 $("body").on('click',"#自定义CSS",function()
 {

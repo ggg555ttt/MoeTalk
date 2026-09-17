@@ -116,17 +116,29 @@ function 读取样式(mode,id)
 			this.value = style
 		})
 	}
-	if(mode == 'str')//CSS数组转字符串
+	if(mode == 'str')//CSS对象转字符串
 	{
+		if(typeof id === 'string')return id
 		let style = ''
-		foreach(id,function(k,v)
+		if(id.length)
 		{
-			style += `${v[0]}:${v[1]};\n`
-		})
+			foreach(id,function(k,v)
+			{
+				style += `${v[0]}:${v[1]};\n`
+			})
+		}
+		else
+		{
+			for(let key in id)
+			{
+				style += `${key}:${id[key]};\n`
+			}
+		}
 		return style
 	}
 	if(mode == 'obj')//CSS字符串转对象
 	{
+		if(typeof id === 'object')return id
 		let style = {}
 		let css = (id || '').split('\n');
 		foreach(css,function(k,v)
@@ -206,6 +218,7 @@ const MoeImage = localforage.createInstance({name:'MoeImage'});//图片库
 const MoeTemp = localforage.createInstance({name:'MoeTemp'});//临时文件
 const MoeProject = localforage.createInstance({name:'MoeProject'});//项目库
 const MoeCache = localforage.createInstance({name:'MoeCache'});//播放器缓存
+const MoeFont = localforage.createInstance({name:'MoeFont'});//自定义字体
 数据操作('Cc')
 function getDeviceAndBrowserInfo()
 {
