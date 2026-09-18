@@ -38,6 +38,7 @@ $("body").on('click','#clean',async function()
 		await 数据操作('Pc')//项目
 		await 数据操作('Tc')//临时
 		await 数据操作('Cc')//缓存
+		await 数据操作('Fc')//缓存
 		localStorage.clear();
 		sessionStorage.clear();
 		$('body').html(`<h1><a href='#' onclick="back()"><i style='color: red; font-weight: bold;'>返回MoeTalk</i></a></h1>`)
@@ -55,7 +56,7 @@ $('body').on('click',"#savedata",async function()
 	delete json.localStorage['cordova']
 	json.sessionStorage = sessionStorage
 	json.IndexedDB = {}
-	let D,C = ['MoeImage','MoeTemp','MoeProject','moetalkStorage','MoeCache']
+	let D,C = ['MoeImage','MoeTemp','MoeProject','moetalkStorage','MoeCache','MoeFont']
 	for(let i=0,l=C.length;i<l;i++)
 	{
 		if(C[i] === 'MoeImage')D = MoeImage
@@ -63,6 +64,7 @@ $('body').on('click',"#savedata",async function()
 		if(C[i] === 'MoeProject')D = MoeProject
 		if(C[i] === 'moetalkStorage')D = moetalkStorage
 		if(C[i] === 'MoeCache')D = MoeCache
+		if(C[i] === 'MoeFont')D = MoeFont
 		json.IndexedDB[C[i]] = {}
 		await D.iterate((value, key, iterationNumber)=>
 		{
@@ -121,6 +123,7 @@ $('body').on('change',"#loaddatafile",async function(e)
 				if(C === 'MoeProject')D = 'P'
 				if(C === 'moetalkStorage')D = 'S'
 				if(C === 'MoeCache')D = 'C'
+				if(C === 'MoeFont')D = 'F'
 				await 数据操作(D+'c')
 				for(let key in 存档信息[K][C])
 				{

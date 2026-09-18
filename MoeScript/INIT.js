@@ -890,7 +890,7 @@ async function 处理文件(DB,C,K,V)
 		}
 		return await 处理缓存(DB,C,K,V);
 	}
-	if(C[1] === 's' && window.保存文件 && V)
+	if(C[1] === 's' && window.保存文件 && V && !K.startsWith('Font-'))
 	{
 		if(C === 'Ts')TempImg.add(K)
 		let file = `用户数据/${DB}/${K}`
@@ -898,7 +898,7 @@ async function 处理文件(DB,C,K,V)
 		else await 保存文件(file+'.webp',await Base64ToBlob(V))
 		return file;
 	}
-	else if(C[1] === 'g' && K)
+	else if(C[1] === 'g' && K && !K.startsWith('Font-'))
 	{
 		let file = `用户数据/${DB}/${K}`
 		if(isCusImg(K))
@@ -935,6 +935,7 @@ async function 数据操作(C,K = null,V = null)
 	else if(C[0] === 'P')D = MoeProject;
 	else if(C[0] === 'S')D = moetalkStorage;
 	else if(C[0] === 'C')D = MoeCache;
+	else if(C[0] === 'F')D = MoeFont;
 	if(C[1] === 's')M = 'setItem';
 	else if(C[1] === 'g')M = 'getItem';
 	else if(C[1] === 'r')M = 'removeItem';
@@ -992,3 +993,72 @@ if(本地)
 		}
 	});
 }
+function escapeHTML(str)
+{
+	return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
+var ALERT = {confirm:{},cancel:{},close:{}}
+window.alert = function(text = '',config = {})
+{
+	if(config.show)$('.alert').removeClass('visible')
+	config.id = config.id || Math.random().toString().replace('0.','')
+	config.title = config.title || '通知'
+	config.cancel = config.cancel || '取消'
+	config.confirm = config.confirm || '确认'
+	config.style = config.style || ''
+	config.yes = config.yes || null
+	config.no = config.no || null
+	config.x = config.x || config.no
+	$(`.ALERT_${config.id}`).remove()
+let style = `style="-webkit-user-select: text;user-select: text; line-height: 125%; white-space: pre-wrap; word-break: break-word; text-align: left; width: 100%; font-family: inherit; overflow: scroll;${config.style}"`
+let html = 
+`<div class="btncdx alert ALERT_${config.id} visible" style="z-index: 1000;">
+	<div class="cFtxnG">
+		<div class="duPzcp" style="height: auto;">
+			<span class="GsrFM title" style="border-bottom: 4px solid;">${config.title}</span>
+			<div class="kncnxt close" style="top: 12.5%;user-select: none;cursor: pointer;" alt="${config.id}">❌</div>
+		</div>
+		<div class="oFeqA" style="max-height: 90%; padding: 0.5rem;">
+			<pre ${style}>${text}</pre>
+			<div class="ia-dnHO">
+				<button class="eLyPUY cancel" alt="${config.id}"style="color:white;">${config.cancel}</button>
+				<button class="eLyPUY kebTxe confirm" alt="${config.id}"style="color:red;">${config.confirm}</button>
+			</div>
+		</div>
+	</div>
+</div>`
+	ALERT.confirm[config.id] = config.yes
+	ALERT.cancel[config.id] = config.no
+	ALERT.close[config.id] = config.x
+	$('.弹窗').append(html)
+}
+$('body').on('click','.confirm',function()
+{
+	let id = $(this).attr('alt')
+	if(ALERT.confirm[id])ALERT.confirm[id]()
+	delete ALERT.confirm[id]
+	delete ALERT.cancel[id]
+	delete ALERT.close[id]
+	$(`.ALERT_${id}`).remove()
+	$('.alert').last().addClass('visible')
+});
+$('body').on('click','.cancel',function()
+{
+	let id = $(this).attr('alt')
+	if(ALERT.cancel[id])ALERT.cancel[id]()
+	delete ALERT.confirm[id]
+	delete ALERT.cancel[id]
+	delete ALERT.close[id]
+	$(`.ALERT_${id}`).remove()
+	$('.alert').last().addClass('visible')
+});
+$('body').on('click','.close',function()
+{
+	let id = $(this).attr('alt')
+	if(ALERT.close[id])ALERT.close[id]()
+	delete ALERT.confirm[id]
+	delete ALERT.cancel[id]
+	delete ALERT.close[id]
+	$(`.ALERT_${id}`).remove()
+	$('.alert').last().addClass('visible')
+});

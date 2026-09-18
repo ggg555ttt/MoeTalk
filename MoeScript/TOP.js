@@ -6,72 +6,64 @@ skip = false
 if(localStorage['调试模式'])var vConsole = new window.VConsole();
 
 
-var ALERT = {confirm:{},cancel:{},close:{}}
-window.alert = function(text = '',config = {})
-{
-	if(config.show)$('.alert').removeClass('visible')
-	config.id = config.id || Math.random().toString().replace('0.','')
-	config.title = config.title || '通知'
-	config.cancel = config.cancel || '取消'
-	config.confirm = config.confirm || '确认'
-	config.style = config.style || ''
-	config.yes = config.yes || null
-	config.no = config.no || null
-	config.x = config.x || config.no
-	$(`.ALERT_${config.id}`).remove()
-let style = `style="-webkit-user-select: text;user-select: text; line-height: 125%; white-space: pre-wrap; word-break: break-word; text-align: left; width: 100%; font-family: inherit; overflow: scroll;${config.style}"`
-let html = 
-`<div class="btncdx alert ALERT_${config.id} visible" style="z-index: 1000;">
-	<div class="cFtxnG">
-		<div class="duPzcp" style="height: auto;">
-			<span class="GsrFM title" style="border-bottom: 4px solid;">${config.title}</span>
-			<div class="kncnxt close" style="top: 12.5%;user-select: none;cursor: pointer;" alt="${config.id}">❌</div>
-		</div>
-		<div class="oFeqA" style="max-height: 90%; padding: 0.5rem;">
-			<pre ${style}>${text}</pre>
-			<div class="ia-dnHO">
-				<button class="eLyPUY cancel" alt="${config.id}"style="color:white;">${config.cancel}</button>
-				<button class="eLyPUY kebTxe confirm" alt="${config.id}"style="color:red;">${config.confirm}</button>
-			</div>
-		</div>
-	</div>
-</div>`
-	ALERT.confirm[config.id] = config.yes
-	ALERT.cancel[config.id] = config.no
-	ALERT.close[config.id] = config.x
-	$('.弹窗').append(html)
-}
-$('body').on('click','.confirm',function()
-{
-	let id = $(this).attr('alt')
-	if(ALERT.confirm[id])ALERT.confirm[id]()
-	delete ALERT.confirm[id]
-	delete ALERT.cancel[id]
-	delete ALERT.close[id]
-	$(`.ALERT_${id}`).remove()
-	$('.alert').last().addClass('visible')
-});
-$('body').on('click','.cancel',function()
-{
-	let id = $(this).attr('alt')
-	if(ALERT.cancel[id])ALERT.cancel[id]()
-	delete ALERT.confirm[id]
-	delete ALERT.cancel[id]
-	delete ALERT.close[id]
-	$(`.ALERT_${id}`).remove()
-	$('.alert').last().addClass('visible')
-});
-$('body').on('click','.close',function()
-{
-	let id = $(this).attr('alt')
-	if(ALERT.close[id])ALERT.close[id]()
-	delete ALERT.confirm[id]
-	delete ALERT.cancel[id]
-	delete ALERT.close[id]
-	$(`.ALERT_${id}`).remove()
-	$('.alert').last().addClass('visible')
-});
+let 字体文件,字体列表 = null
+async function 加载字体(FontCss = `@import url(./MoeData/Fonts/Blueaka/Blueaka.css);`)
+{//
+	$('#MoeFont').remove()
+	if(mt_settings['禁止字体'])return;
+	let 默认字体 = 'Cyrillic,Blueaka'
+	const arr = ['chat','reply','heart','info']
+	const font = {}
+	if(mt_settings.默认字体)
+	{
+		默认字体 = mt_settings.默认字体
+		font[默认字体] = 1
+	}
+	for(let i=0,l=arr.length;i<l;i++)
+	{
+		const family = 读取样式('obj',mt_settings.风格样式[arr[i]])['font-family']
+		if(family && family !== 'Blueaka')font[family] = 1
+	}
 
+	if(!字体列表)字体列表 = await MoeFont.getItem('字体列表') || {}
+	let CusFont = ''
+	for(let id in 字体列表)
+	{
+		if(!字体列表[id].load && !font[id])continue
+		const src = await MoeFont.getItem(id)
+		CusFont += `@font-face{font-family:${id};src:url(${src})}\n`
+	}
+	if(本地)
+	{
+		if(await file_exists('MoeData/Fonts/Blueaka.woff2'))
+		{
+			FontCss = `@font-face{font-family:Blueaka;src:url(./MoeData/Fonts/Blueaka.woff2)}`
+		}
+		else
+		{
+			FontCss = `@import url(${xiyihan}/MoeData/Fonts/Blueaka/Blueaka.css);`
+			$ajax(`${xiyihan}/MoeData/Fonts/Blueaka.woff2`).then(function(data)
+			{
+				if(data)保存文件('MoeData/Fonts/Blueaka.woff2',data)
+			})
+		}
+	}
+	
+	const style = document.createElement('style');
+	style.textContent = FontCss+CusFont
+	style.textContent += `body,input,button,textarea{font-family:${默认字体};}`
+	style.id = 'MoeFont'
+	document.head.appendChild(style);
+}
+async function 自定义CSS()
+{
+	$('#CusCss').remove()
+	if(!localStorage['自定义CSS'])return;
+	const style = document.createElement('style');
+	style.textContent = localStorage['自定义CSS']
+	style.id = 'CusCss'
+	document.head.appendChild(style);
+}
 async function 加载数据(first = null,MMT = null)
 {
 	加载字体()
@@ -163,51 +155,31 @@ async function 加载数据(first = null,MMT = null)
 	}
 	if(!mt_settings['选择游戏'])selectgame()
 }
-let 字体文件,字体列表 = null
-async function 加载字体(FontCss = `@import url(./MoeData/Fonts/Blueaka/Blueaka.css);`)
-{//
-	$('#MoeFont').remove()
-	if(mt_settings['禁止字体'])return;
-	let CusFont = ''
-	if(!字体列表)字体列表 = await MoeFont.getItem('字体列表') || {}
-	for(let id in 字体列表)
-	{
-		// if(!字体列表[id].load)continue
-		const src = await MoeFont.getItem(id)
-		CusFont += `@font-face{font-family:${id};src:url(${src})}\n`
-	}
+
+$(async function()
+{
+	if((设备信息.device.isApple && window.location.protocol == 'http:') || localStorage['phpwin'])await isIos()
 	if(本地)
 	{
-		if(await file_exists('MoeData/Fonts/Blueaka.woff2'))
+		if(客户端 === 'HTML5+')
 		{
-			FontCss = `@font-face{font-family:Blueaka;src:url(./MoeData/Fonts/Blueaka.woff2)}`
+			await 检测版本();
+			[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
 		}
+		if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
 		else
 		{
-			FontCss = `@import url(${xiyihan}/MoeData/Fonts/Blueaka/Blueaka.css);`
-			$ajax(`${xiyihan}/MoeData/Fonts/Blueaka.woff2`).then(function(data)
-			{
-				if(data)保存文件('MoeData/Fonts/Blueaka.woff2',data)
-			})
+			if(mt_settings.自动更新.应用)更新应用()
+			if(mt_settings.自动更新.数据)更新数据()
 		}
+		检查数据()
 	}
-	let 默认字体 = mt_settings.默认字体 || 'Cyrillic,Blueaka'
-	const style = document.createElement('style');
-	style.textContent = FontCss+CusFont
-	style.textContent += `body,input,button,textarea{font-family:${默认字体};}`
-	style.id = 'MoeFont'
-	document.head.appendChild(style);
-}
-async function 自定义CSS()
-{
-	$('#CusCss').remove()
-	if(!localStorage['自定义CSS'])return;
-	const style = document.createElement('style');
-	style.textContent = localStorage['自定义CSS']
-	style.id = 'CusCss'
-	document.head.appendChild(style);
-}
-//使用说明
+	$(".消息底座").wait(function()
+	{
+		加载数据('初始加载')
+	},".消息底座");
+	readme(true)
+})
 async function clearCache()
 {
 	if(window.caches && caches.keys)
@@ -227,10 +199,6 @@ async function clearCache()
 		config.yes = function(){location.reload(true)}
 		alert('缓存清除完毕，请立即刷新页面',config)
 	}
-}
-function escapeHTML(str)
-{
-	return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
 async function update(str = '')
 {
@@ -314,6 +282,7 @@ async function update(str = '')
 		$('.版本:eq(3)').text(网络数据版本)
 	}
 }
+//使用说明
 function readme(first = 0)
 {
 	let text = ''
@@ -361,30 +330,6 @@ function readme(first = 0)
 	ymd = ymd >= 260216 && ymd <= 260223;
 	if(month+day == '0101' || ymd)恭喜发财 = ymd
 }
-$(async function()
-{
-	if((设备信息.device.isApple && window.location.protocol == 'http:') || localStorage['phpwin'])await isIos()
-	if(本地)
-	{
-		if(客户端 === 'HTML5+')
-		{
-			await 检测版本();
-			[羁绊背景,回复背景,错误图片] = await Promise.all([urlToBase64(羁绊背景),urlToBase64(回复背景),urlToBase64(错误图片)]);
-		}
-		if(!mt_settings.自动更新)update('<span style="color:red;">请选择更新方式！</span>\n')
-		else
-		{
-			if(mt_settings.自动更新.应用)更新应用()
-			if(mt_settings.自动更新.数据)更新数据()
-		}
-		检查数据()
-	}
-	$(".消息底座").wait(function()
-	{
-		加载数据('初始加载')
-	},".消息底座");
-	readme(true)
-})
 async function newyear(url)
 {
 	const audioUrl = URL.createObjectURL(await $ajax(url));
@@ -554,7 +499,7 @@ function 更新字体列表(ID = null)
 {
 	
 	let option = ''
-	let Blueaka = '<option value="Blueaka">Blueaka(默认)</option>'
+	let Blueaka = '<option value="Blueaka">默认</option>'
 	for(let id in 字体列表)
 	{
 		option += `<option value="${id}">${字体列表[id].name || id}</option>`
@@ -669,7 +614,7 @@ function 编辑字体(e = null)
 
 $("body").on('click',"#字体设置",async function()
 {
-	let select = '<select class="字体列表"style="font-size:1.5rem;"><option value="Blueaka">Blueaka(默认)</option></select>'
+	let select = '<select class="字体列表"style="font-size:1.5rem;"><option value="Blueaka">默认</option></select>'
 	let arr = ['chat','reply','heart','info']
 	let font = {默认: mt_settings.默认字体 || ''}
 	let css = {}
@@ -842,7 +787,7 @@ async function 备份数据()
 	json.localStorage = localStorage
 	json.sessionStorage = sessionStorage
 	json.IndexedDB = {}
-	let D,C = ['MoeImage','MoeTemp','MoeProject','moetalkStorage','MoeCache']
+	let D,C = ['MoeImage','MoeTemp','MoeProject','moetalkStorage','MoeCache','MoeFont']
 	for(let i=0,l=C.length;i<l;i++)
 	{
 		if(C[i] === 'MoeImage')D = MoeImage
@@ -850,6 +795,7 @@ async function 备份数据()
 		if(C[i] === 'MoeProject')D = MoeProject
 		if(C[i] === 'moetalkStorage')D = moetalkStorage
 		if(C[i] === 'MoeCache')D = MoeCache
+		if(C[i] === 'MoeFont')D = MoeFont
 		json.IndexedDB[C[i]] = {}
 		await D.iterate((value, key, iterationNumber)=>
 		{
@@ -912,6 +858,7 @@ $('body').on('change',"#恢复数据",async function(e)
 				if(C === 'MoeProject')D = 'P'
 				if(C === 'moetalkStorage')D = 'S'
 				if(C === 'MoeCache')D = 'C'
+				if(C === 'MoeFont')D = 'F'
 				await 数据操作(D+'c')
 				for(let key in 存档信息[K][C])
 				{
