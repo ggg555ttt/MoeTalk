@@ -14,6 +14,8 @@
  */
 const VIDEO =
 {
+	ext: 'mp4',               //后缀名 mp4 webm
+	url: '',//本地测试网址 http://192.168.1.4/
 	list: {},
 	info: {},                  // 当前使用的主 manifest 对象
 	downVideos: new Set(),     // 重新下载的视频文件
@@ -45,7 +47,7 @@ function normalizeDirectorySource(source)
 	let normalized = raw.slice(matchIndex).split("?")[0].split("#")[0].replaceAll("\\", "/");
 	
 	// 必须是 CharFace 目录下的资源
-	if(!normalized.includes('/CharFace/'))return null;
+	if(!normalized.includes('/TestFace/'))return null;
 	if(normalized.endsWith("/"))normalized = normalized.slice(0, -1);
 	
 	try
@@ -103,9 +105,9 @@ function getFrameInfoFromManifest(source)
 		}
 	}
 	let CharFaceId, frameIndex, isPlus = false
-	if(source && source.includes('/CharFace/'))
+	if(source && source.includes('/TestFace/'))
 	{
-		CharFaceId = source.split('/CharFace/').pop().replace('.webp','').split('/')
+		CharFaceId = source.split('/TestFace/').pop().replace('.webp','').split('/')
 		frameIndex = CharFaceId.pop();
 		isPlus = CharFaceId.length > 1
 		CharFaceId = CharFaceId.join('/');
@@ -116,7 +118,7 @@ function getFrameInfoFromManifest(source)
 		frameIndex: frameIndex,
 		frameName: frameIndex,
 		isPlus: isPlus,
-		videoUrl: `GameData/${GAME}/Video/${CharFaceId}.mp4`,
+		videoUrl: `${VIDEO.url}GameData/${GAME}/Video/${CharFaceId}.${VIDEO.ext}`,
 		normalized: source
 	};
 }
@@ -172,11 +174,14 @@ async function resolveFrameInfo(source)
 				if(本地 && !json && !离线)//本地不存在，就将网络资源下载到本地
 				{
 					json = await $ajax(`${MoeTalkURL}/${videoUrl}`)//$ajax
-					await 保存文件(videoUrl,json)
+					await 保存文件(videoUrl.replace(VIDEO.url,''),json)
 				}
-				json = JSON.parse(await ZipToJson(json));
-				// json[0] = []//测试
-				VIDEO.info[GAME][CharFaceId] = json;
+				if(json)
+				{
+					json = JSON.parse(await ZipToJson(json));
+					// json[0] = []//测试
+					VIDEO.info[GAME][CharFaceId] = json;
+				}
 				$('video').remove()
 			}
 			catch(error)
@@ -265,6 +270,7 @@ function getVideoEntry(videoUrl)
  */
 function syncFallbackCache(source, dataUrl)
 {
+	return;//先不缓存
 	if(本地)
 	{
 		Promise.resolve().then(async function()
@@ -522,5 +528,13 @@ function patchImageError()
 /**
  * 脚本启动入口
  */
-function start(){patchImageError();}
-start();
+if(localStorage['调试模式'])
+{
+	loadImg = function(src)
+	{
+		if(src.startsWith('Image-'))return href+`用户数据/MoeTemp/${src}.webp`
+		if(isCusImg(src))return href+`用户数据/${TempImg.has(src) ? 'MoeTemp' : 'MoeImage'}/${src}.webp`
+		return href+src.replace('/CharFace/','/TestFace/')
+	}
+	patchImageError()
+}
