@@ -1012,7 +1012,7 @@ window.alert = function(text = '',config = {})
 	$(`.ALERT_${config.id}`).remove()
 let style = `style="-webkit-user-select: text;user-select: text; line-height: 125%; white-space: pre-wrap; word-break: break-word; text-align: left; width: 100%; font-family: inherit; overflow: scroll;${config.style}"`
 let html = 
-`<div class="btncdx alert ALERT_${config.id} visible" style="z-index: 1000;">
+`<div class="btncdx alert ALERT_${config.id} visible" style="z-index: 1000;background-color: rgba(0, 0, 0, 0.6);">
 	<div class="cFtxnG">
 		<div class="duPzcp" style="height: auto;">
 			<span class="GsrFM title" style="border-bottom: 4px solid;">${config.title}</span>
