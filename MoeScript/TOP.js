@@ -927,7 +927,6 @@ $("body").on('click',"#虚拟滚动",function()
 		localStorage['虚拟滚动'] = 虚拟滚动
 	}
 	alert(str,config)
-
 });
 $("body").on('click',"#截图设置",function()
 {
@@ -941,15 +940,25 @@ $("body").on('click',"#截图设置",function()
 	let str = ''
 	str += `<input class='隐藏前缀' type='checkbox'>隐藏下载文件名前缀\n`
 	if(!客户端)str += `<input class='流式下载' type='checkbox'}>流式下载（测试）\n`
-	if(客户端 === 'NW.js')
+	if(客户端 === 'NW.js' || 客户端 === 'HTML5+')
 	{
-		str += '<input type="file" id="下载位置" nwdirectory hidden/>'
-		str += `<p><button class='下载位置'>存档下载位置</button></p>`
-		if(localStorage['存档下载位置'])str += `<p id='存档下载位置'>${localStorage['存档下载位置']}<button class='默认下载位置' onclick='$("#存档下载位置").remove()'>恢复默认</button></p>`
-		str += `<p><button class='下载位置'>图片下载位置</button></p>`
-		if(localStorage['图片下载位置'])str += `<p id='图片下载位置'>${localStorage['图片下载位置']}<button class='默认下载位置' onclick='$("#图片下载位置").remove()'>恢复默认</button></p>`
+		str += '<input type="file" id="下载位置" nwdirectory hidden/>';
+		['存档下载位置','图片下载位置'].map((key) =>
+		{
+			str += `<p><button class='下载位置'data-type='${key}'>设置${key}</button></p>`
+			if(localStorage[key])
+			{
+				let str1 = '/storage/emulated/0'
+				let str2 = 'content://com.android.externalstorage.documents/tree/'
+				let path = localStorage[key]
+				if(path.startsWith(str1))path = path.replace(str1,'内部存储')
+				if(path.startsWith(str2))path = path.replace(str2,'').replace('primary','内部存储').replace('%3A','/').replace('%2F','/')
+
+				let btn = "<button class='默认下载位置' onclick='$(this).parent().remove()'>恢复默认</button>"
+				str += `<p style='margin:0rem 1rem 1rem;'id='${key}'data-type='${localStorage[key]}'>${path}${btn}</p>`
+			}
+		})
 	}
-	str += '\n'
 	str += `<input class='打包下载' type='checkbox' ${mt_settings['打包下载'] ? 'checked' : ''}>图片打包下载（多张图片整合为ZIP）\n`
 	str += `图片宽度：（默认500，上限需测试）\n<input class='宽度限制' type="number" value="${mt_settings['宽度限制']}">\n`
 	str += `图片最大高度：（默认16384，上限需测试）\n<input class='截图高度' type="number"><button id="高度估算">最大高度估算</button>\n`
@@ -979,8 +988,9 @@ $("body").on('click',"#截图设置",function()
 		mt_settings['隐藏前缀'] = $('.隐藏前缀').prop('checked')
 		mt_settings['流式下载'] = $('.流式下载').prop('checked')
 		$('.默认下载位置').remove()
-		localStorage['存档下载位置'] = $('#存档下载位置').text()
-		localStorage['图片下载位置'] = $('#图片下载位置').text()
+		localStorage['存档下载位置'] = $('#存档下载位置').data('type') || ''
+		localStorage['图片下载位置'] = $('#图片下载位置').data('type') || ''
+		if(客户端 === 'HTML5+')清理孤立授权()
 		saveStorage('设置选项',mt_settings,'local')
 	}
 	alert(str,config)
@@ -1006,21 +1016,41 @@ $("body").on('click',"#下载设置",function()
 	}
 	alert(str,config)
 });
+function 下载位置(key,val)
+{
+	let path = val
+	$('#'+key).remove()
+	let str1 = '/storage/emulated/0'
+	let str2 = 'content://com.android.externalstorage.documents/tree/'
+	if(path.startsWith(str1))path = path.replace(str1,'内部存储')
+	if(path.startsWith(str2))path = path.replace(str2,'').replace('primary','内部存储').replace('%3A','/').replace('%2F','/')
+
+	let btn = "<button class='默认下载位置' onclick='$(this).parent().remove()'>恢复默认</button>"
+	let str = `<p style='margin:0rem 1rem 1rem;'id='${key}'data-type='${val}'>${path}${btn}</p>`
+	$(`.下载位置:eq(${['存档下载位置','图片下载位置'].indexOf(key)})`).parent().after(str)
+}
 $("body").on('click',".下载位置",function()
-{ 
-	$('#下载位置').attr('title',$(this).text()).click()
+{
+	let type = $(this).data('type')
+	if(客户端 === 'HTML5+')
+	{
+		选择保存目录(type).then(obj =>
+		{
+			if(obj && obj.uri)下载位置(type,obj.uri)
+		})
+	}
+	else
+	{
+		$('#下载位置').attr('title',type).click()
+	}
 });
 const folderSelector = document.getElementById('folderSelector');
 const pathDisplay = document.getElementById('pathDisplay');
 $("body").on('change','#下载位置',function()
 {
 	if(this.files.length > 0)
-	{
-		let path = this.files[0].path
-		let id = this.title
-		$('#'+id).remove()
-		if(id.startsWith('存档'))$('.下载位置:eq(0)').parent().after(`<p id='存档下载位置'>${path}<button class='默认下载位置' onclick='$("#存档下载位置").remove()'>恢复默认</button></p>`)
-		else $('.下载位置:eq(1)').parent().after(`<p id='图片下载位置'>${path}<button class='默认下载位置' onclick='$("#图片下载位置").remove()'>恢复默认</button></p>`)
+	{ 
+		下载位置(this.title,this.files[0].path)
 	}
 })
 $("body").on('click',"#清除缓存",function()
